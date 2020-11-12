@@ -14,10 +14,11 @@
 cp .env.example .env
 ```
 * Install dependencies
-
+```
 composer install
 php artisan key:generate
 ```
 * Migrate database
 ```
 php artisan migrate
+```
