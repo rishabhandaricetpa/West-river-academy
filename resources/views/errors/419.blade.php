@@ -1,4 +1,4 @@
-@extends('_layouts.minimal')
+@extends('layouts.minimal')
 
 @section('pageTitle','419')
 

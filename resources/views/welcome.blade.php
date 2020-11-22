@@ -1,6 +1,8 @@
-@extends('_layouts.app')
+@extends('layouts.app')
 @section('pageTitle', 'Welcome')
 
 @section('content')
-  <h1 class="text-center">Welcome</h1>
+  <div class="container">
+    <h1 class="text-center py-5">Welcome !</h1>
+  </div>
 @endsection

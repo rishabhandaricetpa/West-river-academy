@@ -8,7 +8,7 @@
 
   <title>@yield('pageTitle', 'Home') | {{config('app.name')}}</title>
 
-  @include('_layouts.partials.styles')
+  @include('layouts.partials.styles')
   @php
     $appConfig = [
       'csrfToken' => csrf_token(),
@@ -23,13 +23,13 @@
 </head>
 <body class="bg-light {{'env-'.config('app.env')}} @yield('bodyClass')">
   <div id="app" class="app">
-  @include('._layouts.partials.navbar')
+  @include('layouts.partials.navbar')
     <!-- Main content starts -->
-    <main class="container main mt-1 mb-4" id="main" role="main">
+    <main class="main mt-3 mb-4" id="main" role="main">
       @yield('content')
     </main>
-    @include('_layouts.partials.footer')
+    @include('layouts.partials.footer')
   </div>
-@include('_layouts.partials.scripts')
+@include('layouts.partials.scripts')
 </body>
 </html>
