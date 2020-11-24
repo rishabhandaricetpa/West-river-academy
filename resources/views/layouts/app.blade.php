@@ -22,14 +22,14 @@
   @stack('after_app_config_script')
 </head>
 <body class="bg-light {{'env-'.config('app.env')}} @yield('bodyClass')">
-  <div id="app" class="app">
-  @include('layouts.partials.navbar')
-    <!-- Main content starts -->
-    <main class="main mt-3 mb-4" id="main" role="main">
-      @yield('content')
-    </main>
-    @include('layouts.partials.footer')
-  </div>
+<div id="app" class="app">
+@include('layouts.partials.navbar')
+<!-- Main content starts -->
+  <main class="main mt-3 mb-4" id="main" role="main">
+    @yield('content')
+  </main>
+  @include('layouts.partials.footer')
+</div>
 @include('layouts.partials.scripts')
 </body>
 </html>

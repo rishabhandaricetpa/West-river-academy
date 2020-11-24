@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -43,11 +44,19 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param \Illuminate\Http\Request $request
-     * @param mixed $user
+     * @param User $user
      * @return mixed
      */
-    protected function authenticated(Request $request, $user)
+    protected function authenticated(Request $request, User $user)
     {
-        //
+        if (! $user->hasVerifiedEmail()) {
+            $this->guard()->logout();
+            $request->session()->invalidate();
+
+            alert()->error('Please verify your email first.');
+
+            return redirect()->route('login')
+                ->withInput($request->only($this->username()));
+        }
     }
 }

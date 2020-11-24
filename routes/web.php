@@ -30,9 +30,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
     Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
-    Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-    Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+    Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
+    Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

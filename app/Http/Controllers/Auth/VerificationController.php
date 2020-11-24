@@ -3,40 +3,64 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use App\Models\User;
+use App\Notifications\EmailVerification;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
-
-    use VerifiesEmails;
-
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $this->middleware('guest');
+        $this->middleware('throttle:30,1');
+    }
+
+    public function showResendForm()
+    {
+        return view('auth.resend');
+    }
+
+    public function verify(Request $request, User $user)
+    {
+        if (! $request->hasValidSignature()) {
+            alert()->error('Invalid verification link. Please request a new one.');
+
+            return redirect()->route('verification.request');
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            $message = 'Your email address is already verified.';
+        } else {
+            $user->setEmailAsVerified();
+            $user->save();
+            $message = 'Email address verified successfully.';
+        }
+
+        alert()->success($message);
+
+        return redirect()->route('login');
+    }
+
+    public function resend(Request $request)
+    {
+        $this->validate($request, [
+            'email' => [
+                'bail', 'required', 'string', 'email', Rule::exists('users', 'email')->where(function ($query) {
+                    /* @var Builder $query */
+                    $query->whereNull('email_verified_at');
+                }),
+            ],
+        ]);
+
+        $user = User::query()
+            ->where('email', $request->get('email'))->first();
+
+        $user->notify(new EmailVerification());
+
+        alert()->success('Email sent successfully. Check your inbox.');
+
+        return redirect()->route('login');
     }
 }

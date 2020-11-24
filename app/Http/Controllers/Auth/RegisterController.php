@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\EmailVerification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email:strict', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -79,8 +80,15 @@ class RegisterController extends Controller
      * @param mixed $user
      * @return mixed
      */
-    protected function registered(Request $request, $user)
+    protected function registered(Request $request, User $user)
     {
-        //
+        // Prevent auto-login after registration
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $user->notify(new EmailVerification());
+
+        alert()->success('Please check your email inbox for verification.');
+
+        return redirect()->route('login');
     }
 }
