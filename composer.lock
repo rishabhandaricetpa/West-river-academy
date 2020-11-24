@@ -4,8 +4,74 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91a726eb643e69b60039480b543c0e2a",
+    "content-hash": "78ab9bf6fff9b161be2ed3a9776477ca",
     "packages": [
+        {
+            "name": "ankurk91/laravel-alert",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ankurk91/laravel-alert.git",
+                "reference": "3cdd9e3329b6ad4921eee2c837958339c827e070"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ankurk91/laravel-alert/zipball/3cdd9e3329b6ad4921eee2c837958339c827e070",
+                "reference": "3cdd9e3329b6ad4921eee2c837958339c827e070",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "^7.0||^8.0",
+                "illuminate/support": "^7.0||^8.0",
+                "php": "^7.3||^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.2",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ankurk91\\LaravelAlert\\AlertServiceProvider"
+                    ],
+                    "aliases": {
+                        "Alert": "Ankurk91\\LaravelAlert\\Facades\\Alert"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ankurk91\\LaravelAlert\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ankurk91",
+                    "homepage": "https://ankurk91.github.io"
+                }
+            ],
+            "description": "A Bootstrap alert helper for Laravel php framework",
+            "homepage": "https://github.com/ankurk91/laravel-alert",
+            "keywords": [
+                "alert",
+                "bootstrap",
+                "flash",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/ankurk91/laravel-alert/issues",
+                "source": "https://github.com/ankurk91/laravel-alert/tree/2.2.1"
+            },
+            "time": "2020-11-08T10:03:07+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.2",
