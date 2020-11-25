@@ -1,1 +1,25 @@
 /** Footer CSS  **/
+
+.social-icons{
+    i{
+        font-size: 1.9rem;
+        color: $border-color;
+    }
+}
+
+.main-footer{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 24rem;
+    *{
+        color: $border-color;
+    }
+    .btn{
+        padding: 8px 2.1875rem;
+        border-radius: 30px;
+    }
+}
+
+.copyright{
+    font-size: 1.1875rem;
+}
