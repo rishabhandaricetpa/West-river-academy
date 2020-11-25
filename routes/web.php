@@ -33,6 +33,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+    Route::get('register',function(){
+        return view('register');
+    });
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

@@ -13,6 +13,9 @@
 
 .btn{
   text-transform: uppercase;
+}
+
+.btn-secondary{
   letter-spacing: 2px;
 }
 
@@ -73,10 +76,24 @@
   background-repeat: no-repeat;
 }
 
-h2{
+h2,h3,.h2,.h3{
   color: #235;
 }
 
+
 .btn{
   text-transform: capitalize;
+}
+
+.mt-2r{
+  margin-top: 2rem !important;
+}
+
+.px-25{
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
+main{
+  min-height: calc(100vh - 95px);
 }

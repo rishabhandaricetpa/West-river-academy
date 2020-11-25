@@ -10,6 +10,11 @@
     padding: 0.625rem 1.875rem;
     letter-spacing: 2px;
     font-weight: 600;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
     &:hover{
       color: #212529;
       background-color: #d9ad00;

@@ -1,7 +1,5 @@
 
 .form-wrap{
-    max-width: 45%;
-    margin: 135px auto;
     padding: 20px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -13,12 +11,17 @@
     }
 }
 
+.form-content{
+    max-width: 90% !important;
+    margin: 135px auto;
+}
+
 label{
     font-size: 14px;
     color: #888888;
-    width: 100px;
+    width: 135px;
     & + div{
-      width: calc(100% - 100px);
+      width: calc(100% - 135px);
     }
 }
 
@@ -28,4 +31,10 @@ label{
     border: 0;
     font-weight: 700;
     margin-bottom: 0;
+}
+
+
+.seperator{
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 2rem;
 }
