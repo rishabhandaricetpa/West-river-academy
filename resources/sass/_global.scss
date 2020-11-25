@@ -1,0 +1,71 @@
+/** global styling **/
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
+.btn{
+  text-transform: uppercase;
+  &:hover{
+    background-color: #CA0;
+  }
+}
+
+/* images */
+
+.o-cover,
+.o-contain {
+  width: 100%;
+}
+
+.o-cover {
+  object-fit: cover;
+}
+
+.o-contain {
+  object-fit: contain;
+}
+
+.img-absolute {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.black-overlay {
+  position: relative;
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: rgba(0, 0, 0, .3);
+  }
+}
+
+.lozad{
+  background-repeat: no-repeat;
+}
+
+h2{
+  color: #235;
+}
+
+.btn{
+  text-transform: capitalize;
+}

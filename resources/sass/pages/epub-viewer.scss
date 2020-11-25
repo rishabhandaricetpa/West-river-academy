@@ -1,0 +1,21 @@
+.navigation-wrapper {
+  button{
+    border-radius: 50%;
+  }
+}
+@media (min-width: 1000px) {
+  .epub-viewer:after {
+    position: absolute;
+    width: 1px;
+    border-right: 1px #000 solid;
+    height: 86%;
+    z-index: 1;
+    left: 50%;
+    margin-left: -1px;
+    top: 12%;
+    opacity: .15;
+    box-shadow: -2px 0 15px rgba(0, 0, 0, 1);
+    content: "";
+  }
+}
+  
