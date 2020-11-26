@@ -104,10 +104,53 @@
       </div>
     </form>
 </div>
+
+
     <div class="text-center mt-2r">
-          <a href="#mailling-address" aria-expanded="false" aria-controls="mailling-address" data-toggle="collapse" class="btn btn-primary">Add Parent 2</a>
+          <a href="#parent-2info" aria-expanded="false" aria-controls="parent-2info" data-toggle="collapse" class="btn btn-primary">Add Parent 2</a>
       </div>
-      <div class="mt-2r collapse" id="mailling-address">
+      <div class="collapse" id="parent-2info">
+      <h2>Enter Parent 2 Information</h2>
+      <form class="seperator">
+      <div class="form-group d-flex mb-1">
+        <label for="">First name</label>
+        <div>
+        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+      <div class="form-group d-flex mb-1">
+        <label for="">Preferred Nickname</label>
+        <div>
+        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+      <div class="form-group d-flex mb-1">
+        <label for="">Last Name</label>
+        <div>
+        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+      <div class="form-group d-flex mb-1">
+        <label for="">Email Address</label>
+        <div>
+        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+      <div class="form-group d-flex mb-1">
+        <label for="">Cell Phone</label>
+        <div>
+        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+      <div class="form-group d-flex mb-1">
+        <label for="">Work/Home Phone</label>
+        <div>
+        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+    </form>
+</div>
+      <div class="mt-2r" >
           <h2>Mailing Address</h2>
       <form class="seperator">
       <div class="form-group d-flex mb-1">
