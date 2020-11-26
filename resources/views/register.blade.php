@@ -105,9 +105,9 @@
     </form>
 </div>
     <div class="text-center mt-2r">
-          <a href="#" class="btn btn-primary">Add Parent 2</a>
+          <a href="#mailling-address" aria-expanded="false" aria-controls="mailling-address" data-toggle="collapse" class="btn btn-primary">Add Parent 2</a>
       </div>
-      <div class="mt-2r">
+      <div class="mt-2r collapse" id="mailling-address">
           <h2>Mailing Address</h2>
       <form class="seperator">
       <div class="form-group d-flex mb-1">
