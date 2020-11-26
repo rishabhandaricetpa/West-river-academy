@@ -49,13 +49,13 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, User $user)
     {
-        if (! $user->hasVerifiedEmail()) {
+        if (!$user->hasVerifiedEmail()) {
             $this->guard()->logout();
             $request->session()->invalidate();
 
             alert()->error('Please verify your email first.');
 
-            return redirect()->route('login')
+            return redirect()->back()
                 ->withInput($request->only($this->username()));
         }
     }

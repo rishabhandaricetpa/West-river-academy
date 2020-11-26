@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ParentProfile;
 use App\Models\User;
 use App\Notifications\EmailVerification;
 use App\Providers\RouteServiceProvider;
@@ -66,11 +67,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $parent =  ParentProfile::create([
+            'user_id' => $user->id,
+            'p1_first_name' => $data['name'],
+            'p1_middle_name' => $data['nick_name'],
+            'p1_last_name' => $data['last_name'],
+            'p1_email' => $data['email'],
+            'p1_cell_phone' => $data['cell_phone'],
+            'p1_home_phone' => $data['home_phone'],
+            'p2_first_name' => $data['p2_name'],
+            'p2_middle_name' => $data['p2_nickname'],
+            'p2_email' => $data['p2_email'],
+            'p2_cell_phone' => $data['p2_cellphone'],
+            'p2_home_phone' => $data['p2_homephone'],
+            'street_address' => $data['street_address'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'zip_code' => $data['zip_code'],
+            'country' => $data['country'],
+            'reference' => $data['refrence'],
+            'immunized' => 'non immunized',
+        ]);
+        $parent->save();
+        return $user;
     }
 
     /**

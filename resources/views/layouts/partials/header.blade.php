@@ -40,8 +40,8 @@
           </ul>
         </div>
         <div>
-          <a href="#" role="button" class="btn btn-primary">enroll now</a>
-          <a href="#" class="user-login"><img class="o-contain" src="images/login-img.png" alt=""></a>
+          <a href="/registration" role="button" class="btn btn-primary">enroll now</a>
+          <a href="/" class="user-login"><img class="o-contain" src="images/login-img.png" alt=""></a>
         </div>
       </nav>
     </header>

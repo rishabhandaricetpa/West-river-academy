@@ -42,13 +42,13 @@
             <div class="form-group d-flex mb-1">
               <label for="">Preferred Nickname</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="" name="nick_name" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Last Name</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="" name="last_name" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
@@ -66,13 +66,13 @@
             <div class="form-group d-flex mb-1">
               <label for="">Cell Phone</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="cell_phone" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Work/Home Phone</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="home_phone" id="" aria-describedby="emailHelp">
               </div>
             </div>
 
@@ -88,37 +88,37 @@
             <div class="form-group d-flex mb-1">
               <label for="">First name</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="p2_name" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Preferred Nickname</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="p2_nickname" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Last Name</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="p2_lastname" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Email Address</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="p2_email" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Cell Phone</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="p2_cellphone" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Work/Home Phone</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="p2_homephone" id="" aria-describedby="emailHelp">
               </div>
             </div>
 
@@ -129,31 +129,31 @@
             <div class="form-group d-flex mb-1">
               <label for="">Street Address</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="street_address" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">city</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="city" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">state</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="state" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Zip Code</label>
               <div>
-                <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="zip_code" id="" aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">country</label>
               <div class="col-4 px-0">
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select class="form-control" name="country" id="exampleFormControlSelect1">
                   <option>united states</option>
                   <option>2</option>
                   <option>3</option>
@@ -166,7 +166,7 @@
           </div>
           <div class="py-5 seperator">
             <label class="h3 w-100">Who referred you to WRA, or how did you learn about us?</label>
-            <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="refrence" id="" aria-describedby="emailHelp">
           </div>
           <div class="mt-2r">
             <h2>Create your Password using ONLY letters and numbers</h2>
