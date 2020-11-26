@@ -15,7 +15,8 @@ class CreateStudentProfilesTable extends Migration
     {
         Schema::create('student_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreign('parent_id')->references('id')->on('parent_profiles');
+            $table->unsignedBigInteger('parent_profile_id');
+            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
