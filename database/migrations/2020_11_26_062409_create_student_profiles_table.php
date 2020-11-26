@@ -23,7 +23,7 @@ class CreateStudentProfilesTable extends Migration
             $table->date('d_o_b');
             $table->string('email');
             $table->string('cell_phone')->nullable();
-            $table->string('student_id');
+            $table->string('student_Id');
             $table->date('start_date_of_enrollment');
             $table->date('end_date_of_enrollment');
             $table->string('grade_level');
