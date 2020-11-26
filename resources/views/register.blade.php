@@ -14,7 +14,7 @@
 
 <body>
   <div id="app" class="app">
-    <img src="https://www.westriveracademy.com/cwp/img/banner.jpg" class="img-absolute" alt="bg-img">
+    <img src="images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
     <!-- * =============== Header =============== * -->
 <header class="site-header">
   <nav class="navbar navbar-expand-lg navbar-dark">
