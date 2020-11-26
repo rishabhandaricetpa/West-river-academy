@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'SignIn/login');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -33,9 +33,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    Route::get('register',function(){
-        return view('register');
+    Route::get('registration', function () {
+        return view('SignIn/register');
     });
+    Route::get('/verify-email', function () {
+        return view('SignIn/verify-email');
+    })->name('verify.email');
+    Route::get('/dashboard', function () {
+        return view('SignIn/dashboard');
+    })->name('dashboard');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

@@ -24,7 +24,7 @@ class VerificationController extends Controller
 
     public function verify(Request $request, User $user)
     {
-        if (! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             alert()->error('Invalid verification link. Please request a new one.');
 
             return redirect()->route('verification.request');
@@ -40,7 +40,7 @@ class VerificationController extends Controller
 
         alert()->success($message);
 
-        return redirect()->route('login');
+        return redirect('/dashboard');
     }
 
     public function resend(Request $request)

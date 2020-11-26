@@ -89,6 +89,6 @@ class RegisterController extends Controller
 
         alert()->success('Please check your email inbox for verification.');
 
-        return redirect()->route('login');
+        return redirect()->route('verify.email');
     }
 }
