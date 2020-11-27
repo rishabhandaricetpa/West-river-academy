@@ -36,9 +36,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('registration', function () {
         return view('SignIn/register');
     });
-    Route::get('reset', function () {
-        return view('SignIn/reset');
-    })->name('password.reset');;
     Route::get('/verify-email', function () {
         return view('SignIn/verify-email');
     })->name('verify.email');

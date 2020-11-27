@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <body>
   <div id="app" class="app">
     <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
@@ -12,14 +13,14 @@
       <div class="form-wrap border bg-light mb-4">
         <h2 class="text-capitalize">Create Your Account</h2>
         <p>Enter the information below and click “Submit.” An email with a link to activate your account will be sent to the email address you provide. You will then be able to sign in, enroll and purchase other services.</p>
-        <div class="register-info">Don't have an account yet? <a href="#">Click this link to create one.</a></div>
+        <div class="register-info">Already have an account? <a href="/">Click this link to sign in.</a></div>
       </div>
 
       <div class="form-wrap border bg-light py-5 px-25">
         <form method="POST" action="{{ route('register') }}">
           @csrf
           <div>
-            <h2>Create your User ID</h2>
+            <h2>Enter Parent 1 Information</h2>
 
             <div class="form-group d-flex mb-1">
               <label for="">First name</label>
@@ -54,7 +55,7 @@
             <div class="form-group d-flex mb-1">
               <label for="">Cell Phone</label>
               <div>
-                <input type="text" class="form-control" name="cell_phone" id=""  required aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="cell_phone" id="" required aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">

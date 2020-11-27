@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <body>
   <div id="app" class="app">
     <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
@@ -43,7 +44,7 @@
           </div>
           <div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="{{ route('password.reset') }}" class="ml-4">Forgot Password?</a>
+            <a href="{{ route('password.request') }}" class="ml-4">Forgot Password?</a>
           </div>
           <div class="register-info">Don't have an account yet? <a href="/registration">Click this link to create one.</a></div>
         </form>
