@@ -1,17 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="robots" content="noindex, nofollow">
-  <title> West River Academy </title>
-  <!-- Style Files -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="css/app.css" rel="stylesheet" media="all">
-</head>
-
 <body>
   <div id="app" class="app">
     <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
@@ -55,7 +43,7 @@
           </div>
           <div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="{{ route('password.request') }}" class="ml-4">Forgot Password?</a>
+            <a href="{{ route('password.reset') }}" class="ml-4">Forgot Password?</a>
           </div>
           <div class="register-info">Don't have an account yet? <a href="/registration">Click this link to create one.</a></div>
         </form>

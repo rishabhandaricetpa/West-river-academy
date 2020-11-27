@@ -1,17 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="robots" content="noindex, nofollow">
-  <title> West River Academy </title>
-  <!-- Style Files -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="css/app.css" rel="stylesheet" media="all">
-</head>
-
 <body>
   <div id="app" class="app">
     <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
@@ -66,7 +54,7 @@
             <div class="form-group d-flex mb-1">
               <label for="">Cell Phone</label>
               <div>
-                <input type="text" class="form-control" name="cell_phone" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="cell_phone" id=""  required aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
@@ -129,31 +117,31 @@
             <div class="form-group d-flex mb-1">
               <label for="">Street Address</label>
               <div>
-                <input type="text" class="form-control" name="street_address" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="street_address" id="" required aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">city</label>
               <div>
-                <input type="text" class="form-control" name="city" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="city" id="" required aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">state</label>
               <div>
-                <input type="text" class="form-control" name="state" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="state" id="" required aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">Zip Code</label>
               <div>
-                <input type="text" class="form-control" name="zip_code" id="" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="zip_code" id="" required aria-describedby="emailHelp">
               </div>
             </div>
             <div class="form-group d-flex mb-1">
               <label for="">country</label>
               <div class="col-4 px-0">
-                <select class="form-control" name="country" id="exampleFormControlSelect1">
+                <select class="form-control" name="country" id="exampleFormControlSelect1" required>
                   <option>united states</option>
                   <option>2</option>
                   <option>3</option>
