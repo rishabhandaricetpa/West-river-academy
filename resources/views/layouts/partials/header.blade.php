@@ -4,9 +4,12 @@
   <meta name="robots" content="noindex, nofollow">
   <title> West River Academy </title>
   <!-- Style Files -->
+
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet" media="all">
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 </head>
   <!-- * =============== Header =============== * -->
   <header class="site-header">

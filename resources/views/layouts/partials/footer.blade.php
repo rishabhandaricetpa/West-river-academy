@@ -20,13 +20,25 @@
   </div>
 </footer>
 </div>
+
+<!-- Footer scripts -->
+
+@stack('select2_script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/app.js" async></script>
-<!-- Footer scripts -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function() { 
+		$("#country").select2({
+			
+		}); 
+	});
+</script>
+
 @stack('before_vendor_scripts')
-<script defer src="{{ mix('js/manifest.js') }}"></script>
-<script defer src="{{ mix('js/vendor.js') }}"></script>
+<!-- <script defer src="{{ mix('js/manifest.js') }}"></script> -->
 @stack('after_vendor_scripts')
 @stack('before_app_scripts')
-<script defer async src="{{ mix('js/app.js') }}"></script>
+<!-- <script defer async src="{{ mix('js/app.js') }}"></script> -->
 @stack('after_app_scripts')

@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class RegisterController extends Controller
 {
@@ -114,5 +116,15 @@ class RegisterController extends Controller
         alert()->success('Please check your email inbox for verification.');
 
         return redirect()->route('verify.email');
+    }
+     /**
+     * show country list to parent profile dropdown 
+     */
+    function countrydata()
+    {
+        $country_list=  DB::table('countries')
+                        ->get();
+
+     return view('SignIn/register')->with('country_list',$country_list);
     }
 }

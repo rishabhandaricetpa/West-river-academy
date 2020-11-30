@@ -36,6 +36,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('registration', function () {
         return view('SignIn/register');
     });
+    Route::get('registration', 'Auth\RegisterController@countrydata');
     Route::get('/verify-email', function () {
         return view('SignIn/verify-email');
     })->name('verify.email');
