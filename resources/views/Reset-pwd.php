@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="robots" content="noindex, nofollow">
-  <title> West River Academy </title>
+  <title> Reset Pwd </title>
   <!-- Style Files -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -41,8 +41,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blog</a>
               <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                <li><a class="dropdown-item" href="#">What Parents | 
-                  Students Say</a></li>
+                <li><a class="dropdown-item" href="#">What Parents | Students Say</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -61,27 +60,18 @@
     <!-- * =============== Main =============== * -->
     <main class="position-relative container">
       <div class="form-wrap border bg-light form-content small-container">
-        <h2>Login to My Account</h2>
+        <h2>Reset Your Password</h2>
+        <p>Enter your user ID and click the submit button. You will be sent an email with a link to reset your password.</p>
         <form>
           <div class="form-group d-flex mb-1">
-            <label for="">Parent 1 Email Address</label>
+            <label for="">User ID</label>
             <div>
               <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-              <div class="alert alert-danger">Enter your user ID.</div>
             </div>
           </div>
-          <div class="form-group d-flex mb-1">
-            <label for="exampleInputPassword1">Password</label>
-            <div>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-              <div class="alert alert-danger">Enter your password.</div>
-            </div>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
-          <div class="mt-4">
-            <button type="submit" class="btn btn-primary">Sign in</button>
-            <a href="#" class="ml-4">Forgot Password?</a>
-          </div>
-       
         </form>
       </div>
     </main>

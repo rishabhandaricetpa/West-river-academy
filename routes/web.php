@@ -36,6 +36,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('register',function(){
         return view('register');
     });
+    Route::get('update-pwd',function(){
+        return view('update-pwd');
+    });
+    Route::get('thankyou',function(){
+        return view('thankyou');
+    });
+    Route::get('Reset-pwd',function(){
+        return view('Reset-pwd');
+    });
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

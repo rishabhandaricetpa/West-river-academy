@@ -10,3 +10,16 @@
     $(this).removeClass('show').attr('aria-expanded', "false");
     $(this).find('.dropdown-menu').removeClass('show');
   });
+
+/* Header on scroll */
+  $(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+     //>=, not <=
+    if (scroll >= 500) {
+        //clearHeader, not clearheader - caps H
+        $(".site-header").addClass("stickyHeader");
+    }
+    else{
+      $(".site-header").removeClass("stickyHeader");
+    }
+}); //missing );

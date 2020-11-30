@@ -3,6 +3,23 @@
   max-width: 90%;
   margin: 0 auto;
   padding-top: 30px;
+  .navbar-toggler{
+    width: 30px;
+    height: 30px;
+    border: 2px solid $white;
+    padding: 0;
+    .icon-bar{
+      width: 100%;
+      height: 3px;
+      background-color: $white;
+      border-radius: 2px;
+      display: block;
+      margin-bottom: 7px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
   .navbar-collapse{
     padding-right: 45px;
   }

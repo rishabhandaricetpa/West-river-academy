@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="robots" content="noindex, nofollow">
-  <title> Register</title>
+  <title> Enroll Students</title>
   <!-- Style Files -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     <!-- * =============== Header =============== * -->
 <header class="site-header">
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/"><img src="images/wra_logo.svg" alt="wra_logo"></a>
+    <a class="navbar-brand" href="/"><img src="/Users/nancyshalini/Documents/projects/peggywebb-westriveracademy-laravel/resources/images/wra_logo.svg" alt="wra_logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-header" aria-controls="main-header" aria-expanded="false" aria-label="Toggle navigation">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -59,7 +59,7 @@
     <div class="form-wrap border bg-light mb-4">
       <h2 class="text-capitalize">Create Your Account</h2>
       <p>Enter the information below and click “Submit.” An email with a link to activate your account will be sent to the email address you provide. You will then be able to sign in, enroll and purchase other services.</p>
-      <div class="register-info">Already have an account yet? <a href="#">Click this link to sign in.</a></div>
+      <div class="register-info">Don't have an account yet? <a href="#">Click this link to create one.</a></div>
   </div>
 
   <div class="form-wrap border bg-light py-5 px-25">
