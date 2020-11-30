@@ -29,7 +29,6 @@ mix.js('resources/js/app.js', 'public/js')
           './js/',
           './css/',
           './fonts/',
-          './images/',
           './mix-manifest.json',
         ],
         verbose: true,
