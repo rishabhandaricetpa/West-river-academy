@@ -61,6 +61,14 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm()
+    {
+        $country_list=  DB::table('countries')
+                        ->get();
+     
+       return view('auth.register')->with('country_list',$country_list);
+     
+    }
     /**
      * Create a new user instance after a valid registration.
      *
@@ -121,11 +129,5 @@ class RegisterController extends Controller
      /**
      * show country list to parent profile dropdown 
      */
-    function countrydata()
-    {
-        $country_list=  DB::table('countries')
-                        ->get();
-
-     return view('SignIn/register')->with('country_list',$country_list);
-    }
+    
 }
