@@ -118,14 +118,14 @@ class RegisterController extends Controller
         //return redirect()->route('verify.email');
         return view('SignIn/verify-email', compact('user'));
     }
-     /**
-     * show country list to parent profile dropdown 
+    /**
+     * show country list to parent profile dropdown
      */
     function countrydata()
     {
-        $country_list=  DB::table('countries')
-                        ->get();
+        $country_list =  DB::table('countries')
+            ->get();
 
-     return view('SignIn/register')->with('country_list',$country_list);
+        return view('SignIn/register')->with('country_list', $country_list);
     }
 }

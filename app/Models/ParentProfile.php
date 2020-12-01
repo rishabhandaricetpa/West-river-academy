@@ -10,7 +10,10 @@ class ParentProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'p1_first_name','p1_email','p1_cell_phone','street_address','city','state','zip_code','country'
+        'user_id', 'p1_first_name', 'p1_middle_name', 'p1_last_name', 'p1_email', 'p1_cell_phone', 'p1_home_phone',
+        'p2_first_name', 'p2_middle_name', 'p2_email', 'p2_cell_phone', 'p2_home_phone',
+        'street_address', 'city', 'state', 'zip_code', 'country', 'reference',
+        'immunized'
     ];
     protected $table = "parent_profiles";
     public function user()
