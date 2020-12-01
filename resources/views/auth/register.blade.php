@@ -20,19 +20,19 @@
         <div class="form-group d-flex mb-1">
           <label for="">First name</label>
           <div>
-            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Preferred Nickname</label>
           <div>
-            <input type="text" class="form-control" id="" name="nick_name" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="" name="nick_name" value="{{ old('nick_name') }}" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Last Name</label>
           <div>
-            <input type="text" class="form-control" id="" name="last_name" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="" value="{{ old('last_name') }}" name="last_name" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
@@ -50,13 +50,13 @@
         <div class="form-group d-flex mb-1">
           <label for="">Cell Phone</label>
           <div>
-            <input type="text" class="form-control" name="cell_phone" id="" required aria-describedby="emailHelp">
+            <input type="number" class="form-control" value="{{ old('cell_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="cell_phone" maxlength="10" pattern="[0-9]*" />
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Work/Home Phone</label>
           <div>
-            <input type="text" class="form-control" name="home_phone" id="" aria-describedby="emailHelp">
+            <input type="number" class="form-control" value="{{ old('home_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="home_phone" maxlength="10" pattern="[0-9]*" />
           </div>
         </div>
 
@@ -72,37 +72,37 @@
         <div class="form-group d-flex mb-1">
           <label for="">First name</label>
           <div>
-            <input type="text" class="form-control" name="p2_name" id="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="p2_name" id="" value="{{ old('p2_name') }}" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Preferred Nickname</label>
           <div>
-            <input type="text" class="form-control" name="p2_nickname" id="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="p2_nickname" value="{{ old('p2_nickname') }}" id="" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Last Name</label>
           <div>
-            <input type="text" class="form-control" name="p2_lastname" id="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="p2_lastname" value="{{ old('p2_lastname') }}" id="" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Email Address</label>
           <div>
-            <input type="text" class="form-control" name="p2_email" id="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="p2_email" value="{{ old('p2_email') }}" id="" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Cell Phone</label>
           <div>
-            <input type="text" class="form-control" name="p2_cellphone" id="" aria-describedby="emailHelp">
+            <input type="number" class="form-control" value="{{ old('p2_cellphone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="p2_cellphone" maxlength="10" pattern="[0-9]*" />
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Work/Home Phone</label>
           <div>
-            <input type="text" class="form-control" name="p2_homephone" id="" aria-describedby="emailHelp">
+            <input type="number" class="form-control" value="{{ old('p2_homephone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="p2_homephone" maxlength="10" pattern="[0-9]*" />
           </div>
         </div>
 
@@ -113,31 +113,31 @@
         <div class="form-group d-flex mb-1">
           <label for="">Street Address</label>
           <div>
-            <input type="text" class="form-control" name="street_address" id="" required aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="street_address" value="{{ old('street_address') }}" id="" required aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">city</label>
           <div>
-            <input type="text" class="form-control" name="city" id="" required aria-describedby="emailHelp">
+            <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="" required aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">state</label>
           <div>
-            <input type="text" class="form-control" name="state" id="" required aria-describedby="emailHelp">
+            <input type="text" class="form-control" value="{{ old('state') }}" name="state" id="" required aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">Zip Code</label>
           <div>
-            <input type="text" class="form-control" name="zip_code" id="" required aria-describedby="emailHelp">
+            <input type="number" class="form-control" value="{{ old('zip_code') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="zip_code" maxlength="6" pattern="[0-9]*" />
           </div>
         </div>
         <div class="form-group d-flex mb-1">
           <label for="">country</label>
           <div class="col-4 px-0">
-            <select class="form-control" name="country" id="exampleFormControlSelect1" required>
+            <select class="form-control" value="{{ old('country') }}" name="country" id="exampleFormControlSelect1" required>
               <option>united states</option>
               <option>2</option>
               <option>3</option>
