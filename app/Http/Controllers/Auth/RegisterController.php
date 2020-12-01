@@ -129,15 +129,5 @@ class RegisterController extends Controller
     /**
      * show country list to parent profile dropdown
      */
-<<<<<<< HEAD
     
-=======
-    function countrydata()
-    {
-        $country_list =  DB::table('countries')
-            ->get();
-
-        return view('SignIn/register')->with('country_list', $country_list);
-    }
->>>>>>> 0a6b44989019210d475822c4652cb4bf361472ef
 }

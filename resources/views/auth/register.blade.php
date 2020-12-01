@@ -137,13 +137,13 @@
         <div class="form-group d-flex mb-1">
           <label for="">country</label>
           <div class="col-4 px-0">
-            <select class="form-control" value="{{ old('country') }}" name="country" id="exampleFormControlSelect1" required>
-              <option>united states</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
+          <select class="form-control" name="country" id="country" id="exampleFormControlSelect1" required>
+                <option value="">Selct Countries</option>
+                @foreach($country_list ?? '' as $country)
+                <option  value="{{$country->country}}">
+                {{$country->country}}</option>
+                @endForeach
+              </select>
           </div>
         </div>
 
