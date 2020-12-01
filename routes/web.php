@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'SignIn/login');
+Route::view('/', 'welcome');
+
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -33,27 +35,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    Route::get('registration', function () {
-        return view('SignIn/register');
-    });
-<<<<<<< HEAD
-    Route::get('update-pwd',function(){
-        return view('update-pwd');
-    });
-    Route::get('thankyou',function(){
-        return view('thankyou');
-    });
-    Route::get('Reset-pwd',function(){
-        return view('Reset-pwd');
-    });
-=======
-    Route::get('/verify-email', function () {
+
+    // dashboard screen and verify email message
+    Route::get('/verify-email/{email}', function () {
         return view('SignIn/verify-email');
     })->name('verify.email');
     Route::get('/dashboard', function () {
         return view('SignIn/dashboard');
     })->name('dashboard');
->>>>>>> b244a81a2448374cf2fa0da742ccd5edf339cc2e
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect('/login');
+    });
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
