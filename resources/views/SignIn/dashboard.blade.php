@@ -9,6 +9,7 @@
 
 <body>
   <h1>Welcome to West River Academy</h1>
+  Logout <a href="{{ url('/logout') }}"> logout </a>
 </body>
 
 </html>

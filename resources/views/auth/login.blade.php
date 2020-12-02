@@ -1,77 +1,54 @@
-@extends('layouts.app')
-@section('pageTitle', 'Login')
+<!-- * =============== Header =============== * -->
+<title> @yield('pageTitle', 'Login') | {{config('app.name')}}</title>
+@include('layouts.partials.header')
 
-@section('content')
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        @include('alert::bootstrap')
+<!-- * =============== /Header =============== * -->
 
-        <div class="card">
-          <div class="card-header">{{ __('Login') }}</div>
+<!-- * =============== Main =============== * -->
+<main class="position-relative container">
 
-          <div class="card-body">
-            <form method="POST" action="{{ route('login') }}">
-              @csrf
+  <div class="form-wrap border bg-light form-content">
+    <h2>Login to My Account</h2>
+    <form method="POST" action="{{ route('login') }}">
+      @csrf
+      <div class="form-group d-flex mb-1">
+        <label for="exampleInputEmail1">Parent 1 Email Address</label>
 
-              <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                <div class="col-md-6">
-                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                         value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                  @error('email')
-                  <div class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </div>
-                  @enderror
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                <div class="col-md-6">
-                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                         name="password" required autocomplete="current-password">
-
-                  @error('password')
-                  <div class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </div>
-                  @enderror
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-6 offset-md-4">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember"
-                           id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label class="form-check-label" for="remember">
-                      {{ __('Remember Me') }}
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
-                    {{ __('Login') }}
-                  </button>
-
-                  <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                  </a>
-                </div>
-              </div>
-            </form>
+        <div>
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+          <!--   <div class="alert alert-danger">Enter your user ID.</div> -->
+          @include('alert::bootstrap')
+          @error('email')
+          <div class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
           </div>
+          @enderror
         </div>
       </div>
-    </div>
+      <div class="form-group d-flex mb-1">
+        <label for="exampleInputPassword1">Password</label>
+        <div>
+          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+          <!--  <div class="alert alert-danger">Enter your password.</div> -->
+          @error('password')
+          <div class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </div>
+          @enderror
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('password.request') }}" class="ml-4">Forgot Password?</a>
+      </div>
+      <div class="register-info">Don't have an account yet? <a href="{{route('register')}}">Click this link to create one.</a></div>
+    </form>
   </div>
-@endsection
+</main>
+
+<!-- * =============== /Main =============== * -->
+
+@include('layouts.partials.footer')
+</body>
+
+</html>
