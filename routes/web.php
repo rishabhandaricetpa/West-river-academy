@@ -35,7 +35,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-<<<<<<< HEAD
     Route::get('registration', function () {
         return view('SignIn/register');
     });
@@ -52,23 +51,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('enroll-student');
     });
     Route::get('/verify-email', function () {
-=======
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {
->>>>>>> 670f53998687ae9f753c5234f34d7fad86a4d558
         return view('SignIn/verify-email');
     })->name('verify.email');
     Route::get('/dashboard', function () {
         return view('SignIn/dashboard');
     })->name('dashboard');
-<<<<<<< HEAD
-=======
     Route::get('/logout', function () {
         Auth::logout();
         return redirect('/login');
     });
->>>>>>> 670f53998687ae9f753c5234f34d7fad86a4d558
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
