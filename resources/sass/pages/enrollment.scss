@@ -1,0 +1,11 @@
+.main-sidebar{
+    width: 180px;
+}
+
+.main-content{
+    width: calc(100% - 180px);
+    .form-content{
+        max-width: 97%;
+    }
+}
+
