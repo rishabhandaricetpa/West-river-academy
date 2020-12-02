@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -58,5 +59,27 @@ class LoginController extends Controller
             return redirect()->back()
                 ->withInput($request->only($this->username()));
         }
+    }
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        // throw ValidationException::withMessages([
+        //   $this->username() => [trans('auth.failed')],
+        // ]);
+        $errors = [$this->username() => trans('auth.failed')];
+
+        // Load user from database
+        $user = User::where($this->username(), $request->{$this->username()})->first();
+
+        if ($user && !Hash::check($request->password, $user->password)) {
+            $errors = ['password' => 'The provided password is incorrect'];
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
     }
 }
