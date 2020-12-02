@@ -6,14 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="robots" content="noindex, nofollow">
   <title> Enroll Students</title>
-  <!-- Style Files -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Judson:ital,wght@0,400;0,700;1,400&family=Lato:ital@1&display=swap" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet" media="all">
 </head>
 
 <body>
+
   <div id="app" class="app">
+  <div class="d-flex">
+   <!-- * =============== Sidebar =============== * -->
+ <sidebar class="main-sidebar bg-secondary">
+ </sidebar>
+  <!-- * =============== Sidebar =============== * -->
+  
+  <div class="main-content position-relative">
     <img src="https://www.westriveracademy.com/cwp/img/banner.jpg" class="img-absolute" alt="bg-img">
     <!-- * =============== Header =============== * -->
 <header class="site-header">
@@ -56,32 +63,53 @@
 
     <!-- * =============== Main =============== * -->
   <main class="position-relative container form-content mt-4">
-    <div class="form-wrap border bg-light mb-4">
-      <h2 class="text-capitalize">Create Your Account</h2>
-      <p>Enter the information below and click “Submit.” An email with a link to activate your account will be sent to the email address you provide. You will then be able to sign in, enroll and purchase other services.</p>
-      <div class="register-info">Don't have an account yet? <a href="#">Click this link to create one.</a></div>
-  </div>
+       <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
   <div class="form-wrap border bg-light py-5 px-25">
       <div>
-      <h2>Create your User ID</h2>
-      <form class="seperator">
+      <h2>Enroll Student 1</h2>
+      <form>
       <div class="form-group d-flex mb-1">
-        <label for="">First name</label>
+        <label for="">First/Given Name <sup>*</sup></label>
         <div>
         <input type="text" class="form-control" id="" aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1">
-        <label for="">Preferred Nickname</label>
+        <label for="">Middle Name <sup>*</sup></label>
         <div>
         <input type="text" class="form-control" id="" aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1">
-        <label for="">Last Name</label>
+        <label for="">Last/Family Name <sup>*</sup></label>
         <div>
         <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      </div>
+      <div class="form-group d-flex mb-1">
+        <label for="">Date of Birth</label>
+        <div>
+        <div class="form-row col-sm-3 px-0">
+    <div class="form-group col-md-5">
+      <select id="" class="form-control">
+        <option selected>-...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <select id="" class="form-control">
+        <option selected>-...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <select id="" class="form-control">
+        <option selected>-...</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
       </div>
       </div>
       <div class="form-group d-flex mb-1">
@@ -97,127 +125,206 @@
       </div>
       </div>
       <div class="form-group d-flex mb-1">
-        <label for="">Work/Home Phone</label>
+        <label for="">Student ID</label>
         <div>
         <input type="text" class="form-control" id="" aria-describedby="emailHelp">
       </div>
       </div>
-    </form>
-</div>
-
-
-    <div class="text-center mt-2r">
-          <a href="#parent-2info" aria-expanded="false" aria-controls="parent-2info" data-toggle="collapse" class="btn btn-primary">Add Parent 2</a>
-      </div>
-      <div class="collapse" id="parent-2info">
-      <h2>Enter Parent 2 Information</h2>
-      <form class="seperator">
-      <div class="form-group d-flex mb-1">
-        <label for="">First name</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">Preferred Nickname</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">Last Name</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">Email Address</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">Cell Phone</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">Work/Home Phone</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-    </form>
-</div>
-      <div class="mt-2r" >
-          <h2>Mailing Address</h2>
-      <form class="seperator">
-      <div class="form-group d-flex mb-1">
-        <label for="">Street Address</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">city</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">state</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">Zip COde</label>
-        <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
-      </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="">country</label>
-        <div class="col-4 px-0">
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>united states</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-    </select>
-      </div>
-      </div>
-    </form>
+      <div class="form-group d-flex mb-1 mt-2r">
+        <label for="">Select your START date of enrollment</label>
+        <div class="row mx-0">
+        <div class="form-row col-sm-3 px-0">
+    <div class="form-group col-md-5">
+      <select id="" class="form-control">
+        <option selected>August</option>
+        <option>...</option>
+      </select>
     </div>
-    <div class="py-5 seperator">
-    <label class="h3 w-100">Who referred you to WRA, or how didi you learn about us?</label>
-    <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+    <div class="form-group col-md-3">
+      <select id="" class="form-control">
+        <option selected>1</option>
+        <option>...</option>
+      </select>
     </div>
-    <div class="mt-2r">
-    <h2>Create your Password using ONLY letters and numbers</h2>
-    <form>
-      <div class="form-group d-flex mb-1">
-        <label for="exampleInputEmail1">User ID</label>
-        <div>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div class="form-group col-md-4">
+      <select id="" class="form-control">
+        <option selected>2020</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+  <div class="info-detail col-sm-9 lato-italic">
+            <p>Choose August 1 (the first day of the Annual enrollment period), January 1 (the first day of the Second Semester), today's date or another date. This date will appear on your confirmation of enrollment letter. You will be considered enrolled for the full 12-month period for Annual or 7-month period for Second Semester Only.</p>
+       </div>
+      </div>      
       </div>
-      </div>
-      <div class="form-group d-flex mb-1">
-        <label for="exampleInputPassword1">Password</label>
-        <div>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-        <div class="info-detail mt-3">
-            <p>After activating your account, you will log in.</p>
-            <p>Enter the email address of Parent 1 and your password.</p>
+      <div class="form-group d-flex mb-1 mt-2r">
+        <label for="">Select your END date of enrollment</label>
+        <div class="row mx-0">
+        <div class="form-row col-sm-3 px-0">
+    <div class="form-group col-md-5">
+      <select id="" class="form-control">
+        <option selected>July</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <select id="" class="form-control">
+        <option selected>31</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <select id="" class="form-control">
+        <option selected>2021</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+  <div class="info-detail col-sm-9 lato-italic">
+            <p>Choose before July 31 (the last day of your enrollment) or another date before July 31. This date will appear on your confirmation of enrollment letter. Your enrollment will officially end on July 31.</p>
        </div>
       </div>
+</div>
+ <div class="form-group mt-2r d-flex links-list mb-5">
+         <a href="#" class="text-uppercase">help me choose my dates</a>
+         <a href="#" class="text-uppercase ml-4">what if i need to skip a year?</a>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    </div>
+<div class="form-group d-flex mb-1 lato-italic info-detail">
+        <label for="">Select grade level(s) for your enrollment period
+       <p>(You may select more than one for multiple years)</p></label>
+        <div class="row pl-5">
+          <div class="col-sm-3">
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              Upgraded
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              Preschool Age 3
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              Preschool Age 4
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+            Kindergarten
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              1
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              2
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              3
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              4
+            </label>
+            </div>
+             </div>
+             <div class="col-sm-3">
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              5
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              6
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              7
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              8
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              9
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              10
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              11
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <label class="form-check-label" for="">
+              12
+            </label>
+            </div>
+          </div>
 
+      </div>
+      
+      </div>
+      <div class="form-group d-flex mt-2r">
+        <label for="">Is this student immunized?</label>
+        <div class="col-sm-6">
+        <select class="form-control">
+          <option>Yes, records will come with school records.</option>
+          <option>Yes, I will provide records.</option>
+          <option>Yes, I plan to get immunizations soon.</option>
+          <option>No, for personal reasons.</option>
+          <option>No, for medical reasons.</option>
+          <option>No, for religious reasons.</option>
+        </select>
+      </div>
+      </div>
+      <div id="addAnotherEnroll" class="collapse">
+      <div class="form-group d-flex" >
+        <label for="">tell us more about your situation</label>
+        <div>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      </div>
+     </div>
+      <div class="mt-4">
+        <a  class="btn btn-primary" data-toggle="collapse" href="#addAnotherEnroll" aria-expanded="false" aria-controls="addAnotherEnroll">Add Another Enrollment Period</a>
+        <a href="#" role="button" class="btn btn-primary ml-4">Continue</a>
+      </div>
+    </form>
+    
   </main>
 
     <!-- * =============== /Main =============== * -->
@@ -243,6 +350,9 @@
 	</div>
       </div>
     </footer>
+    
+  </div>
+  </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/app.js" async></script>

@@ -12,7 +12,7 @@
 }
 
 .form-content{
-    max-width: 90% !important;
+    max-width: 90%;
     margin: 135px auto;
 }
 
@@ -20,6 +20,8 @@ label{
     font-size: 14px;
     color: #888888;
     width: 135px;
+    padding-right: 8px;
+    line-height: 20px;
     & + div{
       width: calc(100% - 135px);
     }
@@ -41,4 +43,21 @@ label{
 
 .small-container{
     max-width: 50% !important;
+}
+
+select.form-control{
+    padding: 3px;
+}
+
+textarea{
+    resize: none;
+}
+
+.links-list{
+    padding-left: 135px;
+    text-decoration: underline;
+    a{
+        font-size: 18px;
+        color: $light-blue;
+    }
 }

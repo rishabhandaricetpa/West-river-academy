@@ -36,7 +36,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('registration', function () {
         return view('SignIn/register');
     });
-<<<<<<< HEAD
     Route::get('update-pwd',function(){
         return view('update-pwd');
     });
@@ -46,14 +45,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('Reset-pwd',function(){
         return view('Reset-pwd');
     });
-=======
+    Route::get('enroll-student',function(){
+        return view('enroll-student');
+    });
     Route::get('/verify-email', function () {
         return view('SignIn/verify-email');
     })->name('verify.email');
     Route::get('/dashboard', function () {
         return view('SignIn/dashboard');
     })->name('dashboard');
->>>>>>> b244a81a2448374cf2fa0da742ccd5edf339cc2e
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
