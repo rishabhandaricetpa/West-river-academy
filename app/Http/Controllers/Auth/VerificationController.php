@@ -40,7 +40,7 @@ class VerificationController extends Controller
 
         alert()->success($message);
 
-        return redirect('/dashboard');
+        return redirect('/login');
     }
 
     public function resend(Request $request)

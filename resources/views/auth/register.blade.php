@@ -18,7 +18,7 @@
         <h2>Enter Parent 1 Information</h2>
 
         <div class="form-group d-flex mb-1">
-          <label for="">First name</label>
+          <label for="">First Name *</label>
           <div>
             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
           </div>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="">Email Address</label>
+          <label for="">Email Address *</label>
           <div>
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
             @error('email')
@@ -48,7 +48,7 @@
 
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="">Cell Phone</label>
+          <label for="">Cell Phone *</label>
           <div>
             <input type="number" class="form-control" value="{{ old('cell_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="cell_phone" maxlength="10" pattern="[0-9]*" />
           </div>
@@ -111,39 +111,39 @@
         <h2>Mailing Address</h2>
 
         <div class="form-group d-flex mb-1">
-          <label for="">Street Address</label>
+          <label for="">Street Address *</label>
           <div>
             <input type="text" class="form-control" name="street_address" value="{{ old('street_address') }}" id="" required aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="">city</label>
+          <label for="">City *</label>
           <div>
             <input type="text" class="form-control" name="city" value="{{ old('city') }}" id="" required aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="">state</label>
+          <label for="">State *</label>
           <div>
             <input type="text" class="form-control" value="{{ old('state') }}" name="state" id="" required aria-describedby="emailHelp">
           </div>
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="">Zip Code</label>
+          <label for="">Zip Code *</label>
           <div>
             <input type="number" class="form-control" value="{{ old('zip_code') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="zip_code" maxlength="6" pattern="[0-9]*" />
           </div>
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="">country</label>
+          <label for="">Country *</label>
           <div class="col-4 px-0">
-          <select class="form-control" name="country" id="country" id="exampleFormControlSelect1" required>
-                <option value="">Selct Countries</option>
-                @foreach($country_list ?? '' as $country)
-                <option  value="{{$country->country}}">
+            <select class="form-control" name="country" id="country" id="exampleFormControlSelect1" required>
+              <option value="">Select Country</option>
+              @foreach($country_list ?? '' as $country)
+              <option value="{{$country->country}}">
                 {{$country->country}}</option>
-                @endForeach
-              </select>
+              @endForeach
+            </select>
           </div>
         </div>
 
@@ -156,7 +156,7 @@
         <h2>Create your Password using ONLY letters and numbers</h2>
 
         <div class="form-group d-flex mb-1">
-          <label for="exampleInputEmail1">Password</label>
+          <label for="exampleInputEmail1">Password *</label>
           <div>
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
             @error('password')
@@ -167,7 +167,7 @@
           </div>
         </div>
         <div class="form-group d-flex mb-1">
-          <label for="exampleInputPassword1">Confirm Password</label>
+          <label for="exampleInputPassword1">Confirm Password *</label>
           <div>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             <div class="info-detail mt-3">
