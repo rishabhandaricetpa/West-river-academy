@@ -11,14 +11,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Judson:ital,wght@0,400;0,700;1,400&family=Lato:ital@1&display=swap" rel="stylesheet">
   <link href="{{mix('css/app.css')}}" rel="stylesheet" media="all">
   <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
 </head>
 <!-- * =============== Header =============== * -->
 <header class="site-header">
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark px-0">
     <a class="navbar-brand" href="/"><img src="/images/wra_logo.svg" alt="wra_logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-header" aria-controls="main-header" aria-expanded="false" aria-label="Toggle navigation">
       <span class="icon-bar"></span>
@@ -29,7 +28,7 @@
     <div class="collapse navbar-collapse" id="main-header">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrollment</a>
+          <a class="nav-link" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrollment</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown05">
             <li><a class="dropdown-item" href="#">international</a></li>
             <li> <a class="dropdown-item" href="#">graduation</a></li>
@@ -47,7 +46,7 @@
         </li>
       </ul>
     </div>
-    <div>
+    <div class="action-buttons">
       <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
       <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
     </div>

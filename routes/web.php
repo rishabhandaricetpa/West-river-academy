@@ -64,5 +64,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return redirect('/login');
     });
 });
-
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

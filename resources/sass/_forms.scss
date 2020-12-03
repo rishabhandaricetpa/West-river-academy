@@ -7,17 +7,16 @@
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     h2{
-        margin-bottom: 12px;
+        margin-bottom: 2rem;
     }
 }
 
 .form-content{
-    max-width: 90%;
     margin: 135px auto;
 }
 
 label{
-    font-size: 14px;
+    font-size: 13px;
     color: #888888;
     width: 135px;
     padding-right: 8px;
@@ -41,9 +40,7 @@ label{
     padding-bottom: 2rem;
 }
 
-.small-container{
-    max-width: 50% !important;
-}
+
 
 select.form-control{
     padding: 3px;
