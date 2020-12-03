@@ -8,7 +8,7 @@
 <main class="position-relative container">
 
   <div class="form-wrap border bg-light form-content">
-    <h2>Login to My Account</h2>
+    <h2>Log In to My Account</h2>
     <form method="POST" action="{{ route('login') }}">
       @csrf
       <div class="form-group d-flex mb-1">
