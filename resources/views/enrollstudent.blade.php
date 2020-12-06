@@ -1,90 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="robots" content="noindex, nofollow">
-  <title> Enroll Students</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Judson:ital,wght@0,400;0,700;1,400&family=Lato:ital@1&display=swap" rel="stylesheet">
-  <link href="css/app.css" rel="stylesheet" media="all">
-</head>
+<title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
+<!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
+@include('layouts.partials.header')
 
-<body>
-
-  <div id="app" class="app">
-  <div class="d-flex">
-   <!-- * =============== Sidebar =============== * -->
+ <!-- * =============== Sidebar =============== * -->
  <sidebar class="main-sidebar bg-secondary">
- </sidebar>
-  <!-- * =============== Sidebar =============== * -->
-  
-  <div class="main-content position-relative">
-    <img src="https://www.westriveracademy.com/cwp/img/banner.jpg" class="img-absolute" alt="bg-img">
-    <!-- * =============== Header =============== * -->
-<header class="site-header">
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/"><img src="/Users/nancyshalini/Documents/projects/peggywebb-westriveracademy-laravel/resources/images/wra_logo.svg" alt="wra_logo"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-header" aria-controls="main-header" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="main-header">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Enrollment</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown05">
-            <li><a class="dropdown-item" href="#">international</a></li>
-            <li> <a class="dropdown-item" href="#">graduation</a></li>
-           <li>  <a class="dropdown-item" href="#">Accreditation</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">our story <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">faq</a>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <a href="#" role="button" class="btn btn-primary">enroll now</a>
-     <a href="#" class="user-login"><img class="o-contain" src="images/login-img.png" alt=""></a>
-    </div>
-  </nav>
-</header>
-    <!-- * =============== /Header =============== * -->
-
-    <!-- * =============== Main =============== * -->
+ </sidebar>  
+     <!-- * =============== Main =============== * -->
   <main class="position-relative container form-content mt-4">
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
   <div class="form-wrap border bg-light py-5 px-25">
+  <form method="POST" action="{{ route('enroll') }}">
+  @csrf
       <div>
       <h2>Enroll Student 1</h2>
       <form>
       <div class="form-group d-flex mb-1">
         <label for="">First/Given Name <sup>*</sup></label>
         <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+        <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" value="{{ old('first_name') }}" name="first_name" required aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1">
-        <label for="">Middle Name <sup>*</sup></label>
+        <label for="">Middle Name </label>
         <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') }}" aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1">
         <label for="">Last/Family Name <sup>*</sup></label>
         <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" required aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1">
@@ -93,14 +40,25 @@
         <div class="form-row col-sm-3 px-0">
     <div class="form-group col-md-5">
       <select id="" class="form-control">
-        <option selected>-...</option>
-        <option>...</option>
+           
       </select>
     </div>
     <div class="form-group col-md-3">
-      <select id="" class="form-control">
+      <select id="" class="form-control" name="d_o_B">
         <option selected>-...</option>
-        <option>...</option>
+              <option value=''>--Select Month--</option>
+          <option selected value='1'>Janaury</option>
+          <option value='2'>February</option>
+          <option value='3'>March</option>
+          <option value='4'>April</option>
+          <option value='5'>May</option>
+          <option value='6'>June</option>
+          <option value='7'>July</option>
+          <option value='8'>August</option>
+          <option value='9'>September</option>
+          <option value='10'>October</option>
+          <option value='11'>November</option>
+          <option value='12'>December</option>
       </select>
     </div>
     <div class="form-group col-md-4">
@@ -115,19 +73,24 @@
       <div class="form-group d-flex mb-1">
         <label for="">Email Address</label>
         <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+        <input type="text" class="form-control @error('email') is-invalid @enderro"  name="email" id="email" value="{{ old('email') }}" required aria-describedby="emailHelp">
+        @error('email')
+            <div class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </div>
+            @enderror
       </div>
       </div>
       <div class="form-group d-flex mb-1">
         <label for="">Cell Phone</label>
         <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+        <input type="text" class="form-control" id="cell_phone" name="cell_phone" value="{{ old('cell_phone') }}" aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1">
         <label for="">Student ID</label>
         <div>
-        <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+        <input type="text" class="form-control" id="student_id" name="student_id" required aria-describedby="emailHelp">
       </div>
       </div>
       <div class="form-group d-flex mb-1 mt-2r">
@@ -196,49 +159,49 @@
         <div class="row pl-5">
           <div class="col-sm-3">
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="Upgraded">
             <label class="form-check-label" for="">
               Upgraded
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="Preschool Age 3">
             <label class="form-check-label" for="">
               Preschool Age 3
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="Preschool Age 4">
             <label class="form-check-label" for="">
               Preschool Age 4
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="Kindergarten">
             <label class="form-check-label" for="">
             Kindergarten
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="1">
             <label class="form-check-label" for="">
               1
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="2">
             <label class="form-check-label" for="">
               2
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="3">
             <label class="form-check-label" for="">
               3
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="4">
             <label class="form-check-label" for="">
               4
             </label>
@@ -246,49 +209,49 @@
              </div>
              <div class="col-sm-3">
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="5">
             <label class="form-check-label" for="">
               5
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="6">
             <label class="form-check-label" for="">
               6
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="7">
             <label class="form-check-label" for="">
               7
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="8">
             <label class="form-check-label" for="">
               8
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="9">
             <label class="form-check-label" for="">
               9
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="10">
             <label class="form-check-label" for="">
               10
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="11">
             <label class="form-check-label" for="">
               11
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="student_grade" id="" value="12">
             <label class="form-check-label" for="">
               12
             </label>
@@ -301,7 +264,7 @@
       <div class="form-group d-flex mt-2r">
         <label for="">Is this student immunized?</label>
         <div class="col-sm-6">
-        <select class="form-control">
+        <select class="form-control" name="immunized_Stat">
           <option>Yes, records will come with school records.</option>
           <option>Yes, I will provide records.</option>
           <option>Yes, I plan to get immunizations soon.</option>
@@ -311,61 +274,25 @@
         </select>
       </div>
       </div>
-      <div id="addAnotherEnroll" class="collapse">
       <div class="form-group d-flex" >
-        <label for="">tell us more about your situation</label>
+        <label for="">tell us more about your situation </label>
         <div>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3"></textarea>
       </div>
       </div>
      </div>
       <div class="mt-4">
         <a  class="btn btn-primary" data-toggle="collapse" href="#addAnotherEnroll" aria-expanded="false" aria-controls="addAnotherEnroll">Add Another Enrollment Period</a>
-        <a href="#" role="button" class="btn btn-primary ml-4">Continue</a>
+        <button type="submit" class="btn btn-primary">Continue</button>
       </div>
     </form>
     
   </main>
 
     <!-- * =============== /Main =============== * -->
+    @include('layouts.partials.footer')
 
-    <footer class="bg-dark position-relative text-center main-footer">
-      <div class="container">
-        <ul class="social-icons list-unstyled d-flex justify-content-center">
-          <li><a href="#" class="mx-2"><i class="fab fa-facebook"></i></a></li>
-          <li><a href="#" class="mx-2"><i class="fab fa-twitter"></i></a></li>
-          <li><a href="#" class="mx-2"><i class="fab fa-pinterest"></i></a></li>
-          <li><a href="#" class="mx-2"><i class="fab fa-linkedin"></i></a></li>
-          <li><a href="#" class="mx-2"><i class="fab fa-instagram-square"></i></a></li>
-        </ul>
-        <a href="#" role="button" class="btn btn-secondary text-uppercase mt-4 mb-3">contact us</a>
-        <ul class="list-unstyled">
-        <li><a href=""><i class="fas fa-phone-alt mr-2"></i>949 - 492 - 5240</a></li>
-        <li><a href="#"><i class="fas fa-envelope mr-2"></i>contact@westriveracademy.com</a></li>
-        </ul>
-        <div class="copyright">
-	       	Copyright © 2020 West River Academy. 
-          <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-	        <a href="#" class="d-block">Website design, development and maintenance by eXcelisys, Inc.</a>
-	</div>
-      </div>
-    </footer>
-    
-  </div>
-  </div>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="js/app.js" async></script>
-   <!-- Footer scripts -->
- @stack('before_vendor_scripts')
-<script defer src="{{ mix('js/manifest.js') }}"></script>
-<script defer src="{{ mix('js/vendor.js') }}"></script>
-@stack('after_vendor_scripts')
-@stack('before_app_scripts')
-<script defer async src="{{ mix('js/app.js') }}"></script>
-@stack('after_app_scripts')
 </body>
-
 </html>
 
 

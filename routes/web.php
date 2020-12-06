@@ -35,22 +35,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    Route::get('registration', function () {
-        return view('SignIn/register');
+    Route::get('/enroll',function(){
+        return view('enrollstudent');
     });
-    Route::get('update-pwd',function(){
-        return view('update-pwd');
-    });
-    Route::get('thankyou',function(){
-        return view('thankyou');
-    });
-    Route::get('Reset-pwd',function(){
-        return view('Reset-pwd');
-    });
-    Route::get('enroll-student',function(){
-        return view('enroll-student');
-    });
-    Route::get('/verify-email', function () {
+    Route::post('/enroll', 'StudentController@create')->name('enroll');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {
@@ -64,5 +52,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return redirect('/login');
     });
 });
-});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

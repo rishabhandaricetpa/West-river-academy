@@ -34,8 +34,7 @@
 			
 		}); 
 	});
-</script>
-
+  </script>
 @stack('before_vendor_scripts')
 <!-- <script defer src="{{ mix('js/manifest.js') }}"></script> -->
 @stack('after_vendor_scripts')
