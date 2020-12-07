@@ -118,6 +118,18 @@ h2,h3,.h2,.h3{
   padding-right: 2.5rem !important;
 }
 
+/* popup css */
+.modal-dialog{
+  max-width: 560px;
+}
+.modal-body{
+   padding-bottom: 1rem !important;
+  p{
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+  }
+}
+
 /* global css */
 
 .app{

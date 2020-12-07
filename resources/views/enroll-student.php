@@ -200,11 +200,11 @@
       </div>
 </div>
  <div class="form-group mt-2r d-flex links-list mb-5">
-         <!-- Button trigger modal -->
-          <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDatesLong">
-          help me choose my dates
-          </button>
-          <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDatesLong">
+            <!-- Button trigger modal -->
+              <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates">
+              help me choose my dates
+              </button>
+          <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates">
           what if i need to skip a year?
           </button>
       </div>
@@ -534,22 +534,14 @@
 	</div>
       </div>
     </footer>
-    <!-- Modal -->
-<div class="modal fade" id="chooseDates" tabindex="-1" role="dialog" aria-labelledby="chooseDatesLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- Modal -->
+<div class="modal fade" id="chooseDates" tabindex="-1" aria-labelledby="chooseDatesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="chooseDatesLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <p>Annual enrollment covers the 12 months from August 1 - July 31. Second Semester Only covers January 1 - July 31. If you prefer to start your enrollment on the date you enroll, select that date. If you want your enrollment to date back to August 1, even though it is now later in the year, you can do so.</p>
+        <p>The dates you select will appear on your confirmation of enrollment letter. Regardless of the date you select, your enrollment will include the full 12-month period for Annual or the full 7-month period for Second Semester Only.</p>
+      <div class="text-right"><button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Close</button></div>  
       </div>
     </div>
   </div>
@@ -557,17 +549,16 @@
   </div>
   </div>
   </div>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/app.js" async></script>
    <!-- Footer scripts -->
- @stack('before_vendor_scripts')
+ <!-- @stack('before_vendor_scripts')
 <script defer src="{{ mix('js/manifest.js') }}"></script>
 <script defer src="{{ mix('js/vendor.js') }}"></script>
 @stack('after_vendor_scripts')
 @stack('before_app_scripts')
 <script defer async src="{{ mix('js/app.js') }}"></script>
-@stack('after_app_scripts')
+@stack('after_app_scripts') -->
 </body>
 
 </html>
