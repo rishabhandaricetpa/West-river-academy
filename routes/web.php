@@ -51,6 +51,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Auth::logout();
         return redirect('/login');
     });
+    Route::get('dashboard', function () {
+        return view('admin.app');
+    })->name('admin.dashboard');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

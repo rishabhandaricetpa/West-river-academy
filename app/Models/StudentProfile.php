@@ -15,7 +15,15 @@ class StudentProfile extends Model
         'student_situation'
     ];
     protected $table = "student_profiles";
-    
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'd_o_b',
+    ];
+
     public function parentProfile()
     {
         return $this->belongsTo('App\Models\ParentProfile');

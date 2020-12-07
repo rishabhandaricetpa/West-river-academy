@@ -21,13 +21,12 @@ class StudentController extends Controller
     protected function create(Request $data)
     {
         $user = Auth::user();
-
         $student =  StudentProfile::create([
              'parent_profile_id' => $user->id,
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'last_name' => $data['last_name'],
-            // 'd_o_b' => $data['d_o_B'],
+            'd_o_b' => \Carbon\Carbon::createFromFormat('d-m-Y', $data['dob'])->format('d/m/Y'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
             'student_Id' => $data['student_id'],
