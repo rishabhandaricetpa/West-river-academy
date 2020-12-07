@@ -16,7 +16,21 @@
   <div id="app" class="app">
   <div class="d-flex">
    <!-- * =============== Sidebar =============== * -->
- <sidebar class="main-sidebar bg-secondary">
+ <sidebar class="main-sidebar bg-secondary px-2 pt-5">
+    <ul class="list-unstyled">
+    <li>
+    <a href="#">Dashboard</a>
+      <ul class="list-unstyled">
+        <li><a href="#">Add student</a></li>
+        <li><a href="#">add enrollment</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Cart</a></li>
+    <li><a href="#">Fee structure</a></li>
+    <li><a href="#">Tutorials</a></li>
+    <li><a href="#">My Account</a></li>
+    <li><a href="#">Logout</a></li>
+    </ul>
  </sidebar>
   <!-- * =============== Sidebar =============== * -->
   
@@ -186,8 +200,13 @@
       </div>
 </div>
  <div class="form-group mt-2r d-flex links-list mb-5">
-         <a href="#" class="text-uppercase">help me choose my dates</a>
-         <a href="#" class="text-uppercase ml-4">what if i need to skip a year?</a>
+         <!-- Button trigger modal -->
+          <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDatesLong">
+          help me choose my dates
+          </button>
+          <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDatesLong">
+          what if i need to skip a year?
+          </button>
       </div>
 <div class="form-group d-flex mb-1 lato-italic info-detail">
         <label for="">Select grade level(s) for your enrollment period
@@ -515,10 +534,30 @@
 	</div>
       </div>
     </footer>
-    
+    <!-- Modal -->
+<div class="modal fade" id="chooseDates" tabindex="-1" role="dialog" aria-labelledby="chooseDatesLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="chooseDatesLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
   </div>
   </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/app.js" async></script>
    <!-- Footer scripts -->
