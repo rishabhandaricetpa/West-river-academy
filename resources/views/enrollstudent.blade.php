@@ -11,10 +11,9 @@
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
           <div class="form-wrap border bg-light py-5 px-25">
-            <form method="POST" action="{{ route('enroll') }}">
-            @csrf
-              <div>
-                <h2>Enroll Student 1</h2>
+             <h2>Enroll Student 1</h2>
+             <form method="POST" action="{{ route('enroll') }}">
+                @csrf
                   <div class="form-group d-flex mb-1">
                     <label for="">First/Given Name <sup>*</sup></label>
                       <div>
@@ -37,7 +36,6 @@
                     <label for="">Date of Birth</label>
                     <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"  name="fromdate"></p>
                   </div>
-
                   <div class="form-group d-flex mb-1">
                     <label for="">Email Address</label>
                       <div>
@@ -119,8 +117,9 @@
           </div>
       </div>
               <div class="form-group mt-2r d-flex links-list mb-5">
-                  <a href="#" class="text-uppercase">help me choose my dates</a>
-                  <a href="#" class="text-uppercase ml-4">what if i need to skip a year?</a>
+                 <!-- Button trigger modal -->
+                  <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates">help me choose my dates</button>
+                  <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates"> what if i need to skip a year?</button>
               </div>
         <div class="form-group d-flex mb-1 lato-italic info-detail">
             <label for="">Select grade level(s) for your enrollment period
@@ -419,7 +418,6 @@
         <button type="submit" class="btn btn-primary">Continue</button>
   </div>
   </form>
-
   </main>
 
     <!-- * =============== /Main =============== * -->
