@@ -66,7 +66,6 @@
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
   <div class="form-wrap border bg-light py-5 px-25">
-      <div>
       <h2>Enroll Student 1</h2>
       <form>
       <div class="form-group d-flex mb-1">
@@ -196,49 +195,49 @@
         <div class="row pl-5">
           <div class="col-sm-3">
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               Upgraded
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               Preschool Age 3
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               Preschool Age 4
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
             Kindergarten
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               1
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               2
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               3
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               4
             </label>
@@ -246,49 +245,49 @@
              </div>
              <div class="col-sm-3">
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               5
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               6
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               7
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               8
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               9
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               10
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               11
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="" value="">
+            <input class="form-check-input" type="radio" name="" id="" value="">
             <label class="form-check-label" for="">
               12
             </label>
@@ -311,20 +310,186 @@
         </select>
       </div>
       </div>
-      <div id="addAnotherEnroll" class="collapse">
+
       <div class="form-group d-flex" >
         <label for="">tell us more about your situation</label>
         <div>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
       </div>
-     </div>
-      <div class="mt-4">
-        <a  class="btn btn-primary" data-toggle="collapse" href="#addAnotherEnroll" aria-expanded="false" aria-controls="addAnotherEnroll">Add Another Enrollment Period</a>
-        <a href="#" role="button" class="btn btn-primary ml-4">Continue</a>
+    </form>
+    </div>
+    <div class="form-wrap border bg-light py-2r px-25 mt-2r collapse" id="enrollmentPeriode">
+      <h3 class="mb-5">Add Another Enrollment Period</h3>
+      <form>
+      <div class="form-group d-flex mb-1 mt-2r">
+        <label for="">Select your START date of enrollment</label>
+        <div class="row mx-0">
+        <div class="form-row col-sm-3 px-0">
+    <div class="form-group col-md-5">
+      <select id="" class="form-control">
+        <option selected>August</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <select id="" class="form-control">
+        <option selected>1</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <select id="" class="form-control">
+        <option selected>2020</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+  <div class="info-detail col-sm-9 lato-italic">
+            <p>Choose August 1 (the first day of the Annual enrollment period), January 1 (the first day of the Second Semester), today's date or another date. This date will appear on your confirmation of enrollment letter. You will be considered enrolled for the full 12-month period for Annual or 7-month period for Second Semester Only.</p>
+       </div>
+      </div>      
+      </div>
+      <div class="form-group d-flex mb-1 mt-2r">
+        <label for="">Select your END date of enrollment</label>
+        <div class="row mx-0">
+        <div class="form-row col-sm-3 px-0">
+    <div class="form-group col-md-5">
+      <select id="" class="form-control">
+        <option selected>July</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <select id="" class="form-control">
+        <option selected>31</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <select id="" class="form-control">
+        <option selected>2021</option>
+        <option>...</option>
+      </select>
+    </div>
+  </div>
+  <div class="info-detail col-sm-9 lato-italic">
+            <p>Choose before July 31 (the last day of your enrollment) or another date before July 31. This date will appear on your confirmation of enrollment letter. Your enrollment will officially end on July 31.</p>
+       </div>
+      </div>
+</div>
+<div class="form-group d-flex mb-1 lato-italic info-detail mt-2r">
+        <label for="">Select grade level(s) for your enrollment period
+       <p>(You may select more than one for multiple years)</p></label>
+        <div class="row pl-5">
+          <div class="col-sm-3">
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              Upgraded
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              Preschool Age 3
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              Preschool Age 4
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+            Kindergarten
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              1
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              2
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              3
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              4
+            </label>
+            </div>
+             </div>
+             <div class="col-sm-3">
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              5
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              6
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              7
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              8
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              9
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              10
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              11
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="">
+            <label class="form-check-label" for="">
+              12
+            </label>
+            </div>
+          </div>
+      </div>
       </div>
     </form>
-    
+    </div>
+    <div class="form-wrap border bg-light pb-5 pt-2r px-25 mt-2r">
+        <a href="#enrollmentPeriode" aria-expanded="false" aria-controls="enrollmentPeriode" data-toggle="collapse" class="btn btn-primary collapsed">Add Another Enrollment Period</a>
+        <a href="#" role="button" class="btn btn-primary ml-4">Continue</a>
+      </div>
   </main>
 
     <!-- * =============== /Main =============== * -->
