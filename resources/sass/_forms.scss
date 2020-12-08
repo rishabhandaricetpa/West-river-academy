@@ -18,12 +18,10 @@
 label{
     font-size: 13px;
     color: #888888;
-    width: 135px;
+
     padding-right: 8px;
     line-height: 20px;
-    & + div{
-      width: calc(100% - 135px);
-    }
+
 }
 
 .alert{
