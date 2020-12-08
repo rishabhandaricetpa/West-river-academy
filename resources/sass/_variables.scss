@@ -60,6 +60,9 @@ $h1-font-size: 56px;
 $btn-font-weight:  500;
  $btn-font-size: 14px;
  $btn-border-radius: 10px;
+ $btn-font-size-lg: 20px;
+ $btn-line-height-lg: 25px;
+
 // $btn-line-height:             $input-btn-line-height !default;
 // $btn-white-space:             null !default; // Set to `nowrap` to prevent text wrapping
 
@@ -80,3 +83,6 @@ $input-height: 33px;
 $alert-padding-y:                   0;
 $alert-padding-x:                   0;
 $alert-link-font-weight:            700;
+//modal
+$modal-content-border-radius:       5px;
+$modal-inner-padding:               3rem;

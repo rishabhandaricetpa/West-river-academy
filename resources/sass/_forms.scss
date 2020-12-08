@@ -53,8 +53,11 @@ textarea{
 .links-list{
     padding-left: 135px;
     text-decoration: underline;
-    a{
+    button{
         font-size: 18px;
         color: $light-blue;
+        &:hover,:focus{
+            outline: none;
+        }
     }
 }

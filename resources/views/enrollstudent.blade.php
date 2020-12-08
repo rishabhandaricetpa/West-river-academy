@@ -1,12 +1,32 @@
 
-<title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
+<div class="d-flex">
+<!-- * =============== Sidebar =============== * -->
+<sidebar class="main-sidebar bg-secondary pt-5 fixed-top overflow-auto">
+    <ul class="list-unstyled">
+    <li>
+    <a href="#">Dashboard</a>
+      <ul class="list-unstyled">
+        <li><a href="#">Add student</a></li>
+        <li><a href="#">add enrollment</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Cart</a></li>
+    <li><a href="#">Fee structure</a></li>
+    <li><a href="#">Tutorials</a></li>
+    <li><a href="#">My Account</a></li>
+    <li><a href="#">Logout</a></li>
+    </ul>
+ </sidebar>
+  <!-- * =============== /Sidebar =============== * -->
+
+     <div class="main-content position-relative ml-auto">
+     <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
 <!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
 @include('layouts.partials.header')
+<!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
 
- <!-- * =============== Sidebar =============== * -->
- <sidebar class="main-sidebar bg-secondary">
-  </sidebar>
-     <!-- * =============== Main =============== * -->
+<!-- * =============== Main =============== * -->
+
   <main class="position-relative container form-content mt-4">
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
@@ -14,29 +34,29 @@
              <h2>Enroll Student 1</h2>
              <form method="POST" action="{{ route('enroll') }}">
                 @csrf
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">First/Given Name <sup>*</sup></label>
                       <div>
                         <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" value="{{ old('first_name') }}" name="first_name" required aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">Middle Name </label>
                       <div>
                           <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') }}" aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">Last/Family Name <sup>*</sup></label>
                       <div>
                         <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" required aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">Date of Birth</label>
                     <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"  name="fromdate"></p>
                   </div>
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">Email Address</label>
                       <div>
                         <input type="text" class="form-control @error('email') is-invalid @enderror"  name="email" id="email" value="{{ old('email') }}" required aria-describedby="emailHelp">
@@ -47,19 +67,19 @@
                         @enderror
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">Cell Phone</label>
                       <div>
                         <input type="text" class="form-control" id="cell_phone" name="cell_phone" value="{{ old('cell_phone') }}" aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-1">
+                  <div class="form-group d-flex mb-2">
                     <label for="">Student ID</label>
                       <div>
                         <input type="text" class="form-control" id="student_id" name="student_id" required aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-1 mt-2r">
+                  <div class="form-group d-flex mb-2 mt-2r">
                     <label for="">Select your START date of enrollment</label>
                       <div class="row mx-0">
                         <div class="form-row col-sm-3 px-0">
@@ -88,7 +108,7 @@
                 </div>
               </div>
 
-              <div class="form-group d-flex mb-1 mt-2r">
+              <div class="form-group d-flex mb-2 mt-2r">
                 <label for="">Select your END date of enrollment</label>
                   <div class="row mx-0">
                     <div class="form-row col-sm-3 px-0">
@@ -121,7 +141,7 @@
                   <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates">help me choose my dates</button>
                   <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates"> what if i need to skip a year?</button>
               </div>
-        <div class="form-group d-flex mb-1 lato-italic info-detail">
+        <div class="form-group d-flex mb-2 lato-italic info-detail">
             <label for="">Select grade level(s) for your enrollment period
                 <p>(You may select more than one for multiple years)</p></label>
                   <div class="row pl-5">
@@ -249,7 +269,7 @@
         </div>
      <div class="form-wrap border bg-light py-2r px-25 mt-2r collapse" id="enrollmentPeriode">
       <h3 class="mb-5">Add Another Enrollment Period</h3>
-      <div class="form-group d-flex mb-1 mt-2r">
+      <div class="form-group d-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
         <div class="form-row col-sm-3 px-0">
@@ -277,7 +297,7 @@
        </div>
       </div>
       </div>
-      <div class="form-group d-flex mb-1 mt-2r">
+      <div class="form-group d-flex mb-2 mt-2r">
         <label for="">Select your END date of enrollment</label>
         <div class="row mx-0">
         <div class="form-row col-sm-3 px-0">
@@ -306,7 +326,7 @@
       </div>
 </div>
 
-<div class="form-group d-flex mb-1 lato-italic info-detail mt-2r">
+<div class="form-group d-flex mb-2 lato-italic info-detail mt-2r">
         <label for="">Select grade level(s) for your enrollment period
        <p>(You may select more than one for multiple years)</p></label>
         <div class="row pl-5">
@@ -422,6 +442,8 @@
 
     <!-- * =============== /Main =============== * -->
     @include('layouts.partials.footer')
+    </div>
 
+</div>
 
 
