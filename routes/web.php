@@ -50,6 +50,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('enroll-student',function(){
         return view('enroll-student');
     });
+    Route::get('enroll-student2',function(){
+        return view('enroll-student2');
+    });
     Route::get('/verify-email', function () {
 
     // dashboard screen and verify email message
