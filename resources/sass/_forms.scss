@@ -59,3 +59,10 @@ textarea{
         }
     }
 }
+.form-check-input{
+    margin-top: 3px;
+}
+
+.form-check[data-toggle="modal"]{
+cursor: pointer;
+}

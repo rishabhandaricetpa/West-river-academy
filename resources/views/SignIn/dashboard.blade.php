@@ -9,6 +9,7 @@
 
 <body>
   <h1>Welcome to West River Academy</h1>
+  Student enroll<a href="{{ url('/enroll') }}"> Enroll Stduent </a>
   Logout <a href="{{ url('/logout') }}"> logout </a>
 </body>
 

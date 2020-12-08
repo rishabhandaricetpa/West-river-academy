@@ -1,25 +1,28 @@
 /** global styling **/
 
 /* typography */
-h1{
+h1 {
   font-family: $secondary-font;
 }
 
-h2,h3,.h2,.h3{
+h2,
+h3,
+.h2,
+.h3 {
   color: #235;
 }
 
 /* custom classes */
 
-.lato-italic{
-  p{
+.lato-italic {
+  p {
     font-family: $lato-font;
   }
 
-  &.info-detail{
-    p{
-    font-size: 12px;
-    line-height: 16px;
+  &.info-detail {
+    p {
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 }
@@ -36,6 +39,7 @@ h2,h3,.h2,.h3{
 
 .black-overlay {
   position: relative;
+
   &:after {
     position: absolute;
     top: 0;
@@ -61,23 +65,28 @@ h2,h3,.h2,.h3{
 }
 
 /* buttons */
+button {
+  &:focus {
+    outline: none;
+  }
+}
 
-.btn{
+.btn {
   text-transform: capitalize;
 }
 
-.btn-secondary{
+.btn-secondary {
   letter-spacing: 2px;
 }
 
-.btn-primary{
-  &:hover{
+.btn-primary {
+  &:hover {
     background-color: #CA0;
   }
 }
 
-.btn-secondary{
-  &:hover{
+.btn-secondary {
+  &:hover {
     text-decoration: none;
     opacity: 0.8;
   }
@@ -100,45 +109,78 @@ h2,h3,.h2,.h3{
 
 /* spacing */
 
-.mt-2r{
+.mt-2r {
   margin-top: 2rem !important;
 }
 
-.py-2r{
+.py-2r {
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
 }
 
-.pt-2r{
+.py-2r {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.pt-2r {
   padding-top: 2rem !important;
 }
 
-.px-25{
+.px-25 {
   padding-left: 2.5rem !important;
   padding-right: 2.5rem !important;
 }
 
 /* popup css */
 
-.modal-body{
-   padding-bottom: 1rem !important;
-  p{
+.modal-body {
+  padding-bottom: 1rem !important;
+
+  [data-toggle="modal"] {
+    cursor: pointer;
+  }
+
+  h3 {
+    color: $black;
+  }
+
+  p,
+  label {
     font-size: 16px;
     line-height: 1.5;
+    color: $black;
+  }
+}
+
+.modal-dialog {
+  max-width: 520px;
+}
+
+/* tables */
+table{
+  tr{
+    line-height: 2;
+    font-family:  $lato-font;
+  }
+  tfoot{
+    td{
+      color: #2A9DBE;
+    }
   }
 }
 
 /* global css */
 
-.app{
+.app {
   position: relative;
 }
 
-main{
+main {
   min-height: calc(100vh - 95px);
 }
 
-sup{
+sup {
   color: $danger;
   font-size: 14px;
   top: 0;

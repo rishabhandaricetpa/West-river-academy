@@ -28,8 +28,6 @@
   <main class="main mt-3 mb-4" id="main" role="main">
     @yield('content')
   </main>
-  @include('layouts.partials.footer')
 </div>
-@include('layouts.partials.scripts')
-</body>
-</html>
+@include('layouts.partials.footer')
+

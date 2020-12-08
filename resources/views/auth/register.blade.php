@@ -186,6 +186,5 @@
 <!-- <sup>*</sup> =============== /Main =============== <sup>*</sup> -->
 
 @include('layouts.partials.footer')
-</body>
 
-</html>
+
