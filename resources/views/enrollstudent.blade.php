@@ -34,29 +34,29 @@
              <h2>Enroll Student 1</h2>
              <form method="POST" action="{{ route('enroll') }}">
                 @csrf
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">First/Given Name <sup>*</sup></label>
                       <div>
                         <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" value="{{ old('first_name') }}" name="first_name" required aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">Middle Name </label>
                       <div>
                           <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') }}" aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">Last/Family Name <sup>*</sup></label>
                       <div>
                         <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" required aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">Date of Birth</label>
                     <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"  name="fromdate"></p>
                   </div>
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">Email Address</label>
                       <div>
                         <input type="text" class="form-control @error('email') is-invalid @enderror"  name="email" id="email" value="{{ old('email') }}" required aria-describedby="emailHelp">
@@ -67,19 +67,19 @@
                         @enderror
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">Cell Phone</label>
                       <div>
                         <input type="text" class="form-control" id="cell_phone" name="cell_phone" value="{{ old('cell_phone') }}" aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-2">
+                  <div class="form-group d-sm-flex mb-2">
                     <label for="">Student ID</label>
                       <div>
                         <input type="text" class="form-control" id="student_id" name="student_id" required aria-describedby="emailHelp">
                       </div>
                   </div>
-                  <div class="form-group d-flex mb-2 mt-2r">
+                  <div class="form-group d-sm-flex mb-2 mt-2r">
                     <label for="">Select your START date of enrollment</label>
                       <div class="row mx-0">
                         <div class="form-row col-sm-3 px-0">
@@ -108,7 +108,7 @@
                 </div>
               </div>
 
-              <div class="form-group d-flex mb-2 mt-2r">
+              <div class="form-group d-sm-flex mb-2 mt-2r">
                 <label for="">Select your END date of enrollment</label>
                   <div class="row mx-0">
                     <div class="form-row col-sm-3 px-0">
@@ -141,7 +141,7 @@
                  <a href="#chooseDates" data-toggle="modal">help me choose my dates</a> 
                  <a href="#skipYear" data-toggle="modal" class="ml-4">what if i need to skip a year?</a>
               </div>
-        <div class="form-group d-flex mb-2 lato-italic info-detail">
+        <div class="form-group d-sm-flex mb-2 lato-italic info-detail">
             <label for="">Select grade level(s) for your enrollment period
                 <p>(You may select more than one for multiple years)</p></label>
                   <div class="row pl-5">
@@ -247,7 +247,7 @@
                     </div>
                   </div>
               </div>
-      <div class="form-group d-flex mt-2r">
+      <div class="form-group d-sm-flex mt-2r">
             <label for="">Is this student immunized?</label>
             <div class="col-sm-6">
                 <select class="form-control" name="immunized_Stat">
@@ -260,7 +260,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group d-flex" >
+        <div class="form-group d-sm-flex" >
         <label for="">tell us more about your situation </label>
         <div>
         <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3"></textarea>
@@ -269,7 +269,7 @@
         </div>
      <div class="form-wrap border bg-light py-2r px-25 mt-2r collapse" id="enrollmentPeriode">
       <h3 class="mb-5">Add Another Enrollment Period</h3>
-      <div class="form-group d-flex mb-2 mt-2r">
+      <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
         <div class="form-row col-sm-3 px-0">
@@ -297,7 +297,7 @@
        </div>
       </div>
       </div>
-      <div class="form-group d-flex mb-2 mt-2r">
+      <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your END date of enrollment</label>
         <div class="row mx-0">
         <div class="form-row col-sm-3 px-0">
@@ -326,7 +326,7 @@
       </div>
 </div>
 
-<div class="form-group d-flex mb-2 lato-italic info-detail mt-2r">
+<div class="form-group d-sm-flex mb-2 lato-italic info-detail mt-2r">
         <label for="">Select grade level(s) for your enrollment period
        <p>(You may select more than one for multiple years)</p></label>
         <div class="row pl-5">
