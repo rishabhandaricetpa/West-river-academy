@@ -138,9 +138,8 @@
       </div>
               <div class="form-group mt-2r d-flex links-list mb-5">
                  <!-- Button trigger modal -->
-                  <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates">help me choose my dates</button>
-                  <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#skipYear"> what if i need to skip a year? </button>
-
+                 <a href="#chooseDates" data-toggle="modal">help me choose my dates</a> 
+                 <a href="#skipYear" data-toggle="modal" class="ml-4">what if i need to skip a year?</a>
               </div>
         <div class="form-group d-flex mb-2 lato-italic info-detail">
             <label for="">Select grade level(s) for your enrollment period
