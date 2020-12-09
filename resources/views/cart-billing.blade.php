@@ -153,6 +153,48 @@
              <h2>Select your method of payment...</h2>
              <h3>pay with</h3>
              <ul class="list-unstyled">
+             <li>
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
+            </div>
+          <div> 
+            <h3>Pay Pal</h3>
+            <p>You will be redirected to the PayPal website to complete your payment.</p>
+          </div>
+             </li>
+             <li>
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
+            </div>
+          <div> 
+            <h3>Credit Card / Debit Card</h3>
+            <p>Your credit card information will be taken on the next page.</p>
+          </div>
+             </li>
+             <li>
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
+              <label class="form-check-label" for="">
+                Default radio
+              </label>
+            </div>
+          <div> 
+            <h3>Credit Card / Debit Card</h3>
+            <p>Your credit card information will be taken on the next page.</p>
+          </div>
+             </li>
+             <li>
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
+              <label class="form-check-label" for="">
+                Default radio
+              </label>
+            </div>
+          <div> 
+            <h3>Credit Card / Debit Card</h3>
+            <p>Your credit card information will be taken on the next page.</p>
+          </div>
+             </li>
              </ul>
            
 </div>
