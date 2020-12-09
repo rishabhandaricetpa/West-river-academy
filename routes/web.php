@@ -41,6 +41,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/reviewstudent',function(){
         return view('reviewstudent');
     });
+    Route::get('/cart',function(){
+        return view('cart');
+    });
     Route::post('/enroll', 'StudentController@create')->name('enroll');
 
     // dashboard screen and verify email message
