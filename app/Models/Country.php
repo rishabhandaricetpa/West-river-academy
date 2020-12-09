@@ -10,4 +10,8 @@ class Country extends Model
     use HasFactory;
     protected $fillable = ['country'];
 
+    public function CountryEnrollment()
+    {
+        return $this->hasOne(CountryEnrollment::class);
+    }
 }

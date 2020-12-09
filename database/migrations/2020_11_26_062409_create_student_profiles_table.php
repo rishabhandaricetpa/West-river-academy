@@ -24,9 +24,6 @@ class CreateStudentProfilesTable extends Migration
             $table->string('email');
             $table->string('cell_phone')->nullable();
             $table->string('student_Id');
-            $table->date('start_date_of_enrollment')->nullable();;
-            $table->date('end_date_of_enrollment')->nullable();
-            $table->string('grade_level');
             $table->string('immunized_status')->nullable();
             $table->string('student_situation')->nullable();
             $table->timestamps();

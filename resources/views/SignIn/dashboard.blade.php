@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="d-flex">
+<!-- * =============== Sidebar =============== * -->
+@include('layouts.partials.sidebar')
+  <!-- * =============== /Sidebar =============== * -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-</head>
+     <div class="main-content position-relative ml-auto">
+     <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
+<!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
+@include('layouts.partials.header')
+<!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
 
-<body>
-  <h1>Welcome to West River Academy</h1>
-  Student enroll<a href="{{ url('/enroll') }}"> Enroll Stduent </a>
-  Logout <a href="{{ url('/logout') }}"> logout </a>
-</body>
+<!-- * =============== Main =============== * -->
 
-</html>
+ 
+
+@include('layouts.partials.footer')
+</div>
+</div>
+

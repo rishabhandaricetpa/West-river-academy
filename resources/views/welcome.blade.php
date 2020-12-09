@@ -1,4 +1,4 @@
-<!-- <title> @yield('pageTitle', 'Welcome') | {{config('app.name')}}</title>
+<title> @yield('pageTitle', 'Welcome') | {{config('app.name')}}</title>
 @include('layouts.partials.header')
 
 <head>
@@ -14,6 +14,6 @@
 <main>
 </main>
 
-@include('layouts.partials.footer') -->
+@include('layouts.partials.footer') 
 
 

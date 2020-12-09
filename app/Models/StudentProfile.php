@@ -23,9 +23,13 @@ class StudentProfile extends Model
     protected $dates = [
         'd_o_b',
     ];
-
+    
     public function parentProfile()
     {
         return $this->belongsTo('App\Models\ParentProfile');
+    }
+    public function EnrollmentPeriods()
+    {
+        return $this->hasMany('App\Models\EnrollmentPeriods','student_profile_id','id');
     }
   }

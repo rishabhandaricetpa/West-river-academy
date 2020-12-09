@@ -1,22 +1,7 @@
 
 <div class="d-flex">
 <!-- * =============== Sidebar =============== * -->
-<sidebar class="main-sidebar bg-secondary pt-5 fixed-top overflow-auto">
-    <ul class="list-unstyled">
-    <li>
-    <a href="#">Dashboard</a>
-      <ul class="list-unstyled">
-        <li><a href="#">Add student</a></li>
-        <li><a href="#">add enrollment</a></li>
-      </ul>
-    </li>
-    <li><a href="#">Cart</a></li>
-    <li><a href="#">Fee structure</a></li>
-    <li><a href="#">Tutorials</a></li>
-    <li><a href="#">My Account</a></li>
-    <li><a href="#">Logout</a></li>
-    </ul>
- </sidebar>
+@include('layouts.partials.sidebar')
   <!-- * =============== /Sidebar =============== * -->
 
      <div class="main-content position-relative ml-auto">
@@ -54,7 +39,7 @@
                   </div>
                   <div class="form-group d-flex mb-2">
                     <label for="">Date of Birth</label>
-                    <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"  name="fromdate"></p>
+                    <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"></p>
                   </div>
                   <div class="form-group d-flex mb-2">
                     <label for="">Email Address</label>
@@ -84,24 +69,9 @@
                       <div class="row mx-0">
                         <div class="form-row col-sm-3 px-0">
                            <div class="form-group col-md-5">
-                              <select id="" class="form-control">
-                                <option selected>August</option>
-                                    <option>...</option>
-                              </select>
+                           <p><input type="text" class="form-control startdate" name="startdate"></p>
                             </div>
-                            <div class="form-group col-md-3">
-                              <select id="" class="form-control">
-                                <option selected>1</option>
-                                <option>...</option>
-                              </select>
-                            </div>
-                          <div class="form-group col-md-4">
-                            <select id="" class="form-control">
-                              <option selected>2020</option>
-                              <option>...</option>
-                            </select>
                           </div>
-                        </div>
                   <div class="info-detail col-sm-9 lato-italic">
                     <p>Choose August 1 (the first day of the Annual enrollment period), January 1 (the first day of the Second Semester), today's date or another date. This date will appear on your confirmation of enrollment letter. You will be considered enrolled for the full 12-month period for Annual or 7-month period for Second Semester Only.</p>
                   </div>
@@ -113,24 +83,9 @@
                   <div class="row mx-0">
                     <div class="form-row col-sm-3 px-0">
                         <div class="form-group col-md-5">
-                          <select id="" class="form-control">
-                            <option selected>July</option>
-                            <option>...</option>
-                          </select>
+                        <p><input type="text" class="form-control enddate" name="enddate"></p>
                         </div>
-                    <div class="form-group col-md-3">
-                        <select id="" class="form-control">
-                          <option selected>31</option>
-                          <option>...</option>
-                        </select>
-                  </div>
-                  <div class="form-group col-md-4">
-                      <select id="" class="form-control">
-                        <option selected>2021</option>
-                        <option>...</option>
-                      </select>
-                </div>
-              </div>
+                    </div>
               <div class="info-detail col-sm-9 lato-italic">
                   <p>Choose before July 31 (the last day of your enrollment) or another date before July 31. This date will appear on your confirmation of enrollment letter. Your enrollment will officially end on July 31.</p>
               </div>
@@ -147,49 +102,49 @@
                   <div class="row pl-5">
                     <div class="col-sm-3">
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="Upgraded">
+                      <input class="form-check-input" type="radio" name="student_grade" value="Upgraded">
                       <label class="form-check-label" for="">
                         Upgraded
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="Preschool Age 3">
+                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 3">
                       <label class="form-check-label" for="">
                         Preschool Age 3
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="Preschool Age 4">
+                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 4">
                       <label class="form-check-label" for="">
                         Preschool Age 4
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="Kindergarten">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="Kindergarten">
                       <label class="form-check-label" for="">
                       Kindergarten
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="1">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="1">
                       <label class="form-check-label" for="">
                         1
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="2">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="2">
                       <label class="form-check-label" for="">
                         2
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="3">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="3">
                       <label class="form-check-label" for="">
                         3
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="4">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="4">
                       <label class="form-check-label" for="">
                         4
                       </label>
@@ -197,49 +152,49 @@
                       </div>
                       <div class="col-sm-3">
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="5">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="5">
                       <label class="form-check-label" for="">
                         5
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="6">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="6">
                       <label class="form-check-label" for="">
                         6
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="7">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="7">
                       <label class="form-check-label" for="">
                         7
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="8">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="8">
                       <label class="form-check-label" for="">
                         8
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="9">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="9">
                       <label class="form-check-label" for="">
                         9
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="10">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="10">
                       <label class="form-check-label" for="">
                         10
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="11">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="11">
                       <label class="form-check-label" for="">
                         11
                       </label>
                       </div>
                       <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade" id="" value="12">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="12">
                       <label class="form-check-label" for="">
                         12
                       </label>
@@ -261,182 +216,15 @@
             </div>
         </div>
         <div class="form-group d-flex" >
-        <label for="">tell us more about your situation </label>
-        <div>
-        <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3"></textarea>
+          <label for="">tell us more about your situation </label>
+             <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3"></textarea>
         </div>
         </div>
+          <div class="form-wrap border bg-light py-2r px-25 mt-2r">
+          <a  type="button" class="btn btn-primary addenrollment" id="addEnroll" value="addEnroll">Add Another Enrollment Period</a>
+          <button type="submit" class="btn btn-primary">Continue</button>
         </div>
-     <div class="form-wrap border bg-light py-2r px-25 mt-2r collapse" id="enrollmentPeriode">
-      <h3 class="mb-5">Add Another Enrollment Period</h3>
-      <div class="form-group d-flex mb-2 mt-2r">
-        <label for="">Select your START date of enrollment</label>
-        <div class="row mx-0">
-        <div class="form-row col-sm-3 px-0">
-    <div class="form-group col-md-5">
-      <select id="" class="form-control">
-        <option selected>August</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-3">
-      <select id="" class="form-control">
-        <option selected>1</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-4">
-      <select id="" class="form-control">
-        <option selected>2020</option>
-        <option>...</option>
-      </select>
-    </div>
-  </div>
-  <div class="info-detail col-sm-9 lato-italic">
-            <p>Choose August 1 (the first day of the Annual enrollment period), January 1 (the first day of the Second Semester), today's date or another date. This date will appear on your confirmation of enrollment letter. You will be considered enrolled for the full 12-month period for Annual or 7-month period for Second Semester Only.</p>
-       </div>
-      </div>
-      </div>
-      <div class="form-group d-flex mb-2 mt-2r">
-        <label for="">Select your END date of enrollment</label>
-        <div class="row mx-0">
-        <div class="form-row col-sm-3 px-0">
-    <div class="form-group col-md-5">
-      <select id="" class="form-control">
-        <option selected>July</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-3">
-      <select id="" class="form-control">
-        <option selected>31</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-4">
-      <select id="" class="form-control">
-        <option selected>2021</option>
-        <option>...</option>
-      </select>
-    </div>
-  </div>
-  <div class="info-detail col-sm-9 lato-italic">
-            <p>Choose before July 31 (the last day of your enrollment) or another date before July 31. This date will appear on your confirmation of enrollment letter. Your enrollment will officially end on July 31.</p>
-       </div>
-      </div>
-</div>
-
-<div class="form-group d-flex mb-2 lato-italic info-detail mt-2r">
-        <label for="">Select grade level(s) for your enrollment period
-       <p>(You may select more than one for multiple years)</p></label>
-        <div class="row pl-5">
-          <div class="col-sm-3">
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              Upgraded
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              Preschool Age 3
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              Preschool Age 4
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-            Kindergarten
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              1
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              2
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              3
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              4
-            </label>
-            </div>
-             </div>
-             <div class="col-sm-3">
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              5
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              6
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              7
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              8
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              9
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              10
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              11
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="" id="" value="">
-            <label class="form-check-label" for="">
-              12
-            </label>
-            </div>
-          </div>
-      </div>
-      </div>
-    </div>
-    <div class="form-wrap border bg-light py-2r px-25 mt-2r">
-        <a  href="#enrollmentPeriode" aria-expanded="false" aria-controls="enrollmentPeriode" data-toggle="collapse" class="btn btn-primary collapsed">Add Another Enrollment Period</a>
-        <button type="submit" class="btn btn-primary">Continue</button>
-  </div>
+        <div id="enrollmentPeriode" ></div>
   </form>
   </main>
 
