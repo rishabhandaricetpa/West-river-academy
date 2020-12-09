@@ -40,6 +40,7 @@
                   <div class="form-group d-flex mb-2">
                     <label for="">Date of Birth</label>
                     <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"></p>
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                   </div>
                   <div class="form-group d-flex mb-2">
                     <label for="">Email Address</label>
@@ -70,6 +71,7 @@
                         <div class="form-row col-sm-3 px-0">
                            <div class="form-group col-md-5">
                            <p><input type="text" class="form-control startdate" name="startdate"></p>
+                           <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                             </div>
                           </div>
                   <div class="info-detail col-sm-9 lato-italic">
@@ -84,6 +86,7 @@
                     <div class="form-row col-sm-3 px-0">
                         <div class="form-group col-md-5">
                         <p><input type="text" class="form-control enddate" name="enddate"></p>
+                        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                         </div>
                     </div>
               <div class="info-detail col-sm-9 lato-italic">
@@ -94,7 +97,8 @@
               <div class="form-group mt-2r d-flex links-list mb-5">
                  <!-- Button trigger modal -->
                   <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates">help me choose my dates</button>
-                  <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#chooseDates"> what if i need to skip a year?</button>
+                  <button type="button" class="border-0 text-uppercase" data-toggle="modal" data-target="#skipYear"> what if i need to skip a year? </button>
+
               </div>
         <div class="form-group d-flex mb-2 lato-italic info-detail">
             <label for="">Select grade level(s) for your enrollment period
@@ -181,20 +185,20 @@
                         9
                       </label>
                       </div>
-                      <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="10">
+                      <div class="form-check" data-toggle="modal" data-target="#chooseGrade">
+                      <input class="form-check-input" type="radio" name="student_grade" id="" value="10">
                       <label class="form-check-label" for="">
                         10
                       </label>
                       </div>
-                      <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="11">
+                      <div class="form-check" data-toggle="modal" data-target="#chooseGrade">
+                      <input class="form-check-input" type="radio" name="student_grade" id="" value="11">
                       <label class="form-check-label" for="">
                         11
                       </label>
                       </div>
-                      <div class="form-check">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="12">
+                      <div class="form-check" data-toggle="modal" data-target="#chooseGrade">
+                      <input class="form-check-input" type="radio" name="student_grade" id="" value="12">
                       <label class="form-check-label" for="">
                         12
                       </label>
@@ -220,14 +224,61 @@
              <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3"></textarea>
         </div>
         </div>
+        <div id="enrollmentPeriode"></div>
           <div class="form-wrap border bg-light py-2r px-25 mt-2r">
           <a  type="button" class="btn btn-primary addenrollment" id="addEnroll" value="addEnroll">Add Another Enrollment Period</a>
           <button type="submit" class="btn btn-primary">Continue</button>
         </div>
-        <div id="enrollmentPeriode" ></div>
+       
   </form>
   </main>
-
+  <!-- Choose Dates -->
+<div class="modal fade" id="chooseDates" tabindex="-1" aria-labelledby="chooseDatesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Annual enrollment covers the 12 months from August 1 - July 31. Second Semester Only covers January 1 - July 31. If you prefer to start your enrollment on the date you enroll, select that date. If you want your enrollment to date back to August 1, even though it is now later in the year, you can do so.</p>
+        <p>The dates you select will appear on your confirmation of enrollment letter. Regardless of the date you select, your enrollment will include the full 12-month period for Annual or the full 7-month period for Second Semester Only.</p>
+      <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>  
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Skip Year -->
+<div class="modal fade" id="skipYear" tabindex="-1" aria-labelledby="skipYearLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+      <p>If you need to enroll for 2 periods that are not consecutive, complete the first enrollment period and then click on Add Another Enrollment Period at the bottom of this form.
+      </p>
+      <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>  
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Choose more grade -->
+<div class="modal fade" id="chooseGrade" tabindex="-1" aria-labelledby="chooseGradeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+      <h3 class="text-center mb-4">For NEW high school students grades 10, 11 and 12</h3>
+      <p>
+      If you are newly enrolling in West River Academy for grades 10, 11 or 12, you will need to provide transcripts issued from a public or private school for your previous high school years in order for us to issue a complete high school transcript if you transfer out of West River Academy or when you graduate. If transcripts cannot be provided, you will need to enroll with us for those years. Please indicate that you understand this policy by checking the box below:
+      </p>
+      <div class="form-check">
+         <input class="form-check-input" type="radio" name="student_grade" id="" value="10">
+         <label class="form-check-label w-100" for="">
+          I understand that by enrolling in West River Academy for grade 10, 11 or 12, I agree to provide transcripts from a previous school or to enroll in West River Academy for previous years before enrolling in the Graduation Program or requesting a high school transcript to transfer out of West River Academy to another school.
+          </label>
+          </div>
+      <div class="text-right mt-3">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary ml-3" data-dismiss="modal">Save</button>
+      </div>  
+      </div>
+    </div>
+  </div>
+</div>
     <!-- * =============== /Main =============== * -->
     @include('layouts.partials.footer')
     </div>

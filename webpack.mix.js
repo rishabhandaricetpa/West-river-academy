@@ -26,7 +26,6 @@ mix.js('resources/js/app.js', 'public/js')
         cleanStaleWebpackAssets: false,
         cleanOnceBeforeBuildPatterns: [
           '!.gitignore',
-          './js/',
           './css/',
           './fonts/',
           './mix-manifest.json',

@@ -125,7 +125,15 @@
 
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+  /* forms */
+  label{
+  width: 135px;
+  & + div{
+    width: calc(100% - 135px);
+  }
+  }
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 767px) {}
