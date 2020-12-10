@@ -149,48 +149,42 @@
 
   </form>
 </div>
-<div class="form-wrap border bg-light py-5 px-25 mt-2r">
+<div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
              <h2>Select your method of payment...</h2>
-             <h3>pay with</h3>
-             <ul class="list-unstyled">
-             <li>
+             <h3 class="py-2">pay with</h3>
+             <ul class="list-unstyled enlarge-input payment-method">
+             <li class="py-3 pl-3">
              <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
             </div>
-          <div> 
+          <div class="payment-info"> 
             <h3>Pay Pal</h3>
             <p>You will be redirected to the PayPal website to complete your payment.</p>
           </div>
              </li>
-             <li>
+             <li class="py-3 pl-3">
              <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
             </div>
-          <div> 
+          <div class="payment-info"> 
             <h3>Credit Card / Debit Card</h3>
             <p>Your credit card information will be taken on the next page.</p>
           </div>
              </li>
-             <li>
+             <li class="py-3 pl-3">
              <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
-              <label class="form-check-label" for="">
-                Default radio
-              </label>
             </div>
-          <div> 
+          <div class="payment-info"> 
             <h3>Credit Card / Debit Card</h3>
             <p>Your credit card information will be taken on the next page.</p>
           </div>
              </li>
-             <li>
+             <li class="py-3 pl-3">
              <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
-              <label class="form-check-label" for="">
-                Default radio
-              </label>
             </div>
-          <div> 
+          <div class="payment-info"> 
             <h3>Credit Card / Debit Card</h3>
             <p>Your credit card information will be taken on the next page.</p>
           </div>
@@ -198,6 +192,22 @@
              </ul>
            
 </div>
+
+<div class="form-wrap border bg-light py-5 px-25 mt-2r">
+             <h2>If you have a coupon code enter it here</h2>
+             <form method="POST">
+                  <div class="form-group d-sm-flex mb-2">
+                    <label for="">Coupon Code</label>
+                      <div>
+                        <input type="email" class="form-control @error('first_name') is-invalid @enderror" id="first_name" value="{{ old('first_name') }}" name="first_name" required aria-describedby="emailHelp">
+                      </div>
+                  </div>
+  </form>
+</div>
+<div class="form-wrap border bg-light py-2r px-25 mt-2r">
+          <a href="#" class="btn btn-primary" >Back</a>
+          <a href="#" class="btn btn-primary ml-3" >Continue</a>
+        </div>
   </main>
 
     <!-- * =============== /Main =============== * -->

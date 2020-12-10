@@ -75,3 +75,10 @@ cursor: pointer;
     left: 9px;
     color: $gray-700;
 }
+
+.enlarge-input{
+    input{
+        width: 28px;
+        height: 28px;
+    }
+}
