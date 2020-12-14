@@ -44,6 +44,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/cart',function(){
         return view('cart');
     });
+
     Route::get('/cart-billing',function(){
         return view('cart-billing');
     });

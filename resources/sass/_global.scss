@@ -64,6 +64,20 @@ h3,
   -o-transform: translate(-50%, -50%);
 }
 
+/* links */
+
+.decoration-none{
+ &:hover{
+   text-decoration: none;
+ }
+}
+
+/* colors */
+
+.text-black{
+  color: $black !important;
+}
+
 /* buttons */
 button {
   &:focus {
