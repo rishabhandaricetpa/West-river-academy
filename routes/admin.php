@@ -32,5 +32,9 @@ Route::group(
             Auth::guard('admin')->logout();
             return redirect('/admin/login');
         })->name('admin.logout');
+        Route::get('view',function(){
+            return view('admin/familyInformation/view-parent');
+        })->name('view');
     }
+   
 );
