@@ -22,13 +22,13 @@
   <script src="backend/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script>
     $(function () {
-      $("#example1").DataTable({
+      $(".data-table").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
     });
   </script>
+
   <!-- ChartJS -->
   <script src="backend/plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
