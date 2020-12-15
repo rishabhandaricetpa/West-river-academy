@@ -1,13 +1,8 @@
-@import "variables";
-@import "vendor";
-@import "typography";
-@import "global";
-//Page-specific styles
-@import "header";
-@import 'forms';
-@import 'pages/login';
-@import 'pages/register';
-@import 'pages/enrollment';
-// @import 'social-sharing';
-@import 'footer';
-@import "responsive";
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';

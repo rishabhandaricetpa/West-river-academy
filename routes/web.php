@@ -35,18 +35,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    Route::get('/enroll-student', 'StudentController@index');
-    Route::get('/reviewstudent', function () {
-        return view('reviewstudent');
-    });
-    Route::get('/cart', function () {
-        return view('cart');
-    });
-    Route::post('/enroll-student', 'StudentController@save')->name('enroll');
-    Route::get('/cart-billing', function () {
-        return view('cart-billing');
-    });
-    Route::post('/enroll-student', 'StudentController@create')->name('enroll');
+
+
+    // admin dashboard
+    Route::get('admin-dashboard', function () {
+        return view('admin.app');
+    })->name('admin.admindashboard');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {
@@ -59,9 +53,24 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Auth::logout();
         return redirect('/login');
     });
-    Route::get('admin-dashboard', function () {
-        return view('admin.app');
-    })->name('admin.admindashboard');
+
+
+    //working blades by frontend
+    Route::get('/reviewstudent', function () {
+        return view('reviewstudent');
+    });
+    Route::get('/cart', function () {
+        return view('cart');
+    });
+    Route::get('/cart-billing', function () {
+        return view('cart-billing');
+    });
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+
+Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function () {
+    //
+    Route::get('/enroll-student', 'StudentController@index');
+    Route::post('/enroll-student', 'StudentController@save')->name('enroll');
+});
