@@ -12,20 +12,8 @@ $(document).ready(function() {
     $('.dobdatepicker').datepicker({
         format: 'dd-mm-yyyy',
     });
-    $('.startdate').datepicker({
-        format: 'dd-mm-yyyy',
-    });
-    $('.enddate').datepicker({
-        format: 'dd-mm-yyyy',
-    });
 
     $('#addEnroll').click(function() {
-        $('.enddate').datepicker({
-            format: 'dd-mm-yyyy',
-        });
-        $('.startdate').datepicker({
-            format: 'dd-mm-yyyy',
-        });
     if (iCnt <= 3) {
         iCnt = iCnt + 1;
                     let enrollhtml= '<div class="form-wrap border bg-light py-2r px-25 mt-2r" id="enrollmentPeriode">'+

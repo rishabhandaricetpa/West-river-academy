@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Country;
 use Auth;
 use App\Models\ParentProfile;
 use App\Models\User;
@@ -8,13 +10,14 @@ use App\Models\StudentProfile;
 use App\Models\EnrollmentPeriods;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    
+
     public function __construct()
     {
     }
@@ -32,30 +35,44 @@ class StudentController extends Controller
             'd_o_b' => ['required'],
         ]);
     }
-
-    protected function create(Request $data)
+    public function index()
     {
-       
+        $id = auth()->user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        $country = $parentProfileData->country;
+        $countryData = Country::where('country', $country)->first();
+        $countryId = $countryData->id;
+        $semesters_dates = Country::find($countryId)->semesters()->get();
+        return view('enrollstudent', compact('semesters_dates'));
+    }
+
+    protected function save(Request $data)
+    {
+        $Userid = auth()->user()->id;
+        $parentProfileData = User::find($Userid)->parentProfile()->first();
+        $id = $parentProfileData->id;
         $student =  StudentProfile::create([
-            'parent_profile_id' => auth()->user()->id,
+
+            'parent_profile_id' => $id,
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'last_name' => $data['last_name'],
-            'd_o_b' => \Carbon\Carbon::createFromFormat('d-m-Y' , $data['dob'])->format('Y-m-d'),
+            'd_o_b' => \Carbon\Carbon::createFromFormat('d-m-Y', $data['dob'])->format('Y-m-d'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
             'student_Id' => $data['student_id'],
             'immunized_status' => $data['immunized_Stat'],
             'student_situation' => $data['student_situation'],
-           ]);
-        $enrollment=EnrollmentPeriods::create([
-            'student_profile_id'=> $student->id,
-            'start_date_of_enrollment'=> \Carbon\Carbon::createFromFormat('d-m-Y' , $data['startdate'])->format('Y-m-d'),
-            'end_date_of_enrollment'=> \Carbon\Carbon::createFromFormat('d-m-Y' , $data['enddate'])->format('Y-m-d'),
-            'grade_level'=> $data['student_grade']
+        ]);
+
+        $enrollPeriods = EnrollmentPeriods::create([
+            'student_profile_id' => $student->id,
+            'start_date_of_enrollment' => $data['startdate'],
+            'end_date_of_enrollment' => $data['enddate'],
+            'grade_level' => $data['student_grade']
         ]);
         $student->save();
-        return redirect('/enroll')->with('success', 'Contact saved!');
-
+        $enrollPeriods->save();
+        return redirect('/enroll-student')->with('success', 'Contact saved!');
     }
 }

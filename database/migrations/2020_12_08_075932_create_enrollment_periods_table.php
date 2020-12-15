@@ -18,8 +18,8 @@ class CreateEnrollmentPeriodsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('student_profile_id');
             $table->foreign('student_profile_id')->references('id')->on('student_profiles');
-            $table->date('start_date_of_enrollment');
-            $table->date('end_date_of_enrollment');
+            $table->string('start_date_of_enrollment');
+            $table->string('end_date_of_enrollment');
             $table->string('grade_level');
         });
     }

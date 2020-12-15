@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCountryEnrollmentDatesTable extends Migration
+class Semesters extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCountryEnrollmentDatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('country_enrollment_dates', function (Blueprint $table) {
+        Schema::create('semesters', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCountryEnrollmentDatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('country_enrollment_dates');
+        //
     }
 }

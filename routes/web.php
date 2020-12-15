@@ -35,16 +35,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    Route::get('/enroll',function(){
-        return view('enrollstudent');
-    });
-    Route::get('/reviewstudent',function(){
+    Route::get('/enroll-student', 'StudentController@index');
+    Route::get('/reviewstudent', function () {
         return view('reviewstudent');
     });
-    Route::get('/cart',function(){
+    Route::get('/cart', function () {
         return view('cart');
     });
-    Route::post('/enroll', 'StudentController@create')->name('enroll');
+    Route::post('/enroll-student', 'StudentController@save')->name('enroll');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {

@@ -11,7 +11,7 @@ class StudentProfile extends Model
 
     protected $fillable = [
         'parent_profile_id', 'first_name', 'middle_name', 'last_name', 'd_o_b', 'email', 'cell_phone',
-         'student_Id', 'start_date_of_enrollment', 'end_date_of_enrollment', 'grade_level', 'immunized_status',
+        'student_Id', 'start_date_of_enrollment', 'end_date_of_enrollment', 'grade_level', 'immunized_status',
         'student_situation'
     ];
     protected $table = "student_profiles";
@@ -23,13 +23,13 @@ class StudentProfile extends Model
     protected $dates = [
         'd_o_b',
     ];
-    
+
     public function parentProfile()
     {
         return $this->belongsTo('App\Models\ParentProfile');
     }
-    public function EnrollmentPeriods()
+    public function enrollmentPeriods()
     {
-        return $this->hasMany('App\Models\EnrollmentPeriods','student_profile_id','id');
+        return $this->hasMany('App\Models\EnrollmentPeriods', 'student_profile_id', 'id');
     }
-  }
+}
