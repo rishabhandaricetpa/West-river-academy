@@ -68,3 +68,17 @@ textarea{
 .form-check[data-toggle="modal"]{
 cursor: pointer;
 }
+
+.form-group .fa-calendar-alt{
+    position: relative;
+    top: 7px;
+    left: 9px;
+    color: $gray-700;
+}
+
+.enlarge-input{
+    input{
+        width: 28px;
+        height: 28px;
+    }
+}

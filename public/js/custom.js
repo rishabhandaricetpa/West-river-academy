@@ -10,7 +10,7 @@ $(document).ready(function() {
     });
 
     $('.dobdatepicker').datepicker({
-        format: 'dd-mm-yyyy',
+        format: 'dd-MM-yyyy',
     });
 
     $('#addEnroll').click(function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
                                 '<div class="row mx-0">'+
                                 '<div class="form-row col-sm-3 px-0">'+
                                 '<div class="form-group col-md-5">'+
-                                   '<p><input type="text" class="form-control startdate" name="startdate"></p>'+
+                                   '<p><input type="text" class="form-control startdate" name="startdate[]"></p>'+
                                     '</div>'+
                                '</div>'+
                                 '<div class="info-detail col-sm-9 lato-italic">'+
@@ -36,7 +36,7 @@ $(document).ready(function() {
                                     '<div class="row mx-0">'+
                                         '<div class="form-row col-sm-3 px-0">'+
                                             '<div class="form-group col-md-5">'+
-                                            '<p><input type="text" class="form-control enddate" name="enddate"></p>'+
+                                            '<p><input type="text" class="form-control enddate" name="enddate[]"></p>'+
                                             '</div>'+
                                         '</div>'+
                                  '<div class="info-detail col-sm-9 lato-italic">'+
@@ -50,49 +50,49 @@ $(document).ready(function() {
                                     '<div class="row pl-5">'+
                                         '<div class="col-sm-3">'+
                                             '<div class="form-check">'+
-                                               '<input class="form-check-input" type="radio" name="student_grade" value="Upgraded">'+
+                                               '<input class="form-check-input" type="radio" name="student_grade[]" value="Upgraded" data-bind="checked:Scoreschk">'+
                                                     '<label class="form-check-label" for="">'+
                                                         'Upgraded'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 3">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="Preschool Age 3">'+
                                                    '<label class="form-check-label" for="">'+
                                                         'Preschool Age 3'+
                                                    '</label>'+
                                             '</div>'+
                                '            <div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 4">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="Preschool Age 4">'+
                                                     '<label class="form-check-label" for="">'+
                                                         'Preschool Age 4'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="Kindergarten">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="Kindergarten">'+
                                                     '<label class="form-check-label" for="">'+
                                                         'Kindergarten'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="1">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="1">'+
                                                     '<label class="form-check-label" for="">'+
                                                       '1'+
                                                 '</label>'+
                                            ' </div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="2">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="2">'+
                                                     '<label class="form-check-label" for="">'+
                                                        '2'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="3">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="3">'+
                                                     '<label class="form-check-label" for="">'+
                                                         '3'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="4">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="4">'+
                                                     '<label class="form-check-label" for="">'+
                                                         '4'+
                                                     '</label>'+
@@ -100,49 +100,49 @@ $(document).ready(function() {
                                     '</div>'+
                                     '<div class="col-sm-3">'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="5">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="5">'+
                                                     '<label class="form-check-label" for="">'+
                                                          '5'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="6">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="6">'+
                                                     '<label class="form-check-label" for="">'+
                                                         '6'+
                                                     '</label>'+
                                             ' </div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade" value="7">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]" value="7">'+
                                                     '<label class="form-check-label" for="">'+
                                                         '7'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade"  value="8">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]"  value="8">'+
                                                     '<label class="form-check-label" for="">'+
                                                          '8'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade"  value="9">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]"  value="9">'+
                                                     '<label class="form-check-label" for="">'+
                                                         '9'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade"  value="10">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]"  value="10">'+
                                                     '<label class="form-check-label" for="">'+
                                                         '10'+
                                                     '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade"  value="11">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]"  value="11">'+
                                                     '<label class="form-check-label" for="">'+
                                                     '11'+
                                                 '</label>'+
                                             '</div>'+
                                             '<div class="form-check">'+
-                                                '<input class="form-check-input" type="radio" name="student_grade"  value="12">'+
+                                                '<input class="form-check-input" type="radio" name="student_grade[]"  value="12">'+
                                                     '<label class="form-check-label" for="">'+
                                                          '12'+
                                                     '</label>'+

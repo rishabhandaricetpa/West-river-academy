@@ -57,7 +57,7 @@ class StudentController extends Controller
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'last_name' => $data['last_name'],
-            'd_o_b' => \Carbon\Carbon::createFromFormat('d-m-Y', $data['dob'])->format('Y-m-d'),
+            'd_o_b' => \Carbon\Carbon::createFromFormat('d-M-Y', $data['dob'])->format('Y-m-d'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
             'student_Id' => $data['student_id'],

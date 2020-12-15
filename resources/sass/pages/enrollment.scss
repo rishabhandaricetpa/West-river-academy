@@ -38,6 +38,32 @@
   }
 }
 
+.payment-info{
+  padding-left: 2.5rem;
+  h3{
+    font-size: 1.3125rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: $black;
+  }
+  p{
+    margin-bottom: 0;
+  }
+}
+
+.payment-method{
+ h2 + h3{
+    background-color: $gray-base;
+    padding-left: 2.5rem;
+  }
+  li:nth-child(even) {
+    background-color: $white;
+}
+.form-check{
+  top: 11px;
+}
+}
+
 .table-content{
   a:not(.btn){
     text-decoration: underline;
