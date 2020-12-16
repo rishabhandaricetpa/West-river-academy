@@ -2,7 +2,7 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="" class="brand-link">
+      <a href="{{route('admin.admindashboard')}}" class="brand-link">
         <span class="brand-text font-weight-light"> Welcome Admin</span>
       </a>
       <!-- Sidebar Menu -->

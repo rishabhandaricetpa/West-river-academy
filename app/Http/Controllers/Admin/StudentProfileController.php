@@ -16,8 +16,8 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
-        $data = StudentProfile::all();
-        return view('admin.familyInformation.view-student',compact('data'));
+        $student = StudentProfile::all();
+        return view('admin.familyInformation.view-student',compact('student'));
     }
 
     /**
@@ -27,7 +27,7 @@ class StudentProfileController extends Controller
      */
     public function create()
     {
-        return view('admin.familyInformation.edit-student',compact('data'));
+        return view('admin.familyInformation.edit-student',compact('student'));
     }
 
     /**
@@ -61,8 +61,8 @@ class StudentProfileController extends Controller
     public function edit($id)
     {
        
-        $data= StudentProfile::find($id);
-        return view('admin.familyInformation.edit-student',compact('data'));
+        $student= StudentProfile::find($id);
+        return view('admin.familyInformation.edit-student',compact('student'));
     }
 
     /**
@@ -72,25 +72,23 @@ class StudentProfileController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $data, $id)
+    public function update(Request $request,$id)
     {
-        $data->validate([
-            'first_name'=>'required',
-            'first_name'=>'required',
-            'email'=>'required'
-        ]);
-        $data = StudentProfile::find($id);
-        $data->first_name   =  $data->get('first_name');
-        $data->middle_name  =  $data->get('first_name');
-        $data->last_name    =  $data->get('last_name');
-        $data->d_o_b        =  $data->get('dob');
-        $data->email        =  $data->get('email');
-        $data->cell_phone   =  $data->get('cell_phone');
-        $data->student_Id	=  $data->get('student_Id');
-        $data->immunized_status	= $data->get('immunized_Stat');
-        $data->save();
+   
+        
+        $student = StudentProfile::find($id);
+        $student->first_name   =  $request->get('first_name');
+        $student->middle_name  =  $request->get('first_name');
+        $student->last_name    =  $request->get('last_name');
+        $student->d_o_b        =  '2020-01-14';
+        $student->email        =  $request->get('email');
+        $student->cell_phone   =  $request->get('cell_phone');
+        $student->student_Id	=  $request->get('student_id');
+        $student->immunized_status	= $request->get('immunized_status');
+        $student->save();
 
-        return redirect('admin.familyInformation.edit-student')->with('success', 'Student Information updated!');
+        //return redirect('admin.familyInformation.edit-student')->with('success', 'Student Information updated!');
+    return redirect('admin/view-student');
     }
 
     /**
@@ -102,6 +100,7 @@ class StudentProfileController extends Controller
     public function destroy($id)
     {
         StudentProfile::where('id',$id)->delete();
-        return redirect()->back()->with('success','Delete Successfully');
+       // Session::flash('flash_message', 'Task successfully deleted!');
+        return redirect()->back();
     }
 }

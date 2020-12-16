@@ -16,9 +16,9 @@ class CountrySemester extends Migration
         Schema::create('country_semester', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('country_id');
-           // $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('semester_id');
-           // $table->foreign('semester_id')->references('id')->on('semesters');
+            $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
             $table->timestamps();
         });
     }

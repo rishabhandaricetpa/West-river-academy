@@ -39,7 +39,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // admin dashboard
     Route::get('admin-dashboard', function () {
-        return view('admin.app');
+        return view('admin.home');
     })->name('admin.admindashboard');
 
     // dashboard screen and verify email message

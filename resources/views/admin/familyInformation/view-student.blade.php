@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('admin.layouts.partials.header')
+@extends('admin.app')
 
-<body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
-
-        <!-- * =============== NavBar =============== * -->
-  @include('admin.layouts.partials.navbar')
-  <!-- * =============== /Navbar =============== * -->
-    <!-- * =============== Sidebar =============== * -->
-  @include('admin.layouts.partials.sidebar')
-  <!-- * =============== /Sidebar =============== * -->
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+@section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -59,7 +45,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($data as $item)
+                  @foreach($student as $item)
                   <tr>
                       <td>{{$item->student_Id}}</td>
                       <td>{{$item->first_name}}</td>
@@ -69,7 +55,7 @@
                       <td>{{$item->cell_phone}}</td>
                       <td>{{$item->immunized_status}}</td>
                       <td><a href="{{ url('admin/edit-student',$item->id)}}"> <i class="fas fa-edit"></i></a>
-                      <a href="{{ url('admin/edit-student',$item->id)}}"><i class="fas fa-trash-alt"></i></td>
+                      <a href="{{ url('admin/delete',$item->id)}}"><i class="fas fa-trash-alt"></i></td>
                   </tr>
                   @endforeach
                   </tbody>
@@ -82,13 +68,7 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
     </section>
   </div>
-  <!-- /.content-wrapper -->
-  @include('admin.layouts.partials.footer')
-
-
-
-</div>
+    <!-- /.content -->
+@endsection

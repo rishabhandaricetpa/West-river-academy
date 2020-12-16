@@ -52,7 +52,6 @@ class StudentController extends Controller
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $id = $parentProfileData->id;
         $student =  StudentProfile::create([
-
             'parent_profile_id' => $id,
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],

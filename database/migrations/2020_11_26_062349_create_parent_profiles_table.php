@@ -16,7 +16,7 @@ class CreateParentProfilesTable extends Migration
         Schema::create('parent_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('p1_first_name');
             $table->string('p1_middle_name')->nullable();
             $table->string('p1_last_name')->nullable();

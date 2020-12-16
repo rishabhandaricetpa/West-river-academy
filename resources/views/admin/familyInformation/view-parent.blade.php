@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('admin.layouts.partials.header')
+@extends('admin.app')
 
-<body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
+@section('content')
+<!-- Content Header (Page header) -->
+<!-- Content Wrapper. Contains page content -->
 
-        <!-- * =============== NavBar =============== * -->
-  @include('admin.layouts.partials.navbar')
-  <!-- * =============== /Navbar =============== * -->
-    <!-- * =============== Sidebar =============== * -->
-  @include('admin.layouts.partials.sidebar')
-  <!-- * =============== /Sidebar =============== * -->
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -77,10 +66,12 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
+   
     </section>
   </div>
-  <!-- /.content-wrapper -->
-  @include('admin.layouts.partials.footer')
+    <!-- /.content -->
+@endsection
+
+
+
 
