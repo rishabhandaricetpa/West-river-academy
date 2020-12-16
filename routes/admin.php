@@ -35,3 +35,9 @@ Route::group(
     }
 );
 Route::get('view', 'ParentController@parentData')->name('view');
+Route::get('view-student', 'StudentProfileController@index')->name('view-student');
+
+Route::get('edit-student/{id}', 'StudentProfileController@edit')->name('edit-student');
+Route::get('edit-student/update', 'StudentProfileController@update')->name('edit-student.update');
+
+

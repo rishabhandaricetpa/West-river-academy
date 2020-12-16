@@ -48,23 +48,28 @@
                 <table id="example1" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
-                    <th>P1 First Name</th>
-                    <th>P2 First Name</th>
+                    <th>Student Id</th>
+                    <th>Student First Name</th>
+                    <th>Studen Last Name</th>
+                    <th>Date of Birth</th>
                     <th>Email</th>
-                    <th>Country</th>
-                    <th>Phone</th>
-                    <th>Action</th>
+                    <th>Cell_phone</th>
+                    <th>Immunized</th>
+                    <th>Actions</th>
                   </tr>
                   </thead>
                   <tbody>
                   @foreach($data as $item)
                   <tr>
-                      <td>{{$item->p1_first_name}}</td>
-                      <td>{{$item->p2_first_name}}</td>
+                      <td>{{$item->student_Id}}</td>
+                      <td>{{$item->first_name}}</td>
+                      <td>{{$item->last_name}}</td>
+                      <td>{{$item->d_o_b}}</td>
                       <td>{{$item->email}}</td>
-                      <td>{{$item->country}}</td>
-                      <td>{{$item->p1_cell_phone}}</td>
-                      <td><i class="fas fa-edit"></i></td>
+                      <td>{{$item->cell_phone}}</td>
+                      <td>{{$item->immunized_status}}</td>
+                      <td><a href="{{ url('admin/edit-student',$item->id)}}"> <i class="fas fa-edit"></i></a>
+                      <a href="{{ url('admin/edit-student',$item->id)}}"><i class="fas fa-trash-alt"></i></td>
                   </tr>
                   @endforeach
                   </tbody>
@@ -84,3 +89,6 @@
   <!-- /.content-wrapper -->
   @include('admin.layouts.partials.footer')
 
+
+
+</div>

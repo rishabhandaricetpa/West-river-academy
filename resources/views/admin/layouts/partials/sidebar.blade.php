@@ -20,15 +20,27 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('/enroll') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Parent</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ url('admin/view')}}"class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Parent</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="" {{ url('/dashboard') }}"" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Student Profile
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/view-student')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Student</p>
                 </a>
               </li>
 

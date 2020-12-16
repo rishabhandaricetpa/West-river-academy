@@ -8,6 +8,7 @@
   </script>
   <!-- Bootstrap 4 -->
   <script src="backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <script src="backend/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script src="backend/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -22,7 +23,7 @@
   <script src="backend/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script>
     $(function () {
-      $(".data-table").DataTable({
+      $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
