@@ -5,13 +5,15 @@
   @include('layouts.partials.styles')
   <title> @yield('pageTitle', 'Home') | {{config('app.name')}}</title>
   <!-- jQuery and JS bundle w/ Popper.js -->
-  
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
   <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
+  <link href="{{asset('css/app.css')}}" rel="stylesheet">
+  <script src="{{asset('js/app.js')}}"></script>
 </head>
 <!-- * =============== Header =============== * -->
 <header class="site-header">

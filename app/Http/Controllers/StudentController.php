@@ -35,15 +35,21 @@ class StudentController extends Controller
             'd_o_b' => ['required'],
         ]);
     }
-    public function index()
+    public function index(Request $request)
     {
-        $id = auth()->user()->id;
-        $parentProfileData = User::find($id)->parentProfile()->first();
-        $country = $parentProfileData->country;
-        $countryData = Country::where('country', $country)->first();
-        $countryId = $countryData->id;
-        $semesters_dates = Country::find($countryId)->semesters()->get();
-        return view('enrollstudent', compact('semesters_dates'));
+        // $id = auth()->user()->id;
+        // $parentProfileData = User::find($id)->parentProfile()->first();
+        // $country = $parentProfileData->country;
+        // $countryData = Country::where('country', $country)->first();
+        // $countryId = $countryData->id;
+        // $semesters_dates = Country::find($countryId)->semesters()->get();
+        // return view('enrollstudent', compact('semesters_dates'));
+        $student = StudentProfile::all();
+        // return response()->json($student);
+        if ($request->expectsJson()) {
+            return response()->json($student);
+        }
+        return view('enrollstudent', compact('student'));
     }
 
     protected function save(Request $data)

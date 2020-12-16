@@ -1,4 +1,3 @@
-
 @stack('select2_script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -9,11 +8,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 <script src="{{ URL::asset('/js/custom.js') }}" crossorigin="anonymous"></script>
 <!-- Footer scripts -->
-@stack('before_vendor_scripts')
-<!-- <script defer src="{{ mix('js/manifest.js') }}"></script> -->
-<script defer src="{{ mix('js/vendor.js') }}"></script>
-@stack('after_vendor_scripts')
-@stack('before_app_scripts')
-<script defer async src="{{ mix('js/app.js') }}"></script>
-@stack('after_app_scripts')
 
