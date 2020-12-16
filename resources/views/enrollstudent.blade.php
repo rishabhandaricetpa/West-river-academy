@@ -75,6 +75,15 @@
                     @endforeach
                   </select>
                 </div>
+                <div class="form-group col-md-3">
+                <select id="" class="form-control">
+                  <option selected>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                </select>
+              </div>
               </div>
               <div class="info-detail col-sm-9 lato-italic">
                 <p>Choose August 1 (the first day of the Annual enrollment period), January 1 (the first day of the Second Semester), today's date or another date. This date will appear on your confirmation of enrollment letter. You will be considered enrolled for the full 12-month period for Annual or 7-month period for Second Semester Only.</p>
@@ -88,10 +97,17 @@
               <div class="form-row col-sm-3 px-0">
                 <div class="form-group col-md-5">
                   <select name="enddate">
-
                     <option value='{{ $semesters_date->end_date }}'>{{$semesters_date->end_date}}</option>
-
                   </select>
+                </div>
+                <div class="form-group col-md-3">
+                <select id="" class="form-control">
+                  <option selected>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                </select>
                 </div>
               </div>
               <div class="info-detail col-sm-9 lato-italic">
