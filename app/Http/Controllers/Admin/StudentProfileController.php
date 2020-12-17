@@ -16,7 +16,7 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
-        $student = StudentProfile::all();
+        $student = StudentProfile::all()->where('status',0);
         return view('admin.familyInformation.view-student',compact('student'));
     }
 
@@ -60,7 +60,6 @@ class StudentProfileController extends Controller
      */
     public function edit($id)
     {
-       
         $student= StudentProfile::find($id);
         return view('admin.familyInformation.edit-student',compact('student'));
     }
@@ -74,8 +73,6 @@ class StudentProfileController extends Controller
      */
     public function update(Request $request,$id)
     {
-   
-        
         $student = StudentProfile::find($id);
         $student->first_name   =  $request->get('first_name');
         $student->middle_name  =  $request->get('first_name');
@@ -86,11 +83,12 @@ class StudentProfileController extends Controller
         $student->student_Id	=  $request->get('student_id');
         $student->immunized_status	= $request->get('immunized_status');
         $student->save();
-
-        //return redirect('admin.familyInformation.edit-student')->with('success', 'Student Information updated!');
-    return redirect('admin/view-student');
+        $notification = array(
+            'message' => 'Student Record is updated Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect('admin/view-student')->with($notification);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -99,8 +97,11 @@ class StudentProfileController extends Controller
      */
     public function destroy($id)
     {
+        $notification = array(
+            'message' => 'Student Record is Deleted Successfully!',
+            'alert-type' => 'warning'
+        );
         StudentProfile::where('id',$id)->delete();
-       // Session::flash('flash_message', 'Task successfully deleted!');
-        return redirect()->back();
+        return redirect()->back()->with($notification);
     }
 }

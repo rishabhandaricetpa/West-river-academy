@@ -26,6 +26,7 @@ class CreateStudentProfilesTable extends Migration
             $table->string('student_Id');
             $table->string('immunized_status')->nullable();
             $table->string('student_situation')->nullable();
+            $table->boolean('status')->default('0');
             $table->timestamps();
         });
     }

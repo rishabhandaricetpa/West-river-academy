@@ -55,7 +55,7 @@
                       <td>{{$item->cell_phone}}</td>
                       <td>{{$item->immunized_status}}</td>
                       <td><a href="{{ url('admin/edit-student',$item->id)}}"> <i class="fas fa-edit"></i></a>
-                      <a href="{{ url('admin/delete',$item->id)}}"><i class="fas fa-trash-alt"></i></td>
+                      <a href="{{ url('admin/delete',$item->id)}}"><i class="fas fa-trash-alt" onclick="return myFunction();"></i></td>
                   </tr>
                   @endforeach
                   </tbody>
@@ -72,3 +72,9 @@
   </div>
     <!-- /.content -->
 @endsection
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to delete this"))
+      event.preventDefault();
+  }
+ </script>

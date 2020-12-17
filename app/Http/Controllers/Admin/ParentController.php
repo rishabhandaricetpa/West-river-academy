@@ -31,7 +31,7 @@ class ParentController extends Controller
      */
     public function parentData()
     {
-        $data = ParentProfile::all();
+        $data = ParentProfile::all()->where('status',0);
         return view('admin.familyInformation.view-parent',compact('data'));
     }
 }

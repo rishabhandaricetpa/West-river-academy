@@ -67,9 +67,7 @@ class RegisterController extends Controller
         $country_list=  Country::select('country')
                         ->orderBy('country')
                         ->get();
-     
        return view('auth.register')->with('country_list',$country_list);
-     
     }
     /**
      * Create a new user instance after a valid registration.
@@ -108,8 +106,7 @@ class RegisterController extends Controller
         $parent->save();
         return $user;
     }
-
-    /**
+        /**
      * The user has been registered.
      *
      * @param \Illuminate\Http\Request $request
@@ -131,5 +128,4 @@ class RegisterController extends Controller
     /**
      * show country list to parent profile dropdown
      */
-    
 }

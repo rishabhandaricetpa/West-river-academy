@@ -48,7 +48,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('verify.email');
     Route::get('/dashboard', function () {
         return view('SignIn/dashboard');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('active_user');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect('/login');

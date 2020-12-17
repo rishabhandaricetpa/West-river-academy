@@ -38,7 +38,7 @@
           </div>
           <div class="form-group d-flex mb-2">
             <label for="">Date of Birth</label>
-            <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob"></p>
+            <p><input type="text" class="form-control dobdatepicker" id="dob" name="dob" required></p>
             <i class="fas fa-calendar-alt" aria-hidden="true"></i>
           </div>
           <div class="form-group d-flex mb-2">
@@ -241,7 +241,7 @@
           </div>
           <div class="form-group d-flex">
             <label for="">tell us more about your situation </label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="student_situation" rows="3" required></textarea>
           </div>
       </div>
       <div id="enrollmentPeriode"></div>

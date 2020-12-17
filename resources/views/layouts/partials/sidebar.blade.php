@@ -3,8 +3,8 @@
     <li>
     <a href="{{ url('/dashboard') }}">Dashboard</a>
       <ul class="list-unstyled">
-        <li><a href="{{ url('/enroll') }}">Add student</a></li>
-        <li><a href="#">add enrollment</a></li>
+        <li><a href="#">Add student</a></li>
+        <li><a href="{{ url('/enroll-student') }}">add enrollment</a></li>
       </ul>
     </li>
     <li><a href="#">Cart</a></li>

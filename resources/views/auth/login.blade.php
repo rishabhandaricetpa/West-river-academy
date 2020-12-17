@@ -8,6 +8,11 @@
 <main class="position-relative container">
 
   <div class="form-wrap border bg-light form-content small-container">
+  @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <h2>Log in to My Account</h2>
     <form method="POST" action="{{ route('login') }}" class="mb-0">
       @csrf

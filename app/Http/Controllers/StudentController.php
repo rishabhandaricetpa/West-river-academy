@@ -62,6 +62,7 @@ class StudentController extends Controller
             'student_Id' => $data['student_id'],
             'immunized_status' => $data['immunized_Stat'],
             'student_situation' => $data['student_situation'],
+            'status'=> 0,
         ]);
 
         $enrollPeriods = EnrollmentPeriods::create([
@@ -72,6 +73,10 @@ class StudentController extends Controller
         ]);
         $student->save();
         $enrollPeriods->save();
-        return redirect('/enroll-student')->with('success', 'Contact saved!');
+        $notification = array(
+            'message' => 'Student Enrolled Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }
