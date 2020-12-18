@@ -6,6 +6,7 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    min-height: 245px;
     h2{
         margin-bottom: 2rem;
     }
@@ -81,4 +82,26 @@ cursor: pointer;
         width: 28px;
         height: 28px;
     }
+}
+
+.inner-form-wrapper{
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+}
+
+.label-styling{
+    label{
+    padding-right: 28px;
+    width: 270px;
+    }
+}
+
+.label-xl label{
+    font-size: 17px;
+}
+
+.label-md label{
+    font-size: 15px;
 }

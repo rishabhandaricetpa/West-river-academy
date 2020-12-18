@@ -32,7 +32,7 @@
 
           <div class="form-wrap border bg-light py-5 px-25">
              <h2 class="mb-5">What would you like to do?</h2>
-            <div class="row">
+            <div class="row dashboard-options">
            <div class="col-md-3 col-sm-6 text-center">
            <a href="#" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-comments rounded-circle circled-grid fa-2x text-secondary"></i>
