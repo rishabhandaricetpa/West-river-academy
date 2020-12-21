@@ -2278,26 +2278,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      form: {
+        first_name: "",
+        middle_name: "",
+        last_name: "",
+        dob: "",
+        email: "",
+        cell_phone: "",
+        immunized_status: "",
+        student_situation: "",
+        studentID: "",
+        enrollPeriods: [{
+          selectedStartDate: "",
+          selectedEndDate: "",
+          grade: ""
+        }]
+      },
       students: []
     };
   },
-  headers: {
-    "X-Requested-With": "XMLHttpRequest"
+  props: {
+    semesters: {
+      type: Array,
+      required: true
+    }
   },
   mounted: function mounted() {
-    var _this = this;
-
-    console.log("Student Component mounted.");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/student").then(function (response) {
-      _this.student = response.data;
-      console.log(_this.student[0]);
-    });
+    this.students = this.semesters;
   },
-  methods: {}
+  methods: {
+    addNewEnrollPeriod: function addNewEnrollPeriod() {
+      this.form.enrollPeriods.push({
+        selectedStartDate: "",
+        selectedEndDate: "",
+        grade: ""
+      });
+    },
+    addStudent: function addStudent() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/enroll-student", this.form).then(function (response) {
+        return window.location = "/reviewstudent/" + response.data.id;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -37925,49 +38002,1065 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { attrs: { method: "POST" } }, [
-    _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _vm._m(0),
+  return _c(
+    "form",
+    {
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.addStudent()
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.first_name,
+                expression: "form.first_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "first_name",
+              name: "first_name",
+              required: "",
+              "aria-describedby": "emailHelp"
+            },
+            domProps: { value: _vm.form.first_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "first_name", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
       _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(_vm.std, function(student) {
-          return _c("li", { key: student.id }, [_vm._v(_vm._s(_vm.std.d_o_b))])
-        }),
-        0
-      ),
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Middle Name ")]),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.middle_name,
+                expression: "form.middle_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "middle_name",
+              name: "middle_name",
+              "aria-describedby": "emailHelp"
+            },
+            domProps: { value: _vm.form.middle_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "middle_name", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
       _vm._v(" "),
-      _vm._m(1)
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
-    _vm._m(4),
-    _vm._v(" "),
-    _vm._m(5),
-    _vm._v(" "),
-    _vm._m(6),
-    _vm._v(" "),
-    _vm._m(7),
-    _vm._v(" "),
-    _vm._m(8),
-    _vm._v(" "),
-    _vm._m(9),
-    _vm._v(" "),
-    _vm._m(10),
-    _vm._v(" "),
-    _vm._m(11),
-    _vm._v(" "),
-    _vm._m(12),
-    _vm._v(" "),
-    _vm._m(13),
-    _vm._v(" "),
-    _c("div", { attrs: { id: "enrollmentPeriode" } }),
-    _vm._v(" "),
-    _vm._m(14)
-  ])
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.last_name,
+                expression: "form.last_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "last_name",
+              name: "last_name",
+              required: "",
+              "aria-describedby": "emailHelp"
+            },
+            domProps: { value: _vm.form.last_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "last_name", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
+        _vm._v(" "),
+        _c("p", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.d_o_b,
+                expression: "form.d_o_b"
+              }
+            ],
+            staticClass: "form-control dobdatepicker",
+            attrs: { type: "text", id: "dob", name: "dob", required: "" },
+            domProps: { value: _vm.form.d_o_b },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "d_o_b", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fas fa-calendar-alt",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Email Address")]),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.email,
+                expression: "form.email"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "email",
+              id: "email",
+              required: "",
+              "aria-describedby": "emailHelp"
+            },
+            domProps: { value: _vm.form.email },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "email", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Cell Phone")]),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.cell_phone,
+                expression: "form.cell_phone"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "cell_phone",
+              name: "cell_phone",
+              "aria-describedby": "emailHelp"
+            },
+            domProps: { value: _vm.form.cell_phone },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "cell_phone", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Student ID ")]),
+        _vm._v(" "),
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.studentID,
+                expression: "form.studentID"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "student_id",
+              name: "student_id",
+              required: "",
+              "aria-describedby": "emailHelp"
+            },
+            domProps: { value: _vm.form.studentID },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "studentID", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.form.enrollPeriods, function(enrollPeriod, index) {
+        return _c("div", { key: enrollPeriod.id }, [
+          _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v("Select your START date of enrollment")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row mx-0" }, [
+              _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
+                _c("div", { staticClass: "form-group col-md-5" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.selectedStartDate,
+                          expression: "enrollPeriod.selectedStartDate"
+                        }
+                      ],
+                      attrs: { name: "startdate" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            enrollPeriod,
+                            "selectedStartDate",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.students, function(student) {
+                      return _c(
+                        "option",
+                        {
+                          key: student.id,
+                          domProps: { value: student.start_date }
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(student.start_date) +
+                              "\n              "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(2, true)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v("Select your END date of enrollment")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row mx-0" }, [
+              _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
+                _c("div", { staticClass: "form-group col-md-5" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.selectedEndDate,
+                          expression: "enrollPeriod.selectedEndDate"
+                        }
+                      ],
+                      attrs: { name: "enddate" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            enrollPeriod,
+                            "selectedEndDate",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.students, function(student) {
+                      return _c(
+                        "option",
+                        {
+                          key: student.id,
+                          domProps: { value: student.end_date }
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(student.end_date) +
+                              "\n              "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3, true)
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(4, true),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group d-flex mb-2 lato-italic info-detail" },
+            [
+              _vm._m(5, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "row pl-5" }, [
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "Upgraded"
+                      },
+                      domProps: {
+                        checked: _vm._q(enrollPeriod.grade, "Upgraded")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "Upgraded")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" Upgraded ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "Preschool Age 3",
+                        required: true
+                      },
+                      domProps: {
+                        checked: _vm._q(enrollPeriod.grade, "Preschool Age 3")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(
+                            enrollPeriod,
+                            "grade",
+                            "Preschool Age 3"
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" Preschool Age 3 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "Preschool Age 4",
+                        required: true
+                      },
+                      domProps: {
+                        checked: _vm._q(enrollPeriod.grade, "Preschool Age 4")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(
+                            enrollPeriod,
+                            "grade",
+                            "Preschool Age 4"
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" Preschool Age 4 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "Kindergarten"
+                      },
+                      domProps: {
+                        checked: _vm._q(enrollPeriod.grade, "Kindergarten")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "Kindergarten")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" Kindergarten ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "1"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "1") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "1")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 1 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "2"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "2") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "2")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 2 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "3"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "3") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "3")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 3 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "4"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "4") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "4")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 4 ")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "5"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "5") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "5")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 5 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "6"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "6") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "6")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 6 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "7"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "7") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "7")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 7 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "8"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "8") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "8")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 8 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: enrollPeriod.grade,
+                          expression: "enrollPeriod.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "student_grade",
+                        value: "9"
+                      },
+                      domProps: { checked: _vm._q(enrollPeriod.grade, "9") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(enrollPeriod, "grade", "9")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v(" 9 ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-check",
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#chooseGrade"
+                      }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: enrollPeriod.grade,
+                            expression: "enrollPeriod.grade"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "student_grade",
+                          id: "",
+                          value: "10"
+                        },
+                        domProps: { checked: _vm._q(enrollPeriod.grade, "10") },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(enrollPeriod, "grade", "10")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { staticClass: "form-check-label", attrs: { for: "" } },
+                        [_vm._v(" 10 ")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-check",
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#chooseGrade"
+                      }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: enrollPeriod.grade,
+                            expression: "enrollPeriod.grade"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "student_grade",
+                          id: "",
+                          value: "11"
+                        },
+                        domProps: { checked: _vm._q(enrollPeriod.grade, "11") },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(enrollPeriod, "grade", "11")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { staticClass: "form-check-label", attrs: { for: "" } },
+                        [_vm._v(" 11 ")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-check",
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#chooseGrade"
+                      }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: enrollPeriod.grade,
+                            expression: "enrollPeriod.grade"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "student_grade",
+                          id: "",
+                          value: "12"
+                        },
+                        domProps: { checked: _vm._q(enrollPeriod.grade, "12") },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(enrollPeriod, "grade", "12")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { staticClass: "form-check-label", attrs: { for: "" } },
+                        [_vm._v(" 12 ")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group d-flex mt-2r" }, [
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v("Is this student immunized?")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.immunized_status,
+                      expression: "form.immunized_status"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "immunized_status" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "immunized_status",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", [
+                    _vm._v("Yes, records will come with school records.")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("Yes, I will provide records.")]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Yes, I plan to get immunizations soon.")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("No, for personal reasons.")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("No, for medical reasons.")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("No, for religious reasons.")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group d-flex" }, [
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v("tell us more about your situation ")
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.student_situation,
+                  expression: "form.student_situation"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "exampleFormControlTextarea1",
+                name: "student_situation",
+                rows: "3",
+                required: ""
+              },
+              domProps: { value: _vm.form.student_situation },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "student_situation", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "enrollmentPeriode" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-wrap py-2r px-25 mt-2r" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary addenrollment",
+            attrs: { type: "button", id: "addEnroll", value: "addEnroll" },
+            on: { click: _vm.addNewEnrollPeriod }
+          },
+          [_vm._v("Add Another Enrollment Period")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Continue")]
+        )
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -37983,101 +39076,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("input", {
-        staticClass: "form-control @error('first_name') is-invalid @enderror",
-        attrs: {
-          type: "text",
-          id: "first_name",
-          name: "first_name",
-          required: "",
-          "aria-describedby": "emailHelp"
-        }
-      })
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Last/Family Name "),
+      _c("sup", [_vm._v("*")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Middle Name ")]),
-      _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "middle_name",
-            name: "middle_name",
-            "aria-describedby": "emailHelp"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _c("label", { attrs: { for: "" } }, [
-        _vm._v("Last/Family Name "),
-        _c("sup", [_vm._v("*")])
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "last_name",
-            name: "last_name",
-            required: "",
-            "aria-describedby": "emailHelp"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
-      _vm._v(" "),
+    return _c("div", { staticClass: "info-detail col-sm-9 lato-italic" }, [
       _c("p", [
-        _c("input", {
-          staticClass: "form-control dobdatepicker",
-          attrs: { type: "text", id: "dob", name: "dob" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("i", {
-        staticClass: "fas fa-calendar-alt",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Email Address")]),
-      _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          staticClass: "form-control @error('email') is-invalid @enderror",
-          attrs: {
-            type: "text",
-            name: "email",
-            id: "email",
-            required: "",
-            "aria-describedby": "emailHelp"
-          }
-        })
+        _vm._v(
+          "\n            Choose August 1 (the first day of the Annual enrollment period),\n            January 1 (the first day of the Second Semester), today's date or\n            another date. This date will appear on your confirmation of\n            enrollment letter. You will be considered enrolled for the full\n            12-month period for Annual or 7-month period for Second Semester\n            Only.\n          "
+        )
       ])
     ])
   },
@@ -38085,92 +39097,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Cell Phone")]),
-      _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "cell_phone",
-            name: "cell_phone",
-            "aria-describedby": "emailHelp"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Student ID")]),
-      _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "student_id",
-            name: "student_id",
-            required: "",
-            "aria-describedby": "emailHelp"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
-      _c("label", { attrs: { for: "" } }, [
-        _vm._v("Select your START date of enrollment")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mx-0" }, [
-        _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
-          _c("div", { staticClass: "form-group col-md-5" }, [
-            _c("select", { attrs: { name: "startdate" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "info-detail col-sm-9 lato-italic" }, [
-          _c("p", [
-            _vm._v(
-              "\n          Choose August 1 (the first day of the Annual enrollment period),\n          January 1 (the first day of the Second Semester), today's date or\n          another date. This date will appear on your confirmation of\n          enrollment letter. You will be considered enrolled for the full\n          12-month period for Annual or 7-month period for Second Semester\n          Only.\n        "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
-      _c("label", { attrs: { for: "" } }, [
-        _vm._v("Select your END date of enrollment")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mx-0" }, [
-        _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
-          _c("div", { staticClass: "form-group col-md-5" }, [
-            _c("select", { attrs: { name: "enddate" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "info-detail col-sm-9 lato-italic" }, [
-          _c("p", [
-            _vm._v(
-              "\n          Choose before July 31 (the last day of your enrollment) or another\n          date before July 31. This date will appear on your confirmation of\n          enrollment letter. Your enrollment will officially end on July 31.\n        "
-            )
-          ])
-        ])
+    return _c("div", { staticClass: "info-detail col-sm-9 lato-italic" }, [
+      _c("p", [
+        _vm._v(
+          "\n            Choose before July 31 (the last day of your enrollment) or another\n            date before July 31. This date will appear on your confirmation of\n            enrollment letter. Your enrollment will officially end on July 31.\n          "
+        )
       ])
     ])
   },
@@ -38201,358 +39132,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "form-group d-flex mb-2 lato-italic info-detail" },
-      [
-        _c("label", { attrs: { for: "" } }, [
-          _vm._v("Select grade level(s) for your enrollment period\n      "),
-          _c("p", [_vm._v("(You may select more than one for multiple years)")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row pl-5" }, [
-          _c("div", { staticClass: "col-sm-3" }, [
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  name: "student_grade",
-                  value: "Upgraded"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" Upgraded ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  name: "student_grade",
-                  value: "Preschool Age 3"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" Preschool Age 3 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  name: "student_grade",
-                  value: "Preschool Age 4"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" Preschool Age 4 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  name: "student_grade",
-                  value: "Kindergarten"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" Kindergarten ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "1" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 1 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "2" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 2 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "3" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 3 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "4" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 4 ")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-3" }, [
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "5" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 5 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "6" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 6 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "7" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 7 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "8" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 8 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", name: "student_grade", value: "9" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "" } },
-                [_vm._v(" 9 ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-check",
-                attrs: { "data-toggle": "modal", "data-target": "#chooseGrade" }
-              },
-              [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "radio",
-                    name: "student_grade",
-                    id: "",
-                    value: "10"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "form-check-label", attrs: { for: "" } },
-                  [_vm._v(" 10 ")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-check",
-                attrs: { "data-toggle": "modal", "data-target": "#chooseGrade" }
-              },
-              [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "radio",
-                    name: "student_grade",
-                    id: "",
-                    value: "11"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "form-check-label", attrs: { for: "" } },
-                  [_vm._v(" 11 ")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-check",
-                attrs: { "data-toggle": "modal", "data-target": "#chooseGrade" }
-              },
-              [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "radio",
-                    name: "student_grade",
-                    id: "",
-                    value: "12"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "form-check-label", attrs: { for: "" } },
-                  [_vm._v(" 12 ")]
-                )
-              ]
-            )
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mt-2r" }, [
-      _c("label", { attrs: { for: "" } }, [
-        _vm._v("Is this student immunized?")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-6" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { name: "immunized_Stat" } },
-          [
-            _c("option", [
-              _vm._v("Yes, records will come with school records.")
-            ]),
-            _vm._v(" "),
-            _c("option", [_vm._v("Yes, I will provide records.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("Yes, I plan to get immunizations soon.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("No, for personal reasons.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("No, for medical reasons.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("No, for religious reasons.")])
-          ]
-        )
-      ])
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Select grade level(s) for your enrollment period\n        "),
+      _c("p", [_vm._v("(You may select more than one for multiple years)")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex" }, [
-      _c("label", { attrs: { for: "" } }, [
-        _vm._v("tell us more about your situation ")
-      ]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: {
-          id: "exampleFormControlTextarea1",
-          name: "student_situation",
-          rows: "3"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "form-wrap border bg-light py-2r px-25 mt-2r" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary addenrollment",
-            attrs: { type: "button", id: "addEnroll", value: "addEnroll" }
-          },
-          [_vm._v("Add Another Enrollment Period")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Continue")]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true

@@ -185,6 +185,7 @@
                 name="student_grade"
                 value="Preschool Age 3"
                 v-model="enrollPeriod.grade"
+                :required="true"
               />
               <label class="form-check-label" for=""> Preschool Age 3 </label>
             </div>
@@ -195,6 +196,7 @@
                 name="student_grade"
                 value="Preschool Age 4"
                 v-model="enrollPeriod.grade"
+                :required="true"
               />
               <label class="form-check-label" for=""> Preschool Age 4 </label>
             </div>
@@ -373,6 +375,7 @@
           name="student_situation"
           rows="3"
           v-model="form.student_situation"
+          required
         ></textarea>
       </div>
     </div>
@@ -435,8 +438,12 @@ export default {
       });
     },
     addStudent() {
-      axios.post("/enroll-student", this.form);
-      alert("add student");
+      axios
+        .post("/enroll-student", this.form)
+        .then(
+          (response) => (window.location = "/reviewstudent/" + response.data.id)
+        )
+        .catch((error) => console.log(error));
     },
   },
 };

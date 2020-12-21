@@ -36,14 +36,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
     Route::get('/enroll-student', 'StudentController@index');
-    Route::get('/reviewstudent', function () {
-        return view('reviewstudent');
-    });
+    Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/cart', function () {
         return view('cart');
     });
     Route::post('/enroll-student', 'StudentController@store')->middleware('auth');
-
     Route::get('/cart-billing', function () {
         return view('cart-billing');
     });

@@ -43,28 +43,19 @@ class StudentController extends Controller
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
         $semesters_dates = Country::find($countryId)->semesters()->get();
-        //dd($semesters_dates);
         if ($request->expectsJson()) {
             return response()->json($semesters_dates);
         }
         return view('enrollstudent', compact('semesters_dates'));
-        //$student = StudentProfile::all();
-        // return response()->json($student);
-
-        //return view('enrollstudent', compact('student'));
     }
 
     protected function store(Request $data)
     {
 
         $Userid = auth()->user()->id;
-
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $id = $parentProfileData->id;
-
-
         $student =  StudentProfile::create([
-            
 
             'parent_profile_id' => $id,
             'first_name' => $data['first_name'],
@@ -85,6 +76,15 @@ class StudentController extends Controller
                 'grade_level' => $period['grade']
             ]);
         }
-        return redirect('/enroll-student')->with('success', 'Contact saved!');
+        if ($data->expectsJson()) {
+            return response()->json($student);
+        }
+        // return view('reviewstudent', compact('enrollPeriods'));
+    }
+    public function reviewStudent($id)
+    {
+        $studentData = StudentProfile::find($id)->first();
+        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+        return view('reviewstudent', compact('studentData', 'enrollPeriods'));
     }
 }
