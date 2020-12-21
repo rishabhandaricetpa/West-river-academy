@@ -15,5 +15,3 @@
 </main>
 
 @include('layouts.partials.footer') 
-
-

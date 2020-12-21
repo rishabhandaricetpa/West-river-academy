@@ -41,6 +41,44 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('admin-dashboard', function () {
         return view('admin.home');
     })->name('admin.admindashboard');
+    Route::get('/enroll',function(){
+        return view('enrollstudent');
+    });
+    Route::get('/reviewstudent',function(){
+        return view('reviewstudent');
+    });
+    Route::get('/dashboard-transcript-finished',function(){
+        return view('dashboard-transcript-finished');
+    });
+    Route::get('/dashboard-transcript-filling',function(){
+        return view('dashboard-transcript-filling');
+    });
+    Route::get('/download-transcript',function(){
+        return view('download-transcript');
+    });
+    Route::get('/dashboard-transcript-filling1',function(){
+        return view('dashboard-transcript-filling1');
+    });
+    Route::get('/dashboard-languages',function(){
+        return view('dashboard-languages');
+    });
+    Route::get('/dashboard-transcript-filling2',function(){
+        return view('dashboard-transcript-filling2');
+    });
+    Route::get('/dashboard-another-languages',function(){
+        return view('dashboard-another-languages');
+    });
+    Route::get('/dashboard-transcript',function(){
+        return view('dashboard-transcript');
+    });
+    Route::get('/cart',function(){
+        return view('cart');
+    });
+
+    Route::get('/cart-billing',function(){
+        return view('cart-billing');
+    });
+    Route::post('/enroll', 'StudentController@create')->name('enroll');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {

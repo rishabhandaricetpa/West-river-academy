@@ -189,8 +189,7 @@
             <p>Your credit card information will be taken on the next page.</p>
           </div>
              </li>
-             </ul>
-           
+             </ul>     
 </div>
 
 <div class="form-wrap border bg-light py-5 px-25 mt-2r">
