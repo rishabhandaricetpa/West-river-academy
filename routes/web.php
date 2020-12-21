@@ -47,6 +47,24 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/dashboard-transcript-filling',function(){
         return view('dashboard-transcript-filling');
     });
+    Route::get('/select-courses',function(){
+        return view('select-courses');
+    });
+    Route::get('/transcript-united-states',function(){
+        return view('transcript-united-states');
+    });
+    Route::get('/transcript-select-country',function(){
+        return view('transcript-select-country');
+    });
+    Route::get('/year-grade',function(){
+        return view('year-grade');
+    });
+    Route::get('/select-grade',function(){
+        return view('select-grade');
+    });
+    Route::get('/transcript-united-states1',function(){
+        return view('transcript-united-states1');
+    });
     Route::get('/download-transcript',function(){
         return view('download-transcript');
     });
