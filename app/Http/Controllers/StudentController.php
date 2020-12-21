@@ -35,7 +35,7 @@ class StudentController extends Controller
             'd_o_b' => ['required'],
         ]);
     }
-    public function index()
+    public function index(Request $request)
     {
         $id = auth()->user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
@@ -43,10 +43,18 @@ class StudentController extends Controller
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
         $semesters_dates = Country::find($countryId)->semesters()->get();
+        //dd($semesters_dates);
+        if ($request->expectsJson()) {
+            return response()->json($semesters_dates);
+        }
         return view('enrollstudent', compact('semesters_dates'));
+        //$student = StudentProfile::all();
+        // return response()->json($student);
+
+        //return view('enrollstudent', compact('student'));
     }
 
-    protected function save(Request $data)
+    protected function store(Request $data)
     {
         $Userid = auth()->user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
@@ -56,27 +64,27 @@ class StudentController extends Controller
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'last_name' => $data['last_name'],
-            'd_o_b' => \Carbon\Carbon::createFromFormat('d-M-Y', $data['dob'])->format('Y-m-d'),
+            'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
-            'student_Id' => $data['student_id'],
-            'immunized_status' => $data['immunized_Stat'],
+            'student_Id' => $data['studentID'],
+            'immunized_status' => $data['immunized_status'],
             'student_situation' => $data['student_situation'],
             'status'=> 0,
         ]);
-
-        $enrollPeriods = EnrollmentPeriods::create([
-            'student_profile_id' => $student->id,
-            'start_date_of_enrollment' => $data['startdate'],
-            'end_date_of_enrollment' => $data['enddate'],
-            'grade_level' => $data['student_grade']
-        ]);
-        $student->save();
-        $enrollPeriods->save();
+        foreach ($data->get('enrollPeriods', []) as $period) {
+            $enrollPeriods = EnrollmentPeriods::create([
+                'student_profile_id' => $student->id,
+                'start_date_of_enrollment' => $period['selectedStartDate'],
+                'end_date_of_enrollment' => $period['selectedEndDate'],
+                'grade_level' => $period['grade']
+            ]);
+        }
+        // return redirect('/enroll-student')->with('success', 'Contact saved!');
         $notification = array(
             'message' => 'Student Enrolled Successfully!',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect('/enroll-student')->with($notification);
     }
 }

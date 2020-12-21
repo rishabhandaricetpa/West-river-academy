@@ -36,7 +36,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-
+    Route::get('/enroll-student', 'StudentController@index');
+    Route::post('/enroll-student', 'StudentController@store')->name('enroll');
     // admin dashboard
     Route::get('admin-dashboard', function () {
         return view('admin.home');
@@ -78,7 +79,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/cart-billing',function(){
         return view('cart-billing');
     });
-    Route::post('/enroll', 'StudentController@create')->name('enroll');
+  
+
+    Route::get('/cart-billing', function () {
+        return view('cart-billing');
+    });
+    //Route::post('/enroll-student', 'StudentController@create')->name('enroll');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {
@@ -106,9 +112,3 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
-
-Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function () {
-    //
-    Route::get('/enroll-student', 'StudentController@index');
-    Route::post('/enroll-student', 'StudentController@save')->name('enroll');
-});
