@@ -18,7 +18,7 @@
       <div class="form-wrap border bg-light py-5 px-25">
         <h2>Enroll Student 1</h2>
         <div id="app">
-          <enroll-student></enroll-student>
+          <enroll-student :semesters='@json($semesters_dates)'></enroll-student>
         </div>
     </main>
     <!-- Choose Dates -->

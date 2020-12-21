@@ -42,11 +42,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/cart', function () {
         return view('cart');
     });
-    Route::post('/enroll-student', 'StudentController@save')->name('enroll');
+    Route::post('/enroll-student', 'StudentController@store')->middleware('auth');
+
     Route::get('/cart-billing', function () {
         return view('cart-billing');
     });
-    Route::post('/enroll-student', 'StudentController@create')->name('enroll');
+    //Route::post('/enroll-student', 'StudentController@create')->name('enroll');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {
