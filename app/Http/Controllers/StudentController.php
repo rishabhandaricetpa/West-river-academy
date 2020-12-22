@@ -7,6 +7,7 @@ use Auth;
 use App\Models\ParentProfile;
 use App\Models\User;
 use App\Models\StudentProfile;
+use App\Models\FeeStructure;
 use App\Models\EnrollmentPeriods;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -67,12 +68,15 @@ class StudentController extends Controller
             'student_situation' => $data['student_situation'],
             'status'=> 0,
         ]);
+
         foreach ($data->get('enrollPeriods', []) as $period) {
             $enrollPeriods = EnrollmentPeriods::create([
                 'student_profile_id' => $student->id,
                 'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
                 'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
-                'grade_level' => $period['grade']
+                'grade_level' => $period['grade'],
+                'calculated_month'=> \Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate']),
+                'fee_structure_id'=>\Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate'])>=6?'1':'2'
             ]);
         }
         if ($data->expectsJson()) {
@@ -83,9 +87,13 @@ class StudentController extends Controller
     public function reviewStudent($id)
     {
 
-        $studentData = StudentProfile::find($id);
-        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        return view('reviewstudent', compact('studentData', 'enrollPeriods'));
+        $studentData    = StudentProfile::find($id);
+        $enrollPeriods  = StudentProfile::find($id)->enrollmentPeriods()->get();
+        $periodInfo     = EnrollmentPeriods::select('fee_structure_id', EnrollmentPeriods::raw('count(fee_structure_id) as total'))
+                                        ->where('student_profile_id',$id)
+                                        ->groupBy('fee_structure_id')->get();
+        $feestructure   = FeeStructure::all();
+        return view('reviewstudent', compact('studentData', 'enrollPeriods','feestructure','periodInfo'));
     }
     public function edit($id)
     {

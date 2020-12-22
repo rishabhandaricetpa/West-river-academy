@@ -44,8 +44,6 @@
 
             </div>
           </div>
-
-
           <div class="form-group d-sm-flex mb-2">
             <label for="">Grade Level(s)</label>
             <div>
@@ -58,10 +56,12 @@
           <h3 class="py-3">Fees</h3>
           <table class="px-0 w-100">
             <tbody>
+              @foreach($periodInfo as $period)
               <tr>
-                <td>Annual * 2</td>
-                <td class="text-right">$750</td>
+                <td>{{$period->period}} * {{$period->total}}</td>
+                <td class="text-right">{{$period->period =='Annual'?'$350':'$100'}}</td>
               </tr>
+              @endforeach
               <tr>
                 <td>Second Semester Only * 1</td>
                 <td class="text-right">$200</td>
