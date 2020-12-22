@@ -31,7 +31,8 @@
         "bootstrap": "^4.5.3",
         "jquery": "^3.5.1",
         "popper.js": "^1.16.1",
-        "vuejs-datepicker": "^1.6.2"
+        "vuejs-datepicker": "^1.6.2",
+        "ziggy-js": "^1.0.4"
     },
     "engines": {
         "node": ">=10.13.0",

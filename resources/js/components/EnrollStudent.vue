@@ -44,13 +44,8 @@
     <div class="form-group d-flex mb-2">
       <label for="">Date of Birth</label>
       <p>
-         <Datepicker
-         id="dob"
-         name="dob"
-         v-model="form.dob"
-         required
-         >
-         </Datepicker>
+        <Datepicker id="dob" name="dob" v-model="form.dob" required>
+        </Datepicker>
       </p>
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
     </div>
@@ -95,10 +90,7 @@
         />
       </div>
     </div>
-    <div
-      v-for="(enrollPeriod) in form.enrollPeriods"
-      :key="enrollPeriod.id"
-    >
+    <div v-for="enrollPeriod in form.enrollPeriods" :key="enrollPeriod.id">
       <div class="form-group d-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
@@ -106,14 +98,14 @@
             <div class="form-group col-md-5">
               <p>
                 <Datepicker
-                id="startdate"
-                name="startdate"
-                v-model="enrollPeriod.selectedStartDate"
-                required
-                placeholder="Select Start Date"
+                  id="startdate"
+                  name="startdate"
+                  v-model="enrollPeriod.selectedStartDate"
+                  required
+                  placeholder="Select Start Date"
                 >
                 </Datepicker>
-            </p>
+              </p>
             </div>
           </div>
           <div class="info-detail col-sm-9 lato-italic">
@@ -136,15 +128,15 @@
             <div class="form-group col-md-5">
               <p>
                 <Datepicker
-                id="enddate"
-                name="enddate"
-                v-model="enrollPeriod.selectedEndDate"
-                placeholder="Select End Date"
-                required
+                  id="enddate"
+                  name="enddate"
+                  v-model="enrollPeriod.selectedEndDate"
+                  placeholder="Select End Date"
+                  required
                 >
                 </Datepicker>
-            </p>
-            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+              </p>
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>
             </div>
           </div>
           <div class="info-detail col-sm-9 lato-italic">
@@ -397,12 +389,12 @@
 
 <script>
 import axios from "axios";
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from "vuejs-datepicker";
 
 export default {
-  name:'enroll-student',
-   components: {
-     Datepicker
+  name: "EnrollStudent",
+  components: {
+    Datepicker,
   },
   data() {
     return {
@@ -446,7 +438,7 @@ export default {
     },
     addStudent() {
       axios
-        .post("/enroll-student", this.form)
+        .post(route("enroll.student"), this.form)
         .then(
           (response) => (window.location = "/reviewstudent/" + response.data.id)
         )
@@ -455,5 +447,4 @@ export default {
   },
 };
 </script>
-<style>
-</style>
+
