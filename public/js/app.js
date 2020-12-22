@@ -2325,6 +2325,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2371,8 +2375,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addStudent: function addStudent() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/enroll-student", this.form);
-      alert("add student");
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/enroll-student", this.form).then(function (response) {
+        return window.location = "/reviewstudent/" + response.data.id;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
   }
 });
@@ -18636,54 +18643,25 @@ var render = function() {
               _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
                 _c("div", { staticClass: "form-group col-md-5" }, [
                   _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
+                    "p",
+                    [
+                      _c("Datepicker", {
+                        attrs: {
+                          id: "startdate",
+                          name: "startdate",
+                          required: "",
+                          placeholder: "Select Start Date"
+                        },
+                        model: {
                           value: enrollPeriod.selectedStartDate,
+                          callback: function($$v) {
+                            _vm.$set(enrollPeriod, "selectedStartDate", $$v)
+                          },
                           expression: "enrollPeriod.selectedStartDate"
                         }
-                      ],
-                      attrs: { name: "startdate" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            enrollPeriod,
-                            "selectedStartDate",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    _vm._l(_vm.students, function(student) {
-                      return _c(
-                        "option",
-                        {
-                          key: student.id,
-                          domProps: { value: student.start_date }
-                        },
-                        [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(student.start_date) +
-                              "\n              "
-                          )
-                        ]
-                      )
-                    }),
-                    0
+                      })
+                    ],
+                    1
                   )
                 ])
               ]),
@@ -18701,55 +18679,31 @@ var render = function() {
               _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
                 _c("div", { staticClass: "form-group col-md-5" }, [
                   _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
+                    "p",
+                    [
+                      _c("Datepicker", {
+                        attrs: {
+                          id: "enddate",
+                          name: "enddate",
+                          placeholder: "Select End Date",
+                          required: ""
+                        },
+                        model: {
                           value: enrollPeriod.selectedEndDate,
+                          callback: function($$v) {
+                            _vm.$set(enrollPeriod, "selectedEndDate", $$v)
+                          },
                           expression: "enrollPeriod.selectedEndDate"
                         }
-                      ],
-                      attrs: { name: "enddate" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            enrollPeriod,
-                            "selectedEndDate",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    _vm._l(_vm.students, function(student) {
-                      return _c(
-                        "option",
-                        {
-                          key: student.id,
-                          domProps: { value: student.end_date }
-                        },
-                        [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(student.end_date) +
-                              "\n              "
-                          )
-                        ]
-                      )
-                    }),
-                    0
-                  )
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-calendar-alt",
+                    attrs: { "aria-hidden": "true" }
+                  })
                 ])
               ]),
               _vm._v(" "),
@@ -18814,7 +18768,8 @@ var render = function() {
                       attrs: {
                         type: "radio",
                         name: "student_grade",
-                        value: "Preschool Age 3"
+                        value: "Preschool Age 3",
+                        required: true
                       },
                       domProps: {
                         checked: _vm._q(enrollPeriod.grade, "Preschool Age 3")
@@ -18851,7 +18806,8 @@ var render = function() {
                       attrs: {
                         type: "radio",
                         name: "student_grade",
-                        value: "Preschool Age 4"
+                        value: "Preschool Age 4",
+                        required: true
                       },
                       domProps: {
                         checked: _vm._q(enrollPeriod.grade, "Preschool Age 4")
@@ -19396,7 +19352,8 @@ var render = function() {
               attrs: {
                 id: "exampleFormControlTextarea1",
                 name: "student_situation",
-                rows: "3"
+                rows: "3",
+                required: ""
               },
               domProps: { value: _vm.form.student_situation },
               on: {
@@ -19411,8 +19368,6 @@ var render = function() {
           ])
         ])
       }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "enrollmentPeriode" } }),
       _vm._v(" "),
       _c("div", { staticClass: "form-wrap py-2r px-25 mt-2r" }, [
         _c(

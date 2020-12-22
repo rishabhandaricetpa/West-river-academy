@@ -43,15 +43,10 @@ class StudentController extends Controller
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
         $semesters_dates = Country::find($countryId)->semesters()->get();
-        //dd($semesters_dates);
         if ($request->expectsJson()) {
             return response()->json($semesters_dates);
         }
         return view('enrollstudent', compact('semesters_dates'));
-        //$student = StudentProfile::all();
-        // return response()->json($student);
-
-        //return view('enrollstudent', compact('student'));
     }
 
     protected function store(Request $data)
@@ -75,16 +70,20 @@ class StudentController extends Controller
         foreach ($data->get('enrollPeriods', []) as $period) {
             $enrollPeriods = EnrollmentPeriods::create([
                 'student_profile_id' => $student->id,
-                'start_date_of_enrollment' => $period['selectedStartDate'],
-                'end_date_of_enrollment' => $period['selectedEndDate'],
+                'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
+                'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
                 'grade_level' => $period['grade']
             ]);
         }
-        // return redirect('/enroll-student')->with('success', 'Contact saved!');
-        $notification = array(
-            'message' => 'Student Enrolled Successfully!',
-            'alert-type' => 'success'
-        );
-        return redirect('/enroll-student')->with($notification);
+        if ($data->expectsJson()) {
+            return response()->json($student);
+        }
+        // return view('reviewstudent', compact('enrollPeriods'));
+    }
+    public function reviewStudent($id)
+    {
+        $studentData = StudentProfile::find($id)->first();
+        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+        return view('reviewstudent', compact('studentData', 'enrollPeriods'));
     }
 }

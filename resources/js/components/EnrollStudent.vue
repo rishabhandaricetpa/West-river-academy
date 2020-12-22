@@ -99,21 +99,21 @@
       v-for="(enrollPeriod) in form.enrollPeriods"
       :key="enrollPeriod.id"
     >
-    
       <div class="form-group d-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
           <div class="form-row col-sm-3 px-0">
             <div class="form-group col-md-5">
-             <select name="startdate" v-model="enrollPeriod.selectedStartDate">
-                <option
-                  v-for="student in students"
-                  :value="student.start_date"
-                  :key="student.id"
+              <p>
+                <Datepicker
+                id="startdate"
+                name="startdate"
+                v-model="enrollPeriod.selectedStartDate"
+                required
+                placeholder="Select Start Date"
                 >
-                  {{ student.start_date }}
-                </option>
-              </select>
+                </Datepicker>
+            </p>
             </div>
           </div>
           <div class="info-detail col-sm-9 lato-italic">
@@ -134,15 +134,17 @@
         <div class="row mx-0">
           <div class="form-row col-sm-3 px-0">
             <div class="form-group col-md-5">
-              <select name="enddate" v-model="enrollPeriod.selectedEndDate">
-                <option
-                  v-for="student in students"
-                  :value="student.end_date"
-                  :key="student.id"
+              <p>
+                <Datepicker
+                id="enddate"
+                name="enddate"
+                v-model="enrollPeriod.selectedEndDate"
+                placeholder="Select End Date"
+                required
                 >
-                  {{ student.end_date }}
-                </option>
-              </select>
+                </Datepicker>
+            </p>
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
             </div>
           </div>
           <div class="info-detail col-sm-9 lato-italic">
@@ -185,6 +187,7 @@
                 name="student_grade"
                 value="Preschool Age 3"
                 v-model="enrollPeriod.grade"
+                :required="true"
               />
               <label class="form-check-label" for=""> Preschool Age 3 </label>
             </div>
@@ -195,6 +198,7 @@
                 name="student_grade"
                 value="Preschool Age 4"
                 v-model="enrollPeriod.grade"
+                :required="true"
               />
               <label class="form-check-label" for=""> Preschool Age 4 </label>
             </div>
@@ -373,10 +377,10 @@
           name="student_situation"
           rows="3"
           v-model="form.student_situation"
+          required
         ></textarea>
       </div>
     </div>
-    <div id="enrollmentPeriode"></div>
     <div class="form-wrap py-2r px-25 mt-2r">
       <a
         type="button"
@@ -441,8 +445,12 @@ export default {
       });
     },
     addStudent() {
-      axios.post("/enroll-student", this.form);
-      alert("add student");
+      axios
+        .post("/enroll-student", this.form)
+        .then(
+          (response) => (window.location = "/reviewstudent/" + response.data.id)
+        )
+        .catch((error) => console.log(error));
     },
   },
 };
