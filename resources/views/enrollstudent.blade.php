@@ -1,9 +1,18 @@
-@extends('layouts.app')
+<div class="d-flex">
+  <!-- * =============== Sidebar =============== * -->
+  @include('layouts.partials.sidebar')
+  <!-- * =============== /Sidebar =============== * -->
 
-@section('content')
-<!-- * =============== Main =============== * -->
+  <div class="main-content position-relative ml-auto">
+    <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
+    <!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
+    @include('layouts.partials.header')
 
-<main class="position-relative container form-content mt-4">
+    <!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
+
+    <!-- * =============== Main =============== * -->
+
+    <main class="position-relative container form-content mt-4">
       <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
       <div class="form-wrap border bg-light py-5 px-25">
@@ -60,4 +69,7 @@
       </div>
     </div>
     <!-- * =============== /Main =============== * -->
-    @endsection
+    @include('layouts.partials.footer')
+  </div>
+
+</div>

@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import jQuery from 'jquery';
 window.$ = window.jQuery = jQuery;
 import axios from 'axios';
@@ -14,3 +15,12 @@ import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/modal';
 import Datepicker from 'vuejs-datepicker';
 
+import Ziggy from 'ziggy-js';
+// route() helper is available everywhere
+window.route = Ziggy;
+// Exposing route() helper method to vue templates
+Vue.mixin({
+  methods: {
+    route: Ziggy
+  }
+});

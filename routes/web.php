@@ -40,52 +40,52 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('admin-dashboard', function () {
         return view('admin.home');
     })->name('admin.admindashboard');
- 
-    Route::get('/dashboard-transcript-finished',function(){
+
+    Route::get('/dashboard-transcript-finished', function () {
         return view('dashboard-transcript-finished');
     });
-    Route::get('/dashboard-transcript-filling',function(){
+    Route::get('/dashboard-transcript-filling', function () {
         return view('dashboard-transcript-filling');
     });
-    Route::get('/download-transcript',function(){
+    Route::get('/download-transcript', function () {
         return view('download-transcript');
     });
-    Route::get('/dashboard-transcript-filling1',function(){
+    Route::get('/dashboard-transcript-filling1', function () {
         return view('dashboard-transcript-filling1');
     });
-    Route::get('/dashboard-languages',function(){
+    Route::get('/dashboard-languages', function () {
         return view('dashboard-languages');
     });
-    Route::get('/dashboard-transcript-filling2',function(){
+    Route::get('/dashboard-transcript-filling2', function () {
         return view('dashboard-transcript-filling2');
     });
-    Route::get('/dashboard-another-languages',function(){
+    Route::get('/dashboard-another-languages', function () {
         return view('dashboard-another-languages');
     });
-    Route::get('/dashboard-transcript',function(){
+    Route::get('/dashboard-transcript', function () {
         return view('dashboard-transcript');
     });
-    Route::get('/cart',function(){
+    Route::get('/cart', function () {
         return view('cart');
     });
 
-    Route::get('/cart-billing',function(){
+    Route::get('/cart-billing', function () {
         return view('cart-billing');
     });
-  
+
 
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/cart', function () {
         return view('cart');
     });
-  
+
     Route::get('/cart-billing', function () {
         return view('cart-billing');
     });
 
     //enroll student
     Route::get('/enroll-student', 'StudentController@index');
-    Route::post('/enroll-student', 'StudentController@store')->middleware('auth');
+    Route::post('/enroll-student', 'StudentController@store')->middleware('auth')->name('enroll.student');
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
 

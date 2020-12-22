@@ -1,5 +1,7 @@
 </body>
+@routes
 @include('layouts.partials.scripts')
+
 </html>
 <footer class="bg-dark position-relative text-center main-footer">
   <div class="container">
@@ -24,4 +26,3 @@
 </footer>
 </div>
 <!-- Footer scripts -->
-
