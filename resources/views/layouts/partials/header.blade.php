@@ -12,8 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
   <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
-  <link href="{{asset('css/app.css')}}" rel="stylesheet">
-  <script src="{{asset('js/app.js')}}"></script>
+  
 </head>
 <!-- * =============== Header =============== * -->
 <header class="site-header">

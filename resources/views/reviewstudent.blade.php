@@ -1,32 +1,7 @@
-<div class="d-flex">
-  <!-- * =============== Sidebar =============== * -->
-  <sidebar class="main-sidebar bg-secondary pt-5 fixed-top overflow-auto">
-    <ul class="list-unstyled">
-      <li>
-        <a href="#">Dashboard</a>
-        <ul class="list-unstyled">
-          <li><a href="#">Add student</a></li>
-          <li><a href="#">add enrollment</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Cart</a></li>
-      <li><a href="#">Fee structure</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">My Account</a></li>
-      <li><a href="#">Logout</a></li>
-    </ul>
-  </sidebar>
-  <!-- * =============== /Sidebar =============== * -->
+@extends('layouts.app')
 
-  <div class="main-content position-relative ml-auto">
-    <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
-    <!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
-    @include('layouts.partials.header')
-    <!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
-
-    <!-- * =============== Main =============== * -->
-
-    <main class="position-relative container form-content mt-4">
+@section('content')
+<main class="position-relative container form-content mt-4">
       <h1 class="text-center text-white text-uppercase">student enrollment</h1>
       <div class="form-wrap border bg-light py-5 px-25">
         <h2 class="h3">Review Student 1 Enrollment</h2>
@@ -100,14 +75,9 @@
             </tfoot>
           </table>
           <div class="text-right mt-4">
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="{{route('edit.student',$studentData->id)}}" class="btn btn-primary">Edit</a>
             <a href="#" class="btn btn-primary ml-3">Add to Cart</a>
           </div>
         </div>
     </main>
-
-    <!-- * =============== /Main =============== * -->
-    @include('layouts.partials.footer')
-  </div>
-
-</div>
+    @endsection

@@ -1920,6 +1920,377 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEnrollStudent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditEnrollStudent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EnrollStudent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EnrollStudent.vue?vue&type=script&lang=js& ***!
@@ -18377,6 +18748,652 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEnrollStudent.vue?vue&type=template&id=2f5ef470&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditEnrollStudent.vue?vue&type=template&id=2f5ef470& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("form", { attrs: { method: "POST", action: "" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Email Address")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          staticClass: "form-control @error('email') is-invalid @enderror",
+          attrs: {
+            type: "text",
+            name: "email",
+            id: "email",
+            value: "",
+            required: "",
+            "aria-describedby": "emailHelp"
+          }
+        }),
+        _vm._v("\n      @error('email')\n      "),
+        _c(
+          "div",
+          { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+          [_c("strong", [_vm._v(_vm._s(_vm.$message))])]
+        ),
+        _vm._v("\n      @enderror\n    ")
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _vm._m(8),
+    _vm._v(" "),
+    _vm._m(9),
+    _vm._v(" "),
+    _vm._m(10),
+    _vm._v(" "),
+    _vm._m(11),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "enrollmentPeriode" } }),
+    _vm._v(" "),
+    _vm._m(12)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("First/Given Name "),
+        _c("sup", [_vm._v("*")])
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          staticClass: "form-control @error('first_name') is-invalid @enderror",
+          attrs: {
+            type: "text",
+            id: "first_name",
+            value: "",
+            name: "first_name",
+            required: "",
+            "aria-describedby": "emailHelp"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Middle Name ")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "middle_name",
+            name: "middle_name",
+            value: "",
+            "aria-describedby": "emailHelp"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("Last/Family Name "),
+        _c("sup", [_vm._v("*")])
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "last_name",
+            name: "last_name",
+            value: "",
+            required: "",
+            "aria-describedby": "emailHelp"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
+      _vm._v(" "),
+      _c("p", [
+        _c("input", {
+          staticClass: "form-control dobdatepicker",
+          attrs: { type: "text", id: "dob", name: "dob", value: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fas fa-calendar-alt",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Cell Phone")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "cell_phone",
+            name: "cell_phone",
+            value: "",
+            "aria-describedby": "emailHelp"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Student ID")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "student_id",
+            name: "student_id",
+            value: "",
+            required: "",
+            "aria-describedby": "emailHelp"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("Select your START date of enrollment")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mx-0" }, [
+        _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
+          _c("div", { staticClass: "form-group col-md-5" }, [
+            _c("select", { attrs: { name: "startdate" } })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "info-detail col-sm-9 lato-italic" }, [
+          _c("p", [
+            _vm._v(
+              "\n          Choose August 1 (the first day of the Annual enrollment period),\n          January 1 (the first day of the Second Semester), today's date or\n          another date. This date will appear on your confirmation of\n          enrollment letter. You will be considered enrolled for the full\n          12-month period for Annual or 7-month period for Second Semester\n          Only.\n        "
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("Select your END date of enrollment")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mx-0" }, [
+        _c("div", { staticClass: "form-row col-sm-3 px-0" }, [
+          _c("div", { staticClass: "form-group col-md-5" }, [
+            _c("select", { attrs: { name: "enddate" } })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "info-detail col-sm-9 lato-italic" }, [
+          _c("p", [
+            _vm._v(
+              "\n          Choose before July 31 (the last day of your enrollment) or another\n          date before July 31. This date will appear on your confirmation of\n          enrollment letter. Your enrollment will officially end on July 31.\n        "
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-group mt-2r d-flex links-list mb-5" },
+      [
+        _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
+          _vm._v("help me choose my dates")
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "ml-4",
+            attrs: { href: "#skipYear", "data-toggle": "modal" }
+          },
+          [_vm._v("what if i need to skip a year?")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-group d-flex mb-2 lato-italic info-detail" },
+      [
+        _c("label", { attrs: { for: "" } }, [
+          _vm._v("Select grade level(s) for your enrollment period\n      "),
+          _c("p", [_vm._v("(You may select more than one for multiple years)")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row pl-5" }, [
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "student_grade",
+                  value: "Upgraded",
+                  required: ""
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" Upgraded ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "student_grade",
+                  value: "Preschool Age 3"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" Preschool Age 3 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "student_grade",
+                  value: "Preschool Age 4"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" Preschool Age 4 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "student_grade",
+                  value: "Kindergarten"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" Kindergarten ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "1" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 1 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "2" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 2 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "3" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 3 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "4" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 4 ")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "5" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 5 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "6" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 6 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "7" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 7 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "8" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 8 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", name: "student_grade", value: "9" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "form-check-label", attrs: { for: "" } },
+                [_vm._v(" 9 ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-check",
+                attrs: { "data-toggle": "modal", "data-target": "#chooseGrade" }
+              },
+              [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "radio",
+                    name: "student_grade",
+                    id: "",
+                    value: "10"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "form-check-label", attrs: { for: "" } },
+                  [_vm._v(" 10 ")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-check",
+                attrs: { "data-toggle": "modal", "data-target": "#chooseGrade" }
+              },
+              [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "radio",
+                    name: "student_grade",
+                    id: "",
+                    value: "11"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "form-check-label", attrs: { for: "" } },
+                  [_vm._v(" 11 ")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-check",
+                attrs: { "data-toggle": "modal", "data-target": "#chooseGrade" }
+              },
+              [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "radio",
+                    name: "student_grade",
+                    id: "",
+                    value: "12"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "form-check-label", attrs: { for: "" } },
+                  [_vm._v(" 12 ")]
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex mt-2r" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("Is this student immunized?")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-6" }, [
+        _c(
+          "select",
+          { staticClass: "form-control", attrs: { name: "immunized_status" } },
+          [
+            _c("option", [
+              _vm._v("Yes, records will come with school records.")
+            ]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Yes, I will provide records.")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Yes, I plan to get immunizations soon.")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("No, for personal reasons.")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("No, for medical reasons.")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("No, for religious reasons.")])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-flex" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("tell us more about your situation ")
+      ]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: {
+          id: "exampleFormControlTextarea1",
+          name: "student_situation",
+          value: "",
+          rows: "3"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-wrap border bg-light py-2r px-25 mt-2r" },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary addenrollment",
+            attrs: { type: "button", id: "addEnroll", value: "addEnroll" }
+          },
+          [_vm._v("Add Another Enrollment Period")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Continue")]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EnrollStudent.vue?vue&type=template&id=7132dbda&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EnrollStudent.vue?vue&type=template&id=7132dbda& ***!
@@ -34127,6 +35144,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('enroll-student', __webpack_require__(/*! ./components/EnrollStudent.vue */ "./resources/js/components/EnrollStudent.vue")["default"]);
+Vue.component('edit-enroll', __webpack_require__(/*! ./components/EditEnrollStudent.vue */ "./resources/js/components/EditEnrollStudent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -34175,6 +35193,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // 
 
  //import 'bootstrap/js/dist/tab';
 
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditEnrollStudent.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/EditEnrollStudent.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditEnrollStudent_vue_vue_type_template_id_2f5ef470___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditEnrollStudent.vue?vue&type=template&id=2f5ef470& */ "./resources/js/components/EditEnrollStudent.vue?vue&type=template&id=2f5ef470&");
+/* harmony import */ var _EditEnrollStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditEnrollStudent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditEnrollStudent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditEnrollStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditEnrollStudent_vue_vue_type_template_id_2f5ef470___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditEnrollStudent_vue_vue_type_template_id_2f5ef470___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditEnrollStudent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditEnrollStudent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/EditEnrollStudent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEnrollStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditEnrollStudent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEnrollStudent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEnrollStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditEnrollStudent.vue?vue&type=template&id=2f5ef470&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/EditEnrollStudent.vue?vue&type=template&id=2f5ef470& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEnrollStudent_vue_vue_type_template_id_2f5ef470___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditEnrollStudent.vue?vue&type=template&id=2f5ef470& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEnrollStudent.vue?vue&type=template&id=2f5ef470&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEnrollStudent_vue_vue_type_template_id_2f5ef470___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEnrollStudent_vue_vue_type_template_id_2f5ef470___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

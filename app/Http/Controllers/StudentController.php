@@ -82,8 +82,16 @@ class StudentController extends Controller
     }
     public function reviewStudent($id)
     {
-        $studentData = StudentProfile::find($id)->first();
+
+        $studentData = StudentProfile::find($id);
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
         return view('reviewstudent', compact('studentData', 'enrollPeriods'));
+    }
+    public function edit($id)
+    {
+        $studentData = StudentProfile::find($id);
+        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+        //  dd($enrollPeriods);
+        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
     }
 }
