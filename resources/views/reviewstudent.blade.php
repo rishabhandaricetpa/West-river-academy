@@ -100,7 +100,7 @@
             </tfoot>
           </table>
           <div class="text-right mt-4">
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="{{route('edit.student',$studentData->id)}}" class="btn btn-primary">Edit</a>
             <a href="#" class="btn btn-primary ml-3">Add to Cart</a>
           </div>
         </div>

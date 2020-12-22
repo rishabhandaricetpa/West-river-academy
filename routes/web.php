@@ -35,16 +35,22 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    Route::get('/enroll-student', 'StudentController@index');
-    Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
+
+
     Route::get('/cart', function () {
         return view('cart');
     });
-    Route::post('/enroll-student', 'StudentController@store')->middleware('auth');
+
     Route::get('/cart-billing', function () {
         return view('cart-billing');
     });
-    //Route::post('/enroll-student', 'StudentController@create')->name('enroll');
+
+    //enroll student
+    Route::get('/enroll-student', 'StudentController@index');
+    Route::post('/enroll-student', 'StudentController@store')->middleware('auth');
+    Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
+    Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
+
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {
