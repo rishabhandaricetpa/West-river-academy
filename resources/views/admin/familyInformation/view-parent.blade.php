@@ -53,7 +53,9 @@
                       <td>{{$item->email}}</td>
                       <td>{{$item->country}}</td>
                       <td>{{$item->p1_cell_phone}}</td>
-                      <td><a href="{{ url('admin/deactive',$item->id)}}"> <i class="fas fa-ban"></i></a></td>
+                      <td><a href="{{ url('admin/deactive',$item->id)}}"> <i class="fas fa-ban"></i></a>
+                      <a href="{{ url('admin/edit',$item->id)}}"> <i class="fas fa-edit"></i></a>
+                      </td>
                   </tr>
                   @endforeach
                   </tbody>
