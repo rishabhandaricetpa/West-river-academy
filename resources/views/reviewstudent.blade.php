@@ -15,7 +15,7 @@
           <div class="form-group d-sm-flex mb-2">
             <label for="">Date of Birth</label>
             <div>
-              <p>{{$studentData ->d_o_b->format('d M')}}</p>
+              <p>{{$studentData ->d_o_b->format('d M yy')}}</p>
             </div>
           </div>
           <div class="form-group d-sm-flex mb-2">
@@ -40,7 +40,7 @@
           <div class="form-group d-sm-flex mb-2">
             <label for="">Enrollment Period(s)</label>
             <div>
-              <p>{{ Carbon\Carbon::parse($enrollPeriod->start_date_of_enrollment)->format('d M') }},{{ Carbon\Carbon::parse($enrollPeriod->end_date_of_enrollment)->format('d M') }}</p>
+              <p>{{ Carbon\Carbon::parse($enrollPeriod->start_date_of_enrollment)->format('d M yy') }},{{ Carbon\Carbon::parse($enrollPeriod->end_date_of_enrollment)->format('d M yy') }}</p>
 
             </div>
           </div>
@@ -58,19 +58,15 @@
             <tbody>
               @foreach($periodInfo as $period)
               <tr>
-                <td>{{$period->period}} * {{$period->total}}</td>
-                <td class="text-right">{{$period->period =='Annual'?'$350':'$100'}}</td>
+                <td>{{$period->fee_structure_id == '1'?'Annual':'Semester'}} * {{$period->total}}</td>
+                <td class="text-right">{{$period->fee_structure_id == 1?'$350':'$100'}}</td>
               </tr>
               @endforeach
-              <tr>
-                <td>Second Semester Only * 1</td>
-                <td class="text-right">$200</td>
-              </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td>Annual * 2</td>
-                <td class="text-right">$750</td>
+                <td>Total</td>
+                <td class="text-right">{{$period->fee_structure_id==1?'$350':'$100'}}</td>
               </tr>
             </tfoot>
           </table>

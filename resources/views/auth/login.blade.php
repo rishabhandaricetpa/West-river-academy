@@ -1,9 +1,6 @@
 <!-- * =============== Header =============== * -->
 <title> @yield('pageTitle', 'Login') | {{config('app.name')}}</title>
 @include('layouts.partials.header')
-
-<!-- * =============== /Header =============== * -->
-
 <!-- * =============== Main =============== * -->
 <main class="position-relative container">
 
@@ -50,7 +47,4 @@
     </form>
   </div>
 </main>
-
-<!-- * =============== /Main =============== * -->
-
 @include('layouts.partials.footer')

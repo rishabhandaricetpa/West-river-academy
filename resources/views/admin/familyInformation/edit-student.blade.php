@@ -30,8 +30,7 @@
                   </div>
                   <div class="form-group">
                     <label>Date of Birth<sup>*</sup>  <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
-                    <input  class="form-control" id="dob" name="dob" value="{{$student->d_o_b}}" >
-                   
+                    <input  class="form-control" id="dob" name="dob" value="{{$student->d_o_b->format('d M')}}" >
                   </div>
                   <div class="form-group">
                     <label>Email Address</label>

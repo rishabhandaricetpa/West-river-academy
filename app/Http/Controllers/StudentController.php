@@ -40,14 +40,14 @@ class StudentController extends Controller
     {
         $id = auth()->user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
-        $country = $parentProfileData->country;
-        $countryData = Country::where('country', $country)->first();
-        $countryId = $countryData->id;
-        $semesters_dates = Country::find($countryId)->semesters()->get();
-        if ($request->expectsJson()) {
-            return response()->json($semesters_dates);
-        }
-        return view('enrollstudent', compact('semesters_dates'));
+        // $country = $parentProfileData->country;
+        // $countryData = Country::where('country', $country)->first();
+        // $countryId = $countryData->id;
+        // $semesters_dates = Country::find($countryId)->semesters()->get();
+        // if ($request->expectsJson()) {
+        //     return response()->json($semesters_dates);
+        // }
+        return view('enrollstudent', compact('parentProfileData'));
     }
 
     protected function store(Request $data)

@@ -103,6 +103,7 @@
                   v-model="enrollPeriod.selectedStartDate"
                   required
                   placeholder="Select Start Date"
+                  :value="enrollPeriod.selectedStartDate"
                 >
                 </Datepicker>
               </p>
@@ -133,6 +134,7 @@
                   v-model="enrollPeriod.selectedEndDate"
                   placeholder="Select End Date"
                   required
+                  :disabledDates="enrollPeriod.disabledDates"
                 >
                 </Datepicker>
               </p>
@@ -398,7 +400,7 @@ export default {
   },
   data() {
     return {
-      form: {
+        form: {
         first_name: "",
         middle_name: "",
         last_name: "",
@@ -413,6 +415,13 @@ export default {
             selectedStartDate: "",
             selectedEndDate: "",
             grade: "",
+            disabledDates: {
+             ranges: [{
+                  from: new Date(2020 ,12, 1),
+                  to: new Date(2131 ,12, 1),
+            },
+        ],
+        }
           },
         ],
       },

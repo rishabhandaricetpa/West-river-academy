@@ -42,6 +42,7 @@
                     <th>Email</th>
                     <th>Country</th>
                     <th>Phone</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -53,8 +54,10 @@
                       <td>{{$item->email}}</td>
                       <td>{{$item->country}}</td>
                       <td>{{$item->p1_cell_phone}}</td>
-                      <td><a href="{{ url('admin/deactive',$item->id)}}"> <i class="fas fa-ban"></i></a>
-                      <a href="{{ url('admin/edit',$item->id)}}"> <i class="fas fa-edit"></i></a>
+                      <td>{{$item->status==0 ?'Active':'Deactivated'}}</td>
+                      <td><a href="{{ url('admin/deactive',$item->id)}}"> <i class="fas fa-ban" onclick="disableButton(this)"></i></a>
+                      <a href="{{ url('admin/edit',$item->id)}}"><i class="fas fa-edit"></i>
+                      <a href="{{ url('admin/delete/parent',$item->id)}}"><i class="fas fa-trash-alt" onclick="return myFunction();"></i></a>
                       </td>
                   </tr>
                   @endforeach
@@ -72,6 +75,12 @@
   </div>
     <!-- /.content -->
 @endsection
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to delete this"))
+      event.preventDefault();
+  }
+ </script>
 
 
 

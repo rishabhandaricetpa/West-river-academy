@@ -2789,6 +2789,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2811,7 +2813,13 @@ __webpack_require__.r(__webpack_exports__);
         enrollPeriods: [{
           selectedStartDate: "",
           selectedEndDate: "",
-          grade: ""
+          grade: "",
+          disabledDates: {
+            ranges: [{
+              from: new Date(2020, 12, 1),
+              to: new Date(2131, 12, 1)
+            }]
+          }
         }]
       },
       students: []
@@ -20168,7 +20176,8 @@ var render = function() {
                           id: "startdate",
                           name: "startdate",
                           required: "",
-                          placeholder: "Select Start Date"
+                          placeholder: "Select Start Date",
+                          value: enrollPeriod.selectedStartDate
                         },
                         model: {
                           value: enrollPeriod.selectedStartDate,
@@ -20204,7 +20213,8 @@ var render = function() {
                           id: "enddate",
                           name: "enddate",
                           placeholder: "Select End Date",
-                          required: ""
+                          required: "",
+                          disabledDates: enrollPeriod.disabledDates
                         },
                         model: {
                           value: enrollPeriod.selectedEndDate,
@@ -36570,8 +36580,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! bootstrap/js/dist/modal */ "./node_modules/bootstrap/js/dist/modal.js");
 /* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js");
-/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(ziggy_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js");
+/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(ziggy_js__WEBPACK_IMPORTED_MODULE_9__);
 
 
 window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
@@ -36589,11 +36599,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // 
 
  // route() helper is available everywhere
 
-window.route = ziggy_js__WEBPACK_IMPORTED_MODULE_10___default.a; // Exposing route() helper method to vue templates
+window.route = ziggy_js__WEBPACK_IMPORTED_MODULE_9___default.a; // Exposing route() helper method to vue templates
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   methods: {
-    route: ziggy_js__WEBPACK_IMPORTED_MODULE_10___default.a
+    route: ziggy_js__WEBPACK_IMPORTED_MODULE_9___default.a
   }
 });
 
@@ -36855,8 +36865,8 @@ $(window).scroll(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/rebeccarisha/projects/peggywebb-westriveracademy-laravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/rebeccarisha/projects/peggywebb-westriveracademy-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/paige.priyanka/Documents/Projects/peggywebb-westriveracademy-laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/paige.priyanka/Documents/Projects/peggywebb-westriveracademy-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

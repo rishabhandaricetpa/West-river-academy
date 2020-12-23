@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Parent Information</h1>
+            <h1 class="m-0">Student Information</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -50,7 +50,7 @@
                       <td>{{$item->student_Id}}</td>
                       <td>{{$item->first_name}}</td>
                       <td>{{$item->last_name}}</td>
-                      <td>{{$item->d_o_b}}</td>
+                      <td>{{$item->d_o_b->format('d M')}}</td>
                       <td>{{$item->email}}</td>
                       <td>{{$item->cell_phone}}</td>
                       <td>{{$item->immunized_status}}</td>

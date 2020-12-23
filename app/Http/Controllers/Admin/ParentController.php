@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\ParentProfile;
+use App\Models\User;
 use App\Models\StudentProfile;
 
 class ParentController extends Controller
@@ -24,7 +25,7 @@ class ParentController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        $data = ParentProfile::all()->where('status',0);
+        $data = ParentProfile::all();
         return view('admin.familyInformation.view-parent',compact('data'));
     }
     /**
@@ -89,7 +90,6 @@ class ParentController extends Controller
         $parent->p1_home_phone   =  $request->get('p1_home_phone');
         $parent->p2_first_name   =  $request->get('p2_first_name');
         $parent->p2_middle_name  =  $request->get('p2_middle_name');
-        $parent->p2_last_name    =  $request->get('p2_last_name');
         $parent->p2_email        =  $request->get('p2_email');
         $parent->p2_cell_phone   =  $request->get('p2_cell_phone');
         $parent->p2_home_phone   =  $request->get('p2_home_phone');
@@ -104,7 +104,7 @@ class ParentController extends Controller
             'message' => 'parent Record is updated Successfully!',
             'alert-type' => 'success'
         );
-        return redirect('admin/view-parent')->with($notification);
+        return redirect('admin/view')->with($notification);
     }
     /**
      * Remove the specified resource from storage.
@@ -112,13 +112,13 @@ class ParentController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-//    public function destroy($id)
-//     {
-//         $notification = array(
-//             'message' => 'parent Record is Deleted Successfully!',
-//             'alert-type' => 'warning'
-//         );
-//         parentProfile::where('id',$id)->delete();
-//         return redirect()->back()->with($notification);
-//     } 
+    public function destroy($id)
+     {
+         $notification = array(
+             'message' => 'parent Record is Deleted Successfully!',
+              'alert-type' => 'warning'
+        );
+         parentProfile::where('id',$id)->delete();
+         return redirect()->back()->with($notification);
+    } 
 }

@@ -14,7 +14,6 @@
               <!-- /.card-header -->
               <!-- form start -->
               <form method="post" action="{{route('admin.parent.update',$parent->id)}}">
-
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -32,7 +31,6 @@
                   <div class="form-group">
                     <label>p1 Email<sup>*</sup>  <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
                     <input  class="form-control" id="p1_email" name="p1_email" value="{{$parent->p1_email}}" >
-                   
                   </div>
                   <div class="form-group">
                     <label>P1 Cell Phone</label>
@@ -51,13 +49,8 @@
                     <input  class="form-control" id="p2_middle_name" name="p2_middle_name" value="{{$parent->p2_middle_name}}">
                   </div>
                   <div class="form-group">
-                    <label>P2 Last/Family Name</label>
-                    <input  class="form-control" id="p2_last_name" name="p2_last_name" value="{{$parent->p2_last_name}}">
-                  </div>
-                  <div class="form-group">
                     <label>p2 Email<i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
                     <input  class="form-control" id="p2_email" name="p2_email" value="{{$parent->p2_email}}" >
-                   
                   </div>
                   <div class="form-group">
                     <label>P2 Cell Phone</label>
@@ -95,7 +88,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Update</button>
                 </div>
               </form>
             </div>
