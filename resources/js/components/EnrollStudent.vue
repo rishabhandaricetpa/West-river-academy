@@ -1,4 +1,6 @@
 <template>
+ <div class="form-wrap border bg-light py-5 px-25">
+    <h2>Enroll Student 1</h2>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
@@ -90,7 +92,7 @@
         />
       </div>
     </div>
-    <div v-for="enrollPeriod in form.enrollPeriods" :key="enrollPeriod.id">
+    <div class="seperator" v-for="enrollPeriod in form.enrollPeriods" :key="enrollPeriod.id">
       <div class="form-group d-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
@@ -346,6 +348,7 @@
           </div>
         </div>
       </div>
+       </div>
       <div class="form-group d-flex mt-2r">
         <label for="">Is this student immunized?</label>
         <div class="col-sm-6">
@@ -374,7 +377,6 @@
           required
         ></textarea>
       </div>
-    </div>
     <div class="form-wrap py-2r px-25 mt-2r">
       <a
         type="button"
@@ -387,6 +389,7 @@
       <button type="submit" class="btn btn-primary">Continue</button>
     </div>
   </form>
+  </div>
 </template>
 
 <script>
@@ -412,7 +415,7 @@ export default {
         studentID: "",
         enrollPeriods: [
           {
-            selectedStartDate: "",
+            selectedStartDate: new Date(2020, 0,  11),
             selectedEndDate: "",
             grade: "",
             disabledDates: {

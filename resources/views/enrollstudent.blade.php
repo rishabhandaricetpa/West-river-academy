@@ -5,8 +5,8 @@
     <main class="position-relative container form-content mt-4">
       <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
-      <div class="form-wrap border bg-light py-5 px-25">
-        <h2>Enroll Student 1</h2>
+     
+       
         <div id="app">
           <enroll-student></enroll-student>
         </div>

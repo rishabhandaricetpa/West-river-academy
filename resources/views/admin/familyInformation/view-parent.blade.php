@@ -51,7 +51,7 @@
                   <tr>
                       <td>{{$item->p1_first_name}}</td>
                       <td>{{$item->p2_first_name}}</td>
-                      <td>{{$item->email}}</td>
+                      <td>{{$item->p1_email}}</td>
                       <td>{{$item->country}}</td>
                       <td>{{$item->p1_cell_phone}}</td>
                       <td>{{$item->status==0 ?'Active':'Deactivated'}}</td>

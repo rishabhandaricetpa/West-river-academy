@@ -16,6 +16,13 @@
               <form method="post" action="{{route('admin.parent.update',$parent->id)}}">
                 @csrf
                 <div class="card-body">
+                <div class="form-group">
+                    <label>User Status<sup>*</sup></label>
+                    <select id="status" name="status" value="{{$parent->status==0?'Active':'Deactive'}}">
+                      <option value="0">Active</option>
+                      <option value="1">Deactive</option>
+                   </select>
+                  </div>
                   <div class="form-group">
                     <label>P1 First/Given Name <sup>*</sup></label>
                     <input  class="form-control" id="p1_first_name" value="{{$parent->p1_first_name}}" name="p1_first_name">

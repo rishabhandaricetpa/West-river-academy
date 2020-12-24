@@ -99,6 +99,7 @@ class ParentController extends Controller
         $parent->country   =  $request->get('country');
         $parent->reference	=  $request->get('reference');
         $parent->immunized	= $request->get('immunized');
+        $parent->status	= $request->get('status');
         $parent->save();
         $notification = array(
             'message' => 'parent Record is updated Successfully!',
