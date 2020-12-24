@@ -38,6 +38,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/enroll',function(){
         return view('enrollstudent');
     });
+    Route::get('/welcome-video',function(){
+        return view('welcome-video');
+    });
     Route::get('/reviewstudent',function(){
         return view('reviewstudent');
     });
@@ -58,6 +61,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
     Route::get('/year-grade',function(){
         return view('year-grade');
+    });
+    Route::get('/year-grade1',function(){
+        return view('year-grade1');
+    });
+    Route::get('/Ap-courses',function(){
+        return view('Ap-courses');
+    });
+    Route::get('/select-language-arts',function(){
+        return view('select-language-arts');
     });
     Route::get('/select-grade',function(){
         return view('select-grade');

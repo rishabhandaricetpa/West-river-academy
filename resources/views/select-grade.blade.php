@@ -65,10 +65,11 @@
          <div class="info-detail lato-italic">
             <p>Note: Courses and grades must match exactly the transcript we have on file from the other school.</p>
          </div>
+         <div class="text-center mt-5">
+   <a href="year-grade" class="btn btn-primary">Continue</a>
    </div>
-   <div class="text-center mt-5">
-   <a href="#" class="btn btn-primary">Continue</a>
    </div>
+
    </form>
 </main>
     <!-- * =============== /Main =============== * -->

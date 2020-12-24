@@ -34,7 +34,7 @@
             <p class="w-100">You are ready to select the courses, credits and grades to put on the transcript for <a href="">Eric</a>. Be sure you have watched the tutorial and read the recommended course distribution before starting. </p>
            <div class="mt-auto col-xl-9 d-xl-flex justify-content-between">
            <a href="#" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">View Transcript Tutorial</a>
-           <a href="#" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">Start to create transcript</a>
+           <a href="transcript-united-states" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">Start to create transcript</a>
            <a href="#recommendedCourse" class="btn btn-primary font-weight-bold mb-4 mb-xl-0" data-toggle="modal">View recommended course distribution</a>
            </div> 
           </div>

@@ -23,3 +23,6 @@
       $(".site-header").removeClass("stickyHeader");
     }
 }); //missing );
+
+
+

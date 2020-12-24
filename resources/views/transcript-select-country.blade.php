@@ -44,7 +44,7 @@
          </div>
       </div>
       <div class="text-center mt-5">
-         <a href="#" class="btn btn-primary">Continue</a>
+         <a href="select-grade" class="btn btn-primary">Continue</a>
       </div>
    </form>
 </main>

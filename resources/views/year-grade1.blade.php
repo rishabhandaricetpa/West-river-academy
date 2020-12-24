@@ -20,51 +20,25 @@
                 @csrf
         <div class="form-group mb-2 lato-italic info-detail pb-4">
            <div class="row ">
-            <div class="col-sm-2">
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade" value="Upgraded">
-                      <label class="form-check-label" for="">
-                        2016-2017
-                      </label>
-                      </div>
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 3">
-                      <label class="form-check-label" for="">
-                        2017-2018
-                      </label>
-                      </div>
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 4">
-                      <label class="form-check-label" for="">
-                       2018-2019
-                      </label>
-                      </div>
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="1">
-                      <label class="form-check-label" for="">
-                        2019-2020
-                      </label>
-                      </div>
-                </div>
+
                  <div class="col-sm-4">
                       <div class="form-check mb-2">
                       <input class="form-check-input" type="radio" name="student_grade"  value="2">
                       <label class="form-check-label" for="">
-                        2020-2021
+                        2020
                       </label>
                       </div>
-                      <div class="form-check d-sm-flex mb-2">
+                      <div class="form-check mb-2">
                       <input class="form-check-input" type="radio" name="student_grade"  value="2">
-                       <label class="w-auto" for="">Other</label>
-                        <div>
-                          <input id="" type="text" class="form-control " name="" required="" autocomplete="new-password" aria-autocomplete="list">
+                      <label class="form-check-label" for="">
+                        2021
+                      </label>
                       </div>
-                </div>
                     </div>
                   </div>
         </div>
         <div class="text-center mt-5">
-            <a href="year-grade1" class="btn btn-primary">Continue</a>
+            <a href="Ap-courses" class="btn btn-primary">Continue</a>
         </div>
   </form>
   </main>

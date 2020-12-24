@@ -33,7 +33,7 @@
          </div>
       </div>
       <div class="text-center">
-         <a href="#" class="btn btn-primary">Continue</a>
+         <a href="transcript-select-country" class="btn btn-primary">Continue</a>
       </div>
    </form>
 </main>

@@ -1,0 +1,20 @@
+<!-- * =============== Header =============== * -->
+<title> @yield('pageTitle', 'Login') | {{config('app.name')}}</title>
+@include('layouts.partials.header')
+
+<!-- * =============== /Header =============== * -->
+
+<!-- * =============== Main =============== * -->
+<main class="position-relative container">
+
+  <div class="form-wrap border bg-light form-content">
+    <h2 class="mb-3">Welcome to the West River Academy</h2>
+    <div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="images/SampleVideo.mp4" allowfullscreen></iframe>
+</div>
+  </div>
+</main>
+
+<!-- * =============== /Main =============== * -->
+
+@include('layouts.partials.footer')

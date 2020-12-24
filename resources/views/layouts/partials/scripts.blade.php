@@ -1,4 +1,3 @@
-
 @stack('select2_script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -16,4 +15,3 @@
 @stack('before_app_scripts')
 <script defer async src="{{ mix('js/app.js') }}"></script>
 @stack('after_app_scripts')
-
