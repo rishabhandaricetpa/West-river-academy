@@ -1,5 +1,5 @@
 <template>
-  <form method="POST" action="">
+  <form method="POST" @submit.prevent="EditStudent()">
     <div class="form-group d-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
       <div>
@@ -45,13 +45,8 @@
     <div class="form-group d-flex mb-2">
       <label for="">Date of Birth</label>
       <p>
-        <input
-          type="text"
-          class="form-control dobdatepicker"
-          id="dob"
-          name="dob"
-          v-model="form.d_o_b"
-        />
+        <Datepicker id="dob" name="dob" v-model="form.dob" required>
+        </Datepicker>
       </p>
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
     </div>
@@ -98,6 +93,7 @@
     </div>
     <div v-for="(period, index) in form.periods" :key="period.id">
       <div class="form-group d-flex mb-2 mt-2r">
+        <span class="remove" v-on:click="removePeriod(index)">x</span>
         <label for="">Select your START date of enrollment{{ index }}</label>
         <div class="row mx-0">
           <div class="form-row col-sm-3 px-0">
@@ -168,7 +164,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Upgraded"
                 v-model="period.grade"
                 required
@@ -179,7 +174,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Preschool Age 3"
                 v-model="period.grade"
               />
@@ -189,7 +183,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Preschool Age 4"
                 v-model="period.grade"
               />
@@ -199,7 +192,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Kindergarten"
                 v-model="period.grade"
               />
@@ -209,7 +201,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="1"
               />
@@ -219,7 +210,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="2"
               />
@@ -229,7 +219,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="3"
               />
@@ -239,7 +228,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="4"
               />
@@ -251,7 +239,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="5"
               />
@@ -261,7 +248,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="6"
               />
@@ -271,7 +257,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="7"
               />
@@ -281,21 +266,19 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 v-model="period.grade"
                 value="8"
               />
-              <label class="form-check-label" for=""> 8 </label>
+              <label class="form-check-label"> 8 </label>
             </div>
             <div class="form-check">
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="9"
                 v-model="period.grade"
               />
-              <label class="form-check-label" for=""> 9 </label>
+              <label class="form-check-label"> 9 </label>
             </div>
             <div
               class="form-check"
@@ -305,8 +288,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
-                id=""
                 value="10"
                 v-model="period.grade"
               />
@@ -320,7 +301,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 id=""
                 value="11"
                 v-model="period.grade"
@@ -335,7 +315,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 id=""
                 value="12"
                 v-model="period.grade"
@@ -345,32 +324,35 @@
           </div>
         </div>
       </div>
-      <div class="form-group d-flex mt-2r">
-        <label for="">Is this student immunized?</label>
-        <div class="col-sm-6">
-          <select class="form-control" name="immunized_status">
-            <option>Yes, records will come with school records.</option>
-            <option>Yes, I will provide records.</option>
-            <option>Yes, I plan to get immunizations soon.</option>
-            <option>No, for personal reasons.</option>
-            <option>No, for medical reasons.</option>
-            <option>No, for religious reasons.</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group d-flex">
-        <label for="">tell us more about your situation </label>
-        <textarea
+    </div>
+    <div class="form-group d-flex mt-2r">
+      <label for="">Is this student immunized?</label>
+      <div class="col-sm-6">
+        <select
           class="form-control"
-          id="exampleFormControlTextarea1"
-          name="student_situation"
-          value=""
-          rows="3"
-          v-model="form.student_situation"
-        ></textarea>
+          name="immunized_status"
+          v-model="form.immunized_status"
+        >
+          <option>Yes, records will come with school records.</option>
+          <option>Yes, I will provide records.</option>
+          <option>Yes, I plan to get immunizations soon.</option>
+          <option>No, for personal reasons.</option>
+          <option>No, for medical reasons.</option>
+          <option>No, for religious reasons.</option>
+        </select>
       </div>
     </div>
-    <div id="enrollmentPeriode"></div>
+    <div class="form-group d-flex">
+      <label for="">tell us more about your situation </label>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        name="student_situation"
+        value=""
+        rows="3"
+        v-model="form.student_situation"
+      ></textarea>
+    </div>
 
     <div class="form-wrap">
       <a
@@ -378,6 +360,8 @@
         class="btn btn-primary addenrollment"
         id="addEnroll"
         value="addEnroll"
+        @click="addNewEnrollPeriod"
+        v-if="canAddMorePeriod"
         >Add Another Enrollment Period</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
@@ -387,6 +371,7 @@
 
 <script>
 import Datepicker from "vuejs-datepicker";
+import axios from "axios";
 export default {
   name: "EditEnrollStudent",
   components: {
@@ -402,6 +387,7 @@ export default {
         d_o_b: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
+        immunized_status: this.students.immunized_status,
         periods: [],
       },
     };
@@ -409,11 +395,33 @@ export default {
   created() {
     this.periods.forEach((item) => {
       this.form.periods.push({
+        id: item.id,
         selectedStartDate: item.start_date_of_enrollment,
         selectedEndDate: item.end_date_of_enrollment,
         grade: item.grade_level,
       });
     });
+  },
+  methods: {
+    EditStudent() {
+      axios
+        .post(route("update.student", this.students), this.form)
+        .then(
+          (response) => (window.location = "/reviewstudent/" + this.students.id)
+        )
+        .catch((error) => console.log(error));
+    },
+    addNewEnrollPeriod() {
+      this.form.periods.push({
+        id: null,
+        selectedStartDate: "",
+        selectedEndDate: "",
+        grade: "",
+      });
+    },
+    removePeriod(index) {
+      this.form.periods.splice(index, 1);
+    },
   },
   props: {
     students: {
@@ -421,8 +429,13 @@ export default {
       required: true,
     },
     periods: {
-      type: Object,
+      type: Array,
       required: true,
+    },
+  },
+  computed: {
+    canAddMorePeriod() {
+      return this.form.periods.length < 3;
     },
   },
 };
