@@ -1956,6 +1956,8 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2343,6 +2345,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditEnrollStudent",
@@ -2356,9 +2360,10 @@ __webpack_require__.r(__webpack_exports__);
         middle_name: this.students.middle_name,
         last_name: this.students.last_name,
         email: this.students.email,
-        d_o_b: this.students.d_o_b,
+        dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
+        immunized_status: this.students.immunized_status,
         periods: []
       }
     };
@@ -2368,11 +2373,37 @@ __webpack_require__.r(__webpack_exports__);
 
     this.periods.forEach(function (item) {
       _this.form.periods.push({
+        id: item.id,
         selectedStartDate: item.start_date_of_enrollment,
         selectedEndDate: item.end_date_of_enrollment,
         grade: item.grade_level
       });
     });
+  },
+  methods: {
+    EditStudent: function EditStudent() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("update.student", this.students), this.form).then(function (response) {
+        return window.location = "/reviewstudent/" + _this2.students.id;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    addNewEnrollPeriod: function addNewEnrollPeriod() {
+      this.form.periods.push({
+        id: null,
+        selectedStartDate: "",
+        selectedEndDate: "",
+        grade: ""
+      });
+    },
+    removePeriod: function removePeriod(index) {
+      this.form.periods.splice(index, 1);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("delete.student", this.students), this.form)["catch"](function (error) {
+        return console.log(error);
+      });
+    }
   },
   props: {
     students: {
@@ -2380,8 +2411,13 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     periods: {
-      type: Object,
+      type: Array,
       required: true
+    }
+  },
+  computed: {
+    canAddMorePeriod: function canAddMorePeriod() {
+      return this.form.periods.length < 3;
     }
   }
 });
@@ -2400,17 +2436,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2813,19 +2838,10 @@ __webpack_require__.r(__webpack_exports__);
           selectedEndDate: "",
           grade: ""
         }]
-      },
-      students: []
+      }
     };
   },
-  props: {
-    semesters: {
-      type: Array,
-      required: true
-    }
-  },
-  mounted: function mounted() {
-    this.students = this.semesters;
-  },
+  mounted: function mounted() {},
   methods: {
     addNewEnrollPeriod: function addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
@@ -18854,7 +18870,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { attrs: { method: "POST", action: "" } },
+    {
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.EditStudent()
+        }
+      }
+    },
     [
       _c("div", { staticClass: "form-group d-flex mb-2" }, [
         _vm._m(0),
@@ -18961,29 +18985,22 @@ var render = function() {
       _c("div", { staticClass: "form-group d-flex mb-2" }, [
         _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
         _vm._v(" "),
-        _c("p", [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.d_o_b,
-                expression: "form.d_o_b"
+        _c(
+          "p",
+          [
+            _c("Datepicker", {
+              attrs: { required: "", id: "dob", name: "dob" },
+              model: {
+                value: _vm.form.dob,
+                callback: function($$v) {
+                  _vm.$set(_vm.form, "dob", $$v)
+                },
+                expression: "form.dob"
               }
-            ],
-            staticClass: "form-control dobdatepicker",
-            attrs: { type: "text", id: "dob", name: "dob" },
-            domProps: { value: _vm.form.d_o_b },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "d_o_b", $event.target.value)
-              }
-            }
-          })
-        ]),
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("i", {
           staticClass: "fas fa-calendar-alt",
@@ -19043,7 +19060,9 @@ var render = function() {
               type: "text",
               id: "cell_phone",
               name: "cell_phone",
-              "aria-describedby": "emailHelp"
+              "aria-describedby": "emailHelp",
+              oninput:
+                "javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             },
             domProps: { value: _vm.form.cell_phone },
             on: {
@@ -19095,6 +19114,19 @@ var render = function() {
       _vm._l(_vm.form.periods, function(period, index) {
         return _c("div", { key: period.id }, [
           _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
+            _c(
+              "span",
+              {
+                staticClass: "remove",
+                on: {
+                  click: function($event) {
+                    return _vm.removePeriod(index)
+                  }
+                }
+              },
+              [_vm._v("x")]
+            ),
+            _vm._v(" "),
             _c("label", { attrs: { for: "" } }, [
               _vm._v("Select your START date of enrollment" + _vm._s(index))
             ]),
@@ -19185,12 +19217,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "Upgraded",
-                        required: ""
-                      },
+                      attrs: { type: "radio", value: "Upgraded", required: "" },
                       domProps: { checked: _vm._q(period.grade, "Upgraded") },
                       on: {
                         change: function($event) {
@@ -19219,8 +19246,8 @@ var render = function() {
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
-                        name: "student_grade",
-                        value: "Preschool Age 3"
+                        value: "Preschool Age 3",
+                        required: ""
                       },
                       domProps: {
                         checked: _vm._q(period.grade, "Preschool Age 3")
@@ -19252,8 +19279,8 @@ var render = function() {
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
-                        name: "student_grade",
-                        value: "Preschool Age 4"
+                        value: "Preschool Age 4",
+                        required: ""
                       },
                       domProps: {
                         checked: _vm._q(period.grade, "Preschool Age 4")
@@ -19285,8 +19312,8 @@ var render = function() {
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
-                        name: "student_grade",
-                        value: "Kindergarten"
+                        value: "Kindergarten",
+                        required: ""
                       },
                       domProps: {
                         checked: _vm._q(period.grade, "Kindergarten")
@@ -19316,11 +19343,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "1"
-                      },
+                      attrs: { type: "radio", required: "", value: "1" },
                       domProps: { checked: _vm._q(period.grade, "1") },
                       on: {
                         change: function($event) {
@@ -19347,11 +19370,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "2"
-                      },
+                      attrs: { type: "radio", required: "", value: "2" },
                       domProps: { checked: _vm._q(period.grade, "2") },
                       on: {
                         change: function($event) {
@@ -19378,11 +19397,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "3"
-                      },
+                      attrs: { type: "radio", required: "", value: "3" },
                       domProps: { checked: _vm._q(period.grade, "3") },
                       on: {
                         change: function($event) {
@@ -19409,11 +19424,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "4"
-                      },
+                      attrs: { type: "radio", required: "", value: "4" },
                       domProps: { checked: _vm._q(period.grade, "4") },
                       on: {
                         change: function($event) {
@@ -19442,11 +19453,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "5"
-                      },
+                      attrs: { type: "radio", required: "", value: "5" },
                       domProps: { checked: _vm._q(period.grade, "5") },
                       on: {
                         change: function($event) {
@@ -19473,11 +19480,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "6"
-                      },
+                      attrs: { type: "radio", required: "", value: "6" },
                       domProps: { checked: _vm._q(period.grade, "6") },
                       on: {
                         change: function($event) {
@@ -19504,11 +19507,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "7"
-                      },
+                      attrs: { type: "radio", required: "", value: "7" },
                       domProps: { checked: _vm._q(period.grade, "7") },
                       on: {
                         change: function($event) {
@@ -19535,11 +19534,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "8"
-                      },
+                      attrs: { type: "radio", required: "", value: "8" },
                       domProps: { checked: _vm._q(period.grade, "8") },
                       on: {
                         change: function($event) {
@@ -19548,11 +19543,9 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v(" 8 ")]
-                    )
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _vm._v(" 8 ")
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check" }, [
@@ -19566,11 +19559,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "9"
-                      },
+                      attrs: { type: "radio", value: "9", required: "" },
                       domProps: { checked: _vm._q(period.grade, "9") },
                       on: {
                         change: function($event) {
@@ -19579,11 +19568,9 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v(" 9 ")]
-                    )
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _vm._v(" 9 ")
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -19606,12 +19593,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "student_grade",
-                          id: "",
-                          value: "10"
-                        },
+                        attrs: { type: "radio", value: "10", required: "" },
                         domProps: { checked: _vm._q(period.grade, "10") },
                         on: {
                           change: function($event) {
@@ -19650,9 +19632,9 @@ var render = function() {
                         staticClass: "form-check-input",
                         attrs: {
                           type: "radio",
-                          name: "student_grade",
                           id: "",
-                          value: "11"
+                          value: "11",
+                          required: ""
                         },
                         domProps: { checked: _vm._q(period.grade, "11") },
                         on: {
@@ -19692,9 +19674,9 @@ var render = function() {
                         staticClass: "form-check-input",
                         attrs: {
                           type: "radio",
-                          name: "student_grade",
                           id: "",
-                          value: "12"
+                          value: "12",
+                          required: ""
                         },
                         domProps: { checked: _vm._q(period.grade, "12") },
                         on: {
@@ -19714,48 +19696,117 @@ var render = function() {
                 ])
               ])
             ]
-          ),
-          _vm._v(" "),
-          _vm._m(6, true),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group d-flex" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("tell us more about your situation ")
-            ]),
-            _vm._v(" "),
-            _c("textarea", {
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex mt-2r" }, [
+        _c("label", { attrs: { for: "" } }, [
+          _vm._v("Is this student immunized?")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "select",
+            {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.student_situation,
-                  expression: "form.student_situation"
+                  value: _vm.form.immunized_status,
+                  expression: "form.immunized_status"
                 }
               ],
               staticClass: "form-control",
-              attrs: {
-                id: "exampleFormControlTextarea1",
-                name: "student_situation",
-                value: "",
-                rows: "3"
-              },
-              domProps: { value: _vm.form.student_situation },
+              attrs: { name: "immunized_status" },
               on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "student_situation", $event.target.value)
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.form,
+                    "immunized_status",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
                 }
               }
-            })
-          ])
+            },
+            [
+              _c("option", [
+                _vm._v("Yes, records will come with school records.")
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Yes, I will provide records.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Yes, I plan to get immunizations soon.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("No, for personal reasons.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("No, for medical reasons.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("No, for religious reasons.")])
+            ]
+          )
         ])
-      }),
+      ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "enrollmentPeriode" } }),
+      _c("div", { staticClass: "form-group d-flex" }, [
+        _vm._m(6),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.student_situation,
+              expression: "form.student_situation"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "exampleFormControlTextarea1",
+            name: "student_situation",
+            value: "",
+            rows: "3",
+            required: ""
+          },
+          domProps: { value: _vm.form.student_situation },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "student_situation", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _vm._m(7)
+      _c("div", { staticClass: "form-wrap" }, [
+        _vm.canAddMorePeriod
+          ? _c(
+              "a",
+              {
+                staticClass: "btn btn-primary addenrollment",
+                attrs: { type: "button", id: "addEnroll", value: "addEnroll" },
+                on: { click: _vm.addNewEnrollPeriod }
+              },
+              [_vm._v("Add Another Enrollment Period")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Continue")]
+        )
+      ])
     ],
     2
   )
@@ -19839,53 +19890,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group d-flex mt-2r" }, [
-      _c("label", { attrs: { for: "" } }, [
-        _vm._v("Is this student immunized?")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-6" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { name: "immunized_status" } },
-          [
-            _c("option", [
-              _vm._v("Yes, records will come with school records.")
-            ]),
-            _vm._v(" "),
-            _c("option", [_vm._v("Yes, I will provide records.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("Yes, I plan to get immunizations soon.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("No, for personal reasons.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("No, for medical reasons.")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("No, for religious reasons.")])
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-wrap" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-primary addenrollment",
-          attrs: { type: "button", id: "addEnroll", value: "addEnroll" }
-        },
-        [_vm._v("Add Another Enrollment Period")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Continue")]
-      )
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("tell us more about your situation"),
+      _c("sup", [_vm._v("*")])
     ])
   }
 ]
@@ -20101,7 +20108,11 @@ var render = function() {
               type: "text",
               id: "cell_phone",
               name: "cell_phone",
-              "aria-describedby": "emailHelp"
+              "aria-describedby": "emailHelp",
+              oninput:
+                "javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);",
+              maxlength: "10",
+              pattern: "[0-9]*"
             },
             domProps: { value: _vm.form.cell_phone },
             on: {
@@ -20250,11 +20261,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "Upgraded"
-                      },
+                      attrs: { type: "radio", value: "Upgraded" },
                       domProps: {
                         checked: _vm._q(enrollPeriod.grade, "Upgraded")
                       },
@@ -20285,7 +20292,6 @@ var render = function() {
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
-                        name: "student_grade",
                         value: "Preschool Age 3",
                         required: true
                       },
@@ -20323,7 +20329,6 @@ var render = function() {
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
-                        name: "student_grade",
                         value: "Preschool Age 4",
                         required: true
                       },
@@ -20359,11 +20364,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "Kindergarten"
-                      },
+                      attrs: { type: "radio", value: "Kindergarten" },
                       domProps: {
                         checked: _vm._q(enrollPeriod.grade, "Kindergarten")
                       },
@@ -20392,11 +20393,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "1"
-                      },
+                      attrs: { type: "radio", value: "1" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "1") },
                       on: {
                         change: function($event) {
@@ -20423,11 +20420,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "2"
-                      },
+                      attrs: { type: "radio", value: "2" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "2") },
                       on: {
                         change: function($event) {
@@ -20454,11 +20447,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "3"
-                      },
+                      attrs: { type: "radio", value: "3" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "3") },
                       on: {
                         change: function($event) {
@@ -20485,11 +20474,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "4"
-                      },
+                      attrs: { type: "radio", value: "4" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "4") },
                       on: {
                         change: function($event) {
@@ -20518,11 +20503,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "5"
-                      },
+                      attrs: { type: "radio", value: "5" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "5") },
                       on: {
                         change: function($event) {
@@ -20549,11 +20530,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "6"
-                      },
+                      attrs: { type: "radio", value: "6" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "6") },
                       on: {
                         change: function($event) {
@@ -20580,11 +20557,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "7"
-                      },
+                      attrs: { type: "radio", value: "7" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "7") },
                       on: {
                         change: function($event) {
@@ -20611,11 +20584,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "student_grade",
-                        value: "8"
-                      },
+                      attrs: { type: "radio", value: "8" },
                       domProps: { checked: _vm._q(enrollPeriod.grade, "8") },
                       on: {
                         change: function($event) {
@@ -20682,12 +20651,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "student_grade",
-                          id: "",
-                          value: "10"
-                        },
+                        attrs: { type: "radio", id: "", value: "10" },
                         domProps: { checked: _vm._q(enrollPeriod.grade, "10") },
                         on: {
                           change: function($event) {
@@ -20724,12 +20688,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "student_grade",
-                          id: "",
-                          value: "11"
-                        },
+                        attrs: { type: "radio", id: "", value: "11" },
                         domProps: { checked: _vm._q(enrollPeriod.grade, "11") },
                         on: {
                           change: function($event) {
@@ -20766,12 +20725,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "student_grade",
-                          id: "",
-                          value: "12"
-                        },
+                        attrs: { type: "radio", id: "", value: "12" },
                         domProps: { checked: _vm._q(enrollPeriod.grade, "12") },
                         on: {
                           change: function($event) {
@@ -20790,102 +20744,96 @@ var render = function() {
                 ])
               ])
             ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group d-flex mt-2r" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("Is this student immunized?")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.immunized_status,
-                      expression: "form.immunized_status"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { name: "immunized_status" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.form,
-                        "immunized_status",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", [
-                    _vm._v("Yes, records will come with school records.")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Yes, I will provide records.")]),
-                  _vm._v(" "),
-                  _c("option", [
-                    _vm._v("Yes, I plan to get immunizations soon.")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("No, for personal reasons.")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("No, for medical reasons.")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("No, for religious reasons.")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group d-flex" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _vm._v("tell us more about your situation ")
-            ]),
-            _vm._v(" "),
-            _c("textarea", {
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex mt-2r" }, [
+        _c("label", { attrs: { for: "" } }, [
+          _vm._v("Is this student immunized?")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "select",
+            {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.student_situation,
-                  expression: "form.student_situation"
+                  value: _vm.form.immunized_status,
+                  expression: "form.immunized_status"
                 }
               ],
               staticClass: "form-control",
-              attrs: {
-                id: "exampleFormControlTextarea1",
-                name: "student_situation",
-                rows: "3",
-                required: ""
-              },
-              domProps: { value: _vm.form.student_situation },
+              attrs: { name: "immunized_status" },
               on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "student_situation", $event.target.value)
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.form,
+                    "immunized_status",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
                 }
               }
-            })
-          ])
+            },
+            [
+              _c("option", [
+                _vm._v("Yes, records will come with school records.")
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Yes, I will provide records.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Yes, I plan to get immunizations soon.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("No, for personal reasons.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("No, for medical reasons.")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("No, for religious reasons.")])
+            ]
+          )
         ])
-      }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-flex" }, [
+        _vm._m(6),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.student_situation,
+              expression: "form.student_situation"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "exampleFormControlTextarea1",
+            name: "student_situation",
+            rows: "3",
+            required: ""
+          },
+          domProps: { value: _vm.form.student_situation },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "student_situation", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-wrap py-2r px-25 mt-2r" }, [
         _c(
@@ -20981,6 +20929,15 @@ var staticRenderFns = [
     return _c("label", { attrs: { for: "" } }, [
       _vm._v("Select grade level(s) for your enrollment period\n        "),
       _c("p", [_vm._v("(You may select more than one for multiple years)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("tell us more about your situation "),
+      _c("sup", [_vm._v("*")])
     ])
   }
 ]
@@ -36570,8 +36527,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! bootstrap/js/dist/modal */ "./node_modules/bootstrap/js/dist/modal.js");
 /* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js");
-/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(ziggy_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js");
+/* harmony import */ var ziggy_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(ziggy_js__WEBPACK_IMPORTED_MODULE_9__);
 
 
 window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
@@ -36589,11 +36546,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // 
 
  // route() helper is available everywhere
 
-window.route = ziggy_js__WEBPACK_IMPORTED_MODULE_10___default.a; // Exposing route() helper method to vue templates
+window.route = ziggy_js__WEBPACK_IMPORTED_MODULE_9___default.a; // Exposing route() helper method to vue templates
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   methods: {
-    route: ziggy_js__WEBPACK_IMPORTED_MODULE_10___default.a
+    route: ziggy_js__WEBPACK_IMPORTED_MODULE_9___default.a
   }
 });
 

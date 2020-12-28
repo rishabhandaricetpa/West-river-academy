@@ -45,7 +45,7 @@
     <div class="form-group d-flex mb-2">
       <label for="">Date of Birth</label>
       <p>
-        <Datepicker id="dob" name="dob" v-model="form.dob" required>
+        <Datepicker required id="dob" name="dob" v-model="form.dob">
         </Datepicker>
       </p>
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
@@ -74,6 +74,7 @@
           name="cell_phone"
           v-model="form.cell_phone"
           aria-describedby="emailHelp"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         />
       </div>
     </div>
@@ -358,7 +359,7 @@
       </div>
     </div>
     <div class="form-group d-flex">
-      <label for="">tell us more about your situation </label>
+      <label for="">tell us more about your situation<sup>*</sup> </label>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"
@@ -366,6 +367,7 @@
         value=""
         rows="3"
         v-model="form.student_situation"
+        required
       ></textarea>
     </div>
 
@@ -399,7 +401,7 @@ export default {
         middle_name: this.students.middle_name,
         last_name: this.students.last_name,
         email: this.students.email,
-        d_o_b: this.students.d_o_b,
+        dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
         immunized_status: this.students.immunized_status,

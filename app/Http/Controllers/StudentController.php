@@ -40,14 +40,14 @@ class StudentController extends Controller
     {
         $id = auth()->user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
-        $country = $parentProfileData->country;
-        $countryData = Country::where('country', $country)->first();
-        $countryId = $countryData->id;
-        $semesters_dates = Country::find($countryId)->semesters()->get();
+        // $country = $parentProfileData->country;
+        // $countryData = Country::where('country', $country)->first();
+        // $countryId = $countryData->id;
+        // $semesters_dates = Country::find($countryId)->semesters()->get();
         if ($request->expectsJson()) {
-            return response()->json($semesters_dates);
+            return response()->json();
         }
-        return view('enrollstudent', compact('semesters_dates'));
+        return view('enrollstudent');
     }
 
     protected function store(Request $data)
@@ -63,7 +63,7 @@ class StudentController extends Controller
             'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
-            'student_Id' => $data['student_Id'],
+            'student_Id' => $data['studentID'],
             'immunized_status' => $data['immunized_status'],
             'student_situation' => $data['student_situation'],
             'status' => 0,
@@ -96,7 +96,7 @@ class StudentController extends Controller
         $student->middle_name = $request->input('middle_name');
         $student->last_name = $request->input('last_name');
         $student->email = $request->input('email');
-        $student->d_o_b = $request->input('dob');
+        $student->d_o_b = \Carbon\Carbon::parse($request->input('dob'))->format('Y-m-d');
         $student->cell_phone = $request->input('cell_phone');
         $student->student_Id = $request->input('student_Id');
         $student->immunized_status = $request->input('immunized_status');

@@ -73,6 +73,9 @@
           name="cell_phone"
           aria-describedby="emailHelp"
           v-model="form.cell_phone"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="10"
+          pattern="[0-9]*"
         />
       </div>
     </div>
@@ -329,35 +332,36 @@
           </div>
         </div>
       </div>
-      <div class="form-group d-flex mt-2r">
-        <label for="">Is this student immunized?</label>
-        <div class="col-sm-6">
-          <select
-            class="form-control"
-            name="immunized_status"
-            v-model="form.immunized_status"
-          >
-            <option>Yes, records will come with school records.</option>
-            <option>Yes, I will provide records.</option>
-            <option>Yes, I plan to get immunizations soon.</option>
-            <option>No, for personal reasons.</option>
-            <option>No, for medical reasons.</option>
-            <option>No, for religious reasons.</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group d-flex">
-        <label for="">tell us more about your situation </label>
-        <textarea
+    </div>
+    <div class="form-group d-flex mt-2r">
+      <label for="">Is this student immunized?</label>
+      <div class="col-sm-6">
+        <select
           class="form-control"
-          id="exampleFormControlTextarea1"
-          name="student_situation"
-          rows="3"
-          v-model="form.student_situation"
-          required
-        ></textarea>
+          name="immunized_status"
+          v-model="form.immunized_status"
+        >
+          <option>Yes, records will come with school records.</option>
+          <option>Yes, I will provide records.</option>
+          <option>Yes, I plan to get immunizations soon.</option>
+          <option>No, for personal reasons.</option>
+          <option>No, for medical reasons.</option>
+          <option>No, for religious reasons.</option>
+        </select>
       </div>
     </div>
+    <div class="form-group d-flex">
+      <label for="">tell us more about your situation <sup>*</sup></label>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        name="student_situation"
+        rows="3"
+        v-model="form.student_situation"
+        required
+      ></textarea>
+    </div>
+
     <div class="form-wrap py-2r px-25 mt-2r">
       <a
         type="button"
@@ -401,18 +405,10 @@ export default {
           },
         ],
       },
-      students: [],
     };
   },
-  props: {
-    semesters: {
-      type: Array,
-      required: true,
-    },
-  },
-  mounted() {
-    this.students = this.semesters;
-  },
+
+  mounted() {},
   methods: {
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
