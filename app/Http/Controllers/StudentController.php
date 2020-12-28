@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\StudentProfile;
 use App\Models\EnrollmentPeriods;
 use App\Providers\RouteServiceProvider;
+use Faker\Calculator\Ean;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
@@ -62,10 +63,10 @@ class StudentController extends Controller
             'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
-            'student_Id' => $data['studentID'],
+            'student_Id' => '52556',
             'immunized_status' => $data['immunized_status'],
             'student_situation' => $data['student_situation'],
-            'status'=> 0,
+            'status' => 0,
         ]);
         foreach ($data->get('enrollPeriods', []) as $period) {
             $enrollPeriods = EnrollmentPeriods::create([
@@ -87,11 +88,52 @@ class StudentController extends Controller
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
         return view('reviewstudent', compact('studentData', 'enrollPeriods'));
     }
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        $student = StudentProfile::find($id);
+        $student->first_name = $request->input('first_name');
+        $student->middle_name = $request->input('middle_name');
+        $student->last_name = $request->input('last_name');
+        $student->email = $request->input('email');
+        $student->d_o_b = $request->input('d_o_b');
+        $student->cell_phone = $request->input('cell_phone');
+        $student->student_Id = $request->input('student_Id');
+        $student->immunized_status = $request->input('immunized_status');
+        $student->student_situation = $request->input('student_situation');
+        $student->save();
+        $periods = collect($request->get('periods'));
+
+        $periods->whereNull('id')->each(function ($period) use ($student) {
+            $enrollPeriod = new EnrollmentPeriods();
+            $enrollPeriod->fill([
+                'student_profile_id' => $student->id,
+                'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
+                'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
+                'grade_level' => $period['grade']
+            ]);
+            $enrollPeriod->save();
+        });
+        $periods->whereNotNull('id')->each(function ($period) use ($student) {
+            $enrollPeriod = EnrollmentPeriods::find($period['id']);
+            dd($enrollPeriod);
+            $enrollPeriod->fill([
+                'student_profile_id' => $student->id,
+                'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
+                'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
+                'grade_level' => $period['grade']
+            ]);
+            $enrollPeriod->save();
+        });
+        DB::commit();
+        return response()->json(null);
+    }
     public function edit($id)
     {
         $studentData = StudentProfile::find($id);
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        //  dd($enrollPeriods);
+        //dd($enrollPeriods);
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
     }
 }
