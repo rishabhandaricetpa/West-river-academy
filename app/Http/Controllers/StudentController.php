@@ -63,7 +63,7 @@ class StudentController extends Controller
             'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
             'email' => $data['email'],
             'cell_phone' => $data['cell_phone'],
-            'student_Id' => '52556',
+            'student_Id' => $data['student_Id'],
             'immunized_status' => $data['immunized_status'],
             'student_situation' => $data['student_situation'],
             'status' => 0,
@@ -79,7 +79,6 @@ class StudentController extends Controller
         if ($data->expectsJson()) {
             return response()->json($student);
         }
-        // return view('reviewstudent', compact('enrollPeriods'));
     }
     public function reviewStudent($id)
     {
@@ -97,7 +96,7 @@ class StudentController extends Controller
         $student->middle_name = $request->input('middle_name');
         $student->last_name = $request->input('last_name');
         $student->email = $request->input('email');
-        $student->d_o_b = $request->input('d_o_b');
+        $student->d_o_b = $request->input('dob');
         $student->cell_phone = $request->input('cell_phone');
         $student->student_Id = $request->input('student_Id');
         $student->immunized_status = $request->input('immunized_status');
@@ -117,7 +116,6 @@ class StudentController extends Controller
         });
         $periods->whereNotNull('id')->each(function ($period) use ($student) {
             $enrollPeriod = EnrollmentPeriods::find($period['id']);
-            dd($enrollPeriod);
             $enrollPeriod->fill([
                 'student_profile_id' => $student->id,
                 'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
@@ -133,7 +131,17 @@ class StudentController extends Controller
     {
         $studentData = StudentProfile::find($id);
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        //dd($enrollPeriods);
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
+    }
+    public function delete(Request $request, $id)
+    {
+
+        $periods_id = collect($request->get('periods'))->pluck('id');
+        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+        $enrollPeriodId = collect($enrollPeriods)->pluck('id');
+
+        $diff = $enrollPeriodId->diff($periods_id);
+
+        EnrollmentPeriods::whereIn('id', $diff)->delete();
     }
 }

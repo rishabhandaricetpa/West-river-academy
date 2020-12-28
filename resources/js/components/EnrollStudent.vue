@@ -166,7 +166,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Upgraded"
                 v-model="enrollPeriod.grade"
               />
@@ -176,7 +175,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Preschool Age 3"
                 v-model="enrollPeriod.grade"
                 :required="true"
@@ -187,7 +185,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Preschool Age 4"
                 v-model="enrollPeriod.grade"
                 :required="true"
@@ -198,7 +195,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="Kindergarten"
                 v-model="enrollPeriod.grade"
               />
@@ -208,7 +204,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="1"
                 v-model="enrollPeriod.grade"
               />
@@ -218,7 +213,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="2"
                 v-model="enrollPeriod.grade"
               />
@@ -228,7 +222,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="3"
                 v-model="enrollPeriod.grade"
               />
@@ -238,7 +231,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="4"
                 v-model="enrollPeriod.grade"
               />
@@ -250,7 +242,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="5"
                 v-model="enrollPeriod.grade"
               />
@@ -260,7 +251,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="6"
                 v-model="enrollPeriod.grade"
               />
@@ -270,7 +260,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="7"
                 v-model="enrollPeriod.grade"
               />
@@ -280,7 +269,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 value="8"
                 v-model="enrollPeriod.grade"
               />
@@ -304,7 +292,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 id=""
                 value="10"
                 v-model="enrollPeriod.grade"
@@ -319,7 +306,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 id=""
                 value="11"
                 v-model="enrollPeriod.grade"
@@ -334,7 +320,6 @@
               <input
                 class="form-check-input"
                 type="radio"
-                name="student_grade"
                 id=""
                 value="12"
                 v-model="enrollPeriod.grade"
