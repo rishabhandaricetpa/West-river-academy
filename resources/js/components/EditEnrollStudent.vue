@@ -68,13 +68,12 @@
       <label for="">Cell Phone</label>
       <div>
         <input
-          type="text"
+          type="number"
           class="form-control"
           id="cell_phone"
           name="cell_phone"
           v-model="form.cell_phone"
           aria-describedby="emailHelp"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         />
       </div>
     </div>
@@ -455,7 +454,7 @@ export default {
   },
   computed: {
     canAddMorePeriod() {
-      return this.form.periods.length < 3;
+      return this.form.periods.length < 4;
     },
   },
 };

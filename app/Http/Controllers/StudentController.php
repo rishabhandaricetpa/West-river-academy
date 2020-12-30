@@ -38,15 +38,6 @@ class StudentController extends Controller
     }
     public function index(Request $request)
     {
-        $id = auth()->user()->id;
-        $parentProfileData = User::find($id)->parentProfile()->first();
-        // $country = $parentProfileData->country;
-        // $countryData = Country::where('country', $country)->first();
-        // $countryId = $countryData->id;
-        // $semesters_dates = Country::find($countryId)->semesters()->get();
-        if ($request->expectsJson()) {
-            return response()->json();
-        }
         return view('enrollstudent');
     }
 
@@ -82,10 +73,10 @@ class StudentController extends Controller
     }
     public function reviewStudent($id)
     {
-
-        $studentData = StudentProfile::find($id);
+        $user_id = Auth::user()->id;
+        $students = ParentProfile::find($user_id)->studentProfile()->get();
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        return view('reviewstudent', compact('studentData', 'enrollPeriods'));
+        return view('reviewstudent', compact('enrollPeriods', 'students'));
     }
     public function update(Request $request, $id)
     {
