@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\EnrollmentHelper;
 
 class StudentController extends Controller
 {
@@ -41,18 +42,19 @@ class StudentController extends Controller
     {
         $id = auth()->user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
-        // $country = $parentProfileData->country;
-        // $countryData = Country::where('country', $country)->first();
-        // $countryId = $countryData->id;
-        // $semesters_dates = Country::find($countryId)->semesters()->get();
-        // if ($request->expectsJson()) {
-        //     return response()->json($semesters_dates);
-        // }
-        return view('enrollstudent', compact('parentProfileData'));
+        $country = $parentProfileData->country;
+        $countryData = Country::where('country', $country)->first();
+        $countryId = $countryData->id;
+        $semesters_dates = Country::find($countryId)->semesters()->get();
+        if ($request->expectsJson()) {
+            return response()->json($semesters_dates);
+        }
+        return view('enrollstudent', compact('semesters_dates'));
     }
 
     protected function store(Request $data)
     {
+        $this->EnrollmentHelper = new EnrollmentHelper();
         $Userid = auth()->user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $id = $parentProfileData->id;
@@ -77,8 +79,9 @@ class StudentController extends Controller
                 'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
                 'grade_level' => $period['grade'],
                 'calculated_month'=> \Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate']),
-                'fee_structure_id'=>\Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate'])>=6?'1':'2'
-            ]);
+                // 'fee_structure_id'=>\Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate'])>=6?'1':'2'
+                'fee_structure_id'=> $this->EnrollmentHelper->getEnrollmentPeriod($period['selectedStartDate'],$period['selectedEndDate']),
+                ]);
         }
         if ($data->expectsJson()) {
             return response()->json($student);
@@ -87,7 +90,6 @@ class StudentController extends Controller
     }
     public function reviewStudent($id)
     {
-
         $studentData    = StudentProfile::find($id);
         $enrollPeriods  = StudentProfile::find($id)->enrollmentPeriods()->get();
         $periodInfo     = EnrollmentPeriods::select('fee_structure_id', EnrollmentPeriods::raw('count(fee_structure_id) as total'))

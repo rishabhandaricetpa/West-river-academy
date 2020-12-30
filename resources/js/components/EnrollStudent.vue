@@ -395,6 +395,7 @@
 <script>
 import axios from "axios";
 import Datepicker from "vuejs-datepicker";
+import moment from 'moment';
 
 export default {
   name: "EnrollStudent",
@@ -415,13 +416,13 @@ export default {
         studentID: "",
         enrollPeriods: [
           {
-            selectedStartDate: new Date(2020, 0,  11),
+            selectedStartDate: moment(this.semesters.start_date).format('yy-MMMM-DD'),
             selectedEndDate: "",
             grade: "",
             disabledDates: {
              ranges: [{
-                  from: new Date(2020 ,12, 1),
-                  to: new Date(2131 ,12, 1),
+                  from: moment(this.selectedStartDate).format('MMMM DD YYYY'),
+                  to: moment(this.selectedStartDate).format('YYYY'),
             },
         ],
         }

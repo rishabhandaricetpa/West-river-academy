@@ -1,32 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-=======
 
 <main class="position-relative container form-content mt-4">
   <h1 class="text-center text-white text-uppercase">enroll students</h1>
 
->>>>>>> 94ac033eb249ff84103767fd277b2b6a482629c4
 
 
-<<<<<<< HEAD
-     
-       
-        <div id="app">
-          <enroll-student></enroll-student>
-        </div>
-    </main>
-    <!-- Choose Dates -->
-    <div class="modal fade" id="chooseDates" tabindex="-1" aria-labelledby="chooseDatesLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-body">
-            <p>Annual enrollment covers the 12 months from August 1 - July 31. Second Semester Only covers January 1 - July 31. If you prefer to start your enrollment on the date you enroll, select that date. If you want your enrollment to date back to August 1, even though it is now later in the year, you can do so.</p>
-            <p>The dates you select will appear on your confirmation of enrollment letter. Regardless of the date you select, your enrollment will include the full 12-month period for Annual or the full 7-month period for Second Semester Only.</p>
-            <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
-          </div>
-=======
   <div id="app">
     <enroll-student :semesters='@json($semesters_dates)'> </enroll-student>
   </div>
@@ -43,7 +23,6 @@
           select, your enrollment will include the full 12-month period for Annual or the full 7-month period for Second
           Semester Only.</p>
         <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
->>>>>>> 94ac033eb249ff84103767fd277b2b6a482629c4
         </div>
       </div>
     </div>
@@ -91,10 +70,6 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-    @endsection
-=======
   </div>
 </div>
 @endsection
->>>>>>> 94ac033eb249ff84103767fd277b2b6a482629c4
