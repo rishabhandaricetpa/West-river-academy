@@ -89,7 +89,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
-
+    Route::post('delete/{id}', 'StudentController@delete')->name('delete.student');
 
     // dashboard screen and verify email message
     Route::get('/verify-email/{email}', function () {

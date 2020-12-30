@@ -45,7 +45,7 @@
     <div class="form-group d-flex mb-2">
       <label for="">Date of Birth</label>
       <p>
-        <Datepicker id="dob" name="dob" v-model="form.dob" required>
+        <Datepicker required id="dob" name="dob" v-model="form.dob">
         </Datepicker>
       </p>
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
@@ -74,6 +74,7 @@
           name="cell_phone"
           v-model="form.cell_phone"
           aria-describedby="emailHelp"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         />
       </div>
     </div>
@@ -93,7 +94,7 @@
     </div>
     <div v-for="(period, index) in form.periods" :key="period.id">
       <div class="form-group d-flex mb-2 mt-2r">
-        <span class="remove" v-on:click="removePeriod(index)">x</span>
+        <span class="remove" @click="removePeriod(index)">x</span>
         <label for="">Select your START date of enrollment{{ index }}</label>
         <div class="row mx-0">
           <div class="form-row col-sm-3 px-0">
@@ -176,6 +177,7 @@
                 type="radio"
                 value="Preschool Age 3"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label" for=""> Preschool Age 3 </label>
             </div>
@@ -185,6 +187,7 @@
                 type="radio"
                 value="Preschool Age 4"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label" for=""> Preschool Age 4 </label>
             </div>
@@ -194,6 +197,7 @@
                 type="radio"
                 value="Kindergarten"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label" for=""> Kindergarten </label>
             </div>
@@ -202,6 +206,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="1"
               />
               <label class="form-check-label" for=""> 1 </label>
@@ -211,6 +216,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="2"
               />
               <label class="form-check-label" for=""> 2 </label>
@@ -220,6 +226,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="3"
               />
               <label class="form-check-label" for=""> 3 </label>
@@ -229,6 +236,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="4"
               />
               <label class="form-check-label" for=""> 4 </label>
@@ -240,6 +248,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="5"
               />
               <label class="form-check-label" for=""> 5 </label>
@@ -249,6 +258,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="6"
               />
               <label class="form-check-label" for=""> 6 </label>
@@ -258,6 +268,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="7"
               />
               <label class="form-check-label" for=""> 7 </label>
@@ -267,6 +278,7 @@
                 class="form-check-input"
                 type="radio"
                 v-model="period.grade"
+                required
                 value="8"
               />
               <label class="form-check-label"> 8 </label>
@@ -277,6 +289,7 @@
                 type="radio"
                 value="9"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label"> 9 </label>
             </div>
@@ -290,6 +303,7 @@
                 type="radio"
                 value="10"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label" for=""> 10 </label>
             </div>
@@ -304,6 +318,7 @@
                 id=""
                 value="11"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label" for=""> 11 </label>
             </div>
@@ -318,6 +333,7 @@
                 id=""
                 value="12"
                 v-model="period.grade"
+                required
               />
               <label class="form-check-label" for=""> 12 </label>
             </div>
@@ -343,7 +359,7 @@
       </div>
     </div>
     <div class="form-group d-flex">
-      <label for="">tell us more about your situation </label>
+      <label for="">tell us more about your situation<sup>*</sup> </label>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"
@@ -351,6 +367,7 @@
         value=""
         rows="3"
         v-model="form.student_situation"
+        required
       ></textarea>
     </div>
 
@@ -384,7 +401,7 @@ export default {
         middle_name: this.students.middle_name,
         last_name: this.students.last_name,
         email: this.students.email,
-        d_o_b: this.students.d_o_b,
+        dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
         immunized_status: this.students.immunized_status,
@@ -421,6 +438,9 @@ export default {
     },
     removePeriod(index) {
       this.form.periods.splice(index, 1);
+      axios
+        .post(route("delete.student", this.students), this.form)
+        .catch((error) => console.log(error));
     },
   },
   props: {

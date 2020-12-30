@@ -54,7 +54,6 @@ class StudentController extends Controller
 
     protected function store(Request $data)
     {
-        $this->EnrollmentHelper = new EnrollmentHelper();
         $Userid = auth()->user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $id = $parentProfileData->id;
@@ -71,7 +70,7 @@ class StudentController extends Controller
             'student_situation' => $data['student_situation'],
             'status' => 0,
         ]);
-
+        $this->EnrollmentHelper = new EnrollmentHelper();
         foreach ($data->get('enrollPeriods', []) as $period) {
             $enrollPeriods = EnrollmentPeriods::create([
                 'student_profile_id' => $student->id,

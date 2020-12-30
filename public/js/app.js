@@ -2329,6 +2329,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2343,7 +2360,7 @@ __webpack_require__.r(__webpack_exports__);
         middle_name: this.students.middle_name,
         last_name: this.students.last_name,
         email: this.students.email,
-        d_o_b: this.students.d_o_b,
+        dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
         immunized_status: this.students.immunized_status,
@@ -2383,6 +2400,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removePeriod: function removePeriod(index) {
       this.form.periods.splice(index, 1);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("delete.student", this.students), this.form)["catch"](function (error) {
+        return console.log(error);
+      });
     }
   },
   props: {
@@ -40574,7 +40594,7 @@ var render = function() {
           "p",
           [
             _c("Datepicker", {
-              attrs: { id: "dob", name: "dob", required: "" },
+              attrs: { required: "", id: "dob", name: "dob" },
               model: {
                 value: _vm.form.dob,
                 callback: function($$v) {
@@ -40645,7 +40665,9 @@ var render = function() {
               type: "text",
               id: "cell_phone",
               name: "cell_phone",
-              "aria-describedby": "emailHelp"
+              "aria-describedby": "emailHelp",
+              oninput:
+                "javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             },
             domProps: { value: _vm.form.cell_phone },
             on: {
@@ -40827,7 +40849,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "Preschool Age 3" },
+                      attrs: {
+                        type: "radio",
+                        value: "Preschool Age 3",
+                        required: ""
+                      },
                       domProps: {
                         checked: _vm._q(period.grade, "Preschool Age 3")
                       },
@@ -40856,7 +40882,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "Preschool Age 4" },
+                      attrs: {
+                        type: "radio",
+                        value: "Preschool Age 4",
+                        required: ""
+                      },
                       domProps: {
                         checked: _vm._q(period.grade, "Preschool Age 4")
                       },
@@ -40885,7 +40915,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "Kindergarten" },
+                      attrs: {
+                        type: "radio",
+                        value: "Kindergarten",
+                        required: ""
+                      },
                       domProps: {
                         checked: _vm._q(period.grade, "Kindergarten")
                       },
@@ -40914,7 +40948,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "1" },
+                      attrs: { type: "radio", required: "", value: "1" },
                       domProps: { checked: _vm._q(period.grade, "1") },
                       on: {
                         change: function($event) {
@@ -40941,7 +40975,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "2" },
+                      attrs: { type: "radio", required: "", value: "2" },
                       domProps: { checked: _vm._q(period.grade, "2") },
                       on: {
                         change: function($event) {
@@ -40968,7 +41002,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "3" },
+                      attrs: { type: "radio", required: "", value: "3" },
                       domProps: { checked: _vm._q(period.grade, "3") },
                       on: {
                         change: function($event) {
@@ -40995,7 +41029,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "4" },
+                      attrs: { type: "radio", required: "", value: "4" },
                       domProps: { checked: _vm._q(period.grade, "4") },
                       on: {
                         change: function($event) {
@@ -41024,7 +41058,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "5" },
+                      attrs: { type: "radio", required: "", value: "5" },
                       domProps: { checked: _vm._q(period.grade, "5") },
                       on: {
                         change: function($event) {
@@ -41051,7 +41085,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "6" },
+                      attrs: { type: "radio", required: "", value: "6" },
                       domProps: { checked: _vm._q(period.grade, "6") },
                       on: {
                         change: function($event) {
@@ -41078,7 +41112,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "7" },
+                      attrs: { type: "radio", required: "", value: "7" },
                       domProps: { checked: _vm._q(period.grade, "7") },
                       on: {
                         change: function($event) {
@@ -41105,7 +41139,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "8" },
+                      attrs: { type: "radio", required: "", value: "8" },
                       domProps: { checked: _vm._q(period.grade, "8") },
                       on: {
                         change: function($event) {
@@ -41130,7 +41164,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-check-input",
-                      attrs: { type: "radio", value: "9" },
+                      attrs: { type: "radio", value: "9", required: "" },
                       domProps: { checked: _vm._q(period.grade, "9") },
                       on: {
                         change: function($event) {
@@ -41164,7 +41198,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: { type: "radio", value: "10" },
+                        attrs: { type: "radio", value: "10", required: "" },
                         domProps: { checked: _vm._q(period.grade, "10") },
                         on: {
                           change: function($event) {
@@ -41201,7 +41235,12 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: { type: "radio", id: "", value: "11" },
+                        attrs: {
+                          type: "radio",
+                          id: "",
+                          value: "11",
+                          required: ""
+                        },
                         domProps: { checked: _vm._q(period.grade, "11") },
                         on: {
                           change: function($event) {
@@ -41238,7 +41277,12 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-check-input",
-                        attrs: { type: "radio", id: "", value: "12" },
+                        attrs: {
+                          type: "radio",
+                          id: "",
+                          value: "12",
+                          required: ""
+                        },
                         domProps: { checked: _vm._q(period.grade, "12") },
                         on: {
                           change: function($event) {
@@ -41318,9 +41362,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group d-flex" }, [
-        _c("label", { attrs: { for: "" } }, [
-          _vm._v("tell us more about your situation ")
-        ]),
+        _vm._m(6),
         _vm._v(" "),
         _c("textarea", {
           directives: [
@@ -41336,7 +41378,8 @@ var render = function() {
             id: "exampleFormControlTextarea1",
             name: "student_situation",
             value: "",
-            rows: "3"
+            rows: "3",
+            required: ""
           },
           domProps: { value: _vm.form.student_situation },
           on: {
@@ -41446,6 +41489,15 @@ var staticRenderFns = [
     return _c("label", { attrs: { for: "" } }, [
       _vm._v("Select grade level(s) for your enrollment period\n        "),
       _c("p", [_vm._v("(You may select more than one for multiple years)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("tell us more about your situation"),
+      _c("sup", [_vm._v("*")])
     ])
   }
 ]
