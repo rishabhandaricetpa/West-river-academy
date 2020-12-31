@@ -9,7 +9,7 @@ class EnrollmentPeriods extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'student_profile_id', 'start_date_of_enrollment', 'end_date_of_enrollment', 'grade_level','calculated_month','fee_structure_id'
+        'student_profile_id', 'start_date_of_enrollment', 'end_date_of_enrollment', 'grade_level','fee_structure_id'
     ];
     protected $table = "enrollment_periods";
 

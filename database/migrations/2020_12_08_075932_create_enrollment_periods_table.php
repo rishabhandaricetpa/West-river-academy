@@ -21,7 +21,6 @@ class CreateEnrollmentPeriodsTable extends Migration
             $table->string('start_date_of_enrollment');
             $table->string('end_date_of_enrollment');
             $table->string('grade_level');
-            $table->string('calculated_month');
         });
     }
 

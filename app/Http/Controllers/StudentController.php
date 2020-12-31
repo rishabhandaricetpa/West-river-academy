@@ -70,16 +70,20 @@ class StudentController extends Controller
             'student_situation' => $data['student_situation'],
             'status' => 0,
         ]);
-        $this->EnrollmentHelper = new EnrollmentHelper();
         foreach ($data->get('enrollPeriods', []) as $period) {
+            // $calculated_month =  \Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate']);
+            // if($calculated_month>=6){
+            // $feestructure   = FeeStructure::select('id')
+            //                     ->where('id',1)
+            //                     ->get();
+            //                }
             $enrollPeriods = EnrollmentPeriods::create([
                 'student_profile_id' => $student->id,
                 'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
                 'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
                 'grade_level' => $period['grade'],
-                'calculated_month'=> \Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate']),
-                // 'fee_structure_id'=>\Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate'])>=6?'1':'2'
-                'fee_structure_id'=> $this->EnrollmentHelper->getEnrollmentPeriod($period['selectedStartDate'],$period['selectedEndDate']),
+                // 'fee_structure_id'=>$feestructure['id'],
+                'fee_structure_id'=>\Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate'])>=6?'1':'2'
                 ]);
         }
         if ($data->expectsJson()) {
@@ -89,13 +93,14 @@ class StudentController extends Controller
     }
     public function reviewStudent($id)
     {
-        $studentData    = StudentProfile::find($id);
-        $enrollPeriods  = StudentProfile::find($id)->enrollmentPeriods()->get();
-        $periodInfo     = EnrollmentPeriods::select('fee_structure_id', EnrollmentPeriods::raw('count(fee_structure_id) as total'))
+         $user_id = Auth::user()->id;
+         $students = ParentProfile::find($user_id)->studentProfile()->get();
+         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+         $periodInfo     = EnrollmentPeriods::select('fee_structure_id', EnrollmentPeriods::raw('count(fee_structure_id) as total'))
                                         ->where('student_profile_id',$id)
                                         ->groupBy('fee_structure_id')->get();
         $feestructure   = FeeStructure::all();
-        return view('reviewstudent', compact('studentData', 'enrollPeriods','feestructure','periodInfo'));
+        return view('reviewstudent', compact('students', 'enrollPeriods','feestructure','periodInfo'));
     }
     public function update(Request $request, $id)
     {
@@ -142,7 +147,6 @@ class StudentController extends Controller
     {
         $studentData = StudentProfile::find($id);
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        //dd($enrollPeriods);
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
     }
 }

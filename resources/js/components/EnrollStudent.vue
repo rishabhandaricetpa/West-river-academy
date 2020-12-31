@@ -92,7 +92,12 @@
         />
       </div>
     </div>
-    <div class="seperator" v-for="enrollPeriod in form.enrollPeriods" :key="enrollPeriod.id">
+    <div
+      class="seperator"
+      v-for="(enrollPeriod, index) in form.enrollPeriods"
+      :key="enrollPeriod.id"
+    >
+      <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
@@ -383,6 +388,7 @@
         class="btn btn-primary addenrollment"
         id="addEnroll"
         value="addEnroll"
+        v-if="canAddMorePeriod"
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
@@ -456,6 +462,11 @@ export default {
           (response) => (window.location = "/reviewstudent/" + response.data.id)
         )
         .catch((error) => console.log(error));
+    },
+  },
+  computed: {
+    canAddMorePeriod() {
+      return this.form.enrollPeriods.length < 4;
     },
   },
 };
