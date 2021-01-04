@@ -111,6 +111,7 @@
                   required
                   placeholder="Select Start Date"
                   :value="enrollPeriod.selectedStartDate"
+                  :highlighted="disabledDates"
                 >
                 </Datepicker>
               </p>
@@ -141,7 +142,7 @@
                   v-model="enrollPeriod.selectedEndDate"
                   placeholder="Select End Date"
                   required
-                  :disabledDates="enrollPeriod.disabledDates"
+                  :disabled-dates="disabledDates"
                 >
                 </Datepicker>
               </p>
@@ -410,6 +411,9 @@ export default {
   },
   data() {
     return {
+         disabledDates: {
+             from: moment(this.semesters.start_date).format('YYYY/MM/DD'),
+            },
         form: {
         first_name: "",
         middle_name: "",
@@ -422,16 +426,9 @@ export default {
         studentID: "",
         enrollPeriods: [
           {
-            selectedStartDate: moment(this.semesters.start_date).format('yy-MMMM-DD'),
+            selectedStartDate: moment(this.semesters.start_date).format('YYYY/MM/DD'),
             selectedEndDate: "",
             grade: "",
-            disabledDates: {
-             ranges: [{
-                  from: moment(this.selectedStartDate).format('MMMM DD YYYY'),
-                  to: moment(this.selectedStartDate).format('YYYY'),
-            },
-        ],
-        }
           },
         ],
       },
@@ -440,14 +437,24 @@ export default {
   },
   props: {
     semesters: {
-      type: Array,
       required: true,
     },
   },
   mounted() {
-    this.students = this.semesters;
+    this.$watch('enrollPeriod.selectedStartDate', this.updateDisabledDates)
   },
   methods: {
+    updateDisabledDates(newValue) {
+      debugger
+      console.log({
+        newValue
+      });
+      const year = new Date(newValue.getFullYear() + 1);
+      // disable all dates starting from next year
+      this.disabledDates.from = new Date(year, 0, 1);
+
+      console.log(this.disabledDates)
+    },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
         selectedStartDate: "",

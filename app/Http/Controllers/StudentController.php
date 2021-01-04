@@ -45,7 +45,7 @@ class StudentController extends Controller
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
-        $semesters_dates = Country::find($countryId)->semesters()->get();
+        $semesters_dates = Country::find($countryId)->semesters()->first();
         if ($request->expectsJson()) {
             return response()->json($semesters_dates);
         }
@@ -131,7 +131,6 @@ class StudentController extends Controller
         });
         $periods->whereNotNull('id')->each(function ($period) use ($student) {
             $enrollPeriod = EnrollmentPeriods::find($period['id']);
-            dd($enrollPeriod);
             $enrollPeriod->fill([
                 'student_profile_id' => $student->id,
                 'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
