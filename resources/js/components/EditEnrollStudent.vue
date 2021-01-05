@@ -403,6 +403,7 @@ export default {
         dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
+        student_situation: this.students.student_situation,
         immunized_status: this.students.immunized_status,
         periods: [],
       },

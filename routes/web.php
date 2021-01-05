@@ -84,7 +84,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     //enroll student
-    Route::get('/enroll-student', 'StudentController@index');
+    Route::get('/enroll-student', 'StudentController@index')->middleware('auth');
     Route::post('/enroll-student', 'StudentController@store')->middleware('auth')->name('enroll.student');
     Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
@@ -114,6 +114,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/cart-billing', function () {
         return view('cart-billing');
     });
+    //payment
+    Route::get('payment', function () {
+        return view('paywithpaypal');
+    })->name('paywithpaypal');
+    Route::post('paypal', 'PaymentController@postPaymentWithpaypal');
+    Route::get('status', 'PaymentController@getPaymentStatus')->name('status');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');

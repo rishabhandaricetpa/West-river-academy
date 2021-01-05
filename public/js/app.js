@@ -2345,7 +2345,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2363,6 +2362,7 @@ __webpack_require__.r(__webpack_exports__);
         dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
+        student_situation: this.students.student_situation,
         immunized_status: this.students.immunized_status,
         periods: []
       }
@@ -2417,7 +2417,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     canAddMorePeriod: function canAddMorePeriod() {
-      return this.form.periods.length < 3;
+      return this.form.periods.length < 4;
     }
   }
 });
@@ -2436,6 +2436,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2856,6 +2861,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    }
+  },
+  computed: {
+    canAddMorePeriod: function canAddMorePeriod() {
+      return this.form.enrollPeriods.length < 4;
     }
   }
 });
@@ -19057,12 +19067,10 @@ var render = function() {
             ],
             staticClass: "form-control",
             attrs: {
-              type: "text",
+              type: "number",
               id: "cell_phone",
               name: "cell_phone",
-              "aria-describedby": "emailHelp",
-              oninput:
-                "javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              "aria-describedby": "emailHelp"
             },
             domProps: { value: _vm.form.cell_phone },
             on: {
@@ -20161,8 +20169,10 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._l(_vm.form.enrollPeriods, function(enrollPeriod) {
+      _vm._l(_vm.form.enrollPeriods, function(enrollPeriod, index) {
         return _c("div", { key: enrollPeriod.id }, [
+          _c("h3", [_vm._v("Enrollment Period " + _vm._s(index + 1))]),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group d-flex mb-2 mt-2r" }, [
             _c("label", { attrs: { for: "" } }, [
               _vm._v("Select your START date of enrollment")
@@ -20836,15 +20846,17 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-wrap py-2r px-25 mt-2r" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary addenrollment",
-            attrs: { type: "button", id: "addEnroll", value: "addEnroll" },
-            on: { click: _vm.addNewEnrollPeriod }
-          },
-          [_vm._v("Add Another Enrollment Period")]
-        ),
+        _vm.canAddMorePeriod
+          ? _c(
+              "a",
+              {
+                staticClass: "btn btn-primary addenrollment",
+                attrs: { type: "button", id: "addEnroll", value: "addEnroll" },
+                on: { click: _vm.addNewEnrollPeriod }
+              },
+              [_vm._v("Add Another Enrollment Period")]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "button",
