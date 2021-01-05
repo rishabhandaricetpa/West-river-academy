@@ -41,6 +41,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/welcome-video',function(){
         return view('welcome-video');
     });
+    Route::get('/select-elective',function(){
+        return view('select-elective');
+    });
+    Route::get('/high-school-course',function(){
+        return view('high-school-course');
+    });
+    Route::get('/college-details',function(){
+        return view('college-details');
+    });
+    Route::get('/grade-level',function(){
+        return view('grade-level');
+    });
+    Route::get('/grade-level-transcript',function(){
+        return view('grade-level-transcript');
+    });
     Route::get('/reviewstudent',function(){
         return view('reviewstudent');
     });

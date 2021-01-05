@@ -17,35 +17,9 @@
           <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
              <form method="POST" class="mb-0 px-0 unstyled-label">
                <div class="col-sm-7 px-0">
-               <h3 class="mb-3">Select an English/Language Arts course:<i class="ml-2 fas fa-question-circle tooltip-styling text-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></h3>
-                <div class="form-group d-sm-flex  align-items-center">
-                  <select class="form-control text-uppercase">
-                        <option>English</option>
-                        <option>English i</option>
-                        <option>English ii</option>
-                        <option>English iii</option>
-                        <option>English iv</option>
-                        <option>Language arts i</option>
-                        <option>Language arts ii</option>
-                        <option>Language arts iii</option>
-                        <option>Language arts iv</option>
-                        <option>Grammer & Composition</option>
-                        <option>English Literature</option>
-                        <option>American Literature</option>
-                        <option>Literature & Language</option>
-                        <option>World Literature</option>
-                        <option>journalism</option>
-                        <option>The Novel</option>
-                        <option>Short story writing</option>
-                        <option>Contemporary english literature</option>
-                        <option>Creative writing</option>
-                        <option>Critical thinking skills</option>
-                        <option>Intro to logic</option>
-                        <option>Film as literature</option>
-                      </select>
-                  </div>
-                  <div class="form-group d-sm-flex  align-items-center">
-                    <label for="" class="h3 text-black mb-0">Other</label>
+               <h3 class="mb-3">Select an Elective:<i class="ml-2 fas fa-question-circle tooltip-styling text-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></h3>
+                  <div class="form-group">
+                    <label for="" class="h3 text-black">Enter an elective, such as MUSIC, ART, DANCE. DRAMA. etc.</label>
                       <div class="w-100">
                         <input type="text" class="form-control" name="" value="" aria-describedby="">
                       </div>
@@ -84,8 +58,8 @@
                     </div>
                   </div>
                   <div class="mt-2r">
-                    <a href="#" class="btn btn-primary">Add another English/Language Arts Course</a>
-                    <a href="select-elective" class="btn btn-primary ml-4 float-right">Continue</a>
+                    <a href="#" class="btn btn-primary">Add another Elective</a>
+                    <a href="#" class="btn btn-primary ml-4 float-right">Continue</a>
                   </div> 
                 </div>
             </form>

@@ -16,7 +16,7 @@
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
           <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
              <form method="POST" class="mb-0 px-0 unstyled-label">
-               <div class="col-sm-7 px-0">
+               <div class="col-sm-9 px-0">
                <h3 class="mb-3">Select an English/Language Arts course:<i class="ml-2 fas fa-question-circle tooltip-styling text-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i></h3>
                 <div class="form-group d-sm-flex  align-items-center">
                   <select class="form-control text-uppercase">

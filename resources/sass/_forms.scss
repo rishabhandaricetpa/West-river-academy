@@ -38,7 +38,9 @@ label{
     padding-bottom: 2rem;
 }
 
-
+.min-select{
+    width: 100px;
+}
 
 select.form-control{
     padding: 3px;
@@ -118,4 +120,8 @@ label.h3{
     &.text-black{
       font-weight: 500;
     }
+}
+
+.tooltip-styling{
+    font-size: 24px;
 }
