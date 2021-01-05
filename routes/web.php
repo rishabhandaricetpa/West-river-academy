@@ -117,3 +117,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+Route::get('/stripe-payment', [App\Http\Controllers\StripeController::class, 'handleGet']);
+Route::post('/stripe-payment', [App\Http\Controllers\StripeController::class, 'handlePost'])->name('stripe.payment');
