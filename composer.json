@@ -21,6 +21,7 @@
     "laravel/tinker": "^2.5",
     "laravel/ui": "^3.1",
     "stripe/stripe-php": "^7.67",
+    "paypal/rest-api-sdk-php": "^1.14",
     "tightenco/ziggy": "^1.0",
     "yajra/laravel-datatables-oracle": "~9.0",
     "yoeunes/toastr": "^1.2"
