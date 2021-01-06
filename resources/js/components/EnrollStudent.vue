@@ -105,13 +105,12 @@
             <div class="form-group col-md-5">
               <p>
                 <Datepicker
-                  id="startdate"
                   name="startdate"
                   v-model="enrollPeriod.selectedStartDate"
                   required
                   placeholder="Select Start Date"
                   :value="enrollPeriod.selectedStartDate"
-                  :highlighted="disabledDates"
+                  @input="updateEndDate(index)"
                 >
                 </Datepicker>
               </p>
@@ -137,12 +136,11 @@
             <div class="form-group col-md-5">
               <p>
                 <Datepicker
-                  id="enddate"
                   name="enddate"
                   v-model="enrollPeriod.selectedEndDate"
                   placeholder="Select End Date"
                   required
-                  :disabled-dates="disabledDates"
+                  :disabled-dates="enrollPeriod.endDisabledDates"
                 >
                 </Datepicker>
               </p>
@@ -411,27 +409,27 @@ export default {
   },
   data() {
     return {
-         disabledDates: {
-             from: moment(this.semesters.start_date).format('YYYY/MM/DD'),
-            },
         form: {
-        first_name: "",
-        middle_name: "",
-        last_name: "",
-        dob: "",
-        email: "",
-        cell_phone: "",
-        immunized_status: "",
-        student_situation: "",
-        studentID: "",
-        enrollPeriods: [
-          {
-            selectedStartDate: moment(this.semesters.start_date).format('YYYY/MM/DD'),
-            selectedEndDate: "",
-            grade: "",
-          },
-        ],
-      },
+          first_name: "",
+          middle_name: "",
+          last_name: "",
+          dob: "",
+          email: "",
+          cell_phone: "",
+          immunized_status: "",
+          student_situation: "",
+          studentID: "",
+          enrollPeriods: [
+            {
+              selectedStartDate: new Date(this.semesters.start_date),
+              selectedEndDate: "",
+              grade: "",
+              endDisabledDates: {
+                from: this.calcEndDate(this.semesters.start_date),
+              },
+            },
+          ],
+        },
       students: [],
     };
   },
@@ -440,26 +438,25 @@ export default {
       required: true,
     },
   },
-  mounted() {
-    this.$watch('enrollPeriod.selectedStartDate', this.updateDisabledDates)
-  },
   methods: {
-    updateDisabledDates(newValue) {
-      debugger
-      console.log({
-        newValue
-      });
-      const year = new Date(newValue.getFullYear() + 1);
-      // disable all dates starting from next year
-      this.disabledDates.from = new Date(year, 0, 1);
+    calcEndDate(date){
+      const oldDate = new Date(date);
+      const year = oldDate.getFullYear();
 
-      console.log(this.disabledDates)
+      return new Date(year, 11, 31); // returns 31 dec for same year
+    },
+    updateEndDate(index) {
+      this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
+      this.form.enrollPeriods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
-        selectedStartDate: "",
+        selectedStartDate: new Date(this.semesters.start_date),
         selectedEndDate: "",
         grade: "",
+        endDisabledDates: {
+          from: this.calcEndDate(this.semesters.start_date),
+        },
       });
     },
     addStudent() {
