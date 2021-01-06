@@ -112,7 +112,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('cart');
     });
     Route::get('/cart-billing', function () {
-        return view('cart-billing');
+        return view('Billing/cart-billing');
     });
     //payment
     Route::get('payment', function () {

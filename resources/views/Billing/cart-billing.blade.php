@@ -1,32 +1,7 @@
 
-<div class="d-flex">
-<!-- * =============== Sidebar =============== * -->
-<sidebar class="main-sidebar bg-secondary pt-5 fixed-top overflow-auto">
-    <ul class="list-unstyled">
-    <li>
-    <a href="#">Dashboard</a>
-      <ul class="list-unstyled">
-        <li><a href="#">Add student</a></li>
-        <li><a href="#">add enrollment</a></li>
-      </ul>
-    </li>
-    <li><a href="#">Cart</a></li>
-    <li><a href="#">Fee structure</a></li>
-    <li><a href="#">Tutorials</a></li>
-    <li><a href="#">My Account</a></li>
-    <li><a href="#">Logout</a></li>
-    </ul>
- </sidebar>
-  <!-- * =============== /Sidebar =============== * -->
+@extends('layouts.app')
 
-     <div class="main-content position-relative ml-auto">
-     <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
-<!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
-@include('layouts.partials.header')
-<!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
-
-<!-- * =============== Main =============== * -->
-
+@section('content')
 <main class="position-relative container form-content mt-4">
        <h1 class="text-center text-white text-uppercase">cart</h1>
 
@@ -87,6 +62,9 @@
              <h2>Shipping Address</h2>
              
              <form method="POST">
+             <div class="checkbox">
+              <label><input type="checkbox" id="copy_address" name="copy_address"> Same as Billing Address</label>
+              </div>
                   <div class="form-group d-sm-flex mb-2">
                     <label for="">First Name</label>
                       <div>
@@ -157,7 +135,16 @@
              <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
             </div>
-          <div class="payment-info"> 
+            <div class="payment-info"> 
+            <h3>Credit Card/Debit Card</h3>
+            <p>Your credit card information will be taken on the page</p>
+          </div>
+             </li>
+             <li class="py-3 pl-3">
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
+            </div>
+            <div class="payment-info"> 
             <h3>Pay Pal</h3>
             <p>You will be redirected to the PayPal website to complete your payment.</p>
           </div>
@@ -167,8 +154,8 @@
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
             </div>
           <div class="payment-info"> 
-            <h3>Credit Card / Debit Card</h3>
-            <p>Your credit card information will be taken on the next page.</p>
+            <h3>Bank Transfer</h3>
+            <p>Release of enrollment confirmation may be delayed until payment clears.</p>
           </div>
              </li>
              <li class="py-3 pl-3">
@@ -176,8 +163,8 @@
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
             </div>
           <div class="payment-info"> 
-            <h3>Credit Card / Debit Card</h3>
-            <p>Your credit card information will be taken on the next page.</p>
+            <h3>MoneyGram</h3>
+            <p>Release of enrollment confirmation may be delayed until payment clears.</p>
           </div>
              </li>
              <li class="py-3 pl-3">
@@ -185,8 +172,8 @@
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
             </div>
           <div class="payment-info"> 
-            <h3>Credit Card / Debit Card</h3>
-            <p>Your credit card information will be taken on the next page.</p>
+            <h3>Check or Money Order</h3>
+            <p>Release of enrollment confirmation may be delayed until payment clears.</p>
           </div>
              </li>
              </ul>     
@@ -209,10 +196,4 @@
         </div>
   </main>
 
-    <!-- * =============== /Main =============== * -->
-    @include('layouts.partials.footer')
-    </div>
-
-</div>
-
-
+@endsection

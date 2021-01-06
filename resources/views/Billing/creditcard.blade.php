@@ -1,89 +1,9 @@
-<!DOCTYPE html>
-<html>
+
 <head>
 	<title>Laravel 7 - Integrate Stripe Payment Gateway Example</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <style type="text/css">
-        .container {
-            margin-top: 40px;
-        }
-        .panel-heading {
-        display: inline;
-        font-weight: bold;
-        }
-        .flex-table {
-            display: table;
-        }
-        .display-tr {
-            display: table-row;
-        }
-        .display-td {
-            display: table-cell;
-            vertical-align: middle;
-            width: 55%;
-        }
-    </style>
-</head>
-
-  
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-  
-<script type="text/javascript">
-$(function() {
-    var $form         = $(".validation");
-  $('form.validation').bind('submit', function(e) {
-    var $form         = $(".validation"),
-        inputVal = ['input[type=email]', 'input[type=password]',
-                         'input[type=text]', 'input[type=file]',
-                         'textarea'].join(', '),
-        $inputs       = $form.find('.required').find(inputVal),
-        $errorStatus = $form.find('div.error'),
-        valid         = true;
-        $errorStatus.addClass('hide');
- 
-        $('.has-error').removeClass('has-error');
-    $inputs.each(function(i, el) {
-      var $input = $(el);
-      if ($input.val() === '') {
-        $input.parent().addClass('has-error');
-        $errorStatus.removeClass('hide');
-        e.preventDefault();
-      }
-    });
-  
-    if (!$form.data('cc-on-file')) {
-      e.preventDefault();
-      Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-      Stripe.createToken({
-        number: $('.card-num').val(),
-        cvc: $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val()
-      }, stripeHandleResponse);
-    }
-  
-  });
-  
-  function stripeHandleResponse(status, response) {
-        if (response.error) {
-            $('.error')
-                .removeClass('hide')
-                .find('.alert')
-                .text(response.error.message);
-        } else {
-            var token = response['id'];
-            $form.find('input[type=text]').empty();
-            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-            $form.get(0).submit();
-        }
-    }
-  
-});
-</script>
-</html>
-
-
+    </head>
 
 <div class="d-flex">
 <!-- * =============== Sidebar =============== * -->
@@ -98,10 +18,9 @@ $(function() {
 
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
-       <h1 class="text-center text-white text-uppercase">dashboard</h1>
+       <h1 class="text-center text-white text-uppercase">Payment Details</h1>
 
           <div class="form-wrap border bg-light py-5 px-25">
-             <h2 class="mb-5">What would you like to do?</h2>
             
              <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -167,7 +86,7 @@ $(function() {
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-danger btn-lg btn-block" type="submit">Pay Now (₹150)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now (₹150)</button>
                             </div>
                         </div>
                           
@@ -184,3 +103,58 @@ $(function() {
 @include('layouts.partials.footer')
 </div>
 </div>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  
+<script type="text/javascript">
+$(function() {
+    var $form         = $(".validation");
+  $('form.validation').bind('submit', function(e) {
+    var $form         = $(".validation"),
+        inputVal = ['input[type=email]', 'input[type=password]',
+                         'input[type=text]', 'input[type=file]',
+                         'textarea'].join(', '),
+        $inputs       = $form.find('.required').find(inputVal),
+        $errorStatus = $form.find('div.error'),
+        valid         = true;
+        $errorStatus.addClass('hide');
+ 
+        $('.has-error').removeClass('has-error');
+    $inputs.each(function(i, el) {
+      var $input = $(el);
+      if ($input.val() === '') {
+        $input.parent().addClass('has-error');
+        $errorStatus.removeClass('hide');
+        e.preventDefault();
+      }
+    });
+  
+    if (!$form.data('cc-on-file')) {
+      e.preventDefault();
+      Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+      Stripe.createToken({
+        number: $('.card-num').val(),
+        cvc: $('.card-cvc').val(),
+        exp_month: $('.card-expiry-month').val(),
+        exp_year: $('.card-expiry-year').val()
+      }, stripeHandleResponse);
+    }
+  
+  });
+  
+  function stripeHandleResponse(status, response) {
+        if (response.error) {
+            $('.error')
+                .removeClass('hide')
+                .find('.alert')
+                .text(response.error.message);
+        } else {
+            var token = response['id'];
+            $form.find('input[type=text]').empty();
+            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+            $form.get(0).submit();
+        }
+    }
+  
+});
+</script>

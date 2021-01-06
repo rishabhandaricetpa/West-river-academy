@@ -12,7 +12,7 @@ class StripeController extends Controller
      */
     public function handleGet()
     {
-        return view('home');
+        return view('Billing/creditcard');
     }
   
     /**
@@ -27,9 +27,10 @@ class StripeController extends Controller
                 "source" => $request->stripeToken,
                 "description" => "Making test payment." 
         ]);
-  
-        Session::flash('success', 'Payment has been successfully processed.');
-          
-        return back();
+        $notification = array(
+            'message' => 'Payment has been successfully processed!',
+            'alert-type' => 'success'
+        ); 
+        return back()->with($notification);
     }
 }
