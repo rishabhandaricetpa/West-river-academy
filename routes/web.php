@@ -44,8 +44,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/select-elective',function(){
         return view('select-elective');
     });
+    Route::get('/bank-transfer',function(){
+        return view('bank-transfer');
+    });
     Route::get('/high-school-course',function(){
         return view('high-school-course');
+    });
+    Route::get('/order-review',function(){
+        return view('order-review');
+    });
+    Route::get('/custom-payment',function(){
+        return view('custom-payment');
     });
     Route::get('/college-details',function(){
         return view('college-details');
