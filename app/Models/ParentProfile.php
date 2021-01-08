@@ -46,6 +46,8 @@ class ParentProfile extends Model
             ->groupBy('enrollment_payments.amount')
             ->get();
         }
+    }
+    
     public function address()
     {
         return $this->hasMany('App\Models\Address','parent_profile_id','id');
