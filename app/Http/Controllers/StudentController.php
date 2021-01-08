@@ -8,6 +8,7 @@ use App\Models\ParentProfile;
 use App\Models\User;
 use App\Models\StudentProfile;
 use App\Models\FeeStructure;
+use App\Models\Address;
 use App\Models\EnrollmentPeriods;
 use App\Providers\RouteServiceProvider;
 use Faker\Calculator\Ean;
@@ -82,14 +83,12 @@ class StudentController extends Controller
                 'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
                 'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
                 'grade_level' => $period['grade'],
-                // 'fee_structure_id'=>$feestructure['id'],
                 'fee_structure_id'=>\Carbon\Carbon::parse($period['selectedEndDate'])->diffInMonths($period['selectedStartDate'])>=6?'1':'2'
                 ]);
         }
         if ($data->expectsJson()) {
             return response()->json($student);
         }
-        // return view('reviewstudent', compact('enrollPeriods'));
     }
     public function reviewStudent($id)
     {
@@ -147,5 +146,46 @@ class StudentController extends Controller
         $studentData = StudentProfile::find($id);
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
+    }
+  
+    public function address($id)
+    {    $user_id = Auth::user()->id;
+         $parent = ParentProfile::find($user_id)->first();
+         $country_list=  Country::select('country')
+         ->orderBy('country')
+         ->get();
+         return view('Billing/cart-billing', compact('parent','country_list'));
+    }
+    protected function saveaddress(Request $data)
+    {   
+        $data=$data->all();
+        $billing_data = $data['billing_address'];
+        $shipping_data = $data['billing_address'];
+        $payment_type=$data['paymentMethod'];
+        $Userid = auth()->user()->id;
+        $parentProfileData = User::find($Userid)->parentProfile()->first();
+        $id = $parentProfileData->id;
+        $billinAddress =  Address::create([
+            'parent_profile_id' => $id,
+            'billing_street_address' => $billing_data['street_address'],
+            'billing_city' => $billing_data['city'],
+            'billing_state' => $billing_data['state'],
+            'billing_zip_code' => $billing_data['zip_code'],
+            'billing_country' => $billing_data['country'],
+            'shipping_street_address' => $shipping_data['street_address'],
+            'shipping_city' => $shipping_data['city'],
+            'shipping_state' => $shipping_data['state'],
+            'shipping_zip_code' => $shipping_data['zip_code'],
+            'shipping_country' => $shipping_data['country'],
+            'email'=> $data['email'],
+        ]);
+        $billinAddress->save();
+        // if($payment_type['payment_type']=="1"){
+        return view('Billing/creditcard');
+        // }
+        // else
+        // {
+        //    return back();
+        // }
     }
 }

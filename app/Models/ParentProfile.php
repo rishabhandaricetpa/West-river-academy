@@ -24,4 +24,12 @@ class ParentProfile extends Model
     {
         return $this->hasMany('App\Models\StudentProfile','parent_profile_id','id');
     }
+    public function address()
+    {
+        return $this->hasMany('App\Models\Address','parent_profile_id','id');
+    }
+    public function payment()
+    {
+        return $this->hasMany('App\Models\Payment','parent_profile_id','id');
+    }
 }

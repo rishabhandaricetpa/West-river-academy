@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::view('/', 'welcome');
-
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -41,47 +39,43 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('admin.home');
     })->name('admin.admindashboard');
 
-    Route::get('/dashboard-transcript-finished', function () {
-        return view('dashboard-transcript-finished');
-    });
-    Route::get('/dashboard-transcript-filling', function () {
-        return view('dashboard-transcript-filling');
-    });
-    Route::get('/download-transcript', function () {
-        return view('download-transcript');
-    });
-    Route::get('/dashboard-transcript-filling1', function () {
-        return view('dashboard-transcript-filling1');
-    });
-    Route::get('/dashboard-languages', function () {
-        return view('dashboard-languages');
-    });
-    Route::get('/dashboard-transcript-filling2', function () {
-        return view('dashboard-transcript-filling2');
-    });
-    Route::get('/dashboard-another-languages', function () {
-        return view('dashboard-another-languages');
-    });
-    Route::get('/dashboard-transcript', function () {
-        return view('dashboard-transcript');
-    });
-    Route::get('/cart', function () {
-        return view('cart');
-    });
+    // Route::get('/dashboard-transcript-finished', function () {
+    //     return view('dashboard-transcript-finished');
+    // });
+    // Route::get('/dashboard-transcript-filling', function () {
+    //     return view('dashboard-transcript-filling');
+    // });
+    // Route::get('/download-transcript', function () {
+    //     return view('download-transcript');
+    // });
+    // Route::get('/dashboard-transcript-filling1', function () {
+    //     return view('dashboard-transcript-filling1');
+    // });
+    // Route::get('/dashboard-languages', function () {
+    //     return view('dashboard-languages');
+    // });
+    // Route::get('/dashboard-transcript-filling2', function () {
+    //     return view('dashboard-transcript-filling2');
+    // });
+    // Route::get('/dashboard-another-languages', function () {
+    //     return view('dashboard-another-languages');
+    // });
+    // Route::get('/dashboard-transcript', function () {
+    //     return view('dashboard-transcript');
+    // });
+    // Route::get('/cart', function () {
+    //     return view('cart');
+    // });
 
-    Route::get('/cart-billing', function () {
-        return view('cart-billing');
-    });
-
-
+    // Route::get('/cart-billing', function () {
+    //     return view('cart-billing');
+    // });
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/cart', function () {
         return view('cart');
     });
-
-    Route::get('/cart-billing', function () {
-        return view('cart-billing');
-    });
+    Route::get('/cart', 'StudentController@address')->name('billing.address');
+    Route::get('cart-billing/{id}', 'StudentController@address')->name('billing.address');
 
     //enroll student
     Route::get('/enroll-student', 'StudentController@index')->middleware('auth');
@@ -114,6 +108,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/cart-billing', function () {
         return view('Billing/cart-billing');
     });
+    Route::post('/cart-billing', 'StudentController@saveaddress')->middleware('auth')->name('billing.address');
+
+
     //payment
     Route::get('payment', function () {
         return view('paywithpaypal');
@@ -123,5 +120,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
-Route::get('/stripe-payment', [App\Http\Controllers\StripeController::class, 'handleGet']);
+//-----payments
+Route::get('/stripe-payment', 'App\Http\Controllers\StripeController@index');
 Route::post('/stripe-payment', [App\Http\Controllers\StripeController::class, 'handlePost'])->name('stripe.payment');
+Route::post('paymentinfo/{id}', 'App\Http\Controllers\StripeController@store')->name('payment.info');

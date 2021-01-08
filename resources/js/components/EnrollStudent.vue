@@ -443,7 +443,7 @@ export default {
       const oldDate = new Date(date);
       const year = oldDate.getFullYear();
 
-      return new Date(year, 11, 31); // returns 31 dec for same year
+      return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
     updateEndDate(index) {
       this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);

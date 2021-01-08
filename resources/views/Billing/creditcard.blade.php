@@ -3,20 +3,11 @@
 	<title>Laravel 7 - Integrate Stripe Payment Gateway Example</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    </head>
+</head>
 
-<div class="d-flex">
-<!-- * =============== Sidebar =============== * -->
-@include('layouts.partials.sidebar')
-  <!-- * =============== /Sidebar =============== * -->
+@extends('layouts.app')
 
-     <div class="main-content position-relative ml-auto">
-     <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
-<!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
-@include('layouts.partials.header')
-<!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
-
-<!-- * =============== Main =============== * -->
+@section('content')
 <main class="position-relative container form-content mt-4">
        <h1 class="text-center text-white text-uppercase">Payment Details</h1>
 
@@ -31,14 +22,6 @@
                     </div>                    
                 </div>
                 <div class="panel-body">
-  
-                    @if (Session::has('success'))
-                        <div class="alert alert-success text-center">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                            <p>{{ Session::get('success') }}</p>
-                        </div>
-                    @endif
-  
                     <form role="form" action="{{ route('stripe.payment') }}" method="post" class="validation"
                                                      data-cc-on-file="false"
                                                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
@@ -90,71 +73,11 @@
                             </div>
                         </div>
                           
-                    </form>
-                </div>
-            </div>        
+                        </form>
+                    </div>
+                </div>        
+            </div>
         </div>
     </div>
-         </div>
-  </main>
-
- 
-
-@include('layouts.partials.footer')
-</div>
-</div>
-
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-  
-<script type="text/javascript">
-$(function() {
-    var $form         = $(".validation");
-  $('form.validation').bind('submit', function(e) {
-    var $form         = $(".validation"),
-        inputVal = ['input[type=email]', 'input[type=password]',
-                         'input[type=text]', 'input[type=file]',
-                         'textarea'].join(', '),
-        $inputs       = $form.find('.required').find(inputVal),
-        $errorStatus = $form.find('div.error'),
-        valid         = true;
-        $errorStatus.addClass('hide');
- 
-        $('.has-error').removeClass('has-error');
-    $inputs.each(function(i, el) {
-      var $input = $(el);
-      if ($input.val() === '') {
-        $input.parent().addClass('has-error');
-        $errorStatus.removeClass('hide');
-        e.preventDefault();
-      }
-    });
-  
-    if (!$form.data('cc-on-file')) {
-      e.preventDefault();
-      Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-      Stripe.createToken({
-        number: $('.card-num').val(),
-        cvc: $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val()
-      }, stripeHandleResponse);
-    }
-  
-  });
-  
-  function stripeHandleResponse(status, response) {
-        if (response.error) {
-            $('.error')
-                .removeClass('hide')
-                .find('.alert')
-                .text(response.error.message);
-        } else {
-            var token = response['id'];
-            $form.find('input[type=text]').empty();
-            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-            $form.get(0).submit();
-        }
-    }
-  
-});
-</script>
+</main>
+@endsection

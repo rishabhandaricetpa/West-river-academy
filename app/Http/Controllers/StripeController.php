@@ -10,7 +10,7 @@ class StripeController extends Controller
     /**
      * payment view
      */
-    public function handleGet()
+    public function index()
     {
         return view('Billing/creditcard');
     }

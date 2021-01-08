@@ -7,7 +7,7 @@
         <li><a href="{{ url('/enroll-student') }}">add enrollment</a></li>
       </ul>
     </li>
-    <li><a href="#">Cart</a></li>
+    <li><a href="{{ url('/cart') }}">Cart</a></li>
     <li><a href="#">Fee structure</a></li>
     <li><a href="#">Tutorials</a></li>
     <li><a href="#">My Account</a></li>

@@ -38,7 +38,6 @@
           <p>{{$student ->student_Id}}</p>
         </div>
       </div>
-
       @if($student->count()==1)
       @foreach($enrollPeriods as $enrollPeriod) <div class="form-group d-sm-flex mb-2">
         <label for="">Enrollment Period(s)</label>
@@ -53,12 +52,10 @@
           <p>{{$enrollPeriod->grade_level}}</p>
         </div>
       </div>
-
       @endforeach
       @endif
       <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary">Edit Student {{$key}} </a>
       @endforeach
-
     </form>
     <div class="col-md-4">
           <h3 class="py-3">Fees</h3>
