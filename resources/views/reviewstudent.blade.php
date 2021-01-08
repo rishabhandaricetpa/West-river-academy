@@ -17,7 +17,7 @@
       <div class="form-group d-sm-flex mb-2">
         <label for="">Date of Birth</label>
         <div>
-          <p>{{$student ->d_o_b->format('d M Y' )}}</p>
+          <p>{{$student ->d_o_b->format('M j, Y' )}}</p>
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
@@ -64,19 +64,23 @@
       <h3 class="py-3">Fees</h3>
       <table class="px-0 w-100">
         <tbody>
-          <tr>
-            <td>Annual * 2</td>
-            <td class="text-right">$750</td>
-          </tr>
-          <tr>
-            <td>Second Semester Only * 1</td>
-            <td class="text-right">$200</td>
-          </tr>
+          @php
+              $total_amount = 0;
+          @endphp
+          @foreach ($fees as $fee)
+            <tr>
+              <td> @if ($fee->type == 'annual') Annual  @else Second Semester Only @endif x  {{ $fee->count }}</td>
+              <td class="text-right">${{ $fee->amount }}</td>
+              @php
+                  $total_amount += $fee->amount;
+              @endphp
+            </tr>
+          @endforeach
         </tbody>
         <tfoot>
           <tr>
-            <td>Annual * 2</td>
-            <td class="text-right">$750</td>
+            <td>Total to pay </td>
+            <td class="text-right"> ${{ $total_amount }}</td>
           </tr>
         </tfoot>
       </table>
