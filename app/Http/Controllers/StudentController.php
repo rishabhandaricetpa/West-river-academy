@@ -7,6 +7,8 @@ use Auth;
 use App\Models\ParentProfile;
 use App\Models\User;
 use App\Models\StudentProfile;
+use App\Models\FeeStructure;
+use App\Models\Address;
 use App\Models\EnrollmentPeriods;
 use App\Models\EnrollmentPayment;
 use App\Models\FeesInfo;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\EnrollmentHelper;
 
 class StudentController extends Controller
 {
@@ -40,7 +43,16 @@ class StudentController extends Controller
     }
     public function index(Request $request)
     {
-        return view('enrollstudent');
+        $id = auth()->user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        $country = $parentProfileData->country;
+        $countryData = Country::where('country', $country)->first();
+        $countryId = $countryData->id;
+        $semesters_dates = Country::find($countryId)->semesters()->first();
+        if ($request->expectsJson()) {
+            return response()->json($semesters_dates);
+        }
+        return view('enrollstudent', compact('semesters_dates'));
     }
 
     protected function store(Request $data)
@@ -177,15 +189,45 @@ class StudentController extends Controller
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
     }
-    public function delete(Request $request, $id)
-    {
-
-        $periods_id = collect($request->get('periods'))->pluck('id');
-        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        $enrollPeriodId = collect($enrollPeriods)->pluck('id');
-
-        $diff = $enrollPeriodId->diff($periods_id);
-
-        EnrollmentPeriods::whereIn('id', $diff)->delete();
+  
+    public function address($id)
+    {    $user_id = Auth::user()->id;
+         $parent = ParentProfile::find($user_id)->first();
+         $country_list=  Country::select('country')
+         ->orderBy('country')
+         ->get();
+         return view('Billing/cart-billing', compact('parent','country_list'));
+    }
+    protected function saveaddress(Request $data)
+    {   
+        $data=$data->all();
+        $billing_data = $data['billing_address'];
+        $shipping_data = $data['billing_address'];
+        $payment_type=$data['paymentMethod'];
+        $Userid = auth()->user()->id;
+        $parentProfileData = User::find($Userid)->parentProfile()->first();
+        $id = $parentProfileData->id;
+        $billinAddress =  Address::create([
+            'parent_profile_id' => $id,
+            'billing_street_address' => $billing_data['street_address'],
+            'billing_city' => $billing_data['city'],
+            'billing_state' => $billing_data['state'],
+            'billing_zip_code' => $billing_data['zip_code'],
+            'billing_country' => $billing_data['country'],
+            'shipping_street_address' => $shipping_data['street_address'],
+            'shipping_city' => $shipping_data['city'],
+            'shipping_state' => $shipping_data['state'],
+            'shipping_zip_code' => $shipping_data['zip_code'],
+            'shipping_country' => $shipping_data['country'],
+            'email'=> $data['email'],
+        ]);
+        $billinAddress->save();
+        if($payment_type['payment_type']=="Credit Card"){
+        return view('Billing/creditcard');
+        }
+         else
+        {
+        alert('hello');
+        }
     }
 }

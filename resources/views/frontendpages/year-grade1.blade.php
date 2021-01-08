@@ -20,42 +20,25 @@
                 @csrf
         <div class="form-group mb-2 lato-italic info-detail pb-4">
            <div class="row ">
-            <div class="col-sm-3">
+
+                 <div class="col-sm-4">
                       <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 3">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="2">
                       <label class="form-check-label" for="">
-                        2016-17
+                        2020
                       </label>
                       </div>
                       <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 4">
+                      <input class="form-check-input" type="radio" name="student_grade"  value="2">
                       <label class="form-check-label" for="">
-                        2017-18
+                        2021
                       </label>
                       </div>
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="1">
-                      <label class="form-check-label" for="">
-                        2018-19
-                      </label>
-                      </div>
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="1">
-                      <label class="form-check-label" for="">
-                        2019-20
-                      </label>
-                      </div>
-                      <div class="form-check mb-2">
-                      <input class="form-check-input" type="radio" name="student_grade"  value="1">
-                      <label class="form-check-label" for="">
-                        2020-21
-                      </label>
-                      </div>
-                </div>
-                  </div>   
+                    </div>
+                  </div>
         </div>
-        <div class="text-center">
-            <a href="#" class="btn btn-primary">Continue</a>
+        <div class="text-center mt-5">
+            <a href="Ap-courses" class="btn btn-primary">Continue</a>
         </div>
   </form>
   </main>

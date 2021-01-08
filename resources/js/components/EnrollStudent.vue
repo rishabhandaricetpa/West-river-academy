@@ -1,4 +1,6 @@
 <template>
+ <div class="form-wrap border bg-light py-5 px-25">
+    <h2>Enroll Student 1</h2>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
@@ -73,9 +75,6 @@
           name="cell_phone"
           aria-describedby="emailHelp"
           v-model="form.cell_phone"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-          maxlength="10"
-          pattern="[0-9]*"
         />
       </div>
     </div>
@@ -94,6 +93,7 @@
       </div>
     </div>
     <div
+      class="seperator"
       v-for="(enrollPeriod, index) in form.enrollPeriods"
       :key="enrollPeriod.id"
     >
@@ -105,11 +105,12 @@
             <div class="form-group col-md-5">
               <p>
                 <Datepicker
-                  id="startdate"
                   name="startdate"
                   v-model="enrollPeriod.selectedStartDate"
                   required
                   placeholder="Select Start Date"
+                  :value="enrollPeriod.selectedStartDate"
+                  @input="updateEndDate(index)"
                 >
                 </Datepicker>
               </p>
@@ -135,11 +136,11 @@
             <div class="form-group col-md-5">
               <p>
                 <Datepicker
-                  id="enddate"
                   name="enddate"
                   v-model="enrollPeriod.selectedEndDate"
                   placeholder="Select End Date"
                   required
+                  :disabled-dates="enrollPeriod.endDisabledDates"
                 >
                 </Datepicker>
               </p>
@@ -173,44 +174,220 @@
               <input
                 class="form-check-input"
                 type="radio"
+<<<<<<< HEAD
                 :value= "val"
                 v-model="enrollPeriod.grade"
               />
               <label class="form-check-label" for=""> {{ val }} </label>
+=======
+                name="student_grade"
+                value="Upgraded"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> Upgraded </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="Preschool Age 3"
+                v-model="enrollPeriod.grade"
+                :required="true"
+              />
+              <label class="form-check-label" for=""> Preschool Age 3 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="Preschool Age 4"
+                v-model="enrollPeriod.grade"
+                :required="true"
+              />
+              <label class="form-check-label" for=""> Preschool Age 4 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="Kindergarten"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> Kindergarten </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="1"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 1 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="2"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 2 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="3"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 3 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="4"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 4 </label>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="5"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 5 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="6"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 6 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="7"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 7 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="8"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 8 </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                value="9"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 9 </label>
+            </div>
+            <div
+              class="form-check"
+              data-toggle="modal"
+              data-target="#chooseGrade"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                id=""
+                value="10"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 10 </label>
+            </div>
+            <div
+              class="form-check"
+              data-toggle="modal"
+              data-target="#chooseGrade"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                id=""
+                value="11"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 11 </label>
+            </div>
+            <div
+              class="form-check"
+              data-toggle="modal"
+              data-target="#chooseGrade"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                name="student_grade"
+                id=""
+                value="12"
+                v-model="enrollPeriod.grade"
+              />
+              <label class="form-check-label" for=""> 12 </label>
+>>>>>>> d6e1b1597cf073e39afe38d2e2965e0fddf56709
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="form-group d-flex mt-2r">
-      <label for="">Is this student immunized?</label>
-      <div class="col-sm-6">
-        <select
-          class="form-control"
-          name="immunized_status"
-          v-model="form.immunized_status"
-        >
-          <option>Yes, records will come with school records.</option>
-          <option>Yes, I will provide records.</option>
-          <option>Yes, I plan to get immunizations soon.</option>
-          <option>No, for personal reasons.</option>
-          <option>No, for medical reasons.</option>
-          <option>No, for religious reasons.</option>
-        </select>
+       </div>
+      <div class="form-group d-flex mt-2r">
+        <label for="">Is this student immunized?</label>
+        <div class="col-sm-6">
+          <select
+            class="form-control"
+            name="immunized_status"
+            v-model="form.immunized_status"
+          >
+            <option>Yes, records will come with school records.</option>
+            <option>Yes, I will provide records.</option>
+            <option>Yes, I plan to get immunizations soon.</option>
+            <option>No, for personal reasons.</option>
+            <option>No, for medical reasons.</option>
+            <option>No, for religious reasons.</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="form-group d-flex">
-      <label for="">tell us more about your situation <sup>*</sup></label>
-      <textarea
-        class="form-control"
-        id="exampleFormControlTextarea1"
-        name="student_situation"
-        rows="3"
-        v-model="form.student_situation"
-        required
-      ></textarea>
-    </div>
-
+      <div class="form-group d-flex">
+        <label for="">tell us more about your situation </label>
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          name="student_situation"
+          rows="3"
+          v-model="form.student_situation"
+          required
+        ></textarea>
+      </div>
     <div class="form-wrap py-2r px-25 mt-2r">
       <a
         type="button"
@@ -224,11 +401,13 @@
       <button type="submit" class="btn btn-primary">Continue</button>
     </div>
   </form>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import Datepicker from "vuejs-datepicker";
+import moment from 'moment';
 
 export default {
   name: "EnrollStudent",
@@ -238,34 +417,54 @@ export default {
   data() {
     return {
       grades:[['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
-      form: {
-        first_name: "",
-        middle_name: "",
-        last_name: "",
-        dob: "",
-        email: "",
-        cell_phone: "",
-        immunized_status: "",
-        student_situation: "",
-        studentID: "",
-        enrollPeriods: [
-          {
-            selectedStartDate: "",
-            selectedEndDate: "",
-            grade: "",
-          },
-        ],
-      },
+        form: {
+          first_name: "",
+          middle_name: "",
+          last_name: "",
+          dob: "",
+          email: "",
+          cell_phone: "",
+          immunized_status: "",
+          student_situation: "",
+          studentID: "",
+          enrollPeriods: [
+            {
+              selectedStartDate: new Date(this.semesters.start_date),
+              selectedEndDate: "",
+              grade: "",
+              endDisabledDates: {
+                from: this.calcEndDate(this.semesters.start_date),
+              },
+            },
+          ],
+        },
+      students: [],
     };
   },
-
-  mounted() {},
+  props: {
+    semesters: {
+      required: true,
+    },
+  },
   methods: {
+    calcEndDate(date){
+      const oldDate = new Date(date);
+      const year = oldDate.getFullYear();
+
+      return new Date(year + 1, 0, 1); // returns 31 dec for same year
+    },
+    updateEndDate(index) {
+      this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
+      this.form.enrollPeriods[index].selectedEndDate = ''; // reset the end date value
+    },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
-        selectedStartDate: "",
+        selectedStartDate: new Date(this.semesters.start_date),
         selectedEndDate: "",
         grade: "",
+        endDisabledDates: {
+          from: this.calcEndDate(this.semesters.start_date),
+        },
       });
     },
     addStudent() {

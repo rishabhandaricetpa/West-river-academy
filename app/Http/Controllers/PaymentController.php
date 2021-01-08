@@ -48,7 +48,7 @@ class PaymentController extends Controller
         $item_1 = new Item();
 
         $item_1->setName('Product 1')
-            ->setCurrency('INR')
+            ->setCurrency('USD')
             ->setQuantity(1)
             ->setPrice($request->get('amount'));
 
@@ -56,7 +56,7 @@ class PaymentController extends Controller
         $item_list->setItems(array($item_1));
 
         $amount = new Amount();
-        $amount->setCurrency('INR')
+        $amount->setCurrency('USD')
             ->setTotal($request->get('amount'));
 
         $transaction = new Transaction();

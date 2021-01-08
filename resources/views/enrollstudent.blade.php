@@ -8,7 +8,8 @@
 
 
   <div id="app">
-    <enroll-student> </enroll-student>
+  
+    <enroll-student :semesters='@json($semesters_dates)'> </enroll-student>
   </div>
 </main>
 <!-- Choose Dates -->

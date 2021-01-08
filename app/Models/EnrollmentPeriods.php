@@ -21,4 +21,8 @@ class EnrollmentPeriods extends Model
     {
         return $this->belongsTo(Country::class);
     }
+    public function FeeStructure()
+    {
+        return $this->belongsTo('App\Models\FeeStructure');
+    }
 }

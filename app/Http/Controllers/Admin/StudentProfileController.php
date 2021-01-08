@@ -16,7 +16,7 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
-        $student = StudentProfile::all()->where('status',0);
+        $student = StudentProfile::all();
         return view('admin.familyInformation.view-student',compact('student'));
     }
 

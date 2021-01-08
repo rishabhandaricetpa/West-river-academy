@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 // Dashboard
 Route::get('/', 'HomeController@index')->name('home');
 
-// Login
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -34,7 +33,11 @@ Route::group(
         })->name('admin.logout');
     }
 );
-Route::get('view', 'ParentController@parentData')->name('view');
+Route::get('view', 'ParentController@index')->name('view.parent');
+Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
+Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
+Route::get('delete/parent/{id}', 'ParentController@destroy')->name('parent.delete');
+
 Route::get('view-student', 'StudentProfileController@index')->name('view-student');
 Route::get('edit-student/{id}', 'StudentProfileController@edit')->name('edit-student');
 Route::post('update/{id}', 'StudentProfileController@update')->name('edit-student.update');
