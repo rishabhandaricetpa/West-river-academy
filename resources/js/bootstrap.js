@@ -24,3 +24,6 @@ Vue.mixin({
     route: Ziggy
   }
 });
+import 'bootstrap/js/dist/tooltip';
+
+$('[data-toggle="tooltip"]').tooltip();

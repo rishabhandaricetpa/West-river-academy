@@ -33,4 +33,17 @@ class StripeController extends Controller
         ); 
         return back()->with($notification);
     }
+    public function store($id, Request $request)
+    {
+        $paymentinfo = new Payment;
+        $user = Auth::user();
+        $paymentinfo = $user->transactions()->create([
+            'transcation_id' => $id,
+
+        ]);
+        $paymentinfo->save();
+        Mail::to(Auth::user())->send(new OrderShipped($id));
+        return view('ordershipped');
+    }
+
 }

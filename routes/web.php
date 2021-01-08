@@ -33,7 +33,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
+    Route::get('/welcome-video', function () {
+        return view('welcome-video');
+    });
     // admin dashboard
     Route::get('admin-dashboard', function () {
         return view('admin.home');
@@ -67,15 +69,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //     return view('cart');
     // });
 
-    // Route::get('/cart-billing', function () {
-    //     return view('cart-billing');
-    // });
+   
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/cart', function () {
         return view('cart');
     });
-    Route::get('/cart', 'StudentController@address')->name('billing.address');
-    Route::get('cart-billing/{id}', 'StudentController@address')->name('billing.address');
+   
 
     //enroll student
     Route::get('/enroll-student', 'StudentController@index')->middleware('auth');
@@ -105,9 +104,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/cart', function () {
         return view('cart');
     });
-    Route::get('/cart-billing', function () {
-        return view('Billing/cart-billing');
-    });
+
+    
+    // Route::get('/cart', 'StudentController@address')->name('billing.address');
+    Route::get('edit/{id}', 'StudentController@address')->name('edit.address');
+    // Route::get('/cart-billing', function () {
+    //     return view('Billing/cart-billing');
+    // });
     Route::post('/cart-billing', 'StudentController@saveaddress')->middleware('auth')->name('billing.address');
 
 
@@ -123,4 +126,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 //-----payments
 Route::get('/stripe-payment', 'App\Http\Controllers\StripeController@index');
 Route::post('/stripe-payment', [App\Http\Controllers\StripeController::class, 'handlePost'])->name('stripe.payment');
-Route::post('paymentinfo/{id}', 'App\Http\Controllers\StripeController@store')->name('payment.info');
+// Route::post('paymentinfo/{id}', 'App\Http\Controllers\StripeController@store')->name('payment.info');

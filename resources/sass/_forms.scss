@@ -5,7 +5,6 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-    min-height: 245px;
     h2{
         margin-bottom: 2rem;
     }
@@ -18,7 +17,6 @@
 label{
     font-size: 13px;
     color: #888888;
-
     padding-right: 8px;
     line-height: 20px;
 
@@ -38,7 +36,9 @@ label{
     padding-bottom: 2rem;
 }
 
-
+.min-select{
+    width: 100px;
+}
 
 select.form-control{
     padding: 3px;
@@ -102,5 +102,24 @@ cursor: pointer;
 }
 
 .label-md label{
-    font-size: 15px;
+   font-size: 15px;
+}
+
+.unstyled-label{
+    label{
+        width: auto;
+        & + div{
+         width: auto;
+        }
+    }
+}
+
+label.h3{
+    &.text-black{
+      font-weight: 500;
+    }
+}
+
+.tooltip-styling{
+    font-size: 24px;
 }

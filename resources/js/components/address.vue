@@ -324,7 +324,8 @@ export default {
       axios
         .post(route("billing.address"), this.form)
         .then(
-          (response) => (window.location = "/stripe-payment/" )        )
+          (response) => (window.location = "/stripe-payment/" )       
+           )
         .catch((error) => console.log(error));
     },
   },

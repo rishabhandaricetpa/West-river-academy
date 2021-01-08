@@ -180,12 +180,12 @@ class StudentController extends Controller
             'email'=> $data['email'],
         ]);
         $billinAddress->save();
-        // if($payment_type['payment_type']=="1"){
+        if($payment_type['payment_type']=="Credit Card"){
         return view('Billing/creditcard');
-        // }
-        // else
-        // {
-        //    return back();
-        // }
+        }
+         else
+        {
+        alert('hello');
+        }
     }
 }
