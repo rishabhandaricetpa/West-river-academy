@@ -53,29 +53,25 @@ class Cart extends Model
     private static function calculateItemsPerStudent($enroll_data)
     {
         $data = [];
-
+        
         foreach ($enroll_data as $key => $value) {
+            $type =  $value['type'] == 'annual' ? 'Annual' : 'Second Semester Only';
+            $arr = [
+                'id' => $value['id'],
+                'type' => $type,
+                'amount' => $value['amount'],
+                'start_date' => \Carbon\Carbon::parse($value['start_date_of_enrollment'])->format('d M Y'),
+                'end_date' => \Carbon\Carbon::parse($value['end_date_of_enrollment'])->format('d M Y')
+            ];
             if(array_key_exists($value['student_Id'], $data)){
                 array_push(
                     $data[$value['student_Id']]['enroll_items'],
-                    [
-                        'id' => $value['id'],
-                        'type' => $value['type'],
-                        'amount' => $value['amount'],
-                        'start_date' => $value['start_date_of_enrollment'],
-                        'end_date' => $value['end_date_of_enrollment']
-                    ]
+                    $arr
                 );
             }else{
                 $data[$value['student_Id']] = [
-                    'name' => $value['first_name'],
-                    'enroll_items' => [[
-                        'id' => $value['id'],
-                        'type' => $value['type'],
-                        'amount' => $value['amount'],
-                        'start_date' => $value['start_date_of_enrollment'],
-                        'end_date' => $value['end_date_of_enrollment']
-                    ]]
+                    'name' => ucfirst($value['first_name']),
+                    'enroll_items' => [$arr]
                 ];
             }
         }
