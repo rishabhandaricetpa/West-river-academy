@@ -101,9 +101,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/reviewstudent', function () {
         return view('reviewstudent');
     });
-    Route::get('/cart', function () {
-        return view('cart');
-    });
+    
+    Route::post('/cart', 'CartController@store')->middleware('auth')->name('add.cart');
+    Route::get('/cart', 'CartController@index')->middleware('auth');
 
     
     // Route::get('/cart', 'StudentController@address')->name('billing.address');

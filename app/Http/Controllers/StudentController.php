@@ -128,7 +128,6 @@ class StudentController extends Controller
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
 
         $fees = ParentProfile::getParentPendingFees($user_id);
-
         return view('reviewstudent', compact('enrollPeriods', 'students', 'fees'));
     }
     public function update(Request $request, $id)
@@ -156,7 +155,7 @@ class StudentController extends Controller
             }else{
                 $student_type = 'additional_student';
             }
-
+           
             $periods->whereNull('id')->each(function ($period) use ($student,$student_type) {
                 $enrollPeriod = new EnrollmentPeriods();
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
@@ -192,17 +191,30 @@ class StudentController extends Controller
             'grade_level' => $period['grade'],
             'type' => $type
         ]);
+        $enrollPeriod->save();
 
+        $EnrollmentPayment = EnrollmentPayment::where('enrollment_period_id', $enrollPeriod->id)->first();
+
+        if(is_null($EnrollmentPayment)){
+            $EnrollmentPayment = new EnrollmentPayment();
+        }
+
+        if($EnrollmentPayment->status == 'paid'){
+            return;
+        }
+        
         $fee_type = $student_type.'_'.$type;
         $fee = FeesInfo::select('amount')->where('type',$fee_type)->first();
 
-        $enrollmentPayment = EnrollmentPayment::create([
+        $EnrollmentPayment->fill([
             'enrollment_period_id' => $enrollPeriod->id,
             'status' => 'pending',
             'amount' => $fee->amount
         ]);
 
-        $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
+        $EnrollmentPayment->save();
+
+        $enrollPeriod->enrollment_payment_id = $EnrollmentPayment->id;
         $enrollPeriod->save();
     }
 
