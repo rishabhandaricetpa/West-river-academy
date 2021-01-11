@@ -8,7 +8,7 @@
   <div class="form-wrap border bg-light py-5 px-25">
     <h2>Enroll Student 1</h2>
     <div id="app">
-      <edit-enroll :students='@json($studentData)' :periods='@json($enrollPeriods)'></edit-enroll>
+      <edit-enroll :semesters='@json($semesters_dates)' :students='@json($studentData)' :periods='@json($enrollPeriods)'></edit-enroll>
     </div>
 </main>
 <!-- Choose Dates -->

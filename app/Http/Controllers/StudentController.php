@@ -111,13 +111,13 @@ class StudentController extends Controller
             DB::commit();
 
             if ($data->expectsJson()) {
-                return response()->json(['status' => 'success' ,'messgae' => 'Student added successfully', 'data' => $student]);
+                return response()->json(['status' => 'success' ,'message' => 'Student added successfully', 'data' => $student]);
             }
         }catch (\Exception $e) {
             DB::rollBack();
 
             if ($data->expectsJson()) {
-                return response()->json(['status' => 'error' ,'messgae' => 'Failed to add student']);
+                return response()->json(['status' => 'error' ,'message' => 'Failed to add student']);
             }
         }
     }
@@ -149,45 +149,73 @@ class StudentController extends Controller
             $student->save();
             $periods = collect($request->get('periods'));
 
-            $periods->whereNull('id')->each(function ($period) use ($student) {
+            $first_student_id = StudentProfile::where('parent_profile_id',$student->parent_profile_id)->orderBy('created_at','asc')->pluck('id')->first();
+
+            if($first_student_id == $id){
+                $student_type = 'first_student';
+            }else{
+                $student_type = 'additional_student';
+            }
+
+            $periods->whereNull('id')->each(function ($period) use ($student,$student_type) {
                 $enrollPeriod = new EnrollmentPeriods();
-                $enrollPeriod->fill([
-                    'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
-                    'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
-                    'grade_level' => $period['grade']
-                ]);
-                $enrollPeriod->save();
+                $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
             });
-            $periods->whereNotNull('id')->each(function ($period) use ($student) {
+            $periods->whereNotNull('id')->each(function ($period) use ($student, $student_type) {
                 $enrollPeriod = EnrollmentPeriods::find($period['id']);
-                $enrollPeriod->fill([
-                    'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  \Carbon\Carbon::parse($period['selectedStartDate'])->format('Y-m-d'),
-                    'end_date_of_enrollment' => \Carbon\Carbon::parse($period['selectedEndDate'])->format('Y-m-d'),
-                    'grade_level' => $period['grade']
-                ]);
-                $enrollPeriod->save();
+                $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
             });
 
             DB::commit();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'success' ,'messgae' => 'Student updated successfully']);
+                return response()->json(['status' => 'success' ,'message' => 'Student updated successfully']);
             }
         }catch (\Exception $e) {
             DB::rollBack();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'error' ,'messgae' => 'Failed to update student']);
+                return response()->json(['status' => 'error' ,'message' => 'Failed to update student']);
             }
         }
     }
+
+    public function updateEnrollPeriod($period, $student, $enrollPeriod, $student_type){
+        $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
+        $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
+        $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
+        $enrollPeriod->fill([
+            'student_profile_id' => $student->id,
+            'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
+            'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
+            'grade_level' => $period['grade'],
+            'type' => $type
+        ]);
+
+        $fee_type = $student_type.'_'.$type;
+        $fee = FeesInfo::select('amount')->where('type',$fee_type)->first();
+
+        $enrollmentPayment = EnrollmentPayment::create([
+            'enrollment_period_id' => $enrollPeriod->id,
+            'status' => 'pending',
+            'amount' => $fee->amount
+        ]);
+
+        $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
+        $enrollPeriod->save();
+    }
+
     public function edit($id)
     {
+        $parentProfileData = User::find(auth()->user()->id)->parentProfile()->first();
+        $country = $parentProfileData->country;
+        $countryData = Country::where('country', $country)->first();
+        $countryId = $countryData->id;
+        $semesters_dates = Country::find($countryId)->semesters()->first();
         $studentData = StudentProfile::find($id);
         $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
-        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods'));
+        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'semesters_dates'));
     }
   
     public function address($id)
