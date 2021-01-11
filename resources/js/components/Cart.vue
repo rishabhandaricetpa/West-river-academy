@@ -1,12 +1,12 @@
 <template>
   <div>
     <div>
-      <div class="mt-2r" v-for="(student, index) in students" :key="index">
+      <div class="mt-2r" v-for="(student, index) in studentsData" :key="index">
         <h3>{{ student.name }}</h3>
         <div v-for="(item, i) in student.enroll_items" :key="i" class="row border-bottom py-3">
           <div class="col-sm-6"><p>{{ item.type }} <span class="small">( {{ item.start_date }} - {{ item.end_date }} )</span> </p></div>
           <div class="col-sm-2 text-right price"><p>${{ item.amount }}</p></div>
-          <div class="col-sm-2 text-right" @click="remove(item.id)"> <a href="javascript:void(0)"> Remove </a></div>
+          <div class="col-sm-2 text-right" @click="remove(item.id, index, i, item.amount)" > <a href="javascript:void(0)"> Remove </a></div>
         </div>
       </div>
     </div>
@@ -24,7 +24,8 @@ export default {
   name: "GetCart",
   data() {
     return {
-      total:0
+      total:0,
+      studentsData: this.students
     };
   },
   props: {
@@ -33,15 +34,31 @@ export default {
     },
   },
   methods: {
-    remove(id){
-      console.log(id);
+    remove(id, studentIndex, enrollIndex, amount){
+      axios
+        .delete(route("delete.cart",id))
+        .then(
+          (response) => {
+            const resp = response.data;
+            if(resp.status == 'success') {
+              this.total -= amount;
+              this.studentsData[studentIndex]['enroll_items'].splice(enrollIndex, 1);
+              if(this.studentsData[studentIndex]['enroll_items'].length == 0){
+                delete this.studentsData[studentIndex];
+              }
+            }else{
+              alert(resp.message);
+            }
+          }
+        )
+        .catch((error) => console.log(error));
     }
   },
   mounted(){
     let total = 0;
-    for (const student in this.students) {
-      if (this.students.hasOwnProperty(student)) {
-        const el = this.students[student];
+    for (const student in this.studentsData) {
+      if (this.studentsData.hasOwnProperty(student)) {
+        const el = this.studentsData[student];
       
         el.enroll_items.forEach(element => {
           total = total + (element['amount'] * 1);

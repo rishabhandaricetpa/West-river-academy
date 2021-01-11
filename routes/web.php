@@ -103,6 +103,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
     
     Route::post('/cart', 'CartController@store')->middleware('auth')->name('add.cart');
+    Route::delete('/cart/{id}', 'CartController@delete')->middleware('auth')->name('delete.cart');
     Route::get('/cart', 'CartController@index')->middleware('auth');
 
     

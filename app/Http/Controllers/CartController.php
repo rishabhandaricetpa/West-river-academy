@@ -57,11 +57,20 @@ class CartController extends Controller
 
             DB::commit();
 
-            $this->index();
+            return redirect('/cart');
             
         }catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back();
+        }
+    }
+
+    public function delete($id)
+    {
+        if(Cart::where('id',$id)->delete()){
+            return response()->json(['status' => 'success' ,'message' => 'Item removed successfully']);
+        }else{
+            return response()->json(['status' => 'error' ,'message' => 'Failed to remove item']);
         }
     }
 }
