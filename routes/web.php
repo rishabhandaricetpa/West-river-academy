@@ -65,8 +65,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/dashboard-transcript', function () {
     //     return view('dashboard-transcript');
     // });
-    // Route::get('/cart', function () {
-    //     return view('cart');
+    // Route::get('/order-review', function () {
+    //     return view('frontendpages/order-review');
     // });
 
    
@@ -107,7 +107,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     
     // Route::get('/cart', 'StudentController@address')->name('billing.address');
-    Route::get('edit/{id}', 'StudentController@address')->name('edit.address');
+    Route::get('edit/address/{id}', 'StudentController@address')->name('edit.address');
     // Route::get('/cart-billing', function () {
     //     return view('Billing/cart-billing');
     // });
@@ -124,6 +124,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 //-----payments
-Route::get('/stripe-payment', 'App\Http\Controllers\StripeController@index');
+Route::get('/stripe-payment', 'App\Http\Controllers\StripeController@index')->name('stripe.payment');
 Route::post('/stripe-payment', [App\Http\Controllers\StripeController::class, 'handlePost'])->name('stripe.payment');
 // Route::post('paymentinfo/{id}', 'App\Http\Controllers\StripeController@store')->name('payment.info');
+Route::get('/money-order', 'App\Http\Controllers\MoneyOrderController@index')->name('money.order');
+Route::get('bankTransfer','App\Http\Controllers\BankTranferController@index')->name('bank.transfer');
+
+

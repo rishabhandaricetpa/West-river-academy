@@ -53,7 +53,7 @@
               <a href="#" class="btn btn-secondary">Add Student</a>
               <a href="#" class="btn btn-secondary ml-sm-2">Add Service</a>
             </div>
-            <a href="{{url('/edit', Auth::user()->id)}}" class="btn btn-primary ml-auto">Check Out and Pay</a>
+            <a href="{{url('/edit/address', Auth::user()->id)}}" class="btn btn-primary ml-auto">Check Out and Pay</a>
           </div>
         </div>
        </div>

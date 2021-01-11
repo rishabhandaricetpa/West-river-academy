@@ -121,6 +121,9 @@ class StudentController extends Controller
             }
         }
     }
+    /**
+     * review student data on review page
+     */
     public function reviewStudent($id)
     {
         $user_id = Auth::user()->id;
@@ -131,6 +134,7 @@ class StudentController extends Controller
 
         return view('reviewstudent', compact('enrollPeriods', 'students', 'fees'));
     }
+
     public function update(Request $request, $id)
     {
         try{
@@ -191,20 +195,24 @@ class StudentController extends Controller
     }
   
     public function address($id)
-    {    $user_id = Auth::user()->id;
+    {    
+        $user_id = Auth::user()->id;
          $parent = ParentProfile::find($user_id)->first();
          $country_list=  Country::select('country')
          ->orderBy('country')
          ->get();
          return view('Billing/cart-billing', compact('parent','country_list'));
     }
-    protected function saveaddress(Request $data)
+    /**
+     * This function is used to store billing and shipping address
+     */
+    protected function saveaddress(Request $request)
     {   
-        $data=$data->all();
-        $billing_data = $data['billing_address'];
-        $shipping_data = $data['billing_address'];
-        $payment_type=$data['paymentMethod'];
-        $Userid = auth()->user()->id;
+        $address = new Address();
+        $billing_data = $request->input('billing_address');
+        $shipping_data = $request->input('shipping_address');
+        $payment_type = $request->input('paymentMethod');
+        $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $id = $parentProfileData->id;
         $billinAddress =  Address::create([
@@ -219,15 +227,19 @@ class StudentController extends Controller
             'shipping_state' => $shipping_data['state'],
             'shipping_zip_code' => $shipping_data['zip_code'],
             'shipping_country' => $shipping_data['country'],
-            'email'=> $data['email'],
+            'email'=> $request['email'],
         ]);
-        $billinAddress->save();
         if($payment_type['payment_type']=="Credit Card"){
-        return view('Billing/creditcard');
+            return route('stripe.payment');
         }
-         else
-        {
-        alert('hello');
+        elseif($payment_type['payment_type']=="Pay Pal"){
+            return route('paywithpaypal');
+        }
+        elseif($payment_type['payment_type']=="Bank Transfer"){
+            return route('bank.transfer');
+        }
+        elseif($payment_type['payment_type']=="Check or Money Order"){
+            return route('money.order');
         }
     }
 }
