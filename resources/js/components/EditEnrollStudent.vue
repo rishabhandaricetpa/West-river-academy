@@ -104,6 +104,7 @@
                 v-model="period.selectedStartDate"
                 required
                 placeholder="Select Start Date"
+                @input="updateEndDate(index)"
               >
               </Datepicker>
             </div>
@@ -132,6 +133,7 @@
                 v-model="period.selectedEndDate"
                 required
                 placeholder="Select Start Date"
+                :disabled-dates="period.endDisabledDates"
               >
               </Datepicker>
             </div>
@@ -159,182 +161,15 @@
           <p>(You may select more than one for multiple years)</p></label
         >
         <div class="row pl-5">
-          <div class="col-sm-3">
-            <div class="form-check">
+          <div v-for="(grade, index) in grades" :key="index" class="col-sm-3">
+            <div v-for="(val, i) in grade" :key="i" class="form-check">
               <input
                 class="form-check-input"
                 type="radio"
-                value="Upgraded"
+                :value= "val"
                 v-model="period.grade"
-                required
               />
-              <label class="form-check-label" for=""> Upgraded </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="Preschool Age 3"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label" for=""> Preschool Age 3 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="Preschool Age 4"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label" for=""> Preschool Age 4 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="Kindergarten"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label" for=""> Kindergarten </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="1"
-              />
-              <label class="form-check-label" for=""> 1 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="2"
-              />
-              <label class="form-check-label" for=""> 2 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="3"
-              />
-              <label class="form-check-label" for=""> 3 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="4"
-              />
-              <label class="form-check-label" for=""> 4 </label>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="5"
-              />
-              <label class="form-check-label" for=""> 5 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="6"
-              />
-              <label class="form-check-label" for=""> 6 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="7"
-              />
-              <label class="form-check-label" for=""> 7 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                v-model="period.grade"
-                required
-                value="8"
-              />
-              <label class="form-check-label"> 8 </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                value="9"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label"> 9 </label>
-            </div>
-            <div
-              class="form-check"
-              data-toggle="modal"
-              data-target="#chooseGrade"
-            >
-              <input
-                class="form-check-input"
-                type="radio"
-                value="10"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label" for=""> 10 </label>
-            </div>
-            <div
-              class="form-check"
-              data-toggle="modal"
-              data-target="#chooseGrade"
-            >
-              <input
-                class="form-check-input"
-                type="radio"
-                id=""
-                value="11"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label" for=""> 11 </label>
-            </div>
-            <div
-              class="form-check"
-              data-toggle="modal"
-              data-target="#chooseGrade"
-            >
-              <input
-                class="form-check-input"
-                type="radio"
-                id=""
-                value="12"
-                v-model="period.grade"
-                required
-              />
-              <label class="form-check-label" for=""> 12 </label>
+              <label class="form-check-label" for=""> {{ val }} </label>
             </div>
           </div>
         </div>
@@ -395,6 +230,7 @@ export default {
   },
   data() {
     return {
+      grades:[['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
       form: {
         first_name: this.students.first_name,
         middle_name: this.students.middle_name,
@@ -416,6 +252,9 @@ export default {
         selectedStartDate: item.start_date_of_enrollment,
         selectedEndDate: item.end_date_of_enrollment,
         grade: item.grade_level,
+        endDisabledDates: {
+          from: this.calcEndDate(item.start_date_of_enrollment),
+        },
       });
     });
   },
@@ -424,16 +263,32 @@ export default {
       axios
         .post(route("update.student", this.students), this.form)
         .then(
-          (response) => (window.location = "/reviewstudent/" + this.students.id)
+          (response) => {
+            const resp = response.data;
+            resp.status == 'success' ? window.location = "/reviewstudent/" + this.students.id : alert(resp.message);
+          }
         )
         .catch((error) => console.log(error));
+    },
+    calcEndDate(date){
+      const oldDate = new Date(date);
+      const year = oldDate.getFullYear();
+
+      return new Date(year + 1, 0, 1); // returns 31 dec for same year
+    },
+    updateEndDate(index) {
+      this.form.periods[index].endDisabledDates.from = this.calcEndDate(this.form.periods[index].selectedStartDate);
+      this.form.periods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
       this.form.periods.push({
         id: null,
-        selectedStartDate: "",
+        selectedStartDate: new Date(this.semesters.start_date),
         selectedEndDate: "",
         grade: "",
+        endDisabledDates: {
+          from: this.calcEndDate(this.semesters.start_date),
+        },
       });
     },
     removePeriod(index) {
@@ -450,6 +305,9 @@ export default {
     },
     periods: {
       type: Array,
+      required: true,
+    },
+    semesters: {
       required: true,
     },
   },

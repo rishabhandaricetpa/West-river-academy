@@ -9,7 +9,7 @@
 <h2>Hi {{$user->name}} </h2>,
 PAYMENT: Bank Transfer
 Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page.
-https://www.westriveracademy.com/cwp/pvt/bank
+http://westriveracademy.test/bank-transfer
 
 Please let us know when you have made the payment and if you have used TransferWise or a regular bank transfer.
 

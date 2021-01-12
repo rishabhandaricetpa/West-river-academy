@@ -65,9 +65,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/dashboard-transcript', function () {
     //     return view('dashboard-transcript');
     // });
-    // Route::get('/order-review', function () {
-    //     return view('frontendpages/order-review');
-    // });
+    Route::get('/bank-transfer', function () {
+        return view('bank-transfer');
+    });
 
    
     Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
@@ -101,9 +101,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/reviewstudent', function () {
         return view('reviewstudent');
     });
-    Route::get('/cart', function () {
-        return view('cart');
-    });
+    
+    Route::post('/cart', 'CartController@store')->middleware('auth')->name('add.cart');
+    Route::delete('/cart/{id}', 'CartController@delete')->middleware('auth')->name('delete.cart');
+    Route::get('/cart', 'CartController@index')->middleware('auth');
 
     
     // Route::get('/cart', 'StudentController@address')->name('billing.address');

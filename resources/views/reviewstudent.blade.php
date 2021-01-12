@@ -57,35 +57,53 @@
       <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary">Edit Student {{$key}} </a>
       @endforeach
     </form>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <h3 class="py-3">Fees</h3>
-      <table class="px-0 w-100">
-        <tbody>
-          @php
-              $total_amount = 0;
-          @endphp
-          @foreach ($fees as $fee)
+      <form method="POST" action="{{route('add.cart')}}">
+        @csrf
+        <input type="hidden" name="type" value="enrollment_period">
+        <table class="px-0 w-100">
+          <thead>
             <tr>
-              <td> @if ($fee->type == 'annual') Annual  @else Second Semester Only @endif x  {{ $fee->count }}</td>
-              <td class="text-right">${{ $fee->amount }}</td>
-              @php
-                  $total_amount += $fee->amount;
-              @endphp
+              <th></th>
+              <th>Name</th>
+              <th>Enrollment Period</th>
+              <th>Amount</th>
             </tr>
-          @endforeach
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Total to pay </td>
-            <td class="text-right"> ${{ $total_amount }}</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="text-right mt-4">
-        <a href="/enroll-student" class="btn btn-primary">Add Another Student</a>
-
-        <a href="#" class="btn btn-primary ml-3">Add to Cart</a>
-      </div>
+          </thead>
+          <tbody>
+            @php
+                $total_amount = 0;
+            @endphp
+            @foreach ($fees as $fee)
+              <tr>
+                <td style="min-width: 2rem; text-align:center"> <input type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
+                <td>{{ $fee->first_name }}</td>
+                <td class="ml-2">  
+                  @if ($fee->type == 'annual') Annual  @else Second Semester Only @endif
+                  <span class="small"> ({{ Carbon\Carbon::parse($fee->start_date_of_enrollment)->format('d M Y') }} - {{ Carbon\Carbon::parse($fee->end_date_of_enrollment)->format('d M Y') }} ) </span>
+                </td>
+                <td class="text-center">${{ $fee->amount }}</td>
+                @php
+                    $total_amount += $fee->amount;
+                @endphp
+              </tr>
+            @endforeach
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td class="text-center">Total to pay </td>
+              <td class="text-center"> ${{ $total_amount }}</td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="text-right mt-4">
+          <a href="/enroll-student" class="btn btn-primary">Add Another Student</a>
+          <button type="submit" class="btn btn-primary ml-3"> Add selected items to Cart </button>
+        </div>
+      </form>
     </div>
 </main>
 @endsection
