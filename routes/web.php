@@ -87,8 +87,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('payment', function () {
         return view('paywithpaypal');
     })->name('paywithpaypal');
-    Route::post('paypal', 'PaymentController@postPaymentWithpaypal');
-    Route::get('status', 'PaymentController@getPaymentStatus')->name('status');
+    Route::post('paypal', 'PaypalPaymentController@postPaymentWithpaypal');
+    Route::get('status', 'PaypalPaymentController@getPaymentStatus')->name('status');
     Route::get('payment/{id}', 'StudentController@paypalorderReview')->name('paypal.order');
 
     //Stripe Payment
