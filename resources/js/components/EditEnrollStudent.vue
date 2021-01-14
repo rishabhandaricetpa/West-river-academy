@@ -92,87 +92,100 @@
       </div>
     </div>
     <div v-for="(period, index) in form.periods" :key="period.id">
-      <div class="form-group d-flex mb-2 mt-2r">
+      <div v-if="period.status === 'pending'">
         <span class="remove" @click="removePeriod(index)">x</span>
-        <label for="">Select your START date of enrollment{{ index }}</label>
-        <div class="row mx-0">
-          <div class="form-row col-sm-3 px-0">
-            <div class="form-group col-md-5">
-              <Datepicker
-                id="startdate"
-                name="startdate"
-                v-model="period.selectedStartDate"
-                required
-                placeholder="Select Start Date"
-                @input="updateEndDate(index)"
-              >
-              </Datepicker>
+        <div class="form-group d-flex mb-2 mt-2r">
+          <label for="">Select your START date of enrollment{{ index }}</label>
+          <div class="row mx-0">
+            <div class="form-row col-sm-3 px-0">
+              <div class="form-group col-md-5">
+                <Datepicker
+                  id="startdate"
+                  name="startdate"
+                  v-model="period.selectedStartDate"
+                  required
+                  placeholder="Select Start Date"
+                  @input="updateEndDate(index)"
+                >
+                </Datepicker>
+              </div>
+            </div>
+            <div class="info-detail col-sm-9 lato-italic">
+              <p>
+                Choose August 1 (the first day of the Annual enrollment period),
+                January 1 (the first day of the Second Semester), today's date or
+                another date. This date will appear on your confirmation of
+                enrollment letter. You will be considered enrolled for the full
+                12-month period for Annual or 7-month period for Second Semester
+                Only.
+              </p>
             </div>
           </div>
-          <div class="info-detail col-sm-9 lato-italic">
-            <p>
-              Choose August 1 (the first day of the Annual enrollment period),
-              January 1 (the first day of the Second Semester), today's date or
-              another date. This date will appear on your confirmation of
-              enrollment letter. You will be considered enrolled for the full
-              12-month period for Annual or 7-month period for Second Semester
-              Only.
-            </p>
-          </div>
         </div>
-      </div>
 
-      <div class="form-group d-flex mb-2 mt-2r">
-        <label for="">Select your END date of enrollment</label>
-        <div class="row mx-0">
-          <div class="form-row col-sm-3 px-0">
-            <div class="form-group col-md-5">
-              <Datepicker
-                id="startdate"
-                name="startdate"
-                v-model="period.selectedEndDate"
-                required
-                placeholder="Select Start Date"
-                :disabled-dates="period.endDisabledDates"
-              >
-              </Datepicker>
+        <div class="form-group d-flex mb-2 mt-2r">
+          <label for="">Select your END date of enrollment</label>
+          <div class="row mx-0">
+            <div class="form-row col-sm-3 px-0">
+              <div class="form-group col-md-5">
+                <Datepicker
+                  id="startdate"
+                  name="startdate"
+                  v-model="period.selectedEndDate"
+                  required
+                  placeholder="Select Start Date"
+                  :disabled-dates="period.endDisabledDates"
+                >
+                </Datepicker>
+              </div>
+            </div>
+            <div class="info-detail col-sm-9 lato-italic">
+              <p>
+                Choose before July 31 (the last day of your enrollment) or another
+                date before July 31. This date will appear on your confirmation of
+                enrollment letter. Your enrollment will officially end on July 31.
+              </p>
             </div>
           </div>
-          <div class="info-detail col-sm-9 lato-italic">
-            <p>
-              Choose before July 31 (the last day of your enrollment) or another
-              date before July 31. This date will appear on your confirmation of
-              enrollment letter. Your enrollment will officially end on July 31.
-            </p>
-          </div>
         </div>
-      </div>
-      <div class="form-group mt-2r d-flex links-list mb-5">
-        <!-- Button trigger modal -->
-        <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
-        <a href="#skipYear" data-toggle="modal" class="ml-4"
-          >what if i need to skip a year?</a
-        >
-      </div>
+        <div class="form-group mt-2r d-flex links-list mb-5">
+          <!-- Button trigger modal -->
+          <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
+          <a href="#skipYear" data-toggle="modal" class="ml-4"
+            >what if i need to skip a year?</a
+          >
+        </div>
 
-      <div class="form-group d-flex mb-2 lato-italic info-detail">
-        <label for=""
-          >Select grade level(s) for your enrollment period
-          <p>(You may select more than one for multiple years)</p></label
-        >
-        <div class="row pl-5">
-          <div v-for="(grade, index) in grades" :key="index" class="col-sm-3">
-            <div v-for="(val, i) in grade" :key="i" class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                :value= "val"
-                v-model="period.grade"
-              />
-              <label class="form-check-label" for=""> {{ val }} </label>
+        <div class="form-group d-flex mb-2 lato-italic info-detail">
+          <label for=""
+            >Select grade level(s) for your enrollment period
+            <p>(You may select more than one for multiple years)</p></label
+          >
+          <div class="row pl-5">
+            <div v-for="(grade, index) in grades" :key="index" class="col-sm-3">
+              <div v-for="(val, i) in grade" :key="i" class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  :value= "val"
+                  v-model="period.grade"
+                />
+                <label class="form-check-label" for=""> {{ val }} </label>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div v-else>
+          <div>
+            <p><span> Start Date: </span> {{ period.selectedStartDate }} </p>
+          </div>
+          <div>
+            <p><span> End Date: </span> {{ period.selectedEndDate }} </p>
+          </div>
+          <div>
+            <p><span> Grade: </span> {{ period.grade }} </p>
+          </div>
       </div>
     </div>
     <div class="form-group d-flex mt-2r">
@@ -252,6 +265,7 @@ export default {
         selectedStartDate: item.start_date_of_enrollment,
         selectedEndDate: item.end_date_of_enrollment,
         grade: item.grade_level,
+        status: item.status,
         endDisabledDates: {
           from: this.calcEndDate(item.start_date_of_enrollment),
         },
@@ -292,9 +306,14 @@ export default {
       });
     },
     removePeriod(index) {
-      this.form.periods.splice(index, 1);
       axios
         .post(route("delete.student", this.students), this.form)
+        .then(
+          (response) => {
+            const resp = response.data;
+            resp.status == 'success' ? this.form.periods.splice(index, 1) : alert(resp.message);
+          }
+        )
         .catch((error) => console.log(error));
     },
   },

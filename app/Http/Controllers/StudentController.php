@@ -164,8 +164,10 @@ class StudentController extends Controller
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
             });
             $periods->whereNotNull('id')->each(function ($period) use ($student, $student_type) {
-                $enrollPeriod = EnrollmentPeriods::find($period['id']);
-                $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
+                if(!EnrollmentPayment::where('enrollment_period_id',$period['id'])->where('status','paid')->exists()){
+                    $enrollPeriod = EnrollmentPeriods::find($period['id']);
+                    $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
+                }
             });
 
             DB::commit();
@@ -229,7 +231,11 @@ class StudentController extends Controller
         $countryId = $countryData->id;
         $semesters_dates = Country::find($countryId)->semesters()->first();
         $studentData = StudentProfile::find($id);
-        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+        $enrollPeriods =  EnrollmentPeriods::where('student_profile_id',$id) 
+                                            ->leftJoin('enrollment_payments','enrollment_payments.id','enrollment_periods.enrollment_payment_id')
+                                            ->select('enrollment_periods.*','enrollment_payments.status')
+                                            ->orderBy('enrollment_payments.status','desc')
+                                            ->get();
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'semesters_dates'));
     }
   
