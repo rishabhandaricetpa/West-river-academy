@@ -51,11 +51,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/enroll-student', 'StudentController@index')->middleware('auth');
     Route::post('/enroll-student', 'StudentController@store')->middleware('auth')->name('enroll.student');
     Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
-<<<<<<< HEAD
-    Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
-=======
     Route::get('/reviewstudents',  'StudentController@reviewStudent')->name('reviewstudent');
->>>>>>> local-dev
     Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
     Route::post('delete/{id}', 'StudentController@delete')->name('delete.student');
 
