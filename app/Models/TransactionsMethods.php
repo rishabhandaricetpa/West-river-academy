@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class TransactionsMethods extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'transcation_id', 'payment_mode', 'parent_profile_id',
        ];
-    protected $table = "payments";
+    protected $table = "transaction_methods";
     
     public function parentProfile()
     {

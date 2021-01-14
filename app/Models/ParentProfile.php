@@ -61,8 +61,8 @@ class ParentProfile extends Model
     {
         return $this->hasMany('App\Models\Address','parent_profile_id','id');
     }
-    public function payment()
+    public function transactionsMethods()
     {
-        return $this->hasMany('App\Models\Payment','parent_profile_id','id');
+        return $this->hasMany('App\Models\TransactionsMethods','parent_profile_id','id');
     }
 }

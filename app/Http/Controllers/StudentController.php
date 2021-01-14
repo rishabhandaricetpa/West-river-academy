@@ -12,6 +12,7 @@ use App\Models\Address;
 use App\Models\EnrollmentPeriods;
 use App\Models\EnrollmentPayment;
 use App\Models\FeesInfo;
+use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
 use Faker\Calculator\Ean;
 use Illuminate\Http\Request;
@@ -23,9 +24,17 @@ use App\Helpers\EnrollmentHelper;
 
 class StudentController extends Controller
 {
+    private $parent_profile_id;
 
     public function __construct()
     {
+        $this->middleware(function ($request, $next) {
+            $Userid = auth()->user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $this->parent_profile_id = $parentProfileData->id;
+
+            return $next($request);
+        });
     }
     /**
      * Get a validator for an incoming registration request.
@@ -236,50 +245,89 @@ class StudentController extends Controller
   
     public function address($id)
     {    
-        $user_id = Auth::user()->id;
+         $user_id = Auth::user()->id;
          $parent = ParentProfile::find($user_id)->first();
-         $country_list=  Country::select('country')
-         ->orderBy('country')
-         ->get();
-         return view('Billing/cart-billing', compact('parent','country_list'));
+         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+         $country_list  =  Country::select('country')->get();
+         return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
     }
     /**
      * This function is used to store billing and shipping address
      */
     protected function saveaddress(Request $request)
     {   
-        $address = new Address();
-        $billing_data = $request->input('billing_address');
-        $shipping_data = $request->input('shipping_address');
-        $payment_type = $request->input('paymentMethod');
-        $Userid = Auth::user()->id;
-        $parentProfileData = User::find($Userid)->parentProfile()->first();
-        $id = $parentProfileData->id;
-        $billinAddress =  Address::create([
-            'parent_profile_id' => $id,
-            'billing_street_address' => $billing_data['street_address'],
-            'billing_city' => $billing_data['city'],
-            'billing_state' => $billing_data['state'],
-            'billing_zip_code' => $billing_data['zip_code'],
-            'billing_country' => $billing_data['country'],
-            'shipping_street_address' => $shipping_data['street_address'],
-            'shipping_city' => $shipping_data['city'],
-            'shipping_state' => $shipping_data['state'],
-            'shipping_zip_code' => $shipping_data['zip_code'],
-            'shipping_country' => $shipping_data['country'],
-            'email'=> $request['email'],
-        ]);
-        if($payment_type['payment_type']=="Credit Card"){
-            return route('stripe.payment');
-        }
-        elseif($payment_type['payment_type']=="Pay Pal"){
-            return route('paywithpaypal');
-        }
-        elseif($payment_type['payment_type']=="Bank Transfer"){
-            return route('bank.transfer');
-        }
-        elseif($payment_type['payment_type']=="Check or Money Order"){
-            return route('money.order');
-        }
+        try{
+                $address = new Address();
+                $billing_data = $request->input('billing_address');
+                $shipping_data = $request->input('shipping_address');
+                $payment_type = $request->input('paymentMethod');
+                $Userid = Auth::user()->id;
+                $parentProfileData = User::find($Userid)->parentProfile()->first();
+                $id = $parentProfileData->id;
+                $billinAddress =  Address::create([
+                    'parent_profile_id' => $id,
+                    'billing_street_address' => $billing_data['street_address'],
+                    'billing_city' => $billing_data['city'],
+                    'billing_state' => $billing_data['state'],
+                    'billing_zip_code' => $billing_data['zip_code'],
+                    'billing_country' => $billing_data['country'],
+                    'shipping_street_address' => $shipping_data['street_address'],
+                    'shipping_city' => $shipping_data['city'],
+                    'shipping_state' => $shipping_data['state'],
+                    'shipping_zip_code' => $shipping_data['zip_code'],
+                    'shipping_country' => $shipping_data['country'],
+                    'email'=> $request['email'],
+                ]);
+                $parentaddress = ParentProfile::find($Userid)->first();
+                $parentaddress->fill([
+                    'street_address' => $billing_data['street_address'],
+                    'city' => $billing_data['city'],
+                    'state' => $billing_data['state'],
+                    'zip_code' => $billing_data['zip_code'],
+                    'country' => $billing_data['country'],
+                ]);
+                $parentaddress->save();
+                if($payment_type['payment_type']=="Credit Card"){
+                    return route('stripe.payment');
+                }
+                elseif($payment_type['payment_type']=="Pay Pal"){
+                    return route('paywithpaypal');
+                }
+                elseif($payment_type['payment_type']=="Bank Transfer"){
+                    return route('order.review');
+                }
+                elseif($payment_type['payment_type']=="Check or Money Order"){
+                    return route('money.order');
+                }
+            } catch (\Exception $e) {   
+                DB::rollBack();
+            }
     }
+    public function orderReview($parent_id){
+
+       $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+       $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+       return view('Billing.order-review',compact('address','enroll_fees','parent_id'));
+    
+    }
+    
+    public function paypalorderReview($parent_id){
+        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        return view('paywithpaypal',compact('address','enroll_fees'));
+     
+     }
+     public function stripeorderReview($parent_id){
+        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        return view('Billing/creditcard',compact('address','enroll_fees'));
+     
+     }
+     public function moneyorderReview($parent_id){
+        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
+     
+     }
+
 }

@@ -27,8 +27,7 @@
                                                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                                                     id="payment-form">
                         @csrf
-  
-                        <div class='form-row row'>
+                          <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card</label> <input
                                     class='form-control' size='4' type='text'>
@@ -59,6 +58,7 @@
                                     class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                     type='text'>
                             </div>
+                            <input id="amount" name="amount" type="hidden" value="{{$enroll_fees->amount}}">
                         </div>
   
                         <div class='form-row row'>
@@ -69,7 +69,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now (₹150)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ${{$enroll_fees->amount}}</button>
                             </div>
                         </div>
                           

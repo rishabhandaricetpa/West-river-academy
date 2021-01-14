@@ -77,8 +77,8 @@
                   <label for="">Country</label>
                         <div class="col-sm-4 px-0">
                               <select class="form-control" name="country" v-model="form.billing_address.country" required>  
-                                  <option>India</option>   
-                        </select>
+                                  <option v-for="(val, i) in countries" :key="i" >{{val.country}}</option>   
+                              </select>
                               </div>
                             </div>
                         </div>
@@ -162,8 +162,8 @@
                   <label for="">Country</label>
                       <div class="col-sm-4 px-0">  
                              <select class="form-control" name="country" v-model="form.shipping_address.country" required>  
-                                  <option>India</option>   
-                        </select>                    
+                                  <option v-for="(val, i) in countries" :key="i" >{{val.country}}</option>   
+                              </select>                   
                         </div>
                       </div>
                     </div>
@@ -182,6 +182,43 @@
                       </div>
                   </div>
             </div>
+                        <div class="form-wrap border bg-light py-5 px-25 mt-2r">
+                <h2 class="mb-3">Payment Items</h2>
+                <div class="seperator">
+                <div class="row gray-bg py-2 text-capitalize">
+                  <div class="col-sm-3">
+                  <span>item</span>
+                  </div>
+                  <div class="col-sm-3">
+                  <span>quantity</span>
+                  </div>
+                  <div class="col-sm-3">
+                  <span>price</span>
+                  </div>
+                  <div class="col-sm-3">
+                  <span>total</span>
+                  </div>
+            </div>
+            <div class="row py-2">
+                  <div class="col-sm-3">
+                  <span>Custom Payment</span>
+                  </div>
+                  <div class="col-sm-3">
+                  <span>1</span>
+                  </div>
+                  <div class="col-sm-3">
+                  <span>${{total.amount}}</span>
+                  </div>
+                  <div class="col-sm-3">
+                  <span>${{total.amount}}</span>
+                  </div>
+                </div>
+                </div>
+                <div class="total-amount pt-5">
+                <span>Total price</span>
+                <span class="float-right">${{total.amount}}</span>
+                </div>
+          </div>
           <div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
              <h2>Select your method of payment...</h2>
              <h3 class="py-2">pay with</h3>
@@ -272,6 +309,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "address",
   data() {
@@ -304,19 +342,17 @@ export default {
       },
     };
   },
-    props: {
-    parents: {
-      required: true,
-    },
-    countries:{
-       required: true,
-    }
-  },
+  props: ['parents', 'countries', 'total'],
   methods: {
       copyBilling() {
-      if(this.form.sSame) {
+      if(this.form.sSame==true) {
         for(let key in this.form.billing_address) {
           this.form.shipping_address[key] = this.form.billing_address[key];
+        }
+      }
+      else{
+        for(let key in this.form.shipping_address) {
+         this.form.shipping_address[key] ="";
         }
       }
     },
@@ -324,7 +360,7 @@ export default {
       axios
         .post(route("billing.address"), this.form)
         .then((response) => {
-            window.location = response.data
+            window.location = response.data+"/"+this.parents.id
         })
         .catch((error) => console.log(error));
     },

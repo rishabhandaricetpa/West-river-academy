@@ -11,13 +11,14 @@
         <label for="">Amount</label>
         <div>
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <input type="number" name="amount" id="amount" type="text">
+        <!-- <span class="input-group-text">$</span> -->
+        <input class="form-control" type="number" name="amount" id="amount" type="text" value="{{$enroll_fees?$enroll_fees->amount:''}}" readonly> 
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="exampleInputPassword1">What are you paying for?</label>
         <div>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" >
         </div>
       </div>
       <div class="mt-2r">

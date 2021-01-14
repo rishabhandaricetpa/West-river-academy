@@ -81,7 +81,7 @@
       </form>
    </div>
    <div class="form-wrap border bg-light py-2r px-25 mt-2r">
-      <a href="#" class="btn btn-primary">Return to the Dashboard</a>
+      <a href="/dashboard" class="btn btn-primary">Return to the Dashboard</a>
    </div>
 </main>
 

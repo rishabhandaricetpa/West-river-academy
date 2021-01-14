@@ -13,15 +13,16 @@ class MoneyOrderController extends Controller
 /**
      * payment view
      */
-    public function index()
-    {
-     $id= auth()->user()->id;
-      $user=  User::find($id)->first();
+    public function index(){
+    // { dd('reacjed');
+       $id = auth()->user()->id;
+       $user=  User::find($id)->first();
       $email= $user->email;
-      $address = User::find($id)->parentProfile()->first();
-      $date = \Carbon\Carbon::now()->format('Y-m-d');
+    //   $address = User::find($id)->parentProfile()->first();
+    //   $date = \Carbon\Carbon::now()->format('Y-m-d');
         Mail::to('paige.priyanka@ithands.com')->send(new SendMail($user));
-     return view('mail.order-review',compact('email','date'));
+        return view('mail.moneyorder-review',compact('email'));
+
     }
   
 }

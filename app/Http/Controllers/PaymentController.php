@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Input;
 use Redirect;
 use Session;
 use URL;
-
-
+use App\Models\Payments;
 
 class PaymentController extends Controller
 {
@@ -39,6 +38,7 @@ class PaymentController extends Controller
     {
         return view('paywithpaypal');
     }
+    
 
     public function postPaymentWithpaypal(Request $request)
     {
@@ -104,7 +104,11 @@ class PaymentController extends Controller
     public function getPaymentStatus(Request $request)
     {
         $payment_id = Session::get('paypal_payment_id');
-
+        //  $paypal =new Payment();
+        //  $paypal->transcation_id = $payment_id ;
+        //  $paypal->payment_mode='Pay Pal';
+        //  $paypal->parent_profile_id = auth()->user()->id;
+        //  $paypal->save();
         Session::forget('paypal_payment_id');
         if (empty($request->input('PayerID')) || empty($request->input('token'))) {
             \Session::put('error', 'Payment failed');
@@ -116,8 +120,11 @@ class PaymentController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
 
         if ($result->getState() == 'approved') {
-            \Session::put('success', 'Payment success !!');
-            return Redirect::route('paywithpaypal');
+            $notification = array(
+                'message' => 'Payment has been successfully processed! Add more services',
+                'alert-type' => 'success'
+            ); 
+            return Redirect::route('dashboard')->with($notification);
         }
 
         \Session::put('error', 'Payment failed !!');

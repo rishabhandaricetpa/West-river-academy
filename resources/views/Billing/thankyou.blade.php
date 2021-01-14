@@ -8,8 +8,8 @@
   <form method="post" action="{{route('payment.info',$charges->id)}}">
     @csrf
     <h2 class="text-capitalize">Thank you!</h2>
-    <p class="mb-0">Your Transaction with Stripe is successfull.Your order id is Transaction Id: {{$charges->id}}
-    <input type="submit" name="submit" value="Go to Dashboard">
+    <p class="mb-0">Your Transaction is successfull.
+    <input type="submit" name="submit" value="Submit">
     </p>
   </div>
 @endsection

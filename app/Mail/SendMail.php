@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\User;
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -28,7 +28,12 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        
-        return $this->from('paige.priyanka@ithands.com')->subject('Payment')->view('mail.moneyordermail')->with('data', $this->user);
+        $id= auth()->user()->id;
+        $user=  User::find($id)->first();
+        $email= $user->email;
+        $address = User::find($id)->parentProfile()->first();
+        $date = \Carbon\Carbon::now()->format('Y-m-d');
+        return $this->from('paige.priyanka@ithands.com')
+        ->markdown('mail.moneyordermail',compact('user','address','date','email'));
     }
 }
