@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TransactionsMethods extends Model
+class TransactionsMethod extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'transcation_id', 'payment_mode', 'parent_profile_id',
+        'transcation_id', 'payment_mode', 'parent_profile_id','amount','status',
        ];
     protected $table = "transaction_methods";
     

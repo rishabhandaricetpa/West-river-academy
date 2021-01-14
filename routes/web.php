@@ -95,7 +95,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
     Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
     Route::post('/stripe-payment', 'StripeController@handlePost')->name('stripe.payment');
-    Route::post('paymentinfo/{id}', 'StripeController@store')->name('payment.info');
+    Route::get('paymentinfo',function () {
+        return view('paywithpaypal');
+    })->name('payment.info');
     //Invoice
     Route::get('/invoices', 'StripeController@invoices');
     Route::get('/invoice/{invoice_id}', 'StripeController@invoice');
@@ -117,7 +119,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
    
 });
 
-// Route::post('paymentinfo/{id}', 'App\Http\Controllers\StripeController@store')->name('payment.info');--Stipe
 
 
 

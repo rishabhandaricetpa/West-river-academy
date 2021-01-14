@@ -18,11 +18,11 @@ use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
+use App\Models\TransactionsMethod;
 use Illuminate\Support\Facades\Input;
 use Redirect;
 use Session;
 use URL;
-use App\Models\Payments;
 
 class PaymentController extends Controller
 {
@@ -104,11 +104,11 @@ class PaymentController extends Controller
     public function getPaymentStatus(Request $request)
     {
         $payment_id = Session::get('paypal_payment_id');
-        //  $paypal =new Payment();
-        //  $paypal->transcation_id = $payment_id ;
-        //  $paypal->payment_mode='Pay Pal';
-        //  $paypal->parent_profile_id = auth()->user()->id;
-        //  $paypal->save();
+         $paypal =new TransactionsMethod();
+         $paypal->transcation_id = $payment_id ;
+         $paypal->payment_mode='Pay Pal';
+         $paypal->parent_profile_id = auth()->user()->id;
+         $paypal->save();
         Session::forget('paypal_payment_id');
         if (empty($request->input('PayerID')) || empty($request->input('token'))) {
             \Session::put('error', 'Payment failed');

@@ -58,6 +58,12 @@
                                     class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                     type='text'>
                             </div>
+                            <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>What you paying for</label> <input
+                                    class='form-control' size='4' type='text' name="description">
+                            </div>
+                        </div>
                             <input id="amount" name="amount" type="hidden" value="{{$enroll_fees->amount}}">
                         </div>
   
