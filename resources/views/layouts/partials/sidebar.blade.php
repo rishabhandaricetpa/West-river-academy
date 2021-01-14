@@ -5,6 +5,7 @@
       <ul class="list-unstyled">
         <li><a href="#">Add student</a></li>
         <li><a href="{{ url('/enroll-student') }}">add enrollment</a></li>
+        <li><a href="{{ url('/reviewstudents') }}">View Students</a></li>
       </ul>
     </li>
     <li><a href="{{ url('/cart') }}">Cart</a></li>
