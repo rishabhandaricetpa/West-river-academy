@@ -124,14 +124,13 @@ class StudentController extends Controller
     /**
      * review student data on review page
      */
-    public function reviewStudent($id)
+    public function reviewStudent()
     {
         $user_id = Auth::user()->id;
         $students = ParentProfile::find($user_id)->studentProfile()->get();
-        $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
 
         $fees = ParentProfile::getParentPendingFees($user_id);
-        return view('reviewstudent', compact('enrollPeriods', 'students', 'fees'));
+        return view('reviewstudent', compact('students', 'fees'));
     }
 
     public function update(Request $request, $id)

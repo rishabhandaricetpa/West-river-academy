@@ -296,7 +296,7 @@ export default {
         .then(
           (response) => {
             const resp = response.data;
-            resp.status == 'success' ? window.location = "/reviewstudent/" + resp.data.id : alert(resp.message);
+            resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
           }
         )
         .catch((error) => console.log(error));
