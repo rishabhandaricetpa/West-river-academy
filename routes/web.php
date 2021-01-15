@@ -92,11 +92,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('payment/{id}', 'StudentController@paypalorderReview')->name('paypal.order');
 
     //Stripe Payment
-    Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
+    // Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
     Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
     Route::post('/stripe-payment', 'StripeController@handlePost')->name('stripe.payment');
     Route::get('paymentinfo',function () {
-        return view('paywithpaypal');
+        return view('Billing/paymentsuccess');
     })->name('payment.info');
     //Invoice
     Route::get('/invoices', 'StripeController@invoices');
