@@ -8,18 +8,14 @@ PAYMENT: N/A</p>
 
 
 <p>BILLING INFORMATION</p>
-<p>Priyanka Pant Priyanka</p>
-<p>dehradun</p>
-<p>dehradun, uttarakhand 248001</p>
-<p>IN</p>
+<p>{{$parent_profile->street_address}}</p>
+<p>{{$parent_profile->city}} </p>
+<p>{{$parent_profile->state}} </p>
+<p>{{$parent_profile->zip_code}} </p>
+<p>{{$parent_profile->country}} </p>
 
 <p>-------------------------------------</p>
 <p>ITEM: CUSTPAYMENT</p>
 <p>Custom Payment</p>
-<p>PRICE: $0.00</p>
-<p>QT: 1</p>
-<p>ITEM TOTAL: $0.00</p>
+<p>PRICE: ${{$payment->amount}} </p>
 
-<p>TOTAL: $0.00</p>
-<p>AMOUNT PAID: $0.00</p>
-<p>AMOUNT DUE: $0.00</p>

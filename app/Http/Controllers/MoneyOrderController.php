@@ -20,7 +20,7 @@ class MoneyOrderController extends Controller
       $email= $user->email;
     //   $address = User::find($id)->parentProfile()->first();
     //   $date = \Carbon\Carbon::now()->format('Y-m-d');
-        Mail::to('paige.priyanka@ithands.com')->send(new SendMail($user));
+        Mail::to($email)->send(new SendMail($user));
         return view('mail.moneyorder-review',compact('email'));
 
     }
