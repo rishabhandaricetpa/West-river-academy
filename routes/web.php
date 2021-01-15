@@ -87,14 +87,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('payment', function () {
         return view('paywithpaypal');
     })->name('paywithpaypal');
-    Route::post('paypal', 'PaypalPaymentController@postPaymentWithpaypal');
-    Route::get('status', 'PaypalPaymentController@getPaymentStatus')->name('status');
+    Route::post('paypal', 'PaymentMethod\PaypalPaymentController@postPaymentWithpaypal');
+    Route::get('status', 'PaymentMethod\PaypalPaymentController@getPaymentStatus')->name('status');
     Route::get('payment/{id}', 'StudentController@paypalorderReview')->name('paypal.order');
 
     //Stripe Payment
     // Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
     Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
-    Route::post('/stripe-payment', 'StripeController@handlePost')->name('stripe.payment');
+    Route::post('/stripe-payment', 'PaymentMethod\StripeController@handlePost')->name('stripe.payment');
     Route::get('paymentinfo',function () {
         return view('Billing/paymentsuccess');
     })->name('payment.info');
@@ -103,16 +103,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/invoice/{invoice_id}', 'StripeController@invoice');
     
     //Money-order
-    Route::get('/money-order', 'MoneyOrderController@index')->name('money.order');
+    Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
     Route::get('/money-order/{id}', 'StudentController@moneyorderReview');
-    Route::get('moneyorder-email','MoneyOrderController@index');
+    Route::get('moneyorder-email','PaymentMethod\MoneyOrderController@index');
 
     //Bank Transfer
     Route::get('order-review', function () {
         return view('Billing/order-review');
     })->name('order.review');
     Route::get('order-review/{id}', 'StudentController@orderReview');
-    Route::get('bankTransfer','BankTranferController@index')->name('bank.transfer');
+    Route::get('bankTransfer','PaymentMethod\BankTranferController@index')->name('bank.transfer');
     Route::get('/bank-transfer', function () {
         return view('bank-transfer');
     });

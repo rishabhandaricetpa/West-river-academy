@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\PaymentMethod;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\BankTranferEmail;
 use Illuminate\Support\Facades\Mail;

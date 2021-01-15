@@ -1,6 +1,6 @@
 
 <head>
-	<title>Laravel 7 - Integrate Stripe Payment Gateway Example</title>
+	<title>Credit Card Payment</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </head>

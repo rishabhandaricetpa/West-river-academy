@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\PaymentMethod;
+use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use PayPal\Rest\ApiContext;
@@ -24,7 +24,7 @@ use Redirect;
 use Session;
 use URL;
 
-class PaymentController extends Controller
+class   PaypalPaymentController extends Controller
 {
     private $_api_context;
 
@@ -94,6 +94,14 @@ class PaymentController extends Controller
 
         Session::put('paypal_payment_id', $payment->getId());
 
+        $paypal =new TransactionsMethod();
+        $paypal->transcation_id =$payment->getId();
+        $paypal->payment_mode= 'Pay pal';
+        $paypal->parent_profile_id = auth()->user()->id;
+        $paypal->amount = $amount->getTotal();
+        
+        $paypal->status ='succeeded';
+        $paypal->save();
         if (isset($redirect_url)) {
             return Redirect::away($redirect_url);
         }
@@ -102,13 +110,9 @@ class PaymentController extends Controller
         return Redirect::route('paywithpaypal');
     }
     public function getPaymentStatus(Request $request)
-    {
-        $payment_id = Session::get('paypal_payment_id');
-         $paypal =new TransactionsMethod();
-         $paypal->transcation_id = $payment_id ;
-         $paypal->payment_mode='Pay Pal';
-         $paypal->parent_profile_id = auth()->user()->id;
-         $paypal->save();
+    {   
+       
+        $payment_id = Session::get('paypal_payment_id');        
         Session::forget('paypal_payment_id');
         if (empty($request->input('PayerID')) || empty($request->input('token'))) {
             \Session::put('error', 'Payment failed');
