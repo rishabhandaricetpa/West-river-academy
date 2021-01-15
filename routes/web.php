@@ -33,9 +33,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+
+    Route::group(['middleware'=>'auth'],function(){
+
     Route::get('/welcome-video', function () {
         return view('welcome-video');
     });
+
     // admin dashboard
     Route::get('admin-dashboard', function () {
         return view('admin.home');
@@ -48,8 +53,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
    
 
     //enroll student
-    Route::get('/enroll-student', 'StudentController@index')->middleware('auth');
-    Route::post('/enroll-student', 'StudentController@store')->middleware('auth')->name('enroll.student');
+    Route::get('/enroll-student', 'StudentController@index');
+    Route::post('/enroll-student', 'StudentController@store')->name('enroll.student');
     Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
     Route::get('/reviewstudents',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
@@ -73,14 +78,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('reviewstudent');
     });
     
-    Route::post('/cart', 'CartController@store')->middleware('auth')->name('add.cart');
-    Route::delete('/cart/{id}', 'CartController@delete')->middleware('auth')->name('delete.cart');
-    Route::get('/cart', 'CartController@index')->middleware('auth');
+    Route::post('/cart', 'CartController@store')->name('add.cart');
+    Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
+    Route::get('/cart', 'CartController@index');
 
     
     // Route::get('/cart', 'StudentController@address')->name('billing.address');
     Route::get('edit/address/{id}', 'StudentController@address')->name('edit.address');
-    Route::post('/cart-billing', 'StudentController@saveaddress')->middleware('auth')->name('billing.address');
+    Route::post('/cart-billing', 'StudentController@saveaddress')->name('billing.address');
 
 
     //Paypal Payment
@@ -120,7 +125,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('user.settings');
    
 });
-
+});
 
 
 
