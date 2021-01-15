@@ -51,7 +51,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/enroll-student', 'StudentController@index')->middleware('auth');
     Route::post('/enroll-student', 'StudentController@store')->middleware('auth')->name('enroll.student');
     Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
-    Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
+    Route::get('/reviewstudents',  'StudentController@reviewStudent')->name('reviewstudent');
     Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
     Route::post('delete/{id}', 'StudentController@delete')->name('delete.student');
 
@@ -98,9 +98,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('paymentinfo',function () {
         return view('Billing/paymentsuccess');
     })->name('payment.info');
-    //Invoice
-    Route::get('/invoices', 'StripeController@invoices');
-    Route::get('/invoice/{invoice_id}', 'StripeController@invoice');
+    
     
     //Money-order
     Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
@@ -116,6 +114,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/bank-transfer', function () {
         return view('bank-transfer');
     });
+    //
+    Route::get('/mysettings',function () {
+        return view('myaccount');
+    })->name('user.settings');
    
 });
 

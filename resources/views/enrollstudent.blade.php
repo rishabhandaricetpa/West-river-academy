@@ -9,7 +9,7 @@
 
   <div id="app">
   
-    <enroll-student :semesters='@json($semesters_dates)'> </enroll-student>
+    <enroll-student :semesters='@json($countryData)'> </enroll-student>
   </div>
 </main>
 <!-- Choose Dates -->

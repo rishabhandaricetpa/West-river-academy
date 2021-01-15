@@ -38,22 +38,6 @@
           <p>{{$student ->student_Id}}</p>
         </div>
       </div>
-      @if($student->count()==1)
-      @foreach($enrollPeriods as $enrollPeriod) <div class="form-group d-sm-flex mb-2">
-        <label for="">Enrollment Period(s)</label>
-        <div>
-          <p>{{ Carbon\Carbon::parse($enrollPeriod->start_date_of_enrollment)->format('d M Y') }} - {{ Carbon\Carbon::parse($enrollPeriod->end_date_of_enrollment)->format('d M Y') }}</p>
-
-        </div>
-      </div>
-      <div class="form-group d-sm-flex mb-2">
-        <label for="">Grade Level(s)</label>
-        <div>
-          <p>{{$enrollPeriod->grade_level}}</p>
-        </div>
-      </div>
-      @endforeach
-      @endif
       <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary">Edit Student {{$key}} </a>
       @endforeach
     </form>
