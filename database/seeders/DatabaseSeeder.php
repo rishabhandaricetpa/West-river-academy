@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 class DatabaseSeeder extends Seeder
 {
-    protected $toTruncate = ['Countries','fees_info','semesters','country_semester'];
+    protected $toTruncate = ['Countries','fees_info'];
 
     /**
      * Seed the application's database.
@@ -23,8 +23,6 @@ class DatabaseSeeder extends Seeder
         }
         // \App\Models\User::factory(10)->create();
         $this->call(CountriesTableSeeder::class);
-        $this->call(SemesterTableSeeder::class);
-        $this->call(CountrySemesterTableSeeder::class);
         $this->call(FeesInfoSeeder::class);
         Model::reguard();
 

@@ -14,8 +14,8 @@ class AddEnrollmentPaymentIdOnEnrollmentPeriodsTable extends Migration
     public function up()
     {
         Schema::table('enrollment_periods', function (Blueprint $table) {
-            $table->unsignedBigInteger('enrollment_payment_id');
-            $table->foreign('enrollment_payment_id')->references('id')->on('enrollment_payments')->onDelete('cascade')->nullable()->default(NULL);
+            $table->unsignedBigInteger('enrollment_payment_id')->nullable();
+            $table->foreign('enrollment_payment_id')->nullable()->references('id')->on('enrollment_payments')->onDelete('cascade');
         });
     }
 

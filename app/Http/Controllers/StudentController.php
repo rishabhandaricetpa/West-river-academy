@@ -57,11 +57,10 @@ class StudentController extends Controller
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
-        $semesters_dates = Country::find($countryId)->semesters()->first();
         if ($request->expectsJson()) {
-            return response()->json($semesters_dates);
+            return response()->json($countryData);
         }
-        return view('enrollstudent', compact('semesters_dates'));
+        return view('enrollstudent', compact('countryData'));
     }
 
     protected function store(Request $data)
@@ -238,14 +237,13 @@ class StudentController extends Controller
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
-        $semesters_dates = Country::find($countryId)->semesters()->first();
         $studentData = StudentProfile::find($id);
         $enrollPeriods =  EnrollmentPeriods::where('student_profile_id',$id) 
                                             ->leftJoin('enrollment_payments','enrollment_payments.id','enrollment_periods.enrollment_payment_id')
                                             ->select('enrollment_periods.*','enrollment_payments.status')
                                             ->orderBy('enrollment_payments.status','desc')
                                             ->get();
-        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'semesters_dates'));
+        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
   
     public function address($id)
