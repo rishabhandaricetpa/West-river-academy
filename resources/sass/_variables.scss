@@ -14,17 +14,22 @@ $box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 $danger: #F55;
 $gray-800: #393b48;
 $gray-600: rgb(78, 156, 186);
+$light-blue: #2A9DBE;
+$gray-base: #c2c2c2;
+$text-color: #203258;
 
 //Headings
-// $h1-font-size: 30px;
+$h1-font-size: 56px;
  $h2-font-size: 21px;
- $h3-font-size: 18px;
+ $h3-font-size: 16px;
 // $h4-font-size: 16px;
 // $headings-color: $gray-base;
  $headings-font-weight: 700;
 
 //Fonts
  $primary-font: 'Catamaran', sans-serif;
+ $secondary-font: 'Judson', serif;
+ $lato-font: 'Lato', sans-serif;
 
 //Dropdowns
 // $dropdown-border-radius: 0;
@@ -53,11 +58,18 @@ $gray-600: rgb(78, 156, 186);
 // $btn-padding-y:               $input-btn-padding-y !default;
 // $btn-padding-x:               $input-btn-padding-x !default;
 // $btn-font-family:             $input-btn-font-family !default;
-$btn-font-weight:  400;
+$btn-font-weight:  500;
  $btn-font-size: 14px;
  $btn-border-radius: 10px;
+ $btn-font-size-lg: 20px;
+ $btn-line-height-lg: 25px;
+
+//Button secondary 
+ $btn-padding-y-lg:           8px;
+ $btn-padding-x-lg:           2.1875rem;
+ $btn-border-radius-lg:       30px;
 // $btn-line-height:             $input-btn-line-height !default;
-// $btn-white-space:             null !default; // Set to `nowrap` to prevent text wrapping
+// $btn-white-space:             null !default; // Set to nowrap to prevent text wrapping
 
 //Forms
 // $label-margin-bottom:;
@@ -71,8 +83,11 @@ $btn-font-weight:  400;
 // $input-border-color: ;
 // $input-border-width:  ;
 $input-border-radius: 0;
-$input-height: 33px;                         
+$input-height: 33px;
 
 $alert-padding-y:                   0;
 $alert-padding-x:                   0;
 $alert-link-font-weight:            700;
+//modal
+$modal-content-border-radius:       5px;
+$modal-inner-padding:               3rem;

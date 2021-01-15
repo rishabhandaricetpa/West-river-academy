@@ -17,7 +17,7 @@
         {{ session('status') }}
       </div>
       @endif
-      <div class="form-group d-flex mb-1">
+      <div class="form-group d-flex mb-2">
 
         <label for="">Parent 1 Email Address</label>
         <div>
@@ -40,6 +40,4 @@
 <!-- * =============== /Main =============== * -->
 
 @include('layouts.partials.footer')
-</body>
 
-</html>

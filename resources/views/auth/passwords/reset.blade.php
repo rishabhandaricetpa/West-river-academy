@@ -11,7 +11,7 @@
       @csrf
 
       <input type="hidden" name="token" value="{{ $token }}">
-      <div class="form-group d-flex mb-1 seperator">
+      <div class="form-group d-flex mb-2 seperator">
         <label for="">Email Address</label>
         <div>
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
@@ -23,7 +23,7 @@
           @enderror
         </div>
       </div>
-      <div class="form-group d-flex mb-1 mt-2r">
+      <div class="form-group d-flex mb-2 mt-2r">
         <label for="">New Password</label>
         <div>
           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -35,7 +35,7 @@
           @enderror
         </div>
       </div>
-      <div class="form-group d-flex mb-1">
+      <div class="form-group d-flex mb-2">
         <label for="">Confirm Password</label>
         <div>
           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -51,6 +51,3 @@
 <!-- * =============== /Main =============== * -->
 @include('layouts.partials.footer')
 
-</body>
-
-</html>

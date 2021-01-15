@@ -10,12 +10,8 @@
 .main-footer{
     padding-top: 20px;
     padding-bottom: 20px;
-    *{
+    *:not(.btn){
         color: $border-color;
-    }
-    .btn{
-        padding: 8px 2.1875rem;
-        border-radius: 30px;
     }
 }
 

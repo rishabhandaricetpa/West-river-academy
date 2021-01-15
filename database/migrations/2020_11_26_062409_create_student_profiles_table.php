@@ -16,19 +16,17 @@ class CreateStudentProfilesTable extends Migration
         Schema::create('student_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_profile_id');
-            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles');
+            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->date('d_o_b');
+            $table->date('d_o_b')->nullable();
             $table->string('email');
             $table->string('cell_phone')->nullable();
             $table->string('student_Id');
-            $table->date('start_date_of_enrollment');
-            $table->date('end_date_of_enrollment');
-            $table->string('grade_level');
             $table->string('immunized_status')->nullable();
-            $table->string('student_situation');
+            $table->string('student_situation')->nullable();
+            $table->boolean('status')->default('0');
             $table->timestamps();
         });
     }

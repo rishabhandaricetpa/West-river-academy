@@ -1,35 +1,29 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta content="strict-origin-when-cross-origin" name="referrer">
+<div class="d-flex">
+  <!-- * =============== Sidebar =============== * -->
+  @include('layouts.partials.sidebar')
+  <!-- * =============== /Sidebar =============== * -->
 
-  <title>@yield('pageTitle', 'Home') | {{config('app.name')}}</title>
+  <div class="main-content position-relative ml-auto">
+    <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
+    <!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
+    @include('layouts.partials.header')
 
-  @include('layouts.partials.styles')
-  @php
-    $appConfig = [
-      'csrfToken' => csrf_token(),
-      'env' => config('app.env'),
-      'user'=> ['id' => auth()->id()],
-    ];
-  @endphp
-  <script>
-    window.appConfig = @json($appConfig)
-  </script>
-  @stack('after_app_config_script')
-</head>
-<body class="bg-light {{'env-'.config('app.env')}} @yield('bodyClass')">
-<div id="app" class="app">
-@include('layouts.partials.navbar')
-<!-- Main content starts -->
-  <main class="main mt-3 mb-4" id="main" role="main">
+    <!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
+
+    <!-- * =============== Main =============== * -->
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
     @yield('content')
-  </main>
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
   @include('layouts.partials.footer')
+  </div>
+
 </div>
-@include('layouts.partials.scripts')
 </body>
+
 </html>

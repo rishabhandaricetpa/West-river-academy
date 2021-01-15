@@ -63,12 +63,10 @@ _ide_helper*.php
 .phpstorm.*.php
 
 # Project
-/public/js
 /public/css
 /public/fonts
-
+/public/js/app.js
 /public/mix-manifest.json
-/public/*.js
 /public/*.css
 
 # Force yarn usage

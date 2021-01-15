@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+//Route::get('student', 'HomeController@index');
+Route::get('/student', [App\Http\Controllers\StudentController::class, 'index']);
+//Route::resource('/api/student','StudentController');

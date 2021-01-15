@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\ParentProfile;
 use App\Models\User;
+use App\Models\Country;
 use App\Notifications\EmailVerification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -63,11 +64,10 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $country_list=  DB::table('countries')
+        $country_list=  Country::select('country')
+                        ->orderBy('country')
                         ->get();
-     
        return view('auth.register')->with('country_list',$country_list);
-     
     }
     /**
      * Create a new user instance after a valid registration.
@@ -106,8 +106,7 @@ class RegisterController extends Controller
         $parent->save();
         return $user;
     }
-
-    /**
+        /**
      * The user has been registered.
      *
      * @param \Illuminate\Http\Request $request
@@ -129,5 +128,4 @@ class RegisterController extends Controller
     /**
      * show country list to parent profile dropdown
      */
-    
 }

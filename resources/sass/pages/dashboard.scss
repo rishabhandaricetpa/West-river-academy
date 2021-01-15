@@ -1,0 +1,38 @@
+.circled-grid{
+    width: 4.5rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    border: 1px solid $gray-600;
+    transition: .2 all linear;
+    -webkit-transition: .2 all linear;
+    -moz-transition: .2 all linear;
+    -ms-transition: .2 all linear;
+    -o-transition: .2 all linear;
+    &:hover{
+        background-color: $gray-600;
+        color: $white !important;
+    }
+}
+
+.dashboard-info{
+    h3{
+        font-weight: 500;
+    }
+    p{
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    a:not(.btn){
+        text-decoration: underline;
+    }
+    a,p{
+        color: $text-color;
+    }
+}
+
+.total-amount{
+    span{
+       font-size: 24px;
+       font-weight: 700; 
+    }
+}
