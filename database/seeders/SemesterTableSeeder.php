@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Semester;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class SemesterTableSeeder extends Seeder
 {
@@ -14,13 +15,14 @@ class SemesterTableSeeder extends Seeder
      */
     public function run()
     {
+        $year =date("Y");
         $semester_dates = [
-            ['start_date' => 'August 1', 'end_date' => 'July 31'],
-            ['start_date' => 'January 1', 'end_date' => 'July 31'],
-            ['start_date' => 'January 1', 'end_date' => 'December 31'],
-            ['start_date' => 'June 1', 'end_date' => 'December 31'],
-            ['start_date' => 'April 1', 'end_date' => 'March 31'],
-            ['start_date' => 'September 1', 'end_date' => 'March 31'],
+            ['start_date' => Carbon::create( $year, '08', '01')->format('Y-m-d'), 'end_date' => Carbon::create( $year, '07', '31')->format('Y-m-d')],
+            ['start_date' => Carbon::create( $year, '01', '01')->format('Y-m-d'), 'end_datfe' => Carbon::create( $year, '07', '31')->format('Y-m-d')],
+            ['start_date' => Carbon::create( $year, '01', '01')->format('Y-m-d'), 'end_date' => Carbon::create( $year, '12', '31')->format('Y-m-d')],
+            ['start_date' => Carbon::create( $year, '06', '01')->format('Y-m-d'), 'end_date' => Carbon::create( $year, '12', '31')->format('Y-m-d')],
+            ['start_date' => Carbon::create( $year, '04', '01')->format('Y-m-d'), 'end_date' => Carbon::create( $year, '03', '31')->format('Y-m-d')],
+            ['start_date' => Carbon::create( $year, '09', '01')->format('Y-m-d'), 'end_date' => Carbon::create( $year, '03', '31')->format('Y-m-d')],
         ];
         Semester::insert($semester_dates);
     }

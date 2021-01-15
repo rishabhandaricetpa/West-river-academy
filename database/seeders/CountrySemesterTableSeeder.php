@@ -15,8 +15,8 @@ class CountrySemesterTableSeeder extends Seeder
     public function run()
     {
         $country_semester = [
-            ['country_id' => 1, 'semester_id' => 5],
-            ['country_id' => 1, 'semester_id' => 6],
+            ['country_id' => 97, 'semester_id' => 5],
+            ['country_id' => 97, 'semester_id' => 6],
             ['country_id' => 2, 'semester_id' => 3],
             ['country_id' => 2, 'semester_id' => 4],
         ];

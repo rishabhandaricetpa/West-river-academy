@@ -15,7 +15,7 @@ class FeesInfoSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['type' => 'first_student_annual', 'description' => 'Fee for first student (Annual)', 'amount' => '350'],
+            ['type' => 'first_student_annual', 'description' => 'Fee for first student (Annual)', 'amount' => '375'],
             ['type' => 'first_student_half', 'description' => 'Fee for first student (semi)', 'amount' => '200'],
             ['type' => 'additional_student_annual', 'description' => 'Fee for additional student (Annual)', 'amount' => '50'],
             ['type' => 'additional_student_half', 'description' => 'Fee for additional student (semi)', 'amount' => '50'],
