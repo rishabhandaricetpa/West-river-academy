@@ -315,6 +315,7 @@ export default {
       this.form.periods.push({
         id: null,
         selectedStartDate: new Date(this.semesters.start_date),
+        status: "pending",
         selectedEndDate: "",
         grade: "",
         endDisabledDates: {
