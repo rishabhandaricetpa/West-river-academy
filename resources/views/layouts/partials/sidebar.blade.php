@@ -3,14 +3,13 @@
     <li>
     <a href="{{ url('/dashboard') }}">Dashboard</a>
       <ul class="list-unstyled">
-        <li><a href="#">Add student</a></li>
-        <li><a href="{{ url('/enroll-student') }}">add enrollment</a></li>
-        <li><a href="{{ url('/reviewstudents') }}">View Students</a></li>
+        <li><a href="{{ url('/enroll-student') }}">Enroll Student</a></li>
+        <li><a href="{{ url('/reviewstudents') }}">Review Students</a></li>
       </ul>
     </li>
     <li><a href="{{ url('/cart') }}">Cart</a></li>
-    <li><a href="#">Fee structure</a></li>
-    <li><a href="#">Tutorials</a></li>
+    <li><a href="#">Fees And Services</a></li>
+    <li><a href="#">Support Videos</a></li>
     <li><a href="{{ url('/mysettings', Auth::user()->id)}}">My Account</a></li>
     <li><a href="{{ url('/logout') }}">Logout</a></li>
     </ul>
