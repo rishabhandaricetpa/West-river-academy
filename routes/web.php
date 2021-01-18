@@ -119,11 +119,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/bank-transfer', function () {
         return view('bank-transfer');
     });
-    //
-    Route::get('/mysettings',function () {
-        return view('myaccount');
-    })->name('user.settings');
-   
+    Route::get('/mysettings/{id}', 'StudentController@mysettings');
+    Route::get('/editaccount/{id}', 'StudentController@editmysettings');
+    Route::post('/updateaccount/{id}', 'StudentController@updatemysettings')->name('update.account');
+
 });
 });
 

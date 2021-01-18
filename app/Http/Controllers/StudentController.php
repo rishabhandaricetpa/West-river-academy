@@ -333,4 +333,41 @@ class StudentController extends Controller
      
      }
 
+    public function mysettings($id)
+    {    
+         $user_id = Auth::user()->id;
+         $parent = ParentProfile::find($user_id)->first();
+         return view('myaccount', compact('parent','user_id'));
+    }
+    public function editmysettings($id)
+    {    
+         $user_id = Auth::user()->id;
+         $parent = ParentProfile::find($user_id)->first();
+         return view('edit-account', compact('parent','user_id'));
+    }
+    public function updatemysettings(Request $request, $id)
+    {
+        try{
+            DB::beginTransaction();
+            $parent1=  User::find($id)->parentProfile()->first();
+            $parent_id = $parent1->id;
+            $parent = ParentProfile::find(1)->first();
+            $parent->p1_first_name   =  $request->get('first_name');
+            $parent->p1_last_name    =  $request->get('last_name');
+            $parent->p1_email        =  $request->get('email');
+            $parent->p1_cell_phone   =  $request->get('phone');
+            $parent->save();
+            $notification = array(
+                'message' => 'parent Record is updated Successfully!',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }catch (\Exception $e) {
+            DB::rollBack();
+
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error' ,'message' => 'Failed to update My account']);
+            }
+        }
+    }
 }
