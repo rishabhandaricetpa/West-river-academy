@@ -44,6 +44,7 @@ Route::post('update/{id}', 'StudentProfileController@update')->name('edit-studen
 Route::get('delete/{id}', 'StudentProfileController@destroy')->name('delete.student');
 Route::get('deactive/{id}', 'Auth\RegisterController@dactive')->name('deactive.student');
 
+Route::get('coupon', 'CouponController@index')->name('view.coupon');
 
 
 
