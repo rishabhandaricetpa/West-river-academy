@@ -32,7 +32,7 @@
             <label for="">Password</label>
             <div>********</div>
          </div>
-         <a href="{{ route('password.request') }}" class="btn btn-primary">Change Your Password?</a>
+         <a href="{{ route('reset.password',$user_id  ) }}" class="btn btn-primary">Change Your Password?</a>
 
 </div>
 

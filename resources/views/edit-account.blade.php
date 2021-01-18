@@ -23,19 +23,19 @@
         <div class="form-group d-flex mb-2">
             <label for="">Last Name</label>
             <div>
-            <input  class="form-control " name="last_name"  required autocomplete="p1_last_name" autofocus>
+            <input  class="form-control " name="last_name"  value="{{$parent->p1_last_name}}" required autocomplete="p1_last_name" autofocus>
             </div>
         </div>
         <div class="form-group d-flex mb-2">
                 <label for="">Parent 1 Email Address</label>
                 <div>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="p1_email" autofocus>
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  value="{{$parent->p1_email}}" name="email"  required autocomplete="p1_email" autofocus>
                 </div>
         </div>
         <div class="form-group d-flex mb-2">
             <label for="">Phone Number</label>
             <div>
-            <input class="form-control " name="phone"  required autocomplete="p1_cell_phone" autofocus>
+            <input class="form-control " name="phone"  value="{{$parent->p1_cell_phone}}" required autocomplete="p1_cell_phone" autofocus>
             @error('email')
             <div class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

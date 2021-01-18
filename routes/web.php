@@ -84,7 +84,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     
     // Route::get('/cart', 'StudentController@address')->name('billing.address');
-    Route::get('edit/address/{id}', 'StudentController@address')->name('edit.address');
+    Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
     Route::post('/cart-billing', 'StudentController@saveaddress')->name('billing.address');
 
 
@@ -119,9 +119,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/bank-transfer', function () {
         return view('bank-transfer');
     });
-    Route::get('/mysettings/{id}', 'StudentController@mysettings');
-    Route::get('/editaccount/{id}', 'StudentController@editmysettings');
-    Route::post('/updateaccount/{id}', 'StudentController@updatemysettings')->name('update.account');
+    Route::get('/mysettings/{id}', 'ParentController@mysettings');
+    Route::get('/editaccount/{id}', 'ParentController@editmysettings');
+    Route::post('/updateaccount/{id}', 'ParentController@updatemysettings')->name('update.account');
+    Route::get('/reset', function () {
+        return view('resetpassword');
+    })->name('reset.password');
+    Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
 });
 });

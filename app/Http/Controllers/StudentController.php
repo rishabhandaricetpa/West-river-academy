@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use App\Helpers\EnrollmentHelper;
 
 class StudentController extends Controller
 {
@@ -260,22 +259,7 @@ class StudentController extends Controller
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
   
-    public function address($id)
-    {    
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id)->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-
-        if( is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0){
-            $notification = array(
-                'message' => 'Cart is Empty! Please add atleast one item.',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
-        }
-        $country_list  =  Country::select('country')->get();
-        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
-    }
+    
     /**
      * This function is used to store billing and shipping address
      */
@@ -384,49 +368,4 @@ class StudentController extends Controller
             }
         }
     }
-
-    public function mysettings($id)
-    {    
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id)->first();
-        return view('myaccount', compact('parent','user_id'));
-    }
-
-    public function editmysettings($id)
-    {    
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id)->first();
-        return view('edit-account', compact('parent','user_id'));
-    }
-
-    public function updatemysettings(Request $request, $id)
-    {
-        try{
-            DB::beginTransaction();
-            $parent1=  User::find($id)->parentProfile()->first();
-            $parent_id = $parent1->id;
-            $parent = ParentProfile::find(1)->first();
-            $parent->p1_first_name   =  $request->get('first_name');
-            $parent->p1_last_name    =  $request->get('last_name');
-            $parent->p1_email        =  $request->get('email');
-            $parent->p1_cell_phone   =  $request->get('phone');
-            $parent->save();
-         
-            DB::commit();
-
-            $notification = array(
-                'message' => 'parent Record is updated Successfully!',
-                'alert-type' => 'success'
-            );
-         
-            return redirect()->back()->with($notification);
-        }catch (\Exception $e) {
-            DB::rollBack();
-
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'error' ,'message' => 'Failed to update My account']);
-            }
-        }
-    }
-
 }
