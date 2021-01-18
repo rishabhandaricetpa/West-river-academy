@@ -262,11 +262,19 @@ class StudentController extends Controller
   
     public function address($id)
     {    
-         $user_id = Auth::user()->id;
-         $parent = ParentProfile::find($user_id)->first();
-         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-         $country_list  =  Country::select('country')->get();
-         return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
+        $user_id = Auth::user()->id;
+        $parent = ParentProfile::find($user_id)->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+
+        if( is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0){
+            $notification = array(
+                'message' => 'Cart is Empty! Please add atleast one item.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        $country_list  =  Country::select('country')->get();
+        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
     }
     /**
      * This function is used to store billing and shipping address
