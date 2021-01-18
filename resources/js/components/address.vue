@@ -285,12 +285,12 @@
               class="form-check-input" 
               type="radio" 
               name="payment_type"
-              value="Check or Money Order"
+              value="Cheque or Money Order"
               v-model="form.paymentMethod.payment_type" 
               >
             </div>
           <div class="payment-info"> 
-            <h3>Check or Money Order</h3>
+            <h3>Cheque or Money Order</h3>
             <p>Release of enrollment confirmation may be delayed until payment clears.</p>
           </div>
              </li>

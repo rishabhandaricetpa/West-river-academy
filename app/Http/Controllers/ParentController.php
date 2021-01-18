@@ -10,6 +10,7 @@ use App\Models\ParentProfile;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\FeesInfo;
+use App\Models\Address;
 use Illuminate\Support\Facades\DB;
 
 class ParentController extends Controller
@@ -42,18 +43,75 @@ class ParentController extends Controller
         $country_list  =  Country::select('country')->get();
         return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
     }
+
+    /**
+     * This function is used to store billing and shipping address
+     */
+    protected function saveaddress(Request $request)
+    {   
+        try{
+            DB::beginTransaction();
+            $address = new Address();
+            $billing_data = $request->input('billing_address');
+            $shipping_data = $request->input('shipping_address');
+            $payment_type = $request->input('paymentMethod');
+            $Userid = Auth::user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $id = $parentProfileData->id;
+            $billinAddress =  Address::create([
+                'parent_profile_id' => $id,
+                'billing_street_address' => $billing_data['street_address'],
+                'billing_city' => $billing_data['city'],
+                'billing_state' => $billing_data['state'],
+                'billing_zip_code' => $billing_data['zip_code'],
+                'billing_country' => $billing_data['country'],
+                'shipping_street_address' => $shipping_data['street_address'],
+                'shipping_city' => $shipping_data['city'],
+                'shipping_state' => $shipping_data['state'],
+                'shipping_zip_code' => $shipping_data['zip_code'],
+                'shipping_country' => $shipping_data['country'],
+                'email'=> $request['email'],
+            ]);
+            $parentaddress = ParentProfile::find($Userid)->first();
+            $parentaddress->fill([
+                'street_address' => $billing_data['street_address'],
+                'city' => $billing_data['city'],
+                'state' => $billing_data['state'],
+                'zip_code' => $billing_data['zip_code'],
+                'country' => $billing_data['country'],
+            ]);
+            $parentaddress->save();
+            if($payment_type['payment_type']=="Credit Card"){
+                return route('stripe.payment');
+            }
+            elseif($payment_type['payment_type']=="Pay Pal"){
+                return route('paywithpaypal');
+            }
+            elseif($payment_type['payment_type']=="Bank Transfer"){
+                return route('order.review');
+            }
+            elseif($payment_type['payment_type']=="Cheque or Money Order"){
+                return route('money.order');
+            }
+            DB::commit();
+            } catch (\Exception $e) {   
+                DB::rollBack();
+            }
+    }
+    
+    //Parent accounts edit information 
     public function mysettings($id)
     {    
         $user_id = Auth::user()->id;
         $parent = ParentProfile::find($user_id)->first();
-        return view('myaccount', compact('parent','user_id'));
+        return view('MyAccounts/myaccount', compact('parent','user_id'));
     }
 
     public function editmysettings($id)
     {    
         $user_id = Auth::user()->id;
         $parent = ParentProfile::find($user_id)->first();
-        return view('edit-account', compact('parent','user_id'));
+        return view('MyAccounts/edit-account', compact('parent','user_id'));
     }
 
     public function updatemysettings(Request $request, $id)
