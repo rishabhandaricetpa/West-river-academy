@@ -170,7 +170,7 @@
         >
         <div class="row pl-5">
           <div v-for="(grade, index) in grades" :key="index" class="col-sm-3">
-            <div v-for="(val, i) in grade" :key="i" class="form-check">
+            <div v-for="(val, i) in grade" :key="i" class="form-check" :data-toggle="[val > 9 ? 'modal' : '']"  :data-target="[val > 9 ? '#chooseGrade' : '']">
               <input
                 class="form-check-input"
                 type="radio"
