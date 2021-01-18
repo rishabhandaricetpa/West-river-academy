@@ -71,12 +71,6 @@ class StudentController extends Controller
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
             
-            if(!StudentProfile::where('parent_profile_id',$id)->exists()){
-                $student_type = 'first_student';
-            }else{
-                $student_type = 'additional_student';
-            }
-            
             $student =  StudentProfile::create([
                 'parent_profile_id' => $id,
                 'first_name' => $data['first_name'],
@@ -95,6 +89,20 @@ class StudentController extends Controller
                 $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
                 $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
+                $enroll_year = $selectedStartDate->year;
+
+                $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$id)
+                                                    ->where('student_profiles.id','!=', $student->id)
+                                                    ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
+                                                    ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                                                    ->exists();
+
+                if(!$student_enrolled){
+                    $student_type = 'first_student';
+                }else{
+                    $student_type = 'additional_student';
+                }
 
                 $enrollPeriod = EnrollmentPeriods::create([
                     'student_profile_id' => $student->id,
@@ -158,23 +166,15 @@ class StudentController extends Controller
             $student->student_situation = $request->input('student_situation');
             $student->save();
             $periods = collect($request->get('periods'));
-
-            $first_student_id = StudentProfile::where('parent_profile_id',$student->parent_profile_id)->orderBy('created_at','asc')->pluck('id')->first();
-
-            if($first_student_id == $id){
-                $student_type = 'first_student';
-            }else{
-                $student_type = 'additional_student';
-            }
            
-            $periods->whereNull('id')->each(function ($period) use ($student,$student_type) {
+            $periods->whereNull('id')->each(function ($period) use ($student) {
                 $enrollPeriod = new EnrollmentPeriods();
-                $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
+                $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
-            $periods->whereNotNull('id')->each(function ($period) use ($student, $student_type) {
+            $periods->whereNotNull('id')->each(function ($period) use ($student) {
                 if(!EnrollmentPayment::where('enrollment_period_id',$period['id'])->where('status','paid')->exists()){
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
-                    $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
+                    $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
             });
 
@@ -192,10 +192,24 @@ class StudentController extends Controller
         }
     }
 
-    public function updateEnrollPeriod($period, $student, $enrollPeriod, $student_type){
+    public function updateEnrollPeriod($period, $student, $enrollPeriod){
         $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
+        $enroll_year = $selectedStartDate->year;
+        
+        $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$student->parent_profile_id)
+                                            ->where('student_profiles.id','!=', $student->id)
+                                            ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
+                                            ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                                            ->exists();
+
+        if(!$student_enrolled){
+            $student_type = 'first_student';
+        }else{
+            $student_type = 'additional_student';
+        }
 
         $enrollPeriod->fill([
             'student_profile_id' => $student->id,
@@ -332,5 +346,31 @@ class StudentController extends Controller
         return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
      
      }
+
+    public function delete(Request $request, $id)
+    {
+        try{
+            DB::beginTransaction();
+            $periods_id = collect($request->get('periods'))->pluck('id');
+            $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+            $enrollPeriodId = collect($enrollPeriods)->pluck('id');
+
+            $diff = $enrollPeriodId->diff($periods_id);
+
+            EnrollmentPeriods::whereIn('id', $diff)->delete();
+           
+            DB::commit();
+           
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'success' ,'message' => 'Successfully removed period']);
+            }
+        }catch (\Exception $e) {
+            DB::rollBack();
+
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error' ,'message' => 'Failed to update student']);
+            }
+        }
+    }
 
 }

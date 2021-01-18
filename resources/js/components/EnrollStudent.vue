@@ -221,7 +221,7 @@
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
-      <button type="submit" class="btn btn-primary">Continue</button>
+      <button type="submit" :disabled="disableSubmit" class="btn btn-primary">Continue</button>
     </div>
   </form>
   </div>
@@ -262,6 +262,7 @@ export default {
           ],
         },
       students: [],
+      disableSubmit:false
     };
   },
   props: {
@@ -291,15 +292,17 @@ export default {
       });
     },
     addStudent() {
+      this.disableSubmit = true;
       axios
         .post(route("enroll.student"), this.form)
         .then(
           (response) => {
             const resp = response.data;
             resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
+            this.disableSubmit = false;
           }
         )
-        .catch((error) => console.log(error));
+        .catch((error) => this.disableSubmit = false);
     },
   },
   computed: {
