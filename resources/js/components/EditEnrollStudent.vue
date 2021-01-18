@@ -324,8 +324,10 @@ export default {
       });
     },
     removePeriod(index) {
+      let reqData = this.form;
+      reqData.periods.splice(index, 1);
       axios
-        .post(route("delete.student", this.students), this.form)
+        .post(route("delete.enroll", this.students), reqData)
         .then(
           (response) => {
             const resp = response.data;

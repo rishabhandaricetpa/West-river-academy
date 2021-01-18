@@ -347,7 +347,7 @@ class StudentController extends Controller
      
      }
 
-    public function delete(Request $request, $id)
+    public function deleteEnroll(Request $request, $id)
     {
         try{
             DB::beginTransaction();
@@ -357,8 +357,11 @@ class StudentController extends Controller
 
             $diff = $enrollPeriodId->diff($periods_id);
 
+            EnrollmentPayment::whereIn('enrollment_period_id',$diff)->delete();
+            Cart::whereIn('item_id',$diff)->where('item_type','enrollment_period')->delete();
+
             EnrollmentPeriods::whereIn('id', $diff)->delete();
-           
+
             DB::commit();
             if ($request->expectsJson()) {
                 return response()->json(['status' => 'success' ,'message' => 'Successfully removed enroll period']);

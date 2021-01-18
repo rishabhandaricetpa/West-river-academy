@@ -331,6 +331,7 @@ export default {
       return this.form.enrollPeriods.length < 4;
     },
   },
+  }
 };
 </script>
 
