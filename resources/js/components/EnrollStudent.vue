@@ -1,6 +1,11 @@
 <template>
  <div class="form-wrap border bg-light py-5 px-25">
-    <h2>Enroll Student 1</h2>
+    <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
+    <h2>Enroll Student 1</h2> 
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
@@ -49,7 +54,7 @@
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
         </Datepicker>
       </p>
-      <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      <i class="fas fa-calendar-alt" aria-hidden="true"></i>  
     </div>
     <div class="form-group d-flex mb-2">
       <label for="">Email Address</label>
@@ -239,7 +244,7 @@ export default {
   },
   data() {
     return {
-      grades:[['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
+      grades:[['Ungraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
         form: {
           first_name: "",
           middle_name: "",
@@ -262,7 +267,8 @@ export default {
           ],
         },
       students: [],
-      disableSubmit:false
+      disableSubmit:false,
+      errors:[]
     };
   },
   props: {
@@ -276,6 +282,10 @@ export default {
       const year = oldDate.getFullYear();
 
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
+    },
+     validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     updateEndDate(index) {
       this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
@@ -291,9 +301,18 @@ export default {
         },
       });
     },
-    addStudent() {
-      this.disableSubmit = true;
-      axios
+    addStudent(e) {
+      this.errors = []; 
+      if(!this.form.dob){
+      this.errors.push('Date of birth is required');
+      alert('Please fill the required form');
+      }
+       if(!this.validEmail(this.form.email)) {
+        this.errors.push('Valid email required.');
+      }
+      if(this.form.dob && this.validEmail(this.form.email)){
+        this.disableSubmit = true;
+        axios
         .post(route("enroll.student"), this.form)
         .then(
           (response) => {
@@ -303,8 +322,10 @@ export default {
           }
         )
         .catch((error) => this.disableSubmit = false);
-    },
+    }
+    e.preventDefault();
   },
+  
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
