@@ -302,7 +302,8 @@ export default {
       });
     },
     addStudent(e) {
-      this.errors = []; 
+      this.disableSubmit = true;
+       this.errors = []; 
       if(!this.form.dob){
       this.errors.push('Date of birth is required');
       alert('Please fill the required form');

@@ -282,48 +282,50 @@ class StudentController extends Controller
     protected function saveaddress(Request $request)
     {   
         try{
-                $address = new Address();
-                $billing_data = $request->input('billing_address');
-                $shipping_data = $request->input('shipping_address');
-                $payment_type = $request->input('paymentMethod');
-                $Userid = Auth::user()->id;
-                $parentProfileData = User::find($Userid)->parentProfile()->first();
-                $id = $parentProfileData->id;
-                $billinAddress =  Address::create([
-                    'parent_profile_id' => $id,
-                    'billing_street_address' => $billing_data['street_address'],
-                    'billing_city' => $billing_data['city'],
-                    'billing_state' => $billing_data['state'],
-                    'billing_zip_code' => $billing_data['zip_code'],
-                    'billing_country' => $billing_data['country'],
-                    'shipping_street_address' => $shipping_data['street_address'],
-                    'shipping_city' => $shipping_data['city'],
-                    'shipping_state' => $shipping_data['state'],
-                    'shipping_zip_code' => $shipping_data['zip_code'],
-                    'shipping_country' => $shipping_data['country'],
-                    'email'=> $request['email'],
-                ]);
-                $parentaddress = ParentProfile::find($Userid)->first();
-                $parentaddress->fill([
-                    'street_address' => $billing_data['street_address'],
-                    'city' => $billing_data['city'],
-                    'state' => $billing_data['state'],
-                    'zip_code' => $billing_data['zip_code'],
-                    'country' => $billing_data['country'],
-                ]);
-                $parentaddress->save();
-                if($payment_type['payment_type']=="Credit Card"){
-                    return route('stripe.payment');
-                }
-                elseif($payment_type['payment_type']=="Pay Pal"){
-                    return route('paywithpaypal');
-                }
-                elseif($payment_type['payment_type']=="Bank Transfer"){
-                    return route('order.review');
-                }
-                elseif($payment_type['payment_type']=="Check or Money Order"){
-                    return route('money.order');
-                }
+            DB::beginTransaction();
+            $address = new Address();
+            $billing_data = $request->input('billing_address');
+            $shipping_data = $request->input('shipping_address');
+            $payment_type = $request->input('paymentMethod');
+            $Userid = Auth::user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $id = $parentProfileData->id;
+            $billinAddress =  Address::create([
+                'parent_profile_id' => $id,
+                'billing_street_address' => $billing_data['street_address'],
+                'billing_city' => $billing_data['city'],
+                'billing_state' => $billing_data['state'],
+                'billing_zip_code' => $billing_data['zip_code'],
+                'billing_country' => $billing_data['country'],
+                'shipping_street_address' => $shipping_data['street_address'],
+                'shipping_city' => $shipping_data['city'],
+                'shipping_state' => $shipping_data['state'],
+                'shipping_zip_code' => $shipping_data['zip_code'],
+                'shipping_country' => $shipping_data['country'],
+                'email'=> $request['email'],
+            ]);
+            $parentaddress = ParentProfile::find($Userid)->first();
+            $parentaddress->fill([
+                'street_address' => $billing_data['street_address'],
+                'city' => $billing_data['city'],
+                'state' => $billing_data['state'],
+                'zip_code' => $billing_data['zip_code'],
+                'country' => $billing_data['country'],
+            ]);
+            $parentaddress->save();
+            if($payment_type['payment_type']=="Credit Card"){
+                return route('stripe.payment');
+            }
+            elseif($payment_type['payment_type']=="Pay Pal"){
+                return route('paywithpaypal');
+            }
+            elseif($payment_type['payment_type']=="Bank Transfer"){
+                return route('order.review');
+            }
+            elseif($payment_type['payment_type']=="Check or Money Order"){
+                return route('money.order');
+            }
+            DB::commit();
             } catch (\Exception $e) {   
                 DB::rollBack();
             }
@@ -409,10 +411,14 @@ class StudentController extends Controller
             $parent->p1_email        =  $request->get('email');
             $parent->p1_cell_phone   =  $request->get('phone');
             $parent->save();
+         
+            DB::commit();
+
             $notification = array(
                 'message' => 'parent Record is updated Successfully!',
                 'alert-type' => 'success'
             );
+         
             return redirect()->back()->with($notification);
         }catch (\Exception $e) {
             DB::rollBack();
@@ -423,5 +429,4 @@ class StudentController extends Controller
         }
     }
 
-               
 }
