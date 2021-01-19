@@ -21,7 +21,7 @@
                         <h3 class="panel-heading">Payment Details</h3>
                     </div>                    
                 </div>
-                <div class="panel-body">
+                <div class="panel-body">    
                     <form role="form" action="{{ route('stripe.payment') }}" method="post" class="validation"
                                                      data-cc-on-file="false"
                                                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"

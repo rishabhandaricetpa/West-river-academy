@@ -2236,10 +2236,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "address",
@@ -2546,6 +2542,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2555,7 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      grades: [['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'], ['5', '6', '7', '8', '9', '10', '11', '12']],
+      grades: [['Ungraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'], ['5', '6', '7', '8', '9', '10', '11', '12']],
       form: {
         first_name: this.students.first_name,
         middle_name: this.students.middle_name,
@@ -2567,7 +2569,8 @@ __webpack_require__.r(__webpack_exports__);
         student_situation: this.students.student_situation,
         immunized_status: this.students.immunized_status,
         periods: []
-      }
+      },
+      errors: []
     };
   },
   created: function created() {
@@ -2588,12 +2591,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     EditStudent: function EditStudent() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("update.student", this.students), this.form).then(function (response) {
-        var resp = response.data;
-        resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
-      })["catch"](function (error) {
-        return console.log(error);
-      });
+      this.errors = [];
+
+      if (!this.validEmail(this.form.email)) {
+        this.errors.push('Valid email required.');
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("update.student", this.students), this.form).then(function (response) {
+          var resp = response.data;
+          resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
+    },
+    validEmail: function validEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     calcEndDate: function calcEndDate(date) {
       var oldDate = new Date(date);
@@ -2608,6 +2621,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.periods.push({
         id: null,
         selectedStartDate: new Date(this.semesters.start_date),
+        status: "pending",
         selectedEndDate: "",
         grade: "",
         endDisabledDates: {
@@ -2618,7 +2632,9 @@ __webpack_require__.r(__webpack_exports__);
     removePeriod: function removePeriod(index) {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("delete.student", this.students), this.form).then(function (response) {
+      var reqData = this.form;
+      reqData.periods.splice(index, 1);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(route("delete.enroll", this.students), reqData).then(function (response) {
         var resp = response.data;
         resp.status == 'success' ? _this2.form.periods.splice(index, 1) : alert(resp.message);
       })["catch"](function (error) {
@@ -2891,6 +2907,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2901,7 +2922,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      grades: [['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'], ['5', '6', '7', '8', '9', '10', '11', '12']],
+      grades: [['Ungraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'], ['5', '6', '7', '8', '9', '10', '11', '12']],
       form: {
         first_name: "",
         middle_name: "",
@@ -2913,15 +2934,17 @@ __webpack_require__.r(__webpack_exports__);
         student_situation: "",
         studentID: "",
         enrollPeriods: [{
-          selectedStartDate: new Date(this.semesters.start_date),
+          selectedStartDate: new Date(this.semesters),
           selectedEndDate: "",
           grade: "",
           endDisabledDates: {
-            from: this.calcEndDate(this.semesters.start_date)
+            from: this.calcEndDate(this.semesters)
           }
         }]
       },
-      students: []
+      students: [],
+      disableSubmit: false,
+      errors: []
     };
   },
   props: {
@@ -2935,27 +2958,51 @@ __webpack_require__.r(__webpack_exports__);
       var year = oldDate.getFullYear();
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
+    validEmail: function validEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
     updateEndDate: function updateEndDate(index) {
       this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
       this.form.enrollPeriods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod: function addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
-        selectedStartDate: new Date(this.semesters.start_date),
+        selectedStartDate: new Date(this.semesters),
         selectedEndDate: "",
         grade: "",
         endDisabledDates: {
-          from: this.calcEndDate(this.semesters.start_date)
+          from: this.calcEndDate(this.semesters)
         }
       });
     },
-    addStudent: function addStudent() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("enroll.student"), this.form).then(function (response) {
-        var resp = response.data;
-        resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
-      })["catch"](function (error) {
-        return console.log(error);
-      });
+    addStudent: function addStudent(e) {
+      var _this = this;
+
+      this.disableSubmit = true;
+      this.errors = [];
+
+      if (!this.form.dob) {
+        this.errors.push('Date of birth is required');
+        alert('Please fill the required form');
+      }
+
+      if (!this.validEmail(this.form.email)) {
+        this.errors.push('Valid email required.');
+      }
+
+      if (this.form.dob && this.validEmail(this.form.email)) {
+        this.disableSubmit = true;
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("enroll.student"), this.form).then(function (response) {
+          var resp = response.data;
+          resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
+          _this.disableSubmit = false;
+        })["catch"](function (error) {
+          return _this.disableSubmit = false;
+        });
+      }
+
+      e.preventDefault();
     }
   },
   computed: {
@@ -41781,7 +41828,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-wrap border bg-light py-5 px-25 mt-2r" }, [
-        _c("h2", [_vm._v("Shipping Address")]),
+        _c("h2", [_vm._v("Mailing Address")]),
         _vm._v(" "),
         _c("div", { staticClass: "checkbox" }, [
           _c("label", { staticClass: "sSame", attrs: { for: "sSame" } }, [
@@ -41849,7 +41896,6 @@ var render = function() {
               attrs: {
                 type: "text",
                 name: "first_name",
-                required: "",
                 "aria-describedby": "emailHelp"
               },
               domProps: { value: _vm.form.shipping_address.first_name },
@@ -41886,7 +41932,6 @@ var render = function() {
               attrs: {
                 type: "text",
                 name: "last_name",
-                required: "",
                 "aria-describedby": "emailHelp"
               },
               domProps: { value: _vm.form.shipping_address.last_name },
@@ -41923,7 +41968,6 @@ var render = function() {
               attrs: {
                 type: "text",
                 name: "street",
-                required: "",
                 "aria-describedby": "emailHelp"
               },
               domProps: { value: _vm.form.shipping_address.street_address },
@@ -41960,7 +42004,6 @@ var render = function() {
               attrs: {
                 type: "text",
                 name: "city",
-                required: "",
                 "aria-describedby": "emailHelp"
               },
               domProps: { value: _vm.form.shipping_address.city },
@@ -41997,7 +42040,6 @@ var render = function() {
               attrs: {
                 type: "text",
                 name: "state",
-                required: "",
                 "aria-describedby": "emailHelp"
               },
               domProps: { value: _vm.form.shipping_address.state },
@@ -42034,7 +42076,6 @@ var render = function() {
               attrs: {
                 type: "text",
                 name: "zip_code",
-                required: "",
                 "aria-describedby": "emailHelp"
               },
               domProps: { value: _vm.form.shipping_address.zip_code },
@@ -42070,7 +42111,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { name: "country", required: "" },
+                attrs: { name: "country" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -42346,12 +42387,12 @@ var render = function() {
                     attrs: {
                       type: "radio",
                       name: "payment_type",
-                      value: "Check or Money Order"
+                      value: "Cheque or Money Order"
                     },
                     domProps: {
                       checked: _vm._q(
                         _vm.form.paymentMethod.payment_type,
-                        "Check or Money Order"
+                        "Cheque or Money Order"
                       )
                     },
                     on: {
@@ -42359,7 +42400,7 @@ var render = function() {
                         return _vm.$set(
                           _vm.form.paymentMethod,
                           "payment_type",
-                          "Check or Money Order"
+                          "Cheque or Money Order"
                         )
                       }
                     }
@@ -42467,7 +42508,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "payment-info" }, [
-      _c("h3", [_vm._v("Check or Money Order")]),
+      _c("h3", [_vm._v("Cheque or Money Order")]),
       _vm._v(" "),
       _c("p", [
         _vm._v(
@@ -42688,7 +42729,23 @@ var render = function() {
                 _vm.$set(_vm.form, "email", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.errors.length
+            ? _c("p", [
+                _c(
+                  "ul",
+                  _vm._l(_vm.errors, function(error) {
+                    return _c(
+                      "li",
+                      { key: error.id, staticStyle: { color: "red" } },
+                      [_vm._v("  " + _vm._s(error) + " ")]
+                    )
+                  }),
+                  0
+                )
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -43161,6 +43218,22 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-wrap border bg-light py-5 px-25" }, [
+    _vm.errors.length
+      ? _c("p", [
+          _c(
+            "ul",
+            _vm._l(_vm.errors, function(error) {
+              return _c(
+                "li",
+                { key: error.id, staticStyle: { color: "red" } },
+                [_vm._v("  " + _vm._s(error) + " ")]
+              )
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("h2", [_vm._v("Enroll Student 1")]),
     _vm._v(" "),
     _c(
@@ -43507,7 +43580,14 @@ var render = function() {
                       _vm._l(grade, function(val, i) {
                         return _c(
                           "div",
-                          { key: i, staticClass: "form-check" },
+                          {
+                            key: i,
+                            staticClass: "form-check",
+                            attrs: {
+                              "data-toggle": [val > 9 ? "modal" : ""],
+                              "data-target": [val > 9 ? "#chooseGrade" : ""]
+                            }
+                          },
                           [
                             _c("input", {
                               directives: [
@@ -43662,7 +43742,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "submit", disabled: _vm.disableSubmit }
+            },
             [_vm._v("Continue")]
           )
         ])
