@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Coupon;
+use App\Models\ParentProfile;
 
 class CouponController extends Controller
 {
@@ -21,11 +22,19 @@ class CouponController extends Controller
 
     public function create()
     {
-        return view('admin.coupon.create');
+        $parents = ParentProfile::select('id','p1_email')->get()->toArray();
+        return view('admin.coupon.create',compact('parents'));
     }
 
     public function store(Request $request)
     {
-        
+
     }
+
+    public function getCode()
+    {
+        return Coupon::generateCode();
+    }
+
+    
 }

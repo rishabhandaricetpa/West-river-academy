@@ -38,6 +38,28 @@
         "responsive": true, "lengthChange": false, "autoWidth": false,
       });
 
+      $("#generate-code").on('click',function () {
+        let _this = $(this);
+        let text = _this.text();
+
+        _this.attr('disabled',true);
+        _this.text('Generating...');
+        
+        $.ajax({
+          type: "get",
+          url: "{{route('admin.coupons.generate')}}",
+          success: function (response) {
+            $("#code").val(response);
+            _this.attr('disabled',false);
+            _this.text(text);
+          },
+          error: function () { 
+            _this.attr('disabled',false);
+            _this.text(text);
+          }
+        });
+      });
+
     });
   </script>
 
