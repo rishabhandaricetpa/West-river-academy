@@ -18,4 +18,14 @@ class CouponController extends Controller
     {
         return datatables(Coupon::all())->toJson();
     }
+
+    public function create()
+    {
+        return view('admin.coupon.create');
+    }
+
+    public function store(Request $request)
+    {
+        
+    }
 }

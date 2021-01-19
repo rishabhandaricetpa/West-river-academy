@@ -21,13 +21,14 @@
            <!-- /.card-header -->
             <div class="card">
               <div class="card-header">
-                {{-- <h3 class="card-title">DataTable with default features</h3> --}}
+                <a href="{{ route('admin.create.coupon') }}" class="btn btn-sm btn-success"> Generate New Coupon </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="coupons-table" class="table table-bordered table-striped data-table"">
+                <table id="coupons-table" class="table table-bordered table-striped data-table">
                   <thead>
                   <tr>
+                    <th>Sno</th>
                     <th>Code</th>
                     <th>Amount</th>
                     <th>Status</th>
