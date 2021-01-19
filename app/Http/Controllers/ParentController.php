@@ -101,7 +101,7 @@ class ParentController extends Controller
             elseif($payment_type['payment_type']=="Bank Transfer"){
                 return route('order.review');
             }
-            elseif($payment_type['payment_type']=="Cheque or Money Order"){
+            elseif($payment_type['payment_type']=="Check or Money Order"){
                 return route('money.order');
             }
             DB::commit();

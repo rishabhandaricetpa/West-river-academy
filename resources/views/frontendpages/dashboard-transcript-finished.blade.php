@@ -4,10 +4,11 @@
 <sidebar class="main-sidebar bg-secondary pt-5 fixed-top overflow-auto">
     <ul class="list-unstyled">
     <li>
-    <a href="#">Dashboard</a>
+    <a href="#"><span>Dashboard</span><i class="fas fa-tachometer-alt"></i>
+Download SVGPerfect for when you want to use just one icon as a vector on the desktop or in your own icon workflow.</a>
       <ul class="list-unstyled">
-        <li><a href="#">Add student</a></li>
-        <li><a href="#">add enrollment</a></li>
+        <li><a href="#"><span>Add student</span><i class="fas fa-user-graduate"></i></a></li>
+        <li><a href="#"><span>add enrollment</span><i class="fas fa-edit"></i></a></li>
       </ul>
     </li>
     <li><a href="#">Cart</a></li>

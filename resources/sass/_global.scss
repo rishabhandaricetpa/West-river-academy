@@ -206,3 +206,14 @@ sup {
   font-size: 14px;
   top: 0;
 }
+
+.table-styling{
+  thead{
+    background-color: #cccc;
+  }
+  tbody{
+    tr:nth-child(even){
+    background-color: $white;
+    }
+  }
+}
