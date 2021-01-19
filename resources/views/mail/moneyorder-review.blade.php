@@ -8,7 +8,7 @@
 <main class="position-relative container form-content mt-4">
   <div class="form-wrap border bg-light form-content small-container">
     <h2 class="text-capitalize">Thank you!</h2>
-    <p class="mb-0">We sent an email to {{$email}} .Please check your email receipt for information about paying by Cheque or money order.
+    <p class="mb-0">We sent an email to {{$email}} .Please check your email receipt for information about paying by Check or money order.
 </p>
   </div>
 </main>

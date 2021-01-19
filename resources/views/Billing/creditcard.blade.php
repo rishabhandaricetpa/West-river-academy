@@ -1,6 +1,5 @@
-
 <head>
-	<title>Laravel 7 - Integrate Stripe Payment Gateway Example</title>
+	<title>Credit Card Payment</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </head>
@@ -60,8 +59,8 @@
                             </div>
                             <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>What you paying for</label> <input
-                                    class='form-control' size='4' type='text' name="description">
+                                <label class='control-label'>What you paying for</label> 
+                                <input  class='form-control' size='4' type='text' name="description">
                             </div>
                         </div>
                             <input id="amount" name="amount" type="hidden" value="{{$enroll_fees->amount}}">
