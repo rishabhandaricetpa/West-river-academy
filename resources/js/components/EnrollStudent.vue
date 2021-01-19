@@ -257,11 +257,11 @@ export default {
           studentID: "",
           enrollPeriods: [
             {
-              selectedStartDate: new Date(this.semesters.start_date),
+              selectedStartDate: new Date(this.semesters),
               selectedEndDate: "",
               grade: "",
               endDisabledDates: {
-                from: this.calcEndDate(this.semesters.start_date),
+                from: this.calcEndDate(this.semesters),
               },
             },
           ],
@@ -293,11 +293,11 @@ export default {
     },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
-        selectedStartDate: new Date(this.semesters.start_date),
+        selectedStartDate: new Date(this.semesters),
         selectedEndDate: "",
         grade: "",
         endDisabledDates: {
-          from: this.calcEndDate(this.semesters.start_date),
+          from: this.calcEndDate(this.semesters),
         },
       });
     },
@@ -326,12 +326,13 @@ export default {
     }
     e.preventDefault();
   },
-  },
+ },
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
     },
   },
+  
 };
 </script>
 
