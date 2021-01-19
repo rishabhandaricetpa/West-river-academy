@@ -176,16 +176,26 @@
           </div>
         </div>
       </div>
+
       <div v-else>
-          <div>
-            <p><span> Start Date: </span> {{ period.selectedStartDate }} </p>
-          </div>
-          <div>
-            <p><span> End Date: </span> {{ period.selectedEndDate }} </p>
-          </div>
-          <div>
-            <p><span> Grade: </span> {{ period.grade }} </p>
-          </div>
+            <table class="table-styling border w-100 my-5">
+            <thead>
+            <tr>
+              <th>
+             Start Date:
+              </th>
+              <th>End Date: </th>
+              <th>Grade:</th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                <td>{{ period.selectedStartDate }}</td>
+                <td>{{ period.selectedEndDate }}</td>
+                <td>{{ period.grade }} </td>
+                </tr>
+              </tbody>
+            </table>
       </div>
     </div>
     <div class="form-group d-sm-flex">

@@ -1,4 +1,4 @@
-<sidebar class="main-sidebar bg-secondary pt-5 fixed-top overflow-auto">
+<sidebar class="main-sidebar bg-secondary pt-5 fixed-top">
     <ul class="list-unstyled">
     <li>
     <a href="{{ url('/dashboard') }}"><span>Dashboard </span><i class="fas fa-2x fa-tachometer-alt"></i></a>

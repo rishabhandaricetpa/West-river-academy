@@ -2574,6 +2574,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43831,26 +43841,23 @@ var render = function() {
                 )
               ])
             : _c("div", [
-                _c("div", [
-                  _c("p", [
-                    _c("span", [_vm._v(" Start Date: ")]),
-                    _vm._v(" " + _vm._s(period.selectedStartDate) + " ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("p", [
-                    _c("span", [_vm._v(" End Date: ")]),
-                    _vm._v(" " + _vm._s(period.selectedEndDate) + " ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("p", [
-                    _c("span", [_vm._v(" Grade: ")]),
-                    _vm._v(" " + _vm._s(period.grade) + " ")
-                  ])
-                ])
+                _c(
+                  "table",
+                  { staticClass: "table-styling border w-100 my-5" },
+                  [
+                    _vm._m(6, true),
+                    _vm._v(" "),
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("td", [_vm._v(_vm._s(period.selectedStartDate))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(period.selectedEndDate))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(period.grade) + " ")])
+                      ])
+                    ])
+                  ]
+                )
               ])
         ])
       }),
@@ -43912,7 +43919,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group d-sm-flex" }, [
-        _vm._m(6),
+        _vm._m(7),
         _vm._v(" "),
         _c("div", [
           _c("textarea", {
@@ -44049,6 +44056,20 @@ var staticRenderFns = [
     return _c("label", { attrs: { for: "" } }, [
       _vm._v("Select grade level(s) for your enrollment period\n          "),
       _c("p", [_vm._v("(You may select more than one for multiple years)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("\n           Start Date:\n            ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("End Date: ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Grade:")])
+      ])
     ])
   },
   function() {
