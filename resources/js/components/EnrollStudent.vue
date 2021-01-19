@@ -175,7 +175,7 @@
         >
         <div class="row pl-5">
           <div v-for="(grade, index) in grades" :key="index" class="col-sm-3">
-            <div v-for="(val, i) in grade" :key="i" class="form-check">
+            <div v-for="(val, i) in grade" :key="i" class="form-check" :data-toggle="[val > 9 ? 'modal' : '']"  :data-target="[val > 9 ? '#chooseGrade' : '']">
               <input
                 class="form-check-input"
                 type="radio"
@@ -226,7 +226,7 @@
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
-      <button type="submit" class="btn btn-primary">Continue</button>
+      <button type="submit" :disabled="disableSubmit" class="btn btn-primary">Continue</button>
     </div>
   </form>
   </div>
@@ -267,6 +267,7 @@ export default {
           ],
         },
       students: [],
+      disableSubmit:false,
       errors:[]
     };
   },
@@ -301,37 +302,37 @@ export default {
       });
     },
     addStudent(e) {
-      this.errors = []; 
+      this.disableSubmit = true;
+       this.errors = []; 
       if(!this.form.dob){
-     this.errors.push('Date of birth is required');
-     alert('Please fill the required form');
+      this.errors.push('Date of birth is required');
+      alert('Please fill the required form');
       }
        if(!this.validEmail(this.form.email)) {
         this.errors.push('Valid email required.');
       }
       if(this.form.dob && this.validEmail(this.form.email)){
-         axios
+        this.disableSubmit = true;
+        axios
         .post(route("enroll.student"), this.form)
         .then(
           (response) => {
             const resp = response.data;
             resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
+            this.disableSubmit = false;
           }
         )
-        .catch((error) => console.log(error));
-      }
-     e.preventDefault();
-
-     
-      }
- 
+        .catch((error) => this.disableSubmit = false);
+    }
+    e.preventDefault();
   },
-  
+ },
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
     },
   },
+  
 };
 </script>
 

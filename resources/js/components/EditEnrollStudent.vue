@@ -315,6 +315,7 @@ export default {
       this.form.periods.push({
         id: null,
         selectedStartDate: new Date(this.semesters.start_date),
+        status: "pending",
         selectedEndDate: "",
         grade: "",
         endDisabledDates: {
@@ -323,8 +324,10 @@ export default {
       });
     },
     removePeriod(index) {
+      let reqData = this.form;
+      reqData.periods.splice(index, 1);
       axios
-        .post(route("delete.student", this.students), this.form)
+        .post(route("delete.enroll", this.students), reqData)
         .then(
           (response) => {
             const resp = response.data;

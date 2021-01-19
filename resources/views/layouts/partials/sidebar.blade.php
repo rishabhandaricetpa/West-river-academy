@@ -10,7 +10,7 @@
     <li><a href="{{ url('/cart') }}">Cart</a></li>
     <li><a href="#">Fees And Services</a></li>
     <li><a href="#">Support Videos</a></li>
-    <li><a href="{{ url('/mysettings') }}">My Account</a></li>
+    <li><a href="{{ url('/mysettings', Auth::user()->id)}}">My Account</a></li>
     <li><a href="{{ url('/logout') }}">Logout</a></li>
     </ul>
  </sidebar>
