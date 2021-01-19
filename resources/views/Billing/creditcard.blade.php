@@ -17,25 +17,18 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row text-center">
-                        <h3 class="panel-heading">Payment Details</h3>
-                    </div>                    
-                </div>
-                <div class="panel-body">    
-                    <form role="form" action="{{ route('stripe.payment') }}" method="post" class="validation"
-                                                     data-cc-on-file="false"
                                                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                                                     id="payment-form">
                         @csrf
                           <div class='form-row row'>
-                            <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>Name on Card</label> <input
+                                <label class='control-label'>Name on Card<sup>*</sup></label> <input
                                     class='form-control' size='4' type='text'>
                             </div>
                         </div>
   
                         <div class='form-row row'>
-                            <div class='col-xs-12 form-group card required'>
-                                <label class='control-label'>Card Number</label> <input
+                            <div class='col-xs-12 form-group card required border-0'>
+                                <label class='control-label'>Card Number<sup>*</sup></label> <input
                                     autocomplete='off' class='form-control card-num' size='20'
                                     type='text'>
                             </div>
@@ -43,24 +36,24 @@
   
                         <div class='form-row row'>
                             <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                <label class='control-label'>CVC</label> 
+                                <label class='control-label'>CVC<sup>*</sup></label> 
                                 <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4'
                                     type='text'>
                             </div>
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                <label class='control-label'>Expiration Month</label> <input
+                                <label class='control-label'>Expiration Month<sup>*</sup></label> <input
                                     class='form-control card-expiry-month' placeholder='MM' size='2'
                                     type='text'>
                             </div>
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                <label class='control-label'>Expiration Year</label> <input
+                                <label class='control-label'>Expiration Year<sup>*</sup></label> <input
                                     class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                     type='text'>
                             </div>
-                            <div class='form-row row'>
+                            <div class='form-row row col-12'>
                             <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>What you paying for</label> 
-                                <input  class='form-control' size='4' type='text' name="description">
+                                <label class='control-label'>What you paying for<sup>*</sup></label> <input
+                                    class='form-control' size='4' type='text' name="description">
                             </div>
                         </div>
                             <input id="amount" name="amount" type="hidden" value="{{$enroll_fees->amount}}">

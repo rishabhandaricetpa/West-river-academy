@@ -1,7 +1,7 @@
 .main-sidebar {
   width: 180px;
   height: 100vh;
-
+  overflow-x: visible !important;
   ul {
     .fas{
       display: none;;
@@ -24,6 +24,7 @@
     text-transform: capitalize;
     width: 100%;
     padding: .5rem;
+    position: relative;
 
     &:hover {
       text-decoration: none;
