@@ -3,10 +3,14 @@
   height: 100vh;
 
   ul {
+    .fas{
+      display: none;;
+    }
     ul {
       li {
         a {
           padding-left: 1rem;
+
         }
       }
     }

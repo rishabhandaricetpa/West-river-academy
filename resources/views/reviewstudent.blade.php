@@ -4,7 +4,7 @@
 <main class="position-relative container form-content mt-4">
   <h1 class="text-center text-white text-uppercase">student enrollment</h1>
   <div class="form-wrap border bg-light py-5 px-25">
-    <h2 class="h3">Review Student Enrollment</h2>
+    <h2>Review Student Enrollment</h2>
     <form method="POST" action="" class="seperator pb-2">
       @foreach($students as $key=>$student)
       <h3> Student Profile {{++$key}}</h3>
@@ -41,12 +41,12 @@
       <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary">Edit Student {{$key}} </a>
       @endforeach
     </form>
-    <div class="col-md-6">
+    <div >
       <h3 class="py-3">Fees</h3>
       <form method="POST" action="{{route('add.cart')}}">
         @csrf
         <input type="hidden" name="type" value="enrollment_period">
-        <table class="px-0 w-100">
+        <table class="px-0 w-100 table-styling">
           <thead>
             <tr>
               <th></th>

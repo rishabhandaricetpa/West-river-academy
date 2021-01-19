@@ -2,7 +2,7 @@
  <div class="form-wrap border bg-light py-5 px-25">
     <h2>Enroll Student 1</h2>
   <form method="POST" @submit.prevent="addStudent()">
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
       <div>
         <input
@@ -16,7 +16,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Middle Name </label>
       <div>
         <input
@@ -29,7 +29,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Last/Family Name <sup>*</sup></label>
       <div>
         <input
@@ -43,7 +43,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Date of Birth</label>
       <p>
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
@@ -51,7 +51,7 @@
       </p>
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
       <div>
         <input
@@ -65,7 +65,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Cell Phone</label>
       <div>
         <input
@@ -78,7 +78,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Student ID </label>
       <div>
         <input
@@ -93,16 +93,16 @@
       </div>
     </div>
     <div
-      class="seperator"
+      class="seperator mt-4"
       v-for="(enrollPeriod, index) in form.enrollPeriods"
       :key="enrollPeriod.id"
     >
       <h3>Enrollment Period {{ index + 1 }}</h3>
-      <div class="form-group d-flex mb-2 mt-2r">
+      <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row mx-0">
-          <div class="form-row col-sm-3 px-0">
-            <div class="form-group col-md-5">
+          <div class="form-row col-md-4 col-lg-2 px-0">
+            <div class="form-group w-100">
               <p>
                 <Datepicker
                   name="startdate"
@@ -116,7 +116,7 @@
               </p>
             </div>
           </div>
-          <div class="info-detail col-sm-9 lato-italic">
+          <div class="info-detail col-md-8 col-lg-10 lato-italic">
             <p>
               Choose August 1 (the first day of the Annual enrollment period),
               January 1 (the first day of the Second Semester), today's date or
@@ -129,11 +129,11 @@
         </div>
       </div>
 
-      <div class="form-group d-flex mb-2 mt-2r">
+      <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your END date of enrollment</label>
         <div class="row mx-0">
-          <div class="form-row col-sm-3 px-0">
-            <div class="form-group col-md-5">
+          <div class="form-row col-md-4 col-lg-2 px-0">
+            <div class="form-group w-100">
               <p>
                 <Datepicker
                   name="enddate"
@@ -144,10 +144,10 @@
                 >
                 </Datepicker>
               </p>
-              <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+             
             </div>
           </div>
-          <div class="info-detail col-sm-9 lato-italic">
+          <div class="info-detail col-md-8 col-lg-10 lato-italic">
             <p>
               Choose before July 31 (the last day of your enrollment) or another
               date before July 31. This date will appear on your confirmation of
@@ -156,14 +156,14 @@
           </div>
         </div>
       </div>
-      <div class="form-group mt-2r d-flex links-list mb-5">
+      <div class="form-group mt-2r d-sm-flex links-list mb-5">
         <!-- Button trigger modal -->
         <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
-        <a href="#skipYear" data-toggle="modal" class="ml-4"
+        <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
           >what if i need to skip a year?</a
         >
       </div>
-      <div class="form-group d-flex mb-2 lato-italic info-detail">
+      <div class="form-group d-sm-flex mb-2 lato-italic info-detail">
         <label for=""
           >Select grade level(s) for your enrollment period
           <p>(You may select more than one for multiple years)</p></label
@@ -183,9 +183,9 @@
         </div>
       </div>
        </div>
-      <div class="form-group d-flex mt-2r">
+      <div class="form-group d-sm-flex mt-2r">
         <label for="">Is this student immunized?</label>
-        <div class="col-sm-6">
+        <div class="col-sm-6 px-0">
           <select
             class="form-control"
             name="immunized_status"
@@ -200,8 +200,9 @@
           </select>
         </div>
       </div>
-      <div class="form-group d-flex">
+      <div class="form-group d-sm-flex">
         <label for="">tell us more about your situation </label>
+        <div>
         <textarea
           class="form-control"
           id="exampleFormControlTextarea1"
@@ -210,8 +211,9 @@
           v-model="form.student_situation"
           required
         ></textarea>
+        </div>
       </div>
-    <div class="form-wrap py-2r px-25 mt-2r">
+    <div class="form-wrap py-2r px-25 mt-2r mb-4 mb-sm-0">
       <a
         type="button"
         class="btn btn-primary addenrollment"
