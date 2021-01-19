@@ -62,8 +62,14 @@
           required
           aria-describedby="emailHelp"
         />
+        <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+      </p> 
       </div>
     </div>
+    
     <div class="form-group d-flex mb-2">
       <label for="">Cell Phone</label>
       <div>
@@ -243,7 +249,7 @@ export default {
   },
   data() {
     return {
-      grades:[['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
+      grades:[['Ungraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
       form: {
         first_name: this.students.first_name,
         middle_name: this.students.middle_name,
@@ -256,6 +262,7 @@ export default {
         immunized_status: this.students.immunized_status,
         periods: [],
       },
+      errors:[]
     };
   },
   created() {
@@ -274,7 +281,11 @@ export default {
   },
   methods: {
     EditStudent() {
-      axios
+      this.errors = []; 
+       if (!this.validEmail(this.form.email)) {
+        this.errors.push('Valid email required.');
+      }else{
+        axios
         .post(route("update.student", this.students), this.form)
         .then(
           (response) => {
@@ -283,6 +294,12 @@ export default {
           }
         )
         .catch((error) => console.log(error));
+      }
+  
+    },
+     validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     calcEndDate(date){
       const oldDate = new Date(date);
@@ -307,8 +324,10 @@ export default {
       });
     },
     removePeriod(index) {
+      let reqData = this.form;
+      reqData.periods.splice(index, 1);
       axios
-        .post(route("delete.student", this.students), this.form)
+        .post(route("delete.enroll", this.students), reqData)
         .then(
           (response) => {
             const resp = response.data;

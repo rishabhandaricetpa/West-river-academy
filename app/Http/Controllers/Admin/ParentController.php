@@ -81,6 +81,10 @@ class ParentController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $userdata=User::find($id)->first();
+        $userdata->name         =       $request->get('p1_first_name');
+        $userdata->email        =       $request->get('p1_email');
+        $userdata->save();
         $parent = ParentProfile::find($id);
         $parent->p1_first_name   =  $request->get('p1_first_name');
         $parent->p1_middle_name  =  $request->get('p1_middle_name');

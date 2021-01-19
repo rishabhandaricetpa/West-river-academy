@@ -14,7 +14,7 @@
       <div class="form-group d-flex mb-2 seperator">
         <label for="">Email Address</label>
         <div>
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus readonly>
 
           @error('email')
           <div class="invalid-feedback" role="alert">

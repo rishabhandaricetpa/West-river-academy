@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\FeesInfo;
+use App\Models\EnrollmentPeriods;
+use App\Models\StudentProfile;
 
 class Cart extends Model
 {
@@ -77,5 +80,64 @@ class Cart extends Model
         }
 
         return $data;
+    }
+
+    public static function isCartValid($parent_profile_id)
+    {
+        $cart_valid = true;
+        $student_ids = $fees = [];
+        
+        // get student ids for the parent
+        $students = ParentProfile::find($parent_profile_id)->studentProfile()->select('id')->get()->toArray();
+
+        foreach ($students as $key => $student) {
+            array_push($student_ids,$student['id']);
+        }
+
+        // get the enroll period years currently in the cart
+        $cart_item_years = Cart::where('cart.item_type','enrollment_period')
+                            ->where('cart.parent_profile_id',$parent_profile_id)
+                            ->leftJoin('enrollment_periods','enrollment_periods.id','cart.item_id')
+                            ->select(DB::raw('YEAR(enrollment_periods.start_date_of_enrollment) as enroll_year'))
+                            ->groupBy('enroll_year')
+                            ->get()
+                            ->toArray();
+
+        // get fee detail for first student
+        $fee_info = FeesInfo::whereIN('type',['first_student_annual','first_student_half'])
+                            ->select('amount')
+                            ->get()
+                            ->toArray();
+
+        foreach ($fee_info as $key => $fee) {
+            array_push($fees,$fee['amount']);
+        }
+
+        // loop through cart years and check if the first student is already enrolled for that year
+        for ($i=0; $i < count($cart_item_years); $i++) { 
+            $year = $cart_item_years[$i]['enroll_year'];
+            $check = EnrollmentPeriods::whereIn('student_profile_id',$student_ids)
+                                        ->whereYear('start_date_of_enrollment',$year)
+                                        ->leftJoin('enrollment_payments','enrollment_payments.id','enrollment_periods.enrollment_payment_id')
+                                        ->where('enrollment_payments.status','paid')
+                                        ->exists();
+            
+            // if there's no student enrolled for that year
+            if(!$check){ 
+                // now check if the first student payment is in the cart
+                $cart_valid = Cart::where('cart.item_type','enrollment_period')
+                                ->where('cart.parent_profile_id',$parent_profile_id)
+                                ->leftJoin('enrollment_payments','enrollment_payments.enrollment_period_id','cart.item_id')
+                                ->leftJoin('enrollment_periods','enrollment_periods.id','cart.item_id')
+                                ->whereYear('enrollment_periods.start_date_of_enrollment',$year)
+                                ->whereIn('enrollment_payments.amount',$fees)
+                                ->exists();
+                if(!$cart_valid){
+                    break;
+                }
+            }
+        }
+                        
+        return $cart_valid;
     }
 }

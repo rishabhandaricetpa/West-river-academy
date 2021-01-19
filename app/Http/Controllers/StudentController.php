@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\EnrollmentHelper;
-
+use Carbon\Carbon;
 class StudentController extends Controller
 {
     private $parent_profile_id;
@@ -56,11 +56,14 @@ class StudentController extends Controller
         $parentProfileData = User::find($id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
-        $countryId = $countryData->id;
+        $year =date("Y");
+        $year=   Carbon::create( $year)->format('Y');
+        $month_date = Carbon::create( $countryData->start_date)->format('m-d');
+        $start_date =$year ."-". $month_date;
         if ($request->expectsJson()) {
-            return response()->json($countryData);
+            return response()->json($start_date);
         }
-        return view('enrollstudent', compact('countryData'));
+        return view('enrollstudent', compact('start_date'));
     }
 
     protected function store(Request $data)
@@ -260,66 +263,7 @@ class StudentController extends Controller
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
   
-    public function address($id)
-    {    
-         $user_id = Auth::user()->id;
-         $parent = ParentProfile::find($user_id)->first();
-         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-         $country_list  =  Country::select('country')->get();
-         return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
-    }
-    /**
-     * This function is used to store billing and shipping address
-     */
-    protected function saveaddress(Request $request)
-    {   
-        try{
-                $address = new Address();
-                $billing_data = $request->input('billing_address');
-                $shipping_data = $request->input('shipping_address');
-                $payment_type = $request->input('paymentMethod');
-                $Userid = Auth::user()->id;
-                $parentProfileData = User::find($Userid)->parentProfile()->first();
-                $id = $parentProfileData->id;
-                $billinAddress =  Address::create([
-                    'parent_profile_id' => $id,
-                    'billing_street_address' => $billing_data['street_address'],
-                    'billing_city' => $billing_data['city'],
-                    'billing_state' => $billing_data['state'],
-                    'billing_zip_code' => $billing_data['zip_code'],
-                    'billing_country' => $billing_data['country'],
-                    'shipping_street_address' => $shipping_data['street_address'],
-                    'shipping_city' => $shipping_data['city'],
-                    'shipping_state' => $shipping_data['state'],
-                    'shipping_zip_code' => $shipping_data['zip_code'],
-                    'shipping_country' => $shipping_data['country'],
-                    'email'=> $request['email'],
-                ]);
-                $parentaddress = ParentProfile::find($Userid)->first();
-                $parentaddress->fill([
-                    'street_address' => $billing_data['street_address'],
-                    'city' => $billing_data['city'],
-                    'state' => $billing_data['state'],
-                    'zip_code' => $billing_data['zip_code'],
-                    'country' => $billing_data['country'],
-                ]);
-                $parentaddress->save();
-                if($payment_type['payment_type']=="Credit Card"){
-                    return route('stripe.payment');
-                }
-                elseif($payment_type['payment_type']=="Pay Pal"){
-                    return route('paywithpaypal');
-                }
-                elseif($payment_type['payment_type']=="Bank Transfer"){
-                    return route('order.review');
-                }
-                elseif($payment_type['payment_type']=="Check or Money Order"){
-                    return route('money.order');
-                }
-            } catch (\Exception $e) {   
-                DB::rollBack();
-            }
-    }
+    
     public function orderReview($parent_id){
 
        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
@@ -347,7 +291,7 @@ class StudentController extends Controller
      
      }
 
-    public function delete(Request $request, $id)
+    public function deleteEnroll(Request $request, $id)
     {
         try{
             DB::beginTransaction();
@@ -357,20 +301,21 @@ class StudentController extends Controller
 
             $diff = $enrollPeriodId->diff($periods_id);
 
+            EnrollmentPayment::whereIn('enrollment_period_id',$diff)->delete();
+            Cart::whereIn('item_id',$diff)->where('item_type','enrollment_period')->delete();
+
             EnrollmentPeriods::whereIn('id', $diff)->delete();
-           
+
             DB::commit();
-           
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'success' ,'message' => 'Successfully removed period']);
+                return response()->json(['status' => 'success' ,'message' => 'Successfully removed enroll period']);
             }
         }catch (\Exception $e) {
             DB::rollBack();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'error' ,'message' => 'Failed to update student']);
+                return response()->json(['status' => 'error' ,'message' => 'Failed to remove enroll period']);
             }
         }
     }
-
 }
