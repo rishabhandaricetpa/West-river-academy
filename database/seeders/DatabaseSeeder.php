@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 class DatabaseSeeder extends Seeder
 {
-    protected $toTruncate = ['Countries','fees_info'];
+    protected $toTruncate = ['countries','fees_info'];
 
     /**
      * Seed the application's database.

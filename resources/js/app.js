@@ -22,8 +22,8 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('enroll-student', require('./components/EnrollStudent.vue').default);
 Vue.component('edit-enroll', require('./components/EditEnrollStudent.vue').default);
-Vue.component('billing-shipping', require('./components/Address.vue').default);
-Vue.component('get-cart', require('./components/cart.vue').default);
+Vue.component('billing-shipping', require('./components/address.vue').default);
+Vue.component('get-cart', require('./components/Cart.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

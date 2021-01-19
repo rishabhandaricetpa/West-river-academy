@@ -1,6 +1,6 @@
 <template>
   <form method="POST" @submit.prevent="EditStudent()">
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
       <div>
         <input
@@ -15,7 +15,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Middle Name </label>
       <div>
         <input
@@ -28,7 +28,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Last/Family Name <sup>*</sup></label>
       <div>
         <input
@@ -42,15 +42,15 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Date of Birth</label>
-      <p>
+      <p class="position-relative mb-0">
         <Datepicker required id="dob" name="dob" v-model="form.dob">
         </Datepicker>
       </p>
-      <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
       <div>
         <input
@@ -69,8 +69,7 @@
       </p> 
       </div>
     </div>
-    
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Cell Phone</label>
       <div>
         <input
@@ -83,7 +82,7 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-2">
+    <div class="form-group d-sm-flex mb-2">
       <label for="">Student ID</label>
       <div>
         <input
@@ -98,13 +97,13 @@
       </div>
     </div>
     <div v-for="(period, index) in form.periods" :key="period.id">
-      <div v-if="period.status === 'pending'">
-        <span class="remove" @click="removePeriod(index)">x</span>
-        <div class="form-group d-flex mb-2 mt-2r">
+      <div v-if="period.status === 'pending'" class="position-relative">
+        <span class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
+        <div class="form-group d-sm-flex mb-2 mt-2r">
           <label for="">Select your START date of enrollment{{ index }}</label>
           <div class="row mx-0">
-            <div class="form-row col-sm-3 px-0">
-              <div class="form-group col-md-5">
+            <div class="form-row col-md-4 col-lg-2 px-0">
+              <div class="form-group w-100">
                 <Datepicker
                   id="startdate"
                   name="startdate"
@@ -116,7 +115,7 @@
                 </Datepicker>
               </div>
             </div>
-            <div class="info-detail col-sm-9 lato-italic">
+            <div class="info-detail col-md-8 col-lg-10 lato-italic">
               <p>
                 Choose August 1 (the first day of the Annual enrollment period),
                 January 1 (the first day of the Second Semester), today's date or
@@ -129,11 +128,11 @@
           </div>
         </div>
 
-        <div class="form-group d-flex mb-2 mt-2r">
+        <div class="form-group d-sm-flex mb-2 mt-2r">
           <label for="">Select your END date of enrollment</label>
           <div class="row mx-0">
-            <div class="form-row col-sm-3 px-0">
-              <div class="form-group col-md-5">
+            <div class="form-row col-md-4 col-lg-2 px-0">
+              <div class="form-group w-100">
                 <Datepicker
                   id="startdate"
                   name="startdate"
@@ -145,7 +144,7 @@
                 </Datepicker>
               </div>
             </div>
-            <div class="info-detail col-sm-9 lato-italic">
+            <div class="info-detail col-md-8 col-lg-10 lato-italic">
               <p>
                 Choose before July 31 (the last day of your enrollment) or another
                 date before July 31. This date will appear on your confirmation of
@@ -154,15 +153,15 @@
             </div>
           </div>
         </div>
-        <div class="form-group mt-2r d-flex links-list mb-5">
+        <div class="form-group mt-2r d-sm-flex links-list mb-5">
           <!-- Button trigger modal -->
           <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
-          <a href="#skipYear" data-toggle="modal" class="ml-4"
+          <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
             >what if i need to skip a year?</a
           >
         </div>
 
-        <div class="form-group d-flex mb-2 lato-italic info-detail">
+        <div class="form-group d-sm-flex mb-2r lato-italic info-detail ">
           <label for=""
             >Select grade level(s) for your enrollment period
             <p>(You may select more than one for multiple years)</p></label
@@ -194,9 +193,9 @@
           </div>
       </div>
     </div>
-    <div class="form-group d-flex mt-2r">
+    <div class="form-group d-sm-flex">
       <label for="">Is this student immunized?</label>
-      <div class="col-sm-6">
+      <div class="col-sm-6 px-0">
         <select
           class="form-control"
           name="immunized_status"
@@ -211,8 +210,9 @@
         </select>
       </div>
     </div>
-    <div class="form-group d-flex">
+    <div class="form-group d-sm-flex">
       <label for="">tell us more about your situation<sup>*</sup> </label>
+      <div>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"
@@ -222,12 +222,13 @@
         v-model="form.student_situation"
         required
       ></textarea>
+      </div>
     </div>
 
     <div class="form-wrap">
       <a
         type="button"
-        class="btn btn-primary addenrollment"
+        class="btn btn-primary addenrollment mb-4 mb-sm-0"
         id="addEnroll"
         value="addEnroll"
         @click="addNewEnrollPeriod"
