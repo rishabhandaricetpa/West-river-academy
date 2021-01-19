@@ -326,13 +326,12 @@ export default {
     }
     e.preventDefault();
   },
-  
+  },
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
     },
   },
-  }
 };
 </script>
 
