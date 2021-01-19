@@ -7,7 +7,10 @@
     <h2>Review Student Enrollment</h2>
     <form method="POST" action="" class="seperator pb-2">
       @foreach($students as $key=>$student)
+      <div class="d-flex align-items-center">
       <h3> Student Profile {{++$key}}</h3>
+      <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary ml-auto">Edit Student {{$key}} </a>
+      </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="">Student Name</label>
         <div>
@@ -38,7 +41,7 @@
           <p>{{$student ->student_Id}}</p>
         </div>
       </div>
-      <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary">Edit Student {{$key}} </a>
+     
       @endforeach
     </form>
     <div >
