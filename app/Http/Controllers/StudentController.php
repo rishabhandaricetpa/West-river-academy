@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\EnrollmentHelper;
-
+use Carbon\Carbon;
 class StudentController extends Controller
 {
     private $parent_profile_id;
@@ -56,11 +56,14 @@ class StudentController extends Controller
         $parentProfileData = User::find($id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
-        $countryId = $countryData->id;
+        $year =date("Y");
+        $year=   Carbon::create( $year)->format('Y');
+        $month_date = Carbon::create( $countryData->start_date)->format('m-d');
+        $start_date =$year ."-". $month_date;
         if ($request->expectsJson()) {
-            return response()->json($countryData);
+            return response()->json($start_date);
         }
-        return view('enrollstudent', compact('countryData'));
+        return view('enrollstudent', compact('start_date'));
     }
 
     protected function store(Request $data)
