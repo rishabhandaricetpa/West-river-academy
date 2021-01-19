@@ -25,7 +25,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped data-table"">
+                <table id="coupons-table" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
                     <th>Code</th>
@@ -37,19 +37,6 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($coupons as $coupon)
-                  <tr>
-                    <td>{{$coupon->code}}</td>
-                    <td>{{$coupon->amount}}</td>
-                    <td>{{$coupon->status}}</td>
-                    <td>{{$coupon->redeem_left}}</td>
-                    <td>{{$coupon->expire_at->format('d M')}}</td>
-                    <td>
-                        {{-- <a href="{{ url('admin/coupon',$item->id)}}"> <i class="fas fa-edit"></i></a> --}}
-                        {{-- <a href="{{ url('admin/delete',$item->id)}}"><i class="fas fa-trash-alt" onclick="return myFunction();"></i> --}}
-                    </td>
-                  </tr>
-                  @endforeach
                   </tbody>
                 </table>
               </div>
@@ -69,4 +56,5 @@
       if(!confirm("Are You Sure to delete this"))
       event.preventDefault();
   }
+
  </script>

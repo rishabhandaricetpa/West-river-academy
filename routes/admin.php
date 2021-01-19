@@ -45,6 +45,7 @@ Route::get('delete/{id}', 'StudentProfileController@destroy')->name('delete.stud
 Route::get('deactive/{id}', 'Auth\RegisterController@dactive')->name('deactive.student');
 
 Route::get('coupon', 'CouponController@index')->name('view.coupon');
+Route::get('coupon/data', 'CouponController@dataTable')->name('coupons.dt');
 
 
 

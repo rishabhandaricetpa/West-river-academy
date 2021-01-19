@@ -11,8 +11,11 @@ class CouponController extends Controller
 {
     public function index()
     {
-        $coupons = Coupon::all();
+        return view('admin.coupon.view');
+    }
 
-        return view('admin.coupon.view',compact('coupons'));
+    public function dataTable()
+    {
+        return datatables(Coupon::all())->toJson();
     }
 }
