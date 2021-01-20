@@ -227,6 +227,7 @@
               name="payment_type"
               value="Credit Card"
               v-model="form.paymentMethod.payment_type" 
+              required
               >
             </div>
             <div class="payment-info"> 
@@ -356,7 +357,7 @@ export default {
       axios
         .post(route("billing.address"), this.form)
         .then((response) => {
-            window.location = response.data+"/"+this.parents.id
+            window.location = response.data ? response.data+"/"+this.parents.id:alert(response.message)
         })
         .catch((error) => console.log(error));
     },

@@ -22,11 +22,11 @@ class CreateAddressTable extends Migration
             $table->string('billing_state');
             $table->string('billing_zip_code');
             $table->string('billing_country');
-            $table->string('shipping_street_address');
-            $table->string('shipping_city');
-            $table->string('shipping_state');
-            $table->string('shipping_zip_code');
-            $table->string('shipping_country');
+            $table->string('shipping_street_address')->nullable();
+            $table->string('shipping_city')->nullable();
+            $table->string('shipping_state')->nullable();
+            $table->string('shipping_zip_code')->nullable();
+            $table->string('shipping_country')->nullable();
             $table->string('email');
             $table->timestamps();
         });

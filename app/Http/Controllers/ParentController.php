@@ -20,7 +20,7 @@ class ParentController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $Userid = auth()->user()->id;
+            $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
 
@@ -101,7 +101,7 @@ class ParentController extends Controller
             elseif($payment_type['payment_type']=="Bank Transfer"){
                 return route('order.review');
             }
-            elseif($payment_type['payment_type']=="Cheque or Money Order"){
+            elseif($payment_type['payment_type']=="Check or Money Order"){
                 return route('money.order');
             }
             DB::commit();
