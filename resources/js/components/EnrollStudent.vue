@@ -54,7 +54,7 @@
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
         </Datepicker>
       </p>
-      <i class="fas fa-calendar-alt" aria-hidden="true"></i>  
+      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -116,6 +116,7 @@
                   placeholder="Select Start Date"
                   :value="enrollPeriod.selectedStartDate"
                   @input="updateEndDate(index)"
+                  :open-date="enrollPeriod.selectedStartDate"
                 >
                 </Datepicker>
               </p>
@@ -146,6 +147,7 @@
                   placeholder="Select End Date"
                   required
                   :disabled-dates="enrollPeriod.endDisabledDates"
+                  :open-date="enrollPeriod.selectedStartDate" 
                 >
                 </Datepicker>
               </p>
@@ -228,7 +230,7 @@
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
-      <button type="submit" :disabled="disableSubmit" class="btn btn-primary">Continue</button>
+      <button type="submit"  class="btn btn-primary">Continue</button>
     </div>
   </form>
   </div>
@@ -264,12 +266,12 @@ export default {
               grade: "",
               endDisabledDates: {
                 from: this.calcEndDate(this.semesters),
+                to: this.calcToData(this.semesters),
               },
             },
           ],
         },
       students: [],
-      disableSubmit:false,
       errors:[]
     };
   },
@@ -285,12 +287,21 @@ export default {
 
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
-     validEmail: function (email) {
+    calcToData(date){
+      const oldDate = new Date(date);
+      const oDate = oldDate.getDate();
+      const year = oldDate.getFullYear();
+      const month = oldDate.getMonth();
+
+      return new Date(year, month, oDate + 1);
+    },
+    validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
     updateEndDate(index) {
       this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
+      this.form.enrollPeriods[index].endDisabledDates.to = this.calcToData(this.form.enrollPeriods[index].selectedStartDate);
       this.form.enrollPeriods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
@@ -300,11 +311,12 @@ export default {
         grade: "",
         endDisabledDates: {
           from: this.calcEndDate(this.semesters),
+          to: this.calcToData(this.semesters),
         },
       });
     },
-    addStudent(e) {
-      this.disableSubmit = true;
+    addStudent() {
+    //  this.disableSubmit = true;
        this.errors = []; 
       if(!this.form.dob){
       this.errors.push('Date of birth is required');
@@ -314,20 +326,21 @@ export default {
         this.errors.push('Valid email required.');
       }
       if(this.form.dob && this.validEmail(this.form.email)){
-        this.disableSubmit = true;
+       // this.disableSubmit = true;
         axios
         .post(route("enroll.student"), this.form)
         .then(
           (response) => {
             const resp = response.data;
             resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
-            this.disableSubmit = false;
+         //  this.disableSubmit = false;
           }
-        )
-        .catch((error) => this.disableSubmit = false);
+        )   
+      }
+    },
+    clickDatepicker(){
+      document.getElementById('dob').click();
     }
-    e.preventDefault();
-  },
  },
   computed: {
     canAddMorePeriod() {

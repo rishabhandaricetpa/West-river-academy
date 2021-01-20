@@ -20,7 +20,7 @@ class ParentController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $Userid = auth()->user()->id;
+            $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
 
@@ -29,10 +29,10 @@ class ParentController extends Controller
     }
     public function address($id)
     {    
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id)->first();
+        $parent =User::find($id)->parentProfile()->first();
+        
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-
+        
         if( is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0){
             $notification = array(
                 'message' => 'Cart is Empty! Please add atleast one item.',

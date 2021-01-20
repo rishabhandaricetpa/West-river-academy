@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-
+use Auth;
 use App\Models\User;
 class ActiveUser
 {
@@ -19,10 +19,10 @@ class ActiveUser
      */
     public function handle(Request $request, Closure $next)
     {
-        $id = auth()->user()->id;
+        $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
             if ($parentProfileData->status==1) {
-            $user = auth()->user();
+            $user = Auth::user();
             auth()->logout();
             $notification = array(
                 'message' => 'Your account is not in active status!Please contact your admin',

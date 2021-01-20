@@ -48,7 +48,7 @@
         <Datepicker required id="dob" name="dob" v-model="form.dob">
         </Datepicker>
       </p>
-        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -181,16 +181,26 @@
           </div>
         </div>
       </div>
+
       <div v-else>
-          <div>
-            <p><span> Start Date: </span> {{ period.selectedStartDate }} </p>
-          </div>
-          <div>
-            <p><span> End Date: </span> {{ period.selectedEndDate }} </p>
-          </div>
-          <div>
-            <p><span> Grade: </span> {{ period.grade }} </p>
-          </div>
+            <table class="table-styling border w-100 my-5">
+            <thead>
+            <tr>
+              <th>
+             Start Date:
+              </th>
+              <th>End Date: </th>
+              <th>Grade:</th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                <td>{{ period.selectedStartDate }}</td>
+                <td>{{ period.selectedEndDate }}</td>
+                <td>{{ period.grade }} </td>
+                </tr>
+              </tbody>
+            </table>
       </div>
     </div>
     <div class="form-group d-sm-flex">
@@ -276,6 +286,7 @@ export default {
         status: item.status,
         endDisabledDates: {
           from: this.calcEndDate(item.start_date_of_enrollment),
+          to: this.calcToData(item.start_date_of_enrollment),
         },
       });
     });
@@ -308,8 +319,17 @@ export default {
 
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
+    calcToData(date){
+      const oldDate = new Date(date);
+      const oDate = oldDate.getDate();
+      const year = oldDate.getFullYear();
+      const month = oldDate.getMonth();
+
+      return new Date(year, month, oDate + 1);
+    },
     updateEndDate(index) {
       this.form.periods[index].endDisabledDates.from = this.calcEndDate(this.form.periods[index].selectedStartDate);
+      this.form.periods[index].endDisabledDates.to = this.calcToData(this.form.periods[index].selectedStartDate);
       this.form.periods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
@@ -321,6 +341,7 @@ export default {
         grade: "",
         endDisabledDates: {
           from: this.calcEndDate(this.semesters.start_date),
+          to: this.calcToData(this.semesters.start_date),
         },
       });
     },
@@ -337,6 +358,9 @@ export default {
         )
         .catch((error) => console.log(error));
     },
+    clickDatepicker(){
+      document.getElementById('dob').click();
+    }
   },
   props: {
     students: {
