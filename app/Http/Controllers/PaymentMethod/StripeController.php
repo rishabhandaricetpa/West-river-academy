@@ -8,10 +8,25 @@ use Session;
 use Redirect;
 use App\Models\TransactionsMethod;
 use App\Models\User;
+use App\Models\Cart;
+use App\Models\ParentProfile;
+use App\Models\StudentProfile;
+
 use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller
 {
+    private $parent_profile_id;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $Userid = Auth::user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $this->parent_profile_id = $parentProfileData->id;
+            return $next($request);
+        });
+    }
     /**
      * payment view
      */
@@ -25,7 +40,8 @@ class StripeController extends Controller
      */
     public function handlePost(Request $request)
     {   
-        $amount=$request->amount;
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $amount=$enroll_fees->amount;
         $paymentinfo = new TransactionsMethod;
         $user=Auth::user();
         $email=$user->email;

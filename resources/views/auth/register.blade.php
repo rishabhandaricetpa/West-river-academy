@@ -70,7 +70,7 @@
         <h2>Enter Parent 2 Information</h2>
 
         <div class="form-group d-sm-flex mb-2">
-          <label for="">First name</label>
+          <label for="">First Name</label>
           <div>
             <input type="text" class="form-control" name="p2_name" id="" value="{{ old('p2_name') }}" aria-describedby="emailHelp">
           </div>
