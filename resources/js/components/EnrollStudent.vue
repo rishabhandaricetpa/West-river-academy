@@ -54,7 +54,7 @@
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
         </Datepicker>
       </p>
-      <i class="fas fa-calendar-alt" aria-hidden="true"></i>  
+      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -335,11 +335,12 @@ export default {
             resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
          //  this.disableSubmit = false;
           }
-        )
-        
+        )   
+      }
+    },
+    clickDatepicker(){
+      document.getElementById('dob').click();
     }
-   
-  },
  },
   computed: {
     canAddMorePeriod() {
