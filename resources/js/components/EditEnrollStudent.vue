@@ -48,7 +48,7 @@
         <Datepicker required id="dob" name="dob" v-model="form.dob">
         </Datepicker>
       </p>
-        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -358,6 +358,9 @@ export default {
         )
         .catch((error) => console.log(error));
     },
+    clickDatepicker(){
+      document.getElementById('dob').click();
+    }
   },
   props: {
     students: {
