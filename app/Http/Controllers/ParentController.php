@@ -29,10 +29,10 @@ class ParentController extends Controller
     }
     public function address($id)
     {    
-        
         $parent =User::find($id)->parentProfile()->first();
-
+        
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        
         if( is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0){
             $notification = array(
                 'message' => 'Cart is Empty! Please add atleast one item.',
@@ -83,7 +83,6 @@ class ParentController extends Controller
                 'shipping_country' => $shipping_data['country'],
                 'email'=> $request['email'],
             ]);
-            $billinAddress->save();
             $parentaddress = ParentProfile::find($Userid)->first();
             $parentaddress->fill([
                 'street_address' => $billing_data['street_address'],
@@ -93,8 +92,6 @@ class ParentController extends Controller
                 'country' => $billing_data['country'],
             ]);
             $parentaddress->save();
-            DB::commit();
-
             if($payment_type['payment_type']=="Credit Card"){
                 return route('stripe.payment');
             }
@@ -104,9 +101,10 @@ class ParentController extends Controller
             elseif($payment_type['payment_type']=="Bank Transfer"){
                 return route('order.review');
             }
-            elseif($payment_type['payment_type']=="Check or Money Order"){
+            elseif($payment_type['payment_type']=="Cheque or Money Order"){
                 return route('money.order');
             }
+            DB::commit();
             } catch (\Exception $e) {   
                 DB::rollBack();
             }
@@ -115,27 +113,27 @@ class ParentController extends Controller
     //Parent accounts edit information 
     public function mysettings($id)
     {    
-        $parent =User::find($id)->parentProfile()->first();
         $user_id = Auth::user()->id;
+        $parent = ParentProfile::find($user_id)->first();
         return view('MyAccounts/myaccount', compact('parent','user_id'));
     }
 
     public function editmysettings($id)
     {    
         $user_id = Auth::user()->id;
-        $parent =User::find($id)->parentProfile()->first();
+        $parent = ParentProfile::find($user_id)->first();
         return view('MyAccounts/edit-account', compact('parent','user_id'));
     }
 
     public function updatemysettings(Request $request, $id)
     {
         try{
-
             DB::beginTransaction();
             $user_id = Auth::user()->id;
             $userdata=User::find($user_id)->first();
             $userdata->name         =       $request->get('first_name');
             $userdata->email        =       $request->get('email');
+            // $Userdata->email_verified_at='';
             $userdata->save();
 
             $user=  User::find($id)->parentProfile()->first();
