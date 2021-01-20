@@ -81,7 +81,7 @@
     .navbar-toggler {
       position: absolute;
       right: 0;
-      z-index: 2;
+      z-index: 9999999;
     }
 
     .navbar-collapse {
@@ -94,7 +94,7 @@
       top: 0;
       display: block !important;
       overflow-y: auto;
-      z-index: 1;
+      z-index: 9999;
 
       &.show {
         left: 0;
@@ -133,6 +133,16 @@
       a {
         margin-bottom: 1rem;
          text-align: center;
+         &:hover span{
+          display: block;
+          left: 100%;
+          top: 50%;
+          position: absolute;
+          background-color: $primary;
+          padding: 7px;
+          min-width: 100%;
+          white-space: nowrap;
+        }
       }
 
       .fas {
