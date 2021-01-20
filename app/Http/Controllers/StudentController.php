@@ -266,26 +266,26 @@ class StudentController extends Controller
     
     public function orderReview($parent_id){
 
-       $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
-       $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $address   = User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
        return view('Billing.order-review',compact('address','enroll_fees','parent_id'));
     
     }
     
     public function paypalorderReview($parent_id){
-        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         return view('paywithpaypal',compact('address','enroll_fees'));
      
      }
      public function stripeorderReview($parent_id){
-        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         return view('Billing/creditcard',compact('address','enroll_fees'));
      
      }
      public function moneyorderReview($parent_id){
-        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
      

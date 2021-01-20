@@ -1,5 +1,5 @@
 <p>{{ $user['name'] }}
-<p>PAYMENT: Cheque or Money Order<p>
+<p>PAYMENT: Check or Money Order<p>
 <p>West River Academy<p>
 <p>33721 Bluewater Lane<p>
 <p>Dana Point, CA 92629</p>

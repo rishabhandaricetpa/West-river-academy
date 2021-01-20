@@ -9,7 +9,8 @@
       @csrf
       <div class="form-group d-sm-flex mb-2">
         <label for="">Amount</label>
-        <div>
+        <div class="d-flex align-items-center">
+        <i class="fas fa-dollar-sign additional-sign"></i>
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <!-- <span class="input-group-text">$</span> -->
         <input class="form-control" type="number" name="amount" id="amount" type="text" value="{{$enroll_fees?$enroll_fees->amount:''}}" readonly> 
