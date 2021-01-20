@@ -50,13 +50,13 @@
         <div class="form-group d-sm-flex mb-2">
           <label for="">Cell Phone <sup>*</sup></label>
           <div>
-            <input type="number" class="form-control" value="{{ old('cell_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="cell_phone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
+            <input type="text" class="form-control" value="{{ old('cell_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="cell_phone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
           <label for="">Work/Home Phone</label>
           <div>
-            <input type="number" class="form-control" value="{{ old('home_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="home_phone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
+            <input type="text" class="form-control" value="{{ old('home_phone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="home_phone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
           </div>
         </div>
 
@@ -96,13 +96,13 @@
         <div class="form-group d-sm-flex mb-2">
           <label for="">Cell Phone</label>
           <div>
-            <input type="number" class="form-control" value="{{ old('p2_cellphone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="p2_cellphone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
+            <input type="text" class="form-control" value="{{ old('p2_cellphone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="p2_cellphone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
           <label for="">Work/Home Phone</label>
           <div>
-            <input type="number" class="form-control" value="{{ old('p2_homephone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="p2_homephone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
+            <input type="text" class="form-control" value="{{ old('p2_homephone') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="p2_homephone" maxlength="10" pattern="[0-9]<sup>*</sup>" />
           </div>
         </div>
 
@@ -131,7 +131,7 @@
         <div class="form-group d-sm-flex mb-2">
           <label for="">Zip Code <sup>*</sup></label>
           <div>
-            <input type="number" class="form-control" value="{{ old('zip_code') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="zip_code" maxlength="6" pattern="[0-9]<sup>*</sup>" />
+            <input type="text" class="form-control" value="{{ old('zip_code') }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="zip_code" maxlength="6" pattern="[0-9]<sup>*</sup>" />
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
