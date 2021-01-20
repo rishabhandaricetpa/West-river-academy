@@ -226,7 +226,7 @@
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
-      <button type="submit" :disabled="disableSubmit" class="btn btn-primary">Continue</button>
+      <button type="submit"  class="btn btn-primary">Continue</button>
     </div>
   </form>
   </div>
@@ -267,7 +267,6 @@ export default {
           ],
         },
       students: [],
-      disableSubmit:false,
       errors:[]
     };
   },
@@ -301,8 +300,8 @@ export default {
         },
       });
     },
-    addStudent(e) {
-      this.disableSubmit = true;
+    addStudent() {
+    //  this.disableSubmit = true;
        this.errors = []; 
       if(!this.form.dob){
       this.errors.push('Date of birth is required');
@@ -312,19 +311,19 @@ export default {
         this.errors.push('Valid email required.');
       }
       if(this.form.dob && this.validEmail(this.form.email)){
-        this.disableSubmit = true;
+       // this.disableSubmit = true;
         axios
         .post(route("enroll.student"), this.form)
         .then(
           (response) => {
             const resp = response.data;
             resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
-            this.disableSubmit = false;
+         //  this.disableSubmit = false;
           }
         )
-        .catch((error) => this.disableSubmit = false);
+        
     }
-    e.preventDefault();
+   
   },
  },
   computed: {
