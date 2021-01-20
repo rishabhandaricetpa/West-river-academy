@@ -43704,7 +43704,7 @@ var render = function() {
                       [
                         _c(
                           "div",
-                          { staticClass: "form-group w-100" },
+                          { staticClass: "form-group w-100 datepicker-full" },
                           [
                             _c("Datepicker", {
                               attrs: {
@@ -43748,7 +43748,7 @@ var render = function() {
                       [
                         _c(
                           "div",
-                          { staticClass: "form-group w-100" },
+                          { staticClass: "form-group w-100 datepicker-full" },
                           [
                             _c("Datepicker", {
                               attrs: {
@@ -44363,38 +44363,42 @@ var render = function() {
                     "div",
                     { staticClass: "form-row col-md-4 col-lg-2 px-0" },
                     [
-                      _c("div", { staticClass: "form-group w-100" }, [
-                        _c(
-                          "p",
-                          [
-                            _c("Datepicker", {
-                              attrs: {
-                                name: "startdate",
-                                required: "",
-                                placeholder: "Select Start Date",
-                                value: enrollPeriod.selectedStartDate
-                              },
-                              on: {
-                                input: function($event) {
-                                  return _vm.updateEndDate(index)
-                                }
-                              },
-                              model: {
-                                value: enrollPeriod.selectedStartDate,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    enrollPeriod,
-                                    "selectedStartDate",
-                                    $$v
-                                  )
+                      _c(
+                        "div",
+                        { staticClass: "form-group w-100 datepicker-full" },
+                        [
+                          _c(
+                            "p",
+                            [
+                              _c("Datepicker", {
+                                attrs: {
+                                  name: "startdate",
+                                  required: "",
+                                  placeholder: "Select Start Date",
+                                  value: enrollPeriod.selectedStartDate
                                 },
-                                expression: "enrollPeriod.selectedStartDate"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
+                                on: {
+                                  input: function($event) {
+                                    return _vm.updateEndDate(index)
+                                  }
+                                },
+                                model: {
+                                  value: enrollPeriod.selectedStartDate,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      enrollPeriod,
+                                      "selectedStartDate",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "enrollPeriod.selectedStartDate"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -44412,29 +44416,38 @@ var render = function() {
                     "div",
                     { staticClass: "form-row col-md-4 col-lg-2 px-0" },
                     [
-                      _c("div", { staticClass: "form-group w-100" }, [
-                        _c(
-                          "p",
-                          [
-                            _c("Datepicker", {
-                              attrs: {
-                                name: "enddate",
-                                placeholder: "Select End Date",
-                                required: "",
-                                "disabled-dates": enrollPeriod.endDisabledDates
-                              },
-                              model: {
-                                value: enrollPeriod.selectedEndDate,
-                                callback: function($$v) {
-                                  _vm.$set(enrollPeriod, "selectedEndDate", $$v)
+                      _c(
+                        "div",
+                        { staticClass: "form-group w-100 datepicker-full" },
+                        [
+                          _c(
+                            "p",
+                            [
+                              _c("Datepicker", {
+                                attrs: {
+                                  name: "enddate",
+                                  placeholder: "Select End Date",
+                                  required: "",
+                                  "disabled-dates":
+                                    enrollPeriod.endDisabledDates
                                 },
-                                expression: "enrollPeriod.selectedEndDate"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
+                                model: {
+                                  value: enrollPeriod.selectedEndDate,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      enrollPeriod,
+                                      "selectedEndDate",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "enrollPeriod.selectedEndDate"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -44459,7 +44472,7 @@ var render = function() {
                     _vm._l(_vm.grades, function(grade, index) {
                       return _c(
                         "div",
-                        { key: index, staticClass: "col-sm-3" },
+                        { key: index, staticClass: "col-6 col-sm-3" },
                         _vm._l(grade, function(val, i) {
                           return _c(
                             "div",
@@ -44602,29 +44615,33 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-wrap py-2r px-25 mt-2r mb-4 mb-sm-0" }, [
-          _vm.canAddMorePeriod
-            ? _c(
-                "a",
-                {
-                  staticClass: "btn btn-primary addenrollment",
-                  attrs: {
-                    type: "button",
-                    id: "addEnroll",
-                    value: "addEnroll"
+        _c(
+          "div",
+          { staticClass: "form-wrap py-2r px-sm-25 mt-2r mb-4 mb-sm-0" },
+          [
+            _vm.canAddMorePeriod
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary addenrollment mb-4 mb-sm-0",
+                    attrs: {
+                      type: "button",
+                      id: "addEnroll",
+                      value: "addEnroll"
+                    },
+                    on: { click: _vm.addNewEnrollPeriod }
                   },
-                  on: { click: _vm.addNewEnrollPeriod }
-                },
-                [_vm._v("Add Another Enrollment Period")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v("Continue")]
-          )
-        ])
+                  [_vm._v("Add Another Enrollment Period")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Continue")]
+            )
+          ]
+        )
       ],
       2
     )
@@ -44797,7 +44814,7 @@ var render = function() {
                 "div",
                 { key: i, staticClass: "row border-bottom py-3" },
                 [
-                  _c("div", { staticClass: "col-sm-8" }, [
+                  _c("div", { staticClass: "col-8" }, [
                     _c("p", [
                       _vm._v(_vm._s(item.type) + " "),
                       _c("span", { staticClass: "small" }, [
@@ -44812,14 +44829,14 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-2 text-right price" }, [
+                  _c("div", { staticClass: "col-2 text-right price" }, [
                     _c("p", [_vm._v("$" + _vm._s(item.amount))])
                   ]),
                   _vm._v(" "),
                   _c(
                     "div",
                     {
-                      staticClass: "col-sm-2 text-right",
+                      staticClass: "col-2 text-right",
                       on: {
                         click: function($event) {
                           return _vm.remove(item.id, index, i, item.amount)
@@ -44845,7 +44862,7 @@ var render = function() {
     _c("div", { staticClass: "cart-total row py-2" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-2 text-right price" }, [
+      _c("div", { staticClass: "col-2 text-right price" }, [
         _c("p", [_vm._v(" $" + _vm._s(_vm.total))])
       ])
     ])
@@ -44856,7 +44873,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+    return _c("div", { staticClass: "col-8 text-right" }, [
       _c("p", [_vm._v("Total")])
     ])
   }

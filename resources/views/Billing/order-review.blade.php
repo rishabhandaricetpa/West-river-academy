@@ -35,8 +35,8 @@
    </div>
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Payment Items</h2>
-      <div class="seperator">
-      <div class="row gray-bg py-2 text-capitalize">
+      <div class="seperator overflow-auto">
+      <!-- <div class="row gray-bg py-2 text-capitalize">
         <div class="col-sm-3">
         <span>item</span>
         </div>
@@ -49,8 +49,32 @@
         <div class="col-sm-3">
         <span>total</span>
         </div>
-   </div>
-   <div class="row py-2">
+   </div> -->
+   <table class="w-100 table-styling">
+     <thead>
+        <tr>
+        <th>item</th>
+        <th>quantity</th>
+        <th>price</th>
+        <th>total</th>
+        </tr>
+     </thead>
+     <tbody>
+        <tr>
+           <td>Custom Payment</td>
+           <td>1</td>
+           <td>${{$enroll_fees->amount}}</td>
+           <td>${{$enroll_fees->amount}}</td>
+        </tr>
+     </tbody>
+     <tfoot>
+        <tr>
+           <td>Total price</td>
+           <td>${{$enroll_fees->amount}}</td>
+        </tr>
+     </tfoot>
+   </table>
+   <!-- <div class="row py-2">
         <div class="col-sm-3">
         <span>Custom Payment</span>
         </div>
@@ -69,6 +93,7 @@
       <span>Total price</span>
       <span class="ml-2">${{$enroll_fees->amount}}</span>
       </div>
+</div> -->
 </div>
 <div class="form-wrap border bg-light py-2r px-25 mt-2r">
       <a href="#" class="btn btn-primary">cancel</a>
