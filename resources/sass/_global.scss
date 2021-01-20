@@ -211,9 +211,14 @@ sup {
   thead{
     background-color: #cccc;
   }
+  td,th{
+    padding: 5px 10px;
+  }
   tbody{
+
     tr:nth-child(even){
     background-color: $white;
     }
   }
 }
+

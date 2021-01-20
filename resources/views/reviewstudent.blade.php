@@ -5,12 +5,13 @@
   <h1 class="text-center text-white text-uppercase">student enrollment</h1>
   <div class="form-wrap border bg-light py-5 px-25">
     <h2>Review Student Enrollment</h2>
-    <form method="POST" action="" class="seperator pb-2">
+    <form method="POST" action="" class="pb-2">
       @foreach($students as $key=>$student)
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center pt-4">
       <h3> Student Profile {{++$key}}</h3>
       <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary ml-auto">Edit Student {{$key}} </a>
       </div>
+      <div class="seperator">
       <div class="form-group d-sm-flex mb-2">
         <label for="">Student Name</label>
         <div>
@@ -41,7 +42,7 @@
           <p>{{$student ->student_Id}}</p>
         </div>
       </div>
-     
+      </div>
       @endforeach
     </form>
     <div >
