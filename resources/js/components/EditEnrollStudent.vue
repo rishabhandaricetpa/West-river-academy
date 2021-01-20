@@ -98,7 +98,7 @@
     </div>
     <div v-for="(period, index) in form.periods" :key="period.id">
       <div v-if="period.status === 'pending'" class="position-relative">
-        <span class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
+        <span v-if="canRemovePeriod"  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
         <div class="form-group d-sm-flex mb-2 mt-2r">
           <label for="">Select your START date of enrollment{{ index }}</label>
           <div class="row mx-0">
@@ -134,8 +134,8 @@
             <div class="form-row col-md-4 col-lg-2 px-0">
               <div class="form-group w-100">
                 <Datepicker
-                  id="startdate"
-                  name="startdate"
+                  id="enddate"
+                  name="enddate"
                   v-model="period.selectedEndDate"
                   required
                   placeholder="Select Start Date"
@@ -273,7 +273,8 @@ export default {
         immunized_status: this.students.immunized_status,
         periods: [],
       },
-      errors:[]
+      errors:[],
+      removingPeriod : false,
     };
   },
   created() {
@@ -346,17 +347,27 @@ export default {
       });
     },
     removePeriod(index) {
-      let reqData = this.form;
+      if(this.removingPeriod){
+        return;
+      }
+      this.removingPeriod = true;
+      
+      let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
       reqData.periods.splice(index, 1);
+      
       axios
         .post(route("delete.enroll", this.students), reqData)
         .then(
           (response) => {
             const resp = response.data;
             resp.status == 'success' ? this.form.periods.splice(index, 1) : alert(resp.message);
+            this.removingPeriod = false;
           }
         )
-        .catch((error) => console.log(error));
+        .catch((error) => { 
+          this.removingPeriod = false;
+          console.log(error)
+        });
     },
     clickDatepicker(){
       document.getElementById('dob').click();
@@ -379,6 +390,9 @@ export default {
     canAddMorePeriod() {
       return this.form.periods.length < 4;
     },
+    canRemovePeriod(){
+      return this.form.periods.length > 1;
+    }
   },
 };
 </script>
