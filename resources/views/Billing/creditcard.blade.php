@@ -17,10 +17,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row text-center">
+                        <h2 class="panel-heading mb-0">Payment Details</h2>
+                    </div>                    
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{{ route('stripe.payment') }}" method="post" class="validation"
+                                                     data-cc-on-file="false"
                                                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                                                     id="payment-form">
                         @csrf
                           <div class='form-row row'>
+                            <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card<sup>*</sup></label> <input
                                     class='form-control' size='4' type='text'>
                             </div>
