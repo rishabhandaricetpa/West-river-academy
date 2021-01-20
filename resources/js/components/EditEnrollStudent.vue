@@ -286,6 +286,7 @@ export default {
         status: item.status,
         endDisabledDates: {
           from: this.calcEndDate(item.start_date_of_enrollment),
+          to: this.calcToData(item.start_date_of_enrollment),
         },
       });
     });
@@ -318,8 +319,17 @@ export default {
 
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
+    calcToData(date){
+      const oldDate = new Date(date);
+      const oDate = oldDate.getDate();
+      const year = oldDate.getFullYear();
+      const month = oldDate.getMonth();
+
+      return new Date(year, month, oDate + 1);
+    },
     updateEndDate(index) {
       this.form.periods[index].endDisabledDates.from = this.calcEndDate(this.form.periods[index].selectedStartDate);
+      this.form.periods[index].endDisabledDates.to = this.calcToData(this.form.periods[index].selectedStartDate);
       this.form.periods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
@@ -331,6 +341,7 @@ export default {
         grade: "",
         endDisabledDates: {
           from: this.calcEndDate(this.semesters.start_date),
+          to: this.calcToData(this.semesters.start_date),
         },
       });
     },
