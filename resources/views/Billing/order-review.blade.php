@@ -67,7 +67,7 @@
       </div>
       <div class="total-amount pt-5">
       <span>Total price</span>
-      <span class="float-right">${{$enroll_fees->amount}}</span>
+      <span class="ml-2">${{$enroll_fees->amount}}</span>
       </div>
 </div>
 <div class="form-wrap border bg-light py-2r px-25 mt-2r">
