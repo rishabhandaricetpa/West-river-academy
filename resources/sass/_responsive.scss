@@ -30,6 +30,10 @@
     font-size: 15px;
   }
 
+  main{
+    min-height: auto;
+  }
+
   /* header */
   .site-header {
     max-width: 100%;
@@ -96,6 +100,10 @@
       }
     }
   }
+  .form-wrap.px-25 {
+   padding-left: 1rem !important;
+   padding-right: 1rem !important;
+  }
 }
 
 // Small devices
@@ -109,7 +117,10 @@
   select {
     font-size: 16px !important;
   }
-
+  /* Datepicker */
+  .vdp-datepicker__calendar{
+    width: 100% !important;
+  }
   /* sidebar */
   .main-sidebar {
     width: 50px;

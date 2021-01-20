@@ -148,15 +148,19 @@ label.h3{
     }
 }
 
-
+.datepicker-full{
+    .vdp-datepicker,.vdp-datepicker> div,.vdp-datepicker input,p{
+        width: 100% !important;
+    }
+}
 
 .additional-sign{
     width: 32px;
     border: 1px solid #ccc;
     border-right: 0;
-    height: 100%;
     text-align: center;
     line-height: 31px;
     color: #000;
     background: #e9ecef;
 }
+

@@ -103,7 +103,7 @@
           <label for="">Select your START date of enrollment{{ index }}</label>
           <div class="row mx-0">
             <div class="form-row col-md-4 col-lg-2 px-0">
-              <div class="form-group w-100">
+              <div class="form-group w-100 datepicker-full">
                 <Datepicker
                   id="startdate"
                   name="startdate"
@@ -132,7 +132,7 @@
           <label for="">Select your END date of enrollment</label>
           <div class="row mx-0">
             <div class="form-row col-md-4 col-lg-2 px-0">
-              <div class="form-group w-100">
+              <div class="form-group w-100 datepicker-full">
                 <Datepicker
                   id="startdate"
                   name="startdate"
