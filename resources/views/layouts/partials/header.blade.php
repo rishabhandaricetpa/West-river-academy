@@ -44,11 +44,12 @@
           <a class="nav-link" href="#">faq</a>
         </li>
       </ul>
-    </div>
-    <div class="action-buttons">
+      <div class="action-buttons">
       <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
       <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
     </div>
+    </div>
+  
   </nav>
 </header>
 <!-- * =============== /Header =============== * -->

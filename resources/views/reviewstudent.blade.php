@@ -50,6 +50,7 @@
       <form method="POST" action="{{route('add.cart')}}">
         @csrf
         <input type="hidden" name="type" value="enrollment_period">
+        <div class="overflow-auto">
         <table class="px-0 w-100 table-styling">
           <thead>
             <tr>
@@ -87,6 +88,7 @@
             </tr>
           </tfoot>
         </table>
+        </div>
         <div class="text-right mt-4">
           <a href="/enroll-student" class="btn btn-primary">Add Another Student</a>
           <button type="submit" class="btn btn-primary ml-3"> Add selected items to Cart </button>
