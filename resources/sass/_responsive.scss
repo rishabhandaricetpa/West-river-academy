@@ -37,9 +37,14 @@
     padding-right: 15px;
 
     .action-buttons {
+      padding: 13px;
       .btn {
         padding: 4px 12px;
         font-size: 13px;
+      }
+      .user-login{
+        display: block;
+        margin-top: 20px;
       }
     }
 
@@ -72,16 +77,6 @@
       background-color: transparent;
       border: 0;
       padding-top: 0;
-    }
-
-    .action-buttons {
-      margin-right: 42px;
-    }
-
-    .navbar-toggler {
-      position: absolute;
-      right: 0;
-      z-index: 9999999;
     }
 
     .navbar-collapse {
