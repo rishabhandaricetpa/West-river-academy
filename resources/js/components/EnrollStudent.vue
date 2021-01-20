@@ -116,6 +116,7 @@
                   placeholder="Select Start Date"
                   :value="enrollPeriod.selectedStartDate"
                   @input="updateEndDate(index)"
+                  :open-date="enrollPeriod.selectedStartDate"
                 >
                 </Datepicker>
               </p>
@@ -146,6 +147,7 @@
                   placeholder="Select End Date"
                   required
                   :disabled-dates="enrollPeriod.endDisabledDates"
+                  :open-date="enrollPeriod.selectedStartDate" 
                 >
                 </Datepicker>
               </p>
@@ -264,6 +266,7 @@ export default {
               grade: "",
               endDisabledDates: {
                 from: this.calcEndDate(this.semesters),
+                to: this.calcToData(this.semesters),
               },
             },
           ],
@@ -285,12 +288,21 @@ export default {
 
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
-     validEmail: function (email) {
+    calcToData(date){
+      const oldDate = new Date(date);
+      const oDate = oldDate.getDate();
+      const year = oldDate.getFullYear();
+      const month = oldDate.getMonth();
+
+      return new Date(year, month, oDate + 1);
+    },
+    validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
     updateEndDate(index) {
       this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
+      this.form.enrollPeriods[index].endDisabledDates.to = this.calcToData(this.form.enrollPeriods[index].selectedStartDate);
       this.form.enrollPeriods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
@@ -300,6 +312,7 @@ export default {
         grade: "",
         endDisabledDates: {
           from: this.calcEndDate(this.semesters),
+          to: this.calcToData(this.semesters),
         },
       });
     },
