@@ -20,7 +20,7 @@ class ParentController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $Userid = auth()->user()->id;
+            $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
 
@@ -41,15 +41,15 @@ class ParentController extends Controller
             return redirect()->back()->with($notification);
         }
 
-        // $is_valid = Cart::isCartValid($this->parent_profile_id);
+        $is_valid = Cart::isCartValid($this->parent_profile_id);
 
-        // if(!$is_valid){
-        //     $notification = array(
-        //         'message' => 'Cart is Invalid!',
-        //         'alert-type' => 'error'
-        //     );
-        //     return redirect()->back()->with($notification);
-        // }
+        if(!$is_valid){
+            $notification = array(
+                'message' => 'Cart is Invalid!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
 
         $country_list  =  Country::select('country')->get();
         return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));

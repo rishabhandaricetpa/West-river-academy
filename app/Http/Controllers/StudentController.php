@@ -29,7 +29,7 @@ class StudentController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $Userid = auth()->user()->id;
+            $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
 
@@ -52,7 +52,7 @@ class StudentController extends Controller
     }
     public function index(Request $request)
     {
-        $id = auth()->user()->id;
+        $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
@@ -70,7 +70,7 @@ class StudentController extends Controller
     {
         try{
             DB::beginTransaction();
-            $Userid = auth()->user()->id;
+            $Userid =Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
             
