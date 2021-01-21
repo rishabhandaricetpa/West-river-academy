@@ -1,10 +1,5 @@
 <template>
  <div class="form-wrap border bg-light py-5 px-25">
-    <p v-if="errors.length" >
-       <ul>
-       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
-      </ul>
-    </p> 
     <h2>Enroll Student 1</h2> 
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-sm-flex mb-2">
@@ -183,6 +178,7 @@
                 type="radio"
                 :value= "val"
                 v-model="enrollPeriod.grade"
+                required
               />
               <label class="form-check-label" for=""> {{ val }} </label>
             </div>
@@ -220,6 +216,11 @@
         ></textarea>
         </div>
       </div>
+      <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="form-wrap py-2r px-sm-25 mt-2r mb-4 mb-sm-0">
       <a
         type="button"
@@ -239,7 +240,7 @@
 <script>
 import axios from "axios";
 import Datepicker from "vuejs-datepicker";
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   name: "EnrollStudent",
@@ -248,31 +249,43 @@ export default {
   },
   data() {
     return {
-      grades:[['Ungraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
-        form: {
-          first_name: "",
-          middle_name: "",
-          last_name: "",
-          dob: "",
-          email: "",
-          cell_phone: "",
-          immunized_status: "",
-          student_situation: "",
-          studentID: "",
-          enrollPeriods: [
-            {
-              selectedStartDate: new Date(this.semesters),
-              selectedEndDate: "",
-              grade: "",
-              endDisabledDates: {
-                from: this.calcEndDate(this.semesters),
-                to: this.calcToData(this.semesters),
-              },
+      grades: [
+        [
+          "Ungraded",
+          "Preschool Age 3",
+          "Preschool Age 4",
+          "Kindergarten",
+          "1",
+          "2",
+          "3",
+          "4",
+        ],
+        ["5", "6", "7", "8", "9", "10", "11", "12"],
+      ],
+      form: {
+        first_name: "",
+        middle_name: "",
+        last_name: "",
+        dob: "",
+        email: "",
+        cell_phone: "",
+        immunized_status: "",
+        student_situation: "",
+        studentID: "",
+        enrollPeriods: [
+          {
+            selectedStartDate: new Date(this.semesters),
+            selectedEndDate: "",
+            grade: "",
+            endDisabledDates: {
+              from: this.calcEndDate(this.semesters),
+              to: this.calcToData(this.semesters),
             },
-          ],
-        },
+          },
+        ],
+      },
       students: [],
-      errors:[]
+      errors: [],
     };
   },
   props: {
@@ -281,13 +294,12 @@ export default {
     },
   },
   methods: {
-    calcEndDate(date){
+    calcEndDate(date) {
       const oldDate = new Date(date);
       const year = oldDate.getFullYear();
-
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
-    calcToData(date){
+    calcToData(date) {
       const oldDate = new Date(date);
       const oDate = oldDate.getDate();
       const year = oldDate.getFullYear();
@@ -300,9 +312,13 @@ export default {
       return re.test(email);
     },
     updateEndDate(index) {
-      this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
-      this.form.enrollPeriods[index].endDisabledDates.to = this.calcToData(this.form.enrollPeriods[index].selectedStartDate);
-      this.form.enrollPeriods[index].selectedEndDate = ''; // reset the end date value
+      this.form.enrollPeriods[index].endDisabledDates.from = this.calcEndDate(
+        this.form.enrollPeriods[index].selectedStartDate
+      );
+      this.form.enrollPeriods[index].endDisabledDates.to = this.calcToData(
+        this.form.enrollPeriods[index].selectedStartDate
+      );
+      this.form.enrollPeriods[index].selectedEndDate = ""; // reset the end date value
     },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
@@ -316,38 +332,58 @@ export default {
       });
     },
     addStudent() {
-    //  this.disableSubmit = true;
-       this.errors = []; 
-      if(!this.form.dob){
-      this.errors.push('Date of birth is required');
-      alert('Please fill the required form');
+      this.errors = [];
+      if (!this.form.dob) {
+        this.errors.push("Date of birth is required");
+        alert("Please fill the required form");
       }
-       if(!this.validEmail(this.form.email)) {
-        this.errors.push('Valid email required.');
+      if (!this.validEmail(this.form.email)) {
+        this.errors.push("Valid email required.");
       }
-      if(this.form.dob && this.validEmail(this.form.email)){
-       // this.disableSubmit = true;
-        axios
-        .post(route("enroll.student"), this.form)
-        .then(
-          (response) => {
-            const resp = response.data;
-            resp.status == 'success' ? window.location = "/reviewstudents" : alert(resp.message);
-         //  this.disableSubmit = false;
-          }
-        )   
+      if (!this.vallidateGrades()) {
+        this.errors.push("Grade is required Field! Please select a Grade and then continue");
+      }
+      if (!this.vallidateEndDate()) {
+        this.errors.push("End date of Enrollment is required!Please select a End Date and then continue");
+      }
+      if (this.form.dob && this.validEmail(this.form.email) && this.vallidateGrades() && this.vallidateEndDate()) {
+        axios.post(route("enroll.student"), this.form).then((response) => {
+          const resp = response.data;
+          resp.status == "success"
+            ? (window.location = "/reviewstudents")
+            : alert(resp.message);
+        });
       }
     },
-    clickDatepicker(){
-      document.getElementById('dob').click();
-    }
- },
+    vallidateGrades() {
+      for (let i = 0; i < this.form.enrollPeriods.length; i++) {
+        const enrollPeriod = this.form.enrollPeriods[i];
+        if (!enrollPeriod.grade) {
+          return false;
+          break;
+        }
+      }
+      return true;
+    },
+     vallidateEndDate() {
+      for (let i = 0; i < this.form.enrollPeriods.length; i++) {
+        const enrollPeriod = this.form.enrollPeriods[i];
+        if (!enrollPeriod.selectedEndDate) {
+          return false;
+          break;
+        }
+      }
+      return true;
+    },
+    clickDatepicker() {
+      document.getElementById("dob").click();
+    },
+  },
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
     },
   },
-  
 };
 </script>
 
