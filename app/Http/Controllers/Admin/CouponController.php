@@ -28,7 +28,7 @@ class CouponController extends Controller
 
     public function store(Request $request)
     {
-
+        
     }
 
     public function getCode()
