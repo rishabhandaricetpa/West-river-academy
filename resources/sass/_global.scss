@@ -208,6 +208,7 @@ sup {
 }
 
 .table-styling{
+  min-width: 500px;
   thead{
     background-color: #cccc;
   }
@@ -222,3 +223,6 @@ sup {
   }
 }
 
+a.btn{
+  -webkit-appearance: none !important;
+}

@@ -20,19 +20,32 @@ use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use App\Models\TransactionsMethod;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use Redirect;
 use Session;
 use URL;
+use App\Models\User;
+use App\Models\Cart;
+use App\Models\ParentProfile;
+
 
 class   PaypalPaymentController extends Controller
 {
     private $_api_context;
+    private $parent_profile_id;
 
     public function __construct()
     {
         $paypal_configuration = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
         $this->_api_context->setConfig($paypal_configuration['settings']);
+        
+    $this->middleware(function ($request, $next) {
+        $Userid = Auth::user()->id;
+        $parentProfileData = User::find($Userid)->parentProfile()->first();
+        $this->parent_profile_id = $parentProfileData->id;
+        return $next($request);
+        });
     }
     public function payWithPaypal()
     {
@@ -44,20 +57,21 @@ class   PaypalPaymentController extends Controller
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
-
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $total=$enroll_fees->amount;
         $item_1 = new Item();
 
         $item_1->setName('Product 1')
             ->setCurrency('USD')
             ->setQuantity(1)
-            ->setPrice($request->get('amount'));
+            ->setPrice($total);
 
         $item_list = new ItemList();
         $item_list->setItems(array($item_1));
 
         $amount = new Amount();
         $amount->setCurrency('USD')
-            ->setTotal($request->get('amount'));
+            ->setTotal($total);
 
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -94,14 +108,6 @@ class   PaypalPaymentController extends Controller
 
         Session::put('paypal_payment_id', $payment->getId());
 
-        $paypal =new TransactionsMethod();
-        $paypal->transcation_id =$payment->getId();
-        $paypal->payment_mode= 'Pay pal';
-        $paypal->parent_profile_id = auth()->user()->id;
-        $paypal->amount = $amount->getTotal();
-        
-        $paypal->status ='succeeded';
-        $paypal->save();
         if (isset($redirect_url)) {
             return Redirect::away($redirect_url);
         }
@@ -123,6 +129,15 @@ class   PaypalPaymentController extends Controller
         $execution->setPayerId($request->input('PayerID'));
         $result = $payment->execute($execution, $this->_api_context);
 
+        $jsonResult =json_decode($result,true );
+      $amount=  $jsonResult['transactions'][0]['amount']['total'];
+        $paypal =new TransactionsMethod();
+        $paypal->transcation_id =$payment_id;
+        $paypal->payment_mode= 'Pay pal';
+        $paypal->parent_profile_id = Auth::user()->id;
+        $paypal->amount =$amount;
+        $paypal->status="succeeded";
+        $paypal->save();
         if ($result->getState() == 'approved') {
             $notification = array(
                 'message' => 'Payment has been successfully processed! Add more services',
