@@ -378,7 +378,11 @@ export default {
     clickDatepicker() {
       document.getElementById("dob").click();
     },
-  },
+    clickDatepicker(){
+      document.getElementById('dob').click();
+      document.getElementById('dob').focus();
+    }
+ },
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
