@@ -92,6 +92,8 @@ class ParentController extends Controller
                 'country' => $billing_data['country'],
             ]);
             $parentaddress->save();
+            DB::commit();
+
             if($payment_type['payment_type']=="Credit Card"){
                 return route('stripe.payment');
             }
@@ -104,7 +106,6 @@ class ParentController extends Controller
             elseif($payment_type['payment_type']=="Check or Money Order"){
                 return route('money.order');
             }
-            DB::commit();
             } catch (\Exception $e) {   
                 DB::rollBack();
             }

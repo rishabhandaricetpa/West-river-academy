@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-
 use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller

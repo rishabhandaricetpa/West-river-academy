@@ -203,16 +203,16 @@
                   <span>1</span>
                   </div>
                   <div class="col-sm-3">
-                  <span>${{total.amount}}</span>
+                  <span><i class="fas fa-dollar-sign"></i>{{total.amount}}</span>
                   </div>
                   <div class="col-sm-3">
-                  <span>${{total.amount}}</span>
+                  <span><i class="fas fa-dollar-sign"></i>{{total.amount}}</span>
                   </div>
                 </div>
                 </div>
                 <div class="total-amount pt-5">
                 <span>Total price</span>
-                <span class="float-right">${{total.amount}}</span>
+                <span class="float-right"><i class="fas fa-dollar-sign"></i>{{total.amount}}</span>
                 </div>
           </div>
           <div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
