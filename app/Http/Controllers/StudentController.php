@@ -69,6 +69,17 @@ class StudentController extends Controller
     protected function store(Request $data)
     {
         try{
+            $data['student_Id'] = $data['studentID'];
+            $this->validate($data, [
+                'student_Id'     => 'required|unique:student_profiles'
+            ]);
+            } 
+       catch (\Exception $e) {
+            if ($data->expectsJson()) {
+            return response()->json(['status' => 'error' ,'message' => 'Studnet id must be unique']);
+            }
+        }
+        try{
             DB::beginTransaction();
             $Userid =Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
