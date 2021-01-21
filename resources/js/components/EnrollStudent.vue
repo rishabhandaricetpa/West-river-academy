@@ -340,6 +340,7 @@ export default {
     },
     clickDatepicker(){
       document.getElementById('dob').click();
+      document.getElementById('dob').focus();
     }
  },
   computed: {
