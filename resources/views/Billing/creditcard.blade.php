@@ -74,7 +74,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ${{$enroll_fees->amount}}</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</button>
                             </div>
                         </div>
                           
