@@ -2257,15 +2257,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "address",
@@ -3051,6 +3042,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -43050,29 +43043,29 @@ var render = function() {
       _c("div", { staticClass: "form-wrap border bg-light py-5 px-25 mt-2r" }, [
         _c("h2", { staticClass: "mb-3" }, [_vm._v("Payment Items")]),
         _vm._v(" "),
-        _c("div", { staticClass: "seperator" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "row py-2" }, [
-            _vm._m(1),
+        _c("div", { staticClass: "seperator overflow-auto" }, [
+          _c("table", { staticClass: "w-100 table-styling" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("span", [_vm._v("$" + _vm._s(_vm.total.amount))])
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [_vm._v("Custom Payment ")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("1")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("$" + _vm._s(_vm.total.amount))]),
+                _vm._v(" "),
+                _c("td", [_vm._v("$" + _vm._s(_vm.total.amount))])
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("span", [_vm._v("$" + _vm._s(_vm.total.amount))])
+            _c("tfoot", [
+              _c("tr", [
+                _c("td", [_vm._v("Total price")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("$" + _vm._s(_vm.total.amount))])
+              ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "total-amount pt-5" }, [
-          _c("span", [_vm._v("Total price")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "float-right" }, [
-            _vm._v("$" + _vm._s(_vm.total.amount))
           ])
         ])
       ]),
@@ -43127,7 +43120,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(1)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -43165,7 +43158,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -43203,7 +43196,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(5)
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -43241,7 +43234,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(6)
+                _vm._m(4)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -43279,14 +43272,14 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(7)
+                _vm._m(5)
               ])
             ]
           )
         ]
       ),
       _vm._v(" "),
-      _vm._m(8)
+      _vm._m(6)
     ]
   )
 }
@@ -43295,31 +43288,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row gray-bg py-2 text-capitalize" }, [
-      _c("div", { staticClass: "col-sm-3" }, [_c("span", [_vm._v("item")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-3" }, [
-        _c("span", [_vm._v("quantity")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-3" }, [_c("span", [_vm._v("price")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-3" }, [_c("span", [_vm._v("total")])])
+    return _c("thead", [
+      _c("tr", [_vm._v("item")]),
+      _c("tr", [
+        _c("th", [_vm._v("quantity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("total")])
+      ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-3" }, [
-      _c("span", [_vm._v("Custom Payment")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-3" }, [_c("span", [_vm._v("1")])])
   },
   function() {
     var _vm = this
@@ -44468,7 +44446,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "row pl-5" },
+                    { staticClass: "row pl-sm-5" },
                     _vm._l(_vm.grades, function(grade, index) {
                       return _c(
                         "div",
@@ -44615,33 +44593,32 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-wrap py-2r px-sm-25 mt-2r mb-4 mb-sm-0" },
-          [
-            _vm.canAddMorePeriod
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary addenrollment mb-4 mb-sm-0",
-                    attrs: {
-                      type: "button",
-                      id: "addEnroll",
-                      value: "addEnroll"
-                    },
-                    on: { click: _vm.addNewEnrollPeriod }
+        _c("div", { staticClass: "form-wrap py-2r px-sm-25 mt-2r" }, [
+          _vm.canAddMorePeriod
+            ? _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary addenrollment mb-4 mb-sm-0",
+                  attrs: {
+                    type: "button",
+                    id: "addEnroll",
+                    value: "addEnroll"
                   },
-                  [_vm._v("Add Another Enrollment Period")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Continue")]
-            )
-          ]
-        )
+                  on: { click: _vm.addNewEnrollPeriod }
+                },
+                [_vm._v("Add Another Enrollment Period")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary mb-4 mb-sm-0",
+              attrs: { type: "submit" }
+            },
+            [_vm._v("Continue")]
+          )
+        ])
       ],
       2
     )
@@ -44803,16 +44780,16 @@ var render = function() {
     _c(
       "div",
       _vm._l(_vm.studentsData, function(student, index) {
-        return _c(
-          "div",
-          { key: index, staticClass: "mt-2r" },
-          [
-            _c("h3", [_vm._v(_vm._s(student.name))]),
-            _vm._v(" "),
+        return _c("div", { key: index, staticClass: "mt-2r" }, [
+          _c("h3", [_vm._v(_vm._s(student.name))]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "overflow-auto" },
             _vm._l(student.enroll_items, function(item, i) {
               return _c(
                 "div",
-                { key: i, staticClass: "row border-bottom py-3" },
+                { key: i, staticClass: "row border-bottom py-3 min-table" },
                 [
                   _c("div", { staticClass: "col-8" }, [
                     _c("p", [
@@ -44851,10 +44828,10 @@ var render = function() {
                   )
                 ]
               )
-            })
-          ],
-          2
-        )
+            }),
+            0
+          )
+        ])
       }),
       0
     ),

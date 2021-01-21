@@ -168,7 +168,7 @@
           >Select grade level(s) for your enrollment period
           <p>(You may select more than one for multiple years)</p></label
         >
-        <div class="row pl-5">
+        <div class="row pl-sm-5">
           <div v-for="(grade, index) in grades" :key="index" class="col-6 col-sm-3">
             <div v-for="(val, i) in grade" :key="i" class="form-check">
               <input
@@ -213,7 +213,7 @@
         ></textarea>
         </div>
       </div>
-    <div class="form-wrap py-2r px-sm-25 mt-2r mb-4 mb-sm-0">
+    <div class="form-wrap py-2r px-sm-25 mt-2r">
       <a
         type="button"
         class="btn btn-primary addenrollment mb-4 mb-sm-0"
@@ -223,7 +223,7 @@
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
-      <button type="submit" class="btn btn-primary">Continue</button>
+      <button type="submit" class="btn btn-primary mb-4 mb-sm-0">Continue</button>
     </div>
   </form>
   </div>
