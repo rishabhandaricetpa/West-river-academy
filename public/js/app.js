@@ -2257,6 +2257,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "address",
@@ -3042,8 +3043,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
 //
 //
 //
@@ -43289,8 +43288,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [_vm._v("item")]),
       _c("tr", [
+        _c("th", [_vm._v("item")]),
+        _vm._v(" "),
         _c("th", [_vm._v("quantity")]),
         _vm._v(" "),
         _c("th", [_vm._v("price")]),
@@ -44780,18 +44780,18 @@ var render = function() {
     _c(
       "div",
       _vm._l(_vm.studentsData, function(student, index) {
-        return _c("div", { key: index, staticClass: "mt-2r" }, [
-          _c("h3", [_vm._v(_vm._s(student.name))]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "overflow-auto" },
+        return _c(
+          "div",
+          { key: index, staticClass: "mt-2r" },
+          [
+            _c("h3", [_vm._v(_vm._s(student.name))]),
+            _vm._v(" "),
             _vm._l(student.enroll_items, function(item, i) {
               return _c(
                 "div",
-                { key: i, staticClass: "row border-bottom py-3 min-table" },
+                { key: i, staticClass: "row border-bottom py-3" },
                 [
-                  _c("div", { staticClass: "col-8" }, [
+                  _c("div", { staticClass: "col-sm-8" }, [
                     _c("p", [
                       _vm._v(_vm._s(item.type) + " "),
                       _c("span", { staticClass: "small" }, [
@@ -44806,14 +44806,14 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-2 text-right price" }, [
+                  _c("div", { staticClass: "col-sm-2 text-right price" }, [
                     _c("p", [_vm._v("$" + _vm._s(item.amount))])
                   ]),
                   _vm._v(" "),
                   _c(
                     "div",
                     {
-                      staticClass: "col-2 text-right",
+                      staticClass: "col-sm-2 text-right",
                       on: {
                         click: function($event) {
                           return _vm.remove(item.id, index, i, item.amount)
@@ -44828,10 +44828,10 @@ var render = function() {
                   )
                 ]
               )
-            }),
-            0
-          )
-        ])
+            })
+          ],
+          2
+        )
       }),
       0
     ),
@@ -44839,7 +44839,7 @@ var render = function() {
     _c("div", { staticClass: "cart-total row py-2" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "col-2 text-right price" }, [
+      _c("div", { staticClass: "col-sm-2 text-right price" }, [
         _c("p", [_vm._v(" $" + _vm._s(_vm.total))])
       ])
     ])
@@ -44850,7 +44850,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8 text-right" }, [
+    return _c("div", { staticClass: "col-sm-8 text-right" }, [
       _c("p", [_vm._v("Total")])
     ])
   }
