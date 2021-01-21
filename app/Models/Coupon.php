@@ -11,7 +11,7 @@ class Coupon extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'amount', 'status', 'coupon_for', 'redeem_left', 'expire_at', 'assigend_to'
+        'code', 'amount', 'status', 'coupon_for', 'redeem_left', 'expire_at', 'description'
     ];
 
     public static function generateCode()

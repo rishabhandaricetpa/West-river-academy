@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAssignedToColumnOnCouponsTable extends Migration
+class AddDescriptionColumnOnCouponsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAssignedToColumnOnCouponsTable extends Migration
     public function up()
     {
         Schema::table('coupons', function (Blueprint $table) {
-            $table->longText('assigend_to')->nullable()->after('expire_at');
+            $table->longText('description')->nullable()->after('expire_at');
         });
     }
 
@@ -25,7 +25,6 @@ class AddAssignedToColumnOnCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::table('coupons', function (Blueprint $table) {
-        });
+        //
     }
 }

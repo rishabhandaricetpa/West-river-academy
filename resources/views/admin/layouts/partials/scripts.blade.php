@@ -37,6 +37,23 @@
         "processing": true,
         "serverSide": true,
         "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "code" },
+          { "data": "amount" },
+          { "data": "status" },
+          { "data": "redeem_left" },
+          { "data": "expire_at" },
+          { "data": "id",
+            "render": function ( data ) {
+                        return `<a href="#">Edit</a>`;
+                      } 
+          },
+        ]
       });
 
       $("#generate-code").on('click',function () {

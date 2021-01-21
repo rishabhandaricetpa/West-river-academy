@@ -23,24 +23,38 @@
             <div class="col-6">
               <label for="generate-code">Coupon Code <small>(required)</small>:</label>
               <div class="row">
-                <input type="text" class="form-control col-6" required id="code" placeholder="Enter coupon code">
+                <input type="text" class="form-control col-6" required id="code" name="code" placeholder="Enter coupon code">
                 <button type="button" id="generate-code" class="btn ml-2 w-50 col-4 btn-sm btn-info"> Generate Code</button>
               </div>
             </div>
             <div class="col-4">
               <label for="amount">Amount <small>(required)</small>:</label>
-              <input type="number" class="form-control" required id="amount" placeholder="Enter coupon amount">
+              <input type="number" class="form-control" required id="amount" name="amount" placeholder="Enter coupon amount">
             </div>
           </div>
 
           <div class="row form-group">
-            <div class="col-6">
+            <div class="col-4">
               <label for="redeem">Redeem Count <small>(blank for no limit)</small>:</label>
-              <input type="number" class="form-control w-50" id="redeem" placeholder="limit the times coupon can be used">
+              <input type="number" class="form-control w-50" id="redeem" name="redeem_left" placeholder="limit the times coupon can be used">
             </div>
             <div class="col-4">
               <label for="expire">Expire at <small>(blank for no limit)</small>:</label>
-              <input type="date" class="form-control" id="expire">
+              <input type="date" class="form-control w-50" id="expire_at" name="expire_at">
+            </div>
+            <div class="col-4">
+              <label for="status">Status :</label>
+              <select name="status" id="status" class="form-control w-50">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-8 ">
+              <label for="description">Description <small>(optional)</small>:</label>
+              <textarea name="description" placeholder="Enter description.." class="w-100" id="description" cols="80" rows="2"></textarea>
             </div>
           </div>
 
