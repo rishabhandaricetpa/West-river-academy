@@ -28,12 +28,21 @@ class CouponController extends Controller
         return view('admin.coupon.create',compact('parents'));
     }
 
+    public function edit($id)
+    {
+        $coupon = Coupon::find($id);
+        $parents = ParentProfile::select('id','p1_email')->get()->toArray();
+        return view('admin.coupon.edit',compact('parents','coupon'));
+    }
+
     public function store(Request $request)
     {
         try {
             DB::beginTransaction();
             $input = $request->all();
-            $input['coupon_for'] = implode(',',$input['assign']);
+            if(isset($input['assign'])){
+                $input['coupon_for'] = implode(',',$input['assign']);
+            }
             $create = Coupon::create($input);
             if(!$create){
                 throw new Exception("Failed to create Coupon", 1);

@@ -49,8 +49,8 @@
           { "data": "redeem_left" },
           { "data": "expire_at" },
           { "data": "id",
-            "render": function ( data ) {
-                        return `<a href="#">Edit</a>`;
+            "render": function ( id ) {
+                        return `<a href="{{ route('admin.view.coupon') }}/${id}/edit">Edit</a>`;
                       } 
           },
         ]
