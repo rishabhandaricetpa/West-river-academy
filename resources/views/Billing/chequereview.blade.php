@@ -70,11 +70,6 @@
              </tr>
           </tfoot>
        </table>
-
-      <div class="total-amount pt-5">
-      <span>Total price</span>
-      <span class="float-right"><i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</span>
-      </div>
 </div>
 <div class="form-wrap border bg-light py-2r px-25 mt-2r">
       <a href="#" class="btn btn-primary">cancel</a>
