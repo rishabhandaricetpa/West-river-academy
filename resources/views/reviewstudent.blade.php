@@ -90,7 +90,7 @@
         </table>
         </div>
         <div class="text-right mt-4">
-          <a href="/enroll-student" class="btn btn-primary">Add Another Student</a>
+          <a href="/enroll-student" class="btn btn-primary mb-4 mb-sm-0">Add Another Student</a>
           <button type="submit" class="btn btn-primary ml-3"> Add selected items to Cart </button>
         </div>
       </form>

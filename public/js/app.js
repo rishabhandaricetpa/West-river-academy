@@ -44197,31 +44197,35 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
-          _vm._v(" "),
-          _c(
-            "p",
-            [
-              _c("Datepicker", {
-                attrs: { id: "dob", name: "dob", required: "" },
-                model: {
-                  value: _vm.form.dob,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "dob", $$v)
-                  },
-                  expression: "form.dob"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("i", {
-            staticClass: "fas fa-calendar-alt",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]),
+        _c(
+          "div",
+          { staticClass: "form-group d-sm-flex mb-2 position-relative" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
+            _vm._v(" "),
+            _c(
+              "p",
+              [
+                _c("Datepicker", {
+                  attrs: { id: "dob", name: "dob", required: "" },
+                  model: {
+                    value: _vm.form.dob,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "dob", $$v)
+                    },
+                    expression: "form.dob"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("i", {
+              staticClass: "fas fa-calendar-alt",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
           _c("label", { attrs: { for: "" } }, [_vm._v("Email Address")]),
@@ -44336,49 +44340,45 @@ var render = function() {
                   _vm._v("Select your START date of enrollment")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "row mx-0" }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-row col-md-4 col-lg-2 px-0" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "form-group w-100 datepicker-full" },
-                        [
-                          _c(
-                            "p",
-                            [
-                              _c("Datepicker", {
-                                attrs: {
-                                  name: "startdate",
-                                  required: "",
-                                  placeholder: "Select Start Date",
-                                  value: enrollPeriod.selectedStartDate
-                                },
-                                on: {
-                                  input: function($event) {
-                                    return _vm.updateEndDate(index)
-                                  }
-                                },
-                                model: {
-                                  value: enrollPeriod.selectedStartDate,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      enrollPeriod,
-                                      "selectedStartDate",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "enrollPeriod.selectedStartDate"
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4 col-lg-2" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group w-100 datepicker-full" },
+                      [
+                        _c(
+                          "p",
+                          [
+                            _c("Datepicker", {
+                              attrs: {
+                                name: "startdate",
+                                required: "",
+                                placeholder: "Select Start Date",
+                                value: enrollPeriod.selectedStartDate
+                              },
+                              on: {
+                                input: function($event) {
+                                  return _vm.updateEndDate(index)
                                 }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    ]
-                  ),
+                              },
+                              model: {
+                                value: enrollPeriod.selectedStartDate,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    enrollPeriod,
+                                    "selectedStartDate",
+                                    $$v
+                                  )
+                                },
+                                expression: "enrollPeriod.selectedStartDate"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _vm._m(2, true)
                 ])
@@ -44389,45 +44389,36 @@ var render = function() {
                   _vm._v("Select your END date of enrollment")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "row mx-0" }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-row col-md-4 col-lg-2 px-0" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "form-group w-100 datepicker-full" },
-                        [
-                          _c(
-                            "p",
-                            [
-                              _c("Datepicker", {
-                                attrs: {
-                                  name: "enddate",
-                                  placeholder: "Select End Date",
-                                  required: "",
-                                  "disabled-dates":
-                                    enrollPeriod.endDisabledDates
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4 col-lg-2" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group w-100 datepicker-full" },
+                      [
+                        _c(
+                          "p",
+                          [
+                            _c("Datepicker", {
+                              attrs: {
+                                name: "enddate",
+                                placeholder: "Select End Date",
+                                required: "",
+                                "disabled-dates": enrollPeriod.endDisabledDates
+                              },
+                              model: {
+                                value: enrollPeriod.selectedEndDate,
+                                callback: function($$v) {
+                                  _vm.$set(enrollPeriod, "selectedEndDate", $$v)
                                 },
-                                model: {
-                                  value: enrollPeriod.selectedEndDate,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      enrollPeriod,
-                                      "selectedEndDate",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "enrollPeriod.selectedEndDate"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    ]
-                  ),
+                                expression: "enrollPeriod.selectedEndDate"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _vm._m(3, true)
                 ])
@@ -44481,7 +44472,7 @@ var render = function() {
                               _c(
                                 "label",
                                 {
-                                  staticClass: "form-check-label",
+                                  staticClass: "form-check-label pl-1 pl-sm-0",
                                   attrs: { for: "" }
                                 },
                                 [_vm._v(" " + _vm._s(val) + " ")]
