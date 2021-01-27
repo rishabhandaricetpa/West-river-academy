@@ -301,6 +301,13 @@ class StudentController extends Controller
         return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
      
      }
+        
+    public function moneygramReview($parent_id){
+
+        $address   = User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+       return view('Billing.moneyGram',compact('address','enroll_fees','parent_id'));
+    }
 
     public function deleteEnroll(Request $request, $id)
     {

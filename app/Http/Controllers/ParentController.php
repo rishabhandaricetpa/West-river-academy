@@ -103,6 +103,9 @@ class ParentController extends Controller
             elseif($payment_type['payment_type']=="Bank Transfer"){
                 return route('order.review');
             }
+            elseif($payment_type['payment_type']=="MoneyGram"){
+                return route('money.gram');
+            }
             elseif($payment_type['payment_type']=="Check or Money Order"){
                 return route('money.order');
             }

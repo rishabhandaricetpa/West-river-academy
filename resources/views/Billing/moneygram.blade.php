@@ -5,7 +5,7 @@
 <main class="position-relative container form-content mt-4">
    <div class="form-wrap border bg-light py-5 px-25">
       <h2 class="mb-3">Billing Information</h2>
-      <form method="get" action="{{url('moneyorder-email')}}">
+      <form method="get" action="{{route('email.moneygram')}}">
          <div class="form-group d-flex mb-2">
             <label for="">Name</label>
             <div class="ml-auto">{{$address->p1_first_name}} </div>

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
+use App\Models\EnrollmentPayment;
 use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller
@@ -64,6 +65,27 @@ class StripeController extends Controller
             'amount'=> $charges->amount/100,
             'status'=>$charges->status,
         ]);
+        
+        if($charges->status=='succeeded'){
+        $cartItems=Cart::select('item_id')->where('parent_profile_id',$parentProfileData->id)->get();
+        foreach ($cartItems as $cart) 
+        {
+          $enrollemtpayment=EnrollmentPayment::select()->where('enrollment_period_id',$cart->item_id)->first();
+          $enrollemtpayment->status='paid';
+          $enrollemtpayment->transcation_id=$charges->id;
+          $enrollemtpayment->payment_mode='Credit Card';
+          $enrollemtpayment->save();
+        }
+
+        $refreshCart=Cart::select()->where('parent_profile_id',$parentProfileData->id)->get();
+        $refreshCart->each->delete();
+        }else{
+            $notification = array(
+                'message' => 'Payment not processed!Please check with your bank!',
+                'alert-type' => 'error'
+            ); 
+            return Redirect::route('payment.info')->with($notification); 
+        }
         $paymentinfo->save();
         
         $notification = array(
