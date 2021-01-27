@@ -7,7 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
-class BankTranferEmail extends Mailable
+use App\Models\Cart;
+use Auth;
+class MoneyGram extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,7 +18,6 @@ class BankTranferEmail extends Mailable
      *
      * @return void
      */
-    public $user;
     public function __construct($user)
     {
         $this->user = $user;
@@ -28,12 +29,16 @@ class BankTranferEmail extends Mailable
      * @return $this
      */
     public function build()
-    {    $date = \Carbon\Carbon::now()->format('Y-m-d');
-        $user= $this->user;
-        $id=$user->id;
+    {
+        $id= Auth::user()->id;
         $user=  User::find($id)->first();
+        $email= $user->email;   
+        $parent_profile = User::find($id)->parentProfile()->first();
         $address = User::find($id)->parentProfile()->first();
-        return $this->from('rebecca.rish@ithands.com')
-        ->markdown('mail.bankinfo',compact('date','address'))->subject('Bank Transfer Details');
+        $date = \Carbon\Carbon::now()->format('Y-m-d');
+        $payment= Cart::getCartAmount($parent_profile->id,true);
+        $date = \Carbon\Carbon::now()->format('Y-m-d');
+        return $this->from('paige.priyanka@ithands.com')
+        ->markdown('mail.moneygram-email',compact('user','address','parent_profile','date','email','payment'))->subject('Money Gram Payment');
     }
 }

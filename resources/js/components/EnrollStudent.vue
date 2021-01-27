@@ -43,8 +43,8 @@
         />
       </div>
     </div>
-    <div class="form-group d-sm-flex mb-2">
-      <label for="">Date of Birth<sup>*</sup></label>
+    <div class="form-group d-sm-flex mb-2 position-relative">
+      <label for="">Date of Birth</label>
       <p>
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
         </Datepicker>
@@ -104,9 +104,9 @@
       <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
-        <div class="row mx-0">
-          <div class="form-row col-md-4 col-lg-2 px-0">
-            <div class="form-group d-sm-flex mb-2">
+        <div class="row">
+          <div class="col-md-4 col-lg-2">
+            <div class="form-group w-100 datepicker-full">
               <p>
                 <Datepicker
                   name="startdate"
@@ -136,9 +136,9 @@
 
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your END date of enrollment</label>
-        <div class="row mx-0">
-          <div class="form-row col-md-4 col-lg-2 px-0">
-            <div class="form-group d-sm-flex mb-2">
+        <div class="row">
+          <div class="col-md-4 col-lg-2">
+            <div class="form-group w-100 datepicker-full">
               <p>
                 <Datepicker
                   name="enddate"
@@ -184,7 +184,7 @@
                 v-model="enrollPeriod.grade"
                 required
               />
-              <label class="form-check-label" for=""> {{ val }} </label>
+              <label class="form-check-label pl-1 pl-sm-0" for=""> {{ val }} </label>
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@
         </div>
       </div>
       <div class="form-group d-sm-flex">
-        <label for="">tell us more about your situation </label>
+        <label for="">Tell us more about your situation </label>
         <div>
         <textarea
           class="form-control"
