@@ -50,7 +50,7 @@
                       <td>{{$item->student_Id}}</td>
                       <td>{{$item->first_name}}</td>
                       <td>{{$item->last_name}}</td>
-                      <td>{{$item->d_o_b->format('d M')}}</td>
+                      <td>{{$item->d_o_b->format('M d Y')}}</td>
                       <td>{{$item->email}}</td>
                       <td>{{$item->cell_phone}}</td>
                       <td>{{$item->immunized_status}}</td>
@@ -76,5 +76,7 @@
   function myFunction() {
       if(!confirm("Are You Sure to delete this"))
       event.preventDefault();
+
+  
   }
  </script>

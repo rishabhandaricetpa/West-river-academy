@@ -30,9 +30,9 @@
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
-          <label for="">Last Name</label>
+          <label for="">Last Name <sup>*</sup></label>
           <div>
-            <input type="text" class="form-control" id="" value="{{ old('last_name') }}" name="last_name" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="" value="{{ old('last_name') }}" name="last_name" aria-describedby="emailHelp" required>
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
@@ -138,7 +138,7 @@
           <label for="">Country <sup>*</sup></label>
           <div class="col-sm-4 px-0">
             <select class="form-control" name="country" id="country" id="exampleFormControlSelect1" required>
-              <option value="">Select Country</option>
+              <option value="United States">United States</option>
               @foreach($country_list ?? '' as $country)
               <option value="{{$country->country}}">
                 {{$country->country}}</option>
@@ -171,8 +171,8 @@
           <div>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             <div class="info-detail mt-3">
-              <p>After activating your account, you will log in.</p>
-              <p>Enter the email address of Parent 1 and your password.</p>
+              <p><b>Please note the Parent 1 email and the password you selected.
+               You will need these to log in after you activate your account.</b></p>
             </div>
           </div>
         </div>

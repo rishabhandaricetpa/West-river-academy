@@ -1,6 +1,7 @@
 <template>
  <div class="form-wrap border bg-light py-5 px-25">
     <h2>Enroll Student 1</h2> 
+    <p>*=Required</p>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
@@ -10,7 +11,6 @@
           class="form-control"
           id="first_name"
           name="first_name"
-          required
           aria-describedby="emailHelp"
           v-model="form.first_name"
         />
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="form-group d-sm-flex mb-2">
-      <label for="">Date of Birth</label>
+      <label for="">Date of Birth<sup>*</sup></label>
       <p>
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
         </Datepicker>
@@ -79,18 +79,22 @@
       </div>
     </div>
     <div class="form-group d-sm-flex mb-2">
-      <label for="">Student ID </label>
+      <label for="">National ID </label>
       <div>
         <input
           type="text"
           class="form-control"
           id="student_id"
           name="student_id"
-          required
           aria-describedby="emailHelp"
           v-model="form.studentID"
         />
       </div>
+          
+            <p>
+         Please enter your National ID if you wish to have it on your documents.
+            </p>
+        
     </div>
     <div
       class="seperator mt-4"
@@ -212,7 +216,6 @@
           name="student_situation"
           rows="3"
           v-model="form.student_situation"
-          required
         ></textarea>
         </div>
       </div>
@@ -240,7 +243,7 @@
 <script>
 import axios from "axios";
 import Datepicker from "vuejs-datepicker";
-import moment from "moment";
+
 
 export default {
   name: "EnrollStudent",
