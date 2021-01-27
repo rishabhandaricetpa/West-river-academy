@@ -37,11 +37,10 @@
     }
 }
 
-.dashboard-options{
-      .fas{
-        border: 1px solid #4e9cba;
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
-      }
-  }
+.rounded-input{
+    width: 180px;
+    font-size: 1em;
+    padding: 6px 15px;
+    margin: 0;
+    border-radius: 1.2em;
+}
