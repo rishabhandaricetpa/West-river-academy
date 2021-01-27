@@ -15,7 +15,7 @@
       <div class="form-group d-sm-flex mb-2">
         <label for="">Student Name</label>
         <div>
-          <p>{{$student ->first_name}}</p>
+          <p>{{$student ->first_name}} {{$student ->last_name}}</p>
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
@@ -70,7 +70,7 @@
                 <td>{{ $fee->first_name }}</td>
                 <td class="ml-2">  
                   @if ($fee->type == 'annual') Annual  @else Second Semester Only @endif
-                  <span class="small"> ({{ Carbon\Carbon::parse($fee->start_date_of_enrollment)->format('d M Y') }} - {{ Carbon\Carbon::parse($fee->end_date_of_enrollment)->format('d M Y') }} ) </span>
+                  <span class="small"> ({{ Carbon\Carbon::parse($fee->start_date_of_enrollment)->format('M d Y') }} - {{ Carbon\Carbon::parse($fee->end_date_of_enrollment)->format('M d Y') }} ) </span>
                 </td>
                 <td class="text-center">${{ $fee->amount }}</td>
                 @php

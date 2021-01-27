@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\EnrollmentHelper;
-
+use Carbon\Carbon;
 class StudentController extends Controller
 {
     private $parent_profile_id;
@@ -29,11 +29,10 @@ class StudentController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $Userid = auth()->user()->id;
+            $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
-
-            return $next($request);
+              return $next($request);
         });
     }
     /**
@@ -52,37 +51,45 @@ class StudentController extends Controller
     }
     public function index(Request $request)
     {
-        $id = auth()->user()->id;
+        $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
-        $countryId = $countryData->id;
+        $year =date("Y");
+        $year=   Carbon::create( $year)->format('Y');
+        $month_date = Carbon::create( $countryData->start_date)->format('m-d');
+        $start_date =$year ."-". $month_date;
         if ($request->expectsJson()) {
-            return response()->json($countryData);
+            return response()->json($start_date);
         }
-        return view('enrollstudent', compact('countryData'));
+        return view('enrollstudent', compact('start_date'));
     }
 
     protected function store(Request $data)
     {
+    //     try{
+    //         $data['student_Id'] = $data['studentID'];
+    //         $this->validate($data, [
+    //             'student_Id'     => 'required|unique:student_profiles'
+    //         ]);
+    //         } 
+    //    catch (\Exception $e) {
+    //         if ($data->expectsJson()) {
+    //         return response()->json(['status' => 'error' ,'message' => 'Studnet id must be unique']);
+    //         }
+    //     }
         try{
             DB::beginTransaction();
-            $Userid = auth()->user()->id;
+            $Userid =Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
-            
-            if(!StudentProfile::where('parent_profile_id',$id)->exists()){
-                $student_type = 'first_student';
-            }else{
-                $student_type = 'additional_student';
-            }
             
             $student =  StudentProfile::create([
                 'parent_profile_id' => $id,
                 'first_name' => $data['first_name'],
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
-                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
+                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('M d Y'),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
                 'student_Id' => $data['studentID'],
@@ -96,10 +103,24 @@ class StudentController extends Controller
                 $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
+                $enroll_year = $selectedStartDate->year;
+
+                $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$id)
+                                                    ->where('student_profiles.id','!=', $student->id)
+                                                    ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
+                                                    ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                                                    ->exists();
+
+                if(!$student_enrolled){
+                    $student_type = 'first_student';
+                }else{
+                    $student_type = 'additional_student';
+                }
+
                 $enrollPeriod = EnrollmentPeriods::create([
                     'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
-                    'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
+                    'start_date_of_enrollment' =>  $selectedStartDate->format('M d Y'),
+                    'end_date_of_enrollment' => $selectedEndDate->format('M d Y'),
                     'grade_level' => $period['grade'],
                     'type' => $type
                 ]);
@@ -158,23 +179,15 @@ class StudentController extends Controller
             $student->student_situation = $request->input('student_situation');
             $student->save();
             $periods = collect($request->get('periods'));
-
-            $first_student_id = StudentProfile::where('parent_profile_id',$student->parent_profile_id)->orderBy('created_at','asc')->pluck('id')->first();
-
-            if($first_student_id == $id){
-                $student_type = 'first_student';
-            }else{
-                $student_type = 'additional_student';
-            }
            
-            $periods->whereNull('id')->each(function ($period) use ($student,$student_type) {
+            $periods->whereNull('id')->each(function ($period) use ($student) {
                 $enrollPeriod = new EnrollmentPeriods();
-                $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
+                $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
-            $periods->whereNotNull('id')->each(function ($period) use ($student, $student_type) {
+            $periods->whereNotNull('id')->each(function ($period) use ($student) {
                 if(!EnrollmentPayment::where('enrollment_period_id',$period['id'])->where('status','paid')->exists()){
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
-                    $this->updateEnrollPeriod($period, $student, $enrollPeriod, $student_type);
+                    $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
             });
 
@@ -192,10 +205,24 @@ class StudentController extends Controller
         }
     }
 
-    public function updateEnrollPeriod($period, $student, $enrollPeriod, $student_type){
+    public function updateEnrollPeriod($period, $student, $enrollPeriod){
         $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
+        $enroll_year = $selectedStartDate->year;
+        
+        $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$student->parent_profile_id)
+                                            ->where('student_profiles.id','!=', $student->id)
+                                            ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
+                                            ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                                            ->exists();
+
+        if(!$student_enrolled){
+            $student_type = 'first_student';
+        }else{
+            $student_type = 'additional_student';
+        }
 
         $enrollPeriod->fill([
             'student_profile_id' => $student->id,
@@ -246,91 +273,66 @@ class StudentController extends Controller
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
   
-    public function address($id)
-    {    
-         $user_id = Auth::user()->id;
-         $parent = ParentProfile::find($user_id)->first();
-         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-         $country_list  =  Country::select('country')->get();
-         return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
-    }
-    /**
-     * This function is used to store billing and shipping address
-     */
-    protected function saveaddress(Request $request)
-    {   
-        try{
-                $address = new Address();
-                $billing_data = $request->input('billing_address');
-                $shipping_data = $request->input('shipping_address');
-                $payment_type = $request->input('paymentMethod');
-                $Userid = Auth::user()->id;
-                $parentProfileData = User::find($Userid)->parentProfile()->first();
-                $id = $parentProfileData->id;
-                $billinAddress =  Address::create([
-                    'parent_profile_id' => $id,
-                    'billing_street_address' => $billing_data['street_address'],
-                    'billing_city' => $billing_data['city'],
-                    'billing_state' => $billing_data['state'],
-                    'billing_zip_code' => $billing_data['zip_code'],
-                    'billing_country' => $billing_data['country'],
-                    'shipping_street_address' => $shipping_data['street_address'],
-                    'shipping_city' => $shipping_data['city'],
-                    'shipping_state' => $shipping_data['state'],
-                    'shipping_zip_code' => $shipping_data['zip_code'],
-                    'shipping_country' => $shipping_data['country'],
-                    'email'=> $request['email'],
-                ]);
-                $parentaddress = ParentProfile::find($Userid)->first();
-                $parentaddress->fill([
-                    'street_address' => $billing_data['street_address'],
-                    'city' => $billing_data['city'],
-                    'state' => $billing_data['state'],
-                    'zip_code' => $billing_data['zip_code'],
-                    'country' => $billing_data['country'],
-                ]);
-                $parentaddress->save();
-                if($payment_type['payment_type']=="Credit Card"){
-                    return route('stripe.payment');
-                }
-                elseif($payment_type['payment_type']=="Pay Pal"){
-                    return route('paywithpaypal');
-                }
-                elseif($payment_type['payment_type']=="Bank Transfer"){
-                    return route('order.review');
-                }
-                elseif($payment_type['payment_type']=="Check or Money Order"){
-                    return route('money.order');
-                }
-            } catch (\Exception $e) {   
-                DB::rollBack();
-            }
-    }
+    
     public function orderReview($parent_id){
 
-       $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
-       $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $address   = User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
        return view('Billing.order-review',compact('address','enroll_fees','parent_id'));
     
     }
     
     public function paypalorderReview($parent_id){
-        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         return view('paywithpaypal',compact('address','enroll_fees'));
      
      }
      public function stripeorderReview($parent_id){
-        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         return view('Billing/creditcard',compact('address','enroll_fees'));
      
      }
      public function moneyorderReview($parent_id){
-        $address= ParentProfile::find($parent_id)->select('street_address','city','state','zip_code','country','p1_first_name','p1_last_name')->first();
+        $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
      
      }
+        
+    public function moneygramReview($parent_id){
 
+        $address   = User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+       return view('Billing.moneygram',compact('address','enroll_fees','parent_id'));
+    }
+
+    public function deleteEnroll(Request $request, $id)
+    {
+        try{
+            DB::beginTransaction();
+            $periods_id = collect($request->get('periods'))->pluck('id');
+            $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+            $enrollPeriodId = collect($enrollPeriods)->pluck('id');
+
+            $diff = $enrollPeriodId->diff($periods_id);
+
+            EnrollmentPayment::whereIn('enrollment_period_id',$diff)->delete();
+            Cart::whereIn('item_id',$diff)->where('item_type','enrollment_period')->delete();
+
+            EnrollmentPeriods::whereIn('id', $diff)->delete();
+
+            DB::commit();
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'success' ,'message' => 'Successfully removed enroll period']);
+            }
+        }catch (\Exception $e) {
+            DB::rollBack();
+
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error' ,'message' => 'Failed to remove enroll period']);
+            }
+        }
+    }
 }

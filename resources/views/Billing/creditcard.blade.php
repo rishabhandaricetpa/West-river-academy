@@ -1,4 +1,3 @@
-
 <head>
 	<title>Credit Card Payment</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -60,7 +59,7 @@
                             </div>
                             <div class='form-row row col-12'>
                             <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>What you paying for<sup>*</sup></label> <input
+                                <label class='control-label'>What are you paying for<sup>*</sup></label> <input
                                     class='form-control' size='4' type='text' name="description">
                             </div>
                         </div>
@@ -75,7 +74,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ${{$enroll_fees->amount}}</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</button>
                             </div>
                         </div>
                           

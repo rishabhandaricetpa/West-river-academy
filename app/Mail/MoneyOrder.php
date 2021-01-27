@@ -8,7 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 use App\Models\Cart;
-class SendMail extends Mailable
+use Auth;
+class MoneyOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,13 +30,13 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        $id= auth()->user()->id;
+        $id= Auth::user()->id;
         $user=  User::find($id)->first();
         $email= $user->email;   
         $parent_profile = User::find($id)->parentProfile()->first();
         $payment= Cart::getCartAmount($parent_profile->id,true);
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         return $this->from('paige.priyanka@ithands.com')
-        ->markdown('mail.moneyordermail',compact('user','parent_profile','date','email','payment'));
+        ->markdown('mail.moneyordermail',compact('user','parent_profile','date','email','payment'))->subject('Check and Money Order Details');
     }
 }

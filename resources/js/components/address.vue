@@ -84,7 +84,7 @@
                         </div>
 
           <div class="form-wrap border bg-light py-5 px-25 mt-2r">
-             <h2>Shipping Address</h2>
+             <h2>Mailing Address</h2>
 
              <div class="checkbox">
               <label for="sSame" class="sSame"><input type="checkbox" @change="copyBilling" id="sSame" v-model="form.sSame"> Same as Billing Address</label>
@@ -97,7 +97,6 @@
                         class="form-control" 
                         name="first_name" 
                         v-model="form.shipping_address.first_name"
-                        required 
                         aria-describedby="emailHelp">
                       </div>
                   </div>
@@ -110,7 +109,6 @@
                         class="form-control" 
                         name="last_name" 
                         v-model="form.shipping_address.last_name"
-                        required 
                         aria-describedby="emailHelp">
                       </div>
                   </div>
@@ -123,7 +121,6 @@
                         class="form-control" 
                         name="street" 
                         v-model="form.shipping_address.street_address"
-                        required 
                         aria-describedby="emailHelp">
                       </div>
                   </div>
@@ -134,7 +131,7 @@
                         class="form-control" 
                         name="city" 
                         v-model="form.shipping_address.city"
-                        required aria-describedby="emailHelp">
+                        aria-describedby="emailHelp">
                       </div>
                   </div>
                   <div class="form-group d-sm-flex mb-2">
@@ -144,7 +141,6 @@
                         class="form-control" 
                         name="state"
                         v-model="form.shipping_address.state" 
-                        required 
                         aria-describedby="emailHelp">
                       </div>
                   </div>
@@ -155,13 +151,13 @@
                         class="form-control" 
                         name="zip_code" 
                         v-model="form.shipping_address.zip_code"
-                        required aria-describedby="emailHelp">
+                        aria-describedby="emailHelp">
                       </div>
                   </div>
                   <div class="form-group d-sm-flex">
                   <label for="">Country</label>
                       <div class="col-sm-4 px-0">  
-                             <select class="form-control" name="country" v-model="form.shipping_address.country" required>  
+                             <select class="form-control" name="country" v-model="form.shipping_address.country" >  
                                   <option v-for="(val, i) in countries" :key="i" >{{val.country}}</option>   
                               </select>                   
                         </div>
@@ -198,14 +194,14 @@
              <tr>
                 <td>Custom Payment </td>
                 <td>1</td>
-                <td>${{total.amount}}</td>
-                <td>${{total.amount}}</td>
+                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
+                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
              </tr>
              </tbody>
              <tfoot>
              <tr>
                 <td>Total price</td>
-                <td>${{total.amount}}</td>
+                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
              </tr>
              </tfoot>
              </table>
@@ -223,6 +219,7 @@
               name="payment_type"
               value="Credit Card"
               v-model="form.paymentMethod.payment_type" 
+              required
               >
             </div>
             <div class="payment-info"> 
@@ -352,7 +349,7 @@ export default {
       axios
         .post(route("billing.address"), this.form)
         .then((response) => {
-            window.location = response.data+"/"+this.parents.id
+            window.location = response.data ? response.data+"/"+this.parents.id:alert(response.message)
         })
         .catch((error) => console.log(error));
     },

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -59981,3 +59982,5 @@ module.exports = __webpack_require__(/*! /Users/nancyshalini/Documents/projects/
 /***/ })
 
 /******/ });
+=======
+>>>>>>> 0f19b671dc1c108986cda6c0aee0516a085473c0

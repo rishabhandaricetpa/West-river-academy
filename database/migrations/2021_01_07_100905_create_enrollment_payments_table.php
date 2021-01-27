@@ -18,7 +18,9 @@ class CreateEnrollmentPaymentsTable extends Migration
             $table->unsignedBigInteger('enrollment_period_id');
             $table->foreign('enrollment_period_id')->references('id')->on('enrollment_periods')->onDelete('cascade');
             $table->string('amount');
-            $table->enum('status',['pending','paid']);
+            $table->enum('status',['pending','paid','active']);
+            $table->string('transcation_id')->nullable();
+            $table->string('payment_mode')->nullable();
             $table->timestamps();
         });
     }

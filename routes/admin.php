@@ -23,6 +23,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
+Route::group(['middleware'=>'auth'],function(){
 
 Route::group(
     ['namespace' => 'admin'],
@@ -31,8 +32,10 @@ Route::group(
             Auth::guard('admin')->logout();
             return redirect('/admin/login');
         })->name('admin.logout');
-    }
-);
+    Route::get('/payments-invoice', function () {
+        return view('admin/paymentsInvoice/payment');
+    });
+});
 Route::get('view', 'ParentController@index')->name('view.parent');
 Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
 Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
@@ -44,6 +47,7 @@ Route::post('update/{id}', 'StudentProfileController@update')->name('edit-studen
 Route::get('delete/{id}', 'StudentProfileController@destroy')->name('delete.student');
 Route::get('deactive/{id}', 'Auth\RegisterController@dactive')->name('deactive.student');
 
+Route::get('edit-periods/{id}','StudentProfileController@editPeriods')->name('edit-periods.update');
 
 
-
+});

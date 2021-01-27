@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-
+use App\Models\EnrollmentPeriods;
 class StudentProfileController extends Controller
 {
     /**
@@ -26,7 +26,7 @@ class StudentProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         return view('admin.familyInformation.edit-student',compact('student'));
     }
 
@@ -61,7 +61,8 @@ class StudentProfileController extends Controller
     public function edit($id)
     {
         $student= StudentProfile::find($id);
-        return view('admin.familyInformation.edit-student',compact('student'));
+        $enrollment_periods= StudentProfile::find($id)->enrollmentPeriods()->get();
+        return view('admin.familyInformation.edit-student',compact('student','enrollment_periods'));
     }
 
     /**
@@ -72,16 +73,27 @@ class StudentProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
-    {
+    {  
         $student = StudentProfile::find($id);
+        $enrollment_periods= StudentProfile::find($id)->enrollmentPeriods()->get();
         $student->first_name   =  $request->get('first_name');
         $student->middle_name  =  $request->get('first_name');
         $student->last_name    =  $request->get('last_name');
-        $student->d_o_b        =  '2020-01-14';
+        $student->d_o_b        =  $request->get('d_o_b');
         $student->email        =  $request->get('email');
         $student->cell_phone   =  $request->get('cell_phone');
         $student->student_Id	=  $request->get('student_id');
         $student->immunized_status	= $request->get('immunized_status');
+       $enrollupdate=EnrollmentPeriods::select('id')->where('student_profile_id',$id)->get();
+ 
+         foreach($enrollupdate as $key => $en){
+            $enroll     = EnrollmentPeriods::whereId($en->id)->first();
+            $startDates      = $request->get('start_date');
+            $endDates        = $request->get('end_date');
+            $enroll->start_date_of_enrollment=\Carbon\Carbon::parse($startDates[$key])->format('M d Y');
+            $enroll->end_date_of_enrollment=\Carbon\Carbon::parse($startDates[$key])->format('M d Y');
+            $enroll->save();
+         }       
         $student->save();
         $notification = array(
             'message' => 'Student Record is updated Successfully!',

@@ -2,7 +2,6 @@
 
 @section('content')
 <!-- * =============== Main =============== * -->
-
 <main class="position-relative container form-content mt-4">
    <div class="form-wrap border bg-light py-5 px-25">
       <h2 class="mb-3">Billing Information</h2>
@@ -54,10 +53,10 @@
                    1
                 </td>
                 <td>
-                ${{$enroll_fees->amount}}
+                <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}
                 </td>
                 <td>
-                ${{$enroll_fees->amount}}
+                <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}
                 </td>
              </tr>
           </tbody>
@@ -66,7 +65,7 @@
                 <td>
                 Total price
                 </td>
-                <td>${{$enroll_fees->amount}}</td>
+                <td><i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</td>
              </tr>
           </tfoot>
        </table>

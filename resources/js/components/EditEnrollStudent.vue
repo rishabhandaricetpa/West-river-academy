@@ -48,7 +48,7 @@
         <Datepicker required id="dob" name="dob" v-model="form.dob">
         </Datepicker>
       </p>
-        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -93,12 +93,12 @@
     </div>
     <div v-for="(period, index) in form.periods" :key="period.id">
       <div v-if="period.status === 'pending'" class="position-relative">
-        <span class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
+        <span v-if="canRemovePeriod"  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
         <div class="form-group d-sm-flex mb-2 mt-2r">
           <label for="">Select your START date of enrollment{{ index }}</label>
           <div class="row mx-0">
             <div class="form-row col-md-4 col-lg-2 px-0">
-              <div class="form-group w-100 datepicker-full">
+              <div class="form-group d-sm-flex mb-2">
                 <Datepicker
                   id="startdate"
                   name="startdate"
@@ -127,10 +127,10 @@
           <label for="">Select your END date of enrollment</label>
           <div class="row mx-0">
             <div class="form-row col-md-4 col-lg-2 px-0">
-              <div class="form-group w-100 datepicker-full">
+              <div class="form-group d-sm-flex mb-2">
                 <Datepicker
-                  id="startdate"
-                  name="startdate"
+                  id="enddate"
+                  name="enddate"
                   v-model="period.selectedEndDate"
                   required
                   placeholder="Select Start Date"
@@ -229,7 +229,11 @@
       ></textarea>
       </div>
     </div>
-
+  <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+      </p> 
     <div class="form-wrap">
       <a
         type="button"
@@ -255,7 +259,7 @@ export default {
   },
   data() {
     return {
-      grades:[['Upgraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
+      grades:[['Ungraded', 'Preschool Age 3', 'Preschool Age 4', 'Kindergarten', '1', '2', '3', '4'],['5', '6', '7', '8', '9', '10', '11', '12']],
       form: {
         first_name: this.students.first_name,
         middle_name: this.students.middle_name,
@@ -268,6 +272,8 @@ export default {
         immunized_status: this.students.immunized_status,
         periods: [],
       },
+      errors:[],
+      removingPeriod : false,
     };
   },
   created() {
@@ -280,13 +286,24 @@ export default {
         status: item.status,
         endDisabledDates: {
           from: this.calcEndDate(item.start_date_of_enrollment),
+          to: this.calcToData(item.start_date_of_enrollment),
         },
       });
     });
   },
   methods: {
     EditStudent() {
-      axios
+      this.errors = []; 
+       if (!this.validEmail(this.form.email)) {
+       return this.errors.push('Valid email required.');
+      }
+      if (!this.vallidateGrades()) {
+        this.errors.push("Grade is required Field! Please select a Grade and then continue");
+      }
+      if (!this.vallidateEndDate()) {
+        this.errors.push("End date of Enrollment is required!Please select a End Date and then continue");
+      }else{
+        axios
         .post(route("update.student", this.students), this.form)
         .then(
           (response) => {
@@ -295,6 +312,12 @@ export default {
           }
         )
         .catch((error) => console.log(error));
+      }
+  
+    },
+     validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     calcEndDate(date){
       const oldDate = new Date(date);
@@ -302,32 +325,79 @@ export default {
 
       return new Date(year + 1, 0, 1); // returns 31 dec for same year
     },
+    calcToData(date){
+      const oldDate = new Date(date);
+      const oDate = oldDate.getDate();
+      const year = oldDate.getFullYear();
+      const month = oldDate.getMonth();
+
+      return new Date(year, month, oDate + 1);
+    },
     updateEndDate(index) {
       this.form.periods[index].endDisabledDates.from = this.calcEndDate(this.form.periods[index].selectedStartDate);
+      this.form.periods[index].endDisabledDates.to = this.calcToData(this.form.periods[index].selectedStartDate);
       this.form.periods[index].selectedEndDate = ''; // reset the end date value
     },
     addNewEnrollPeriod() {
       this.form.periods.push({
         id: null,
         selectedStartDate: new Date(this.semesters.start_date),
+        status: "pending",
         selectedEndDate: "",
         grade: "",
         endDisabledDates: {
           from: this.calcEndDate(this.semesters.start_date),
+          to: this.calcToData(this.semesters.start_date),
         },
       });
     },
     removePeriod(index) {
+      if(this.removingPeriod){
+        return;
+      }
+      this.removingPeriod = true;
+      
+      let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
+      reqData.periods.splice(index, 1);
+      
       axios
-        .post(route("delete.student", this.students), this.form)
+        .post(route("delete.enroll", this.students), reqData)
         .then(
           (response) => {
             const resp = response.data;
             resp.status == 'success' ? this.form.periods.splice(index, 1) : alert(resp.message);
+            this.removingPeriod = false;
           }
         )
-        .catch((error) => console.log(error));
+        .catch((error) => { 
+          this.removingPeriod = false;
+          console.log(error)
+        });
     },
+    vallidateGrades() {
+      for (let i = 0; i < this.form.periods.length; i++) {
+        const periods = this.form.periods[i];
+        if (!periods.grade) {
+          return false;
+          break;
+        }
+      }
+      return true;
+    },
+     vallidateEndDate() {
+      for (let i = 0; i < this.form.periods.length; i++) {
+        const periods = this.form.periods[i];
+        if (!periods.selectedEndDate) {
+          return false;
+          break;
+        }
+      }
+      return true;
+    },
+    clickDatepicker(){
+      document.getElementById('dob').click();
+      document.getElementById('dob').focus();
+    }
   },
   props: {
     students: {
@@ -346,6 +416,9 @@ export default {
     canAddMorePeriod() {
       return this.form.periods.length < 4;
     },
+    canRemovePeriod(){
+      return this.form.periods.length > 1;
+    }
   },
 };
 </script>
