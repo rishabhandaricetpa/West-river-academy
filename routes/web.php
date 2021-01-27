@@ -117,8 +117,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
      //Money Gram
      Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
-     Route::get('/money-gram/{id}', 'StudentController@moneygramReview')->name('edit.moneyGram');
-     Route::get('moneygram-email','PaymentMethod\MoneyGramController@index')->name('email.moneygram');
+     Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
+     Route::get('moneygram-email','PaymentMethod\MoneyGramController@index');
      Route::get('/moneygram-transfer', function () {
         return view('Billing/moneygram-transfer');
     });

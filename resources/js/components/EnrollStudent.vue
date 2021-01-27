@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="form-group d-sm-flex">
-        <label for="">tell us more about your situation </label>
+        <label for="">Tell us more about your situation </label>
         <div>
         <textarea
           class="form-control"
