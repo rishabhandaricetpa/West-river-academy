@@ -1,7 +1,7 @@
 <template>
- <div class="form-wrap border bg-light py-5 px-25">
+ <div class="form-wrap border bg-light py-5 px-25 position-relative">
     <h2>Enroll Student 1</h2> 
-    <p>*=Required</p>
+    <p class="required-option">*=Required</p>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
@@ -78,24 +78,28 @@
         />
       </div>
     </div>
-    <div class="form-group d-sm-flex mb-2">
-      <label for="">National ID </label>
-      <div>
-        <input
-          type="text"
-          class="form-control"
-          id="student_id"
-          name="student_id"
-          aria-describedby="emailHelp"
-          v-model="form.studentID"
-        />
-      </div>
-          
+    <div class="form-group d-sm-flex mb-2 mt-2r">
+        <label for="">National ID</label>
+        <div class="row">
+          <div class="col-md-4 col-lg-2">
+            <div class="form-group w-100 datepicker-full">
+             <input
+                type="text"
+                class="form-control"
+                id="student_id"
+                name="student_id"
+                aria-describedby="emailHelp"
+                v-model="form.studentID"
+               />
+            </div>
+          </div>
+          <div class="info-detail col-md-8 col-lg-10 lato-italic">
             <p>
-         Please enter your National ID if you wish to have it on your documents.
+              Please enter your National ID if you wish to have it on your documents.
             </p>
-        
-    </div>
+          </div>
+        </div>
+      </div>
     <div
       class="seperator mt-4"
       v-for="(enrollPeriod, index) in form.enrollPeriods"
@@ -153,18 +157,21 @@
              
             </div>
           </div>
-          <div class="info-detail col-md-8 col-lg-10 lato-italic">
+          <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
               Choose before July 31 (the last day of your enrollment) or another
               date before July 31. This date will appear on your confirmation of
               enrollment letter. Your enrollment will officially end on July 31.
             </p>
           </div>
+          <div class="col-lg-4 links-list pl-0">
+           <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
+          </div>
         </div>
       </div>
       <div class="form-group mt-2r d-sm-flex links-list mb-5">
         <!-- Button trigger modal -->
-        <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
+       
         <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
           >what if i need to skip a year?</a
         >
