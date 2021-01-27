@@ -1,7 +1,7 @@
 <template>
  <div class="form-wrap border bg-light py-5 px-25 position-relative">
     <h2>Enroll Student 1</h2> 
-    <p class="required-option">*=Required</p>
+    <p class="required-option">* Fields are required</p>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
