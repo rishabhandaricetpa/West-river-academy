@@ -51,8 +51,10 @@ Route::get('coupon', 'CouponController@index')->name('view.coupon');
 Route::get('coupon/create', 'CouponController@create')->name('create.coupon');
 Route::get('coupon/{id}/edit', 'CouponController@edit')->name('edit.coupon');
 Route::post('coupon', 'CouponController@store')->name('store.coupon');
+Route::put('coupon/{id}', 'CouponController@update')->name('update.coupon');
 Route::get('coupon/data', 'CouponController@dataTable')->name('coupons.dt');
 Route::get('coupon/generate', 'CouponController@getCode')->name('coupons.generate');
+
 Route::get('edit-periods/{id}','StudentProfileController@editPeriods')->name('edit-periods.update');
 
 
