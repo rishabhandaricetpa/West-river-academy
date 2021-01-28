@@ -23,6 +23,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
+Route::group(['middleware'=>'auth'],function(){
 
 Route::group(
     ['namespace' => 'admin'],
@@ -31,8 +32,10 @@ Route::group(
             Auth::guard('admin')->logout();
             return redirect('/admin/login');
         })->name('admin.logout');
-    }
-);
+    Route::get('/payments-invoice', function () {
+        return view('admin/paymentsInvoice/payment');
+    });
+});
 Route::get('view', 'ParentController@index')->name('view.parent');
 Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
 Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
@@ -50,6 +53,7 @@ Route::get('coupon/{id}/edit', 'CouponController@edit')->name('edit.coupon');
 Route::post('coupon', 'CouponController@store')->name('store.coupon');
 Route::get('coupon/data', 'CouponController@dataTable')->name('coupons.dt');
 Route::get('coupon/generate', 'CouponController@getCode')->name('coupons.generate');
+Route::get('edit-periods/{id}','StudentProfileController@editPeriods')->name('edit-periods.update');
 
 
-
+});

@@ -13,6 +13,7 @@
     "ext-mbstring": "*",
     "almasaeed2010/adminlte": "~2.4",
     "ankurk91/laravel-alert": "^2.2",
+    "barryvdh/laravel-dompdf": "^0.9.0",
     "bmatovu/multi-auth": "^10.3",
     "fideloper/proxy": "^4.4",
     "fruitcake/laravel-cors": "^2.0",

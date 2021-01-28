@@ -84,6 +84,13 @@
       });
 
     });
+    $(function(){
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
+
+  
   </script>
 
   <!-- ChartJS -->
@@ -98,6 +105,7 @@
   <!-- daterangepicker -->
   <script src="{{ asset('backend/plugins/moment/moment.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
+  
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
   <!-- Summernote -->

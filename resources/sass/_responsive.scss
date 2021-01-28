@@ -101,8 +101,7 @@
     }
   }
   .form-wrap.px-25 {
-   padding-left: 1rem !important;
-   padding-right: 1rem !important;
+   padding: 1rem !important;
   }
 }
 
@@ -185,6 +184,15 @@
   /* edit */
   .links-list {
     padding-left: 0;
+  }
+  .vdp-datepicker input{
+   width: 100%;
+  }
+  .form-group .fa-calendar-alt{
+    position: absolute;
+    left: auto;
+    right: 11px;
+    top: 35px;
   }
 }
 

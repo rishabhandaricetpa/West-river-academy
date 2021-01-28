@@ -183,24 +183,25 @@
                 <div class="seperator overflow-auto">
             <table class="w-100 table-styling">
             <thead>
-              <tr>item<tr>
-              <th>quantity</th>
-              <th>price</th>
-              <th>total</th>
+              <tr>
+                <th>item</th>
+                <th>quantity</th>
+                <th>price</th>
+                <th>total</th>
              </tr>
              </thead>
              <tbody>
              <tr>
-              <td>Custom Payment </td>
-              <td>1</td>
-              <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
-              <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
+                <td>Custom Payment </td>
+                <td>1</td>
+                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
+                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
              </tr>
              </tbody>
              <tfoot>
              <tr>
-             <td>Total price</td>
-             <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
+                <td>Total price</td>
+                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
              </tr>
              </tfoot>
              </table>

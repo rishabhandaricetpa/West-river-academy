@@ -27,7 +27,7 @@ use URL;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\ParentProfile;
-
+use App\Models\EnrollmentPayment;
 
 class   PaypalPaymentController extends Controller
 {
@@ -138,6 +138,21 @@ class   PaypalPaymentController extends Controller
         $paypal->amount =$amount;
         $paypal->status="succeeded";
         $paypal->save();
+
+        $cartItems=Cart::select('item_id')->where('parent_profile_id',$paypal->parent_profile_id)->get();
+        
+        foreach ($cartItems as $cart) 
+        {
+          $enrollemtpayment=EnrollmentPayment::select()->where('enrollment_period_id',$cart->item_id)->first();
+          $enrollemtpayment->status='paid';
+          $enrollemtpayment->transcation_id=$payment_id;;
+          $enrollemtpayment->payment_mode='Pay pal';
+          $enrollemtpayment->save();
+        }
+
+        $refreshCart=Cart::select()->where('parent_profile_id',$paypal->parent_profile_id)->get();
+        $refreshCart->each->delete();
+        
         if ($result->getState() == 'approved') {
             $notification = array(
                 'message' => 'Payment has been successfully processed! Add more services',

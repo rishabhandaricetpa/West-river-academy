@@ -53,6 +53,7 @@ textarea{
     text-decoration: underline;
 
     a{
+        text-decoration: underline;
         font-size: 18px;
         color: $light-blue;
         text-transform: uppercase;
@@ -148,11 +149,7 @@ label.h3{
     }
 }
 
-.datepicker-full{
-    .vdp-datepicker,.vdp-datepicker> div,.vdp-datepicker input,p{
-        width: 100% !important;
-    }
-}
+
 
 .additional-sign{
     width: 32px;

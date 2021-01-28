@@ -32,8 +32,7 @@ class StudentController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
-
-            return $next($request);
+              return $next($request);
         });
     }
     /**
@@ -68,6 +67,17 @@ class StudentController extends Controller
 
     protected function store(Request $data)
     {
+    //     try{
+    //         $data['student_Id'] = $data['studentID'];
+    //         $this->validate($data, [
+    //             'student_Id'     => 'required|unique:student_profiles'
+    //         ]);
+    //         } 
+    //    catch (\Exception $e) {
+    //         if ($data->expectsJson()) {
+    //         return response()->json(['status' => 'error' ,'message' => 'Studnet id must be unique']);
+    //         }
+    //     }
         try{
             DB::beginTransaction();
             $Userid =Auth::user()->id;
@@ -79,7 +89,7 @@ class StudentController extends Controller
                 'first_name' => $data['first_name'],
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
-                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
+                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('M d Y'),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
                 'student_Id' => $data['studentID'],
@@ -109,8 +119,8 @@ class StudentController extends Controller
 
                 $enrollPeriod = EnrollmentPeriods::create([
                     'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
-                    'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
+                    'start_date_of_enrollment' =>  $selectedStartDate->format('M d Y'),
+                    'end_date_of_enrollment' => $selectedEndDate->format('M d Y'),
                     'grade_level' => $period['grade'],
                     'type' => $type
                 ]);
@@ -290,6 +300,13 @@ class StudentController extends Controller
         return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
      
      }
+        
+    public function moneygramReview($parent_id){
+
+        $address   = User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+       return view('Billing.moneygram',compact('address','enroll_fees','parent_id'));
+    }
 
     public function deleteEnroll(Request $request, $id)
     {
