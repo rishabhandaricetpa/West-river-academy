@@ -60,9 +60,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/verify-email/{email}', function () {
         return view('SignIn/verify-email');
     })->name('verify.email');
-    Route::get('/dashboard', function () {
-        return view('SignIn/dashboard');
-    })->name('dashboard')->middleware('active_user');
+    // Route::get('/dashboard', function () {
+    //     return view('SignIn/dashboard');
+    // })->name('dashboard')->middleware('active_user');
+    Route::get('/dashboard', 'StudentController@showstudents')->name('dashboard');
+
     Route::get('/logout', function () {
         Auth::logout();
         return redirect('/login');
@@ -130,10 +132,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('MyAccounts/resetpassword');
     })->name('reset.password');
     Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
-    Route::get('/viewConfirmation', function () {
-        return view('viewConfirmation');
-    })->name('view.confirm');
-    Route::get('generate-pdf', 'PDFController@generatePDF')->name('genrate.confirmition');
+    // Route::get('/viewConfirmation/{id}', function () {
+    //     return view('viewConfirmation');
+    // })->name('view.confirm');
+    Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
+
+    Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
 // admin dashboard
 Route::get('admin-dashboard', function () {
     return view('admin.home');

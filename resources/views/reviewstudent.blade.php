@@ -4,7 +4,7 @@
 <main class="position-relative container form-content mt-4">
   <h1 class="text-center text-white text-uppercase">student enrollment</h1>
   <div class="form-wrap border bg-light py-5 px-25">
-    <h2>Review Student Enrollment</h2>
+    <h2>Review Student Enrollment Information</h2>
     <form method="POST" action="" class="pb-2">
       @foreach($students as $key=>$student)
       <div class="d-flex align-items-center pt-4">
@@ -83,7 +83,7 @@
             <tr>
               <td></td>
               <td></td>
-              <td class="text-center">Total to pay </td>
+              <td class="text-center">Total to Pay </td>
               <td class="text-center"> ${{ $total_amount }}</td>
             </tr>
           </tfoot>

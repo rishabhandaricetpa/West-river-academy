@@ -9,7 +9,7 @@
     @csrf
     <h2 class="text-capitalize">Thank you!</h2>
     <h2 class="text-capitalize">Download Enrollment Confirmation</h2>
-    <p class="mb-0">Your download will begin automatically. If it does not click <a href="{{ route('genrate.confirmition') }}">here</a>.
+    <p class="mb-0">Your download will begin automatically. If it does not click <a href="{{ route('genrate.confirmition',$id) }}">here</a>.
     <a href="{{route('dashboard')}}" class="btn btn-primary">Go to Dashboard</a>
     </p>
   </div>

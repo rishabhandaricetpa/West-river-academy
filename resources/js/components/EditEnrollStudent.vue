@@ -42,6 +42,40 @@
         />
       </div>
     </div>
+      <div class="form-group d-flex mb-1 lato-italic info-detail">
+        <label for="">Gender <sup>*</sup></label>
+        <div class="row pl-5">
+          <div class="col-sm-3">
+            <div class="form-check">
+              <input 
+              class="form-check-input" 
+              type="radio" 
+              name="gender" 
+              value="Male"
+              v-model="form.gender"
+              >
+            <label class="form-check-label">
+              Male
+            </label>
+            </div>
+            </div>
+            <div class="col-sm-3">
+            <div class="form-check">
+            <input 
+            class="form-check-input" 
+            type="radio" 
+            name="gender" 
+            value="Female"
+            id="gender" 
+            v-model="form.gender"
+            >
+            <label class="form-check-label">
+              Female
+            </label>
+            </div>
+            </div>     
+      </div>
+      </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Date of Birth</label>
       <p class="position-relative mb-0">
@@ -264,6 +298,7 @@ export default {
         first_name: this.students.first_name,
         middle_name: this.students.middle_name,
         last_name: this.students.last_name,
+        gender:this.students.gender,
         email: this.students.email,
         dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
