@@ -16,12 +16,14 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDF()
+    public function generatePDF($id)
     {
         $Userid =Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
+        $studentProfileData=StudentProfile::whereId($id)->first();
         $id = $parentProfileData->id;
         $data = [
+            'student'=>$studentProfileData,
             'title' => 'Confirmation of Enrollment',
             'date' => date('m/d/Y')
         ];

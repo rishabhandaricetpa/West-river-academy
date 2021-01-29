@@ -43,8 +43,42 @@
         />
       </div>
     </div>
+    <div class="form-group d-flex mb-1 lato-italic info-detail">
+        <label for="">Gender <sup>*</sup></label>
+        <div class="row pl-5">
+          <div class="col-sm-3">
+            <div class="form-check">
+              <input 
+              class="form-check-input" 
+              type="radio" 
+              name="gender" 
+              value="Male"
+              v-model="form.gender"
+              >
+            <label class="form-check-label">
+              Male
+            </label>
+            </div>
+            </div>
+            <div class="col-sm-3">
+            <div class="form-check">
+            <input 
+            class="form-check-input" 
+            type="radio" 
+            name="gender" 
+            value="Female"
+            id="gender" 
+            v-model="form.gender"
+            >
+            <label class="form-check-label">
+              Female
+            </label>
+            </div>
+            </div>     
+      </div>
+      </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
-      <label for="">Date of Birth</label>
+      <label for="">Date of Birth<sup>*</sup></label>
       <p>
         <Datepicker id="dob" name="dob" v-model="form.dob" required>
         </Datepicker>
@@ -165,7 +199,7 @@
             </p>
           </div>
           <div class="col-lg-4 links-list pl-0">
-           <a href="#chooseDates" data-toggle="modal">help me choose my dates</a>
+           <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
         </div>
       </div>

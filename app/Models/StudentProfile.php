@@ -10,7 +10,7 @@ class StudentProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_profile_id', 'first_name', 'middle_name', 'last_name', 'd_o_b', 'email', 'cell_phone',
+        'parent_profile_id', 'first_name', 'middle_name', 'last_name', 'd_o_b', 'email', 'cell_phone','gender',
         'student_Id', 'start_date_of_enrollment', 'end_date_of_enrollment', 'grade_level', 'immunized_status',
         'student_situation'
     ];
