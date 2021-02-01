@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Models\ParentProfile;
+use Carbon\Carbon;
 Use DB;
 use Exception;
 
@@ -33,6 +34,7 @@ class CouponController extends Controller
         $coupon = Coupon::find($id);
         $parents = ParentProfile::select('id','p1_email')->get()->toArray();
         $coupon->coupon_for = explode(',', $coupon->coupon_for);
+        $coupon->expire_at = Carbon::parse($coupon->expire_at)->format('Y-m-d');
         return view('admin.coupon.edit',compact('parents','coupon'));
     }
 
@@ -74,31 +76,30 @@ class CouponController extends Controller
 
     public function update(Request $request,$id)
     {
-        dd('s');
-        // try {
-        //     DB::beginTransaction();
-        //     $input = $request->all();
-        //     if(isset($input['assign'])){
-        //         $input['coupon_for'] = implode(',',$input['assign']);
-        //     }
-        //     $create = Coupon::create($input);
-        //     if(!$create){
-        //         throw new Exception("Failed to create Coupon", 1);
-        //     }
-        //     DB::commit();
-        //     $notification = array(
-        //         'message' => 'Coupon generated Successfully!',
-        //         'alert-type' => 'success'
-        //     );
-        //     return redirect()->route('admin.view.coupon')->with($notification);
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     $notification = array(
-        //         'message' => 'Failed to generate Coupon!',
-        //         'alert-type' => 'error'
-        //     );
-        //     return redirect()->back()->with($notification);
-        // }
+        try {
+            DB::beginTransaction();
+            $input = $request->all();
+            if(isset($input['assign'])){
+                $input['coupon_for'] = implode(',',$input['assign']);
+            }
+            $update = Coupon::find($id)->update($input);
+            if(!$update){
+                throw new Exception("Failed to update Coupon", 1);
+            }
+            DB::commit();
+            $notification = array(
+                'message' => 'Coupon Updated Successfully!',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('admin.view.coupon')->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Coupon!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     public function getCode()
