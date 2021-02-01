@@ -114,16 +114,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('order.review');
     Route::get('order-review/{id}', 'StudentController@orderReview');
     Route::get('bankTransfer','PaymentMethod\BankTranferController@index')->name('bank.transfer');
-    Route::get('/bank-transfer', function () {
-        return view('Billing/bank-transfer');
-    });
+    Route::get('/bank-transfer', 'ParentController@getBankTransferDetails');
+
+
      //Money Gram
      Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
      Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
      Route::get('moneygram-email','PaymentMethod\MoneyGramController@index');
-     Route::get('/moneygram-transfer', function () {
-        return view('Billing/moneygram-transfer');
-    });
+     Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
+
+    
 
     Route::get('/mysettings/{id}', 'ParentController@mysettings');
     Route::get('/editaccount/{id}', 'ParentController@editmysettings');

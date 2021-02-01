@@ -33,43 +33,12 @@
      
    </div>
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
-      <h2 class="mb-3">Payment Items</h2>
-      <div class="seperator overflow-auto">
-       <table class="w-100 table-styling">
-          <thead>
-             <tr>
-                <th>item</th>
-                <th>quantity</th>
-                <th>price</th>
-                <th>total</th>
-             </tr>
-          </thead>
-          <tbody>
-             <tr>
-                <td>
-                Custom Payment
-                </td>
-                <td>
-                   1
-                </td>
-                <td>
-                <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}
-                </td>
-                <td>
-                <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}
-                </td>
-             </tr>
-          </tbody>
-          <tfoot>
-             <tr>
-                <td>
-                Total price
-                </td>
-                <td><i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</td>
-             </tr>
-          </tfoot>
-       </table>
-</div>
+                <h2 class="mb-3">Payment Total</h2>
+                <div class="form-group d-flex mb-2">
+            <label for="">Order Total</label>
+            <div class="ml-auto"><i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</div>
+         </div>
+                </div>
 <div class="form-wrap border bg-light py-2r px-25 mt-2r">
       <a href="#" class="btn btn-primary">cancel</a>
       <a href="{{route('edit.address',$parent_id)}}" class="btn btn-primary">back</a>

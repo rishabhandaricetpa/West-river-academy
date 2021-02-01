@@ -10,36 +10,35 @@
       <form method="POST"  class="mb-0">
          <div class="form-group d-sm-flex mb-2">
             <label for="">Account Holder</label>
-            <div> West River Educational Services</div>
+            <div> {{$tranferwise->account_holder}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Account Number</label>
-            <div>822000140123</div>
+            <div>{{$tranferwise->account_number}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Wire transfer number</label>
-            <div>026073008</div>
+            <div>{{$tranferwise->wire_transfer_number}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Bank code: (SWIFT / BIC)</label>
-            <div>CMFGUS33</div>
+            <div>{{$tranferwise->swift_code}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Routing number (ACH or ABA)</label>
-            <div>026073150</div>
+            <div>{{$tranferwise->routing_number}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Address</label>
             <div>
-            <p class="mb-1">TransferWise</p>
-            <p class="mb-1">19 W. 24th Street</p>
-           <p class="mb-1"> New York, NY 10010</p>
-            <p class="mb-1">United States</p>
+            <p class="mb-1">{{$tranferwise->address}}</p>
+            <p class="mb-1">{{$tranferwise->state}}</p>
+           <p class="mb-1"> {{$tranferwise->country}}</p>
             </div>
          </div>
          <div class="form-group d-sm-flex mb-0">
             <label for="">Website</label>
-            <div><a href="http://transferwise.com">http://transferwise.com</a></div>
+            <div><a href="{{$tranferwise->website}}">{{$tranferwise->website}}</a></div>
          </div>
       </form>
    </div>
@@ -49,34 +48,34 @@
       <form method="POST" class="mb-0">
          <div class="form-group d-sm-flex mb-2">
             <label for="">Bank Name</label>
-            <div>US Bank NA</div>
+            <div>{{$banktransfer->bank_name}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">SWIFT code</label>
-            <div>USBKUS44IMT</div>
+            <div>{{$banktransfer->swift_code}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Bank Address</label>
             <div>
-          <p>33621 Del Obispo St, Ste A</p>
-          <p>Dana Point, CA 92629</p>
+          <p>{{$banktransfer->bank_address}}</p>
+          <p>{{$banktransfer->street}}</p>
             </div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Phone Number</label>
-            <div>(800) 872-2657</div>
+            <div>{{$banktransfer->phone_number}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Routing Number</label>
-            <div>102000021</div>
+            <div>{{$banktransfer->routing_number}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Account Name</label>
-            <div>West River Educational Services, Inc.</div>
+            <div>{{$banktransfer->account_name}}</div>
          </div>
          <div class="form-group d-sm-flex mb-0">
             <label for="">Account Number</label>
-            <div>153463063153</div>
+            <div>{{$banktransfer->account_number}}</div>
          </div>
       </form>
    </div>

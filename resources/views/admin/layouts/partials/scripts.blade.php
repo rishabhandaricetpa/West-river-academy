@@ -38,10 +38,12 @@
     $(".datepicker").datepicker({
         dateFormat: "yy-mm-dd"
     });
+    $("#addressData").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    
 });
-
-  
-  </script>
+</script>
 
   <!-- ChartJS -->
   <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>

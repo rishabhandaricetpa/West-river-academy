@@ -32,9 +32,8 @@ Route::group(
             Auth::guard('admin')->logout();
             return redirect('/admin/login');
         })->name('admin.logout');
-    Route::get('/payments-invoice', function () {
-        return view('admin/paymentsInvoice/payment');
-    });
+
+
 });
 Route::get('view', 'ParentController@index')->name('view.parent');
 Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
@@ -49,5 +48,22 @@ Route::get('deactive/{id}', 'Auth\RegisterController@dactive')->name('deactive.s
 
 Route::get('edit-periods/{id}','StudentProfileController@editPeriods')->name('edit-periods.update');
 
+Route::get('/payment-address', 'PaymentAddressController@index');
+Route::get('edit-banktransfer/{id}', 'PaymentAddressController@edit')->name('banktransfer.edit');
+Route::get('edit-transferwise/{id}', 'PaymentAddressController@editTransferWise')->name('transferwise.edit');
+Route::get('edit-moneygram/{id}', 'PaymentAddressController@editMoneyGram')->name('moneygram.edit');
+
+Route::post('update/transferwise/{id}', 'PaymentAddressController@updateTransferwise')->name('transferwise.update');
+Route::post('update/moneygram/{id}', 'PaymentAddressController@updateMoneytransfer')->name('moneygram.update');
+Route::post('update/banktransfer/{id}', 'PaymentAddressController@update')->name('banktransfer.update');
+
+Route::post('/moneygram', 'PaymentAddressController@storeMoneygram')->name('create.moneygram');
+Route::post('/transferwise', 'PaymentAddressController@storeTransferwise')->name('create.transferwise');
+Route::post('/banktransfer', 'PaymentAddressController@storeBanktransfer')->name('create.banktransfer');
+
+Route::get('delete/moneygram/{id}', 'PaymentAddressController@destroyMoneyGramAddress')->name('delete.moneygramAddress');
+Route::get('delete/transferwise/{id}', 'PaymentAddressController@destroyTransferwiseAddress')->name('delete.transferwiseAddress');
+Route::get('delete/banktransfer/{id}', 'PaymentAddressController@destroyBanktransferAddress')->name('delete.banktransferAddress');
 
 });
+
