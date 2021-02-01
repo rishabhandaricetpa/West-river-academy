@@ -95,12 +95,11 @@ class Cart extends Model
             array_push($student_ids,$student['id']);
         }
 
-        // get the enroll period years currently in the cart
+        // get the enroll periods currently in the cart
         $cart_item_years = Cart::where('cart.item_type','enrollment_period')
                             ->where('cart.parent_profile_id',$parent_profile_id)
                             ->leftJoin('enrollment_periods','enrollment_periods.id','cart.item_id')
-                            ->select(DB::raw('YEAR(enrollment_periods.start_date_of_enrollment) as enroll_year'))
-                            ->groupBy('enroll_year')
+                            ->select('enrollment_periods.start_date_of_enrollment','enrollment_periods.end_date_of_enrollment')
                             ->get()
                             ->toArray();
 
@@ -116,9 +115,12 @@ class Cart extends Model
 
         // loop through cart years and check if the first student is already enrolled for that year
         for ($i=0; $i < count($cart_item_years); $i++) { 
-            $year = $cart_item_years[$i]['enroll_year'];
+            $start_date = $cart_item_years[$i]['start_date_of_enrollment'];
+            $end_date = $cart_item_years[$i]['end_date_of_enrollment'];
+
             $check = EnrollmentPeriods::whereIn('student_profile_id',$student_ids)
-                                        ->whereYear('start_date_of_enrollment',$year)
+                                        ->whereDate('enrollment_periods.start_date_of_enrollment','<=',$start_date)
+                                        ->whereDate('enrollment_periods.end_date_of_enrollment','>=',$end_date)
                                         ->leftJoin('enrollment_payments','enrollment_payments.id','enrollment_periods.enrollment_payment_id')
                                         ->where('enrollment_payments.status','paid')
                                         ->exists();
@@ -130,7 +132,8 @@ class Cart extends Model
                                 ->where('cart.parent_profile_id',$parent_profile_id)
                                 ->leftJoin('enrollment_payments','enrollment_payments.enrollment_period_id','cart.item_id')
                                 ->leftJoin('enrollment_periods','enrollment_periods.id','cart.item_id')
-                                ->whereYear('enrollment_periods.start_date_of_enrollment',$year)
+                                ->whereDate('enrollment_periods.start_date_of_enrollment','<=',$start_date)
+                                ->whereDate('enrollment_periods.end_date_of_enrollment','>=',$end_date)
                                 ->whereIn('enrollment_payments.amount',$fees)
                                 ->exists();
                 if(!$cart_valid){

@@ -105,12 +105,11 @@ class StudentController extends Controller
                 $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
-                $enroll_year = $selectedStartDate->year;
-
                 $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$id)
                                                     ->where('student_profiles.id','!=', $student->id)
                                                     ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
-                                                    ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                                                    ->whereDate('enrollment_periods.start_date_of_enrollment','<=',$selectedStartDate)
+                                                    ->whereDate('enrollment_periods.end_date_of_enrollment','>=',$selectedEndDate)
                                                     ->exists();
 
                 if(!$student_enrolled){
@@ -213,12 +212,11 @@ class StudentController extends Controller
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
-        $enroll_year = $selectedStartDate->year;
-        
         $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$student->parent_profile_id)
                                             ->where('student_profiles.id','!=', $student->id)
                                             ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
-                                            ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                                            ->whereDate('enrollment_periods.start_date_of_enrollment','<=',$selectedStartDate)
+                                            ->whereDate('enrollment_periods.end_date_of_enrollment','>=',$selectedEndDate)
                                             ->exists();
 
         if(!$student_enrolled){
