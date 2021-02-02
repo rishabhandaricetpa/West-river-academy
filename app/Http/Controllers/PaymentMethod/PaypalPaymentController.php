@@ -57,8 +57,13 @@ class   PaypalPaymentController extends Controller
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
+       
+        $coupon_code = session('applied_coupon',null);
+
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        $total=$enroll_fees->amount;
+        $coupon_amount = session('applied_coupon_amount',0);
+        $total=$coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+       
         $item_1 = new Item();
 
         $item_1->setName('Product 1')

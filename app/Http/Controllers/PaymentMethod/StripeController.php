@@ -46,7 +46,7 @@ class StripeController extends Controller
         
         $amount=$enroll_fees->amount;
         $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount = $amount - $coupon_amount;
+        $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
 
         $paymentinfo = new TransactionsMethod;
         $user=Auth::user();
