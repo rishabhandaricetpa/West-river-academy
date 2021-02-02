@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Coupon;
+use App\Models\User;
 use App\Models\ParentProfile;
 use Carbon\Carbon;
 Use DB;
@@ -107,5 +108,8 @@ class CouponController extends Controller
         return Coupon::generateCode();
     }
 
-    
+    public function applyCoupon($code)
+    {
+        $coupon = Coupon::where('code',$code)->first();
+    }
 }

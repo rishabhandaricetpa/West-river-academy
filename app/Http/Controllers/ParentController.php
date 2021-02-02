@@ -10,6 +10,7 @@ use App\Models\ParentProfile;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\FeesInfo;
+use App\Models\Coupon;
 use App\Models\Address;
 use Illuminate\Support\Facades\DB;
 
@@ -51,8 +52,10 @@ class ParentController extends Controller
             return redirect()->back()->with($notification);
         }
 
+        $coupons = Coupon::getParentCoupons();
+
         $country_list  =  Country::select('country')->get();
-        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
+        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees','coupons'));
     }
 
     /**

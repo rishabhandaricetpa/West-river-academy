@@ -46,7 +46,7 @@
           { "data": "code" },
           { "data": "amount" },
           { "data": "status" },
-          { "data": "redeem_left" },
+          // { "data": "redeem_left" },
           { "data": "expire_at" },
           { "data": "id",
             "render": function ( id ) {

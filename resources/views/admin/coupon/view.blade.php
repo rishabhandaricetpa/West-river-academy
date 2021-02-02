@@ -32,7 +32,7 @@
                     <th>Code</th>
                     <th>Amount</th>
                     <th>Status</th>
-                    <th>Redeem left</th>
+                    {{-- <th>Redeem left</th> --}}
                     <th>Expire at</th>
                     <th>Actions</th>
                   </tr>

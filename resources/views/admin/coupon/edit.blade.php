@@ -34,10 +34,10 @@
           </div>
 
           <div class="row form-group">
-            <div class="col-4">
+            {{-- <div class="col-4">
               <label for="redeem">Redeem Count <small>(blank for no limit)</small>:</label>
               <input type="number" class="form-control w-50" min="0" id="redeem" name="redeem_left" value="{{ $coupon->redeem_left }}" placeholder="limit the times coupon can be used">
-            </div>
+            </div> --}}
             <div class="col-4">
               <label for="expire">Expire at <small>(blank for no limit)</small>:</label>
               <input type="date" class="form-control w-50" id="expire_at" value="{{ $coupon->expire_at }}" name="expire_at">

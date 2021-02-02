@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class Coupon extends Model
@@ -28,5 +29,27 @@ class Coupon extends Model
     private static function createRandomCode()
     {
         return Str::upper(Str::random(8));
+    }
+
+    public static function getParentCoupons()
+    {
+        $Userid = Auth::user()->id;
+        $parentProfileData = User::find($Userid)->parentProfile()->first();
+        $parent_id = $parentProfileData->id;
+
+        $coupons = Coupon::select('code','amount')
+                            ->where('status','active')
+                            ->whereNull('coupon_for')
+                            ->orWhereNull('expire_at')
+                            ->orWhere('coupon_for','')
+                            ->orWhere('coupon_for',$parent_id) // if there's only one user is assigned
+                            ->orWhere('coupon_for','like',"%,$parent_id") // if id is in the last place
+                            ->orWhere('coupon_for','like',"$parent_id,%") // if id is in the first place
+                            ->orWhere('coupon_for','like',"%,$parent_id,%") // if id is in between 
+                            ->orWhere('expire_at','')
+                            ->orWhereDate('expire_at','>',date('Y-m-d'))
+                            ->get()
+                            ->toArray();
+        return $coupons;
     }
 }
