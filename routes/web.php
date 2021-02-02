@@ -73,6 +73,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/reviewstudent', function () {
         return view('reviewstudent');
     });
+
+
+    Route::get('/confirmationLetter', function () {
+        return view('confirmationLetter');
+    });
     
     Route::post('/cart', 'CartController@store')->name('add.cart');
     Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
