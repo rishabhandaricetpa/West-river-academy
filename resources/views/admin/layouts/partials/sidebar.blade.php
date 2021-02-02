@@ -71,6 +71,30 @@
             </a>
 
           </li>
+          <li class="nav-item menu-open">
+            <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Payments
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/view-student')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Payment</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/payment-address')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Change Address</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="{{route('admin.logout')}}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>

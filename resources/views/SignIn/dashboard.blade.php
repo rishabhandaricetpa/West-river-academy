@@ -76,7 +76,6 @@
 </div>
 <div class="form-wrap border bg-light py-5 px-25">
              <h2 class="mb-3">Download Your Confirmation Letter</h2>
-             <p>Select the information you wish to include on your confirmation letter.</p>
              <div class="mb-2 text-center text-sm-left">
 							</div>
               <div class="overflow-auto">

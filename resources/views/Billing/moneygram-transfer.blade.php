@@ -10,29 +10,29 @@
       <form method="POST" class="mb-0">
          <div class="form-group d-sm-flex mb-2">
             <label for="">Name</label>
-            <div>Margaret Webb</div>
+            <div>{{$moneyGram->name}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Address</label>
-            <div>33721 Bluewater Lane</div>
+            <div>{{$moneyGram->address}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">City</label>
             <div>
-          <p>Dana Point</p>
+          <p>{{$moneyGram->city}}</p>
             </div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">State</label>
-            <div>CA</div>
+            <div>{{$moneyGram->state}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">Zip</label>
-            <div>92629</div>
+            <div>{{$moneyGram->zip}}</div>
          </div>
          <div class="form-group d-sm-flex mb-2">
             <label for="">ID</label>
-            <div>IDD9791604 (California Driver’s License)</div>
+            <div>{{$moneyGram->money_gram_id}}</div>
          </div>
     <p>Please email us the reference number, remitter and amount after you have made the payment.</p>
       </form>

@@ -66,7 +66,10 @@ class StudentController extends Controller
     }
     public function showstudents()
     {
-        $student = StudentProfile::all();
+        $id = Auth::user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        $parentId=$parentProfileData->id;
+        $student = StudentProfile::where('parent_profile_id',$parentId)->get();
         return view('SignIn.dashboard',compact('student'));
     }
     

@@ -193,4 +193,15 @@ class ParentController extends Controller
         return redirect()->back()->with($notification);
     }
     }
+    public function getBankTransferDetails()
+    {
+        $tranferwise = DB::table('transfer_wise_deatils')->where('status', '1')->first();
+        $banktransfer = DB::table('bank_transfer_details')->where('status', '1')->first(); 
+        return view('Billing/bank-transfer', compact('tranferwise','banktransfer'));
+    }
+    public function getMoneyGramDetails()
+    {
+        $moneyGram = DB::table('money_gram_details')->where('status', '1')->first();
+        return view('Billing/moneygram-transfer', compact('moneyGram'));
+    }
 }
