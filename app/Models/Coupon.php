@@ -36,20 +36,25 @@ class Coupon extends Model
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $parent_id = $parentProfileData->id;
-
+        
+        $codes = [];
+        
         $coupons = Coupon::select('code','amount')
                             ->where('status','active')
-                            ->whereNull('coupon_for')
-                            ->orWhereNull('expire_at')
-                            ->orWhere('coupon_for','')
-                            ->orWhere('coupon_for',$parent_id) // if there's only one user is assigned
-                            ->orWhere('coupon_for','like',"%,$parent_id") // if id is in the last place
-                            ->orWhere('coupon_for','like',"$parent_id,%") // if id is in the first place
-                            ->orWhere('coupon_for','like',"%,$parent_id,%") // if id is in between 
-                            ->orWhere('expire_at','')
-                            ->orWhereDate('expire_at','>',date('Y-m-d'))
+                            // ->orWhereNull('expire_at')
+                            // ->orWhere('coupon_for',$parent_id) // if there's only one user is assigned
+                            // ->orWhere('coupon_for','like',"%,$parent_id") // if id is in the last place
+                            // ->orWhere('coupon_for','like',"$parent_id,%") // if id is in the first place
+                            // ->orWhere('coupon_for','like',"%,$parent_id,%") // if id is in between 
+                            // ->orWhere('expire_at','')
+                            // ->orWhereDate('expire_at','>',date('Y-m-d'))
                             ->get()
                             ->toArray();
-        return $coupons;
+
+        foreach ($coupons as $coupon) {
+            array_push($codes,[ 'label' => $coupon['code'].' ($'. $coupon['amount'].')', 'value' => $coupon['code']]);
+        }
+        
+        return $codes;
     }
 }

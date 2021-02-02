@@ -123,6 +123,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      Route::get('moneygram-email','PaymentMethod\MoneyGramController@index');
      Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
 
+    Route::get('/coupon/apply/{code}', 'Admin\CouponController@applyCoupon')->name('coupon.apply');
     
 
     Route::get('/mysettings/{id}', 'ParentController@mysettings');

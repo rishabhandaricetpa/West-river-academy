@@ -110,6 +110,9 @@ class CouponController extends Controller
 
     public function applyCoupon($code)
     {
-        $coupon = Coupon::where('code',$code)->first();
+        $coupon = Coupon::where('code',$code)->where('status','active')->first();
+        if(!$coupon){
+            return response()->json(['status' => 'error' ,'message' => 'Coupon is Invalid! Please try again.']);
+        }
     }
 }
