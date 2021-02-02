@@ -44,8 +44,8 @@ class MoneyOrderController extends Controller
          $enrollemtpayment->save();
        }
 
-      //  $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
-      //  $refreshCart->each->delete();
+       $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
+       $refreshCart->each->delete();
 
         Mail::to($email)->send(new MoneyOrder($user));
         return view('mail.moneyorder-review',compact('email'));
