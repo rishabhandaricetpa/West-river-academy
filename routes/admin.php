@@ -56,4 +56,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('payments', 'PaymentController@view')->name('payments');
     Route::get('edit-payment/{id}', 'PaymentController@edit')->name('edit.student.payment');
     Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
+
+    // edit for payment address for - moneygram,banktransfer & transferwise
+    Route::get('/payment-address', 'PaymentAddressController@index');
+    Route::get('edit-banktransfer/{id}', 'PaymentAddressController@edit')->name('banktransfer.edit');
+    Route::get('edit-transferwise/{id}', 'PaymentAddressController@editTransferWise')->name('transferwise.edit');
+    Route::get('edit-moneygram/{id}', 'PaymentAddressController@editMoneyGram')->name('moneygram.edit');
+
+    //update
+    Route::post('update/transferwise/{id}', 'PaymentAddressController@updateTransferwise')->name('transferwise.update');
+    Route::post('update/moneygram/{id}', 'PaymentAddressController@updateMoneytransfer')->name('moneygram.update');
+    Route::post('update/banktransfer/{id}', 'PaymentAddressController@update')->name('banktransfer.update');
+
+    Route::post('/moneygram', 'PaymentAddressController@storeMoneygram')->name('create.moneygram');
+    Route::post('/transferwise', 'PaymentAddressController@storeTransferwise')->name('create.transferwise');
+    Route::post('/banktransfer', 'PaymentAddressController@storeBanktransfer')->name('create.banktransfer');
+    //delete
+    Route::get('delete/moneygram/{id}', 'PaymentAddressController@destroyMoneyGramAddress')->name('delete.moneygramAddress');
+    Route::get('delete/transferwise/{id}', 'PaymentAddressController@destroyTransferwiseAddress')->name('delete.transferwiseAddress');
+    Route::get('delete/banktransfer/{id}', 'PaymentAddressController@destroyBanktransferAddress')->name('delete.banktransferAddress');
 });

@@ -34,6 +34,7 @@ class Cart extends Model
                 $enroll_data = $enroll_query->select(
                                                 'student_profiles.first_name',
                                                 'student_profiles.student_Id',
+                                                'student_profiles.id as student_db_id',
                                                 'enrollment_periods.type',
                                                 'enrollment_periods.start_date_of_enrollment',
                                                 'enrollment_periods.end_date_of_enrollment',
@@ -66,13 +67,13 @@ class Cart extends Model
                 'start_date' => \Carbon\Carbon::parse($value['start_date_of_enrollment'])->format('d M Y'),
                 'end_date' => \Carbon\Carbon::parse($value['end_date_of_enrollment'])->format('d M Y')
             ];
-            if(array_key_exists($value['student_Id'], $data)){
+            if(array_key_exists($value['student_db_id'], $data)){
                 array_push(
-                    $data[$value['student_Id']]['enroll_items'],
+                    $data[$value['student_db_id']]['enroll_items'],
                     $arr
                 );
             }else{
-                $data[$value['student_Id']] = [
+                $data[$value['student_db_id']] = [
                     'name' => ucfirst($value['first_name']),
                     'enroll_items' => [$arr]
                 ];

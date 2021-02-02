@@ -37,8 +37,8 @@
             <table id="example1" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
-                    <th>P1 First Name</th>
-                    <th>P2 First Name</th>
+                    <th>Parent1 First Name</th>
+                    <th>Parent2 First Name</th>
                     <th>Email</th>
                     <th>Country</th>
                     <th>Phone</th>

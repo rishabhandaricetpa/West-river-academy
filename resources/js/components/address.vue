@@ -178,38 +178,20 @@
                       </div>
                   </div>
             </div>
-                        <div class="form-wrap border bg-light py-5 px-25 mt-2r">
-                <h2 class="mb-3">Payment Items</h2>
-                <div class="seperator overflow-auto">
+              <div class="form-wrap border bg-light py-5 px-25 mt-2r">
+                <h2 class="mb-3">Payment Total</h2>
             <table class="w-100 table-styling">
-            <thead>
-              <tr>
-                <th>item</th>
-                <th>quantity</th>
-                <th>price</th>
-                <th>total</th>
-             </tr>
-             </thead>
-             <tbody>
-             <tr>
-                <td>Custom Payment </td>
-                <td>1</td>
-                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
-                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
-             </tr>
-             </tbody>
              <tfoot>
              <tr>
-                <td>Total price</td>
-                <td><i class="fas fa-dollar-sign"></i>{{total.amount}}</td>
+                <td class="mb-3">Order total</td>
+                <h2 class="mb-3">${{total.amount}}</h2>
              </tr>
              </tfoot>
              </table>
                 </div>
-          </div>
           <div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
              <h2>Select your method of payment...</h2>
-             <h3 class="py-2">pay with</h3>
+             <h3 class="py-2">Pay with</h3>
              <ul class="list-unstyled enlarge-input payment-method">
              <li class="py-3 pl-3">
              <div class="form-check">

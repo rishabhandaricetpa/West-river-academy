@@ -45,8 +45,8 @@ class MoneyGramController extends Controller
          $enrollemtpayment->save();
        }
 
-    //    $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
-    //    $refreshCart->each->delete();
+       $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
+       $refreshCart->each->delete();
 
         Mail::to($email)->send(new MoneyGram($user));
         return view('mail.moneygram-review',compact('email','date'));

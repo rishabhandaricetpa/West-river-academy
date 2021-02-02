@@ -25,13 +25,12 @@
             </a>
           </li>
 
-        </ul>
       </li>
       <li class="nav-item menu-open">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link active">
+        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
-            Student Profile
+            Payments
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -39,37 +38,52 @@
           <li class="nav-item">
             <a href="{{ url('admin/view-student')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>View Student</p>
+              <p>View Payment</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/payment-address')}}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Change Address</p>
             </a>
           </li>
 
         </ul>
       </li>
       <li class="nav-item">
-        <a href="{{route('admin.payments')}}" class="nav-link">
-          <i class="nav-icon fas fa-th"></i>
-          <p>
-            Student Payment
-          </p>
+        <a href="{{ url('admin/view-student')}}" class="nav-link">
+          <i class="far fa-circle nav-icon"></i>
+          <p>View Student</p>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Fee Structure
-          </p>
-        </a>
 
-      </li>
-      <li class="nav-item">
-        <a href="{{route('admin.logout')}}" class="nav-link">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Logout
-          </p>
-        </a>
-      </li>
+    </ul>
+    </li>
+    <li class="nav-item">
+      <a href="{{route('admin.payments')}}" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+          Student Payment
+        </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-copy"></i>
+        <p>
+          Fee Structure
+        </p>
+      </a>
+
+    </li>
+    <li class="nav-item">
+      <a href="{{route('admin.logout')}}" class="nav-link">
+        <i class="nav-icon fas fa-copy"></i>
+        <p>
+          Logout
+        </p>
+      </a>
+    </li>
   </nav>
   <!-- /.sidebar-menu -->
   </div>

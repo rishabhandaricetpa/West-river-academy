@@ -64,20 +64,24 @@ class StudentController extends Controller
         }
         return view('enrollstudent', compact('start_date'));
     }
+    public function showstudents()
+    {
+        $id = Auth::user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        $parentId=$parentProfileData->id;
+        $student = StudentProfile::where('parent_profile_id',$parentId)->get();
+        return view('SignIn.dashboard',compact('student'));
+    }
+    
+    public function confirmationpage($id)
+    {
+        $student = StudentProfile::all();
+        return view('viewConfirmation',compact('student','id'));
+    }
 
     protected function store(Request $data)
     {
-    //     try{
-    //         $data['student_Id'] = $data['studentID'];
-    //         $this->validate($data, [
-    //             'student_Id'     => 'required|unique:student_profiles'
-    //         ]);
-    //         } 
-    //    catch (\Exception $e) {
-    //         if ($data->expectsJson()) {
-    //         return response()->json(['status' => 'error' ,'message' => 'Studnet id must be unique']);
-    //         }
-    //     }
+    
         try{
             DB::beginTransaction();
             $Userid =Auth::user()->id;
@@ -89,6 +93,7 @@ class StudentController extends Controller
                 'first_name' => $data['first_name'],
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
+                'gender' => $data['gender'],
                 'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('M d Y'),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
@@ -172,6 +177,7 @@ class StudentController extends Controller
             $student->middle_name = $request->input('middle_name');
             $student->last_name = $request->input('last_name');
             $student->email = $request->input('email');
+            $student->gender = $request->input('gender');
             $student->d_o_b = \Carbon\Carbon::parse($request->input('dob'))->format('Y-m-d');
             $student->cell_phone = $request->input('cell_phone');
             $student->student_Id = $request->input('student_Id');

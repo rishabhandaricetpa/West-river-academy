@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'The provided email address is not registered.',
-    'password' => 'The provided password is incorrect.',
+    'failed' => 'There is no account with this email address..',
+    'password' => 'Wrong password. Try again or click Forgot password to reset it.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];
