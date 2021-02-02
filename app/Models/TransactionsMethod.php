@@ -10,7 +10,7 @@ class TransactionsMethod extends Model
     use HasFactory;
 
     protected $fillable = [
-        'transcation_id', 'payment_mode', 'parent_profile_id','amount','status',
+        'transcation_id', 'payment_mode', 'parent_profile_id','amount','status','coupon_code','coupon_amount'
        ];
     protected $table = "transaction_methods";
     

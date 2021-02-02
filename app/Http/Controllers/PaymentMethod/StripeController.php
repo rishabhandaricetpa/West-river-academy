@@ -8,6 +8,7 @@ use Session;
 use Redirect;
 use App\Models\TransactionsMethod;
 use App\Models\User;
+use App\Models\Coupon;
 use App\Models\Cart;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
@@ -41,7 +42,12 @@ class StripeController extends Controller
     public function handlePost(Request $request)
     {   
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $coupon_code = session('applied_coupon',null);
+        
         $amount=$enroll_fees->amount;
+        $coupon_amount = session('applied_coupon_amount',0);
+        $final_amount = $amount - $coupon_amount;
+
         $paymentinfo = new TransactionsMethod;
         $user=Auth::user();
         $email=$user->email;
@@ -51,7 +57,7 @@ class StripeController extends Controller
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         try {
             $charges = \Stripe\Charge::create ([
-                "amount" => 100 * $amount,
+                "amount" => 100 * $final_amount,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
                 "receipt_email"=>$email,
@@ -62,9 +68,13 @@ class StripeController extends Controller
             'parent_profile_id'=>$parentProfileData,
             'transcation_id' => $charges->id,
             'payment_mode'=>'Credit Card',
-            'amount'=> $charges->amount/100,
+            'amount'=> $amount,
             'status'=>$charges->status,
+            'coupon_code'=>$coupon_code,
+            'coupon_amount'=>$coupon_amount,
         ]);
+
+        Coupon::removeAppliedCoupon();
         
         if($charges->status=='succeeded'){
         $cartItems=Cart::select('item_id')->where('parent_profile_id',$parentProfileData->id)->get();

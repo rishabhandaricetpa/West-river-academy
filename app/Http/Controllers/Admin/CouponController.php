@@ -112,8 +112,7 @@ class CouponController extends Controller
     public function applyCoupon($code)
     {
 
-        session(['applied_coupon' => null]);
-        session(['applied_coupon_amount' => null]);
+        Coupon::removeAppliedCoupon();
 
         $coupon = Coupon::where('code',$code)->where('status','active')->first();
 
@@ -122,12 +121,12 @@ class CouponController extends Controller
         }
 
         if($coupon->expire_at !== null){ // if coupon is expired
-            if(Carbon::parse($coupon->expire_at)->lt(date('y-m-d'))){
+            if(Carbon::parse($coupon->expire_at)->lt(Carbon::now())){
                 return $this->invalidCouponResponse();
             }
         }
 
-        if($coupon->coupon_for !== null && $coupon->coupon_for!== ''){ // if coupon is not assigned
+        if($coupon->coupon_for !== null && $coupon->coupon_for !== ''){ // if coupon is not assigned
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $parent_id = $parentProfileData->id;
@@ -152,7 +151,6 @@ class CouponController extends Controller
 
     public function removeAppliedCoupon()
     {
-        session(['applied_coupon' => null]);
-        session(['applied_coupon_amount' => null]);
+        Coupon::removeAppliedCoupon();
     }
 }

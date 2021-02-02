@@ -31,6 +31,12 @@ class Coupon extends Model
         return Str::upper(Str::random(8));
     }
 
+    public static function removeAppliedCoupon()
+    {
+        session(['applied_coupon' => null]);
+        session(['applied_coupon_amount' => null]);
+    }
+
     public static function getParentCoupons()
     {
         $Userid = Auth::user()->id;

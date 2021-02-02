@@ -227,6 +227,7 @@
             :reduce="(label) => label.value"
             v-model="selectedCoupon"
             :options="coupons"
+            :selected="selectedCoupon"
           ></v-select>
         </div>
       </div>
