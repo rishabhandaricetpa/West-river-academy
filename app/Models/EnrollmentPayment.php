@@ -12,5 +12,8 @@ class EnrollmentPayment extends Model
     protected $fillable = [
         'enrollment_period_id', 'amount', 'status'
     ];
-
+    public function enrollment_period()
+    {
+        return $this->hasOne(EnrollmentPeriods::class);
+    }
 }
