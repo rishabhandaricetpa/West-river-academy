@@ -11,6 +11,7 @@ use App\Models\ParentProfile;
 use Carbon\Carbon;
 Use DB;
 use Exception;
+use Auth;
 
 class CouponController extends Controller
 {
@@ -110,9 +111,48 @@ class CouponController extends Controller
 
     public function applyCoupon($code)
     {
+
+        session(['applied_coupon' => null]);
+        session(['applied_coupon_amount' => null]);
+
         $coupon = Coupon::where('code',$code)->where('status','active')->first();
-        if(!$coupon){
-            return response()->json(['status' => 'error' ,'message' => 'Coupon is Invalid! Please try again.']);
+
+        if($coupon === null){ // if coupon is inactive or doesn't exists
+            return $this->invalidCouponResponse();
         }
+
+        if($coupon->expire_at !== null){ // if coupon is expired
+            if(Carbon::parse($coupon->expire_at)->lt(date('y-m-d'))){
+                return $this->invalidCouponResponse();
+            }
+        }
+
+        if($coupon->coupon_for !== null && $coupon->coupon_for!== ''){ // if coupon is not assigned
+            $Userid = Auth::user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $parent_id = $parentProfileData->id;
+
+            if(in_array($parent_id,explode(',',$coupon->coupon_for))){
+                return $this->invalidCouponResponse();
+            }
+        }
+
+        // store coupon details in session
+        session(['applied_coupon' => $code]);
+        session(['applied_coupon_amount' => $coupon->amount]);
+        
+        return response()->json(['status' => 'success', 'amount' => $coupon->amount, 'message' => 'Coupon applied successfully.']);
+
+    }
+
+    private function invalidCouponResponse()
+    {
+        return response()->json(['status' => 'error' ,'message' => 'Coupon is Invalid! Please try again.']);
+    }
+
+    public function removeAppliedCoupon()
+    {
+        session(['applied_coupon' => null]);
+        session(['applied_coupon_amount' => null]);
     }
 }

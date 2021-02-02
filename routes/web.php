@@ -193,6 +193,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
 
     Route::get('/coupon/apply/{code}', 'Admin\CouponController@applyCoupon')->name('coupon.apply');
+    Route::get('/coupon/remove', 'Admin\CouponController@removeAppliedCoupon')->name('coupon.remove');
     
 
     Route::get('/mysettings/{id}', 'ParentController@mysettings');

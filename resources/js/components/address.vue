@@ -432,9 +432,14 @@ export default {
         .get(route("coupon.apply", this.selectedCoupon))
         .then((response) => {
           if(response.data.status == 'success'){
-            
+            if(response.data.amount > this.total.amount){
+              this.amount = 0;
+            }else{
+              this.amount = this.total.amount - response.data.amount;
+            }
           }else{
-
+            this.selectedCoupon = null;
+            this.amount = this.total.amount;
           }
         })
         .catch((error) => console.log(error));
