@@ -28,12 +28,11 @@ class BankTranferEmail extends Mailable
      * @return $this
      */
     public function build()
-    {    $date = \Carbon\Carbon::now()->format('Y-m-d');
-        $user= $this->user;
-        $id=$user->id;
+    {   $date = \Carbon\Carbon::now()->format('Y-m-d');
+        $id= $this->user->id; 
         $user=  User::find($id)->first();
         $address = User::find($id)->parentProfile()->first();
-        return $this->from('rebecca.rish@ithands.com')
+        return $this->from(env('EMAIL'))
         ->markdown('mail.bankinfo',compact('date','address'))->subject('Bank Transfer Details');
     }
 }
