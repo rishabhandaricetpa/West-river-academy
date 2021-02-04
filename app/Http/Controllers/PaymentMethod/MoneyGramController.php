@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\PaymentMethod;
 use App\Http\Controllers\Controller;
-
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MoneyGram;
@@ -35,7 +35,18 @@ class MoneyGramController extends Controller
      //update cart status active 
      $address = User::find($id)->parentProfile()->first();
      $date = \Carbon\Carbon::now()->format('Y-m-d');
-       $payment= Cart::getCartAmount($this->parent_profile_id,true);
+     $parentProfileData = User::find($id)->parentProfile()->first();
+     $enroll_fees= Cart::getCartAmount($this->parent_profile_id,true);
+
+     $paymentinfo = new TransactionsMethod;
+     $paymentinfo = $parentProfileData->TransactionsMethod()->create([
+      'parent_profile_id'=>$parentProfileData,
+      'transcation_id' => substr(uniqid(), 0, 8),
+      'payment_mode'=>'Money Gram',
+      'amount'=>$enroll_fees->amount ,
+      'status'=>'active',
+      ]);
+      
        $cartItems=Cart::select('item_id')->where('parent_profile_id',$id)->get();
        foreach ($cartItems as $cart) 
        {
@@ -52,4 +63,5 @@ class MoneyGramController extends Controller
         return view('mail.moneygram-review',compact('email','date'));
 
     }
+    
 }

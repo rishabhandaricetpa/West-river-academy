@@ -59,6 +59,10 @@ class   PaypalPaymentController extends Controller
         $payer->setPaymentMethod('paypal');
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         $total=$enroll_fees->amount;
+        if(empty($total)){
+            return view('Billing.invalid');
+        }
+        else{
         $item_1 = new Item();
 
         $item_1->setName('Product 1')
@@ -115,6 +119,7 @@ class   PaypalPaymentController extends Controller
         \Session::put('error', 'Unknown error occurred');
         return Redirect::route('paywithpaypal');
     }
+}
     public function getPaymentStatus(Request $request)
     {   
        
@@ -158,7 +163,7 @@ class   PaypalPaymentController extends Controller
                 'message' => 'Payment has been successfully processed! Add more services',
                 'alert-type' => 'success'
             ); 
-            return Redirect::route('dashboard')->with($notification);
+            return Redirect::route('thankyou.paypal')->with($notification);
         }
 
         \Session::put('error', 'Payment failed !!');

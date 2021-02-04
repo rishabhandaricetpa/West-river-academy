@@ -7,6 +7,7 @@ use App\Mail\BankTranferEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\TransactionsMethod;
 use App\Models\EnrollmentPayment;
 use Auth;
 
@@ -33,7 +34,16 @@ class BankTranferController extends Controller
      $date = \Carbon\Carbon::now()->format('Y-m-d');
      
      //update cart status active 
-     $payment= Cart::getCartAmount($this->parent_profile_id,true);
+     $parentProfileData = User::find($id)->parentProfile()->first();
+     $enroll_fees= Cart::getCartAmount($this->parent_profile_id,true);
+     $paymentinfo = new TransactionsMethod;
+     $paymentinfo = $parentProfileData->TransactionsMethod()->create([
+        'parent_profile_id'=>$parentProfileData,
+        'transcation_id' => substr(uniqid(), 0, 8),
+        'payment_mode'=>'Bank Transfer',
+        'amount'=>$enroll_fees->amount ,
+        'status'=>'active',
+        ]);
      $cartItems=Cart::select('item_id')->where('parent_profile_id',$id)->get();
      foreach ($cartItems as $cart) 
      {
@@ -45,6 +55,7 @@ class BankTranferController extends Controller
 
      $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
      $refreshCart->each->delete();
+     
      Mail::to($email)->send(new BankTranferEmail($user));
      return view('mail.banktransfer',compact('email','date'));
     }

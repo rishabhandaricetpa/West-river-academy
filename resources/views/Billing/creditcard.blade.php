@@ -59,7 +59,7 @@
                             </div>
                             <div class='form-row row col-12'>
                             <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>What are you paying for<sup>*</sup></label> <input
+                                <label class='control-label'>What are you paying for</label> <input
                                     class='form-control' size='4' type='text' name="description">
                             </div>
                         </div>
@@ -68,7 +68,7 @@
   
                         <div class='form-row row'>
                             <div class='col-md-12 hide error form-group'>
-                                <div class='alert-danger alert'>Fix the errors before you begin.</div>
+                                <div class='alert-danger alert'>Please fill the Required fields.</div>
                             </div>
                         </div>
   

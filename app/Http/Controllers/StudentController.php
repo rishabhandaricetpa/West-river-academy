@@ -51,18 +51,38 @@ class StudentController extends Controller
     }
     public function index(Request $request)
     {
+        try{
+
         $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
         $year =date("Y");
+        $newYear=$year+1;
         $year=   Carbon::create( $year)->format('Y');
-        $month_date = Carbon::create( $countryData->start_date)->format('m-d');
-        $start_date =$year ."-". $month_date;
+        $month_start_date = Carbon::create( $countryData->start_date)->format('m-d');
+        $start_date =$year ."-". $month_start_date;
+
+        $year_end_date = Carbon::create( $countryData->end_date)->format('m-d');
+        $country_end_date="12-31";
+        if($year_end_date==$country_end_date){
+            $month_end_date=Carbon::create( $countryData->end_date)->format('m-d');
+            $end_date=$year ."-". $month_end_date;
+        }
+        else{
+            $month_end_date=Carbon::create( $countryData->end_date)->format('m-d');
+            $end_date=$newYear ."-". $month_end_date;
+        }
         if ($request->expectsJson()) {
             return response()->json($start_date);
         }
-        return view('enrollstudent', compact('start_date'));
+        return view('enrollstudent', compact('start_date','end_date'));
+    }
+    catch (\Exception $e) {
+        DB::rollBack();
+            return response()->json(['status' => 'error' ,'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
+    }
+
     }
     public function showstudents()
     {
@@ -284,34 +304,70 @@ class StudentController extends Controller
 
         $address   = User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-       return view('Billing.order-review',compact('address','enroll_fees','parent_id'));
-    
+        $amount=$enroll_fees->amount;
+        if(empty($amount)){
+            
+            return view('Billing.invalid');
+        }
+        else
+        {
+        return view('Billing.order-review',compact('address','enroll_fees','parent_id'));
+        }
     }
     
     public function paypalorderReview($parent_id){
         $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $amount=$enroll_fees->amount;
+        if(empty($amount)){
+            
+            return view('Billing.invalid');
+        }
+        else
+        {
         return view('paywithpaypal',compact('address','enroll_fees'));
+        }
      
      }
      public function stripeorderReview($parent_id){
         $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        return view('Billing/creditcard',compact('address','enroll_fees'));
+        $amount=$enroll_fees->amount;
+        if(empty($amount)){
+            
+            return view('Billing.invalid');
+        }
+        else{
+            return view('Billing/creditcard',compact('address','enroll_fees'));
+        }
      
      }
      public function moneyorderReview($parent_id){
         $address= User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
-     
+        $amount=$enroll_fees->amount;
+        if(empty($amount)){
+
+            return view('Billing.invalid');
+        }
+        else{
+            return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
+        }
      }
         
     public function moneygramReview($parent_id){
 
         $address   = User::find($parent_id)->parentProfile()->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-       return view('Billing.moneygram',compact('address','enroll_fees','parent_id'));
+        $amount=$enroll_fees->amount;
+        if(empty($amount)){
+            
+            return view('Billing.invalid');
+        }
+        else
+        {
+        return view('Billing.moneygram',compact('address','enroll_fees','parent_id'));
+        }
     }
 
     public function deleteEnroll(Request $request, $id)

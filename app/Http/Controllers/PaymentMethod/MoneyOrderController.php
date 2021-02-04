@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\PaymentMethod;
 use App\Http\Controllers\Controller;
-
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MoneyOrder;
@@ -29,12 +29,23 @@ class MoneyOrderController extends Controller
      * payment view
      */
     public function index(){
+      
        $id =Auth::user()->id;
        $user=  User::find($id)->first();
        $email= Auth::user()->email;
      //update cart status active 
+       $parentProfileData = User::find($id)->parentProfile()->first();
+       $enroll_fees= Cart::getCartAmount($this->parent_profile_id,true);
 
-       $payment= Cart::getCartAmount($this->parent_profile_id,true);
+       $paymentinfo = new TransactionsMethod;
+        $paymentinfo = $parentProfileData->TransactionsMethod()->create([
+      'parent_profile_id'=>$parentProfileData,
+      'transcation_id' => substr(uniqid(), 0, 8),
+      'payment_mode'=>'Check or Money Order',
+      'amount'=>$enroll_fees->amount ,
+      'status'=>'active',
+      ]);
+      
        $cartItems=Cart::select('item_id')->where('parent_profile_id',$id)->get();
        foreach ($cartItems as $cart) 
        {

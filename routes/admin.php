@@ -65,5 +65,10 @@ Route::get('delete/moneygram/{id}', 'PaymentAddressController@destroyMoneyGramAd
 Route::get('delete/transferwise/{id}', 'PaymentAddressController@destroyTransferwiseAddress')->name('delete.transferwiseAddress');
 Route::get('delete/banktransfer/{id}', 'PaymentAddressController@destroyBanktransferAddress')->name('delete.banktransferAddress');
 
+//country date
+Route::get('/countryenrollments', 'CountryController@index')->name('country.display');
+Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
+Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
+
 });
 

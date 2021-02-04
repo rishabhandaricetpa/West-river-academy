@@ -282,7 +282,7 @@
 import axios from "axios";
 
 export default {
-  name: "address",
+  name: "Address",
   data() {
     return {
       form: {
