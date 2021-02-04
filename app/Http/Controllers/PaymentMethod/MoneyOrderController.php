@@ -6,10 +6,10 @@ use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MoneyOrder;
-use App\Models\User;
-use Auth;
 use App\Models\Cart;
 use App\Models\EnrollmentPayment;
+use App\Models\User;
+use Auth;
 
 
 class MoneyOrderController extends Controller
@@ -22,11 +22,13 @@ class MoneyOrderController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
+
             return $next($request);
         });
     }
-/**
-     * payment view
+
+    /**
+     * payment view.
      */
     public function index(){
       
@@ -59,8 +61,7 @@ class MoneyOrderController extends Controller
        $refreshCart->each->delete();
 
         Mail::to($email)->send(new MoneyOrder($user));
-        return view('mail.moneyorder-review',compact('email'));
 
+        return view('mail.moneyorder-review', compact('email'));
     }
-  
 }

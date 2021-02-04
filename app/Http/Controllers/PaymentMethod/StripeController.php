@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\PaymentMethod;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Stripe;
-use Session;
-use Redirect;
-use App\Models\TransactionsMethod;
-use App\Models\User;
 use App\Models\Cart;
+use App\Models\EnrollmentPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-use App\Models\EnrollmentPayment;
+use App\Models\TransactionsMethod;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Redirect;
+use Session;
+use Stripe;
 
 class StripeController extends Controller
 {
@@ -24,19 +25,21 @@ class StripeController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
+
             return $next($request);
         });
     }
+
     /**
-     * payment view
+     * payment view.
      */
     public function index()
     {
         return view('Billing/creditcard');
     }
-  
+
     /**
-     * handling payment with POST
+     * handling payment with POST.
      */
     public function handlePost(Request $request)
     {   
@@ -48,8 +51,8 @@ class StripeController extends Controller
         }
         else{
         $paymentinfo = new TransactionsMethod;
-        $user=Auth::user();
-        $email=$user->email;
+        $user = Auth::user();
+        $email = $user->email;
         $userId = Auth::user()->id;
         $parentProfileData = User::find($userId)->parentProfile()->first();
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));

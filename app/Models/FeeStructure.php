@@ -9,10 +9,11 @@ class FeeStructure extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'fee_type', 'period', 'amount'
+        'fee_type', 'period', 'amount',
     ];
+
     public function EnrollmentPeriods()
     {
-        return $this->hasMany('App\Models\EnrollmentPeriods','period_id','id');
+        return $this->hasMany('App\Models\EnrollmentPeriods', 'period_id', 'id');
     }
 }

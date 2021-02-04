@@ -164,7 +164,6 @@ return [
         Yoeunes\Toastr\ToastrServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
-
         /*
          * Package Service Providers...
          */

@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\PaymentMethod;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Mail\BankTranferEmail;
-use Illuminate\Support\Facades\Mail;
-use App\Models\User;
 use App\Models\Cart;
 use App\Models\TransactionsMethod;
 use App\Models\EnrollmentPayment;
+use App\Models\User;
 use Auth;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BankTranferController extends Controller
 {
-  private $parent_profile_id;
+    private $parent_profile_id;
 
     public function __construct()
     {
@@ -22,6 +22,7 @@ class BankTranferController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
+
             return $next($request);
         });
     }

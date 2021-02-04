@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
-use Auth;
-use App\Models\ParentProfile;
-use App\Models\User;
-use App\Models\StudentProfile;
-use App\Models\FeeStructure;
+use App\Helpers\EnrollmentHelper;
 use App\Models\Address;
-use App\Models\EnrollmentPeriods;
-use App\Models\EnrollmentPayment;
-use App\Models\FeesInfo;
 use App\Models\Cart;
+use App\Models\Country;
+use App\Models\EnrollmentPayment;
+use App\Models\EnrollmentPeriods;
+use App\Models\FeesInfo;
+use App\Models\FeeStructure;
+use App\Models\ParentProfile;
+use App\Models\StudentProfile;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Auth;
+use Carbon\Carbon;
 use Faker\Calculator\Ean;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use App\Helpers\EnrollmentHelper;
-use Carbon\Carbon;
+
 class StudentController extends Controller
 {
     private $parent_profile_id;
@@ -32,9 +33,11 @@ class StudentController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
-              return $next($request);
+
+            return $next($request);
         });
     }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,6 +52,7 @@ class StudentController extends Controller
             'd_o_b' => ['required'],
         ]);
     }
+
     public function index(Request $request)
     {
         try{
@@ -84,31 +88,33 @@ class StudentController extends Controller
     }
 
     }
+
     public function showstudents()
     {
         $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
-        $parentId=$parentProfileData->id;
-        $student = StudentProfile::where('parent_profile_id',$parentId)->get();
-        return view('SignIn.dashboard',compact('student'));
+        $parentId = $parentProfileData->id;
+        $student = StudentProfile::where('parent_profile_id', $parentId)->get();
+
+        return view('SignIn.dashboard', compact('student'));
     }
-    
+
     public function confirmationpage($id)
     {
         $student = StudentProfile::all();
-        return view('viewConfirmation',compact('student','id'));
+
+        return view('viewConfirmation', compact('student', 'id'));
     }
 
     protected function store(Request $data)
     {
-    
-        try{
+        try {
             DB::beginTransaction();
-            $Userid =Auth::user()->id;
+            $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
-            
-            $student =  StudentProfile::create([
+
+            $student = StudentProfile::create([
                 'parent_profile_id' => $id,
                 'first_name' => $data['first_name'],
                 'middle_name' => $data['middle_name'],
@@ -130,15 +136,15 @@ class StudentController extends Controller
 
                 $enroll_year = $selectedStartDate->year;
 
-                $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$id)
-                                                    ->where('student_profiles.id','!=', $student->id)
-                                                    ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
-                                                    ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+                $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $id)
+                                                    ->where('student_profiles.id', '!=', $student->id)
+                                                    ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                                                    ->whereYear('enrollment_periods.start_date_of_enrollment', $enroll_year)
                                                     ->exists();
 
-                if(!$student_enrolled){
+                if (! $student_enrolled) {
                     $student_type = 'first_student';
-                }else{
+                } else {
                     $student_type = 'additional_student';
                 }
 
@@ -147,16 +153,16 @@ class StudentController extends Controller
                     'start_date_of_enrollment' =>  $selectedStartDate->format('M d Y'),
                     'end_date_of_enrollment' => $selectedEndDate->format('M d Y'),
                     'grade_level' => $period['grade'],
-                    'type' => $type
+                    'type' => $type,
                 ]);
 
                 $fee_type = $student_type.'_'.$type;
-                $fee = FeesInfo::select('amount')->where('type',$fee_type)->first();
+                $fee = FeesInfo::select('amount')->where('type', $fee_type)->first();
 
                 $enrollmentPayment = EnrollmentPayment::create([
                     'enrollment_period_id' => $enrollPeriod->id,
                     'status' => 'pending',
-                    'amount' => $fee->amount
+                    'amount' => $fee->amount,
                 ]);
 
                 $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
@@ -165,18 +171,19 @@ class StudentController extends Controller
             DB::commit();
 
             if ($data->expectsJson()) {
-                return response()->json(['status' => 'success' ,'message' => 'Student added successfully', 'data' => $student]);
+                return response()->json(['status' => 'success', 'message' => 'Student added successfully', 'data' => $student]);
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             if ($data->expectsJson()) {
-                return response()->json(['status' => 'error' ,'message' => 'Failed to add student']);
+                return response()->json(['status' => 'error', 'message' => 'Failed to add student']);
             }
         }
     }
+
     /**
-     * review student data on review page
+     * review student data on review page.
      */
     public function reviewStudent()
     {
@@ -184,12 +191,13 @@ class StudentController extends Controller
         $students = ParentProfile::find($user_id)->studentProfile()->get();
 
         $fees = ParentProfile::getParentPendingFees($user_id);
+
         return view('reviewstudent', compact('students', 'fees'));
     }
 
     public function update(Request $request, $id)
     {
-        try{
+        try {
             DB::beginTransaction();
 
             $student = StudentProfile::find($id);
@@ -205,13 +213,13 @@ class StudentController extends Controller
             $student->student_situation = $request->input('student_situation');
             $student->save();
             $periods = collect($request->get('periods'));
-           
+
             $periods->whereNull('id')->each(function ($period) use ($student) {
                 $enrollPeriod = new EnrollmentPeriods();
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
             $periods->whereNotNull('id')->each(function ($period) use ($student) {
-                if(!EnrollmentPayment::where('enrollment_period_id',$period['id'])->where('status','paid')->exists()){
+                if (! EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
                     $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
@@ -220,33 +228,34 @@ class StudentController extends Controller
             DB::commit();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'success' ,'message' => 'Student updated successfully']);
+                return response()->json(['status' => 'success', 'message' => 'Student updated successfully']);
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'error' ,'message' => 'Failed to update student']);
+                return response()->json(['status' => 'error', 'message' => 'Failed to update student']);
             }
         }
     }
 
-    public function updateEnrollPeriod($period, $student, $enrollPeriod){
+    public function updateEnrollPeriod($period, $student, $enrollPeriod)
+    {
         $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
         $enroll_year = $selectedStartDate->year;
-        
-        $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$student->parent_profile_id)
-                                            ->where('student_profiles.id','!=', $student->id)
-                                            ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
-                                            ->whereYear('enrollment_periods.start_date_of_enrollment',$enroll_year)
+
+        $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $student->parent_profile_id)
+                                            ->where('student_profiles.id', '!=', $student->id)
+                                            ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                                            ->whereYear('enrollment_periods.start_date_of_enrollment', $enroll_year)
                                             ->exists();
 
-        if(!$student_enrolled){
+        if (! $student_enrolled) {
             $student_type = 'first_student';
-        }else{
+        } else {
             $student_type = 'additional_student';
         }
 
@@ -255,27 +264,27 @@ class StudentController extends Controller
             'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
             'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
             'grade_level' => $period['grade'],
-            'type' => $type
+            'type' => $type,
         ]);
         $enrollPeriod->save();
 
         $EnrollmentPayment = EnrollmentPayment::where('enrollment_period_id', $enrollPeriod->id)->first();
 
-        if(is_null($EnrollmentPayment)){
+        if (is_null($EnrollmentPayment)) {
             $EnrollmentPayment = new EnrollmentPayment();
         }
 
-        if($EnrollmentPayment->status == 'paid'){
+        if ($EnrollmentPayment->status == 'paid') {
             return;
         }
-        
+
         $fee_type = $student_type.'_'.$type;
-        $fee = FeesInfo::select('amount')->where('type',$fee_type)->first();
+        $fee = FeesInfo::select('amount')->where('type', $fee_type)->first();
 
         $EnrollmentPayment->fill([
             'enrollment_period_id' => $enrollPeriod->id,
             'status' => 'pending',
-            'amount' => $fee->amount
+            'amount' => $fee->amount,
         ]);
 
         $EnrollmentPayment->save();
@@ -291,14 +300,14 @@ class StudentController extends Controller
         $countryData = Country::where('country', $country)->first();
         $countryId = $countryData->id;
         $studentData = StudentProfile::find($id);
-        $enrollPeriods =  EnrollmentPeriods::where('student_profile_id',$id) 
-                                            ->leftJoin('enrollment_payments','enrollment_payments.id','enrollment_periods.enrollment_payment_id')
-                                            ->select('enrollment_periods.*','enrollment_payments.status')
-                                            ->orderBy('enrollment_payments.status','desc')
+        $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
+                                            ->leftJoin('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+                                            ->select('enrollment_periods.*', 'enrollment_payments.status')
+                                            ->orderBy('enrollment_payments.status', 'desc')
                                             ->get();
+
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
-  
     
     public function orderReview($parent_id){
 
@@ -372,28 +381,28 @@ class StudentController extends Controller
 
     public function deleteEnroll(Request $request, $id)
     {
-        try{
+        try {
             DB::beginTransaction();
             $periods_id = collect($request->get('periods'))->pluck('id');
-            $enrollPeriods =  StudentProfile::find($id)->enrollmentPeriods()->get();
+            $enrollPeriods = StudentProfile::find($id)->enrollmentPeriods()->get();
             $enrollPeriodId = collect($enrollPeriods)->pluck('id');
 
             $diff = $enrollPeriodId->diff($periods_id);
 
-            EnrollmentPayment::whereIn('enrollment_period_id',$diff)->delete();
-            Cart::whereIn('item_id',$diff)->where('item_type','enrollment_period')->delete();
+            EnrollmentPayment::whereIn('enrollment_period_id', $diff)->delete();
+            Cart::whereIn('item_id', $diff)->where('item_type', 'enrollment_period')->delete();
 
             EnrollmentPeriods::whereIn('id', $diff)->delete();
 
             DB::commit();
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'success' ,'message' => 'Successfully removed enroll period']);
+                return response()->json(['status' => 'success', 'message' => 'Successfully removed enroll period']);
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'error' ,'message' => 'Failed to remove enroll period']);
+                return response()->json(['status' => 'error', 'message' => 'Failed to remove enroll period']);
             }
         }
     }

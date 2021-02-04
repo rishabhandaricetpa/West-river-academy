@@ -2,12 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Http\Request;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-use Auth;
 use App\Models\User;
+use Auth;
+use Closure;
+use Illuminate\Http\Request;
+
 class ActiveUser
 {
     /**
@@ -21,15 +22,17 @@ class ActiveUser
     {
         $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
-            if ($parentProfileData->status==1) {
+        if ($parentProfileData->status == 1) {
             $user = Auth::user();
             auth()->logout();
-            $notification = array(
+            $notification = [
                 'message' => 'Your account is not in active status!Please contact your admin',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->route('login')->with($notification);
         }
+
         return $next($request);
     }
 }

@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
+
 class DatabaseSeeder extends Seeder
 {
-    protected $toTruncate = ['countries','fees_info','bank_transfer_details','money_gram_details','transfer_wise_deatils'];
+    protected $toTruncate = ['countries', 'fees_info', 'bank_transfer_details', 'money_gram_details', 'transfer_wise_deatils'];
 
     /**
      * Seed the application's database.
@@ -18,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        foreach($this->toTruncate as $table) {
+        foreach ($this->toTruncate as $table) {
             DB::table($table)->truncate();
         }
         // \App\Models\User::factory(10)->create();
@@ -28,6 +29,5 @@ class DatabaseSeeder extends Seeder
         $this->call(MoneyGramTableSeeder::class);
         $this->call(TransferwiseTableSeeder::class);
         Model::reguard();
-
     }
 }

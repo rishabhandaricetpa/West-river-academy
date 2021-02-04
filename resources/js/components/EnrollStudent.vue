@@ -54,6 +54,7 @@
               name="gender" 
               value="Male"
               v-model="form.gender"
+              required
               >
             <label class="form-check-label">
               Male

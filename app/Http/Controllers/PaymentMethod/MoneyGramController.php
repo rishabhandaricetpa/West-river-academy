@@ -6,11 +6,10 @@ use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MoneyGram;
-use App\Models\User;
-use Auth;
 use App\Models\Cart;
 use App\Models\EnrollmentPayment;
-
+use App\Models\User;
+use Auth;
 
 class MoneyGramController extends Controller
 {
@@ -22,11 +21,13 @@ class MoneyGramController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
+
             return $next($request);
         });
     }
-/**
-     * payment view
+
+    /**
+     * payment view.
      */
     public function index(){
        $id =Auth::user()->id;
@@ -60,8 +61,8 @@ class MoneyGramController extends Controller
        $refreshCart->each->delete();
 
         Mail::to($email)->send(new MoneyGram($user));
-        return view('mail.moneygram-review',compact('email','date'));
 
+        return view('mail.moneygram-review', compact('email', 'date'));
     }
     
 }

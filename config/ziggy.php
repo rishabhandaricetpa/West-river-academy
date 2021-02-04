@@ -15,8 +15,6 @@ return [
         'webhooks.*',
     ],
 
-
-
     /*
      * Set this to true if you want to manually import the route helper method.
      * When `true`; you need to rebuild your assets whenever you update this php package.
