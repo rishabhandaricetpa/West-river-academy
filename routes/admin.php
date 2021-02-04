@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('payments', 'PaymentController@view')->name('payments');
     Route::get('edit-payment/{id}', 'PaymentController@edit')->name('edit.student.payment');
     Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
+    Route::get('edit-payment-status/{id}', 'PaymentController@editPaymentStatus')->name('edit.payment.status');
+
 
     // edit for payment address for - moneygram,banktransfer & transferwise
     Route::get('/payment-address', 'PaymentAddressController@index');

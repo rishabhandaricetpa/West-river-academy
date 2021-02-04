@@ -37,7 +37,7 @@
                       <td>{{$payment->status}}
                             </td>
                             <td>
-                                <a href=" {{route('edit-payment',$payment->id )}}"><i class=" fas fa-edit"
+                                <a href=" {{route('admin.edit.payment.status',$payment->id )}}"><i class=" fas fa-edit"
                                 onclick="return myFunction();"></i></a>
                             </td>
                             </tr>
