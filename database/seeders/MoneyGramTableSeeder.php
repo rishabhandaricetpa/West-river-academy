@@ -23,7 +23,7 @@ class MoneyGramTableSeeder extends Seeder
             'state'=>'CA',
             'zip'=>'92629',
             'money_gram_id'=>'IDD9791604 (California Driver’s License)',
-            'status'=>'1'
+            'status'=>'1',
         ]);
     }
 }

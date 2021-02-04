@@ -24,7 +24,7 @@ class VerificationController extends Controller
 
     public function verify(Request $request, User $user)
     {
-        if (!$request->hasValidSignature()) {
+        if (! $request->hasValidSignature()) {
             alert()->error('Invalid verification link. Please request a new one.');
 
             return redirect()->route('verification.request');

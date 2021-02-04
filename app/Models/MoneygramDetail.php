@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MoneygramDetail extends Model
 {
     use HasFactory;
-    protected $table = "money_gram_details";
+    protected $table = 'money_gram_details';
 
     protected $fillable = [
-        'name', 'address', 'city','state','zip','money_gram_id','status'
+        'name', 'address', 'city', 'state', 'zip', 'money_gram_id', 'status',
     ];
 }

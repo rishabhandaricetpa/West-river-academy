@@ -2,13 +2,14 @@
 
 namespace App\Mail;
 
+use App\Models\Cart;
+use App\Models\User;
+use Auth;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\User;
-use App\Models\Cart;
-use Auth;
+
 class MoneyOrder extends Mailable
 {
     use Queueable, SerializesModels;
@@ -30,13 +31,14 @@ class MoneyOrder extends Mailable
      */
     public function build()
     {
-        $id= Auth::user()->id;
-        $user=  User::find($id)->first();
-        $email= $user->email;   
+        $id = $this->user->id;
+        $user = User::find($id)->first();
+        $email = $user->email;
         $parent_profile = User::find($id)->parentProfile()->first();
-        $payment= Cart::getCartAmount($parent_profile->id,true);
+        $payment = Cart::getCartAmount($parent_profile->id, true);
         $date = \Carbon\Carbon::now()->format('Y-m-d');
-        return $this->from('paige.priyanka@ithands.com')
-        ->markdown('mail.moneyordermail',compact('user','parent_profile','date','email','payment'))->subject('Check and Money Order Details');
+
+        return $this->from(env('EMAIL'))
+        ->markdown('mail.moneyordermail', compact('user', 'parent_profile', 'date', 'email', 'payment'))->subject('Check and Money Order Details');
     }
 }

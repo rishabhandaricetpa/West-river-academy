@@ -24,12 +24,12 @@ Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
 Route::group(['middleware' => 'auth'], function () {
-
     Route::group(
         ['namespace' => 'admin'],
         function () {
             Route::get('logout', function () {
                 Auth::guard('admin')->logout();
+
                 return redirect('/admin/login');
             })->name('admin.logout');
             Route::get('/payments-invoice', function () {
@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('payments', 'PaymentController@view')->name('payments');
     Route::get('edit-payment/{id}', 'PaymentController@edit')->name('edit.student.payment');
     Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
+    Route::get('edit-payment-status/{id}', 'PaymentController@editPaymentStatus')->name('edit.payment.status');
 
     // edit for payment address for - moneygram,banktransfer & transferwise
     Route::get('/payment-address', 'PaymentAddressController@index');

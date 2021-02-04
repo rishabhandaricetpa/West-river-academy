@@ -14,7 +14,7 @@ class AddEnrollementTypeOnEnrollmentPeriodsTable extends Migration
     public function up()
     {
         Schema::table('enrollment_periods', function (Blueprint $table) {
-            $table->enum('type',['annual','half']);
+            $table->enum('type', ['annual', 'half']);
         });
     }
 
