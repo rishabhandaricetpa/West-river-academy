@@ -35,25 +35,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-
     Route::group(['middleware' => 'auth'], function () {
-
         Route::get('/welcome-video', function () {
             return view('welcome-video');
         });
 
-
-        Route::get('/reviewstudent/{id}',  'StudentController@reviewStudent')->name('reviewstudent');
+        Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
         Route::get('/cart', function () {
             return view('cart');
         });
-
 
         //enroll student
         Route::get('/enroll-student', 'StudentController@index');
         Route::post('/enroll-student', 'StudentController@store')->name('enroll.student');
         Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
-        Route::get('/reviewstudents',  'StudentController@reviewStudent')->name('reviewstudent');
+        Route::get('/reviewstudents', 'StudentController@reviewStudent')->name('reviewstudent');
         Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
         Route::post('delete/{id}', 'StudentController@deleteEnroll')->name('delete.enroll');
 
@@ -68,9 +64,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/logout', function () {
             Auth::logout();
+
             return redirect('/login');
         });
-
 
         //working blades by frontend
         Route::get('/reviewstudent', function () {
@@ -81,11 +77,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
 
-
         // Route::get('/cart', 'StudentController@address')->name('billing.address');
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
-
 
         //Paypal Payment
         Route::get('payment', function () {
@@ -103,7 +97,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('Billing/paymentsuccess');
         })->name('payment.info');
 
-
         //Money-order
         Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
         Route::get('/money-order/{id}', 'StudentController@moneyorderReview');
@@ -117,14 +110,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('bankTransfer', 'PaymentMethod\BankTranferController@index')->name('bank.transfer');
         Route::get('/bank-transfer', 'ParentController@getBankTransferDetails');
 
-
         //Money Gram
         Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
         Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
         Route::get('moneygram-email', 'PaymentMethod\MoneyGramController@index');
         Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
-
-
 
         Route::get('/mysettings/{id}', 'ParentController@mysettings');
         Route::get('/editaccount/{id}', 'ParentController@editmysettings');

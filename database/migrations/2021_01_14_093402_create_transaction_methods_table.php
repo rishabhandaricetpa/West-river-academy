@@ -21,7 +21,7 @@ class CreateTransactionMethodsTable extends Migration
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->timestamps();
             $table->string('amount');
-            $table->string('status')->nullable();      
+            $table->string('status')->nullable();
         });
     }
 

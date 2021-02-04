@@ -14,6 +14,7 @@ class Country extends Model
     {
         return $this->hasOne(CountryEnrollment::class);
     }
+
     public function semesters()
     {
         return $this->belongsToMany(Semester::class);

@@ -50,7 +50,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, User $user)
     {
-        if (!$user->hasVerifiedEmail()) {
+        if (! $user->hasVerifiedEmail()) {
             $this->guard()->logout();
             $request->session()->invalidate();
 
@@ -60,6 +60,7 @@ class LoginController extends Controller
                 ->withInput($request->only($this->username()));
         }
     }
+
     protected function sendFailedLoginResponse(Request $request)
     {
         // throw ValidationException::withMessages([
@@ -70,7 +71,7 @@ class LoginController extends Controller
         // Load user from database
         $user = User::where($this->username(), $request->{$this->username()})->first();
 
-        if ($user && !Hash::check($request->password, $user->password)) {
+        if ($user && ! Hash::check($request->password, $user->password)) {
             $errors = ['password' => 'The provided password is incorrect'];
         }
 
