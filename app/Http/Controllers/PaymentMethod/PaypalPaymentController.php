@@ -58,8 +58,6 @@ class   PaypalPaymentController extends Controller
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
        
-        $coupon_code = session('applied_coupon',null);
-
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
         $coupon_amount = session('applied_coupon_amount',0);
         $total=$coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
@@ -133,15 +131,19 @@ class   PaypalPaymentController extends Controller
         $execution = new PaymentExecution();
         $execution->setPayerId($request->input('PayerID'));
         $result = $payment->execute($execution, $this->_api_context);
+        
+        $coupon_code = session('applied_coupon',null);
+        $coupon_amount = session('applied_coupon_amount',0);
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
 
-        $jsonResult =json_decode($result,true );
-      $amount=  $jsonResult['transactions'][0]['amount']['total'];
         $paypal =new TransactionsMethod();
         $paypal->transcation_id =$payment_id;
         $paypal->payment_mode= 'Pay pal';
         $paypal->parent_profile_id = Auth::user()->id;
-        $paypal->amount =$amount;
+        $paypal->amount =$enroll_fees->amount;
         $paypal->status="succeeded";
+        $paypal->coupon_code = $coupon_code;
+        $paypal->coupon_amount = $coupon_amount;
         $paypal->save();
 
         $cartItems=Cart::select('item_id')->where('parent_profile_id',$paypal->parent_profile_id)->get();
