@@ -295,37 +295,38 @@ class StudentController extends Controller
 
         return view('Billing.order-review', compact('address', 'enroll_fees', 'parent_id'));
     }
-
-    public function paypalorderReview($parent_id)
-    {
-        $address = User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-
-        return view('paywithpaypal', compact('address', 'enroll_fees'));
-    }
-
-    public function stripeorderReview($parent_id)
-    {
-        $address = User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-
-        return view('Billing/creditcard', compact('address', 'enroll_fees'));
-    }
-
-    public function moneyorderReview($parent_id)
-    {
-        $address = User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-
-        return view('Billing.chequereview', compact('address', 'enroll_fees', 'parent_id'));
-    }
-
-    public function moneygramReview($parent_id)
-    {
-        $address = User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-
-        return view('Billing.moneygram', compact('address', 'enroll_fees', 'parent_id'));
+    
+    public function paypalorderReview($parent_id){
+        $address= User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $coupon_amount = session('applied_coupon_amount',0);
+        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+       
+        return view('paywithpaypal',compact('address','final_amount'));
+     
+     }
+     public function stripeorderReview($parent_id){
+        $address= User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        $coupon_amount = session('applied_coupon_amount',0);
+        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        
+        return view('Billing/creditcard',compact('address','final_amount'));
+     
+     }
+     public function moneyorderReview($parent_id){
+        $address= User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+        
+        return view('Billing.chequereview',compact('address','enroll_fees','parent_id'));
+     
+     }
+        
+    public function moneygramReview($parent_id){
+        $address   = User::find($parent_id)->parentProfile()->first();
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
+       
+        return view('Billing.moneygram',compact('address','enroll_fees','parent_id'));
     }
 
     public function deleteEnroll(Request $request, $id)
