@@ -181,6 +181,23 @@
     height: 27px;
   }
 
+  /* Admin css */
+  .admin-wrapper{
+    .dt-buttons{
+      display: block;
+      button{
+        width: 100%;
+        display: block;
+        margin-bottom: 15px;
+        border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        -ms-border-radius: 0 !important;
+        -o-border-radius: 0 !important;
+}
+
+    }
+  }
   /* edit */
   .links-list {
     padding-left: 0;

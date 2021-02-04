@@ -1,15 +1,15 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar  admin-sidebar">
   <!-- Brand Logo -->
   <a href="{{route('admin.admindashboard')}}" class="brand-link">
-    <span class="brand-text font-weight-light"> Welcome Admin</span>
+  <img src="/images/wra_logo.svg" alt="wra_logo">
   </a>
   <!-- Sidebar Menu -->
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-      <li class="nav-item menu-open">
+      <li class="nav-item menu">
         <a href="" {{ url('/dashboard') }}"" class="nav-link active">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
@@ -21,12 +21,22 @@
           <li class="nav-item">
             <a href="{{ url('admin/view')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>View Parent</p>
+              <p>View Parents </p>
             </a>
           </li>
 
       </li>
-      <li class="nav-item menu-open">
+      
+    </ul>
+    </li>
+    <li class="nav-item menu">
+    <li class="nav-item">
+        <a href="{{ url('admin/view-student')}}" class="nav-link">
+          <i class="far fa-circle nav-icon"></i>
+          <p>View Students</p>
+        </a>
+      </li>
+  <li class="nav-item menu">
         <a href="" {{ url('/dashboard') }}"" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
@@ -35,12 +45,14 @@
           </p>
         </a>
         <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="{{ url('admin/view-student')}}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>View Payment</p>
-            </a>
-          </li>
+        <li class="nav-item">
+      <a href="{{route('admin.payments')}}" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+          View Payments
+        </p>
+      </a>
+    </li>
           <li class="nav-item">
             <a href="{{ url('admin/payment-address')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
@@ -50,23 +62,6 @@
 
         </ul>
       </li>
-      <li class="nav-item">
-        <a href="{{ url('admin/view-student')}}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>View Student</p>
-        </a>
-      </li>
-
-    </ul>
-    </li>
-    <li class="nav-item">
-      <a href="{{route('admin.payments')}}" class="nav-link">
-        <i class="nav-icon fas fa-th"></i>
-        <p>
-          Student Payment
-        </p>
-      </a>
-    </li>
     <li class="nav-item">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-copy"></i>
@@ -76,6 +71,7 @@
       </a>
 
     </li>
+  
     <li class="nav-item">
       <a href="{{route('admin.logout')}}" class="nav-link">
         <i class="nav-icon fas fa-copy"></i>
