@@ -58,7 +58,9 @@ class ParentController extends Controller
         $coupons = Coupon::getParentCoupons();
 
         $country_list  =  Country::select('country')->get();
-        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees','coupons'));
+        $coupon_code = session('applied_coupon',null);
+        
+        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees','coupons','coupon_code'));
     }
 
     /**

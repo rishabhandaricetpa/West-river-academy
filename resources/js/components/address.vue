@@ -225,9 +225,9 @@
         <div>
           <v-select
             :reduce="(label) => label.value"
-            v-model="selectedCoupon"
+            v-model="selectedcoupon"
             :options="coupons"
-            :selected="selectedCoupon"
+            :selected="selectedcoupon"
           ></v-select>
         </div>
       </div>
@@ -238,7 +238,7 @@
           <input
             type="text"
             class="form-control"
-            v-model="selectedCoupon"
+            v-model="selectedcoupon"
             placeholder="Enter coupon code"
           />
         </div>
@@ -373,7 +373,6 @@ export default {
   },
   data() {
     return {
-      selectedCoupon: null,
       amount: this.total.amount,
       form: {
         sSame: false,
@@ -402,7 +401,7 @@ export default {
       },
     };
   },
-  props: ["parents", "countries", "total", "coupons"],
+  props: ["parents", "countries", "total", "coupons", "selectedcoupon"],
   methods: {
     copyBilling() {
       if (this.form.sSame == true) {
@@ -426,11 +425,11 @@ export default {
         .catch((error) => console.log(error));
     },
     applyCoupon() {
-      if(this.selectedCoupon === null){
+      if(this.selectedcoupon === null){
         return false;
       }
       axios
-        .get(route("coupon.apply", this.selectedCoupon))
+        .get(route("coupon.apply", this.selectedcoupon))
         .then((response) => {
           if(response.data.status == 'success'){
             if(response.data.amount > this.total.amount){
@@ -439,12 +438,15 @@ export default {
               this.amount = this.total.amount - response.data.amount;
             }
           }else{
-            this.selectedCoupon = null;
+            this.selectedcoupon = null;
             this.amount = this.total.amount;
           }
         })
         .catch((error) => console.log(error));
     },
   },
+  mounted(){
+    this.selectedcoupon !== null ? this.applyCoupon() : '';
+  }
 };
 </script>
