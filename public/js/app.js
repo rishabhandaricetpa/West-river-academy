@@ -2294,6 +2294,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2308,6 +2342,7 @@ __webpack_require__.r(__webpack_exports__);
         first_name: this.students.first_name,
         middle_name: this.students.middle_name,
         last_name: this.students.last_name,
+        gender: this.students.gender,
         email: this.students.email,
         dob: this.students.d_o_b,
         cell_phone: this.students.cell_phone,
@@ -2731,6 +2766,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2881,24 +2950,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -21168,6 +21219,75 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group d-flex mb-1 lato-italic info-detail" },
+        [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "row pl-5" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.gender,
+                      expression: "form.gender"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "radio", name: "gender", value: "Male" },
+                  domProps: { checked: _vm._q(_vm.form.gender, "Male") },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "gender", "Male")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "form-check-label" }, [
+                  _vm._v("\n            Male\n          ")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.gender,
+                      expression: "form.gender"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "radio",
+                    name: "gender",
+                    value: "Female",
+                    id: "gender"
+                  },
+                  domProps: { checked: _vm._q(_vm.form.gender, "Female") },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "gender", "Female")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "form-check-label" }, [
+                  _vm._v("\n            Female\n          ")
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
         _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
         _vm._v(" "),
@@ -21358,7 +21478,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(2, true)
+                    _vm._m(3, true)
                   ])
                 ]),
                 _vm._v(" "),
@@ -21398,11 +21518,11 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(3, true)
+                    _vm._m(4, true)
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(4, true),
+                _vm._m(5, true),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -21411,7 +21531,7 @@ var render = function() {
                       "form-group d-sm-flex mb-2r lato-italic info-detail "
                   },
                   [
-                    _vm._m(5, true),
+                    _vm._m(6, true),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -21471,7 +21591,7 @@ var render = function() {
                   "table",
                   { staticClass: "table-styling border w-100 my-5" },
                   [
-                    _vm._m(6, true),
+                    _vm._m(7, true),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -21545,7 +21665,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group d-sm-flex" }, [
-        _vm._m(7),
+        _vm._m(8),
         _vm._v(" "),
         _c("div", [
           _c("textarea", {
@@ -21633,6 +21753,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
       _vm._v("Last/Family Name "),
+      _c("sup", [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Gender "),
       _c("sup", [_vm._v("*")])
     ])
   },
@@ -21751,7 +21880,9 @@ var render = function() {
     [
       _c("h2", [_vm._v("Enroll Student 1")]),
       _vm._v(" "),
-      _c("p", { staticClass: "required-option" }, [_vm._v("*=Required")]),
+      _c("p", { staticClass: "required-option" }, [
+        _vm._v("* Fields are required")
+      ]),
       _vm._v(" "),
       _c(
         "form",
@@ -21867,9 +21998,78 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
+            { staticClass: "form-group d-flex mb-1 lato-italic info-detail" },
+            [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "row pl-5" }, [
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.gender,
+                          expression: "form.gender"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "gender", value: "Male" },
+                      domProps: { checked: _vm._q(_vm.form.gender, "Male") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form, "gender", "Male")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _vm._v("\n             Male\n           ")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-3" }, [
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.gender,
+                          expression: "form.gender"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "gender",
+                        value: "Female",
+                        id: "gender"
+                      },
+                      domProps: { checked: _vm._q(_vm.form.gender, "Female") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.form, "gender", "Female")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _vm._v("\n             Female\n           ")
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
             { staticClass: "form-group d-sm-flex mb-2 position-relative" },
             [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Date of Birth")]),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "p",
@@ -21998,7 +22198,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(4)
             ])
           ]),
           _vm._v(" "),
@@ -22055,7 +22255,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(3, true)
+                    _vm._m(5, true)
                   ])
                 ]),
                 _vm._v(" "),
@@ -22101,13 +22301,13 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(4, true),
+                    _vm._m(6, true),
                     _vm._v(" "),
-                    _vm._m(5, true)
+                    _vm._m(7, true)
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(6, true),
+                _vm._m(8, true),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -22116,7 +22316,7 @@ var render = function() {
                       "form-group d-sm-flex mb-2 lato-italic info-detail"
                   },
                   [
-                    _vm._m(7, true),
+                    _vm._m(9, true),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -22351,6 +22551,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Gender "),
+      _c("sup", [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Date of Birth"),
+      _c("sup", [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "info-detail col-md-8 col-lg-10 lato-italic" },
@@ -22401,7 +22619,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-4 links-list pl-0" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
-        _vm._v("help me choose my dates")
+        _vm._v("help me choose a date")
       ])
     ])
   },
@@ -23085,38 +23303,15 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-wrap border bg-light py-5 px-25 mt-2r" }, [
-        _c("h2", { staticClass: "mb-3" }, [_vm._v("Payment Items")]),
+        _c("h2", { staticClass: "mb-3" }, [_vm._v("Payment Total")]),
         _vm._v(" "),
-        _c("div", { staticClass: "seperator overflow-auto" }, [
-          _c("table", { staticClass: "w-100 table-styling" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("Custom Payment ")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("1")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("i", { staticClass: "fas fa-dollar-sign" }),
-                  _vm._v(_vm._s(_vm.total.amount))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("i", { staticClass: "fas fa-dollar-sign" }),
-                  _vm._v(_vm._s(_vm.total.amount))
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tfoot", [
-              _c("tr", [
-                _c("td", [_vm._v("Total price")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("i", { staticClass: "fas fa-dollar-sign" }),
-                  _vm._v(_vm._s(_vm.total.amount))
-                ])
+        _c("table", { staticClass: "w-100 table-styling" }, [
+          _c("tfoot", [
+            _c("tr", [
+              _c("td", { staticClass: "mb-3" }, [_vm._v("Order total")]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "mb-3" }, [
+                _vm._v("$" + _vm._s(_vm.total.amount))
               ])
             ])
           ])
@@ -23132,7 +23327,7 @@ var render = function() {
         [
           _c("h2", [_vm._v("Select your method of payment...")]),
           _vm._v(" "),
-          _c("h3", { staticClass: "py-2" }, [_vm._v("pay with")]),
+          _c("h3", { staticClass: "py-2" }, [_vm._v("Pay with")]),
           _vm._v(" "),
           _c(
             "ul",
@@ -23174,7 +23369,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(0)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -23212,7 +23407,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(1)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -23250,7 +23445,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -23288,7 +23483,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -23326,34 +23521,18 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(5)
+                _vm._m(4)
               ])
             ]
           )
         ]
       ),
       _vm._v(" "),
-      _vm._m(6)
+      _vm._m(5)
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("item")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("quantity")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("price")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("total")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

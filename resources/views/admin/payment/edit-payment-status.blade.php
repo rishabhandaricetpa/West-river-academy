@@ -3,23 +3,16 @@
 @section('content')
 
 <section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-                <!-- general form elements -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Edit Student Payment Information</h3>
-                    </div>
-                    <!-- /.card-header -->
+    <div class="container-fluid position-relative">
+                        <h1>Edit Student Payment Information</h1>
+                        <div class="form-wrap border py-5 px-25 position-relative">
                     <!-- form start -->
-                    <form method="post" action="{{route('admin.update-payment',$enroll_payment->id)}}">
+                    <form method="post" class="row" action="{{route('admin.update-payment',$enroll_payment->id)}}">
                         @csrf
-                        <div class="card-body">
-                            <div class="form-group">
+                    
+                            <div class="form-group col-sm-6">
                                 <label>Grade Level <sup>*</sup></label>
-                                <select name="grade_level">
+                                <select name="grade_level" class="form-control">
                                     <option value="Ungraded" @if($enrollment_periods->grade_level == 'Ungraded')
                                         selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if($enrollment_periods->grade_level== 'Preschool
@@ -73,24 +66,24 @@
                                         selected="selected" @endif>12</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-6">
                                 <label>Start Date of Enrollment <sup>*</sup></label>
                                 <input name="start_date_of_enrollment" class="form-control datepicker"
                                     value="{{$enrollment_periods->start_date_of_enrollment}}">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-6">
                                 <label>End Date of Enrollment <sup>*</sup></label>
                                 <input name="end_date_of_enrollment" class="form-control datepicker"
                                     value="{{$enrollment_periods->end_date_of_enrollment}}">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-6">
                                 <label>Amount <sup>*</sup></label>
                                 <input class="form-control" id="amount" value="{{$enroll_payment->amount}}"
                                     name="amount">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-12">
                                 <label>Payment Status</label>
-                                <select name="paymentStatus">
+                                <select name="paymentStatus" class="form-control">
                                     <option value="pending" @if($enroll_payment->status == 'pending')
                                         selected="selected" @endif>Pending</option>
                                     <option value="paid" @if($enroll_payment->status== 'paid')
@@ -99,34 +92,23 @@
                                         selected="selected" @endif>Active</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-6">
                                 <label>Transcation ID <sup>*</sup></label>
                                 <input class="form-control" id="transcation_id"
                                     value="{{$enroll_payment->transcation_id}}" name="transcation_id" readonly>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-6">
                                 <label>Payment Mode <sup>*</sup></label>
                                 <input class="form-control" id="payment_mode" value="{{$enroll_payment->payment_mode}}"
                                     name="payment_mode" readonly>
                             </div>
-                        </div>
-                </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
+                            <div class="col-sm-12">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
+                        </div>
+
                 </form>
             </div>
-            <!-- /.card -->
-
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!--/.col (right) -->
-    </div>
-    <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
 

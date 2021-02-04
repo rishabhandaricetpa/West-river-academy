@@ -1,8 +1,8 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar  admin-sidebar">
   <!-- Brand Logo -->
   <a href="{{route('admin.admindashboard')}}" class="brand-link">
-    <span class="brand-text font-weight-light"> Welcome Admin</span>
+  <img src="/images/wra_logo.svg" alt="wra_logo">
   </a>
   <!-- Sidebar Menu -->
   <nav class="mt-2">
