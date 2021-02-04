@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+<img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
+    <div class="row justify-content-center pt-5">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Confirm Password') }}</div>
