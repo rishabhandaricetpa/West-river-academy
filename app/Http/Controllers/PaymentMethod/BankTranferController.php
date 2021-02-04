@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PaymentMethod;
 use App\Http\Controllers\Controller;
 use App\Mail\BankTranferEmail;
 use App\Models\Cart;
+use App\Models\TransactionsMethod;
 use App\Models\EnrollmentPayment;
 use App\Models\User;
 use Auth;
@@ -25,30 +26,38 @@ class BankTranferController extends Controller
             return $next($request);
         });
     }
+    public function index(){
+      $id = Auth::user()->id;
+      $user=  User::find($id)->first();
+      $email= Auth::user()->email; 
 
-    public function index()
-    {
-        $id = Auth::user()->id;
-        $user = User::find($id)->first();
-        $email = Auth::user()->email;
+     $address = User::find($id)->parentProfile()->first();
+     $date = \Carbon\Carbon::now()->format('Y-m-d');
+     
+     //update cart status active 
+     $parentProfileData = User::find($id)->parentProfile()->first();
+     $enroll_fees= Cart::getCartAmount($this->parent_profile_id,true);
+     $paymentinfo = new TransactionsMethod;
+     $paymentinfo = $parentProfileData->TransactionsMethod()->create([
+        'parent_profile_id'=>$parentProfileData,
+        'transcation_id' => substr(uniqid(), 0, 8),
+        'payment_mode'=>'Bank Transfer',
+        'amount'=>$enroll_fees->amount ,
+        'status'=>'active',
+        ]);
+     $cartItems=Cart::select('item_id')->where('parent_profile_id',$id)->get();
+     foreach ($cartItems as $cart) 
+     {
+       $enrollemtpayment=EnrollmentPayment::select()->where('enrollment_period_id',$cart->item_id)->first();
+       $enrollemtpayment->status='active';
+       $enrollemtpayment->payment_mode='Bank Transfer';
+       $enrollemtpayment->save();
+     }
 
-        $address = User::find($id)->parentProfile()->first();
-        $date = \Carbon\Carbon::now()->format('Y-m-d');
-
-        //update cart status active
-        $payment = Cart::getCartAmount($this->parent_profile_id, true);
-        $cartItems = Cart::select('item_id')->where('parent_profile_id', $id)->get();
-        foreach ($cartItems as $cart) {
-            $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-            $enrollemtpayment->status = 'active';
-            $enrollemtpayment->payment_mode = 'Bank Transfer';
-            $enrollemtpayment->save();
-        }
-
-        $refreshCart = Cart::select()->where('parent_profile_id', $id)->get();
-        $refreshCart->each->delete();
-        Mail::to($email)->send(new BankTranferEmail($user));
-
-        return view('mail.banktransfer', compact('email', 'date'));
+     $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
+     $refreshCart->each->delete();
+     
+     Mail::to($email)->send(new BankTranferEmail($user));
+     return view('mail.banktransfer',compact('email','date'));
     }
 }

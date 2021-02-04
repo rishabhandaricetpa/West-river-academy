@@ -20,10 +20,12 @@ class PDFController extends Controller
     {
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
-        $studentProfileData = StudentProfile::whereId($id)->first();
+        $studentProfileData=StudentProfile::whereId($id)->first();
+        $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
         $id = $parentProfileData->id;
         $data = [
             'student'=>$studentProfileData,
+            'enrollment'=>$enrollment_periods,
             'title' => 'Confirmation of Enrollment',
             'date' => date('m/d/Y'),
         ];

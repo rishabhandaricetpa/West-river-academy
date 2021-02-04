@@ -77,7 +77,9 @@ class ParentController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
-            $billinAddress = Address::create([
+            $billinAddress =  Address::updateOrCreate(
+                ['parent_profile_id'=>$id],
+                [
                 'parent_profile_id' => $id,
                 'billing_street_address' => $billing_data['street_address'],
                 'billing_city' => $billing_data['city'],

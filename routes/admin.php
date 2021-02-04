@@ -84,4 +84,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('coupon/{id}', 'CouponController@update')->name('update.coupon');
     Route::get('coupon/data', 'CouponController@dataTable')->name('coupons.dt');
     Route::get('coupon/generate', 'CouponController@getCode')->name('coupons.generate');
+    //country date
+    Route::get('/countryenrollments', 'CountryController@index')->name('country.display');
+    Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
+    Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
 });

@@ -61,6 +61,18 @@
             </a>
           </li>
 
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/countryenrollments')}}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Country Enrollments
+              </p>
+            </a>
+          </li>
+      </nav>
+      <!-- /.sidebar-menu -->
         </ul>
       </li>
       <li class="nav-item">

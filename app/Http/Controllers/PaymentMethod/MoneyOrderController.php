@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\PaymentMethod;
-
 use App\Http\Controllers\Controller;
+use App\Models\TransactionsMethod;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\MoneyOrder;
 use App\Models\Cart;
 use App\Models\EnrollmentPayment;
 use App\Models\User;
 use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+
 
 class MoneyOrderController extends Controller
 {
@@ -29,24 +30,35 @@ class MoneyOrderController extends Controller
     /**
      * payment view.
      */
-    public function index()
-    {
-        $id = Auth::user()->id;
-        $user = User::find($id)->first();
-        $email = Auth::user()->email;
-        //update cart status active
+    public function index(){
+      
+       $id =Auth::user()->id;
+       $user=  User::find($id)->first();
+       $email= Auth::user()->email;
+     //update cart status active 
+       $parentProfileData = User::find($id)->parentProfile()->first();
+       $enroll_fees= Cart::getCartAmount($this->parent_profile_id,true);
 
-        $payment = Cart::getCartAmount($this->parent_profile_id, true);
-        $cartItems = Cart::select('item_id')->where('parent_profile_id', $id)->get();
-        foreach ($cartItems as $cart) {
-            $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-            $enrollemtpayment->status = 'active';
-            $enrollemtpayment->payment_mode = 'Check and Money Order';
-            $enrollemtpayment->save();
-        }
+       $paymentinfo = new TransactionsMethod;
+        $paymentinfo = $parentProfileData->TransactionsMethod()->create([
+      'parent_profile_id'=>$parentProfileData,
+      'transcation_id' => substr(uniqid(), 0, 8),
+      'payment_mode'=>'Check or Money Order',
+      'amount'=>$enroll_fees->amount ,
+      'status'=>'active',
+      ]);
+      
+       $cartItems=Cart::select('item_id')->where('parent_profile_id',$id)->get();
+       foreach ($cartItems as $cart) 
+       {
+         $enrollemtpayment=EnrollmentPayment::select()->where('enrollment_period_id',$cart->item_id)->first();
+         $enrollemtpayment->status='active';
+         $enrollemtpayment->payment_mode='Check and Money Order';
+         $enrollemtpayment->save();
+       }
 
-        $refreshCart = Cart::select()->where('parent_profile_id', $id)->get();
-        $refreshCart->each->delete();
+       $refreshCart=Cart::select()->where('parent_profile_id',$id)->get();
+       $refreshCart->each->delete();
 
         Mail::to($email)->send(new MoneyOrder($user));
 

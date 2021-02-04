@@ -55,19 +55,38 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
+        try{
+
         $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
-        $year = date('Y');
-        $year = Carbon::create($year)->format('Y');
-        $month_date = Carbon::create($countryData->start_date)->format('m-d');
-        $start_date = $year.'-'.$month_date;
+        $year =date("Y");
+        $newYear=$year+1;
+        $year=   Carbon::create( $year)->format('Y');
+        $month_start_date = Carbon::create( $countryData->start_date)->format('m-d');
+        $start_date =$year ."-". $month_start_date;
+
+        $year_end_date = Carbon::create( $countryData->end_date)->format('m-d');
+        $country_end_date="12-31";
+        if($year_end_date==$country_end_date){
+            $month_end_date=Carbon::create( $countryData->end_date)->format('m-d');
+            $end_date=$year ."-". $month_end_date;
+        }
+        else{
+            $month_end_date=Carbon::create( $countryData->end_date)->format('m-d');
+            $end_date=$newYear ."-". $month_end_date;
+        }
         if ($request->expectsJson()) {
             return response()->json($start_date);
         }
+        return view('enrollstudent', compact('start_date','end_date'));
+    }
+    catch (\Exception $e) {
+        DB::rollBack();
+            return response()->json(['status' => 'error' ,'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
+    }
 
-        return view('enrollstudent', compact('start_date'));
     }
 
     public function showstudents()
@@ -288,39 +307,61 @@ class StudentController extends Controller
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
 
+
+    private function getFinalAmount(){
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
+
+        if(empty($enroll_fees->amount)){
+            return false;
+        }
+
+        $coupon_amount = session('applied_coupon_amount',0);
+        $final_amount=$coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+
+        return $final_amount;
+    }
+
     public function orderReview($parent_id)
     {
         $address = User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-        $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount=$coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $final_amount = $this->getFinalAmount();
+
+        if($final_amount === false){
+            return view('Billing.invalid');
+        }
 
         return view('Billing.order-review', compact('address', 'final_amount', 'parent_id'));
     }
     
     public function paypalorderReview($parent_id){
         $address= User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $final_amount = $this->getFinalAmount();
+
+        if($final_amount === false){
+            return view('Billing.invalid');
+        }
        
         return view('paywithpaypal',compact('address','final_amount'));
      
      }
      public function stripeorderReview($parent_id){
         $address= User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $final_amount = $this->getFinalAmount();
+
+        if($final_amount === false){
+            return view('Billing.invalid');
+        }
         
         return view('Billing/creditcard',compact('address','final_amount'));
      
      }
      public function moneyorderReview($parent_id){
         $address= User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $final_amount = $this->getFinalAmount();
+
+        if($final_amount === false){
+            return view('Billing.invalid');
+        }
         
         return view('Billing.chequereview',compact('address','final_amount','parent_id'));
      
@@ -328,9 +369,11 @@ class StudentController extends Controller
         
     public function moneygramReview($parent_id){
         $address   = User::find($parent_id)->parentProfile()->first();
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $final_amount = $this->getFinalAmount();
+
+        if($final_amount === false){
+            return view('Billing.invalid');
+        }
 
         return view('Billing.moneygram',compact('address','final_amount','parent_id'));
     }
