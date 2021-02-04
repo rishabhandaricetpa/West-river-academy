@@ -38,6 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [];
+
     public function parentProfile()
     {
         return $this->hasOne(ParentProfile::class);

@@ -25,7 +25,7 @@ class BankTransferTableSeeder extends Seeder
             'routing_number'=>'102000021',
             'account_name'=>'West River Educational Services, Inc.',
             'account_number'=>'153463063153',
-            'status'=>'1'
+            'status'=>'1',
         ]);
     }
 }
