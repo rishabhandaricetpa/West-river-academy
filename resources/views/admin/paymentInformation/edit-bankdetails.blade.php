@@ -4,8 +4,8 @@
 
 
 
-<h5 class="mt-4 mb-2">Payment Address</h5>
-            <div class="row">
+<h5 class="mb-2">Payment Address</h5>
+            <div class="container-fluid">
                 <div class="col-12">
             <!-- Custom Tabs -->
                     <div class="card">
@@ -59,7 +59,7 @@
                   <!-- /.tab-pane -->
                   
                             <div class="tab-pane" id="tab_2">
-                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#bankTransferModal">Add New Bank Transfer Address</button>
+                                <button type="submit" class="btn btn-primary mb-4" data-toggle="modal" data-target="#bankTransferModal">Add New Bank Transfer Address</button>
                                      <table id="addressData" class="table table-bordered table-striped data-table">
                                         <thead>
                                             <tr>
@@ -149,7 +149,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="moneygramModalLabel">Add New Address for Money Gram</h5>
+        <h3  id="moneygramModalLabel">Add New Address for Money Gram</h3>
       </div>
       <form method="post" action="{{route('admin.create.moneygram')}}">
                 @csrf
@@ -179,7 +179,7 @@
                     <input  class="form-control" id="money_gram_id" name="money_gram_id" value="">
                   </div>
                 <!-- /.card-body -->
-      <div class="modal-footer">
+      <div class="modal-footer py-3 px-0">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
@@ -196,7 +196,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="bankTransferModalLabel">Add New Address for Bank Transfer</h5>
+        <h3 id="bankTransferModalLabel">Add New Address for Bank Transfer</h3>
       </div>
       <form method="post" action="{{route('admin.create.banktransfer')}}">
                 @csrf
@@ -234,7 +234,7 @@
                     <input  class="form-control" id="account_number" name="account_number" value="">
                   </div>
                 <!-- /.card-body -->
-      <div class="modal-footer">
+      <div class="modal-footer py-3">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
