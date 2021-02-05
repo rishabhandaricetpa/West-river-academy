@@ -81,6 +81,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('transcript-wizard');
         });
 
+        Route::get('/graduation-app', function () {
+            return view('graduation-app');
+        });
+
+        Route::get('/graduation-app-grade', function () {
+            return view('graduation-app-grade');
+        });
+
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');

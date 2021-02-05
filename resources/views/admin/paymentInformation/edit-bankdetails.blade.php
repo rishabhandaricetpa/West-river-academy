@@ -24,7 +24,7 @@
                                 <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#moneygramModal">Add New Money Gram Address</button>
                                    
                                    
-                                    <table id="addressData" class="table table-bordered table-striped data-table"">
+                                    <table id="addressData" class="table table-bordered table-striped data-table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
