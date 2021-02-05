@@ -30,6 +30,25 @@
     </ul>
     </li>
     <li class="nav-item menu">
+        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Students
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+        <li class="nav-item">
+      <a href="{{ url('admin/view-student')}}" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+          View Students
+        </p>
+      </a>
+        </li>
+            </ul>
+          </li>
+    <li class="nav-item menu">
     <li class="nav-item">
         <a href="{{ url('admin/view-student')}}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
@@ -52,34 +71,44 @@
           View Payments
         </p>
       </a>
-    </li>
+        </li>
           <li class="nav-item">
-          <a href="{{ route('admin.view.coupon') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Coupons
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Fee Structure
-              </p>
             <a href="{{ url('admin/payment-address')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Change Address</p>
             </a>
           </li>
-
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.view.coupon') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+              Coupons
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.logout')}}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Logout
+              </p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="{{ url('admin/countryenrollments')}}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Country Enrollments
+                Country Data
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.logout')}}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Logout
               </p>
             </a>
           </li>
@@ -87,26 +116,5 @@
       <!-- /.sidebar-menu -->
         </ul>
       </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-copy"></i>
-        <p>
-          Fee Structure
-        </p>
-      </a>
-
-    </li>
-  
-    <li class="nav-item">
-      <a href="{{route('admin.logout')}}" class="nav-link">
-        <i class="nav-icon fas fa-copy"></i>
-        <p>
-          Logout
-        </p>
-      </a>
-    </li>
-  </nav>
-  <!-- /.sidebar-menu -->
   </div>
-  <!-- /.sidebar -->
 </aside>
