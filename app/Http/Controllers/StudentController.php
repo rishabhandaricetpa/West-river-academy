@@ -66,6 +66,8 @@ class StudentController extends Controller
         $year=   Carbon::create( $year)->format('Y');
         $month_start_date = Carbon::create( $countryData->start_date)->format('m-d');
         $start_date =$year ."-". $month_start_date;
+        $sem= Carbon::parse($start_date);
+        $semestermonth=  $sem->addMonths(5);
 
         $year_end_date = Carbon::create( $countryData->end_date)->format('m-d');
         $country_end_date="12-31";
@@ -80,7 +82,7 @@ class StudentController extends Controller
         if ($request->expectsJson()) {
             return response()->json($start_date);
         }
-        return view('enrollstudent', compact('start_date','end_date'));
+        return view('enrollstudent', compact('start_date','end_date','semestermonth'));
     }
     catch (\Exception $e) {
         DB::rollBack();

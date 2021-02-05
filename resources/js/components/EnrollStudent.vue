@@ -80,7 +80,7 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <p>
+      <p class="position-relative mb-0">
         <flat-pickr id="dob" name="dob" :config="config" v-model="form.dob" required>
         </flat-pickr>
       </p>
@@ -140,6 +140,7 @@
       v-for="(enrollPeriod, index) in form.enrollPeriods"
       :key="enrollPeriod.id"
     >
+      <span v-if="canRemovePeriod"  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
       <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
@@ -148,6 +149,7 @@
             <div class="form-group w-100 datepicker-full">
               <p>
                 <flat-pickr
+                id="startdate"
                   name="startdate"
                   v-model="enrollPeriod.selectedStartDate"
                   required
@@ -162,7 +164,7 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose August 1 (the first day of the Annual enrollment period),
+              Choose {{new Date(startdate) | moment("MMMM Do")}} (the first day of the Annual enrollment period),
               January 1 (the first day of the Second Semester), today's date or
               another date. This date will appear on your confirmation of
               enrollment letter. You will be considered enrolled for the full
@@ -183,6 +185,7 @@
             <div class="form-group w-100 datepicker-full">
               <p>
                 <flat-pickr
+                 id="enddate"
                   name="enddate"
                   v-model="enrollPeriod.selectedEndDate"
                   :config="enrollPeriod.configenddate"
@@ -198,9 +201,10 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose before July 31 (the last day of your enrollment) or another
-              date before July 31. This date will appear on your confirmation of
-              enrollment letter. Your enrollment will officially end on July 31.
+              Choose before {{new Date(enddate) | moment("MMMM Do")}}
+              (the last day of your enrollment) or another
+              date before {{new Date(enddate) | moment("MMMM Do")}}. This date will appear on your confirmation of
+              enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
             </p>
           </div>
           <div class="col-lg-4 links-list pl-0">
@@ -210,7 +214,6 @@
       </div>
       <div class="form-group mt-2r d-sm-flex links-list mb-5">
         <!-- Button trigger modal -->
-       
         <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
           >what if i need to skip a year?</a
         >
@@ -329,10 +332,13 @@ export default {
             configstartdate: {
               altFormat: "F j, Y",
               altInput: true,
+              allowInput: true,
             },
             configenddate: {
               altFormat: "F j, Y",
+              altInputClass: "form-control",
               altInput: true,
+              allowInput: true,
               disable: [
                 {
                   from: this.calcEndDate(this.startdate),
@@ -346,9 +352,11 @@ export default {
       config: {
         altFormat: "F j, Y",
         altInput: true,
+        allowInput: true,
       },
       students: [],
       errors: [],
+      removingPeriod: false,
     };
   },
   props: {
@@ -363,24 +371,30 @@ export default {
     calcEndDate(date) {
       const oldDate = new Date(date);
       const year = oldDate.getFullYear();
-      return new Date(year + 1, 0, 1); // returns 31 dec for same year
+      const oDate = oldDate.getDate();
+      const month = oldDate.getMonth();
+      return new Date(year + 1, month, oDate); 
     },
     calcToData(date) {
       const oldDate = new Date(date);
       const oDate = oldDate.getDate();
       const year = oldDate.getFullYear();
-      const month = oldDate.getMonth(); 
-      return new Date(year +100, month, oDate + 1);
+      const month = oldDate.getMonth();
+      return new Date(year + 100, month, oDate + 1);
     },
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
     updateEndDate(index) {
-      this.form.enrollPeriods[index].configenddate.disable[0].from = this.calcEndDate(
+      this.form.enrollPeriods[
+        index
+      ].configenddate.disable[0].from = this.calcEndDate(
         this.form.enrollPeriods[index].selectedStartDate
       );
-      this.form.enrollPeriods[index].configenddate.disable[0].to = this.calcToData(
+      this.form.enrollPeriods[
+        index
+      ].configenddate.disable[0].to = this.calcToData(
         this.form.enrollPeriods[index].selectedStartDate
       );
       this.form.enrollPeriods[index].selectedEndDate = ""; // reset the end date value
@@ -393,10 +407,12 @@ export default {
         configstartdate: {
           altFormat: "F j, Y",
           altInput: true,
+          allowInput: true,
         },
         configenddate: {
           altFormat: "F j, Y",
           altInput: true,
+          allowInput: true,
           disable: [
             {
               from: this.calcEndDate(this.startdate),
@@ -405,6 +421,29 @@ export default {
           ],
         },
       });
+    },
+     removePeriod(index) {
+      if (this.removingPeriod) {
+        return;
+      }
+      this.removingPeriod = true;
+
+      let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
+      reqData.enrollPeriods.splice(index, 1);
+
+      axios
+        .post(route("delete.enroll", this.students), reqData)
+        .then((response) => {
+          const resp = response.data;
+          resp.status == "success"
+            ? this.form.enrollPeriods.splice(index, 1)
+            : alert(resp.message);
+          this.removingPeriod = false;
+        })
+        .catch((error) => {
+          this.removingPeriod = false;
+          console.log(error);
+        });
     },
     addStudent() {
       this.errors = [];
@@ -470,6 +509,9 @@ export default {
   computed: {
     canAddMorePeriod() {
       return this.form.enrollPeriods.length < 4;
+    },
+     canRemovePeriod() {
+      return this.form.enrollPeriods.length > 1;
     },
   },
 };
