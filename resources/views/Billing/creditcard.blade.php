@@ -63,7 +63,6 @@
                                     class='form-control' size='4' type='text' name="description">
                             </div>
                         </div>
-                            <input id="amount" name="amount" type="hidden" value="{{$enroll_fees->amount}}">
                         </div>
   
                         <div class='form-row row'>
@@ -74,7 +73,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now <i class="fas fa-dollar-sign"></i>{{$final_amount}}</button>
                             </div>
                         </div>
                           

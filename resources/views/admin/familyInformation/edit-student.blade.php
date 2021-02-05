@@ -4,51 +4,42 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @section('content')
 <section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <!-- left column -->
-      <div class="col-md-12">
-        <!-- general form elements -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Edit Student Information</h3>
-          </div>
-
-          <!-- /.card-header -->
-          <!-- form start -->
-          <form method="post" action="{{route('admin.edit-student.update',$student->id)}}">
+  <div class="container-fluid position-relative">
+            <h1>Edit Student Information</h1>
+            <div class="form-wrap border py-5 px-25 position-relative">
+          <form method="post"  action="{{route('admin.edit-student.update',$student->id)}}">
             @csrf
-            <div class="card-body">
-              <div class="form-group">
+            <div class="card-body p-0 row">
+              <div class="form-group col-sm-6">
                 <label>First/Given Name <sup>*</sup></label>
                 <input class="form-control" id="first_name" value="{{$student->first_name}}" name="first_name">
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Middle Name</label>
                 <input class="form-control" id="middle_name" name="middle_name" value="{{$student->middle_name}}">
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Last/Family Name <sup>*</sup></label>
                 <input class="form-control" id="last_name" name="last_name" value="{{$student->last_name}}">
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Date of Birth<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
                 <input class="form-control" id="dob" name="dob" value="{{$student->d_o_b}}" required>
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Email Address</label>
                 <input class="form-control" name="email" id="email" value="{{$student->email}}">
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Cell Phone<sup>*</sup></label>
                 <input class="form-control" id="cell_phone" name="cell_phone" value="{{$student->cell_phone}}">
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Student ID<sup>*</sup></label>
                 <input class="form-control" id="student_id" name="student_id" value="{{$student->student_Id}}">
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Student ID<sup>*</sup></label>
                 <select class="form-control" name="immunized_status" value="{{$student->immunized_status}}">
                   <option>Yes, records will come with school records.</option>
@@ -64,13 +55,20 @@
             </div>
             <label>Enrollment Period <sup>*</sup></label>
             @foreach($enrollment_periods as $enrollment_period)
-            <div class="form-group">
+            <div class="form-group w-100 row align-items-center">
               <input type="hidden" name="id[]" value="{{$enrollment_period->id}}">
-              Start Date <input class="datepicker" type="text" name="start_date[]"
+           <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
+             <label>Start Date </label>
+             <input class="datepicker" type="text" name="start_date[]"
                 value="{{$enrollment_period->start_date_of_enrollment}}">
-              End Date <input class="datepicker" type="text" name="end_date[]"
+             </div>
+             <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">  
+               <label>End Date </label>
+               <input class="datepicker" type="text" name="end_date[]"
                 value="{{$enrollment_period->end_date_of_enrollment}}">
-              <select name="grade[]">
+                </div>
+                <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
+              <select name="grade[]" class="form-control">
                 <option value="Ungraded" @if($enrollment_period->grade_level == 'Ungraded')
                   selected="selected" @endif>Ungraded</option>
                 <option value="Preschool Age 3" @if($enrollment_period->grade_level== 'Preschool
@@ -123,24 +121,19 @@
                   '12')
                   selected="selected" @endif>12</option>
               </select>
+              </div>
             </div>
             @endforeach
             <!-- /.card-body -->
-        </div>
-        <div class="card-footer">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+
         </form>
+      </div>
       </div>
       <!-- /.card -->
 
       <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
-  </div>
-  <!--/.col (right) -->
-  </div>
-  <!-- /.row -->
   </div><!-- /.container-fluid -->
 </section>
 

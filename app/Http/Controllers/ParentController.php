@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\FeesInfo;
+use App\Models\Coupon;
+use App\Models\Address;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
@@ -54,9 +55,12 @@ class ParentController extends Controller
             return redirect()->back()->with($notification);
         }
 
-        $country_list = Country::select('country')->get();
+        $coupons = Coupon::getParentCoupons();
 
-        return view('Billing/cart-billing', compact('parent', 'country_list', 'enroll_fees'));
+        $country_list  =  Country::select('country')->get();
+        $coupon_code = session('applied_coupon',null);
+        
+        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees','coupons','coupon_code'));
     }
 
     /**

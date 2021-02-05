@@ -21,9 +21,9 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm admin-nav">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('admin.home') }}">
+            <a class="navbar-brand text-white" href="{{ route('admin.home') }}">
                 {{ config('app.name', 'Laravel') }} :: Admin
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -41,11 +41,11 @@
                     <!-- Authentication Links -->
                     @if (Auth::guard('admin')->guest())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-white" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('admin.register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link text-white" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
@@ -72,7 +72,7 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
 </div>

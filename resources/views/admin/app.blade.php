@@ -7,7 +7,7 @@
   @include('admin.layouts.partials.navbar')
   <!-- * =============== /Navbar =============== * -->
     <!-- * =============== Sidebar =============== * -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar">
   @include('admin.layouts.partials.sidebar')
   </aside>
 
@@ -17,7 +17,8 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper admin-wrapper">
+  <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
     @yield('content')
   </div>
   <!-- /.content-wrapper -->

@@ -4,23 +4,18 @@
 <!-- Content Header (Page header) -->
 <!-- Content Wrapper. Contains page content -->
 
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 parentinfo">Parent Information</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Parent Information</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid position-relative">
+        <h1 class="m-0 text-center">Parent Information</h1>
+      <div class="d-flex">
+        <ol class="breadcrumb ml-auto">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Parent Information</li>
+        </ol>
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
 <!-- Main content -->
 <section class="content">
