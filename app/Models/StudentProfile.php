@@ -33,4 +33,9 @@ class StudentProfile extends Model
     {
         return $this->hasMany('App\Models\EnrollmentPeriods', 'student_profile_id', 'id');
     }
+
+    public function graduation()
+    {
+        return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');
+    }
 }

@@ -28,6 +28,11 @@ class ParentProfile extends Model
         return $this->hasMany('App\Models\StudentProfile', 'parent_profile_id', 'id');
     }
 
+    public function graduations()
+    {
+        return $this->hasMany('App\Models\Graduation', 'parent_profile_id', 'id');
+    }
+
     public static function getParentPendingFees($parent_profile_id, $total = false)
     {
         try {
