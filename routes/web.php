@@ -77,6 +77,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('reviewstudent');
         });
 
+        Route::get('/transcript-wizard', function () {
+            return view('transcript-wizard');
+        });
+
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
