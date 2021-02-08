@@ -16,7 +16,7 @@
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
           <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
              <h3>Select an English / Language Arts course:</h3>
-             <form method="POST" action="{{ route('enroll') }}">
+             <form method="POST" action="">
    @csrf
    <div class="form-group d-sm-flex mt-2r row">
       <div class="col-sm-6">
