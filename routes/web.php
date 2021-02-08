@@ -210,9 +210,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('frontendpages.dashboard-transcript-filling');
     });
 
-    Route::get('transcript1', function () {
-        return view('frontendpages.dashboard-transcript-filling1');
-    });
+    Route::get('english-transcript', 'EnglishLanguageController@index')->name('english.transcript');
 
     Route::get('transcript2', function () {
         return view('frontendpages.dashboard-transcript-filling2');
