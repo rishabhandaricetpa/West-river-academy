@@ -433,10 +433,12 @@ export default {
         configstartdate: {
           altFormat: "F j, Y",
           altInput: true,
+          allowInput: true,
         },
         configenddate: {
           altFormat: "F j, Y",
           altInput: true,
+          allowInput: true,
           disable: [
             {
               from: this.calcEndDate(this.startdate),
