@@ -3,12 +3,8 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Coupon Management</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+      <div class="container-fluid position-relative">
+            <h1 class="text-center">Coupon Management</h1>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -21,7 +17,7 @@
            <!-- /.card-header -->
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('admin.create.coupon') }}" class="btn btn-sm btn-success"> Generate New Coupon </a>
+                <a href="{{ route('admin.create.coupon') }}" class="btn btn-primary"> Generate New Coupon </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

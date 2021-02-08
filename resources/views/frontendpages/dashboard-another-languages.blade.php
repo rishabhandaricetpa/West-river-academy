@@ -16,7 +16,7 @@
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
           <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
              <h3 class="mb-3">Do you want to add another grade level?</h3>
-             <form method="POST" class="mb-0" action="{{ route('enroll') }}">
+             <form method="POST" class="mb-0" action="">
                 @csrf
         <div class="form-group mb-2 lato-italic info-detail pb-4 py-2">
            <div class="row ">

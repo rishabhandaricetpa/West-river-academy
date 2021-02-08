@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\EnrollmentHelper;
-use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\EnrollmentPayment;
@@ -14,13 +12,10 @@ use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Faker\Calculator\Ean;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -55,40 +50,37 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        try{
+        try {
 
-        $id = Auth::user()->id;
-        $parentProfileData = User::find($id)->parentProfile()->first();
-        $country = $parentProfileData->country;
-        $countryData = Country::where('country', $country)->first();
-        $year =date("Y");
-        $newYear=$year+1;
-        $year=   Carbon::create( $year)->format('Y');
-        $month_start_date = Carbon::create( $countryData->start_date)->format('m-d');
-        $start_date =$year ."-". $month_start_date;
-        $sem= Carbon::parse($start_date);
-        $semestermonth=  $sem->addMonths(5);
+            $id = Auth::user()->id;
+            $parentProfileData = User::find($id)->parentProfile()->first();
+            $country = $parentProfileData->country;
+            $countryData = Country::where('country', $country)->first();
+            $year = date("Y");
+            $newYear = $year + 1;
+            $year =   Carbon::create($year)->format('Y');
+            $month_start_date = Carbon::create($countryData->start_date)->format('m-d');
+            $start_date = $year . "-" . $month_start_date;
+            $sem = Carbon::parse($start_date);
+            $semestermonth =  $sem->addMonths(5);
 
-        $year_end_date = Carbon::create( $countryData->end_date)->format('m-d');
-        $country_end_date="12-31";
-        if($year_end_date==$country_end_date){
-            $month_end_date=Carbon::create( $countryData->end_date)->format('m-d');
-            $end_date=$year ."-". $month_end_date;
+            $year_end_date = Carbon::create($countryData->end_date)->format('m-d');
+            $country_end_date = "12-31";
+            if ($year_end_date == $country_end_date) {
+                $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
+                $end_date = $year . "-" . $month_end_date;
+            } else {
+                $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
+                $end_date = $newYear . "-" . $month_end_date;
+            }
+            if ($request->expectsJson()) {
+                return response()->json($start_date);
+            }
+            return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
         }
-        else{
-            $month_end_date=Carbon::create( $countryData->end_date)->format('m-d');
-            $end_date=$newYear ."-". $month_end_date;
-        }
-        if ($request->expectsJson()) {
-            return response()->json($start_date);
-        }
-        return view('enrollstudent', compact('start_date','end_date','semestermonth'));
-    }
-    catch (\Exception $e) {
-        DB::rollBack();
-            return response()->json(['status' => 'error' ,'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
-    }
-
     }
 
     public function showstudents()
@@ -136,14 +128,14 @@ class StudentController extends Controller
                 $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
-                $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$id)
-                                                    ->where('student_profiles.id','!=', $student->id)
-                                                    ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
-                                                    ->whereDate('enrollment_periods.start_date_of_enrollment','<=',$selectedStartDate)
-                                                    ->whereDate('enrollment_periods.end_date_of_enrollment','>=',$selectedEndDate)
-                                                    ->exists();
+                $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $id)
+                    ->where('student_profiles.id', '!=', $student->id)
+                    ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                    ->whereDate('enrollment_periods.start_date_of_enrollment', '<=', $selectedStartDate)
+                    ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
+                    ->exists();
 
-                if (! $student_enrolled) {
+                if (!$student_enrolled) {
                     $student_type = 'first_student';
                 } else {
                     $student_type = 'additional_student';
@@ -157,7 +149,7 @@ class StudentController extends Controller
                     'type' => $type,
                 ]);
 
-                $fee_type = $student_type.'_'.$type;
+                $fee_type = $student_type . '_' . $type;
                 $fee = FeesInfo::select('amount')->where('type', $fee_type)->first();
 
                 $enrollmentPayment = EnrollmentPayment::create([
@@ -220,7 +212,7 @@ class StudentController extends Controller
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
             $periods->whereNotNull('id')->each(function ($period) use ($student) {
-                if (! EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
+                if (!EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
                     $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
@@ -246,14 +238,14 @@ class StudentController extends Controller
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
-        $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id',$student->parent_profile_id)
-                                            ->where('student_profiles.id','!=', $student->id)
-                                            ->leftJoin('enrollment_periods','enrollment_periods.student_profile_id','student_profiles.id')
-                                            ->whereDate('enrollment_periods.start_date_of_enrollment','<=',$selectedStartDate)
-                                            ->whereDate('enrollment_periods.end_date_of_enrollment','>=',$selectedEndDate)
-                                            ->exists();
+        $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $student->parent_profile_id)
+            ->where('student_profiles.id', '!=', $student->id)
+            ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+            ->whereDate('enrollment_periods.start_date_of_enrollment', '<=', $selectedStartDate)
+            ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
+            ->exists();
 
-        if (! $student_enrolled) {
+        if (!$student_enrolled) {
             $student_type = 'first_student';
         } else {
             $student_type = 'additional_student';
@@ -278,7 +270,7 @@ class StudentController extends Controller
             return;
         }
 
-        $fee_type = $student_type.'_'.$type;
+        $fee_type = $student_type . '_' . $type;
         $fee = FeesInfo::select('amount')->where('type', $fee_type)->first();
 
         $EnrollmentPayment->fill([
@@ -301,24 +293,25 @@ class StudentController extends Controller
         $countryId = $countryData->id;
         $studentData = StudentProfile::find($id);
         $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
-                                            ->leftJoin('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
-                                            ->select('enrollment_periods.*', 'enrollment_payments.status')
-                                            ->orderBy('enrollment_payments.status', 'desc')
-                                            ->get();
+            ->leftJoin('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+            ->select('enrollment_periods.*', 'enrollment_payments.status')
+            ->orderBy('enrollment_payments.status', 'desc')
+            ->get();
 
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
     }
 
 
-    private function getFinalAmount(){
+    private function getFinalAmount()
+    {
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
 
-        if(empty($enroll_fees->amount)){
+        if (empty($enroll_fees->amount)) {
             return false;
         }
 
-        $coupon_amount = session('applied_coupon_amount',0);
-        $final_amount=$coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $coupon_amount = session('applied_coupon_amount', 0);
+        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
 
         return $final_amount;
     }
@@ -328,56 +321,57 @@ class StudentController extends Controller
         $address = User::find($parent_id)->parentProfile()->first();
         $final_amount = $this->getFinalAmount();
 
-        if($final_amount === false){
+        if ($final_amount === false) {
             return view('Billing.invalid');
         }
 
         return view('Billing.order-review', compact('address', 'final_amount', 'parent_id'));
     }
-    
-    public function paypalorderReview($parent_id){
-        $address= User::find($parent_id)->parentProfile()->first();
+
+    public function paypalorderReview($parent_id)
+    {
+        $address = User::find($parent_id)->parentProfile()->first();
         $final_amount = $this->getFinalAmount();
 
-        if($final_amount === false){
+        if ($final_amount === false) {
             return view('Billing.invalid');
         }
-       
-        return view('paywithpaypal',compact('address','final_amount'));
-     
-     }
-     public function stripeorderReview($parent_id){
-        $address= User::find($parent_id)->parentProfile()->first();
+
+        return view('paywithpaypal', compact('address', 'final_amount'));
+    }
+    public function stripeorderReview($parent_id)
+    {
+        $address = User::find($parent_id)->parentProfile()->first();
         $final_amount = $this->getFinalAmount();
 
-        if($final_amount === false){
+        if ($final_amount === false) {
             return view('Billing.invalid');
         }
-        
-        return view('Billing/creditcard',compact('address','final_amount'));
-     
-     }
-     public function moneyorderReview($parent_id){
-        $address= User::find($parent_id)->parentProfile()->first();
+
+        return view('Billing/creditcard', compact('address', 'final_amount'));
+    }
+    public function moneyorderReview($parent_id)
+    {
+        $address = User::find($parent_id)->parentProfile()->first();
         $final_amount = $this->getFinalAmount();
 
-        if($final_amount === false){
+        if ($final_amount === false) {
             return view('Billing.invalid');
         }
-        
-        return view('Billing.chequereview',compact('address','final_amount','parent_id'));
-     
-     }
-        
-    public function moneygramReview($parent_id){
+
+        return view('Billing.chequereview', compact('address', 'final_amount', 'parent_id'));
+    }
+
+    public function moneygramReview($parent_id)
+    {
         $address   = User::find($parent_id)->parentProfile()->first();
         $final_amount = $this->getFinalAmount();
 
-        if($final_amount === false){
+        if ($final_amount === false) {
             return view('Billing.invalid');
         }
 
-        return view('Billing.moneygram',compact('address','final_amount','parent_id'));
+        return view('Billing.moneygram', compact('address', 'final_amount', 'parent_id'));
     }
 
     public function deleteEnroll(Request $request, $id)
