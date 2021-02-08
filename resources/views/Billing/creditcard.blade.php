@@ -59,22 +59,21 @@
                             </div>
                             <div class='form-row row col-12'>
                             <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>What are you paying for<sup>*</sup></label> <input
+                                <label class='control-label'>What are you paying for</label> <input
                                     class='form-control' size='4' type='text' name="description">
                             </div>
                         </div>
-                            <input id="amount" name="amount" type="hidden" value="{{$enroll_fees->amount}}">
                         </div>
   
                         <div class='form-row row'>
                             <div class='col-md-12 hide error form-group'>
-                                <div class='alert-danger alert'>Fix the errors before you begin.</div>
+                                <div class='alert-danger alert'>Please fill the Required fields.</div>
                             </div>
                         </div>
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now <i class="fas fa-dollar-sign"></i>{{$enroll_fees->amount}}</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now <i class="fas fa-dollar-sign"></i>{{$final_amount}}</button>
                             </div>
                         </div>
                           

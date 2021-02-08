@@ -14,8 +14,10 @@ class PaymentController extends Controller
     public function view()
     {
         $students = StudentProfile::all();
+
         return view('admin.payment.view-payment', compact('students'));
     }
+
     public function edit($id)
     {
         $student = StudentProfile::find($id)->first();
@@ -37,14 +39,18 @@ class PaymentController extends Controller
 
             )
             ->get();
+
         return view('admin.payment.edit-payment', compact('payment_info', 'student'));
     }
+
     public function editPaymentStatus(Request $request, $id)
     {
         $enroll_payment = EnrollmentPayment::find($id);
         $enrollment_periods = EnrollmentPayment::find($id)->enrollment_period()->first();
+
         return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods'));
     }
+
     public function update(Request $request, $payment_id)
     {
 
@@ -60,14 +66,15 @@ class PaymentController extends Controller
         // update enrollment period
         $enrollment_periods = EnrollmentPayment::find($payment_id)->enrollment_period()->first();
         $enrollment_periods->grade_level = $request->input('grade_level');
-        $enrollment_periods->start_date_of_enrollment = $request->input('start_date_of_enrollment');
-        $enrollment_periods->end_date_of_enrollment = $request->input('end_date_of_enrollment');
+        $enrollment_periods->start_date_of_enrollment = \Carbon\Carbon::parse($request->input('start_date_of_enrollment'))->format('M d Y');
+        $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('M d Y');
         $enrollment_payment->grade_level = $request->input('grade_level');
         $enrollment_periods->save();
-        $notification = array(
+        $notification = [
             'message' => 'Record Updated Successfully!',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
+
         return redirect()->back()->with($notification);
     }
 }

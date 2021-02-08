@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Auth;
-use App\Models\User;
-use App\Models\StudentProfile;
+
+use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\ParentProfile;
-use App\Http\Controllers\Controller;
+use App\Models\StudentProfile;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -42,26 +43,29 @@ class RegisterController extends Controller
     {
         $this->middleware('admin.guest:admin');
     }
+
     /**
      * Deactivate the specified user from storage.
      *
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-        public function dactive($id)
+    public function dactive($id)
     {
         $parent = ParentProfile::find($id);
         $studentProfileData = StudentProfile::find($parent)->first();
-        $parent->status   =  '1';
+        $parent->status = '1';
         $parent->save();
-        $studentProfileData->status='1';
+        $studentProfileData->status = '1';
         $studentProfileData->save();
-        $notification = array(
+        $notification = [
             'message' => 'Student Record is Deactivated Successfully!',
-            'alert-type' => 'warning'
-        );
+            'alert-type' => 'warning',
+        ];
+
         return redirect()->back()->with($notification);
     }
+
     /**
      * Get a validator for an incoming registration request.
      *

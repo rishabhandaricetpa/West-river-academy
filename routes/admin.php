@@ -24,12 +24,12 @@ Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
 Route::group(['middleware' => 'auth'], function () {
-
     Route::group(
         ['namespace' => 'admin'],
         function () {
             Route::get('logout', function () {
                 Auth::guard('admin')->logout();
+
                 return redirect('/admin/login');
             })->name('admin.logout');
             Route::get('/payments-invoice', function () {
@@ -58,7 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
     Route::get('edit-payment-status/{id}', 'PaymentController@editPaymentStatus')->name('edit.payment.status');
 
-
     // edit for payment address for - moneygram,banktransfer & transferwise
     Route::get('/payment-address', 'PaymentAddressController@index');
     Route::get('edit-banktransfer/{id}', 'PaymentAddressController@edit')->name('banktransfer.edit');
@@ -77,4 +76,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('delete/moneygram/{id}', 'PaymentAddressController@destroyMoneyGramAddress')->name('delete.moneygramAddress');
     Route::get('delete/transferwise/{id}', 'PaymentAddressController@destroyTransferwiseAddress')->name('delete.transferwiseAddress');
     Route::get('delete/banktransfer/{id}', 'PaymentAddressController@destroyBanktransferAddress')->name('delete.banktransferAddress');
+
+    Route::get('coupon', 'CouponController@index')->name('view.coupon');
+    Route::get('coupon/create', 'CouponController@create')->name('create.coupon');
+    Route::get('coupon/{id}/edit', 'CouponController@edit')->name('edit.coupon');
+    Route::post('coupon', 'CouponController@store')->name('store.coupon');
+    Route::put('coupon/{id}', 'CouponController@update')->name('update.coupon');
+    Route::get('coupon/data', 'CouponController@dataTable')->name('coupons.dt');
+    Route::get('coupon/generate', 'CouponController@getCode')->name('coupons.generate');
+    //country date
+    Route::get('/countryenrollments', 'CountryController@index')->name('country.display');
+    Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
+    Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
 });

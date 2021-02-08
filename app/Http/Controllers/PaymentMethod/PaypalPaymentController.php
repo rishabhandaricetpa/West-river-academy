@@ -1,35 +1,36 @@
 <?php
 
 namespace App\Http\Controllers\PaymentMethod;
+
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\EnrollmentPayment;
+use App\Models\ParentProfile;
+use App\Models\TransactionsMethod;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
-use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use PayPal\Api\Agreement;
-use PayPal\Api\Payer;
-use PayPal\Api\Plan;
-use PayPal\Api\PaymentDefinition;
-use PayPal\Api\PayerInfo;
+use PayPal\Api\Amount;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
-use PayPal\Api\Amount;
-use PayPal\Api\Transaction;
-use PayPal\Api\RedirectUrls;
+use PayPal\Api\Payer;
+use PayPal\Api\PayerInfo;
 use PayPal\Api\Payment;
+use PayPal\Api\PaymentDefinition;
 use PayPal\Api\PaymentExecution;
-use App\Models\TransactionsMethod;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Auth;
+use PayPal\Api\Plan;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
 use Redirect;
 use Session;
 use URL;
-use App\Models\User;
-use App\Models\Cart;
-use App\Models\ParentProfile;
-use App\Models\EnrollmentPayment;
 
-class   PaypalPaymentController extends Controller
+class PaypalPaymentController extends Controller
 {
     private $_api_context;
     private $parent_profile_id;
@@ -39,89 +40,100 @@ class   PaypalPaymentController extends Controller
         $paypal_configuration = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
         $this->_api_context->setConfig($paypal_configuration['settings']);
-        
-    $this->middleware(function ($request, $next) {
-        $Userid = Auth::user()->id;
-        $parentProfileData = User::find($Userid)->parentProfile()->first();
-        $this->parent_profile_id = $parentProfileData->id;
-        return $next($request);
+
+        $this->middleware(function ($request, $next) {
+            $Userid = Auth::user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $this->parent_profile_id = $parentProfileData->id;
+
+            return $next($request);
         });
     }
+
     public function payWithPaypal()
     {
         return view('paywithpaypal');
     }
-    
 
     public function postPaymentWithpaypal(Request $request)
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        $total=$enroll_fees->amount;
-        $item_1 = new Item();
 
-        $item_1->setName('Product 1')
-            ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setPrice($total);
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
+        if (empty($enroll_fees->amount)) {
+            return view('Billing.invalid');
+        } else {
+            $coupon_amount = session('applied_coupon_amount', 0);
+            $total = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
 
-        $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
+            $item_1 = new Item();
 
-        $amount = new Amount();
-        $amount->setCurrency('USD')
-            ->setTotal($total);
+            $item_1->setName('Product 1')
+                ->setCurrency('USD')
+                ->setQuantity(1)
+                ->setPrice($total);
 
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription('Enter Your transaction description');
+            $item_list = new ItemList();
+            $item_list->setItems([$item_1]);
 
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('status'))
-            ->setCancelUrl(URL::route('status'));
+            $amount = new Amount();
+            $amount->setCurrency('USD')
+                ->setTotal($total);
 
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-        try {
-            $payment->create($this->_api_context);
-        } catch (Exception $e) {
-            if (\Config::get('app.debug')) {
-                \Session::put('error', 'Connection timeout');
-                return Redirect::route('paywithpaypal');
-            } else {
-                \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::route('paywithpaypal');
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($item_list)
+                ->setDescription('Enter Your transaction description');
+
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::route('status'))
+                ->setCancelUrl(URL::route('status'));
+
+            $payment = new Payment();
+            $payment->setIntent('Sale')
+                ->setPayer($payer)
+                ->setRedirectUrls($redirect_urls)
+                ->setTransactions([$transaction]);
+            try {
+                $payment->create($this->_api_context);
+            } catch (Exception $e) {
+                if (\Config::get('app.debug')) {
+                    \Session::put('error', 'Connection timeout');
+
+                    return Redirect::route('paywithpaypal');
+                } else {
+                    \Session::put('error', 'Some error occur, sorry for inconvenient');
+
+                    return Redirect::route('paywithpaypal');
+                }
             }
-        }
 
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
+            foreach ($payment->getLinks() as $link) {
+                if ($link->getRel() == 'approval_url') {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
             }
+
+            Session::put('paypal_payment_id', $payment->getId());
+
+            if (isset($redirect_url)) {
+                return Redirect::away($redirect_url);
+            }
+
+            \Session::put('error', 'Unknown error occurred');
+
+            return Redirect::route('paywithpaypal');
         }
-
-        Session::put('paypal_payment_id', $payment->getId());
-
-        if (isset($redirect_url)) {
-            return Redirect::away($redirect_url);
-        }
-
-        \Session::put('error', 'Unknown error occurred');
-        return Redirect::route('paywithpaypal');
     }
     public function getPaymentStatus(Request $request)
-    {   
-       
-        $payment_id = Session::get('paypal_payment_id');        
+    {
+        $payment_id = Session::get('paypal_payment_id');
         Session::forget('paypal_payment_id');
         if (empty($request->input('PayerID')) || empty($request->input('token'))) {
             \Session::put('error', 'Payment failed');
+
             return Redirect::route('paywithpaypal');
         }
         $payment = Payment::get($payment_id, $this->_api_context);
@@ -129,39 +141,43 @@ class   PaypalPaymentController extends Controller
         $execution->setPayerId($request->input('PayerID'));
         $result = $payment->execute($execution, $this->_api_context);
 
-        $jsonResult =json_decode($result,true );
-      $amount=  $jsonResult['transactions'][0]['amount']['total'];
-        $paypal =new TransactionsMethod();
-        $paypal->transcation_id =$payment_id;
-        $paypal->payment_mode= 'Pay pal';
+        $coupon_code = session('applied_coupon', null);
+        $coupon_amount = session('applied_coupon_amount', 0);
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
+
+        $paypal = new TransactionsMethod();
+        $paypal->transcation_id = $payment_id;
+        $paypal->payment_mode = 'Pay pal';
         $paypal->parent_profile_id = Auth::user()->id;
-        $paypal->amount =$amount;
-        $paypal->status="succeeded";
+        $paypal->amount = $enroll_fees->amount;
+        $paypal->status = "succeeded";
+        $paypal->coupon_code = $coupon_code;
+        $paypal->coupon_amount = $coupon_amount;
         $paypal->save();
 
-        $cartItems=Cart::select('item_id')->where('parent_profile_id',$paypal->parent_profile_id)->get();
-        
-        foreach ($cartItems as $cart) 
-        {
-          $enrollemtpayment=EnrollmentPayment::select()->where('enrollment_period_id',$cart->item_id)->first();
-          $enrollemtpayment->status='paid';
-          $enrollemtpayment->transcation_id=$payment_id;;
-          $enrollemtpayment->payment_mode='Pay pal';
-          $enrollemtpayment->save();
+        $cartItems = Cart::select('item_id')->where('parent_profile_id', $paypal->parent_profile_id)->get();
+
+        foreach ($cartItems as $cart) {
+            $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
+            $enrollemtpayment->status = 'paid';
+            $enrollemtpayment->transcation_id = $payment_id;
+            $enrollemtpayment->payment_mode = 'Pay pal';
+            $enrollemtpayment->save();
         }
 
-        $refreshCart=Cart::select()->where('parent_profile_id',$paypal->parent_profile_id)->get();
+        $refreshCart = Cart::select()->where('parent_profile_id', $paypal->parent_profile_id)->get();
         $refreshCart->each->delete();
-        
+
         if ($result->getState() == 'approved') {
-            $notification = array(
+            $notification = [
                 'message' => 'Payment has been successfully processed! Add more services',
                 'alert-type' => 'success'
-            ); 
-            return Redirect::route('dashboard')->with($notification);
+            ];
+            return Redirect::route('thankyou.paypal')->with($notification);
         }
 
         \Session::put('error', 'Payment failed !!');
+
         return Redirect::route('paywithpaypal');
     }
 }

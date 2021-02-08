@@ -24,7 +24,7 @@
   <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
+  <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
   <script>
     $(function () {
       $("#example1").DataTable({
@@ -32,7 +32,57 @@
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-      
+      $("#coupons-table").DataTable({
+        "ajax": "{{ route('admin.coupons.dt') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "code" },
+          { "data": "amount" },
+          { "data": "status" },
+          // { "data": "redeem_left" },
+          { "data": "expire_at" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="{{ route('admin.view.coupon') }}/${id}/edit">Edit</a>`;
+                      } 
+          },
+        ]
+      });
+
+      $("#generate-code").on('click',function () {
+        let _this = $(this);
+        let text = _this.text();
+
+        _this.attr('disabled',true);
+        _this.text('Generating...');
+        
+        $.ajax({
+          type: "get",
+          url: "{{route('admin.coupons.generate')}}",
+          success: function (response) {
+            $("#code").val(response);
+            _this.attr('disabled',false);
+            _this.text(text);
+          },
+          error: function () { 
+            _this.attr('disabled',false);
+            _this.text(text);
+          }
+        });
+      });
+
+      $('#assign-select').select2({
+        placeholder: 'Select Parents to assign Coupon',
+        allowClear: true
+      });
+
     });
     $(function(){
     $(".datepicker").datepicker({

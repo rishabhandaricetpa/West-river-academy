@@ -6,7 +6,7 @@
                 <h1>Edit Parent Information</h1>
                 <div class="form-wrap border py-5 px-25 position-relative">
               <!-- form start -->
-              <form method="get" class="row" action="{{route('admin.parent.update',$parent->id)}}">
+              <form method="post" class="row" action="{{route('admin.parent.update',$parent->id)}}">
                 @csrf
                 <div class="form-group col-sm-6">
                     <label>User Status<sup>*</sup></label>

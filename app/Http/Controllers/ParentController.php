@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\StudentProfile;
-use App\Models\ParentProfile;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\FeesInfo;
+use App\Models\Coupon;
 use App\Models\Address;
+use App\Models\ParentProfile;
+use App\Models\StudentProfile;
+use App\Models\User;
+use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ParentController extends Controller
@@ -27,40 +28,47 @@ class ParentController extends Controller
             return $next($request);
         });
     }
+
     public function address($id)
-    {    
-        $parent =User::find($id)->parentProfile()->first();
-        
-        $enroll_fees = Cart::getCartAmount($this->parent_profile_id,true);
-        
-        if( is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0){
-            $notification = array(
+    {
+        $parent = User::find($id)->parentProfile()->first();
+
+        $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
+
+        if (is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0) {
+            $notification = [
                 'message' => 'Cart is Empty! Please add atleast one item.',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
 
         $is_valid = Cart::isCartValid($this->parent_profile_id);
 
-        if(!$is_valid){
-            $notification = array(
+        if (! $is_valid) {
+            $notification = [
                 'message' => 'Cart is Invalid!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
 
+        $coupons = Coupon::getParentCoupons();
+
         $country_list  =  Country::select('country')->get();
-        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees'));
+        $coupon_code = session('applied_coupon',null);
+        
+        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees','coupons','coupon_code'));
     }
 
     /**
-     * This function is used to store billing and shipping address
+     * This function is used to store billing and shipping address.
      */
     protected function saveaddress(Request $request)
-    {   
-        try{
+    {
+        try {
             DB::beginTransaction();
             $address = new Address();
             $billing_data = $request->input('billing_address');
@@ -69,7 +77,9 @@ class ParentController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
-            $billinAddress =  Address::create([
+            $billinAddress =  Address::updateOrCreate(
+                ['parent_profile_id'=>$id],
+                [
                 'parent_profile_id' => $id,
                 'billing_street_address' => $billing_data['street_address'],
                 'billing_city' => $billing_data['city'],
@@ -94,111 +104,116 @@ class ParentController extends Controller
             $parentaddress->save();
             DB::commit();
 
-            if($payment_type['payment_type']=="Credit Card"){
+            if ($payment_type['payment_type'] == 'Credit Card') {
                 return route('stripe.payment');
-            }
-            elseif($payment_type['payment_type']=="Pay Pal"){
+            } elseif ($payment_type['payment_type'] == 'Pay Pal') {
                 return route('paywithpaypal');
-            }
-            elseif($payment_type['payment_type']=="Bank Transfer"){
+            } elseif ($payment_type['payment_type'] == 'Bank Transfer') {
                 return route('order.review');
-            }
-            elseif($payment_type['payment_type']=="MoneyGram"){
+            } elseif ($payment_type['payment_type'] == 'MoneyGram') {
                 return route('money.gram');
-            }
-            elseif($payment_type['payment_type']=="Check or Money Order"){
+            } elseif ($payment_type['payment_type'] == 'Check or Money Order') {
                 return route('money.order');
             }
-            } catch (\Exception $e) {   
-                DB::rollBack();
-            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     }
-    
-    //Parent accounts edit information 
+
+    //Parent accounts edit information
     public function mysettings($id)
-    {    
+    {
         $user_id = Auth::user()->id;
         $parent = ParentProfile::find($user_id)->first();
-        return view('MyAccounts/myaccount', compact('parent','user_id'));
+
+        return view('MyAccounts/myaccount', compact('parent', 'user_id'));
     }
 
     public function editmysettings($id)
-    {    
+    {
         $user_id = Auth::user()->id;
         $parent = ParentProfile::find($user_id)->first();
-        return view('MyAccounts/edit-account', compact('parent','user_id'));
+
+        return view('MyAccounts/edit-account', compact('parent', 'user_id'));
     }
 
     public function updatemysettings(Request $request, $id)
     {
-        try{
+        try {
             DB::beginTransaction();
             $user_id = Auth::user()->id;
-            $userdata=User::find($user_id)->first();
-            $userdata->name         =       $request->get('first_name');
-            $userdata->email        =       $request->get('email');
+            $userdata = User::find($user_id)->first();
+            $userdata->name = $request->get('first_name');
+            $userdata->email = $request->get('email');
             // $Userdata->email_verified_at='';
             $userdata->save();
 
-            $user=  User::find($id)->parentProfile()->first();
+            $user = User::find($id)->parentProfile()->first();
             $parent_id = $user->id;
             $parent = ParentProfile::find($parent_id)->first();
-            $parent->p1_first_name   =  $request->get('first_name');
-            $parent->p1_last_name    =  $request->get('last_name');
-            $parent->p1_email        =  $request->get('email');
-            $parent->p1_cell_phone   =  $request->get('phone');
+            $parent->p1_first_name = $request->get('first_name');
+            $parent->p1_last_name = $request->get('last_name');
+            $parent->p1_email = $request->get('email');
+            $parent->p1_cell_phone = $request->get('phone');
             $parent->save();
-         
+
             DB::commit();
 
-            $notification = array(
+            $notification = [
                 'message' => 'User Record is updated Successfully!',
-                'alert-type' => 'success'
-            );
-         
+                'alert-type' => 'success',
+            ];
+
             return redirect()->back()->with($notification);
-            }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             if ($request->expectsJson()) {
-                return response()->json(['status' => 'error' ,'message' => 'Failed to update My account']);
+                return response()->json(['status' => 'error', 'message' => 'Failed to update My account']);
             }
         }
     }
-    public function updatePassword(Request $request,$id)
+
+    public function updatePassword(Request $request, $id)
     {
-    $this->validate($request, [
+        $this->validate($request, [
         'old_password'     => 'required',
         'new_password'     => 'required|min:6',
         'confirm_password' => 'required|same:new_password',
     ]);
-    $data = $request->all();
-    $user = User::find($id);
-    if(! Hash::check($data['old_password'], $user->password)){
-        $notification = array(
+        $data = $request->all();
+        $user = User::find($id);
+        if (! Hash::check($data['old_password'], $user->password)) {
+            $notification = [
             'message' => 'Please enter Correct Previous Password!',
-            'alert-type' => 'Error'
-        );
-        return redirect()->back()->with($notification);
-    }else{
-        $user->password =   Hash::make($data['new_password']);
-        $user->save();
-        $notification = array(
+            'alert-type' => 'Error',
+        ];
+
+            return redirect()->back()->with($notification);
+        } else {
+            $user->password = Hash::make($data['new_password']);
+            $user->save();
+            $notification = [
             'message' => 'Password Updated Successfully!',
-            'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+            'alert-type' => 'success',
+        ];
+
+            return redirect()->back()->with($notification);
+        }
     }
-    }
+
     public function getBankTransferDetails()
     {
         $tranferwise = DB::table('transfer_wise_deatils')->where('status', '1')->first();
-        $banktransfer = DB::table('bank_transfer_details')->where('status', '1')->first(); 
-        return view('Billing/bank-transfer', compact('tranferwise','banktransfer'));
+        $banktransfer = DB::table('bank_transfer_details')->where('status', '1')->first();
+
+        return view('Billing/bank-transfer', compact('tranferwise', 'banktransfer'));
     }
+
     public function getMoneyGramDetails()
     {
         $moneyGram = DB::table('money_gram_details')->where('status', '1')->first();
+
         return view('Billing/moneygram-transfer', compact('moneyGram'));
     }
 }

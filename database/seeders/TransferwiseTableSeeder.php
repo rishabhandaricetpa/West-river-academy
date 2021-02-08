@@ -26,7 +26,7 @@ class TransferwiseTableSeeder extends Seeder
             'state'=>'24th Street New York, NY 1001',
             'country'=>'United States',
             'website'=>'http://transferwise.com',
-            'status'=>'1'
+            'status'=>'1',
         ]);
     }
 }

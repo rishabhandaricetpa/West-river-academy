@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\ParentProfile;
 use App\Models\User;
-use App\Models\Country;
 use App\Notifications\EmailVerification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-
 
 class RegisterController extends Controller
 {
@@ -64,11 +63,13 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $country_list=  Country::select('country')
+        $country_list = Country::select('country')
                         ->orderBy('country')
                         ->get();
-       return view('auth.register')->with('country_list',$country_list);
+
+        return view('auth.register')->with('country_list', $country_list);
     }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -82,7 +83,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $parent =  ParentProfile::create([
+        $parent = ParentProfile::create([
             'user_id' => $user->id,
             'p1_first_name' => $data['name'],
             'p1_middle_name' => $data['nick_name'],
@@ -104,9 +105,11 @@ class RegisterController extends Controller
             'immunized' => 'non immunized',
         ]);
         $parent->save();
+
         return $user;
     }
-        /**
+
+    /**
      * The user has been registered.
      *
      * @param \Illuminate\Http\Request $request
@@ -125,7 +128,8 @@ class RegisterController extends Controller
         //return redirect()->route('verify.email');
         return view('SignIn/verify-email', compact('user'));
     }
-    /**
+
+    /*
      * show country list to parent profile dropdown
      */
 }

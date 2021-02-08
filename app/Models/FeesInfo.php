@@ -9,10 +9,9 @@ class FeesInfo extends Model
 {
     use HasFactory;
 
-    protected $table = "fees_info";
+    protected $table = 'fees_info';
 
     protected $fillable = [
-        'type', 'description', 'amount'
+        'type', 'description', 'amount',
     ];
-
 }

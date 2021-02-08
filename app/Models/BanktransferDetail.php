@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class BanktransferDetail extends Model
 {
     use HasFactory;
-    protected $table = "bank_transfer_details";
+    protected $table = 'bank_transfer_details';
 
     protected $fillable = [
-        'bank_name', 'swift_code', 'bank_address','street','phone_number','routing_number','account_name','account_number','status'
+        'bank_name', 'swift_code', 'bank_address', 'street', 'phone_number', 'routing_number', 'account_name', 'account_number', 'status',
     ];
 }
