@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ParentProfile extends Model
 {
@@ -73,5 +74,12 @@ class ParentProfile extends Model
     public function transactionsMethod()
     {
         return $this->hasMany('App\Models\TransactionsMethod', 'parent_profile_id', 'id');
+    }
+
+    public static function getParentId()
+    {
+        $id = Auth::user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        return $parentProfileData->id;
     }
 }

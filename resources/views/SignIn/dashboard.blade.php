@@ -52,7 +52,7 @@
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
-              <a href="" class="d-inline-block mb-5 decoration-none">
+              <a href="{{ route('graduation.apply') }}" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Apply for Graduation</h3>
               </a>
