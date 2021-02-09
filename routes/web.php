@@ -218,20 +218,20 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('admin-dashboard', function () {
         return view('admin.home');
     })->name('admin.admindashboard');
-    Route::get('transcript', function () {
-        return view('frontendpages.dashboard-transcript-filling');
-    });
+
 
     Route::get('english-transcript', 'EnglishLanguageController@index')->name('english.transcript');
 
-    Route::get('transcript2', function () {
-        return view('frontendpages.dashboard-transcript-filling2');
-    });
-
-    Route::get('transcript-final', function () {
-        return view('frontendpages.dashboard-transcript-finished');
-    });
+    //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
     Route::post('year', 'TranscriptController@create')->name('year');
+    Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
+
+    Route::post('notify-student/{id}', 'TranscriptController@notification')->name('notify.studentInfo');
+    Route::get('display-student/{id}', 'TranscriptController@displayStudent')->name('display.studentProfile');
+    Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
+    Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
+    Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
+    Route::post('enrollyear/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
 });
