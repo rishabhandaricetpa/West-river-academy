@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\StudentProfile;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
