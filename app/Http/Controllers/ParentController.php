@@ -10,7 +10,8 @@ use App\Models\Address;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,7 +47,7 @@ class ParentController extends Controller
 
         $is_valid = Cart::isCartValid($this->parent_profile_id);
 
-        if (! $is_valid) {
+        if (!$is_valid) {
             $notification = [
                 'message' => 'Cart is Invalid!',
                 'alert-type' => 'error',
@@ -58,9 +59,9 @@ class ParentController extends Controller
         $coupons = Coupon::getParentCoupons();
 
         $country_list  =  Country::select('country')->get();
-        $coupon_code = session('applied_coupon',null);
-        
-        return view('Billing/cart-billing', compact('parent','country_list','enroll_fees','coupons','coupon_code'));
+        $coupon_code = session('applied_coupon', null);
+
+        return view('Billing/cart-billing', compact('parent', 'country_list', 'enroll_fees', 'coupons', 'coupon_code'));
     }
 
     /**
@@ -78,21 +79,22 @@ class ParentController extends Controller
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
             $billinAddress =  Address::updateOrCreate(
-                ['parent_profile_id'=>$id],
+                ['parent_profile_id' => $id],
                 [
-                'parent_profile_id' => $id,
-                'billing_street_address' => $billing_data['street_address'],
-                'billing_city' => $billing_data['city'],
-                'billing_state' => $billing_data['state'],
-                'billing_zip_code' => $billing_data['zip_code'],
-                'billing_country' => $billing_data['country'],
-                'shipping_street_address' => $shipping_data['street_address'],
-                'shipping_city' => $shipping_data['city'],
-                'shipping_state' => $shipping_data['state'],
-                'shipping_zip_code' => $shipping_data['zip_code'],
-                'shipping_country' => $shipping_data['country'],
-                'email'=> $request['email'],
-            ]);
+                    'parent_profile_id' => $id,
+                    'billing_street_address' => $billing_data['street_address'],
+                    'billing_city' => $billing_data['city'],
+                    'billing_state' => $billing_data['state'],
+                    'billing_zip_code' => $billing_data['zip_code'],
+                    'billing_country' => $billing_data['country'],
+                    'shipping_street_address' => $shipping_data['street_address'],
+                    'shipping_city' => $shipping_data['city'],
+                    'shipping_state' => $shipping_data['state'],
+                    'shipping_zip_code' => $shipping_data['zip_code'],
+                    'shipping_country' => $shipping_data['country'],
+                    'email' => $request['email'],
+                ]
+            );
             $parentaddress = ParentProfile::find($Userid)->first();
             $parentaddress->fill([
                 'street_address' => $billing_data['street_address'],
@@ -177,26 +179,26 @@ class ParentController extends Controller
     public function updatePassword(Request $request, $id)
     {
         $this->validate($request, [
-        'old_password'     => 'required',
-        'new_password'     => 'required|min:6',
-        'confirm_password' => 'required|same:new_password',
-    ]);
+            'old_password'     => 'required',
+            'new_password'     => 'required|min:6',
+            'confirm_password' => 'required|same:new_password',
+        ]);
         $data = $request->all();
         $user = User::find($id);
-        if (! Hash::check($data['old_password'], $user->password)) {
+        if (!Hash::check($data['old_password'], $user->password)) {
             $notification = [
-            'message' => 'Please enter Correct Previous Password!',
-            'alert-type' => 'Error',
-        ];
+                'message' => 'Please enter Correct Previous Password!',
+                'alert-type' => 'Error',
+            ];
 
             return redirect()->back()->with($notification);
         } else {
             $user->password = Hash::make($data['new_password']);
             $user->save();
             $notification = [
-            'message' => 'Password Updated Successfully!',
-            'alert-type' => 'success',
-        ];
+                'message' => 'Password Updated Successfully!',
+                'alert-type' => 'success',
+            ];
 
             return redirect()->back()->with($notification);
         }
