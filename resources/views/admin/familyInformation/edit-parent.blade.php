@@ -29,7 +29,7 @@
                   </div>
                   <div class="form-group col-sm-6">
                     <label>Parent1 Email<sup>*</sup>  <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
-                    <input  class="form-control" id="p1_email" name="p1_email" value="{{$parent->p1_email}}" >
+                    <input  class="form-control" id="p1_email" name="p1_email" value="{{$parent->p1_email}}" disabled >
                   </div>
                   <div class="form-group col-sm-6">
                     <label>Parent1 Cell Phone</label>

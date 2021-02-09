@@ -123,3 +123,12 @@
         }
     }
 }
+
+#generate-code{
+    @extend .btn-secondary;
+    white-space: nowrap;
+}
+
+.generate-Coupon .select2-container--default .select2-selection--multiple{
+    border: 0;
+}
