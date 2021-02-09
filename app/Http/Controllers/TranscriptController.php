@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Transcript;
 use App\Models\StudentProfile;
 use App\Models\EnrollmentPeriods;
+use App\Models\Cart;
 use App\Models\ParentProfile;
 use App\Models\Country;
+use App\Models\EnrollmentPayment;
 use App\Models\TranscriptK8;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TranscriptController extends Controller
 {
@@ -39,7 +42,6 @@ class TranscriptController extends Controller
      */
     public function viewEnrollment(Request $request, $id)
     {
-
         $student = StudentProfile::find($id);
         $student->first_name = $request->get('first_name');
         $student->middle_name = $request->get('middle_name');
@@ -68,7 +70,18 @@ class TranscriptController extends Controller
     public function viewStudent($id)
     {
         $enroll_student = StudentProfile::find($id);
-        return view('transcript.transcript-wizard', compact('enroll_student'));
+        $allEnrollmentPeriods = StudentProfile::find($id)->enrollmentPeriods()->get();
+        $id =  collect($allEnrollmentPeriods)->pluck('id');
+        $payment_info = DB::table('enrollment_periods')
+            ->whereIn('enrollment_payment_id', $id)
+            ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+            ->where('enrollment_payments.status', 'paid')
+            ->get();
+        if (count($payment_info) == 0) {
+            dd('can not purchase transcript since no enrollment period is paid');
+        } else {
+            return view('transcript.transcript-wizard', compact('enroll_student'));
+        }
     }
     public function displayStudent($id)
     {
