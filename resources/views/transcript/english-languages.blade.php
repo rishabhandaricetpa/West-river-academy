@@ -1,33 +1,22 @@
 
-<div class="d-flex">
-<!-- * =============== Sidebar =============== * -->
-@include('layouts.partials.sidebar')
-  <!-- * =============== /Sidebar =============== * -->
+@extends('layouts.app')
 
-     <div class="main-content position-relative ml-auto">
-     <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
-<!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
-@include('layouts.partials.header')
-<!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
-
-<!-- * =============== Main =============== * -->
-
-  <main class="position-relative container form-content mt-4">
+@section('content')
+<main class="position-relative container form-content mt-4">
        <h1 class="text-center text-white text-uppercase">enroll students</h1>
           <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
              <h3>Select an English / Language Arts course:</h3>
-             <form method="POST" action="{{ route('enroll') }}">
+             <form method="POST" action="">
    @csrf
    <div class="form-group d-sm-flex mt-2r row">
       <div class="col-sm-6">
-         <select class="form-control mb-4" name="immunized_Stat">
-            <option>English</option>
-            <option>Langugae Arts</option>
-            <option>Reading</option>
-            <option>Writing</option>
-            <option>Oral communication</option>
-            <option>Media literacy</option>
-         </select>
+      <select class="form-control mb-4" name="english_course" id="english_course" required>
+              <option value="United States">English</option>
+              @foreach($englishCourse ?? '' as $english)
+              <option value="{{$english->course_name}}">
+                {{$english->subject_name}}</option>
+              @endForeach
+            </select>
          <div class="form-group d-sm-flex" >
             <label for="" class="w-auto">Other</label>
             <input type="text" class="form-control">
@@ -78,9 +67,5 @@
    </div>
    </div>
 </form>
-  </main>
-    <!-- * =============== /Main =============== * -->
-    @include('layouts.partials.footer')
-    </div>
-
-</div>
+</main>
+@endsection

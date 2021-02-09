@@ -89,13 +89,13 @@ class ParentController extends Controller
     {
         $userdata = User::find($id)->first();
         $userdata->name = $request->get('p1_first_name');
-        $userdata->email = $request->get('p1_email');
+        // $userdata->email = $request->get('p1_email');
         $userdata->save();
         $parent = ParentProfile::find($id);
         $parent->p1_first_name = $request->get('p1_first_name');
         $parent->p1_middle_name = $request->get('p1_middle_name');
         $parent->p1_last_name = $request->get('p1_last_name');
-        $parent->p1_email = $request->get('p1_email');
+        // $parent->p1_email = $request->get('p1_email');
         $parent->p1_cell_phone = $request->get('p1_cell_phone');
         $parent->p1_home_phone = $request->get('p1_home_phone');
         $parent->p2_first_name = $request->get('p2_first_name');

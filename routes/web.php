@@ -73,6 +73,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('reviewstudent');
         });
 
+        Route::get('/transcript-wizard', function () {
+            return view('transcript-wizard');
+        });
+
+        Route::get('/graduation-app', function () {
+            return view('graduation-app');
+        });
+
+        Route::get('/graduation-app-grade', function () {
+            return view('graduation-app-grade');
+        });
+
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
@@ -137,12 +149,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('admin.home');
         })->name('admin.admindashboard');
     });
-    
+
     Route::post('/cart', 'CartController@store')->name('add.cart');
     Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
     Route::get('/cart', 'CartController@index');
 
-    
+
     // Route::get('/cart', 'StudentController@address')->name('billing.address');
     Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
     Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
@@ -160,34 +172,34 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
     Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
     Route::post('/stripe-payment', 'PaymentMethod\StripeController@handlePost')->name('stripe.payment');
-    Route::get('paymentinfo',function () {
+    Route::get('paymentinfo', function () {
         return view('Billing/paymentsuccess');
     })->name('payment.info');
-    
-    
+
+
     //Money-order
     Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
     Route::get('/money-order/{id}', 'StudentController@moneyorderReview');
-    Route::get('moneyorder-email','PaymentMethod\MoneyOrderController@index');
+    Route::get('moneyorder-email', 'PaymentMethod\MoneyOrderController@index');
 
     //Bank Transfer
     Route::get('order-review', function () {
         return view('Billing/order-review');
     })->name('order.review');
     Route::get('order-review/{id}', 'StudentController@orderReview');
-    Route::get('bankTransfer','PaymentMethod\BankTranferController@index')->name('bank.transfer');
+    Route::get('bankTransfer', 'PaymentMethod\BankTranferController@index')->name('bank.transfer');
     Route::get('/bank-transfer', 'ParentController@getBankTransferDetails');
 
 
-     //Money Gram
-     Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
-     Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
-     Route::get('moneygram-email','PaymentMethod\MoneyGramController@index');
-     Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
+    //Money Gram
+    Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
+    Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
+    Route::get('moneygram-email', 'PaymentMethod\MoneyGramController@index');
+    Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
 
     Route::get('/coupon/apply/{code}', 'Admin\CouponController@applyCoupon')->name('coupon.apply');
     Route::get('/coupon/remove', 'Admin\CouponController@removeAppliedCoupon')->name('coupon.remove');
-    
+
 
     Route::get('/mysettings/{id}', 'ParentController@mysettings');
     Route::get('/editaccount/{id}', 'ParentController@editmysettings');
@@ -202,8 +214,24 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
 
     Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
-// admin dashboard
-Route::get('admin-dashboard', function () {
-    return view('admin.home');
-})->name('admin.admindashboard');
+    // admin dashboard
+    Route::get('admin-dashboard', function () {
+        return view('admin.home');
+    })->name('admin.admindashboard');
+    Route::get('transcript', function () {
+        return view('frontendpages.dashboard-transcript-filling');
+    });
+
+    Route::get('english-transcript', 'EnglishLanguageController@index')->name('english.transcript');
+
+    Route::get('transcript2', function () {
+        return view('frontendpages.dashboard-transcript-filling2');
+    });
+
+    Route::get('transcript-final', function () {
+        return view('frontendpages.dashboard-transcript-finished');
+    });
+    Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
+    Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
+    Route::post('year', 'TranscriptController@create')->name('year');
 });

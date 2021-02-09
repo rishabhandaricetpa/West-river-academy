@@ -4,7 +4,7 @@
       <div class="mt-2r" v-for="(student, index) in studentsData" :key="index">
         <h3>{{ student.name }}</h3>
         <div v-for="(item, i) in student.enroll_items" :key="i" class="row border-bottom py-3">
-          <div class="col-sm-8"><p>{{ item.type }} <span class="small">( {{ item.start_date }} - {{ item.end_date }} )</span> </p></div>
+          <div class="col-sm-8"><p>{{ item.type }} <span class="small">( {{ item.start_date | moment("MMMM DD YYYY")}} - {{ item.end_date | moment("MMMM DD YYYY")}} )</span> </p></div>
           <div class="col-sm-2 text-right price"><p>${{ item.amount }}</p></div>
           <div class="col-sm-2 text-right" @click="remove(item.id, index, i, item.amount)" > <a href="javascript:void(0)"> Remove </a></div>
         </div>
