@@ -21,38 +21,38 @@
       <p class="mt-2r mb-4">Please tell us how you completed grades 9,10 and 11.</p>
       <div class="mt-4">
          <p>Grade 9</p>
-            <div v-for="option in options" class="form-group d-sm-flex mb-1">
-                <input type="radio" required name="grade_nine_option" v-model="form.grade_nine_option" :value="option">
-                <label for="" class="w-auto pl-2 pr-0">@{{ option }}</label>
+            <div v-for="(option, index) in options" class="form-group d-sm-flex mb-1">
+                <input type="radio" :id="'nine-' + index" required name="grade_nine_option" v-model="form.grade_nine_option" :value="option">
+                <label :for="'nine-' + index" class="w-auto pl-2 pr-0">@{{ option }}</label>
             </div>
             <div class="form-group d-sm-flex mb-1">
-                <input type="radio" required name="grade_nine_option" v-model="form.grade_nine_option" value="other">
-                <label for="" class="w-auto pl-2 pr-0">Other</label>
+                <input type="radio" id="nine-other" required name="grade_nine_option" v-model="form.grade_nine_option" value="other">
+                <label for="nine-other" class="w-auto pl-2 pr-0">Other</label>
                 <input type="text" v-model="form.grade_nine_other" value="" class="w-100 ml-3" placeholder="Reason">
             </div>
       </div>
 
       <div class="mt-4">
          <p>Grade 10</p>
-            <div v-for="option in options" class="form-group d-sm-flex mb-1">
-                <input type="radio" required name="grade_ten_option" v-model="form.grade_ten_option" :value="option">
-                <label for="" class="w-auto pl-2 pr-0">@{{ option }}</label>
+            <div v-for="(option, index) in options" class="form-group d-sm-flex mb-1">
+                <input type="radio" :id="'ten-' + index" required name="grade_ten_option" v-model="form.grade_ten_option" :value="option">
+                <label :for="'ten-' + index" class="w-auto pl-2 pr-0">@{{ option }}</label>
             </div>
             <div class="form-group d-sm-flex mb-1">
-                <input type="radio" required name="grade_ten_option" v-model="form.grade_ten_option" value="other">
-                <label for="" class="w-auto pl-2 pr-0">Other</label>
+                <input type="radio" id="ten-other" required name="grade_ten_option" v-model="form.grade_ten_option" value="other">
+                <label for="ten-other" class="w-auto pl-2 pr-0">Other</label>
                 <input type="text" v-model="form.grade_ten_other" value="" class="w-100 ml-3" placeholder="Reason">
             </div>
       </div>
       <div class="mt-4">
          <p>Grade 11</p>
-            <div v-for="option in options" class="form-group d-sm-flex mb-1">
-                <input type="radio" required name="grade_eleven_option" v-model="form.grade_eleven_option" :value="option">
-                <label for="" class="w-auto pl-2 pr-0">@{{ option }}</label>
+            <div v-for="(option, index) in options" class="form-group d-sm-flex mb-1">
+                <input type="radio" :id="'eleven-' + index" required name="grade_eleven_option" v-model="form.grade_eleven_option" :value="option">
+                <label :for="'eleven-' + index" class="w-auto pl-2 pr-0">@{{ option }}</label>
             </div>
             <div class="form-group d-sm-flex mb-1">
-                <input type="radio" required name="grade_eleven_option" v-model="form.grade_eleven_option" value="other">
-                <label for="" class="w-auto pl-2 pr-0">Other</label>
+                <input type="radio" id="eleven-other" required name="grade_eleven_option" v-model="form.grade_eleven_option" value="other">
+                <label for="eleven-other" class="w-auto pl-2 pr-0">Other</label>
                 <input type="text" v-model="form.grade_eleven_other" value="" class="w-100 ml-3" placeholder="Reason">
             </div>
       </div>
