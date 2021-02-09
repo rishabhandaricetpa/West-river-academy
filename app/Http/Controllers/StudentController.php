@@ -290,6 +290,9 @@ class StudentController extends Controller
         $parentProfileData = User::find(auth()->user()->id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
+        $start_date=$countryData->start_date;
+        $sem = Carbon::parse($start_date);
+        $semestermonth =  $sem->addMonths(5);
         $countryId = $countryData->id;
         $studentData = StudentProfile::find($id);
         $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
@@ -298,7 +301,7 @@ class StudentController extends Controller
             ->orderBy('enrollment_payments.status', 'desc')
             ->get();
 
-        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
+        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData','semestermonth'));
     }
 
 

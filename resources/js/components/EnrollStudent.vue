@@ -11,6 +11,7 @@
           class="form-control"
           id="first_name"
           name="first_name"
+          required
           aria-describedby="emailHelp"
           v-model="form.first_name"
         />
@@ -94,7 +95,6 @@
           class="form-control"
           name="email"
           id="email"
-          required
           aria-describedby="emailHelp"
           v-model="form.email"
         />
@@ -140,6 +140,7 @@
       v-for="(enrollPeriod, index) in form.enrollPeriods"
       :key="enrollPeriod.id"
     >
+      <div class="position-relative">
       <span v-if="canRemovePeriod"  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
       <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-sm-flex mb-2 mt-2r">
@@ -165,7 +166,7 @@
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
               Choose {{new Date(startdate) | moment("MMMM Do")}} (the first day of the Annual enrollment period),
-              January 1 (the first day of the Second Semester), today's date or
+              {{new Date(sem) | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
               another date. This date will appear on your confirmation of
               enrollment letter. You will be considered enrolled for the full
               12-month period for Annual or 7-month period for Second Semester
@@ -238,6 +239,7 @@
           </div>
         </div>
       </div>
+       </div>
        </div>
       <div class="form-group d-sm-flex mt-2r">
         <label for="">Is this student immunized?</label>
@@ -339,6 +341,7 @@ export default {
               altInputClass: "form-control",
               altInput: true,
               allowInput: true,
+              minDate:new Date(this.startdate),
               disable: [
                 {
                   from: this.calcEndDate(this.startdate),
@@ -366,8 +369,12 @@ export default {
     enddate: {
       required: true,
     },
+    sem: {
+      required: true,
+    },
   },
   methods: {
+    
     calcEndDate(date) {
       const oldDate = new Date(date);
       const year = oldDate.getFullYear();
@@ -380,12 +387,12 @@ export default {
       const oDate = oldDate.getDate();
       const year = oldDate.getFullYear();
       const month = oldDate.getMonth();
-      return new Date(year + 100, month, oDate + 1);
+      return new Date(year + 900, month, oDate + 1);
     },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
+    // validEmail: function (email) {
+    //   var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //   return re.test(email);
+    // },
     updateEndDate(index) {
       this.form.enrollPeriods[
         index
@@ -413,6 +420,7 @@ export default {
           altFormat: "F j, Y",
           altInput: true,
           allowInput: true,
+          minDate:new Date(this.startdate),
           disable: [
             {
               from: this.calcEndDate(this.startdate),
@@ -451,9 +459,9 @@ export default {
         this.errors.push("Date of birth is required");
         alert("Please fill the required form");
       }
-      if (!this.validEmail(this.form.email)) {
-        this.errors.push("Valid email required.");
-      }
+      // if (!this.validEmail(this.form.email)) {
+      //   this.errors.push("Valid email required.");
+      // }
       if (!this.vallidateGrades()) {
         this.errors.push(
           "Grade is required Field! Please select a Grade and then continue"
@@ -466,7 +474,6 @@ export default {
       }
       if (
         this.form.dob &&
-        this.validEmail(this.form.email) &&
         this.vallidateGrades() &&
         this.vallidateEndDate()
       ) {

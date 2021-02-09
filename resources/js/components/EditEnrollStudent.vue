@@ -94,7 +94,6 @@
           name="email"
           id="email"
           v-model="form.email"
-          required
           aria-describedby="emailHelp"
         />
       </div>
@@ -150,8 +149,8 @@
             </div>
             <div class="info-detail col-md-8 col-lg-6 lato-italic">
               <p>
-               Choose {{new Date(startdate) | moment("MMMM Do")}} (the first day of the Annual enrollment period),
-                January 1 (the first day of the Second Semester), today's date or
+               Choose {{new Date(semesters.start_date) | moment("MMMM Do")}} (the first day of the Annual enrollment period),
+                {{new Date(semmonth) | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
                 another date. This date will appear on your confirmation of
                 enrollment letter. You will be considered enrolled for the full
                 12-month period for Annual or 7-month period for Second Semester
@@ -184,9 +183,9 @@
             </div>
             <div class="info-detail col-md-8 col-lg-6 lato-italic">
               <p>
-                Choose before {{new Date(enddate) | moment("MMMM Do")}} (the last day of your enrollment) or another
-                date before {{new Date(enddate) | moment("MMMM Do")}}. This date will appear on your confirmation of
-                enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
+                Choose before {{new Date(semesters.end_date) | moment("MMMM Do")}} (the last day of your enrollment) or another
+                date before {{new Date(semesters.end_date) | moment("MMMM Do")}}. This date will appear on your confirmation of
+                enrollment letter. Your enrollment will officially end on {{new Date(semesters.end_date) | moment("MMMM Do")}}.
               </p>
             </div>
              <div class="col-lg-4 links-list pl-0">
@@ -261,7 +260,7 @@
       </div>
     </div>
     <div class="form-group d-sm-flex">
-      <label for="">tell us more about your situation<sup>*</sup> </label>
+      <label for="">Tell us more about your situation</label>
       <div>
       <textarea
         class="form-control"
@@ -270,7 +269,6 @@
         value=""
         rows="3"
         v-model="form.student_situation"
-        required
       ></textarea>
       </div>
     </div>
@@ -345,8 +343,8 @@ export default {
     this.periods.forEach((item) => {
       this.form.periods.push({
         id: item.id,
-        selectedStartDate: item.start_date_of_enrollment,
-        selectedEndDate: item.end_date_of_enrollment,
+        selectedStartDate: new Date(item.start_date_of_enrollment),
+        selectedEndDate: new Date(item.end_date_of_enrollment),
         grade: item.grade_level,
         status: item.status,
         configstartdate: {
@@ -372,9 +370,9 @@ export default {
   methods: {
     EditStudent() {
       this.errors = [];
-      if (!this.validEmail(this.form.email)) {
-        return this.errors.push("Valid email required.");
-      }
+      // if (!this.validEmail(this.form.email)) {
+      //   return this.errors.push("Valid email required.");
+      // }
       if (!this.vallidateGrades()) {
         this.errors.push(
           "Grade is required Field! Please select a Grade and then continue"
@@ -396,10 +394,10 @@ export default {
           .catch((error) => console.log(error));
       }
     },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
+    // validEmail: function (email) {
+    //   var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //   return re.test(email);
+    // },
     calcEndDate(date) {
       const oldDate = new Date(date);
       const year = oldDate.getFullYear();
@@ -412,7 +410,7 @@ export default {
       const oDate = oldDate.getDate();
       const year = oldDate.getFullYear();
       const month = oldDate.getMonth();
-      return new Date(year + 100, month, oDate + 1);
+      return new Date(year + 900, month, oDate + 1);
     },
     updateEndDate(index) {
       this.form.periods[index].configenddate.disable[0].from = this.calcEndDate(
@@ -428,7 +426,7 @@ export default {
         id: null,
         selectedStartDate: new Date(this.semesters.start_date),
         status: "pending",
-        selectedEndDate: "",
+        selectedEndDate: new Date(this.semesters.end_date),
         grade: "",
         configstartdate: {
           altFormat: "F j, Y",
@@ -441,8 +439,8 @@ export default {
           allowInput: true,
           disable: [
             {
-              from: this.calcEndDate(this.startdate),
-              to: this.calcToData(this.startdate),
+              from: this.calcEndDate(this.semesters.start_date),
+              to: this.calcToData(this.semesters.start_date),
             },
           ],
         },
@@ -506,6 +504,9 @@ export default {
       required: true,
     },
     semesters: {
+      required: true,
+    },
+     semmonth: {
       required: true,
     },
   },
