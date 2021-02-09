@@ -89,14 +89,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.logout')}}" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Logout
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{ url('admin/countryenrollments')}}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>

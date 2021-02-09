@@ -219,6 +219,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('admin.home');
     })->name('admin.admindashboard');
 
+
+    Route::get('english-transcript', 'EnglishLanguageController@index')->name('english.transcript');
+
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
