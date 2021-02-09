@@ -73,6 +73,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('reviewstudent');
         });
 
+        Route::get('/graduation-2', function () {
+            return view('graduation-2');
+        });
+
         Route::get('/transcript-wizard', function () {
             return view('transcript-wizard');
         });
@@ -83,6 +87,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/graduation-app-grade', function () {
             return view('graduation-app-grade');
+        });
+
+        Route::get('/app-approve', function () {
+            return view('app-approve');
         });
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
