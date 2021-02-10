@@ -10,8 +10,8 @@
           v-if="canRemovePeriod"
           class="remove"
           @click="removeEnglishCourse(index)"
-          ><i class="fas fa-times"></i
-        ></span>
+          ><i class="fas fa-times"></i>
+        </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
             <select
@@ -31,69 +31,33 @@
             <div class="form-group d-sm-flex mt-4">
               <div class="col-sm-3 px-0">
                 <h3>Select a Grade</h3>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="2"
-                  />
-                  <label class="form-check-label" for="">
-                    A
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="3"
-                  />
-                  <label class="form-check-label" for="">
-                    B
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="4"
-                  />
-                  <label class="form-check-label" for="">
-                    C
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="5"
-                  />
-                  <label class="form-check-label" for="">
-                    D
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="5"
-                  />
-                  <label class="form-check-label" for="">
-                    PASS
-                  </label>
-                </div>
-              </div>
-              <div>
                 <a
                   href="#chooseGrades"
                   data-toggle="modal"
                   class="btn btn-primary"
                   >Help me decide</a
                 >
+                <div class="row pl-sm-5">
+                  <div
+                    v-for="(grade, index) in grades"
+                    :key="index"
+                    class="col-6 col-sm-3"
+                  >
+                    <div v-for="(val, i) in grade" :key="i" class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        :value="val"
+                        v-model="form.englishCourse.grade"
+                        required
+                      />
+                      <label class="form-check-label pl-1 pl-sm-0" for="">
+                        {{ val }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div></div>
               </div>
             </div>
             <div class="mt-5">
@@ -125,12 +89,13 @@ export default {
   },
   data() {
     return {
+      grades: [["A", "B", "C", "D", "PASS"]],
       form: {
         englishCourse: [
           {
             subject: "",
             other_subjcts: "",
-            grades: ""
+            grade: ""
           }
         ]
       },

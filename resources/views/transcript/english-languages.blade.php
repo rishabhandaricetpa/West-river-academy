@@ -5,7 +5,7 @@
 
 <div id="app">
 <main class="position-relative container form-content mt-4">
-       <h1 class="text-center text-white text-uppercase">enroll students</h1>
+       <h1 class="text-center text-white text-uppercase"></h1>
           <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
              <h3>Select an English / Language Arts course:</h3>
     <english-course :englishcourse='@json($englishCourse)'> </english-course>

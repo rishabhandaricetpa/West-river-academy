@@ -26,4 +26,11 @@ class CourseController extends Controller
         return view('admin.transcript.edit-courses', compact('subjects'));
     }
 
+    public function editSubjects($id)
+    {
+        $banktransfer = BanktransferDetail::find($id);
+
+        return view('admin.paymentInformation.edit-banktransfer', compact('banktransfer'));
+    }
+
 }
