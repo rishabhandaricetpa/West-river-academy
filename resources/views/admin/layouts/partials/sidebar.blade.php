@@ -81,7 +81,7 @@
             </ul>
           </li>
           <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+        <a href="{{ url('/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Transcripts

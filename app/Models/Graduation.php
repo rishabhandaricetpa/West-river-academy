@@ -15,12 +15,12 @@ class Graduation extends Model
     
     public function parent()
     {
-        return $this->belongsTo('App\Models\ParentProfile');
+        return $this->belongsTo('App\Models\ParentProfile','parent_profile_id','id');
     }
 
     public function student()
     {
-        return $this->belongsTo('App\Models\StudentProfile');
+        return $this->belongsTo('App\Models\StudentProfile','student_profile_id','id');
     }
 
     public function details()

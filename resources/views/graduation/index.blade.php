@@ -15,6 +15,7 @@
                             <th>Name</th>
                             <th>Date of Birth</th>
                             <th>Gender</th>
+                            <th>Graduation Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,6 +24,17 @@
                                 <td><input class="form-check-input" required type="radio" value="{{ $student->id }}" name="student">{{ $student->first_name.' '.$student->last_name }}</td>
                                 <td>{{ $student->dob }}</td>
                                 <td>{{ $student->gender }}</td>
+                                @if ($student->graduation === null)
+                                    <td>Not Applied</td>
+                                @elseif($student->graduation->status === 'pending')
+                                    <td>Pending Approval</td>
+                                @elseif($student->graduation->status === 'approved')
+                                    <td>Approved (Pending Payment)</td>
+                                @elseif($student->graduation->status === 'paid')
+                                    <td>Paid</td>
+                                @elseif($student->graduation->status === 'completed')
+                                    <td>Graduation Completed</td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

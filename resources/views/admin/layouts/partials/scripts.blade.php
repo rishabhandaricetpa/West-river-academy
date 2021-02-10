@@ -56,6 +56,48 @@
         ]
       });
 
+      $("#graduation-table").DataTable({
+        "ajax": "{{ route('admin.graduation.dt') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { 
+            "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;e
+                    } 
+          },
+          { 
+            "data": "student",
+            "render": function ( student, type, row, meta ) {
+                        return student.first_name + ' ' + student.last_name;
+                    } 
+          },
+          { "data": "student.email" },
+          { "data": "student.birthdate" },
+          { 
+            "data": "grade_9_info",
+            "render": function ( data, type, row, meta ) {
+                        return `
+                          <ul>
+                            <li>
+                                Grade 9 : ${ row.grade_9_info }
+                            </li>
+                            <li>
+                                Grade 10 : ${ row.grade_10_info }
+                            </li>
+                            <li>
+                                Grade 11 : ${ row.grade_11_info }
+                            </li>
+                          </ul>
+                        `;
+                    }
+          },
+          { "data": "status" },
+        ]
+      });
+
       $("#generate-code").on('click',function () {
         let _this = $(this);
         let text = _this.text();

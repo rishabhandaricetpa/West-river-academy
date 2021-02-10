@@ -14,7 +14,11 @@ class GraduationController extends Controller
     public function index()
     {
         $parent_id = ParentProfile::getParentId();
-        $students = StudentProfile::select('id','first_name','last_name','gender')->selectRaw('DATE(d_o_b) as dob')->where('parent_profile_id',$parent_id)->get();
+        $students = StudentProfile::select('id','first_name','last_name','gender')
+                                    ->selectRaw('DATE(d_o_b) as dob')
+                                    ->where('parent_profile_id',$parent_id)
+                                    ->with('graduation')
+                                    ->get();
 
         return view('graduation.index',compact('students'));
     }
@@ -60,10 +64,11 @@ class GraduationController extends Controller
 
     public function graduations()
     {
+        return view('admin.graduation.view');
     }
 
     public function dataTable()
     {
-        return datatables(Graduation::with('details')->get())->toJson();
+        return datatables(Graduation::with(['details','student','parent'])->get())->toJson();
     }
 }

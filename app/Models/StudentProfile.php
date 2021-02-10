@@ -24,6 +24,13 @@ class StudentProfile extends Model
         'd_o_b',
     ];
 
+    protected $appends = ['birthdate'];
+
+    public function getBirthdateAttribute()
+    {
+        return $this->d_o_b->format('m/d/Y') ;
+    }
+
     public function parentProfile()
     {
         return $this->belongsTo('App\Models\ParentProfile');
