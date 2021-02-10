@@ -8,6 +8,7 @@ use Auth;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Graduation;
+use App\Models\GraduationDetail;
 
 class GraduationController extends Controller
 {
@@ -51,6 +52,7 @@ class GraduationController extends Controller
 
             $data = [
                 'parent_profile_id' => ParentProfile::getParentId(),
+                'student_profile_id' => $inputs['student_id'],
                 'grade_9_info' => $inputs['grade_nine_option'] === 'other' ? $inputs['grade_nine_other'] : $inputs['grade_nine_option'],
                 'grade_10_info' => $inputs['grade_ten_option'] === 'other' ? $inputs['grade_ten_other'] : $inputs['grade_ten_option'],
                 'grade_11_info' => $inputs['grade_eleven_option'] === 'other' ? $inputs['grade_eleven_other'] : $inputs['grade_eleven_option'],
@@ -58,7 +60,8 @@ class GraduationController extends Controller
             ];
 
             StudentProfile::whereId($inputs['student_id'])->update(['email' => $inputs['email']]);
-            Graduation::updateOrInsert(['student_profile_id' => $inputs['student_id']], $data);
+            $graduation = Graduation::create($data);
+            GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
 
             DB::commit();
 
@@ -72,6 +75,11 @@ class GraduationController extends Controller
                 return response()->json(['status' => 'error', 'message' => 'Failed to add record']);
             }
         }
+    }
+
+    public function update(Request $request, $id)
+    {
+        dd('s');
     }
 
     public function graduations()

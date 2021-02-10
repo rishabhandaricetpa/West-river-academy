@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('graduations', '\App\Http\Controllers\GraduationController@graduations')->name('view.graduation');
     Route::get('graduations/data', '\App\Http\Controllers\GraduationController@dataTable')->name('graduation.dt');
     Route::get('graduations/{id}/edit', '\App\Http\Controllers\GraduationController@edit')->name('edit.graduation');
+    Route::put('graduations/{id}', '\App\Http\Controllers\GraduationController@update')->name('update.graduation');
 
     //transcript
     Route::get('/manage-courses', 'CourseController@index')->name('manage.course');
