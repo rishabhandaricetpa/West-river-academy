@@ -341,7 +341,7 @@ export default {
               altInputClass: "form-control",
               altInput: true,
               allowInput: true,
-              minDate:new Date(this.startdate),
+              minDate:this.calcMinDate(this.startdate),
               disable: [
                 {
                   from: this.calcEndDate(this.startdate),
@@ -382,6 +382,13 @@ export default {
       const month = oldDate.getMonth();
       return new Date(year + 1, month, oDate); 
     },
+     calcMinDate(date){
+      const oldDate = new Date(date);
+      const year = oldDate.getFullYear();
+      const oDate = oldDate.getDate();
+      const month = oldDate.getMonth();
+      return new Date(year, month, oDate + 1); 
+    },
     calcToData(date) {
       const oldDate = new Date(date);
       const oDate = oldDate.getDate();
@@ -404,6 +411,11 @@ export default {
       ].configenddate.disable[0].to = this.calcToData(
         this.form.enrollPeriods[index].selectedStartDate
       );
+      this.form.enrollPeriods[
+        index
+      ].configenddate.minDate = this.calcMinDate(
+        this.form.enrollPeriods[index].selectedStartDate
+      );
       this.form.enrollPeriods[index].selectedEndDate = ""; // reset the end date value
     },
     addNewEnrollPeriod() {
@@ -420,7 +432,7 @@ export default {
           altFormat: "F j, Y",
           altInput: true,
           allowInput: true,
-          minDate:new Date(this.startdate),
+          minDate:this.calcMinDate(this.startdate),
           disable: [
             {
               from: this.calcEndDate(this.startdate),
