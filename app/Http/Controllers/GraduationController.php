@@ -79,7 +79,33 @@ class GraduationController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd('s');
+        try {
+            DB::beginTransaction();
+            $inputs = $request->all();
+            
+            Graduation::find($id)->update(['status' => $inputs['status']]);
+
+            unset($inputs['_method']);
+            unset($inputs['_token']);
+            unset($inputs['status']);
+
+            GraduationDetail::where('graduation_id',$id)->update($inputs);
+
+            DB::commit();
+
+            return redirect()->route('admin.view.graduation')->with([
+                'message' => 'Details updated successfully!',
+                'alert-type' => 'success',
+            ]);
+           
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with([
+                'message' => 'Failed to update details!',
+                'alert-type' => 'error',
+            ]);
+        }
     }
 
     public function graduations()
