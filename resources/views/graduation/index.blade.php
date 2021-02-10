@@ -21,7 +21,10 @@
                     <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                <td><input class="form-check-input" required type="radio" value="{{ $student->id }}" name="student">{{ $student->first_name.' '.$student->last_name }}</td>
+                                <td>
+                                    <input class="form-check-input" @if ($student->graduation !== null) disabled @endif required type="radio" value="{{ $student->id }}" name="student">
+                                    {{ $student->fullname }}
+                                </td>
                                 <td>{{ $student->dob }}</td>
                                 <td>{{ $student->gender }}</td>
                                 @if ($student->graduation === null)

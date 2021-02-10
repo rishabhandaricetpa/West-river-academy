@@ -68,12 +68,7 @@
                         return meta.row +1;e
                     } 
           },
-          { 
-            "data": "student",
-            "render": function ( student, type, row, meta ) {
-                        return student.first_name + ' ' + student.last_name;
-                    } 
-          },
+          { "data": "student.fullname" },
           { "data": "student.email" },
           { "data": "student.birthdate" },
           { 
@@ -95,6 +90,11 @@
                     }
           },
           { "data": "status" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
+                      } 
+          }
         ]
       });
 

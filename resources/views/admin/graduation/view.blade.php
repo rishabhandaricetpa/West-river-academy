@@ -27,6 +27,7 @@
                     <th>Birthdate</th>
                     <th>Grades Details</th>
                     <th>Status</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>

@@ -26,7 +26,19 @@ class GraduationController extends Controller
     public function gradutaionApplication(Request $request)
     {
         $student_id = $request->query('student');
-        $student = StudentProfile::whereId($student_id)->where('parent_profile_id',ParentProfile::getParentId())->first();
+        $student = StudentProfile::whereId($student_id)->where('parent_profile_id',ParentProfile::getParentId())->with('graduation')->first();
+
+        if($student === null){
+            return redirect()->back()->with([
+                'message' => 'Student not found!',
+                'alert-type' => 'error',
+            ]);
+        }else if($student->graduation !== null){
+            return redirect()->back()->with([
+                'message' => 'Graduation is already applied for this student!',
+                'alert-type' => 'error',
+            ]);
+        }
 
         return view('graduation.application',compact('student'));
     }
@@ -70,5 +82,12 @@ class GraduationController extends Controller
     public function dataTable()
     {
         return datatables(Graduation::with(['details','student','parent'])->get())->toJson();
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $graduation = Graduation::whereId($id)->with(['details','student','parent'])->first();
+
+        return view('admin.graduation.edit',compact('graduation'));
     }
 }
