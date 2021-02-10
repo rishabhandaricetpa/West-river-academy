@@ -92,5 +92,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/manage-courses', 'CourseController@index')->name('manage.course');
     Route::get('edit-course/{id}', 'CourseController@edit')->name('edit.course');
     Route::get('edit-subject/{id}', 'CourseController@editSubject')->name('subject.edit');
+    Route::post('update/subject/{id}', 'CourseController@update')->name('update.subject');
+    Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
+    Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
 
 });
