@@ -12,4 +12,9 @@ class GraduationDetail extends Model
     protected $fillable = [
         'graduation_id', 'project', 'diploma', 'transcript', 'situation', 'record_received', 'grad_date', 'apostille_package', 'notes'
     ];
+
+    public function graduation()
+    {
+        return $this->belongsTo('App\Models\Graduation');
+    }
 }

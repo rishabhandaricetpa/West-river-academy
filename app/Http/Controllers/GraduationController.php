@@ -57,4 +57,13 @@ class GraduationController extends Controller
             }
         }
     }
+
+    public function graduations()
+    {
+    }
+
+    public function dataTable()
+    {
+        return datatables(Graduation::with('details')->get())->toJson();
+    }
 }

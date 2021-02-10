@@ -88,4 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/countryenrollments', 'CountryController@index')->name('country.display');
     Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
     Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
+
+    Route::get('graduations', '\App\Http\Controllers\GraduationController@graduations')->name('view.graduation');
+
 });

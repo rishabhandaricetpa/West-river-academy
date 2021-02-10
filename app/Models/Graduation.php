@@ -22,4 +22,9 @@ class Graduation extends Model
     {
         return $this->belongsTo('App\Models\StudentProfile');
     }
+
+    public function details()
+    {
+        return $this->hasOne('App\Models\GraduationDetail');
+    }
 }
