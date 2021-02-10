@@ -16,7 +16,7 @@ class EnglishLanguageController extends Controller
                             ->first();
         $englishCourse=Subject::where('courses_id',$course->id)
                         ->where('transcript_period', 'K-8')
-                        ->get();                 
+                        ->get();   
         return view('transcript.english-languages',compact('englishCourse'));
     }
 }

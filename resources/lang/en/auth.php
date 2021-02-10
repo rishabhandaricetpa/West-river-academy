@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'There is no account with this email address..',
+    'failed' => 'There is no account with this email address.',
     'password' => 'Wrong password. Try again or click Forgot password to reset it.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

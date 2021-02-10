@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('delete/moneygram/{id}', 'PaymentAddressController@destroyMoneyGramAddress')->name('delete.moneygramAddress');
     Route::get('delete/transferwise/{id}', 'PaymentAddressController@destroyTransferwiseAddress')->name('delete.transferwiseAddress');
     Route::get('delete/banktransfer/{id}', 'PaymentAddressController@destroyBanktransferAddress')->name('delete.banktransferAddress');
-
+    //coupon Management
     Route::get('coupon', 'CouponController@index')->name('view.coupon');
     Route::get('coupon/create', 'CouponController@create')->name('create.coupon');
     Route::get('coupon/{id}/edit', 'CouponController@edit')->name('edit.coupon');
@@ -91,4 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('graduations', '\App\Http\Controllers\GraduationController@graduations')->name('view.graduation');
 
+    //transcript
+    Route::get('/manage-courses', 'CourseController@index')->name('manage.course');
+    Route::get('edit-course/{id}', 'CourseController@edit')->name('edit.course');
 });
