@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 // Dashboard
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -92,5 +92,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/manage-courses', 'CourseController@index')->name('manage.course');
     Route::get('edit-course/{id}', 'CourseController@edit')->name('edit.course');
     Route::get('edit-subject/{id}', 'CourseController@editSubject')->name('subject.edit');
-
 });
