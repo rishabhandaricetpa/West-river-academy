@@ -238,5 +238,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //Transcript K-8 Cources
 
     Route::get('english-course/{id}', 'EnglishLanguageController@index')->name('english.cource');
-    Route::post('englishCourse', 'EnglishLanguageController@store')->name('englishCourse.update');
+    Route::post('englishCourse/{id}', 'EnglishLanguageController@store')->name('englishCourse.update');
 });

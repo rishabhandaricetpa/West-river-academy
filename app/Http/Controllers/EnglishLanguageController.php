@@ -23,17 +23,18 @@ class EnglishLanguageController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
 
         foreach ($request->get('englishCourse', []) as $period) {
+            $subject = $period['subject'];
+            $subject = Subject::where('subject_name', $subject)->first();
 
             $english_course = TranscriptCourse::create([
                 'student_profile_id' => $period['student_id'],
                 'courses_id' => $period['courses_id'],
-                'subject_id' => $period['transcript_id'],
+                'subject_id' => $subject->id,
                 'score' => $period['grade']
             ]);
-            $english_course->save();
         }
     }
 }

@@ -112,9 +112,11 @@ export default {
   props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("englishCourse.update"), this.form).then((response) => {
-        console.log(response.data);
-      });
+      axios
+        .post(route("englishCourse.update", this.student_id), this.form)
+        .then((response) => {
+          console.log(response.data);
+        });
     },
     addNewEnglishCourse() {
       this.form.englishCourse.push({
@@ -122,7 +124,7 @@ export default {
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject: "",
-        other_subjcts: "",
+        other_subjects: "",
         grades: "",
       });
     },
