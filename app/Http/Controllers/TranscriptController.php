@@ -78,7 +78,7 @@ class TranscriptController extends Controller
             ->where('enrollment_payments.status', 'paid')
             ->get();
         if (count($payment_info) == 0) {
-            dd('can not purchase transcript since no enrollment period is paid');
+            return view('transcript.dashboard-notify', compact('enroll_student'));
         } else {
             return view('transcript.transcript-wizard', compact('enroll_student'));
         }
