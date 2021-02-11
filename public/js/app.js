@@ -47253,6 +47253,10 @@ $(window).scroll(function () {
   }
 }); //missing );
 
+$(".notify-btn").click(function () {
+  $(".notification").toggleClass('d-block');
+});
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
