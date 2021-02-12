@@ -53,7 +53,7 @@ class MoneyOrderController extends Controller
    
     //update cart status active 
 
-    $emtyCart= Cart::emptyCart($this->parent_profile_id,$type);
+    Cart::emptyCart($type);
 
     Mail::to($email)->send(new MoneyOrder($user));
 

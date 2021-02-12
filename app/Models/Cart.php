@@ -205,17 +205,30 @@ class Cart extends Model
                 ->get();
     }
 
-    public static function emptyCart($parent_profile_id,$type){
+    public static function emptyCart($type){
            
-        $id = Auth::user()->id;
-            $cartItems = Cart::select('item_id')->where('parent_profile_id', $id)->get();
-            foreach ($cartItems as $cart) {
-                $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-                $enrollemtpayment->status = 'active';
-                $enrollemtpayment->payment_mode = $type;
-                $enrollemtpayment->save();
+        $parent_profile_id = ParentProfile::getParentId();
+
+        $cartItems = Cart::select('item_id')->where('parent_profile_id', $parent_profile_id)->get();
+        foreach ($cartItems as $cart) {
+            switch ($cart->item_type) {
+                case 'enrollment_period':
+                    $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
+                    $enrollemtpayment->status = 'active';
+                    $enrollemtpayment->payment_mode = $type;
+                    $enrollemtpayment->save();
+                    break;
+                
+                case 'enrollment_period':
+                    break;
+                
+                default:
+                    break;
             }
-            $refreshCart = Cart::select()->where('parent_profile_id', $id)->get();
-            $refreshCart->each->delete();
+            
+        }
+        
+        $refreshCart = Cart::select()->where('parent_profile_id', $parent_profile_id)->get();
+        $refreshCart->each->delete();
     }
 }
