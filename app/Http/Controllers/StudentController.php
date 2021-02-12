@@ -114,7 +114,7 @@ class StudentController extends Controller
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
                 'gender' => $data['gender'],
-                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('M d Y'),
+                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
                 'student_Id' => $data['studentID'],
@@ -143,8 +143,8 @@ class StudentController extends Controller
 
                 $enrollPeriod = EnrollmentPeriods::create([
                     'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  $selectedStartDate->format('M d Y'),
-                    'end_date_of_enrollment' => $selectedEndDate->format('M d Y'),
+                    'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
+                    'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
                     'grade_level' => $period['grade'],
                     'type' => $type,
                 ]);

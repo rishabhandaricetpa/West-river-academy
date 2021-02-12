@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
     Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
     Route::get('delete/parent/{id}', 'ParentController@destroy')->name('parent.delete');
+    Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
 
     // Crud for student profile
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');

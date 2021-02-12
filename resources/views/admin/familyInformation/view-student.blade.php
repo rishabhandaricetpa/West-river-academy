@@ -52,7 +52,10 @@
                       <td>{{$item->immunized_status}}</td>
                       <td><a href=" {{ url('admin/edit-student',$item->id)}}"> <i class="fas fa-edit"></i></a>
               <a href="{{ url('admin/delete',$item->id)}}"><i class="fas fa-trash-alt"
-                  onclick="return myFunction();"></i></td>
+                  onclick="return myFunction();"></i>
+                  <a href="{{route('admin.edit.student.payment',$item->id)}}">
+                            <i class="fas fa-arrow-alt-circle-right"></i></a>
+                  </td>
                 </tr>
                 @endforeach
                 </tbody>

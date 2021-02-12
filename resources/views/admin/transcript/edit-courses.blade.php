@@ -23,7 +23,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#addsubjectsModal">Add New Money Gram Address</button>
+                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#addsubjectsModal">Add New Subject to {{$coursename->course_name}}</button>
                         <table id="addressData" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
