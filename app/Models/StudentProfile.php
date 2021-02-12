@@ -28,7 +28,7 @@ class StudentProfile extends Model
 
     public function getBirthdateAttribute()
     {
-        return $this->d_o_b->format('m/d/Y') ;
+        return  $this->d_o_b === null ? '' : $this->d_o_b->format('m/d/Y') ;
     }
 
     public function getFullnameAttribute()
@@ -49,5 +49,15 @@ class StudentProfile extends Model
     public function graduation()
     {
         return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');
+    }
+
+    public function graduationAddress()
+    {
+        return $this->hasOneThrough(
+            'App\Models\GraduationMailingAddress',
+            'App\Models\Graduation',
+            'student_profile_id',
+            'graduation_id'
+        );
     }
 }

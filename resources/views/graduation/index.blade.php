@@ -32,7 +32,7 @@
                                 @elseif($student->graduation->status === 'pending')
                                     <td>Pending Approval</td>
                                 @elseif($student->graduation->status === 'approved')
-                                    <td>Approved (Pending Payment)</td>
+                                    <td> <a href="{{ route('graduation.purchase',$student->id) }}">Approved <small>(click here to pay)</small> </a></td>
                                 @elseif($student->graduation->status === 'paid')
                                     <td>Paid</td>
                                 @elseif($student->graduation->status === 'completed')

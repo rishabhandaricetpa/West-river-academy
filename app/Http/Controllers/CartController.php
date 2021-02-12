@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\ParentProfile;
+use App\Models\StudentProfile;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -47,6 +49,30 @@ class CartController extends Controller
                                 'parent_profile_id' => $this->parent_profile_id,
                             ]);
                         }
+                    }
+                    break;
+
+                case 'graduation':
+                    $parent_profile_id = ParentProfile::getParentId();
+
+                    $student = StudentProfile::whereId($data['student_id'])
+                                                ->where('parent_profile_id', $parent_profile_id)
+                                                ->with('graduation')
+                                                ->first();
+
+                    if($student){
+                        if (! Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
+                            Cart::create([
+                                'item_type' => 'graduation',
+                                'item_id' => $student->graduation->id,
+                                'parent_profile_id' => $parent_profile_id,
+                            ]);
+                        }
+                    }else{
+                        return redirect()->back()->with([
+                            'message' => 'Invalid data entered!',
+                            'alert-type' => 'error',
+                        ]);
                     }
                     break;
 

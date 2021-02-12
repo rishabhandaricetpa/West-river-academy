@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid position-relative">
-  <h1>Edit Parent Information</h1>
+  <h1>Edit Graduation Information</h1>
   <div class="form-wrap border py-5 px-25 position-relative">
     <form action="{{ route('admin.update.graduation',$graduation->id) }}" class="row" method="post">
       @csrf

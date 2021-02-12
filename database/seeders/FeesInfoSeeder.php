@@ -19,6 +19,7 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'first_student_half', 'description' => 'Fee for first student (semi)', 'amount' => '200'],
             ['type' => 'additional_student_annual', 'description' => 'Fee for additional student (Annual)', 'amount' => '50'],
             ['type' => 'additional_student_half', 'description' => 'Fee for additional student (semi)', 'amount' => '50'],
+            ['type' => 'graduation', 'description' => 'Fee for Graduation', 'amount' => '395'],
         ];
         FeesInfo::insert($data);
     }

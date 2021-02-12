@@ -239,6 +239,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
     Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
     Route::post('graduation', 'GraduationController@store')->name('graduation.store');
+    Route::get('graduation/purchase/{id}', 'GraduationController@purchase')->name('graduation.purchase');
+    
+    // Graduation Process ends
 
     Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
 

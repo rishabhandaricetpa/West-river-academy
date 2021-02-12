@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\EnrollmentPeriods;
 use App\Models\FeesInfo;
 use App\Models\StudentProfile;
+use App\Models\ParentProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -22,65 +23,25 @@ class Cart extends Model
     public static function getCartAmount($parent_profile_id, $total = false)
     {
         try {
-            $enroll_query = self::where('cart.parent_profile_id', $parent_profile_id)
-                            ->where('cart.item_type', 'enrollment_period')
-                            ->leftJoin('enrollment_periods', 'enrollment_periods.id', 'cart.item_id')
-                            ->leftJoin('student_profiles', 'enrollment_periods.student_profile_id', 'student_profiles.id')
-                            ->leftJoin('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id');
-
             if ($total) {
-                return $enroll_query->select(DB::raw('sum(enrollment_payments.amount) as amount'))->first();
-            } else {
-                $enroll_data = $enroll_query->select(
-                                                'student_profiles.first_name',
-                                                'student_profiles.student_Id',
-                                                'student_profiles.id as student_db_id',
-                                                'enrollment_periods.type',
-                                                'enrollment_periods.start_date_of_enrollment',
-                                                'enrollment_periods.end_date_of_enrollment',
-                                                'cart.id',
-                                                'enrollment_payments.amount',
-                                                )
-                                            ->groupBy('student_profiles.id')
-                                            ->groupBy('enrollment_periods.type')
-                                            ->groupBy('cart.id')
-                                            ->groupBy('enrollment_payments.amount')
-                                            ->get();
+                $enroll_total = Self::getEnrollQuery()->select(DB::raw('sum(enrollment_payments.amount) as amount'))->first();
+                $graduation_total = Self::getGraduationQuery()->select(DB::raw('sum(graduations.amount) as amount'))->first();
+                
+                // had to make it an object to make sure it doesn't break anywhere
+                // TODO - remove the amount property and replace it everywhere 
+                $total_amount = (object) array();
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount;
 
-                return self::calculateItemsPerStudent($enroll_data);
+                return $total_amount;
+            } else {
+                $enroll_data = Self::getEnrollData();
+                $graduation_data = Self::getGraduationData();
+
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data);
             }
         } catch (\Exception $e) {
             return [];
         }
-    }
-
-    private static function calculateItemsPerStudent($enroll_data)
-    {
-        $data = [];
-
-        foreach ($enroll_data as $key => $value) {
-            $type = $value['type'] == 'annual' ? 'Annual' : 'Second Semester Only';
-            $arr = [
-                'id' => $value['id'],
-                'type' => $type,
-                'amount' => $value['amount'],
-                'start_date' => \Carbon\Carbon::parse($value['start_date_of_enrollment'])->format('d M Y'),
-                'end_date' => \Carbon\Carbon::parse($value['end_date_of_enrollment'])->format('d M Y'),
-            ];
-            if (array_key_exists($value['student_db_id'], $data)) {
-                array_push(
-                    $data[$value['student_db_id']]['enroll_items'],
-                    $arr
-                );
-            } else {
-                $data[$value['student_db_id']] = [
-                    'name' => ucfirst($value['first_name']),
-                    'enroll_items' => [$arr],
-                ];
-            }
-        }
-
-        return $data;
     }
 
     public static function isCartValid($parent_profile_id)
@@ -144,4 +105,104 @@ class Cart extends Model
 
         return $cart_valid;
     }
+
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data)
+    {
+        $data = [];
+
+        foreach ($enroll_data as $key => $value) {
+            $type = $value['type'] == 'annual' ? 'Annual' : 'Second Semester Only';
+            $arr = [
+                'id' => $value['id'],
+                'type' => $type,
+                'amount' => $value['amount'],
+                'start_date' => \Carbon\Carbon::parse($value['start_date_of_enrollment'])->format('d M Y'),
+                'end_date' => \Carbon\Carbon::parse($value['end_date_of_enrollment'])->format('d M Y'),
+            ];
+            if (array_key_exists($value['student_db_id'], $data)) {
+                array_push(
+                    $data[$value['student_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$value['student_db_id']] = [
+                    'name' => ucfirst($value['first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
+
+        foreach ($graduation_data as $k => $val) {
+            $arr = [
+                'id' => $val['id'],
+                'type' => 'Graduation',
+                'amount' => $val['amount'],
+            ];
+            if (array_key_exists($val['student_db_id'], $data)) {
+                array_push(
+                    $data[$val['student_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$val['student_db_id']] = [
+                    'name' => ucfirst($val['first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
+
+        return $data;
+    }
+
+    private static function getEnrollQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+                    ->where('cart.item_type', 'enrollment_period')
+                    ->leftJoin('enrollment_periods', 'enrollment_periods.id', 'cart.item_id')
+                    ->leftJoin('student_profiles', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                    ->leftJoin('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id');
+    }
+
+    private static function getGraduationQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+                ->where('cart.item_type', 'graduation')
+                ->leftJoin('graduations', 'graduations.id', 'cart.item_id')
+                ->leftJoin('student_profiles', 'graduations.student_profile_id', 'student_profiles.id');
+    }
+
+    private static function getEnrollData()
+    {
+        return Self::getEnrollQuery()->select(
+                    'student_profiles.first_name',
+                    'student_profiles.student_Id',
+                    'student_profiles.id as student_db_id',
+                    'enrollment_periods.type',
+                    'enrollment_periods.start_date_of_enrollment',
+                    'enrollment_periods.end_date_of_enrollment',
+                    'cart.id',
+                    'enrollment_payments.amount',
+                )
+                ->groupBy('student_profiles.id')
+                ->groupBy('enrollment_periods.type')
+                ->groupBy('cart.id')
+                ->groupBy('enrollment_payments.amount')
+                ->get();
+    }
+
+    private static function getGraduationData()
+    {
+        return Self::getGraduationQuery()->select(
+                    'student_profiles.first_name',
+                    'student_profiles.student_Id',
+                    'student_profiles.id as student_db_id',
+                    'cart.id',
+                    'graduations.amount',
+                )
+                ->groupBy('student_profiles.id')
+                ->groupBy('cart.id')
+                ->groupBy('graduations.amount')
+                ->get();
+    }
+
 }

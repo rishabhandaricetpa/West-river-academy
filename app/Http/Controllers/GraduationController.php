@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FeesInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -50,6 +51,8 @@ class GraduationController extends Controller
             DB::beginTransaction();
             $inputs = $request->all();
 
+            $fee = FeesInfo::where('type','graduation')->pluck('amount')->first();
+
             $data = [
                 'parent_profile_id' => ParentProfile::getParentId(),
                 'student_profile_id' => $inputs['student_id'],
@@ -57,6 +60,7 @@ class GraduationController extends Controller
                 'grade_10_info' => $inputs['grade_ten_option'] === 'other' ? $inputs['grade_ten_other'] : $inputs['grade_ten_option'],
                 'grade_11_info' => $inputs['grade_eleven_option'] === 'other' ? $inputs['grade_eleven_other'] : $inputs['grade_eleven_option'],
                 'status' => 'pending',
+                'amount' => $fee,
             ];
 
             StudentProfile::whereId($inputs['student_id'])->update(['email' => $inputs['email']]);
@@ -123,5 +127,12 @@ class GraduationController extends Controller
         $graduation = Graduation::whereId($id)->with(['details','student','parent'])->first();
 
         return view('admin.graduation.edit',compact('graduation'));
+    }
+
+    public function purchase(Request $request, $id)
+    {
+        $student = StudentProfile::find($id)->with(['graduationAddress', 'graduation'])->first();
+
+        return view('graduation.purchase',compact('student'));
     }
 }
