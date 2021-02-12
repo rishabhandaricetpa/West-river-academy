@@ -3,11 +3,11 @@
 @section('content')
 <section class="content">
 <div class="container-fluid position-relative">
-                <h3 class="card-title">Edit Country Enrollment Data</h3>
+              <h1>Edit Country Enrollment Data</h1>
               <div class="form-wrap border py-5 px-25">
-                <form method="post" action="{{route('admin.country.update',$countrydata->id)}}">
+                <form method="post" class="row" action="{{route('admin.country.update',$countrydata->id)}}">
                 @csrf
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-12">
                         <label>Country Name<sup>*</sup></label>
                         <input  class="form-control" id="country" value="{{$countrydata->country}}" name="country" required>
                     </div>
@@ -20,7 +20,7 @@
                         <input  type="text" class="form-control datepicker" id="end_date" name="end_date" value="{{Carbon\Carbon::parse($countrydata->end_date)->format('M d Y')}}">
                     </div>
                 <!-- /.card-body -->
-                <div class="card-footer col-sm-6">
+                <div class="col-sm-12">
                   <button type="submit" class="btn btn-primary">Update</button>
                 </div>
               </form>

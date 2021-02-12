@@ -48,13 +48,6 @@
         </li>
             </ul>
           </li>
-    <li class="nav-item menu">
-    <li class="nav-item">
-        <a href="{{ url('admin/view-student')}}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>View Students</p>
-        </a>
-      </li>
   <li class="nav-item menu">
         <a href="" {{ url('/dashboard') }}"" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>

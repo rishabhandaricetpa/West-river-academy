@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\Storage;
 
 class PDFController extends Controller
 {
@@ -21,6 +22,7 @@ class PDFController extends Controller
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $studentProfileData=StudentProfile::whereId($id)->first();
+        $pdfname=$studentProfileData->first_name.'_'.$studentProfileData->last_name.'_'.$studentProfileData->d_o_b->format('M_d_Y').'_'.'Confirmation_letter';
         $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
         $id = $parentProfileData->id;
         $data = [
@@ -29,9 +31,8 @@ class PDFController extends Controller
             'title' => 'Confirmation of Enrollment',
             'date' => date('m/d/Y'),
         ];
-
         $pdf = PDF::loadView('confirmationLetter', $data);
-
-        return $pdf->download('Confirmation.pdf');
+        // Storage::disk('local')->put('public/pdf/Confirmation.pdf', $pdf->output());
+        return $pdf->download($pdfname.'.pdf');
     }
 }

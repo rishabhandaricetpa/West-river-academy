@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 // Dashboard
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
     Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
     Route::get('delete/parent/{id}', 'ParentController@destroy')->name('parent.delete');
+    Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
 
     // Crud for student profile
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
@@ -98,4 +99,8 @@ Route::group(['middleware' => 'auth'], function () {
     //transcript
     Route::get('/manage-courses', 'CourseController@index')->name('manage.course');
     Route::get('edit-course/{id}', 'CourseController@edit')->name('edit.course');
+    Route::get('edit-subject/{id}', 'CourseController@editSubject')->name('subject.edit');
+    Route::post('update/subject/{id}', 'CourseController@update')->name('update.subject');
+    Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
+    Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
 });
