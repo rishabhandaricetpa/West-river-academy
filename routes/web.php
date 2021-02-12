@@ -237,6 +237,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //Transcript K-8 Cources
 
-    Route::get('english-course/{id}', 'EnglishLanguageController@index')->name('english.cource');
-    Route::post('englishCourse/{id}', 'EnglishLanguageController@store')->name('englishCourse.update');
+    //english course
+    Route::post('englishCourse', 'Courses\EnglishController@store')->name('englishCourse.store');
+
+    //social studies
+    Route::get('social-studies/{id}', 'Courses\SocialStudiesController@index')->name('social.studies');
+    Route::post('/social-studies', 'Courses\SocialStudiesController@store')->name('socialStudiesCourse.store');
+
+    //mathematics 
+    Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
 });
