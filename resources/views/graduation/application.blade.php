@@ -69,7 +69,7 @@
       <div class="modal-body">
         <p>Thank you for your application.</p>
         <p>We will review it and notify you of the next steps.</p>
-        <button type="button" class="btn btn-primary" v-on:click="redirect" data-dismiss="modal">Okay</button>
+        <a href="{{ route('dashboard') }}" class="btn btn-primary" >Okay</a>
       </div>
     </div>
   </div>
@@ -131,11 +131,6 @@
                 }
 
                 return true;
-            },
-            redirect(){
-                console.log('here');
-                console.log(window);
-                window.location = "{{ route('dashboard') }}";
             }
         }
     });
