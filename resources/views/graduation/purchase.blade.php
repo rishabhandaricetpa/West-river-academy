@@ -3,7 +3,7 @@
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">Graduation application</h1>
+  <h1 class="text-center text-white text-uppercase">Purchase Graduation</h1>
   <div class="form-wrap border bg-light py-5 px-25">
    <div class="col-sm-6 pt-4">
     <form method="POST" action="{{ route('add.cart') }}" >
@@ -69,7 +69,7 @@
             </div>
             <div class="d-flex border-top py-3">
                 <span class="text-secondary">Total to Pay</span>
-                <span class="text-secondary ml-auto">$</span>
+                <span class="text-secondary ml-auto">${{ $student->graduation->amount }}</span>
             </div>
             <div class="text-right pt-4 border-top">
             <input type="hidden" name="type" value="graduation">
