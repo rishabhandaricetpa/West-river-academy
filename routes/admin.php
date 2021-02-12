@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 // Dashboard
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -96,5 +96,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update/subject/{id}', 'CourseController@update')->name('update.subject');
     Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
     Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
-
 });

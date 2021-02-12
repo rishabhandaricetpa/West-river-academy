@@ -2,29 +2,30 @@
 
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\ParentProfile;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Subject;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 class CourseController extends Controller
 {
     public function index()
     {
 
         $courses = Course::all();
-        return view('admin.transcript.view-courses', compact('courses'));   
-    
+        return view('admin.transcript.view-courses', compact('courses'));
     }
 
-    protected function store(Request $request,$id)
+    protected function store(Request $request, $id)
     {
         try {
             DB::beginTransaction();
             $subject = Subject::create([
-                'courses_id'=>$id,
+                'courses_id' => $id,
                 'subject_name' => $request['subject_name'],
                 'transcript_period' => $request['grade'],
                 'status' => 0,
@@ -49,9 +50,9 @@ class CourseController extends Controller
     public function edit($id)
     {
         $coursename = Course::find($id);
-        $subjects=Subject::where('courses_id',$id)
-                        ->get();  
-        return view('admin.transcript.edit-courses', compact('subjects','coursename'));
+        $subjects = Subject::where('courses_id', $id)
+            ->get();
+        return view('admin.transcript.edit-courses', compact('subjects', 'coursename'));
     }
 
     public function editSubject($id)
@@ -85,5 +86,4 @@ class CourseController extends Controller
 
         return redirect()->back()->with($notification);
     }
-
 }

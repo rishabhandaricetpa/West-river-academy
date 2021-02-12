@@ -220,7 +220,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('admin.admindashboard');
 
 
-    Route::get('english-transcript', 'EnglishLanguageController@index')->name('english.transcript');
+
 
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
@@ -234,4 +234,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
     Route::post('enrollyear/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
+
+    //Transcript K-8 Cources
+
+    Route::get('english-course/{id}', 'EnglishLanguageController@index')->name('english.cource');
+    Route::post('englishCourse/{id}', 'EnglishLanguageController@store')->name('englishCourse.update');
 });

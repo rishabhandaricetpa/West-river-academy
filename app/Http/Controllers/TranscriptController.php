@@ -8,6 +8,8 @@ use App\Models\EnrollmentPeriods;
 use App\Models\Cart;
 use App\Models\ParentProfile;
 use App\Models\Country;
+use App\Models\Course;
+use App\Models\Subject;
 use App\Models\EnrollmentPayment;
 use App\Models\TranscriptK8;
 use Illuminate\Http\Request;
@@ -111,7 +113,7 @@ class TranscriptController extends Controller
         $result = array_unique($items);
         return view('transcript.transcript-enrollment-year', compact('transcript', 'id', 'result'));
     }
-    public function storeYear(Request $request, $id)
+    public function storeYear(Request $request, $student_id)
     {
         $transcript_id = $request->get('transcript_id');
         $transcript = TranscriptK8::find($transcript_id);
@@ -121,5 +123,14 @@ class TranscriptController extends Controller
             $transcript->enrollment_year = $request->get('other_year');
         }
         $transcript->save();
+        $course = Course::select('id', DB::raw('count(*) as total'))
+            ->groupBy('id')
+            ->where('course_name', 'English / Language Arts')
+            ->first();
+        $courses_id = $course->id;
+        $englishCourse = Subject::where('courses_id', $course->id)
+            ->where('transcript_period', 'K-8')
+            ->get();
+        return view('cources.english-cources', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
     }
 }

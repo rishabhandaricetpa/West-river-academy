@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Models;
-
 use App\Models\EnrollmentPeriods;
 use App\Models\FeesInfo;
 use App\Models\StudentProfile;
+use App\Models\EnrollmentPayment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 class Cart extends Model
 {
     use HasFactory;
@@ -143,5 +143,19 @@ class Cart extends Model
         }
 
         return $cart_valid;
+    }
+
+    public static function emptyCart($parent_profile_id,$type){
+           
+        $id = Auth::user()->id;
+            $cartItems = Cart::select('item_id')->where('parent_profile_id', $id)->get();
+            foreach ($cartItems as $cart) {
+                $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
+                $enrollemtpayment->status = 'active';
+                $enrollemtpayment->payment_mode = $type;
+                $enrollemtpayment->save();
+            }
+            $refreshCart = Cart::select()->where('parent_profile_id', $id)->get();
+            $refreshCart->each->delete();
     }
 }
