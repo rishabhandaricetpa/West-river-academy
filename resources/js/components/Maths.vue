@@ -90,12 +90,11 @@ export default {
     return {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
-        course_id: this.course_id,
+        courses_id: this.courses_id,
         mathscourse: [
           {
-            transcript_id: this.transcript_id,
             student_id: this.student_id,
-            courses_id: this.course_id,
+            courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
             grade: "",
@@ -108,18 +107,19 @@ export default {
   props: ["mathscourse", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("mathsCourse.store"), this.form).then((response) => {
-        window.location = "/social-studies/" + this.student_id;
-      });
+      axios.post(route("mathematics.store"), this.form);
+      //   .then((response) => {
+      //     window.location = "/social-studies/" + this.student_id;
+      //   });
     },
     addNewSocialScienceCourse() {
       this.form.mathscourse.push({
         transcript_id: this.transcript_id,
         student_id: this.student_id,
-        courses_id: this.course_id,
+        courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: "",
+        grade: "",
       });
     },
   },

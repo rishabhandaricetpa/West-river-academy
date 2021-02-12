@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 use App\Models\Subject;
+use App\Models\TranscriptCourse;
 
 class MathsController extends Controller
 {
@@ -22,5 +23,23 @@ class MathsController extends Controller
             ->where('transcript_period', 'K-8')
             ->get();
         return view('cources.maths', compact('MathsCourse', 'student_id', 'course_id'));
+    }
+    public function store(Request $request)
+    {
+        //dd($request->all());
+        $id = $request->get('courses_id');
+        $refreshCourse = TranscriptCourse::select()->where('courses_id', $id)->get();
+        $refreshCourse->each->delete();
+        foreach ($request->get('mathscourse', []) as $period) {
+            $subject = $period['subject'];
+            $subject = Subject::where('subject_name', $subject)->first();
+
+            $english_course = TranscriptCourse::create([
+                'student_profile_id' => $period['student_id'],
+                'courses_id' => $period['courses_id'],
+                'subject_id' => $subject->id,
+                'score' => $period['grade']
+            ]);
+        }
     }
 }

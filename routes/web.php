@@ -246,4 +246,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //mathematics 
     Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
+    Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
 });
