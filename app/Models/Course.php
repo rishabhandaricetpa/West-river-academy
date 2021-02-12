@@ -18,5 +18,9 @@ class Course extends Model
     {
         return $this->hasMany('App\Models\Subject', 'course_id', 'id');
     }
+    public function transcriptCourse()
+    {
+        return $this->belongsTo('App\Models\TranscriptCourse');
+    }
 
 }

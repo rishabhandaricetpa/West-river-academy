@@ -10,7 +10,7 @@
       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
       <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link active">
+        <a href=" {{ url('/admin/dashboard') }}" class="nav-link active">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Parent Profile
@@ -30,7 +30,7 @@
     </ul>
     </li>
     <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+        <a href=" {{ url('admin/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Students
@@ -49,7 +49,7 @@
             </ul>
           </li>
   <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+        <a href=" {{ url('admin/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Payments
@@ -74,7 +74,7 @@
             </ul>
           </li>
           <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+        <a href="{{ url('admin/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Transcripts
@@ -83,7 +83,7 @@
         </a>
         <ul class="nav nav-treeview">
         <li class="nav-item">
-      <a href="" class="nav-link">
+      <a href="{{ url('admin/view/transcript') }}" class="nav-link">
         <i class="nav-icon fas fa-th"></i>
         <p>
           View Transcript

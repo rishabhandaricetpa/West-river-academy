@@ -145,7 +145,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
-        Route::get('admin-dashboard', function () {
+        Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
     });
@@ -215,9 +215,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
     // admin dashboard
-    Route::get('admin-dashboard', function () {
-        return view('admin.home');
-    })->name('admin.admindashboard');
+    // Route::get('admin-dashboard', function () {
+    //     return view('admin.home');
+    // })->name('admin.admindashboard');
 
 
 
@@ -236,7 +236,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('enrollyear/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
 
     //Transcript K-8 Cources
-
     Route::get('english-course/{id}', 'EnglishLanguageController@index')->name('english.cource');
     Route::post('englishCourse/{id}', 'EnglishLanguageController@store')->name('englishCourse.update');
+
 });

@@ -39,6 +39,7 @@
                     <th>Phone</th>
                     <th>Status</th>
                     <th>Action</th>
+                    <th>Student Information</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -51,11 +52,11 @@
                       <td>{{$item->p1_cell_phone}}</td>
                       <td>{{$item->status==0 ?'Active':'Deactivated'}}</td>
                       <td><a href=" {{ url('admin/deactive',$item->id)}}"> <i class="fas fa-ban"
-                onclick="disableButton(this)"></i></a>
-              <a href="{{ url('admin/edit',$item->id)}}"><i class="fas fa-edit"></i>
+                    onclick="disableButton(this)"></i></a>
+                    <a href="{{ url('admin/edit',$item->id)}}"><i class="fas fa-edit"></i>
                 <a href="{{ url('admin/delete/parent',$item->id)}}"><i class="fas fa-trash-alt"
-                    onclick="return myFunction();"></i></a>
-                    <a href="{{ url('admin/view-student',$item->id)}}">
+                    onclick="return myFunction();"></i></a></td>
+                    <td><a href="{{ url('admin/view-student',$item->id)}}">
                             <i class="fas fa-arrow-alt-circle-right"></i></a>
                 </td>
                 </tr>
