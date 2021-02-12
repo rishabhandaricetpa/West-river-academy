@@ -233,12 +233,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
     Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
-    Route::post('enrollyear/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
+    Route::post('english-course/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
 
     //Transcript K-8 Cources
 
     //english course
-    Route::post('englishCourse', 'Courses\EnglishController@store')->name('englishCourse.store');
+    Route::post('english-course', 'Courses\EnglishController@store')->name('englishCourse.store');
 
     //social studies
     Route::get('social-studies/{id}', 'Courses\SocialStudiesController@index')->name('social.studies');
@@ -247,4 +247,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //mathematics 
     Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
     Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
+
+    //science
+    Route::get('science/{student_id}', 'Courses\ScienceController@index')->name('science');
+    Route::post('science', 'Courses\ScienceController@store')->name('science.store');
+
+    //physical education
+
+    Route::get('physical-education/{id}', function () {
+        dd('write physical education ');
+    });
 });
