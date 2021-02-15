@@ -133,9 +133,14 @@ class Cart extends Model
         }
 
         foreach ($graduation_data as $k => $val) {
+            if($val['apostille_country'] !== null && !empty($val['apostille_country'])){
+                $type = 'Graduation (with Apostille Package)';
+            }else{
+                $type = 'Graduation';
+            }
             $arr = [
                 'id' => $val['id'],
-                'type' => 'Graduation',
+                'type' => $type,
                 'amount' => $val['amount'],
             ];
             if (array_key_exists($val['student_db_id'], $data)) {
@@ -199,6 +204,7 @@ class Cart extends Model
                     'student_profiles.id as student_db_id',
                     'cart.id',
                     'graduation_payments.amount',
+                    'graduations.apostille_country',
                 )
                 ->groupBy('student_profiles.id')
                 ->groupBy('cart.id')

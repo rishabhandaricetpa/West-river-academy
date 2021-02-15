@@ -89,6 +89,7 @@
                         `;
                     }
           },
+          { "data": "apostille_country" },
           { "data": "status" },
           { "data": "id",
             "render": function ( id ) {

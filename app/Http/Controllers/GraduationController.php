@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\FeesInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +53,7 @@ class GraduationController extends Controller
             DB::beginTransaction();
             $inputs = $request->all();
 
-            $fee = FeesInfo::where('type','graduation')->pluck('amount')->first();
+            $fee = FeesInfo::getFeeAmount('graduation');
 
             $data = [
                 'parent_profile_id' => ParentProfile::getParentId(),
@@ -132,8 +133,11 @@ class GraduationController extends Controller
 
     public function purchase(Request $request, $id)
     {
-        $student = StudentProfile::find($id)->with(['graduationAddress', 'graduation', 'graduationPayment'])->first();
+        $student = StudentProfile::whereId($id)->with(['graduationAddress', 'graduation', 'graduationPayment', 'parentProfile'])->first();
+        $countries = Country::select('country')->where('country','!=','United States')->get();
+        $apostille_fee = FeesInfo::getFeeAmount('apostille');
+        $graduation_fee = FeesInfo::getFeeAmount('graduation');
 
-        return view('graduation.purchase',compact('student'));
+        return view('graduation.purchase',compact('student', 'countries', 'apostille_fee', 'graduation_fee'));
     }
 }

@@ -14,4 +14,9 @@ class FeesInfo extends Model
     protected $fillable = [
         'type', 'description', 'amount',
     ];
+
+    public static function getFeeAmount($type)
+    {
+       return Self::where('type', $type)->pluck('amount')->first();
+    }
 }
