@@ -283,4 +283,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //science
     Route::get('science/{student_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
+
+    Route::get('download-transcript', function () {
+        return view('transcript/download-transcript');
+    })->name('download.transcript');
+    Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
+
 });

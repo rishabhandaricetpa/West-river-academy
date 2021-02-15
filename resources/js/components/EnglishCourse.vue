@@ -90,13 +90,14 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "EnglishCourse",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
-        courses_id: this.courses_id,
+        course_id: this.courses_id,
+        // transcripts_id: this.transcript_id,
         englishCourse: [
           {
             transcript_id: this.transcript_id,
@@ -104,17 +105,17 @@ export default {
             courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
-            grade: "",
-          },
-        ],
+            grade: ""
+          }
+        ]
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
   props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("englishCourse.store"), this.form).then((response) => {
+      axios.post(route("englishCourse.store"), this.form).then(response => {
         window.location = "/social-studies/" + this.student_id;
       });
     },
@@ -125,9 +126,9 @@ export default {
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: "",
+        grades: ""
       });
-    },
+    }
   },
   removeEnglishCourse(index) {
     if (this.removingPeriod) {
@@ -141,7 +142,7 @@ export default {
   computed: {
     canRemovePeriod() {
       return this.form.englishCourse.length > 1;
-    },
-  },
+    }
+  }
 };
 </script>

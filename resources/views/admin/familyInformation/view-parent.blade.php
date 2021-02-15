@@ -32,9 +32,9 @@
             <table id="example1" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
-                    <th>Parent1 First Name</th>
-                    <th>Parent2 First Name</th>
-                    <th>Email</th>
+                    <th>Parent 1 Name</th>
+                    <th>Parent 2 Name</th>
+                    <th>Parent 1 Email</th>
                     <th>Country</th>
                     <th>Phone</th>
                     <th>Status</th>

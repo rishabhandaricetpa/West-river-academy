@@ -25,7 +25,7 @@
               </div>
               <div class="form-group col-sm-6">
                 <label>Date of Birth<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
-                <input class="form-control" id="dob" name="dob" value="{{$student->d_o_b}}" required>
+                <input  class="form-control datepicker" id="dob" name="dob" value="{{$student->d_o_b->format('M d Y')}}" required>
               </div>
               <div class="form-group col-sm-6">
                 <label>Email Address</label>
