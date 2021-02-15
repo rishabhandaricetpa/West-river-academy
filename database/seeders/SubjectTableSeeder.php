@@ -133,12 +133,11 @@ class SubjectTableSeeder extends Seeder
                 ['4','MARINE BIOLOGY','9-12'],
                 
                 //anoher
-                ['8','ENGLISH','K-8'],
-                ['8','LANGUAGE ART','K-8'],
-                ['8','READING','K-8'],
-                ['8','WRITING','K-8'],
-                ['8','ORAL COMMUNICATION','K-8'],
-                ['8','MEDIA LITERACY','K-8'],
+                ['8','ART','K-8'],
+                ['8','DANCE','K-8'],
+                ['8','DRAMA','K-8'],
+                ['8','MUSIC','K-8'],
+                ['8','VIRTUAL ARTS','K-8'],
                 ['8','MUSIC','9-12'],
                 ['8','ART','9-12'],
                 ['8','DANCE','9-12'],
