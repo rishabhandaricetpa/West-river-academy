@@ -95,6 +95,7 @@ export default {
           {
             student_id: this.student_id,
             courses_id: this.courses_id,
+            transcript_id: this.transcript_id,
             subject: "",
             other_subjects: "",
             grade: "",
@@ -104,11 +105,12 @@ export default {
       removingPeriod: false,
     };
   },
-  props: ["mathscourse", "student_id", "courses_id"],
+  props: ["mathscourse", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses() {
       axios.post(route("mathematics.store"), this.form).then((response) => {
-        window.location = "/science/" + this.student_id;
+        window.location =
+          "/science/" + this.student_id + "/" + this.transcript_id;
       });
     },
     addNewSocialScienceCourse() {
@@ -116,6 +118,7 @@ export default {
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         courses_id: this.courses_id,
+        transcript_id: this.transcript_id,
         subject: "",
         other_subjects: "",
         grade: "",

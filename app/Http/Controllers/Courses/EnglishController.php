@@ -29,7 +29,7 @@ class EnglishController extends Controller
                 'courses_id' => $period['courses_id'],
                 'subject_id' => $subject->id,
                 'score' => $period['grade'],
-                'k8transcript_id'=>$period['transcript_id'],
+                'k8transcript_id' => $period['transcript_id'],
             ]);
         }
     }

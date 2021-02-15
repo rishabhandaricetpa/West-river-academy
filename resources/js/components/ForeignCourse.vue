@@ -90,7 +90,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "ForeignCourse",
   components: {
-    "v-select": vSelect
+    "v-select": vSelect,
   },
   data() {
     return {
@@ -104,18 +104,19 @@ export default {
             courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
-            grade: ""
-          }
-        ]
+            grade: "",
+          },
+        ],
       },
-      removingPeriod: false
+      removingPeriod: false,
     };
   },
   props: ["foreignstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("foreign.store"), this.form).then(response => {
-        window.location = "/another/" + this.student_id;
+      axios.post(route("foreign.store"), this.form).then((response) => {
+        window.location =
+          "/another/" + this.student_id + "/" + this.transcript_id;
       });
     },
     addNewSocialScienceCourse() {
@@ -125,9 +126,9 @@ export default {
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: ""
+        grades: "",
       });
-    }
+    },
   },
   removeForeignCourse(index) {
     if (this.removingPeriod) {
@@ -141,7 +142,7 @@ export default {
   computed: {
     canRemovePeriod() {
       return this.form.foreignCourse.length > 1;
-    }
-  }
+    },
+  },
 };
 </script>
