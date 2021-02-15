@@ -46,27 +46,14 @@ class MoneyOrderController extends Controller
     $amount = $enroll_fees->amount;
     $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
 
-    $paymentinfo = new TransactionsMethod;
-    $paymentinfo = $parentProfileData->TransactionsMethod()->create([
-      'parent_profile_id' => $parentProfileData,
-      'transcation_id' => substr(uniqid(), 0, 8),
-      'payment_mode' => 'Check or Money Order',
-      'amount' => $amount,
-      'status' => 'active',
-      'coupon_code' => $coupon_code,
-      'coupon_amount' => $coupon_amount,
-    ]);
+    $type='Check or Money Order';
+    //store transactions
 
-    $cartItems = Cart::select('item_id')->where('parent_profile_id', $id)->get();
-    foreach ($cartItems as $cart) {
-      $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-      $enrollemtpayment->status = 'active';
-      $enrollemtpayment->payment_mode = 'Check and Money Order';
-      $enrollemtpayment->save();
-    }
+    $saveTransaction= TransactionsMethod::storeTransactionData($this->parent_profile_id,$amount,$coupon_code,$coupon_amount,$type);
+   
+    //update cart status active 
 
-    $refreshCart = Cart::select()->where('parent_profile_id', $id)->get();
-    $refreshCart->each->delete();
+    Cart::emptyCart($type);
 
     Mail::to($email)->send(new MoneyOrder($user));
 

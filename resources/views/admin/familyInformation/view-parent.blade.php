@@ -55,6 +55,8 @@
               <a href="{{ url('admin/edit',$item->id)}}"><i class="fas fa-edit"></i>
                 <a href="{{ url('admin/delete/parent',$item->id)}}"><i class="fas fa-trash-alt"
                     onclick="return myFunction();"></i></a>
+                    <a href="{{ url('admin/view-student',$item->id)}}">
+                            <i class="fas fa-arrow-alt-circle-right"></i></a>
                 </td>
                 </tr>
                 @endforeach

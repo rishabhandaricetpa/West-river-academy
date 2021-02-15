@@ -120,7 +120,6 @@
           id="student_id"
           name="student_id"
           v-model="form.student_Id"
-          required
           aria-describedby="emailHelp"
         />
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <form method="POST" action="">
+  <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
       v-for="(englishCourse, index) in form.englishCourse"
@@ -10,15 +10,15 @@
           v-if="canRemovePeriod"
           class="remove"
           @click="removeEnglishCourse(index)"
-          ><i class="fas fa-times"></i
-        ></span>
+          ><i class="fas fa-times"></i>
+        </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
             <select
               class="form-control mb-4"
               name="english_course"
               id="english_course"
-              v-model="form.englishCourse.subject"
+              v-model="englishCourse.subject"
             >
               <option v-for="(val, i) in englishcourse" :key="i">
                 {{ val.subject_name }}
@@ -26,89 +26,57 @@
             </select>
             <div class="form-group d-sm-flex">
               <label for="" class="w-auto">Other</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="form.englishCourse.other_subjects"
+              />
             </div>
             <div class="form-group d-sm-flex mt-4">
               <div class="col-sm-3 px-0">
                 <h3>Select a Grade</h3>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="2"
-                  />
-                  <label class="form-check-label" for="">
-                    A
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="3"
-                  />
-                  <label class="form-check-label" for="">
-                    B
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="4"
-                  />
-                  <label class="form-check-label" for="">
-                    C
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="5"
-                  />
-                  <label class="form-check-label" for="">
-                    D
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="student_grade"
-                    value="5"
-                  />
-                  <label class="form-check-label" for="">
-                    PASS
-                  </label>
-                </div>
-              </div>
-              <div>
                 <a
                   href="#chooseGrades"
                   data-toggle="modal"
                   class="btn btn-primary"
                   >Help me decide</a
                 >
+                <div class="row pl-sm-5">
+                  <div
+                    v-for="(grade, index) in grades"
+                    :key="index"
+                    class="col-6 col-sm-3"
+                  >
+                    <div v-for="(val, i) in grade" :key="i" class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        :value="val"
+                        v-model="englishCourse.grade"
+                        required
+                      />
+                      <label class="form-check-label pl-1 pl-sm-0" for="">
+                        {{ val }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div></div>
               </div>
-            </div>
-            <div class="mt-5">
-              <a
-                type="button"
-                class="btn btn-primary float-left"
-                id="addEnglish"
-                @click="addNewEnglishCourse"
-                >Add another English/Language Arts Course</a
-              >
-              <a href="#" class="btn btn-primary float-right">Continue</a>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="mt-5">
+      <a
+        type="button"
+        class="btn btn-primary float-left"
+        id="addEnglish"
+        @click="addNewEnglishCourse"
+        >Add another English/Language Arts Course</a
+      >
+      <button type="submit" class="btn btn-primary">Continue</button>
     </div>
   </form>
 </template>
@@ -121,31 +89,45 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "EnglishCourse",
   components: {
-    "v-select": vSelect
+    "v-select": vSelect,
   },
   data() {
     return {
+      grades: [["A", "B", "C", "D", "PASS"]],
       form: {
         englishCourse: [
           {
+            transcript_id: this.transcript_id,
+            student_id: this.student_id,
+            courses_id: this.courses_id,
             subject: "",
-            other_subjcts: "",
-            grades: ""
-          }
-        ]
+            other_subjects: "",
+            grade: "",
+          },
+        ],
       },
-      removingPeriod: false
+      removingPeriod: false,
     };
   },
-  props: ["englishcourse"],
+  props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
   methods: {
+    addCourses() {
+      axios
+        .post(route("englishCourse.update", this.student_id), this.form)
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
     addNewEnglishCourse() {
       this.form.englishCourse.push({
+        transcript_id: this.transcript_id,
+        student_id: this.student_id,
+        courses_id: this.courses_id,
         subject: "",
-        other_subjcts: "",
-        grades: ""
+        other_subjects: "",
+        grades: "",
       });
-    }
+    },
   },
   removeEnglishCourse(index) {
     if (this.removingPeriod) {
@@ -159,7 +141,7 @@ export default {
   computed: {
     canRemovePeriod() {
       return this.form.englishCourse.length > 1;
-    }
-  }
+    },
+  },
 };
 </script>

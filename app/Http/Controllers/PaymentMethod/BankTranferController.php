@@ -40,29 +40,12 @@ class BankTranferController extends Controller
     $coupon_amount = session('applied_coupon_amount', 0);
     $amount = $enroll_fees->amount;
     $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
-
+    $type='Bank Transfer';
+    //store transactions
+    $saveTransaction= TransactionsMethod::storeTransactionData($this->parent_profile_id,$amount,$coupon_code,$coupon_amount,$type);
     //update cart status active 
-    $parentProfileData = User::find($id)->parentProfile()->first();
-    $paymentinfo = new TransactionsMethod;
-    $paymentinfo = $parentProfileData->TransactionsMethod()->create([
-      'parent_profile_id' => $parentProfileData,
-      'transcation_id' => substr(uniqid(), 0, 8),
-      'payment_mode' => 'Bank Transfer',
-      'amount' => $amount,
-      'status' => 'active',
-      'coupon_code' => $coupon_code,
-      'coupon_amount' => $coupon_amount,
-    ]);
-    $cartItems = Cart::select('item_id')->where('parent_profile_id', $id)->get();
-    foreach ($cartItems as $cart) {
-      $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-      $enrollemtpayment->status = 'active';
-      $enrollemtpayment->payment_mode = 'Bank Transfer';
-      $enrollemtpayment->save();
-    }
-
-    $refreshCart = Cart::select()->where('parent_profile_id', $id)->get();
-    $refreshCart->each->delete();
+    
+    Cart::emptyCart($type);
 
     Mail::to($email)->send(new BankTranferEmail($user));
     return view('mail.banktransfer', compact('email', 'date'));

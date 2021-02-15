@@ -18,8 +18,16 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
+        
         $student = StudentProfile::all();
 
+        return view('admin.familyInformation.view-student', compact('student'));
+    
+    }
+
+    public function studentInformation($id)
+    {
+        $student = StudentProfile::where('parent_profile_id',$id)->get();
         return view('admin.familyInformation.view-student', compact('student'));
     }
 
