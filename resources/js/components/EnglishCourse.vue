@@ -116,7 +116,8 @@ export default {
   methods: {
     addCourses() {
       axios.post(route("englishCourse.store"), this.form).then(response => {
-        window.location = "/social-studies/" + this.student_id;
+        window.location =
+          "/social-studies/" + this.courses_id + "/" + this.transcript_id;
       });
     },
     addNewSocialScienceCourse() {
