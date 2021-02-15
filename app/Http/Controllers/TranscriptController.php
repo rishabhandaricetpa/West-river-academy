@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Subject;
 use App\Models\EnrollmentPayment;
 use App\Models\TranscriptK8;
+use App\Models\TranscriptPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -142,7 +143,7 @@ class TranscriptController extends Controller
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $studentProfileData=StudentProfile::whereId($id)->first();
-        $pdfname=$studentProfileData->first_name.'_'.$studentProfileData->last_name.'_'.$studentProfileData->d_o_b->format('M_d_Y').'_'.'transcript_letter';
+        $pdfname=$studentProfileData->first_name.'_'.$studentProfileData->last_name.'_'.$studentProfileData->d_o_b->format('M_d_Y').'_'.'unsigned_transcript_letter';
         $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
         $id = $parentProfileData->id;
         $data = [
@@ -153,6 +154,14 @@ class TranscriptController extends Controller
         ];
         $pdf = PDF::loadView('transcript.pdf', $data);
         Storage::disk('local')->put('public/pdf/'.$pdfname.'.pdf', $pdf->output());
+
+        //store pdf link
+        $storetranscript=TranscriptPdf::create([
+            'student_profile_id' => $studentProfileData->id,
+            'pdf_link' => $pdfname.'.pdf',
+            'k8transcript_id'=>'1',
+            'status' => 'pending',
+        ]);
         return $pdf->download($pdfname.'.pdf');
     }
 }

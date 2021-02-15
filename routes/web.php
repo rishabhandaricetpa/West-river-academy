@@ -290,4 +290,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('download.transcript');
     Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
 
+    Route::get('new-grade/{student_id}/{transcript_id}', function () {
+        return view('transcript/dashboard-another-languages');
+    })->name('new-grade');
+
 });

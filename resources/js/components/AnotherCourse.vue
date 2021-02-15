@@ -114,7 +114,10 @@ export default {
   props: ["anotherstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("another.store"), this.form).then(response => {});
+      axios.post(route("another.store"), this.form).then(response => {
+        window.location =
+          "/new-grade/" + this.courses_id + "/" + this.transcript_id;
+      });
     },
     addNewSocialScienceCourse() {
       this.form.anotherCourse.push({
