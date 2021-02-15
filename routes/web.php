@@ -246,4 +246,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //mathematics 
     Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
+
+    //health
+    Route::get('health/{id}', 'Courses\HealthController@index')->name('health');
+    Route::post('/health', 'Courses\HealthController@store')->name('health.store');
+    //foreign languages
+    Route::get('foreign/{id}', 'Courses\ForeignController@index')->name('foreign');
+    Route::post('/foreign', 'Courses\ForeignController@store')->name('foreign.store');
+    
+    //another
+    Route::get('another/{id}', 'Courses\AnotherCourseController@index')->name('another');
+    Route::post('/another', 'Courses\AnotherCourseController@store')->name('another.store');
 });
