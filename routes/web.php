@@ -69,6 +69,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         //working blades by frontend
+        Route::get('/transcript-wizard-dashboard', function () {
+            return view('transcript-wizard-dashboard');
+        });
+
+        Route::get('/transcript-pdf', function () {
+            return view('transcript-pdf');
+        });
+
         Route::get('/reviewstudent', function () {
             return view('reviewstudent');
         });
