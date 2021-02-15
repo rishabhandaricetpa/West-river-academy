@@ -9,27 +9,28 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Subject;
 use App\Models\TranscriptCourse;
 
-class ScienceController extends Controller
+class PhysicalEducationController extends Controller
 {
     public function index($id)
     {
         $student_id = $id;
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Science')
+            ->where('course_name', 'Physical Education')
             ->first();
+
         $courses_id = $course->id;
-        $science_course = Subject::where('courses_id', $course->id)
+        $physical_education = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
             ->get();
-        return view('courses.science', compact('science_course', 'student_id', 'courses_id'));
+        return view('courses.physicalEducation', compact('physical_education', 'student_id', 'courses_id'));
     }
     public function store(Request $request)
     {
         $id = $request->get('courses_id');
         $refreshCourse = TranscriptCourse::select()->where('courses_id', $id)->get();
         $refreshCourse->each->delete();
-        foreach ($request->get('sciencecourse', []) as $period) {
+        foreach ($request->get('physicalEducation', []) as $period) {
             $subject = $period['subject'];
             $subject = Subject::where('subject_name', $subject)->first();
 

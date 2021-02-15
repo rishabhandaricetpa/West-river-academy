@@ -34,7 +34,7 @@
           <h3>Is the transcript for grades Kindergarten-8 or for high school (grade 9-12)?</h3>
           <div class="d-sm-flex py-4 col-sm-6 mx-auto">
             <div class="form-check mb-1">
-              <input class="form-check-input" type="radio" name="grade" value="K-8">
+              <input class="form-check-input" type="radio" name="grade" value="K-8" required>
               <label class="form-check-label" for="">k-8</label>
             </div>
             <div class="form-check mb-1">

@@ -7,7 +7,7 @@
         <h1 class="text-center text-white text-uppercase"></h1>
         <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
             <h3>Select an History / Social Science course:</h3>
-            <social-studies :socialstudies='@json($socialStudiesCourse)' :student_id='@json($student_id)' :course_id='@json($course_id)'> </social-studies>
+            <social-studies :socialstudies='@json($socialStudiesCourse)' :student_id='@json($student_id)' :courses_id='@json($courses_id)'> </social-studies>
         </div>
     </main>
     <div class="modal fade" id="chooseGrades" tabindex="-1" aria-labelledby="chooseGradesLabel" aria-hidden="true">
