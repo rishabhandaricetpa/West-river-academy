@@ -2,26 +2,20 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="(englishCourse, index) in form.englishCourse"
-      :key="englishCourse.id"
+      v-for="science in form.sciencecourse"
+      :key="science.id"
     >
       <div class="position-relative">
-        <span
-          v-if="canRemovePeriod"
-          class="remove"
-          @click="removeEnglishCourse(index)"
-          ><i class="fas fa-times"></i>
-        </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
             <select
               class="form-control mb-4"
-              name="english_course"
-              id="english_course"
+              name="maths_course"
+              id="maths_course"
               required
-              v-model="englishCourse.subject"
+              v-model="science.subject"
             >
-              <option v-for="(val, i) in englishcourse" :key="i">
+              <option v-for="(val, i) in sciencecourse" :key="i">
                 {{ val.subject_name }}
               </option>
             </select>
@@ -30,7 +24,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.englishCourse.other_subjects"
+                v-model="form.sciencecourse.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -53,7 +47,7 @@
                         class="form-check-input"
                         type="radio"
                         :value="val"
-                        v-model="englishCourse.grade"
+                        v-model="science.grade"
                         required
                       />
                       <label class="form-check-label pl-1 pl-sm-0" for="">
@@ -75,7 +69,7 @@
         class="btn btn-primary float-left"
         id="addEnglish"
         @click="addNewSocialScienceCourse"
-        >Add another English/Language Arts Course</a
+        >Add another Science Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
     </div>
@@ -88,46 +82,45 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  name: "EnglishCourse",
+  name: "ScienceCourse",
   components: {
-    "v-select": vSelect
+    "v-select": vSelect,
   },
   data() {
     return {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
-        course_id: this.courses_id,
-        englishCourse: [
+        courses_id: this.courses_id,
+        sciencecourse: [
           {
-            transcript_id: this.transcript_id,
             student_id: this.student_id,
             courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
-            grade: ""
-          }
-        ]
+            grade: "",
+          },
+        ],
       },
-      removingPeriod: false
+      removingPeriod: false,
     };
   },
-  props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
+  props: ["sciencecourse", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("englishCourse.store"), this.form).then(response => {
-        window.location = "/social-studies/" + this.student_id;
+      axios.post(route("science.store"), this.form).then((response) => {
+        window.location = "/physical-education/" + this.student_id;
       });
     },
     addNewSocialScienceCourse() {
-      this.form.englishCourse.push({
+      this.form.sciencecourse.push({
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: ""
+        grade: "",
       });
-    }
+    },
   },
   removeEnglishCourse(index) {
     if (this.removingPeriod) {
@@ -136,12 +129,12 @@ export default {
     this.removingPeriod = true;
 
     let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.englishCourse.splice(index, 1);
+    reqData.sciencecourse.splice(index, 1);
   },
   computed: {
-    canRemovePeriod() {
-      return this.form.englishCourse.length > 1;
-    }
-  }
+    // canRemovePeriod() {
+    //   return this.form.sciencecourse.length > 1;
+    // },
+  },
 };
 </script>

@@ -153,7 +153,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
-        Route::get('admin-dashboard', function () {
+        Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
     });
@@ -223,9 +223,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
     // admin dashboard
-    Route::get('admin-dashboard', function () {
-        return view('admin.home');
-    })->name('admin.admindashboard');
+    // Route::get('admin-dashboard', function () {
+    //     return view('admin.home');
+    // })->name('admin.admindashboard');
 
 
 
@@ -250,10 +250,39 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
     Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
-    Route::post('enrollyear/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
+    Route::post('english-course/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
 
     //Transcript K-8 Cources
 
-    Route::get('english-course/{id}', 'EnglishLanguageController@index')->name('english.cource');
-    Route::post('englishCourse/{id}', 'EnglishLanguageController@store')->name('englishCourse.update');
+    //english course
+    Route::post('english-course', 'Courses\EnglishController@store')->name('englishCourse.store');
+
+    //social studies
+    Route::get('social-studies/{id}', 'Courses\SocialStudiesController@index')->name('social.studies');
+    Route::post('/social-studies', 'Courses\SocialStudiesController@store')->name('socialStudiesCourse.store');
+
+    //mathematics 
+    Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
+
+    //health
+    Route::get('health/{id}', 'Courses\HealthController@index')->name('health');
+    Route::post('/health', 'Courses\HealthController@store')->name('health.store');
+    //foreign languages
+    Route::get('foreign/{id}', 'Courses\ForeignController@index')->name('foreign');
+    Route::post('/foreign', 'Courses\ForeignController@store')->name('foreign.store');
+    
+    //another
+    Route::get('another/{id}', 'Courses\AnotherCourseController@index')->name('another');
+    Route::post('/another', 'Courses\AnotherCourseController@store')->name('another.store');
+    Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
+
+    //science
+    Route::get('science/{student_id}', 'Courses\ScienceController@index')->name('science');
+    Route::post('science', 'Courses\ScienceController@store')->name('science.store');
+
+    //physical education
+
+    Route::get('physical-education/{id}', function () {
+        dd('write physical education ');
+    });
 });

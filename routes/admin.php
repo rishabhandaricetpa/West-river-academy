@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/payments-invoice', function () {
                 return view('admin/paymentsInvoice/payment');
             });
+
+            
         }
     );
 
@@ -103,4 +105,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update/subject/{id}', 'CourseController@update')->name('update.subject');
     Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
     Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
+    //transcript
+    Route::get('/view/transcript', 'TranscriptController@index')->name('view.transcript');
+    Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
+
+    Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
+    Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
+
+    
 });
