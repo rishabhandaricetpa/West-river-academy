@@ -15,7 +15,7 @@ class EnglishController extends Controller
     public function store(Request $request)
     {
 
-        $id = $request->get('course_id');
+        $id = $request->get('courses_id');
         //first delete the course if exists in database
         $refreshCourses = TranscriptCourse::select()->where('courses_id', $id)->get();
         $refreshCourses->each->delete();

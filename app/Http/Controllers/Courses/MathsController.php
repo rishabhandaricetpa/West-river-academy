@@ -18,11 +18,11 @@ class MathsController extends Controller
             ->groupBy('id')
             ->where('course_name', 'Mathematics')
             ->first();
-        $course_id = $course->id;
+        $courses_id = $course->id;
         $maths_course = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
             ->get();
-        return view('cources.maths', compact('maths_course', 'student_id', 'course_id'));
+        return view('courses.maths', compact('maths_course', 'student_id', 'courses_id'));
     }
     public function store(Request $request)
     {

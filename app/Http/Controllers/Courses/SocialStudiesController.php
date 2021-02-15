@@ -18,16 +18,16 @@ class SocialStudiesController extends Controller
             ->groupBy('id')
             ->where('course_name', 'History / Social Science')
             ->first();
-        $course_id = $course->id;
+        $courses_id = $course->id;
         $socialStudiesCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
             ->get();
-        return view('courses.social-studies', compact('socialStudiesCourse', 'student_id', 'course_id'));
+        return view('courses.social-studies', compact('socialStudiesCourse', 'student_id', 'courses_id'));
     }
     public function store(Request $request)
     {
         // dd($request->get('course_id'));
-        $id = $request->get('course_id');
+        $id = $request->get('courses_id');
         $refreshCourse = TranscriptCourse::select()->where('courses_id', $id)->get();
         $refreshCourse->each->delete();
         foreach ($request->get('socialStudiesCourse', []) as $period) {
