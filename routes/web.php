@@ -73,6 +73,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('reviewstudent');
         });
 
+        Route::get('/graduation-2', function () {
+            return view('graduation-2');
+        });
+
         Route::get('/transcript-wizard', function () {
             return view('transcript-wizard');
         });
@@ -83,6 +87,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/graduation-app-grade', function () {
             return view('graduation-app-grade');
+        });
+
+        Route::get('/app-approve', function () {
+            return view('app-approve');
         });
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
@@ -145,7 +153,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
-        Route::get('admin-dashboard', function () {
+        Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
     });
@@ -215,9 +223,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
     // admin dashboard
-    Route::get('admin-dashboard', function () {
-        return view('admin.home');
-    })->name('admin.admindashboard');
+    // Route::get('admin-dashboard', function () {
+    //     return view('admin.home');
+    // })->name('admin.admindashboard');
 
 
 
@@ -226,6 +234,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
     Route::post('year', 'TranscriptController@create')->name('year');
+
+    // Graduation Process
+    Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
+    Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
+    Route::post('graduation', 'GraduationController@store')->name('graduation.store');
+    Route::get('graduation/purchase/{id}', 'GraduationController@purchase')->name('graduation.purchase');
+    
+    // Graduation Process ends
+
     Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
 
     Route::post('notify-student/{id}', 'TranscriptController@notification')->name('notify.studentInfo');
@@ -246,6 +263,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //mathematics 
     Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
+
+    //health
+    Route::get('health/{id}', 'Courses\HealthController@index')->name('health');
+    Route::post('/health', 'Courses\HealthController@store')->name('health.store');
+    //foreign languages
+    Route::get('foreign/{id}', 'Courses\ForeignController@index')->name('foreign');
+    Route::post('/foreign', 'Courses\ForeignController@store')->name('foreign.store');
+    
+    //another
+    Route::get('another/{id}', 'Courses\AnotherCourseController@index')->name('another');
+    Route::post('/another', 'Courses\AnotherCourseController@store')->name('another.store');
     Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
 
     //science

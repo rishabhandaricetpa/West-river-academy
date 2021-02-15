@@ -86,11 +86,11 @@ export default {
             courses_id: this.course_id,
             subject: "",
             other_subjects: "",
-            grade: "",
-          },
-        ],
+            grade: ""
+          }
+        ]
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
   props: ["socialstudies", "student_id", "course_id"],
@@ -98,8 +98,8 @@ export default {
     addCourses() {
       axios
         .post(route("socialStudiesCourse.store"), this.form)
-        .then((response) => {
-          window.location = "/mathematics/" + this.student_id;
+        .then(response => {
+          window.location = "/health/" + this.student_id;
         });
     },
     addNewEnglishCourse() {
@@ -108,9 +108,10 @@ export default {
         courses_id: this.course_id,
         subject: "",
         other_subjects: "",
-        grades: "",
+        grades: ""
       });
-    },
-  },
+    }
+  }
 };
-</script>>
+</script>
+>

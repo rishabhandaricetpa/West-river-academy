@@ -12,4 +12,18 @@ class TranscriptCourse extends Model
     protected $fillable = [
         'student_profile_id', 'courses_id', 'subject_id', 'score'
     ];
+
+    public function subjects()
+    {
+        return $this->hasMany('App\Models\Subject', 'id', 'subject_id');
+    }
+    public function course()
+    {
+        return $this->hasMany('App\Models\Course', 'id', 'courses_id');
+    }
+    public function StudentProfile()
+    {
+        return $this->belongsTo('App\Models\StudentProfile');
+    }
+
 }

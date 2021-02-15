@@ -1,7 +1,7 @@
 </body>
 @routes
 @include('layouts.partials.scripts')
-
+@yield('manualscript')
 </html>
 <footer class="bg-dark position-relative text-center main-footer">
   <div class="container">

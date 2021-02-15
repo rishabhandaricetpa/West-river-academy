@@ -23,3 +23,7 @@
       $(".site-header").removeClass("stickyHeader");
     }
 }); //missing );
+
+$(".notify-btn").click(function(){
+  $(".notification").toggleClass('d-block');
+});

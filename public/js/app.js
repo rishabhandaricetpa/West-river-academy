@@ -345,6 +345,9 @@ axios.all = function all(promises) {
 };
 axios.spread = __webpack_require__(/*! ./helpers/spread */ "./node_modules/axios/lib/helpers/spread.js");
 
+// Expose isAxiosError
+axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_modules/axios/lib/helpers/isAxiosError.js");
+
 module.exports = axios;
 
 // Allow use of default import syntax in TypeScript
@@ -1349,6 +1352,29 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
+/***/ "./node_modules/axios/lib/helpers/isAxiosError.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/lib/helpers/isURLSameOrigin.js":
 /*!***********************************************************!*\
   !*** ./node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
@@ -2315,8 +2341,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -2356,8 +2380,8 @@ __webpack_require__.r(__webpack_exports__);
     this.periods.forEach(function (item) {
       _this.form.periods.push({
         id: item.id,
-        selectedStartDate: item.start_date_of_enrollment,
-        selectedEndDate: item.end_date_of_enrollment,
+        selectedStartDate: new Date(item.start_date_of_enrollment),
+        selectedEndDate: new Date(item.end_date_of_enrollment),
         grade: item.grade_level,
         status: item.status,
         configstartdate: {
@@ -2370,6 +2394,7 @@ __webpack_require__.r(__webpack_exports__);
           altInputClass: "form-control",
           altInput: true,
           allowInput: true,
+          minDate: _this.calcMinDate(_this.startdate),
           disable: [{
             from: _this.calcEndDate(item.start_date_of_enrollment),
             to: _this.calcToData(item.start_date_of_enrollment)
@@ -2380,11 +2405,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     EditStudent: function EditStudent() {
-      this.errors = [];
-
-      if (!this.validEmail(this.form.email)) {
-        return this.errors.push("Valid email required.");
-      }
+      this.errors = []; // if (!this.validEmail(this.form.email)) {
+      //   return this.errors.push("Valid email required.");
+      // }
 
       if (!this.vallidateGrades()) {
         this.errors.push("Grade is required Field! Please select a Grade and then continue");
@@ -2401,10 +2424,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    validEmail: function validEmail(email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
+    // validEmail: function (email) {
+    //   var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //   return re.test(email);
+    // },
     calcEndDate: function calcEndDate(date) {
       var oldDate = new Date(date);
       var year = oldDate.getFullYear();
@@ -2412,16 +2435,24 @@ __webpack_require__.r(__webpack_exports__);
       var month = oldDate.getMonth();
       return new Date(year + 1, month, oDate);
     },
+    calcMinDate: function calcMinDate(date) {
+      var oldDate = new Date(date);
+      var year = oldDate.getFullYear();
+      var oDate = oldDate.getDate();
+      var month = oldDate.getMonth();
+      return new Date(year, month, oDate + 1);
+    },
     calcToData: function calcToData(date) {
       var oldDate = new Date(date);
       var oDate = oldDate.getDate();
       var year = oldDate.getFullYear();
       var month = oldDate.getMonth();
-      return new Date(year + 100, month, oDate + 1);
+      return new Date(year + 900, month, oDate + 1);
     },
     updateEndDate: function updateEndDate(index) {
       this.form.periods[index].configenddate.disable[0].from = this.calcEndDate(this.form.periods[index].selectedStartDate);
       this.form.periods[index].configenddate.disable[0].to = this.calcToData(this.form.periods[index].selectedStartDate);
+      this.form.periods[index].configenddate.minDate = this.calcMinDate(this.form.periods[index].selectedStartDate);
       this.form.periods[index].selectedEndDate = ""; // reset the end date value
     },
     addNewEnrollPeriod: function addNewEnrollPeriod() {
@@ -2429,7 +2460,7 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         selectedStartDate: new Date(this.semesters.start_date),
         status: "pending",
-        selectedEndDate: "",
+        selectedEndDate: new Date(this.semesters.end_date),
         grade: "",
         configstartdate: {
           altFormat: "F j, Y",
@@ -2440,9 +2471,10 @@ __webpack_require__.r(__webpack_exports__);
           altFormat: "F j, Y",
           altInput: true,
           allowInput: true,
+          minDate: this.calcMinDate(this.startdate),
           disable: [{
-            from: this.calcEndDate(this.startdate),
-            to: this.calcToData(this.startdate)
+            from: this.calcEndDate(this.semesters.start_date),
+            to: this.calcToData(this.semesters.start_date)
           }]
         }
       });
@@ -2507,6 +2539,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     semesters: {
       required: true
+    },
+    semmonth: {
+      required: true
     }
   },
   computed: {
@@ -2515,6 +2550,185 @@ __webpack_require__.r(__webpack_exports__);
     },
     canRemovePeriod: function canRemovePeriod() {
       return this.form.periods.length > 1;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EnglishCourse.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EnglishCourse.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
+/* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "EnglishCourse",
+  components: {
+    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  data: function data() {
+    return {
+      form: {
+        englishCourse: [{
+          subject: "",
+          other_subjcts: "",
+          grades: ""
+        }]
+      },
+      removingPeriod: false
+    };
+  },
+  props: ["englishcourse"],
+  methods: {
+    addNewEnglishCourse: function addNewEnglishCourse() {
+      this.form.englishCourse.push({
+        subject: "",
+        other_subjcts: "",
+        grades: ""
+      });
+    }
+  },
+  removeEnglishCourse: function removeEnglishCourse(index) {
+    if (this.removingPeriod) {
+      return;
+    }
+
+    this.removingPeriod = true;
+    var reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
+
+    reqData.englishCourse.splice(index, 1);
+  },
+  computed: {
+    canRemovePeriod: function canRemovePeriod() {
+      return this.form.englishCourse.length > 1;
     }
   }
 });
@@ -2538,6 +2752,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -2864,6 +3080,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             altInputClass: "form-control",
             altInput: true,
             allowInput: true,
+            minDate: this.calcMinDate(this.startdate),
             disable: [{
               from: this.calcEndDate(this.startdate),
               to: this.calcToData(this.startdate)
@@ -2887,6 +3104,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     enddate: {
       required: true
+    },
+    sem: {
+      required: true
     }
   },
   methods: _defineProperty({
@@ -2897,12 +3117,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var month = oldDate.getMonth();
       return new Date(year + 1, month, oDate);
     },
+    calcMinDate: function calcMinDate(date) {
+      var oldDate = new Date(date);
+      var year = oldDate.getFullYear();
+      var oDate = oldDate.getDate();
+      var month = oldDate.getMonth();
+      return new Date(year, month, oDate + 1);
+    },
     calcToData: function calcToData(date) {
       var oldDate = new Date(date);
       var oDate = oldDate.getDate();
       var year = oldDate.getFullYear();
       var month = oldDate.getMonth();
-      return new Date(year + 100, month, oDate + 1);
+      return new Date(year + 900, month, oDate + 1);
     },
     // validEmail: function (email) {
     //   var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -2911,6 +3138,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     updateEndDate: function updateEndDate(index) {
       this.form.enrollPeriods[index].configenddate.disable[0].from = this.calcEndDate(this.form.enrollPeriods[index].selectedStartDate);
       this.form.enrollPeriods[index].configenddate.disable[0].to = this.calcToData(this.form.enrollPeriods[index].selectedStartDate);
+      this.form.enrollPeriods[index].configenddate.minDate = this.calcMinDate(this.form.enrollPeriods[index].selectedStartDate);
       this.form.enrollPeriods[index].selectedEndDate = ""; // reset the end date value
     },
     addNewEnrollPeriod: function addNewEnrollPeriod() {
@@ -2927,6 +3155,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           altFormat: "F j, Y",
           altInput: true,
           allowInput: true,
+          minDate: this.calcMinDate(this.startdate),
           disable: [{
             from: this.calcEndDate(this.startdate),
             to: this.calcToData(this.startdate)
@@ -3412,6 +3641,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       amount: this.total.amount,
+      couponSelected: this.selectedcoupon,
       form: {
         sSame: false,
         email: this.parents.p1_email,
@@ -3464,11 +3694,11 @@ __webpack_require__.r(__webpack_exports__);
     applyCoupon: function applyCoupon() {
       var _this2 = this;
 
-      if (this.selectedcoupon === null) {
+      if (this.couponSelected === null) {
         return false;
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(route("coupon.apply", this.selectedcoupon)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(route("coupon.apply", this.couponSelected)).then(function (response) {
         if (response.data.status == 'success') {
           if (response.data.amount > _this2.total.amount) {
             _this2.amount = 0;
@@ -3476,7 +3706,7 @@ __webpack_require__.r(__webpack_exports__);
             _this2.amount = _this2.total.amount - response.data.amount;
           }
         } else {
-          _this2.selectedcoupon = null;
+          _this2.couponSelected = null;
           _this2.amount = _this2.total.amount;
         }
       })["catch"](function (error) {
@@ -3485,7 +3715,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.selectedcoupon !== null ? this.applyCoupon() : '';
+    this.couponSelected !== null ? this.applyCoupon() : '';
   }
 });
 
@@ -24123,11 +24353,18 @@ var render = function() {
                                     "\n               Choose " +
                                       _vm._s(
                                         _vm._f("moment")(
-                                          new Date(_vm.startdate),
+                                          new Date(_vm.semesters.start_date),
                                           "MMMM Do"
                                         )
                                       ) +
-                                      " (the first day of the Annual enrollment period),\n                January 1 (the first day of the Second Semester), today's date or\n                another date. This date will appear on your confirmation of\n                enrollment letter. You will be considered enrolled for the full\n                12-month period for Annual or 7-month period for Second Semester\n                Only.\n              "
+                                      " (the first day of the Annual enrollment period),\n                " +
+                                      _vm._s(
+                                        _vm._f("moment")(
+                                          new Date(_vm.semmonth),
+                                          "MMMM Do"
+                                        )
+                                      ) +
+                                      " (the first day of the Second Semester), today's date or\n                another date. This date will appear on your confirmation of\n                enrollment letter. You will be considered enrolled for the full\n                12-month period for Annual or 7-month period for Second Semester\n                Only.\n              "
                                   )
                                 ])
                               ]
@@ -24198,21 +24435,21 @@ var render = function() {
                                     "\n                Choose before " +
                                       _vm._s(
                                         _vm._f("moment")(
-                                          new Date(_vm.enddate),
+                                          new Date(_vm.semesters.end_date),
                                           "MMMM Do"
                                         )
                                       ) +
                                       " (the last day of your enrollment) or another\n                date before " +
                                       _vm._s(
                                         _vm._f("moment")(
-                                          new Date(_vm.enddate),
+                                          new Date(_vm.semesters.end_date),
                                           "MMMM Do"
                                         )
                                       ) +
                                       ". This date will appear on your confirmation of\n                enrollment letter. Your enrollment will officially end on " +
                                       _vm._s(
                                         _vm._f("moment")(
-                                          new Date(_vm.enddate),
+                                          new Date(_vm.semesters.end_date),
                                           "MMMM Do"
                                         )
                                       ) +
@@ -24397,7 +24634,9 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group d-sm-flex" }, [
-            _vm._m(9),
+            _c("label", { attrs: { for: "" } }, [
+              _vm._v("Tell us more about your situation")
+            ]),
             _vm._v(" "),
             _c("div", [
               _c("textarea", {
@@ -24414,8 +24653,7 @@ var render = function() {
                   id: "exampleFormControlTextarea1",
                   name: "student_situation",
                   value: "",
-                  rows: "3",
-                  required: ""
+                  rows: "3"
                 },
                 domProps: { value: _vm.form.student_situation },
                 on: {
@@ -24462,7 +24700,7 @@ var render = function() {
                   [_vm._v("Add Another Enrollment Period")]
                 )
               : _vm._e(),
-            _vm._v("\n      " + _vm._s(_vm.periods) + "\n      "),
+            _vm._v(" "),
             _c(
               "button",
               {
@@ -24576,14 +24814,220 @@ var staticRenderFns = [
         _c("th", [_vm._v("Grade")])
       ])
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EnglishCourse.vue?vue&type=template&id=1c1cbe60&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EnglishCourse.vue?vue&type=template&id=1c1cbe60& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    { attrs: { method: "POST", action: "" } },
+    _vm._l(_vm.form.englishCourse, function(englishCourse, index) {
+      return _c(
+        "div",
+        { key: englishCourse.id, staticClass: "seperator mt-4" },
+        [
+          _c("div", { staticClass: "position-relative" }, [
+            _vm.canRemovePeriod
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "remove",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeEnglishCourse(index)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-times" })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.englishCourse.subject,
+                        expression: "form.englishCourse.subject"
+                      }
+                    ],
+                    staticClass: "form-control mb-4",
+                    attrs: { name: "english_course", id: "english_course" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form.englishCourse,
+                          "subject",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.englishcourse, function(val, i) {
+                    return _c("option", { key: i }, [
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(val.subject_name) +
+                          "\n            "
+                      )
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _vm._m(0, true),
+                _vm._v(" "),
+                _vm._m(1, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-5" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary float-left",
+                      attrs: { type: "button", id: "addEnglish" },
+                      on: { click: _vm.addNewEnglishCourse }
+                    },
+                    [_vm._v("Add another English/Language Arts Course")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary float-right",
+                      attrs: { href: "#" }
+                    },
+                    [_vm._v("Continue")]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
+    }),
+    0
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group d-sm-flex" }, [
+      _c("label", { staticClass: "w-auto", attrs: { for: "" } }, [
+        _vm._v("Other")
+      ]),
+      _vm._v(" "),
+      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "" } }, [
-      _vm._v("tell us more about your situation"),
-      _c("sup", [_vm._v("*")])
+    return _c("div", { staticClass: "form-group d-sm-flex mt-4" }, [
+      _c("div", { staticClass: "col-sm-3 px-0" }, [
+        _c("h3", [_vm._v("Select a Grade")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "student_grade", value: "2" }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "form-check-label", attrs: { for: "" } }, [
+            _vm._v("\n                  A\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "student_grade", value: "3" }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "form-check-label", attrs: { for: "" } }, [
+            _vm._v("\n                  B\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "student_grade", value: "4" }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "form-check-label", attrs: { for: "" } }, [
+            _vm._v("\n                  C\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "student_grade", value: "5" }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "form-check-label", attrs: { for: "" } }, [
+            _vm._v("\n                  D\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "radio", name: "student_grade", value: "5" }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "form-check-label", attrs: { for: "" } }, [
+            _vm._v("\n                  PASS\n                ")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { href: "#chooseGrades", "data-toggle": "modal" }
+          },
+          [_vm._v("Help me decide")]
+        )
+      ])
     ])
   }
 ]
@@ -24952,252 +25396,276 @@ var render = function() {
               "div",
               { key: enrollPeriod.id, staticClass: "seperator mt-4" },
               [
-                _vm.canRemovePeriod
-                  ? _c(
-                      "span",
-                      {
-                        staticClass: "remove",
-                        on: {
-                          click: function($event) {
-                            return _vm.removePeriod(index)
+                _c("div", { staticClass: "position-relative" }, [
+                  _vm.canRemovePeriod
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "remove",
+                          on: {
+                            click: function($event) {
+                              return _vm.removePeriod(index)
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("h3", [_vm._v("Enrollment Period " + _vm._s(index + 1))]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group d-sm-flex mb-2 mt-2r" }, [
-                  _c("label", { attrs: { for: "" } }, [
-                    _vm._v("Select your START date of enrollment")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-4 col-lg-2" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group w-100 datepicker-full" },
-                        [
-                          _c(
-                            "p",
-                            [
-                              _c("flat-pickr", {
-                                attrs: {
-                                  id: "startdate",
-                                  name: "startdate",
-                                  required: "",
-                                  config: enrollPeriod.configstartdate,
-                                  value: enrollPeriod.selectedStartDate,
-                                  "open-date": enrollPeriod.selectedStartDate
-                                },
-                                on: {
-                                  input: function($event) {
-                                    return _vm.updateEndDate(index)
-                                  }
-                                },
-                                model: {
-                                  value: enrollPeriod.selectedStartDate,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      enrollPeriod,
-                                      "selectedStartDate",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "enrollPeriod.selectedStartDate"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]
+                        },
+                        [_c("i", { staticClass: "fas fa-times" })]
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "info-detail col-md-8 col-lg-6 lato-italic"
-                      },
-                      [
-                        _c("p", [
-                          _vm._v(
-                            "\n             Choose " +
-                              _vm._s(
-                                _vm._f("moment")(
-                                  new Date(_vm.startdate),
-                                  "MMMM Do"
-                                )
-                              ) +
-                              " (the first day of the Annual enrollment period),\n             January 1 (the first day of the Second Semester), today's date or\n             another date. This date will appear on your confirmation of\n             enrollment letter. You will be considered enrolled for the full\n             12-month period for Annual or 7-month period for Second Semester\n             Only.\n           "
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(5, true)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group d-sm-flex mb-2 mt-2r" }, [
-                  _c("label", { attrs: { for: "" } }, [
-                    _vm._v("Select your END date of enrollment")
-                  ]),
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-4 col-lg-2" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group w-100 datepicker-full" },
-                        [
+                  _c("h3", [_vm._v("Enrollment Period " + _vm._s(index + 1))]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group d-sm-flex mb-2 mt-2r" },
+                    [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Select your START date of enrollment")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-4 col-lg-2" }, [
                           _c(
-                            "p",
+                            "div",
+                            { staticClass: "form-group w-100 datepicker-full" },
                             [
-                              _c("flat-pickr", {
-                                staticClass: "form-control",
-                                attrs: {
-                                  id: "enddate",
-                                  name: "enddate",
-                                  config: enrollPeriod.configenddate,
-                                  required: "",
-                                  value: enrollPeriod.selectedEndDate,
-                                  "open-date": enrollPeriod.selectedStartDate
-                                },
-                                model: {
-                                  value: enrollPeriod.selectedEndDate,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      enrollPeriod,
-                                      "selectedEndDate",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "enrollPeriod.selectedEndDate"
-                                }
-                              })
-                            ],
-                            1
+                              _c(
+                                "p",
+                                [
+                                  _c("flat-pickr", {
+                                    attrs: {
+                                      id: "startdate",
+                                      name: "startdate",
+                                      required: "",
+                                      config: enrollPeriod.configstartdate,
+                                      value: enrollPeriod.selectedStartDate,
+                                      "open-date":
+                                        enrollPeriod.selectedStartDate
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.updateEndDate(index)
+                                      }
+                                    },
+                                    model: {
+                                      value: enrollPeriod.selectedStartDate,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          enrollPeriod,
+                                          "selectedStartDate",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "enrollPeriod.selectedStartDate"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
                           )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "info-detail col-md-8 col-lg-6 lato-italic"
-                      },
-                      [
-                        _c("p", [
-                          _vm._v(
-                            "\n             Choose before " +
-                              _vm._s(
-                                _vm._f("moment")(
-                                  new Date(_vm.enddate),
-                                  "MMMM Do"
-                                )
-                              ) +
-                              "\n             (the last day of your enrollment) or another\n             date before " +
-                              _vm._s(
-                                _vm._f("moment")(
-                                  new Date(_vm.enddate),
-                                  "MMMM Do"
-                                )
-                              ) +
-                              ". This date will appear on your confirmation of\n             enrollment letter. Your enrollment will officially end on " +
-                              _vm._s(
-                                _vm._f("moment")(
-                                  new Date(_vm.enddate),
-                                  "MMMM Do"
-                                )
-                              ) +
-                              ".\n           "
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(6, true)
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm._m(7, true),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "form-group d-sm-flex mb-2 lato-italic info-detail"
-                  },
-                  [
-                    _vm._m(8, true),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "row pl-sm-5" },
-                      _vm._l(_vm.grades, function(grade, index) {
-                        return _c(
+                        ]),
+                        _vm._v(" "),
+                        _c(
                           "div",
-                          { key: index, staticClass: "col-6 col-sm-3" },
-                          _vm._l(grade, function(val, i) {
-                            return _c(
-                              "div",
-                              {
-                                key: i,
-                                staticClass: "form-check",
-                                attrs: {
-                                  "data-toggle": [val > 9 ? "modal" : ""],
-                                  "data-target": [val > 9 ? "#chooseGrade" : ""]
-                                }
-                              },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: enrollPeriod.grade,
-                                      expression: "enrollPeriod.grade"
+                          {
+                            staticClass:
+                              "info-detail col-md-8 col-lg-6 lato-italic"
+                          },
+                          [
+                            _c("p", [
+                              _vm._v(
+                                "\n             Choose " +
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      new Date(_vm.startdate),
+                                      "MMMM Do"
+                                    )
+                                  ) +
+                                  " (the first day of the Annual enrollment period),\n             " +
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      new Date(_vm.sem),
+                                      "MMMM Do"
+                                    )
+                                  ) +
+                                  " (the first day of the Second Semester), today's date or\n             another date. This date will appear on your confirmation of\n             enrollment letter. You will be considered enrolled for the full\n             12-month period for Annual or 7-month period for Second Semester\n             Only.\n           "
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(5, true)
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group d-sm-flex mb-2 mt-2r" },
+                    [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Select your END date of enrollment")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-4 col-lg-2" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group w-100 datepicker-full" },
+                            [
+                              _c(
+                                "p",
+                                [
+                                  _c("flat-pickr", {
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: "enddate",
+                                      name: "enddate",
+                                      config: enrollPeriod.configenddate,
+                                      required: "",
+                                      value: enrollPeriod.selectedEndDate,
+                                      "open-date":
+                                        enrollPeriod.selectedStartDate
+                                    },
+                                    model: {
+                                      value: enrollPeriod.selectedEndDate,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          enrollPeriod,
+                                          "selectedEndDate",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "enrollPeriod.selectedEndDate"
                                     }
-                                  ],
-                                  staticClass: "form-check-input",
-                                  attrs: { type: "radio", required: "" },
-                                  domProps: {
-                                    value: val,
-                                    checked: _vm._q(enrollPeriod.grade, val)
-                                  },
-                                  on: {
-                                    change: function($event) {
-                                      return _vm.$set(
-                                        enrollPeriod,
-                                        "grade",
-                                        val
-                                      )
-                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "info-detail col-md-8 col-lg-6 lato-italic"
+                          },
+                          [
+                            _c("p", [
+                              _vm._v(
+                                "\n             Choose before " +
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      new Date(_vm.enddate),
+                                      "MMMM Do"
+                                    )
+                                  ) +
+                                  "\n             (the last day of your enrollment) or another\n             date before " +
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      new Date(_vm.enddate),
+                                      "MMMM Do"
+                                    )
+                                  ) +
+                                  ". This date will appear on your confirmation of\n             enrollment letter. Your enrollment will officially end on " +
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      new Date(_vm.enddate),
+                                      "MMMM Do"
+                                    )
+                                  ) +
+                                  ".\n           "
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(6, true)
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(7, true),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "form-group d-sm-flex mb-2 lato-italic info-detail"
+                    },
+                    [
+                      _vm._m(8, true),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "row pl-sm-5" },
+                        _vm._l(_vm.grades, function(grade, index) {
+                          return _c(
+                            "div",
+                            { key: index, staticClass: "col-6 col-sm-3" },
+                            _vm._l(grade, function(val, i) {
+                              return _c(
+                                "div",
+                                {
+                                  key: i,
+                                  staticClass: "form-check",
+                                  attrs: {
+                                    "data-toggle": [val > 9 ? "modal" : ""],
+                                    "data-target": [
+                                      val > 9 ? "#chooseGrade" : ""
+                                    ]
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "form-check-label pl-1 pl-sm-0",
-                                    attrs: { for: "" }
-                                  },
-                                  [_vm._v(" " + _vm._s(val) + " ")]
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        )
-                      }),
-                      0
-                    )
-                  ]
-                )
+                                },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: enrollPeriod.grade,
+                                        expression: "enrollPeriod.grade"
+                                      }
+                                    ],
+                                    staticClass: "form-check-input",
+                                    attrs: { type: "radio", required: "" },
+                                    domProps: {
+                                      value: val,
+                                      checked: _vm._q(enrollPeriod.grade, val)
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          enrollPeriod,
+                                          "grade",
+                                          val
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "form-check-label pl-1 pl-sm-0",
+                                      attrs: { for: "" }
+                                    },
+                                    [_vm._v(" " + _vm._s(val) + " ")]
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ])
               ]
             )
           }),
@@ -26119,14 +26587,14 @@ var render = function() {
                     return label.value
                   },
                   options: _vm.coupons,
-                  selected: _vm.selectedcoupon
+                  selected: _vm.couponSelected
                 },
                 model: {
-                  value: _vm.selectedcoupon,
+                  value: _vm.couponSelected,
                   callback: function($$v) {
-                    _vm.selectedcoupon = $$v
+                    _vm.couponSelected = $$v
                   },
-                  expression: "selectedcoupon"
+                  expression: "couponSelected"
                 }
               })
             ],
@@ -26145,19 +26613,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.selectedcoupon,
-                  expression: "selectedcoupon"
+                  value: _vm.couponSelected,
+                  expression: "couponSelected"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", placeholder: "Enter coupon code" },
-              domProps: { value: _vm.selectedcoupon },
+              domProps: { value: _vm.couponSelected },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.selectedcoupon = $event.target.value
+                  _vm.couponSelected = $event.target.value
                 }
               }
             })
@@ -46849,6 +47317,7 @@ Vue.component('enroll-student', __webpack_require__(/*! ./components/EnrollStude
 Vue.component('edit-enroll', __webpack_require__(/*! ./components/EditEnrollStudent.vue */ "./resources/js/components/EditEnrollStudent.vue")["default"]);
 Vue.component('billing-shipping', __webpack_require__(/*! ./components/address.vue */ "./resources/js/components/address.vue")["default"]);
 Vue.component('get-cart', __webpack_require__(/*! ./components/Cart.vue */ "./resources/js/components/Cart.vue")["default"]);
+Vue.component('english-course', __webpack_require__(/*! ./components/EnglishCourse.vue */ "./resources/js/components/EnglishCourse.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -47058,6 +47527,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/EnglishCourse.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/EnglishCourse.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EnglishCourse_vue_vue_type_template_id_1c1cbe60___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EnglishCourse.vue?vue&type=template&id=1c1cbe60& */ "./resources/js/components/EnglishCourse.vue?vue&type=template&id=1c1cbe60&");
+/* harmony import */ var _EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EnglishCourse.vue?vue&type=script&lang=js& */ "./resources/js/components/EnglishCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EnglishCourse_vue_vue_type_template_id_1c1cbe60___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EnglishCourse_vue_vue_type_template_id_1c1cbe60___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EnglishCourse.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EnglishCourse.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/EnglishCourse.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EnglishCourse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EnglishCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EnglishCourse.vue?vue&type=template&id=1c1cbe60&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/EnglishCourse.vue?vue&type=template&id=1c1cbe60& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_template_id_1c1cbe60___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EnglishCourse.vue?vue&type=template&id=1c1cbe60& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EnglishCourse.vue?vue&type=template&id=1c1cbe60&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_template_id_1c1cbe60___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_template_id_1c1cbe60___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/EnrollStudent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/EnrollStudent.vue ***!
@@ -47225,6 +47763,10 @@ $(window).scroll(function () {
   }
 }); //missing );
 
+$(".notify-btn").click(function () {
+  $(".notification").toggleClass('d-block');
+});
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
@@ -47245,8 +47787,8 @@ $(window).scroll(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/paigepriyanka/Documents/projects/peggywebb-westriveracademy-laravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/paigepriyanka/Documents/projects/peggywebb-westriveracademy-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/trevorkrishan/Documents/Projects/peggywebb-westriveracademy-laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/trevorkrishan/Documents/Projects/peggywebb-westriveracademy-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

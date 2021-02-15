@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/payments-invoice', function () {
                 return view('admin/paymentsInvoice/payment');
             });
+
+            
         }
     );
 
@@ -89,6 +91,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/countryenrollments', 'CountryController@index')->name('country.display');
     Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
     Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
+
+    //graduation process 
+    Route::get('graduations', '\App\Http\Controllers\GraduationController@graduations')->name('view.graduation');
+    Route::get('graduations/data', '\App\Http\Controllers\GraduationController@dataTable')->name('graduation.dt');
+    Route::get('graduations/{id}/edit', '\App\Http\Controllers\GraduationController@edit')->name('edit.graduation');
+    Route::put('graduations/{id}', '\App\Http\Controllers\GraduationController@update')->name('update.graduation');
+
     //transcript
     Route::get('/manage-courses', 'CourseController@index')->name('manage.course');
     Route::get('edit-course/{id}', 'CourseController@edit')->name('edit.course');
@@ -96,4 +105,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update/subject/{id}', 'CourseController@update')->name('update.subject');
     Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
     Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
+    //transcript
+    Route::get('/view/transcript', 'TranscriptController@index')->name('view.transcript');
+    Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
+
+    Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
+    Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
+
+    
 });

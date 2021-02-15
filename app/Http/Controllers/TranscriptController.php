@@ -131,6 +131,6 @@ class TranscriptController extends Controller
         $englishCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
             ->get();
-        return view('cources.english-cources', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
+        return view('courses.english-course', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
     }
 }

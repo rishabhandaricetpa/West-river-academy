@@ -22,7 +22,7 @@ class SocialStudiesController extends Controller
         $socialStudiesCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
             ->get();
-        return view('cources.social-studies', compact('socialStudiesCourse', 'student_id', 'course_id'));
+        return view('courses.social-studies', compact('socialStudiesCourse', 'student_id', 'course_id'));
     }
     public function store(Request $request)
     {
