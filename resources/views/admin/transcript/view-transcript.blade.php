@@ -30,14 +30,14 @@
                         <h3 class="card-title"></h3>
                     </div>
                     <!-- /.card-header -->
-
+                    Student Name:{{$student->first_name}} {{$student->last_name}}
                     <div class="card-body">
                         <table id="addressData" class="table table-bordered table-striped data-table"">
                   <thead>
                   <button type="submit" class="btn btn-primary">View Transcript Pdf</button>
-
+                  
+                  <a type="buuton" href="{{ url('admin/file-upload')}}" class="btn btn-primary">upload signed transcript Pdf</a>
                   <tr>
-                  <th>Student Name</th>
                     <th>Transcript</th>
                     <th>Course Name</th>
                     <th>Subject Name</th>
@@ -48,7 +48,6 @@
                   <tbody>
                   @foreach($transcriptData as $transcript)
                   <tr>
-                      <td>{{$student->first_name}} {{$student->last_name}}</td>
                       <td>{{$transcript->transcript_period}}</td>
                       <td>{{$transcript->course_name}}</td>
                       <td>{{$transcript->subject_name}}</td>

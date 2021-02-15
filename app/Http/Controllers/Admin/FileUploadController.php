@@ -27,7 +27,7 @@ class FileUploadController extends Controller
         $fileName = time().'.'.$request->file->extension();  
    
         $request->file->move(public_path('storage/pdf'), $fileName);
-   
+ 
         return back()
             ->with('success','You have successfully upload file.')
             ->with('file',$fileName);

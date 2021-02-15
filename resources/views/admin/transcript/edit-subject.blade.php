@@ -7,8 +7,6 @@
             <div class="form-wrap border py-5 px-25 position-relative">
               <form method="post" class="row" action="{{url('admin/update/subject',$name->id)}}">
                 @csrf           
-                <form method="" action="">
-                @csrf
                 <div class="card-body">
                   <div class="form-group">
                     <label>Subject Name<sup>*</sup></label>
@@ -30,7 +28,6 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-      </div><!-- /.container-fluid -->
 </section>
 
 @endsection

@@ -2,26 +2,26 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="(englishCourse, index) in form.englishCourse"
-      :key="englishCourse.id"
+      v-for="(healthCourse, index) in form.healthCourse"
+      :key="healthCourse.id"
     >
       <div class="position-relative">
         <span
           v-if="canRemovePeriod"
           class="remove"
-          @click="removeEnglishCourse(index)"
+          @click="removeHealthCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
             <select
               class="form-control mb-4"
-              name="english_course"
-              id="english_course"
+              name="health_course"
+              id="health_course"
               required
-              v-model="englishCourse.subject"
+              v-model="healthCourse.subject"
             >
-              <option v-for="(val, i) in englishcourse" :key="i">
+              <option v-for="(val, i) in healthstudies" :key="i">
                 {{ val.subject_name }}
               </option>
             </select>
@@ -30,7 +30,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.englishCourse.other_subjects"
+                v-model="form.healthCourse.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -53,7 +53,7 @@
                         class="form-check-input"
                         type="radio"
                         :value="val"
-                        v-model="englishCourse.grade"
+                        v-model="healthCourse.grade"
                         required
                       />
                       <label class="form-check-label pl-1 pl-sm-0" for="">
@@ -88,7 +88,7 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  name: "EnglishCourse",
+  name: "HealthCourse",
   components: {
     "v-select": vSelect
   },
@@ -96,8 +96,8 @@ export default {
     return {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
-        course_id: this.courses_id,
-        englishCourse: [
+        courses_id: this.courses_id,
+        healthCourse: [
           {
             transcript_id: this.transcript_id,
             student_id: this.student_id,
@@ -111,15 +111,15 @@ export default {
       removingPeriod: false
     };
   },
-  props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
+  props: ["healthstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("englishCourse.store"), this.form).then(response => {
-        window.location = "/social-studies/" + this.student_id;
+      axios.post(route("health.store"), this.form).then(response => {
+        window.location = "/foreign/" + this.student_id;
       });
     },
     addNewSocialScienceCourse() {
-      this.form.englishCourse.push({
+      this.form.healthCourse.push({
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         courses_id: this.courses_id,
@@ -129,18 +129,18 @@ export default {
       });
     }
   },
-  removeEnglishCourse(index) {
+  removeHealthCourse(index) {
     if (this.removingPeriod) {
       return;
     }
     this.removingPeriod = true;
 
     let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.englishCourse.splice(index, 1);
+    reqData.healthCourse.splice(index, 1);
   },
   computed: {
     canRemovePeriod() {
-      return this.form.englishCourse.length > 1;
+      return this.form.healthCourse.length > 1;
     }
   }
 };

@@ -27,7 +27,8 @@ Vue.component('edit-enroll', require('./components/EditEnrollStudent.vue').defau
 Vue.component('billing-shipping', require('./components/address.vue').default);
 Vue.component('get-cart', require('./components/Cart.vue').default);
 Vue.component('english-course', require('./components/EnglishCourse.vue').default);
-
+Vue.component('social-studies', require('./components/SocialStudiesCourse.vue').default);
+Vue.component('maths-course', require('./components/Maths.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
