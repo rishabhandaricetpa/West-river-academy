@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\GraduationMailingAddress;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
@@ -61,6 +62,14 @@ class CartController extends Controller
                                                 ->first();
 
                     if($student){
+                        GraduationMailingAddress::create([
+                            'graduation_id' => $student->graduation->id,
+                            'name' => $data['name'],
+                            'street' => $data['street'],
+                            'city' => $data['city'],
+                            'country' => $data['country'],
+                            'postal_code' => $data['postal_code']
+                        ]);
                         if (! Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
                             Cart::create([
                                 'item_type' => 'graduation',

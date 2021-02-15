@@ -63,4 +63,14 @@ class StudentProfile extends Model
             'graduation_id'
         );
     }
+
+    public function graduationPayment()
+    {
+        return $this->hasOneThrough(
+            'App\Models\GraduationPayment',
+            'App\Models\Graduation',
+            'student_profile_id',
+            'graduation_id'
+        );
+    }
 }

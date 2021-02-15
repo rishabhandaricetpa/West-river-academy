@@ -155,18 +155,7 @@ class PaypalPaymentController extends Controller
         $paypal->coupon_amount = $coupon_amount;
         $paypal->save();
 
-        $cartItems = Cart::select('item_id')->where('parent_profile_id', $paypal->parent_profile_id)->get();
-
-        foreach ($cartItems as $cart) {
-            $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-            $enrollemtpayment->status = 'paid';
-            $enrollemtpayment->transcation_id = $payment_id;
-            $enrollemtpayment->payment_mode = 'Pay pal';
-            $enrollemtpayment->save();
-        }
-
-        $refreshCart = Cart::select()->where('parent_profile_id', $paypal->parent_profile_id)->get();
-        $refreshCart->each->delete();
+        Cart::emptyCartAfterPayment('Pay pal', 'paid', $payment_id);
 
         if ($result->getState() == 'approved') {
             $notification = [

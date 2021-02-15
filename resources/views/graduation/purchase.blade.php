@@ -13,10 +13,9 @@
        <div>{{ $student->fullname }}</div>
       </div>
             <div class="form-group d-sm-flex mb-1 pb-1 align-items-center">
-                <input type="radio" name="graduation_fee" id="graduation_fee" value="{{ $student->graduation->amount }}">
                 <input type="hidden" name="student_id" value="{{ $student->id }}">
                 <p class="mb-0 pl-2">Graduation</p>
-                <p class="ml-sm-auto mb-0">${{ $student->graduation->amount }}</p>
+                <p class="ml-sm-auto mb-0">${{ $student->graduationPayment->amount }}</p>
             </div>
             {{-- <div class="form-group d-sm-flex mb-1 border-top pt-4">
                 <input type="radio" name="" id="" value="">
@@ -40,36 +39,36 @@
             <div class="form-group d-sm-flex mb-2">
                 <label for="name">Name</label>
                 <div>
-                   <input type="text" name="name" id="name" value="{{ $student->graduation->name }}" class="w-100 ml-sm-3 form-control">
+                   <input type="text" name="name" id="name" value="{{ $student->graduationAddress->name ?? '' }}" class="w-100 ml-sm-3 form-control">
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
                 <label for="street">Street</label>
                 <div>
-                   <input type="text" name="street" id="street" value="{{ $student->graduation->street }}" class="w-100 ml-sm-3 form-control">
+                   <input type="text" name="street" id="street" value="{{ $student->graduationAddress->street ?? '' }}" class="w-100 ml-sm-3 form-control">
                 </div>
             </div>           
              <div class="form-group d-sm-flex mb-2">
                 <label for="city">City</label>
                 <div>
-                   <input type="text" name="city" id="city" value="{{ $student->graduation->city }}" class="w-100 ml-sm-3 form-control">
+                   <input type="text" name="city" id="city" value="{{ $student->graduationAddress->city ?? '' }}" class="w-100 ml-sm-3 form-control">
                 </div>
             </div>           
              <div class="form-group d-sm-flex mb-2">
                 <label for="gcountry">Country</label>
                 <div>
-                   <input type="text" name="country" id="gcountry" value="{{ $student->graduation->country }}" class="w-100 ml-sm-3 form-control">
+                   <input type="text" name="country" id="gcountry" value="{{ $student->graduationAddress->country ?? '' }}" class="w-100 ml-sm-3 form-control">
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
                 <label for="postal_code">Postal Code</label>
                 <div>
-                   <input type="text" name="postal_code" id="postal_code" value="{{ $student->graduation->postal_code }}" class="w-100 ml-sm-3 form-control">
+                   <input type="text" name="postal_code" id="postal_code" value="{{ $student->graduationAddress->postal_code ?? '' }}" class="w-100 ml-sm-3 form-control">
                 </div>
             </div>
             <div class="d-flex border-top py-3">
                 <span class="text-secondary">Total to Pay</span>
-                <span class="text-secondary ml-auto">${{ $student->graduation->amount }}</span>
+                <span class="text-secondary ml-auto">${{ $student->graduationPayment->amount }}</span>
             </div>
             <div class="text-right pt-4 border-top">
             <input type="hidden" name="type" value="graduation">

@@ -25,7 +25,7 @@ class Cart extends Model
         try {
             if ($total) {
                 $enroll_total = Self::getEnrollQuery()->select(DB::raw('sum(enrollment_payments.amount) as amount'))->first();
-                $graduation_total = Self::getGraduationQuery()->select(DB::raw('sum(graduations.amount) as amount'))->first();
+                $graduation_total = Self::getGraduationQuery()->select(DB::raw('sum(graduation_payments.amount) as amount'))->first();
                 
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
@@ -168,6 +168,7 @@ class Cart extends Model
         return self::where('cart.parent_profile_id', ParentProfile::getParentId())
                 ->where('cart.item_type', 'graduation')
                 ->leftJoin('graduations', 'graduations.id', 'cart.item_id')
+                ->leftJoin('graduation_payments', 'cart.item_id', 'graduation_payments.graduation_id')
                 ->leftJoin('student_profiles', 'graduations.student_profile_id', 'student_profiles.id');
     }
 
@@ -197,29 +198,45 @@ class Cart extends Model
                     'student_profiles.student_Id',
                     'student_profiles.id as student_db_id',
                     'cart.id',
-                    'graduations.amount',
+                    'graduation_payments.amount',
                 )
                 ->groupBy('student_profiles.id')
                 ->groupBy('cart.id')
-                ->groupBy('graduations.amount')
+                ->groupBy('graduation_payments.amount')
                 ->get();
     }
 
-    public static function emptyCart($type){
+    public static function emptyCartAfterPayment($type, $status, $payment_id = null){
            
         $parent_profile_id = ParentProfile::getParentId();
 
-        $cartItems = Cart::select('item_id')->where('parent_profile_id', $parent_profile_id)->get();
+        $cartItems = Cart::select()->where('parent_profile_id', $parent_profile_id)->get();
+
         foreach ($cartItems as $cart) {
             switch ($cart->item_type) {
                 case 'enrollment_period':
                     $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-                    $enrollemtpayment->status = 'active';
+                    $enrollemtpayment->status = $status;
                     $enrollemtpayment->payment_mode = $type;
+                    if($payment_id != null){
+                        $enrollemtpayment->transcation_id = $payment_id;
+                    }
                     $enrollemtpayment->save();
+                    
                     break;
                 
-                case 'enrollment_period':
+                case 'graduation':
+                    $graduation_payment =  GraduationPayment::where('graduation_id', $cart->item_id)->first();
+                    $graduation_payment->payment_mode = $type;
+                    if($payment_id != null){
+                        $graduation_payment->transcation_id = $payment_id;
+                    }
+                    $graduation_payment->save();
+
+                    $graduation = Graduation::whereId($cart->item_id)->first();
+                    $graduation->status = 'paid';
+                    $graduation->save();
+
                     break;
                 
                 default:

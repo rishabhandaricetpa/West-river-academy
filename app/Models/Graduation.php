@@ -28,6 +28,11 @@ class Graduation extends Model
         return $this->hasOne('App\Models\GraduationDetail');
     }
 
+    public function payment()
+    {
+        return $this->hasOne('App\Models\GraduationPayment');
+    }
+
     public function address()
     {
         return $this->hasOne('App\Models\GraduationMailingAddress');
