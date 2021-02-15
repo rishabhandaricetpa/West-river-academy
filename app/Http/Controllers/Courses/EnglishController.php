@@ -14,7 +14,6 @@ class EnglishController extends Controller
 
     public function store(Request $request)
     {
-
         $id = $request->get('course_id');
         //first delete the course if exists in database
         $refreshCourses = TranscriptCourse::select()->where('courses_id', $id)->get();
@@ -29,7 +28,8 @@ class EnglishController extends Controller
                 'student_profile_id' => $period['student_id'],
                 'courses_id' => $period['courses_id'],
                 'subject_id' => $subject->id,
-                'score' => $period['grade']
+                'score' => $period['grade'],
+                'k8transcript_id'=>$period['transcript_id'],
             ]);
         }
     }

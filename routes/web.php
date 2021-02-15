@@ -240,7 +240,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
     Route::post('graduation', 'GraduationController@store')->name('graduation.store');
     Route::get('graduation/purchase/{id}', 'GraduationController@purchase')->name('graduation.purchase');
-    
+
     // Graduation Process ends
 
     Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
@@ -263,6 +263,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //mathematics 
     Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
+    Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
+
+    //physical education
+    Route::get('physical-education/{student_id}', 'Courses\PhysicalEducationController@index')->name('physical.education');
+    Route::post('physical-education', 'Courses\PhysicalEducationController@store')->name('physicalEducation.store');
 
     //health
     Route::get('health/{id}', 'Courses\HealthController@index')->name('health');
@@ -270,19 +275,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //foreign languages
     Route::get('foreign/{id}', 'Courses\ForeignController@index')->name('foreign');
     Route::post('/foreign', 'Courses\ForeignController@store')->name('foreign.store');
-    
+
     //another
     Route::get('another/{id}', 'Courses\AnotherCourseController@index')->name('another');
     Route::post('/another', 'Courses\AnotherCourseController@store')->name('another.store');
-    Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
 
     //science
     Route::get('science/{student_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
-
-    //physical education
-
-    Route::get('physical-education/{id}', function () {
-        dd('write physical education ');
-    });
 });

@@ -27,7 +27,7 @@ class ForeignController extends Controller
 
     public function store(Request $request)
     {
-        $id = $request->get('course_id');
+        $id = $request->get('courses_id');
         $refreshCourse = TranscriptCourse::select()->where('courses_id', $id)->get();
         $refreshCourse->each->delete();
         foreach ($request->get('foreignCourse', []) as $period) {

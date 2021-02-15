@@ -26,10 +26,15 @@ Vue.component('enroll-student', require('./components/EnrollStudent.vue').defaul
 Vue.component('edit-enroll', require('./components/EditEnrollStudent.vue').default);
 Vue.component('billing-shipping', require('./components/address.vue').default);
 Vue.component('get-cart', require('./components/Cart.vue').default);
+
 Vue.component('english-course', require('./components/EnglishCourse.vue').default);
 Vue.component('social-studies', require('./components/SocialStudiesCourse.vue').default);
 Vue.component('maths-course', require('./components/Maths.vue').default);
 Vue.component('science-course', require('./components/ScienceCourse.vue').default);
+Vue.component('physical-educatiom', require('./components/PhysicalEducation.vue').default);
+Vue.component('health-course', require('./components/HealthCourse.vue').default);
+Vue.component('foreign-course', require('./components/ForeignCourse.vue').default);
+Vue.component('another-course', require('./components/AnotherCourse.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
