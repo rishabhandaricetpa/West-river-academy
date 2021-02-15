@@ -24,6 +24,18 @@ class StudentProfile extends Model
         'd_o_b',
     ];
 
+    protected $appends = ['birthdate','fullname'];
+
+    public function getBirthdateAttribute()
+    {
+        return  $this->d_o_b === null ? '' : $this->d_o_b->format('m/d/Y') ;
+    }
+
+    public function getFullnameAttribute()
+    {
+        return $this->first_name .' '. $this->last_name ;
+    }
+
     public function parentProfile()
     {
         return $this->belongsTo('App\Models\ParentProfile');
@@ -36,5 +48,19 @@ class StudentProfile extends Model
     public function transcriptCourses()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'id');
+    }
+    public function graduation()
+    {
+        return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');
+    }
+
+    public function graduationAddress()
+    {
+        return $this->hasOneThrough(
+            'App\Models\GraduationMailingAddress',
+            'App\Models\Graduation',
+            'student_profile_id',
+            'graduation_id'
+        );
     }
 }

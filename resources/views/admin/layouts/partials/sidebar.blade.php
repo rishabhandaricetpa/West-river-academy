@@ -74,7 +74,7 @@
             </ul>
           </li>
           <li class="nav-item menu">
-        <a href="{{ url('admin/dashboard') }}" class="nav-link ">
+        <a href="{{ url('/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Transcripts
@@ -103,6 +103,14 @@
               <i class="nav-icon fas fa-copy"></i>
               <p>
               Coupons
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.view.graduation') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+              Graduations
               </p>
             </a>
           </li>

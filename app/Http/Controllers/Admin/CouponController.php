@@ -131,7 +131,7 @@ class CouponController extends Controller
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $parent_id = $parentProfileData->id;
 
-            if(in_array($parent_id,explode(',',$coupon->coupon_for))){
+            if(!in_array($parent_id,explode(',',$coupon->coupon_for))){
                 return $this->invalidCouponResponse();
             }
         }

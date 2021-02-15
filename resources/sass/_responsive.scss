@@ -218,7 +218,10 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
-
+  /* global classes*/
+  .space-pre{
+    white-space: pre;
+  }
   /* forms */
   label {
     width: 135px;
