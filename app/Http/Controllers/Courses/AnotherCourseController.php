@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class AnotherCourseController extends Controller
 {
-    public function index($id)
+    public function index($id, $transcript_id)
     {
         $student_id = $id;
         $course = Course::select('id', DB::raw('count(*) as total'))
@@ -22,13 +22,13 @@ class AnotherCourseController extends Controller
         $anotherCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
             ->get();
-        return view('courses.another-course', compact('anotherCourse', 'student_id', 'courses_id'));
+        return view('courses.another-course', compact('anotherCourse', 'student_id', 'courses_id', 'transcript_id'));
     }
 
     public function store(Request $request)
     {
-        $id = $request->get('courses_id');
-        $refreshCourse = TranscriptCourse::select()->where('courses_id', $id)->get();
+        DB::beginTransaction();
+        $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('anotherCourse', []) as $period) {
             $subject = $period['subject'];
@@ -38,8 +38,10 @@ class AnotherCourseController extends Controller
                 'student_profile_id' => $period['student_id'],
                 'courses_id' => $period['courses_id'],
                 'subject_id' => $subject->id,
-                'score' => $period['grade']
+                'score' => $period['grade'],
+                'k8transcript_id' => $period['transcript_id'],
             ]);
         }
+        DB::commit();
     }
 }

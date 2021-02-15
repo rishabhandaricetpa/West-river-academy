@@ -258,29 +258,30 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('english-course', 'Courses\EnglishController@store')->name('englishCourse.store');
 
     //social studies
-    Route::get('social-studies/{id}', 'Courses\SocialStudiesController@index')->name('social.studies');
+    Route::get('social-studies/{student_id}/{transcript_id}', 'Courses\SocialStudiesController@index')->name('social.studies');
     Route::post('/social-studies', 'Courses\SocialStudiesController@store')->name('socialStudiesCourse.store');
 
     //mathematics 
-    Route::get('mathematics/{student_id}', 'Courses\MathsController@index')->name('mathematics');
+    Route::get('mathematics/{student_id}/{transcript_id}', 'Courses\MathsController@index')->name('mathematics');
     Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
 
     //physical education
-    Route::get('physical-education/{student_id}', 'Courses\PhysicalEducationController@index')->name('physical.education');
+    Route::get('physical-education/{student_id}/{transcript_id}', 'Courses\PhysicalEducationController@index')->name('physical.education');
     Route::post('physical-education', 'Courses\PhysicalEducationController@store')->name('physicalEducation.store');
 
+
     //health
-    Route::get('health/{id}', 'Courses\HealthController@index')->name('health');
+    Route::get('health/{student_id}/{transcript_id}', 'Courses\HealthController@index')->name('health');
     Route::post('/health', 'Courses\HealthController@store')->name('health.store');
     //foreign languages
-    Route::get('foreign/{id}', 'Courses\ForeignController@index')->name('foreign');
+    Route::get('foreign/{student_id}/{transcript_id}', 'Courses\ForeignController@index')->name('foreign');
     Route::post('/foreign', 'Courses\ForeignController@store')->name('foreign.store');
 
     //another
-    Route::get('another/{id}', 'Courses\AnotherCourseController@index')->name('another');
+    Route::get('another/{student_id}/{transcript_id}', 'Courses\AnotherCourseController@index')->name('another');
     Route::post('/another', 'Courses\AnotherCourseController@store')->name('another.store');
 
     //science
-    Route::get('science/{student_id}', 'Courses\ScienceController@index')->name('science');
+    Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 });
