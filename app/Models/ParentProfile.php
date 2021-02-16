@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ParentProfile extends Model
 {
@@ -54,12 +54,12 @@ class ParentProfile extends Model
                     'enrollment_periods.end_date_of_enrollment',
                     'student_profiles.first_name',
                     'student_profiles.student_Id',
-                    )
-                ->groupBy('student_profiles.id')
-                ->groupBy('enrollment_periods.id')
-                ->groupBy('enrollment_periods.type')
-                ->groupBy('enrollment_payments.amount')
-                ->get();
+                )
+                    ->groupBy('student_profiles.id')
+                    ->groupBy('enrollment_periods.id')
+                    ->groupBy('enrollment_periods.type')
+                    ->groupBy('enrollment_payments.amount')
+                    ->get();
             }
         } catch (\Exception $e) {
             return [];

@@ -69,6 +69,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         //working blades by frontend
+        Route::get('/transcript-wizard-dashboard', function () {
+            return view('transcript-wizard-dashboard');
+        });
+
+        Route::get('/transcript-wizard-grade', function () {
+            return view('transcript-wizard-grade');
+        });
+
+        Route::get('/transcript-pdf', function () {
+            return view('transcript-pdf');
+        });
+
         Route::get('/reviewstudent', function () {
             return view('reviewstudent');
         });
@@ -284,4 +296,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //science
     Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
+
+    Route::get('students-transcript', function () {
+        return view('transcript-wizard-dashboard');
+    });
 });
