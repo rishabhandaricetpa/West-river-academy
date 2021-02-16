@@ -19,7 +19,7 @@
             </div>
             @if ($student->parentProfile->country !== 'United States')
                 <div class="form-group d-sm-flex mb-1 border-top pt-4">
-                    <input type="radio" v-on:click.once="changeTotal" name="apostille" v-model="apostille" value="yes">
+                    <input v-model="apostille" type="checkbox" name="apostille">
                     <p class="pl-2">Apostille Package for 2 documents (the diploma and the transcript) and Express postage:</p>
                     <p class="ml-sm-auto">${{ $apostille_fee }}</p>
                 </div>
@@ -84,21 +84,30 @@
         el: '#mainapp-purchase',
         data() {
             return {
-                apostille: null,
-                apostilleCountry: '',
-                total: {{ $graduation_fee }},
+                apostille: "{{ !empty($student->graduation->apostille_country) ? true : false }}",
+                apostilleCountry: "{{ !empty($student->graduation->apostille_country) ? $student->graduation->apostille_country : '' }}",
+                total: "{{ !empty($student->graduation->apostille_country) ? $graduation_fee + $apostille_fee : $graduation_fee }}",
+                graduationFee: {{ $graduation_fee }},
+                apostilleFee: {{ $apostille_fee }},
             }
         },
-        methods:{
+        methods: {
             validate(){
-                if(this.apostille !== null && this.apostilleCountry === ''){
+                if(this.apostille !== false && this.apostilleCountry === ''){
                     alert('Please choose Country!')
                     return false;
                 }
                 this.$refs.form.submit();
-            },
-            changeTotal(){
-                this.total = this.total + {{ $apostille_fee }};
+            }
+        },
+        watch: {
+            apostille(){
+                if(this.apostille){
+                    this.total = this.graduationFee + this.apostilleFee;
+                }else{
+                    this.total = this.graduationFee;
+                    this.apostilleCountry = '';
+                }
             }
         }
     });
