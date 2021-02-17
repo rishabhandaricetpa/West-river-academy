@@ -20,7 +20,6 @@ class TranscriptController extends Controller
     {
         $students = StudentProfile::all();
         return view('admin.transcript.view-student', compact('students'));
-
     }
 
 
@@ -42,5 +41,4 @@ class TranscriptController extends Controller
         ->get();
         return view('admin.transcript.view-transcript', compact('transcriptData','student','k8details'));
     }
-   
 }

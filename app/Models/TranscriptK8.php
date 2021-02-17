@@ -19,7 +19,7 @@ class TranscriptK8 extends Model
     }
     public function transcripts()
     {
-        return $this->hasMany('App\Models\Transcript');
+        return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
     }
     public function TranscriptCourse()
     {

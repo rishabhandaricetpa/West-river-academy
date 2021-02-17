@@ -55,11 +55,10 @@ class TranscriptController extends Controller
         $student->last_name = $request->get('last_name');
         $student->update();
 
-        $transcript =  TranscriptK8::updateOrCreate(
-            ['student_profile_id' => $id],
+        $transcript =  TranscriptK8::create(
             [
                 'student_profile_id' => $id,
-                'country' => $request->input('country'),
+                'country' => $request->get('country'),
             ]
         );
         return view('transcript.grade', compact('transcript', 'student'));
@@ -163,5 +162,11 @@ class TranscriptController extends Controller
             'status' => 'pending',
         ]);
         return $pdf->download($pdfname.'.pdf');
+        
+    }  
+    public function viewAnotherEnrollment($student_id)
+    {
+        $transcript = new TranscriptK8();
+        return view('transcript.grade');
     }
 }

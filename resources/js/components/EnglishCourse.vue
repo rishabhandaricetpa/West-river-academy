@@ -96,8 +96,8 @@ export default {
     return {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
-        course_id: this.courses_id,
-        // transcripts_id: this.transcript_id,
+        courses_id: this.courses_id,
+        transcript_id: this.transcript_id,
         englishCourse: [
           {
             transcript_id: this.transcript_id,
@@ -117,7 +117,7 @@ export default {
     addCourses() {
       axios.post(route("englishCourse.store"), this.form).then(response => {
         window.location =
-          "/social-studies/" + this.courses_id + "/" + this.transcript_id;
+          "/social-studies/" + this.student_id + "/" + this.transcript_id;
       });
     },
     addNewSocialScienceCourse() {

@@ -97,6 +97,7 @@ export default {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
         courses_id: this.courses_id,
+        transcript_id: this.transcript_id,
         anotherCourse: [
           {
             transcript_id: this.transcript_id,
@@ -115,8 +116,7 @@ export default {
   methods: {
     addCourses() {
       axios.post(route("another.store"), this.form).then(response => {
-        window.location =
-          "/new-grade/" + this.courses_id + "/" + this.transcript_id;
+        window.location = "/another-grade/" + this.student_id;
       });
     },
     addNewSocialScienceCourse() {
