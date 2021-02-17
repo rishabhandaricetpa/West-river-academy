@@ -79,9 +79,32 @@ cursor: pointer;
 
 .enlarge-input{
     input{
-        width: 28px;
-        height: 28px;
+        width: 28px !important;
+        height: 28px !important;
+        &[type="checkbox"],&[type="radio"]{
+            border-width: 3px;
+        }
+        &[type="checkbox"]{
+        &:checked{
+            &:before{
+                top:2px;
+                left: 1px;
+                font-size: 18px;
+            }
+        }
     }
+    &[type="radio"]{
+        &:checked{
+            &:before{
+                top: 4px;
+                left: 4px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+    }
+
 }
 
 .inner-form-wrapper{
@@ -183,11 +206,26 @@ label.h3{
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 10%);
     transition: border-color 50ms ease-in-out;
     position: relative;
+    width: 11px;
+    height: 16px;
+    border-width: 1px;
+    top: 3px;
+}
+
+input[type=checkbox]{
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+}
+
+input[type=radio] {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 
 input[type=checkbox]:checked,input[type=radio]:checked{
@@ -198,7 +236,7 @@ input[type=checkbox]:checked:before,
 input[type=radio]:checked:before{
     position: absolute;
     top: 2px;
-    left: 0;
+    left: -4;
 }
 
  input[type=checkbox]:checked:before
@@ -215,9 +253,19 @@ input[type=radio]:checked:before{
     text-rendering: auto;
     line-height: 1;
     color: $light-blue;
-    font-size: 18px;
+    font-size: 11px;
+
 }
 
 input[type=radio]:checked:before{
-
+     background-color: $light-blue;
+     width: 10px;
+     height: 10px;
+     content:'';
+     border-radius: 50%;
+     -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+     -ms-border-radius: 50%;
+     -o-border-radius: 50%;
+     left:2px;
 }
