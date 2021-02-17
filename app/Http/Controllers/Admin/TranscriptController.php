@@ -19,7 +19,6 @@ class TranscriptController extends Controller
     public function index()
     {
         $students = StudentProfile::all();
-
         return view('admin.transcript.view-student', compact('students'));
 
     }
@@ -27,9 +26,10 @@ class TranscriptController extends Controller
 
     public function edit($id)
     {
+        // $transcriptDeatils=TranscriptK8::find($id)->get();
         $student = StudentProfile::find($id)->first();
         $transcriptCourses = StudentProfile::find($id)->transcriptCourses()->get();
-        $k8deatils=StudentProfile::find($id)->TranscriptK8()->get();
+        $k8details=StudentProfile::find($id)->TranscriptK8()->get();
         $transcriptData = TranscriptCourse::where('student_profile_id', $id)
                             ->join('courses','courses.id','transcript_course.courses_id')
                             ->join('subjects','subjects.id','transcript_course.subject_id')
@@ -40,8 +40,7 @@ class TranscriptController extends Controller
                                 'courses.course_name',
                          )
         ->get();
-    
-        return view('admin.transcript.view-transcript', compact('transcriptData','student','k8deatils'));
+        return view('admin.transcript.view-transcript', compact('transcriptData','student','k8details'));
     }
    
 }

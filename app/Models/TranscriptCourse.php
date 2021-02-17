@@ -10,7 +10,7 @@ class TranscriptCourse extends Model
     use HasFactory;
     protected $table = 'transcript_course';
     protected $fillable = [
-        'student_profile_id', 'courses_id', 'subject_id', 'score','k8transcript_id'
+        'student_profile_id', 'courses_id', 'subject_id', 'score', 'k8transcript_id'
     ];
 
     public function subjects()
