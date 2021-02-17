@@ -81,7 +81,7 @@ export default {
       grades: [["A", "B", "C", "D", "PASS"]],
       form: {
         courses_id: this.courses_id,
-
+        transcript_id: this.transcript_id,
         socialStudiesCourse: [
           {
             student_id: this.student_id,

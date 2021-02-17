@@ -26,10 +26,11 @@ class SocialStudiesController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         // $id = $request->get('courses_id');
         // TranscriptCourse::select()->where('courses_id', $id)->get();
         DB::beginTransaction();
-        $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->get();
+        $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('socialStudiesCourse', []) as $period) {
             $subject = $period['subject'];

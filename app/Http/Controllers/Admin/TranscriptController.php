@@ -20,7 +20,6 @@ class TranscriptController extends Controller
         $students = StudentProfile::all();
 
         return view('admin.transcript.view-student', compact('students'));
-
     }
 
 
@@ -29,17 +28,16 @@ class TranscriptController extends Controller
         $student = StudentProfile::find($id)->first();
         $transcriptCourses = StudentProfile::find($id)->transcriptCourses()->get();
         $transcriptData = TranscriptCourse::where('student_profile_id', $id)
-                            ->join('courses','courses.id','transcript_course.courses_id')
-                            ->join('subjects','subjects.id','transcript_course.subject_id')
-                            ->join('k8transcript','k8transcript.id','transcript_course.k8transcript_id')
-                            ->select(
-                                'transcript_course.score',
-                                'subjects.subject_name',
-                                'subjects.transcript_period',
-                                'courses.course_name',
-                         )
-        ->get();
-        return view('admin.transcript.view-transcript', compact('transcriptData','student'));
+            ->join('courses', 'courses.id', 'transcript_course.courses_id')
+            ->join('subjects', 'subjects.id', 'transcript_course.subject_id')
+            ->join('k8transcript', 'k8transcript.id', 'transcript_course.k8transcript_id')
+            ->select(
+                'transcript_course.score',
+                'subjects.subject_name',
+                'subjects.transcript_period',
+                'courses.course_name',
+            )
+            ->get();
+        return view('admin.transcript.view-transcript', compact('transcriptData', 'student'));
     }
-   
 }
