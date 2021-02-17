@@ -3,7 +3,7 @@
 @section('content')
 <section class="content">
       <div class="container-fluid position-relative">
-      <h1>Edit Parent Information</h1>
+      <h1>Edit Money Gram Address</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
               <form method="post" class="row" action="{{url('admin/update/moneygram',$moneyGram->id)}}">
                 @csrf
@@ -46,12 +46,8 @@
                 </div>
               </form>
             </div>
-            <!-- /.card -->
-
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-      </div><!-- /.container-fluid -->
+      </div>
 </section>
 
 @endsection

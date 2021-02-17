@@ -1,22 +1,14 @@
-<div class="d-flex">
-<!-- * =============== Sidebar =============== * -->
-@include('layouts.partials.sidebar')
-  <!-- * =============== /Sidebar =============== * -->
+@extends('layouts.app')
 
-     <div class="main-content position-relative ml-auto">
-     <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
-<!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
-@include('layouts.partials.header')
-<!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
+@section('content')
 
-<!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
        <h1 class="text-center text-white text-uppercase">dashboard</h1>
           <div class="form-wrap border bg-light py-5 px-25 mb-4">
              <h2 class="mb-5">What would you like to do?</h2>
                   <div class="row dashboard-options">
                      <div class="col-md-3 col-sm-6 text-center">
-                        <a href="#" class="d-inline-block mb-5 decoration-none">
+                        <a href="https://www.westriveracademy.com/schedule-a-call/" class="d-inline-block mb-5 decoration-none">
                            <i class="fas fa-comments rounded-circle circled-grid fa-2x text-secondary"></i>
                            <h3 class="mt-3 text-black font-weight-normal">Order a Personal Consultation</h3>
                </a>
@@ -28,7 +20,7 @@
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
-              <a href="#" class="d-inline-block mb-5 decoration-none">
+              <a href="https://www.idcreator.com/custom-id-designs/westriveracademy-id-card.html" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-id-card-alt rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Order a Student ID Card</h3>
               </a>
@@ -52,7 +44,7 @@
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
-              <a href="" class="d-inline-block mb-5 decoration-none">
+              <a href="{{ route('graduation.apply') }}" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Apply for Graduation</h3>
               </a>
@@ -70,7 +62,7 @@
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
-              <a href="#" class="d-inline-block mb-5 decoration-none">
+              <a href="{{ url('/enroll-student')}}" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-user-graduate rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Enroll a new Student in my Family</h3>
               </a>
@@ -113,6 +105,4 @@
               </div>  
          </div>
   </main>
-@include('layouts.partials.footer')
-</div>
-</div>
+@endsection

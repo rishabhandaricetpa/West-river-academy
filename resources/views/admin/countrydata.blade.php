@@ -3,10 +3,10 @@
 @section('content')
 <div class="content-header">
   <div class="container-fluid position-relative">
-        <h1 class="m-0 text-center">Contry And Enrollment Date</h1>
+        <h1 class="m-0 text-center">Country And Enrollment Date</h1>
       <div class="d-flex">
         <ol class="breadcrumb ml-auto">
-          <li class="breadcrumb-item active">Contry And Enrollments</li>
+          <li class="breadcrumb-item active">Country And Enrollments</li>
         </ol>
   </div><!-- /.container-fluid -->
 </div>
@@ -35,8 +35,8 @@
                   @foreach($countrydata as $countryenrollment)
                   <tr>
                       <td>{{$countryenrollment->country}}</td>
-                      <td>{{Carbon\Carbon::parse($countryenrollment->start_date)->format('M d Y')}}</td>
-                      <td>{{Carbon\Carbon::parse($countryenrollment->end_date)->format('M d Y')}}</td>
+                      <td>{{Carbon\Carbon::parse($countryenrollment->start_date)->format('M d')}}</td>
+                      <td>{{Carbon\Carbon::parse($countryenrollment->end_date)->format('M d')}}</td>
                       <td><a href="{{ url('admin/edit-country',$countryenrollment->id)}}"> <i class="fas fa-edit"></i></a>
                   </tr>
                   @endforeach

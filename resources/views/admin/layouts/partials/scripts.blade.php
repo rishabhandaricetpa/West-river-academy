@@ -7,13 +7,13 @@
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <!-- Bootstrap 4 -->
-  <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('backend/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ asset('backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ asset('backend/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ asset('backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
@@ -32,6 +32,94 @@
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
+      //parent datatable
+
+      $("#family-table").DataTable({
+        "ajax": "{{ route('admin.datatable.parent') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "p1_first_name"},
+          { "data": "country" },
+          { "data": "state"},
+          { "data": "status" },
+          { "data": "created_at"},
+          { "data": "updated_at" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>`+ 
+                              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` + 
+                              `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                      } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="view-student">View Students</a>`;                    
+              } 
+          },
+          { "data": "student_profile",
+            "render":function(data){
+              let list = `<ul>`;
+              data.forEach(student  => {
+                  list += `
+                            <li> ${student.fullname} </li>
+                            <li> ${student.email} </li>
+                          `;
+              });
+              list += `</ul>`;
+
+              return list;
+            }
+          },
+        ]
+      });
+
+      $("#student-table").DataTable({
+        "ajax": "{{ route('admin.datatable.student') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "fullname"},
+          { "data": "d_o_b"},
+          { "data": "email" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>`+ 
+                              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` + 
+                              `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                      } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit-payment/${id}">View Payments</a>`;                    
+              } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit-transcript/${id}">Transcripts</a>`;                    
+              } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="graduations/${id}/edit">Graduations</a>`;                    
+              } 
+          },
+        ]
+      });
+      //name country state active enrolled created modified 
+      //coupon datatable
       $("#coupons-table").DataTable({
         "ajax": "{{ route('admin.coupons.dt') }}",
         "processing": true,
@@ -53,6 +141,48 @@
                         return `<a href="{{ route('admin.view.coupon') }}/${id}/edit">Edit</a>`;
                       } 
           },
+        ]
+      });
+
+      $("#graduation-table").DataTable({
+        "ajax": "{{ route('admin.graduation.dt') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { 
+            "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;e
+                    } 
+          },
+          { "data": "student.fullname" },
+          { "data": "student.email" },
+          { "data": "student.birthdate" },
+          { 
+            "data": "grade_9_info",
+            "render": function ( data, type, row, meta ) {
+                        return `
+                          <ul>
+                            <li>
+                                Grade 9 : ${ row.grade_9_info }
+                            </li>
+                            <li>
+                                Grade 10 : ${ row.grade_10_info }
+                            </li>
+                            <li>
+                                Grade 11 : ${ row.grade_11_info }
+                            </li>
+                          </ul>
+                        `;
+                    }
+          },
+          { "data": "status" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
+                      } 
+          }
         ]
       });
 

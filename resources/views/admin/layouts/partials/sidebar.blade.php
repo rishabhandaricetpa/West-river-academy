@@ -10,7 +10,7 @@
       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
       <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link active">
+        <a href=" {{ url('/admin/dashboard') }}" class="nav-link active">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Parent Profile
@@ -30,7 +30,7 @@
     </ul>
     </li>
     <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+        <a href=" {{ url('admin/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Students
@@ -48,15 +48,8 @@
         </li>
             </ul>
           </li>
-    <li class="nav-item menu">
-    <li class="nav-item">
-        <a href="{{ url('admin/view-student')}}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>View Students</p>
-        </a>
-      </li>
   <li class="nav-item menu">
-        <a href="" {{ url('/dashboard') }}"" class="nav-link ">
+        <a href=" {{ url('admin/dashboard') }}" class="nav-link ">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Payments
@@ -80,11 +73,44 @@
           </li>
             </ul>
           </li>
+          <li class="nav-item menu">
+        <a href="{{ url('/dashboard') }}" class="nav-link ">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Transcripts
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+        <li class="nav-item">
+      <a href="{{ url('admin/view/transcript') }}" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+          View Transcript
+        </p>
+      </a>
+        </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/manage-courses')}}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Manage Course</p>
+            </a>
+          </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="{{ route('admin.view.coupon') }}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
               Coupons
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.view.graduation') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+              Graduations
               </p>
             </a>
           </li>

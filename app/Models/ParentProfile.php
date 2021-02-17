@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ParentProfile extends Model
 {
@@ -28,6 +29,11 @@ class ParentProfile extends Model
         return $this->hasMany('App\Models\StudentProfile', 'parent_profile_id', 'id');
     }
 
+    public function graduations()
+    {
+        return $this->hasMany('App\Models\Graduation', 'parent_profile_id', 'id');
+    }
+
     public static function getParentPendingFees($parent_profile_id, $total = false)
     {
         try {
@@ -48,12 +54,12 @@ class ParentProfile extends Model
                     'enrollment_periods.end_date_of_enrollment',
                     'student_profiles.first_name',
                     'student_profiles.student_Id',
-                    )
-                ->groupBy('student_profiles.id')
-                ->groupBy('enrollment_periods.id')
-                ->groupBy('enrollment_periods.type')
-                ->groupBy('enrollment_payments.amount')
-                ->get();
+                )
+                    ->groupBy('student_profiles.id')
+                    ->groupBy('enrollment_periods.id')
+                    ->groupBy('enrollment_periods.type')
+                    ->groupBy('enrollment_payments.amount')
+                    ->get();
             }
         } catch (\Exception $e) {
             return [];
@@ -68,5 +74,12 @@ class ParentProfile extends Model
     public function transactionsMethod()
     {
         return $this->hasMany('App\Models\TransactionsMethod', 'parent_profile_id', 'id');
+    }
+
+    public static function getParentId()
+    {
+        $id = Auth::user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        return $parentProfileData->id;
     }
 }

@@ -169,7 +169,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
-        Route::get('admin-dashboard', function () {
+        Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
     });
@@ -239,23 +239,83 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
     // admin dashboard
-    Route::get('admin-dashboard', function () {
-        return view('admin.home');
-    })->name('admin.admindashboard');
-    Route::get('transcript', function () {
-        return view('frontendpages.dashboard-transcript-filling');
-    });
+    // Route::get('admin-dashboard', function () {
+    //     return view('admin.home');
+    // })->name('admin.admindashboard');
 
-    Route::get('english-transcript', 'EnglishLanguageController@index')->name('english.transcript');
 
-    Route::get('transcript2', function () {
-        return view('frontendpages.dashboard-transcript-filling2');
-    });
 
-    Route::get('transcript-final', function () {
-        return view('frontendpages.dashboard-transcript-finished');
-    });
+
+    //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
     Route::post('year', 'TranscriptController@create')->name('year');
+
+    // Graduation Process
+    Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
+    Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
+    Route::post('graduation', 'GraduationController@store')->name('graduation.store');
+    Route::get('graduation/purchase/{id}', 'GraduationController@purchase')->name('graduation.purchase');
+
+    // Graduation Process ends
+
+    Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
+
+    Route::post('notify-student/{id}', 'TranscriptController@notification')->name('notify.studentInfo');
+    Route::get('display-student/{id}', 'TranscriptController@displayStudent')->name('display.studentProfile');
+    Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
+    Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
+    Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
+    Route::post('english-course/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
+
+    //Transcript K-8 Cources
+
+    //english course
+    Route::post('english-course', 'Courses\EnglishController@store')->name('englishCourse.store');
+
+    //social studies
+    Route::get('social-studies/{student_id}/{transcript_id}', 'Courses\SocialStudiesController@index')->name('social.studies');
+    Route::post('/social-studies', 'Courses\SocialStudiesController@store')->name('socialStudiesCourse.store');
+
+    //mathematics 
+    Route::get('mathematics/{student_id}/{transcript_id}', 'Courses\MathsController@index')->name('mathematics');
+    Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
+
+    //physical education
+    Route::get('physical-education/{student_id}/{transcript_id}', 'Courses\PhysicalEducationController@index')->name('physical.education');
+    Route::post('physical-education', 'Courses\PhysicalEducationController@store')->name('physicalEducation.store');
+
+
+    //health
+    Route::get('health/{student_id}/{transcript_id}', 'Courses\HealthController@index')->name('health');
+    Route::post('/health', 'Courses\HealthController@store')->name('health.store');
+    //foreign languages
+    Route::get('foreign/{student_id}/{transcript_id}', 'Courses\ForeignController@index')->name('foreign');
+    Route::post('/foreign', 'Courses\ForeignController@store')->name('foreign.store');
+
+    //another
+    Route::get('another/{student_id}/{transcript_id}', 'Courses\AnotherCourseController@index')->name('another');
+    Route::post('/another', 'Courses\AnotherCourseController@store')->name('another.store');
+
+    //science
+    Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
+    Route::post('science', 'Courses\ScienceController@store')->name('science.store');
+
+    Route::get('download-transcript', function () {
+        return view('transcript/download-transcript');
+    })->name('download.transcript');
+    Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
+
+    Route::get('new-grade/{student_id}/{transcript_id}', function () {
+        return view('transcript/dashboard-another-languages');
+    })->name('new-grade');
+
+    Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@anotherGrade');
+    Route::post('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
+    Route::get('students-transcript/{student_id}', function () {
+        return view('transcript-wizard-dashboard');
+    })->name('student.transcript');
+
+    //another grade enrollment_year
+    Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
 });

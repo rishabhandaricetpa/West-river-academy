@@ -25,7 +25,7 @@
               </div>
               <div class="form-group col-sm-6">
                 <label>Date of Birth<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
-                <input class="form-control" id="dob" name="dob" value="{{$student->d_o_b}}" required>
+                <input  class="form-control datepicker" id="dob" name="dob" value="{{$student->d_o_b->format('M d Y')}}" required>
               </div>
               <div class="form-group col-sm-6">
                 <label>Email Address</label>
@@ -67,7 +67,9 @@
                <input class="datepicker" type="text" name="end_date[]"
                 value="{{$enrollment_period->end_date_of_enrollment}}">
                 </div>
+
                 <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
+                <label>Grade Level</label>
               <select name="grade[]" class="form-control">
                 <option value="Ungraded" @if($enrollment_period->grade_level == 'Ungraded')
                   selected="selected" @endif>Ungraded</option>
@@ -126,6 +128,7 @@
             @endforeach
             <!-- /.card-body -->
           <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Upload Confirmation Letter</button>
         </div>
 
         </form>

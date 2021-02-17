@@ -18,8 +18,18 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
-        $student = StudentProfile::all();
+        
+        return view('admin.familyInformation.view-student');
+    
+    }
+    public function dataTable()
+    {
+        return datatables(StudentProfile::with(['parentProfile' ,'enrollmentPeriods','transcriptCourses','TranscriptK8','graduation'])->get())->toJson();
+    }
 
+    public function studentInformation($id)
+    {
+        $student = StudentProfile::where('parent_profile_id',$id)->get();
         return view('admin.familyInformation.view-student', compact('student'));
     }
 

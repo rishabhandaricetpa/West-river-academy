@@ -114,7 +114,7 @@ class StudentController extends Controller
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
                 'gender' => $data['gender'],
-                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('M d Y'),
+                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
                 'student_Id' => $data['studentID'],
@@ -143,8 +143,8 @@ class StudentController extends Controller
 
                 $enrollPeriod = EnrollmentPeriods::create([
                     'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  $selectedStartDate->format('M d Y'),
-                    'end_date_of_enrollment' => $selectedEndDate->format('M d Y'),
+                    'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
+                    'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
                     'grade_level' => $period['grade'],
                     'type' => $type,
                 ]);
@@ -290,6 +290,9 @@ class StudentController extends Controller
         $parentProfileData = User::find(auth()->user()->id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
+        $start_date=$countryData->start_date;
+        $sem = Carbon::parse($start_date);
+        $semestermonth =  $sem->addMonths(5);
         $countryId = $countryData->id;
         $studentData = StudentProfile::find($id);
         $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
@@ -298,7 +301,7 @@ class StudentController extends Controller
             ->orderBy('enrollment_payments.status', 'desc')
             ->get();
 
-        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData'));
+        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData','semestermonth'));
     }
 
 
