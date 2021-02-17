@@ -73,6 +73,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('transcript-wizard-dashboard');
         });
 
+        Route::get('/purchase-transcript', function () {
+            return view('purchase-transcript');
+        });
 
         Route::get('/transcript-wizard-grade', function () {
             return view('transcript-wizard-grade');

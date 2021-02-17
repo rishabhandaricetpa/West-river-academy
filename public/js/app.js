@@ -47253,8 +47253,15 @@ $(window).scroll(function () {
   }
 }); //missing );
 
+/* Notifications */
+
 $(".notify-btn").click(function () {
   $(".notification").toggleClass('d-block');
+});
+$(document).on("click", function (event) {
+  if (!$(event.target).closest(".notification-wrap").length) {
+    $(".notification").removeClass("d-block");
+  }
 });
 
 /***/ }),
