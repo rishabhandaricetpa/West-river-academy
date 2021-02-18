@@ -28,40 +28,60 @@
             <table class="table-styling w-100">
                 <thead>
                     <tr>
-                        <th>Course Name</th>
-                        <th>Subject Name</th>
-                        <th>Score</th>
-                        <th>Transcript Period</th>
+
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($transcriptDatas as $school => $transcripts)
-                    <tr class="text-center">
-                        <td class=" text-center bg-light d-block h3" colspan="6">{{$school}}
 
-                        </td>
-                    </tr>
-                    @foreach($transcripts as $transcript)
-                    <tr>
-
-                        <td>{{$transcript->school_name}}</td>
-                        <td>{{$transcript->course_name}}</td>
-                        <td>{{$transcript->subject_name}}</td>
-                        <td>{{$transcript->score}}</td>
-                        <td>{{$transcript->transcript_period}}</td>
-
-
-
-                    </tr>
-
-                    @endforeach
-                    @endforeach
 
                 </tbody>
             </table>
         </div>
+        @foreach($transcriptDatas as $school)
 
+        <div class="datablock">
+            <legend>{{$school->school_name}}</legend>
+            <p>
+                Academic School Year(s):{{$school->enrollment_year}}<br>
+                Grade: {{$school->grade}}<br>
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subjects</th>
+                        <th class="hide">Courses</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach($school->TranscriptCourse as $course)
+                    @foreach ($course->subjects as $subject)
+                    <tr>
+
+                        <td>{{$subject->subject_name}}</td>
+                        <td>
+                            @php
+                            $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
+                            return $value['id'] == $subject['courses_id'];
+                            });
+                            @endphp
+                            {{$firstCourse->course_name}}
+                        </td>
+                        <td>{{$course->score}}</td>
+                    </tr>
+                    @endforeach
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="buttongroup">
+                <form action="https://www.westriveracademy.com/cwp/pvt/transcript/setgrd/4EAEA8DC-F849-A842-8960-03C7170023B1" method="post" accept-charset="utf-8">
+                    <input type="submit" name="edit" id="edit" value="Select Course Names and Grades" class="add">
+                </form>
+            </div>
+        </div>
+        @endforeach
     </div>
 
 

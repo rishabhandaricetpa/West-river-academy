@@ -67,8 +67,4 @@ class StudentProfile extends Model
             'graduation_id'
         );
     }
-    public function TranscriptK8()
-    {
-        return $this->hasMany('App\Models\TranscriptK8', 'student_profile_id', 'id');
-    }
 }
