@@ -13,7 +13,8 @@ use App\Models\Subject;
 use App\Models\TranscriptCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\TranscriptPdf;
+use PDF;
 class TranscriptController extends Controller
 {
     public function index()
@@ -41,4 +42,13 @@ class TranscriptController extends Controller
         ->get();
         return view('admin.transcript.view-transcript', compact('transcriptData','student','k8details'));
     }
+    public function fetchfile($id){
+
+       $data= TranscriptPdf::where('student_profile_id',$id)->first();
+       $pdflink=$data->pdf_link ;
+       $pdf = PDF::loadView('transcript.pdf', $data);
+
+        return $pdf->download('storage/pdf/'.$pdflink);
+
+   }
 }

@@ -114,5 +114,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
     Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
+    Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
+
+
     
 });

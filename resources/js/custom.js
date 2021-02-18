@@ -27,3 +27,6 @@
 $(".notify-btn").click(function(){
   $(".notification").toggleClass('d-block');
 });
+
+/* Show transcript popup by default */
+$('#transcript-notification').modal('show');

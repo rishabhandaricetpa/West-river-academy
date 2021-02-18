@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transcript pdf</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Judson:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,100;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> -->
-    <style>
-    body {
-        font-weight: 400;
-        font-family: "Catamaran", sans-serif;
-     }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+
+    <main class="position-relative container form-content mt-4">
+      <h1 class="text-center text-white text-uppercase">dashboard</h1>
+
+      <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
+        <p>I'm finished with this transcript. I want to see what it looks like</p>
+        <!-- <a href="{{ route('genrate.transcript',1) }}" class="btn btn-primary mt-4 font-weight-bold">View Transcript</a> -->
+
+        <a href="{{ url('/transcript-pdf') }}" class="btn btn-primary mt-4 font-weight-bold"  data-toggle="modal" data-target="#moneygramModal">View Transcript</a>
+      </div>
+    </main>
+
+    <div class="modal fade" id="moneygramModal" tabindex="-1" role="dialog" aria-labelledby="moneygramModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
 <div style="max-width:1000px;margin:0 auto;padding:0 15px;">
     <div style="display:flex;flex-wrap:wrap;align-items: center;">
     <h1 style="width:50%;text-transform:uppercase;font-family:'Judson',serif;font-weight: 300;margin:0;">official transcript</h1>
@@ -27,8 +29,8 @@
     </div>
     <div style="width:50%;">
        <ul style="list-style-type:none;padding-left:0;">
-            <li style="display:flex;">Student <span>teodora velickovic</span></li>
-            <li style="display:flex;">address <span>durmitorska 22, 21000 novi sad, serbia</span></li>
+            <li style="display:flex;">Student <span> : Paige</span></li>
+            <li style="display:flex;">address <span>Dehradun</span></li>
        </ul>
     </div>
     <div style="width:50%;display:flex;">
@@ -117,7 +119,7 @@
         <p style="text-align:center;width:100%;">West River Academy is</p>
         <div style="display: flex;justify-content: space-around;width: 100%;">
         <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Edit</button>
-        <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Submit</button>
+        <a type="button"  href="{{ url('/download-transcript') }}"  style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Submit</a>
         </div>
     </div>
     <div>
@@ -125,5 +127,7 @@
     </div>
         
         </div>
-</body>
-</html>
+        </div>
+</div>
+</div>
+ @endsection

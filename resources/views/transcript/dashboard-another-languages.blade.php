@@ -25,7 +25,7 @@
                       </div>
                 </div>
                 <div class="col-sm-12">
-                  <a type="button" href="{{ url ('download-transcript')}}" class="btn btn-primary">Continue</a>
+                  <a type="button" href="{{ url ('preview-transcript')}}" class="btn btn-primary">Continue</a>
                 </div>
               <!-- </form> -->
                   </div>   

@@ -8,7 +8,7 @@
             <div class="d-flex">
             <ol class="breadcrumb ml-auto">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol> 
             </div>
       </div><!-- /.container-fluid -->
@@ -26,12 +26,12 @@
               <div class="inner">
                 <h3>150</h3>
 
-                <p>Manage Staff Mambers</p>
+                <p>View Parents</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{url('admin/view')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

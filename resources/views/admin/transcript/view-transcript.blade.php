@@ -40,7 +40,7 @@
                         <table id="addressData" class="table table-bordered table-striped data-table"">
                   <thead>
                   <div class="col-sm-12">
-                  <button type="submit" class="btn btn-primary">View Transcript Pdf</button>
+                  <a type="button" href="{{ url('admin/view-pdf',1)}}"  class="btn btn-primary">View Unsigned Transcript Pdf</a>
                   <a type="buuton" href="{{ url('admin/file-upload')}}" class="btn btn-primary">upload signed transcript Pdf</a> 
                            </div>
                  
