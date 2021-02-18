@@ -23,87 +23,47 @@
         </form>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <h2 class="mb-3">Solana Beach Elementary School</h2>
-        <div>
-            <p class="mb-0">Academic School Year(s): 2017-2018</p>
-            <p>Grade: 5</p>
-        </div>
+
         <div class="overflow-auto">
             <table class="table-styling w-100">
                 <thead>
                     <tr>
-                        <th>Course / Subject</th>
-                        <th>Category</th>
-                        <th>Grade</th>
+                        <th>Course Name</th>
+                        <th>Subject Name</th>
+                        <th>Score</th>
+                        <th>Transcript Period</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>ENGLISH</td>
-                        <td>English / Language Arts</td>
-                        <td>A</td>
+
+                    @foreach($transcriptDatas as $school => $transcripts)
+                    <tr class="text-center">
+                        <td class=" text-center bg-light d-block h3" colspan="6">{{$school}}
+
+                        </td>
                     </tr>
+                    @foreach($transcripts as $transcript)
                     <tr>
-                        <td>GEOGRAPHY</td>
-                        <td>Social Studies / History</td>
-                        <td>A</td>
+
+                        <td>{{$transcript->school_name}}</td>
+                        <td>{{$transcript->course_name}}</td>
+                        <td>{{$transcript->subject_name}}</td>
+                        <td>{{$transcript->score}}</td>
+                        <td>{{$transcript->transcript_period}}</td>
+
+
+
                     </tr>
-                    <tr>
-                        <td>MATHEMATICS</td>
-                        <td>Mathematics</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>PHYSICAL EDUCATION</td>
-                        <td>Physical Education</td>
-                        <td>P</td>
-                    </tr>
-                    <tr>
-                        <td>SCIENCE</td>
-                        <td>Science</td>
-                        <td>c</td>
-                    </tr>
+
+                    @endforeach
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
-        <a href="#" class="btn btn-primary mt-4" role="button">Select Course Names and Grades</a>
+
     </div>
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <h2 class="mb-3">West River Academy</h2>
-        <div>
-            <p class="mb-0">Academic School Year(s): 2019-2020</p>
-            <p>Grade: 5</p>
-        </div>
-        <div class="overflow-auto">
-            <table class="table-styling w-100">
-                <thead>
-                    <tr>
-                        <th>Course / Subject</th>
-                        <th>Category</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>ENGLISH</td>
-                        <td>English / Language Arts</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>GEOGRAPHY</td>
-                        <td>Social Studies / History</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>MATHEMATICS</td>
-                        <td>Mathematics</td>
-                        <td>A</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <a href="#" class="btn btn-primary mt-4" role="button">Select Course Names and Grades</a>
-    </div>
+
 
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <p>You can use the button below to add classes from other schools, colleges, and universities. Course selection, credits, and grades must match exactly the transcript we have on file from the other school. Heading on transcript will indicate the name of the school.</p>
