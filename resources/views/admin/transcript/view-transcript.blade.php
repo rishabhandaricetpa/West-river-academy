@@ -30,13 +30,20 @@
                         <h3 class="card-title"></h3>
                     </div>
                     <!-- /.card-header -->
-                    Student Name:{{$student->first_name}} {{$student->last_name}}
+                     <p>Student Name:{{$student->first_name}} {{$student->last_name}}</p>
+                     @foreach($k8details as $k8detail)
+                     <p>Student year of enrollment:  {{$k8detail->enrollment_year}}</p>
+                     <p>School Name :  {{$k8detail->school_name}}</p>
+                     <p>Student Grade :  {{$k8detail->grade}}</p>
+                     @endforeach
                     <div class="card-body">
                         <table id="addressData" class="table table-bordered table-striped data-table"">
                   <thead>
+                  <div class="col-sm-12">
                   <button type="submit" class="btn btn-primary">View Transcript Pdf</button>
-                  
-                  <a type="buuton" href="{{ url('admin/file-upload')}}" class="btn btn-primary">upload signed transcript Pdf</a>
+                  <a type="buuton" href="{{ url('admin/file-upload')}}" class="btn btn-primary">upload signed transcript Pdf</a> 
+                           </div>
+                 
                   <tr>
                     <th>Transcript</th>
                     <th>Course Name</th>

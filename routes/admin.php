@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     );
 
     // Crud for parent profile
+    Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');
     Route::get('view', 'ParentController@index')->name('view.parent');
     Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
     Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
 
     // Crud for student profile
+    Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student');
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
     Route::get('edit-student/{id}', 'StudentProfileController@edit')->name('edit-student');
     Route::post('update/{id}', 'StudentProfileController@update')->name('edit-student.update');

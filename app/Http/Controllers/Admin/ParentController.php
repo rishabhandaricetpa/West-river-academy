@@ -28,11 +28,13 @@ class ParentController extends Controller
      */
     public function index()
     {
-        $data = ParentProfile::all();
-
-        return view('admin.familyInformation.view-parent', compact('data'));
+        return view('admin.familyInformation.view-parent');
     }
 
+    public function dataTable()
+    {
+       return datatables(ParentProfile::with(['studentProfile','address'])->get())->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *
