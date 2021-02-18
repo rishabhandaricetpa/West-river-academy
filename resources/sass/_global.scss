@@ -174,9 +174,6 @@ button {
   }
 }
 
-.modal-dialog {
-  max-width: 520px;
-}
 
 /* tables */
 table{
@@ -209,6 +206,16 @@ sup {
 
 .table-styling{
   min-width: 500px;
+  &.enlarge-input{
+    td{
+      position: relative;
+      padding-left: 40px;
+      input{
+        position: absolute;
+        left: 26px;
+      }
+    }
+  }
   thead{
     background-color: #cccc;
   }

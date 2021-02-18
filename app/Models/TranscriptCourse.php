@@ -25,4 +25,8 @@ class TranscriptCourse extends Model
     {
         return $this->belongsTo('App\Models\StudentProfile');
     }
+    public function TranscriptK8()
+    {
+        return $this->belongsTo('App\Models\TranscriptK8');
+    }
 }

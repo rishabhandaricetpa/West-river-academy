@@ -29,38 +29,22 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped data-table"">
+            <table id="family-table" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
-                    <th>Parent1 First Name</th>
-                    <th>Parent2 First Name</th>
-                    <th>Email</th>
+                    <th>Parent Id</th>
+                    <th>Parent 1 Name</th>
                     <th>Country</th>
-                    <th>Phone</th>
+                    <th>State</th>
                     <th>Status</th>
+                    <th>Created_At</th>
+                    <th>Updated_At</th> 
                     <th>Action</th>
-                    <th>Student Information</th>
+                    <th>Students</th>
+                    <th>Student Name</th>
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($data as $item)
-                  <tr>
-                      <td>{{$item->p1_first_name}}</td>
-                      <td>{{$item->p2_first_name}}</td>
-                      <td>{{$item->p1_email}}</td>
-                      <td>{{$item->country}}</td>
-                      <td>{{$item->p1_cell_phone}}</td>
-                      <td>{{$item->status==0 ?'Active':'Deactivated'}}</td>
-                      <td><a href=" {{ url('admin/deactive',$item->id)}}"> <i class="fas fa-ban"
-                    onclick="disableButton(this)"></i></a>
-                    <a href="{{ url('admin/edit',$item->id)}}"><i class="fas fa-edit"></i>
-                <a href="{{ url('admin/delete/parent',$item->id)}}"><i class="fas fa-trash-alt"
-                    onclick="return myFunction();"></i></a></td>
-                    <td><a href="{{ url('admin/view-student',$item->id)}}">
-                            <i class="fas fa-arrow-alt-circle-right"></i></a>
-                </td>
-                </tr>
-                @endforeach
                 </tbody>
             </table>
           </div>
@@ -75,9 +59,3 @@
 </div>
 <!-- /.content -->
 @endsection
-<script>
-  function myFunction() {
-      if(!confirm("Are You Sure to delete this"))
-      event.preventDefault();
-  }
-</script>

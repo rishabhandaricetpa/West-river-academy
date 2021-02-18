@@ -49,6 +49,10 @@ class StudentProfile extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'id');
     }
+    public function TranscriptK8()
+    {
+        return $this->hasMany('App\Models\TranscriptK8', 'student_profile_id', 'id');
+    }
     public function graduation()
     {
         return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');

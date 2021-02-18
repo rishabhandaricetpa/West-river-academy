@@ -73,6 +73,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('transcript-wizard-dashboard');
         });
 
+        Route::get('/purchase-transcript', function () {
+            return view('purchase-transcript');
+        });
+
         Route::get('/transcript-wizard-grade', function () {
             return view('transcript-wizard-grade');
         });
@@ -297,7 +301,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 
-    Route::get('students-transcript', function () {
+    Route::get('download-transcript', function () {
+        return view('transcript/download-transcript');
+    })->name('download.transcript');
+    Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
+
+    Route::get('new-grade/{student_id}/{transcript_id}', function () {
+        return view('transcript/dashboard-another-languages');
+    })->name('new-grade');
+
+    Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@anotherGrade');
+    Route::post('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
+    Route::get('students-transcript/{student_id}', function () {
         return view('transcript-wizard-dashboard');
-    });
+    })->name('student.transcript');
+
+    //another grade enrollment_year
+    Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
 });

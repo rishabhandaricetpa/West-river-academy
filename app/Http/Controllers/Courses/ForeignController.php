@@ -29,7 +29,7 @@ class ForeignController extends Controller
     public function store(Request $request)
     {
         DB::beginTransaction();
-        $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->get();
+        $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('foreignCourse', []) as $period) {
             $subject = $period['subject'];
