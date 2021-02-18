@@ -25,4 +25,8 @@ class TranscriptK8 extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
     }
+    // public function courses()
+    // {
+    //     return $this->hasManyThrough(Courses::class, TranscriptCourse::class, 'k8transcript_id');
+    // }
 }
