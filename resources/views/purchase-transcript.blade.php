@@ -8,7 +8,7 @@
             <h2 class="mb-3">Purchase Transcripts</h2>
             <p>The first transcript created for a student is $80. Additional transcripts in subsequent years are $25.</p>
     <form method="POST" action="" class="mb-0">
-    <div class="overflow-auto">
+    <div class="overflow-auto max-table">
     <table class="table-styling w-100 enlarge-input">
            <thead>
              <tr>
@@ -29,13 +29,24 @@
              <td><input class="form-check-input" type="checkbox" name="">Aug 1, 2024 - Jul 31, 2025</td>
              <td>10</td>
            </tr>
+           <tr> 
+             <td><input class="form-check-input" type="checkbox" name="">Aug 1, 2024 - Jul 31, 2025</td>
+             <td>10</td>
+           </tr>         
            </tbody>
            </table>
            </div>
       <div class="form-group d-sm-flex mb-2">
-        <label for="">Name</label>
+        <label for="">Purpose of Transcript</label>
         <div>
-           White Rice
+        <select name="" class="form-control">
+            <option>Yes, records will come with school records.</option> 
+            <option>Yes, I will provide records.</option> 
+            <option>Yes, I plan to get immunizations soon.</option>
+            <option>No, for personal reasons.</option> 
+            <option>No, for medical reasons.</option> 
+            <option>No, for religious reasons.</option>
+         </select>
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
