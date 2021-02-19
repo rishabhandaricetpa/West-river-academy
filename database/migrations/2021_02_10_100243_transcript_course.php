@@ -23,9 +23,8 @@ class TranscriptCourse extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects')->nullable()->onDelete('cascade');
             $table->string('score')->nullable();
             $table->unsignedBigInteger('k8transcript_id');
-            $table->foreign('k8transcript_id')->references('id')->on('k8transcript')->onDelete('cascade');
+            $table->foreign('k8transcript_id')->references('id')->on('k8transcript')->nullable()->onDelete('cascade');
             $table->timestamps();
-
         });
     }
 

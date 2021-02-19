@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
                 return view('admin/paymentsInvoice/payment');
             });
 
-            
+
         }
     );
 
@@ -115,7 +115,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
     Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
+    Route::get('edit-subGrades/{subject_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
 
-
-    
 });

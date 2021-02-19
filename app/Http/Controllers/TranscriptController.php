@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Subject;
 use App\Models\EnrollmentPayment;
 use App\Models\TranscriptK8;
+use App\Models\TranscriptCourse;
 use App\Models\TranscriptPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,9 +71,7 @@ class TranscriptController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeEnrollmentYear(Request $request)
-    {
-    }
+
     public function viewStudent($id)
     {
         $enroll_student = StudentProfile::find($id);
@@ -117,8 +116,9 @@ class TranscriptController extends Controller
         $result = array_unique($items);
         return view('transcript.transcript-enrollment-year', compact('transcript', 'id', 'result'));
     }
-    public function storeYear(Request $request, $student_id)
+    public function storeYear(Request $request, $student_id, $transcript_id)
     {
+        //  dd($request->all());
         $transcript_id = $request->get('transcript_id');
         $transcript = TranscriptK8::find($transcript_id);
         if ($request->get('enrollment_year')) {
@@ -127,16 +127,19 @@ class TranscriptController extends Controller
             $transcript->enrollment_year = $request->get('other_year');
         }
         $transcript->save();
-        $course = Course::select('id', DB::raw('count(*) as total'))
-            ->groupBy('id')
-            ->where('course_name', 'English / Language Arts')
-            ->first();
-        $courses_id = $course->id;
-        $englishCourse = Subject::where('courses_id', $course->id)
-            ->where('transcript_period', 'K-8')
-            ->get();
-        return view('courses.english-course', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
+        // $course = Course::select('id', DB::raw('count(*) as total'))
+        //     ->groupBy('id')
+        //     ->where('course_name', 'English / Language Arts')
+        //     ->first();
+        // $courses_id = $course->id;
+        // $englishCourse = Subject::where('courses_id', $course->id)
+        //     ->where('transcript_period', 'K-8')
+        //     ->get();
+        return redirect()->route('english.course', [$student_id, $transcript_id]);
+
+        //return view('courses.english-course', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
     }
+
     public function genrateTranscript($id)
     {
         $Userid = Auth::user()->id;
@@ -167,5 +170,17 @@ class TranscriptController extends Controller
     {
         $transcript = new TranscriptK8();
         return view('transcript.grade');
+    }
+    public function displayAllCourse($transcript_id, $student_id)
+    {
+        dd($student_id);
+        // $courses = TranscriptCourse::where('k8transcript_id', $transcript_id)->get();
+        $courses = TranscriptCourse::where('k8transcript_id', $transcript_id)
+            ->join('k8transcript', 'k8transcript.id', 'transcript_course.k8transcript_id')
+            ->join('courses', 'courses.id', 'transcript_course.courses_id')
+            ->join('subjects', 'subjects.id', 'transcript_course.subject_id')
+            ->get();
+        //dd($courses);
+        return view('transcript-wizard-grade', compact('courses'));
     }
 }

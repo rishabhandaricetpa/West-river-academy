@@ -30,7 +30,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.englishCourse.other_subjects"
+                v-model="englishCourse.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">

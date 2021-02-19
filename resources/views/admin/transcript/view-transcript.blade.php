@@ -55,8 +55,7 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editGrades">Edit</button>
-</td>
+                        <td><a type="button"  href="{{ route('admin.edit.subGrades',$subject->id)}}" class="btn btn-primary">Edit</a></td>
                     </tr>
                     @endforeach
                     @endforeach
@@ -67,34 +66,6 @@
         @endforeach
     </div>
 </main>
-
-<div class="modal fade" id="editGrades" tabindex="-1" role="dialog" aria-labelledby="editGradesLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3  id="moneygramModalLabel">Add New Address for Money Gram</h3>
-      </div>
-      <form method="post" action="{{route('admin.create.moneygram')}}">
-                @csrf
-                <div class="card-body">
-                  <div class="form-group">
-                    <label>Subjects<sup>*</sup></label>
-                    <input  class="form-control" id="subject_name" value="" name="subject_name">
-                  </div>
-                  <div class="form-group">
-                    <label>Grades</label>
-                    <input  class="form-control" id="grades" name="grades" value="">
-                  </div>
-                <!-- /.card-body -->
-      <div class="modal-footer py-3 px-0">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-</div>
 @endsection
 <script>
     function myFunction() {

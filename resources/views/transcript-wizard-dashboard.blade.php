@@ -76,9 +76,7 @@
                 </tbody>
             </table>
             <div class="buttongroup">
-                <form action="https://www.westriveracademy.com/cwp/pvt/transcript/setgrd/4EAEA8DC-F849-A842-8960-03C7170023B1" method="post" accept-charset="utf-8">
-                    <input type="submit" name="edit" id="edit" value="Select Course Names and Grades" class="add">
-                </form>
+                <a href="{{route('displayAllCourse',[$school->id,$school->student_profile_id])}}" class="btn btn-primary ">Select Courses and Grade</a>
             </div>
         </div>
         @endforeach

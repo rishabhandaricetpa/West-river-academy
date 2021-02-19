@@ -26,29 +26,6 @@ class TranscriptController extends Controller
 
     public function edit($id)
     {
-        // $transcriptDeatils=TranscriptK8::find($id)->get();
-        // $student = StudentProfile::find($id)->first();
-        // $transcriptCourses = StudentProfile::find($id)->transcriptCourses()->get();
-        // $k8details=StudentProfile::find($id)->TranscriptK8()->get();
-        // $transcriptData = TranscriptCourse::where('student_profile_id', $id)
-        //                     ->join('courses','courses.id','transcript_course.courses_id')
-        //                     ->join('subjects','subjects.id','transcript_course.subject_id')
-        //                     ->select(
-        //                         'transcript_course.score',
-        //                         'subjects.subject_name',
-        //                         'subjects.transcript_period',
-        //                         'courses.course_name',
-        //                  )
-        // ->get();
-        // return view('admin.transcript.view-transcript', compact('transcriptData','student','k8details'));
-
-        // $student_transcripts = TranscriptCourse::where('student_profile_id', $id)->select('k8transcript_id')->groupBy('k8transcript_id')->get();
-
-
-        // $transcriptCourses = StudentProfile::find($id)->transcriptCourses()->get();
-
-        // $k8details = StudentProfile::find($id)->TranscriptK8()->get();
-
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
@@ -56,6 +33,12 @@ class TranscriptController extends Controller
         $student = StudentProfile::find($id);
             return view('admin.transcript.view-transcript', compact('student', 'transcriptData'));
         
+    }
+    public function editSubGrades($subject_id)
+    {
+        $subjects=Subject::find($subject_id)->first();
+        return view('admin.transcript.edit_subject_grade', compact('subjects'));
+
     }
     public function fetchfile($id){
 

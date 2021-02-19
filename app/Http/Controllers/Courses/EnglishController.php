@@ -11,15 +11,25 @@ use Illuminate\Support\Facades\DB;
 
 class EnglishController extends Controller
 {
+    public function index($student_id, $transcript_id)
+    {
+        $course = Course::select('id', DB::raw('count(*) as total'))
+            ->groupBy('id')
+            ->where('course_name', 'English / Language Arts')
+            ->first();
+        $courses_id = $course->id;
+        $englishCourse = Subject::where('courses_id', $course->id)
+            ->where('transcript_period', 'K-8')
+            ->get();
+        return view('courses.english-course', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
+    }
 
     public function store(Request $request)
     {
         $id = $request->get('courses_id');
         //first delete the course if exists in database
-
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
-
         // then insert new subjects
         foreach ($request->get('englishCourse', []) as $period) {
             $subject = $period['subject'];
