@@ -68,43 +68,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return redirect('/login');
         });
 
-        //working blades by frontend
-        Route::get('/transcript-wizard-dashboard', function () {
-            return view('transcript-wizard-dashboard');
-        });
 
-
-        Route::get('/transcript-wizard-grade', function () {
-            return view('transcript-wizard-grade');
-        });
-
-        Route::get('/transcript-pdf', function () {
-            return view('transcript-pdf');
-        });
-
-        Route::get('/reviewstudent', function () {
-            return view('reviewstudent');
-        });
-
-        Route::get('/graduation-2', function () {
-            return view('graduation-2');
-        });
-
-        Route::get('/transcript-wizard', function () {
-            return view('transcript-wizard');
-        });
-
-        Route::get('/graduation-app', function () {
-            return view('graduation-app');
-        });
-
-        Route::get('/graduation-app-grade', function () {
-            return view('graduation-app-grade');
-        });
-
-        Route::get('/app-approve', function () {
-            return view('app-approve');
-        });
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
@@ -261,13 +225,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('notify-student/{id}', 'TranscriptController@notification')->name('notify.studentInfo');
     Route::get('display-student/{id}', 'TranscriptController@displayStudent')->name('display.studentProfile');
     Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
-    Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
-    Route::post('english-course/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
+    //save year
+    Route::post('updateYear/{student_id}/{transcript_id}', 'TranscriptController@storeYear')->name('update.enrollYear');
+
+
 
     //Transcript K-8 Cources
 
     //english course
+    //view english course
+    Route::get('english-course/{id}/{transcript_id}', 'Courses\EnglishController@index')->name('english.course');
+    //save course
     Route::post('english-course', 'Courses\EnglishController@store')->name('englishCourse.store');
 
     //social studies
@@ -320,4 +289,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/editgrade/{student_id}/{transcript_id}', function () {
         dd('welcome');
     })->name('edit.grade');
+
+    Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
 });
