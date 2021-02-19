@@ -263,7 +263,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
     Route::post('enroll-year', 'TranscriptController@storeEnrollmentYear')->name('transcript.enrollment_year');
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
-    Route::post('english-course/{id}', 'TranscriptController@storeYear')->name('transcript.enrollment_year');
+    Route::post('english-course/{id}', 'TranscriptController@storeYear')->name('english.course');
 
     //Transcript K-8 Cources
 
