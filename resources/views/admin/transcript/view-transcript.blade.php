@@ -1,83 +1,100 @@
 @extends('admin.app')
 
 @section('content')
-<!-- Content Header (Page header) -->
-<!-- Content Wrapper. Contains page content -->
 
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid position-relative">
-                <h1>Students Transcript</h1>
-            <div class="d-flex">
-                <ol class="breadcrumb ml-auto">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Student Transcript</li>
-                    <li class="breadcrumb-item active">Transcript</li>
-                </ol>
-            </div><!-- /.col -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
+<main class="position-relative container form-content mt-4">
+    <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
+    <div class="form-wrap border bg-light py-5 px-25 mb-4">
+        <h2 class="mb-3">{{$student->first_name}}</h2>
+        <form method="POST" action="" class="mb-0">
 
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <!-- /.card-header -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title"></h3>
-                    </div>
-                    <!-- /.card-header -->
-                     <p>Student Name:{{$student->first_name}} {{$student->last_name}}</p>
-                     @foreach($k8details as $k8detail)
-                     <p>Student year of enrollment:  {{$k8detail->enrollment_year}}</p>
-                     <p>School Name :  {{$k8detail->school_name}}</p>
-                     <p>Student Grade :  {{$k8detail->grade}}</p>
-                     @endforeach
-                    <div class="card-body">
-                        <table id="addressData" class="table table-bordered table-striped data-table"">
-                  <thead>
-                  <div class="col-sm-12">
-                  <a type="button" href="{{ url('admin/view-pdf',1)}}"  class="btn btn-primary">View Unsigned Transcript Pdf</a>
-                  <a type="buuton" href="{{ url('admin/file-upload')}}" class="btn btn-primary">upload signed transcript Pdf</a> 
-                           </div>
-                 
-                  <tr>
-                    <th>Transcript</th>
-                    <th>Course Name</th>
-                    <th>Subject Name</th>
-                    <th>Grade</th>
-                    <th>Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @foreach($transcriptData as $transcript)
-                  <tr>
-                      <td>{{$transcript->transcript_period}}</td>
-                      <td>{{$transcript->course_name}}</td>
-                      <td>{{$transcript->subject_name}}</td>
-                      <td>{{$transcript->score}}</td>
-                      <td>
-                            <a href="">
-                            <i class="fas fa-arrow-alt-circle-right"></i></a>
-                            </td>
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+            <div class="form-group d-sm-flex mb-2">
+                <label for="">Name</label>
+                <div>
+                    {{$student->fullname}}
                 </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-</section>
+            <div class="form-group d-sm-flex mb-2">
+                <label for="">Date of Birth</label>
+                <div>
+                    {{$student->d_o_b->format('d M Y ')}}
+                </div>
+            </div>
+        </form>
+    </div>
+        @foreach($transcriptData as $school)
+        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+        <a type="button" href="{{ url('admin/view-pdf',1)}}" class="btn btn-primary">Generate Unsigned Transcript</a>
+        <a type="button" href="{{ url('admin/file-upload')}}" class="btn btn-primary">Upload Signed Transcript</a>
+            <legend>{{$school->school_name}}</legend>
+            <p>
+                Academic School Year(s):{{$school->enrollment_year}}<br>
+                Grade: {{$school->grade}}<br>
+            </p>
+            <table id="addressData" class="table table-bordered table-striped data-table"">
+                <thead>
+                    <tr>
+                        <th>Courses</th>
+                        <th>Subjects</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($school->TranscriptCourse as $course)
+                    @foreach ($course->subjects as $subject)
+                    <tr>
+
+                        <td>
+                            @php
+                            $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
+                            return $value['id'] == $subject['courses_id'];
+                            });
+                            @endphp
+                            {{$firstCourse->course_name}}
+                        </td>
+                        <td>{{$subject->subject_name}}</td>
+                        <td>{{$course->score}}</td>
+                        <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#editGrades">Edit</button>
+</td>
+                    </tr>
+                    @endforeach
+                    @endforeach
+                </tbody>
+            </table>
+                </form>
+            </div>
+        @endforeach
+    </div>
+</main>
+
+<div class="modal fade" id="editGrades" tabindex="-1" role="dialog" aria-labelledby="editGradesLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3  id="moneygramModalLabel">Add New Address for Money Gram</h3>
+      </div>
+      <form method="post" action="{{route('admin.create.moneygram')}}">
+                @csrf
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Subjects<sup>*</sup></label>
+                    <input  class="form-control" id="subject_name" value="" name="subject_name">
+                  </div>
+                  <div class="form-group">
+                    <label>Grades</label>
+                    <input  class="form-control" id="grades" name="grades" value="">
+                  </div>
+                <!-- /.card-body -->
+      <div class="modal-footer py-3 px-0">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
-<!-- /.content -->
+</div>
 @endsection
 <script>
     function myFunction() {
