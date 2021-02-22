@@ -34,7 +34,7 @@ class EnglishController extends Controller
         foreach ($request->get('englishCourse', []) as $period) {
             $subject = $period['subject'];
             $subject = Subject::where('subject_name', $subject)->first();
-
+        if(empty($period->other_subjects)){
             $english_course = TranscriptCourse::create([
                 'student_profile_id' => $period['student_id'],
                 'courses_id' => $period['courses_id'],
@@ -42,6 +42,22 @@ class EnglishController extends Controller
                 'score' => $period['grade'],
                 'k8transcript_id' => $period['transcript_id'],
             ]);
+        }
+        else{
+             $other_subjetct =Subject::create([
+            'courses_id'=> $period['courses_id'],
+            'subject_name'=> $period['other_subjects'],
+            'transcript_period'=>'K-8',
+            'status'=>'1'
+            ]);   
+            $english_course = TranscriptCourse::create([
+                'student_profile_id' => $period['student_id'],
+                'courses_id' => $period['courses_id'],
+                'subject_id' => $subject->id,
+                'score' => $period['grade'],
+                'k8transcript_id' => $period['transcript_id'],
+            ]); 
+         }
         }
     }
 }

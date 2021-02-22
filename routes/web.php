@@ -203,10 +203,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('admin-dashboard', function () {
     //     return view('admin.home');
     // })->name('admin.admindashboard');
-
-
-
-
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
@@ -267,13 +263,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 
-    Route::get('preview-transcript', function () {
-        return view('transcript/preview-transcript');
-    })->name('preview.transcript');
+    // Route::get('preview-transcript', function () {
+    //     return view('transcript/preview-transcript');
+    // })->name('preview.transcript');
     Route::get('download-transcript', function () {
         return view('transcript/download-transcript');
     })->name('download.transcript');
     Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
+    Route::get('preview-transcript/{student_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
     Route::get('new-grade/{student_id}/{transcript_id}', function () {
         return view('transcript/dashboard-another-languages');
@@ -291,4 +288,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('edit.grade');
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
+    Route::get('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');
+
 });

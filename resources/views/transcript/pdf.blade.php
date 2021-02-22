@@ -6,123 +6,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transcript pdf</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <style>
-    body {
-        font-weight: 400;
-        font-family: "Catamaran", sans-serif;
-     }
-    </style>
+<style>
+ body{
+  font-family: "Catamaran", sans-serif;
+ }
+ table{
+   width:100%;
+ }
+</style>
 </head>
 <body>
-<div style="max-width:1000px;margin:0 auto;padding:0 15px;">
-    <div style="display:flex;flex-wrap:wrap;align-items: center;">
-    <h1 style="width:50%;text-transform:uppercase;font-family:'Judson',serif;font-weight: 300;margin:0;">official transcript</h1>
-    <div style="width:50%;display:flex;">
-    <div style="margin-left:auto;text-align:center;">
-       <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;">
+  <table style="margin-bottom:60px;">
+     <tbody>
+     <tr style="width:100%;">
+      <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
+      <td width="50%" style="text-align:center;">
+      <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
        <p style="margin:0;">Califorinia Colorado USA</p>
-       <p style="margin:0;">949.492.5240 info@westriveracademy.com</p>
-       </div>
-    </div>
-    <div style="width:50%;">
-       <ul style="list-style-type:none;padding-left:0;">
-            <li style="display:flex;">Student <span>teodora velickovic</span></li>
-            <li style="display:flex;">address <span>durmitorska 22, 21000 novi sad, serbia</span></li>
-       </ul>
-    </div>
-    <div style="width:50%;display:flex;">
-       <ul style="list-style-type:none;padding-left:0;margin-left:auto;">
-            <li style="display:flex;">Date of birth <span>october 19, 2010</span></li>
-            <li style="display:flex;">acadmic years <span>2019-2020</span></li>
-            <li style="display:flex;">Grade levels <span>4 and 5</span></li>
-       </ul>
-    </div>
-    <table style="width:60%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
+       <p style="margin:0;">949.492.5240 info@westriveracademy.com</p></td>
+    </tr>
+     </tbody>
+  </table>
+  <table>
+     <tbody>
+         <tr style="width:100%;">
+            <td style="text-transform:uppercase;font-size:14px;width:10%;">student</td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:50%;">teodora velickovic</td>
+            <td style="text-transform:uppercase;font-size:14px;width:20%;">date of birth</td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:20%;">october 19 2010</td>
+          </tr>
+     </tbody>
+  </table>
+  <table>
+     <tbody>
+         <tr style="width:100%;">
+            <td style="text-transform:uppercase;font-size:14px;width:10%;">address</td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:50%;">durmitorska 22, 21000 novi sad, serbia</td>
+            <td style="text-transform:uppercase;font-size:14px;width:20%;">academic years</td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:20%;">2019-20</td>
+          </tr>
+     </tbody>
+  </table>
+  <table style="margin-bottom:50px;">
+     <tbody>
+         <tr style="width:100%;">
+            <td style="text-transform:uppercase;font-size:14px;width:10%;"></td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:50%;"></td>
+            <td style="text-transform:uppercase;font-size:14px;width:20%;">grade level</td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:20%;">4 and 5</td>
+          </tr>
+     </tbody>
+  </table>
+<table>
+  <tbody>
+    <tr style="width:100%;">
+    <td width="80%">
+      <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
         <thead>
           <tr>
-             <th colspan="2" style="border-bottom:1px solid #000;font-size: 14px;font-weight:400;">course name</th>
-             <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;font-weight:400;">Grade 4</th>
-             <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;font-weight:400;">Grade 5</th>
+             <th colspan="3" style="border-bottom:1px solid #000;font-size: 14px;font-weight:700;width:70%;">course name</th>
+             <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;font-weight:700;width:15%;">Grade A</th>
+             <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;font-weight:700;width:15%;">grade A</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;font-size:14px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;font-size:14px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;font-size:14px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size:14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="border-bottom:1px solid #000;font-size: 14px;">mathematics</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="border-bottom:1px solid #000;font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
           <tr>
-            <td colspan="2" style="font-size: 14px;">mathematics</td>
-            <td style="border-left:1px solid #000;font-size: 14px;">grade 4</td>
-            <td style="border-left:1px solid #000;font-size: 14px;">grade 5</td>
+            <td colspan="3" style="font-size: 14px;width:70%;padding:6px;">mathematics</td>
+            <td style="border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
+            <td style="border-left:1px solid #000;font-size: 14px;width:15%;padding:6px;text-align:center;">A</td>
           </tr>
         </tbody>
         </table>
-        <div style="width:40%;padding-left: 15px;box-sizing:border-box;display:flex;">
-        <div style="margin-left:auto;">
-         <h3 style="font-weight:600;text-transform:uppercase;">
-         <span style="border-bottom:1px solid #000;">grading system</span>
-         </h3>
-        <ul style="list-style-type:none;padding-left:0;">
-          <li>A = 90-100%</li>
-          <li>B = 80-89%</li>
-          <li>C = 70-79%</li>
-          <li>D = 60-69%</li>
-          <li>F = 0-59%</li>
-          <li>P = PASS</li>
-        </ul>
-        </div>
-        </div>
-        <p>The Student has met West River Academy's requirments for Grades 4 and 5, and is promoted to grade 6.</p>
-        <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;">
-         <div style="width:60%;display:flex;flex-wrap:wrap;">
-         <div style="width:60%;text-transform:uppercase;text-align:center;padding:15px;box-sizing:border-box;"><span style="border-top: 1px solid #000;display:block;">official signature</span></div>
-         <div style="width:40%;text-transform:uppercase;text-align:center;padding:15px;box-sizing:border-box;"><span style="border-top: 1px solid #000;display:block;">date</span></div>
-         </div>
-         <div style="width:40%;">
-         <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo">
-         </div>
-        </div>
-        <p style="text-align:center;width:100%;">West River Academy is</p>
-        <div style="display: flex;justify-content: space-around;width: 100%;">
-        <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Edit</button>
-        <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Submit</button>
-        </div>
-    </div>
-    <div>
-
-    </div>
-        
-        </div>
+    </td>
+    <td width="20%" style="text-align:right;">
+    <table>
+      <tbody>
+        <tr><td style="border-bottom:1px solid #000;font-weight:600;text-transform:uppercase;">grading system</td></tr>
+        <tr><td>A = 90-100%</td></tr>
+        <tr><td>B = 80-89%</td></tr>
+        <tr><td>C = 70-79%</td></tr>
+        <tr><td>D = 60-69%</td></tr>
+        <tr><td>F = 0-59%</td></tr>
+        <tr><td>P = PASS</td></tr>
+      </tbody>
+    </table>
+    </td>
+    </tr>
+    <tr width="100%"><td style="margin-top: 20px;padding-top:20px;width:100%;">The Student has met West River Academy's requirments for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is promoted to grade <span style="font-weight:700;">6</span>.</td></tr>
+    <tr>
+      <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;">official signature</span></td>
+      <td width="20%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;">date</span></td>
+      <td width="20%"> <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo"></td>
+    </tr>
+    <tr><td><p>West River Academy is</p></td></tr>
+  </tbody>
+</table>
+<table width="100%">
+    <tbody>
+      <tr>
+        <td width="50%" style="text-align:center;position: relative;"> <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:45%;top:10px;">Edit</button></td>
+        <td width="50%" style="text-align:center;position: relative;"> <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:42%;top:10px;">Submit</button></td>
+      </tr>
+    </tbody>
+</table>
 </body>
 </html>

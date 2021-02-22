@@ -20,11 +20,8 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-body">
-        <p>Annual enrollment covers the 12 months from  Second Semester Only covers If you prefer to start your enrollment on the date you enroll, select that date. If you want your
-          enrollment to date back to  even though it is now later in the year, you can do so.</p>
-        <p>The dates you select will appear on your confirmation of enrollment letter. Regardless of the date you
-          select, your enrollment will include the full 12-month period for Annual or the full 7-month period for Second
-          Semester Only.</p>
+        <p>Thank you. We will review your transcript and give you our feedback. Then you will be able to approve or edit your transcript. After you approve it, it will be available for you to download.</p>
+        <p>Any changes requested after your approval will incur a $25 change fee.</p>
         <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
       </div>

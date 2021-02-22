@@ -38,7 +38,7 @@
                 </tbody>
             </table>
         </div>
-        @foreach($transcriptDatas as $school)
+        @foreach($transcriptData as $school)
 
         <div class="datablock">
             <legend>{{$school->school_name}}</legend>
@@ -91,7 +91,7 @@
         <p>If you are finished with this transcript and would like to see what it looks like, you can click the "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click the "Submit Transcript" button.</p>
         <a href="#" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
         <a href="#" class="btn btn-primary mt-3 ml-2" role="button">Preview Transcript</a>
-        <a href="#" class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
+        <a href="{{url ('preview-transcript',$student->id)}}" class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
     </div>
 </main>
 

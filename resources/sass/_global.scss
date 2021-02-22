@@ -205,7 +205,17 @@ sup {
 
 .table-styling {
   min-width: 500px;
-  thead {
+  &.enlarge-input{
+    td{
+      position: relative;
+      padding-left: 40px;
+      input{
+        position: absolute;
+        left: 26px;
+      }
+    }
+  }
+  thead{
     background-color: #cccc;
   }
   td,

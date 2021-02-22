@@ -142,11 +142,16 @@ class TranscriptController extends Controller
 
     public function genrateTranscript($id)
     {
+
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
+
         $studentProfileData = StudentProfile::whereId($id)->first();
+
         $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'unsigned_transcript_letter';
+
         $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
+
         $id = $parentProfileData->id;
         $data = [
             'student' => $studentProfileData,
@@ -154,14 +159,16 @@ class TranscriptController extends Controller
             'title' => 'transcript',
             'date' => date('m/d/Y'),
         ];
+
         $pdf = PDF::loadView('transcript.pdf', $data);
+
         Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
         //store pdf link
         $storetranscript = TranscriptPdf::create([
             'student_profile_id' => $studentProfileData->id,
             'pdf_link' => $pdfname . '.pdf',
-            'k8transcript_id' => '1',
+            // 'k8transcript_id' => '1',
             'status' => 'pending',
         ]);
         return $pdf->download($pdfname . '.pdf');
@@ -183,4 +190,18 @@ class TranscriptController extends Controller
         //dd($courses);
         return view('transcript-wizard-grade', compact('courses'));
     }
+
+    public function previewTranscript($student_id)
+        {      
+            $student = StudentProfile::find($student_id);
+            $grades  =TranscriptK8::distinct()->where('student_profile_id',$student_id)->get(['grade']);
+            $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
+            ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
+            ->get();
+            $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
+            return view('transcript/preview-transcript',compact('student','transcriptData','grades', 'groupCourses'));
+
+
+        }
+
 }

@@ -42,14 +42,14 @@ class TranscriptController extends Controller
     }
     public function fetchfile($id){
 
-        if(isEmpty($id)){
-            alert('the user has not submitted the transcript!');
-        }else{
+        // if(isEmpty($id)){
+        //     alert('the user has not submitted the transcript!');
+        // }else{
        $data= TranscriptPdf::where('student_profile_id',$id)->first();
        $pdflink=$data->pdf_link ;
        $pdf = PDF::loadView('transcript.pdf', $data);
 
         return $pdf->download('storage/pdf/'.$pdflink);
-        }
+        // }
    }
 }
