@@ -312,10 +312,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@anotherGrade');
     Route::post('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
-    Route::get('students-transcript/{student_id}', function () {
-        return view('transcript-wizard-dashboard');
-    })->name('student.transcript');
+
 
     //another grade enrollment_year
     Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
+    //edit grade 
+    Route::get('/editgrade/{student_id}/{transcript_id}', function () {
+        dd('welcome');
+    })->name('edit.grade');
 });
