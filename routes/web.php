@@ -285,10 +285,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //another grade enrollment_year
     Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
-    //edit grade 
-    Route::get('/editgrade/{student_id}/{transcript_id}', function () {
-        dd('welcome');
-    })->name('edit.grade');
+
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
+
+
+    //edit courses
+
+    Route::get('edit-english/{student_id}/{transcript_id}', 'TranscriptController@editEnglish')->name('edit.englishCourse');
 });

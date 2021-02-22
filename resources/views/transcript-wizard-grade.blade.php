@@ -11,7 +11,7 @@
             <div class="form-group d-sm-flex mb-2">
                 <label for="">Name</label>
                 <div>
-                    -
+
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
@@ -42,7 +42,7 @@
         </form>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <h2 class="mb-3">Health</h2>
+        <h2 class="mb-3">Edit Courses/Subjects</h2>
         <div class="overflow-auto">
             <table class="table-styling w-100">
                 <thead>
@@ -60,9 +60,13 @@
                         <td>{{$course->course_name}}</td>
                         <td>{{$course->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td> <i class="fas fa-trash-alt float-right text-center"></i></td>
                     </tr>
                     @endforeach
+
+                    <td>
+                        <a href="{{route('edit.englishCourse',[$student_id,$transcript_id])}}" class="btn btn-primary">Edit
+                        </a>
+                    </td>
                 </tbody>
             </table>
         </div>

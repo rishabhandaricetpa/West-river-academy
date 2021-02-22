@@ -29,4 +29,8 @@ class TranscriptCourse extends Model
     {
         return $this->belongsTo('App\Models\TranscriptK8');
     }
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

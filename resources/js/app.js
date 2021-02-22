@@ -35,6 +35,14 @@ Vue.component('physical-educatiom', require('./components/PhysicalEducation.vue'
 Vue.component('health-course', require('./components/HealthCourse.vue').default);
 Vue.component('foreign-course', require('./components/ForeignCourse.vue').default);
 Vue.component('another-course', require('./components/AnotherCourse.vue').default);
+
+//edit courses
+
+Vue.component('edit-english-course', require('./components/EditEnglishCourse.vue').default);
+
+
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -18,9 +18,9 @@ class Subject extends Model
     {
         return $this->belongsTo('App\Models\Course');
     }
-    public function transcriptCourse()
-    {
-        return $this->belongsTo('App\Models\TranscriptCourse');
-    }
+    // public function transcriptCourse()
+    // {
+    //     return $this->belongsTo('App\Models\TranscriptCourse');
+    // }
 
 }
