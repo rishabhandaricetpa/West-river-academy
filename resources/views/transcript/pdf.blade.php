@@ -16,15 +16,13 @@
 </style>
 </head>
 <body>
-  <table style="margin-bottom:60px;">
-     <tbody>
-     <tr style="width:100%;">
-       <table>
+<table>
          <tbody>
            <tr width="100%"><td style="width:100%;color:#EC1D1D;font-weight:500;font-size:24px;margin:0 auto;">After this transcript is approved by you, any further changes will incure a $25 fee.</td></tr>
          </tbody>
        </table>
-     </tr>
+  <table style="margin-bottom:60px;">
+     <tbody>
      <tr style="width:100%;">
       <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
       <td width="50%" style="text-align:center;">
@@ -67,7 +65,7 @@
 <table>
   <tbody>
     <tr style="width:100%;">
-    <td width="80%">
+    <td width="70%">
       <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
         <thead>
           <tr>
@@ -120,22 +118,30 @@
         </tbody>
         </table>
     </td>
-    <td width="20%" style="text-align:right;">
+    <td width="30%" style="text-align:right;">
     <table width="100%">
       <tbody>
-        <tr style="width:100%;"><td style="white-space: pre;font-weight:600;text-transform:uppercase;text-align:right;padding-left:32px;"><span style="border-bottom:1px solid #000;display:block;">GRADING SYSTEM</span></td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">A = 90-100%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">B = 80-89%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">C = 70-79%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">D = 60-69%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">F = 0-59%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">P = PASS</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:22px;"><span style="border-bottom:1px solid #000;display:inline-block;">GRADING SYSTEM</span></td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;">A = 90-100%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;">B = 80-89%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;">C = 70-79%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;">D = 60-69%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;">F = 0-59%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;">P = PASS</td></tr>
       </tbody>
     </table>
     </td>
     </tr>
-    <tr width="100%"><td style="margin-top: 20px;padding-top:20px;width:100%;">The Student has met West River Academy's requirments for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is promoted to grade <span style="font-weight:700;">6</span>.</td></tr>
-    <tr>
+  </tbody>
+</table>
+<table style="margin:20px 0 40px;">
+  <tbody>
+  <tr width="100%"><td style="padding-top:20px;width:100%;">The Student has met West River Academy's requirments for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is promoted to grade <span style="font-weight:700;">6</span>.</td></tr>
+  </tbody>
+</table>
+<table>
+  <tbody>
+  <tr>
       <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;">official signature</span></td>
       <td width="20%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;">date</span></td>
       <td width="20%"> <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo"></td>
