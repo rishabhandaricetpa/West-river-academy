@@ -10,7 +10,7 @@ class Graduation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_profile_id', 'student_profile_id', 'grade_9_info', 'grade_10_info', 'grade_11_info', 'status', 'amount'
+        'parent_profile_id', 'student_profile_id', 'grade_9_info', 'grade_10_info', 'grade_11_info', 'status', 'apostille_country'
     ];
     
     public function parent()
@@ -26,6 +26,11 @@ class Graduation extends Model
     public function details()
     {
         return $this->hasOne('App\Models\GraduationDetail');
+    }
+
+    public function payment()
+    {
+        return $this->hasOne('App\Models\GraduationPayment');
     }
 
     public function address()

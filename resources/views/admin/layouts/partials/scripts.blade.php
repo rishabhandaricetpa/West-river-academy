@@ -210,6 +210,14 @@
                             </li>
                           </ul>
                         `;
+                    }
+          },
+          { "data": "apostille_country" },
+          { "data": "status" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
+                      } 
           }
         },
         {

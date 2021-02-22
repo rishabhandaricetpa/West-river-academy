@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAmountOnGraduationsTable extends Migration
+class AddApostilleCountryColumnOnGraduations extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAmountOnGraduationsTable extends Migration
     public function up()
     {
         Schema::table('graduations', function (Blueprint $table) {
-            $table->string('amount')->nullable()->after('status');
+            $table->string('apostille_country')->nullable()->after('status');
         });
     }
 

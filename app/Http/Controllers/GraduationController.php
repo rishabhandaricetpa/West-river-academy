@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\FeesInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,7 @@ use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Graduation;
 use App\Models\GraduationDetail;
+use App\Models\GraduationPayment;
 
 class GraduationController extends Controller
 {
@@ -51,7 +53,7 @@ class GraduationController extends Controller
             DB::beginTransaction();
             $inputs = $request->all();
 
-            $fee = FeesInfo::where('type','graduation')->pluck('amount')->first();
+            $fee = FeesInfo::getFeeAmount('graduation');
 
             $data = [
                 'parent_profile_id' => ParentProfile::getParentId(),
@@ -60,11 +62,11 @@ class GraduationController extends Controller
                 'grade_10_info' => $inputs['grade_ten_option'] === 'other' ? $inputs['grade_ten_other'] : $inputs['grade_ten_option'],
                 'grade_11_info' => $inputs['grade_eleven_option'] === 'other' ? $inputs['grade_eleven_other'] : $inputs['grade_eleven_option'],
                 'status' => 'pending',
-                'amount' => $fee,
             ];
 
             StudentProfile::whereId($inputs['student_id'])->update(['email' => $inputs['email']]);
             $graduation = Graduation::create($data);
+            GraduationPayment::updateOrInsert(['graduation_id' => $graduation->id],[ 'amount' => $fee]);
             GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
 
             DB::commit();
@@ -131,8 +133,11 @@ class GraduationController extends Controller
 
     public function purchase(Request $request, $id)
     {
-        $student = StudentProfile::find($id)->with(['graduationAddress', 'graduation'])->first();
+        $student = StudentProfile::whereId($id)->with(['graduationAddress', 'graduation', 'graduationPayment', 'parentProfile'])->first();
+        $countries = Country::select('country')->where('country','!=','United States')->get();
+        $apostille_fee = FeesInfo::getFeeAmount('apostille');
+        $graduation_fee = FeesInfo::getFeeAmount('graduation');
 
-        return view('graduation.purchase',compact('student'));
+        return view('graduation.purchase',compact('student', 'countries', 'apostille_fee', 'graduation_fee'));
     }
 }

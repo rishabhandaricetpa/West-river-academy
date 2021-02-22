@@ -150,12 +150,12 @@ class StudentController extends Controller
                 ]);
 
                 $fee_type = $student_type . '_' . $type;
-                $fee = FeesInfo::select('amount')->where('type', $fee_type)->first();
+                $fee = FeesInfo::getFeeAmount($fee_type);
 
                 $enrollmentPayment = EnrollmentPayment::create([
                     'enrollment_period_id' => $enrollPeriod->id,
                     'status' => 'pending',
-                    'amount' => $fee->amount,
+                    'amount' => $fee,
                 ]);
 
                 $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
@@ -271,12 +271,12 @@ class StudentController extends Controller
         }
 
         $fee_type = $student_type . '_' . $type;
-        $fee = FeesInfo::select('amount')->where('type', $fee_type)->first();
+        $fee = FeesInfo::getFeeAmount($fee_type);
 
         $EnrollmentPayment->fill([
             'enrollment_period_id' => $enrollPeriod->id,
             'status' => 'pending',
-            'amount' => $fee->amount,
+            'amount' => $fee,
         ]);
 
         $EnrollmentPayment->save();
