@@ -6,19 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-<h2>Hi {{$user->name}} </h2>,
+<h2>Hi user </h2>,
 PAYMENT: Bank Transfer
 Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page.
 http://westriveracademy.test/bank-transfer
 
 Please let us know when you have made the payment and if you have used TransferWise or a regular bank transfer.
 
-DATE: {{ $date}}
+DATE: 20-march-2020
 PAYMENT: N/A
 
 BILLING INFORMATION
 
-{{$address->street_address}}.,<
+Your Address
 ------------
 ITEM: CUSTPAYMENT
 Custom Payment

@@ -69,6 +69,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         //working blades by frontend
+        Route::get('bankinfo', function () {
+            return view('mail/bankinfo');
+        });
+
         Route::get('/transcript-wizard-dashboard', function () {
             return view('transcript-wizard-dashboard');
         });

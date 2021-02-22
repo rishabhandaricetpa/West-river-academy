@@ -19,6 +19,13 @@
   <table style="margin-bottom:60px;">
      <tbody>
      <tr style="width:100%;">
+       <table>
+         <tbody>
+           <tr width="100%"><td style="width:100%;color:#EC1D1D;font-weight:500;font-size:24px;margin:0 auto;">After this transcript is approved by you, any further changes will incure a $25 fee.</td></tr>
+         </tbody>
+       </table>
+     </tr>
+     <tr style="width:100%;">
       <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
       <td width="50%" style="text-align:center;">
       <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
@@ -114,15 +121,15 @@
         </table>
     </td>
     <td width="20%" style="text-align:right;">
-    <table>
+    <table width="100%">
       <tbody>
-        <tr><td style="border-bottom:1px solid #000;font-weight:600;text-transform:uppercase;">grading system</td></tr>
-        <tr><td>A = 90-100%</td></tr>
-        <tr><td>B = 80-89%</td></tr>
-        <tr><td>C = 70-79%</td></tr>
-        <tr><td>D = 60-69%</td></tr>
-        <tr><td>F = 0-59%</td></tr>
-        <tr><td>P = PASS</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;font-weight:600;text-transform:uppercase;text-align:right;padding-left:32px;"><span style="border-bottom:1px solid #000;display:block;">GRADING SYSTEM</span></td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">A = 90-100%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">B = 80-89%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">C = 70-79%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">D = 60-69%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">F = 0-59%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:32px;">P = PASS</td></tr>
       </tbody>
     </table>
     </td>

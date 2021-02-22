@@ -8,7 +8,7 @@
             <h2 class="mb-3">Purchase Transcripts</h2>
             <p>The first transcript created for a student is $80. Additional transcripts in subsequent years are $25.</p>
     <form method="POST" action="" class="mb-0">
-    <div class="overflow-auto max-table">
+    <div class="overflow-auto max-table mb-2">
     <table class="table-styling w-100 enlarge-input">
            <thead>
              <tr>
@@ -38,7 +38,7 @@
            </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="">Purpose of Transcript</label>
-        <div>
+        <div class="col-sm-5 px-0">
         <select name="" class="form-control">
             <option>Yes, records will come with school records.</option> 
             <option>Yes, I will provide records.</option> 
@@ -50,107 +50,102 @@
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
-        <label for="">Date of Birth</label>
+        <label for="">Message or Additional Information</label>
         <div>
-         Jan 1, 2004
+        <textarea name="" id="" cols="40" rows="10" class="form-control"></textarea>
         </div>
       </div>
     </form>  
     </div>
 
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">Solana Beach Elementary School</h2>
-            <div>
-                <p class="mb-0">Academic School Year(s): 2017-2018</p>
-                <p>Grade: 5</p>
-            </div>
-            <div class="overflow-auto">
-                <table class="table-styling w-100">
-                <thead>
-                <tr>
-                    <th>Course / Subject</th>
-                    <th>Category</th>
-                    <th>Grade</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>ENGLISH</td>
-                    <td>English / Language Arts</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>GEOGRAPHY</td>
-                    <td>Social Studies / History</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>MATHEMATICS</td>
-                    <td>Mathematics</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>PHYSICAL EDUCATION</td>
-                    <td>Physical Education</td>
-                    <td>P</td>
-                </tr>
-                <tr>
-                    <td>SCIENCE</td>
-                    <td>Science</td>
-                    <td>c</td>
-                </tr>
-                </tbody>
-                </table>
-  </div>
-  <a href="#" class="btn btn-primary mt-4" role="button">Select Course Names and Grades</a>
-    </div>
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">West River Academy</h2>
-            <div>
-                <p class="mb-0">Academic School Year(s): 2019-2020</p>
-                <p>Grade: 5</p>
-            </div>
-            <div class="overflow-auto">
-                <table class="table-styling w-100">
-                <thead>
-                <tr>
-                    <th>Course / Subject</th>
-                    <th>Category</th>
-                    <th>Grade</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>ENGLISH</td>
-                    <td>English / Language Arts</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>GEOGRAPHY</td>
-                    <td>Social Studies / History</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td>MATHEMATICS</td>
-                    <td>Mathematics</td>
-                    <td>A</td>
-                </tr>
-                </tbody>
-                </table>
-  </div>
-  <a href="#" class="btn btn-primary mt-4" role="button">Select Course Names and Grades</a>
+      <h2 class="mb-3">Apostille or Notarization</h2>
+      <p>Apostilles are optional for international students whose countries are members of The Hague Convention. An Apostille includes notarization. Express Mail is strongly recommended to ensure delivery.</p>
+    <form method="POST" action="" class="mb-0">
+     <div class="d-sm-flex enlarge-input align-items-center seperator pl-4">
+      <input class="form-check-input" type="checkbox" name="">
+      <p class="mb-0 pl-2 pt-3">My transcript needs to be notarized or sent for an Apostille.</p>
+     </div>
+     <p class="mt-2r">Choose Apostille or Notarization, enter your mailing address, and select your postage option.</p>
+    <div class="overflow-auto mb-2">
+    <table class="table-styling w-100 enlarge-input">
+           <thead>
+             <tr>
+              <th>Description</th>
+              <th>Price (each)</th>
+             </tr>
+           </thead>
+           <tbody>
+           <tr> 
+             <td><input class="form-check-input" type="Radio" name="">
+             <h3 class="mb-0 mt-1">Notarization</h3>
+             <p class="mb-1">Notarization of a document such as the confirmation of enrollment or transcript.</p>
+          </td>
+             <td>$20.00</td>
+           </tr>
+           <tr> 
+             <td><input class="form-check-input" type="Radio" name="">
+             <h3 class="mb-0 mt-1">Apostille</h3>
+             <p class="mb-1">Student in the countries that are members of The Hague Convention can receive an Apostille on documents. Notarization included.</p></td>
+             <td>$75.00</td>
+           </tr>
+           </tbody>
+           </table>
+           </div>
+      <div class="form-group d-sm-flex mb-2 seperator mt-4">
+        <label for="">Apostille Country</label>
+        <div class="col-sm-2 px-0">
+        <select name="" class="form-control" disabled>
+            <option>-</option> 
+            <option>--</option> 
+            <option>--</option>
+            <option>--</option> 
+            <option>--</option> 
+            <option>--</option>
+         </select>
+        </div>
+      </div>
+      <h2 class="mb-3 mt-5">Postage</h2>
+      <p>Please choose the level of expedited postage or tracking you would like your documents to be mailed to you with. Express mail is highly recommended to ensure receipt of your document. If you don’t order express mail, you risk the document not arriving and having to pay the Apostille fee again. We are not responsible for documents lost in the mail.</p>
+    <div class="overflow-auto mb-2">
+    <table class="table-styling w-100 enlarge-input">
+           <thead>
+             <tr>
+              <th>Description</th>
+              <th>Price (each)</th>
+             </tr>
+           </thead>
+           <tbody>
+           <tr> 
+             <td><input class="form-check-input" type="Radio" name="">
+             <h3 class="mb-0 mt-1">Priority Mail International</h3>
+             <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
+          </td>
+             <td>$55.00</td>
+           </tr>
+           <tr> 
+             <td><input class="form-check-input" type="Radio" name="">
+             <h3 class="mb-0 mt-1">Priority Mail Express International</h3>
+             <p class="mb-1">3-5 business days to arrive, tracking door to door, $100 insurance included.</p></td>
+             <td>$85.00</td>
+           </tr>
+           <tr> 
+             <td><input class="form-check-input" type="Radio" name="">
+             <h3 class="mb-0 mt-1">Priority Mail Express International</h3>
+            </td>
+             <td>$85.00</td>
+           </tr>
+           </tbody>
+           </table>
+           </div>
+    </form>  
     </div>
 
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
-       <p>You can use the button below to add classes from other schools, colleges, and universities. Course selection, credits, and grades must match exactly the transcript we have on file from the other school. Heading on transcript will indicate the name of the school.</p>
-       <a href="#" class="btn btn-primary mt-3" role="button">Add Other School, College, or University</a>
+      <a href="#" class="btn btn-primary" role="button">cancel</a>
+      <a href="#" class="btn btn-primary" role="button">continue</a>
     </div>
-    <div class="form-wrap border bg-light py-5 px-25">
-     <p>If you are finished with this transcript and would like to see what it looks like, you can click the "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click the "Submit Transcript" button.</p>
-  <a href="#" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
-  <a href="#" class="btn btn-primary mt-3 ml-2" role="button">Preview Transcript</a>
-  <a href="#" class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
-    </div>
+   
 </main>
 
 <!-- * =============== /Main =============== * -->
