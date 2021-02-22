@@ -6,13 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-<h2>Hi user, </h2>
-<h3>PAYMENT: Bank Transfer</h3>
-<p>Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/bank-transfer">http://westriveracademy.test/bank-transfer</a></p>
+<h2 style="font-family:'Catamaran', sans-serif;">Hi user, </h2>
+<h3 style="font-family:'Catamaran', sans-serif;">PAYMENT: Bank Transfer</h3>
+<p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/bank-transfer">http://westriveracademy.test/bank-transfer</a></p>
 
-<p>Please let us know when you have made the payment and if you have used TransferWise or a regular bank transfer.</p>
+<p style="font-family:'Catamaran', sans-serif;">Please let us know when you have made the payment and if you have used TransferWise or a regular bank transfer.</p>
 
-<table border="1" style="border-collapse:collapse; margin: 20px 0;" rowspan>
+<table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;" rowspan>
     <thead>
         <tr>
             <th style="padding:8px;text-align:left" scope="row">DATE</th>
@@ -29,7 +29,7 @@
 </table>
 
 <h3>BILLING INFORMATION</h3>
-<table border="1" style="border-collapse:collapse; margin: 20px 0;">
+<table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;">
   <thead>
       <tr>
           <th style="padding:8px;">ITEM</th>
@@ -52,7 +52,7 @@
   </tfoot>
 </table>
 Your Address
-<address>
+<address style="font-family:'Catamaran', sans-serif;">
     Written by <a href="mailto:xyz@example.com">Test</a>.<br>
     Visit us at:
     Example.com
