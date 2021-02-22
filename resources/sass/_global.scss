@@ -207,11 +207,16 @@ sup {
   min-width: 500px;
   &.enlarge-input{
     td{
-      position: relative;
-      padding-left: 40px;
+      &:first-child{
+        position: relative;
+        padding-left: 45px;
+      }
       input{
         position: absolute;
         left: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: 0;
       }
     }
   }
@@ -221,10 +226,17 @@ sup {
   td,
   th {
     padding: 5px 10px;
+    font-family: "Catamaran",sans-serif;
   }
-  tbody {
-    tr:nth-child(even) {
-      background-color: $white;
+  tbody{
+   td{
+     p{
+       line-height: 1.2;
+       font-size: 1rem;
+     }
+   }
+    tr:nth-child(even){
+    background-color: $white;
     }
   }
 }
