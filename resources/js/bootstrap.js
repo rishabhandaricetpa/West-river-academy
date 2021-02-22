@@ -24,6 +24,10 @@ Vue.mixin({
     route: Ziggy
   }
 });
+
+require('select2');
+require('toastr');
+
 import 'bootstrap/js/dist/tooltip';
 
 $('[data-toggle="tooltip"]').tooltip();
