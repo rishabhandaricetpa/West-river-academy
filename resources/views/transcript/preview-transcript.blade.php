@@ -93,7 +93,7 @@
         <p style="text-align:center;width:100%;">West River Academy is accredited by the National Association for the Legal Auppotr of Alternative Schools (NALSAS) and registered in the California School Directory.CDS Code  30 66464 6134720. Country:Orange Address:33721 BlueWater Ln.Dana Point ,CA 92629-2173</p>
         <div style="display: flex;justify-content: space-around;width: 100%;">
         <button type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Edit</button>
-        <a type="button"  href="{{ url('/download-transcript') }}"  style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Submit</a>
+        <a type="button"  href="{{ route('transcript.purchase',$student->id) }}"  style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;">Submit</a>
         </div>
     </div>
     <div>

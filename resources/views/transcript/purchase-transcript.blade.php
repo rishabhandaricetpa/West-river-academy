@@ -4,64 +4,29 @@
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
   <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
+  <form method="POST" action="{{ route('add.cart') }}" >
+  @csrf
   <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">Purchase Transcripts</h2>
             <p>The first transcript created for a student is $80. Additional transcripts in subsequent years are $25.</p>
-    <form method="POST" action="" class="mb-0">
-    <div class="overflow-auto max-table mb-2">
-    <table class="table-styling w-100 enlarge-input">
-           <thead>
-             <tr>
-              <th>Enrollment Dates</th>
-              <th>Grade</th>
-             </tr>
-           </thead>
-           <tbody>
-           <tr> 
-             <td><input class="form-check-input" type="checkbox" name="">Aug 1, 2024 - Jul 31, 2025</td>
-             <td>10</td>
-           </tr>
-           <tr> 
-             <td><input class="form-check-input" type="checkbox" name="">Aug 1, 2024 - Jul 31, 2025</td>
-             <td>10</td>
-           </tr>
-           <tr> 
-             <td><input class="form-check-input" type="checkbox" name="">Aug 1, 2024 - Jul 31, 2025</td>
-             <td>10</td>
-           </tr>
-           <tr> 
-             <td><input class="form-check-input" type="checkbox" name="">Aug 1, 2024 - Jul 31, 2025</td>
-             <td>10</td>
-           </tr>         
-           </tbody>
-           </table>
-           </div>
-      <div class="form-group d-sm-flex mb-2">
-        <label for="">Purpose of Transcript</label>
-        <div class="col-sm-5 px-0">
-        <select name="" class="form-control">
-            <option>Yes, records will come with school records.</option> 
-            <option>Yes, I will provide records.</option> 
-            <option>Yes, I plan to get immunizations soon.</option>
-            <option>No, for personal reasons.</option> 
-            <option>No, for medical reasons.</option> 
-            <option>No, for religious reasons.</option>
-         </select>
-        </div>
-      </div>
-      <div class="form-group d-sm-flex mb-2">
-        <label for="">Message or Additional Information</label>
-        <div>
-        <textarea name="" id="" cols="40" rows="10" class="form-control"></textarea>
-        </div>
-      </div>
-    </form>  
+    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
+      <h2 class="mb-3">Transcript Payment Total</h2>
+      <table class="w-100 table-styling">
+        <tfoot>
+          <tr>
+            <td class="mb-3">Order total</td>
+            <td class="mb-3">${{ $transcript_fee }}</td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
+    <input type="hidden" name="type" value="transcript">
+    <input type="hidden" name="student_id" value="{{ $student->id }}">
+    <input type="hidden" name="student_id" value="{{ $student->id }}">
 
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
       <h2 class="mb-3">Apostille or Notarization</h2>
       <p>Apostilles are optional for international students whose countries are members of The Hague Convention. An Apostille includes notarization. Express Mail is strongly recommended to ensure delivery.</p>
-    <form method="POST" action="" class="mb-0">
      <div class="d-sm-flex enlarge-input align-items-center seperator pl-4">
       <input class="form-check-input" type="checkbox" name="">
       <p class="mb-0 pl-2 pt-3">My transcript needs to be notarized or sent for an Apostille.</p>
@@ -138,15 +103,12 @@
            </tbody>
            </table>
            </div>
-    </form>  
     </div>
-
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
       <a href="#" class="btn btn-primary" role="button">cancel</a>
-      <a href="#" class="btn btn-primary" role="button">continue</a>
+      <button type="submit" class="btn btn-primary">Add to Cart</button>
     </div>
-   
+    </form>  
 </main>
-
 <!-- * =============== /Main =============== * -->
 @endsection

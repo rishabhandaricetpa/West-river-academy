@@ -14,6 +14,7 @@ use App\Models\EnrollmentPayment;
 use App\Models\TranscriptK8;
 use App\Models\TranscriptCourse;
 use App\Models\TranscriptPdf;
+use App\Models\FeesInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -200,8 +201,12 @@ class TranscriptController extends Controller
             ->get();
             $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
             return view('transcript/preview-transcript',compact('student','transcriptData','grades', 'groupCourses'));
-
-
         }
 
+        public function purchase(Request $request, $id)
+        {
+            $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses','parentProfile'])->first();
+            $transcript_fee = FeesInfo::getFeeAmount('transcript');
+            return view('transcript.purchase-transcript',compact('student', 'transcript_fee'));
+        }
 }

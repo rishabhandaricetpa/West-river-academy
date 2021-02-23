@@ -26,7 +26,7 @@ class Cart extends Model
             if ($total) {
                 $enroll_total = Self::getEnrollQuery()->select(DB::raw('sum(enrollment_payments.amount) as amount'))->first();
                 $graduation_total = Self::getGraduationQuery()->select(DB::raw('sum(graduation_payments.amount) as amount'))->first();
-                
+                $transcript_total= Self::getTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
@@ -36,10 +36,12 @@ class Cart extends Model
             } else {
                 $enroll_data = Self::getEnrollData();
                 $graduation_data = Self::getGraduationData();
-
-                return self::calculateItemsPerStudent($enroll_data, $graduation_data);
+                $transcript_data=Self::getTranscriptData();
+                dd($transcript_data);
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data);
             }
         } catch (\Exception $e) {
+            dd($e);
             return [];
         }
     }
@@ -106,7 +108,7 @@ class Cart extends Model
         return $cart_valid;
     }
 
-    private static function calculateItemsPerStudent($enroll_data, $graduation_data)
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data)
     {
         $data = [];
 
@@ -155,7 +157,26 @@ class Cart extends Model
                 ];
             }
         }
+        foreach ($transcript_data as $key => $val) {
+                $type = 'Transcript';
 
+            $arr = [
+                'id' => $val['id'],
+                'type' => $type,
+                'amount' => $val['amount'],
+            ];
+            if (array_key_exists($val['student_db_id'], $data)) {
+                array_push(
+                    $data[$val['student_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$val['student_db_id']] = [
+                    'name' => ucfirst($val['first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
         return $data;
     }
 
@@ -177,6 +198,13 @@ class Cart extends Model
                 ->leftJoin('student_profiles', 'graduations.student_profile_id', 'student_profiles.id');
     }
 
+    private static function getTranscriptQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+                ->where('cart.item_type', 'transcript')
+                ->leftJoin('k8transcript', 'k8transcript.student_profile_id', 'cart.item_id')
+                ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.student_profile_id');
+    }
     private static function getEnrollData()
     {
         return Self::getEnrollQuery()->select(
@@ -212,6 +240,20 @@ class Cart extends Model
                 ->get();
     }
 
+    private static function getTranscriptData()
+    {
+        return Self::getTranscriptQuery()->select(
+                    'student_profiles.first_name',
+                    'student_profiles.student_Id',
+                    'student_profiles.id as student_db_id',
+                    'cart.id',
+                    'transcript_payments.amount',
+                )
+                ->groupBy('student_profiles.id')
+                ->groupBy('cart.id')
+                ->groupBy('transcript_payments.amount')
+                ->get();
+    }
     public static function emptyCartAfterPayment($type, $status, $payment_id = null){
            
         $parent_profile_id = ParentProfile::getParentId();

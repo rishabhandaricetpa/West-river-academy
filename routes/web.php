@@ -41,9 +41,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
-        Route::get('/cart', function () {
-            return view('cart');
-        });
+        // Route::get('/cart', function () {
+        //     return view('cart');
+        // });
 
         //enroll student
         Route::get('/enroll-student', 'StudentController@index');
@@ -135,14 +135,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('admin.admindashboard');
     });
 
-    Route::post('/cart', 'CartController@store')->name('add.cart');
-    Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
-    Route::get('/cart', 'CartController@index');
+    // Route::post('/cart', 'CartController@store')->name('add.cart');
+    // Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
+    // Route::get('/cart', 'CartController@index');
 
 
-    // Route::get('/cart', 'StudentController@address')->name('billing.address');
-    Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
-    Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
+    // // Route::get('/cart', 'StudentController@address')->name('billing.address');
+    // Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
+    // Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
 
     //Paypal Payment
@@ -289,5 +289,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
     Route::get('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');
+
+    // Route::get('purchase-transcript', function () {
+    //     return view('transcript/purchase-transcript');
+    // })->name('purchase.transcript');
 
 });

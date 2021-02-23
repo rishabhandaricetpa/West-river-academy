@@ -22,6 +22,7 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'graduation', 'description' => 'Fee for Graduation', 'amount' => '395'],
             ['type' => 'apostille', 'description' => 'Fee for Apostille Package', 'amount' => '165'],
             ['type' => 'transcript', 'description' => 'K - 8 transcript process', 'amount' => '80'],
+            ['type' => 'transcript_edit', 'description' => 'K - 8 edit transcript process', 'amount' => '25'],
         ];
         FeesInfo::insert($data);
     }

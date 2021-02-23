@@ -30,4 +30,8 @@ class TranscriptK8 extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'student_profile_id');
     }
+    public function payment()
+    {
+        return $this->hasOne('App\Models\TranscriptPayment');
+    }
 }
