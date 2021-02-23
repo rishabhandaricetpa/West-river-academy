@@ -141,7 +141,7 @@
       :key="enrollPeriod.id"
     >
       <div class="position-relative">
-      <span v-if="canRemovePeriod"  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
+      <span  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
       <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
@@ -442,28 +442,31 @@ export default {
         },
       });
     },
-     removePeriod(index) {
-      if (this.removingPeriod) {
-        return;
-      }
-      this.removingPeriod = true;
+    //  removePeriod(index) {
+    //   if (this.removingPeriod) {
+    //     return;
+    //   }
+    //   this.removingPeriod = true;
 
-      let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-      reqData.enrollPeriods.splice(index, 1);
+    //   let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
+    //   reqData.enrollPeriods.splice(index, 1);
 
-      axios
-        .post(route("delete.enroll", this.students), reqData)
-        .then((response) => {
-          const resp = response.data;
-          resp.status == "success"
-            ? this.form.enrollPeriods.splice(index, 1)
-            : alert(resp.message);
-          this.removingPeriod = false;
-        })
-        .catch((error) => {
-          this.removingPeriod = false;
-          console.log(error);
-        });
+    //   axios
+    //     .post(route("delete.enroll", this.students), reqData)
+    //     .then((response) => {
+    //       const resp = response.data;
+    //       resp.status == "success"
+    //         ? this.form.enrollPeriods.splice(index, 1)
+    //         : alert(resp.message);
+    //       this.removingPeriod = false;
+    //     })
+    //     .catch((error) => {
+    //       this.removingPeriod = false;
+    //       console.log(error);
+    //     });
+    // },
+    removePeriod(index){
+        this.form.enrollPeriods.splice(index, 1)
     },
     addStudent() {
       this.errors = [];

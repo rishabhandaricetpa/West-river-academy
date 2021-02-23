@@ -313,4 +313,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('edit-another/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editAnother')->name('edit.AnotherCourse');
     Route::post('/edit/another', 'EditCourses\EditCourse@storeAnother')->name('editAnother.store');
+
+    //delete school
+
+    Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
 });

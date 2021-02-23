@@ -39,9 +39,11 @@
             </table>
         </div>
         @foreach($transcriptDatas as $school)
-
         <div class="datablock">
             <legend>{{$school->school_name}}</legend>
+
+            <a href="{{route('delete.school',$school->id)}}" class="btn btn-primary" type="submit" value="Delete School Record">Delete School Record</a>
+
             <p>
                 Academic School Year(s):{{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
