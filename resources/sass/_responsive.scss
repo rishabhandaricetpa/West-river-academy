@@ -30,7 +30,7 @@
     font-size: 15px;
   }
 
-  main{
+  main {
     min-height: auto;
   }
 
@@ -42,11 +42,13 @@
 
     .action-buttons {
       padding: 13px;
+
       .btn {
         padding: 4px 12px;
         font-size: 13px;
       }
-      .user-login{
+
+      .user-login {
         display: block;
         margin-top: 20px;
       }
@@ -100,8 +102,9 @@
       }
     }
   }
+
   .form-wrap.px-25 {
-   padding: 1rem !important;
+    padding: 1rem !important;
   }
 }
 
@@ -116,10 +119,12 @@
   select {
     font-size: 16px !important;
   }
+
   /* Datepicker */
-  .vdp-datepicker__calendar{
+  .vdp-datepicker__calendar {
     width: 100% !important;
   }
+
   /* sidebar */
   .main-sidebar {
     width: 50px;
@@ -137,8 +142,9 @@
     li {
       a {
         margin-bottom: 1rem;
-         text-align: center;
-         &:hover span{
+        text-align: center;
+
+        &:hover span {
           display: block;
           left: 100%;
           top: 50%;
@@ -181,11 +187,17 @@
     height: 27px;
   }
 
+  /* Fees and services*/
+  .service-list .col-sm-9{
+    min-height: 130px;
+  }
+
   /* Admin css */
-  .admin-wrapper{
-    .dt-buttons{
+  .admin-wrapper {
+    .dt-buttons {
       display: block;
-      button{
+
+      button {
         width: 100%;
         display: block;
         margin-bottom: 15px;
@@ -194,18 +206,21 @@
         -moz-border-radius: 0 !important;
         -ms-border-radius: 0 !important;
         -o-border-radius: 0 !important;
-}
+      }
 
     }
   }
+
   /* edit */
   .links-list {
     padding-left: 0;
   }
-  .vdp-datepicker input{
-   width: 100%;
+
+  .vdp-datepicker input {
+    width: 100%;
   }
-  .form-group .fa-calendar-alt{
+
+  .form-group .fa-calendar-alt {
     position: absolute;
     left: auto;
     right: 11px;
@@ -218,10 +233,24 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
+
   /* global classes*/
-  .space-pre{
+  .space-pre {
     white-space: pre;
   }
+
+  /* Fees and services*/
+  .service-list {
+    .col-sm-9 {
+      padding: 2.5rem 2rem;
+      >.h-100 {
+        &+.h-100 {
+          border-left: 1px solid #ccc;
+        }
+      }
+    }
+  }
+
   /* forms */
   label {
     width: 135px;

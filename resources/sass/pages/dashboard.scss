@@ -57,6 +57,12 @@
 }
 
 .service-list{
+    table{
+        td,th{
+            font-weight: 400;
+    font-family: "Catamaran", sans-serif;
+        }
+    }
     h2{
         font-size: 16px;
         font-weight: 300;
@@ -78,23 +84,27 @@
         -o-border-radius: 3px;
 }
     .col-sm-9{
-        >.h-100{
+        min-height: 190px;
+        >div{
             flex: 1;
-            & + .h-100{
-              border-left: 1px solid #ccc;
-            }
+            padding: 2.3rem;
         }
     }
     .col-sm-3{
         .bg-secondary{
+            position: relative;
+            z-index: 3;
+            min-height: 130px;
             &::after{
                 position: absolute;
-                width: 30px;
+                width: 60px;
                 height: 100%;
                 background-color: #4e9cba;
-                content:'';
+                content: "";
                 top: 0;
-                left: 0;
+                right: -28px;
+                border-radius: 50%;
+                z-index: -1;
             }
         }
     }
