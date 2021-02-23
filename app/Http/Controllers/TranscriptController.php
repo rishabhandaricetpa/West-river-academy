@@ -168,7 +168,6 @@ class TranscriptController extends Controller
     }
     public function viewAnotherEnrollment($student_id)
     {
-        $transcript = new TranscriptK8();
         return view('transcript.grade');
     }
     public function displayAllCourse($transcript_id, $student_id)
@@ -182,18 +181,5 @@ class TranscriptController extends Controller
             ->get();
         //dd($courses);
         return view('transcript-wizard-grade', compact('courses', 'transcript_id', 'student_id'));
-    }
-    public function editEnglish($student_id, $transcript_id)
-    {
-        $course = Course::select('id',)
-            ->where('course_name', 'English / Language Arts')
-            ->first();
-        $englishCourse = Subject::where('courses_id', $course->id)
-            ->where('transcript_period', 'K-8')
-            ->get();
-        $courses_id = $course->id;
-
-        $transcripts = TranscriptCourse::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('k8transcript_id', $transcript_id)->get();
-        return view('editCourses.english-course', compact('englishCourse', 'transcripts', 'student_id', 'transcript_id'));
     }
 }

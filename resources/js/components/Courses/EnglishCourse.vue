@@ -7,7 +7,6 @@
     >
       <div class="position-relative">
         <span
-          v-if="canRemovePeriod"
           class="remove"
           @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
@@ -19,7 +18,7 @@
               name="english_course"
               id="english_course"
               required
-              v-model="englishCourse.subject_name"
+              v-model="englishCourse.subject"
             >
               <option v-for="(val, i) in englishcourse" :key="i">
                 {{ val.subject_name }}
@@ -88,9 +87,9 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  name: "EditEnglishCourse",
+  name: "EnglishCourse",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
@@ -98,15 +97,25 @@ export default {
       form: {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
-        englishCourse: [],
+        englishCourse: [
+          {
+            transcript_id: this.transcript_id,
+            student_id: this.student_id,
+            courses_id: this.courses_id,
+            subject: "",
+            other_subjects: "",
+            grade: ""
+          }
+        ]
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
-  props: ["englishcourse", "transcripts", "english_details", "student_id"],
+  props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("englishCourse.store"), this.form).then((response) => {
+      axios.post(route("englishCourse.store"), this.form)
+      .then(response => {
         window.location =
           "/social-studies/" + this.student_id + "/" + this.transcript_id;
       });
@@ -118,41 +127,13 @@ export default {
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grade: "",
+        grades: ""
       });
     },
-    initForm() {
-      const courses = this.transcripts.map((transcript) => {
-        return {
-          transcript_id: transcript.id,
-          student_id: transcript.student_profile_id,
-          courses_id: transcript.courses_id,
-          subject_name: transcript.subject.subject_name,
-          other_subjects: "",
-          grade: transcript.score,
-        };
-      });
-
-      this.form.englishCourse = courses;
-    },
-  },
-
-  removeEnglishCourse(index) {
-    if (this.removingPeriod) {
-      return;
+     removeEnglishCourse(index) {
+       this.form.englishCourse.splice(index, 1)
     }
-    this.removingPeriod = true;
-
-    let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.englishCourse.splice(index, 1);
   },
-  created() {
-    this.initForm();
-  },
-  computed: {
-    canRemovePeriod() {
-      return this.form.englishCourse.length > 1;
-    },
-  },
+ 
 };
 </script>

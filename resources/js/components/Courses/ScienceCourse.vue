@@ -2,26 +2,25 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="(anotherCourse, index) in form.anotherCourse"
-      :key="anotherCourse.id"
+      v-for="(science,index) in form.sciencecourse"
+      :key="science.id"
     >
       <div class="position-relative">
-        <span
-          v-if="canRemovePeriod"
+         <span
           class="remove"
-          @click="removeForeignCourse(index)"
+          @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
             <select
               class="form-control mb-4"
-              name="health_course"
-              id="health_course"
+              name="maths_course"
+              id="maths_course"
               required
-              v-model="anotherCourse.subject"
+              v-model="science.subject"
             >
-              <option v-for="(val, i) in anotherstudies" :key="i">
+              <option v-for="(val, i) in sciencecourse" :key="i">
                 {{ val.subject_name }}
               </option>
             </select>
@@ -30,7 +29,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.anotherCourse.other_subjects"
+                v-model="form.sciencecourse.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -53,7 +52,7 @@
                         class="form-check-input"
                         type="radio"
                         :value="val"
-                        v-model="anotherCourse.grade"
+                        v-model="science.grade"
                         required
                       />
                       <label class="form-check-label pl-1 pl-sm-0" for="">
@@ -75,7 +74,7 @@
         class="btn btn-primary float-left"
         id="addEnglish"
         @click="addNewSocialScienceCourse"
-        >Add another English/Language Arts Course</a
+        >Add another Science Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
     </div>
@@ -88,9 +87,9 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  name: "AnotherCourse",
+  name: "ScienceCourse",
   components: {
-    "v-select": vSelect
+    "v-select": vSelect,
   },
   data() {
     return {
@@ -98,51 +97,43 @@ export default {
       form: {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
-        anotherCourse: [
+        sciencecourse: [
           {
-            transcript_id: this.transcript_id,
             student_id: this.student_id,
             courses_id: this.courses_id,
+            transcript_id: this.transcript_id,
             subject: "",
             other_subjects: "",
-            grade: ""
-          }
-        ]
+            grade: "",
+          },
+        ],
       },
-      removingPeriod: false
+      removingPeriod: false,
     };
   },
-  props: ["anotherstudies", "transcript_id", "student_id", "courses_id"],
+  props: ["sciencecourse", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses() {
-      axios.post(route("another.store"), this.form).then(response => {
-        window.location = "/another-grade/" + this.student_id;
+      axios.post(route("science.store"), this.form).then((response) => {
+        window.location =
+          "/physical-education/" + this.student_id + "/" + this.transcript_id;
       });
     },
     addNewSocialScienceCourse() {
-      this.form.anotherCourse.push({
+      this.form.sciencecourse.push({
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: ""
+        grade: "",
       });
+    },
+       removeEnglishCourse(index) {
+       console.log(index);
+       this.form.sciencecourse.splice(index, 1)
     }
   },
-  removeForeignCourse(index) {
-    if (this.removingPeriod) {
-      return;
-    }
-    this.removingPeriod = true;
 
-    let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.anotherCourse.splice(index, 1);
-  },
-  computed: {
-    canRemovePeriod() {
-      return this.form.anotherCourse.length > 1;
-    }
-  }
 };
 </script>

@@ -7,7 +7,6 @@
     >
       <div class="position-relative">
         <span
-          v-if="canRemovePeriod"
           class="remove"
           @click="removeHealthCourse(index)"
           ><i class="fas fa-times"></i>
@@ -130,20 +129,9 @@ export default {
         grades: "",
       });
     },
-  },
-  removeHealthCourse(index) {
-    if (this.removingPeriod) {
-      return;
-    }
-    this.removingPeriod = true;
-
-    let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.healthCourse.splice(index, 1);
-  },
-  computed: {
-    canRemovePeriod() {
-      return this.form.healthCourse.length > 1;
-    },
+       removeHealthCourse(index) {
+       this.form.healthCourse.splice(index, 1)
+    }  
   },
 };
 </script>

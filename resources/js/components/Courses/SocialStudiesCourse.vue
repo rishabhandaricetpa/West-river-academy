@@ -2,9 +2,15 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="physicalEducation in form.physicalEducation"
-      :key="physicalEducation.id"
+      v-for="(socialStudiesCourse,index) in form.socialStudiesCourse"
+      :key="socialStudiesCourse.id"
     >
+      <div class="position-relative">
+        <span
+          class="remove"
+          @click="removeEnglishCourse(index)"
+          ><i class="fas fa-times"></i>
+        </span>
       <div class="form-group d-sm-flex mt-2r row">
         <div class="col-sm-6">
           <select
@@ -12,9 +18,9 @@
             name="social_studies"
             id="social_studies"
             required
-            v-model="physicalEducation.subject"
+            v-model="socialStudiesCourse.subject"
           >
-            <option v-for="(val, i) in physical_education" :key="i">
+            <option v-for="(val, i) in socialstudies" :key="i">
               {{ val.subject_name }}
             </option>
           </select>
@@ -23,7 +29,7 @@
             <input
               type="text"
               class="form-control"
-              v-model="form.physicalEducation.other_subjects"
+              v-model="form.socialStudiesCourse.other_subjects"
             />
           </div>
           <div class="form-group d-sm-flex mt-4">
@@ -46,7 +52,7 @@
                       class="form-check-input"
                       type="radio"
                       :value="val"
-                      v-model="physicalEducation.grade"
+                      v-model="socialStudiesCourse.grade"
                       required
                     />
                     <label class="form-check-label pl-1 pl-sm-0" for="">
@@ -60,6 +66,7 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
     <div class="mt-5">
       <a
@@ -67,7 +74,7 @@
         class="btn btn-primary float-left"
         id="addEnglish"
         @click="addNewEnglishCourse"
-        >Add another Physical Education Course</a
+        >Add another History/Social Science Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
     </div>
@@ -82,7 +89,7 @@ export default {
       form: {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
-        physicalEducation: [
+        socialStudiesCourse: [
           {
             student_id: this.student_id,
             courses_id: this.courses_id,
@@ -96,18 +103,18 @@ export default {
       removingPeriod: false,
     };
   },
-  props: ["physical_education", "student_id", "courses_id", "transcript_id"],
+  props: ["socialstudies", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses() {
       axios
-        .post(route("physicalEducation.store"), this.form)
+        .post(route("socialStudiesCourse.store"), this.form)
         .then((response) => {
           window.location =
-            "/health/" + this.student_id + "/" + this.transcript_id;
+            "/mathematics/" + this.student_id + "/" + this.transcript_id;
         });
     },
     addNewEnglishCourse() {
-      this.form.physicalEducation.push({
+      this.form.socialStudiesCourse.push({
         student_id: this.student_id,
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
@@ -116,6 +123,10 @@ export default {
         grades: "",
       });
     },
+     removeEnglishCourse(index) {
+       console.log(index);
+        this.form.socialStudiesCourse.splice(index, 1)
+    }
   },
 };
 </script>

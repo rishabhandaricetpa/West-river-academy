@@ -33,7 +33,7 @@
       <div class="form-group d-sm-flex mb-2">
         <label for="">Country to present transcript</label>
         <div>
-          <select name="country" class="form-select w-100" aria-label="Default select example">
+          <select name="country" class="form-select w-100 form-control" aria-label="Default select example">
             <option value="United States" name="country">United States</option>
             @foreach($countries as $country)
             <option name="country" value="{{$country->country}}">{{$country->country}}</option>
