@@ -85,6 +85,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('transcript-wizard-grade');
         });
 
+        Route::get('/fees-services', function () {
+            return view('fees-services');
+        });
+
         Route::get('/transcript-pdf', function () {
             return view('transcript-pdf');
         });
