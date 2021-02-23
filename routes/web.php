@@ -68,6 +68,38 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return redirect('/login');
         });
 
+        //working blades by frontend
+        Route::get('bankinfo', function () {
+            return view('mail/bankinfo');
+        });
+
+        Route::get('/transcript-wizard-dashboard', function () {
+            return view('transcript-wizard-dashboard');
+        });
+
+        Route::get('/purchase-transcript', function () {
+            return view('purchase-transcript');
+        });
+
+        Route::get('/transcript-wizard-grade', function () {
+            return view('transcript-wizard-grade');
+        });
+
+        Route::get('/fees-services', function () {
+            return view('fees-services');
+        });
+
+        Route::get('/transcript-pdf', function () {
+            return view('transcript-pdf');
+        });
+
+        Route::get('/reviewstudent', function () {
+            return view('reviewstudent');
+        });
+
+        Route::get('/graduation-2', function () {
+            return view('graduation-2');
+        });
 
 
         Route::post('/cart', 'CartController@store')->name('add.cart');

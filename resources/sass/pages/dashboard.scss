@@ -55,3 +55,47 @@
     margin-top: 5px;
     cursor: pointer;
 }
+
+.service-list{
+    h2{
+        font-size: 16px;
+        font-weight: 300;
+        span{
+            font-size: 13px;
+        }
+    }
+    p{
+        font-weight: 300;
+        span{
+            font-size: 20px;
+        }
+    }
+    >.bg-white{
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+}
+    .col-sm-9{
+        >.h-100{
+            flex: 1;
+            & + .h-100{
+              border-left: 1px solid #ccc;
+            }
+        }
+    }
+    .col-sm-3{
+        .bg-secondary{
+            &::after{
+                position: absolute;
+                width: 30px;
+                height: 100%;
+                background-color: #4e9cba;
+                content:'';
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+}
