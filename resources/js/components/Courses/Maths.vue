@@ -17,7 +17,6 @@
               class="form-control mb-4"
               name="maths_course"
               id="maths_course"
-              required
               v-model="maths.subject"
             >
               <option v-for="(val, i) in mathscourse" :key="i">
@@ -68,7 +67,6 @@
         </div>
       </div>
       </div>
-    </div>
     <div class="mt-5">
       <a
         type="button"

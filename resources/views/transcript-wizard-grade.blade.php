@@ -49,11 +49,16 @@
                     </tr>
                     @endforeach
 
-                    <td>
-                        <a href="{{route('edit.englishCourse',[$student_id,$transcript_id])}}" class="btn btn-primary">Edit Courses
-                        </a>
-                    </td>
+
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="pl-0 pt-4">
+                            <a href="{{route('edit.englishCourse',[$student_id,$transcript_id])}}" class="btn btn-primary">Edit Courses
+                            </a>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

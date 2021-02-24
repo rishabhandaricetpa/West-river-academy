@@ -17,7 +17,6 @@
               class="form-control mb-4"
               name="maths_course"
               id="maths_course"
-              required
               v-model="science.subject"
             >
               <option v-for="(val, i) in sciencecourse" :key="i">

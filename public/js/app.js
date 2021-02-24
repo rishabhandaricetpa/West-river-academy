@@ -2128,7 +2128,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2197,7 +2196,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
-//
 //
 //
 //
@@ -2430,7 +2428,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2499,7 +2496,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
-//
 //
 //
 //
@@ -2734,8 +2730,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2879,7 +2873,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "social-studies",
   data: function data() {
@@ -2942,7 +2935,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
-//
 //
 //
 //
@@ -3169,7 +3161,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "social-studies",
   data: function data() {
@@ -3193,11 +3184,10 @@ __webpack_require__.r(__webpack_exports__);
   props: ["socialstudies", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses: function addCourses() {
-      var _this = this;
-
-      axios.post(route("socialStudiesCourse.store"), this.form).then(function (response) {
-        window.location = "/mathematics/" + _this.student_id + "/" + _this.transcript_id;
-      });
+      axios.post(route("socialStudiesCourse.store"), this.form); // .then((response) => {
+      //   window.location =
+      //     "/mathematics/" + this.student_id + "/" + this.transcript_id;
+      // });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
       this.form.socialStudiesCourse.push({
@@ -3492,7 +3482,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3527,7 +3516,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -3538,7 +3527,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -5530,25 +5519,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
+    //  removePeriod(index) {
+    //   if (this.removingPeriod) {
+    //     return;
+    //   }
+    //   this.removingPeriod = true;
+    //   let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
+    //   reqData.enrollPeriods.splice(index, 1);
+    //   axios
+    //     .post(route("delete.enroll", this.students), reqData)
+    //     .then((response) => {
+    //       const resp = response.data;
+    //       resp.status == "success"
+    //         ? this.form.enrollPeriods.splice(index, 1)
+    //         : alert(resp.message);
+    //       this.removingPeriod = false;
+    //     })
+    //     .catch((error) => {
+    //       this.removingPeriod = false;
+    //       console.log(error);
+    //     });
+    // },
     removePeriod: function removePeriod(index) {
-      var _this = this;
-
-      if (this.removingPeriod) {
-        return;
-      }
-
-      this.removingPeriod = true;
-      var reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-
-      reqData.enrollPeriods.splice(index, 1);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("delete.enroll", this.students), reqData).then(function (response) {
-        var resp = response.data;
-        resp.status == "success" ? _this.form.enrollPeriods.splice(index, 1) : alert(resp.message);
-        _this.removingPeriod = false;
-      })["catch"](function (error) {
-        _this.removingPeriod = false;
-        console.log(error);
-      });
+      this.form.enrollPeriods.splice(index, 1);
     },
     addStudent: function addStudent() {
       this.errors = [];
@@ -26363,11 +26356,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "health_course",
-                        id: "health_course",
-                        required: ""
-                      },
+                      attrs: { name: "health_course", id: "health_course" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -26610,11 +26599,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "english_course",
-                        id: "english_course",
-                        required: ""
-                      },
+                      attrs: { name: "english_course", id: "english_course" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -26657,22 +26642,20 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.englishCourse.other_subjects,
-                          expression: "form.englishCourse.other_subjects"
+                          value: englishCourse.other_subjects,
+                          expression: "englishCourse.other_subjects"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: {
-                        value: _vm.form.englishCourse.other_subjects
-                      },
+                      domProps: { value: englishCourse.other_subjects },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.englishCourse,
+                            englishCourse,
                             "other_subjects",
                             $event.target.value
                           )
@@ -26857,11 +26840,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "health_course",
-                        id: "health_course",
-                        required: ""
-                      },
+                      attrs: { name: "health_course", id: "health_course" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -27104,11 +27083,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "health_course",
-                        id: "health_course",
-                        required: ""
-                      },
+                      attrs: { name: "health_course", id: "health_course" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -27346,11 +27321,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "maths_course",
-                      id: "maths_course",
-                      required: ""
-                    },
+                    attrs: { name: "maths_course", id: "maths_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -27583,11 +27554,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "social_studies",
-                        id: "social_studies",
-                        required: ""
-                      },
+                      attrs: { name: "social_studies", id: "social_studies" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -27830,11 +27797,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "maths_course",
-                      id: "maths_course",
-                      required: ""
-                    },
+                    attrs: { name: "maths_course", id: "maths_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -28070,11 +28033,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "social_studies",
-                        id: "social_studies",
-                        required: ""
-                      },
+                      attrs: { name: "social_studies", id: "social_studies" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -28117,22 +28076,20 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.socialStudiesCourse.other_subjects,
-                          expression: "form.socialStudiesCourse.other_subjects"
+                          value: socialStudiesCourse.other_subjects,
+                          expression: "socialStudiesCourse.other_subjects"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: {
-                        value: _vm.form.socialStudiesCourse.other_subjects
-                      },
+                      domProps: { value: socialStudiesCourse.other_subjects },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.socialStudiesCourse,
+                            socialStudiesCourse,
                             "other_subjects",
                             $event.target.value
                           )
@@ -28564,11 +28521,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "english_course",
-                        id: "english_course",
-                        required: ""
-                      },
+                      attrs: { name: "english_course", id: "english_course" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -28611,23 +28564,21 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.englishCourse.other_subjects,
-                          expression: "form.englishCourse.other_subjects"
+                          value: englishCourse.other_subject,
+                          expression: "englishCourse.other_subject"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: {
-                        value: _vm.form.englishCourse.other_subjects
-                      },
+                      domProps: { value: englishCourse.other_subject },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.englishCourse,
-                            "other_subjects",
+                            englishCourse,
+                            "other_subject",
                             $event.target.value
                           )
                         }
@@ -28727,7 +28678,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewEnglishCourse }
           },
@@ -28737,7 +28688,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -28746,7 +28697,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -31478,20 +31432,18 @@ var render = function() {
               { key: enrollPeriod.id, staticClass: "seperator mt-4" },
               [
                 _c("div", { staticClass: "position-relative" }, [
-                  _vm.canRemovePeriod
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "remove",
-                          on: {
-                            click: function($event) {
-                              return _vm.removePeriod(index)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-times" })]
-                      )
-                    : _vm._e(),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "remove",
+                      on: {
+                        click: function($event) {
+                          return _vm.removePeriod(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  ),
                   _vm._v(" "),
                   _c("h3", [_vm._v("Enrollment Period " + _vm._s(index + 1))]),
                   _vm._v(" "),
