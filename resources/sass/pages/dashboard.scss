@@ -1,112 +1,137 @@
-.circled-grid{
-    width: 4.5rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    border: 1px solid $gray-600;
-    transition: .2 all linear;
-    -webkit-transition: .2 all linear;
-    -moz-transition: .2 all linear;
-    -ms-transition: .2 all linear;
-    -o-transition: .2 all linear;
-    &:hover{
-        background-color: $gray-600;
-        color: $white !important;
-    }
+.circled-grid {
+  width: 4.5rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  border: 1px solid $gray-600;
+  transition: .2 all linear;
+  -webkit-transition: .2 all linear;
+  -moz-transition: .2 all linear;
+  -ms-transition: .2 all linear;
+  -o-transition: .2 all linear;
+
+  &:hover {
+    background-color: $gray-600;
+    color: $white !important;
+  }
 }
 
-.dashboard-info{
-    h3{
-        font-weight: 500;
-    }
-    p{
-        font-size: 1.2rem;
-        font-weight: 500;
-    }
-    a:not(.btn){
-        text-decoration: underline;
-    }
-    a,p{
-        color: $text-color;
-    }
+.dashboard-info {
+  h3 {
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  a:not(.btn) {
+    text-decoration: underline;
+  }
+
+  a,
+  p {
+    color: $text-color;
+  }
 }
 
-.total-amount{
-    span{
-       font-size: 24px;
-       font-weight: 700; 
-    }
+.total-amount {
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
 }
 
-.rounded-input{
-    width: 180px;
-    font-size: 1em;
-    padding: 6px 15px;
-    margin: 0;
-    border-radius: 1.2em;
+.rounded-input {
+  width: 180px;
+  font-size: 1em;
+  padding: 6px 15px;
+  margin: 0;
+  border-radius: 1.2em;
 }
 
-.table-styling .fas{
-    width: 30px;
-    height: 30px;
-    background-color: $primary;
-    line-height: 30px;
-    font-size: 18px;
-    border-radius: 4px;
-    margin-top: 5px;
-    cursor: pointer;
-    text-align: center;
+.table-styling .fas {
+  width: 30px;
+  height: 30px;
+  background-color: $primary;
+  line-height: 30px;
+  font-size: 18px;
+  border-radius: 4px;
+  margin-top: 5px;
+  cursor: pointer;
+  text-align: center;
 }
 
-.service-list{
-    table{
-        td,th{
-            font-weight: 400;
-    font-family: "Catamaran", sans-serif;
-        }
+.service-list {
+  table {
+
+    td,
+    th {
+      font-weight: 400;
+      font-family: "Catamaran", sans-serif;
     }
-    h2{
-        font-size: 16px;
-        font-weight: 300;
-        span{
-            font-size: 13px;
-        }
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 300;
+
+    span {
+      font-size: 13px;
     }
-    p{
-        font-weight: 300;
-        span{
-            font-size: 20px;
-        }
+  }
+
+  p {
+    font-weight: 300;
+
+    span {
+      font-size: 20px;
     }
-    >.bg-white{
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -ms-border-radius: 3px;
-        -o-border-radius: 3px;
+  }
+
+  >.bg-white {
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+  }
+
+  .col-sm-9 {
+    min-height: 190px;
+
+    >div {
+      flex: 1;
+      padding: 2.3rem;
+    }
+  }
+
+  .col-sm-3 {
+    .bg-secondary {
+      position: relative;
+      z-index: 3;
+      min-height: 130px;
+
+      &::after {
+        position: absolute;
+        width: 60px;
+        height: 100%;
+        background-color: #4e9cba;
+        content: "";
+        top: 0;
+        right: -28px;
+        border-radius: 50%;
+        z-index: -1;
+      }
+    }
+  }
 }
-    .col-sm-9{
-        min-height: 190px;
-        >div{
-            flex: 1;
-            padding: 2.3rem;
-        }
-    }
-    .col-sm-3{
-        .bg-secondary{
-            position: relative;
-            z-index: 3;
-            min-height: 130px;
-            &::after{
-                position: absolute;
-                width: 60px;
-                height: 100%;
-                background-color: #4e9cba;
-                content: "";
-                top: 0;
-                right: -28px;
-                border-radius: 50%;
-                z-index: -1;
-            }
-        }
-    }
+
+.school-record .seperator:nth-last-child {
+  border-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.total-amount {
+  font-size: 2.5rem;
 }

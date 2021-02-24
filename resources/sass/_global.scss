@@ -225,9 +225,10 @@ sup {
     background-color: #cccc;
   }
   td,th{
-    padding: 5px 10px;
+    padding: 12px 10px;
     font-family: "Catamaran",sans-serif;
     line-height: 1.2;
+    font-size: 1rem;
   }
   tbody{
    td{
@@ -246,3 +247,11 @@ a.btn{
   -webkit-appearance: none !important;
 }
 
+
+.b-radius-20{
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
