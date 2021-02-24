@@ -64,21 +64,6 @@ class EnglishController extends Controller
                 ]);
             }
         }
-        else{
-             $other_subjetct =Subject::create([
-            'courses_id'=> $period['courses_id'],
-            'subject_name'=> $period['other_subjects'],
-            'transcript_period'=>'K-8',
-            'status'=>'1'
-            ]);   
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]); 
-         }
         }
-    }
-}
+ }
+

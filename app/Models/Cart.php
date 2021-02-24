@@ -30,7 +30,7 @@ class Cart extends Model
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
-                $total_amount->amount = $enroll_total->amount + $graduation_total->amount;
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount;
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();

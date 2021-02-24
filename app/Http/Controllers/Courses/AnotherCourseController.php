@@ -58,7 +58,7 @@ class AnotherCourseController extends Controller
         $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses()->get();
         $k8details = StudentProfile::find($student_id)->TranscriptK8()->get();
 
-        $transcriptData = TranscriptK8::where('student_profile_id', $student_id)
+        $transcriptDatas = TranscriptK8::where('student_profile_id', $student_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
 
@@ -66,7 +66,7 @@ class AnotherCourseController extends Controller
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('display.studentProfile', $request->get('student_id'));
         } else {
-            return view('transcript-wizard-dashboard', compact('student', 'transcriptData'));
+            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas'));
         }
     }
 }
