@@ -70,7 +70,7 @@
     <div class="mt-5">
       <a
         type="button"
-        class="btn btn-primary float-left"
+        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
         id="addEnglish"
         @click="addNewSocialScienceCourse"
         >Add another English/Language Arts Course</a

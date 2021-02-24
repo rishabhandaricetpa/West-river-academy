@@ -3184,10 +3184,11 @@ __webpack_require__.r(__webpack_exports__);
   props: ["socialstudies", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses: function addCourses() {
-      axios.post(route("socialStudiesCourse.store"), this.form); // .then((response) => {
-      //   window.location =
-      //     "/mathematics/" + this.student_id + "/" + this.transcript_id;
-      // });
+      var _this = this;
+
+      axios.post(route("socialStudiesCourse.store"), this.form).then(function (response) {
+        window.location = "/mathematics/" + _this.student_id + "/" + _this.transcript_id;
+      });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
       this.form.socialStudiesCourse.push({
@@ -3312,7 +3313,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3347,7 +3347,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -3358,7 +3358,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -3651,7 +3651,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3686,7 +3685,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -3697,7 +3696,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -3821,12 +3820,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "EditMathsCourse",
+  name: "EditHealthCourse",
   components: {
     "v-select": vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
   },
@@ -3856,7 +3854,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -3867,7 +3865,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -3991,7 +3989,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4026,7 +4023,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -4037,7 +4034,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -4161,7 +4158,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4196,7 +4192,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -4207,7 +4203,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -4331,7 +4327,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4366,7 +4361,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -4377,7 +4372,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -4501,7 +4496,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4536,7 +4530,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject_name: "",
-        other_subjects: "",
+        other_subject: "",
         grade: ""
       });
     },
@@ -4547,7 +4541,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
-          other_subjects: "",
+          other_subject: transcript.other_subject,
           grade: transcript.score
         };
       });
@@ -26399,22 +26393,20 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.anotherCourse.other_subjects,
-                          expression: "form.anotherCourse.other_subjects"
+                          value: anotherCourse.other_subjects,
+                          expression: "anotherCourse.other_subjects"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: {
-                        value: _vm.form.anotherCourse.other_subjects
-                      },
+                      domProps: { value: anotherCourse.other_subjects },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.anotherCourse,
+                            anotherCourse,
                             "other_subjects",
                             $event.target.value
                           )
@@ -26515,7 +26507,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewSocialScienceCourse }
           },
@@ -26756,7 +26748,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left  mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewEnglishCourse }
           },
@@ -26883,22 +26875,20 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.foreignCourse.other_subjects,
-                          expression: "form.foreignCourse.other_subjects"
+                          value: foreignCourse.other_subjects,
+                          expression: "foreignCourse.other_subjects"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: {
-                        value: _vm.form.foreignCourse.other_subjects
-                      },
+                      domProps: { value: foreignCourse.other_subjects },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.foreignCourse,
+                            foreignCourse,
                             "other_subjects",
                             $event.target.value
                           )
@@ -26999,7 +26989,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewForeignCourse }
           },
@@ -27126,20 +27116,20 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.healthCourse.other_subjects,
-                          expression: "form.healthCourse.other_subjects"
+                          value: healthCourse.other_subjects,
+                          expression: "healthCourse.other_subjects"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: { value: _vm.form.healthCourse.other_subjects },
+                      domProps: { value: healthCourse.other_subjects },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.healthCourse,
+                            healthCourse,
                             "other_subjects",
                             $event.target.value
                           )
@@ -27240,7 +27230,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewSocialScienceCourse }
           },
@@ -27364,23 +27354,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.mathscourse.other_subjects,
-                        expression: "form.mathscourse.other_subjects"
+                        value: maths.other_subjects,
+                        expression: "maths.other_subjects"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.mathscourse.other_subjects },
+                    domProps: { value: maths.other_subjects },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.mathscourse,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(maths, "other_subjects", $event.target.value)
                       }
                     }
                   })
@@ -27470,7 +27456,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewMathsCourse }
           },
@@ -27597,22 +27583,20 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.physicalEducation.other_subjects,
-                          expression: "form.physicalEducation.other_subjects"
+                          value: physicalEducation.other_subjects,
+                          expression: "physicalEducation.other_subjects"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: {
-                        value: _vm.form.physicalEducation.other_subjects
-                      },
+                      domProps: { value: physicalEducation.other_subjects },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.form.physicalEducation,
+                            physicalEducation,
                             "other_subjects",
                             $event.target.value
                           )
@@ -27716,7 +27700,8 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass:
+              "btn btn-primary float-left btn btn-primary float-left  mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewEnglishCourse }
           },
@@ -27840,23 +27825,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.sciencecourse.other_subjects,
-                        expression: "form.sciencecourse.other_subjects"
+                        value: science.other_subjects,
+                        expression: "science.other_subjects"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.sciencecourse.other_subjects },
+                    domProps: { value: science.other_subjects },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.sciencecourse,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(science, "other_subjects", $event.target.value)
                       }
                     }
                   })
@@ -27946,7 +27927,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewSocialScienceCourse }
           },
@@ -28193,7 +28174,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewEnglishCourse }
           },
@@ -28274,11 +28255,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -28321,23 +28298,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -28427,7 +28400,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left  mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -28437,7 +28410,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left  mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -28446,7 +28419,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -28772,11 +28748,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -28819,23 +28791,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -28925,7 +28893,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -28935,7 +28903,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -28944,7 +28912,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -29016,11 +28987,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -29063,23 +29030,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -29169,7 +29132,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -29179,7 +29142,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -29188,7 +29151,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -29260,11 +29226,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -29307,23 +29269,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -29413,7 +29371,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -29423,7 +29381,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -29432,7 +29390,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -29504,11 +29465,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -29551,23 +29508,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -29657,7 +29610,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left  mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -29667,7 +29620,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left  mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -29676,7 +29629,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -29748,11 +29704,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -29795,23 +29747,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -29901,7 +29849,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -29911,7 +29859,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -29920,7 +29868,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
@@ -29992,11 +29943,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control mb-4",
-                    attrs: {
-                      name: "english_course",
-                      id: "english_course",
-                      required: ""
-                    },
+                    attrs: { name: "english_course", id: "english_course" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -30039,23 +29986,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.Course.other_subjects,
-                        expression: "form.Course.other_subjects"
+                        value: Course.other_subject,
+                        expression: "Course.other_subject"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.form.Course.other_subjects },
+                    domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.form.Course,
-                          "other_subjects",
-                          $event.target.value
-                        )
+                        _vm.$set(Course, "other_subject", $event.target.value)
                       }
                     }
                   })
@@ -30145,7 +30088,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewCourse }
           },
@@ -30155,7 +30098,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-left",
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.viewCourses }
           },
@@ -30164,7 +30107,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary mb-sm-0 mb-3",
+            attrs: { type: "submit" }
+          },
           [_vm._v("Continue")]
         )
       ])
