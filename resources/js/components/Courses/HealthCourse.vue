@@ -2,14 +2,13 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="(anotherCourse, index) in form.anotherCourse"
-      :key="anotherCourse.id"
+      v-for="(healthCourse, index) in form.healthCourse"
+      :key="healthCourse.id"
     >
       <div class="position-relative">
         <span
-          v-if="canRemovePeriod"
           class="remove"
-          @click="removeForeignCourse(index)"
+          @click="removeHealthCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -19,9 +18,9 @@
               name="health_course"
               id="health_course"
               required
-              v-model="anotherCourse.subject"
+              v-model="healthCourse.subject"
             >
-              <option v-for="(val, i) in anotherstudies" :key="i">
+              <option v-for="(val, i) in healthstudies" :key="i">
                 {{ val.subject_name }}
               </option>
             </select>
@@ -30,7 +29,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.anotherCourse.other_subjects"
+                v-model="form.healthCourse.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -53,7 +52,7 @@
                         class="form-check-input"
                         type="radio"
                         :value="val"
-                        v-model="anotherCourse.grade"
+                        v-model="healthCourse.grade"
                         required
                       />
                       <label class="form-check-label pl-1 pl-sm-0" for="">
@@ -88,9 +87,9 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  name: "AnotherCourse",
+  name: "HealthCourse",
   components: {
-    "v-select": vSelect
+    "v-select": vSelect,
   },
   data() {
     return {
@@ -98,51 +97,41 @@ export default {
       form: {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
-        anotherCourse: [
+        healthCourse: [
           {
             transcript_id: this.transcript_id,
             student_id: this.student_id,
             courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
-            grade: ""
-          }
-        ]
+            grade: "",
+          },
+        ],
       },
-      removingPeriod: false
+      removingPeriod: false,
     };
   },
-  props: ["anotherstudies", "transcript_id", "student_id", "courses_id"],
+  props: ["healthstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("another.store"), this.form).then(response => {
-        window.location = "/another-grade/" + this.student_id;
+      axios.post(route("health.store"), this.form).then((response) => {
+        window.location =
+          "/foreign/" + this.student_id + "/" + this.transcript_id;
       });
     },
     addNewSocialScienceCourse() {
-      this.form.anotherCourse.push({
+      this.form.healthCourse.push({
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: ""
+        grades: "",
       });
-    }
+    },
+       removeHealthCourse(index) {
+       this.form.healthCourse.splice(index, 1)
+    }  
   },
-  removeForeignCourse(index) {
-    if (this.removingPeriod) {
-      return;
-    }
-    this.removingPeriod = true;
-
-    let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.anotherCourse.splice(index, 1);
-  },
-  computed: {
-    canRemovePeriod() {
-      return this.form.anotherCourse.length > 1;
-    }
-  }
 };
 </script>

@@ -27,14 +27,26 @@ Vue.component('edit-enroll', require('./components/EditEnrollStudent.vue').defau
 Vue.component('billing-shipping', require('./components/address.vue').default);
 Vue.component('get-cart', require('./components/Cart.vue').default);
 
-Vue.component('english-course', require('./components/EnglishCourse.vue').default);
-Vue.component('social-studies', require('./components/SocialStudiesCourse.vue').default);
-Vue.component('maths-course', require('./components/Maths.vue').default);
-Vue.component('science-course', require('./components/ScienceCourse.vue').default);
-Vue.component('physical-educatiom', require('./components/PhysicalEducation.vue').default);
-Vue.component('health-course', require('./components/HealthCourse.vue').default);
-Vue.component('foreign-course', require('./components/ForeignCourse.vue').default);
-Vue.component('another-course', require('./components/AnotherCourse.vue').default);
+//courses
+Vue.component('english-course', require('./components/Courses/EnglishCourse.vue').default);
+Vue.component('social-studies', require('./components/Courses/SocialStudiesCourse.vue').default);
+Vue.component('maths-course', require('./components/Courses/Maths.vue').default);
+Vue.component('science-course', require('./components/Courses/ScienceCourse.vue').default);
+Vue.component('physical-educatiom', require('./components/Courses/PhysicalEducation.vue').default);
+Vue.component('health-course', require('./components/Courses/HealthCourse.vue').default);
+Vue.component('foreign-course', require('./components/Courses/ForeignCourse.vue').default);
+Vue.component('another-course', require('./components/Courses/AnotherCourse.vue').default);
+
+//edit courses
+
+Vue.component('edit-english-course', require('./components/EditCourses/EditEnglishCourse.vue').default);
+Vue.component('edit-social-studies', require('./components/EditCourses/EditSocialStudies.vue').default);
+Vue.component('edit-maths', require('./components/EditCourses/EditMathsCourse.vue').default);
+Vue.component('edit-science', require('./components/EditCourses/EditScienceCourse.vue').default);
+Vue.component('edit-physical', require('./components/EditCourses/EditPhysicalEducationCourse.vue').default);
+Vue.component('edit-health', require('./components/EditCourses/EditHealthCourse.vue').default);
+Vue.component('edit-foreign', require('./components/EditCourses/EditForeignCourse.vue').default);
+Vue.component('edit-another', require('./components/EditCourses/EditAnotherCourse.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

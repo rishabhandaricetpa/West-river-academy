@@ -11,9 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class SocialStudiesController extends Controller
 {
-    public function index($id, $transcript_id)
+    public function index($student_id, $transcript_id)
     {
-        $student_id = $id;
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
             ->where('course_name', 'History / Social Science')

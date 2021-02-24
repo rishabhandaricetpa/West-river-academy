@@ -127,8 +127,8 @@
 <table width="100%">
     <tbody>
       <tr>
-        <td width="50%" style="text-align:center;position: relative;"> <a type="submit" style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:45%;top:10px;">Edit</button></td>
-        <td width="50%" style="text-align:center;position: relative;"> <a type="submit" href="{{ route('transcript.purchase',[$student->id,$transcript_id->id]) }}"  style="background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:42%;top:10px;">Submit</button></td>
+        <td width="50%" style="text-align:center;position: relative;"> <a type="submit" style="background-color: #FC0;line-height:1;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:45%;top:10px;">Edit</button></td>
+        <td width="50%" style="text-align:center;position: relative;"> <a type="submit" href="{{ route('transcript.purchase',[$student->id,$transcript_id->id]) }}"  style="line-height:1;background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:42%;top:10px;">Submit</button></td>
       </tr>
     </tbody>
 </table>

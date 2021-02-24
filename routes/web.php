@@ -261,10 +261,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //Transcript K-8 Cources
 
-    //english course
-    //view english course
     Route::get('english-course/{id}/{transcript_id}', 'Courses\EnglishController@index')->name('english.course');
-    //save course
+
     Route::post('english-course', 'Courses\EnglishController@store')->name('englishCourse.store');
 
     //social studies
@@ -308,16 +306,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('transcript/dashboard-another-languages');
     })->name('new-grade');
 
-    Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@anotherGrade');
-    Route::post('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
+    Route::get('choose-another/{student_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
+    Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
 
 
     //another grade enrollment_year
-    Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
-    //edit grade 
-    Route::get('/editgrade/{student_id}/{transcript_id}', function () {
-        dd('welcome');
-    })->name('edit.grade');
+    // Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
+
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
     Route::get('transcript/purchase/{id}/{transcript_id}', 'TranscriptController@purchase')->name('transcript.purchase');
@@ -326,4 +321,35 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //     return view('transcript/purchase-transcript');
     // })->name('purchase.transcript');
 
+
+
+    //edit courses
+
+    Route::get('edit-english/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editEnglish')->name('edit.englishCourse');
+    Route::post('edit-english', 'EditCourses\EditCourse@storeEnglish')->name('editEnglishCourse.store');
+
+    Route::get('edit-social-studies/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editSocialStudies')->name('edit.socialStudies');
+    Route::post('edit-social', 'EditCourses\EditCourse@storeSocial', 'EditCourses\EditCourse@storeSocialStudies')->name('editSocialCourse.store');
+
+    Route::get('edit-math/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editMaths')->name('edit.mathsCourse');
+    Route::post('edit-maths', 'EditCourses\EditCourse@storeMaths', 'EditCourses\EditCourse@storeMaths')->name('editMathCourse.store');
+
+    Route::get('edit-science/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editScience')->name('edit.scienceCourse');
+    Route::post('edit-science', 'EditCourses\EditCourse@storeScience', 'EditCourses\EditCourse@storeScience')->name('editScienceCourse.store');
+
+    Route::get('edit-physical-education/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editPhysicalEducation')->name('edit.editPhysicaEducationCourse');
+    Route::post('edit-physical-education', 'EditCourses\EditCourse@storePhysicalEducation')->name('editPhysicaEducationCourse.store');
+
+    Route::get('edit-health/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editHealth')->name('edit.editHealthCourse');
+    Route::post('edit-health', 'EditCourses\EditCourse@storeHealth')->name('editHealthCourse.store');
+
+    Route::get('edit-foreign/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editForeign')->name('edit.foreignCourse');
+    Route::post('edit/foreign', 'EditCourses\EditCourse@storeForeign')->name('editForeign.store');
+
+    Route::get('edit-another/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editAnother')->name('edit.AnotherCourse');
+    Route::post('/edit/another', 'EditCourses\EditCourse@storeAnother')->name('editAnother.store');
+
+    //delete school
+
+    Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
 });
