@@ -8,9 +8,9 @@
   <div class="form-wrap border bg-light py-2r px-25 dashboard-info">
     <form class="mb-0 inner-form-wrapper" method="post" action="{{route('update.studentProfile',$studentProfile->id)}}">
       @csrf
+      <input type="hidden" name="transcript_id" value={{$transcriptData_id}}>
       <div class="form-group d-sm-flex mb-2">
         <label for="exampleInputEmail1">First name</label>
-
         <div>
           <input type="text" class="form-control " name="first_name" value="{{$studentProfile->first_name}}" required="" autofocus="">
           <!--   <div class="alert alert-danger">Enter your user ID.</div> -->

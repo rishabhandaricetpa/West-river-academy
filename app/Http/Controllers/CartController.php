@@ -104,14 +104,14 @@ class CartController extends Controller
                         $parent_profile_id = ParentProfile::getParentId();
                         $student = StudentProfile::whereId($data['student_id'])
                                                     ->where('parent_profile_id', $parent_profile_id)
+                                                    ->with('transcript')
                                                     ->first();
                         
-                      
                         $amount = FeesInfo::getFeeAmount('transcript');
-                        if (! Cart::where('item_id', $student->id)->where('item_type', 'transcript')->exists()) {         
+                        if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {         
                         Cart::create([
                                     'item_type' => 'transcript',
-                                    'item_id' => $student->id,
+                                    'item_id' => $request->get('transcript_id'),
                                     'parent_profile_id' => $parent_profile_id,
                                 ]);
                         }
@@ -122,6 +122,7 @@ class CartController extends Controller
             DB::commit();
             return redirect('/cart');
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
 
             return redirect()->back();

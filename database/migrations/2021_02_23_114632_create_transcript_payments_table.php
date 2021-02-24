@@ -15,8 +15,8 @@ class CreateTranscriptPaymentsTable extends Migration
     {
         Schema::create('transcript_payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_profile_id');
-            $table->foreign('student_profile_id')->references('student_profile_id')->on('k8transcript')->nullable()->onDelete('cascade');
+            $table->unsignedBigInteger('transcript_id');
+            $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');
             $table->string('amount');
             $table->enum('status', ['pending', 'paid', 'approved','completed']);
             $table->string('transcation_id')->nullable();

@@ -20,15 +20,14 @@
         </tfoot>
       </table>
     </div>
+    
+    <input type="hidden" name="transcript_id" value="{{$transcript_id}}">
     <input type="hidden" name="type" value="transcript">
     <input type="hidden" name="student_id" value="{{ $student->id }}">
-    <input type="hidden" name="student_id" value="{{ $student->id }}">
-
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
       <h2 class="mb-3">Apostille or Notarization</h2>
       <p>Apostilles are optional for international students whose countries are members of The Hague Convention. An Apostille includes notarization. Express Mail is strongly recommended to ensure delivery.</p>
      <div class="d-sm-flex enlarge-input align-items-center seperator pl-4">
-      <input class="form-check-input" type="checkbox" name="">
       <p class="mb-0 pl-2 pt-3">My transcript needs to be notarized or sent for an Apostille.</p>
      </div>
      <p class="mt-2r">Choose Apostille or Notarization, enter your mailing address, and select your postage option.</p>

@@ -2791,7 +2791,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -32745,11 +32744,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-4",
-                      attrs: {
-                        name: "english_course",
-                        id: "english_course",
-                        required: ""
-                      },
+                      attrs: { name: "english_course", id: "english_course" },
                       on: {
                         change: function($event) {
                           var $$selectedVal = Array.prototype.filter
@@ -56612,6 +56607,8 @@ __webpack_require__(/*! ./custom */ "./resources/js/custom.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
+
+__webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -56621,6 +56618,7 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
 
 Vue.component('enroll-student', __webpack_require__(/*! ./components/EnrollStudent.vue */ "./resources/js/components/EnrollStudent.vue")["default"]);
 Vue.component('edit-enroll', __webpack_require__(/*! ./components/EditEnrollStudent.vue */ "./resources/js/components/EditEnrollStudent.vue")["default"]);

@@ -251,7 +251,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
 
     Route::post('notify-student/{id}', 'TranscriptController@notification')->name('notify.studentInfo');
-    Route::get('display-student/{id}', 'TranscriptController@displayStudent')->name('display.studentProfile');
+    Route::get('display-student/{id}/{transcriptdata_id}', 'TranscriptController@displayStudent')->name('display.studentProfile');
     Route::post('student-grade/{id}', 'TranscriptController@viewEnrollment')->name('update.studentProfile');
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
     //save year
@@ -320,7 +320,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('edit.grade');
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
-    Route::get('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');
+    Route::get('transcript/purchase/{id}/{transcript_id}', 'TranscriptController@purchase')->name('transcript.purchase');
 
     // Route::get('purchase-transcript', function () {
     //     return view('transcript/purchase-transcript');

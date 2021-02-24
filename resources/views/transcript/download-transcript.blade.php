@@ -9,13 +9,9 @@
         <p>The transcript for Paige is Ready to download<a href="#"></a></p>
         <a href="{{ route('genrate.transcript',1) }}" class="btn btn-primary mt-4 font-weight-bold">Download</a>
                 <!-- <a href="{{ route('genrate.transcript',1) }}" class="btn btn-primary mt-4 font-weight-bold">View Transcript</a> -->
-
       </div>
     </main>
-
-
 <!-- Modal -->
-
 <div class="modal fade" id="transcript-notification" tabindex="-1" aria-labelledby="chooseDatesLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -31,4 +27,3 @@
 </div>
 </div>
 @endsection
-

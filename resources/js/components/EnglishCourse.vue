@@ -18,7 +18,6 @@
               class="form-control mb-4"
               name="english_course"
               id="english_course"
-              required
               v-model="englishCourse.subject"
             >
               <option v-for="(val, i) in englishcourse" :key="i">

@@ -10,7 +10,7 @@ class TranscriptK8 extends Model
     use HasFactory;
     protected $table = 'k8transcript';
     protected $fillable = [
-        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name'
+        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name','transcript_id',
     ];
 
     public function transcriptPdf()
@@ -25,7 +25,6 @@ class TranscriptK8 extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
     }
-
     public function TranscriptDetails()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'student_profile_id');
@@ -34,4 +33,9 @@ class TranscriptK8 extends Model
     {
         return $this->hasOne('App\Models\TranscriptPayment');
     }
+    public function student()
+    {
+        return $this->belongsTo('App\Models\StudentProfile','student_profile_id','id');
+    }
+
 }

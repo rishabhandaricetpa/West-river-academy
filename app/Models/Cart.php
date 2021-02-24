@@ -31,13 +31,12 @@ class Cart extends Model
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
                 $total_amount->amount = $enroll_total->amount + $graduation_total->amount;
-
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();
                 $graduation_data = Self::getGraduationData();
                 $transcript_data=Self::getTranscriptData();
-                dd($transcript_data);
+                // dd($transcript_data);
                 return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data);
             }
         } catch (\Exception $e) {
@@ -200,10 +199,11 @@ class Cart extends Model
 
     private static function getTranscriptQuery()
     {
-        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+       return self::where('cart.parent_profile_id', ParentProfile::getParentId())
                 ->where('cart.item_type', 'transcript')
-                ->leftJoin('k8transcript', 'k8transcript.student_profile_id', 'cart.item_id')
-                ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.student_profile_id');
+                ->leftJoin('transcripts', 'transcripts.id', 'cart.item_id')
+                ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.transcript_id')
+                ->leftJoin('student_profiles', 'transcripts.student_profile_id', 'student_profiles.id');
     }
     private static function getEnrollData()
     {
@@ -286,7 +286,20 @@ class Cart extends Model
                     $graduation->save();
 
                     break;
-                
+                case 'transcript':
+                        $transcript_payment =  TranscriptPayment::where('transcript_id', $cart->item_id)->first();
+                        $transcript_payment->payment_mode = $type;
+                        if($payment_id != null){
+                            $transcript_payment->transcation_id = $payment_id;
+                            $transcript->status = 'paid';
+                        }
+                        $transcript_payment->save();
+    
+                        $transcript = Transcript::whereId($cart->item_id)->first();
+                        $transcript->status = 'paid';
+                        $transcript->save();
+    
+                        break;
                 default:
                     break;
             }

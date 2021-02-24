@@ -77,4 +77,8 @@ class StudentProfile extends Model
             'graduation_id'
         );
     }
+    public function transcript()
+    {
+        return $this->hasMany('App\Models\Transcript', 'student_profile_id', 'id');
+    }
 }
