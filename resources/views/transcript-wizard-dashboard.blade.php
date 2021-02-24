@@ -4,7 +4,7 @@
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
     <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
+    <div class="form-wrap border bg-light py-5 px-25 mb-4 school-record">
         <h2 class="mb-3">{{$student->first_name}}</h2>
         <form method="POST" action="" class="mb-0">
 
@@ -38,47 +38,48 @@
                 </tbody>
             </table>
         </div>
-        @foreach($transcriptData as $school)
-        <div class="datablock">
-            <legend>{{$school->school_name}}</legend>
+        @foreach($transcriptDatas as $school)
+        <div class="seperator mb-4">
+            <h2 class="mb-2">{{$school->school_name}}</h2>
 
-            <a href="{{route('delete.school',$school->id)}}" class="btn btn-primary" type="submit" value="Delete School Record">Delete School Record</a>
+            <a href="{{route('delete.school',$school->id)}}" class="btn btn-primary float-right" type="submit" value="Delete School Record">Delete School Record</a>
 
-            <p>
-                Academic School Year(s):{{$school->enrollment_year}}<br>
-                Grade: {{$school->grade}}<br>
-            </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Subjects</th>
-                        <th class="hide">Courses</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <p class="mb-0"><span class="font-weight-bold mr-2">Academic School Year(s):</span>{{$school->enrollment_year}} </p>
+            <p> <span class="font-weight-bold mr-2"> Grade:</span> {{$school->grade}}</p>
 
-                    @foreach($school->TranscriptCourse as $course)
-                    @foreach ($course->subjects as $subject)
-                    <tr>
+            <div class="overflow-auto">
+                <table class="table-styling w-100">
+                    <thead>
+                        <tr>
+                            <th>Subjects</th>
+                            <th class="hide">Courses</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        <td>{{$subject->subject_name}}</td>
-                        <td>
-                            @php
-                            $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
-                            return $value['id'] == $subject['courses_id'];
-                            });
-                            @endphp
-                            {{$firstCourse->course_name}}
-                        </td>
-                        <td>{{$course->score}}</td>
-                    </tr>
-                    @endforeach
-                    @endforeach
-                </tbody>
-            </table>
+                        @foreach($school->TranscriptCourse as $course)
+                        @foreach ($course->subjects as $subject)
+                        <tr>
+
+                            <td>{{$subject->subject_name}}</td>
+                            <td>
+                                @php
+                                $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
+                                return $value['id'] == $subject['courses_id'];
+                                });
+                                @endphp
+                                {{$firstCourse->course_name}}
+                            </td>
+                            <td>{{$course->score}}</td>
+                        </tr>
+                        @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="buttongroup">
-                <a href="{{route('displayAllCourse',[$school->id,$school->student_profile_id])}}" class="btn btn-primary ">Select Courses and Grade</a>
+                <a href="{{route('displayAllCourse',[$school->id,$school->student_profile_id])}}" class="btn btn-primary mt-4">Select Courses and Grade</a>
             </div>
         </div>
         @endforeach

@@ -17,7 +17,6 @@
               class="form-control mb-4"
               name="health_course"
               id="health_course"
-              required
               v-model="healthCourse.subject"
             >
               <option v-for="(val, i) in healthstudies" :key="i">

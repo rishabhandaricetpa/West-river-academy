@@ -17,7 +17,6 @@
             class="form-control mb-4"
             name="social_studies"
             id="social_studies"
-            required
             v-model="physicalEducation.subject"
           >
             <option v-for="(val, i) in physical_education" :key="i">

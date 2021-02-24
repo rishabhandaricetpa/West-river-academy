@@ -17,7 +17,6 @@
             class="form-control mb-4"
             name="social_studies"
             id="social_studies"
-            required
             v-model="socialStudiesCourse.subject"
           >
             <option v-for="(val, i) in socialstudies" :key="i">
@@ -29,7 +28,7 @@
             <input
               type="text"
               class="form-control"
-              v-model="form.socialStudiesCourse.other_subjects"
+              v-model="socialStudiesCourse.other_subjects"
             />
           </div>
           <div class="form-group d-sm-flex mt-4">
@@ -108,10 +107,10 @@ export default {
     addCourses() {
       axios
         .post(route("socialStudiesCourse.store"), this.form)
-        .then((response) => {
-          window.location =
-            "/mathematics/" + this.student_id + "/" + this.transcript_id;
-        });
+        // .then((response) => {
+        //   window.location =
+        //     "/mathematics/" + this.student_id + "/" + this.transcript_id;
+        // });
     },
     addNewEnglishCourse() {
       this.form.socialStudiesCourse.push({

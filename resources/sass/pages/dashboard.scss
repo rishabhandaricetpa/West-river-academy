@@ -1,48 +1,49 @@
-.circled-grid{
-    width: 4.5rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    border: 1px solid $gray-600;
-    transition: .2 all linear;
-    -webkit-transition: .2 all linear;
-    -moz-transition: .2 all linear;
-    -ms-transition: .2 all linear;
-    -o-transition: .2 all linear;
-    &:hover{
-        background-color: $gray-600;
-        color: $white !important;
-    }
+.circled-grid {
+  width: 4.5rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  border: 1px solid $gray-600;
+  transition: 0.2 all linear;
+  -webkit-transition: 0.2 all linear;
+  -moz-transition: 0.2 all linear;
+  -ms-transition: 0.2 all linear;
+  -o-transition: 0.2 all linear;
+  &:hover {
+    background-color: $gray-600;
+    color: $white !important;
+  }
 }
 
-.dashboard-info{
-    h3{
-        font-weight: 500;
-    }
-    p{
-        font-size: 1.2rem;
-        font-weight: 500;
-    }
-    a:not(.btn){
-        text-decoration: underline;
-    }
-    a,p{
-        color: $text-color;
-    }
+.dashboard-info {
+  h3 {
+    font-weight: 500;
+  }
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  a:not(.btn) {
+    text-decoration: underline;
+  }
+  a,
+  p {
+    color: $text-color;
+  }
 }
 
-.total-amount{
-    span{
-       font-size: 24px;
-       font-weight: 700; 
-    }
+.total-amount {
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
 }
 
-.rounded-input{
-    width: 180px;
-    font-size: 1em;
-    padding: 6px 15px;
-    margin: 0;
-    border-radius: 1.2em;
+.rounded-input {
+  width: 180px;
+  font-size: 1em;
+  padding: 6px 15px;
+  margin: 0;
+  border-radius: 1.2em;
 }
 
 .table-styling .fas{
@@ -98,4 +99,14 @@
             }
         }
     }
+}
+.table-styling .fas {
+  width: 30px;
+  height: 30px;
+  background-color: $primary;
+  line-height: 30px;
+  font-size: 18px;
+  border-radius: 4px;
+  margin-top: 5px;
+  cursor: pointer;
 }
