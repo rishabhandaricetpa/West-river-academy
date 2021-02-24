@@ -35,8 +35,8 @@
                 <thead>
 
                     <tr>
-                        <th>Course / Subject</th>
-                        <th>Category</th>
+                        <th>Courses</th>
+                        <th>Subjects</th>
                         <th>Grade</th>
                     </tr>
                 </thead>

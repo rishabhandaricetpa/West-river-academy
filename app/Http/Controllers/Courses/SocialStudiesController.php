@@ -20,12 +20,13 @@ class SocialStudiesController extends Controller
         $courses_id = $course->id;
         $socialStudiesCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
+            ->where('status', 0)
             ->get();
         return view('courses.social-studies', compact('socialStudiesCourse', 'student_id', 'courses_id', 'transcript_id'));
     }
     public function store(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         DB::beginTransaction();
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
@@ -39,7 +40,7 @@ class SocialStudiesController extends Controller
                     'transcript_period' => 'K-8',
                     'status' => 1
                 ]);
-                $english_course = TranscriptCourse::create([
+                TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
@@ -51,7 +52,7 @@ class SocialStudiesController extends Controller
                 $subject = $period['subject'];
                 $subject = Subject::where('subject_name', $subject)->first();
 
-                $english_course = TranscriptCourse::create([
+                TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $subject->id,

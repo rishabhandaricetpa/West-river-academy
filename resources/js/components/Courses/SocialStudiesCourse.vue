@@ -107,10 +107,10 @@ export default {
     addCourses() {
       axios
         .post(route("socialStudiesCourse.store"), this.form)
-        // .then((response) => {
-        //   window.location =
-        //     "/mathematics/" + this.student_id + "/" + this.transcript_id;
-        // });
+        .then((response) => {
+          window.location =
+            "/mathematics/" + this.student_id + "/" + this.transcript_id;
+        });
     },
     addNewEnglishCourse() {
       this.form.socialStudiesCourse.push({

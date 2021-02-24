@@ -28,7 +28,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.mathscourse.other_subjects"
+                v-model="maths.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -113,7 +113,8 @@ export default {
   props: ["mathscourse", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses() {
-      axios.post(route("mathematics.store"), this.form).then((response) => {
+       axios.post(route("mathematics.store"), this.form)
+      .then((response) => {
         window.location =
           "/science/" + this.student_id + "/" + this.transcript_id;
       });

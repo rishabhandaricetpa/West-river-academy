@@ -27,7 +27,6 @@ class EnglishController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $id = $request->get('courses_id');
         //first delete the course if exists in database
 
@@ -45,7 +44,7 @@ class EnglishController extends Controller
                     'transcript_period' => 'K-8',
                     'status' => 1
                 ]);
-                $english_course = TranscriptCourse::create([
+                TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
@@ -57,7 +56,7 @@ class EnglishController extends Controller
                 $subject = $period['subject'];
                 $subject = Subject::where('subject_name', $subject)->first();
 
-                $english_course = TranscriptCourse::create([
+                TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $subject->id,

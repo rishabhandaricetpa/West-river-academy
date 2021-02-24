@@ -28,7 +28,7 @@
             <input
               type="text"
               class="form-control"
-              v-model="form.physicalEducation.other_subjects"
+              v-model="physicalEducation.other_subjects"
             />
           </div>
           <div class="form-group d-sm-flex mt-4">
