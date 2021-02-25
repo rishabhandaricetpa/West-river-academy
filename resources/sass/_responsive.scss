@@ -212,9 +212,6 @@
   }
 
   /* edit */
-  .links-list {
-    padding-left: 0;
-  }
 
   .vdp-datepicker input {
     width: 100%;
@@ -233,7 +230,12 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
-
+  /* edit */
+  .links-list{
+  &.form-group{
+    padding-left: 135px;
+  }
+}
   /* global classes*/
   .space-pre {
     white-space: pre;
