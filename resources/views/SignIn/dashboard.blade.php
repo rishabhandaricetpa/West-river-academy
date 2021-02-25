@@ -11,8 +11,8 @@
                         <a href="https://www.westriveracademy.com/schedule-a-call/" class="d-inline-block mb-5 decoration-none">
                            <i class="fas fa-comments rounded-circle circled-grid fa-2x text-secondary"></i>
                            <h3 class="mt-3 text-black font-weight-normal">Order a Personal Consultation</h3>
-               </a>
-              </div>  
+                        </a>
+                     </div>  
               <div class="col-md-3 col-sm-6 text-center">
                <a href="#" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-stamp rounded-circle circled-grid fa-2x text-secondary"></i>
@@ -72,11 +72,58 @@
              </div>
          </div>
 </div>
-<div class="form-wrap border bg-light py-5 px-25">
+         <div class="form-wrap border bg-light py-5 px-25 mb-4">
+             <h2 class="mb-3">Billing Information</h2>
+              <div class="row">
+                <div class="col-sm-6 d-flex justify-content-center align-items-center">
+                   <div class="text-center">
+                     <p class="mb-0">Amount Due:</p>
+                     <span class="total-amount">$580.00</span>
+                   </div>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-center align-items-center">
+                   <div class="text-center">
+                     <p>Make an Online Payment:</p>
+                     <a href="#" class="btn btn-primary">Pay Now</a>
+                   </div>
+                </div>
+              </div>
+         </div>
+
+         <div class="form-wrap border bg-light py-5 px-25 mb-4">
+            <h2 class="mb-3">Transcripts</h2>
+            <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to download it.</p>
+    
+    <div class="overflow-auto max-table mb-2">
+    <table class="table-styling w-100">
+           <thead>
+             <tr>
+              <th>Student</th>
+              <th>School Year(s)</th>
+              <th>Grade(s)</th>
+              <th>Status</th>
+              <th></th>
+             </tr>
+           </thead>
+           <tbody>
+           <tr> 
+             <td>White Rice</td>
+             <td>2017-2021</td>
+             <td>5-6</td>
+             <td>Pending</td>
+             <td><a href="#">Edit Transcript</a></td>
+           </tr>       
+           </tbody>
+           </table>
+           </div>
+           <a href="#" class="btn btn-primary mt-4">Purchase Transcripts</a>
+    </div>
+
+    <div class="form-wrap border bg-light py-5 px-25 mb-4">
              <h2 class="mb-3">Download Your Confirmation Letter</h2>
              <div class="mb-2 text-center text-sm-left">
 							</div>
-              <div class="overflow-auto">
+              <div class="overflow-auto max-table">
                  <table class="table-styling w-100">
                   <thead>
                      <tr>
@@ -99,10 +146,83 @@
 					 @endforeach
                   </tbody>
                  </table>
+</div>
                  <div class="mt-2 text-right"> <p>Download your Enrollment Confirmation Letters from the download links above.</p></div>
 					<input type="submit" name="submit" id="submit" class="btn btn-primary" value="Renew Enrollment">
 				</form>
-              </div>  
+              
          </div>
+
+         <div class="form-wrap border bg-light py-5 px-25 mb-4">
+             <h2 class="mb-3">Request School Records Transfer</h2>
+             <div class="d-flex align-items-center flex-wrap">
+				<span class="mb-3 mr-3">Show Enrollments From:</span> <select name="enroll_year" id="enroll_year" class="form-control mr-2 mb-3 w-auto">
+               <option value="2020">2020</option>
+               <option value="2019">2019</option>
+               </select>
+				<input type="text" name="enroll_filter" id="enroll_filter" class="form-control  mr-2 b-radius-20 mb-3 w-auto" value="" placeholder="Filter by first name">
+				<input type="submit" name="enroll_go" id="enroll_go" value="GO" class="btn btn-primary mr-2 mb-3">
+									<input type="submit" name="enroll_clear" id="enroll_clear" value="Show All" disabled="" class="clear btn btn-secondary mb-3" disabled>
+							</div>
+              <div class="overflow-auto max-table">
+                 <table class="table-styling w-100">
+                  <thead>
+                     <tr>
+                        <th>Student </th>
+                        <th>Date</th>
+                        <th>School</th>
+                        <th>Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+						   <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                     <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                     <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                     <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                     <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                     <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                     <tr>
+                        <td>p1 pant</td>
+                        <td>08/20/2020</td>
+                        <td>Sample Elementary School</td>
+                        <td>Records Received</td>
+							</tr>
+                  </tbody>
+                 </table>
+</div>
+					<input type="submit" name="submit" id="submit" class="btn btn-primary mt-4" value="Renew Enrollment">
+				</form>
+              </div>  
+       
   </main>
 @endsection
