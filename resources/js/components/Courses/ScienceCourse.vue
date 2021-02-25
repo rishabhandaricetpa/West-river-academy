@@ -28,7 +28,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.sciencecourse.other_subjects"
+                v-model="science.other_subjects"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -70,7 +70,7 @@
     <div class="mt-5">
       <a
         type="button"
-        class="btn btn-primary float-left"
+        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
         id="addEnglish"
         @click="addNewSocialScienceCourse"
         >Add another Science Course</a

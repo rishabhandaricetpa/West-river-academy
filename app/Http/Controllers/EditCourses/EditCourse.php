@@ -28,7 +28,6 @@ class EditCourse extends Controller
     }
     public function storeEnglish(Request $request)
     {
-        //  dd($request->all());
         DB::beginTransaction();
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
@@ -41,7 +40,7 @@ class EditCourse extends Controller
                     'transcript_period' => 'K-8',
                     'status' => 1
                 ]);
-                $english_course = TranscriptCourse::create([
+                TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
@@ -50,10 +49,10 @@ class EditCourse extends Controller
                     'k8transcript_id' => $period['transcript_id'],
                 ]);
             } else {
-                $subject = $period['subject'];
-                $subject = Subject::where('subject_name', $subject)->first();
+                $subject_name = $period['subject_name'];
 
-                $english_course = TranscriptCourse::create([
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $subject->id,
@@ -86,16 +85,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }
@@ -119,16 +136,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }
@@ -153,16 +188,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }
@@ -187,16 +240,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }
@@ -220,16 +291,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }
@@ -253,16 +342,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }
@@ -286,16 +393,34 @@ class EditCourse extends Controller
         $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         foreach ($request->get('Course', []) as $period) {
-            $subject = $period['subject_name'];
-            $subject = Subject::where('subject_name', $subject)->first();
+            $other_subjects =  $period['other_subject'];
+            if ($other_subjects) {
+                $other_sub = Subject::create([
+                    'courses_id' => $period['courses_id'],
+                    'subject_name' => $other_subjects,
+                    'transcript_period' => 'K-8',
+                    'status' => 1
+                ]);
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $other_sub->id,
+                    'score' => $period['grade'],
+                    'other_subject' => $other_sub->subject_name,
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            } else {
+                $subject_name = $period['subject_name'];
 
-            $english_course = TranscriptCourse::create([
-                'student_profile_id' => $period['student_id'],
-                'courses_id' => $period['courses_id'],
-                'subject_id' => $subject->id,
-                'score' => $period['grade'],
-                'k8transcript_id' => $period['transcript_id'],
-            ]);
+                $subject = Subject::where('subject_name', $subject_name)->first();
+                TranscriptCourse::create([
+                    'student_profile_id' => $period['student_id'],
+                    'courses_id' => $period['courses_id'],
+                    'subject_id' => $subject->id,
+                    'score' => $period['grade'],
+                    'k8transcript_id' => $period['transcript_id'],
+                ]);
+            }
         }
         DB::commit();
     }

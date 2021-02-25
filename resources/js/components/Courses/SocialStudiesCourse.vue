@@ -70,7 +70,7 @@
     <div class="mt-5">
       <a
         type="button"
-        class="btn btn-primary float-left"
+        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
         id="addEnglish"
         @click="addNewEnglishCourse"
         >Add another History/Social Science Course</a
@@ -107,10 +107,10 @@ export default {
     addCourses() {
       axios
         .post(route("socialStudiesCourse.store"), this.form)
-        // .then((response) => {
-        //   window.location =
-        //     "/mathematics/" + this.student_id + "/" + this.transcript_id;
-        // });
+        .then((response) => {
+          window.location =
+            "/mathematics/" + this.student_id + "/" + this.transcript_id;
+        });
     },
     addNewEnglishCourse() {
       this.form.socialStudiesCourse.push({
