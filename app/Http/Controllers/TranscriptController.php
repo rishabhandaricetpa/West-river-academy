@@ -17,11 +17,14 @@ use App\Models\TranscriptPdf;
 use App\Models\TranscriptPayment;
 use App\Models\FeesInfo;
 use Illuminate\Http\Request;
+use App\Mail\TranscriptEmail;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Models\User;
 use PDF;
 use Storage;
+use Illuminate\Support\Facades\Mail;
+
 
 class TranscriptController extends Controller
 {
@@ -199,22 +202,31 @@ class TranscriptController extends Controller
     public function previewTranscript($student_id)
         {      
             $parentId=ParentProfile::getParentId();
-            $address=ParentProfile::where('id',$parentId)->get();
+            $address=ParentProfile::where('id',$parentId)->first();
             $student = StudentProfile::find($student_id);
-            $grades  =TranscriptK8::distinct()->where('student_profile_id',$student_id)->get(['grade']);
+            $grades  =TranscriptK8::where('student_profile_id',$student_id)->orderBy('grade','ASC')->get(['grade']);
             $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
             ->get();
             $transcript_id=Transcript::select()->where('student_profile_id', $student_id)->where('status',"pending")->first();
             $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
-            return view('transcript/preview-transcript',compact('student','transcriptData','grades', 'groupCourses','transcript_id'));
+            return view('transcript/preview-transcript',compact('student','transcriptData','grades', 'groupCourses','transcript_id','address'));
         }
 
         public function purchase(Request $request, $id,$transcript_id)
         {
-            // $transcriptData->save();
+            $id = Auth::user()->id;
+            $user =  User::find($id)->first();
+            $email = Auth::user()->email;
+            Mail::to($email)->send(new TranscriptEmail($user));
+
             $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses','parentProfile'])->first();
             $transcript_fee = FeesInfo::getFeeAmount('transcript');
             return view('transcript.purchase-transcript',compact('student', 'transcript_fee','transcript_id'));
         }
+        public function downlaodTranscript($transcrip_id,$student_id)
+        {
+            return view('transcript/download-transcript',compact('transcrip_id','student_id'));
+        }
+      
 }

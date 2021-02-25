@@ -19,7 +19,7 @@ class TranscriptCourse extends Model
     }
     public function course()
     {
-        return $this->hasOne('App\Models\Course', 'id', 'courses_id');
+        return $this->hasMany('App\Models\Course', 'id', 'courses_id');
     }
     public function StudentProfile()
     {
@@ -29,11 +29,11 @@ class TranscriptCourse extends Model
     {
         return $this->belongsTo('App\Models\TranscriptK8');
     }
-    // public function subject()
-    // {
-    //     return $this->hasOne('App\Models\Subject', 'id', 'subject_id');
-    // }
-    public function subject(){
-        return $this->belongsTo(Subject::class);
+    public function subject()
+    {
+        return $this->hasOne('App\Models\Subject', 'id', 'subject_id');
     }
+    // public function subject(){
+    //     return $this->belongsTo(Subject::class);
+    // }
 }

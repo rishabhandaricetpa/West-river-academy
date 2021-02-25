@@ -68,40 +68,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return redirect('/login');
         });
 
-        //working blades by frontend
-        Route::get('bankinfo', function () {
-            return view('mail/bankinfo');
-        });
-
-        Route::get('/transcript-wizard-dashboard', function () {
-            return view('transcript-wizard-dashboard');
-        });
-
-        Route::get('/purchase-transcript', function () {
-            return view('purchase-transcript');
-        });
-
-        Route::get('/transcript-wizard-grade', function () {
-            return view('transcript-wizard-grade');
-        });
-
-        Route::get('/fees-services', function () {
-            return view('fees-services');
-        });
-
-        Route::get('/transcript-pdf', function () {
-            return view('transcript-pdf');
-        });
-
-        Route::get('/reviewstudent', function () {
-            return view('reviewstudent');
-        });
-
-        Route::get('/graduation-2', function () {
-            return view('graduation-2');
-        });
-
-
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
@@ -296,9 +262,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('preview-transcript', function () {
     //     return view('transcript/preview-transcript');
     // })->name('preview.transcript');
-    Route::get('download-transcript', function () {
-        return view('transcript/download-transcript');
-    })->name('download.transcript');
+  
+    Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
+
     Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
     Route::get('preview-transcript/{student_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 

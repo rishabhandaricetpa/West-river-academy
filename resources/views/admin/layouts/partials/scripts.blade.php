@@ -37,167 +37,135 @@
     //parent datatable
 
     $("#family-table").DataTable({
-      "ajax": "{{ route('admin.datatable.parent') }}",
-      "processing": true,
-      "serverSide": true,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
-          "data": "p1_first_name"
-        },
-        {
-          "data": "country"
-        },
-        {
-          "data": "state"
-        },
-        {
-          "data": "status"
-        },
-        {
-          "data": "created_at"
-        },
-        {
-          "data": "updated_at"
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
-              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
-              `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
-          }
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="view-student">View Students</a>`;
-          }
-        },
-      ]
-    });
+        "ajax": "{{ route('admin.datatable.parent') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "p1_first_name"},
+          { "data": "country" },
+          { "data": "state"},
+          { "data": "status" },
+          { "data": "created_at"},
+          { "data": "updated_at" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>`+ 
+                              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` + 
+                              `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                      } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="view-student">View Students</a>`;                    
+              } 
+          },
+          { "data": "student_profile",
+            "render":function(data){
+              let list = `<ul>`;
+              data.forEach(student  => {
+                  list += `
+                            <li> ${student.fullname} </li>
+                            <li> ${student.email} </li>
+                          `;
+              });
+              list += `</ul>`;
 
-    $("#student-table").DataTable({
-      "ajax": "{{ route('admin.datatable.student') }}",
-      "processing": true,
-      "serverSide": true,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
-          "data": "fullname"
-        },
-        {
-          "data": "d_o_b"
-        },
-        {
-          "data": "email"
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>` +
-              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
-              `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
-          }
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="edit-payment/${id}">View Payments</a>`;
-          }
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="edit-transcript/${id}">Transcripts</a>`;
-          }
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="graduations/${id}/edit">Graduations</a>`;
-          }
-        },
-      ]
-    });
+              return list;
+            }
+          },
+        ]
+      });
+
+      $("#student-table").DataTable({
+        "ajax": "{{ route('admin.datatable.student') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "fullname"},
+          { "data": "d_o_b"},
+          { "data": "email" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>`+ 
+                              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` + 
+                              `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                      } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit-payment/${id}">View Payments</a>`;                    
+              } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="edit-transcript/${id}">Transcripts</a>`;                    
+              } 
+          },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="graduations/${id}/edit">Graduations</a>`;                    
+              } 
+          },
+        ]
+      });
     //name country state active enrolled created modified 
     //coupon datatable
     $("#coupons-table").DataTable({
-      "ajax": "{{ route('admin.coupons.dt') }}",
-      "processing": true,
-      "serverSide": true,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
-          "data": "code"
-        },
-        {
-          "data": "amount"
-        },
-        {
-          "data": "status"
-        },
-        // { "data": "redeem_left" },
-        {
-          "data": "expire_at"
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="{{ route('admin.view.coupon') }}/${id}/edit">Edit</a>`;
-          }
-        },
-      ]
-    });
+        "ajax": "{{ route('admin.coupons.dt') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;
+                    } 
+          },
+          { "data": "code" },
+          { "data": "amount" },
+          { "data": "status" },
+          // { "data": "redeem_left" },
+          { "data": "expire_at" },
+          { "data": "id",
+            "render": function ( id ) {
+                        return `<a href="{{ route('admin.view.coupon') }}/${id}/edit">Edit</a>`;
+                      } 
+          },
+        ]
+      });
 
-    $("#graduation-table").DataTable({
-      "ajax": "{{ route('admin.graduation.dt') }}",
-      "processing": true,
-      "serverSide": true,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-            e
-          }
-        },
-        {
-          "data": "student.fullname"
-        },
-        {
-          "data": "student.email"
-        },
-        {
-          "data": "student.birthdate"
-        },
-        {
-          "data": "grade_9_info",
-          "render": function(data, type, row, meta) {
-            return `
+
+      $("#graduation-table").DataTable({
+        "ajax": "{{ route('admin.graduation.dt') }}",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "columns": [
+          { 
+            "data": "id",
+            "render": function ( data, type, row, meta ) {
+                        return meta.row +1;e
+                    } 
+          },
+          { "data": "student.fullname" },
+          { "data": "student.email" },
+          { "data": "student.birthdate" },
+          { 
+            "data": "grade_9_info",
+            "render": function ( data, type, row, meta ) {
+                        return `
                           <ul>
                             <li>
                                 Grade 9 : ${ row.grade_9_info }
@@ -219,58 +187,47 @@
                         return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
                       } 
           }
-        },
-        {
-          "data": "status"
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
-          }
-        }
-      ]
-    });
-
-    $("#generate-code").on('click', function() {
-      let _this = $(this);
-      let text = _this.text();
-
-      _this.attr('disabled', true);
-      _this.text('Generating...');
-
-      $.ajax({
-        type: "get",
-        url: "{{route('admin.coupons.generate')}}",
-        success: function(response) {
-          $("#code").val(response);
-          _this.attr('disabled', false);
-          _this.text(text);
-        },
-        error: function() {
-          _this.attr('disabled', false);
-          _this.text(text);
-        }
+        ]
       });
-    });
 
-    $('#assign-select').select2({
-      placeholder: 'Select Parents to assign Coupon',
-      allowClear: true
-    });
+   
+      $("#generate-code").on('click',function () {
+        let _this = $(this);
+        let text = _this.text();
 
-  });
-  $(function() {
+        _this.attr('disabled',true);
+        _this.text('Generating...');
+        
+        $.ajax({
+          type: "get",
+          url: "{{route('admin.coupons.generate')}}",
+          success: function (response) {
+            $("#code").val(response);
+            _this.attr('disabled',false);
+            _this.text(text);
+          },
+          error: function () { 
+            _this.attr('disabled',false);
+            _this.text(text);
+          }
+        });
+      });
+
+      $('#assign-select').select2({
+        placeholder: 'Select Parents to assign Coupon',
+        allowClear: true
+      });
+
+    });
+    $(function(){
     $(".datepicker").datepicker({
-      dateFormat: "yy-mm-dd"
+        dateFormat: "yy-mm-dd"
     });
     $("#addressData").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-  });
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    
+});
 </script>
 
 <!-- ChartJS -->

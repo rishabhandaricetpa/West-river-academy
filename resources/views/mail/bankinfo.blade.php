@@ -53,18 +53,8 @@
 </table>
 Your Address
 <address style="font-family:'Catamaran', sans-serif;">
-    Written by <a href="mailto:xyz@example.com">Test</a>.<br>
-    Visit us at:
-    Example.com
-    XYZ
-    ABCS
+    Written by <a href="mailto:xyz@example.com">West River Academy</a>.<br>
+    Visit us at: https://www.westriveracademy.com/
 </address>
-<!-- ITEM: CUSTPAYMENT
-Custom Payment
-PRICE: $0.00
-QT: 1
-ITEM TOTAL: $0.00
-
-TOTAL: $0.00 -->
 </body>
 </html>

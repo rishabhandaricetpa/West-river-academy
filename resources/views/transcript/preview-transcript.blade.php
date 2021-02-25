@@ -48,7 +48,7 @@
      <tbody>
          <tr style="width:100%;">
             <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
-            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">durmitorska 22, 21000 novi sad, serbia</td>
+            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$address->street_address}} {{$address->city}}, {{$address->zip_code}}, {{$address->country}}</td>
             <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
             <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">2019-20</td>
           </tr>
