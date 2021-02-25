@@ -35,8 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/payments-invoice', function () {
                 return view('admin/paymentsInvoice/payment');
             });
-
-
         }
     );
 
@@ -117,4 +115,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
     Route::get('edit-subGrades/{subject_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
 
+    Route::get('other-subjects/{course_id}', 'CourseController@otherSubjects')->name('other.subjects');
+    Route::get('add-other/{subject_id}', 'CourseController@addSubjects')->name('add.other');
+    Route::get('delete/others/{subject_id}', 'CourseController@deleteSubjects')->name('delete.other');
+
+    Route::get('delete/school/{transcript_id}', 'CourseController@deleteSchool')->name('deleteSchool');
 });

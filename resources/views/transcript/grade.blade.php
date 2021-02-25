@@ -84,15 +84,15 @@
           </div>
         </div>
         <h3 class="mb-3 mt-4">Where were you enrolled for this grade?</h3>
-        <div class="col-sm-6">
-          <div class="form-group d-sm-flex mb-2">
+        <div class="col-sm-6 px-0">
+          <div class="form-group d-sm-flex mb-2 form-check">
             <input class="form-check-input" type="radio" name="school_name" value="West River Academy">
             <label class="form-check-label" for="">
               West River Academy
             </label>
           </div>
-          <div class="form-group d-sm-flex mb-2">
-
+          <div class="form-group d-sm-flex mb-2 form-check">
+            <input class="form-check-input" type="radio" name="school_name" value="West River Academy">
             <label class="form-check-label" for="">
               Other:Full Name of School
             </label>

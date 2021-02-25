@@ -22,16 +22,17 @@
             </div>
         </form>
     </div>
-        @foreach($transcriptData as $school)
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+    @foreach($transcriptData as $school)
+    <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <a type="button" href="{{ url('admin/view-pdf',1)}}" class="btn btn-primary">Generate Unsigned Transcript</a>
         <a type="button" href="{{ url('admin/file-upload')}}" class="btn btn-primary">Upload Signed Transcript</a>
-            <legend>{{$school->school_name}}</legend>
-            <p>
-                Academic School Year(s):{{$school->enrollment_year}}<br>
-                Grade: {{$school->grade}}<br>
-            </p>
-            <table id="addressData" class="table table-bordered table-striped data-table"">
+        <a type="button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary">Delete School Record</a>
+        <legend>{{$school->school_name}}</legend>
+        <p>
+            Academic School Year(s):{{$school->enrollment_year}}<br>
+            Grade: {{$school->grade}}<br>
+        </p>
+        <table id="addressData" class="table table-bordered table-striped data-table"">
                 <thead>
                     <tr>
                         <th>Courses</th>
@@ -55,21 +56,21 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><a type="button"  href="{{ route('admin.edit.subGrades',$subject->id)}}" class="btn btn-primary">Edit</a></td>
-                    </tr>
-                    @endforeach
-                    @endforeach
-                </tbody>
-            </table>
-                </form>
-            </div>
-        @endforeach
+                        <td><a type=" button" href="{{ route('admin.edit.subGrades',$subject->id)}}" class="btn btn-primary">Edit</a></td>
+            </tr>
+            @endforeach
+            @endforeach
+            </tbody>
+        </table>
+        </form>
+    </div>
+    @endforeach
     </div>
 </main>
 @endsection
 <script>
     function myFunction() {
-      if(!confirm("Are You Sure to delete this"))
-      event.preventDefault();
-  }
+        if (!confirm("Are You Sure to delete this"))
+            event.preventDefault();
+    }
 </script>
