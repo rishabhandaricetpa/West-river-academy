@@ -2,20 +2,24 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="maths in form.mathscourse"
-      :key="maths.id"
+      v-for="(englishCourse, index) in form.englishCourse"
+      :key="englishCourse.id"
     >
       <div class="position-relative">
+        <span
+          class="remove"
+          @click="removeEnglishCourse(index)"
+          ><i class="fas fa-times"></i>
+        </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
             <select
               class="form-control mb-4"
-              name="maths_course"
-              id="maths_course"
-              required
-              v-model="maths.subject"
+              name="english_course"
+              id="english_course"
+              v-model="englishCourse.subject_name"
             >
-              <option v-for="(val, i) in mathscourse" :key="i">
+              <option v-for="(val, i) in englishcourse" :key="i">
                 {{ val.subject_name }}
               </option>
             </select>
@@ -24,7 +28,7 @@
               <input
                 type="text"
                 class="form-control"
-                v-model="form.mathscourse.other_subjects"
+                v-model="englishCourse.other_subject"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -47,7 +51,7 @@
                         class="form-check-input"
                         type="radio"
                         :value="val"
-                        v-model="maths.grade"
+                        v-model="englishCourse.grade"
                         required
                       />
                       <label class="form-check-label pl-1 pl-sm-0" for="">
@@ -66,12 +70,19 @@
     <div class="mt-5">
       <a
         type="button"
-        class="btn btn-primary float-left"
+        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
         id="addEnglish"
-        @click="addNewSocialScienceCourse"
-        >Add another Mathematics Course</a
+        @click="addNewEnglishCourse"
+        >Add another English/Language Arts Course</a
       >
-      <button type="submit" class="btn btn-primary">Continue</button>
+          <a
+        type="button"
+        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
+        id="addEnglish"
+        @click="viewCourses"
+        >View All Courses</a
+      >
+      <button type="submit" class="btn btn-primary mb-sm-0 mb-3">Continue</button>
     </div>
   </form>
 </template>
@@ -82,7 +93,7 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  name: "MathsCourse",
+  name: "EditEnglishCourse",
   components: {
     "v-select": vSelect,
   },
@@ -92,53 +103,55 @@ export default {
       form: {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
-        mathscourse: [
-          {
-            student_id: this.student_id,
-            courses_id: this.courses_id,
-            transcript_id: this.transcript_id,
-            subject: "",
-            other_subjects: "",
-            grade: "",
-          },
-        ],
+        englishCourse: [],
       },
       removingPeriod: false,
     };
   },
-  props: ["mathscourse", "student_id", "courses_id", "transcript_id"],
+  props: ["englishcourse", "transcripts", "english_details", "student_id","courses_id","transcript_id"],
   methods: {
     addCourses() {
-      axios.post(route("mathematics.store"), this.form).then((response) => {
+       axios.post(route("editEnglishCourse.store"), this.form)
+     .then((response) => {
         window.location =
-          "/science/" + this.student_id + "/" + this.transcript_id;
+          "/edit-social-studies/" + this.student_id + "/" + this.transcript_id;
       });
     },
-    addNewSocialScienceCourse() {
-      this.form.mathscourse.push({
+    addNewEnglishCourse() {
+      this.form.englishCourse.push({
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         courses_id: this.courses_id,
-        transcript_id: this.transcript_id,
-        subject: "",
-        other_subjects: "",
+        subject_name: "",
+        other_subject: "",
         grade: "",
       });
     },
-  },
-  removeEnglishCourse(index) {
-    if (this.removingPeriod) {
-      return;
-    }
-    this.removingPeriod = true;
+    initForm() {
+      const courses = this.transcripts.map((transcript) => {
+        return {
+          transcript_id: transcript.k8transcript_id,
+          student_id: transcript.student_profile_id,
+          courses_id: transcript.courses_id,
+          subject_name: transcript.subject.subject_name,
+          other_subject: transcript.other_subject,
+          grade: transcript.score,
+        };
+      });
 
-    let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    reqData.englishCourse.splice(index, 1);
-  },
-  computed: {
-    canRemovePeriod() {
-      return this.form.englishCourse.length > 1;
+      this.form.englishCourse = courses;
     },
+    viewCourses(){
+      window.location =
+          "/another-grade/" + this.student_id;
+    },
+
+   removeEnglishCourse(index) {
+       this.form.englishCourse.splice(index, 1)
+    }
+  },
+  created() {
+    this.initForm();
   },
 };
 </script>

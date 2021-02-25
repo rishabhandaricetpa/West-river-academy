@@ -1,53 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>laravel 8 file upload example - ItSolutionStuff.com.com</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-  
-<body>
-<div class="container">
-   
-    <div class="panel panel-primary">
-      <div class="panel-heading"><h2>upload Transcript</h2></div>
-      <div class="panel-body">
-   
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
-        </div>
-        @endif
-  
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-  
-        <form action="{{ route('admin.file.upload.post') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-  
-                <div class="col-md-6">
+@extends('admin.app')
+
+@section('content')
+<section class="content">
+      <div class="container-fluid position-relative">
+      <h1>Upload Transcript</h1>
+            <div class="form-wrap border py-5 px-25 position-relative">
+
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
+            
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+              <form action="{{ route('admin.file.upload.post') }}" method="POST" enctype="multipart/form-data">
+                @csrf           
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Upload Signed Document<sup>*</sup></label>
                     <input type="file" name="file" class="form-control">
                 </div>
-   
-                <div class="col-md-6">
-                    <button type="submit" class="btn btn-success">Upload</button>
+                  </div>
+                <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Upload</button>
+                  <a href="/admin/manage-courses" class="btn btn-primary">Back</a>
                 </div>
-   
+              </form>
             </div>
-        </form>
-  
-      </div>
-    </div>
-</div>
-</body>
-  
-</html>
+            <!-- /.card -->
+
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+</section>
+
+@endsection
+
+

@@ -111,7 +111,7 @@
          <div style="width:40%;text-transform:uppercase;text-align:center;padding:15px;box-sizing:border-box;"><span style="border-top: 1px solid #000;display:block;">date</span></div>
          </div>
          <div style="width:40%;">
-         <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo">
+         <!-- <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo"> -->
          </div>
         </div>
         <p style="text-align:center;width:100%;">West River Academy is</p>

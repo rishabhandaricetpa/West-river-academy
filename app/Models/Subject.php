@@ -16,11 +16,11 @@ class Subject extends Model
 
     public function parentProfile()
     {
-        return $this->belongsTo('App\Models\Course');
+        return $this->belongsTo('App\Models\Subject');
     }
-    public function transcriptCourse()
-    {
-        return $this->belongsTo('App\Models\TranscriptCourse');
-    }
+    // public function transcriptCourse()
+    // {
+    //     return $this->belongsTo('App\Models\TranscriptCourse');
+    // }
 
 }

@@ -12,13 +12,19 @@ use App\Models\Course;
 use App\Models\Subject;
 use App\Models\EnrollmentPayment;
 use App\Models\TranscriptK8;
+use App\Models\TranscriptCourse;
 use App\Models\TranscriptPdf;
+use App\Models\TranscriptPayment;
+use App\Models\FeesInfo;
 use Illuminate\Http\Request;
+use App\Mail\TranscriptEmail;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Models\User;
 use PDF;
 use Storage;
+use Illuminate\Support\Facades\Mail;
+
 
 class TranscriptController extends Controller
 {
@@ -35,8 +41,16 @@ class TranscriptController extends Controller
     public function notification(Request $request, $id)
     {
         if ($request->get('grade') == 'K-8') {
+            $transcriptData = Transcript::create([
+                'parent_profile_id' => ParentProfile::getParentId(),
+                'student_profile_id' => $id,
+                'period' => 'K-8',
+                'status' => 'pending',
+            ]);
+            $transcript_fee = FeesInfo::getFeeAmount('transcript');
+            TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id],[ 'amount' => $transcript_fee]);
             $student = StudentProfile::find($id);
-            return view('transcript.dashboard-transcript', compact('student'));
+            return view('transcript.dashboard-transcript', compact('student','transcriptData'));
         } else {
             //add screen for 9-12 students
             dd('Add 9-12 screen');
@@ -49,6 +63,7 @@ class TranscriptController extends Controller
      */
     public function viewEnrollment(Request $request, $id)
     {
+
         $student = StudentProfile::find($id);
         $student->first_name = $request->get('first_name');
         $student->middle_name = $request->get('middle_name');
@@ -59,6 +74,7 @@ class TranscriptController extends Controller
             [
                 'student_profile_id' => $id,
                 'country' => $request->get('country'),
+                'transcript_id'=>$request->get('transcript_id'),
             ]
         );
         return view('transcript.grade', compact('transcript', 'student'));
@@ -70,9 +86,7 @@ class TranscriptController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeEnrollmentYear(Request $request)
-    {
-    }
+
     public function viewStudent($id)
     {
         $enroll_student = StudentProfile::find($id);
@@ -89,11 +103,11 @@ class TranscriptController extends Controller
             return view('transcript.transcript-wizard', compact('enroll_student'));
         }
     }
-    public function displayStudent($id)
+    public function displayStudent($id,$transcriptData_id)
     {
         $studentProfile = StudentProfile::find($id);
         $countries = Country::all();
-        return view('transcript.dashboard-transcript-filling', compact('studentProfile', 'countries'));
+        return view('transcript.dashboard-transcript-filling', compact('studentProfile', 'countries','transcriptData_id'));
     }
     public function storeGrade(Request $request, $id)
     {
@@ -117,7 +131,7 @@ class TranscriptController extends Controller
         $result = array_unique($items);
         return view('transcript.transcript-enrollment-year', compact('transcript', 'id', 'result'));
     }
-    public function storeYear(Request $request, $student_id)
+    public function storeYear(Request $request, $student_id, $transcript_id)
     {
         $transcript_id = $request->get('transcript_id');
         $transcript = TranscriptK8::find($transcript_id);
@@ -127,46 +141,92 @@ class TranscriptController extends Controller
             $transcript->enrollment_year = $request->get('other_year');
         }
         $transcript->save();
-        $course = Course::select('id', DB::raw('count(*) as total'))
-            ->groupBy('id')
-            ->where('course_name', 'English / Language Arts')
-            ->first();
-        $courses_id = $course->id;
-        $englishCourse = Subject::where('courses_id', $course->id)
-            ->where('transcript_period', 'K-8')
-            ->get();
-        return view('courses.english-course', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
+
+        return redirect()->route('english.course', [$student_id, $transcript_id]);
     }
+
     public function genrateTranscript($id)
     {
+
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
-        $studentProfileData=StudentProfile::whereId($id)->first();
-        $pdfname=$studentProfileData->first_name.'_'.$studentProfileData->last_name.'_'.$studentProfileData->d_o_b->format('M_d_Y').'_'.'unsigned_transcript_letter';
+
+        $studentProfileData = StudentProfile::whereId($id)->first();
+
+        $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'unsigned_transcript_letter';
+
         $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
+
         $id = $parentProfileData->id;
         $data = [
-            'student'=>$studentProfileData,
-            'enrollment'=>$enrollment_periods,
+            'student' => $studentProfileData,
+            'enrollment' => $enrollment_periods,
             'title' => 'transcript',
             'date' => date('m/d/Y'),
         ];
+
         $pdf = PDF::loadView('transcript.pdf', $data);
-        Storage::disk('local')->put('public/pdf/'.$pdfname.'.pdf', $pdf->output());
+
+        Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
         //store pdf link
-        $storetranscript=TranscriptPdf::create([
+        $storetranscript = TranscriptPdf::create([
             'student_profile_id' => $studentProfileData->id,
-            'pdf_link' => $pdfname.'.pdf',
-            'k8transcript_id'=>'1',
+            'pdf_link' => $pdfname . '.pdf',
+            'k8transcript_id' => '1',
             'status' => 'pending',
         ]);
-        return $pdf->download($pdfname.'.pdf');
-        
-    }  
+        return $pdf->download($pdfname . '.pdf');
+    }
     public function viewAnotherEnrollment($student_id)
     {
-        $transcript = new TranscriptK8();
         return view('transcript.grade');
     }
+    public function displayAllCourse($transcript_id, $student_id)
+    {
+        $courses = TranscriptCourse::where('k8transcript_id', $transcript_id)
+            ->join('k8transcript', 'k8transcript.id', 'transcript_course.k8transcript_id')
+            ->join('courses', 'courses.id', 'transcript_course.courses_id')
+            ->join('subjects', 'subjects.id', 'transcript_course.subject_id')
+            ->get();
+        $studentInfo = StudentProfile::find($student_id);
+        $school = TranscriptK8::find($transcript_id);
+        return view('transcript-wizard-grade', compact('courses', 'transcript_id', 'student_id', 'studentInfo', 'school'));
+    }
+    public function deleteSchool($transcript_id)
+    {
+        $transcriptDetails = TranscriptK8::find($transcript_id)->delete();
+        return redirect()->back();
+    }
+
+    public function previewTranscript($student_id)
+        {      
+            $parentId=ParentProfile::getParentId();
+            $address=ParentProfile::where('id',$parentId)->first();
+            $student = StudentProfile::find($student_id);
+            $grades  =TranscriptK8::where('student_profile_id',$student_id)->orderBy('grade','ASC')->get(['grade']);
+            $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
+            ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
+            ->get();
+            $transcript_id=Transcript::select()->where('student_profile_id', $student_id)->where('status',"pending")->first();
+            $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
+            return view('transcript/preview-transcript',compact('student','transcriptData','grades', 'groupCourses','transcript_id','address'));
+        }
+
+        public function purchase(Request $request, $id,$transcript_id)
+        {
+            $id = Auth::user()->id;
+            $user =  User::find($id)->first();
+            $email = Auth::user()->email;
+            Mail::to($email)->send(new TranscriptEmail($user));
+
+            $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses','parentProfile'])->first();
+            $transcript_fee = FeesInfo::getFeeAmount('transcript');
+            return view('transcript.purchase-transcript',compact('student', 'transcript_fee','transcript_id'));
+        }
+        public function downlaodTranscript($transcrip_id,$student_id)
+        {
+            return view('transcript/download-transcript',compact('transcrip_id','student_id'));
+        }
+      
 }

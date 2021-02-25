@@ -72,23 +72,7 @@
              </div>
          </div>
 </div>
-         <div class="form-wrap border bg-light py-5 px-25 mb-4">
-             <h2 class="mb-3">Billing Information</h2>
-              <div class="row">
-                <div class="col-sm-6 d-flex justify-content-center align-items-center">
-                   <div class="text-center">
-                     <p class="mb-0">Amount Due:</p>
-                     <span class="total-amount">$580.00</span>
-                   </div>
-                </div>
-                <div class="col-sm-6 d-flex justify-content-center align-items-center">
-                   <div class="text-center">
-                     <p>Make an Online Payment:</p>
-                     <a href="#" class="btn btn-primary">Pay Now</a>
-                   </div>
-                </div>
-              </div>
-         </div>
+        
 
          <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">Transcripts</h2>
@@ -99,20 +83,24 @@
            <thead>
              <tr>
               <th>Student</th>
-              <th>School Year(s)</th>
-              <th>Grade(s)</th>
               <th>Status</th>
-              <th></th>
+              <th>Edit Tramscript</th>
+              <th>Download</th>
              </tr>
            </thead>
            <tbody>
+           @foreach($transcript as $transcriptData)
            <tr> 
-             <td>White Rice</td>
-             <td>2017-2021</td>
-             <td>5-6</td>
-             <td>Pending</td>
+             <td>{{$transcriptData['student']['fullname']}}</td>
+             <td>{{($transcriptData->status)}}</td>
              <td><a href="#">Edit Transcript</a></td>
-           </tr>       
+             @if ($transcriptData->status === 'paid')
+             <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Download Transcript</a></td>
+               @elseif($transcriptData->status === 'pending')
+            <td>Payment Pending</td>
+            @endif
+           </tr>
+           @endforeach       
            </tbody>
            </table>
            </div>
@@ -151,78 +139,8 @@
 					<input type="submit" name="submit" id="submit" class="btn btn-primary" value="Renew Enrollment">
 				</form>
               
-         </div>
-
-         <div class="form-wrap border bg-light py-5 px-25 mb-4">
-             <h2 class="mb-3">Request School Records Transfer</h2>
-             <div class="d-flex align-items-center flex-wrap">
-				<span class="mb-3 mr-3">Show Enrollments From:</span> <select name="enroll_year" id="enroll_year" class="form-control mr-2 mb-3 w-auto">
-               <option value="2020">2020</option>
-               <option value="2019">2019</option>
-               </select>
-				<input type="text" name="enroll_filter" id="enroll_filter" class="form-control  mr-2 b-radius-20 mb-3 w-auto" value="" placeholder="Filter by first name">
-				<input type="submit" name="enroll_go" id="enroll_go" value="GO" class="btn btn-primary mr-2 mb-3">
-									<input type="submit" name="enroll_clear" id="enroll_clear" value="Show All" disabled="" class="clear btn btn-secondary mb-3" disabled>
-							</div>
-              <div class="overflow-auto max-table">
-                 <table class="table-styling w-100">
-                  <thead>
-                     <tr>
-                        <th>Student </th>
-                        <th>Date</th>
-                        <th>School</th>
-                        <th>Status</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-						   <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                     <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                     <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                     <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                     <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                     <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                     <tr>
-                        <td>p1 pant</td>
-                        <td>08/20/2020</td>
-                        <td>Sample Elementary School</td>
-                        <td>Records Received</td>
-							</tr>
-                  </tbody>
-                 </table>
-</div>
-					<input type="submit" name="submit" id="submit" class="btn btn-primary mt-4" value="Renew Enrollment">
+         </div>     
 				</form>
-              </div>  
        
   </main>
 @endsection

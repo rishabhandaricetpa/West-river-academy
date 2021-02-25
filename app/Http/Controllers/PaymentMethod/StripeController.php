@@ -82,17 +82,7 @@ class StripeController extends Controller
                 Coupon::removeAppliedCoupon();
 
                 if ($charges->status == 'succeeded') {
-                    $cartItems = Cart::select('item_id')->where('parent_profile_id', $parentProfileData->id)->get();
-                    foreach ($cartItems as $cart) {
-                        $enrollemtpayment = EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
-                        $enrollemtpayment->status = 'paid';
-                        $enrollemtpayment->transcation_id = $charges->id;
-                        $enrollemtpayment->payment_mode = 'Credit Card';
-                        $enrollemtpayment->save();
-                    }
-
-                    $refreshCart = Cart::select()->where('parent_profile_id', $parentProfileData->id)->get();
-                    $refreshCart->each->delete();
+                    Cart::emptyCartAfterPayment('Credit Card', 'paid', $charges->id);
                 } else {
                     $notification = array(
                         'message' => 'Payment not processed!Please check with your bank!',

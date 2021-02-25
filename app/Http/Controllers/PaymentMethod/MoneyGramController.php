@@ -53,7 +53,7 @@ class MoneyGramController extends Controller
        
         //update cart status active 
     
-        $emtyCart= Cart::emptyCart($this->parent_profile_id,$type);
+        Cart::emptyCartAfterPayment($type, 'active');
 
         Mail::to($email)->send(new MoneyGram($user));
 

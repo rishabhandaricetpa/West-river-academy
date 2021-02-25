@@ -16,11 +16,10 @@ class Course extends Model
 
     public function subjects()
     {
-        return $this->hasMany('App\Models\Subject', 'course_id', 'id');
+        return $this->hasMany('App\Models\Subject', 'courses_id', 'id');
     }
     public function transcriptCourse()
     {
         return $this->belongsTo('App\Models\TranscriptCourse');
     }
-
 }

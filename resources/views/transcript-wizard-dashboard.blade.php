@@ -4,7 +4,7 @@
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
     <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
+    <div class="form-wrap border bg-light py-5 px-25 mb-4 school-record">
         <h2 class="mb-3">{{$student->first_name}}</h2>
         <form method="POST" action="" class="mb-0">
 
@@ -23,87 +23,68 @@
         </form>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <h2 class="mb-3">Solana Beach Elementary School</h2>
-        <div>
-            <p class="mb-0">Academic School Year(s): 2017-2018</p>
-            <p>Grade: 5</p>
-        </div>
+
         <div class="overflow-auto">
             <table class="table-styling w-100">
                 <thead>
                     <tr>
-                        <th>Course / Subject</th>
-                        <th>Category</th>
-                        <th>Grade</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>ENGLISH</td>
-                        <td>English / Language Arts</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>GEOGRAPHY</td>
-                        <td>Social Studies / History</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>MATHEMATICS</td>
-                        <td>Mathematics</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>PHYSICAL EDUCATION</td>
-                        <td>Physical Education</td>
-                        <td>P</td>
-                    </tr>
-                    <tr>
-                        <td>SCIENCE</td>
-                        <td>Science</td>
-                        <td>c</td>
-                    </tr>
+
+
+
                 </tbody>
             </table>
         </div>
-        <a href="#" class="btn btn-primary mt-4" role="button">Select Course Names and Grades</a>
-    </div>
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <h2 class="mb-3">West River Academy</h2>
-        <div>
-            <p class="mb-0">Academic School Year(s): 2019-2020</p>
-            <p>Grade: 5</p>
+        @foreach($transcriptDatas as $school)
+        <div class="seperator mb-4">
+            <h2 class="mb-2">{{$school->school_name}}</h2>
+
+            <a href="{{route('delete.school',$school->id)}}" class="btn btn-primary float-right" type="submit" value="Delete School Record">Delete School Record</a>
+
+            <p class="mb-0"><span class="font-weight-bold mr-2">Academic School Year(s):</span>{{$school->enrollment_year}} </p>
+            <p> <span class="font-weight-bold mr-2"> Grade:</span> {{$school->grade}}</p>
+
+            <div class="overflow-auto">
+                <table class="table-styling w-100">
+                    <thead>
+                        <tr>
+                            <th>Subjects</th>
+                            <th class="hide">Courses</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach($school->TranscriptCourse as $course)
+                        @foreach ($course->subjects as $subject)
+                        <tr>
+
+                            <td>{{$subject->subject_name}}</td>
+                            <td>
+                                @php
+                                $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
+                                return $value['id'] == $subject['courses_id'];
+                                });
+                                @endphp
+                                {{$firstCourse->course_name}}
+                            </td>
+                            <td>{{$course->score}}</td>
+                        </tr>
+                        @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="buttongroup">
+                <a href="{{route('displayAllCourse',[$school->id,$school->student_profile_id])}}" class="btn btn-primary mt-4">Select Courses and Grade</a>
+            </div>
         </div>
-        <div class="overflow-auto">
-            <table class="table-styling w-100">
-                <thead>
-                    <tr>
-                        <th>Course / Subject</th>
-                        <th>Category</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>ENGLISH</td>
-                        <td>English / Language Arts</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>GEOGRAPHY</td>
-                        <td>Social Studies / History</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>MATHEMATICS</td>
-                        <td>Mathematics</td>
-                        <td>A</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <a href="#" class="btn btn-primary mt-4" role="button">Select Course Names and Grades</a>
+        @endforeach
     </div>
+
 
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <p>You can use the button below to add classes from other schools, colleges, and universities. Course selection, credits, and grades must match exactly the transcript we have on file from the other school. Heading on transcript will indicate the name of the school.</p>
@@ -113,7 +94,7 @@
         <p>If you are finished with this transcript and would like to see what it looks like, you can click the "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click the "Submit Transcript" button.</p>
         <a href="#" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
         <a href="#" class="btn btn-primary mt-3 ml-2" role="button">Preview Transcript</a>
-        <a href="#" class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
+        <a href="{{url ('preview-transcript',$student->id)}}" class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
     </div>
 </main>
 

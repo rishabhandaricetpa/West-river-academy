@@ -44,10 +44,11 @@
           <a class="nav-link" href="#">faq</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">logout</a>
+          <a class="nav-link" href="{{ url('/logout') }}">logout</a>
         </li>
       </ul>
-      <div class="action-buttons">
+      @if(Auth::id())
+        <div class="action-buttons d-none">
       <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
       <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
     </div>
@@ -64,11 +65,16 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
       <span class="notify-time">12:40 PM</span>
       </li>
-    </ul>
+      </ul>
     <a href="#" class="text-secondary float-right mb-2">View Old Notifications</a>
     </div>
-</div>
-
+    </div>
+      @else
+        <div class="action-buttons">
+      <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
+      <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
+    </div> 
+    @endif 
     </div>
   
   </nav>

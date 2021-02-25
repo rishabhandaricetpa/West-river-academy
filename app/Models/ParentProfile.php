@@ -82,4 +82,8 @@ class ParentProfile extends Model
         $parentProfileData = User::find($id)->parentProfile()->first();
         return $parentProfileData->id;
     }
+    public function transcripts()
+    {
+        return $this->hasMany('App\Models\Graduation', 'parent_profile_id', 'id');
+    }
 }

@@ -10,7 +10,7 @@ class TranscriptCourse extends Model
     use HasFactory;
     protected $table = 'transcript_course';
     protected $fillable = [
-        'student_profile_id', 'courses_id', 'subject_id', 'score', 'k8transcript_id'
+        'student_profile_id', 'courses_id', 'subject_id', 'score', 'k8transcript_id', 'other_subject'
     ];
 
     public function subjects()
@@ -29,4 +29,11 @@ class TranscriptCourse extends Model
     {
         return $this->belongsTo('App\Models\TranscriptK8');
     }
+    public function subject()
+    {
+        return $this->hasOne('App\Models\Subject', 'id', 'subject_id');
+    }
+    // public function subject(){
+    //     return $this->belongsTo(Subject::class);
+    // }
 }

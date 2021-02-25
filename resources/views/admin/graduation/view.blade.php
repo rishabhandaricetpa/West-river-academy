@@ -26,6 +26,7 @@
                     <th>Student Email</th>
                     <th>Birthdate</th>
                     <th>Grades Details</th>
+                    <th>Apostille Country</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAmountOnGraduationsTable extends Migration
+class AddOtherSubjectToTranscriptCourse extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddAmountOnGraduationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('graduations', function (Blueprint $table) {
-            $table->string('amount')->nullable()->after('status');
+        Schema::table('transcript_course', function (Blueprint $table) {
+            $table->string('other_subject')->nullable();
         });
     }
 
@@ -25,6 +25,8 @@ class AddAmountOnGraduationsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('transcript_course', function (Blueprint $table) {
+            //
+        });
     }
 }
