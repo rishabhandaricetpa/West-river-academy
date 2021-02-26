@@ -90,9 +90,8 @@ class StudentController extends Controller
         $parentProfileData = User::find($id)->parentProfile()->first();
         $parentId = $parentProfileData->id;
         $student = StudentProfile::where('parent_profile_id', $parentId)->get();
-        $transcript=Transcript::where('parent_profile_id',$parentId)->with('student')->get();
-        // dd($transcript);
-        return view('SignIn.dashboard', compact('student','transcript'));
+        $transcript = Transcript::where('parent_profile_id', $parentId)->with('student')->get();
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId'));
     }
 
     public function confirmationpage($id)
@@ -292,7 +291,7 @@ class StudentController extends Controller
         $parentProfileData = User::find(auth()->user()->id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
-        $start_date=$countryData->start_date;
+        $start_date = $countryData->start_date;
         $sem = Carbon::parse($start_date);
         $semestermonth =  $sem->addMonths(5);
         $countryId = $countryData->id;
@@ -303,7 +302,7 @@ class StudentController extends Controller
             ->orderBy('enrollment_payments.status', 'desc')
             ->get();
 
-        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData','semestermonth'));
+        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
     }
 
 

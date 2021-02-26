@@ -115,9 +115,11 @@ class TranscriptController extends Controller
         $transcript = TranscriptK8::find($transcript_id);
         $transcript->grade = $request->get('student_grade');
 
-        if ($request->get('school_name')) {
+        if ($request->get('school_name') == 'West River Academy') {
+
             $transcript->school_name = $request->get('school_name');
-        } elseif ($request->get('other_school')) {
+        } elseif ($request->get('school_name') == 'Others') {
+
             $transcript->school_name = $request->get('other_school');
         }
         $transcript->save();

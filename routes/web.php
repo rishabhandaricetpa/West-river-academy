@@ -262,7 +262,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('preview-transcript', function () {
     //     return view('transcript/preview-transcript');
     // })->name('preview.transcript');
-  
+
     Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
 
     Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
@@ -316,6 +316,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('/edit/another', 'EditCourses\EditCourse@storeAnother')->name('editAnother.store');
 
     //delete school
-
     Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
+
+    //Record Transfer
+    Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
 });
