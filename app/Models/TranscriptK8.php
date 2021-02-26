@@ -13,10 +13,6 @@ class TranscriptK8 extends Model
         'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name','transcript_id',
     ];
 
-    public function transcriptPdf()
-    {
-        return $this->hasMany('App\Models\TranscriptPdf', 'k8transcript_id', 'id');
-    }
     public function transcripts()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');

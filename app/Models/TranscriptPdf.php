@@ -11,11 +11,11 @@ class TranscriptPdf extends Model
     use HasFactory;
     protected $table = 'transcript_pdf';
     protected $fillable = [
-        'student_profile_id', 'pdf_link', 'status', 'k8transcript_id',
+        'student_profile_id', 'pdf_link', 'status', 'transcript_id',
     ];
 
-    public function TranscriptK8()
+    public function Transcript()
     {
-        return $this->belongsTo('App\Models\TranscriptK8');
+        return $this->belongsTo('App\Models\Transcript');
     }
 }

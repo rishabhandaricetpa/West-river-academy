@@ -230,6 +230,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 
 
+    // final-submission.blade
+    Route::get('submit/{student_id}/{transcript_id}', 'TranscriptController@submitTranscript')->name('submit.transcript');
+
+    Route::get('transcript-submitted', function () {
+        return view('transcript/final-submission');
+    })->name('transcript.submitted');
     //Transcript K-8 Cources
 
     Route::get('english-course/{id}/{transcript_id}', 'Courses\EnglishController@index')->name('english.course');
@@ -270,7 +276,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
   
     Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
 
-    Route::get('generate-transcript/{id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
+    Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
     Route::get('preview-transcript/{student_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
     Route::get('new-grade/{student_id}/{transcript_id}', function () {
@@ -286,7 +292,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
-    Route::get('transcript/purchase/{id}/{transcript_id}', 'TranscriptController@purchase')->name('transcript.purchase');
+    Route::post('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');
 
     // Route::get('purchase-transcript', function () {
     //     return view('transcript/purchase-transcript');
