@@ -7,8 +7,7 @@
 
       <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
         <p>The transcript for Paige is Ready to download<a href="#"></a></p>
-        <a href="{{ route('genrate.transcript',1) }}" class="btn btn-primary mt-4 font-weight-bold">Download</a>
-                <!-- <a href="{{ route('genrate.transcript',1) }}" class="btn btn-primary mt-4 font-weight-bold">View Transcript</a> -->
+        <a href="{{ route('fetch.transcript',[$transcrip_id,$student_id]) }}" class="btn btn-primary mt-4 font-weight-bold">Download</a>
       </div>
     </main>
 <!-- Modal -->

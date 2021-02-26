@@ -81,4 +81,13 @@ class StudentProfile extends Model
     {
         return $this->hasMany('App\Models\Transcript', 'student_profile_id', 'id');
     }
+    public function transcriptDetails()
+    {
+        return $this->hasOneThrough(
+            'App\Models\TranscriptCourse',
+            'App\Models\TranscriptK8',
+            'student_profile_id',
+            'k8transcript_id'
+        );
+    }
 }

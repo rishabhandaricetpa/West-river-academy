@@ -20,19 +20,18 @@
                     {{$student->d_o_b->format('d M Y ')}}
                 </div>
             </div>
+            <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
+            <a type="button" href="{{ url('admin/file-upload')}}" class="btn btn-primary">Upload Signed Transcript</a>
         </form>
     </div>
-    @foreach($transcriptData as $school)
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <a type="button" href="{{ url('admin/view-pdf',1)}}" class="btn btn-primary">Generate Unsigned Transcript</a>
-        <a type="button" href="{{ url('admin/file-upload')}}" class="btn btn-primary">Upload Signed Transcript</a>
-        <a type="button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary">Delete School Record</a>
-        <legend>{{$school->school_name}}</legend>
-        <p>
-            Academic School Year(s):{{$school->enrollment_year}}<br>
-            Grade: {{$school->grade}}<br>
-        </p>
-        <table id="addressData" class="table table-bordered table-striped data-table"">
+        @foreach($transcriptData as $school)
+        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+            <legend>{{$school->school_name}}</legend>
+            <p>
+                Academic School Year(s):{{$school->enrollment_year}}<br>
+                Grade: {{$school->grade}}<br>
+            </p>
+            <table id="addressData" class="table table-bordered table-striped data-table"">
                 <thead>
                     <tr>
                         <th>Courses</th>

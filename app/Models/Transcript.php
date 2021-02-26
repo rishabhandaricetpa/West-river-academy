@@ -21,4 +21,9 @@ class Transcript extends Model
     {
         return $this->belongsTo('App\Models\StudentProfile','student_profile_id','id');
     }
+
+    public function transcriptPdf()
+    {
+        return $this->hasMany('App\Models\TranscriptPdf', 'transcript_id', 'id');
+    }
 }

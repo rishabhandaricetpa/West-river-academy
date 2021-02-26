@@ -10,7 +10,7 @@
         <h2 class="mb-3">Welcome to the Transcript Wizard!</h2>
         <h3>You will be guided through the process of creating a transcript for:</h3>
       </div>
-      <form method="post" action="{{route('notify.studentInfo',$enroll_student->id)}}" class="mb-0 mt-5 label-large">
+      <form method="post" action="{{route('transcript.purchase',$enroll_student->id)}}" class="mb-0 mt-5 label-large">
         @csrf
         <div class="form-group d-sm-flex mb-2">
           <label for="">First name</label>

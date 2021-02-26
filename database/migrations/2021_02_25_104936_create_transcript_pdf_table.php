@@ -19,12 +19,11 @@ class CreateTranscriptPdfTable extends Migration
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->nullable()->onDelete('cascade');
             $table->string('pdf_link')->nullable();
             $table->enum('status', ['pending', 'approved', 'paid', 'completed']);
-            $table->unsignedBigInteger('k8transcript_id');
-            $table->foreign('k8transcript_id')->references('id')->on('k8transcript')->onDelete('cascade');
+            $table->unsignedBigInteger('transcript_id');
+            $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
