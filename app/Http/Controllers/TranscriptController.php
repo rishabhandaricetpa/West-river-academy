@@ -19,8 +19,8 @@ use App\Models\FeesInfo;
 use Illuminate\Http\Request;
 use App\Mail\TranscriptEmail;
 use Illuminate\Support\Facades\DB;
-use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Storage;
 use Illuminate\Support\Facades\Mail;
@@ -66,7 +66,7 @@ class TranscriptController extends Controller
             [
                 'student_profile_id' => $id,
                 'country' => $request->get('country'),
-                'transcript_id'=>$request->get('transcript_id'),
+                'transcript_id' => $request->get('transcript_id'),
             ]
         );
         return view('transcript.grade', compact('transcript', 'student'));
@@ -109,11 +109,11 @@ class TranscriptController extends Controller
             }
         }
     }
-    public function displayStudent($id,$transcriptData_id)
+    public function displayStudent($id, $transcriptData_id)
     {
         $studentProfile = StudentProfile::find($id);
         $countries = Country::all();
-        return view('transcript.dashboard-transcript-filling', compact('studentProfile', 'countries','transcriptData_id'));
+        return view('transcript.dashboard-transcript-filling', compact('studentProfile', 'countries', 'transcriptData_id'));
     }
     public function storeGrade(Request $request, $id)
     {
@@ -170,24 +170,28 @@ class TranscriptController extends Controller
     public function deleteSchool($transcript_id)
     {
         $transcriptDetails = TranscriptK8::find($transcript_id)->delete();
-        return redirect()->back();
+        $notification = [
+            'message' => 'School Record Deleted Successfully!',
+            'alert-type' => 'success',
+        ];
+        return redirect()->back()->with($notification);
     }
 
     public function previewTranscript($student_id)
-        {      
-            $parentId=ParentProfile::getParentId();
-            $address=ParentProfile::where('id',$parentId)->first();
-            $student = StudentProfile::find($student_id);
-            $grades  =TranscriptK8::where('student_profile_id',$student_id)->orderBy('grade','ASC')->get(['grade']);
-            $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
+    {
+        $parentId = ParentProfile::getParentId();
+        $address = ParentProfile::where('id', $parentId)->first();
+        $student = StudentProfile::find($student_id);
+        $grades  = TranscriptK8::where('student_profile_id', $student_id)->orderBy('grade', 'ASC')->get(['grade']);
+        $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
             ->get();
             $transcript_id=Transcript::select()->where('student_profile_id', $student_id)->where('status',"paid")->first();
             $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
             return view('transcript/preview-transcript',compact('student','transcriptData','grades', 'groupCourses','transcript_id','address'));
-        }
+     }
 
-        public function purchase(Request $request, $id)
+    public function purchase(Request $request, $id)
         {
 
         if ($request->get('grade') == 'K-8') {

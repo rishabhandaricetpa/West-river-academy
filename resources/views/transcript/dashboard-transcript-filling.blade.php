@@ -12,21 +12,21 @@
       <div class="form-group d-sm-flex mb-2">
         <label for="exampleInputEmail1">First name</label>
         <div>
-          <input type="text" class="form-control " name="first_name" value="{{$studentProfile->first_name}}" required="" autofocus="">
+          <input type="text" class="form-control " name="first_name" value="{{$studentProfile->first_name}}" autofocus="" required>
           <!--   <div class="alert alert-danger">Enter your user ID.</div> -->
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="">Middle Name</label>
         <div>
-          <input type="text" class="form-control " name="middle_name" required="" value="{{$studentProfile->middle_name}}" autocomplete="">
+          <input type="text" class="form-control " name="middle_name" value="{{$studentProfile->middle_name}}" autocomplete="">
           <!--  <div class="alert alert-danger">Enter your password.</div> -->
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="">Last Name</label>
         <div>
-          <input type="text" class="form-control " name="last_name" value="{{$studentProfile->last_name}}" required="" autocomplete="">
+          <input type="text" class="form-control " name="last_name" value="{{$studentProfile->last_name}}" autocomplete="" required>
           <!--  <div class="alert alert-danger">Enter your password.</div> -->
         </div>
       </div>

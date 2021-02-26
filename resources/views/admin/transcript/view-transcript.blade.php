@@ -55,21 +55,21 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><a type="button"  href="{{ route('admin.edit.subGrades',$subject->id)}}" class="btn btn-primary">Edit</a></td>
-                    </tr>
-                    @endforeach
-                    @endforeach
-                </tbody>
-            </table>
-                </form>
-            </div>
-        @endforeach
+                        <td><a type=" button" href="{{ route('admin.edit.subGrades',$subject->id)}}" class="btn btn-primary">Edit</a></td>
+            </tr>
+            @endforeach
+            @endforeach
+            </tbody>
+        </table>
+        </form>
+    </div>
+    @endforeach
     </div>
 </main>
 @endsection
 <script>
     function myFunction() {
-      if(!confirm("Are You Sure to delete this"))
-      event.preventDefault();
-  }
+        if (!confirm("Are You Sure to delete this"))
+            event.preventDefault();
+    }
 </script>

@@ -442,29 +442,7 @@ export default {
         },
       });
     },
-    //  removePeriod(index) {
-    //   if (this.removingPeriod) {
-    //     return;
-    //   }
-    //   this.removingPeriod = true;
 
-    //   let reqData = JSON.parse(JSON.stringify(this.form)); // copying object wihtout reference
-    //   reqData.enrollPeriods.splice(index, 1);
-
-    //   axios
-    //     .post(route("delete.enroll", this.students), reqData)
-    //     .then((response) => {
-    //       const resp = response.data;
-    //       resp.status == "success"
-    //         ? this.form.enrollPeriods.splice(index, 1)
-    //         : alert(resp.message);
-    //       this.removingPeriod = false;
-    //     })
-    //     .catch((error) => {
-    //       this.removingPeriod = false;
-    //       console.log(error);
-    //     });
-    // },
     removePeriod(index){
         this.form.enrollPeriods.splice(index, 1)
     },
