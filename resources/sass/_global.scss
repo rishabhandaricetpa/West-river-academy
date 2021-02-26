@@ -155,6 +155,10 @@ button {
 
 /* popup css */
 
+.modal{
+  padding-right: 0 !important;
+}
+
 .modal-body {
   padding-bottom: 1rem !important;
 
@@ -253,4 +257,10 @@ a.btn {
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+}
+
+.datepicker-full{
+  >p{
+    width: 100%;
+  }
 }

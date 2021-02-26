@@ -25,7 +25,7 @@
                         <td>{{$student->birthdate}}</td>
                         <td>{{$student->student_Id}}</td>
                         <td>{{$student->email}}</td>
-                        <td><a href="" class="btn btn-primary">Send Record Transfer Request</a></td>
+                        <td><a href="{{route('record.send',$student->id)}}" class="btn btn-primary">Send Record Transfer Request</a></td>
                     </tr>
                     @endforeach
                 </tbody>

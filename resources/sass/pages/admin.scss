@@ -132,3 +132,7 @@
 .generate-Coupon .select2-container--default .select2-selection--multiple{
     border: 0;
 }
+
+.flatpickr-input{
+    @extend .form-control;
+}

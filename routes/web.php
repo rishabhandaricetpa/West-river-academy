@@ -57,6 +57,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/verify-email/{email}', function () {
             return view('SignIn/verify-email');
         })->name('verify.email');
+
         // Route::get('/dashboard', function () {
         //     return view('SignIn/dashboard');
         // })->name('dashboard')->middleware('active_user');
@@ -131,6 +132,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
+
+        Route::get('previous-school', function () {
+            return view('previous-school');
+        });
     });
 
     // Route::post('/cart', 'CartController@store')->name('add.cart');
@@ -222,6 +227,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
     //save year
     Route::post('updateYear/{student_id}/{transcript_id}', 'TranscriptController@storeYear')->name('update.enrollYear');
+
+
+
     // final-submission.blade
     Route::get('submit/{student_id}/{transcript_id}', 'TranscriptController@submitTranscript')->name('submit.transcript');
 
@@ -323,4 +331,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //Record Transfer
     Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
+    Route::get('record/request/{student_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
 });

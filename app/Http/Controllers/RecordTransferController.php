@@ -19,69 +19,8 @@ class RecordTransferController extends Controller
         return view('recordTransfer.studentDetails', compact('students'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function sendRecordRequest($student_id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RecordTransfer  $recordTransfer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(RecordTransfer $recordTransfer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RecordTransfer  $recordTransfer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RecordTransfer $recordTransfer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RecordTransfer  $recordTransfer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RecordTransfer $recordTransfer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RecordTransfer  $recordTransfer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(RecordTransfer $recordTransfer)
-    {
-        //
+        return view('previous-school', compact('student_id'));
     }
 }
