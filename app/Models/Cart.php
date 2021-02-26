@@ -291,14 +291,14 @@ class Cart extends Model
                         $transcript_payment->payment_mode = $type;
                         if($payment_id != null){
                             $transcript_payment->transcation_id = $payment_id;
-                            $transcript->status = 'paid';
+                            $transcript_payment->status = 'paid';
                         }
                         $transcript_payment->save();
     
                         $transcript = Transcript::whereId($cart->item_id)->first();
                         $transcript->status = 'paid';
                         $transcript->save();
-    
+                        
                         break;
                 default:
                     break;

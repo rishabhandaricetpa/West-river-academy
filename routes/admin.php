@@ -117,4 +117,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
     Route::get('edit-subGrades/{subject_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
 
+    //genrate Unsigned Transcript for student
+    Route::get('generate-transcript/{id}/{transcript_id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
+    Route::get('viewfull-transcript/{student_id}/{transcript_id}', 'TranscriptController@editTranscript')->name('viewfull.transcript');
+
 });

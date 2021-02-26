@@ -1,30 +1,30 @@
-@extends('layouts.app')
-
-@section('content')
-
-    <main class="position-relative container form-content mt-4">
-      <h1 class="text-center text-white text-uppercase">dashboard</h1>
-
-      <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
-        <p>I'm finished with this transcript. I want to see what it looks like</p>
-        <a href="{{ url('/transcript-pdf') }}" class="btn btn-primary mt-4 font-weight-bold"  data-toggle="modal" data-target="#previewTranscriptModal">View Transcript</a>
-
-      </div>
-    </main>
-
-    <div class="modal fade" id="previewTranscriptModal" tabindex="-1" role="dialog" aria-labelledby="previewTranscriptModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
- <table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript pdf</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<style>
+ body{
+  font-family: "Catamaran", sans-serif;
+ }
+ table{
+   width:100%;
+ }
+</style>
+</head>
+<body>
+<table>
          <tbody>
-           <tr width="100%"><td style="width:100%;color:#EC1D1D;font-weight:400;font-size:19px;margin:0 auto;">After this transcript is approved by you, any further changes will incure a $25 fee.</td></tr>
+           <tr width="100%"><td style="width:100%;color:#EC1D1D;font-weight:400;font-size:20px;margin:0 auto;">After this transcript is approved by you, any further changes will incure a $25 fee.</td></tr>
          </tbody>
        </table>
-  <table style="margin-bottom:20px;" width="100%">
+  <table style="margin-bottom:20px;">
      <tbody>
      <tr style="width:100%;">
-      <td width="50%" style="text-transform:uppercase;font-weight: 700;font-size:25px;">official transcript</td>
+      <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
       <td width="50%" style="text-align:center;">
       <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
        <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
@@ -32,7 +32,7 @@
     </tr>
      </tbody>
   </table>
-  <table width="100%">
+  <table>
      <tbody>
          <tr style="width:100%;">
             <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
@@ -42,7 +42,7 @@
           </tr>
      </tbody>
   </table>
-  <table width="100%">
+  <table>
      <tbody>
          <tr style="width:100%;">
             <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
@@ -52,7 +52,7 @@
           </tr>
      </tbody>
   </table>
-  <table style="margin-bottom:40px;" width="100%">
+  <table style="margin-bottom:20px;">
      <tbody>
          <tr style="width:100%;">
             <td style="text-transform:uppercase;font-size:14px;width:10%;"></td>
@@ -62,17 +62,17 @@
           </tr>
      </tbody>
   </table>
-<table width="100%">
+<table>
   <tbody>
     <tr style="width:100%;">
     <td width="70%">
       <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
         <thead>
           <tr>
-             <th colspan="3" style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">course name</th>
+             <th colspan="3" style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">Course name</th>
              @foreach($grades as $grade) 
              <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;width:15%;padding:3px;">Grade {{$grade->grade}}</th>
-             @endforeach
+         @endforeach
           </tr>
         </thead>
         <tbody>
@@ -122,17 +122,5 @@
   <tr><td><p style="font-size:11px;">West River Academy is accredited by the National Association for the Legal Auppotr of Alternative Schools (NALSAS) and registered in the California School Directory.CDS Code 30 66464 6134720. Country:Orange Address:33721 BlueWater Ln.Dana Point ,CA 92629-2173</p></td></tr>
   </tbody>
 </table>
-<table width="100%">
-    <tbody>
-      <tr>
-        <td width="50%" style="text-align:center;position: relative;"> <a type="submit" style="background-color: #FC0;line-height:1;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:45%;top:10px;">Edit</button></td>
-        <td width="50%" style="text-align:center;position: relative;"> <a type="submit" href="{{ route('submit.transcript',[$student->id,$transcript_id->id]) }}"  style="line-height:1;background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:42%;top:10px;">Submit</button></td>
-      </tr>
-    </tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-
-@endsection
+</body>
+</html>

@@ -40,7 +40,7 @@
               <div class="col-md-3 col-sm-6 text-center">
               <a href="{{route('order-transcript',Auth::user()->id)}}" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
-               <h3 class="mt-3 text-black font-weight-normal">Order & PurchaseTranscript </h3>
+               <h3 class="mt-3 text-black font-weight-normal">Purchase a Transcript </h3>
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
@@ -84,7 +84,7 @@
              <tr>
               <th>Student</th>
               <th>Status</th>
-              <th>Edit Tramscript</th>
+              <th>Edit Transcript</th>
               <th>Download</th>
              </tr>
            </thead>
@@ -93,11 +93,17 @@
            <tr> 
              <td>{{$transcriptData['student']['fullname']}}</td>
              <td>{{($transcriptData->status)}}</td>
+             @if($transcriptData->status === 'paid')
              <td><a href="#">Edit Transcript</a></td>
-             @if ($transcriptData->status === 'paid')
-             <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Download Transcript</a></td>
-               @elseif($transcriptData->status === 'pending')
-            <td>Payment Pending</td>
+             @else
+             <td>-</td>
+             @endif
+             @if($transcriptData->status === 'approved')
+             <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Download Transcript</a></td>
+               @elseif($transcriptData->status === 'completed')
+            <td>Waiting For Approval</td>
+            @elseif($transcriptData->status === 'paid')
+            <td><a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary">Create a Transcript</a></td>
             @endif
            </tr>
            @endforeach       

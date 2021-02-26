@@ -21,7 +21,7 @@
                 <tbody>
                     @foreach($enroll_students as $enroll_student)
                     <tr>
-                        <td> {{$enroll_student->first_name . "  ".$enroll_student->middle_name ."  ".$enroll_student->last_name}}</td>
+                        <td>{{$enroll_student->fullname}}</td>
                         <td>{{$enroll_student->d_o_b->format('M d Y')}}</td>
                         <td>{{$enroll_student->student_Id}}</td>
                         <td>{{$enroll_student->email}}</td>
