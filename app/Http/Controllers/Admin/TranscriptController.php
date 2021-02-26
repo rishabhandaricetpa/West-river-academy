@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\StudentProfile;
 use App\Models\TranscriptK8;
+use App\Models\TranscriptPayment;
 use App\Models\Subject;
 use App\Models\TranscriptCourse;
 use App\Models\Transcript;
@@ -84,6 +85,7 @@ class TranscriptController extends Controller
         $transcriptData = TranscriptK8::select()->where('transcript_id',$transcript_id)
         ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
         ->get();
+        
         $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $id)->get()->unique('subject_id'); 
 
         $pdfname = $student->fullname. '_' . $student->d_o_b->format('M_d_Y').'_'.$transcript_id . '_' . 'unsigned_transcript_letter';
@@ -114,6 +116,19 @@ class TranscriptController extends Controller
         }
         $storetranscript->save();
         
+        //MOVE CODE FROM HERE TO UPLOAD SIGNED CODE CHANGE THE STATUS TO UPLOAD IN UPLOAD SIGNED
+        $updateTranscriptStatus =  Transcript::whereId($transcript_id)
+                                    ->where('status','completed')->first();
+        if($updateTranscriptStatus != null){
+                    $updateTranscriptStatus->status = 'approved';
+            }
+        $updateTranscriptStatus->save();
+        $paymentsTranscriptStatus =  TranscriptPayment::where('transcript_id',$transcript_id)
+                                ->where('status','completed')->first();
+        if($paymentsTranscriptStatus != null){
+                    $paymentsTranscriptStatus->status = 'approved';
+            }
+        $apymentsTranscriptStatus->save();
         return $pdf->download($pdfname . '.pdf');
     }
 

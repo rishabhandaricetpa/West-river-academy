@@ -248,5 +248,17 @@ class TranscriptController extends Controller
 
             return redirect('transcript-submitted')->with($notification);
          }
+     public function fetchfile($transcrip_id,$student_id){
+        // if(isEmpty($id)){
+        //     alert('Transcript Not approved yet');
+        // }else{
+       $data= TranscriptPdf::where('transcript_id',$transcrip_id)->first();
+       $pdflink=$data->pdf_link ;
+    //    dd($pdflink);
+    //    $pdf = PDF::loadView('admin.transcript.pdf', $data);
+
+        return response()->download('storage/pdf/'.$pdflink);
+        // }
+   }
       
 }
