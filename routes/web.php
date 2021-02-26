@@ -57,6 +57,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/verify-email/{email}', function () {
             return view('SignIn/verify-email');
         })->name('verify.email');
+        
         // Route::get('/dashboard', function () {
         //     return view('SignIn/dashboard');
         // })->name('dashboard')->middleware('active_user');
@@ -131,6 +132,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
+
+        Route::get('previous-school', function () {
+            return view('previous-school');
+        });
     });
 
     // Route::post('/cart', 'CartController@store')->name('add.cart');
