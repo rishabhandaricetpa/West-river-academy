@@ -44,10 +44,10 @@
         />
       </div>
     </div>
-    <div class="form-group d-flex mb-1 lato-italic info-detail">
+    <div class="form-group d-sm-flex mb-1 lato-italic info-detail">
         <label for="">Gender <sup>*</sup></label>
-        <div class="row pl-5">
-          <div class="col-sm-3">
+        <div class="row pl-sm-5">
+          <div class="col-6 col-sm-3">
             <div class="form-check">
               <input 
               class="form-check-input" 
@@ -57,12 +57,12 @@
               v-model="form.gender"
               required
               >
-            <label class="form-check-label">
+            <label class="form-check-label pl-1 pl-sm-0">
               Male
             </label>
             </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-6 col-sm-3">
             <div class="form-check">
             <input 
             class="form-check-input" 
@@ -72,7 +72,7 @@
             id="gender" 
             v-model="form.gender"
             >
-            <label class="form-check-label">
+            <label class="form-check-label pl-1 pl-sm-0">
               Female
             </label>
             </div>
@@ -113,10 +113,10 @@
         />
       </div>
     </div>
-    <div class="form-group d-sm-flex mb-2 mt-2r">
+    <div class="form-group d-sm-flex mb-2">
         <label for="">National ID</label>
         <div class="row">
-          <div class="col-md-4 col-lg-2">
+          <div class="col-md-5 col-lg-3">
             <div class="form-group w-100 datepicker-full">
              <input
                 type="text"
@@ -128,7 +128,7 @@
                />
             </div>
           </div>
-          <div class="info-detail col-md-8 col-lg-10 lato-italic">
+          <div class="info-detail col-md-8 col-lg-9 lato-italic">
             <p>
               Please enter your National ID if you wish to have it on your documents.
             </p>
@@ -146,7 +146,7 @@
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your START date of enrollment</label>
         <div class="row">
-          <div class="col-md-4 col-lg-2">
+          <div class="col-md-4 col-lg-3">
             <div class="form-group w-100 datepicker-full">
               <p>
                 <flat-pickr
@@ -173,7 +173,7 @@
               Only.
             </p>
           </div>
-           <div class="col-lg-4 links-list pl-0">
+           <div class="col-lg-3 links-list">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
         </div>
@@ -182,7 +182,7 @@
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your END date of enrollment</label>
         <div class="row">
-          <div class="col-md-4 col-lg-2">
+          <div class="col-md-4 col-lg-3">
             <div class="form-group w-100 datepicker-full">
               <p>
                 <flat-pickr
@@ -208,14 +208,14 @@
               enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
             </p>
           </div>
-          <div class="col-lg-4 links-list pl-0">
+          <div class="col-lg-3 links-list">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
         </div>
       </div>
       <div class="form-group mt-2r d-sm-flex links-list mb-5">
         <!-- Button trigger modal -->
-        <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
+        <a href="#skipYear" data-toggle="modal" 
           >what if i need to skip a year?</a
         >
       </div>
@@ -275,7 +275,7 @@
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
       </ul>
     </p> 
-    <div class="form-wrap py-2r px-sm-25 mt-2r">
+    <div class="mt-2r">
       <a
         type="button"
         class="btn btn-primary addenrollment mb-4 mb-sm-0"
@@ -285,7 +285,7 @@
         @click="addNewEnrollPeriod"
         >Add Another Enrollment Period</a
       >
-      <button type="submit"  class="btn btn-primary mb-4 mb-sm-0">Continue</button>
+      <button type="submit"  class="btn btn-primary mb-4 mb-sm-0 ml-2">Continue</button>
     </div>
   </form>
   </div>
@@ -442,7 +442,6 @@ export default {
         },
       });
     },
-
     removePeriod(index){
         this.form.enrollPeriods.splice(index, 1)
     },

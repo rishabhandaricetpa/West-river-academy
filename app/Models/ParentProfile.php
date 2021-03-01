@@ -86,4 +86,8 @@ class ParentProfile extends Model
     {
         return $this->hasMany('App\Models\Graduation', 'parent_profile_id', 'id');
     }
+    public function schoolRecord()
+    {
+        return $this->hasMany(RecordTransfer::class);
+    }
 }

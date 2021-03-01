@@ -92,7 +92,7 @@
             </label>
           </div>
           <div class="form-group d-sm-flex mb-2 form-check">
-            <input class="form-check-input" type="radio" name="school_name" value="West River Academy">
+            <input class="form-check-input" type="radio" name="school_name" value="Others">
             <label class="form-check-label" for="">
               Other:Full Name of School
             </label>

@@ -57,6 +57,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/verify-email/{email}', function () {
             return view('SignIn/verify-email');
         })->name('verify.email');
+
         // Route::get('/dashboard', function () {
         //     return view('SignIn/dashboard');
         // })->name('dashboard')->middleware('active_user');
@@ -131,6 +132,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('admin/dashboard', function () {
             return view('admin.home');
         })->name('admin.admindashboard');
+
+        Route::get('previous-school', function () {
+            return view('previous-school');
+        });
     });
 
     // Route::post('/cart', 'CartController@store')->name('add.cart');
@@ -222,6 +227,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('transcript-grade/{id}', 'TranscriptController@storeGrade')->name('transcript.grade');
     //save year
     Route::post('updateYear/{student_id}/{transcript_id}', 'TranscriptController@storeYear')->name('update.enrollYear');
+
+
+
     // final-submission.blade
     Route::get('submit/{student_id}/{transcript_id}', 'TranscriptController@submitTranscript')->name('submit.transcript');
 
@@ -267,6 +275,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // })->name('custom.payments');
     Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment');
     // Route::post('custom-payments', 'PaymentMethod\CustomPaymentsController@update')->name('custom.payment');
+    // Route::get('preview-transcript', function () {
+    //     return view('transcript/preview-transcript');
+    // })->name('preview.transcript');
 
     Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
     Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
@@ -322,6 +333,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('/edit/another', 'EditCourses\EditCourse@storeAnother')->name('editAnother.store');
 
     //delete school
-
     Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
+
+    //Record Transfer
+    Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
+    Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
+    Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
+    Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
+    Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
 });

@@ -345,6 +345,9 @@ axios.all = function all(promises) {
 };
 axios.spread = __webpack_require__(/*! ./helpers/spread */ "./node_modules/axios/lib/helpers/spread.js");
 
+// Expose isAxiosError
+axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_modules/axios/lib/helpers/isAxiosError.js");
+
 module.exports = axios;
 
 // Allow use of default import syntax in TypeScript
@@ -1344,6 +1347,29 @@ module.exports = function isAbsoluteURL(url) {
   // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
   // by any combination of letters, digits, plus, period, or hyphen.
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAxiosError.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
 
@@ -37694,12 +37720,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "form-group d-flex mb-1 lato-italic info-detail" },
+            {
+              staticClass: "form-group d-sm-flex mb-1 lato-italic info-detail"
+            },
             [
               _vm._m(2),
               _vm._v(" "),
-              _c("div", { staticClass: "row pl-5" }, [
-                _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "row pl-sm-5" }, [
+                _c("div", { staticClass: "col-6 col-sm-3" }, [
                   _c("div", { staticClass: "form-check" }, [
                     _c("input", {
                       directives: [
@@ -37725,13 +37753,15 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", { staticClass: "form-check-label" }, [
-                      _vm._v("\n             Male\n           ")
-                    ])
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label pl-1 pl-sm-0" },
+                      [_vm._v("\n             Male\n           ")]
+                    )
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
+                _c("div", { staticClass: "col-6 col-sm-3" }, [
                   _c("div", { staticClass: "form-check" }, [
                     _c("input", {
                       directives: [
@@ -37757,9 +37787,11 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", { staticClass: "form-check-label" }, [
-                      _vm._v("\n             Female\n           ")
-                    ])
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label pl-1 pl-sm-0" },
+                      [_vm._v("\n             Female\n           ")]
+                    )
                   ])
                 ])
               ])
@@ -37869,11 +37901,11 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group d-sm-flex mb-2 mt-2r" }, [
+          _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
             _c("label", { attrs: { for: "" } }, [_vm._v("National ID")]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4 col-lg-2" }, [
+              _c("div", { staticClass: "col-md-5 col-lg-3" }, [
                 _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
                   _c("input", {
                     directives: [
@@ -37938,7 +37970,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-4 col-lg-2" }, [
+                        _c("div", { staticClass: "col-md-4 col-lg-3" }, [
                           _c(
                             "div",
                             { staticClass: "form-group w-100 datepicker-full" },
@@ -38024,7 +38056,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-4 col-lg-2" }, [
+                        _c("div", { staticClass: "col-md-4 col-lg-3" }, [
                           _c(
                             "div",
                             { staticClass: "form-group w-100 datepicker-full" },
@@ -38295,7 +38327,7 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "form-wrap py-2r px-sm-25 mt-2r" }, [
+          _c("div", { staticClass: "mt-2r" }, [
             _vm.canAddMorePeriod
               ? _c(
                   "a",
@@ -38315,7 +38347,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-primary mb-4 mb-sm-0",
+                staticClass: "btn btn-primary mb-4 mb-sm-0 ml-2",
                 attrs: { type: "submit" }
               },
               [_vm._v("Continue")]
@@ -38370,7 +38402,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "info-detail col-md-8 col-lg-10 lato-italic" },
+      { staticClass: "info-detail col-md-8 col-lg-9 lato-italic" },
       [
         _c("p", [
           _vm._v(
@@ -38384,7 +38416,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 links-list pl-0" }, [
+    return _c("div", { staticClass: "col-lg-3 links-list" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])
@@ -38394,7 +38426,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 links-list pl-0" }, [
+    return _c("div", { staticClass: "col-lg-3 links-list" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])
@@ -38408,14 +38440,9 @@ var staticRenderFns = [
       "div",
       { staticClass: "form-group mt-2r d-sm-flex links-list mb-5" },
       [
-        _c(
-          "a",
-          {
-            staticClass: "ml-sm-4",
-            attrs: { href: "#skipYear", "data-toggle": "modal" }
-          },
-          [_vm._v("what if i need to skip a year?")]
-        )
+        _c("a", { attrs: { href: "#skipYear", "data-toggle": "modal" } }, [
+          _vm._v("what if i need to skip a year?")
+        ])
       ]
     )
   },
@@ -61383,8 +61410,8 @@ $(document).on("click", function (event) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/paigepriyanka/Documents/projects/peggywebb-westriveracademy-laravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/paigepriyanka/Documents/projects/peggywebb-westriveracademy-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/rebeccarisha/Documents/projects/peggywebb-westriveracademy-laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/rebeccarisha/Documents/projects/peggywebb-westriveracademy-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
