@@ -331,5 +331,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //Record Transfer
     Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
-    Route::get('record/request/{student_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
+    Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
+    Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
+    Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
+    Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
 });

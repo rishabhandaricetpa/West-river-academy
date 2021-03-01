@@ -124,4 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('delete/others/{subject_id}', 'CourseController@deleteSubjects')->name('delete.other');
 
     Route::get('delete/school/{transcript_id}', 'CourseController@deleteSchool')->name('deleteSchool');
+
+    //record transfer request
+    Route::get('record/request', 'RecordTransferController@index')->name('record.request');
 });

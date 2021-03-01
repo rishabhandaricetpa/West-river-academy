@@ -90,4 +90,8 @@ class StudentProfile extends Model
             'k8transcript_id'
         );
     }
+    public function recordTransfers()
+    {
+        return $this->hasMany(RecordTransfer::class);
+    }
 }

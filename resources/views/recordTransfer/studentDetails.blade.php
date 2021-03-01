@@ -8,6 +8,7 @@
 
         <h2 class="mb-3">Select the student who wishes to send record transfer request.</h2>
         <div class="overflow-auto">
+            <input type="hidden" value="{{$parentId}}" name="parent_id">
             <table class="w-100 table-styling enlarge-input">
                 <thead>
                     <tr>
@@ -19,13 +20,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($students as$student)
+                    @foreach($students as $student)
                     <tr>
                         <td> {{$student->fullname}}</td>
                         <td>{{$student->birthdate}}</td>
                         <td>{{$student->student_Id}}</td>
                         <td>{{$student->email}}</td>
-                        <td><a href="{{route('record.send',$student->id)}}" class="btn btn-primary">Send Record Transfer Request</a></td>
+                        <td><a href="{{route('record.send',[$student->id,$parentId])}}" class="btn btn-primary">Send Record Transfer Request</a></td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -78,9 +78,8 @@ class AnotherCourseController extends Controller
         $k8details = StudentProfile::find($student_id)->TranscriptK8()->get();
 
         $transcriptDatas = TranscriptK8::where('student_profile_id', $student_id)
-            ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
+            ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course', 'transcript'])
             ->get();
-
         $student = StudentProfile::find($student_id);
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('display.studentProfile', $request->get('student_id'));
