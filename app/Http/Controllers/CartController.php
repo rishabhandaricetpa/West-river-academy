@@ -9,6 +9,7 @@ use App\Models\GraduationMailingAddress;
 use App\Models\GraduationPayment;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptK8;
+use App\Models\CustomPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
@@ -116,6 +117,26 @@ class CartController extends Controller
                                 ]);
                         }
                         break;
+                case 'custom':
+                            $customPaymentsData = CustomPayment::create([
+                                'parent_profile_id' => ParentProfile::getParentId(),
+                                'amount' => $request->get('amount'),
+                                'paying_for' => 'pending',
+                                'type_of_payment'=>'Custom Payments',
+                                'status'=>'pending'
+                            ]);
+                             $parentId= $customPaymentsData->parent_profile_id;
+                                $parent_profile_id = ParentProfile::getParentId();
+                                $amount = $data['amount'];
+                                if (! Cart::where('item_id', $parent_profile_id)->where('item_type', 'custom')->exists()) {         
+                                Cart::create([
+                                            'item_type' => 'custom',
+                                            'item_id' => $parent_profile_id,
+                                            'parent_profile_id' => $parent_profile_id,
+                                        ]);
+                                }
+                                break;
+                               
                 default:
                     break;
             }

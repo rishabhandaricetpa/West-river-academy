@@ -27,17 +27,18 @@ class Cart extends Model
                 $enroll_total = Self::getEnrollQuery()->select(DB::raw('sum(enrollment_payments.amount) as amount'))->first();
                 $graduation_total = Self::getGraduationQuery()->select(DB::raw('sum(graduation_payments.amount) as amount'))->first();
                 $transcript_total= Self::getTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
+                $custom_total=Self::getCustomQuery()->select(DB::raw('sum(custom_payments.amount) as amount'))->first();
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
-                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount;
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount+ $custom_total->amount;
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();
                 $graduation_data = Self::getGraduationData();
                 $transcript_data=Self::getTranscriptData();
-                // dd($transcript_data);
-                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data);
+                $custom_data=Self::getcustomData();
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data,$custom_data);
             }
         } catch (\Exception $e) {
             dd($e);
@@ -49,7 +50,6 @@ class Cart extends Model
     {
         $cart_valid = true;
         $student_ids = $fees = [];
-
         // get student ids for the parent
         $students = ParentProfile::find($parent_profile_id)->studentProfile()->select('id')->get()->toArray();
 
@@ -107,7 +107,7 @@ class Cart extends Model
         return $cart_valid;
     }
 
-    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data)
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data,$custom_data)
     {
         $data = [];
 
@@ -176,7 +176,29 @@ class Cart extends Model
                 ];
             }
         }
+
+        foreach ($custom_data as $key => $val) {
+            $type = 'Custom Payment';
+
+        $arr = [
+            'id' => $val['id'],
+            'type' => $type,
+            'amount' => $val['amount'],
+        ];
+        if (array_key_exists($val['parent_db_id'], $data)) {
+            array_push(
+                $data[$val['parent_db_id']]['enroll_items'],
+                $arr
+            );
+        } else {
+            $data[$val['parent_db_id']] = [
+                'name' => ucfirst($val['p1_first_name']),
+                'enroll_items' => [$arr],
+            ];
+        }
+    }
         return $data;
+        
     }
 
     private static function getEnrollQuery()
@@ -204,6 +226,14 @@ class Cart extends Model
                 ->leftJoin('transcripts', 'transcripts.id', 'cart.item_id')
                 ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.transcript_id')
                 ->leftJoin('student_profiles', 'transcripts.student_profile_id', 'student_profiles.id');
+    }
+
+    private static function getCustomQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+                ->where('cart.item_type', 'custom')
+                ->leftJoin('custom_payments', 'cart.item_id', 'custom_payments.parent_profile_id')
+                ->leftJoin('parent_profiles', 'custom_payments.parent_profile_id', 'parent_profiles.id');
     }
     private static function getEnrollData()
     {
@@ -254,6 +284,20 @@ class Cart extends Model
                 ->groupBy('transcript_payments.amount')
                 ->get();
     }
+
+    private static function getCustomData()
+    {
+        return Self::getCustomQuery()->select(
+                    'parent_profiles.p1_first_name',
+                    'parent_profiles.id as parent_db_id',
+                    'cart.id',
+                    'custom_payments.amount',
+                )
+                ->groupBy('parent_profiles.id')
+                ->groupBy('cart.id')
+                ->groupBy('custom_payments.amount')
+                ->get();
+    }
     public static function emptyCartAfterPayment($type, $status, $payment_id = null){
            
         $parent_profile_id = ParentProfile::getParentId();
@@ -300,6 +344,16 @@ class Cart extends Model
                         $transcript->save();
                         
                         break;
+
+                case 'custom':
+                            $custom_payment =  CustomPayment::where('parent_profile_id', $cart->item_id)->first();
+                            $custom_payment->payment_mode = $type;
+                            if($payment_id != null){
+                                $custom_payment->transcation_id = $payment_id;
+                                $custom_payment->status = 'paid';
+                            }
+                            $custom_payment->save();                        
+                            break;
                 default:
                     break;
             }

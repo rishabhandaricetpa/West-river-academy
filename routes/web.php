@@ -262,11 +262,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 
-    // Route::get('preview-transcript', function () {
-    //     return view('transcript/preview-transcript');
-    // })->name('preview.transcript');
-  
+    // Route::get('custom-payments', function () {
+    //     return view('payments/custom-payment');
+    // })->name('custom.payments');
+    Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment');
+    // Route::post('custom-payments', 'PaymentMethod\CustomPaymentsController@update')->name('custom.payment');
+
     Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
+    Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
 
     Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
     Route::get('preview-transcript/{student_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');

@@ -19,4 +19,5 @@ class FeesInfo extends Model
     {
        return Self::where('type', $type)->pluck('amount')->first();
     }
+   
 }

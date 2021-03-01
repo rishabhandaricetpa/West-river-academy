@@ -61,17 +61,7 @@ class TranscriptController extends Controller
         return view('admin.transcript.edit_subject_grade', compact('subjects'));
 
     }
-//     public function fetchfile($id){
-//         // if(isEmpty($id)){
-//         //     alert('the user has not submitted the transcript!');
-//         // }else{
-//        $data= TranscriptPdf::where('student_profile_id',$id)->first();
-//        $pdflink=$data->pdf_link ;
-//        $pdf = PDF::loadView('transcript.pdf', $data);
 
-//         return $pdf->download('storage/pdf/'.$pdflink);
-//         // }
-//    }
     public function genrateTranscript($id,$transcript_id)
     {
         //fetch data for the transcript pdf
@@ -128,7 +118,7 @@ class TranscriptController extends Controller
         if($paymentsTranscriptStatus != null){
                     $paymentsTranscriptStatus->status = 'approved';
             }
-        $apymentsTranscriptStatus->save();
+        $paymentsTranscriptStatus->save();
         return $pdf->download($pdfname . '.pdf');
     }
 

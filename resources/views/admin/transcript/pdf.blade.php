@@ -69,16 +69,16 @@
       <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
         <thead>
           <tr>
-             <th colspan="3" style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">Course name</th>
+             <th  style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">Course name</th>
              @foreach($grades as $grade) 
-             <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;width:15%;padding:3px;">Grade {{$grade->grade}}</th>
+             <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;width:15%;padding:3px 20px;white-spane:initial;word-break:break-all;">Grade {{$grade->grade}}</th>
          @endforeach
           </tr>
         </thead>
         <tbody>
         @foreach($groupCourses as $course)
           <tr>
-            <td colspan="3" style="border-bottom:1px solid #000;width:70%;padding:3px;font-size:11px;">{{$course->subject->subject_name}}</td>
+            <td style="border-bottom:1px solid #000;width:70%;padding:3px;font-size:11px;">{{$course->subject->subject_name}}</td>
             @foreach($transcriptData as $niddle => $data)
             <td style="border-bottom:1px solid #000;border-left:1px solid #000;width:15%;padding:3px;font-size:11px;text-align:center;">{{ getMetrixValues($course, $data, $transcriptData) }}</td>
             @endforeach
@@ -90,13 +90,13 @@
     <td width="30%" style="text-align:right;">
     <table width="100%">
       <tbody>
-        <tr style="width:100%;"><td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:22px;"><span style="border-bottom:1px solid #000;display:inline-block;font-size:11px;">GRADING SYSTEM</span></td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;font-size:11px;">A = 90-100%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;font-size:11px;">B = 80-89%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;font-size:11px;">C = 70-79%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;font-size:11px;">D = 60-69%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;font-size:11px;">F = 0-59%</td></tr>
-        <tr style="width:100%;"><td style="white-space: pre;padding-left:22px;font-size:11px;">P = PASS</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:52px;"><span style="border-bottom:1px solid #000;display:inline-block;font-size:11px;">GRADING SYSTEM</span></td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:52px;font-size:11px;">A = 90-100%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:52px;font-size:11px;">B = 80-89%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:52px;font-size:11px;">C = 70-79%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:52px;font-size:11px;">D = 60-69%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:52px;font-size:11px;">F = 0-59%</td></tr>
+        <tr style="width:100%;"><td style="white-space: pre;padding-left:52px;font-size:11px;">P = PASS</td></tr>
       </tbody>
     </table>
     </td>
@@ -108,7 +108,7 @@
   <tr width="100%"><td style="padding-top:20px;width:100%;font-size:12px;">The Student has met West River Academy's requirments for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is promoted to grade <span style="font-weight:700;">6</span>.</td></tr>
   </tbody>
 </table>
-<table>
+<table style="margin-top:47%">
   <tbody>
   <tr>
       <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>

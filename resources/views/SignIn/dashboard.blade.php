@@ -32,9 +32,9 @@
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
-              <a href="#" class="d-inline-block mb-5 decoration-none">
+              <a href="{{ route('custom.payment')}}" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-credit-card rounded-circle circled-grid fa-2x text-secondary"></i>
-               <h3 class="mt-3 text-black font-weight-normal">Make a Payment</h3>
+               <h3 class="mt-3 text-black font-weight-normal">Make a Custom Payment</h3>
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
@@ -95,8 +95,8 @@
              <td>{{($transcriptData->status)}}</td>
              @if($transcriptData->status === 'paid')
              <td><a href="#">Edit Transcript</a></td>
-             @else
-             <td>-</td>
+             @elseif($transcriptData->status === 'approved')
+             <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">click here to edit Transcript</a></td>
              @endif
              @if($transcriptData->status === 'approved')
              <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Download Transcript</a></td>
