@@ -41,9 +41,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
-        // Route::get('/cart', function () {
-        //     return view('cart');
-        // });
 
         //enroll student
         Route::get('/enroll-student', 'StudentController@index');
@@ -73,7 +70,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
 
-        // Route::get('/cart', 'StudentController@address')->name('billing.address');
+
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
@@ -89,7 +86,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('thankyou.paypal');
 
         //Stripe Payment
-        // Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
         Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
         Route::post('/stripe-payment', 'PaymentMethod\StripeController@handlePost')->name('stripe.payment');
         Route::get('paymentinfo', function () {
@@ -122,9 +118,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('MyAccounts/resetpassword');
         })->name('reset.password');
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
-        // Route::get('/viewConfirmation/{id}', function () {
-        //     return view('viewConfirmation');
-        // })->name('view.confirm');
+
         Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
@@ -138,15 +132,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 
-    // Route::post('/cart', 'CartController@store')->name('add.cart');
-    // Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
-    // Route::get('/cart', 'CartController@index');
-
-
-    // // Route::get('/cart', 'StudentController@address')->name('billing.address');
-    // Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
-    // Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
-
 
     //Paypal Payment
     Route::get('payment', function () {
@@ -157,7 +142,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('payment/{id}', 'StudentController@paypalorderReview')->name('paypal.order');
 
     //Stripe Payment
-    // Route::get('/stripe-payment', 'StripeController@index')->name('stripe.payment');
+
     Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
     Route::post('/stripe-payment', 'PaymentMethod\StripeController@handlePost')->name('stripe.payment');
     Route::get('paymentinfo', function () {
@@ -196,9 +181,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('MyAccounts/resetpassword');
     })->name('reset.password');
     Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
-    // Route::get('/viewConfirmation/{id}', function () {
-    //     return view('viewConfirmation');
-    // })->name('view.confirm');
+
     Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
 
     Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
@@ -270,14 +253,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('science/{student_id}/{transcript_id}', 'Courses\ScienceController@index')->name('science');
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 
-    // Route::get('custom-payments', function () {
-    //     return view('payments/custom-payment');
-    // })->name('custom.payments');
-    Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment')->middleware('auth');
-    // Route::post('custom-payments', 'PaymentMethod\CustomPaymentsController@update')->name('custom.payment');
-    // Route::get('preview-transcript', function () {
-    //     return view('transcript/preview-transcript');
-    // })->name('preview.transcript');
+    Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment');
 
     Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
     Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
@@ -293,17 +269,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
 
 
-    //another grade enrollment_year
-    // Route::get('another-level/{student_id}', 'TranscriptController@viewAnotherEnrollment')->name('another.level');
-
-
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
     Route::post('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');
-
-    // Route::get('purchase-transcript', function () {
-    //     return view('transcript/purchase-transcript');
-    // })->name('purchase.transcript');
-
 
 
     //edit courses
