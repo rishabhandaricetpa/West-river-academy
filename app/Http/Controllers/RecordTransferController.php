@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
 use Illuminate\Http\Request;
+use DB;
 
 class RecordTransferController extends Controller
 {
@@ -25,25 +26,36 @@ class RecordTransferController extends Controller
     }
     public function storeRecordRequest(Request $request, $student_id, $parent_id)
     {
-        $recordTransfer = new RecordTransfer();
-        $recordTransfer->student_profile_id = $student_id;
-        $recordTransfer->parent_profile_id = $parent_id;
-        $recordTransfer->school_name = $request->get('school_name');
-        $recordTransfer->email = $request->get('email');
-        $recordTransfer->fax_number = $request->get('fax_number');
-        $recordTransfer->phone_number = $request->get('phone_number');
-        $recordTransfer->street_address = $request->get('street_address');
-        $recordTransfer->city = $request->get('city');
-        $recordTransfer->state = $request->get('state');
-        $recordTransfer->zip_code = $request->get('zip_code');
-        $recordTransfer->country = $request->get('country');
-        $recordTransfer->status = 'InReview';
-        $recordTransfer->save();
-        $notification = [
-            'message' => 'Record Transfer Request Sent Successfully!',
-            'alert-type' => 'success',
-        ];
-        return redirect()->back()->with($notification);
+        try {
+            DB::beginTransaction();
+            $recordTransfer = new RecordTransfer();
+            $recordTransfer->student_profile_id = $student_id;
+            $recordTransfer->parent_profile_id = $parent_id;
+            $recordTransfer->school_name = $request->get('school_name');
+            $recordTransfer->email = $request->get('email');
+            $recordTransfer->fax_number = $request->get('fax_number');
+            $recordTransfer->phone_number = $request->get('phone_number');
+            $recordTransfer->street_address = $request->get('street_address');
+            $recordTransfer->city = $request->get('city');
+            $recordTransfer->state = $request->get('state');
+            $recordTransfer->zip_code = $request->get('zip_code');
+            $recordTransfer->country = $request->get('country');
+            $recordTransfer->status = 'InReview';
+            $recordTransfer->save();
+            DB::commit();
+            $notification = [
+                'message' => 'Record Transfer Request Sent Successfully!',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
     public function editRecordRequest($id)
     {
@@ -52,25 +64,35 @@ class RecordTransferController extends Controller
     }
     public function updateStoreRecordRequest(Request $request, $id)
     {
-
-        $recordTransfer = RecordTransfer::find($id);
-        $recordTransfer->student_profile_id = $request->get('student_id');
-        $recordTransfer->parent_profile_id = $request->get('parent_id');
-        $recordTransfer->school_name = $request->get('school_name');
-        $recordTransfer->email = $request->get('email');
-        $recordTransfer->fax_number = $request->get('fax_number');
-        $recordTransfer->phone_number = $request->get('phone_number');
-        $recordTransfer->street_address = $request->get('street_address');
-        $recordTransfer->city = $request->get('city');
-        $recordTransfer->state = $request->get('state');
-        $recordTransfer->zip_code = $request->get('zip_code');
-        $recordTransfer->country = $request->get('country');
-        $recordTransfer->status = 'InReview';
-        $recordTransfer->save();
-        $notification = [
-            'message' => 'Record Transfer Request Updated Successfully!',
-            'alert-type' => 'success',
-        ];
-        return redirect()->back()->with($notification);
+        try {
+            DB::beginTransaction();
+            $recordTransfer = RecordTransfer::find($id);
+            $recordTransfer->student_profile_id = $request->get('student_id');
+            $recordTransfer->parent_profile_id = $request->get('parent_id');
+            $recordTransfer->school_name = $request->get('school_name');
+            $recordTransfer->email = $request->get('email');
+            $recordTransfer->fax_number = $request->get('fax_number');
+            $recordTransfer->phone_number = $request->get('phone_number');
+            $recordTransfer->street_address = $request->get('street_address');
+            $recordTransfer->city = $request->get('city');
+            $recordTransfer->state = $request->get('state');
+            $recordTransfer->zip_code = $request->get('zip_code');
+            $recordTransfer->country = $request->get('country');
+            $recordTransfer->status = 'InReview';
+            $recordTransfer->save();
+            DB::commit();
+            $notification = [
+                'message' => 'Record Transfer Request Updated Successfully!',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

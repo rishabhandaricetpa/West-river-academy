@@ -20,33 +20,33 @@ class GraduationController extends Controller
     public function index()
     {
         $parent_id = ParentProfile::getParentId();
-        $students = StudentProfile::select('id','first_name','last_name','gender')
-                                    ->selectRaw('DATE(d_o_b) as dob')
-                                    ->where('parent_profile_id',$parent_id)
-                                    ->with('graduation')
-                                    ->get();
+        $students = StudentProfile::select('id', 'first_name', 'last_name', 'gender')
+            ->selectRaw('DATE(d_o_b) as dob')
+            ->where('parent_profile_id', $parent_id)
+            ->with('graduation')
+            ->get();
 
-        return view('graduation.index',compact('students'));
+        return view('graduation.index', compact('students'));
     }
 
     public function gradutaionApplication(Request $request)
     {
         $student_id = $request->query('student');
-        $student = StudentProfile::whereId($student_id)->where('parent_profile_id',ParentProfile::getParentId())->with('graduation')->first();
+        $student = StudentProfile::whereId($student_id)->where('parent_profile_id', ParentProfile::getParentId())->with('graduation')->first();
 
-        if($student === null){
+        if ($student === null) {
             return redirect()->back()->with([
                 'message' => 'Student not found!',
                 'alert-type' => 'error',
             ]);
-        }else if($student->graduation !== null){
+        } else if ($student->graduation !== null) {
             return redirect()->back()->with([
                 'message' => 'Graduation is already applied for this student!',
                 'alert-type' => 'error',
             ]);
         }
 
-        return view('graduation.application',compact('student'));
+        return view('graduation.application', compact('student'));
     }
 
     public function store(Request $request)
@@ -68,7 +68,7 @@ class GraduationController extends Controller
 
             StudentProfile::whereId($inputs['student_id'])->update(['email' => $inputs['email']]);
             $graduation = Graduation::create($data);
-            GraduationPayment::updateOrInsert(['graduation_id' => $graduation->id],[ 'amount' => $fee]);
+            GraduationPayment::updateOrInsert(['graduation_id' => $graduation->id], ['amount' => $fee]);
             GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
 
             DB::commit();
@@ -90,22 +90,22 @@ class GraduationController extends Controller
         try {
             DB::beginTransaction();
             $inputs = $request->all();
-            
+
             $graduation = Graduation::whereId($id);
             $old_status = $graduation->pluck('status')->first();
 
             $graduation->update(['status' => $inputs['status']]);
 
-            if($inputs['status'] === 'approved' && $inputs['status'] != $old_status){
-                $data = $graduation->with(['parent','student'])->first();
-                if($data->parent->p1_email){
+            if ($inputs['status'] === 'approved' && $inputs['status'] != $old_status) {
+                $data = $graduation->with(['parent', 'student'])->first();
+                if ($data->parent->p1_email) {
                     $graduation_fee = FeesInfo::getFeeAmount('graduation');
 
-                    if($data->apostille_country){
+                    if ($data->apostille_country) {
                         $apostille_fee = FeesInfo::getFeeAmount('apostille');
                         $total_fee = $graduation_fee + $apostille_fee;
                         $message = 'final transcript and Apostille.';
-                    }else{
+                    } else {
                         $total_fee = $graduation_fee;
                         $message = 'and final transcript.';
                     }
@@ -121,7 +121,7 @@ class GraduationController extends Controller
             unset($inputs['_token']);
             unset($inputs['status']);
 
-            GraduationDetail::where('graduation_id',$id)->update($inputs);
+            GraduationDetail::where('graduation_id', $id)->update($inputs);
 
             DB::commit();
 
@@ -129,7 +129,6 @@ class GraduationController extends Controller
                 'message' => 'Details updated successfully!',
                 'alert-type' => 'success',
             ]);
-           
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -147,23 +146,23 @@ class GraduationController extends Controller
 
     public function dataTable()
     {
-        return datatables(Graduation::with(['details','student','parent'])->get())->toJson();
+        return datatables(Graduation::with(['details', 'student', 'parent'])->get())->toJson();
     }
 
     public function edit(Request $request, $id)
     {
-        $graduation = Graduation::whereId($id)->with(['details','student','parent'])->first();
+        $graduation = Graduation::whereId($id)->with(['details', 'student', 'parent'])->first();
 
-        return view('admin.graduation.edit',compact('graduation'));
+        return view('admin.graduation.edit', compact('graduation'));
     }
 
     public function purchase(Request $request, $id)
     {
         $student = StudentProfile::whereId($id)->with(['graduationAddress', 'graduation', 'graduationPayment', 'parentProfile'])->first();
-        $countries = Country::select('country')->where('country','!=','United States')->get();
+        $countries = Country::select('country')->where('country', '!=', 'United States')->get();
         $apostille_fee = FeesInfo::getFeeAmount('apostille');
         $graduation_fee = FeesInfo::getFeeAmount('graduation');
 
-        return view('graduation.purchase',compact('student', 'countries', 'apostille_fee', 'graduation_fee'));
+        return view('graduation.purchase', compact('student', 'countries', 'apostille_fee', 'graduation_fee'));
     }
 }

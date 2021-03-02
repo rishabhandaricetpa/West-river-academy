@@ -64,23 +64,33 @@ class PaymentAddressController extends Controller
 
     public function update(Request $request, $id)
     {
-        $banktransfer = BanktransferDetail::find($id);
-        $banktransfer->bank_name = $request->get('bank_name');
-        $banktransfer->swift_code = $request->get('swift_code');
-        $banktransfer->bank_address = $request->get('bank_address');
-        $banktransfer->street = $request->get('street');
-        $banktransfer->phone_number = $request->get('phone_number');
-        $banktransfer->routing_number = $request->get('routing_number');
-        $banktransfer->account_name = $request->get('account_name');
-        $banktransfer->account_number = $request->get('account_number');
-        $banktransfer->status = $request->get('status');
-        $banktransfer->save();
-        $notification = [
-            'message' => 'Address for Banktransfer is updated Successfully!',
-            'alert-type' => 'success',
-        ];
-
-        return redirect('admin/payment-address')->with($notification);
+        try {
+            DB::beginTransaction();
+            $banktransfer = BanktransferDetail::find($id);
+            $banktransfer->bank_name = $request->get('bank_name');
+            $banktransfer->swift_code = $request->get('swift_code');
+            $banktransfer->bank_address = $request->get('bank_address');
+            $banktransfer->street = $request->get('street');
+            $banktransfer->phone_number = $request->get('phone_number');
+            $banktransfer->routing_number = $request->get('routing_number');
+            $banktransfer->account_name = $request->get('account_name');
+            $banktransfer->account_number = $request->get('account_number');
+            $banktransfer->status = $request->get('status');
+            $banktransfer->save();
+            DB::commit();
+            $notification = [
+                'message' => 'Address for Banktransfer is updated Successfully!',
+                'alert-type' => 'success',
+            ];
+            return redirect('admin/payment-address')->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     public function destroyBanktransferAddress($id)
@@ -139,24 +149,35 @@ class PaymentAddressController extends Controller
 
     public function updateTransferwise(Request $request, $id)
     {
-        $transferwise = TransferwiseDetail::find($id);
-        $transferwise->account_holder = $request->get('account_holder');
-        $transferwise->account_number = $request->get('account_number');
-        $transferwise->wire_transfer_number = $request->get('wire_transfer_number');
-        $transferwise->swift_code = $request->get('swift_code');
-        $transferwise->routing_number = $request->get('routing_number');
-        $transferwise->address = $request->get('address');
-        $transferwise->state = $request->get('state');
-        $transferwise->country = $request->get('country');
-        $transferwise->status = $request->get('status');
-        $transferwise->website = $request->get('website');
-        $transferwise->save();
-        $notification = [
-            'message' => 'Address for Transfer Wise is updated Successfully!',
-            'alert-type' => 'success',
-        ];
+        try {
+            DB::beginTransaction();
+            $transferwise = TransferwiseDetail::find($id);
+            $transferwise->account_holder = $request->get('account_holder');
+            $transferwise->account_number = $request->get('account_number');
+            $transferwise->wire_transfer_number = $request->get('wire_transfer_number');
+            $transferwise->swift_code = $request->get('swift_code');
+            $transferwise->routing_number = $request->get('routing_number');
+            $transferwise->address = $request->get('address');
+            $transferwise->state = $request->get('state');
+            $transferwise->country = $request->get('country');
+            $transferwise->status = $request->get('status');
+            $transferwise->website = $request->get('website');
+            $transferwise->save();
+            DB::commit();
+            $notification = [
+                'message' => 'Address for Transfer Wise is updated Successfully!',
+                'alert-type' => 'success',
+            ];
 
-        return redirect('admin/payment-address')->with($notification);
+            return redirect('admin/payment-address')->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     public function destroyTransferwiseAddress($id)
@@ -212,31 +233,52 @@ class PaymentAddressController extends Controller
 
     public function updateMoneytransfer(Request $request, $id)
     {
-        $moneygram = MoneygramDetail::find($id);
-        $moneygram->name = $request->get('name');
-        $moneygram->address = $request->get('address');
-        $moneygram->city = $request->get('city');
-        $moneygram->state = $request->get('state');
-        $moneygram->zip = $request->get('zip');
-        $moneygram->money_gram_id = $request->get('money_gram_id');
-        $moneygram->status = $request->get('status');
-        $moneygram->save();
-        $notification = [
-            'message' => 'Address for MoneyGram is updated Successfully!',
-            'alert-type' => 'success',
-        ];
+        try {
+            DB::beginTransaction();
+            $moneygram = MoneygramDetail::find($id);
+            $moneygram->name = $request->get('name');
+            $moneygram->address = $request->get('address');
+            $moneygram->city = $request->get('city');
+            $moneygram->state = $request->get('state');
+            $moneygram->zip = $request->get('zip');
+            $moneygram->money_gram_id = $request->get('money_gram_id');
+            $moneygram->status = $request->get('status');
+            $moneygram->save();
+            DB::commit();
+            $notification = [
+                'message' => 'Address for MoneyGram is updated Successfully!',
+                'alert-type' => 'success',
+            ];
 
-        return redirect('admin/payment-address')->with($notification);
+            return redirect('admin/payment-address')->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     public function destroyMoneyGramAddress($id)
     {
-        $notification = [
-            'message' => 'Record is Deleted Successfully!',
-            'alert-type' => 'warning',
-        ];
-        MoneygramDetail::where('id', $id)->delete();
-
-        return redirect()->back()->with($notification);
+        try {
+            DB::beginTransaction();
+            $notification = [
+                'message' => 'Record is Deleted Successfully!',
+                'alert-type' => 'warning',
+            ];
+            MoneygramDetail::where('id', $id)->delete();
+            DB::commit();
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

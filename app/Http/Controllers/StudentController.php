@@ -52,7 +52,7 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         try {
-
+            DB::beginTransaction();
             $id = Auth::user()->id;
             $parentProfileData = User::find($id)->parentProfile()->first();
             $country = $parentProfileData->country;
@@ -74,6 +74,7 @@ class StudentController extends Controller
                 $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
                 $end_date = $newYear . "-" . $month_end_date;
             }
+            DB::commit();
             if ($request->expectsJson()) {
                 return response()->json($start_date);
             }
@@ -111,7 +112,6 @@ class StudentController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
-
             $student = StudentProfile::create([
                 'parent_profile_id' => $id,
                 'first_name' => $data['first_name'],

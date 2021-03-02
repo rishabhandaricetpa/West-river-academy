@@ -18,18 +18,17 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
-        
+
         return view('admin.familyInformation.view-student');
-    
     }
     public function dataTable()
     {
-        return datatables(StudentProfile::with(['parentProfile' ,'enrollmentPeriods','transcriptCourses','TranscriptK8','graduation'])->get())->toJson();
+        return datatables(StudentProfile::with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation'])->get())->toJson();
     }
 
     public function studentInformation($id)
     {
-        $student = StudentProfile::where('parent_profile_id',$id)->get();
+        $student = StudentProfile::where('parent_profile_id', $id)->get();
         return view('admin.familyInformation.view-student', compact('student'));
     }
 
@@ -84,35 +83,46 @@ class StudentProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $student = StudentProfile::find($id);
-        $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
-        $student->first_name = $request->get('first_name');
-        $student->middle_name = $request->get('first_name');
-        $student->last_name = $request->get('last_name');
-        $student->d_o_b = \Carbon\Carbon::parse($request->get('d_o_b'))->format('M d Y');
-        $student->email = $request->get('email');
-        $student->cell_phone = $request->get('cell_phone');
-        $student->student_Id = $request->get('student_id');
-        $student->immunized_status = $request->get('immunized_status');
-        $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
+        try {
+            DB::beginTransaction();
+            $student = StudentProfile::find($id);
+            $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
+            $student->first_name = $request->get('first_name');
+            $student->middle_name = $request->get('first_name');
+            $student->last_name = $request->get('last_name');
+            $student->d_o_b = \Carbon\Carbon::parse($request->get('d_o_b'))->format('M d Y');
+            $student->email = $request->get('email');
+            $student->cell_phone = $request->get('cell_phone');
+            $student->student_Id = $request->get('student_id');
+            $student->immunized_status = $request->get('immunized_status');
+            $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
 
-        foreach ($enrollupdate as $key => $en) {
-            $enroll = EnrollmentPeriods::whereId($en->id)->first();
-            $startDates = $request->get('start_date');
-            $endDates = $request->get('end_date');
-            $grade_level = $request->get('grade');
-            $enroll->start_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('M d Y');
-            $enroll->end_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('M d Y');
-            $enroll->grade_level = $grade_level[$key];
-            $enroll->save();
+            foreach ($enrollupdate as $key => $en) {
+                $enroll = EnrollmentPeriods::whereId($en->id)->first();
+                $startDates = $request->get('start_date');
+                $endDates = $request->get('end_date');
+                $grade_level = $request->get('grade');
+                $enroll->start_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('M d Y');
+                $enroll->end_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('M d Y');
+                $enroll->grade_level = $grade_level[$key];
+                $enroll->save();
+            }
+            $student->save();
+            DB::commit();
+            $notification = [
+                'message' => 'Student Record is updated Successfully!',
+                'alert-type' => 'success',
+            ];
+
+            return redirect('admin/view-student')->with($notification);
+        } catch (\Exception $e) {
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
         }
-        $student->save();
-        $notification = [
-            'message' => 'Student Record is updated Successfully!',
-            'alert-type' => 'success',
-        ];
-
-        return redirect('admin/view-student')->with($notification);
     }
 
     /**
@@ -123,12 +133,22 @@ class StudentProfileController extends Controller
      */
     public function destroy($id)
     {
-        $notification = [
-            'message' => 'Student Record is Deleted Successfully!',
-            'alert-type' => 'warning',
-        ];
-        StudentProfile::where('id', $id)->delete();
+        try {
+            DB::beginTransaction();
+            $notification = [
+                'message' => 'Student Record is Deleted Successfully!',
+                'alert-type' => 'warning',
+            ];
+            StudentProfile::where('id', $id)->delete();
+            DB::commit();
 
-        return redirect()->back()->with($notification);
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }
