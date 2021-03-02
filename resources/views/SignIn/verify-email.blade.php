@@ -16,4 +16,3 @@
 <!-- * =============== /Main =============== * -->
 
 @include('layouts.partials.footer')
-

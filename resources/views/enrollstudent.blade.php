@@ -8,7 +8,7 @@
 
 
   <div id="app">
-    <enroll-student :startdate='@json($start_date)' :enddate= '@json($end_date)' :sem='@json($semestermonth)'> </enroll-student>
+    <enroll-student :startdate='@json($start_date)' :enddate='@json($end_date)' :sem='@json($semestermonth)'> </enroll-student>
   </div>
 </main>
 <!-- Choose Dates -->

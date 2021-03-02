@@ -12,6 +12,8 @@ use App\Models\StudentProfile;
 use App\Models\Graduation;
 use App\Models\GraduationDetail;
 use App\Models\GraduationPayment;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\GraduationApproved;
 
 class GraduationController extends Controller
 {
@@ -89,7 +91,31 @@ class GraduationController extends Controller
             DB::beginTransaction();
             $inputs = $request->all();
             
-            Graduation::find($id)->update(['status' => $inputs['status']]);
+            $graduation = Graduation::whereId($id);
+            $old_status = $graduation->pluck('status')->first();
+
+            $graduation->update(['status' => $inputs['status']]);
+
+            if($inputs['status'] === 'approved' && $inputs['status'] != $old_status){
+                $data = $graduation->with(['parent','student'])->first();
+                if($data->parent->p1_email){
+                    $graduation_fee = FeesInfo::getFeeAmount('graduation');
+
+                    if($data->apostille_country){
+                        $apostille_fee = FeesInfo::getFeeAmount('apostille');
+                        $total_fee = $graduation_fee + $apostille_fee;
+                        $message = 'final transcript and Apostille.';
+                    }else{
+                        $total_fee = $graduation_fee;
+                        $message = 'and final transcript.';
+                    }
+
+                    $data->total_fee = $total_fee;
+                    $data->message = $message;
+
+                    Mail::to($data->parent->p1_email)->send(new GraduationApproved($data));
+                }
+            }
 
             unset($inputs['_method']);
             unset($inputs['_token']);

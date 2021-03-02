@@ -152,9 +152,9 @@ class PaymentAddressController extends Controller
         $transferwise->website = $request->get('website');
         $transferwise->save();
         $notification = [
-                'message' => 'Address for Transfer Wise is updated Successfully!',
-                'alert-type' => 'success',
-            ];
+            'message' => 'Address for Transfer Wise is updated Successfully!',
+            'alert-type' => 'success',
+        ];
 
         return redirect('admin/payment-address')->with($notification);
     }
@@ -162,9 +162,9 @@ class PaymentAddressController extends Controller
     public function destroyTransferwiseAddress($id)
     {
         $notification = [
-                'message' => 'Record is Deleted Successfully!',
-                'alert-type' => 'warning',
-            ];
+            'message' => 'Record is Deleted Successfully!',
+            'alert-type' => 'warning',
+        ];
         TransferwiseDetail::where('id', $id)->delete();
 
         return redirect()->back()->with($notification);
@@ -222,9 +222,9 @@ class PaymentAddressController extends Controller
         $moneygram->status = $request->get('status');
         $moneygram->save();
         $notification = [
-                    'message' => 'Address for MoneyGram is updated Successfully!',
-                    'alert-type' => 'success',
-            ];
+            'message' => 'Address for MoneyGram is updated Successfully!',
+            'alert-type' => 'success',
+        ];
 
         return redirect('admin/payment-address')->with($notification);
     }
@@ -232,9 +232,9 @@ class PaymentAddressController extends Controller
     public function destroyMoneyGramAddress($id)
     {
         $notification = [
-                'message' => 'Record is Deleted Successfully!',
-                'alert-type' => 'warning',
-            ];
+            'message' => 'Record is Deleted Successfully!',
+            'alert-type' => 'warning',
+        ];
         MoneygramDetail::where('id', $id)->delete();
 
         return redirect()->back()->with($notification);

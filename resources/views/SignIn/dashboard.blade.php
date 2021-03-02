@@ -162,11 +162,23 @@
                @foreach($transcript as $transcriptData)
                <tr>
                   <td>{{$transcriptData['student']['fullname']}}</td>
-                  <td>{{($transcriptData->status)}}</td>
                   @if($transcriptData->status === 'paid')
-                  <td><a href="#">Edit Transcript</a></td>
+                  <td>Paid</td>
+                  @elseif($transcriptData->status === 'canEdit')
+                  <td>Edit</td>
                   @elseif($transcriptData->status === 'approved')
-                  <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">click here to edit Transcript</a></td>
+                  <td>Approved</td>
+                  @elseif($transcriptData->status === 'completed')
+                  <td>Payment Received</td>
+                  @else
+                  <td>-</td>
+                  @endif
+                  @if($transcriptData->status === 'paid')
+                  <td>-</td>
+                  @elseif($transcriptData->status === 'canEdit')
+                  <td><a href="{{route('another.grade',$transcriptData->student_profile_id)}}">Edit Transcript</a></td>
+                  @elseif($transcriptData->status === 'approved')
+                  <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
                   @else
                   <td>-</td>
                   @endif
@@ -183,6 +195,9 @@
          </table>
       </div>
       <a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary mt-4">Purchase Transcripts</a>
+
+      <a href="#" class="btn btn-primary mt-4">Purchase Transcripts</a>
+
    </div>
 
 </main>
