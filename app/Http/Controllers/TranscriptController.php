@@ -204,7 +204,6 @@ class TranscriptController extends Controller
 
     public function purchase(Request $request, $id)
     {
-
         if ($request->get('grade') == 'K-8') {
             $student = StudentProfile::find($id);
             $transcriptData = Transcript::create([
@@ -281,7 +280,8 @@ class TranscriptController extends Controller
     {
         $student = StudentProfile::find($student_id);
         $transcript_fee = FeesInfo::getFeeAmount('transcript_edit');
-        $transcriptPayment = TranscriptPayment::Create(
+        $transcriptPayment = TranscriptPayment::updateOrCreate(
+            ['transcript_id' => $transcript_id],
             [
                 'amount' => $transcript_fee,
                 'transcript_id' => $transcript_id,
@@ -289,7 +289,7 @@ class TranscriptController extends Controller
             ]
         );
         $student = StudentProfile::whereId($student_id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
-        return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment','student_id'));
+        return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment', 'student_id'));
 
         return view('transcript/edit_approved');
     }

@@ -49,7 +49,7 @@ class CartController extends Controller
                 case 'enrollment_period':
                     for ($i = 0; $i < count($data['eps']); $i++) {
                         $item_id = $data['eps'][$i];
-                        if (! Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
+                        if (!Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
                             Cart::create([
                                 'item_type' => 'enrollment_period',
                                 'item_id' => $item_id,
@@ -63,11 +63,11 @@ class CartController extends Controller
                     $parent_profile_id = ParentProfile::getParentId();
 
                     $student = StudentProfile::whereId($data['student_id'])
-                                                ->where('parent_profile_id', $parent_profile_id)
-                                                ->with('graduation')
-                                                ->first();
+                        ->where('parent_profile_id', $parent_profile_id)
+                        ->with('graduation')
+                        ->first();
 
-                    if($student){
+                    if ($student) {
                         GraduationMailingAddress::create([
                             'graduation_id' => $student->graduation->id,
                             'name' => $data['name'],
@@ -76,82 +76,88 @@ class CartController extends Controller
                             'country' => $data['country'],
                             'postal_code' => $data['postal_code']
                         ]);
-                        
-                        if(isset($data['apostille_country']) && !empty($data['apostille_country'])){
+
+                        if (isset($data['apostille_country']) && !empty($data['apostille_country'])) {
                             // change graduation fee amount based on Apostille
                             $amount = FeesInfo::getFeeAmount('apostille') + FeesInfo::getFeeAmount('graduation');
-                        }else{
+                        } else {
                             $amount = FeesInfo::getFeeAmount('graduation');
                         }
 
                         Graduation::whereId($student->graduation->id)->update(['apostille_country' => $data['apostille_country']]);
                         GraduationPayment::where('graduation_id', $student->graduation->id)->update(['amount' => $amount]);
 
-                        if (! Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
+                        if (!Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
                             Cart::create([
                                 'item_type' => 'graduation',
                                 'item_id' => $student->graduation->id,
                                 'parent_profile_id' => $parent_profile_id,
                             ]);
                         }
-                    }else{
+                    } else {
                         return redirect()->back()->with([
                             'message' => 'Invalid data entered!',
                             'alert-type' => 'error',
                         ]);
                     }
                     break;
-             case 'transcript':
-                        $parent_profile_id = ParentProfile::getParentId();
-                        $student = StudentProfile::whereId($data['student_id'])
-                                                    ->where('parent_profile_id', $parent_profile_id)
-                                                    ->with('transcript')
-                                                    ->first();
-                        $amount = FeesInfo::getFeeAmount('transcript');
-                        if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {         
+                case 'transcript':
+                    $parent_profile_id = ParentProfile::getParentId();
+                    $student = StudentProfile::whereId($data['student_id'])
+                        ->where('parent_profile_id', $parent_profile_id)
+                        ->with('transcript')
+                        ->first();
+                    $amount = FeesInfo::getFeeAmount('transcript');
+                    if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
                         Cart::create([
-                                    'item_type' => 'transcript',
-                                    'item_id' => $request->get('transcript_id'),
-                                    'parent_profile_id' => $parent_profile_id,
-                                ]);
-                        }
-                        break;
+                            'item_type' => 'transcript',
+                            'item_id' => $request->get('transcript_id'),
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
                 case 'custom':
-                            $customPaymentsData = CustomPayment::create([
-                                'parent_profile_id' => ParentProfile::getParentId(),
-                                'amount' => $request->get('amount'),
-                                'paying_for' => 'custom',
-                                'type_of_payment'=>'Custom Payments',
-                                'status'=>'pending'
-                            ]);
-                             $parentId= $customPaymentsData->parent_profile_id;
-                                $parent_profile_id = ParentProfile::getParentId();
-                                $amount = $data['amount'];
-                                if (! Cart::where('item_id', $parent_profile_id)->where('item_type', 'custom')->exists()) {         
-                                Cart::create([
-                                            'item_type' => 'custom',
-                                            'item_id' => $parent_profile_id,
-                                            'parent_profile_id' => $parent_profile_id,
-                                        ]);
-                                }
-                                break;
-
-                    case 'transcript_edit':
-                        $parent_profile_id = ParentProfile::getParentId();
-                        $student = StudentProfile::whereId($data['student_id'])
-                                                    ->where('parent_profile_id', $parent_profile_id)
-                                                    ->with('transcript')
-                                                    ->first();
-                        $amount = FeesInfo::getFeeAmount('transcript_edit');
-                        if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript_edit')->exists()) {         
+                    $clearpendingPayments = CustomPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
+                        ->update(
+                            [
+                                'status' => 'cancelled'
+                            ]
+                        );
+                    $customPaymentsData = CustomPayment::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'amount' => $request->get('amount'),
+                        'paying_for' => 'custom',
+                        'type_of_payment' => 'Custom Payments',
+                        'status' => 'pending'
+                    ]);
+                    $parentId = $customPaymentsData->parent_profile_id;
+                    $parent_profile_id = ParentProfile::getParentId();
+                    $amount = $data['amount'];
+                    if (!Cart::where('item_id', $parent_profile_id)->where('item_type', 'custom')->exists()) {
                         Cart::create([
-                                    'item_type' => 'transcript_edit',
-                                    'item_id' => $request->get('transcript_id'),
-                                    'parent_profile_id' => $parent_profile_id,
-                                ]);
-                        }
-                        break;
-                               
+                            'item_type' => 'custom',
+                            'item_id' => $parent_profile_id,
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
+
+                case 'transcript_edit':
+                    $parent_profile_id = ParentProfile::getParentId();
+                    $student = StudentProfile::whereId($data['student_id'])
+                        ->where('parent_profile_id', $parent_profile_id)
+                        ->with('transcript')
+                        ->first();
+                    $amount = FeesInfo::getFeeAmount('transcript_edit');
+                    if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript_edit')->exists()) {
+                        Cart::create([
+                            'item_type' => 'transcript_edit',
+                            'item_id' => $request->get('transcript_id'),
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
+
                 default:
                     break;
             }

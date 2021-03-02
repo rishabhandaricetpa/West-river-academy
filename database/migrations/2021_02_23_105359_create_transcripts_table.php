@@ -20,7 +20,7 @@ class CreateTranscriptsTable extends Migration
             $table->unsignedBigInteger('student_profile_id');
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->onDelete('cascade');;
             $table->string('period');
-            $table->enum('status', ['pending', 'approved', 'paid', 'completed']);
+            $table->enum('status', ['pending', 'approved', 'paid', 'completed', 'canEdit']);
             $table->timestamps();
         });
     }

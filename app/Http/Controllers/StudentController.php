@@ -91,9 +91,8 @@ class StudentController extends Controller
         $parentId = $parentProfileData->id;
         $student = StudentProfile::where('parent_profile_id', $parentId)->get();
         $transcript = Transcript::where('parent_profile_id', $parentId)
-            ->whereIn('status', ['approved', 'paid', 'completed'])
+            ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
-        //dd($transcript);
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer'));
     }
