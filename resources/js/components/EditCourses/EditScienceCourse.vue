@@ -115,6 +115,8 @@ export default {
      .then((response) => {
         window.location =
           "/edit-physical-education/" + this.student_id + "/" + this.transcript_id;
+      }).catch(error => {
+       alert('Please choose the course or remove it');
       });
     },
     addNewCourse() {

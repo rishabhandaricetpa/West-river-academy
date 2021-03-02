@@ -116,6 +116,9 @@ export default {
       axios.post(route("science.store"), this.form).then((response) => {
         window.location =
           "/physical-education/" + this.student_id + "/" + this.transcript_id;
+      })
+      .catch(error => {
+       alert('Please choose the course or remove it');
       });
     },
     addNewSocialScienceCourse() {

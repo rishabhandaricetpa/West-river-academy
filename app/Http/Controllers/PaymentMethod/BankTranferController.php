@@ -8,8 +8,8 @@ use App\Models\Cart;
 use App\Models\TransactionsMethod;
 use App\Models\EnrollmentPayment;
 use App\Models\User;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class BankTranferController extends Controller
@@ -26,7 +26,7 @@ class BankTranferController extends Controller
       return $next($request);
     });
   }
-  public function index()
+  public function index($amount)
   {
     $id = Auth::user()->id;
     $user =  User::find($id)->first();
@@ -40,14 +40,14 @@ class BankTranferController extends Controller
     $coupon_amount = session('applied_coupon_amount', 0);
     $amount = $enroll_fees->amount;
     $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
-    $type='Bank Transfer';
+    $type = 'Bank Transfer';
     //store transactions
-    $saveTransaction= TransactionsMethod::storeTransactionData($this->parent_profile_id,$amount,$coupon_code,$coupon_amount,$type);
+    $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);
     //update cart status active 
-    
+
     Cart::emptyCartAfterPayment($type, 'active');
 
-    Mail::to($email)->send(new BankTranferEmail($user));
+    Mail::to($email)->send(new BankTranferEmail($user, $amount));
     return view('mail.banktransfer', compact('email', 'date'));
   }
 }

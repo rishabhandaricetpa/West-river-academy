@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-<h2>Hi {{$user->name}} </h2>,
-PAYMENT: Bank Transfer
-Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page.
-http://westriveracademy.test/moneygram-transfer
+    <h2 style="font-family:'Catamaran', sans-serif;">Hi,{{$user->name}}</h2>
+    <h3 style="font-family:'Catamaran', sans-serif;">PAYMENT: MoneyGram </h3>
+    <p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/bank-transfer">http://westriveracademy.test/bank-transfer</a></p>
 
-Please let us know when you have made the payment and if you have used TransferWise or a regular bank transfer.
+    <h3>BILLING INFORMATION</h3>
+    <table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;" rowspan>
+        <thead>
+            <tr>
+                <th style="padding:8px;text-align:left" scope="row">DATE</th>
+                <td style="padding:8px;text-align:left"> {{$date}}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
 
-DATE: {{ $date}}
-PAYMENT: N/A
+                <th style="padding:8px;" scope="row">PAYMENT MODE</th>
+                <td style="padding:8px;">MoneyGram</td>
+            </tr>
+            <tr>
 
-BILLING INFORMATION
+                <th style="padding:8px;" scope="row">TOTAL TO PAY</th>
+                <td style="padding:8px;">${{$amount}}</td>
+            </tr>
+            <tr>
 
-{{$address->street_address}}.,<
-------------
-ITEM: CUSTPAYMENT
-Custom Payment
-PRICE: $0.00
-QT: 1
-ITEM TOTAL: $0.00
+                <th style="padding:8px;" scope="row">ADDRESS</th>
+                <td style="padding:8px;">{{$address->street_address .'  ' . $address->city.'  '.$address->state }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-TOTAL: $0.00
-
-
-</p>
-
+    Your Address
+    <address style="font-family:'Catamaran', sans-serif;">
+        Written by <a href="mailto:xyz@example.com">West River Academy</a>.<br>
+        Visit us at: https://www.westriveracademy.com/
+    </address>
 </body>
+
 </html>

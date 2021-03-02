@@ -10,8 +10,7 @@ use App\Mail\MoneyOrder;
 use App\Models\Cart;
 use App\Models\EnrollmentPayment;
 use App\Models\User;
-use Auth;
-
+use Illuminate\Support\Facades\Auth;
 
 class MoneyOrderController extends Controller
 {
@@ -31,7 +30,7 @@ class MoneyOrderController extends Controller
   /**
    * payment view.
    */
-  public function index()
+  public function index($amount)
   {
 
     $id = Auth::user()->id;
@@ -46,16 +45,16 @@ class MoneyOrderController extends Controller
     $amount = $enroll_fees->amount;
     $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
 
-    $type='Check or Money Order';
+    $type = 'Check or Money Order';
     //store transactions
 
-    $saveTransaction= TransactionsMethod::storeTransactionData($this->parent_profile_id,$amount,$coupon_code,$coupon_amount,$type);
-   
+    $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);
+
     //update cart status active 
 
     Cart::emptyCartAfterPayment($type, 'active');
 
-    Mail::to($email)->send(new MoneyOrder($user));
+    Mail::to($email)->send(new MoneyOrder($user, $amount));
 
     return view('mail.moneyorder-review', compact('email'));
   }

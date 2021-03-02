@@ -24,41 +24,42 @@
             <a type="button" href="{{ url('admin/file-upload')}}" class="btn btn-primary">Upload Signed Transcript</a>
         </form>
     </div>
-        @foreach($transcriptData as $school)
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <legend>{{$school->school_name}}</legend>
-            <p>
-                Academic School Year(s):{{$school->enrollment_year}}<br>
-                Grade: {{$school->grade}}<br>
-            </p>
-            <table id="addressData" class="table table-bordered table-striped data-table"">
-                <thead>
-                    <tr>
-                        <th>Courses</th>
-                        <th>Subjects</th>
-                        <th>Grade</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($school->TranscriptCourse as $course)
-                    @foreach ($course->subjects as $subject)
-                    <tr>
+    @foreach($transcriptData as $school)
+    <div class="form-wrap border bg-light py-5 px-25 mb-4">
+        <legend>{{$school->school_name}}</legend>
+        <p>
+            Academic School Year(s):{{$school->enrollment_year}}<br>
+            Grade: {{$school->grade}}<br>
+        </p>
+        <table id="addressData" class="table table-bordered table-striped data-table"">
+            <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary">Delete School Record</a>
+            <thead>
+                <tr>
+                    <th>Courses</th>
+                    <th>Subjects</th>
+                    <th>Grade</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($school->TranscriptCourse as $course)
+                @foreach ($course->subjects as $subject)
+                <tr>
 
-                        <td>
-                            @php
-                            $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
-                            return $value['id'] == $subject['courses_id'];
-                            });
-                            @endphp
-                            {{$firstCourse->course_name}}
-                        </td>
-                        <td>{{$subject->subject_name}}</td>
-                        <td>{{$course->score}}</td>
-                        <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a></td>
-            </tr>
-            @endforeach
-            @endforeach
+                    <td>
+                        @php
+                        $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
+                        return $value['id'] == $subject['courses_id'];
+                        });
+                        @endphp
+                        {{$firstCourse->course_name}}
+                    </td>
+                    <td>{{$subject->subject_name}}</td>
+                    <td>{{$course->score}}</td>
+                    <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a></td>
+                </tr>
+                @endforeach
+                @endforeach
             </tbody>
         </table>
         </form>

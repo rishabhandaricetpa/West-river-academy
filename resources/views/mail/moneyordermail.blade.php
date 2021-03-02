@@ -1,21 +1,49 @@
-<p>{{ $user['name'] }}
-<p>PAYMENT: Check or Money Order<p>
-<p>West River Academy<p>
-<p>33721 Bluewater Lane<p>
-<p>Dana Point, CA 92629</p>
-<p>DATE: {{ $date}}
-PAYMENT: N/A</p>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-<p>BILLING INFORMATION</p>
-<p>{{$parent_profile->street_address}}</p>
-<p>{{$parent_profile->city}} </p>
-<p>{{$parent_profile->state}} </p>
-<p>{{$parent_profile->zip_code}} </p>
-<p>{{$parent_profile->country}} </p>
+<body>
+    <h2 style="font-family:'Catamaran', sans-serif;">Hi, {{$user->name}}</h2>
+    <h3 style="font-family:'Catamaran', sans-serif;">PAYMENT: Check Or Money Order</h3>
+    <p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/bank-transfer">http://westriveracademy.test/bank-transfer</a></p>
 
-<p>-------------------------------------</p>
-<p>ITEM: CUSTPAYMENT</p>
-<p>Custom Payment</p>
-<p>PRICE: ${{$payment->amount}} </p>
+    <h3>BILLING INFORMATION</h3>
+    <table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;" rowspan>
+        <thead>
+            <tr>
+                <th style="padding:8px;text-align:left" scope="row">DATE</th>
+                <td style="padding:8px;text-align:left"> {{$date}}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
 
+                <th style="padding:8px;" scope="row">PAYMENT MODE</th>
+                <td style="padding:8px;">Check Or Money Order</td>
+            </tr>
+            <tr>
+
+                <th style="padding:8px;" scope="row">TOTAL TO PAY</th>
+                <td style="padding:8px;">${{$amount}}</td>
+            </tr>
+            <tr>
+
+                <th style="padding:8px;" scope="row">ADDRESS</th>
+                <td style="padding:8px;">{{$address->street_address .'  ' . $address->city.'  '.$address->state }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    Your Address
+    <address style="font-family:'Catamaran', sans-serif;">
+        Written by <a href="mailto:xyz@example.com">West River Academy</a>.<br>
+        Visit us at: https://www.westriveracademy.com/
+    </address>
+</body>
+
+</html>
