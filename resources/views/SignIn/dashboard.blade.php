@@ -194,7 +194,10 @@
             </tbody>
          </table>
       </div>
+      <a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary mt-4">Purchase Transcripts</a>
+
       <a href="#" class="btn btn-primary mt-4">Purchase Transcripts</a>
+
    </div>
 
 </main>

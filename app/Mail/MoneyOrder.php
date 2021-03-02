@@ -19,9 +19,10 @@ class MoneyOrder extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $amount)
     {
         $this->user = $user;
+        $this->amount = $amount;
     }
 
     /**
@@ -34,11 +35,10 @@ class MoneyOrder extends Mailable
         $id = $this->user->id;
         $user = User::find($id)->first();
         $email = $user->email;
-        $parent_profile = User::find($id)->parentProfile()->first();
-        $payment = Cart::getCartAmount($parent_profile->id, true);
         $date = \Carbon\Carbon::now()->format('Y-m-d');
-
+        $address = User::find($id)->parentProfile()->first();
+        $amount = $this->amount;
         return $this->from(env('EMAIL'))
-        ->markdown('mail.moneyordermail', compact('user', 'parent_profile', 'date', 'email', 'payment'))->subject('Check and Money Order Details');
+            ->markdown('mail.moneyordermail', compact('user',  'date', 'email', 'address', 'amount'))->subject('Check and Money Order Details');
     }
 }

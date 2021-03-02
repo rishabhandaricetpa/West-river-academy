@@ -110,7 +110,10 @@ export default {
         .then((response) => {
           window.location =
             "/mathematics/" + this.student_id + "/" + this.transcript_id;
-        });
+        })
+        .catch(error => {
+       alert('Please choose the course or remove it');
+      });
     },
     addNewEnglishCourse() {
       this.form.socialStudiesCourse.push({

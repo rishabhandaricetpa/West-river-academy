@@ -115,6 +115,9 @@ export default {
     addCourses() {
       axios.post(route("another.store"), this.form).then(response => {
         window.location = "/choose-another/" + this.student_id;
+      })
+        .catch(error => {
+       alert('Please choose the course or remove it');
       });
     },
     addNewSocialScienceCourse() {

@@ -19,9 +19,10 @@ class BankTranferEmail extends Mailable
      */
     public $user;
 
-    public function __construct($user)
+    public function __construct($user, $amount)
     {
         $this->user = $user;
+        $this->amount = $amount;
     }
 
     /**
@@ -31,12 +32,12 @@ class BankTranferEmail extends Mailable
      */
     public function build()
     {
-        $date = \Carbon\Carbon::now()->format('Y-m-d');
+        $date = \Carbon\Carbon::now()->format('M d Y');
         $id = $this->user->id;
         $user = User::find($id)->first();
         $address = User::find($id)->parentProfile()->first();
-
+        $amount = $this->amount;
         return $this->from(env('EMAIL'))
-        ->markdown('mail.bankinfo', compact('date', 'address'))->subject('Bank Transfer Details');
+            ->markdown('mail.bankinfo', compact('user', 'date', 'address', 'amount'))->subject('Bank Transfer Details');
     }
 }

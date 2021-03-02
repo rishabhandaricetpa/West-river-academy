@@ -19,9 +19,10 @@ class MoneyGram extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $amount)
     {
         $this->user = $user;
+        $this->amount = $amount;
     }
 
     /**
@@ -33,14 +34,11 @@ class MoneyGram extends Mailable
     {
         $id = $this->user->id;
         $user = User::find($id)->first();
-        $email = $user->email;
-        $parent_profile = User::find($id)->parentProfile()->first();
         $address = User::find($id)->parentProfile()->first();
-        $date = \Carbon\Carbon::now()->format('Y-m-d');
-        $payment = Cart::getCartAmount($parent_profile->id, true);
-        $date = \Carbon\Carbon::now()->format('Y-m-d');
+        $date = \Carbon\Carbon::now()->format('M d Y');
+        $amount = $this->amount;
 
         return $this->from(env('EMAIL'))
-        ->markdown('mail.moneygram-email', compact('user', 'address', 'parent_profile', 'date', 'email', 'payment'))->subject('Money Gram Payment');
+            ->markdown('mail.moneygram-email', compact('user', 'address', 'date', 'amount'))->subject('Money Gram Payment');
     }
 }

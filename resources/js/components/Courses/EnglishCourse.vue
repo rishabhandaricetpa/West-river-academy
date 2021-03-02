@@ -117,6 +117,9 @@ export default {
       .then(response => {
         window.location =
           "/social-studies/" + this.student_id + "/" + this.transcript_id;
+      }) 
+      .catch(error => {
+      alert('Please choose the course or remove it');
       });
     },
     addNewEnglishCourse() {

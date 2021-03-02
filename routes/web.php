@@ -74,52 +74,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
-        //Paypal Payment
-        Route::get('payment', function () {
-            return view('paywithpaypal');
-        })->name('paywithpaypal');
-        Route::post('paypal', 'PaymentMethod\PaypalPaymentController@postPaymentWithpaypal');
-        Route::get('status', 'PaymentMethod\PaypalPaymentController@getPaymentStatus')->name('status');
-        Route::get('payment/{id}', 'StudentController@paypalorderReview')->name('paypal.order');
-        Route::get('thankyoupage', function () {
-            return view('Billing/thankyou');
-        })->name('thankyou.paypal');
-
-        //Stripe Payment
-        Route::get('/stripe-payment/{id}', 'StudentController@stripeorderReview')->name('edit.stripe');
-        Route::post('/stripe-payment', 'PaymentMethod\StripeController@handlePost')->name('stripe.payment');
-        Route::get('paymentinfo', function () {
-            return view('Billing/paymentsuccess');
-        })->name('payment.info');
-
-        //Money-order
-        Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
-        Route::get('/money-order/{id}', 'StudentController@moneyorderReview');
-        Route::get('moneyorder-email', 'PaymentMethod\MoneyOrderController@index');
-
-        //Bank Transfer
-        Route::get('order-review', function () {
-            return view('Billing/order-review');
-        })->name('order.review');
-        Route::get('order-review/{id}', 'StudentController@orderReview');
-        Route::get('bankTransfer', 'PaymentMethod\BankTranferController@index')->name('bank.transfer');
-        Route::get('/bank-transfer', 'ParentController@getBankTransferDetails');
-
-        //Money Gram
-        Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
-        Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
-        Route::get('moneygram-email', 'PaymentMethod\MoneyGramController@index');
-        Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
-
-        Route::get('/mysettings/{id}', 'ParentController@mysettings');
-        Route::get('/editaccount/{id}', 'ParentController@editmysettings');
-        Route::post('/updateaccount/{id}', 'ParentController@updatemysettings')->name('update.account');
-        Route::get('/reset', function () {
-            return view('MyAccounts/resetpassword');
-        })->name('reset.password');
-        Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
-
-        Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
@@ -153,21 +107,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //Money-order
     Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
     Route::get('/money-order/{id}', 'StudentController@moneyorderReview');
-    Route::get('moneyorder-email', 'PaymentMethod\MoneyOrderController@index');
+    Route::get('moneyorder-email/{amount}', 'PaymentMethod\MoneyOrderController@index')->name('moneyorder-email');
 
     //Bank Transfer
     Route::get('order-review', function () {
         return view('Billing/order-review');
     })->name('order.review');
     Route::get('order-review/{id}', 'StudentController@orderReview');
-    Route::get('bankTransfer', 'PaymentMethod\BankTranferController@index')->name('bank.transfer');
+    Route::get('bankTransfer/{amount}', 'PaymentMethod\BankTranferController@index')->name('bank.transfer');
     Route::get('/bank-transfer', 'ParentController@getBankTransferDetails');
 
 
     //Money Gram
     Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
     Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
-    Route::get('moneygram-email', 'PaymentMethod\MoneyGramController@index');
+    Route::get('moneygram-email/{amount}', 'PaymentMethod\MoneyGramController@index')->name('moneygram-email');
     Route::get('/moneygram-transfer', 'ParentController@getMoneyGramDetails');
 
     Route::get('/coupon/apply/{code}', 'Admin\CouponController@applyCoupon')->name('coupon.apply');
@@ -184,7 +138,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
 
-    Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
+
     // admin dashboard
     // Route::get('admin-dashboard', function () {
     //     return view('admin.home');
@@ -193,7 +147,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
     Route::post('year', 'TranscriptController@create')->name('year');
-
     // Graduation Process
     Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
     Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
@@ -267,7 +220,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('choose-another/{student_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
     Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
-
+    Route::post('another/required', 'Courses\AnotherCourseController@anotherGradeRequired')->name('another.grade.requirement');
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
     Route::post('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');

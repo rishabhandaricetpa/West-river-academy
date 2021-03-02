@@ -115,7 +115,10 @@ export default {
      .then((response) => {
         window.location = "/another-grade/" + this.student_id;
          
-      });
+      })
+      .catch(error => {
+       alert('Please choose the course or remove it');
+      });;
     },
     addNewCourse() {
       this.form.Course.push({
