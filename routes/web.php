@@ -147,7 +147,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
     Route::post('year', 'TranscriptController@create')->name('year');
-
     // Graduation Process
     Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
     Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
@@ -221,7 +220,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('choose-another/{student_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
     Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
-
+    Route::post('another/required', 'Courses\AnotherCourseController@anotherGradeRequired')->name('another.grade.requirement');
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
     Route::post('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');

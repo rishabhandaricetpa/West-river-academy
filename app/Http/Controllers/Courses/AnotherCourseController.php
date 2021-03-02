@@ -69,6 +69,14 @@ class AnotherCourseController extends Controller
     {
         return view('courses.dashboard-another-languages', compact('id'));
     }
+    public function  anotherGradeRequired(Request $request)
+    {
+        if ($request->get('another_grade') == 'Yes') {
+            return redirect()->route('transcript.studentInfo', $request->get('student_id'));
+        } else if ($request->get('another_grade') == 'No') {
+            return redirect()->route('another.grade', $request->get('student_id'));
+        }
+    }
     public function storeAnotherGrade(Request $request, $student_id)
     {
         $student_transcripts = TranscriptCourse::where('student_profile_id', $student_id)->select('k8transcript_id')->groupBy('k8transcript_id')->get();
