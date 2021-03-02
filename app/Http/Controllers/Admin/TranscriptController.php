@@ -49,16 +49,21 @@ class TranscriptController extends Controller
         $transcriptData = TranscriptK8::Where('transcript_id',$transcript_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
+           
         $student = StudentProfile::find($student_id);
             return view('admin.transcript.view-transcript', compact('student', 'transcriptData','transcript_id'));
 
     }
 
 
-    public function editSubGrades($subject_id)
+    public function editSubGrades($subject_id,$transcript_id)
     {
-        $subjects=Subject::find($subject_id)->first();
-        return view('admin.transcript.edit_subject_grade', compact('subjects'));
+        $schoolDetails=TranscriptK8::whereStudent_profile_id($subject_id)->orWhere('transcript_id',$transcript_id)->first();
+        $subjectDeatils=TranscriptCourse::find($schoolDetails->id)
+                                        ->where('subject_id',$subject_id)
+                                        ->first();//->update(['status' => $inputs['status']]);
+        $subjects=Subject::whereId($subject_id)->first();
+        return view('admin.transcript.edit_subject_grade', compact('subjects','subjectDeatils','subject_id','transcript_id'));
 
     }
 
@@ -121,5 +126,19 @@ class TranscriptController extends Controller
         $paymentsTranscriptStatus->save();
         return $pdf->download($pdfname . '.pdf');
     }
+//updateScore
+public function updateScore(Request $request, $subject_id,$transcript_id)
+{
+    $schoolDetails=TranscriptK8::whereStudent_profile_id($subject_id)->orWhere('transcript_id',$transcript_id)->first();
+    $subjectDeatils=TranscriptCourse::find($schoolDetails->id)
+                                    ->where('subject_id',$subject_id)
+                                    ->update(['score' => $request['grade']]);
+
+    $notification = [
+                     'message' => 'score update Successfully!',
+                     'alert-type' => 'success',
+                     ];
+                            
+    return redirect()->back()->with($notification);}
 
 }

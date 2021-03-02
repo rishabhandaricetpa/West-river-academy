@@ -31,8 +31,8 @@ class ParentController extends Controller
 
     public function address($id)
     {
-        $parent = User::find($id)->parentProfile()->first();
-
+        // $parentdata = ParentProfile::getParentId();
+        $parent=ParentProfile::where('id',ParentProfile::getParentId())->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
 
         if (is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0) {

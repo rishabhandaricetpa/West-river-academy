@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\ParentProfile;
 use App\Models\User;
@@ -17,7 +18,7 @@ class CountryController extends Controller
     public function index()
     {
         $countrydata = Country::all();
-        return view('admin.countrydata',compact('countrydata'));
+        return view('admin.countrydata', compact('countrydata'));
     }
 
     /**
@@ -60,8 +61,8 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $countrydata= Country::find($id);
-        return view('admin.edit-country',compact('countrydata'));
+        $countrydata = Country::find($id);
+        return view('admin.edit-country', compact('countrydata'));
     }
 
     /**
@@ -71,26 +72,25 @@ class CountryController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        try{
-        $country = Country::find($id);
-        $country->country   =  $request->get('country');
-        $country->start_date  =  $request->get('start_date');
-        $country->end_date    =  $request->get('end_date');
-        $country->save();
-        $notification = array(
-            'message' => 'Record is updated Successfully!',
-            'alert-type' => 'success'
-        );
-        return redirect('admin/countryenrollments')->with($notification);
+        try {
+            $country = Country::find($id);
+            $country->country   =  $request->get('country');
+            $country->start_date  =  $request->get('start_date');
+            $country->end_date    =  $request->get('end_date');
+            $country->save();
+            $notification = array(
+                'message' => 'Record is updated Successfully!',
+                'alert-type' => 'success'
+            );
+            return redirect('admin/countryenrollments')->with($notification);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error', 'message' => 'Failed to update Country Data']);
+            }
         }
-        catch (\Exception $e) {
-        DB::rollBack();
-        if ($request->expectsJson()) {
-            return response()->json(['status' => 'error' ,'message' => 'Failed to update Country Data']);
-        }
-    }
     }
 
     /**

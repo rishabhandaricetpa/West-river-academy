@@ -107,7 +107,6 @@ class CartController extends Controller
                                                     ->where('parent_profile_id', $parent_profile_id)
                                                     ->with('transcript')
                                                     ->first();
-                        
                         $amount = FeesInfo::getFeeAmount('transcript');
                         if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {         
                         Cart::create([
@@ -121,7 +120,7 @@ class CartController extends Controller
                             $customPaymentsData = CustomPayment::create([
                                 'parent_profile_id' => ParentProfile::getParentId(),
                                 'amount' => $request->get('amount'),
-                                'paying_for' => 'pending',
+                                'paying_for' => 'custom',
                                 'type_of_payment'=>'Custom Payments',
                                 'status'=>'pending'
                             ]);
@@ -136,6 +135,22 @@ class CartController extends Controller
                                         ]);
                                 }
                                 break;
+
+                    case 'transcript_edit':
+                        $parent_profile_id = ParentProfile::getParentId();
+                        $student = StudentProfile::whereId($data['student_id'])
+                                                    ->where('parent_profile_id', $parent_profile_id)
+                                                    ->with('transcript')
+                                                    ->first();
+                        $amount = FeesInfo::getFeeAmount('transcript_edit');
+                        if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript_edit')->exists()) {         
+                        Cart::create([
+                                    'item_type' => 'transcript_edit',
+                                    'item_id' => $request->get('transcript_id'),
+                                    'parent_profile_id' => $parent_profile_id,
+                                ]);
+                        }
+                        break;
                                
                 default:
                     break;

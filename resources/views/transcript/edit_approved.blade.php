@@ -8,8 +8,10 @@
       <h1 class="text-center text-white text-uppercase">dashboard</h1>
       <form method="POST" action="{{ route('add.cart') }}" class="mb-0">
       @csrf
-      <input type="hidden" name="amount" id="amount" value="{{$transcriptPayment->amount}}" class="w-100" step="0.01">
-        <input type="hidden" name="type" id="transcript_edit" value="custom" class="w-100" step="0.01">
+        <input type="hidden" name="amount" id="amount" value="{{$transcriptPayment->amount}}" class="w-100" step="0.01">
+        <input type="hidden" name="type" id="transcript_edit" value="transcript_edit" class="w-100" step="0.01">
+        <input type="hidden" name="student_id" value="{{ $student->id }}">
+        <input type="hidden" name="transcript_id" value="{{ $transcript_id }}">
       <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
         <p>Any changes requested after your approval will incur a $25 change fee.</a></p>
         <div class="text-center">

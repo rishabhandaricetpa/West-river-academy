@@ -29,7 +29,6 @@
             <a href="#" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-file-alt rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Order an Apostille or Notarization</h3>
-<<<<<<< HEAD
               </a>
               </div>
               <div class="col-md-3 col-sm-6 text-center">
@@ -41,20 +40,6 @@
               <div class="col-md-3 col-sm-6 text-center">
               <a href="{{route('order-transcript',Auth::user()->id)}}" class="d-inline-block mb-5 decoration-none">
               <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
-=======
-            </a>
-         </div>
-         <div class="col-md-3 col-sm-6 text-center">
-            <a href="#" class="d-inline-block mb-5 decoration-none">
-               <i class="fas fa-credit-card rounded-circle circled-grid fa-2x text-secondary"></i>
-               <h3 class="mt-3 text-black font-weight-normal">Make a Payment</h3>
-            </a>
-         </div>
-
-         <div class="col-md-3 col-sm-6 text-center">
-            <a href="{{route('order-transcript',Auth::user()->id)}}" class="d-inline-block mb-5 decoration-none">
-               <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
->>>>>>> 24b6c32ddf358b4e43ea3ab5670ec1c5986411aa
                <h3 class="mt-3 text-black font-weight-normal">Purchase a Transcript </h3>
             </a>
          </div>
@@ -159,10 +144,6 @@
       <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
       </form>
    </div>
-   <div class="form-wrap border bg-light py-5 px-25 mb-4">
-      <h2 class="mb-3">Transcripts</h2>
-      <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to download it.</p>
-
          <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">Transcripts</h2>
             <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to download it.</p>
@@ -186,6 +167,8 @@
              <td><a href="#">Edit Transcript</a></td>
              @elseif($transcriptData->status === 'approved')
              <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">click here to edit Transcript</a></td>
+             @else
+             <td>-</td>
              @endif
              @if($transcriptData->status === 'approved')
              <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Download Transcript</a></td>

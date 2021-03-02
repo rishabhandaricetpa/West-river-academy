@@ -108,12 +108,13 @@ Route::group(['middleware' => 'auth'], function () {
     //transcript
     Route::get('/view/transcript', 'TranscriptController@index')->name('view.transcript');
     Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
+    Route::post('score/{subject_id}/{transcript_id}', 'TranscriptController@updateScore')->name('score.update');
 
     Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
     Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
     Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
-    Route::get('edit-subGrades/{subject_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
+    Route::get('edit-subGrades/{subject_id}/{transcript_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
 
     //genrate Unsigned Transcript for student
     Route::get('generate-transcript/{id}/{transcript_id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');

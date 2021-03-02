@@ -273,7 +273,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('custom-payments', function () {
     //     return view('payments/custom-payment');
     // })->name('custom.payments');
-    Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment');
+    Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment')->middleware('auth');
     // Route::post('custom-payments', 'PaymentMethod\CustomPaymentsController@update')->name('custom.payment');
     // Route::get('preview-transcript', function () {
     //     return view('transcript/preview-transcript');

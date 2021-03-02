@@ -55,7 +55,7 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><a type=" button" href="{{ route('admin.edit.subGrades',$subject->id)}}" class="btn btn-primary">Edit</a></td>
+                        <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a></td>
             </tr>
             @endforeach
             @endforeach

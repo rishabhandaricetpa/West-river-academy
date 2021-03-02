@@ -10,6 +10,6 @@ class CustomPayment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_profile_id','type_of_payment', 'amount', 'paying_for', 'payment_mode'
+        'parent_profile_id','type_of_payment', 'amount', 'paying_for', 'payment_mode','status'
     ];
 }

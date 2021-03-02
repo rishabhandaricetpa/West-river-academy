@@ -256,7 +256,7 @@ class TranscriptController extends Controller
             'status' => 'completed',
         ]);
         $notification = [
-            'message' => 'Transcript Submitted SuccessFully!',
+            'message' => 'Transcript Submitted Successfully!',
             'alert-type' => 'success',
         ];
 
@@ -289,7 +289,7 @@ class TranscriptController extends Controller
             ]
         );
         $student = StudentProfile::whereId($student_id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
-        return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment'));
+        return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment','student_id'));
 
         return view('transcript/edit_approved');
     }
