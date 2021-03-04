@@ -66,6 +66,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('admin.custom.payments')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>
+              Custom Payment
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ url('admin/payment-address')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Change Address</p>
@@ -127,6 +135,14 @@
         <i class="nav-icon fas fa-copy"></i>
         <p>
           Record Transfer
+        </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{route('admin.fees.services')}}" class="nav-link">
+        <i class="nav-icon fas fa-copy"></i>
+        <p>
+          Fees Structure
         </p>
       </a>
     </li>

@@ -138,11 +138,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
 
+    //fees and services
+    Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
 
-    // admin dashboard
-    // Route::get('admin-dashboard', function () {
-    //     return view('admin.home');
-    // })->name('admin.admindashboard');
+
+
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
     Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');

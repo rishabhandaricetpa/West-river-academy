@@ -7,6 +7,7 @@ use App\Models\ParentProfile;
 use App\Models\User;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use DB;
 
 class CountryController extends Controller
 {
@@ -48,10 +49,10 @@ class CountryController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-    public function show(cr $cr)
-    {
-        //
-    }
+    // public function show(cr $cr)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -99,8 +100,8 @@ class CountryController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cr $cr)
-    {
-        //
-    }
+    // public function destroy(cr $cr)
+    // {
+    //     //
+    // }
 }

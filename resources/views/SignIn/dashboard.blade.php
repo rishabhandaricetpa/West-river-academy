@@ -179,11 +179,13 @@
                   <td><a href="{{route('another.grade',$transcriptData->student_profile_id)}}">Edit Transcript</a></td>
                   @elseif($transcriptData->status === 'approved')
                   <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
+                  @elseif($transcriptData->status === 'completed')
+                  <td><a href="{{ route ('preview.transcript',1)}}" role="button">Preview Transcript</a></td>
                   @else
                   <td>-</td>
                   @endif
                   @if($transcriptData->status === 'approved')
-                  <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Download Transcript</a></td>
+                  <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}"><i class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                   @elseif($transcriptData->status === 'completed')
                   <td>Waiting For Approval</td>
                   @elseif($transcriptData->status === 'paid')
@@ -195,9 +197,6 @@
          </table>
       </div>
       <a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary mt-4">Purchase Transcripts</a>
-
-      <a href="#" class="btn btn-primary mt-4">Purchase Transcripts</a>
-
    </div>
 
 </main>
