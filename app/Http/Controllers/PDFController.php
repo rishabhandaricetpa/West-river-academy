@@ -19,20 +19,28 @@ class PDFController extends Controller
      */
     public function generatePDF($id)
     {
-        $Userid = Auth::user()->id;
-        $parentProfileData = User::find($Userid)->parentProfile()->first();
-        $studentProfileData=StudentProfile::whereId($id)->first();
-        $pdfname=$studentProfileData->first_name.'_'.$studentProfileData->last_name.'_'.$studentProfileData->d_o_b->format('M_d_Y').'_'.'Confirmation_letter';
-        $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
-        $id = $parentProfileData->id;
-        $data = [
-            'student'=>$studentProfileData,
-            'enrollment'=>$enrollment_periods,
-            'title' => 'Confirmation of Enrollment',
-            'date' => date('m/d/Y'),
-        ];
-        $pdf = PDF::loadView('confirmationLetter', $data);
-        // Storage::disk('local')->put('public/pdf/Confirmation.pdf', $pdf->output());
-        return $pdf->download($pdfname.'.pdf');
+        try {
+            $Userid = Auth::user()->id;
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $studentProfileData = StudentProfile::whereId($id)->first();
+            $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
+            $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
+            $id = $parentProfileData->id;
+            $data = [
+                'student' => $studentProfileData,
+                'enrollment' => $enrollment_periods,
+                'title' => 'Confirmation of Enrollment',
+                'date' => date('m/d/Y'),
+            ];
+            $pdf = PDF::loadView('confirmationLetter', $data);
+            // Storage::disk('local')->put('public/pdf/Confirmation.pdf', $pdf->output());
+            return $pdf->download($pdfname . '.pdf');
+        } catch (\Exception $e) {
+            $notification = array(
+                'message' => 'Failed!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

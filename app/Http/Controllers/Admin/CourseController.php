@@ -37,7 +37,6 @@ class CourseController extends Controller
                 'message' => 'Record Added Successfully!',
                 'alert-type' => 'success',
             ];
-
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -95,12 +94,13 @@ class CourseController extends Controller
     public function destroy($id)
     {
         try {
+            DB::beginTransaction();
             $notification = [
                 'message' => 'Record is Deleted Successfully!',
                 'alert-type' => 'warning',
             ];
             Subject::where('id', $id)->delete();
-
+            DB::commit();
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
@@ -124,9 +124,11 @@ class CourseController extends Controller
     public function addSubjects($subject_id)
     {
         try {
+            DB::beginTransaction();
             $subject = Subject::find($subject_id);
             $subject->status = 0;
             $subject->save();
+            DB::commit();
             $notification = [
                 'message' => 'Subject Added Successfully!',
                 'alert-type' => 'success',
@@ -145,7 +147,9 @@ class CourseController extends Controller
     public function deleteSubjects($subject_id)
     {
         try {
+            DB::beginTransaction();
             Subject::find($subject_id)->delete();
+            DB::commit();
             $notification = [
                 'message' => 'Subject Deleted Successfully!',
                 'alert-type' => 'success',
@@ -163,7 +167,9 @@ class CourseController extends Controller
     public function deleteSchool($transcript_id)
     {
         try {
+            DB::beginTransaction();
             $transcriptDetails = TranscriptK8::find($transcript_id)->delete();
+            DB::commit();
             $notification = [
                 'message' => 'School Record Deleted Successfully!',
                 'alert-type' => 'success',

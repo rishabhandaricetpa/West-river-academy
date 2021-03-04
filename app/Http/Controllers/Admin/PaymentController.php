@@ -36,7 +36,6 @@ class PaymentController extends Controller
                 'enrollment_periods.end_date_of_enrollment',
                 'enrollment_periods.grade_level',
                 'enrollment_payments.id'
-
             )
             ->get();
 
@@ -55,26 +54,37 @@ class PaymentController extends Controller
     {
 
         // update enrollment payment
-        $enrollment_payment = EnrollmentPayment::find($payment_id);
+        try {
+            DB::beginTransaction();
+            $enrollment_payment = EnrollmentPayment::find($payment_id);
+            $enrollment_payment->amount = $request->input('amount');
+            $enrollment_payment->status = $request->input('paymentStatus');
+            $enrollment_payment->transcation_id = $request->input('transcation_id');
+            $enrollment_payment->payment_mode = $request->input('payment_mode');
+            $enrollment_payment->save();
 
-        $enrollment_payment->amount = $request->input('amount');
-        $enrollment_payment->status = $request->input('paymentStatus');
-        $enrollment_payment->transcation_id = $request->input('transcation_id');
-        $enrollment_payment->payment_mode = $request->input('payment_mode');
-        $enrollment_payment->save();
+            // update enrollment period
+            $enrollment_periods = EnrollmentPayment::find($payment_id)->enrollment_period()->first();
+            $enrollment_periods->grade_level = $request->input('grade_level');
+            $enrollment_periods->start_date_of_enrollment = \Carbon\Carbon::parse($request->input('start_date_of_enrollment'))->format('M d Y');
+            $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('M d Y');
+            $enrollment_payment->grade_level = $request->input('grade_level');
+            $enrollment_periods->save();
+            DB::commit();
 
-        // update enrollment period
-        $enrollment_periods = EnrollmentPayment::find($payment_id)->enrollment_period()->first();
-        $enrollment_periods->grade_level = $request->input('grade_level');
-        $enrollment_periods->start_date_of_enrollment = \Carbon\Carbon::parse($request->input('start_date_of_enrollment'))->format('M d Y');
-        $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('M d Y');
-        $enrollment_payment->grade_level = $request->input('grade_level');
-        $enrollment_periods->save();
-        $notification = [
-            'message' => 'Record Updated Successfully!',
-            'alert-type' => 'success',
-        ];
+            $notification = [
+                'message' => 'Record Updated Successfully!',
+                'alert-type' => 'success',
+            ];
 
-        return redirect()->back()->with($notification);
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $notification = array(
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }
