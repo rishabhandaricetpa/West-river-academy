@@ -110,15 +110,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
     Route::post('score/{subject_id}/{transcript_id}', 'TranscriptController@updateScore')->name('score.update');
 
-    Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
+    Route::get('file-upload/{student_id}/{transcript_id}', 'FileUploadController@fileUpload')->name('file.upload');
     Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
     Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
     Route::get('edit-subGrades/{subject_id}/{transcript_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
+    Route::get('delete-subGrades/{subject_id}/{transcript_id}', 'TranscriptController@deleteSubGrades')->name('delete.subGrades');
 
     //genrate Unsigned Transcript for student
     Route::get('generate-transcript/{id}/{transcript_id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
     Route::get('viewfull-transcript/{student_id}/{transcript_id}', 'TranscriptController@editTranscript')->name('viewfull.transcript');
+    Route::get('signed-transcript/{id}/{transcript_id}', 'TranscriptController@genrateSignedTranscript')->name('signed.transcript');
 
     Route::get('other-subjects/{course_id}', 'CourseController@otherSubjects')->name('other.subjects');
     Route::get('add-other/{subject_id}', 'CourseController@addSubjects')->name('add.other');
@@ -128,4 +130,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     //record transfer request
     Route::get('record/request', 'RecordTransferController@index')->name('record.request');
+
+    //custom Payments
+    Route::get('custom', 'CustomController@index')->name('custom.payments');
+    Route::get('custompayment', 'CustomController@dataTable')->name('datatable.custom');
+
+    Route::get('fees-services', '\App\Http\Controllers\FeeStructureController@index')->name('fees.services');
+    Route::get('feestable', '\App\Http\Controllers\FeeStructureController@dataTable')->name('datatable.fees');
+    Route::get('fees-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@edit')->name('edit.fees');
+    Route::post('fees-services/{id}', '\App\Http\Controllers\FeeStructureController@update')->name('update.fees');
 });

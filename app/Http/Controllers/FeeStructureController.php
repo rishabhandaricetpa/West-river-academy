@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\FeeStructure;
 use Illuminate\Http\Request;
+use App\Models\FeesInfo;
+use DB;
 
 class FeeStructureController extends Controller
 {
@@ -14,7 +16,13 @@ class FeeStructureController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.feeStructure.view');
+    }
+
+    public function viewdata()
+    {
+        $feesData = FeesInfo::all();
+        return view('fees.fees-services', compact('feesData'));
     }
 
     /**
@@ -26,7 +34,11 @@ class FeeStructureController extends Controller
     {
         //
     }
-
+    //fetch data for custo payment
+    public function dataTable()
+    {
+        return datatables(FeesInfo::all())->toJson();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -55,9 +67,11 @@ class FeeStructureController extends Controller
      * @param  \App\Models\FeeStructure  $feeStructure
      * @return \Illuminate\Http\Response
      */
-    public function edit(FeeStructure $feeStructure)
+    public function edit($id)
     {
-        //
+        $fees = FeesInfo::whereId($id)->first();
+
+        return view('admin.feeStructure.edit', compact('fees'));
     }
 
     /**
@@ -67,9 +81,26 @@ class FeeStructureController extends Controller
      * @param  \App\Models\FeeStructure  $feeStructure
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FeeStructure $feeStructure)
+    public function update(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $inputs = $request->all();
+
+            $fees = FeesInfo::whereId($request->get('id'));
+            $fees->update(['amount' => $inputs['amount']]);
+            DB::commit();
+            return redirect()->route('admin.fees.services')->with([
+                'message' => 'Details updated successfully!',
+                'alert-type' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with([
+                'message' => 'Failed to update details!',
+                'alert-type' => 'error',
+            ]);
+        }
     }
 
     /**
