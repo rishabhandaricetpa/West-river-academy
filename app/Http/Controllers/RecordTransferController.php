@@ -37,7 +37,7 @@ class RecordTransferController extends Controller
         $recordTransfer->state = $request->get('state');
         $recordTransfer->zip_code = $request->get('zip_code');
         $recordTransfer->country = $request->get('country');
-        $recordTransfer->status = 'InReview';
+        $recordTransfer->status = 'In Review';
         $recordTransfer->save();
         $notification = [
             'message' => 'Record Transfer Request Sent Successfully!',
@@ -65,7 +65,7 @@ class RecordTransferController extends Controller
         $recordTransfer->state = $request->get('state');
         $recordTransfer->zip_code = $request->get('zip_code');
         $recordTransfer->country = $request->get('country');
-        $recordTransfer->status = 'InReview';
+        $recordTransfer->status = 'In Review';
         $recordTransfer->save();
         $notification = [
             'message' => 'Record Transfer Request Updated Successfully!',

@@ -128,4 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //record transfer request
     Route::get('record/request', 'RecordTransferController@index')->name('record.request');
+    Route::get('student/record/{student_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
+    Route::post('student/requestSent/{student_id}', 'RecordTransferController@sendRecordToSchool')->name('sendRecordToSchool');
+    Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
 });

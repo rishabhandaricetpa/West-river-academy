@@ -122,6 +122,7 @@
                   <th>School Name</th>
                   <th>Email</th>
                   <th>Phone number</th>
+                  <th>Status</th>
                   <th>Action</th>
                </tr>
             </thead>
@@ -132,6 +133,11 @@
                   <td>{{$record->school_name}}</td>
                   <td>{{$record->email}}</td>
                   <td>{{$record->phone_number}}</td>
+                  @if($record->status === 'In Review')
+                  <td>{{$record->status}}</td>
+                  @elseif($record->status === 'Request Sent')
+                  <td>Record Reviewed</td>
+                  @endif
                   <td><a class="btn btn-primary" href="{{route('edit.record',$record->id)}}">Edit</a></td>
                </tr>
                @endforeach

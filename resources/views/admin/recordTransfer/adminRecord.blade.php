@@ -37,6 +37,7 @@
                                     <th>School Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -47,8 +48,15 @@
                                     <td>{{$record->school_name}}</td>
                                     <td>{{$record->email}}</td>
                                     <td>{{$record->phone_number}}</td>
+
+                                    <td>{{$record->status}} </br>
+                                        @if($record->resendCount)
+                                        Resend Requested:{{$record->resendCount}}
+                                        @endif
+                                    </td>
+
                                     <td>
-                                        <a href=" ">
+                                        <a href="{{route('admin.student.schoolRecord',$record->id)}}">
                                             <i class=" fas fa-arrow-alt-circle-right"></i></a>
                                     </td>
                                 </tr>
