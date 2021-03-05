@@ -10,11 +10,11 @@
       <div class="form-group col-sm-6">
         Student Name: {{ $graduation->student->fullname }}
       </div>
-     
+
       <div class="form-group col-sm-6">
         Student Email: {{ $graduation->student->email }}
       </div>
-   
+
       <div class="form-group col-sm-6">
         Birthdate: {{ $graduation->student->birthdate }}
       </div>
@@ -47,26 +47,22 @@
 
       <div class="form-group col-sm-6">
         <label for="transcript">Transcript:</label>
-        <input type="text" class="form-control" id="transcript" value="{{ $graduation->details->transcript }}"
-          name="transcript">
+        <input type="text" class="form-control" id="transcript" value="{{ $graduation->details->transcript }}" name="transcript">
       </div>
 
       <div class="form-group col-sm-6">
         <label for="records">Records Received:</label>
-        <input type="text" class="form-control" id="records" value="{{ $graduation->details->record_received }}"
-          name="record_received">
+        <input type="text" class="form-control" id="records" value="{{ $graduation->details->record_received }}" name="record_received">
       </div>
 
       <div class="form-group col-sm-6">
         <label for="grad_date">Expected Grad Date:</label>
-        <input type="date" class="form-control" id="grad_date" value="{{ $graduation->details->grad_date }}"
-          name="grad_date">
+        <input type="date" class="form-control" id="grad_date" value="{{ $graduation->details->grad_date }}" name="grad_date">
       </div>
 
       <div class="form-group col-sm-6">
         <label for="apostille_package">Apostille Package:</label>
-        <input type="text" class="form-control" id="apostille_package" value="{{ $graduation->details->apostille_package }}"
-          name="apostille_package">
+        <input type="text" class="form-control" id="apostille_package" value="{{ $graduation->details->apostille_package }}" name="apostille_package">
       </div>
 
       <div class="form-group col-sm-8">
@@ -76,17 +72,16 @@
 
       <div class="form-group col-sm-8">
         <label for="situation">Situation/Updates:</label>
-        <textarea name="situation" class="w-100" id="situation" cols="80"
-          rows="4">{{ $graduation->details->situation }}</textarea>
+        <textarea name="situation" class="w-100" id="situation" cols="80" rows="4">{{ $graduation->details->situation }}</textarea>
       </div>
 
       <div class="form-group col-sm-4">
         <label for="status">status:</label>
         <select class="form-control" name="status" id="status">
-          <option @if($graduation->status === 'pending')  selected @endif value="pending">Pending Approval</option>
-          <option @if($graduation->status === 'approved')  selected @endif value="approved">Approved</option>
-          <option @if($graduation->status === 'paid')  selected @endif value="paid">Paid</option>
-          <option @if($graduation->status === 'completed')  selected @endif value="completed">Completed</option>
+          <option @if($graduation->status === 'pending') selected @endif value="pending">Pending Approval</option>
+          <option @if($graduation->status === 'approved') selected @endif value="approved">Approved</option>
+          <option @if($graduation->status === 'paid') selected @endif value="paid">Paid</option>
+          <option @if($graduation->status === 'completed') selected @endif value="completed">Completed</option>
         </select>
       </div>
 

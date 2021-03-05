@@ -90,4 +90,9 @@ class ParentProfile extends Model
     {
         return $this->hasMany(RecordTransfer::class);
     }
+
+    public function customPayment()
+    {
+        return $this->belongsTo('App\Models\CustomPayment');
+    }
 }

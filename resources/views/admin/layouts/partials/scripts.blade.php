@@ -35,7 +35,6 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     //parent datatable
-
     $("#family-table").DataTable({
       "ajax": "{{ route('admin.datatable.parent') }}",
       "processing": true,
@@ -62,12 +61,6 @@
           "data": "status"
         },
         {
-          "data": "created_at"
-        },
-        {
-          "data": "updated_at"
-        },
-        {
           "data": "id",
           "render": function(id) {
             return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
@@ -81,24 +74,11 @@
             return `<a href="view-student">View Students</a>`;
           }
         },
-        {
-          "data": "student_profile",
-          "render": function(data) {
-            let list = `<ul>`;
-            data.forEach(student => {
-              list += `
-                            <li> ${student.fullname} </li>
-                            <li> ${student.email} </li>
-                          `;
-            });
-            list += `</ul>`;
 
-            return list;
-          }
-        },
       ]
     });
 
+    //student datatable
     $("#student-table").DataTable({
       "ajax": "{{ route('admin.datatable.student') }}",
       "processing": true,
@@ -149,7 +129,6 @@
         },
       ]
     });
-    //name country state active enrolled created modified 
     //coupon datatable
     $("#coupons-table").DataTable({
       "ajax": "{{ route('admin.coupons.dt') }}",
@@ -186,7 +165,7 @@
       ]
     });
 
-
+    //graduation datatable
     $("#graduation-table").DataTable({
       "ajax": "{{ route('admin.graduation.dt') }}",
       "processing": true,
@@ -272,6 +251,7 @@
     });
 
   });
+
   $(function() {
     $(".datepicker").datepicker({
       dateFormat: "yy-mm-dd"
@@ -283,6 +263,8 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
   });
+
+  //custom payments
   $("#custom-payment").DataTable({
     "ajax": "{{ route('admin.datatable.custom') }}",
     "processing": true,
@@ -297,7 +279,7 @@
         }
       },
       {
-        "data": "ParentProfile.p1_first_name"
+        "data": "parent_profile_id"
       },
       {
         "data": "amount"
@@ -317,6 +299,7 @@
     ]
   });
 
+  //fees -info table
   $("#fees-table").DataTable({
     "ajax": "{{ route('admin.datatable.fees') }}",
     "processing": true,
@@ -361,7 +344,6 @@
 <!-- daterangepicker -->
 <script src="{{ asset('backend/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
-
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- Summernote -->
