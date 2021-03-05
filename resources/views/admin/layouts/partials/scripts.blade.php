@@ -283,6 +283,53 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
   });
+  // edit Dashboard Record
+  function editDashboard(event) {
+    var id = $(event).data("id");
+    console.log(id);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{url('assign/dashboard')}}",
+      type: "POST",
+      data: {
+        assign_id: id,
+      },
+      success: function(response) {
+        if (response) {
+          $("#assigned_to").val(response.assigned_to);
+          $("#notes").val(response.notes);
+          $("#data_id").val(response.id);
+        }
+      }
+    });
+  }
+  // assign Record of Dashboard
+  function assignTo() {
+    console.log('created');
+    var assignee = $('#assigned_to').val();
+    var notes = $('#notes').val();
+    var id = $('#data_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{url('update/dashboard')}}",
+      type: "POST",
+      data: {
+        id: id,
+        assigned: assignee,
+        notes: notes
+      },
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(response) {
+
+      }
+    });
+  }
 </script>
 
 <!-- ChartJS -->

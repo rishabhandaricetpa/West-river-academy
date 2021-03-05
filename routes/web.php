@@ -261,4 +261,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
     Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
     Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
+
+    Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');
+    Route::post('update/dashboard', 'Admin\DashboardController@updateDashboard');
 });

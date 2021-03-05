@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dashboard;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
 use Illuminate\Http\Request;
@@ -41,7 +42,13 @@ class RecordTransferController extends Controller
             $recordTransfer->zip_code = $request->get('zip_code');
             $recordTransfer->country = $request->get('country');
             $recordTransfer->status = 'In Review';
+            //   dd($recordTransfer);
             $recordTransfer->save();
+
+            Dashboard::create([
+                'linked_to' => 'Record Transfer Request',
+                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            ]);
             DB::commit();
             $notification = [
                 'message' => 'Record Transfer Request Sent Successfully!',

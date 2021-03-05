@@ -131,4 +131,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('student/record/{student_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
     Route::post('student/requestSent/{student_id}', 'RecordTransferController@sendRecordToSchool')->name('sendRecordToSchool');
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
+
+    //dashboard notification
+
+    Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
 });

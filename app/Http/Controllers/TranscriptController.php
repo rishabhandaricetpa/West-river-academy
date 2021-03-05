@@ -38,16 +38,7 @@ class TranscriptController extends Controller
         $enroll_students = ParentProfile::find($id)->studentProfile()->get();
         return view('transcript.graduation-app', compact('enroll_students'));
     }
-    // public function notification(Request $request, $id)
-    // {
-    //     if ($request->get('grade') == 'K-8') {
-    //         $student = StudentProfile::find($id);
-    //         // return view('transcript.dashboard-transcript', compact('student','transcriptData'));
-    //     } else {
-    //         //add screen for 9-12 students
-    //         dd('Add 9-12 screen');
-    //     }
-    // }
+
     /**
      * Show the form for creating a new resource.
      *
