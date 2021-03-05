@@ -93,6 +93,6 @@ class ParentProfile extends Model
 
     public function customPayment()
     {
-        return $this->belongsTo('App\Models\CustomPayment');
+        return $this->hasMany('App\Models\CustomPayment', 'parent_profile_id', 'id');
     }
 }

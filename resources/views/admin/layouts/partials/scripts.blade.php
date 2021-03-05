@@ -279,7 +279,7 @@
         }
       },
       {
-        "data": "parent_profile_id"
+        "data": "parent_profile.p1_first_name"
       },
       {
         "data": "amount"
@@ -331,7 +331,6 @@
     ]
   });
 </script>
-
 <!-- ChartJS -->
 <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>
 <!-- Sparkline -->
