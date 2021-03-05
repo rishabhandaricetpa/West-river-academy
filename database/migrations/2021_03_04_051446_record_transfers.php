@@ -28,7 +28,11 @@ class RecordTransfers extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
-            $table->enum('status', ['InReview', 'approved', 'completed']);
+            $table->integer('resendCount')->nullable();
+            $table->string('firstRequestDate')->nullable();
+            $table->string('secondRequestDate')->nullable();
+            $table->string('thirdRequest')->nullable();
+            $table->enum('status', ['In Review', 'Approved', 'Request Sent'])->nullable();
             $table->timestamps();
         });
     }
@@ -40,6 +44,6 @@ class RecordTransfers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('record_transfers');
+        //
     }
 }
