@@ -23,6 +23,11 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'apostille', 'description' => 'Fee for Apostille Package', 'amount' => '165'],
             ['type' => 'transcript', 'description' => 'K - 8 transcript process', 'amount' => '80'],
             ['type' => 'transcript_edit', 'description' => 'K - 8 edit transcript process', 'amount' => '25'],
+            ['type' => 'express_international', 'description' => 'Express International', 'amount' => '55'],
+            ['type' => 'global_guaranteed_international', 'description' => 'Glaboal Guanteed International', 'amount' => '85'],
+            ['type' => 'priority_international', 'description' => 'Priority International', 'amount' => '145'],
+            ['type' => 'priority_usa', 'description' => 'Priority USA', 'amount' => '10'],
+            ['type' => 'express_usa', 'description' => 'Express USA', 'amount' => '30'],
         ];
         FeesInfo::insert($data);
     }

@@ -31,10 +31,12 @@ class Cart extends Model
                 $transcript_total = Self::getTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
                 $custom_total = Self::getCustomQuery()->select(DB::raw('sum(custom_payments.amount) as amount'))->first();
                 $transcript_edit_total = Self::getEditTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
+                $postage_total = Self::getPostageQuery()->select(DB::raw('sum(order_postages.amount) as amount'))->first();
+
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
-                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount;
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount;
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();
@@ -42,7 +44,8 @@ class Cart extends Model
                 $transcript_data = Self::getTranscriptData();
                 $custom_data = Self::getcustomData();
                 $transcript_edit_data =  Self::getEditTranscriptData();
-                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data);
+                $postage_data = Self::getPostageData();
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data);
             }
         } catch (\Exception $e) {
             dd($e);
@@ -111,7 +114,7 @@ class Cart extends Model
         return $cart_valid;
     }
 
-    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data)
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data)
     {
         $data = [];
 
@@ -221,6 +224,26 @@ class Cart extends Model
                 ];
             }
         }
+        foreach ($postage_data as $key => $val) {
+            $type = 'Order Postage';
+
+            $arr = [
+                'id' => $val['id'],
+                'type' => $type,
+                'amount' => $val['amount'],
+            ];
+            if (array_key_exists($val['parent_db_id'], $data)) {
+                array_push(
+                    $data[$val['parent_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$val['parent_db_id']] = [
+                    'name' => ucfirst($val['p1_first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
         return $data;
     }
 
@@ -267,6 +290,14 @@ class Cart extends Model
             ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.transcript_id')->where('transcript_payments.status', 'pending')
             ->leftJoin('student_profiles', 'transcripts.student_profile_id', 'student_profiles.id');
     }
+    private static function getPostageQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+            ->where('cart.item_type', 'postage')
+            ->leftJoin('order_postages', 'cart.item_id', 'order_postages.parent_profile_id')->where('order_postages.status', 'pending')
+            ->leftJoin('parent_profiles', 'order_postages.parent_profile_id', 'parent_profiles.id');
+    }
+
     private static function getEnrollData()
     {
         return Self::getEnrollQuery()->select(
@@ -344,6 +375,19 @@ class Cart extends Model
             ->groupBy('transcript_payments.amount')
             ->get();
     }
+    private static function getPostageData()
+    {
+        return Self::getPostageQuery()->select(
+            'parent_profiles.p1_first_name',
+            'parent_profiles.id as parent_db_id',
+            'cart.id',
+            'order_postages.amount',
+        )
+            ->groupBy('parent_profiles.id')
+            ->groupBy('cart.id')
+            ->groupBy('order_postages.amount')
+            ->get();
+    }
 
     public static function emptyCartAfterPayment($type, $status, $payment_id = null)
     {
@@ -402,6 +446,7 @@ class Cart extends Model
                     }
                     $custom_payment->save();
                     break;
+
                 case 'transcript_edit':
                     $transcript_payment =  TranscriptPayment::where('transcript_id', $cart->item_id)->first();
                     $transcript_payment->payment_mode = $type;
@@ -415,6 +460,15 @@ class Cart extends Model
                     $transcript->status = 'canEdit';
                     $transcript->save();
 
+                    break;
+                case 'postage':
+                    $postage_payment =  OrderPostage::where('parent_profile_id', $cart->item_id)->first();
+                    $postage_payment->payment_mode = $type;
+                    if ($payment_id != null) {
+                        $postage_payment->transcation_id = $payment_id;
+                        $postage_payment->status = 'paid';
+                    }
+                    $postage_payment->save();
                     break;
                 default:
                     break;

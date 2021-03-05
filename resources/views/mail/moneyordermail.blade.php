@@ -10,7 +10,7 @@
 <body>
     <h2 style="font-family:'Catamaran', sans-serif;">Hi, {{$user->name}}</h2>
     <h3 style="font-family:'Catamaran', sans-serif;">PAYMENT: Check Or Money Order</h3>
-    <p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/bank-transfer">http://westriveracademy.test/bank-transfer</a></p>
+    <p style="font-family:'Catamaran', sans-serif;">Use the following address to make Checks payable to: West River Academy</p>
 
     <h3>BILLING INFORMATION</h3>
     <table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;" rowspan>
@@ -39,7 +39,13 @@
         </tbody>
     </table>
 
-    Your Address
+    <p>Send Payments to:</p>
+    <address style="font-family:'Catamaran', sans-serif;">
+        West River Academy
+        33721 Bluewater Lane
+        Dana Point, CA 92629
+    </address>
+
     <address style="font-family:'Catamaran', sans-serif;">
         Written by <a href="mailto:xyz@example.com">West River Academy</a>.<br>
         Visit us at: https://www.westriveracademy.com/

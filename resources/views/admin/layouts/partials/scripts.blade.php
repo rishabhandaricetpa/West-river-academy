@@ -35,7 +35,6 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     //parent datatable
-
     $("#family-table").DataTable({
       "ajax": "{{ route('admin.datatable.parent') }}",
       "processing": true,
@@ -62,12 +61,6 @@
           "data": "status"
         },
         {
-          "data": "created_at"
-        },
-        {
-          "data": "updated_at"
-        },
-        {
           "data": "id",
           "render": function(id) {
             return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
@@ -81,24 +74,11 @@
             return `<a href="view-student">View Students</a>`;
           }
         },
-        {
-          "data": "student_profile",
-          "render": function(data) {
-            let list = `<ul>`;
-            data.forEach(student => {
-              list += `
-                            <li> ${student.fullname} </li>
-                            <li> ${student.email} </li>
-                          `;
-            });
-            list += `</ul>`;
 
-            return list;
-          }
-        },
       ]
     });
 
+    //student datatable
     $("#student-table").DataTable({
       "ajax": "{{ route('admin.datatable.student') }}",
       "processing": true,
@@ -116,7 +96,7 @@
           "data": "fullname"
         },
         {
-          "data": "d_o_b"
+          "data": "birthdate"
         },
         {
           "data": "email"
@@ -149,7 +129,6 @@
         },
       ]
     });
-    //name country state active enrolled created modified 
     //coupon datatable
     $("#coupons-table").DataTable({
       "ajax": "{{ route('admin.coupons.dt') }}",
@@ -186,7 +165,7 @@
       ]
     });
 
-
+    //graduation datatable
     $("#graduation-table").DataTable({
       "ajax": "{{ route('admin.graduation.dt') }}",
       "processing": true,
@@ -272,6 +251,7 @@
     });
 
   });
+
   $(function() {
     $(".datepicker").datepicker({
       dateFormat: "yy-mm-dd"
@@ -329,9 +309,78 @@
 
       }
     });
+
+    //custom payments
+    $("#custom-payment").DataTable({
+      "ajax": "{{ route('admin.datatable.custom') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "id",
+          "render": function(data, type, row, meta) {
+            return meta.row + 1;
+          }
+        },
+        {
+          "data": "parent_profile.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "paying_for"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
+          "data": "status"
+        },
+      ]
+    });
+
+    //fees -info table
+    $("#fees-table").DataTable({
+      "ajax": "{{ route('admin.datatable.fees') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "id",
+          "render": function(data, type, row, meta) {
+            return meta.row + 1;
+          }
+        },
+        {
+          "data": "type"
+        },
+        {
+          "data": "description"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="{{ route('admin.fees.services')}}/${id}/edit">Edit</a>`;
+          }
+        }
+      ]
+    });
   }
 </script>
 
+
+</script>
 <!-- ChartJS -->
 <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>
 <!-- Sparkline -->
@@ -344,7 +393,6 @@
 <!-- daterangepicker -->
 <script src="{{ asset('backend/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
-
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- Summernote -->

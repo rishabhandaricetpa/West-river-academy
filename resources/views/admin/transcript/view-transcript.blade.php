@@ -21,7 +21,8 @@
                 </div>
             </div>
             <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
-            <a type="button" href="{{ url('admin/file-upload')}}" class="btn btn-primary">Upload Signed Transcript</a>
+            <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
+            <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
         </form>
     </div>
     @foreach($transcriptData as $school)
@@ -56,7 +57,9 @@
                     </td>
                     <td>{{$subject->subject_name}}</td>
                     <td>{{$course->score}}</td>
-                    <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a></td>
+                    <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a>
+                        <a type=" button" href="{{ route('admin.delete.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Delete</a>
+                    </td>
                 </tr>
                 @endforeach
                 @endforeach

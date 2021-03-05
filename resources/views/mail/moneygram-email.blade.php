@@ -10,7 +10,7 @@
 <body>
     <h2 style="font-family:'Catamaran', sans-serif;">Hi,{{$user->name}}</h2>
     <h3 style="font-family:'Catamaran', sans-serif;">PAYMENT: MoneyGram </h3>
-    <p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/bank-transfer">http://westriveracademy.test/bank-transfer</a></p>
+    <p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/moneygram-transfer">http://westriveracademy.test/moneygram-transfer</a></p>
 
     <h3>BILLING INFORMATION</h3>
     <table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;" rowspan>

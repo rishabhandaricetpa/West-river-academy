@@ -13,6 +13,7 @@ use App\Models\CustomPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
+use App\Models\OrderPostage;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -153,6 +154,32 @@ class CartController extends Controller
                         Cart::create([
                             'item_type' => 'transcript_edit',
                             'item_id' => $request->get('transcript_id'),
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
+
+                case 'postage':
+                    $clearpendingPayments = OrderPostage::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
+                        ->update(
+                            [
+                                'status' => 'cancelled'
+                            ]
+                        );
+                    $amount = FeesInfo::getFeeAmount($request->get('payment_for'));
+                    $orderPostageData = OrderPostage::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'amount' =>   $amount,
+                        'paying_for' => $request->get('payment_for'),
+                        'type_of_payment' => '',
+                        'status' => 'pending'
+                    ]);
+                    $parentId = $orderPostageData->parent_profile_id;
+                    $parent_profile_id = ParentProfile::getParentId();
+                    if (!Cart::where('item_id', $parent_profile_id)->where('item_type', 'postage')->exists()) {
+                        Cart::create([
+                            'item_type' => 'postage',
+                            'item_id' => $parent_profile_id,
                             'parent_profile_id' => $parent_profile_id,
                         ]);
                     }

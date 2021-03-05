@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\FeesInfo;
+
 /**
  * Compare given route with current route and return output if they match.
  *
@@ -15,21 +17,26 @@ function active_route($pattern, $output = 'active')
 
 
 function getMetrixValues($course, $data, $transcriptData)
-{ 
-        try {
-            $subjects  = $course->toArray();
-        
-            if( $transcriptData ):
-                    
-                    $transcriptDetails  = $data->transcriptDetails;
+{
+    try {
+        $subjects  = $course->toArray();
 
-                    foreach ($transcriptDetails as $key => $value) {
+        if ($transcriptData) :
 
-                        if( $value['k8transcript_id'] === $data['id'] && $value['subject_id'] === $course['subject_id'])
-                            return $value['score'];
-                    }
-            endif;
-        } catch (\Throwable $th) {
-            return false;
-        }
-    }   
+            $transcriptDetails  = $data->transcriptDetails;
+
+            foreach ($transcriptDetails as $key => $value) {
+
+                if ($value['k8transcript_id'] === $data['id'] && $value['subject_id'] === $course['subject_id'])
+                    return $value['score'];
+            }
+        endif;
+    } catch (\Throwable $th) {
+        return false;
+    }
+}
+function getFeeDetails($type)
+{
+    $fees = FeesInfo::whereType($type)->first();
+    return ($fees->amount);
+}
