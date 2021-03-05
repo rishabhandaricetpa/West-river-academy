@@ -43,6 +43,7 @@
     Your Address
     <address style="font-family:'Catamaran', sans-serif;">
         Written by <a href="mailto:xyz@example.com">West River Academy</a>.<br>
+        <p>contact@westriveracademy.com</p>
         Visit us at: https://www.westriveracademy.com/
     </address>
 </body>
