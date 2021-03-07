@@ -28,6 +28,8 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'priority_international', 'description' => 'Priority International', 'amount' => '145'],
             ['type' => 'priority_usa', 'description' => 'Priority USA', 'amount' => '10'],
             ['type' => 'express_usa', 'description' => 'Express USA', 'amount' => '30'],
+            ['type' => 'notarization_doc_fee', 'description' => 'Fees for Notarization Documents', 'amount' => '20'],
+            ['type' => 'apostille_doc_fee', 'description' => 'Fees for Apostille Documents', 'amount' => '75'],
         ];
         FeesInfo::insert($data);
     }

@@ -26,7 +26,7 @@
             </a>
          </div>
          <div class="col-md-3 col-sm-6 text-center">
-            <a href="#" class="d-inline-block mb-5 decoration-none">
+            <a href="{{ route('notarization')}}" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-file-alt rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Order an Apostille or Notarization</h3>
             </a>

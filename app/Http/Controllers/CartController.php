@@ -14,6 +14,8 @@ use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
 use App\Models\OrderPostage;
+use App\Models\NotarizationPayment;
+use App\Models\Notarization;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +44,7 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         try {
             DB::beginTransaction();
             $data = $request->all();
@@ -160,12 +163,7 @@ class CartController extends Controller
                     break;
 
                 case 'postage':
-                    $clearpendingPayments = OrderPostage::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
-                        ->update(
-                            [
-                                'status' => 'cancelled'
-                            ]
-                        );
+                    $clearpendingPayments = OrderPostage::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = FeesInfo::getFeeAmount($request->get('payment_for'));
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -184,7 +182,51 @@ class CartController extends Controller
                         ]);
                     }
                     break;
+                case 'notarization':
+                    $clearpendingPayments = NotarizationPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $parent_profile_id = ParentProfile::getParentId();
+                    $doctotal = count(collect($request)->get('documents'));
+                    $notarizationDetails = Notarization::create([
+                        'parent_profile_id' => $parent_profile_id,
+                        'number_of_documents' => $doctotal,
+                        'additional_message' => $request['message'],
+                        'postage_option' => $request['payfor'],
+                        'first_name' => $request['first_name'],
+                        'last_name' => $request['last_name'],
+                        'street' => $request['street'],
+                        'city' => $request['city'],
+                        'state' => $request['state'],
+                        'zip_code' => $request['zip_code'],
+                        'country' => $request['country'],
+                        'apostille_country' =>  $request['apostille_country'],
+                    ]);
 
+                    $orderPostageData = OrderPostage::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'amount' =>   FeesInfo::getFeeAmount($request->get('payment_for_postage')),
+                        'paying_for' => $request->get('payment_for_postage'),
+                        'type_of_payment' => '',
+                        'status' => 'pending'
+                    ]);
+                    $amount = FeesInfo::getFeeAmount($request->get('payment_for_postage')) + FeesInfo::getFeeQuantity($request->get('payfor'), $doctotal);
+                    $notarizationData = NotarizationPayment::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'notarization_id' => $notarizationDetails->id,
+                        'order_postages_id' => $orderPostageData->id,
+                        'amount' =>   $amount,
+                        'pay_for' => $request->get('payfor'),
+                        'type_of_payment' => '',
+                        'status' => 'pending'
+                    ]);
+
+                    if (!Cart::where('item_id', $notarizationDetails->id)->where('item_type', 'notarization')->exists()) {
+                        Cart::create([
+                            'item_type' => 'notarization',
+                            'item_id' => $notarizationDetails->id,
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
                 default:
                     break;
             }

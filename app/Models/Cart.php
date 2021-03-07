@@ -32,11 +32,11 @@ class Cart extends Model
                 $custom_total = Self::getCustomQuery()->select(DB::raw('sum(custom_payments.amount) as amount'))->first();
                 $transcript_edit_total = Self::getEditTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
                 $postage_total = Self::getPostageQuery()->select(DB::raw('sum(order_postages.amount) as amount'))->first();
-
+                $notarization_total = Self::getNotarizationQuery()->select(DB::raw('sum(notarization_payments.amount) as amount'))->first();
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
-                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount;
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount + $notarization_total->amount;
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();
@@ -45,7 +45,8 @@ class Cart extends Model
                 $custom_data = Self::getcustomData();
                 $transcript_edit_data =  Self::getEditTranscriptData();
                 $postage_data = Self::getPostageData();
-                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data);
+                $notarization_data = Self::getNotarizationData();
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data);
             }
         } catch (\Exception $e) {
             dd($e);
@@ -114,7 +115,7 @@ class Cart extends Model
         return $cart_valid;
     }
 
-    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data)
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data)
     {
         $data = [];
 
@@ -244,6 +245,25 @@ class Cart extends Model
                 ];
             }
         }
+        foreach ($notarization_data as $key => $val) {
+            $type = 'Notarization Payment';
+            $arr = [
+                'id' => $val['id'],
+                'type' => $type,
+                'amount' => $val['amount'],
+            ];
+            if (array_key_exists($val['parent_db_id'], $data)) {
+                array_push(
+                    $data[$val['parent_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$val['parent_db_id']] = [
+                    'name' => ucfirst($val['first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
         return $data;
     }
 
@@ -296,6 +316,14 @@ class Cart extends Model
             ->where('cart.item_type', 'postage')
             ->leftJoin('order_postages', 'cart.item_id', 'order_postages.parent_profile_id')->where('order_postages.status', 'pending')
             ->leftJoin('parent_profiles', 'order_postages.parent_profile_id', 'parent_profiles.id');
+    }
+    private static function getNotarizationQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+            ->where('cart.item_type', 'notarization')
+            ->leftJoin('notarizations', 'notarizations.parent_profile_id', 'cart.item_id')
+            ->leftJoin('notarization_payments', 'cart.item_id', 'notarization_payments.notarization_id')->where('notarization_payments.status', 'pending')
+            ->leftJoin('parent_profiles', 'notarizations.parent_profile_id', 'parent_profiles.id');
     }
 
     private static function getEnrollData()
@@ -389,6 +417,20 @@ class Cart extends Model
             ->get();
     }
 
+    private static function getNotarizationData()
+    {
+        return Self::getNotarizationQuery()->select(
+            'parent_profiles.p1_first_name',
+            'parent_profiles.id as parent_db_id',
+            'cart.id',
+            'notarization_payments.amount',
+        )
+            ->groupBy('parent_profiles.id')
+            ->groupBy('cart.id')
+            ->groupBy('notarization_payments.amount')
+            ->get();
+    }
+
     public static function emptyCartAfterPayment($type, $status, $payment_id = null)
     {
 
@@ -469,6 +511,20 @@ class Cart extends Model
                         $postage_payment->status = 'paid';
                     }
                     $postage_payment->save();
+                    break;
+                case 'notarization':
+                    $notarization_payment =  NotarizationPayment::where('notarization_id', $cart->item_id)->first();
+                    $notarization_payment->payment_mode = $type;
+                    if ($payment_id != null) {
+                        $notarization_payment->transcation_id = $payment_id;
+                        $notarization_payment->status = 'paid';
+                    }
+                    $notarization_payment->save();
+
+                    $notarization = Notarization::whereId($cart->item_id)->first();
+                    $notarization->status = 'paid';
+                    $notarization->save();
+
                     break;
                 default:
                     break;

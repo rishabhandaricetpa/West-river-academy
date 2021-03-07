@@ -17,7 +17,12 @@ class FeesInfo extends Model
 
     public static function getFeeAmount($type)
     {
-       return Self::where('type', $type)->pluck('amount')->first();
+        return Self::where('type', $type)->pluck('amount')->first();
     }
-   
+
+    public static function getFeeQuantity($type, $quantity)
+    {
+        $amount = Self::where('type', $type)->pluck('amount')->first();
+        return $amount * $quantity;
+    }
 }

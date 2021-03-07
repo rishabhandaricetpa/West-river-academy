@@ -261,9 +261,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
     Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
     Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
+    Route::get('notarization', 'NotarizationController@index')->name('notarization');
+    Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
+
 
     //order Postage
     Route::get('orderpostage', function () {
         return view('orderPostage/purchase_postage');
     });
+
+    //order Notarization
+
 });
