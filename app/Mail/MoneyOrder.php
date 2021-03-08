@@ -38,6 +38,7 @@ class MoneyOrder extends Mailable
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         $address = User::find($id)->parentProfile()->first();
         $amount = $this->amount;
-        return $this->markdown('mail.moneyordermail', compact('user',  'date', 'email', 'address', 'amount'))->subject('Check and Money Order Details');
+
+        return $this->markdown('mail.moneyordermail', compact('user', 'date', 'email', 'address', 'amount'))->subject('Check and Money Order Details');
     }
 }

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CustomPayment;
 use App\Models\FeesInfo;
 use App\Models\Graduation;
 use App\Models\GraduationMailingAddress;
 use App\Models\GraduationPayment;
-use App\Models\TranscriptPayment;
-use App\Models\TranscriptK8;
-use App\Models\CustomPayment;
+use App\Models\OrderPostage;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
+use App\Models\TranscriptK8;
+use App\Models\TranscriptPayment;
 use App\Models\User;
-use App\Models\OrderPostage;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,7 +50,7 @@ class CartController extends Controller
                 case 'enrollment_period':
                     for ($i = 0; $i < count($data['eps']); $i++) {
                         $item_id = $data['eps'][$i];
-                        if (!Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
+                        if (! Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
                             Cart::create([
                                 'item_type' => 'enrollment_period',
                                 'item_id' => $item_id,
@@ -75,10 +75,10 @@ class CartController extends Controller
                             'street' => $data['street'],
                             'city' => $data['city'],
                             'country' => $data['country'],
-                            'postal_code' => $data['postal_code']
+                            'postal_code' => $data['postal_code'],
                         ]);
 
-                        if (isset($data['apostille_country']) && !empty($data['apostille_country'])) {
+                        if (isset($data['apostille_country']) && ! empty($data['apostille_country'])) {
                             // change graduation fee amount based on Apostille
                             $amount = FeesInfo::getFeeAmount('apostille') + FeesInfo::getFeeAmount('graduation');
                         } else {
@@ -88,7 +88,7 @@ class CartController extends Controller
                         Graduation::whereId($student->graduation->id)->update(['apostille_country' => $data['apostille_country']]);
                         GraduationPayment::where('graduation_id', $student->graduation->id)->update(['amount' => $amount]);
 
-                        if (!Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
+                        if (! Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
                             Cart::create([
                                 'item_type' => 'graduation',
                                 'item_id' => $student->graduation->id,
@@ -109,7 +109,7 @@ class CartController extends Controller
                         ->with('transcript')
                         ->first();
                     $amount = FeesInfo::getFeeAmount('transcript');
-                    if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
+                    if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
                         Cart::create([
                             'item_type' => 'transcript',
                             'item_id' => $request->get('transcript_id'),
@@ -121,7 +121,7 @@ class CartController extends Controller
                     $clearpendingPayments = CustomPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
                         ->update(
                             [
-                                'status' => 'cancelled'
+                                'status' => 'cancelled',
                             ]
                         );
                     $customPaymentsData = CustomPayment::create([
@@ -129,12 +129,12 @@ class CartController extends Controller
                         'amount' => $request->get('amount'),
                         'paying_for' => 'custom',
                         'type_of_payment' => 'Custom Payments',
-                        'status' => 'pending'
+                        'status' => 'pending',
                     ]);
                     $parentId = $customPaymentsData->parent_profile_id;
                     $parent_profile_id = ParentProfile::getParentId();
                     $amount = $data['amount'];
-                    if (!Cart::where('item_id', $parent_profile_id)->where('item_type', 'custom')->exists()) {
+                    if (! Cart::where('item_id', $parent_profile_id)->where('item_type', 'custom')->exists()) {
                         Cart::create([
                             'item_type' => 'custom',
                             'item_id' => $parent_profile_id,
@@ -150,7 +150,7 @@ class CartController extends Controller
                         ->with('transcript')
                         ->first();
                     $amount = FeesInfo::getFeeAmount('transcript_edit');
-                    if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript_edit')->exists()) {
+                    if (! Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript_edit')->exists()) {
                         Cart::create([
                             'item_type' => 'transcript_edit',
                             'item_id' => $request->get('transcript_id'),
@@ -163,7 +163,7 @@ class CartController extends Controller
                     $clearpendingPayments = OrderPostage::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
                         ->update(
                             [
-                                'status' => 'cancelled'
+                                'status' => 'cancelled',
                             ]
                         );
                     $amount = FeesInfo::getFeeAmount($request->get('payment_for'));
@@ -172,11 +172,11 @@ class CartController extends Controller
                         'amount' =>   $amount,
                         'paying_for' => $request->get('payment_for'),
                         'type_of_payment' => '',
-                        'status' => 'pending'
+                        'status' => 'pending',
                     ]);
                     $parentId = $orderPostageData->parent_profile_id;
                     $parent_profile_id = ParentProfile::getParentId();
-                    if (!Cart::where('item_id', $parent_profile_id)->where('item_type', 'postage')->exists()) {
+                    if (! Cart::where('item_id', $parent_profile_id)->where('item_type', 'postage')->exists()) {
                         Cart::create([
                             'item_type' => 'postage',
                             'item_id' => $parent_profile_id,
@@ -189,6 +189,7 @@ class CartController extends Controller
                     break;
             }
             DB::commit();
+
             return redirect('/cart');
         } catch (\Exception $e) {
             dd($e);

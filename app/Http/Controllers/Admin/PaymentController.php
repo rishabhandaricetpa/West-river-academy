@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\StudentProfile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -80,10 +80,11 @@ class PaymentController extends Controller
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollBack();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

@@ -17,7 +17,7 @@ class CreateCouponsTable extends Migration
             $table->id();
             $table->string('code');
             $table->string('amount');
-            $table->enum('status',['inactive','active']);
+            $table->enum('status', ['inactive', 'active']);
             $table->string('coupon_for')->nullable();
             $table->string('redeem_left')->nullable();
             $table->timestamp('expire_at')->nullable();

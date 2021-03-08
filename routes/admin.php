@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 // Dashboard
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -96,7 +97,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
     Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
 
-    //graduation process 
+    //graduation process
     Route::get('graduations', '\App\Http\Controllers\GraduationController@graduations')->name('view.graduation');
     Route::get('graduations/data', '\App\Http\Controllers\GraduationController@dataTable')->name('graduation.dt');
     Route::get('graduations/{id}/edit', '\App\Http\Controllers\GraduationController@edit')->name('edit.graduation');

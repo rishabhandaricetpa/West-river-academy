@@ -10,7 +10,7 @@ class GraduationMailingAddress extends Model
     use HasFactory;
 
     protected $fillable = [
-        'graduation_id', 'name', 'street', 'city', 'country', 'postal_code'
+        'graduation_id', 'name', 'street', 'city', 'country', 'postal_code',
     ];
 
     public function graduation()

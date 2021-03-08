@@ -11,8 +11,10 @@ class DashboardController extends Controller
     public function index()
     {
         $dashboardData = Dashboard::all();
+
         return view('admin.dashboard-screen', compact('dashboardData'));
     }
+
     public function updateDashboard(Request $request)
     {
         $record = Dashboard::where('id', $request->id)->first();
@@ -22,9 +24,11 @@ class DashboardController extends Controller
 
         return response()->json(['code' => 200, 'message' => 'Assigned successfully', 'data' => $record], 200);
     }
+
     public function assignRecord(Request $request)
     {
         $record = Dashboard::find($request->get('assign_id'));
+
         return response()->json($record);
     }
 }

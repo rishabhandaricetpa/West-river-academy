@@ -10,8 +10,9 @@ class Transcript extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_profile_id', 'student_profile_id', 'period', 'status'
+        'parent_profile_id', 'student_profile_id', 'period', 'status',
     ];
+
     public function parent()
     {
         return $this->belongsTo('App\Models\ParentProfile', 'parent_profile_id', 'id');
@@ -26,6 +27,7 @@ class Transcript extends Model
     {
         return $this->hasMany('App\Models\TranscriptPdf', 'transcript_id', 'id');
     }
+
     public function studentTranscript()
     {
         return $this->hasOne(TranscriptK8::class);

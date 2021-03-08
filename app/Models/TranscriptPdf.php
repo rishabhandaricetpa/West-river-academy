@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TranscriptPdf extends Model
 {
-
     use HasFactory;
     protected $table = 'transcript_pdf';
     protected $fillable = [

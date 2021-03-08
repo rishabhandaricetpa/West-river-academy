@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use App\Models\TranscriptPdf;
+use App\Models\Transcript;
 use App\Models\TranscriptK8;
 use App\Models\TranscriptPayment;
-use App\Models\Transcript;
+use App\Models\TranscriptPdf;
 use DB;
+use Illuminate\Http\Request;
 
 class FileUploadController extends Controller
 {
@@ -37,13 +36,13 @@ class FileUploadController extends Controller
             //store file to the teanscript_pdf table
 
             //store pdf link
-            $storetranscript =  TranscriptPdf::where('transcript_id', $request->get('transcript_id'))
+            $storetranscript = TranscriptPdf::where('transcript_id', $request->get('transcript_id'))
                 ->where('status', 'completed')->first();
             if ($storetranscript != null) {
-                $storetranscript->pdf_link =  $fileName;
+                $storetranscript->pdf_link = $fileName;
                 $storetranscript->save();
             }
-            $updateTranscriptStatus =  Transcript::whereId($request->get('transcript_id'))
+            $updateTranscriptStatus = Transcript::whereId($request->get('transcript_id'))
                 ->where('status', 'completed')->first();
             if ($updateTranscriptStatus != null) {
                 $updateTranscriptStatus->status = 'approved';
@@ -56,6 +55,7 @@ class FileUploadController extends Controller
                 $paymentsTranscriptStatus->save();
             }
             DB::commit();
+
             return back()
                 ->with('success', 'You have successfully upload file.')
                 ->with('file', $fileName);

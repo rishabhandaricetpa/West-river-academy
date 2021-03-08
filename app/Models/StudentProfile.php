@@ -33,7 +33,7 @@ class StudentProfile extends Model
 
     public function getFullnameAttribute()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function parentProfile()
@@ -45,14 +45,17 @@ class StudentProfile extends Model
     {
         return $this->hasMany('App\Models\EnrollmentPeriods', 'student_profile_id', 'id');
     }
+
     public function transcriptCourses()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'id');
     }
+
     public function TranscriptK8()
     {
         return $this->hasMany('App\Models\TranscriptK8', 'student_profile_id', 'id');
     }
+
     public function graduation()
     {
         return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');
@@ -77,10 +80,12 @@ class StudentProfile extends Model
             'graduation_id'
         );
     }
+
     public function transcript()
     {
         return $this->hasMany('App\Models\Transcript', 'student_profile_id', 'id');
     }
+
     public function transcriptDetails()
     {
         return $this->hasOneThrough(
@@ -90,6 +95,7 @@ class StudentProfile extends Model
             'k8transcript_id'
         );
     }
+
     public function recordTransfers()
     {
         return $this->hasMany(RecordTransfer::class);

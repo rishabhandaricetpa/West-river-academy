@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\PaymentMethod;
 
 use App\Http\Controllers\Controller;
-use App\Models\TransactionsMethod;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\MoneyGram;
 use App\Models\Cart;
 use App\Models\EnrollmentPayment;
+use App\Models\TransactionsMethod;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class MoneyGramController extends Controller
 {
@@ -33,9 +33,9 @@ class MoneyGramController extends Controller
     public function index($amount)
     {
         $id = Auth::user()->id;
-        $user =  User::find($id)->first();
+        $user = User::find($id)->first();
         $email = Auth::user()->email;
-        //update cart status active 
+        //update cart status active
         $address = User::find($id)->parentProfile()->first();
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         $parentProfileData = User::find($id)->parentProfile()->first();
@@ -51,7 +51,7 @@ class MoneyGramController extends Controller
 
         $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);
 
-        //update cart status active 
+        //update cart status active
 
         Cart::emptyCartAfterPayment($type, 'active');
 

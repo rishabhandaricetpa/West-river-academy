@@ -17,22 +17,27 @@ class TranscriptK8 extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
     }
+
     public function TranscriptCourse()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
     }
+
     public function TranscriptDetails()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'student_profile_id');
     }
+
     public function payment()
     {
         return $this->hasOne('App\Models\TranscriptPayment');
     }
+
     public function student()
     {
         return $this->belongsTo('App\Models\StudentProfile', 'student_profile_id', 'id');
     }
+
     public function transcript()
     {
         return $this->belongsTo(Transcript::class);

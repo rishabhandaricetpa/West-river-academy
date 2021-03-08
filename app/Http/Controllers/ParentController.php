@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\Coupon;
-use App\Models\Address;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ParentController extends Controller
 {
@@ -46,7 +46,7 @@ class ParentController extends Controller
 
         $is_valid = Cart::isCartValid($this->parent_profile_id);
 
-        if (!$is_valid) {
+        if (! $is_valid) {
             $notification = [
                 'message' => 'Cart is Invalid!',
                 'alert-type' => 'error',
@@ -57,7 +57,7 @@ class ParentController extends Controller
 
         $coupons = Coupon::getParentCoupons();
 
-        $country_list  =  Country::select('country')->get();
+        $country_list = Country::select('country')->get();
         $coupon_code = session('applied_coupon', null);
 
         return view('Billing/cart-billing', compact('parent', 'country_list', 'enroll_fees', 'coupons', 'coupon_code'));
@@ -77,7 +77,7 @@ class ParentController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $id = $parentProfileData->id;
-            $billinAddress =  Address::updateOrCreate(
+            $billinAddress = Address::updateOrCreate(
                 ['parent_profile_id' => $id],
                 [
                     'parent_profile_id' => $id,
@@ -184,7 +184,7 @@ class ParentController extends Controller
         ]);
         $data = $request->all();
         $user = User::find($id);
-        if (!Hash::check($data['old_password'], $user->password)) {
+        if (! Hash::check($data['old_password'], $user->password)) {
             $notification = [
                 'message' => 'Please enter Correct Previous Password!',
                 'alert-type' => 'Error',

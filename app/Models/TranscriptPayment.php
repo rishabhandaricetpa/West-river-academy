@@ -10,7 +10,7 @@ class TranscriptPayment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'transcript_id', 'amount', 'transcation_id', 'payment_mode'
+        'transcript_id', 'amount', 'transcation_id', 'payment_mode',
     ];
 
     public function transcriptK8()

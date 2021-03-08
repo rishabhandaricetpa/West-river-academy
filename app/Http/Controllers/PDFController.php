@@ -7,8 +7,8 @@ use App\Models\StudentProfile;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
-use PDF;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class PDFController extends Controller
 {
@@ -23,7 +23,7 @@ class PDFController extends Controller
             $Userid = Auth::user()->id;
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $studentProfileData = StudentProfile::whereId($id)->first();
-            $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
+            $pdfname = $studentProfileData->first_name.'_'.$studentProfileData->last_name.'_'.$studentProfileData->d_o_b->format('M_d_Y').'_'.'Confirmation_letter';
             $enrollment_periods = StudentProfile::find($studentProfileData->id)->enrollmentPeriods()->get();
             $id = $parentProfileData->id;
             $data = [
@@ -34,12 +34,13 @@ class PDFController extends Controller
             ];
             $pdf = PDF::loadView('confirmationLetter', $data);
             // Storage::disk('local')->put('public/pdf/Confirmation.pdf', $pdf->output());
-            return $pdf->download($pdfname . '.pdf');
+            return $pdf->download($pdfname.'.pdf');
         } catch (\Exception $e) {
-            $notification = array(
+            $notification = [
                 'message' => 'Failed!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

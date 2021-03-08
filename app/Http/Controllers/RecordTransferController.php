@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Dashboard;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 
 class RecordTransferController extends Controller
 {
@@ -18,6 +18,7 @@ class RecordTransferController extends Controller
     public function index($parentId)
     {
         $students = ParentProfile::find($parentId)->studentProfile()->get();
+
         return view('recordTransfer.studentDetails', compact('students', 'parentId'));
     }
 
@@ -25,6 +26,7 @@ class RecordTransferController extends Controller
     {
         return view('recordTransfer.previous-school', compact('student_id', 'parent_id'));
     }
+
     public function storeRecordRequest(Request $request, $student_id, $parent_id)
     {
         try {
@@ -47,7 +49,7 @@ class RecordTransferController extends Controller
 
             Dashboard::create([
                 'linked_to' => 'Record Transfer Request',
-                'notes' => 'Student Name : ' . $recordTransfer['student']['fullname'],
+                'notes' => 'Student Name : '.$recordTransfer['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();
@@ -55,21 +57,26 @@ class RecordTransferController extends Controller
                 'message' => 'Record Transfer Request Sent Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
+
     public function editRecordRequest($id)
     {
         $school_record = RecordTransfer::find($id);
+
         return view('recordTransfer.edit-record', compact('school_record'));
     }
+
     public function updateStoreRecordRequest(Request $request, $id)
     {
         try {
@@ -93,13 +100,15 @@ class RecordTransferController extends Controller
                 'message' => 'Record Transfer Request Updated Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

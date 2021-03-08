@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +15,8 @@ class CourseTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('courses')->delete(); {
+        DB::table('courses')->delete();
+        {
             $array = [
                 ['1', 'English / Language Arts', 'K-8'],
                 ['2', 'History / Social Science', 'K-8'],

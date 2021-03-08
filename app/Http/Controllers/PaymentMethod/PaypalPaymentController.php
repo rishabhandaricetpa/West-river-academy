@@ -127,6 +127,7 @@ class PaypalPaymentController extends Controller
             return Redirect::route('paywithpaypal');
         }
     }
+
     public function getPaymentStatus(Request $request)
     {
         $payment_id = Session::get('paypal_payment_id');
@@ -150,7 +151,7 @@ class PaypalPaymentController extends Controller
         $paypal->payment_mode = 'Pay pal';
         $paypal->parent_profile_id = Auth::user()->id;
         $paypal->amount = $enroll_fees->amount;
-        $paypal->status = "succeeded";
+        $paypal->status = 'succeeded';
         $paypal->coupon_code = $coupon_code;
         $paypal->coupon_amount = $coupon_amount;
         $paypal->save();
@@ -160,8 +161,9 @@ class PaypalPaymentController extends Controller
         if ($result->getState() == 'approved') {
             $notification = [
                 'message' => 'Payment has been successfully processed! Add more services',
-                'alert-type' => 'success'
+                'alert-type' => 'success',
             ];
+
             return Redirect::route('thankyou.paypal')->with($notification);
         }
 

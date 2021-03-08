@@ -16,7 +16,7 @@ class CreateCustomPaymentsTable extends Migration
         Schema::create('custom_payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_profile_id');
-            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');;
+            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('amount');
             $table->string('paying_for');
             $table->string('type_of_payment');

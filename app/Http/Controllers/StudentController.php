@@ -10,12 +10,12 @@ use App\Models\FeesInfo;
 use App\Models\FeeStructure;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-use App\Models\User;
 use App\Models\Transcript;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -57,30 +57,32 @@ class StudentController extends Controller
             $parentProfileData = User::find($id)->parentProfile()->first();
             $country = $parentProfileData->country;
             $countryData = Country::where('country', $country)->first();
-            $year = date("Y");
+            $year = date('Y');
             $newYear = $year + 1;
-            $year =   Carbon::create($year)->format('Y');
+            $year = Carbon::create($year)->format('Y');
             $month_start_date = Carbon::create($countryData->start_date)->format('m-d');
-            $start_date = $year . "-" . $month_start_date;
+            $start_date = $year.'-'.$month_start_date;
             $sem = Carbon::parse($start_date);
-            $semestermonth =  $sem->addMonths(5);
+            $semestermonth = $sem->addMonths(5);
 
             $year_end_date = Carbon::create($countryData->end_date)->format('m-d');
-            $country_end_date = "12-31";
+            $country_end_date = '12-31';
             if ($year_end_date == $country_end_date) {
                 $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $end_date = $year . "-" . $month_end_date;
+                $end_date = $year.'-'.$month_end_date;
             } else {
                 $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $end_date = $newYear . "-" . $month_end_date;
+                $end_date = $newYear.'-'.$month_end_date;
             }
             DB::commit();
             if ($request->expectsJson()) {
                 return response()->json($start_date);
             }
+
             return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
         } catch (\Exception $e) {
             DB::rollBack();
+
             return response()->json(['status' => 'error', 'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
         }
     }
@@ -95,6 +97,7 @@ class StudentController extends Controller
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
+
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer'));
     }
 
@@ -139,7 +142,7 @@ class StudentController extends Controller
                     ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
                     ->exists();
 
-                if (!$student_enrolled) {
+                if (! $student_enrolled) {
                     $student_type = 'first_student';
                 } else {
                     $student_type = 'additional_student';
@@ -153,7 +156,7 @@ class StudentController extends Controller
                     'type' => $type,
                 ]);
 
-                $fee_type = $student_type . '_' . $type;
+                $fee_type = $student_type.'_'.$type;
                 $fee = FeesInfo::getFeeAmount($fee_type);
 
                 $enrollmentPayment = EnrollmentPayment::create([
@@ -216,7 +219,7 @@ class StudentController extends Controller
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
             $periods->whereNotNull('id')->each(function ($period) use ($student) {
-                if (!EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
+                if (! EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
                     $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
@@ -249,7 +252,7 @@ class StudentController extends Controller
             ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
             ->exists();
 
-        if (!$student_enrolled) {
+        if (! $student_enrolled) {
             $student_type = 'first_student';
         } else {
             $student_type = 'additional_student';
@@ -274,7 +277,7 @@ class StudentController extends Controller
             return;
         }
 
-        $fee_type = $student_type . '_' . $type;
+        $fee_type = $student_type.'_'.$type;
         $fee = FeesInfo::getFeeAmount($fee_type);
 
         $EnrollmentPayment->fill([
@@ -296,7 +299,7 @@ class StudentController extends Controller
         $countryData = Country::where('country', $country)->first();
         $start_date = $countryData->start_date;
         $sem = Carbon::parse($start_date);
-        $semestermonth =  $sem->addMonths(5);
+        $semestermonth = $sem->addMonths(5);
         $countryId = $countryData->id;
         $studentData = StudentProfile::find($id);
         $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
@@ -307,7 +310,6 @@ class StudentController extends Controller
 
         return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
     }
-
 
     private function getFinalAmount()
     {
@@ -346,6 +348,7 @@ class StudentController extends Controller
 
         return view('paywithpaypal', compact('address', 'final_amount'));
     }
+
     public function stripeorderReview($parent_id)
     {
         $address = User::find($parent_id)->parentProfile()->first();
@@ -357,6 +360,7 @@ class StudentController extends Controller
 
         return view('Billing/creditcard', compact('address', 'final_amount'));
     }
+
     public function moneyorderReview($parent_id)
     {
         $address = User::find($parent_id)->parentProfile()->first();
@@ -371,7 +375,7 @@ class StudentController extends Controller
 
     public function moneygramReview($parent_id)
     {
-        $address   = User::find($parent_id)->parentProfile()->first();
+        $address = User::find($parent_id)->parentProfile()->first();
         $final_amount = $this->getFinalAmount();
 
         if ($final_amount === false) {
