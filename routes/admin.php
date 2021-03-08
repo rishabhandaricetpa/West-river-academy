@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 // Dashboard
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -23,24 +24,28 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth:admin'], function () {
     Route::group(
         ['namespace' => 'admin'],
         function () {
             Route::get('logout', function () {
                 Auth::guard('admin')->logout();
 
-                return redirect('/admin/login');
+                return redirect()->route('admin.login');
             })->name('admin.logout');
             Route::get('/payments-invoice', function () {
                 return view('admin/paymentsInvoice/payment');
             });
+            Route::get('dashboard', function () {
+                return view('admin.home');
+            })->name('admin.admindashboard');
         }
+
     );
 
     // Crud for parent profile
     Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');
-    Route::get('view', 'ParentController@index')->name('view.parent');
+    Route::get('view', 'ParentController@index')->name('view.parent')->middleware('auth:admin');
     Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
     Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
     Route::get('delete/parent/{id}', 'ParentController@destroy')->name('parent.delete');
@@ -92,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit-country/{id}', 'CountryController@edit')->name('country.edit');
     Route::post('update/country/{id}', 'CountryController@update')->name('country.update');
 
-    //graduation process 
+    //graduation process
     Route::get('graduations', '\App\Http\Controllers\GraduationController@graduations')->name('view.graduation');
     Route::get('graduations/data', '\App\Http\Controllers\GraduationController@dataTable')->name('graduation.dt');
     Route::get('graduations/{id}/edit', '\App\Http\Controllers\GraduationController@edit')->name('edit.graduation');
@@ -143,4 +148,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('student/record/{student_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
     Route::post('student/requestSent/{student_id}', 'RecordTransferController@sendRecordToSchool')->name('sendRecordToSchool');
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
+
+    //dashboard notification
+
+    Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
 });

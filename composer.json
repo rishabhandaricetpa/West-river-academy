@@ -1,7 +1,7 @@
 {
   "name": "peggywebb/west-river-academy",
   "type": "project",
-  "description": "The Dwell at Home app.",
+  "description": "West River Academy.",
   "license": "proprietary",
   "require": {
     "php": "^7.4|^8.0",

@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CustomPayment;
 use App\Models\FeesInfo;
 use App\Models\Graduation;
 use App\Models\GraduationMailingAddress;
 use App\Models\GraduationPayment;
-use App\Models\TranscriptPayment;
-use App\Models\TranscriptK8;
-use App\Models\CustomPayment;
+use App\Models\OrderPostage;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
+use App\Models\TranscriptK8;
+use App\Models\TranscriptPayment;
 use App\Models\User;
 use App\Models\OrderPostage;
 use App\Models\NotarizationPayment;
@@ -78,7 +79,7 @@ class CartController extends Controller
                             'street' => $data['street'],
                             'city' => $data['city'],
                             'country' => $data['country'],
-                            'postal_code' => $data['postal_code']
+                            'postal_code' => $data['postal_code'],
                         ]);
 
                         if (isset($data['apostille_country']) && !empty($data['apostille_country'])) {
@@ -124,7 +125,7 @@ class CartController extends Controller
                     $clearpendingPayments = CustomPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
                         ->update(
                             [
-                                'status' => 'cancelled'
+                                'status' => 'cancelled',
                             ]
                         );
                     $customPaymentsData = CustomPayment::create([
@@ -132,7 +133,7 @@ class CartController extends Controller
                         'amount' => $request->get('amount'),
                         'paying_for' => 'custom',
                         'type_of_payment' => 'Custom Payments',
-                        'status' => 'pending'
+                        'status' => 'pending',
                     ]);
                     $parentId = $customPaymentsData->parent_profile_id;
                     $parent_profile_id = ParentProfile::getParentId();
@@ -170,7 +171,7 @@ class CartController extends Controller
                         'amount' =>   $amount,
                         'paying_for' => $request->get('payment_for'),
                         'type_of_payment' => '',
-                        'status' => 'pending'
+                        'status' => 'pending',
                     ]);
                     $parentId = $orderPostageData->parent_profile_id;
                     $parent_profile_id = ParentProfile::getParentId();
@@ -231,6 +232,7 @@ class CartController extends Controller
                     break;
             }
             DB::commit();
+
             return redirect('/cart');
         } catch (\Exception $e) {
             dd($e);

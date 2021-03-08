@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\CustomPayment;
+use Illuminate\Http\Request;
 
 class CustomController extends Controller
 {
@@ -24,6 +24,7 @@ class CustomController extends Controller
     {
         return datatables(CustomPayment::with('ParentProfile')->get())->toJson();
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -96,7 +97,7 @@ class CustomController extends Controller
         // }
     }
 
-    /**
+    /*
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\cr  $cr

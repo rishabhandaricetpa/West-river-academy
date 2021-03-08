@@ -15,20 +15,19 @@ function active_route($pattern, $output = 'active')
     return \Illuminate\Support\Facades\Route::is($pattern) ? $output : null;
 }
 
-
 function getMetrixValues($course, $data, $transcriptData)
 {
     try {
-        $subjects  = $course->toArray();
+        $subjects = $course->toArray();
 
         if ($transcriptData) :
 
-            $transcriptDetails  = $data->transcriptDetails;
+            $transcriptDetails = $data->transcriptDetails;
 
             foreach ($transcriptDetails as $key => $value) {
-
-                if ($value['k8transcript_id'] === $data['id'] && $value['subject_id'] === $course['subject_id'])
+                if ($value['k8transcript_id'] === $data['id'] && $value['subject_id'] === $course['subject_id']) {
                     return $value['score'];
+                }
             }
         endif;
     } catch (\Throwable $th) {

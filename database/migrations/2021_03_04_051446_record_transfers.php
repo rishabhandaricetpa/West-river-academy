@@ -32,7 +32,7 @@ class RecordTransfers extends Migration
             $table->string('firstRequestDate')->nullable();
             $table->string('secondRequestDate')->nullable();
             $table->string('thirdRequest')->nullable();
-            $table->enum('status', ['In Review', 'Approved', 'Request Sent'])->nullable();
+            $table->enum('status', ['In Review', 'Record Received', 'Request Sent'])->nullable();
             $table->timestamps();
         });
     }

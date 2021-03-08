@@ -18,9 +18,9 @@ class StudentProfileController extends Controller
      */
     public function index()
     {
-
         return view('admin.familyInformation.view-student');
     }
+
     public function dataTable()
     {
         return datatables(StudentProfile::with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation'])->get())->toJson();
@@ -29,6 +29,7 @@ class StudentProfileController extends Controller
     public function studentInformation($id)
     {
         $student = StudentProfile::where('parent_profile_id', $id)->get();
+
         return view('admin.familyInformation.view-student', compact('student'));
     }
 
@@ -144,10 +145,11 @@ class StudentProfileController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

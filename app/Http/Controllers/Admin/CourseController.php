@@ -1,14 +1,13 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ParentProfile;
-use App\Models\User;
 use App\Models\Course;
+use App\Models\ParentProfile;
 use App\Models\Subject;
 use App\Models\TranscriptK8;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +17,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
+
         return view('admin.transcript.view-courses', compact('courses'));
     }
 
@@ -37,6 +37,7 @@ class CourseController extends Controller
                 'message' => 'Record Added Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -48,6 +49,7 @@ class CourseController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
     //edit subjects
     public function edit($id)
     {
@@ -55,12 +57,15 @@ class CourseController extends Controller
         $subjects = Subject::where('courses_id', $id)
             ->where('status', 0)
             ->get();
+
         return view('admin.transcript.edit-courses', compact('subjects', 'coursename', 'id'));
     }
-    //fetch subjects 
+
+    //fetch subjects
     public function editSubject($id)
     {
         $name = Subject::find($id);
+
         return view('admin.transcript.edit-subject', compact('name'));
     }
 
@@ -79,13 +84,15 @@ class CourseController extends Controller
                 'message' => 'Subject Info Updated!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -101,16 +108,19 @@ class CourseController extends Controller
             ];
             Subject::where('id', $id)->delete();
             DB::commit();
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
+
     //fetch other subject
     public function otherSubjects($id)
     {
@@ -118,8 +128,10 @@ class CourseController extends Controller
         $subjects = Subject::where('courses_id', $id)
             ->where('status', 1)
             ->get();
+
         return view('admin.transcript.add-other-subject', compact('coursename', 'subjects'));
     }
+
     //add other subject to list that show in frontend
     public function addSubjects($subject_id)
     {
@@ -133,16 +145,19 @@ class CourseController extends Controller
                 'message' => 'Subject Added Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
+
     //delete subjects
     public function deleteSubjects($subject_id)
     {
@@ -154,16 +169,19 @@ class CourseController extends Controller
                 'message' => 'Subject Deleted Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
+
     public function deleteSchool($transcript_id)
     {
         try {
@@ -174,13 +192,15 @@ class CourseController extends Controller
                 'message' => 'School Record Deleted Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

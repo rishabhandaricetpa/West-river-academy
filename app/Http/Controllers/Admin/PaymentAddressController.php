@@ -82,13 +82,15 @@ class PaymentAddressController extends Controller
                 'message' => 'Address for Banktransfer is updated Successfully!',
                 'alert-type' => 'success',
             ];
+
             return redirect('admin/payment-address')->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -172,10 +174,11 @@ class PaymentAddressController extends Controller
             return redirect('admin/payment-address')->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -253,10 +256,11 @@ class PaymentAddressController extends Controller
             return redirect('admin/payment-address')->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -271,13 +275,15 @@ class PaymentAddressController extends Controller
             ];
             MoneygramDetail::where('id', $id)->delete();
             DB::commit();
+
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

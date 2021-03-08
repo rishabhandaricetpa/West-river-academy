@@ -15,7 +15,7 @@ class AddTranscriptIdColumnInK8transcriptTable extends Migration
     {
         Schema::table('k8transcript', function (Blueprint $table) {
             $table->unsignedBigInteger('transcript_id');
-            $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');         
+            $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');
         });
     }
 

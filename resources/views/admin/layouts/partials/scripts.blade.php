@@ -263,73 +263,123 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
   });
-
-  //custom payments
-  $("#custom-payment").DataTable({
-    "ajax": "{{ route('admin.datatable.custom') }}",
-    "processing": true,
-    "serverSide": true,
-    "responsive": true,
-    "lengthChange": false,
-    "autoWidth": false,
-    "columns": [{
-        "data": "id",
-        "render": function(data, type, row, meta) {
-          return meta.row + 1;
-        }
+  // edit Dashboard Record
+  function editDashboard(event) {
+    var id = $(event).data("id");
+    console.log(id);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      {
-        "data": "parent_profile.p1_first_name"
+      url: "{{url('assign/dashboard')}}",
+      type: "POST",
+      data: {
+        assign_id: id,
       },
-      {
-        "data": "amount"
-      },
-      {
-        "data": "paying_for"
-      },
-      {
-        "data": "transcation_id"
-      },
-      {
-        "data": "payment_mode"
-      },
-      {
-        "data": "status"
-      },
-    ]
-  });
-
-  //fees -info table
-  $("#fees-table").DataTable({
-    "ajax": "{{ route('admin.datatable.fees') }}",
-    "processing": true,
-    "serverSide": true,
-    "responsive": true,
-    "lengthChange": false,
-    "autoWidth": false,
-    "columns": [{
-        "data": "id",
-        "render": function(data, type, row, meta) {
-          return meta.row + 1;
-        }
-      },
-      {
-        "data": "type"
-      },
-      {
-        "data": "description"
-      },
-      {
-        "data": "amount"
-      },
-      {
-        "data": "id",
-        "render": function(id) {
-          return `<a href="{{ route('admin.fees.services')}}/${id}/edit">Edit</a>`;
+      success: function(response) {
+        if (response) {
+          $("#assigned_to").val(response.assigned_to);
+          $("#notes").val(response.notes);
+          $("#data_id").val(response.id);
         }
       }
-    ]
-  });
+    });
+  }
+  // assign Record of Dashboard
+  function assignTo() {
+    console.log('created');
+    var assignee = $('#assigned_to').val();
+    var notes = $('#notes').val();
+    var id = $('#data_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{url('update/dashboard')}}",
+      type: "POST",
+      data: {
+        id: id,
+        assigned: assignee,
+        notes: notes
+      },
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(response) {
+
+      }
+    });
+
+    //custom payments
+    $("#custom-payment").DataTable({
+      "ajax": "{{ route('admin.datatable.custom') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "id",
+          "render": function(data, type, row, meta) {
+            return meta.row + 1;
+          }
+        },
+        {
+          "data": "parent_profile.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "paying_for"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
+          "data": "status"
+        },
+      ]
+    });
+
+    //fees -info table
+    $("#fees-table").DataTable({
+      "ajax": "{{ route('admin.datatable.fees') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "id",
+          "render": function(data, type, row, meta) {
+            return meta.row + 1;
+          }
+        },
+        {
+          "data": "type"
+        },
+        {
+          "data": "description"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="{{ route('admin.fees.services')}}/${id}/edit">Edit</a>`;
+          }
+        }
+      ]
+    });
+  }
+</script>
+
+
 </script>
 <!-- ChartJS -->
 <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>

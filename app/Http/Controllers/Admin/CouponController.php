@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
 use App\Models\Coupon;
-use App\Models\User;
 use App\Models\ParentProfile;
+use App\Models\User;
+use Auth;
 use Carbon\Carbon;
 use DB;
 use Exception;
-use Auth;
+use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
@@ -28,6 +27,7 @@ class CouponController extends Controller
     public function create()
     {
         $parents = ParentProfile::select('id', 'p1_email')->get()->toArray();
+
         return view('admin.coupon.create', compact('parents'));
     }
 
@@ -37,6 +37,7 @@ class CouponController extends Controller
         $parents = ParentProfile::select('id', 'p1_email')->get()->toArray();
         $coupon->coupon_for = explode(',', $coupon->coupon_for);
         $coupon->expire_at = Carbon::parse($coupon->expire_at)->format('Y-m-d');
+
         return view('admin.coupon.edit', compact('parents', 'coupon'));
     }
 
@@ -53,25 +54,27 @@ class CouponController extends Controller
             $check = Coupon::where('code', $input['code'])->where('status', 'active')->exists();
 
             if ($check) {
-                throw new Exception("Coupon with this code is already Active.", 1);
+                throw new Exception('Coupon with this code is already Active.', 1);
             }
 
             $create = Coupon::create($input);
-            if (!$create) {
-                throw new Exception("Failed to create Coupon", 1);
+            if (! $create) {
+                throw new Exception('Failed to create Coupon', 1);
             }
             DB::commit();
-            $notification = array(
+            $notification = [
                 'message' => 'Coupon generated Successfully!',
-                'alert-type' => 'success'
-            );
+                'alert-type' => 'success',
+            ];
+
             return redirect()->route('admin.view.coupon')->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to generate Coupon!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -85,21 +88,23 @@ class CouponController extends Controller
                 $input['coupon_for'] = implode(',', $input['assign']);
             }
             $update = Coupon::find($id)->update($input);
-            if (!$update) {
-                throw new Exception("Failed to update Coupon", 1);
+            if (! $update) {
+                throw new Exception('Failed to update Coupon', 1);
             }
             DB::commit();
-            $notification = array(
+            $notification = [
                 'message' => 'Coupon Updated Successfully!',
-                'alert-type' => 'success'
-            );
+                'alert-type' => 'success',
+            ];
+
             return redirect()->route('admin.view.coupon')->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Coupon!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -111,7 +116,6 @@ class CouponController extends Controller
 
     public function applyCoupon($code)
     {
-
         Coupon::removeAppliedCoupon();
 
         $coupon = Coupon::where('code', $code)->where('status', 'active')->first();
@@ -131,7 +135,7 @@ class CouponController extends Controller
             $parentProfileData = User::find($Userid)->parentProfile()->first();
             $parent_id = $parentProfileData->id;
 
-            if (!in_array($parent_id, explode(',', $coupon->coupon_for))) {
+            if (! in_array($parent_id, explode(',', $coupon->coupon_for))) {
                 return $this->invalidCouponResponse();
             }
         }

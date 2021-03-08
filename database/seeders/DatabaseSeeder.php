@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     protected $toTruncate = [
-        'countries', 'fees_info', 'bank_transfer_details', 'money_gram_details', 'transfer_wise_deatils'
+        'countries', 'fees_info', 'bank_transfer_details', 'money_gram_details', 'transfer_wise_deatils',
     ];
 
     /**
@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TransferwiseTableSeeder::class);
         $this->call(CourseTableSeeder::class);
         $this->call(SubjectTableSeeder::class);
+        $this->call(AdminLoginSeeder::class);
         Model::reguard();
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Course;
 use App\Models\Subject;
 use App\Models\TranscriptCourse;
-use App\Models\Course;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EnglishController extends Controller
@@ -22,6 +22,7 @@ class EnglishController extends Controller
             ->where('transcript_period', 'K-8')
             ->where('status', 0)
             ->get();
+
         return view('courses.english-course', compact('englishCourse', 'student_id', 'transcript_id', 'courses_id'));
     }
 
@@ -29,18 +30,17 @@ class EnglishController extends Controller
     {
         $id = $request->get('courses_id');
         //first delete the course if exists in database
-        $refreshCourse =  TranscriptCourse::select()->where('courses_id',  $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
+        $refreshCourse = TranscriptCourse::select()->where('courses_id', $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
         // then insert new subjects
         foreach ($request->get('englishCourse', []) as $period) {
-
-            $other_subjects =  $period['other_subjects'];
+            $other_subjects = $period['other_subjects'];
             if ($other_subjects) {
                 $other_sub = Subject::create([
                     'courses_id' => $period['courses_id'],
                     'subject_name' => $other_subjects,
                     'transcript_period' => 'K-8',
-                    'status' => 1
+                    'status' => 1,
                 ]);
                 TranscriptCourse::create([
                     'student_profile_id' => $period['student_id'],
@@ -63,6 +63,5 @@ class EnglishController extends Controller
                 ]);
             }
         }
-        }
- }
-
+    }
+}

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ParentProfile extends Model
 {
@@ -80,12 +80,15 @@ class ParentProfile extends Model
     {
         $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
+
         return $parentProfileData->id;
     }
+
     public function transcripts()
     {
         return $this->hasMany('App\Models\Graduation', 'parent_profile_id', 'id');
     }
+
     public function schoolRecord()
     {
         return $this->hasMany(RecordTransfer::class);

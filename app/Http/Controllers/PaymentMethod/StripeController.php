@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\PaymentMethod;
 
 use App\Http\Controllers\Controller;
-use Stripe;
-use Session;
-use Redirect;
-use App\Models\Coupon;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\EnrollmentPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
@@ -15,6 +12,9 @@ use App\Models\TransactionsMethod;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Redirect;
+use Session;
+use Stripe;
 
 class StripeController extends Controller
 {
@@ -62,11 +62,11 @@ class StripeController extends Controller
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             try {
                 $charges = \Stripe\Charge::create([
-                    "amount" => 100 * $final_amount,
-                    "currency" => "usd",
-                    "source" => $request->stripeToken,
-                    "receipt_email" => $email,
-                    "description" => $request->description
+                    'amount' => 100 * $final_amount,
+                    'currency' => 'usd',
+                    'source' => $request->stripeToken,
+                    'receipt_email' => $email,
+                    'description' => $request->description,
                 ]);
                 $parentProfileData = User::find($userId)->parentProfile()->first();
                 $paymentinfo = $parentProfileData->TransactionsMethod()->create([
@@ -84,26 +84,28 @@ class StripeController extends Controller
                 if ($charges->status == 'succeeded') {
                     Cart::emptyCartAfterPayment('Credit Card', 'paid', $charges->id);
                 } else {
-                    $notification = array(
+                    $notification = [
                         'message' => 'Payment not processed!Please check with your bank!',
-                        'alert-type' => 'error'
-                    );
+                        'alert-type' => 'error',
+                    ];
+
                     return Redirect::route('payment.info')->with($notification);
                 }
 
                 $paymentinfo->save();
 
-                $notification = array(
+                $notification = [
                     'message' => 'Payment has been successfully processed!',
-                    'alert-type' => 'success'
-                );
+                    'alert-type' => 'success',
+                ];
+
                 return Redirect::route('payment.info')->with($notification);
             } catch (\Stripe\Exception\CardException $e) {
-                echo 'Status is:' . $e->getHttpStatus() . '\n';
-                echo 'Type is:' . $e->getError()->type . '\n';
-                echo 'Code is:' . $e->getError()->code . '\n';
-                echo 'Param is:' . $e->getError()->param . '\n';
-                echo 'Message is:' . $e->getError()->message . '\n';
+                echo 'Status is:'.$e->getHttpStatus().'\n';
+                echo 'Type is:'.$e->getError()->type.'\n';
+                echo 'Code is:'.$e->getError()->code.'\n';
+                echo 'Param is:'.$e->getError()->param.'\n';
+                echo 'Message is:'.$e->getError()->message.'\n';
             }
         }
     }

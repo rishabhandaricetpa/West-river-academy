@@ -35,6 +35,7 @@ class ParentController extends Controller
     {
         return datatables(ParentProfile::with(['studentProfile', 'address'])->get())->toJson();
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -76,6 +77,7 @@ class ParentController extends Controller
     public function edit($id)
     {
         $parent = ParentProfile::find($id);
+
         return view('admin.familyInformation.edit-parent', compact('parent'));
     }
 
@@ -123,10 +125,11 @@ class ParentController extends Controller
             return redirect('admin/view')->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }
@@ -151,10 +154,11 @@ class ParentController extends Controller
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
-            $notification = array(
+            $notification = [
                 'message' => 'Failed to update Record!',
-                'alert-type' => 'error'
-            );
+                'alert-type' => 'error',
+            ];
+
             return redirect()->back()->with($notification);
         }
     }

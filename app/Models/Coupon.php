@@ -12,15 +12,15 @@ class Coupon extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'amount', 'status', 'coupon_for', 'redeem_left', 'expire_at', 'description'
+        'code', 'amount', 'status', 'coupon_for', 'redeem_left', 'expire_at', 'description',
     ];
 
     public static function generateCode()
     {
-        $code = Self::createRandomCode();
+        $code = self::createRandomCode();
 
-        if(Coupon::where('code',$code)->where('status','active')->exists()){
-           return Self::generateCode();
+        if (self::where('code', $code)->where('status', 'active')->exists()) {
+            return self::generateCode();
         }
 
         return $code;
@@ -42,37 +42,35 @@ class Coupon extends Model
         $Userid = Auth::user()->id;
         $parentProfileData = User::find($Userid)->parentProfile()->first();
         $parent_id = $parentProfileData->id;
-        
+
         $codes = [];
-        
-        $parent_coupons = Coupon::select('code','amount')
-                            ->where('status','active')
-                            ->where(function($query) use ($parent_id) {
-                                $query->where('coupon_for',$parent_id)// if there's only one user is assigned
-                                        ->orWhere('coupon_for','like',"%,$parent_id") // if id is in the last place
-                                        ->orWhere('coupon_for','like',"$parent_id,%") // if id is in the first place
-                                        ->orWhere('coupon_for','like',"%,$parent_id,%"); // if id is in between 
+
+        $parent_coupons = self::select('code', 'amount')
+                            ->where('status', 'active')
+                            ->where(function ($query) use ($parent_id) {
+                                $query->where('coupon_for', $parent_id)// if there's only one user is assigned
+                                        ->orWhere('coupon_for', 'like', "%,$parent_id") // if id is in the last place
+                                        ->orWhere('coupon_for', 'like', "$parent_id,%") // if id is in the first place
+                                        ->orWhere('coupon_for', 'like', "%,$parent_id,%"); // if id is in between
                             })
-                            ->where(function($query) {
-                                $query->where('expire_at','')
+                            ->where(function ($query) {
+                                $query->where('expire_at', '')
                                         ->orWhereNull('expire_at')
-                                        ->orWhereDate('expire_at','>',date('Y-m-d'));
-                                        
+                                        ->orWhereDate('expire_at', '>', date('Y-m-d'));
                             })
                             ->get()
                             ->toArray();
 
-        $global_coupons = Coupon::select('code','amount')
-                            ->where('status','active')
-                            ->where(function($query) {
-                                $query->where('coupon_for','')
+        $global_coupons = self::select('code', 'amount')
+                            ->where('status', 'active')
+                            ->where(function ($query) {
+                                $query->where('coupon_for', '')
                                         ->orWhereNull('coupon_for');
                             })
-                            ->where(function($query) {
-                                $query->where('expire_at','')
+                            ->where(function ($query) {
+                                $query->where('expire_at', '')
                                         ->orWhereNull('expire_at')
-                                        ->orWhereDate('expire_at','>',date('Y-m-d'));
-                                        
+                                        ->orWhereDate('expire_at', '>', date('Y-m-d'));
                             })
                             ->get()
                             ->toArray();
@@ -80,9 +78,9 @@ class Coupon extends Model
         $coupons = array_merge($parent_coupons, $global_coupons);
 
         foreach ($coupons as $coupon) {
-            array_push($codes,[ 'label' => $coupon['code'].' ($'. $coupon['amount'].')', 'value' => $coupon['code']]);
+            array_push($codes, ['label' => $coupon['code'].' ($'.$coupon['amount'].')', 'value' => $coupon['code']]);
         }
-        
+
         return $codes;
     }
 }

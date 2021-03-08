@@ -10,7 +10,7 @@ class GraduationDetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'graduation_id', 'project', 'diploma', 'transcript', 'situation', 'record_received', 'grad_date', 'apostille_package', 'notes'
+        'graduation_id', 'project', 'diploma', 'transcript', 'situation', 'record_received', 'grad_date', 'apostille_package', 'notes',
     ];
 
     public function graduation()

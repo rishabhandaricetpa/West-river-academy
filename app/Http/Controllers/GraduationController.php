@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\GraduationApproved;
 use App\Models\Country;
 use App\Models\FeesInfo;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Auth;
-use App\Models\ParentProfile;
-use App\Models\StudentProfile;
 use App\Models\Graduation;
 use App\Models\GraduationDetail;
 use App\Models\GraduationPayment;
+use App\Models\ParentProfile;
+use App\Models\StudentProfile;
+use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\GraduationApproved;
 
 class GraduationController extends Controller
 {
@@ -39,7 +39,7 @@ class GraduationController extends Controller
                 'message' => 'Student not found!',
                 'alert-type' => 'error',
             ]);
-        } else if ($student->graduation !== null) {
+        } elseif ($student->graduation !== null) {
             return redirect()->back()->with([
                 'message' => 'Graduation is already applied for this student!',
                 'alert-type' => 'error',

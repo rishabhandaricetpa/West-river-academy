@@ -70,22 +70,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
 
-
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
-
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
-        Route::get('admin/dashboard', function () {
-            return view('admin.home');
-        })->name('admin.admindashboard');
 
         Route::get('previous-school', function () {
             return view('previous-school');
         });
     });
-
 
     //Paypal Payment
     Route::get('payment', function () {
@@ -103,7 +97,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('Billing/paymentsuccess');
     })->name('payment.info');
 
-
     //Money-order
     Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
     Route::get('/money-order/{id}', 'StudentController@moneyorderReview');
@@ -117,7 +110,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('bankTransfer/{amount}', 'PaymentMethod\BankTranferController@index')->name('bank.transfer');
     Route::get('/bank-transfer', 'ParentController@getBankTransferDetails');
 
-
     //Money Gram
     Route::get('/money-gram', 'PaymentMethod\MoneyGramController@index')->name('money.gram');
     Route::get('/money-gram/{id}', 'StudentController@moneygramReview');
@@ -126,7 +118,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/coupon/apply/{code}', 'Admin\CouponController@applyCoupon')->name('coupon.apply');
     Route::get('/coupon/remove', 'Admin\CouponController@removeAppliedCoupon')->name('coupon.remove');
-
 
     Route::get('/mysettings/{id}', 'ParentController@mysettings');
     Route::get('/editaccount/{id}', 'ParentController@editmysettings');
@@ -140,8 +131,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //fees and services
     Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
-
-
 
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
@@ -164,8 +153,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //save year
     Route::post('updateYear/{student_id}/{transcript_id}', 'TranscriptController@storeYear')->name('update.enrollYear');
 
-
-
     // final-submission.blade
     Route::get('submit/{student_id}/{transcript_id}', 'TranscriptController@submitTranscript')->name('submit.transcript');
 
@@ -182,14 +169,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('social-studies/{student_id}/{transcript_id}', 'Courses\SocialStudiesController@index')->name('social.studies');
     Route::post('/social-studies', 'Courses\SocialStudiesController@store')->name('socialStudiesCourse.store');
 
-    //mathematics 
+    //mathematics
     Route::get('mathematics/{student_id}/{transcript_id}', 'Courses\MathsController@index')->name('mathematics');
     Route::post('mathematics', 'Courses\MathsController@store')->name('mathematics.store');
 
     //physical education
     Route::get('physical-education/{student_id}/{transcript_id}', 'Courses\PhysicalEducationController@index')->name('physical.education');
     Route::post('physical-education', 'Courses\PhysicalEducationController@store')->name('physicalEducation.store');
-
 
     //health
     Route::get('health/{student_id}/{transcript_id}', 'Courses\HealthController@index')->name('health');
@@ -224,7 +210,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
     Route::post('transcript/purchase/{id}', 'TranscriptController@purchase')->name('transcript.purchase');
-
 
     //edit courses
 
@@ -265,6 +250,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
 
 
+    Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');
+    Route::post('update/dashboard', 'Admin\DashboardController@updateDashboard');
     //order Postage
     Route::get('orderpostage', function () {
         return view('orderPostage/purchase_postage');

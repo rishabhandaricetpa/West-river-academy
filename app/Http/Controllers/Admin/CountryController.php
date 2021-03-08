@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\ParentProfile;
 use App\Models\User;
-use App\Models\Country;
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
@@ -19,6 +19,7 @@ class CountryController extends Controller
     public function index()
     {
         $countrydata = Country::all();
+
         return view('admin.countrydata', compact('countrydata'));
     }
 
@@ -63,6 +64,7 @@ class CountryController extends Controller
     public function edit($id)
     {
         $countrydata = Country::find($id);
+
         return view('admin.edit-country', compact('countrydata'));
     }
 
@@ -77,14 +79,15 @@ class CountryController extends Controller
     {
         try {
             $country = Country::find($id);
-            $country->country   =  $request->get('country');
-            $country->start_date  =  $request->get('start_date');
-            $country->end_date    =  $request->get('end_date');
+            $country->country = $request->get('country');
+            $country->start_date = $request->get('start_date');
+            $country->end_date = $request->get('end_date');
             $country->save();
-            $notification = array(
+            $notification = [
                 'message' => 'Record is updated Successfully!',
-                'alert-type' => 'success'
-            );
+                'alert-type' => 'success',
+            ];
+
             return redirect('admin/countryenrollments')->with($notification);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -94,7 +97,7 @@ class CountryController extends Controller
         }
     }
 
-    /**
+    /*
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\cr  $cr
