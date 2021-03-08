@@ -12,7 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
   <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
-  
+
 </head>
 <!-- * =============== Header =============== * -->
 <header class="site-header">
@@ -43,40 +43,41 @@
         <li class="nav-item">
           <a class="nav-link" href="#">faq</a>
         </li>
+
+        @if(Auth::id())
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/logout') }}">logout</a>
         </li>
       </ul>
-      @if(Auth::id())
-        <div class="action-buttons d-none">
-      <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
-      <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
-    </div>
-    <div class="notification-wrap position-relative">
-    <button type="button" class="text-white notify-btn bg-transparent border-0"><i class="fas fa-bell fa-2x"></i></button> 
-    <div class="notification d-none">
-    <ul class="list-unstyled">
-      <li class="border-bottom mb-3 pb-3">
-      <p>Your application for graduation has been approved!</p>
-      <a href="#" class="btn btn-primary">pay the fee</a>
-      <span class="notify-time">01:00 PM</span>
-      </li>
-      <li class="border-bottom pb-3 mb-3">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-      <span class="notify-time">12:40 PM</span>
-      </li>
-      </ul>
-    <a href="#" class="text-secondary float-right mb-2">View Old Notifications</a>
-    </div>
-    </div>
+      <div class="action-buttons d-none">
+        <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
+        <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
+      </div>
+      <div class="notification-wrap position-relative">
+        <button type="button" class="text-white notify-btn bg-transparent border-0"><i class="fas fa-bell fa-2x"></i></button>
+        <div class="notification d-none">
+          <ul class="list-unstyled">
+            <li class="border-bottom mb-3 pb-3">
+              <p>Your application for graduation has been approved!</p>
+              <a href="#" class="btn btn-primary">pay the fee</a>
+              <span class="notify-time">01:00 PM</span>
+            </li>
+            <li class="border-bottom pb-3 mb-3">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+              <span class="notify-time">12:40 PM</span>
+            </li>
+          </ul>
+          <a href="#" class="text-secondary float-right mb-2">View Old Notifications</a>
+        </div>
+      </div>
       @else
-        <div class="action-buttons">
-      <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
-      <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
-    </div> 
-    @endif 
+      <div class="action-buttons">
+        <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
+        <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
+      </div>
+      @endif
     </div>
-  
+
   </nav>
 </header>
 

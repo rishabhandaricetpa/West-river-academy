@@ -186,7 +186,7 @@
                   @elseif($transcriptData->status === 'approved')
                   <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
                   @elseif($transcriptData->status === 'completed')
-                  <td><a href="{{ route ('preview.transcript',1)}}" role="button">Preview Transcript</a></td>
+                  <td><a href="{{ route ('preview.transcript',$transcriptData['student']['id'])}}" role="button">Preview Transcript</a></td>
                   @else
                   <td>-</td>
                   @endif

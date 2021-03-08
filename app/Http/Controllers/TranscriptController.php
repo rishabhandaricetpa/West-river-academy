@@ -163,7 +163,6 @@ class TranscriptController extends Controller
     {
         try {
             DB::beginTransaction();
-
             $transcript_id = $request->get('transcript_id');
             $transcript = TranscriptK8::find($transcript_id);
             if ($request->get('enrollment_year')) {
@@ -192,7 +191,6 @@ class TranscriptController extends Controller
     }
     public function displayAllCourse($transcript_id, $student_id)
     {
-
         $k8transcriptData = TranscriptK8::where('id', $transcript_id)->first();
         $transcript =  Transcript::where('id', $k8transcriptData->transcript_id)->first();
 
@@ -238,13 +236,14 @@ class TranscriptController extends Controller
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);
+        $year = TranscriptK8::where('student_profile_id', $student_id)->orderBy('enrollment_year', 'ASC')->get(['enrollment_year'])->unique('enrollment_year');
         $grades  = TranscriptK8::where('student_profile_id', $student_id)->orderBy('grade', 'ASC')->get(['grade']);
         $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
             ->get();
         $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->where('status', "paid")->first();
         $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
-        return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address'));
+        return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
     }
 
     public function purchase(Request $request, $id)
