@@ -30,6 +30,6 @@ class GraduationApproved extends Mailable
      */
     public function build()
     {
-        return $this->from(env('EMAIL'))->view('mail.graduation-approved')->subject('West River Academy Graduation');
+        return $this->view('mail.graduation-approved')->subject('West River Academy Graduation');
     }
 }

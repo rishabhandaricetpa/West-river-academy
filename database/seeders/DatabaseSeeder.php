@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TransferwiseTableSeeder::class);
         $this->call(CourseTableSeeder::class);
         $this->call(SubjectTableSeeder::class);
+        $this->call(AdminLoginSeeder::class);
         Model::reguard();
     }
 }

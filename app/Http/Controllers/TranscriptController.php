@@ -18,6 +18,7 @@ use App\Models\TranscriptPayment;
 use App\Models\FeesInfo;
 use Illuminate\Http\Request;
 use App\Mail\TranscriptEmail;
+use App\Models\Dashboard;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -287,6 +288,7 @@ class TranscriptController extends Controller
     }
     public function submitTranscript($student_id, $transcrip_id)
     {
+
         $transcript_payment =  TranscriptPayment::where('transcript_id', $transcrip_id)->first();
         if ($transcript_payment != null) {
             $transcript_payment->status = 'completed';
@@ -295,14 +297,21 @@ class TranscriptController extends Controller
         $transcriptData =  Transcript::whereId($transcrip_id)->first();
         if ($transcriptData != null) {
             $transcriptData->status = 'completed';
+            Dashboard::create([
+                'linked_to' => 'New Transcript Ordered',
+                'notes' => 'Name of Student: ' . $transcriptData['student']['fullname'],
+                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            ]);
         }
         $transcriptData->save();
+
         //store pdf link
         $storetranscript = TranscriptPdf::create([
             'student_profile_id' => $student_id,
             'transcript_id' => $transcrip_id, //save the transcript id to column
             'status' => 'completed',
         ]);
+
         $notification = [
             'message' => 'Transcript Submitted Successfully!',
             'alert-type' => 'success',

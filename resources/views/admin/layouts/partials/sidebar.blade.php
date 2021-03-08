@@ -1,8 +1,8 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar  admin-sidebar">
   <!-- Brand Logo -->
-  <a href="{{route('admin.admindashboard')}}" class="brand-link">
-    <img src="/images/wra_logo.svg" alt="wra_logo">
+
+  <img src="/images/wra_logo.svg" alt="wra_logo">
   </a>
   <!-- Sidebar Menu -->
   <nav class="mt-2">
@@ -139,7 +139,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{route('admin.logout')}}" class="nav-link">
+        <a href="{{ route('admin.logout')}}" class="nav-link">
           <i class="fas fa-sign-out-alt"></i>
           <p>
             Logout

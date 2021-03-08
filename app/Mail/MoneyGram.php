@@ -38,7 +38,6 @@ class MoneyGram extends Mailable
         $date = \Carbon\Carbon::now()->format('M d Y');
         $amount = $this->amount;
 
-        return $this->from(env('EMAIL'))
-            ->markdown('mail.moneygram-email', compact('user', 'address', 'date', 'amount'))->subject('Money Gram Payment');
+        return  $this->markdown('mail.moneygram-email', compact('user', 'address', 'date', 'amount'))->subject('Money Gram Payment');
     }
 }

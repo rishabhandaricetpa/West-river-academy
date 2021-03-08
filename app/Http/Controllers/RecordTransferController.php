@@ -47,6 +47,7 @@ class RecordTransferController extends Controller
 
             Dashboard::create([
                 'linked_to' => 'Record Transfer Request',
+                'notes' => 'Student Name : ' . $recordTransfer['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();

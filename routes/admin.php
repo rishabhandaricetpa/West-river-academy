@@ -23,24 +23,28 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth:admin'], function () {
     Route::group(
         ['namespace' => 'admin'],
         function () {
             Route::get('logout', function () {
                 Auth::guard('admin')->logout();
 
-                return redirect('/admin/login');
+                return redirect()->route('admin.login');
             })->name('admin.logout');
             Route::get('/payments-invoice', function () {
                 return view('admin/paymentsInvoice/payment');
             });
+            Route::get('dashboard', function () {
+                return view('admin.home');
+            })->name('admin.admindashboard');
         }
+
     );
 
     // Crud for parent profile
     Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');
-    Route::get('view', 'ParentController@index')->name('view.parent');
+    Route::get('view', 'ParentController@index')->name('view.parent')->middleware('auth:admin');
     Route::get('edit/{id}', 'ParentController@edit')->name('parent.edit');
     Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
     Route::get('delete/parent/{id}', 'ParentController@destroy')->name('parent.delete');

@@ -77,9 +77,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
-        Route::get('admin/dashboard', function () {
-            return view('admin.home');
-        })->name('admin.admindashboard');
+
 
         Route::get('previous-school', function () {
             return view('previous-school');
