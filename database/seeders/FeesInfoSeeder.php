@@ -30,6 +30,7 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'express_usa', 'description' => 'Express USA', 'amount' => '30'],
             ['type' => 'notarization_doc_fee', 'description' => 'Fees for Notarization Documents', 'amount' => '20'],
             ['type' => 'apostille_doc_fee', 'description' => 'Fees for Apostille Documents', 'amount' => '75'],
+            ['type' => 'custom_letter', 'description' => 'Fees for Custom Letter', 'amount' => '20'],
         ];
         FeesInfo::insert($data);
     }
