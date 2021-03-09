@@ -78,23 +78,6 @@ class CustomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // try {
-        //     $country = Country::find($id);
-        //     $country->country   =  $request->get('country');
-        //     $country->start_date  =  $request->get('start_date');
-        //     $country->end_date    =  $request->get('end_date');
-        //     $country->save();
-        //     $notification = array(
-        //         'message' => 'Record is updated Successfully!',
-        //         'alert-type' => 'success'
-        //     );
-        //     return redirect('admin/countryenrollments')->with($notification);
-        // } catch (\Exception $e) {
-        //     DB::rollBack();
-        //     if ($request->expectsJson()) {
-        //         return response()->json(['status' => 'error', 'message' => 'Failed to update Country Data']);
-        //     }
-        // }
     }
 
     /*

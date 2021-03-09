@@ -35,7 +35,21 @@ class ParentController extends Controller
     {
         return datatables(ParentProfile::with(['studentProfile', 'address'])->get())->toJson();
     }
+    public function deactive($id)
+    {
+        $parent = ParentProfile::find($id);
+        $studentProfileData = StudentProfile::find($parent)->first();
+        $parent->status = '1';
+        $parent->save();
+        $studentProfileData->status = '1';
+        $studentProfileData->save();
+        $notification = [
+            'message' => 'Parent Record is Deactivated Successfully!',
+            'alert-type' => 'warning',
+        ];
 
+        return redirect()->back()->with($notification);
+    }
     /**
      * Show the form for creating a new resource.
      *

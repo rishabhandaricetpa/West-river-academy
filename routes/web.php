@@ -35,7 +35,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', 'active_user']], function () {
         Route::get('/welcome-video', function () {
             return view('welcome-video');
         });
@@ -256,6 +256,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('orderpostage', function () {
         return view('orderPostage/purchase_postage');
     });
+    Route::get('custom-letter', 'PaymentMethod\CustomLetterController@index')->name('custom.letter');
 
     //order Notarization
 

@@ -18,7 +18,7 @@
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="custom-payment" class="table table-bordered table-striped data-table">
+                        <table id="custom-table" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
                                     <th>Sno</th>

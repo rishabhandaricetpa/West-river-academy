@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         }
 
     );
+    Route::get('deactive/{id}', 'ParentController@deactive')->name('deactive.student');
 
     // Crud for parent profile
     Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');
@@ -57,7 +58,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('edit-student/{id}', 'StudentProfileController@edit')->name('edit-student');
     Route::post('update/{id}', 'StudentProfileController@update')->name('edit-student.update');
     Route::get('delete/{id}', 'StudentProfileController@destroy')->name('delete.student');
-    Route::get('deactive/{id}', 'Auth\RegisterController@dactive')->name('deactive.student');
 
     // Crud for student enrollment period and payment
     Route::get('edit-periods/{id}', 'StudentProfileController@editPeriods')->name('edit-periods.update');

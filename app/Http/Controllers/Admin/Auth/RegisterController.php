@@ -50,21 +50,6 @@ class RegisterController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-    public function dactive($id)
-    {
-        $parent = ParentProfile::find($id);
-        $studentProfileData = StudentProfile::find($parent)->first();
-        $parent->status = '1';
-        $parent->save();
-        $studentProfileData->status = '1';
-        $studentProfileData->save();
-        $notification = [
-            'message' => 'Student Record is Deactivated Successfully!',
-            'alert-type' => 'warning',
-        ];
-
-        return redirect()->back()->with($notification);
-    }
 
     /**
      * Get a validator for an incoming registration request.
