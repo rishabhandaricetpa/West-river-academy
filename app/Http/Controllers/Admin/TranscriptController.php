@@ -60,9 +60,10 @@ class TranscriptController extends Controller
     {
         $schoolDetails = TranscriptK8::Where('transcript_id', $transcript_id)->first();
 
-        $subjectDeatils = TranscriptCourse::find($schoolDetails->id)
+        $subjectDeatils = TranscriptCourse::where('k8transcript_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->first();
+
         $subjects = Subject::whereId($subject_id)->first();
 
         return view('admin.transcript.edit_subject_grade', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id'));
@@ -71,9 +72,8 @@ class TranscriptController extends Controller
     public function genrateTranscript($id, $transcript_id)
     {
         //fetch data for the transcript pdf
-        $parentId = ParentProfile::getParentId();
-        $address = ParentProfile::where('id', $parentId)->first();
-
+        $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
+        $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
         $student = StudentProfile::find($id);
 
         $grades = TranscriptK8::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
@@ -84,7 +84,7 @@ class TranscriptController extends Controller
 
         $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $id)->get()->unique('subject_id');
 
-        $pdfname = $student->fullname.'_'.$student->d_o_b->format('M_d_Y').'_'.$transcript_id.'_'.'unsigned_transcript_letter';
+        $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'unsigned_transcript_letter';
 
         $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
 
@@ -102,7 +102,7 @@ class TranscriptController extends Controller
 
         $pdf = PDF::loadView('admin.transcript.pdf', $data);
 
-        return $pdf->download($pdfname.'.pdf');
+        return $pdf->download($pdfname . '.pdf');
     }
 
     //genrate signed transcript
@@ -111,8 +111,8 @@ class TranscriptController extends Controller
         try {
             DB::beginTransaction();
             //fetch data for the transcript pdf
-            $parentId = ParentProfile::getParentId();
-            $address = ParentProfile::where('id', $parentId)->first();
+            $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
+            $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
 
             $student = StudentProfile::find($id);
 
@@ -124,7 +124,7 @@ class TranscriptController extends Controller
 
             $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $id)->get()->unique('subject_id');
 
-            $pdfname = $student->fullname.'_'.$student->d_o_b->format('M_d_Y').'_'.$transcript_id.'_'.'signed_transcript_letter';
+            $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'signed_transcript_letter';
 
             $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
 
@@ -142,13 +142,13 @@ class TranscriptController extends Controller
 
             $pdf = PDF::loadView('admin.transcript.signed_pdf', $data);
 
-            Storage::disk('local')->put('public/pdf/'.$pdfname.'.pdf', $pdf->output());
+            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
                 ->where('status', 'completed')->first();
             if ($storetranscript != null) {
-                $storetranscript->pdf_link = $pdfname.'.pdf';
+                $storetranscript->pdf_link = $pdfname . '.pdf';
                 $storetranscript->save();
             }
 
@@ -167,7 +167,7 @@ class TranscriptController extends Controller
             }
             DB::commit();
 
-            return $pdf->download($pdfname.'.pdf');
+            return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
             DB::rollback();
             $notification = [
@@ -183,7 +183,7 @@ class TranscriptController extends Controller
     public function updateScore(Request $request, $subject_id, $transcript_id)
     {
         $schoolDetails = TranscriptK8::whereStudent_profile_id($subject_id)->orWhere('transcript_id', $transcript_id)->first();
-        $subjectDeatils = TranscriptCourse::find($schoolDetails->id)
+        $subjectDeatils = TranscriptCourse::where('k8transcript_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->update(['score' => $request['grade']]);
 

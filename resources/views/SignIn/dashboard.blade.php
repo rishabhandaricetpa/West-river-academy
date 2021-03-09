@@ -51,13 +51,13 @@
             </a>
          </div>
          <div class="col-md-3 col-sm-6 text-center">
-            <a href="#" class="d-inline-block mb-5 decoration-none">
+            <a href="{{ route('custom.letter')}}" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-clipboard rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Order a Custom Letter</h3>
             </a>
          </div>
          <div class="col-md-3 col-sm-6 text-center">
-            <a href="#" class="d-inline-block mb-5 decoration-none">
+            <a href="{{ route('reviewstudent') }}" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-sync rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Renew my Family’s Enrollment</h3>
             </a>

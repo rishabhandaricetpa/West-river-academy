@@ -78,6 +78,38 @@
       ]
     });
 
+    //fees -info table
+    $("#fees-table").DataTable({
+      "ajax": "{{ route('admin.datatable.fees') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "id",
+          "render": function(data, type, row, meta) {
+            return meta.row + 1;
+          }
+        },
+        {
+          "data": "type"
+        },
+        {
+          "data": "description"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="{{ route('admin.fees.services')}}/${id}/edit">Edit</a>`;
+          }
+        }
+      ]
+    });
+
     //student datatable
     $("#student-table").DataTable({
       "ajax": "{{ route('admin.datatable.student') }}",
@@ -221,6 +253,39 @@
         }
       ]
     });
+    $("#custom-table").DataTable({
+      "ajax": "{{ route('admin.datatable.custom') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "id",
+          "render": function(data, type, row, meta) {
+            return meta.row + 1;
+          }
+        },
+        {
+          "data": "parent_profile.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "paying_for"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
+          "data": "status"
+        },
+      ]
+    });
 
 
     $("#generate-code").on('click', function() {
@@ -309,74 +374,8 @@
 
       }
     });
-
-    //custom payments
-    $("#custom-payment").DataTable({
-      "ajax": "{{ route('admin.datatable.custom') }}",
-      "processing": true,
-      "serverSide": true,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
-          "data": "parent_profile.p1_first_name"
-        },
-        {
-          "data": "amount"
-        },
-        {
-          "data": "paying_for"
-        },
-        {
-          "data": "transcation_id"
-        },
-        {
-          "data": "payment_mode"
-        },
-        {
-          "data": "status"
-        },
-      ]
-    });
-
-    //fees -info table
-    $("#fees-table").DataTable({
-      "ajax": "{{ route('admin.datatable.fees') }}",
-      "processing": true,
-      "serverSide": true,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
-          "data": "type"
-        },
-        {
-          "data": "description"
-        },
-        {
-          "data": "amount"
-        },
-        {
-          "data": "id",
-          "render": function(id) {
-            return `<a href="{{ route('admin.fees.services')}}/${id}/edit">Edit</a>`;
-          }
-        }
-      ]
-    });
   }
+  //custom payments
 </script>
 
 
