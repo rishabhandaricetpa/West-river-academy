@@ -10,8 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $dashboardData = Dashboard::all();
-
+        $dashboardData = Dashboard::select()->orderBy('id', 'DESC')->get();
         return view('admin.dashboard-screen', compact('dashboardData'));
     }
 

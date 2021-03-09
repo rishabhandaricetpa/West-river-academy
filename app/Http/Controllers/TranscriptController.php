@@ -84,24 +84,26 @@ class TranscriptController extends Controller
      */
     public function viewStudent($id)
     {
+        //dd($id);
         $enroll_student = StudentProfile::find($id);
 
         $allEnrollmentPeriods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
-        $id = collect($allEnrollmentPeriods)->pluck('id');
+        $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
 
         $payment_info = DB::table('enrollment_periods')
-            ->whereIn('enrollment_payment_id', $id)
+            ->whereIn('enrollment_payment_id', $enrollment_ids)
             ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
             ->where('enrollment_payments.status', 'paid')
             ->get();
         if (count($payment_info) == 0) {
             return view('transcript.dashboard-notify', compact('enroll_student'));
         } else {
-            $transcriptPayment = DB::table('transcripts')->whereIn('student_profile_id', $id)
+            $transcriptPayment = DB::table('transcripts')->where('student_profile_id', $id)
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
                 ->where('transcript_payments.status', 'paid')
                 ->first();
+            // dd($transcriptPayment);
             if ($transcriptPayment) {
                 $transcriptData = $transcriptPayment->transcript_id;
                 $student = StudentProfile::find($id)->first();

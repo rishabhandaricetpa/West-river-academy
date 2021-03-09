@@ -118,7 +118,7 @@
         <div class="form-group d-sm-flex mb-2">
             <label for="county">Country</label>
             <div>
-                <input type="text" name="country" id="country" value="" class="w-100 ml-sm-3 form-control">
+                <input type="text" name="country" value="" class="w-100 ml-sm-3 form-control">
             </div>
         </div>
 
