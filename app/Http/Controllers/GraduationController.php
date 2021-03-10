@@ -11,6 +11,7 @@ use App\Models\GraduationPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use Auth;
+use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -70,7 +71,12 @@ class GraduationController extends Controller
             $graduation = Graduation::create($data);
             GraduationPayment::updateOrInsert(['graduation_id' => $graduation->id], ['amount' => $fee]);
             GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
-
+            $studentName = StudentProfile::whereId($inputs['student_id'])->first();
+            Dashboard::create([
+                'linked_to' => 'A Student has applied for the Graduation Process',
+                'notes' => 'Name of Student: ' . $studentName->fullname,
+                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            ]);
             DB::commit();
 
             if ($request->expectsJson()) {

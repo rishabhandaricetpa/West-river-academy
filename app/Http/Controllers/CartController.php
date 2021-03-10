@@ -15,6 +15,7 @@ use App\Models\TranscriptPayment;
 use App\Models\User;
 use App\Models\OrderPostage;
 use App\Models\NotarizationPayment;
+use App\Models\CustomLetterPayment;
 use App\Models\Notarization;
 use Auth;
 use Illuminate\Http\Request;
@@ -223,6 +224,26 @@ class CartController extends Controller
                         Cart::create([
                             'item_type' => 'notarization',
                             'item_id' => $notarizationDetails->id,
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
+                case 'custom_letter':
+                    $clearpendingPayments = CustomLetterPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $amount = FeesInfo::getFeeAmount('custom_letter') * $request->get('quantity');
+                    $customletterPaymentsData = CustomLetterPayment::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'amount' => $amount,
+                        'paying_for' => 'custom_letter',
+                        'type_of_payment' => 'Custom Letter',
+                        'status' => 'pending',
+                    ]);
+                    $parentId = $customletterPaymentsData->parent_profile_id;
+                    $parent_profile_id = ParentProfile::getParentId();
+                    if (!Cart::where('item_id', $parent_profile_id)->where('item_type', 'custom_letter')->exists()) {
+                        Cart::create([
+                            'item_type' => 'custom_letter',
+                            'item_id' => $parent_profile_id,
                             'parent_profile_id' => $parent_profile_id,
                         ]);
                     }

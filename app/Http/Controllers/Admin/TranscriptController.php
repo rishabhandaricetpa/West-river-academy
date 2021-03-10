@@ -34,12 +34,12 @@ class TranscriptController extends Controller
     {
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')
+            ->orWhere('transcripts.student_profile_id', $id)
             ->get();
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
         $student = StudentProfile::find($id);
-
         return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
     }
 
@@ -199,6 +199,6 @@ class TranscriptController extends Controller
 
     public function deleteSubGrades($subject_id, $transcript_id)
     {
-        dd($subject_id);
+        dd($transcript_id);
     }
 }
