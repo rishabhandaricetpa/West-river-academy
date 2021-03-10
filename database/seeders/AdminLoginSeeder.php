@@ -41,7 +41,7 @@ class AdminLoginSeeder extends Seeder
             [
                 'name' => 'Administrator',
                 'email' => 'contact@westriveracademy.com',
-                'password' => bcrypt('123123123'),
+                'password' => bcrypt('12345678'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

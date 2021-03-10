@@ -46,6 +46,7 @@ class Cart extends Model
                 $transcript_edit_data =  Self::getEditTranscriptData();
                 $postage_data = Self::getPostageData();
                 $notarization_data = Self::getNotarizationData();
+
                 return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data);
             }
         } catch (\Exception $e) {
@@ -308,8 +309,9 @@ class Cart extends Model
         return self::where('cart.parent_profile_id', ParentProfile::getParentId())
             ->where('cart.item_type', 'transcript_edit')
             ->leftJoin('transcripts', 'transcripts.id', 'cart.item_id')
-            ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.transcript_id')->where('transcript_payments.status', 'pending')
+            ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.transcript_id')
             ->leftJoin('student_profiles', 'transcripts.student_profile_id', 'student_profiles.id');
+        // dd($dd);
     }
 
     private static function getPostageQuery()
