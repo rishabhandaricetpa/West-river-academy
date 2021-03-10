@@ -61,7 +61,7 @@ class StudentController extends Controller
             $newYear = $year + 1;
             $year = Carbon::create($year)->format('Y');
             $month_start_date = Carbon::create($countryData->start_date)->format('m-d');
-            $start_date = $year.'-'.$month_start_date;
+            $start_date = $year . '-' . $month_start_date;
             $sem = Carbon::parse($start_date);
             $semestermonth = $sem->addMonths(5);
 
@@ -69,10 +69,10 @@ class StudentController extends Controller
             $country_end_date = '12-31';
             if ($year_end_date == $country_end_date) {
                 $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $end_date = $year.'-'.$month_end_date;
+                $end_date = $year . '-' . $month_end_date;
             } else {
                 $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $end_date = $newYear.'-'.$month_end_date;
+                $end_date = $newYear . '-' . $month_end_date;
             }
             DB::commit();
             if ($request->expectsJson()) {
@@ -129,7 +129,6 @@ class StudentController extends Controller
                 'student_situation' => $data['student_situation'],
                 'status' => 0,
             ]);
-
             foreach ($data->get('enrollPeriods', []) as $period) {
                 $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
                 $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
@@ -142,7 +141,7 @@ class StudentController extends Controller
                     ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
                     ->exists();
 
-                if (! $student_enrolled) {
+                if (!$student_enrolled) {
                     $student_type = 'first_student';
                 } else {
                     $student_type = 'additional_student';
@@ -156,7 +155,7 @@ class StudentController extends Controller
                     'type' => $type,
                 ]);
 
-                $fee_type = $student_type.'_'.$type;
+                $fee_type = $student_type . '_' . $type;
                 $fee = FeesInfo::getFeeAmount($fee_type);
 
                 $enrollmentPayment = EnrollmentPayment::create([
@@ -219,7 +218,7 @@ class StudentController extends Controller
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
             $periods->whereNotNull('id')->each(function ($period) use ($student) {
-                if (! EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
+                if (!EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
                     $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
@@ -252,7 +251,7 @@ class StudentController extends Controller
             ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
             ->exists();
 
-        if (! $student_enrolled) {
+        if (!$student_enrolled) {
             $student_type = 'first_student';
         } else {
             $student_type = 'additional_student';
@@ -277,7 +276,7 @@ class StudentController extends Controller
             return;
         }
 
-        $fee_type = $student_type.'_'.$type;
+        $fee_type = $student_type . '_' . $type;
         $fee = FeesInfo::getFeeAmount($fee_type);
 
         $EnrollmentPayment->fill([
