@@ -17,16 +17,16 @@ class CreateStudentProfilesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
-            $table->string('first_name');
+            $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('last_name');
-            $table->date('d_o_b')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('d_o_b')->nullable();
             $table->string('email')->nullable();
             $table->string('cell_phone')->nullable();
             $table->string('student_Id')->nullable();
             $table->string('immunized_status')->nullable();
             $table->string('student_situation')->nullable();
-            $table->boolean('status')->default('0');
+            $table->boolean('status')->default('0')->nullable();
             $table->timestamps();
         });
     }
