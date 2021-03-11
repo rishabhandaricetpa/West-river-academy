@@ -71,7 +71,7 @@
         {
           "data": "id",
           "render": function(id) {
-            return `<a href="view-student">View Students</a>`;
+            return `<a href="view-student/${id}">View Students</a>`;
           }
         },
 
@@ -131,13 +131,15 @@
           "data": "birthdate"
         },
         {
+          "data": "gender"
+        },
+        {
           "data": "email"
         },
         {
           "data": "id",
           "render": function(id) {
             return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>` +
-              `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
               `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
           }
         },
