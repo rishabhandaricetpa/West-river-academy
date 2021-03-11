@@ -52,6 +52,13 @@ class CartController extends Controller
 
             switch ($data['type']) {
                 case 'enrollment_period':
+                    if(!isset($data['eps'])){
+                        return redirect()->back()->with([
+                            'message' => 'Please select atleast one Student!',
+                            'alert-type' => 'error',
+                        ]);
+                    }
+
                     for ($i = 0; $i < count($data['eps']); $i++) {
                         $item_id = $data['eps'][$i];
                         if (!Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
