@@ -58,6 +58,10 @@ class ImportEnrollmentPeriod extends Command
                 $parent_email = Str::of($cells[11]);
                 $family_name  = Str::of($cells[12]);
                 $student_name = Str::of($cells[34]);
+                $selectedStartDate = Str::of($cells[36]);
+                $selectedEndDate = Str::of($cells[37]);
+                $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
                 $student_present = StudentProfile::where('fullname', $student_name)->first();
 
                 if ($student_present) {
@@ -66,7 +70,7 @@ class ImportEnrollmentPeriod extends Command
                         'start_date_of_enrollment' => $cells[36],
                         'end_date_of_enrollment' => $cells[37],
                         'grade_level' => $cells[38],
-                        'type' => $cells[32],
+                        'type' => $type,
                     ]);
                 }
             }
