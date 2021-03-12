@@ -2,29 +2,29 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ParentProfile;
-use App\Models\StudentProfile;
+use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Hash;
 
-class ImportEnrollmentPeriod extends Command
+class ImportEnrollmentPayments extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:enrollments';
+    protected $signature = 'import:enrollmentpayment';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import Enrollment';
+    protected $description = 'Import Enrollment Payment';
 
     /**
      * Create a new command instance.
@@ -55,21 +55,17 @@ class ImportEnrollmentPeriod extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $legacy_name = Str::of($cells[12]);
-                $selectedStartDate = \Carbon\Carbon::parse($cells[36]);
-                $selectedEndDate = \Carbon\Carbon::parse($cells[37]);
-                $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+                $order_id = Str::of($cells[13]);
 
-                $student_present = StudentProfile::where('legacy_name', $legacy_name)->first();
 
-                if ($student_present) {
-                    EnrollmentPeriods::create([
-                        'student_profile_id' => (isset($student_present)) ? $student_present->id : 0,
-                        'start_date_of_enrollment' => $cells[36],
-                        'end_date_of_enrollment' => $cells[37],
-                        'grade_level' => $cells[38],
+                $enrollment_payment = EnrollmentPeriods::where('order_id', $order_id)->first();
+
+                if ($enrollment_payment) {
+                    EnrollmentPayment::create([
+                        'enrollment_period_id' => (isset($enrollment_payment)) ? $enrollment_payment->id : 0,
+                        'amount' => $cells[24],
                         'order_id' => $cells[13],
-                        'type' => $type,
+                        'status' => $cells[22],
                     ]);
                 }
             }

@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Hash;
 
 class ImportParents extends Command
 {
@@ -56,22 +57,32 @@ class ImportParents extends Command
                 }
                 $p1_email = Str::of($cells[13]);
                 $user = User::where('email', $p1_email)->first();
-                ParentProfile::create([
-                    'user_id' => (isset($user)) ? $user->id : 0,
-                    'p1_first_name' => $cells[14],
-                    'p1_last_name' => $cells[15],
-                    'p1_email' => $cells[13],
-                    'p1_cell_phone' => $cells[4],
-                    'p1_home_phone' =>  $cells[4],
-                    'street_address' => $cells[8],
-                    'legacy' => $cells[11],
-                    'city' => $cells[5],
-                    'state' =>  $cells[7],
-                    'zip_code' =>  $cells[9],
-                    'country' => $cells[6],
-                    'reference' =>  $cells[18],
-                    'immunized' =>  $cells[10]
-                ]);
+                if (!$user->exists()) {
+                    User::create(
+                        [
+                            'name' => $cells[14],
+                            'email' => $cells[13],
+                            'password' => Hash::make('12345678'),
+                        ]
+                    );
+                } else {
+                    ParentProfile::create([
+                        'user_id' => (isset($user)) ? $user->id : null,
+                        'p1_first_name' => $cells[14],
+                        'p1_last_name' => $cells[15],
+                        'p1_email' => $cells[13],
+                        'p1_cell_phone' => $cells[4],
+                        'p1_home_phone' =>  $cells[4],
+                        'street_address' => $cells[8],
+                        'legacy' => $cells[11],
+                        'city' => $cells[5],
+                        'state' =>  $cells[7],
+                        'zip_code' =>  $cells[9],
+                        'country' => $cells[6],
+                        'reference' =>  $cells[18],
+                        'immunized' =>  $cells[10]
+                    ]);
+                }
             }
         }
 
