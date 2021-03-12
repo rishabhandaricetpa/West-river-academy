@@ -29,12 +29,11 @@ class TranscriptController extends Controller
     }
 
     //fetch all the transcript data with completed and approved and paid status
-
+    //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
-            ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')
-            ->orWhere('transcripts.student_profile_id', $id)
+            ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
             ->get();
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
