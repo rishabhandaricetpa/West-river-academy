@@ -46,7 +46,7 @@ class ParentController extends Controller
 
         $is_valid = Cart::isCartValid($this->parent_profile_id);
 
-        if (! $is_valid) {
+        if (!$is_valid) {
             $notification = [
                 'message' => 'Cart is Invalid!',
                 'alert-type' => 'error',
@@ -122,18 +122,16 @@ class ParentController extends Controller
     }
 
     //Parent accounts edit information
-    public function mysettings($id)
+    public function mysettings($user_id)
     {
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id)->first();
+        $parent = ParentProfile::where('user_id', $user_id)->first();
 
         return view('MyAccounts/myaccount', compact('parent', 'user_id'));
     }
 
-    public function editmysettings($id)
+    public function editmysettings($user_id)
     {
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id)->first();
+        $parent = ParentProfile::where('user_id', $user_id)->first();
 
         return view('MyAccounts/edit-account', compact('parent', 'user_id'));
     }
@@ -184,7 +182,7 @@ class ParentController extends Controller
         ]);
         $data = $request->all();
         $user = User::find($id);
-        if (! Hash::check($data['old_password'], $user->password)) {
+        if (!Hash::check($data['old_password'], $user->password)) {
             $notification = [
                 'message' => 'Please enter Correct Previous Password!',
                 'alert-type' => 'Error',
