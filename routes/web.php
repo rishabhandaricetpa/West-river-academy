@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('previous-school', function () {
             return view('previous-school');
         });
+
+        Route::get('notification', function () {
+            return Notification::getParentNotifications();
+        })->name('notification.get');
+
     });
 
     //Paypal Payment
