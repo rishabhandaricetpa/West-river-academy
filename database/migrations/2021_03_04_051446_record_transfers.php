@@ -28,6 +28,7 @@ class RecordTransfers extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
+            $table->string('legacy_name')->nullable();
             $table->integer('resendCount')->nullable();
             $table->string('firstRequestDate')->nullable();
             $table->string('secondRequestDate')->nullable();
