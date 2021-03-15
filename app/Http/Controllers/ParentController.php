@@ -22,7 +22,7 @@ class ParentController extends Controller
     {
         $this->middleware(function ($request, $next) {
             $Userid = Auth::user()->id;
-            $parentProfileData = User::find($Userid)->parentProfile();
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
 
             return $next($request);

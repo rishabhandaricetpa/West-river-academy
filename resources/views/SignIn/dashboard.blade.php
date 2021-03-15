@@ -109,7 +109,7 @@
       <div class="mt-2 text-right">
          <p>Download your Enrollment Confirmation Letters from the download links above.</p>
       </div>
-      <input type="submit" name="submit" id="submit" class="btn btn-primary" value="Renew Enrollment">
+      <a href="{{ route('reviewstudent') }}" class="btn btn-primary" value="Renew Enrollment">Renew Enrollment</a>
       </form>
 
    </div>
