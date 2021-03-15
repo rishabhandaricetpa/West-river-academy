@@ -61,10 +61,15 @@ class ImportPaymentForEnrollments extends Command
                     // $student->transcation_id = $cells[15];
                     // $student->payment_mode =  $cells[17];
                     // $student->update();
-                    $clearpendingPayments = EnrollmentPayment::where('order_id', $order_id)->update(
+                    $updatePayments = EnrollmentPayment::where('order_id', $order_id)->update(
                         [
                             'transcation_id' => $cells[15],
                             'payment_mode' => $cells[17],
+                        ]
+                    );
+                    $updatePaymentIdinPeriods = EnrollmentPeriods::where('order_id', $order_id)->update(
+                        [
+                            'enrollment_payment_id' => (isset($payment_order_id)) ? $payment_order_id->id : 0,
                         ]
                     );
                 } else {
