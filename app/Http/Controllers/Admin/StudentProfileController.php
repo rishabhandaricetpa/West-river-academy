@@ -26,11 +26,15 @@ class StudentProfileController extends Controller
         return datatables(StudentProfile::with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation'])->get())->toJson();
     }
 
+    public function selected($parent_profile_id)
+    {
+        return datatables(StudentProfile::where('parent_profile_id', $parent_profile_id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation'])->get())->toJson();
+    }
     public function studentInformation($id)
     {
-        $student = StudentProfile::where('parent_profile_id', $id)->get();
+        $students = StudentProfile::where('parent_profile_id', $id)->get();
 
-        return view('admin.familyInformation.view-student', compact('student'));
+        return view('admin.familyInformation.student', compact('students'));
     }
 
     /**

@@ -33,7 +33,7 @@ class MoneyGram extends Mailable
     public function build()
     {
         $id = $this->user->id;
-        $user = User::find($id)->first();
+        $user = User::find($id);
         $address = User::find($id)->parentProfile()->first();
         $date = \Carbon\Carbon::now()->format('M d Y');
         $amount = $this->amount;

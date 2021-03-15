@@ -33,7 +33,7 @@ class TranscriptEmail extends Mailable
     {
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         $id = $this->user->id;
-        $user = User::find($id)->first();
+        $user = User::find($id);
 
         return $this->markdown('mail.transcriptMail', compact('date'))->subject('Transcript K-8');
     }

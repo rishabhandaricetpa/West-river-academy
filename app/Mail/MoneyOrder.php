@@ -33,7 +33,7 @@ class MoneyOrder extends Mailable
     public function build()
     {
         $id = $this->user->id;
-        $user = User::find($id)->first();
+        $user = User::find($id);
         $email = $user->email;
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         $address = User::find($id)->parentProfile()->first();
