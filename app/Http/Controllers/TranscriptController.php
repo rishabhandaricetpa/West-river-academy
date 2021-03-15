@@ -242,7 +242,7 @@ class TranscriptController extends Controller
         $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
             ->get();
-        $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->where('status', 'paid')->first();
+        $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('paid')->orWhere('status', 'paid')->first();
         $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
         return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
     }
@@ -267,7 +267,8 @@ class TranscriptController extends Controller
                 $id = Auth::user()->id;
                 $user = User::find($id);
                 $email = Auth::user()->email;
-                Mail::to($email)->send(new TranscriptEmail($user));
+
+                // Mail::to($email)->send(new TranscriptEmail($user));
 
                 $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
                 $transcript_fee = FeesInfo::getFeeAmount('transcript');

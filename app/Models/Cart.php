@@ -33,10 +33,12 @@ class Cart extends Model
                 $transcript_edit_total = Self::getEditTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
                 $postage_total = Self::getPostageQuery()->select(DB::raw('sum(order_postages.amount) as amount'))->first();
                 $notarization_total = Self::getNotarizationQuery()->select(DB::raw('sum(notarization_payments.amount) as amount'))->first();
+                $custom_letter_total = Self::getCustomLetterQuery()->select(DB::raw('sum(custom_letter_payments.amount) as amount'))->first();
+
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
-                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount + $notarization_total->amount;
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount + $notarization_total->amount + $custom_letter_total->amount;
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();
@@ -46,12 +48,12 @@ class Cart extends Model
                 $transcript_edit_data =  Self::getEditTranscriptData();
                 $postage_data = Self::getPostageData();
                 $notarization_data = Self::getNotarizationData();
+                $custom_letter_data = Self::getcustomLetterData();
 
-                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data);
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data);
             }
         } catch (\Exception $e) {
             dd($e);
-
             return [];
         }
     }
@@ -117,7 +119,7 @@ class Cart extends Model
         return $cart_valid;
     }
 
-    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data)
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data)
     {
         $data = [];
 
@@ -266,6 +268,26 @@ class Cart extends Model
                 ];
             }
         }
+        foreach ($custom_letter_data as $key => $val) {
+            $type = 'Custom Letter Payment';
+
+            $arr = [
+                'id' => $val['id'],
+                'type' => $type,
+                'amount' => $val['amount'],
+            ];
+            if (array_key_exists($val['parent_db_id'], $data)) {
+                array_push(
+                    $data[$val['parent_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$val['parent_db_id']] = [
+                    'name' => ucfirst($val['p1_first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
         return $data;
     }
 
@@ -328,6 +350,13 @@ class Cart extends Model
             ->leftJoin('notarizations', 'notarizations.parent_profile_id', 'cart.item_id')
             ->leftJoin('notarization_payments', 'cart.item_id', 'notarization_payments.notarization_id')->where('notarization_payments.status', 'pending')
             ->leftJoin('parent_profiles', 'notarizations.parent_profile_id', 'parent_profiles.id');
+    }
+    private static function getCustomLetterQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+            ->where('cart.item_type', 'custom_letter')
+            ->leftJoin('custom_letter_payments', 'cart.item_id', 'custom_letter_payments.parent_profile_id')->where('custom_letter_payments.status', 'pending')
+            ->leftJoin('parent_profiles', 'custom_letter_payments.parent_profile_id', 'parent_profiles.id');
     }
 
     private static function getEnrollData()
@@ -436,11 +465,23 @@ class Cart extends Model
             ->groupBy('notarization_payments.amount')
             ->get();
     }
-
+    private static function getcustomLetterData()
+    {
+        return self::getCustomLetterQuery()->select(
+            'parent_profiles.p1_first_name',
+            'parent_profiles.id as parent_db_id',
+            'cart.id',
+            'custom_letter_payments.amount',
+        )
+            ->groupBy('parent_profiles.id')
+            ->groupBy('cart.id')
+            ->groupBy('custom_letter_payments.amount')
+            ->get();
+    }
     public static function emptyCartAfterPayment($type, $status, $payment_id = null)
     {
         $parent_profile_id = ParentProfile::getParentId();
-
+        $parentName = ParentProfile::whereId($parent_profile_id)->first();
         $cartItems = self::select()->where('parent_profile_id', $parent_profile_id)->get();
 
         foreach ($cartItems as $cart) {
@@ -492,6 +533,11 @@ class Cart extends Model
                         $custom_payment->status = 'paid';
                     }
                     $custom_payment->save();
+                    Dashboard::create([
+                        'linked_to' => 'Custom Payment is done by user',
+                        'notes' => 'Custom Payment is done by ' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
                     break;
 
                 case 'transcript_edit':
@@ -506,6 +552,11 @@ class Cart extends Model
                     $transcript = Transcript::whereId($cart->item_id)->first();
                     $transcript->status = 'canEdit';
                     $transcript->save();
+                    Dashboard::create([
+                        'linked_to' => 'Transcript Edit Request is made by user',
+                        'notes' => 'Transcript Edit' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
 
                     break;
                 case 'postage':
@@ -516,6 +567,11 @@ class Cart extends Model
                         $postage_payment->status = 'paid';
                     }
                     $postage_payment->save();
+                    Dashboard::create([
+                        'linked_to' => 'Postage payment made by user',
+                        'notes' => 'Postage is Ordered by ' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
                     break;
                 case 'notarization':
                     $notarization_payment =  NotarizationPayment::where('notarization_id', $cart->item_id)->first();
@@ -529,7 +585,26 @@ class Cart extends Model
                     $notarization = Notarization::whereId($cart->item_id)->first();
                     $notarization->status = 'paid';
                     $notarization->save();
+                    Dashboard::create([
+                        'linked_to' => 'Notarization and appostile  payment made by user',
+                        'notes' => 'Notarization and appostile is Ordered by ' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
 
+                    break;
+                case 'custom_letter':
+                    $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->first();
+                    $customletter_payment->payment_mode = $type;
+                    if ($payment_id != null) {
+                        $customletter_payment->transcation_id = $payment_id;
+                        $customletter_payment->status = 'paid';
+                    }
+                    $customletter_payment->save();
+                    Dashboard::create([
+                        'linked_to' => 'Custom Letter is Ordered',
+                        'notes' => 'Custom Letter is Ordered by ' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
                     break;
                 default:
                     break;

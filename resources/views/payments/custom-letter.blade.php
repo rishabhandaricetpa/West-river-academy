@@ -8,14 +8,14 @@
             @csrf
             <div class="form-group d-sm-flex mb-2">
                 <div>
-                    <input type="hidden" name="type" id="custom_letter_fee" value="{{$custom_letter_fee}}" class="w-100" step="0.01">
+                    <input type="hidden" name="amount" value="{{$custom_letter_fee}}" class="w-100" step="0.01">
                     <input type="hidden" name="type" id="custom_letter" value="custom_letter" class="w-100" step="0.01">
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
                 <label for="exampleInputPassword1">Quantity Needed?</label>
                 <div>
-                    <input type="text" name="paying_for" class="form-control" required>
+                    <input type="number" name="quantity" class="form-control" required>
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
