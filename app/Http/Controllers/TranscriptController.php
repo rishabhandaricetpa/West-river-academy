@@ -84,9 +84,8 @@ class TranscriptController extends Controller
      */
     public function viewStudent($id)
     {
-        //dd($id);
-        $enroll_student = StudentProfile::find($id);
 
+        $enroll_student = StudentProfile::find($id);
         $allEnrollmentPeriods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
         $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
@@ -103,13 +102,13 @@ class TranscriptController extends Controller
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
                 ->where('transcript_payments.status', 'paid')
                 ->first();
-            // dd($transcriptPayment);
+
             if ($transcriptPayment) {
                 $transcriptData = $transcriptPayment->transcript_id;
-                $student = StudentProfile::find($id)->first();
-
+                $student = StudentProfile::find($id);
                 return view('transcript.dashboard-transcript', compact('student', 'transcriptPayment', 'transcriptData'));
             } else {
+                //dd($enroll_student);
                 return view('transcript.transcript-wizard', compact('enroll_student'));
             }
         }
@@ -266,7 +265,7 @@ class TranscriptController extends Controller
                 TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
                 $transcript_id = $transcriptData->id;
                 $id = Auth::user()->id;
-                $user = User::find($id)->first();
+                $user = User::find($id);
                 $email = Auth::user()->email;
                 Mail::to($email)->send(new TranscriptEmail($user));
 

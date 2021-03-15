@@ -20,6 +20,7 @@ class CreateEnrollmentPaymentsTable extends Migration
             $table->string('amount');
             $table->enum('status', ['pending', 'paid', 'active']);
             $table->string('transcation_id')->nullable();
+            $table->integer('order_id')->nullable();
             $table->string('payment_mode')->nullable();
             $table->timestamps();
         });

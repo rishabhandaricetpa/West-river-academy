@@ -106,7 +106,7 @@ class ParentController extends Controller
     {
         try {
             DB::beginTransaction();
-            $userdata = User::find($id)->first();
+            $userdata = User::find($id);
             $userdata->name = $request->get('p1_first_name');
             // $userdata->email = $request->get('p1_email');
             $userdata->save();
