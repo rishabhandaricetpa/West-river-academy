@@ -38,12 +38,14 @@ class PDFController extends Controller
 
             //store pdf link
             Document::create([
+                'parent_profile_id' => $parentProfileData->id,
                 'student_profile_id' => $id,
                 'pdf_link' => $pdfname . '.pdf',
                 'status' => 'completed',
             ]);
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
+            dd($e);
             $notification = [
                 'message' => 'Failed!',
                 'alert-type' => 'error',

@@ -7,51 +7,49 @@
   <div class="container-fluid position-relative">
     <h1>Edit Student Information</h1>
     <div class="form-wrap border py-5 px-25 position-relative">
-      <form method="post" action="{{route('admin.edit-student.update',$student->id)}}">
+      <form method="post" class="row" action="{{route('admin.edit-student.update',$student->id)}}">
         @csrf
-        <div class="card-body p-0 row">
-          <div class="form-group col-sm-6">
-            <label>First/Given Name <sup>*</sup></label>
-            <input class="form-control" id="first_name" value="{{$student->first_name}}" name="first_name">
-          </div>
+        <div class="form-group col-sm-6">
+          <label>First/Given Name <sup>*</sup></label>
+          <input class="form-control" id="first_name" value="{{$student->first_name}}" name="first_name">
+        </div>
 
-          <div class="form-group col-sm-6">
-            <label>Middle Name</label>
-            <input class="form-control" id="middle_name" name="middle_name" value="{{$student->middle_name}}">
-          </div>
-          <div class="form-group col-sm-6">
-            <label>Last/Family Name <sup>*</sup></label>
-            <input class="form-control" id="last_name" name="last_name" value="{{$student->last_name}}">
-          </div>
-          <div class="form-group col-sm-6">
-            <label>Date of Birth<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
-            <input class="form-control datepicker" id="dob" name="dob" value="{{$student->d_o_b->format('M d Y')}}" required>
-          </div>
-          <div class="form-group col-sm-6">
-            <label>Email Address</label>
-            <input class="form-control" name="email" id="email" value="{{$student->email}}">
-          </div>
-          <div class="form-group col-sm-6">
-            <label>Cell Phone<sup>*</sup></label>
-            <input class="form-control" id="cell_phone" name="cell_phone" value="{{$student->cell_phone}}">
-          </div>
-          <div class="form-group col-sm-6">
-            <label>Student ID<sup>*</sup></label>
-            <input class="form-control" id="student_id" name="student_id" value="{{$student->student_Id}}">
-          </div>
-          <div class="form-group col-sm-6">
-            <label>Student ID<sup>*</sup></label>
-            <select class="form-control" name="immunized_status" value="{{$student->immunized_status}}">
-              <option>Yes, records will come with school records.</option>
-              <option>Yes, I will provide records.</option>
-              <option>Yes, I plan to get immunizations soon.</option>
-              <option>No, for personal reasons.</option>
-              <option>No, for medical reasons.</option>
-              <option>No, for religious reasons.</option>
-            </select>
-          </div>
-          <div>
-          </div>
+        <div class="form-group col-sm-6">
+          <label>Middle Name</label>
+          <input class="form-control" id="middle_name" name="middle_name" value="{{$student->middle_name}}">
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Last/Family Name <sup>*</sup></label>
+          <input class="form-control" id="last_name" name="last_name" value="{{$student->last_name}}">
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Date of Birth<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
+          <input class="form-control datepicker" id="dob" name="dob" value="{{$student->d_o_b->format('M d Y')}}" required>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Email Address</label>
+          <input class="form-control" name="email" id="email" value="{{$student->email}}">
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Cell Phone<sup>*</sup></label>
+          <input class="form-control" id="cell_phone" name="cell_phone" value="{{$student->cell_phone}}">
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Student ID<sup>*</sup></label>
+          <input class="form-control" id="student_id" name="student_id" value="{{$student->student_Id}}">
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Immunized Status<sup>*</sup></label>
+          <select class="form-control" name="immunized_status" value="{{$student->immunized_status}}">
+            <option>Yes, records will come with school records.</option>
+            <option>Yes, I will provide records.</option>
+            <option>Yes, I plan to get immunizations soon.</option>
+            <option>No, for personal reasons.</option>
+            <option>No, for medical reasons.</option>
+            <option>No, for religious reasons.</option>
+          </select>
+        </div>
+        <div>
         </div>
         <label>Enrollment Period <sup>*</sup></label>
         @foreach($enrollment_periods as $enrollment_period)
@@ -126,16 +124,13 @@
         @endforeach
         <!-- /.card-body -->
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-primary">Upload Confirmation Letter</button>
     </div>
+  </div>
 
-    </form>
+  </form>
   </div>
   </div>
-  <!-- /.card -->
 
-  <!-- /.card-body -->
-  </div><!-- /.container-fluid -->
 </section>
 
 @endsection

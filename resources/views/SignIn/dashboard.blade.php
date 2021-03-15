@@ -96,7 +96,11 @@
                   <td>{{$item->last_name}}</td>
                   <td>{{$item->student_Id}}</td>
                   <td>Active</td>
+                  @if($item->payment_status === 'paid')
                   <td><a href="{{ route('view.confirm',$item->id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
+                  @else
+                  <td>Please pay your Enrollment Fees</td>
+                  @endif
                </tr>
                @endforeach
             </tbody>

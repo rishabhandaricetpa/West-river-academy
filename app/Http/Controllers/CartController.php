@@ -52,6 +52,13 @@ class CartController extends Controller
 
             switch ($data['type']) {
                 case 'enrollment_period':
+                    if (!isset($data['eps'])) {
+                        return redirect()->back()->with([
+                            'message' => 'Please select atleast one Student!',
+                            'alert-type' => 'error',
+                        ]);
+                    }
+
                     for ($i = 0; $i < count($data['eps']); $i++) {
                         $item_id = $data['eps'][$i];
                         if (!Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
@@ -184,6 +191,12 @@ class CartController extends Controller
                     }
                     break;
                 case 'notarization':
+                    if (!isset($data['documents'])) {
+                        return redirect()->back()->with([
+                            'message' => 'Please select atleast one Document for Notarization and Appostille!',
+                            'alert-type' => 'error',
+                        ]);
+                    }
                     $clearpendingPayments = NotarizationPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
                     $parent_profile_id = ParentProfile::getParentId();
                     $doctotal = count(collect($request)->get('documents'));

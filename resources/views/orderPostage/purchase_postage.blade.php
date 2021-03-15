@@ -33,11 +33,11 @@
                             <td>${{ getFeeDetails('express_international') }}</td>
                         </tr>
                         <tr>
-                            <td><input class="form-check-input" type="Radio" name="payment_for" value="express_international">
+                            <td><input class="form-check-input" type="Radio" name="payment_for" value="united_postal_service">
                                 <h3 class="mb-0 mt-1">United Postal Service (UPS)</h3>
                                 <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
                             </td>
-                            <td>${{ getFeeDetails('express_international') }}</td>
+                            <td>${{ getFeeDetails('united_postal_service') }}</td>
                         </tr>
                         <tr>
                             <td><input class="form-check-input" type="Radio" name="payment_for" value="global_guaranteed_international">
@@ -59,10 +59,10 @@
                             <td>${{ getFeeDetails('express_usa') }}</td>
                         </tr>
                         <tr>
-                            <td><input class="form-check-input" type="Radio" name="payment_for" value="express_international">
+                            <td><input class="form-check-input" type="Radio" name="payment_for" value="usa_domestic_prioirity_mail">
                                 <h3 class="mb-0 mt-1">USA Domestic First Class Mail</h3>
                             </td>
-                            <td>${{ getFeeDetails('express_international') }}</td>
+                            <td>${{ getFeeDetails('usa_domestic_prioirity_mail') }}</td>
                         </tr>
                     </tbody>
                 </table>

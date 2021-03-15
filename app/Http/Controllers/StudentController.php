@@ -57,32 +57,38 @@ class StudentController extends Controller
             $parentProfileData = User::find($id)->parentProfile()->first();
             $country = $parentProfileData->country;
             $countryData = Country::where('country', $country)->first();
-            $year = date('Y');
-            $newYear = $year + 1;
-            $year = Carbon::create($year)->format('Y');
-            $month_start_date = Carbon::create($countryData->start_date)->format('m-d');
-            $start_date = $year.'-'.$month_start_date;
-            $sem = Carbon::parse($start_date);
-            $semestermonth = $sem->addMonths(5);
+            if ($countryData != null) {
+                $year = date('Y');
+                $newYear = $year + 1;
+                $year = Carbon::create($year)->format('Y');
+                $month_start_date = Carbon::create($countryData->start_date)->format('m-d');
+                $start_date = $year . '-' . $month_start_date;
+                $sem = Carbon::parse($start_date);
+                $semestermonth = $sem->addMonths(5);
 
-            $year_end_date = Carbon::create($countryData->end_date)->format('m-d');
-            $country_end_date = '12-31';
-            if ($year_end_date == $country_end_date) {
-                $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $end_date = $year.'-'.$month_end_date;
+                $year_end_date = Carbon::create($countryData->end_date)->format('m-d');
+                $country_end_date = '12-31';
+                if ($year_end_date == $country_end_date) {
+                    $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
+                    $end_date = $year . '-' . $month_end_date;
+                } else {
+                    $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
+                    $end_date = $newYear . '-' . $month_end_date;
+                }
+                DB::commit();
+                if ($request->expectsJson()) {
+                    return response()->json($start_date);
+                }
+                return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
             } else {
-                $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $end_date = $newYear.'-'.$month_end_date;
+                $start_date = Carbon::now()->format('Y-m-d');
+                $end_date = Carbon::now()->addYears(1)->format('Y-m-d');
+                $sem = Carbon::parse($start_date);
+                $semestermonth = $sem->addMonths(5);
+                return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
             }
-            DB::commit();
-            if ($request->expectsJson()) {
-                return response()->json($start_date);
-            }
-
-            return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
         } catch (\Exception $e) {
             DB::rollBack();
-
             return response()->json(['status' => 'error', 'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
         }
     }
@@ -129,7 +135,6 @@ class StudentController extends Controller
                 'student_situation' => $data['student_situation'],
                 'status' => 0,
             ]);
-
             foreach ($data->get('enrollPeriods', []) as $period) {
                 $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
                 $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
@@ -142,7 +147,7 @@ class StudentController extends Controller
                     ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
                     ->exists();
 
-                if (! $student_enrolled) {
+                if (!$student_enrolled) {
                     $student_type = 'first_student';
                 } else {
                     $student_type = 'additional_student';
@@ -156,7 +161,7 @@ class StudentController extends Controller
                     'type' => $type,
                 ]);
 
-                $fee_type = $student_type.'_'.$type;
+                $fee_type = $student_type . '_' . $type;
                 $fee = FeesInfo::getFeeAmount($fee_type);
 
                 $enrollmentPayment = EnrollmentPayment::create([
@@ -219,7 +224,7 @@ class StudentController extends Controller
                 $this->updateEnrollPeriod($period, $student, $enrollPeriod);
             });
             $periods->whereNotNull('id')->each(function ($period) use ($student) {
-                if (! EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
+                if (!EnrollmentPayment::where('enrollment_period_id', $period['id'])->where('status', 'paid')->exists()) {
                     $enrollPeriod = EnrollmentPeriods::find($period['id']);
                     $this->updateEnrollPeriod($period, $student, $enrollPeriod);
                 }
@@ -252,7 +257,7 @@ class StudentController extends Controller
             ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
             ->exists();
 
-        if (! $student_enrolled) {
+        if (!$student_enrolled) {
             $student_type = 'first_student';
         } else {
             $student_type = 'additional_student';
@@ -277,7 +282,7 @@ class StudentController extends Controller
             return;
         }
 
-        $fee_type = $student_type.'_'.$type;
+        $fee_type = $student_type . '_' . $type;
         $fee = FeesInfo::getFeeAmount($fee_type);
 
         $EnrollmentPayment->fill([
@@ -297,18 +302,33 @@ class StudentController extends Controller
         $parentProfileData = User::find(auth()->user()->id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
-        $start_date = $countryData->start_date;
-        $sem = Carbon::parse($start_date);
-        $semestermonth = $sem->addMonths(5);
-        $countryId = $countryData->id;
-        $studentData = StudentProfile::find($id);
-        $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
-            ->leftJoin('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
-            ->select('enrollment_periods.*', 'enrollment_payments.status')
-            ->orderBy('enrollment_payments.status', 'desc')
-            ->get();
+        if ($countryData != null) {
+            $start_date = $countryData->start_date;
+            $sem = Carbon::parse($start_date);
+            $semestermonth = $sem->addMonths(5);
+            $countryId = $countryData->id;
+            $studentData = StudentProfile::find($id);
+            $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
+                ->leftJoin('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+                ->select('enrollment_periods.*', 'enrollment_payments.status')
+                ->orderBy('enrollment_payments.status', 'desc')
+                ->get();
 
-        return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+        } else {
+            $countryData = Country::where('country', 'other')->first();
+            $start_date = $countryData->start_date;
+            $sem = Carbon::parse($start_date);
+            $semestermonth = $sem->addMonths(5);
+            $studentData = StudentProfile::find($id);
+            $enrollPeriods = EnrollmentPeriods::where('student_profile_id', $id)
+                ->leftJoin('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+                ->select('enrollment_periods.*', 'enrollment_payments.status')
+                ->orderBy('enrollment_payments.status', 'desc')
+                ->get();
+
+            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+        }
     }
 
     private function getFinalAmount()

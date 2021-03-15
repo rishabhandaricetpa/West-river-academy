@@ -10,6 +10,6 @@ class Document extends Model
     use HasFactory;
     protected $table = 'documents';
     protected $fillable = [
-        'student_profile_id', 'pdf_link', 'status',
+        'parent_profile_id', 'student_profile_id', 'pdf_link', 'status',
     ];
 }

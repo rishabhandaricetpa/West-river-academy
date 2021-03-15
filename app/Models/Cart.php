@@ -494,7 +494,16 @@ class Cart extends Model
                         $enrollemtpayment->transcation_id = $payment_id;
                     }
                     $enrollemtpayment->save();
+                    $studentdata = EnrollmentPeriods::select('student_profile_id')->where('id', $cart->item_id)->first();
+                    $student = StudentProfile::whereId($studentdata->student_profile_id)->first();
+                    $student->payment_status = 'paid';
+                    $student->save();
 
+                    Dashboard::create([
+                        'linked_to' => 'New Student Record is created',
+                        'notes' => 'New Student Record is created for parent  ' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
                     break;
 
                 case 'graduation':
