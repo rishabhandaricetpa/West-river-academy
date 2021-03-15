@@ -20,7 +20,7 @@ class PaymentController extends Controller
 
     public function edit($id)
     {
-        $student = StudentProfile::find($id)->first();
+        $student = StudentProfile::find($id);
         $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
         $payment_info = DB::table('enrollment_periods')

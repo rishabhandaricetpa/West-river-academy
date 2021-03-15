@@ -34,7 +34,7 @@ class BankTranferEmail extends Mailable
     {
         $date = \Carbon\Carbon::now()->format('M d Y');
         $id = $this->user->id;
-        $user = User::find($id)->first();
+        $user = User::find($id);
         $address = User::find($id)->parentProfile()->first();
         $amount = $this->amount;
 
