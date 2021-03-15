@@ -75,3 +75,5 @@ package-lock.json
 # Manually publish package assets
 /public/vendor
 /public/js
+
+csv

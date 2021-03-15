@@ -30,7 +30,7 @@ class BankTranferController extends Controller
     public function index($amount)
     {
         $id = Auth::user()->id;
-        $user = User::find($id)->first();
+        $user = User::find($id);
         $email = Auth::user()->email;
 
         $address = User::find($id)->parentProfile()->first();

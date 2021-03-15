@@ -22,7 +22,7 @@ class ParentController extends Controller
     {
         $this->middleware(function ($request, $next) {
             $Userid = Auth::user()->id;
-            $parentProfileData = User::find($Userid)->parentProfile()->first();
+            $parentProfileData = User::find($Userid)->parentProfile();
             $this->parent_profile_id = $parentProfileData->id;
 
             return $next($request);
@@ -94,7 +94,7 @@ class ParentController extends Controller
                     'email' => $request['email'],
                 ]
             );
-            $parentaddress = ParentProfile::find($Userid)->first();
+            $parentaddress = ParentProfile::find($Userid);
             $parentaddress->fill([
                 'street_address' => $billing_data['street_address'],
                 'city' => $billing_data['city'],
@@ -141,7 +141,7 @@ class ParentController extends Controller
         try {
             DB::beginTransaction();
             $user_id = Auth::user()->id;
-            $userdata = User::find($user_id)->first();
+            $userdata = User::find($user_id);
             $userdata->name = $request->get('first_name');
             $userdata->email = $request->get('email');
             // $Userdata->email_verified_at='';
@@ -149,7 +149,7 @@ class ParentController extends Controller
 
             $user = User::find($id)->parentProfile()->first();
             $parent_id = $user->id;
-            $parent = ParentProfile::find($parent_id)->first();
+            $parent = ParentProfile::find($parent_id);
             $parent->p1_first_name = $request->get('first_name');
             $parent->p1_last_name = $request->get('last_name');
             $parent->p1_email = $request->get('email');

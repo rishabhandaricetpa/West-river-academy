@@ -10,7 +10,7 @@ class EnrollmentPayment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'enrollment_period_id', 'amount', 'status',
+        'enrollment_period_id', 'amount', 'status', 'order_id'
     ];
 
     public function enrollment_period()
