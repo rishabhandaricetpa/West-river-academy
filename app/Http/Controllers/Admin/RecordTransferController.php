@@ -22,7 +22,6 @@ class RecordTransferController extends Controller
     public function viewStudentRecord($id)
     {
         $studentRecord = RecordTransfer::where('student_profile_id', $id)->first();
-
         return view('admin.recordTransfer.viewStudentRecord', compact('studentRecord'));
     }
 

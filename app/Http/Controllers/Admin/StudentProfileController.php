@@ -8,6 +8,8 @@ use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use DB;
 use Illuminate\Http\Request;
+use PDF;
+use Storage;
 
 class StudentProfileController extends Controller
 {
@@ -151,6 +153,36 @@ class StudentProfileController extends Controller
         } catch (\Exception $e) {
             $notification = [
                 'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+    }
+    public function generateConfirmation($student_id)
+    {
+        try {
+            $parent_id = StudentProfile::select('parent_profile_id')->whereId($student_id)->first();
+            $studentProfileData = StudentProfile::whereId($student_id)->first();
+
+            $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
+            $enrollment_periods = StudentProfile::where('parent_profile_id', $parent_id->parent_profile_id)
+                ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')->where('confirmation_letters.status', 'paid')
+                ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                ->with('enrollmentPeriods')->get();
+            $data = [
+                'student' => $studentProfileData,
+                'enrollment' => $enrollment_periods,
+                'title' => 'Confirmation of Enrollment',
+                'date' => date('m/d/Y'),
+            ];
+            $pdf = PDF::loadView('confirmationLetter', $data);
+            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
+            return $pdf->download($pdfname . '.pdf');
+        } catch (\Exception $e) {
+            dd($e);
+            $notification = [
+                'message' => 'Failed!',
                 'alert-type' => 'error',
             ];
 

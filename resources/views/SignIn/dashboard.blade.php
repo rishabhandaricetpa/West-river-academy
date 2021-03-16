@@ -83,22 +83,20 @@
             <thead>
                <tr>
                   <th>Student First Name</th>
-                  <th>Last Name</th>
                   <th>Student Id</th>
                   <th>Status</th>
-                  <th></th>
+                  <th>Download</th>
                </tr>
             </thead>
             <tbody>
-               @foreach($student as $item)
+               @foreach($confirmLetter as $student)
                <tr>
-                  <td>{{$item->first_name}}</td>
-                  <td>{{$item->last_name}}</td>
-                  <td>{{$item->student_Id}}</td>
+                  <td>{{$student->fullname}}</td>
+                  <td>{{$student->student_Id}}</td>
                   <td>Active</td>
-                  @if($item->payment_status === 'paid')
-                  <td><a href="{{ route('view.confirm',$item->id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
-                  @else
+                  @if(($student->status === 'completed') || ($student->status === 'paid'))
+                  <td><a href="{{ route('view.confirm',$student->student_profile_id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
+                  @elseif($student->status === 'pending')
                   <td>Please pay your Enrollment Fees</td>
                   @endif
                </tr>
@@ -109,7 +107,7 @@
       <div class="mt-2 text-right">
          <p>Download your Enrollment Confirmation Letters from the download links above.</p>
       </div>
-      <input type="submit" name="submit" id="submit" class="btn btn-primary" value="Renew Enrollment">
+      <a href="{{ route('reviewstudent') }}" class="btn btn-primary" value="Renew Enrollment">Renew Enrollment</a>
       </form>
 
    </div>
