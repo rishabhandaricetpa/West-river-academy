@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Billing Information')
 @section('content')
 
 <main class="position-relative container form-content mt-4">
@@ -19,7 +19,7 @@
          <div class="form-group d-sm-flex mb-2">
             <label for="">City</label>
             <div>
-          <p>{{$moneyGram->city}}</p>
+               <p>{{$moneyGram->city}}</p>
             </div>
          </div>
          <div class="form-group d-sm-flex mb-2">
@@ -34,7 +34,7 @@
             <label for="">ID</label>
             <div>{{$moneyGram->money_gram_id}}</div>
          </div>
-    <p>Please email us the reference number, remitter and amount after you have made the payment.</p>
+         <p>Please email us the reference number, remitter and amount after you have made the payment.</p>
       </form>
    </div>
    <div class="form-wrap border bg-light py-2r px-25 mt-2r">

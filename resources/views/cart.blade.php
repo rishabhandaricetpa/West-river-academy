@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Cart')
 @section('content')
 <main class="position-relative container form-content mt-4">
   <h1 class="text-center text-white text-uppercase">cart</h1>
