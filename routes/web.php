@@ -73,7 +73,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
-        Route::get('generate-pdf/{id}', 'PDFController@generatePDF')->name('genrate.confirmition');
+        Route::get('generate-pdf/{student_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
 
         Route::get('previous-school', function () {
@@ -129,7 +129,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('reset.password');
     Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
-    Route::get('/viewConfirmation/{id}', 'StudentController@confirmationpage')->name('view.confirm');
+    Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
 
     //fees and services
     Route::get('fees', 'FeeStructureController@viewdata')->name('fees');

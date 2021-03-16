@@ -13,7 +13,7 @@ class EditCourse extends Controller
 {
     public function editEnglish($student_id, $transcript_id)
     {
-        $course = Course::select('id', )
+        $course = Course::select('id',)
             ->where('course_name', 'English / Language Arts')
             ->first();
         $englishCourse = Subject::where('courses_id', $course->id)
@@ -23,7 +23,6 @@ class EditCourse extends Controller
         $courses_id = $course->id;
 
         $transcripts = TranscriptCourse::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('k8transcript_id', $transcript_id)->get();
-        // dd($transcripts);
         return view('editCourses.english-course', compact('englishCourse', 'transcripts', 'student_id', 'transcript_id', 'courses_id'));
     }
 
