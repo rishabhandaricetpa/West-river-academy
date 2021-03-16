@@ -220,6 +220,7 @@ input[type=radio] {
   height: 16px;
   border-width: 1px;
   top: -3px;
+  position: relative;
 }
 
 input[type=checkbox] {
@@ -247,12 +248,11 @@ input[type=checkbox]:checked:before,
 input[type=radio]:checked:before {
   position: absolute;
   top: 2px;
-  left: -4;
+  left: 2px;
 }
 
 input[type=checkbox]:checked:before {
   content: "\F00C";
-  width: 24px;
   margin: 0;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;

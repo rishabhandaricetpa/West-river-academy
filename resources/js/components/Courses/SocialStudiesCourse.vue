@@ -38,7 +38,7 @@
                 href="#chooseGrades"
                 data-toggle="modal"
                 class="btn btn-primary"
-                >Help me decide</a
+                >Help me Decide</a
               >
               <div class="row pl-sm-5">
                 <div

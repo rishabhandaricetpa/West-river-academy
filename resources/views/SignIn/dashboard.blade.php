@@ -69,7 +69,7 @@
             </a>
          </div>
          <div class="col-sm-12">
-            <p>Needs Help? Check out our <a href="#">Dashboard Tuorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me decide</a></p>
+            <p>Needs Help? Check out our <a href="#">Dashboard Tuorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
          </div>
       </div>
    </div>
@@ -106,7 +106,7 @@
             </tbody>
          </table>
       </div>
-      <div class="mt-2 text-right">
+      <div class="mt-2 text-md-right">
          <p>Download your Enrollment Confirmation Letters from the download links above.</p>
       </div>
       <input type="submit" name="submit" id="submit" class="btn btn-primary" value="Renew Enrollment">
@@ -148,7 +148,7 @@
             </tbody>
          </table>
       </div>
-      <div class="mt-2 text-right">
+      <div class="mt-2 text-md-right">
          <p>Download your Enrollment Confirmation Letters from the download links above.</p>
       </div>
       <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>

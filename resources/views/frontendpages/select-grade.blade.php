@@ -54,7 +54,7 @@
             <div class="form-check d-sm-flex mb-2">
                <input class="form-check-input" type="radio" name="student_grade"  value="8">
                <label class="form-check-label" for="">
-               Other:Full Name of School
+               Other: Full Name of School
                </label>
                <div>
                   <input type="text" class="form-control " name="password" required="" autocomplete="">
