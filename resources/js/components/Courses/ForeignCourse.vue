@@ -6,9 +6,7 @@
       :key="foreignCourse.id"
     >
       <div class="position-relative">
-        <span
-          class="remove"
-          @click="removeForeignCourse(index)"
+        <span class="remove" @click="removeForeignCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -19,6 +17,7 @@
               id="health_course"
               v-model="foreignCourse.subject"
             >
+              <option disabled value="">Please select one</option>
               <option v-for="(val, i) in foreignstudies" :key="i">
                 {{ val.subject_name }}
               </option>
@@ -28,6 +27,7 @@
               <input
                 type="text"
                 class="form-control"
+                placeholder="Enter other course if not present in above courses"
                 v-model="foreignCourse.other_subjects"
               />
             </div>
@@ -88,7 +88,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "ForeignCourse",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
@@ -103,23 +103,25 @@ export default {
             courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
-            grade: "",
-          },
-        ],
+            grade: ""
+          }
+        ]
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
   props: ["foreignstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("foreign.store"), this.form).then((response) => {
-        window.location =
-          "/another/" + this.student_id + "/" + this.transcript_id;
-      })
-      .catch(error => {
-       alert('Please choose the course or remove it');
-      });
+      axios
+        .post(route("foreign.store"), this.form)
+        .then(response => {
+          window.location =
+            "/another/" + this.student_id + "/" + this.transcript_id;
+        })
+        .catch(error => {
+          alert("Please choose the course or remove it");
+        });
     },
     addNewForeignCourse() {
       this.form.foreignCourse.push({
@@ -128,14 +130,12 @@ export default {
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: "",
+        grades: ""
       });
     },
-       removeForeignCourse(index) {
-       this.form.foreignCourse.splice(index, 1)
+    removeForeignCourse(index) {
+      this.form.foreignCourse.splice(index, 1);
     }
-  },
-
-
+  }
 };
 </script>

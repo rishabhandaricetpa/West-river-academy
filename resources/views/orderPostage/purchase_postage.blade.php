@@ -1,6 +1,7 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Purchase Postage')
 @section('content')
+
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
     <div class="form-wrap border bg-light py-5 px-25 mb-4">

@@ -17,7 +17,7 @@ class CreateEnrollmentPeriodsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('student_profile_id');
-            $table->foreign('student_profile_id')->references('id')->on('student_profiles');
+            $table->foreign('student_profile_id')->references('id')->on('student_profiles')->onDelete('cascade');
             $table->string('start_date_of_enrollment');
             $table->integer('order_id')->nullable();
             $table->string('end_date_of_enrollment');

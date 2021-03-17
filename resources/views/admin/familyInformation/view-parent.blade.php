@@ -33,7 +33,7 @@
                                       <thead>
                                       <tr>
                                         <th>Parent Id</th>
-                                        <th>Parent 1 Name</th>
+                                        <th>Parent Name</th>
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>Status</th>

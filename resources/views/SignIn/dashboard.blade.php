@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Dashbord')
 @section('content')
 
 <main class="position-relative container form-content mt-4">
@@ -73,87 +73,6 @@
          </div>
       </div>
    </div>
-
-   <div class="form-wrap border bg-light py-5 px-25 mb-4">
-      <h2 class="mb-3">Download Your Confirmation Letter</h2>
-      <div class="mb-2 text-center text-sm-left">
-      </div>
-      <div class="overflow-auto max-table">
-         <table class="table-styling w-100">
-            <thead>
-               <tr>
-                  <th>Student First Name</th>
-                  <th>Last Name</th>
-                  <th>Student Id</th>
-                  <th>Status</th>
-                  <th></th>
-               </tr>
-            </thead>
-            <tbody>
-               @foreach($student as $item)
-               <tr>
-                  <td>{{$item->first_name}}</td>
-                  <td>{{$item->last_name}}</td>
-                  <td>{{$item->student_Id}}</td>
-                  <td>Active</td>
-                  @if($item->payment_status === 'paid')
-                  <td><a href="{{ route('view.confirm',$item->id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
-                  @else
-                  <td>Please pay your Enrollment Fees</td>
-                  @endif
-               </tr>
-               @endforeach
-            </tbody>
-         </table>
-      </div>
-      <div class="mt-2 text-md-right">
-         <p>Download your Enrollment Confirmation Letters from the download links above.</p>
-      </div>
-      <input type="submit" name="submit" id="submit" class="btn btn-primary" value="Renew Enrollment">
-      </form>
-
-   </div>
-
-   <div class="form-wrap border bg-light py-5 px-25 mb-4">
-      <h2 class="mb-3">Record Transfer</h2>
-      <div class="mb-2 text-center text-sm-left">
-      </div>
-      <div class="overflow-auto max-table">
-         <table class="table-styling w-100">
-            <thead>
-               <tr>
-                  <th>Student First Name</th>
-                  <th>School Name</th>
-                  <th>Email</th>
-                  <th>Phone number</th>
-                  <th>Status</th>
-                  <th>Action</th>
-               </tr>
-            </thead>
-            <tbody>
-               @foreach($record_transfer as $record)
-               <tr>
-                  <td>{{$record['student']['fullname']}}</td>
-                  <td>{{$record->school_name}}</td>
-                  <td>{{$record->email}}</td>
-                  <td>{{$record->phone_number}}</td>
-                  @if($record->status === 'In Review')
-                  <td>{{$record->status}}</td>
-                  @elseif($record->status === 'Request Sent')
-                  <td>Record Reviewed</td>
-                  @endif
-                  <td><a class="btn btn-primary" href="{{route('edit.record',$record->id)}}">Edit</a></td>
-               </tr>
-               @endforeach
-            </tbody>
-         </table>
-      </div>
-      <div class="mt-2 text-md-right">
-         <p>Download your Enrollment Confirmation Letters from the download links above.</p>
-      </div>
-      <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
-      </form>
-   </div>
    <div class="form-wrap border bg-light py-5 px-25 mb-4">
       <h2 class="mb-3">Transcripts</h2>
       <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to download it.</p>
@@ -208,6 +127,85 @@
       </div>
       <a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary mt-4">Purchase Transcripts</a>
    </div>
+   <div class="form-wrap border bg-light py-5 px-25 mb-4">
+      <h2 class="mb-3">Download Your Confirmation Letter</h2>
+      <div class="mb-2 text-center text-sm-left">
+      </div>
+      <div class="overflow-auto max-table">
+         <table class="table-styling w-100">
+            <thead>
+               <tr>
+                  <th>Student First Name</th>
+                  <th>Student Id</th>
+                  <th>Status</th>
+                  <th>Download</th>
+               </tr>
+            </thead>
+            <tbody>
+               @foreach($confirmLetter as $student)
+               <tr>
+                  <td>{{$student->fullname}}</td>
+                  <td>{{$student->student_Id}}</td>
+                  <td>Active</td>
+                  @if(($student->status === 'completed') || ($student->status === 'paid'))
+                  <td><a href="{{ route('view.confirm',$student->student_profile_id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
+                  @elseif($student->status === 'pending')
+                  <td>Please pay your Enrollment Fees</td>
+                  @endif
+               </tr>
+               @endforeach
+            </tbody>
+         </table>
+      </div>
+      <div class="mt-2 text-md-right">
+         <p>Download your Enrollment Confirmation Letters from the download links above.</p>
+      </div>
+      <a href="{{ route('reviewstudent') }}" class="btn btn-primary" value="Renew Enrollment">Renew Enrollment</a>
+      </form>
+
+   </div>
+
+   <div class="form-wrap border bg-light py-5 px-25 mb-4">
+      <h2 class="mb-3">Record Transfer</h2>
+      <div class="mb-2 text-center text-sm-left">
+      </div>
+      <div class="overflow-auto max-table">
+         <table class="table-styling w-100">
+            <thead>
+               <tr>
+                  <th>Student First Name</th>
+                  <th>School Name</th>
+                  <th>Email</th>
+                  <th>Phone number</th>
+                  <th>Status</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+               @foreach($record_transfer as $record)
+               <tr>
+                  <td>{{$record['student']['fullname']}}</td>
+                  <td>{{$record->school_name}}</td>
+                  <td>{{$record->email}}</td>
+                  <td>{{$record->phone_number}}</td>
+                  @if($record->status === 'In Review')
+                  <td>{{$record->status}}</td>
+                  @elseif($record->status === 'Request Sent')
+                  <td>Record Reviewed</td>
+                  @endif
+                  <td><a class="btn btn-primary" href="{{route('edit.record',$record->id)}}">Edit</a></td>
+               </tr>
+               @endforeach
+            </tbody>
+         </table>
+      </div>
+      <div class="mt-2 text-md-right">
+         <p>Download your Enrollment Confirmation Letters from the download links above.</p>
+      </div>
+      <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
+      </form>
+   </div>
+
 
 </main>
 @endsection

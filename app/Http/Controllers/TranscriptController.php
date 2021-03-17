@@ -244,7 +244,12 @@ class TranscriptController extends Controller
             ->get();
         $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('paid')->orWhere('status', 'paid')->first();
         $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
-        return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
+        if ($transcript_id) {
+            return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
+        } else {
+            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
+            return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
+        }
     }
 
     public function purchase(Request $request, $id)
@@ -253,7 +258,6 @@ class TranscriptController extends Controller
             DB::beginTransaction();
 
             if ($request->get('grade') == 'K-8') {
-                $student = StudentProfile::find($id);
                 $transcriptData = Transcript::create([
                     'parent_profile_id' => ParentProfile::getParentId(),
                     'student_profile_id' => $id,
@@ -264,11 +268,6 @@ class TranscriptController extends Controller
                 $transcript_fee = FeesInfo::getFeeAmount('transcript');
                 TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
                 $transcript_id = $transcriptData->id;
-                $id = Auth::user()->id;
-                $user = User::find($id);
-                $email = Auth::user()->email;
-
-                // Mail::to($email)->send(new TranscriptEmail($user));
 
                 $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
                 $transcript_fee = FeesInfo::getFeeAmount('transcript');

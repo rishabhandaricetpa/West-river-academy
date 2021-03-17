@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Graduation Submitted')
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">

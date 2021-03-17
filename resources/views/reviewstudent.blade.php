@@ -1,14 +1,14 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Review Students')
 @section('content')
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">student enrollment</h1>
+  <h1 class="text-center text-white text-uppercase">Student Enrollment</h1>
   <div class="form-wrap border bg-light py-5 px-25">
     <h2>Review Student Enrollment Information</h2>
     <form method="POST" action="" class="pb-2">
       @foreach($students as $key=>$student)
       <div class="d-flex align-items-center pt-4">
-        <h3> Student Profile {{++$key}}</h3>
+        <h3> Student {{++$key}} Profile </h3>
         <a href="{{route('edit.student',$student->id)}}" class="btn btn-primary ml-auto">Edit Student {{$key}} </a>
       </div>
       <div class="seperator">
@@ -102,23 +102,23 @@
   const reviewForm = new Vue({
     el: '#review-form',
     data() {
-        return {
-          totalAmount : '{{ $total_amount }}'
-        }
+      return {
+        totalAmount: '{{ $total_amount }}'
+      }
     },
-    methods:{
-      changeAmount(event, amount){
-        if(event.srcElement.checked){
+    methods: {
+      changeAmount(event, amount) {
+        if (event.srcElement.checked) {
           this.addAmount(amount)
-        }else{
+        } else {
           this.deductAmount(amount)
         }
       },
-      deductAmount(amount){
-        this.totalAmount -= amount * 1; 
+      deductAmount(amount) {
+        this.totalAmount -= amount * 1;
       },
-      addAmount(amount){
-        this.totalAmount += amount * 1; 
+      addAmount(amount) {
+        this.totalAmount += amount * 1;
       }
     }
   });

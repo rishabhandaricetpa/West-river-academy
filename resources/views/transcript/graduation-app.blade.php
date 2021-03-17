@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Purchase Transcript')
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
@@ -8,7 +8,7 @@
 
         <h2 class="mb-3">Select the student who wishes to purchase transcript</h2>
         <div class="overflow-auto">
-            <table class="w-100 table-styling enlarge-input">
+            <table class="w-100 table-styling">
                 <thead>
                     <tr>
                         <th>Name</th>

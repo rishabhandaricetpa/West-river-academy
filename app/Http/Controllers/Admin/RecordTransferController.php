@@ -14,7 +14,7 @@ class RecordTransferController extends Controller
 {
     public function index()
     {
-        $schoolRecords = RecordTransfer::all();
+        $schoolRecords = RecordTransfer::select()->orderBy('id', 'DESC')->get();
 
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }
@@ -22,8 +22,8 @@ class RecordTransferController extends Controller
     public function viewStudentRecord($id)
     {
         $studentRecord = RecordTransfer::where('student_profile_id', $id)->first();
-
-        return view('admin.recordTransfer.viewStudentRecord', compact('studentRecord'));
+        $studentEnrollmentYear = StudentProfile::find($id)->enrollmentPeriods()->get();
+        return view('admin.recordTransfer.viewStudentRecord', compact('studentRecord', 'studentEnrollmentYear'));
     }
 
     public function sendRecordToSchool(Request $request, $student_id)
@@ -35,6 +35,7 @@ class RecordTransferController extends Controller
         $data['title'] = 'West River Academy';
         $data['name'] = $request->input('name');
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
+        $data['grade'] = $request->get('enrollmentyear');
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $pdf = PDF::loadView('schoolRecord', $data);
         Mail::send('admin.recordTransfer.sendSchoolRecord', $data, function ($message) use ($data, $pdf) {

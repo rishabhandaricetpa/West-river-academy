@@ -6,9 +6,7 @@
       :key="englishCourse.id"
     >
       <div class="position-relative">
-        <span
-          class="remove"
-          @click="removeEnglishCourse(index)"
+        <span class="remove" @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -28,6 +26,7 @@
               <input
                 type="text"
                 class="form-control"
+                placeholder="Enter other course if not present in above courses"
                 v-model="englishCourse.other_subject"
               />
             </div>
@@ -75,14 +74,16 @@
         @click="addNewEnglishCourse"
         >Add another English/Language Arts Course</a
       >
-          <a
+      <a
         type="button"
         class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
         id="addEnglish"
         @click="viewCourses"
         >View All Courses</a
       >
-      <button type="submit" class="btn btn-primary mb-sm-0 mb-3">Continue</button>
+      <button type="submit" class="btn btn-primary mb-sm-0 mb-3">
+        Continue
+      </button>
     </div>
   </form>
 </template>
@@ -95,7 +96,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "EditEnglishCourse",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
@@ -103,21 +104,33 @@ export default {
       form: {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
-        englishCourse: [],
+        englishCourse: []
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
-  props: ["englishcourse", "transcripts", "english_details", "student_id","courses_id","transcript_id"],
+  props: [
+    "englishcourse",
+    "transcripts",
+    "english_details",
+    "student_id",
+    "courses_id",
+    "transcript_id"
+  ],
   methods: {
     addCourses() {
-       axios.post(route("editEnglishCourse.store"), this.form)
-     .then((response) => {
-        window.location =
-          "/edit-social-studies/" + this.student_id + "/" + this.transcript_id;
-      }).catch(error => {
-       alert('Please choose the course or remove it');
-      });
+      axios
+        .post(route("editEnglishCourse.store"), this.form)
+        .then(response => {
+          window.location =
+            "/edit-social-studies/" +
+            this.student_id +
+            "/" +
+            this.transcript_id;
+        })
+        .catch(error => {
+          alert("Please choose the course or remove it");
+        });
     },
     addNewEnglishCourse() {
       this.form.englishCourse.push({
@@ -126,34 +139,33 @@ export default {
         courses_id: this.courses_id,
         subject_name: "",
         other_subject: "",
-        grade: "",
+        grade: ""
       });
     },
     initForm() {
-      const courses = this.transcripts.map((transcript) => {
+      const courses = this.transcripts.map(transcript => {
         return {
           transcript_id: transcript.k8transcript_id,
           student_id: transcript.student_profile_id,
           courses_id: transcript.courses_id,
           subject_name: transcript.subject.subject_name,
           other_subject: transcript.other_subject,
-          grade: transcript.score,
+          grade: transcript.score
         };
       });
 
       this.form.englishCourse = courses;
     },
-    viewCourses(){
-      window.location =
-          "/another-grade/" + this.student_id;
+    viewCourses() {
+      window.location = "/another-grade/" + this.student_id;
     },
 
-   removeEnglishCourse(index) {
-       this.form.englishCourse.splice(index, 1)
+    removeEnglishCourse(index) {
+      this.form.englishCourse.splice(index, 1);
     }
   },
   created() {
     this.initForm();
-  },
+  }
 };
 </script>

@@ -27,12 +27,18 @@
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
   $(function() {
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    // $("#example1").DataTable({
+    //   "responsive": true,
+    //   "lengthChange": false,
+    //   "autoWidth": false,
+    //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    $('#example1').dataTable({
+      "ordering": false,
+      "pagination": true
+    });
+
 
     //parent datatable
     $("#family-table").DataTable({
@@ -58,7 +64,13 @@
           "data": "state"
         },
         {
-          "data": "status"
+          "data": "status",
+          "render": function(status) {
+            if (status === 0)
+              return `<td> Active User</td>`;
+            else
+              return `<td> Deactive User </td>`;
+          }
         },
         {
           "data": "id",
@@ -158,7 +170,11 @@
         {
           "data": "id",
           "render": function(id) {
-            return `<a href="graduations/${id}/edit">Graduations</a>`;
+            if (id == null) {
+              return `<a href="graduations/${id}/edit">Graduations</a>`;
+            } else {
+              return `<label> Not Applied </label>`;
+            }
           }
         },
       ]
@@ -171,6 +187,7 @@
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
+      "ordering": false,
       "columns": [{
           "data": "id",
           "render": function(data, type, row, meta) {

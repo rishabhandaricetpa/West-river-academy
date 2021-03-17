@@ -6,9 +6,7 @@
       :key="healthCourse.id"
     >
       <div class="position-relative">
-        <span
-          class="remove"
-          @click="removeHealthCourse(index)"
+        <span class="remove" @click="removeHealthCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -19,6 +17,7 @@
               id="health_course"
               v-model="healthCourse.subject"
             >
+              <option disabled value="">Please select one</option>
               <option v-for="(val, i) in healthstudies" :key="i">
                 {{ val.subject_name }}
               </option>
@@ -28,6 +27,7 @@
               <input
                 type="text"
                 class="form-control"
+                placeholder="Enter other course if not present in above courses"
                 v-model="healthCourse.other_subjects"
               />
             </div>
@@ -88,7 +88,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "HealthCourse",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
@@ -103,23 +103,25 @@ export default {
             courses_id: this.courses_id,
             subject: "",
             other_subjects: "",
-            grade: "",
-          },
-        ],
+            grade: ""
+          }
+        ]
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
   props: ["healthstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("health.store"), this.form).then((response) => {
-        window.location =
-          "/foreign/" + this.student_id + "/" + this.transcript_id;
-      })  
-      .catch(error => {
-       alert('Please choose the course or remove it');
-      });
+      axios
+        .post(route("health.store"), this.form)
+        .then(response => {
+          window.location =
+            "/foreign/" + this.student_id + "/" + this.transcript_id;
+        })
+        .catch(error => {
+          alert("Please choose the course or remove it");
+        });
     },
     addNewSocialScienceCourse() {
       this.form.healthCourse.push({
@@ -128,12 +130,12 @@ export default {
         courses_id: this.courses_id,
         subject: "",
         other_subjects: "",
-        grades: "",
+        grades: ""
       });
     },
-       removeHealthCourse(index) {
-       this.form.healthCourse.splice(index, 1)
-    }  
-  },
+    removeHealthCourse(index) {
+      this.form.healthCourse.splice(index, 1);
+    }
+  }
 };
 </script>

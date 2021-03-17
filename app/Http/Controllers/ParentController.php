@@ -22,7 +22,7 @@ class ParentController extends Controller
     {
         $this->middleware(function ($request, $next) {
             $Userid = Auth::user()->id;
-            $parentProfileData = User::find($Userid)->parentProfile();
+            $parentProfileData = User::find($Userid)->parentProfile()->first();
             $this->parent_profile_id = $parentProfileData->id;
 
             return $next($request);
@@ -122,18 +122,16 @@ class ParentController extends Controller
     }
 
     //Parent accounts edit information
-    public function mysettings($id)
+    public function mysettings($user_id)
     {
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id);
+        $parent = ParentProfile::where('user_id', $user_id)->first();
 
         return view('MyAccounts/myaccount', compact('parent', 'user_id'));
     }
 
-    public function editmysettings($id)
+    public function editmysettings($user_id)
     {
-        $user_id = Auth::user()->id;
-        $parent = ParentProfile::find($user_id);
+        $parent = ParentProfile::where('user_id', $user_id)->first();
 
         return view('MyAccounts/edit-account', compact('parent', 'user_id'));
     }

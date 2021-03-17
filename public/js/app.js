@@ -2162,7 +2162,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("another.store"), this.form).then(function (response) {
         window.location = "/choose-another/" + _this.student_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewSocialScienceCourse: function addNewSocialScienceCourse() {
@@ -2314,7 +2314,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("englishCourse.store"), this.form).then(function (response) {
         window.location = "/social-studies/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -2466,7 +2466,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("foreign.store"), this.form).then(function (response) {
         window.location = "/another/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewForeignCourse: function addNewForeignCourse() {
@@ -2618,7 +2618,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("health.store"), this.form).then(function (response) {
         window.location = "/foreign/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewSocialScienceCourse: function addNewSocialScienceCourse() {
@@ -2772,7 +2772,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("mathematics.store"), this.form).then(function (response) {
         window.location = "/science/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewMathsCourse: function addNewMathsCourse() {
@@ -2911,7 +2911,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(route("physicalEducation.store"), this.form).then(function (response) {
         window.location = "/health/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -3029,6 +3029,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3063,7 +3064,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("science.store"), this.form).then(function (response) {
         window.location = "/physical-education/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewSocialScienceCourse: function addNewSocialScienceCourse() {
@@ -3175,6 +3176,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "social-studies",
   data: function data() {
@@ -3203,7 +3205,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(route("socialStudiesCourse.store"), this.form).then(function (response) {
         window.location = "/mathematics/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -3329,6 +3331,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3356,9 +3359,8 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editAnother.store"), this.form).then(function (response) {
         window.location = "/another-grade/" + _this.student_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
-      ;
     },
     addNewCourse: function addNewCourse() {
       this.form.Course.push({
@@ -3501,6 +3503,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3528,7 +3531,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editEnglishCourse.store"), this.form).then(function (response) {
         window.location = "/edit-social-studies/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -3672,6 +3675,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3699,7 +3703,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editForeign.store"), this.form).then(function (response) {
         window.location = "/edit-another/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewCourse: function addNewCourse() {
@@ -3843,6 +3847,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3870,7 +3875,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editHealthCourse.store"), this.form).then(function (response) {
         window.location = "/edit-foreign/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewCourse: function addNewCourse() {
@@ -4014,6 +4019,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4041,7 +4047,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editMathCourse.store"), this.form).then(function (response) {
         window.location = "/edit-science/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewCourse: function addNewCourse() {
@@ -4185,6 +4191,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4212,7 +4219,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editPhysicaEducationCourse.store"), this.form).then(function (response) {
         window.location = "/edit-health/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewCourse: function addNewCourse() {
@@ -4356,6 +4363,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4383,7 +4391,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editScienceCourse.store"), this.form).then(function (response) {
         window.location = "/edit-physical-education/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewCourse: function addNewCourse() {
@@ -4527,6 +4535,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4554,7 +4563,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("editSocialCourse.store"), this.form).then(function (response) {
         window.location = "/edit-math/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert('Please choose the course or remove it');
+        alert("Please choose the course or remove it");
       });
     },
     addNewCourse: function addNewCourse() {
@@ -5613,6 +5622,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     canRemovePeriod: function canRemovePeriod() {
       return this.form.enrollPeriods.length > 1;
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Notification.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Notification.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      notifications: [],
+      displayClass: 'd-none'
+    };
+  },
+  methods: {
+    toggleNotifications: function toggleNotifications() {
+      this.displayClass === 'd-none' ? this.displayClass = 'd-block' : this.displayClass = 'd-none';
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(route("notification.get")).then(function (response) {
+      response.data.status === 'success' ? _this.notifications = response.data.notifications : '';
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
 });
 
@@ -33940,16 +34008,22 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.anotherstudies, function(val, i) {
-                      return _c("option", { key: i }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(val.subject_name) +
-                            "\n            "
-                        )
-                      ])
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Please select one")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.anotherstudies, function(val, i) {
+                        return _c("option", { key: i }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(val.subject_name) +
+                              "\n            "
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -33967,7 +34041,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: anotherCourse.other_subjects },
                       on: {
                         input: function($event) {
@@ -34181,21 +34259,27 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.englishcourse, function(val, i) {
-                      return _c("option", { key: i }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(val.subject_name) +
-                            "\n            "
-                        )
-                      ])
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Please select one")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.englishcourse, function(val, i) {
+                        return _c("option", { key: i }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(val.subject_name) +
+                              "\n            "
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group d-sm-flex" }, [
                     _c("label", { staticClass: "w-auto", attrs: { for: "" } }, [
-                      _vm._v("Other")
+                      _vm._v("Others")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -34208,7 +34292,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: englishCourse.other_subjects },
                       on: {
                         input: function($event) {
@@ -34422,16 +34510,22 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.foreignstudies, function(val, i) {
-                      return _c("option", { key: i }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(val.subject_name) +
-                            "\n            "
-                        )
-                      ])
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Please select one")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.foreignstudies, function(val, i) {
+                        return _c("option", { key: i }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(val.subject_name) +
+                              "\n            "
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -34449,7 +34543,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: foreignCourse.other_subjects },
                       on: {
                         input: function($event) {
@@ -34663,16 +34761,22 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.healthstudies, function(val, i) {
-                      return _c("option", { key: i }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(val.subject_name) +
-                            "\n            "
-                        )
-                      ])
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Please select one")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.healthstudies, function(val, i) {
+                        return _c("option", { key: i }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(val.subject_name) +
+                              "\n            "
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -34690,7 +34794,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: healthCourse.other_subjects },
                       on: {
                         input: function($event) {
@@ -34901,16 +35009,22 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.mathscourse, function(val, i) {
-                    return _c("option", { key: i }, [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(val.subject_name) +
-                          "\n            "
-                      )
-                    ])
-                  }),
-                  0
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Please select one")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.mathscourse, function(val, i) {
+                      return _c("option", { key: i }, [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(val.subject_name) +
+                            "\n            "
+                        )
+                      ])
+                    })
+                  ],
+                  2
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -34928,7 +35042,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: maths.other_subjects },
                     on: {
                       input: function($event) {
@@ -35130,16 +35248,22 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.physical_education, function(val, i) {
-                      return _c("option", { key: i }, [
-                        _vm._v(
-                          "\n            " +
-                            _vm._s(val.subject_name) +
-                            "\n          "
-                        )
-                      ])
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Please select one")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.physical_education, function(val, i) {
+                        return _c("option", { key: i }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(val.subject_name) +
+                              "\n            "
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -35157,7 +35281,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: physicalEducation.other_subjects },
                       on: {
                         input: function($event) {
@@ -35187,7 +35315,7 @@ var render = function() {
                             "data-toggle": "modal"
                           }
                         },
-                        [_vm._v("Help me Decide")]
+                        [_vm._v("Help me decide")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -35240,9 +35368,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                    " +
+                                        "\n                      " +
                                           _vm._s(val) +
-                                          "\n                  "
+                                          "\n                    "
                                       )
                                     ]
                                   )
@@ -35372,16 +35500,22 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.sciencecourse, function(val, i) {
-                    return _c("option", { key: i }, [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(val.subject_name) +
-                          "\n            "
-                      )
-                    ])
-                  }),
-                  0
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Please select one")
+                    ]),
+                    _vm._v("\n            >\n            "),
+                    _vm._l(_vm.sciencecourse, function(val, i) {
+                      return _c("option", { key: i }, [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(val.subject_name) +
+                            "\n            "
+                        )
+                      ])
+                    })
+                  ],
+                  2
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -35399,7 +35533,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: science.other_subjects },
                     on: {
                       input: function($event) {
@@ -35604,16 +35742,22 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.socialstudies, function(val, i) {
-                      return _c("option", { key: i }, [
-                        _vm._v(
-                          "\n            " +
-                            _vm._s(val.subject_name) +
-                            "\n          "
-                        )
-                      ])
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Please select one")
+                      ]),
+                      _vm._v("\n            >\n            "),
+                      _vm._l(_vm.socialstudies, function(val, i) {
+                        return _c("option", { key: i }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(val.subject_name) +
+                              "\n            "
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group d-sm-flex" }, [
@@ -35631,7 +35775,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: socialStudiesCourse.other_subjects },
                       on: {
                         input: function($event) {
@@ -35661,7 +35809,7 @@ var render = function() {
                             "data-toggle": "modal"
                           }
                         },
-                        [_vm._v("Help me Decide")]
+                        [_vm._v("Help me decide")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -35714,9 +35862,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                    " +
+                                        "\n                      " +
                                           _vm._s(val) +
-                                          "\n                  "
+                                          "\n                    "
                                       )
                                     ]
                                   )
@@ -35872,7 +36020,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -35992,7 +36144,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -36114,7 +36266,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: {
+                        type: "text",
+                        placeholder:
+                          "Enter other course if not present in above courses"
+                      },
                       domProps: { value: englishCourse.other_subject },
                       on: {
                         input: function($event) {
@@ -36246,7 +36402,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -36365,7 +36521,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -36485,7 +36645,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -36604,7 +36764,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -36724,7 +36888,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -36843,7 +37007,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -36963,7 +37131,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -37082,7 +37250,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -37202,7 +37374,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -37321,7 +37493,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -37441,7 +37617,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -37560,7 +37736,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text" },
+                    attrs: {
+                      type: "text",
+                      placeholder:
+                        "Enter other course if not present in above courses"
+                    },
                     domProps: { value: Course.other_subject },
                     on: {
                       input: function($event) {
@@ -37680,7 +37860,7 @@ var render = function() {
             staticClass: "btn btn-primary mb-sm-0 mb-3",
             attrs: { type: "submit" }
           },
-          [_vm._v("Continue")]
+          [_vm._v("\n      Continue\n    ")]
         )
       ])
     ],
@@ -39463,6 +39643,72 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Notification.vue?vue&type=template&id=6a4ce154&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Notification.vue?vue&type=template&id=6a4ce154& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "notification-wrap position-relative" }, [
+    _c(
+      "button",
+      {
+        staticClass: "text-white bg-transparent border-0",
+        attrs: { type: "button" },
+        on: { click: _vm.toggleNotifications }
+      },
+      [_c("i", { staticClass: "fas fa-bell fa-2x" })]
+    ),
+    _vm._v(" "),
+    _c("div", { class: ["notification", _vm.displayClass] }, [
+      _vm.notifications.length > 0
+        ? _c(
+            "ul",
+            { staticClass: "list-unstyled" },
+            _vm._l(_vm.notifications, function(notification, index) {
+              return _c(
+                "li",
+                { key: index, staticClass: "border-bottom mb-3 pb-3" },
+                [
+                  _c("p", [_vm._v(_vm._s(notification.content))]),
+                  _vm._v(" "),
+                  notification.link
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { href: notification.link.url }
+                        },
+                        [_vm._v(_vm._s(notification.link.name))]
+                      )
+                    : _vm._e()
+                ]
+              )
+            }),
+            0
+          )
+        : _c("span", { staticClass: "mb-3 pb-3" }, [
+            _vm._v("No Notification Found!!")
+          ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -60006,7 +60252,8 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
 Vue.component('enroll-student', __webpack_require__(/*! ./components/EnrollStudent.vue */ "./resources/js/components/EnrollStudent.vue")["default"]);
 Vue.component('edit-enroll', __webpack_require__(/*! ./components/EditEnrollStudent.vue */ "./resources/js/components/EditEnrollStudent.vue")["default"]);
 Vue.component('billing-shipping', __webpack_require__(/*! ./components/address.vue */ "./resources/js/components/address.vue")["default"]);
-Vue.component('get-cart', __webpack_require__(/*! ./components/Cart.vue */ "./resources/js/components/Cart.vue")["default"]); //courses
+Vue.component('get-cart', __webpack_require__(/*! ./components/Cart.vue */ "./resources/js/components/Cart.vue")["default"]);
+Vue.component('notification-bell', __webpack_require__(/*! ./components/Notification.vue */ "./resources/js/components/Notification.vue")["default"]); //courses
 
 Vue.component('english-course', __webpack_require__(/*! ./components/Courses/EnglishCourse.vue */ "./resources/js/components/Courses/EnglishCourse.vue")["default"]);
 Vue.component('social-studies', __webpack_require__(/*! ./components/Courses/SocialStudiesCourse.vue */ "./resources/js/components/Courses/SocialStudiesCourse.vue")["default"]);
@@ -60033,6 +60280,9 @@ Vue.component('edit-another', __webpack_require__(/*! ./components/EditCourses/E
 
 var app = new Vue({
   el: '#app'
+});
+var notification = new Vue({
+  el: '#notification-container'
 });
 
 /***/ }),
@@ -61407,6 +61657,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrollStudent_vue_vue_type_template_id_7132dbda___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrollStudent_vue_vue_type_template_id_7132dbda___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Notification.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/Notification.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Notification.vue?vue&type=template&id=6a4ce154& */ "./resources/js/components/Notification.vue?vue&type=template&id=6a4ce154&");
+/* harmony import */ var _Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Notification.vue?vue&type=script&lang=js& */ "./resources/js/components/Notification.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Notification.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Notification.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Notification.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Notification.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Notification.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Notification.vue?vue&type=template&id=6a4ce154&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/Notification.vue?vue&type=template&id=6a4ce154& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Notification.vue?vue&type=template&id=6a4ce154& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Notification.vue?vue&type=template&id=6a4ce154&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

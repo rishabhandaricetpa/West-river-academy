@@ -6,9 +6,7 @@
       :key="anotherCourse.id"
     >
       <div class="position-relative">
-        <span
-          class="remove"
-          @click="removeForeignCourse(index)"
+        <span class="remove" @click="removeForeignCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -19,6 +17,7 @@
               id="health_course"
               v-model="anotherCourse.subject"
             >
+              <option disabled value="">Please select one</option>
               <option v-for="(val, i) in anotherstudies" :key="i">
                 {{ val.subject_name }}
               </option>
@@ -29,6 +28,7 @@
                 type="text"
                 class="form-control"
                 v-model="anotherCourse.other_subjects"
+                placeholder="Enter other course if not present in above courses"
               />
             </div>
             <div class="form-group d-sm-flex mt-4">
@@ -113,12 +113,14 @@ export default {
   props: ["anotherstudies", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("another.store"), this.form).then(response => {
-        window.location = "/choose-another/" + this.student_id;
-      })
+      axios
+        .post(route("another.store"), this.form)
+        .then(response => {
+          window.location = "/choose-another/" + this.student_id;
+        })
         .catch(error => {
-       alert('Please choose the course or remove it');
-      });
+          alert("Please choose the course or remove it");
+        });
     },
     addNewSocialScienceCourse() {
       this.form.anotherCourse.push({
@@ -130,9 +132,9 @@ export default {
         grades: ""
       });
     },
-         removeForeignCourse(index) {
-       this.form.anotherCourse.splice(index, 1)
+    removeForeignCourse(index) {
+      this.form.anotherCourse.splice(index, 1);
     }
-  },
+  }
 };
 </script>

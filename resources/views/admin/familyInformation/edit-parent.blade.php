@@ -9,8 +9,8 @@
       <form method="post" class="row" action="{{route('admin.parent.update',$parent->id)}}">
         @csrf
         <div class="form-group col-sm-6">
-          <label>User Status<sup>*</sup></label>
-          <select id="status" name="status" class="form-control" value="{{$parent->status==0?'Active':'Deactive'}}">
+          <label>User Status<sup>*</sup> <sup>{{$parent->status===0 ?'Active':'Deactive'}}</sup></label>
+          <select id="status" name="status" class="form-control" value="{{$parent->status===0?'Active':'Deactive'}}">
             <option value="0">Active</option>
             <option value="1">Deactive</option>
           </select>

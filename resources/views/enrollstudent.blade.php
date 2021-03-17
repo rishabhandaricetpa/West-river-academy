@@ -1,9 +1,9 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Enroll Students')
 @section('content')
 
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">enroll students</h1>
+  <h1 class="text-center text-white text-uppercase">Enroll Students</h1>
 
 
 

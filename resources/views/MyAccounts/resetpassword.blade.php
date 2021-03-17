@@ -1,16 +1,16 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Reset Password')
 @section('content')
 
 <main class="position-relative container">
   <div class="form-wrap border bg-light form-content small-container">
     <h2>Update your password</h2>
     <form method="post" action="{{ route('account-pass.update',Auth::user()->id) }}">
-      @csrf    
+      @csrf
       <div class="form-group d-flex mb-2 seperator">
         <label for="">Old Password</label>
         <div>
-          <input  id="password" type="password" class="form-control  @error('old_password') is-invalid @enderror" name="old_password"  autocomplete="email" autofocus>
+          <input id="password" type="password" class="form-control  @error('old_password') is-invalid @enderror" name="old_password" autocomplete="email" autofocus>
           @error('old_password')
           <div class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -46,4 +46,3 @@
 
 
 @endsection
-

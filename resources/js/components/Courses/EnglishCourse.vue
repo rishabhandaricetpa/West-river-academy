@@ -6,9 +6,7 @@
       :key="englishCourse.id"
     >
       <div class="position-relative">
-        <span
-          class="remove"
-          @click="removeEnglishCourse(index)"
+        <span class="remove" @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -19,15 +17,17 @@
               id="english_course"
               v-model="englishCourse.subject"
             >
+              <option disabled value="">Please select one</option>
               <option v-for="(val, i) in englishcourse" :key="i">
                 {{ val.subject_name }}
               </option>
             </select>
             <div class="form-group d-sm-flex">
-              <label for="" class="w-auto">Other</label>
+              <label for="" class="w-auto">Others</label>
               <input
                 type="text"
                 class="form-control"
+                placeholder="Enter other course if not present in above courses"
                 v-model="englishCourse.other_subjects"
               />
             </div>
@@ -113,14 +113,15 @@ export default {
   props: ["englishcourse", "transcript_id", "student_id", "courses_id"],
   methods: {
     addCourses() {
-      axios.post(route("englishCourse.store"), this.form)
-      .then(response => {
-        window.location =
-          "/social-studies/" + this.student_id + "/" + this.transcript_id;
-      }) 
-      .catch(error => {
-      alert('Please choose the course or remove it');
-      });
+      axios
+        .post(route("englishCourse.store"), this.form)
+        .then(response => {
+          window.location =
+            "/social-studies/" + this.student_id + "/" + this.transcript_id;
+        })
+        .catch(error => {
+          alert("Please choose the course or remove it");
+        });
     },
     addNewEnglishCourse() {
       this.form.englishCourse.push({
@@ -132,10 +133,9 @@ export default {
         grades: ""
       });
     },
-     removeEnglishCourse(index) {
-       this.form.englishCourse.splice(index, 1)
+    removeEnglishCourse(index) {
+      this.form.englishCourse.splice(index, 1);
     }
-  },
- 
+  }
 };
 </script>
