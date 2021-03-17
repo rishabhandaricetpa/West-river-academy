@@ -2,13 +2,11 @@
   <form method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
-      v-for="(maths,index) in form.mathscourse"
+      v-for="(maths, index) in form.mathscourse"
       :key="maths.id"
     >
       <div class="position-relative">
-          <span
-          class="remove"
-          @click="removeEnglishCourse(index)"
+        <span class="remove" @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
@@ -19,6 +17,7 @@
               id="maths_course"
               v-model="maths.subject"
             >
+              <option disabled value="">Please select one</option>
               <option v-for="(val, i) in mathscourse" :key="i">
                 {{ val.subject_name }}
               </option>
@@ -28,6 +27,7 @@
               <input
                 type="text"
                 class="form-control"
+                placeholder="Enter other course if not present in above courses"
                 v-model="maths.other_subjects"
               />
             </div>
@@ -66,7 +66,7 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
     <div class="mt-5">
       <a
         type="button"
@@ -88,7 +88,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "MathsCourse",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
@@ -103,24 +103,25 @@ export default {
             transcript_id: this.transcript_id,
             subject: "",
             other_subjects: "",
-            grade: "",
-          },
-        ],
+            grade: ""
+          }
+        ]
       },
-      removingPeriod: false,
+      removingPeriod: false
     };
   },
   props: ["mathscourse", "student_id", "courses_id", "transcript_id"],
   methods: {
     addCourses() {
-       axios.post(route("mathematics.store"), this.form)
-      .then((response) => {
-        window.location =
-          "/science/" + this.student_id + "/" + this.transcript_id;
-      })
-      .catch(error => {
-       alert('Please choose the course or remove it');
-      });
+      axios
+        .post(route("mathematics.store"), this.form)
+        .then(response => {
+          window.location =
+            "/science/" + this.student_id + "/" + this.transcript_id;
+        })
+        .catch(error => {
+          alert("Please choose the course or remove it");
+        });
     },
     addNewMathsCourse() {
       this.form.mathscourse.push({
@@ -130,14 +131,13 @@ export default {
         transcript_id: this.transcript_id,
         subject: "",
         other_subjects: "",
-        grade: "",
+        grade: ""
       });
     },
-      removeEnglishCourse(index) {
-       console.log(index);
-       this.form.mathscourse.splice(index, 1)
+    removeEnglishCourse(index) {
+      console.log(index);
+      this.form.mathscourse.splice(index, 1);
     }
-  },
-
+  }
 };
 </script>

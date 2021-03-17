@@ -22,7 +22,7 @@
               <div class="col-sm-3">
                 <div class="form-check mb-2">
                   <input type="hidden" name="student_id" value="{{$id}}">
-                  <input class="form-check-input" type="radio" name="another_grade" value="Yes">
+                  <input class="form-check-input" type="radio" name="another_grade" value="Yes" required>
                   <label class="form-check-label" for="">
                     Yes
                   </label>
