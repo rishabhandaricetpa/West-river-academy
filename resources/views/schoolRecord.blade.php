@@ -21,7 +21,12 @@
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Name:{{$name}} </p>
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Date of Birth:{{$dob}} </p>
 
-            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Grade: </p>
+            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Grade:@foreach($grade as $gradelevel)
+                {{$gradelevel}}
+                @endforeach
+
+
+            </p>
 
         </div>
     </div>

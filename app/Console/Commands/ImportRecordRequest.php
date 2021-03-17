@@ -44,7 +44,7 @@ class ImportRecordRequest extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/recordrequests.csv');
+        $filePath = base_path('csv/RecordRequest.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -61,8 +61,8 @@ class ImportRecordRequest extends Command
                 if ($student && $parent) {
                     RecordTransfer::create(
                         [
-                            'student_profile_id' => (isset($student)) ? $student->id : null,
-                            'parent_profile_id' => (isset($parent)) ? $parent->id : null,
+                            'student_profile_id' => (isset($student)) ? $student->id : 6760,
+                            'parent_profile_id' => (isset($parent)) ? $parent->id : 190,
                             'school_name' => $cells[6],
                             'email' => $cells[12],
                             'fax_number' => $cells[13],
