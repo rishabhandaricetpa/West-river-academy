@@ -18,7 +18,7 @@
           </p>
         </a>
       </li>
-      <a href="" class="nav-link active">
+      <a href="" class="nav-link">
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
           Parent Profile
@@ -77,7 +77,7 @@
             <a href="{{route('admin.custom.payments')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Custom Payment
+                Custom
               </p>
             </a>
           </li>
