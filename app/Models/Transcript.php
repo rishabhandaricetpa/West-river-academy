@@ -10,7 +10,7 @@ class Transcript extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_profile_id', 'student_profile_id', 'period', 'status',
+        'parent_profile_id', 'student_profile_id', 'period', 'status', 'legacy_name'
     ];
 
     public function parent()

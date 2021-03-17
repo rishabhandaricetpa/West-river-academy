@@ -155,7 +155,7 @@ button {
 
 /* popup css */
 
-.modal{
+.modal {
   padding-right: 0 !important;
 }
 
@@ -209,13 +209,13 @@ sup {
 
 .table-styling {
   min-width: 500px;
-  &.enlarge-input{
-    td{
-      &:first-child{
+  &.enlarge-input {
+    td {
+      &:first-child {
         position: relative;
         padding-left: 45px;
       }
-      input{
+      input {
         position: absolute;
         left: 26px;
         top: 50%;
@@ -224,24 +224,25 @@ sup {
       }
     }
   }
-  thead{
+  thead {
     background-color: #cccc;
   }
-  td,th{
+  td,
+  th {
     padding: 12px 10px;
-    font-family: "Catamaran",sans-serif;
+    font-family: "Catamaran", sans-serif;
     line-height: 1.2;
     font-size: 1rem;
   }
-  tbody{
-   td{
-     p{
-       line-height: 1.2;
-       font-size: 1rem;
-     }
-   }
-    tr:nth-child(even){
-    background-color: $white;
+  tbody {
+    td {
+      p {
+        line-height: 1.2;
+        font-size: 1rem;
+      }
+    }
+    tr:nth-child(even) {
+      background-color: $white;
     }
   }
 }
@@ -250,8 +251,7 @@ a.btn {
   -webkit-appearance: none !important;
 }
 
-
-.b-radius-20{
+.b-radius-20 {
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -259,8 +259,13 @@ a.btn {
   -o-border-radius: 20px;
 }
 
-.datepicker-full{
-  >p{
+.datepicker-full {
+  > p {
     width: 100%;
   }
+}
+
+/* width */
+.min-w-100 {
+  min-width: 100% !important;
 }

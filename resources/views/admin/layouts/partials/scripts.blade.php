@@ -64,7 +64,13 @@
           "data": "state"
         },
         {
-          "data": "status"
+          "data": "status",
+          "render": function(status) {
+            if (status === 0)
+              return `<td> Active User</td>`;
+            else
+              return `<td> Deactive User </td>`;
+          }
         },
         {
           "data": "id",

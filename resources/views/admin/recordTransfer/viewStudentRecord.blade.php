@@ -16,6 +16,11 @@
                         <label>Student Name <sup>*</sup></label>
                         <input class="form-control" id="name" value="{{$studentRecord['student']['fullname']}}" name="name" readonly>
                     </div>
+                    @if($studentEnrollmentYear)
+                    @foreach($studentEnrollmentYear as $year)
+                    <input type="hidden" name="enrollmentyear[]" value="{{$year->grade_level}}">
+                    @endforeach
+                    @endif
                     <div class="form-group col-sm-6">
                         <label>School Name</label>
                         <input class="form-control" name="school_name" value="{{$studentRecord->school_name}}" readonly>
@@ -57,23 +62,39 @@
                 </div>
 
                 <!-- /.card-body -->
+                <div class="row">
+                    <div class="col-md-6 mt-4">
+                        <button type="submit" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();" class="btn btn-primary">Send Record To School</button>
+                        <a href="{{route('admin.resend.request',[$studentRecord->id,$studentRecord->student_profile_id])}}" class=" btn btn-primary">ReSend Request</a>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <table class='table-styling w-100 min-w-100' border="1">
 
-                <button type="submit" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();" class="btn btn-primary">Send Record To School</button>
-                <a href="{{route('admin.resend.request',[$studentRecord->id,$studentRecord->student_profile_id])}}" class=" btn btn-primary">ReSend Request</a>
+                            <tr> @if($studentRecord->resendCount)
+                                <th> Resend Request Count: </th>
+                                <td>{{$studentRecord->resendCount}}</td>
+                                @endif
+                            </tr>
 
-                @if($studentRecord->resendCount)
-                Resend Request Count: {{$studentRecord->resendCount}}
-                @endif
+                            <tr> @if($studentRecord->firstRequestDate)
+                                <th> First Request Date:</th>
+                                <td>{{$studentRecord->firstRequestDate}}</td>
+                            </tr>
+                            @endif
+                            <tr> @if($studentRecord->secondRequestDate)
+                                <th> Second Request Date:</th>
+                                <td> {{$studentRecord->secondRequestDate}}</td>
+                            </tr>
+                            @endif
+                            <tr> @if($studentRecord->thirdRequest)
+                                <th> Third Request Date:</th>
+                                <td>{{$studentRecord->thirdRequest}}</td>
+                                @endif
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
-                @if($studentRecord->firstRequestDate)
-                First Request Date: {{$studentRecord->firstRequestDate}}
-                @endif
-                @if($studentRecord->secondRequestDate)
-                Second Request Date: {{$studentRecord->secondRequestDate}}
-                @endif
-                @if($studentRecord->thirdRequest)
-                Third Request Count: {{$studentRecord->thirdRequest}}
-                @endif
 
         </div>
 
