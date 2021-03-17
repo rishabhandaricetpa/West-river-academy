@@ -19,7 +19,7 @@
         </a>
       </li>
       <a href="" class="nav-link active">
-        <i class="nav-icon fas fa-tachometer-alt"></i>
+      <i class="fas fa-user-friends nav-icon"></i>
         <p>
           Parent Profile
           <i class="right fas fa-angle-left"></i>
@@ -28,7 +28,7 @@
       <ul class="nav nav-treeview">
         <li class="nav-item">
           <a href="{{ url('admin/view')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="nav-icon fas fa-eye"></i>
             <p>View Parents </p>
           </a>
         </li>
@@ -124,7 +124,7 @@
       </li>
       <li class="nav-item">
         <a href="{{ route('admin.view.graduation') }}" class="nav-link">
-          <i class="nav-icon fas fa-copy"></i>
+          <i class="nav-icon fas fa-user-graduate"></i>
           <p>
             Graduations
           </p>
@@ -132,7 +132,7 @@
       </li>
       <li class="nav-item">
         <a href="{{ url('admin/countryenrollments')}}" class="nav-link">
-          <i class="fas fa-database"></i>
+          <i class="nav-icon fas fa-database"></i>
           <p>
             Country Data
           </p>
@@ -141,7 +141,7 @@
 
       <li class="nav-item">
         <a href="{{ url('admin/fees-services')}}" class="nav-link">
-          <i class="fas fa-database"></i>
+          <i class="nav-icon fas fa-dollar-sign"></i>
           <p>
             Fees
           </p>
@@ -149,7 +149,7 @@
       </li>
       <li class="nav-item">
         <a href="{{ route('admin.record.request') }}" class="nav-link">
-          <i class="nav-icon fas fa-copy"></i>
+          <i class="nav-icon fas fa-exchange-alt"></i>
           <p>
             Record Transfer
           </p>
@@ -157,7 +157,7 @@
       </li>
       <li class="nav-item">
         <a href="{{ route('admin.logout')}}" class="nav-link">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="nav-icon fas fa-sign-out-alt"></i>
           <p>
             Logout
           </p>
