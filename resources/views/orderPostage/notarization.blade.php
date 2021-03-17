@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Notarization & Appostile')
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
@@ -148,11 +148,11 @@
                         <td>${{ getFeeDetails('express_international') }}</td>
                     </tr>
                     <tr>
-                        <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="express_international">
+                        <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="united_postal_service">
                             <h3 class="mb-0 mt-1">United Postal Service (UPS)</h3>
                             <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
                         </td>
-                        <td>${{ getFeeDetails('express_international') }}</td>
+                        <td>${{ getFeeDetails('united_postal_service') }}</td>
                     </tr>
                     <tr>
                         <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="global_guaranteed_international">
@@ -174,10 +174,10 @@
                         <td>${{ getFeeDetails('express_usa') }}</td>
                     </tr>
                     <tr>
-                        <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="express_international">
+                        <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="usa_domestic_prioirity_mail">
                             <h3 class="mb-0 mt-1">USA Domestic First Class Mail</h3>
                         </td>
-                        <td>${{ getFeeDetails('express_international') }}</td>
+                        <td>${{ getFeeDetails('usa_domestic_prioirity_mail') }}</td>
                     </tr>
                 </tbody>
             </table>

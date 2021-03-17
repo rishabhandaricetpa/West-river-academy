@@ -124,6 +124,7 @@
         @endforeach
         <!-- /.card-body -->
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a type="button" href="{{ route('admin.genrate.adminConfirmition',$student->id) }}" class="btn btn-primary">Generate Confirmation</a>
     </div>
   </div>
 

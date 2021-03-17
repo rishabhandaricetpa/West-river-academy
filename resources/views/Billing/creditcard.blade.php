@@ -5,7 +5,7 @@
 </head>
 
 @extends('layouts.app')
-
+@section('pageTitle', 'Payment Details')
 @section('content')
 <main class="position-relative container form-content mt-4">
     <h1 class="text-center text-white text-uppercase">Payment Details</h1>

@@ -158,7 +158,11 @@
         {
           "data": "id",
           "render": function(id) {
-            return `<a href="graduations/${id}/edit">Graduations</a>`;
+            if (id == null) {
+              return `<a href="graduations/${id}/edit">Graduations</a>`;
+            } else {
+              return `<label> Not Applied </label>`;
+            }
           }
         },
       ]

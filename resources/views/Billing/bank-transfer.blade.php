@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Billing Information')
 @section('content')
 
 <main class="position-relative container form-content mt-4">
@@ -7,7 +7,7 @@
    <div class="form-wrap border bg-light py-5 px-25">
       <h2 class="mb-3">TransferWise</h2>
       <p>If you are able to use TransferWise, it’s the least expensive way to pay your fees. Here are our Transfer details.</p>
-      <form method="POST"  class="mb-0">
+      <form method="POST" class="mb-0">
          <div class="form-group d-sm-flex mb-2">
             <label for="">Account Holder</label>
             <div> {{$tranferwise->account_holder}}</div>
@@ -31,9 +31,9 @@
          <div class="form-group d-sm-flex mb-2">
             <label for="">Address</label>
             <div>
-            <p class="mb-1">{{$tranferwise->address}}</p>
-            <p class="mb-1">{{$tranferwise->state}}</p>
-           <p class="mb-1"> {{$tranferwise->country}}</p>
+               <p class="mb-1">{{$tranferwise->address}}</p>
+               <p class="mb-1">{{$tranferwise->state}}</p>
+               <p class="mb-1"> {{$tranferwise->country}}</p>
             </div>
          </div>
          <div class="form-group d-sm-flex mb-0">
@@ -57,8 +57,8 @@
          <div class="form-group d-sm-flex mb-2">
             <label for="">Bank Address</label>
             <div>
-          <p>{{$banktransfer->bank_address}}</p>
-          <p>{{$banktransfer->street}}</p>
+               <p>{{$banktransfer->bank_address}}</p>
+               <p>{{$banktransfer->street}}</p>
             </div>
          </div>
          <div class="form-group d-sm-flex mb-2">

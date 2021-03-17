@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('pageTitle', 'Grade & School')
 
 @section('content')
 <main class="position-relative container form-content mt-4 label-styling label-md">

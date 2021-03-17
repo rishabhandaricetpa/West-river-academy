@@ -10,6 +10,7 @@ use App\Models\GraduationDetail;
 use App\Models\GraduationPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
+use App\Models\Notification;
 use Auth;
 use App\Models\Dashboard;
 use Illuminate\Http\Request;
@@ -118,7 +119,9 @@ class GraduationController extends Controller
 
                     $data->total_fee = $total_fee;
                     $data->message = $message;
-
+                    
+                    Notification::create(['parent_profile_id' => ParentProfile::getParentId(), 'content' => 'Your application for graduation has been approved!', 'type' => 'graduation_approved', 'read' => 'false']);
+                    
                     Mail::to($data->parent->p1_email)->send(new GraduationApproved($data));
                 }
             }

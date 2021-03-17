@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Order Custom Letter')
 @section('content')
 <main class="position-relative container form-content mt-4">
     <div class="form-wrap border bg-light form-content small-container">

@@ -11,6 +11,7 @@ use App\Models\FeeStructure;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
+use App\Models\ConfirmationLetter;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -103,15 +104,16 @@ class StudentController extends Controller
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
-
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer'));
+        $confirmLetter = StudentProfile::where('parent_profile_id', $parentId)
+            ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
+            ->with('enrollmentPeriods')->get();
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter'));
     }
 
-    public function confirmationpage($id)
+    public function confirmationpage($student_id)
     {
-        $student = StudentProfile::all();
-
-        return view('viewConfirmation', compact('student', 'id'));
+        $student = StudentProfile::whereId('student_id')->first();
+        return view('viewConfirmation', compact('student', 'student_id'));
     }
 
     protected function store(Request $data)
@@ -169,9 +171,15 @@ class StudentController extends Controller
                     'status' => 'pending',
                     'amount' => $fee,
                 ]);
-
                 $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
                 $enrollPeriod->save();
+                $confirmlink = ConfirmationLetter::create([
+                    'student_profile_id' => $student->id,
+                    'pdf_link' => '',
+                    'status' => 'pending',
+                    'enrollment_period_id' => $enrollPeriod->id
+                ]);
+                $confirmlink->save();
             }
             DB::commit();
 
@@ -179,6 +187,7 @@ class StudentController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Student added successfully', 'data' => $student]);
             }
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
 
             if ($data->expectsJson()) {
@@ -271,7 +280,13 @@ class StudentController extends Controller
             'type' => $type,
         ]);
         $enrollPeriod->save();
-
+        //confirmation periods 
+        $confirmlink = ConfirmationLetter::create([
+            'student_profile_id' => $student->id,
+            'pdf_link' => '',
+            'status' => 'pending',
+            'enrollment_period_id' => $enrollPeriod->id
+        ]);
         $EnrollmentPayment = EnrollmentPayment::where('enrollment_period_id', $enrollPeriod->id)->first();
 
         if (is_null($EnrollmentPayment)) {
