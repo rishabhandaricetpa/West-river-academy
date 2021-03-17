@@ -14,7 +14,7 @@ class RecordTransferController extends Controller
 {
     public function index()
     {
-        $schoolRecords = RecordTransfer::all();
+        $schoolRecords = RecordTransfer::select()->orderBy('id', 'DESC')->get();
 
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }

@@ -37,9 +37,10 @@
                     <div class="form-group">
                         <label for="assigned_to" class="col-form-label">Assigned To:</label>
                         <select class="form-control" id="assigned_to" name="assigned_to">
+                            <option value="" disabled>Please Select One</option>
                             <option value="Peggy">Peggy</option>
                             <option value="Stacey">Stacey</option>
-                            <option value="risha">risha</option>
+                            <option value="risha">Rachel</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -82,7 +83,11 @@
                                     <td>{{$data->created_date}}</td>
                                     <td>{{$data->linked_to}}</td>
                                     <td>{{$data->notes}}</td>
+                                    @if(is_null($data->assigned_to))
+                                    <td class="odd bg-primary">Not Yet Assigned</td>
+                                    @elseif($data->assigned_to)
                                     <td>{{$data->assigned_to}}</td>
+                                    @endif
                                     <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboard(event.target)" data-toggle="modal" data-target="#assignRecord" class="btn btn-primary">Assign</a></td>
                                 </tr>
                                 @endforeach
