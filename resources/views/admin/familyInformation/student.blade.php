@@ -34,31 +34,31 @@
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>School Name</th>
+                                    <th>Date od Birth</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Actions</th>
+                                    <th>View Payments</th>
+                                    <th>View Transcript</th>
+                                    <th>View Graduations</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($schoolRecords as $record)
+                                @foreach($students as $student)
                                 <tr>
-                                    <td>{{$record['student']['fullname']}}</td>
-                                    <td>{{$record->school_name}}</td>
-                                    <td>{{$record->email}}</td>
-                                    <td>{{$record->phone_number}}</td>
-
-                                    <td>{{$record->status}} </br>
-                                        @if($record->resendCount)
-                                        Resend Requested:{{$record->resendCount}}
-                                        @endif
+                                    <td>{{$student->fullname}}</td>
+                                    <td>{{$student->gender}}</td>
+                                    <td>{{$student->email}}</td>
+                                    <td>{{$student->payment_status}} </br>
                                     </td>
-
                                     <td>
-                                        <a href="{{route('admin.student.schoolRecord',$record->student_profile_id)}}">
-                                            <i class=" fas fa-arrow-alt-circle-right"></i></a>
+                                        <a href="{{route('admin.edit-student',$student->id)}}"><i class="fas fa-edit"></i></a>
+                                        <a href="{{route('admin.delete.student',$student->id)}}"><i class="fas fa-trash-alt"></i></a>
                                     </td>
+                                    <td><a href="{{route('admin.edit.student.payment',$student->id)}}">View Payments</a></br></td>
+                                    <td><a href="{{route('admin.edit.transcript',$student->id)}}">View Transcripts</a></br></td>
+                                    <td><a href="{{route('admin.view.graduation',$student->id)}}">View Graduations</a></br></td>
+
                                 </tr>
                                 @endforeach
                             </tbody>

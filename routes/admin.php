@@ -150,6 +150,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
 
     //dashboard notification
+    Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
 });

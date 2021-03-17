@@ -26,6 +26,7 @@ Vue.component('enroll-student', require('./components/EnrollStudent.vue').defaul
 Vue.component('edit-enroll', require('./components/EditEnrollStudent.vue').default);
 Vue.component('billing-shipping', require('./components/address.vue').default);
 Vue.component('get-cart', require('./components/Cart.vue').default);
+Vue.component('notification-bell', require('./components/Notification.vue').default);
 
 //courses
 Vue.component('english-course', require('./components/Courses/EnglishCourse.vue').default);
@@ -55,4 +56,8 @@ Vue.component('edit-another', require('./components/EditCourses/EditAnotherCours
 
 const app = new Vue({
     el: '#app',
+});
+
+const notification = new Vue({
+    el: '#notification-container',
 });

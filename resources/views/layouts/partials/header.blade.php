@@ -17,7 +17,7 @@
 <!-- * =============== Header =============== * -->
 <header class="site-header">
   <nav class="navbar navbar-expand-lg navbar-dark px-0">
-    <a class="navbar-brand" href="/"><img src="/images/wra_logo.svg" alt="wra_logo"></a>
+    <a class="navbar-brand" href="{{route('dashboard')}}"><img src="/images/wra_logo.svg" alt="wra_logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-header" aria-controls="main-header" aria-expanded="false" aria-label="Toggle navigation">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -53,22 +53,8 @@
         <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
         <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
       </div>
-      <div class="notification-wrap position-relative">
-        <button type="button" class="text-white notify-btn bg-transparent border-0"><i class="fas fa-bell fa-2x"></i></button>
-        <div class="notification d-none">
-          <ul class="list-unstyled">
-            <li class="border-bottom mb-3 pb-3">
-              <p>Your application for graduation has been approved!</p>
-              <a href="#" class="btn btn-primary">pay the fee</a>
-              <span class="notify-time">01:00 PM</span>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-              <span class="notify-time">12:40 PM</span>
-            </li>
-          </ul>
-          <a href="#" class="text-secondary float-right mb-2">View Old Notifications</a>
-        </div>
+      <div id="notification-container">
+        <notification-bell></notification-bell>
       </div>
       @else
       <div class="action-buttons">
@@ -80,6 +66,3 @@
 
   </nav>
 </header>
-
-
-<!-- * =============== /Header =============== * -->

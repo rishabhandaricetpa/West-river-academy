@@ -23,8 +23,7 @@ class NotarizationController extends Controller
             ->where('parent_profile_id', $parent_id)
             ->with('graduation')
             ->get();
-        $transcriptdoc = TranscriptPdf::select('transcript_pdf.pdf_link', 'documents.pdf_link')->whereNotNull('transcript_pdf.pdf_link')
-            ->join('documents', 'documents.student_profile_id', 'transcript_pdf.student_profile_id')
+        $transcriptdoc = TranscriptPdf::select('transcript_pdf.pdf_link')->whereNotNull('transcript_pdf.pdf_link')
             ->get();
         return view('orderPostage/notarization', compact('countries', 'students', 'transcriptdoc'));
     }

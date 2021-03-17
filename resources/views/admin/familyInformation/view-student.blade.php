@@ -4,13 +4,13 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
   <div class="container-fluid position-relative">
-        <h1>Student Information</h1>
-       <div class="d-flex">
-        <ol class="breadcrumb ml-auto">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Parent Information</li>
-        </ol>
-        </div>
+    <h1>Student Information</h1>
+    <div class="d-flex">
+      <ol class="breadcrumb ml-auto">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Students Information</li>
+      </ol>
+    </div>
   </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -32,6 +32,7 @@
                   <tr>
                     <th>Student Id</th>
                     <th>Student</th>
+                    <th>DOB</th>
                     <th>Gender</th>
                     <th>Email</th>
                     <th>Actions</th>

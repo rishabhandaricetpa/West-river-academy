@@ -1,8 +1,8 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Review Students')
 @section('content')
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">student enrollment</h1>
+  <h1 class="text-center text-white text-uppercase">Student Enrollment</h1>
   <div class="form-wrap border bg-light py-5 px-25">
     <h2>Review Student Enrollment Information</h2>
     <form method="POST" action="" class="pb-2">
@@ -47,7 +47,7 @@
     </form>
     <div>
       <h3 class="py-3">Fees</h3>
-      <form method="POST" action="{{route('add.cart')}}">
+      <form method="POST" id="review-form" action="{{route('add.cart')}}">
         @csrf
         <input type="hidden" name="type" value="enrollment_period">
         <div class="overflow-auto">
@@ -66,7 +66,7 @@
               @endphp
               @foreach ($fees as $fee)
               <tr>
-                <td style="min-width: 2rem; text-align:center"> <input type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
+                <td style="min-width: 2rem; text-align:center"> <input v-on:click="changeAmount($event, '{{ $fee->amount }}')" type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
                 <td>{{ $fee->first_name }}</td>
                 <td class="ml-2">
                   @if ($fee->type == 'annual') Annual @else Second Semester Only @endif
@@ -84,7 +84,7 @@
                 <td></td>
                 <td></td>
                 <td class="text-center">Total to Pay </td>
-                <td class="text-center"> ${{ $total_amount }}</td>
+                <td class="text-center"> $@{{ totalAmount }}</td>
               </tr>
             </tfoot>
           </table>
@@ -96,4 +96,31 @@
       </form>
     </div>
 </main>
+@endsection
+@section('manualscript')
+<script>
+  const reviewForm = new Vue({
+    el: '#review-form',
+    data() {
+      return {
+        totalAmount: '{{ $total_amount }}'
+      }
+    },
+    methods: {
+      changeAmount(event, amount) {
+        if (event.srcElement.checked) {
+          this.addAmount(amount)
+        } else {
+          this.deductAmount(amount)
+        }
+      },
+      deductAmount(amount) {
+        this.totalAmount -= amount * 1;
+      },
+      addAmount(amount) {
+        this.totalAmount += amount * 1;
+      }
+    }
+  });
+</script>
 @endsection

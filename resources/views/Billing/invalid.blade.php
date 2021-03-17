@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('pageTitle', 'Invalid Transaction')
 @section('content')
 
 <main class="position-relative container form-content mt-4">
@@ -8,4 +8,4 @@
     <p class="mb-0">Invalid Transaction ! Please check your add items to your cart.
     </p>
   </div>
-@endsection
+  @endsection
