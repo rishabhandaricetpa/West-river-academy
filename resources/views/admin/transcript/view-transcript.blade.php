@@ -2,8 +2,11 @@
 
 @section('content')
 
-<main class="position-relative container form-content mt-4">
+<main class="content">
+    <div class="position-relative container-fluid mt-0">
+        <div class="content-header">
     <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
+</div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">{{$student->first_name}}</h2>
         <form method="POST" action="" class="mb-0">
@@ -27,7 +30,7 @@
     </div>
     @foreach($transcriptData as $school)
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <legend>{{$school->school_name}}</legend>
+        <h2 class="mb-3">{{$school->school_name}}</h2>
         <p>
             Academic School Year(s):{{$school->enrollment_year}}<br>
             Grade: {{$school->grade}}<br>
@@ -68,6 +71,7 @@
         </form>
     </div>
     @endforeach
+    </div>
     </div>
 </main>
 @endsection

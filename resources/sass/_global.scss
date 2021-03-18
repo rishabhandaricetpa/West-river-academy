@@ -92,6 +92,7 @@ button {
 
 .btn {
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 .btn-secondary {
@@ -206,7 +207,7 @@ sup {
   top: 0;
 }
 
-.table-styling {
+.table-styling,.data-table {
   min-width: 500px;
   &.enlarge-input {
     td {
@@ -232,6 +233,7 @@ sup {
     font-family: "Catamaran", sans-serif;
     line-height: 1.2;
     font-size: 1rem;
+    vertical-align: middle;
   }
   tbody {
     td {

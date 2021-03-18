@@ -5,6 +5,13 @@
     ul .fas{
         display: inline-block !important;
     }  
+    .nav-treeview{
+        .nav-item{
+            p{
+                font-size: 14px;
+            }
+        }
+    }
 }
 
   .nav-sidebar{
@@ -135,4 +142,18 @@
 
 .flatpickr-input{
     @extend .form-control;
+}
+
+.dataTables_wrapper {
+    .custom-select-sm {
+        padding-right: 26px !important;
+    }
+    .data-table{
+        min-width: auto !important;
+    }
+    td{
+        a:not(:last-child){
+          @extend .mr-2;
+        }
+    }
 }
