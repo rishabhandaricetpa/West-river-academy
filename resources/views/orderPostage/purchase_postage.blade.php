@@ -36,14 +36,14 @@
                         <tr>
                             <td><input class="form-check-input" type="Radio" name="payment_for" value="united_postal_service">
                                 <h3 class="mb-0 mt-1">United Postal Service (UPS)</h3>
-                                <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
+                                <p class="mb-1">Recommended for South and Central American Countries. Tracking included.</p>
                             </td>
                             <td>${{ getFeeDetails('united_postal_service') }}</td>
                         </tr>
                         <tr>
                             <td><input class="form-check-input" type="Radio" name="payment_for" value="global_guaranteed_international">
                                 <h3 class="mb-0 mt-1">Global Express Guaranteed</h3>
-                                <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
+                                <p class="mb-1">1-3 business days to arrive, tracking door to door, $100 insurance.</p>
                             </td>
                             <td>${{ getFeeDetails('global_guaranteed_international') }}</td>
                         </tr>

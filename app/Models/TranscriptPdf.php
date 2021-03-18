@@ -10,7 +10,7 @@ class TranscriptPdf extends Model
     use HasFactory;
     protected $table = 'transcript_pdf';
     protected $fillable = [
-        'student_profile_id', 'pdf_link', 'status', 'transcript_id',
+        'student_profile_id', 'parent_profile_id', 'pdf_link', 'status', 'transcript_id',
     ];
 
     public function Transcript()

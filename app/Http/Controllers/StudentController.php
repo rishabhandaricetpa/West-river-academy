@@ -104,7 +104,7 @@ class StudentController extends Controller
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
-        $confirmLetter = StudentProfile::where('parent_profile_id', $parentId)
+        $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter'));
@@ -174,6 +174,7 @@ class StudentController extends Controller
                 $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
                 $enrollPeriod->save();
                 $confirmlink = ConfirmationLetter::create([
+                    'parent_profile_id' => $id,
                     'student_profile_id' => $student->id,
                     'pdf_link' => '',
                     'status' => 'pending',
@@ -187,7 +188,6 @@ class StudentController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Student added successfully', 'data' => $student]);
             }
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
 
             if ($data->expectsJson()) {
@@ -255,6 +255,7 @@ class StudentController extends Controller
 
     public function updateEnrollPeriod($period, $student, $enrollPeriod)
     {
+        $parent_profile = ParentProfile::getParentId();
         $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
@@ -281,7 +282,9 @@ class StudentController extends Controller
         ]);
         $enrollPeriod->save();
         //confirmation periods 
+
         $confirmlink = ConfirmationLetter::create([
+            'parent_profile_id' => $parent_profile,
             'student_profile_id' => $student->id,
             'pdf_link' => '',
             'status' => 'pending',

@@ -317,6 +317,7 @@ class TranscriptController extends Controller
 
         //store pdf link
         $storetranscript = TranscriptPdf::create([
+            'parent_profile_id' => ParentProfile::getParentId(),
             'student_profile_id' => $student_id,
             'transcript_id' => $transcrip_id, //save the transcript id to column
             'status' => 'completed',
