@@ -199,8 +199,8 @@
             </tbody>
          </table>
       </div>
-      <div class="mt-2 text-md-right">
-         <p>Download your Enrollment Confirmation Letters from the download links above.</p>
+      <div class="mt-2 text-right">
+         <p></p>
       </div>
       <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
       </form>

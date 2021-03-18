@@ -33,7 +33,7 @@ class ParentController extends Controller
 
     public function dataTable()
     {
-        return datatables(ParentProfile::with(['studentProfile', 'address'])->limit(10)->get())->toJson();
+        return datatables(ParentProfile::with(['studentProfile', 'address'])->get())->toJson();
     }
     public function deactive($id)
     {

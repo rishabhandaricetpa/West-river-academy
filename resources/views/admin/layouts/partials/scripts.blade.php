@@ -78,6 +78,8 @@
             return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
               `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
               `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
+
+
           }
         },
         {
