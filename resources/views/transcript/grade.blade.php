@@ -95,7 +95,7 @@
           <div class="form-group d-sm-flex mb-2 form-check">
             <input class="form-check-input" type="radio" name="school_name" value="Others">
             <label class="form-check-label" for="">
-              Other:Full Name of School
+              Other: Full Name of School
             </label>
             <div>
               <input type="text" class="form-control " name="other_school" autocomplete="">

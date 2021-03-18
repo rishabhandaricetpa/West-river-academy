@@ -53,7 +53,7 @@
                   <div class="form-group">
                     <div class="d-sm-flex mt-4">
                       <h3>Select a Grade</h3>
-                      <a href="#" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#GradeHelp">Help me decide</a>
+                      <a href="#" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#GradeHelp">Help me Decide</a>
                     </div>
                   <div class="form-check mb-1">
                         <input class="form-check-input" type="radio" name="" value="option1">

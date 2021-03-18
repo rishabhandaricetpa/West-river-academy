@@ -544,8 +544,8 @@ class Cart extends Model
                     }
                     $custom_payment->save();
                     Dashboard::create([
-                        'linked_to' => 'Custom Payment is done by user',
-                        'notes' => 'Custom Payment is done by ' . $parentName->p1_first_name,
+                        'linked_to' => 'Custom Payment Received',
+                        'notes' => 'Custom Payment Received From : ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
                     break;

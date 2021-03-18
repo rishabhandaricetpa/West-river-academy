@@ -1,5 +1,5 @@
 <template>
-  <form method="POST" @submit.prevent="addCourses()">
+  <form class="mb 0" method="POST" @submit.prevent="addCourses()">
     <div
       class="seperator mt-4"
       v-for="(maths, index) in form.mathscourse"
@@ -38,9 +38,9 @@
                   href="#chooseGrades"
                   data-toggle="modal"
                   class="btn btn-primary"
-                  >Help me decide</a
+                  >Help me Decide</a
                 >
-                <div class="row pl-sm-5">
+                <div class="row pl-sm-5 mt-3">
                   <div
                     v-for="(grade, index) in grades"
                     :key="index"
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-5">
+    <div class="mt-4">
       <a
         type="button"
         class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"

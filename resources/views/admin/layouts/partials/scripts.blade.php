@@ -27,12 +27,18 @@
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
   $(function() {
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    // $("#example1").DataTable({
+    //   "responsive": true,
+    //   "lengthChange": false,
+    //   "autoWidth": false,
+    //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    $('#example1').dataTable({
+      "ordering": false,
+      "pagination": true
+    });
+
 
     //parent datatable
     $("#family-table").DataTable({
@@ -72,6 +78,8 @@
             return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
               `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
               `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
+
+
           }
         },
         {
@@ -181,6 +189,7 @@
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
+      "ordering": false,
       "columns": [{
           "data": "id",
           "render": function(data, type, row, meta) {

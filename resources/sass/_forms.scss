@@ -219,7 +219,10 @@ input[type=radio] {
   width: 11px;
   height: 16px;
   border-width: 1px;
-  top: -3px;
+}
+
+table input[type=checkbox],table input[type=radio]{
+  top: 0;
 }
 
 input[type=checkbox] {
@@ -228,6 +231,8 @@ input[type=checkbox] {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  top: 4px;
+  position: relative;
 }
 
 input[type=radio] {
@@ -236,6 +241,8 @@ input[type=radio] {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  top: -3px;
+  position: absolute;
 }
 
 input[type=checkbox]:checked,
@@ -247,12 +254,11 @@ input[type=checkbox]:checked:before,
 input[type=radio]:checked:before {
   position: absolute;
   top: 2px;
-  left: -4;
+  left: 2px;
 }
 
 input[type=checkbox]:checked:before {
   content: "\F00C";
-  width: 24px;
   margin: 0;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;

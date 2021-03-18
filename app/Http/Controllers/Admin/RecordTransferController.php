@@ -14,7 +14,7 @@ class RecordTransferController extends Controller
 {
     public function index()
     {
-        $schoolRecords = RecordTransfer::all();
+        $schoolRecords = RecordTransfer::select()->orderBy('id', 'DESC')->get();
 
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }
@@ -28,7 +28,6 @@ class RecordTransferController extends Controller
 
     public function sendRecordToSchool(Request $request, $student_id)
     {
-        //dd($request->all());
         $record = RecordTransfer::find($request->record_id);
         $studentData = StudentProfile::find($student_id);
         $data['email'] = $request->get('email');
@@ -37,7 +36,7 @@ class RecordTransferController extends Controller
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
         $data['grade'] = $request->get('enrollmentyear');
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
-        $pdf = PDF::loadView('schoolRecord', $data);
+        $pdf = PDF::loadView('schoolRecordRequest', $data);
         Mail::send('admin.recordTransfer.sendSchoolRecord', $data, function ($message) use ($data, $pdf) {
             $message->to($data['email'], $data['email'])
                 ->subject($data['title'])
@@ -56,6 +55,7 @@ class RecordTransferController extends Controller
     public function resendRecordToSchool($record_id, $student_id)
     {
         $record = RecordTransfer::find($record_id);
+        $student_grade = StudentProfile::find($record->student_profile_id)->enrollmentPeriods()->get();
 
         if (empty($record->resendCount)) {
             $record->resendCount = 1;
@@ -76,13 +76,14 @@ class RecordTransferController extends Controller
         }
 
         $studentData = StudentProfile::where('id', $record->student_profile_id)->first();
-        // dd($studentData);
+
         $data['email'] = $record->email;
         $data['title'] = 'West River Academy';
         $data['name'] = $studentData->first_name;
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
-        $pdf = PDF::loadView('schoolRecord', $data);
+        $data['grade'] = $student_grade;
+        $pdf = PDF::loadView('schoolResendRecord', $data);
         Mail::send('admin.recordTransfer.sendSchoolRecord', $data, function ($message) use ($data, $pdf) {
             $message->to($data['email'], $data['email'])
                 ->subject($data['title'])

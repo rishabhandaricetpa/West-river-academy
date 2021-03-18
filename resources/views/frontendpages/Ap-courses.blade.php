@@ -16,7 +16,7 @@
       <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
         <div class="d-flex">
           <h3 class="mb-3">Did you take any AP courses and pass the AP Test?</h3>
-          <a href="#HelpmeDecide" data-toggle="modal" role="button" class="btn btn-primary ml-auto">Help me decide</a>
+          <a href="#HelpmeDecide" data-toggle="modal" role="button" class="btn btn-primary ml-auto">Help me Decide</a>
         </div>
         <div>
           <a data-toggle="collapse" href="#ap-courses" role="button" aria-expanded="false" aria-controls="ap-courses" class="btn btn-primary px-2r py-1">yes</a>

@@ -10,7 +10,7 @@
       @csrf
       <input type="hidden" name="transcript_id" value={{$transcriptData_id}}>
       <div class="form-group d-sm-flex mb-2">
-        <label for="exampleInputEmail1">First name</label>
+        <label for="exampleInputEmail1">First Name</label>
         <div>
           <input type="text" class="form-control " name="first_name" value="{{$studentProfile->first_name}}" autofocus="" required>
           <!--   <div class="alert alert-danger">Enter your user ID.</div> -->
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="text-left">
-        <a href="#HelpmeDecide" class="btn btn-primary" data-toggle="modal">Help me decide</a>
+        <a href="#HelpmeDecide" class="btn btn-primary" data-toggle="modal">Help me Decide</a>
       </div>
       <div class="mt-5 text-center">
         <button type="submit" class="btn btn-primary">Continue</button>
