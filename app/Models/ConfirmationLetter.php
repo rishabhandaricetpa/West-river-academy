@@ -10,6 +10,6 @@ class ConfirmationLetter extends Model
     use HasFactory;
     protected $table = 'confirmation_letters';
     protected $fillable = [
-        'student_profile_id', 'enrollment_period_id', 'pdf_link', 'status',
+        'student_profile_id', 'parent_profile_id', 'enrollment_period_id', 'pdf_link', 'status',
     ];
 }

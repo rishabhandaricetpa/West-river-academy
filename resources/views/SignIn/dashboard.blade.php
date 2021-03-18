@@ -146,7 +146,11 @@
                <tr>
                   <td>{{$student->fullname}}</td>
                   <td>{{$student->student_Id}}</td>
-                  <td>Active</td>
+                  @if(($student->status === 'completed') || ($student->status === 'paid'))
+                  <td>Completed</td>
+                  @elseif($student->status === 'pending')
+                  <td>Not Paid for Enrollment</td>
+                  @endif
                   @if(($student->status === 'completed') || ($student->status === 'paid'))
                   <td><a href="{{ route('view.confirm',$student->student_profile_id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
                   @elseif($student->status === 'pending')
