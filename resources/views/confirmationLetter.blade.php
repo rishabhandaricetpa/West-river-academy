@@ -9,7 +9,7 @@
 
 <body>
 
-<div style="text-align:center;width:300px;margin:0 auto;" >
+<div style="text-align:center;width:300px;margin:0 auto;">
       <img src="../public/images/letterhead.png" style="width:100%;object-fit:contain;" alt="logo-img">
     </div>
 

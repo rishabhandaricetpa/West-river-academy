@@ -130,12 +130,12 @@
       </tr>
     </tbody>
   </table>
-  <table style="margin-top:47%">
+  <table style="margin-top:3%">
     <tbody>
       <tr>
-        <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
-        <td width="20%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
-        <td width="20%"> <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo"></td>
+        <td width="50%" style="text-align:center;padding-right:30px;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
+        <td width="15%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
+        <td width="35%" style="text-align:right;"> <img src="../public/images/Stamp.png" style="width:150px;heigth:150px;object-fit:contain;" alt="logo"></td>
       </tr>
     </tbody>
   </table>
