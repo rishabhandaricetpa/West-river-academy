@@ -104,11 +104,17 @@ class TranscriptController extends Controller
                 ->first();
 
             if ($transcriptPayment) {
-                $transcriptData = $transcriptPayment->transcript_id;
-                $student = StudentProfile::find($id);
-                return view('transcript.dashboard-transcript', compact('student', 'transcriptPayment', 'transcriptData'));
+                if ($transcriptPayment->period == 'K-8') {
+                    $transcriptData = $transcriptPayment->transcript_id;
+                    $student = StudentProfile::find($id);
+                    return view('transcript.dashboard-transcript', compact('student', 'transcriptPayment', 'transcriptData'));
+                } else {
+                    // dd('9-12 view');
+                    $transcript = Transcript::where('student_profile_id', $id)->first();
+                    $transcript_id = $transcript->id;
+                    return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
+                }
             } else {
-                //dd($enroll_student);
                 return view('transcript.transcript-wizard', compact('enroll_student'));
             }
         }
@@ -252,31 +258,29 @@ class TranscriptController extends Controller
         }
     }
 
+
     public function purchase(Request $request, $id)
     {
         try {
             DB::beginTransaction();
+            $type = $request->get('grade');
+            // if ($request->get('grade') == 'K-8') {
+            $transcriptData = Transcript::create([
+                'parent_profile_id' => ParentProfile::getParentId(),
+                'student_profile_id' => $id,
+                'period' => $request->get('grade'),
+                'status' => 'pending',
+            ]);
 
-            if ($request->get('grade') == 'K-8') {
-                $transcriptData = Transcript::create([
-                    'parent_profile_id' => ParentProfile::getParentId(),
-                    'student_profile_id' => $id,
-                    'period' => 'K-8',
-                    'status' => 'pending',
-                ]);
+            $transcript_fee = FeesInfo::getFeeAmount('transcript');
+            TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
+            $transcript_id = $transcriptData->id;
 
-                $transcript_fee = FeesInfo::getFeeAmount('transcript');
-                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
-                $transcript_id = $transcriptData->id;
+            $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
+            $transcript_fee = FeesInfo::getFeeAmount('transcript');
+            DB::commit();
 
-                $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
-                $transcript_fee = FeesInfo::getFeeAmount('transcript');
-                DB::commit();
-
-                return view('transcript.purchase-transcript', compact('student', 'transcript_fee', 'transcript_id'));
-            } else {
-                dd('Add 9-12 screen');
-            }
+            return view('transcript.purchase-transcript', compact('student', 'transcript_fee', 'transcript_id', 'type'));
         } catch (\Exception $e) {
             DB::rollback();
             $notification = [

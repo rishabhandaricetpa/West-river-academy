@@ -122,8 +122,9 @@ class ParentController extends Controller
     }
 
     //Parent accounts edit information
-    public function mysettings($user_id)
+    public function mysettings()
     {
+        $user_id = Auth::user()->id;
         $parent = ParentProfile::where('user_id', $user_id)->first();
 
         return view('MyAccounts/myaccount', compact('parent', 'user_id'));
