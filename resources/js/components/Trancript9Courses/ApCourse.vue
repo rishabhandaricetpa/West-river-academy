@@ -22,6 +22,7 @@
               name=""
               value=""
               v-model="apCourse.course_name"
+              required
               aria-describedby=""
             />
           </div>
@@ -35,6 +36,7 @@
               <input
                 class="form-check-input"
                 type="radio"
+                required
                 v-model="apCourse.grade"
                 value="A"
               />
@@ -74,6 +76,7 @@
                     v-model="apCourse.credit"
                     id=""
                     :value="credit"
+                    required
                   />
 
                   <label class="form-check-label" for=""> {{ credit }}</label>
@@ -125,12 +128,12 @@ export default {
     submitCredit() {
       axios
         .post(route("apCourse.store"), this.form)
-        // .then(response => {
-        //   window.location =
-        //     "/english-transcript/" + this.student_id + "/" + this.transcript_id;
-        // })
+        .then(response => {
+          window.location =
+            "/english-transcript/" + this.student_id + "/" + this.transcript_id;
+        })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Unable to add course. Please try later!");
         });
     }
   }

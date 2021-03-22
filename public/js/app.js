@@ -5686,6 +5686,1028 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ApCourses",
+  data: function data() {
+    return {
+      form: {
+        student_id: this.student_id,
+        transcript_id: this.transcript_id,
+        apCourses: [{
+          course_name: "",
+          grade: "",
+          credit: ""
+        }]
+      }
+    };
+  },
+  props: ["transcript_id", "student_id", "all_credits"],
+  methods: {
+    addCourses: function addCourses() {
+      this.form.apCourses.push({
+        course_name: "",
+        grade: "",
+        credit: ""
+      });
+    },
+    submitCredit: function submitCredit() {
+      var _this = this;
+
+      axios.post(route("apCourse.store"), this.form).then(function (response) {
+        window.location = "/english-transcript/" + _this.student_id + "/" + _this.transcript_id;
+      })["catch"](function (error) {
+        alert("Unable to add course. Please try later!");
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "EnglishCourse",
+  data: function data() {
+    return {
+      isCredit: false,
+      form: {
+        remainingCredit: "",
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        englishCourse: [{
+          course_id: this.courses_id,
+          transcript_id: this.transcript_id,
+          student_id: this.student_id,
+          subject_name: "",
+          other_subject: "",
+          selectedCredit: "",
+          grade: ""
+        }]
+      }
+    };
+  },
+  props: ["englishcourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits"],
+  methods: {
+    showCredit: function showCredit(e) {
+      this.isCredit = true;
+      this.form.remainingCredit = this.total_credits.total_credit - e.target.value;
+      return this.isCredit;
+    },
+    addCourse: function addCourse() {
+      this.form.englishCourse.push({
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        student_id: this.student_id,
+        subject_name: "",
+        other_subject: "",
+        selectedCredit: "",
+        grade: ""
+      });
+    },
+    removeCourse: function removeCourse(index) {
+      this.form.englishCourse.splice(index, 1);
+    },
+    submitCourse: function submitCourse() {
+      var _this = this;
+
+      axios.post(route("english-transcript.store"), this.form).then(function (response) {
+        window.location = "/mathematics/" + _this.student_id + "/" + _this.transcript_id;
+      })["catch"](function (error) {
+        alert("Please choose the course or remove it");
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "SocialScienceCourse",
+  data: function data() {
+    return {
+      isCredit: false,
+      form: {
+        remainingCredit: "",
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        socialsciencecourse: [{
+          course_id: this.courses_id,
+          transcript_id: this.transcript_id,
+          student_id: this.student_id,
+          subject_name: "",
+          other_subject: "",
+          selectedCredit: "",
+          grade: ""
+        }]
+      }
+    };
+  },
+  props: ["historycourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits"],
+  methods: {
+    showCredit: function showCredit(e) {
+      this.isCredit = true;
+      this.form.remainingCredit = this.total_credits.total_credit - e.target.value;
+      return this.isCredit;
+    },
+    addCourse: function addCourse() {
+      this.form.socialsciencecourse.push({
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        student_id: this.student_id,
+        subject_name: "",
+        other_subject: "",
+        selectedCredit: "",
+        grade: ""
+      });
+    },
+    removeCourse: function removeCourse(index) {
+      this.form.socialsciencecourse.splice(index, 1);
+    },
+    submitCourse: function submitCourse() {
+      var _this = this;
+
+      axios.post(route("socialStudies-transcript.store"), this.form).then(function (response) {
+        window.location = "/science-transcript/" + _this.student_id + "/" + _this.transcript_id;
+      })["catch"](function (error) {
+        alert("Please choose the course or remove it");
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "MathsCourse",
+  data: function data() {
+    return {
+      isCredit: false,
+      form: {
+        remainingCredit: "",
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        mathscourse: [{
+          course_id: this.courses_id,
+          transcript_id: this.transcript_id,
+          student_id: this.student_id,
+          subject_name: "",
+          other_subject: "",
+          selectedCredit: "",
+          grade: ""
+        }]
+      }
+    };
+  },
+  props: ["maths", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits"],
+  methods: {
+    showCredit: function showCredit(e) {
+      this.isCredit = true;
+      this.form.remainingCredit = this.total_credits.total_credit - e.target.value;
+      return this.isCredit;
+    },
+    addCourse: function addCourse() {
+      this.form.mathscourse.push({
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        student_id: this.student_id,
+        subject_name: "",
+        other_subject: "",
+        selectedCredit: "",
+        grade: ""
+      });
+    },
+    removeCourse: function removeCourse(index) {
+      this.form.mathscourse.splice(index, 1);
+    },
+    submitCourse: function submitCourse() {
+      var _this = this;
+
+      axios.post(route("maths-transcript.store"), this.form).then(function (response) {
+        window.location = "/socialStudies/" + _this.student_id + "/" + _this.transcript_id;
+      })["catch"](function (error) {
+        alert("Please choose the course or remove it");
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ScienceCourse",
+  data: function data() {
+    return {
+      isCredit: false,
+      form: {
+        remainingCredit: "",
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        scienceCourse: [{
+          course_id: this.courses_id,
+          transcript_id: this.transcript_id,
+          student_id: this.student_id,
+          subject_name: "",
+          other_subject: "",
+          selectedCredit: "",
+          grade: ""
+        }]
+      }
+    };
+  },
+  props: ["science", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits"],
+  methods: {
+    showCredit: function showCredit(e) {
+      this.isCredit = true;
+      this.form.remainingCredit = this.total_credits.total_credit - e.target.value;
+      return this.isCredit;
+    },
+    addCourse: function addCourse() {
+      this.form.scienceCourse.push({
+        course_id: this.courses_id,
+        transcript_id: this.transcript_id,
+        student_id: this.student_id,
+        subject_name: "",
+        other_subject: "",
+        selectedCredit: "",
+        grade: ""
+      });
+    },
+    removeCourse: function removeCourse(index) {
+      this.form.scienceCourse.splice(index, 1);
+    },
+    submitCourse: function submitCourse() {
+      var _this = this;
+
+      axios.post(route("science-transcript.store"), this.form).then(function (response) {
+        window.location = "/physicalEducation/" + _this.student_id + "/" + _this.transcript_id;
+      })["catch"](function (error) {
+        alert("Please choose the course or remove it");
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/address.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/address.vue?vue&type=script&lang=js& ***!
@@ -38849,6 +39871,2042 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=template&id=3f356e92&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=template&id=3f356e92& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "mb-0 px-0 mt-2r unstyled-label collapse",
+      attrs: { method: "POST", id: "ap-courses" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submitCredit()
+        }
+      }
+    },
+    [
+      _vm._l(_vm.form.apCourses, function(apCourse) {
+        return _c("div", { key: apCourse.id, staticClass: "seperator mt-4" }, [
+          _c("div", { staticClass: "col-sm-7 px-0" }, [
+            _c(
+              "div",
+              { staticClass: "form-group d-sm-flex  align-items-center" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "h3 text-black mb-0", attrs: { for: "" } },
+                  [_vm._v("AP Course Name")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-75" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: apCourse.course_name,
+                        expression: "apCourse.course_name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "",
+                      name: "",
+                      value: "",
+                      required: "",
+                      "aria-describedby": ""
+                    },
+                    domProps: { value: apCourse.course_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(apCourse, "course_name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group mb-2 mt-2r" }, [
+              _c(
+                "label",
+                { staticClass: "h3 text-black mb-3", attrs: { for: "" } },
+                [_vm._v("What grade did you receive?")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-sm-flex" }, [
+                _c("div", { staticClass: "form-check" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: apCourse.grade,
+                        expression: "apCourse.grade"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "radio", required: "", value: "A" },
+                    domProps: { checked: _vm._q(apCourse.grade, "A") },
+                    on: {
+                      change: function($event) {
+                        return _vm.$set(apCourse, "grade", "A")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "form-check-label", attrs: { for: "" } },
+                    [_vm._v("A")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check ml-5" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: apCourse.grade,
+                        expression: "apCourse.grade"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "radio", value: "B" },
+                    domProps: { checked: _vm._q(apCourse.grade, "B") },
+                    on: {
+                      change: function($event) {
+                        return _vm.$set(apCourse, "grade", "B")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "form-check-label", attrs: { for: "" } },
+                    [_vm._v("B")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check ml-5" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: apCourse.grade,
+                        expression: "apCourse.grade"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "radio", value: "C" },
+                    domProps: { checked: _vm._q(apCourse.grade, "C") },
+                    on: {
+                      change: function($event) {
+                        return _vm.$set(apCourse, "grade", "C")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "form-check-label", attrs: { for: "" } },
+                    [_vm._v("C")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group mb-2 mt-2r" }, [
+                _c(
+                  "label",
+                  { staticClass: "h3 text-black mb-3", attrs: { for: "" } },
+                  [_vm._v("Select Credit")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "d-sm-flex" },
+                  _vm._l(_vm.all_credits, function(credits) {
+                    return _c(
+                      "div",
+                      { key: credits.id, staticClass: "form-check" },
+                      _vm._l(credits, function(credit) {
+                        return _c("div", { key: credit.id }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: apCourse.credit,
+                                expression: "apCourse.credit"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", id: "", required: "" },
+                            domProps: {
+                              value: credit,
+                              checked: _vm._q(apCourse.credit, credit)
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(apCourse, "credit", credit)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v(" " + _vm._s(credit))]
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center mt-5" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("\n      I'm finished adding AP Courses\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary ml-4",
+            on: {
+              click: function($event) {
+                return _vm.addCourses()
+              }
+            }
+          },
+          [_vm._v("Add Another AP Course")]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=template&id=e4e1bc7a&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=template&id=e4e1bc7a& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "mb-0 px-0 unstyled-label",
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submitCourse()
+        }
+      }
+    },
+    [
+      _vm._l(_vm.form.englishCourse, function(englishCourse) {
+        return _c(
+          "div",
+          { key: englishCourse.id, staticClass: "seperator mt-4" },
+          [
+            _c("div", { staticClass: "position-relative" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "remove",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeCourse(_vm.index)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-times" })]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7 px-0" }, [
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: englishCourse.subject_name,
+                            expression: "englishCourse.subject_name"
+                          }
+                        ],
+                        staticClass: "form-control text-uppercase",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              englishCourse,
+                              "subject_name",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.englishcourse, function(Course) {
+                          return _c("option", { key: Course }, [
+                            _vm._v(
+                              "\n              " + _vm._s(Course.subject_name)
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "h3 text-black mb-0", attrs: { for: "" } },
+                      [_vm._v("Other")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-100" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: englishCourse.other_subject,
+                            expression: "englishCourse.other_subject"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "",
+                          value: "other",
+                          "aria-describedby": ""
+                        },
+                        domProps: { value: englishCourse.other_subject },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              englishCourse,
+                              "other_subject",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: englishCourse.grade,
+                          expression: "englishCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "A" },
+                      domProps: { checked: _vm._q(englishCourse.grade, "A") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(englishCourse, "grade", "A")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("A")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: englishCourse.grade,
+                          expression: "englishCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "B" },
+                      domProps: { checked: _vm._q(englishCourse.grade, "B") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(englishCourse, "grade", "B")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("B")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: englishCourse.grade,
+                          expression: "englishCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "C" },
+                      domProps: { checked: _vm._q(englishCourse.grade, "C") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(englishCourse, "grade", "C")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("C")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: englishCourse.grade,
+                          expression: "englishCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "D", value: "D" },
+                      domProps: { checked: _vm._q(englishCourse.grade, "D") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(englishCourse, "grade", "D")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("D")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: englishCourse.grade,
+                          expression: "englishCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "Pass" },
+                      domProps: {
+                        checked: _vm._q(englishCourse.grade, "Pass")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(englishCourse, "grade", "Pass")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("Pass")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
+                    _c("h3", { staticClass: "text-black" }, [
+                      _vm._v(
+                        "\n              Select Credit: The recommended credit for a one-year course is\n              selected. You may change it.\n            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: englishCourse.selectedCredit,
+                            expression: "englishCourse.selectedCredit"
+                          }
+                        ],
+                        staticClass: "form-control min-select",
+                        attrs: {
+                          "data-toggle": "collapse",
+                          href: "#remainingCredits",
+                          role: "button",
+                          "aria-expanded": "false",
+                          "aria-controls": "remainingCredits"
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                englishCourse,
+                                "selectedCredit",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            _vm.showCredit
+                          ]
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.all_credits, function(credit) {
+                          return _c("option", { key: credit.id }, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(credit.credit) +
+                                "\n              "
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.isCredit
+                      ? _c("h3", [
+                          _vm._v(
+                            "\n              You have\n              " +
+                              _vm._s(
+                                _vm.total_credits.total_credit -
+                                  englishCourse.selectedCredit
+                              ) +
+                              "\n              out of\n              " +
+                              _vm._s(_vm.total_credits.total_credit) +
+                              "\n              remaining credits for this year.\n            "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-2r" }, [
+        _c(
+          "a",
+          { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
+          [_vm._v("Add another English/Language Arts Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary ml-4 float-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("\n      Continue\n    ")]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "mb-3" }, [
+      _vm._v("\n          Select an English/Language Arts course:"),
+      _c("i", {
+        staticClass:
+          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Tooltip on top"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-sm-flex mt-4" }, [
+      _c("h3", [_vm._v("Select a Grade")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary ml-auto",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#GradeHelp"
+          }
+        },
+        [_vm._v("Help me Decide")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=template&id=6109e232&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=template&id=6109e232& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "mb-0 px-0 unstyled-label",
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submitCourse()
+        }
+      }
+    },
+    [
+      _vm._l(_vm.form.socialsciencecourse, function(socialsciencecourse) {
+        return _c(
+          "div",
+          { key: socialsciencecourse.id, staticClass: "seperator mt-4" },
+          [
+            _c("div", { staticClass: "position-relative" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "remove",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeCourse(_vm.index)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-times" })]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7 px-0" }, [
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: socialsciencecourse.subject_name,
+                            expression: "socialsciencecourse.subject_name"
+                          }
+                        ],
+                        staticClass: "form-control text-uppercase",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              socialsciencecourse,
+                              "subject_name",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.historycourse, function(Course) {
+                          return _c("option", { key: Course }, [
+                            _vm._v(
+                              "\n              " + _vm._s(Course.subject_name)
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "h3 text-black mb-0", attrs: { for: "" } },
+                      [_vm._v("Other")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-100" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: socialsciencecourse.other_subject,
+                            expression: "socialsciencecourse.other_subject"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "",
+                          value: "other",
+                          "aria-describedby": ""
+                        },
+                        domProps: { value: socialsciencecourse.other_subject },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              socialsciencecourse,
+                              "other_subject",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: socialsciencecourse.grade,
+                          expression: "socialsciencecourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "A" },
+                      domProps: {
+                        checked: _vm._q(socialsciencecourse.grade, "A")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(socialsciencecourse, "grade", "A")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("A")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: socialsciencecourse.grade,
+                          expression: "socialsciencecourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "B" },
+                      domProps: {
+                        checked: _vm._q(socialsciencecourse.grade, "B")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(socialsciencecourse, "grade", "B")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("B")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: socialsciencecourse.grade,
+                          expression: "socialsciencecourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "C" },
+                      domProps: {
+                        checked: _vm._q(socialsciencecourse.grade, "C")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(socialsciencecourse, "grade", "C")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("C")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: socialsciencecourse.grade,
+                          expression: "socialsciencecourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "D", value: "D" },
+                      domProps: {
+                        checked: _vm._q(socialsciencecourse.grade, "D")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(socialsciencecourse, "grade", "D")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("D")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: socialsciencecourse.grade,
+                          expression: "socialsciencecourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "Pass" },
+                      domProps: {
+                        checked: _vm._q(socialsciencecourse.grade, "Pass")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(socialsciencecourse, "grade", "Pass")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("Pass")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
+                    _c("h3", { staticClass: "text-black" }, [
+                      _vm._v(
+                        "\n              Select Credit: The recommended credit for a one-year course is\n              selected. You may change it.\n            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: socialsciencecourse.selectedCredit,
+                            expression: "socialsciencecourse.selectedCredit"
+                          }
+                        ],
+                        staticClass: "form-control min-select",
+                        attrs: {
+                          "data-toggle": "collapse",
+                          href: "#remainingCredits",
+                          role: "button",
+                          "aria-expanded": "false",
+                          "aria-controls": "remainingCredits"
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                socialsciencecourse,
+                                "selectedCredit",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            _vm.showCredit
+                          ]
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.all_credits, function(credit) {
+                          return _c("option", { key: credit.id }, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(credit.credit) +
+                                "\n              "
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.isCredit
+                      ? _c("h3", [
+                          _vm._v(
+                            "\n              You have\n              " +
+                              _vm._s(
+                                _vm.total_credits.total_credit -
+                                  socialsciencecourse.selectedCredit
+                              ) +
+                              "\n              out of\n              " +
+                              _vm._s(_vm.total_credits.total_credit) +
+                              "\n              remaining credits for this year.\n            "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-2r" }, [
+        _c(
+          "a",
+          { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
+          [_vm._v("Add another History / Social Science Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary ml-4 float-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("\n      Continue\n    ")]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "mb-3" }, [
+      _vm._v("\n          Select an History / Social Science Arts course:"),
+      _c("i", {
+        staticClass:
+          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Tooltip on top"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-sm-flex mt-4" }, [
+      _c("h3", [_vm._v("Select a Grade")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary ml-auto",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#GradeHelp"
+          }
+        },
+        [_vm._v("Help me Decide")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=template&id=8b013804&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=template&id=8b013804& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "mb-0 px-0 unstyled-label",
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submitCourse()
+        }
+      }
+    },
+    [
+      _vm._l(_vm.form.mathscourse, function(mathscourse) {
+        return _c(
+          "div",
+          { key: mathscourse.id, staticClass: "seperator mt-4" },
+          [
+            _c("div", { staticClass: "position-relative" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "remove",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeCourse(_vm.index)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-times" })]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7 px-0" }, [
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: mathscourse.subject_name,
+                            expression: "mathscourse.subject_name"
+                          }
+                        ],
+                        staticClass: "form-control text-uppercase",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              mathscourse,
+                              "subject_name",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.maths, function(Course) {
+                          return _c("option", { key: Course }, [
+                            _vm._v(
+                              "\n              " + _vm._s(Course.subject_name)
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "h3 text-black mb-0", attrs: { for: "" } },
+                      [_vm._v("Other")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-100" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: mathscourse.other_subject,
+                            expression: "mathscourse.other_subject"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "",
+                          value: "other",
+                          "aria-describedby": ""
+                        },
+                        domProps: { value: mathscourse.other_subject },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              mathscourse,
+                              "other_subject",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: mathscourse.grade,
+                          expression: "mathscourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "A" },
+                      domProps: { checked: _vm._q(mathscourse.grade, "A") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(mathscourse, "grade", "A")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("A")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: mathscourse.grade,
+                          expression: "mathscourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "B" },
+                      domProps: { checked: _vm._q(mathscourse.grade, "B") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(mathscourse, "grade", "B")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("B")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: mathscourse.grade,
+                          expression: "mathscourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "C" },
+                      domProps: { checked: _vm._q(mathscourse.grade, "C") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(mathscourse, "grade", "C")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("C")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: mathscourse.grade,
+                          expression: "mathscourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "D", value: "D" },
+                      domProps: { checked: _vm._q(mathscourse.grade, "D") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(mathscourse, "grade", "D")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("D")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: mathscourse.grade,
+                          expression: "mathscourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "Pass" },
+                      domProps: { checked: _vm._q(mathscourse.grade, "Pass") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(mathscourse, "grade", "Pass")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("Pass")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
+                    _c("h3", { staticClass: "text-black" }, [
+                      _vm._v(
+                        "\n              Select Credit: The recommended credit for a one-year course is\n              selected. You may change it.\n            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: mathscourse.selectedCredit,
+                            expression: "mathscourse.selectedCredit"
+                          }
+                        ],
+                        staticClass: "form-control min-select",
+                        attrs: {
+                          "data-toggle": "collapse",
+                          href: "#remainingCredits",
+                          role: "button",
+                          "aria-expanded": "false",
+                          "aria-controls": "remainingCredits"
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                mathscourse,
+                                "selectedCredit",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            _vm.showCredit
+                          ]
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.all_credits, function(credit) {
+                          return _c("option", { key: credit.id }, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(credit.credit) +
+                                "\n              "
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.isCredit
+                      ? _c("h3", [
+                          _vm._v(
+                            "\n              You have\n              " +
+                              _vm._s(
+                                _vm.total_credits.total_credit -
+                                  mathscourse.selectedCredit
+                              ) +
+                              "\n              out of\n              " +
+                              _vm._s(_vm.total_credits.total_credit) +
+                              "\n              remaining credits for this year.\n            "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-2r" }, [
+        _c(
+          "a",
+          { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
+          [_vm._v("Add another Mathematics/Language Arts Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary ml-4 float-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("\n      Continue\n    ")]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "mb-3" }, [
+      _vm._v("\n          Select an Mathematics/Language Arts course:"),
+      _c("i", {
+        staticClass:
+          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Tooltip on top"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-sm-flex mt-4" }, [
+      _c("h3", [_vm._v("Select a Grade")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary ml-auto",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#GradeHelp"
+          }
+        },
+        [_vm._v("Help me Decide")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=template&id=3b01c0b7&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=template&id=3b01c0b7& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "mb-0 px-0 unstyled-label",
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submitCourse()
+        }
+      }
+    },
+    [
+      _vm._l(_vm.form.scienceCourse, function(scienceCourse) {
+        return _c(
+          "div",
+          { key: scienceCourse.id, staticClass: "seperator mt-4" },
+          [
+            _c("div", { staticClass: "position-relative" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "remove",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeCourse(_vm.index)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-times" })]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7 px-0" }, [
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: scienceCourse.subject_name,
+                            expression: "scienceCourse.subject_name"
+                          }
+                        ],
+                        staticClass: "form-control text-uppercase",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              scienceCourse,
+                              "subject_name",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.science, function(Course) {
+                          return _c("option", { key: Course }, [
+                            _vm._v(
+                              "\n              " + _vm._s(Course.subject_name)
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group d-sm-flex  align-items-center" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "h3 text-black mb-0", attrs: { for: "" } },
+                      [_vm._v("Other")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-100" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: scienceCourse.other_subject,
+                            expression: "scienceCourse.other_subject"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "",
+                          value: "other",
+                          "aria-describedby": ""
+                        },
+                        domProps: { value: scienceCourse.other_subject },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              scienceCourse,
+                              "other_subject",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: scienceCourse.grade,
+                          expression: "scienceCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "A" },
+                      domProps: { checked: _vm._q(scienceCourse.grade, "A") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(scienceCourse, "grade", "A")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("A")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: scienceCourse.grade,
+                          expression: "scienceCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "B" },
+                      domProps: { checked: _vm._q(scienceCourse.grade, "B") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(scienceCourse, "grade", "B")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("B")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: scienceCourse.grade,
+                          expression: "scienceCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "C" },
+                      domProps: { checked: _vm._q(scienceCourse.grade, "C") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(scienceCourse, "grade", "C")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("C")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: scienceCourse.grade,
+                          expression: "scienceCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "D", value: "D" },
+                      domProps: { checked: _vm._q(scienceCourse.grade, "D") },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(scienceCourse, "grade", "D")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("D")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check mb-1" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: scienceCourse.grade,
+                          expression: "scienceCourse.grade"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "radio", name: "", value: "Pass" },
+                      domProps: {
+                        checked: _vm._q(scienceCourse.grade, "Pass")
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(scienceCourse, "grade", "Pass")
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [_vm._v("Pass")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
+                    _c("h3", { staticClass: "text-black" }, [
+                      _vm._v(
+                        "\n              Select Credit: The recommended credit for a one-year course is\n              selected. You may change it.\n            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: scienceCourse.selectedCredit,
+                            expression: "scienceCourse.selectedCredit"
+                          }
+                        ],
+                        staticClass: "form-control min-select",
+                        attrs: {
+                          "data-toggle": "collapse",
+                          href: "#remainingCredits",
+                          role: "button",
+                          "aria-expanded": "false",
+                          "aria-controls": "remainingCredits"
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                scienceCourse,
+                                "selectedCredit",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            _vm.showCredit
+                          ]
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Please select one")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.all_credits, function(credit) {
+                          return _c("option", { key: credit.id }, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(credit.credit) +
+                                "\n              "
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.isCredit
+                      ? _c("h3", [
+                          _vm._v(
+                            "\n              You have\n              " +
+                              _vm._s(
+                                _vm.total_credits.total_credit -
+                                  scienceCourse.selectedCredit
+                              ) +
+                              "\n              out of\n              " +
+                              _vm._s(_vm.total_credits.total_credit) +
+                              "\n              remaining credits for this year.\n            "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-2r" }, [
+        _c(
+          "a",
+          { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
+          [_vm._v("Add another Science Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary ml-4 float-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("\n      Continue\n    ")]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "mb-3" }, [
+      _vm._v("\n          Select an Science Arts course:"),
+      _c("i", {
+        staticClass:
+          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Tooltip on top"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-sm-flex mt-4" }, [
+      _c("h3", [_vm._v("Select a Grade")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary ml-auto",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#GradeHelp"
+          }
+        },
+        [_vm._v("Help me Decide")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/address.vue?vue&type=template&id=21fc0379&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/address.vue?vue&type=template&id=21fc0379& ***!
@@ -60260,7 +63318,7 @@ Vue.component('enroll-student', __webpack_require__(/*! ./components/EnrollStude
 Vue.component('edit-enroll', __webpack_require__(/*! ./components/EditEnrollStudent.vue */ "./resources/js/components/EditEnrollStudent.vue")["default"]);
 Vue.component('billing-shipping', __webpack_require__(/*! ./components/address.vue */ "./resources/js/components/address.vue")["default"]);
 Vue.component('get-cart', __webpack_require__(/*! ./components/Cart.vue */ "./resources/js/components/Cart.vue")["default"]);
-Vue.component('notification-bell', __webpack_require__(/*! ./components/Notification.vue */ "./resources/js/components/Notification.vue")["default"]); //courses
+Vue.component('notification-bell', __webpack_require__(/*! ./components/Notification.vue */ "./resources/js/components/Notification.vue")["default"]); //courses - K-8
 
 Vue.component('english-course', __webpack_require__(/*! ./components/Courses/EnglishCourse.vue */ "./resources/js/components/Courses/EnglishCourse.vue")["default"]);
 Vue.component('social-studies', __webpack_require__(/*! ./components/Courses/SocialStudiesCourse.vue */ "./resources/js/components/Courses/SocialStudiesCourse.vue")["default"]);
@@ -60269,7 +63327,7 @@ Vue.component('science-course', __webpack_require__(/*! ./components/Courses/Sci
 Vue.component('physical-educatiom', __webpack_require__(/*! ./components/Courses/PhysicalEducation.vue */ "./resources/js/components/Courses/PhysicalEducation.vue")["default"]);
 Vue.component('health-course', __webpack_require__(/*! ./components/Courses/HealthCourse.vue */ "./resources/js/components/Courses/HealthCourse.vue")["default"]);
 Vue.component('foreign-course', __webpack_require__(/*! ./components/Courses/ForeignCourse.vue */ "./resources/js/components/Courses/ForeignCourse.vue")["default"]);
-Vue.component('another-course', __webpack_require__(/*! ./components/Courses/AnotherCourse.vue */ "./resources/js/components/Courses/AnotherCourse.vue")["default"]); //edit courses
+Vue.component('another-course', __webpack_require__(/*! ./components/Courses/AnotherCourse.vue */ "./resources/js/components/Courses/AnotherCourse.vue")["default"]); //edit courses K-8
 
 Vue.component('edit-english-course', __webpack_require__(/*! ./components/EditCourses/EditEnglishCourse.vue */ "./resources/js/components/EditCourses/EditEnglishCourse.vue")["default"]);
 Vue.component('edit-social-studies', __webpack_require__(/*! ./components/EditCourses/EditSocialStudies.vue */ "./resources/js/components/EditCourses/EditSocialStudies.vue")["default"]);
@@ -60279,6 +63337,12 @@ Vue.component('edit-physical', __webpack_require__(/*! ./components/EditCourses/
 Vue.component('edit-health', __webpack_require__(/*! ./components/EditCourses/EditHealthCourse.vue */ "./resources/js/components/EditCourses/EditHealthCourse.vue")["default"]);
 Vue.component('edit-foreign', __webpack_require__(/*! ./components/EditCourses/EditForeignCourse.vue */ "./resources/js/components/EditCourses/EditForeignCourse.vue")["default"]);
 Vue.component('edit-another', __webpack_require__(/*! ./components/EditCourses/EditAnotherCourse.vue */ "./resources/js/components/EditCourses/EditAnotherCourse.vue")["default"]);
+Vue.component('ap-course', __webpack_require__(/*! ./components/Trancript9Courses/ApCourse.vue */ "./resources/js/components/Trancript9Courses/ApCourse.vue")["default"]); //courses 9-12
+
+Vue.component('english-transcript-course', __webpack_require__(/*! ./components/TranscriptCourses/EnglishCourse.vue */ "./resources/js/components/TranscriptCourses/EnglishCourse.vue")["default"]);
+Vue.component('maths-transcript-course', __webpack_require__(/*! ./components/TranscriptCourses/MathsCourse.vue */ "./resources/js/components/TranscriptCourses/MathsCourse.vue")["default"]);
+Vue.component('history-transcript-course', __webpack_require__(/*! ./components/TranscriptCourses/HistoryCourse.vue */ "./resources/js/components/TranscriptCourses/HistoryCourse.vue")["default"]);
+Vue.component('science-transcript-course', __webpack_require__(/*! ./components/TranscriptCourses/ScienceCourse.vue */ "./resources/js/components/TranscriptCourses/ScienceCourse.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -61733,6 +64797,351 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Trancript9Courses/ApCourse.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Trancript9Courses/ApCourse.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ApCourse_vue_vue_type_template_id_3f356e92___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ApCourse.vue?vue&type=template&id=3f356e92& */ "./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=template&id=3f356e92&");
+/* harmony import */ var _ApCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ApCourse.vue?vue&type=script&lang=js& */ "./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ApCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ApCourse_vue_vue_type_template_id_3f356e92___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ApCourse_vue_vue_type_template_id_3f356e92___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Trancript9Courses/ApCourse.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ApCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ApCourse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ApCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=template&id=3f356e92&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=template&id=3f356e92& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApCourse_vue_vue_type_template_id_3f356e92___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ApCourse.vue?vue&type=template&id=3f356e92& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trancript9Courses/ApCourse.vue?vue&type=template&id=3f356e92&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApCourse_vue_vue_type_template_id_3f356e92___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApCourse_vue_vue_type_template_id_3f356e92___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/EnglishCourse.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/EnglishCourse.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EnglishCourse_vue_vue_type_template_id_e4e1bc7a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EnglishCourse.vue?vue&type=template&id=e4e1bc7a& */ "./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=template&id=e4e1bc7a&");
+/* harmony import */ var _EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EnglishCourse.vue?vue&type=script&lang=js& */ "./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EnglishCourse_vue_vue_type_template_id_e4e1bc7a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EnglishCourse_vue_vue_type_template_id_e4e1bc7a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TranscriptCourses/EnglishCourse.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./EnglishCourse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=template&id=e4e1bc7a&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=template&id=e4e1bc7a& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_template_id_e4e1bc7a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./EnglishCourse.vue?vue&type=template&id=e4e1bc7a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/EnglishCourse.vue?vue&type=template&id=e4e1bc7a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_template_id_e4e1bc7a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnglishCourse_vue_vue_type_template_id_e4e1bc7a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/HistoryCourse.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/HistoryCourse.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HistoryCourse_vue_vue_type_template_id_6109e232___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HistoryCourse.vue?vue&type=template&id=6109e232& */ "./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=template&id=6109e232&");
+/* harmony import */ var _HistoryCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HistoryCourse.vue?vue&type=script&lang=js& */ "./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HistoryCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HistoryCourse_vue_vue_type_template_id_6109e232___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HistoryCourse_vue_vue_type_template_id_6109e232___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TranscriptCourses/HistoryCourse.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HistoryCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./HistoryCourse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HistoryCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=template&id=6109e232&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=template&id=6109e232& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HistoryCourse_vue_vue_type_template_id_6109e232___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./HistoryCourse.vue?vue&type=template&id=6109e232& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/HistoryCourse.vue?vue&type=template&id=6109e232&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HistoryCourse_vue_vue_type_template_id_6109e232___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HistoryCourse_vue_vue_type_template_id_6109e232___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/MathsCourse.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/MathsCourse.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MathsCourse_vue_vue_type_template_id_8b013804___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MathsCourse.vue?vue&type=template&id=8b013804& */ "./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=template&id=8b013804&");
+/* harmony import */ var _MathsCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MathsCourse.vue?vue&type=script&lang=js& */ "./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MathsCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MathsCourse_vue_vue_type_template_id_8b013804___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MathsCourse_vue_vue_type_template_id_8b013804___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TranscriptCourses/MathsCourse.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MathsCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MathsCourse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MathsCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=template&id=8b013804&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=template&id=8b013804& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MathsCourse_vue_vue_type_template_id_8b013804___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MathsCourse.vue?vue&type=template&id=8b013804& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/MathsCourse.vue?vue&type=template&id=8b013804&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MathsCourse_vue_vue_type_template_id_8b013804___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MathsCourse_vue_vue_type_template_id_8b013804___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/ScienceCourse.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/ScienceCourse.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ScienceCourse_vue_vue_type_template_id_3b01c0b7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ScienceCourse.vue?vue&type=template&id=3b01c0b7& */ "./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=template&id=3b01c0b7&");
+/* harmony import */ var _ScienceCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScienceCourse.vue?vue&type=script&lang=js& */ "./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ScienceCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ScienceCourse_vue_vue_type_template_id_3b01c0b7___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ScienceCourse_vue_vue_type_template_id_3b01c0b7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TranscriptCourses/ScienceCourse.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScienceCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ScienceCourse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScienceCourse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=template&id=3b01c0b7&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=template&id=3b01c0b7& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScienceCourse_vue_vue_type_template_id_3b01c0b7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ScienceCourse.vue?vue&type=template&id=3b01c0b7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TranscriptCourses/ScienceCourse.vue?vue&type=template&id=3b01c0b7&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScienceCourse_vue_vue_type_template_id_3b01c0b7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScienceCourse_vue_vue_type_template_id_3b01c0b7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

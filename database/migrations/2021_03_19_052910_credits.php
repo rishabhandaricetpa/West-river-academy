@@ -17,6 +17,8 @@ class Credits extends Migration
             $table->id();
             $table->float('credit');
             $table->string('country');
+            $table->boolean('is_carnegia');
+            $table->float('total_credit');
             $table->timestamps();
         });
     }
