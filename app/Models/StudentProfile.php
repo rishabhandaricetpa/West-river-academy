@@ -61,6 +61,11 @@ class StudentProfile extends Model
         return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');
     }
 
+    public function dashboard()
+    {
+        return $this->hasOne('App\Models\Dashboard', 'student_profile_id', 'student_profile_id');
+    }
+
     public function graduationAddress()
     {
         return $this->hasOneThrough(

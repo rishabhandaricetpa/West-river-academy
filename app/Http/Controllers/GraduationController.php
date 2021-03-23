@@ -67,15 +67,16 @@ class GraduationController extends Controller
                 'grade_11_info' => $inputs['grade_eleven_option'] === 'other' ? $inputs['grade_eleven_other'] : $inputs['grade_eleven_option'],
                 'status' => 'pending',
             ];
-
             StudentProfile::whereId($inputs['student_id'])->update(['email' => $inputs['email']]);
             $graduation = Graduation::create($data);
             GraduationPayment::updateOrInsert(['graduation_id' => $graduation->id], ['amount' => $fee]);
             GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
             $studentName = StudentProfile::whereId($inputs['student_id'])->first();
             Dashboard::create([
-                'linked_to' => 'A Student has applied for the Graduation Process',
-                'notes' => 'Name of Student: ' . $studentName->fullname,
+                'student_profile_id' => $request->student_id,
+                'linked_to' => $graduation->id,
+                'related_to' => 'graduation_record_received',
+                'notes' => 'Graduation Record Received for' . $studentName->fullname,
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();
@@ -84,6 +85,7 @@ class GraduationController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record added successfully']);
             }
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
 
             if ($request->expectsJson()) {
@@ -119,9 +121,9 @@ class GraduationController extends Controller
 
                     $data->total_fee = $total_fee;
                     $data->message = $message;
-                    
+
                     Notification::create(['parent_profile_id' => ParentProfile::getParentId(), 'content' => 'Your application for graduation has been approved!', 'type' => 'graduation_approved', 'read' => 'false']);
-                    
+
                     Mail::to($data->parent->p1_email)->send(new GraduationApproved($data));
                 }
             }

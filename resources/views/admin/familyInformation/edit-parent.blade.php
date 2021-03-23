@@ -3,16 +3,16 @@
 @section('content')
 <section class="content">
   <div class="container-fluid position-relative">
-    <h1>Edit Parent Information</h1>
+    <h1>Parent Details</h1>
     <div class="form-wrap border py-5 px-25 position-relative">
       <!-- form start -->
       <form method="post" class="row" action="{{route('admin.parent.update',$parent->id)}}">
         @csrf
         <div class="form-group col-sm-6">
-          <label>User Status<sup>*</sup> <sup>{{$parent->status===0 ?'Active':'Deactive'}}</sup></label>
-          <select id="status" name="status" class="form-control" value="{{$parent->status===0?'Active':'Deactive'}}">
+          <label>User Status<sup>*</sup> <sup>{{$parent->status===0 ?'Active':'Inactive'}}</sup></label>
+          <select id="status" name="status" class="form-control" value="{{$parent->status===0?'Active':'Inactive'}}">
             <option value="0">Active</option>
-            <option value="1">Deactive</option>
+            <option value="1">Inactive</option>
           </select>
         </div>
         <div class="form-group col-sm-6">
@@ -76,11 +76,11 @@
           <input class="form-control" id="country" name="country" value="{{$parent->country}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Reference</label>
+          <label>Referred by</label>
           <input class="form-control" id="reference" name="reference" value="{{$parent->reference}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Immunized Status<sup>*</sup></label>
+          <label>Immunization Status<sup>*</sup></label>
           <input class="form-control" id="immunized" name="immunized" value="{{$parent->immunized}}">
         </div>
         <div class="col-sm-12">

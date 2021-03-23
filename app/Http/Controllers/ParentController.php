@@ -107,7 +107,7 @@ class ParentController extends Controller
 
             if ($payment_type['payment_type'] == 'Credit Card') {
                 return route('stripe.payment');
-            } elseif ($payment_type['payment_type'] == 'Pay Pal') {
+            } elseif ($payment_type['payment_type'] == 'PayPal') {
                 return route('paywithpaypal');
             } elseif ($payment_type['payment_type'] == 'Bank Transfer') {
                 return route('order.review');

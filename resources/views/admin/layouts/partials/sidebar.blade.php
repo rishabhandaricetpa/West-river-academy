@@ -126,7 +126,7 @@
         <a href="{{ route('admin.view.graduation') }}" class="nav-link">
           <i class="nav-icon fas fa-user-graduate"></i>
           <p>
-            Graduations
+            Graduation
           </p>
         </a>
       </li>
@@ -143,7 +143,7 @@
         <a href="{{ url('admin/fees-services')}}" class="nav-link">
           <i class="nav-icon fas fa-dollar-sign"></i>
           <p>
-            Fees
+            Fees an Services
           </p>
         </a>
       </li>
@@ -159,7 +159,7 @@
         <a href="{{ route('admin.logout')}}" class="nav-link">
           <i class="nav-icon fas fa-sign-out-alt"></i>
           <p>
-            Logout
+            Log Out
           </p>
         </a>
       </li>

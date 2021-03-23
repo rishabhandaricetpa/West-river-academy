@@ -39,6 +39,7 @@ class TranscriptController extends Controller
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
         $student = StudentProfile::find($id);
+
         return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
     }
 
@@ -49,9 +50,7 @@ class TranscriptController extends Controller
         $transcriptData = TranscriptK8::Where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
-
-        $student = StudentProfile::find($student_id);
-
+        $student = StudentProfile::whereId($student_id)->with('ParentProfile')->first();
         return view('admin.transcript.view-transcript', compact('student', 'transcriptData', 'transcript_id'));
     }
 
