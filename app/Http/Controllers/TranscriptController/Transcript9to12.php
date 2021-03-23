@@ -111,7 +111,7 @@ class Transcript9to12 extends Controller
             DB::commit();
             $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
             // if output is 0 then they belongs to california 
-            $all_credits = Credits::where('is_carnegia', $is_carnegie)->select('credit')->get();
+            $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
             return view('transcript9to12.Ap-courses', compact('student_id', 'transcript_id', 'all_credits'));
         } catch (\Exception $e) {
             DB::rollback();
