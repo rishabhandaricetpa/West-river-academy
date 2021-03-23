@@ -26,7 +26,7 @@
                                     <th>Amount Paid</th>
                                     <th>Paying for</th>
                                     <th>Transaction Id</th>
-                                    <th>Payment Mode</th>
+                                    <th>Payment Method</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>

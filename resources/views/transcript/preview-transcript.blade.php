@@ -8,7 +8,7 @@
   <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
     <p>I'm finished with this transcript. I want to see what it looks like</p>
     <a href="{{ url('/transcript-pdf') }}" class="btn btn-primary mt-4 font-weight-bold" data-toggle="modal" data-target="#previewTranscriptModal">View Transcript</a>
-
+    <a href="{{ route('submit.transcript',[$student->id,$transcript_id->id]) }}" class="btn btn-primary mt-4 font-weight-bold">Submit</a>
   </div>
 </main>
 

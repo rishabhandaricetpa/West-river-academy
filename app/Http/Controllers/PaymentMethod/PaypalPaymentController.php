@@ -148,7 +148,7 @@ class PaypalPaymentController extends Controller
 
         $paypal = new TransactionsMethod();
         $paypal->transcation_id = $payment_id;
-        $paypal->payment_mode = 'Pay pal';
+        $paypal->payment_mode = 'PayPal';
         $paypal->parent_profile_id = Auth::user()->id;
         $paypal->amount = $enroll_fees->amount;
         $paypal->status = 'succeeded';
@@ -156,7 +156,7 @@ class PaypalPaymentController extends Controller
         $paypal->coupon_amount = $coupon_amount;
         $paypal->save();
 
-        Cart::emptyCartAfterPayment('Pay pal', 'paid', $payment_id);
+        Cart::emptyCartAfterPayment('PayPal', 'paid', $payment_id);
 
         if ($result->getState() == 'approved') {
             $notification = [

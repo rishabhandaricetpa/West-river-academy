@@ -48,6 +48,9 @@ class RecordTransferController extends Controller
             $recordTransfer->save();
 
             Dashboard::create([
+                'student_profile_id' => $student_id,
+                'linked_to' => $recordTransfer->id,
+                'related_to' => 'record_transfer',
                 'linked_to' => 'Record Transfer Request',
                 'notes' => 'Student Name : ' . $recordTransfer['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
