@@ -52,10 +52,13 @@ Vue.component('ap-course', require('./components/Trancript9Courses/ApCourse.vue'
 
 //courses 9-12
 Vue.component('english-transcript-course', require('./components/TranscriptCourses/EnglishCourse.vue').default);
-
 Vue.component('maths-transcript-course', require('./components/TranscriptCourses/MathsCourse.vue').default);
 Vue.component('history-transcript-course', require('./components/TranscriptCourses/HistoryCourse.vue').default);
 Vue.component('science-transcript-course', require('./components/TranscriptCourses/ScienceCourse.vue').default);
+Vue.component('physical-transcript-course', require('./components/TranscriptCourses/PhysicalEducationCourse.vue').default);
+Vue.component('health-transcript-course', require('./components/TranscriptCourses/HealthCourse.vue').default);
+Vue.component('foreign-transcript-course', require('./components/TranscriptCourses/ForeignCourse.vue').default);
+Vue.component('another-transcript-course', require('./components/TranscriptCourses/AnotherCourse.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

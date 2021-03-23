@@ -282,12 +282,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('english-transcript', 'TranscriptCourses\EnglishCourse@store')->name('english-transcript.store');
 
     //mathematics course
-    Route::get('mathematics/{student_id}/{transcript_id}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
+    Route::get('mathematics-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
     Route::post('maths-transcript', 'TranscriptCourses\MathematicsCourse@store')->name('maths-transcript.store');
 
     // histroy 
     Route::get('socialStudies/{student_id}/{transcript_id}', 'TranscriptCourses\SocialStudiesCourse@index')->name('socialScience.transcript.course');
-    Route::post('social-studies', 'TranscriptCourses\SocialStudiesCourse@store')->name('socialStudies-transcript.store');
+    Route::post('social-studies-store', 'TranscriptCourses\SocialStudiesCourse@store')->name('socialStudies-transcript.store');
 
     //science
     Route::get('science-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\ScienceCourse@index')->name('socialScience.transcript.course');
@@ -295,4 +295,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //physical education
     Route::get('physicalEducation-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\PhysicalEducationCourse@index')->name('physcialEducation.transcript.course');
+    Route::post('physicalEducation', 'TranscriptCourses\PhysicalEducationCourse@store')->name('physicalEducation-transcript.store');
+
+    //health course
+    Route::get('healthCourse-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\HealthCourse@index')->name('healthCourse-transcript');
+    Route::post('health-store', 'TranscriptCourses\HealthCourse@store')->name('healthEducation-transcript.store');
+
+    //foreign course 
+    Route::get('/foreignCourse-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\ForeignCourse@index')->name('foreignCourse-transcript');
+    Route::post('foreignCourse', 'TranscriptCourses\ForeignCourse@store')->name('foreign-transcript.store');
+
+    //another courses
+    Route::get('/anotherCourse-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\AnotherCourse@index')->name('anotherCourse-transcript');
+    Route::post('anotherCourse', 'TranscriptCourses\AnotherCourse@store')->name('another-transcript.store');
+
+    // another grade
+    Route::get('another-grade-transcript/{student_id}/{transcript_id}', 'TranscriptController\Transcript9to12@anotherGrade')->name('another.transcript.grade');
+    Route::post('is-another', 'TranscriptController\Transcript9to12@getAnotherGradeStatus')->name('transcript.anotherGrade');
 });

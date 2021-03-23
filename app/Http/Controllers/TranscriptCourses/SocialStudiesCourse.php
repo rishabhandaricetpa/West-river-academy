@@ -40,6 +40,8 @@ class SocialStudiesCourse extends Controller
         //create new course
         foreach ($request->get('socialsciencecourse', []) as $period) {
             $other_subjects = $period['other_subject'];
+            $selectedCredit =  $period['selectedCredit'];
+            $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([
                     'courses_id' => $period['course_id'],
@@ -53,7 +55,8 @@ class SocialStudiesCourse extends Controller
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
                     'remaining_credits' => $request->get('remainingCredit'),
-                    'credit_id' => 1,
+                    'credit_id' => $credit->id,
+                    'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
@@ -68,6 +71,7 @@ class SocialStudiesCourse extends Controller
                     'subject_id' => $subject->id,
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
+                    'selectedCredit' => $period['selectedCredit'],
                     'remaining_credits' => $request->get('remainingCredit'),
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);

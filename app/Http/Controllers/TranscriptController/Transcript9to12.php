@@ -138,4 +138,24 @@ class Transcript9to12 extends Controller
             ]);
         }
     }
+    public function anotherGrade($student_id, $transcript_id)
+    {
+        return view('transcript9to12.another-grade-level', compact('student_id', 'transcript_id'));
+    }
+    public function getAnotherGradeStatus(Request $request)
+    {
+        // dd($request->all());
+        if ($request->get('another_grade') == 'Yes') {
+            $id = $request->get('student_id');
+            $enroll_student = StudentProfile::find($id);
+
+
+
+
+
+            return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
+        } else {
+            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas'));
+        }
+    }
 }

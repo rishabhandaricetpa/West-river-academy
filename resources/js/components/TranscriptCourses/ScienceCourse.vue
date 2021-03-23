@@ -210,7 +210,10 @@ export default {
         .post(route("science-transcript.store"), this.form)
         .then(response => {
           window.location =
-            "/physicalEducation/" + this.student_id + "/" + this.transcript_id;
+            "/physicalEducation-transcript/" +
+            this.student_id +
+            "/" +
+            this.transcript_id;
         })
         .catch(error => {
           alert("Please choose the course or remove it");
