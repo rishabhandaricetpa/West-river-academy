@@ -13,6 +13,7 @@ use App\Models\StudentProfile;
 use App\Models\Transcript;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
+use App\Models\Dashboard;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -182,12 +183,20 @@ class StudentController extends Controller
                 ]);
                 $confirmlink->save();
             }
+            Dashboard::create([
+                'student_profile_id' => $student->id,
+                'linked_to' => $student->Name,
+                'related_to' => 'student_record_received',
+                'notes' => 'New Student Record Received for' . $student->first_name . $student->last_name,
+                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            ]);
             DB::commit();
 
             if ($data->expectsJson()) {
                 return response()->json(['status' => 'success', 'message' => 'Student added successfully', 'data' => $student]);
             }
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
 
             if ($data->expectsJson()) {

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CourseTableSeeder::class);
         $this->call(SubjectTableSeeder::class);
         $this->call(AdminLoginSeeder::class);
+        $this->call(CreditTableSeeder::class);
         Model::reguard();
     }
 }

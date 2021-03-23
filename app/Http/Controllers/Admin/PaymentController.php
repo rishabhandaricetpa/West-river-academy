@@ -46,8 +46,8 @@ class PaymentController extends Controller
     {
         $enroll_payment = EnrollmentPayment::find($id);
         $enrollment_periods = EnrollmentPayment::find($id)->enrollment_period()->first();
-
-        return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods'));
+        $student = StudentProfile::find($id);
+        return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods', 'student'));
     }
 
     public function update(Request $request, $payment_id)

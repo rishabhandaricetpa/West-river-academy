@@ -49,12 +49,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "p1_first_name"
         },
         {
@@ -69,7 +63,7 @@
             if (status === 0)
               return `<td> Active User</td>`;
             else
-              return `<td> Deactive User </td>`;
+              return `<td> Inactive User </td>`;
           }
         },
         {
@@ -133,19 +127,22 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "fullname"
         },
         {
-          "data": "birthdate"
+          "data": "birthdate",
+          "render": function(data) {
+            return (moment(data).format("MMM DD YYYY"));
+          }
         },
         {
           "data": "gender"
+        },
+        // {
+        //   "data": "parent_profile.state"
+        // },
+        {
+          "data": "parent_profile.country"
         },
         {
           "data": "email"
@@ -170,12 +167,12 @@
           }
         },
         {
-          "data": "id",
-          "render": function(id) {
-            if (id == null) {
-              return `<a href="graduations/${id}/edit">Graduations</a>`;
-            } else {
+          "data": "graduation.id",
+          "render": function(data) {
+            if (data == null) {
               return `<label> Not Applied </label>`;
+            } else {
+              return `<a href="graduations/${data}/edit">Graduation</a>`;
             }
           }
         },
@@ -240,7 +237,10 @@
           "data": "student.email"
         },
         {
-          "data": "student.birthdate"
+          "data": "student.birthdate",
+          "render": function(data) {
+            return (moment(data).format("MMMM DD YYYY"));
+          }
         },
         {
           "data": "grade_9_info",

@@ -286,12 +286,12 @@
               class="form-check-input"
               type="radio"
               name="payment_type"
-              value="Pay Pal"
+              value="PayPal"
               v-model="form.paymentMethod.payment_type"
             />
           </div>
           <div class="payment-info">
-            <h3>Pay Pal</h3>
+            <h3>PayPal</h3>
             <p>
               You will be redirected to the PayPal website to complete your
               payment.

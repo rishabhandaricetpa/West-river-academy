@@ -84,7 +84,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('notification', function () {
             return Notification::getParentNotifications();
         })->name('notification.get');
-
     });
 
     //Paypal Payment
@@ -127,7 +126,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/coupon/apply/{code}', 'Admin\CouponController@applyCoupon')->name('coupon.apply');
     Route::get('/coupon/remove', 'Admin\CouponController@removeAppliedCoupon')->name('coupon.remove');
 
-    Route::get('/mysettings/{id}', 'ParentController@mysettings');
+    Route::get('/mysettings', 'ParentController@mysettings')->name('mysetting');
     Route::get('/editaccount/{id}', 'ParentController@editmysettings');
     Route::post('/updateaccount/{id}', 'ParentController@updatemysettings')->name('update.account');
     Route::get('/reset', function () {
@@ -266,6 +265,34 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
     Route::get('custom-letter', 'PaymentMethod\CustomLetterController@index')->name('custom.letter');
 
-    //order Notarization
+    // transcript 9-12
 
+    Route::get('select/country/{student_id}/{transcript_id}', 'TranscriptController\Transcript9to12@selectCountry')->name('selecting.country');
+    Route::post('select/grade/{student_id}', 'TranscriptController\Transcript9to12@selectGrade')->name('select.grade');
+    Route::post('select/enrollmentyear/{student_id}', 'TranscriptController\Transcript9to12@enrollSchool')->name('enrollSchool');
+    Route::post('choose/apcourse/{student_id}', 'TranscriptController\Transcript9to12@enrollYear')->name('select.apCourse');
+    Route::post('apCourses/{student_id}', 'TranscriptController\Transcript9to12@apCourses')->name('apCourse');
+
+    // ap course
+    Route::post('apcourse/store', 'TranscriptController\Transcript9to12@storeApCourses')->name('apCourse.store');
+    // transcript courses
+
+    // english course
+    Route::get('english-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\EnglishCourse@index')->name('english.transcript.course');
+    Route::post('english-transcript', 'TranscriptCourses\EnglishCourse@store')->name('english-transcript.store');
+
+    //mathematics course
+    Route::get('mathematics/{student_id}/{transcript_id}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
+    Route::post('maths-transcript', 'TranscriptCourses\MathematicsCourse@store')->name('maths-transcript.store');
+
+    // histroy 
+    Route::get('socialStudies/{student_id}/{transcript_id}', 'TranscriptCourses\SocialStudiesCourse@index')->name('socialScience.transcript.course');
+    Route::post('social-studies', 'TranscriptCourses\SocialStudiesCourse@store')->name('socialStudies-transcript.store');
+
+    //science
+    Route::get('science-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\ScienceCourse@index')->name('socialScience.transcript.course');
+    Route::post('science-transcript', 'TranscriptCourses\ScienceCourse@store')->name('science-transcript.store');
+
+    //physical education
+    Route::get('physicalEducation-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\PhysicalEducationCourse@index')->name('physcialEducation.transcript.course');
 });

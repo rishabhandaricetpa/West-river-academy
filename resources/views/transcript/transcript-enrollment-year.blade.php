@@ -17,7 +17,7 @@
           </label>
         </div>
         @endforeach
-        Choose Other Year <input type="text" name="other_year">
+        Choose Other Year <input type="number" name="other_year">
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary" data-dismiss="modal">Continue</button>
