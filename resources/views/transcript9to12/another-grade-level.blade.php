@@ -5,7 +5,7 @@
    <h1 class="text-center text-white text-uppercase">enroll students</h1>
    <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
       <h3 class="mb-3">Do you want to add another grade level?</h3>
-      <form method="post" class="mb-0" action="{{route('transcript.anotherGrade')}}">
+      <form method="get" class="mb-0" action="{{route('transcript.studentInfo',$student_id)}}">
          @csrf
          <div class="form-group mb-2 lato-italic info-detail pb-4 py-2">
             <div class="row ">
@@ -16,7 +16,7 @@
                         Yes
                      </label>
                      <input type="hidden" name="student_id" value="{{$student_id}}">
-                     <input type="hidden" name="transcript_id" value="{{$transcript_id}}">
+
                   </div>
                   <div class="form-check mb-2">
                      <input class="form-check-input" type="radio" name="another_grade" value="No">

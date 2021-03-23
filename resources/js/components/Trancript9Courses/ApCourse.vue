@@ -128,10 +128,10 @@ export default {
     submitCredit() {
       axios
         .post(route("apCourse.store"), this.form)
-        // .then(response => {
-        //   window.location =
-        //     "/english-transcript/" + this.student_id + "/" + this.transcript_id;
-        // })
+        .then(response => {
+          window.location =
+            "/english-transcript/" + this.student_id + "/" + this.transcript_id;
+        })
         .catch(error => {
           alert("Unable to add course. Please try later!");
         });

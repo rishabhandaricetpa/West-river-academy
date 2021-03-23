@@ -17,8 +17,6 @@ class CreateAdvancePlacementsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('student_profile_id');
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->nullable()->onDelete('cascade');
-            $table->unsignedBigInteger('transcript_id');
-            $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');
             $table->string('ap_course_name');
             $table->string('ap_course_grade');
             $table->string('ap_course_credits');

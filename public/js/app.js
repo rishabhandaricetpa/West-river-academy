@@ -5820,11 +5820,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitCredit: function submitCredit() {
-      axios.post(route("apCourse.store"), this.form) // .then(response => {
-      //   window.location =
-      //     "/english-transcript/" + this.student_id + "/" + this.transcript_id;
-      // })
-      ["catch"](function (error) {
+      var _this = this;
+
+      axios.post(route("apCourse.store"), this.form).then(function (response) {
+        window.location = "/english-transcript/" + _this.student_id + "/" + _this.transcript_id;
+      })["catch"](function (error) {
         alert("Unable to add course. Please try later!");
       });
     }
@@ -45382,12 +45382,12 @@ var render = function() {
                     attrs: {
                       type: "radio",
                       name: "payment_type",
-                      value: "Pay Pal"
+                      value: "PayPal"
                     },
                     domProps: {
                       checked: _vm._q(
                         _vm.form.paymentMethod.payment_type,
-                        "Pay Pal"
+                        "PayPal"
                       )
                     },
                     on: {
@@ -45395,7 +45395,7 @@ var render = function() {
                         return _vm.$set(
                           _vm.form.paymentMethod,
                           "payment_type",
-                          "Pay Pal"
+                          "PayPal"
                         )
                       }
                     }
@@ -45545,7 +45545,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "payment-info" }, [
-      _c("h3", [_vm._v("Pay Pal")]),
+      _c("h3", [_vm._v("PayPal")]),
       _vm._v(" "),
       _c("p", [
         _vm._v(
