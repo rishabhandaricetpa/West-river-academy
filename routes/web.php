@@ -151,7 +151,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // Graduation Process ends
 
-    Route::get('student-transcript/{id}', 'TranscriptController@viewStudent')->name('transcript.studentInfo');
+    Route::get('student-transcript/{student_id}', 'TranscriptController@purchaseNew')->name('transcript.studentInfo');
+    Route::get('create-transcript/{transcript_id}/{student_id}', 'TranscriptController@createTranscript')->name('transcript.create');
+    Route::get('viewall-transcript/{student_id}', 'TranscriptController@getAllTranscript')->name('transcript.viewall');
+
 
     Route::post('notify-student/{id}', 'TranscriptController@notification')->name('notify.studentInfo');
     Route::get('display-student/{id}/{transcriptdata_id}', 'TranscriptController@displayStudent')->name('display.studentProfile');

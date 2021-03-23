@@ -30,7 +30,6 @@
 
                 </button>
             </div>
-
             <form id="assign">
                 <input type="hidden" name="data_id" id="data_id">
                 <div class="modal-body">

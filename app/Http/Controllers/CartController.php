@@ -129,12 +129,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom':
-                    $clearpendingPayments = CustomPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
-                        ->update(
-                            [
-                                'status' => 'cancelled',
-                            ]
-                        );
+                    $clearpendingPayments = CustomPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $customPaymentsData = CustomPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $request->get('amount'),

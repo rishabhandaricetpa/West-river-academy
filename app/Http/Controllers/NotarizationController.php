@@ -24,7 +24,7 @@ class NotarizationController extends Controller
             ->with('graduation')
             ->get();
         $transcriptdoc = DB::table('confirmation_letters')->select('transcript_pdf.pdf_link', 'confirmation_letters.pdf_link as confirm')
-            ->where('confirmation_letters.parent_profile_id', $parent_id)
+            ->where('confirmation_letters.parent_profile_id', $parent_id)->where('confirmation_letters.status', 'completed')
             ->join('transcript_pdf', 'transcript_pdf.parent_profile_id', 'confirmation_letters.parent_profile_id')
             ->get();
         return view('orderPostage/notarization', compact('countries', 'students', 'transcriptdoc'));

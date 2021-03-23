@@ -548,6 +548,8 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $custom_payment->transcation_id = $payment_id;
                         $custom_payment->status = 'paid';
+                    } else {
+                        $custom_payment->status = 'active';
                     }
                     $custom_payment->save();
                     Dashboard::create([
@@ -564,6 +566,8 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $transcript_payment->transcation_id = $payment_id;
                         $transcript_payment->status = 'paid';
+                    } else {
+                        $transcript_payment->status = 'active';
                     }
                     $transcript_payment->save();
 
@@ -584,6 +588,8 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $postage_payment->transcation_id = $payment_id;
                         $postage_payment->status = 'paid';
+                    } else {
+                        $postage_payment->status = 'active';
                     }
                     $postage_payment->save();
                     Dashboard::create([
@@ -599,11 +605,13 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $notarization_payment->transcation_id = $payment_id;
                         $notarization_payment->status = 'paid';
+                    } else {
+                        $notarization_payment->status = 'paid';
                     }
                     $notarization_payment->save();
 
                     $notarization = Notarization::whereId($cart->item_id)->first();
-                    $notarization->status = 'paid';
+                    // $notarization->status = 'paid';
                     $notarization->save();
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
@@ -619,6 +627,8 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $customletter_payment->transcation_id = $payment_id;
                         $customletter_payment->status = 'paid';
+                    } else {
+                        $customletter_payment->status = 'active';
                     }
                     $customletter_payment->save();
                     Dashboard::create([
