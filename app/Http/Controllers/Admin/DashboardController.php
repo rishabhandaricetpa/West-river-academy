@@ -16,11 +16,12 @@ class DashboardController extends Controller
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
         $dateS = Carbon::now()->startOfMonth()->subMonth(6);
-        if ($admin_data->name == "Administrator") {
+        if ($admin_data->name === "Administrator") {
+            dd('here');
             $dashboardData = Dashboard::select()->with('student')->orderBy('id', 'DESC')->where('created_at', '>', $dateS)->get();
             return view('admin.dashboard-screen', compact('dashboardData'));
         } else {
-            $dashboardData = Dashboard::select()->with('student')->where('assigned_to', $admin_data->name)->orWhere('created_at', '>', $dateS)->orderBy('id', 'DESC')->get();
+            $dashboardData = Dashboard::select()->with('student')->where('assigned_to', $admin_data->name)->where('created_at', '>', $dateS)->orderBy('id', 'DESC')->get();
             return view('admin.dashboard-screen', compact('dashboardData'));
         }
     }
