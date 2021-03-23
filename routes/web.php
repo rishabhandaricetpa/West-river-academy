@@ -281,13 +281,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('english-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\EnglishCourse@index')->name('english.transcript.course');
     Route::post('english-transcript', 'TranscriptCourses\EnglishCourse@store')->name('english-transcript.store');
 
-    //mathematics course
-    Route::get('mathematics/{student_id}/{transcript_id}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
-    Route::post('maths-transcript', 'TranscriptCourses\MathematicsCourse@store')->name('maths-transcript.store');
+    // //mathematics course
+    // Route::get('mathematics/{student_id}/{transcript_id}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
+    // Route::post('maths-transcript', 'TranscriptCourses\MathematicsCourse@store')->name('maths-transcript.store');
 
     // histroy 
-    Route::get('socialStudies/{student_id}/{transcript_id}', 'TranscriptCourses\SocialStudiesCourse@index')->name('socialScience.transcript.course');
-    Route::post('social-studies', 'TranscriptCourses\SocialStudiesCourse@store')->name('socialStudies-transcript.store');
+    // Route::get('socialStudies/{student_id}/{transcript_id}', 'TranscriptCourses\SocialStudiesCourse@index')->name('socialScience.transcript.course');
+    // Route::post('social-studies', 'TranscriptCourses\SocialStudiesCourse@store')->name('socialStudies-transcript.store');
 
     //science
     Route::get('science-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\ScienceCourse@index')->name('socialScience.transcript.course');
