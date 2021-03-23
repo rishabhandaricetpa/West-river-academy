@@ -61,7 +61,7 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>To:</td>
+                    <td>To: {{$email}}</td>
                 </tr>
             </tbody>
         </table>
