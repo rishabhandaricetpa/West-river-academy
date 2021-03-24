@@ -10,35 +10,47 @@ use DB;
 use App\Models\TranscriptCourse9_12;
 use App\Models\Credits;
 use Illuminate\Http\Request;
+use Transcript912;
 
-class PhysicalEducationCourse extends Controller
+class AnotherCourse extends Controller
 {
     public function index($student_id, $transcript_id)
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Physical Education')
+            ->where('course_name', 'Another')
             ->first();
         $courses_id = $course->id;
-        $physicalEducation = Subject::where('courses_id', $course->id)
+        $anotherSubjects = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
             ->where('status', 0)
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
         $total_credits = Credits::where('is_carnegia', $is_carnegie)->select('total_credit')->first();
-        return view('transcript9to12_courses.physicaleducationCourse', compact('courses_id', 'physicalEducation', 'student_id', 'transcript_id', 'all_credits', 'total_credits'));
+        /**
+         *  transcript table id required if student select yes for another grade creation
+         */
+
+        $transData = Transcript9_12::where('id', $transcript_id)->first();
+        $trans_id =  $transData->transcript_id;
+        return view('transcript9to12_courses.anotherCourse', compact('courses_id', 'anotherSubjects', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'trans_id'));
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-        // delete if course already exists
+        /**
+         * delete if course already exists 
+         * @param  \Illuminate\Http\Request  $request
+         */
         $id = $request->get('course_id');
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $request->get('course_id'))->where('transcript9_12_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
 
-        //create new course
-        foreach ($request->get('physicalEducationCourse', []) as $period) {
+        /**
+         * create new course
+         */
+
+        foreach ($request->get('anotherCourse', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
             $credit = Credits::where('credit', $selectedCredit)->first();
@@ -55,9 +67,9 @@ class PhysicalEducationCourse extends Controller
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
                     'remaining_credits' => $request->get('remainingCredit'),
-                    'credit_id' =>  $credit->id,
-                    'selectedCredit' => $period['selectedCredit'],
+                    'credit_id' => $credit->id,
                     'other_subject' => $other_sub->subject_name,
+                    'selectedCredit' => $period['selectedCredit'],
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             } else {

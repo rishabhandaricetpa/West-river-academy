@@ -6,8 +6,8 @@
   >
     <div
       class="seperator mt-4"
-      v-for="englishCourse in form.englishCourse"
-      :key="englishCourse.id"
+      v-for="anotherCourse in form.anotherCourse"
+      :key="anotherCourse.id"
     >
       <div class="position-relative">
         <span class="remove" @click="removeCourse(index)"
@@ -15,7 +15,7 @@
         </span>
         <div class="col-sm-7 px-0">
           <h3 class="mb-3">
-            Select an English/Language Arts course:<i
+            Select a Elective course:<i
               class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
               data-toggle="tooltip"
               data-placement="top"
@@ -25,10 +25,10 @@
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
-              v-model="englishCourse.subject_name"
+              v-model="anotherCourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="Course in englishcourse" :key="Course">
+              <option v-for="Course in anothersubjects" :key="Course">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -41,7 +41,7 @@
                 class="form-control"
                 name=""
                 value="other"
-                v-model="englishCourse.other_subject"
+                v-model="anotherCourse.other_subject"
                 aria-describedby=""
               />
             </div>
@@ -62,7 +62,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="englishCourse.grade"
+                v-model="anotherCourse.grade"
                 value="A"
               />
               <label class="form-check-label" for="">A</label>
@@ -72,7 +72,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="englishCourse.grade"
+                v-model="anotherCourse.grade"
                 value="B"
               />
               <label class="form-check-label" for="">B</label>
@@ -82,7 +82,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="englishCourse.grade"
+                v-model="anotherCourse.grade"
                 value="C"
               />
               <label class="form-check-label" for="">C</label>
@@ -91,7 +91,7 @@
               <input
                 class="form-check-input"
                 type="radio"
-                v-model="englishCourse.grade"
+                v-model="anotherCourse.grade"
                 name="D"
                 value="D"
               />
@@ -101,7 +101,7 @@
               <input
                 class="form-check-input"
                 type="radio"
-                v-model="englishCourse.grade"
+                v-model="anotherCourse.grade"
                 name=""
                 value="Pass"
               />
@@ -117,7 +117,7 @@
                 data-toggle="collapse"
                 href="#remainingCredits"
                 role="button"
-                v-model="englishCourse.selectedCredit"
+                v-model="anotherCourse.selectedCredit"
                 v-on:change="showCredit"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
@@ -130,7 +130,7 @@
               </select>
               <h3 v-if="isCredit">
                 You have
-                {{ total_credits.total_credit - englishCourse.selectedCredit }}
+                {{ total_credits.total_credit - anotherCourse.selectedCredit }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
@@ -142,7 +142,7 @@
     </div>
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add another English/Language Arts Course</a
+        >Add Another Foregin Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
@@ -153,7 +153,7 @@
 
 <script>
 export default {
-  name: "EnglishCourse",
+  name: "ForeginCourse",
   data() {
     return {
       isCredit: false,
@@ -162,7 +162,7 @@ export default {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
-        englishCourse: [
+        anotherCourse: [
           {
             course_id: this.courses_id,
             transcript_id: this.transcript_id,
@@ -178,12 +178,13 @@ export default {
   },
 
   props: [
-    "englishcourse",
+    "anothersubjects",
     "transcript_id",
     "student_id",
     "courses_id",
     "all_credits",
-    "total_credits"
+    "total_credits",
+    "trans_id"
   ],
   methods: {
     showCredit(e) {
@@ -193,7 +194,7 @@ export default {
       return this.isCredit;
     },
     addCourse() {
-      this.form.englishCourse.push({
+      this.form.anotherCourse.push({
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
@@ -204,17 +205,17 @@ export default {
       });
     },
     removeCourse(index) {
-      this.form.englishCourse.splice(index, 1);
+      this.form.anotherCourse.splice(index, 1);
     },
     submitCourse() {
       axios
-        .post(route("english-transcript.store"), this.form)
+        .post(route("another-transcript.store"), this.form)
         .then(response => {
           window.location =
-            "/mathematics-transcript/" +
+            "/another-grade-transcript/" +
             this.student_id +
             "/" +
-            this.transcript_id;
+            this.trans_id;
         })
         .catch(error => {
           alert("Please choose the course or remove it");

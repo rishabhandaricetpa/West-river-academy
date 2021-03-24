@@ -125,7 +125,6 @@ class Transcript9to12 extends Controller
     }
     public function storeApCourses(Request $request)
     {
-        $transcript_id = $request->get('transcript_id');
         $student_id = $request->get('student_id');
         $courses = $request->get('apCourses');
         foreach ($courses as $course) {
@@ -134,8 +133,30 @@ class Transcript9to12 extends Controller
                 'ap_course_name' => $course['course_name'],
                 'ap_course_grade' => $course['grade'],
                 'ap_course_credits' => $course['credit'],
-                'transcript_id' => $transcript_id
             ]);
+        }
+    }
+    public function anotherGrade($student_id, $trans_id)
+    {
+        return view('transcript9to12.another-grade-level', compact('student_id', 'trans_id'));
+    }
+    public function getAnotherGradeStatus(Request $request)
+    {
+        $id = $request->get('student_id');
+        $enroll_student = StudentProfile::find($id);
+        $transcriptPayment = DB::table('transcripts')->where('student_profile_id', $id)
+            ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
+            ->where('transcript_payments.status', 'paid')->where('transcripts.period', '9-12')
+            ->first();
+        dd($transcriptPayment);
+        // dd($request->all());
+        if ($request->get('another_grade') == 'Yes') {
+            $id = $request->get('student_id');
+            $enroll_student = StudentProfile::find($id);
+
+            return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
+        } else {
+            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas'));
         }
     }
 }
