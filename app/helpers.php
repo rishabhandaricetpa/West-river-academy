@@ -100,8 +100,9 @@ function getPromtedGrade($grades)
     }
 }
 
-// function getEnrollmentYear($year)
-// {
-
-//     dd($year->toArray());
-// }
+function getCustomLetterQuantity($amount)
+{
+    $customletterfee = FeesInfo::getFeeAmount('custom_letter');
+    $quantity = $amount / $customletterfee;
+    return $quantity;
+}

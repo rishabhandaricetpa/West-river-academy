@@ -82,6 +82,30 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.order.postage')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Order Postage
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.order.customletter')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Custom Letter
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.appostille.notarization')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Notarization
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('admin/payment-address')}}" class="nav-link">
               <i class="fas fa-address-book"></i>
               <p>Change Address</p>

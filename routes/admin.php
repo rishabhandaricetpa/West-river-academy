@@ -140,6 +140,24 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('custom', 'CustomController@index')->name('custom.payments');
     Route::get('custompayment', 'CustomController@dataTable')->name('datatable.custom');
 
+    //order Postage
+    Route::get('order-postage', 'CustomController@viewPostage')->name('order.postage');
+    Route::get('postagepayment', 'CustomController@orderPostageDataTable')->name('datatable.postage');
+    Route::get('edit-postage/{id}', 'CustomController@editOrderPostage')->name('edit.postage');
+    Route::post('update/postage/{id}', 'CustomController@upadteOrderPostage')->name('update.orderpostage');
+
+    //appostile and notarization
+    Route::get('appostille-notarization', 'CustomController@viewNotarization')->name('appostille.notarization');
+    Route::get('notarizationpayment', 'CustomController@orderNotrizationDataTable')->name('datatable.notarization');
+    Route::get('edit-notarization/{id}', 'CustomController@editNotarization')->name('edit.notarization');
+    Route::post('update/notarization/{id}', 'CustomController@updateNotarization')->name('update.notarization');
+
+    //custom letter
+    Route::get('order-customletter', 'CustomController@viewCustomletter')->name('order.customletter');
+    Route::get('customletterpayment', 'CustomController@orderCustomletterDataTable')->name('datatable.customletter');
+    Route::get('edit-customletter/{id}', 'CustomController@editOrderCustomletter')->name('edit.customletter');
+    Route::post('update/customletter/{id}', 'CustomController@updateCustomletter')->name('update.customletter');
+    //dynamic fees &services for backend admin
     Route::get('fees-services', '\App\Http\Controllers\FeeStructureController@index')->name('fees.services');
     Route::get('feestable', '\App\Http\Controllers\FeeStructureController@dataTable')->name('datatable.fees');
     Route::get('fees-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@edit')->name('edit.fees');

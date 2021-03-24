@@ -99,9 +99,9 @@
                                     @elseif($data->related_to === 'transcript_edit_record_received')
                                     <td><a href="">Transcript Edit Request</a></td>
                                     @elseif($data->related_to === 'postage_record_received')
-                                    <td><a href="">Postage Request</a></td>
+                                    <td><a href="{{ route('admin.order.postage')}}">Postage Request</a></td>
                                     @elseif($data->related_to === 'appostile_record_received')
-                                    <td><a href="">Notarization And Appostile</a></td>
+                                    <td><a href="{{ route('admin.appostille.notarization')}}">Notarization And Appostile</a></td>
                                     @elseif($data->related_to === 'custom_letter_record_received')
                                     <td><a href="">Custom Letter</a></td>
                                     @endif

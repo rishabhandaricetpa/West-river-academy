@@ -26,7 +26,9 @@ class AnotherCourseController extends Controller
             ->where('status', 0)
             ->get();
 
-        return view('courses.another-course', compact('anotherCourse', 'student_id', 'courses_id', 'transcript_id'));
+        $transData = TranscriptK8::where('id', $transcript_id)->first();
+        $trans_id =  $transData->transcript_id;
+        return view('courses.another-course', compact('anotherCourse', 'student_id', 'courses_id', 'transcript_id', 'trans_id'));
     }
 
     public function store(Request $request)
@@ -67,15 +69,15 @@ class AnotherCourseController extends Controller
         DB::commit();
     }
 
-    public function anotherGrade($id)
+    public function anotherGrade($id, $trans_id)
     {
-        return view('courses.dashboard-another-languages', compact('id'));
+        return view('courses.dashboard-another-languages', compact('id', 'trans_id'));
     }
 
     public function anotherGradeRequired(Request $request)
     {
         if ($request->get('another_grade') == 'Yes') {
-            return redirect()->route('transcript.studentInfo', $request->get('student_id'));
+            return redirect()->route('transcript.create', [$request->get('trans_id'), $request->get('student_id')]);
         } elseif ($request->get('another_grade') == 'No') {
             return redirect()->route('another.grade', $request->get('student_id'));
         }

@@ -167,7 +167,7 @@ class StudentProfileController extends Controller
             $studentProfileData = StudentProfile::whereId($student_id)->first();
 
             $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
-            $enrollment_periods = StudentProfile::where('parent_profile_id', $parent_id->parent_profile_id)
+            $enrollment_periods = StudentProfile::where('confirmation_letters.parent_profile_id', $parent_id->parent_profile_id)
                 ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')->where('confirmation_letters.status', 'paid')
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
                 ->with('enrollmentPeriods')->get();
@@ -177,6 +177,7 @@ class StudentProfileController extends Controller
                 'title' => 'Confirmation of Enrollment',
                 'date' => date('m/d/Y'),
             ];
+
             $pdf = PDF::loadView('confirmationLetter', $data);
             Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
             return $pdf->download($pdfname . '.pdf');
