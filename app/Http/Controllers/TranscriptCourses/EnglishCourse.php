@@ -25,8 +25,9 @@ class EnglishCourse extends Controller
             ->where('status', 0)
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
+
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
-        $total_credits = Credits::where('is_carnegia', $is_carnegie)->select('total_credit')->first();
+        $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
         return view('transcript9to12_courses.englishCourse', compact('courses_id', 'englishCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits'));
     }
     public function store(Request $request)
@@ -63,6 +64,8 @@ class EnglishCourse extends Controller
             } else {
                 $subject_name = $period['subject_name'];
                 $selectedCredit =  $period['selectedCredit'];
+                // dd($request->all());
+                dd($request->get('credits'));
                 $credit = Credits::where('credit', $selectedCredit)->first();
                 $subject = Subject::where('subject_name', $subject_name)->first();
                 TranscriptCourse9_12::create([

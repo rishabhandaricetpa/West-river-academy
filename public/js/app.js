@@ -68202,6 +68202,10 @@ $(document).on("click", function (event) {
   if (!$(event.target).closest(".notification-wrap").length) {
     $(".notification").removeClass("d-block");
   }
+}); // country transcript
+
+$("#not_california").click(function () {
+  $("#transcript-country").removeClass("show");
 });
 
 /***/ }),

@@ -314,5 +314,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     // another grade
     Route::get('another-grade-transcript/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@anotherGrade')->name('another.transcript.grade');
-    Route::post('is-another', 'TranscriptController\Transcript9to12@getAnotherGradeStatus')->name('transcript.anotherGrade');
+    Route::post('all-students-grades', 'TranscriptController\Transcript9to12@getAnotherGradeStatus')->name('another-transcript9_12.required');
+
+    // student college information
+
+    Route::post('student-college/{student_id}', 'TranscriptController\CollegeController@addCollege')->name('collegeDetails');
 });

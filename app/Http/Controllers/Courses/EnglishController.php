@@ -29,10 +29,10 @@ class EnglishController extends Controller
     public function store(Request $request)
     {
         $id = $request->get('courses_id');
-        //first delete the course if exists in database
+        /** first delete the course if exists in database */
         $refreshCourse = TranscriptCourse::select()->where('courses_id', $request->get('courses_id'))->where('k8transcript_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
-        // then insert new subjects
+        /** then insert new subjects */
         foreach ($request->get('englishCourse', []) as $period) {
             $other_subjects = $period['other_subjects'];
             if ($other_subjects) {

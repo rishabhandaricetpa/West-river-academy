@@ -7,6 +7,7 @@ use App\Models\AdvancePlacement;
 use App\Models\Credits;
 use App\Models\StudentProfile;
 use App\Models\Transcript9_12;
+use App\Models\TranscriptCourse9_12;
 use DB;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,10 @@ class Transcript9to12 extends Controller
 {
     public function selectCountry($student_id, $transcript_id)
     {
+        /** 
+         * 
+         * 
+         */
         try {
             DB::beginTransaction();
             $transcript = Transcript9_12::create([
@@ -39,8 +44,8 @@ class Transcript9to12 extends Controller
         $transcript = Transcript9_12::find($request->input('transcript_id'));
         // dd($transcript);
         if ($request->is_united_states == 'Yes' && $request->is_california == 'Yes') {
-            // is carnegia means all country expect california
-            // 0 - not carnegia 
+
+            /**  is carnegia means all country expect california not carnegia  */
 
             try {
                 DB::beginTransaction();
@@ -58,8 +63,21 @@ class Transcript9to12 extends Controller
             }
             return view('transcript9to12.grade', compact('student_id', 'transcript'));
         } else {
+            try {
+                DB::beginTransaction();
+                $transcript->is_carnegie = 1;
+                $transcript->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+                $notification = [
+                    'message' => 'Failed to insert Record!',
+                    'alert-type' => 'error',
+                ];
 
-            dd('add other country in table and set is_carnegie as 1');
+                return redirect()->back()->with($notification);
+            }
+            return view('transcript9to12.grade', compact('student_id', 'transcript'));
         }
     }
     public function enrollSchool(Request $request, $student_id)
@@ -142,21 +160,22 @@ class Transcript9to12 extends Controller
     }
     public function getAnotherGradeStatus(Request $request)
     {
-        $id = $request->get('student_id');
-        $enroll_student = StudentProfile::find($id);
-        $transcriptPayment = DB::table('transcripts')->where('student_profile_id', $id)
-            ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
-            ->where('transcript_payments.status', 'paid')->where('transcripts.period', '9-12')
-            ->first();
-        dd($transcriptPayment);
-        // dd($request->all());
+        $trans_id = $request->get('trans_id');
+        $student_id = $request->get('student_id');
         if ($request->get('another_grade') == 'Yes') {
-            $id = $request->get('student_id');
-            $enroll_student = StudentProfile::find($id);
-
-            return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
+            return redirect()->route('transcript.create', [$trans_id, $student_id]);
         } else {
-            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas'));
+            // $student_transcripts = TranscriptCourse9_12::where('student_profile_id', $student_id)->select('transcript9_12_id')->groupBy('transcript9_12_id')->get();
+            // $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses9_12()->get();
+            // $details9_12 = StudentProfile::find($student_id)->Transcript912()->get();
+
+            // $student = StudentProfile::find($student_id);
+            // $transcriptDatas = Transcript9_12::where('student_profile_id', $student_id)
+            //     ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
+            //     ->get();
+            // //dd($transcriptDatas);
+            // return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas'));
+            return view('transcript9to12.Is-college', compact('student_id'));
         }
     }
 }
