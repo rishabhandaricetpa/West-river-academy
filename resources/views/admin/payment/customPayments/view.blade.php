@@ -21,7 +21,6 @@
                         <table id="custom-table" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
-                                    <th>Sno</th>
                                     <th>Parent Name</th>
                                     <th>Amount Paid</th>
                                     <th>Paying for</th>

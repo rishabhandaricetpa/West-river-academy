@@ -188,7 +188,7 @@ class CartController extends Controller
                 case 'notarization':
                     if (!isset($data['documents'])) {
                         return redirect()->back()->with([
-                            'message' => 'Please select atleast one Document for Notarization and Appostille!',
+                            'message' => 'Please select atleast one Document for Notarization and Apostille!',
                             'alert-type' => 'error',
                         ]);
                     }

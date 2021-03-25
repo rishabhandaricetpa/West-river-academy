@@ -284,12 +284,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "parent_profile.p1_first_name"
         },
         {
@@ -324,12 +318,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "parent_profile.p1_first_name"
         },
         {
@@ -364,12 +352,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "parent_profile.p1_first_name"
         },
         {
@@ -404,12 +386,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "parent_profile.p1_first_name"
         },
         {

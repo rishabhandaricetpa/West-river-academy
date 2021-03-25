@@ -98,7 +98,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.appostille.notarization')}}" class="nav-link">
+            <a href="{{route('admin.apostille.notarization')}}" class="nav-link">
               <i class="fas fa-money-check-alt"></i>
               <p>
                 Notarization

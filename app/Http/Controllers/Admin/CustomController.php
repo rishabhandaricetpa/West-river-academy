@@ -29,6 +29,12 @@ class CustomController extends Controller
     {
         return datatables(CustomPayment::with('ParentProfile')->get())->toJson();
     }
+    //fetch data for custo payment
+    public function getAllParentsPayment($parent_id)
+    {
+        $customPaymentsData = CustomPayment::where('parent_profile_id', $parent_id)->with('ParentProfile')->get();
+        return view('admin.payment.customPayments.view-each', compact('customPaymentsData'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -133,9 +139,13 @@ class CustomController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
+    public function getAllParentsPostage($parent_id)
+    {
+        $postagePaymentData = OrderPostage::where('parent_profile_id', $parent_id)->with('ParentProfile')->get();
+        return view('admin.payment.orderPostagePayment.view-each', compact('postagePaymentData'));
+    }
 
-
-    //appostille and notarization
+    //apostille and notarization
 
     public function viewNotarization()
     {
@@ -170,7 +180,11 @@ class CustomController extends Controller
         return redirect()->back()->with($notification);
     }
 
-
+    public function getAllParentsNotarization($parent_id)
+    {
+        $notarizationPaymentData = NotarizationPayment::where('parent_profile_id', $parent_id)->with('ParentProfile')->get();
+        return view('admin.payment.notarizationPayments.view-each', compact('notarizationPaymentData'));
+    }
 
     /**
      * Order Custom letter to view all the cutsom letter purchase made by users
@@ -207,5 +221,13 @@ class CustomController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->back()->with($notification);
+    }
+
+
+    //fetch data for custo payment
+    public function getAllParentsCustomLetters($parent_id)
+    {
+        $customLettersPaymentsData = CustomLetterPayment::where('parent_profile_id', $parent_id)->with('ParentProfile')->get();
+        return view('admin.payment.customLetterPayment.view-each', compact('customLettersPaymentsData'));
     }
 }
