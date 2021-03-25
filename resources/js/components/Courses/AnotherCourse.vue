@@ -110,13 +110,15 @@ export default {
       removingPeriod: false
     };
   },
-  props: ["anotherstudies", "transcript_id", "student_id", "courses_id"],
+  props: ["anotherstudies", "transcript_id", "student_id", "courses_id","trans_id"],
   methods: {
     addCourses() {
       axios
         .post(route("another.store"), this.form)
         .then(response => {
-          window.location = "/choose-another/" + this.student_id;
+          window.location = "/choose-another/" +  this.student_id +
+            "/" +
+            this.trans_id;
         })
         .catch(error => {
           alert("Please choose the course or remove it");

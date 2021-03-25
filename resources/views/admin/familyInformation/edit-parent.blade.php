@@ -11,8 +11,10 @@
         <div class="form-group col-sm-6">
           <label>User Status<sup>*</sup> <sup>{{$parent->status===0 ?'Active':'Inactive'}}</sup></label>
           <select id="status" name="status" class="form-control" value="{{$parent->status===0?'Active':'Inactive'}}">
-            <option value="0">Active</option>
-            <option value="1">Inactive</option>
+            <option value="0" @if($parent->status == 0)
+              selected="selected" @endif>Active</option>
+            <option value="1" @if($parent->status == 1)
+              selected="selected" @endif>Inactive</option>
           </select>
         </div>
         <div class="form-group col-sm-6">

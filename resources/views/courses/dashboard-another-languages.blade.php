@@ -33,6 +33,7 @@
                     No
                   </label>
                 </div>
+                <input type="hidden" value="{{$trans_id}}" name="trans_id">
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
               </div>
             </div>

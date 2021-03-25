@@ -95,15 +95,15 @@
                                     @elseif($data->related_to === 'record_transfer')
                                     <td><a href="{{route('admin.student.schoolRecord',$data->student_profile_id)}}">Record Transfer</a></td>
                                     @elseif($data->related_to === 'custom_record_received')
-                                    <td><a href="{{ route('admin.custom.payments')}}">Custom Payment</a></td>
+                                    <td><a href="{{ route('admin.each.payments',$data->linked_to)}}">Custom Payment</a></td>
                                     @elseif($data->related_to === 'transcript_edit_record_received')
                                     <td><a href="">Transcript Edit Request</a></td>
                                     @elseif($data->related_to === 'postage_record_received')
-                                    <td><a href="">Postage Request</a></td>
+                                    <td><a href="{{ route('admin.each.postage',$data->linked_to)}}">Postage Request</a></td>
                                     @elseif($data->related_to === 'appostile_record_received')
-                                    <td><a href="">Notarization And Appostile</a></td>
+                                    <td><a href="{{ route('admin.each.notarization',$data->linked_to)}}">Notarization And Appostile</a></td>
                                     @elseif($data->related_to === 'custom_letter_record_received')
-                                    <td><a href="">Custom Letter</a></td>
+                                    <td><a href="{{ route('admin.each.customletters',$data->linked_to)}}">Custom Letter</a></td>
                                     @endif
                                     <td>{{$data->notes}}</td>
                                     @if(is_null($data->assigned_to))

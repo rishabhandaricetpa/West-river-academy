@@ -203,6 +203,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 
     Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment');
+    Route::get('admin/custom-payments/{id}', 'PaymentMethod\CustomPaymentsController@edit')->name('edit.custompayment');
+    Route::post('update/custom-payments/{id}', 'PaymentMethod\CustomPaymentsController@updateCustomPayments')->name('update.custompayment');
+    Route::get('delete/custom-payments/{id}', 'PaymentMethod\CustomPaymentsController@destroyCustomPayments')->name('delete.custompayment');
+
 
     Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
     Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
@@ -214,7 +218,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         return view('transcript/dashboard-another-languages');
     })->name('new-grade');
 
-    Route::get('choose-another/{student_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
+    Route::get('choose-another/{student_id}/{trans_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
     Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
     Route::post('another/required', 'Courses\AnotherCourseController@anotherGradeRequired')->name('another.grade.requirement');
 
