@@ -50,15 +50,26 @@ class StudentProfile extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'id');
     }
-
+    public function transcriptCourses9_12()
+    {
+        return $this->hasMany(TranscriptCourse9_12::class);
+    }
     public function TranscriptK8()
     {
         return $this->hasMany('App\Models\TranscriptK8', 'student_profile_id', 'id');
     }
-
+    public function Transcript912()
+    {
+        return $this->hasMany(Transcript9_12::class);
+    }
     public function graduation()
     {
         return $this->hasOne('App\Models\Graduation', 'student_profile_id', 'id');
+    }
+
+    public function dashboard()
+    {
+        return $this->hasOne('App\Models\Dashboard', 'student_profile_id', 'student_profile_id');
     }
 
     public function graduationAddress()

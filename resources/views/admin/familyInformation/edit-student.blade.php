@@ -5,7 +5,7 @@
 @section('content')
 <section class="content">
   <div class="container-fluid position-relative">
-    <h1>Edit Student Information</h1>
+    <h1>Student Details</h1>
     <div class="form-wrap border py-5 px-25 position-relative">
       <form method="post" class="row" action="{{route('admin.edit-student.update',$student->id)}}">
         @csrf
@@ -39,7 +39,7 @@
           <input class="form-control" id="student_id" name="student_id" value="{{$student->student_Id}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Immunized Status<sup>*</sup></label>
+          <label>Immunization Status<sup>*</sup></label>
           <select class="form-control" name="immunized_status" value="{{$student->immunized_status}}">
             <option>Yes, records will come with school records.</option>
             <option>Yes, I will provide records.</option>
@@ -57,11 +57,11 @@
           <input type="hidden" name="id[]" value="{{$enrollment_period->id}}">
           <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
             <label>Start Date </label>
-            <input class="datepicker" type="text" name="start_date[]" value="{{$enrollment_period->start_date_of_enrollment}}">
+            <input class="datepicker" type="text" name="start_date[]" value="{{Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M d Y')}}">
           </div>
           <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
             <label>End Date </label>
-            <input class="datepicker" type="text" name="end_date[]" value="{{$enrollment_period->end_date_of_enrollment}}">
+            <input class="datepicker" type="text" name="end_date[]" value="{{Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M d Y')}}">
           </div>
 
           <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
@@ -123,7 +123,7 @@
         </div>
         @endforeach
         <!-- /.card-body -->
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update</button>
         <a type="button" href="{{ route('admin.genrate.adminConfirmition',$student->id) }}" class="btn btn-primary">Generate Confirmation</a>
     </div>
   </div>

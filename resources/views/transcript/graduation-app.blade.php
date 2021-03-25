@@ -16,6 +16,7 @@
                         <th>Student ID</th>
                         <th>Email</th>
                         <th>Action</th>
+                        <th>Purchase</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +26,8 @@
                         <td>{{$enroll_student->d_o_b->format('M d Y')}}</td>
                         <td>{{$enroll_student->student_Id}}</td>
                         <td>{{$enroll_student->email}}</td>
-                        <td><a href="{{route('transcript.studentInfo',$enroll_student->id)}}" class="btn btn-primary">Apply</a></td>
+                        <td><a href="{{route('transcript.viewall',$enroll_student->id)}}" class="btn btn-primary">Create Transcript</a></td>
+                        <td><a href="{{route('transcript.studentInfo',$enroll_student->id)}}" class="btn btn-primary">Purchase</a></td>
                     </tr>
                     @endforeach
                 </tbody>

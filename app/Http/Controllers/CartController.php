@@ -129,12 +129,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom':
-                    $clearpendingPayments = CustomPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())
-                        ->update(
-                            [
-                                'status' => 'cancelled',
-                            ]
-                        );
+                    $clearpendingPayments = CustomPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $customPaymentsData = CustomPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $request->get('amount'),
@@ -193,7 +188,7 @@ class CartController extends Controller
                 case 'notarization':
                     if (!isset($data['documents'])) {
                         return redirect()->back()->with([
-                            'message' => 'Please select atleast one Document for Notarization and Appostille!',
+                            'message' => 'Please select atleast one Document for Notarization and Apostille!',
                             'alert-type' => 'error',
                         ]);
                     }

@@ -36,3 +36,11 @@ $(document).on("click", function (event) {
     $(".notification").removeClass("d-block");
   }
 });
+
+// country transcript
+
+
+$("#not_california").click(function () { 
+  $("#transcript-country").removeClass("show");
+
+});

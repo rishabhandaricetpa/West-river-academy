@@ -8,7 +8,7 @@
             <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">{{$student->first_name}}</h2>
+            <h2 class="mb-3">{{$student->fullname}}</h2>
             <form method="POST" action="" class="mb-0">
 
                 <div class="form-group d-sm-flex mb-2">
@@ -20,9 +20,21 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Date of Birth</label>
                     <div>
-                        {{$student->d_o_b->format('d M Y ')}}
+                        {{$student->d_o_b->format('M d Y ')}}
                     </div>
                 </div>
+                <div class="form-group d-sm-flex mb-2">
+                    <label for="">Address</label>
+                    <div>
+                        {{$student->ParentProfile->street_address}},
+                        {{$student->ParentProfile->city}},
+                        {{$student->ParentProfile->state}},
+                        {{$student->ParentProfile->zip_code}},
+                        {{$student->ParentProfile->country}}
+                    </div>
+                </div>
+
+
                 <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
                 <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
