@@ -1,22 +1,20 @@
 @extends('admin.app')
-
 @section('content')
 <!-- Content Header (Page header) -->
 <!-- Content Wrapper. Contains page content -->
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1>Student List</h1>
+        <h1>Transcript Payment</h1>
         <div class="d-flex">
             <ol class="breadcrumb ml-auto">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Student Information</li>
+                <li class="breadcrumb-item active">Transcript Payment</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.container-fluid -->
 </div>
-<!-- /.content-header -->
 
 <!-- Main content -->
 <section class="content">
@@ -34,36 +32,26 @@
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>Date od Birth</th>
-                                    <th>Gender</th>
-                                    <th>Email</th>
+                                    <th>Transcript Period</th>
+                                    <th>Amount</th>
+                                    <th>Paymet Method</th>
+                                    <th>Transaction Id</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
-                                    <th>View Payments</th>
-                                    <th>View Transcript</th>
-                                    <th>View Graduation</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($students as $student)
+                                @foreach($getAlltranscriptPayments as $getAlltranscriptPayment)
                                 <tr>
-                                    <td>{{$student->fullname}}</td>
-                                    <td>{{$student->d_o_b->format('M d Y')}}</td>
-                                    <td>{{$student->gender}}</td>
-                                    <td>{{$student->email}}</td>
-                                    <td>{{$student->payment_status}} </br>
+                                    <td>{{$getAlltranscriptPayment->transcript->student->fullname}}</td>
+                                    <th>{{$getAlltranscriptPayment->transcript->period}}</th>
+                                    <td>{{$getAlltranscriptPayment->amount}}</td>
+                                    <td>{{$getAlltranscriptPayment->payment_mode}}</td>
+                                    <td>{{$getAlltranscriptPayment->transcation_id}}</td>
+                                    <td>{{$getAlltranscriptPayment->status}}</td>
+                                    <td><a href="{{ route ('admin.transpayment.edit',$getAlltranscriptPayment->id)}}"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route ('admin.transpayment.delete',$getAlltranscriptPayment->id)}}"><i class=" fas fa-trash-alt" onclick="return myFunction();"></i></a>
                                     </td>
-                                    <td>
-                                        <a href="{{route('admin.edit-student',$student->id)}}"><i class="fas fa-edit"></i></a>
-                                        <a href="{{route('admin.delete.student',$student->id)}}"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                    <td><a href="{{route('admin.edit.student.payment',$student->id)}}">View Payments</a></br></td>
-                                    <td><a href="{{route('admin.edit.transcript',$student->id)}}">View Transcripts</a></br></td>
-                                    @if($student->graduation)
-                                    <td><a href="{{route('admin.view.graduation',$student->graduation->id)}}">View Graduation</a></br></td>
-                                    @else
-                                    <td>Not applied</td>
-                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -71,6 +59,7 @@
                     </div>
                     <!-- /.card-body -->
                 </div>
+
                 <!-- /.card -->
             </div>
             <!-- /.col -->
@@ -80,7 +69,7 @@
 </div>
 <!-- /.content -->
 @endsection
-<script>
+<script type="text/javascript">
     function myFunction() {
         if (!confirm("Are You Sure to delete this"))
             event.preventDefault();

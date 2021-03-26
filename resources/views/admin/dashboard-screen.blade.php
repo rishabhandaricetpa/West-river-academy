@@ -91,7 +91,7 @@
                                     @elseif($data->related_to === 'graduation_record_received')
                                     <td><a href="{{ route('admin.view.graduation')}}/{{$data->linked_to}}/edit">Graduation Application</a></td>
                                     @elseif($data->related_to === 'transcript_ordered')
-                                    <td><a href="{{ route('admin.viewfull.transcript',[$data->student_profile_id,$data->linked_to])}}">Transcript Ordered</a></td>
+                                    <td><a href="{{ route ('admin.transpayment.edit',$data->linked_to)}}">Transcript Ordered</a></td>
                                     @elseif($data->related_to === 'record_transfer')
                                     <td><a href="{{route('admin.student.schoolRecord',$data->student_profile_id)}}">Record Transfer</a></td>
                                     @elseif($data->related_to === 'custom_record_received')
@@ -129,9 +129,3 @@
 </div>
 <!-- /.content -->
 @endsection
-<script type="text/javascript">
-    function myFunction() {
-        if (!confirm("Are You Sure to delete this"))
-            event.preventDefault();
-    }
-</script>

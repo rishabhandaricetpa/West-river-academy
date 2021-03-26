@@ -32,4 +32,8 @@ class Transcript extends Model
     {
         return $this->hasOne(TranscriptK8::class);
     }
+    public function transcriptPayment()
+    {
+        return $this->hasOne(TranscriptPayment::class);
+    }
 }

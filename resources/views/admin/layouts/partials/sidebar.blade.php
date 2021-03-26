@@ -131,6 +131,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.transcript.payments') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
+              <p>
+                Transcript Payments
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('admin/manage-courses')}}" class="nav-link">
               <i class="fas fa-tasks"></i>
               <p>Manage Course</p>
