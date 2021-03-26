@@ -81,6 +81,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('previous-school');
         });
 
+        Route::get('college-info', function () {
+            return view('frontendpages.college-info');
+        });
+
         Route::get('notification', function () {
             return Notification::getParentNotifications();
         })->name('notification.get');
@@ -317,10 +321,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('anotherCourse', 'TranscriptCourses\AnotherCourse@store')->name('another-transcript.store');
 
     // another grade
-    Route::get('another-grade-transcript/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@anotherGrade')->name('another.transcript.grade');
+    Route::get('another-grade-transcript/{student_id}/{trans_id}/{transcript9_12id}', 'TranscriptController\Transcript9to12@anotherGrade')->name('another.transcript.grade');
     Route::post('all-students-grades', 'TranscriptController\Transcript9to12@getAnotherGradeStatus')->name('another-transcript9_12.required');
 
     // student college information
 
     Route::post('student-college/{student_id}', 'TranscriptController\CollegeController@addCollege')->name('collegeDetails');
+    Route::post('college-course', 'TranscriptController\CollegeController@store')->name('collegeCourse.store');
 });

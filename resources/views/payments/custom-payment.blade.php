@@ -9,7 +9,7 @@
       <div class="form-group d-sm-flex mb-2">
         <label for="">Amount</label>
         <div>
-          <input type="number" name="amount" id="amount" value="" class="w-100" step="0.01" required>
+          <input type="number" name="amount" id="amount" value="" class="w-100 form-control" step="0.01" required>
           <input type="hidden" name="type" id="custom" value="custom" class="w-100" step="0.01">
         </div>
       </div>

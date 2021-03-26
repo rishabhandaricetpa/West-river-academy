@@ -154,13 +154,15 @@ class Transcript9to12 extends Controller
             ]);
         }
     }
-    public function anotherGrade($student_id, $trans_id)
+    public function anotherGrade($student_id, $trans_id, $transcript9_12_id)
     {
-        return view('transcript9to12.another-grade-level', compact('student_id', 'trans_id'));
+        return view('transcript9to12.another-grade-level', compact('student_id', 'trans_id', 'transcript9_12_id'));
     }
     public function getAnotherGradeStatus(Request $request)
     {
+        //  dd($request->all());
         $trans_id = $request->get('trans_id');
+        $transcript9_12id = $request->get('transcript9_12id');
         $student_id = $request->get('student_id');
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('transcript.create', [$trans_id, $student_id]);
@@ -175,7 +177,7 @@ class Transcript9to12 extends Controller
             //     ->get();
             // //dd($transcriptDatas);
             // return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas'));
-            return view('transcript9to12.Is-college', compact('student_id'));
+            return view('transcript9to12.Is-college', compact('student_id', 'trans_id', 'transcript9_12id'));
         }
     }
 }

@@ -162,6 +162,7 @@ export default {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
+
         englishCourse: [
           {
             course_id: this.courses_id,
@@ -170,7 +171,8 @@ export default {
             subject_name: "",
             other_subject: "",
             selectedCredit: "",
-            grade: ""
+            grade: "",
+            total_credits: this.total_credits.total_credit
           }
         ]
       }
@@ -200,7 +202,8 @@ export default {
         subject_name: "",
         other_subject: "",
         selectedCredit: "",
-        grade: ""
+        grade: "",
+        total_credits: this.total_credits.total_credit
       });
     },
     removeCourse(index) {
