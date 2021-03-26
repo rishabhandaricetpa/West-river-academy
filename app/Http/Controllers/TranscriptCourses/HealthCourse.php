@@ -42,6 +42,7 @@ class HealthCourse extends Controller
         foreach ($request->get('healthCourse', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
+            $total_credits = $period['total_credits'];
             $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([
@@ -55,7 +56,7 @@ class HealthCourse extends Controller
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $request->get('remainingCredit'),
+                    'remaining_credits' => $total_credits - $period['selectedCredit'],
                     'selectedCredit' => $period['selectedCredit'],
                     'credit_id' => $credit->id,
                     'other_subject' => $other_sub->subject_name,
@@ -73,7 +74,7 @@ class HealthCourse extends Controller
                     'score' => $period['grade'],
                     'selectedCredit' => $period['selectedCredit'],
                     'credit_id' => $credit->id,
-                    'remaining_credits' => $request->get('remainingCredit'),
+                    'remaining_credits' =>  $total_credits - $period['selectedCredit'],
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

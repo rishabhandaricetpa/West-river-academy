@@ -170,7 +170,8 @@ export default {
             subject_name: "",
             other_subject: "",
             selectedCredit: "",
-            grade: ""
+            grade: "",
+            total_credits: this.total_credits.total_credit
           }
         ]
       }
@@ -201,7 +202,8 @@ export default {
         subject_name: "",
         other_subject: "",
         selectedCredit: "",
-        grade: ""
+        grade: "",
+        total_credits: this.total_credits.total_credit
       });
     },
     removeCourse(index) {
@@ -215,7 +217,9 @@ export default {
             "/another-grade-transcript/" +
             this.student_id +
             "/" +
-            this.trans_id;
+            this.trans_id +
+            "/" +
+            this.transcript_id;
         })
         .catch(error => {
           alert("Please choose the course or remove it");

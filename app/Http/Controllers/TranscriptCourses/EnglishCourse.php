@@ -32,7 +32,6 @@ class EnglishCourse extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
         // delete if course already exists
         $id = $request->get('course_id');
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $request->get('course_id'))->where('transcript9_12_id', $request->get('transcript_id'))->get();
@@ -42,6 +41,7 @@ class EnglishCourse extends Controller
         foreach ($request->get('englishCourse', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
+            $total_credits = $period['total_credits'];
             $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([
@@ -55,7 +55,7 @@ class EnglishCourse extends Controller
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $request->get('remainingCredit'),
+                    'remaining_credits' => $total_credits - $period['selectedCredit'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -64,8 +64,6 @@ class EnglishCourse extends Controller
             } else {
                 $subject_name = $period['subject_name'];
                 $selectedCredit =  $period['selectedCredit'];
-                // dd($request->all());
-                dd($request->get('credits'));
                 $credit = Credits::where('credit', $selectedCredit)->first();
                 $subject = Subject::where('subject_name', $subject_name)->first();
                 TranscriptCourse9_12::create([
@@ -75,7 +73,7 @@ class EnglishCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $request->get('remainingCredit'),
+                    'remaining_credits' => $total_credits - $period['selectedCredit'],
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

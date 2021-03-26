@@ -48,7 +48,7 @@ Vue.component('edit-physical', require('./components/EditCourses/EditPhysicalEdu
 Vue.component('edit-health', require('./components/EditCourses/EditHealthCourse.vue').default);
 Vue.component('edit-foreign', require('./components/EditCourses/EditForeignCourse.vue').default);
 Vue.component('edit-another', require('./components/EditCourses/EditAnotherCourse.vue').default);
-Vue.component('ap-course', require('./components/Trancript9Courses/ApCourse.vue').default);
+Vue.component('ap-course', require('./components/Trancript9to12OtherCourses/ApCourse.vue').default);
 
 //courses 9-12
 Vue.component('english-transcript-course', require('./components/TranscriptCourses/EnglishCourse.vue').default);
@@ -59,6 +59,9 @@ Vue.component('physical-transcript-course', require('./components/TranscriptCour
 Vue.component('health-transcript-course', require('./components/TranscriptCourses/HealthCourse.vue').default);
 Vue.component('foreign-transcript-course', require('./components/TranscriptCourses/ForeignCourse.vue').default);
 Vue.component('another-transcript-course', require('./components/TranscriptCourses/AnotherCourse.vue').default);
+
+// college information
+Vue.component('college-course', require('./components/Trancript9to12OtherCourses/CollegeCourse.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

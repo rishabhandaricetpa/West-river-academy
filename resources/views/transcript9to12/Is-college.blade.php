@@ -23,6 +23,8 @@
                      <label class="form-check-label" for="">
                         Yes
                      </label>
+                     <input type="hidden" value="{{$trans_id}}" name="trans_id">
+                     <input type="hidden" value="{{$transcript9_12id}}" name="transcript9_12id">
                   </div>
                   <div class="form-check mb-2">
                      <input class="form-check-input" type="radio" name="is_apCourse" value="No">
