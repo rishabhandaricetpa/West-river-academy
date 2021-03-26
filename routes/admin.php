@@ -110,10 +110,16 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/subject/{id}', 'CourseController@update')->name('update.subject');
     Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
     Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
+
     //transcript
     Route::get('/view/transcript', 'TranscriptController@index')->name('view.transcript');
     Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
     Route::post('score/{subject_id}/{transcript_id}', 'TranscriptController@updateScore')->name('score.update');
+
+    //transcrip payments
+    Route::get('transcript-payments', 'TranscriptController@viewAllPayments')->name('transcript.payments');
+    Route::get('transcript-edit/payments/{transpay_id}', 'TranscriptController@editAllPayments')->name('transpayment.edit');
+    Route::get('delete/transcript-payments/{transpay_id}', 'TranscriptController@destroyeachPayments')->name('transpayment.delete');
 
     Route::get('file-upload/{student_id}/{transcript_id}', 'FileUploadController@fileUpload')->name('file.upload');
     Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');

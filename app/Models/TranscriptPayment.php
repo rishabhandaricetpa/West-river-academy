@@ -17,4 +17,8 @@ class TranscriptPayment extends Model
     {
         return $this->belongsTo('App\Models\TranscriptK8');
     }
+    public function transcript()
+    {
+        return $this->belongsTo('App\Models\Transcript');
+    }
 }

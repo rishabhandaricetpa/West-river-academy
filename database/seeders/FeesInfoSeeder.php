@@ -32,7 +32,8 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'usa_domestic_prioirity_mail', 'description' => 'USA Domestic Priority Mail', 'amount' => '0'],
             ['type' => 'notarization_doc_fee', 'description' => 'Fees for Notarization Documents', 'amount' => '20'],
             ['type' => 'apostille_doc_fee', 'description' => 'Fees for Apostille Documents', 'amount' => '75'],
-            ['type' => 'custom_letter', 'description' => 'Fees for Custom Letter', 'amount' => '20'],
+            ['type' => 'custom_letter', 'description' => 'Fees for Custom Letter', 'amount' => '35'],
+            ['type' => 'additional_transcript', 'description' => 'Fees for Additional Transcript for user', 'amount' => '25'],
         ];
         FeesInfo::insert($data);
     }

@@ -27,17 +27,20 @@
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
   $(function() {
-    // $("#example1").DataTable({
-    //   "responsive": true,
-    //   "lengthChange": false,
-    //   "autoWidth": false,
+    $("#example1").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "ordering": false,
+      "pagination": true,
+      "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    // $('#example1').dataTable({
+    //   "ordering": false,
+    //   "pagination": true,
     //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-    $('#example1').dataTable({
-      "ordering": false,
-      "pagination": true
-    });
 
 
     //parent datatable

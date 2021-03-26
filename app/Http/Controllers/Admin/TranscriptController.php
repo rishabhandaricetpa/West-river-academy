@@ -27,7 +27,6 @@ class TranscriptController extends Controller
 
         return view('admin.transcript.view-student', compact('students'));
     }
-
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
@@ -197,6 +196,45 @@ class TranscriptController extends Controller
 
     public function deleteSubGrades($subject_id, $transcript_id)
     {
-        dd($transcript_id);
+        // dd($transcript_id);
+    }
+
+    /* *
+     *view all the payments of the transcript methods
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     */
+    public function viewAllPayments()
+    {
+        $getAlltranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->get();
+        return view('admin.transcript.transcript_payments', compact('getAlltranscriptPayments'));
+    }
+    public function editAllPayments($transpay_id)
+    {
+        $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
+        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments'));
+    }
+
+    public function  destroyeachPayments($transpay_id)
+    {
+        try {
+            DB::beginTransaction();
+
+            TranscriptPayment::where('id', $transpay_id)->delete();
+            DB::commit();
+            $notification = [
+                'message' => 'Trannscript Payment is Deleted Successfully!',
+                'alert-type' => 'warning',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
+        }
     }
 }
