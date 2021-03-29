@@ -123,10 +123,18 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{ url('admin/view/transcript') }}" class="nav-link">
+            <a href="{{ route('admin.view.transcript') }}" class="nav-link">
               <i class="fas fa-eye"></i>
               <p>
-                View Transcript
+                Transcript K-8
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.view.transcript9_12') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
+              <p>
+                Transcript 9-12
               </p>
             </a>
           </li>

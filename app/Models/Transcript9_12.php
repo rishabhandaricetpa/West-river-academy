@@ -22,4 +22,8 @@ class Transcript9_12 extends Model
     {
         return $this->belongsTo(Transcript::class);
     }
+    public function transcripts()
+    {
+        return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
+    }
 }

@@ -87,7 +87,7 @@
                                 <tr>
                                     <td>{{$data->created_date}}</td>
                                     @if($data->related_to === 'student_record_received')
-                                    <td><a href="{{route('admin.edit-student',$data->student->id)}}">New Student Enrolled</a></td>
+                                    <td><a href="{{route('admin.edit.student.payment',$data->student->id)}}">New Student Enrolled</a></td>
                                     @elseif($data->related_to === 'graduation_record_received')
                                     <td><a href="{{ route('admin.view.graduation')}}/{{$data->linked_to}}/edit">Graduation Application</a></td>
                                     @elseif($data->related_to === 'transcript_ordered')
@@ -95,7 +95,7 @@
                                     @elseif($data->related_to === 'record_transfer')
                                     <td><a href="{{route('admin.student.schoolRecord',$data->student_profile_id)}}">Record Transfer</a></td>
                                     @elseif($data->related_to === 'custom_record_received')
-                                    <td><a href="{{ route('admin.each.payments',$data->linked_to)}}">Custom Payment</a></td>
+                                    <td><a href="{{ route('edit.custompayment',$data->linked_to)}}">Custom Payment</a></td>
                                     @elseif($data->related_to === 'transcript_edit_record_received')
                                     <td><a href="">Transcript Edit Request</a></td>
                                     @elseif($data->related_to === 'postage_record_received')

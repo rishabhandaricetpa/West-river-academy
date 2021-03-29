@@ -46,6 +46,7 @@
               <input
                 class="form-check-input"
                 type="radio"
+                required
                 v-model="apCourse.grade"
                 value="B"
               />

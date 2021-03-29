@@ -36,4 +36,12 @@ class Transcript extends Model
     {
         return $this->hasOne(TranscriptPayment::class);
     }
+    public function transcriptk8()
+    {
+        return $this->belongsTo('App\Models\TranscriptK8', 'id', 'transcript_id');
+    }
+    public function transcript9_12()
+    {
+        return $this->belongsTo('App\Models\Transcript9_12', 'id', 'transcript_id');
+    }
 }

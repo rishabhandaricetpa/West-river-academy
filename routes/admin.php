@@ -111,10 +111,15 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('delete/subject/{id}', 'CourseController@destroy')->name('delete.subject');
     Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
 
-    //transcript
+    //transcript k-8
     Route::get('/view/transcript', 'TranscriptController@index')->name('view.transcript');
     Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
     Route::post('score/{subject_id}/{transcript_id}', 'TranscriptController@updateScore')->name('score.update');
+
+    //transcript 9-12
+    Route::get('/view/transcript9_12', 'TranscriptController@viewtranscripts9_12')->name('view.transcript9_12');
+    Route::get('edit-transcript9_12/{id}', 'TranscriptController@edit9_12')->name('edit.transcript9_12');
+
 
     //transcrip payments
     Route::get('transcript-payments', 'TranscriptController@viewAllPayments')->name('transcript.payments');

@@ -36,7 +36,6 @@ class TranscriptController extends Controller
     public function index($id)
     {
         $enroll_students = ParentProfile::find($id)->studentProfile()->get();
-
         return view('transcript.graduation-app', compact('enroll_students'));
     }
 
@@ -327,18 +326,21 @@ class TranscriptController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function previewTranscript($student_id)
+    public function previewTranscript($student_id, $transcript_id)
     {
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);
-        $year = TranscriptK8::where('student_profile_id', $student_id)->orderBy('enrollment_year', 'ASC')->get(['enrollment_year'])->unique('enrollment_year');
-        $grades  = TranscriptK8::where('student_profile_id', $student_id)->orderBy('grade', 'ASC')->get(['grade']);
-        $transcriptData = TranscriptK8::select()->where('student_profile_id', $student_id)
+        $year = TranscriptK8::where('transcript_id', $transcript_id)->orderBy('enrollment_year', 'ASC')->get(['enrollment_year'])->unique('enrollment_year');
+
+        $grades  = TranscriptK8::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
+
+        $transcriptData = TranscriptK8::select()->where('transcript_id', $transcript_id)
             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
             ->get();
-        $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('paid')->orWhere('status', 'paid')->first();
-        $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $student_id)->get()->unique('subject_id');
+        $transcript_course_id = TranscriptK8::select('id')->where('transcript_id', $transcript_id)->get();
+        // $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('paid')->orWhere('status', 'paid')->first();
+        $groupCourses = TranscriptCourse::with(['subject'])->whereIn('k8transcript_id', $transcript_course_id)->get()->unique('subject_id');
         if ($transcript_id) {
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
         } else {
@@ -365,7 +367,7 @@ class TranscriptController extends Controller
                 'period' => $request->get('grade'),
                 'status' => 'pending',
             ]);
-            $getPaidData = Transcript::where('student_profile_id', $id)->where('status', 'paid')->where('period', $type)->get();
+            $getPaidData = Transcript::where('student_profile_id', $id)->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->where('period', $type)->get();
             if (count($getPaidData) > 0) {
                 $transcript_fee = FeesInfo::getFeeAmount('additional_transcript');
                 TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);

@@ -24,15 +24,37 @@ class TranscriptController extends Controller
     public function index()
     {
         $students = StudentProfile::all();
+        $type = "k-8";
+        return view('admin.transcript.view-student', compact('students', 'type'));
+    }
 
-        return view('admin.transcript.view-student', compact('students'));
+    public function viewtranscripts9_12()
+    {
+        $students = StudentProfile::all();
+        $type = "9-12";
+        return view('admin.transcript.view-student', compact('students', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
-        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
+        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8', 'transcript9_12')
+            // ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
+            ->get();
+        // dd($transcript);
+        $transcriptData = TranscriptK8::where('student_profile_id', $id)
+            ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
+            ->get();
+        $student = StudentProfile::find($id);
+
+        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
+    }
+
+    public function edit9_12($id)
+    {
+        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8', 'transcript9_12')
+            ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
             ->get();
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
@@ -41,6 +63,7 @@ class TranscriptController extends Controller
 
         return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
     }
+
 
     //fetch all the transcript data and Genrate the unsigned transcript
 

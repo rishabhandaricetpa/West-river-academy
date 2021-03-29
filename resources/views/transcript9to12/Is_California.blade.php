@@ -20,7 +20,7 @@
                   <h3 class="mb-3">Is the transcript going to be presented in the United States?</h3>
                   <input type="hidden" value="{{$transcript->id}}" name="transcript_id">
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" data-toggle="collapse" data-target="#transcript-country" aria-expanded="false" aria-controls="transcript-country" name="is_united_states" value="Yes">
+                     <input class="form-check-input" type="radio" data-toggle="collapse" data-target="#transcript-country" aria-expanded="false" aria-controls="transcript-country" name="is_united_states" value="Yes" required>
                      <label class="form-check-label" for="">
                         Yes
                      </label>
@@ -35,7 +35,7 @@
                <div class="form-group mb-2 lato-italic info-detail pb-3 collapse" id="transcript-country">
                   <h3 class="mb-3">Is the transcript going to be presented in California ?</h3>
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="is_california" value="Yes">
+                     <input class="form-check-input" type="radio" name="is_california" value="Yes" required>
                      <label class="form-check-label" for="">
                         Yes
                      </label>

@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
-                <label for="exampleInputPassword1">Quantity Needed?</label>
+                <label for="exampleInputPassword1">Quantity Needed</label>
                 <div>
                     <input type="number" name="quantity" class="form-control" required>
                 </div>
