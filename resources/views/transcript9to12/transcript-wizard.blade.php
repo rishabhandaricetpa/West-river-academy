@@ -43,7 +43,7 @@
         <div class="seperator mb-4">
             <h2 class="mb-2">{{$school->school_name}}</h2>
 
-            <a href="{{route('delete.school',$school->id)}}" class="btn btn-primary float-right" type="submit" value="Delete School Record">Delete School Record</a>
+            <a href="{{route('delete.transcript.school',$school->id)}}" class="btn btn-primary float-right" type="submit" value="Delete School Record">Delete School Record</a>
 
             <p class="mb-0"><span class="font-weight-bold mr-2">Academic School Year(s):</span>{{$school->enrollment_year}} </p>
             <p> <span class="font-weight-bold mr-2"> Grade:</span> {{$school->grade}}</p>
@@ -81,7 +81,7 @@
                 </table>
             </div>
             <div class="buttongroup">
-                <a href="{{route('displayAllCourse',[$school->id,$school->student_profile_id])}}" class="btn btn-primary mt-4">Select Courses and Grade</a>
+                <a href="{{route('showCourseDetails',[$school->id,$school->student_profile_id])}}" class="btn btn-primary mt-4">Select Courses and Grade</a>
             </div>
         </div>
         @endforeach

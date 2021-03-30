@@ -9,7 +9,7 @@ class TranscriptCourse9_12 extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'student_profile_id', 'courses_id', 'subject_id', 'score', 'remaining_credits', 'credit_id', 'transcript9_12_id', 'selectedCredit'
+        'student_profile_id', 'courses_id', 'subject_id', 'score', 'remaining_credits', 'credit_id', 'transcript9_12_id', 'other_subject', 'selectedCredit'
     ];
     public function subjects()
     {
@@ -19,5 +19,9 @@ class TranscriptCourse9_12 extends Model
     public function course()
     {
         return $this->hasMany('App\Models\Course', 'id', 'courses_id');
+    }
+    public function subject()
+    {
+        return $this->hasOne('App\Models\Subject', 'id', 'subject_id');
     }
 }

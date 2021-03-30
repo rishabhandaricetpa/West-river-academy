@@ -342,10 +342,26 @@ class TranscriptController extends Controller
         // $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('paid')->orWhere('status', 'paid')->first();
         $groupCourses = TranscriptCourse::with(['subject'])->whereIn('k8transcript_id', $transcript_course_id)->get()->unique('subject_id');
         if ($transcript_id) {
-            return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
+            $enrollment_periods = StudentProfile::find($student_id)->TranscriptK8()->get();
+            $items = [];
+            foreach ($enrollment_periods as $key => $enrollment_period) {
+                $items[] = $enrollment_period->enrollment_year;
+            }
+            $maxYear =  max($items);
+            $minYear = min($items);
+            return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         } else {
+            $enrollment_periods = StudentProfile::find($student_id)->TranscriptK8()->get();
+
+            $items = [];
+            foreach ($enrollment_periods as $key => $enrollment_period) {
+                $items[] = $enrollment_period->enrollment_year;
+            }
+            $maxYear =  max($items);
+            $minYear = min($items);
+
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-            return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year'));
+            return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         }
     }
 

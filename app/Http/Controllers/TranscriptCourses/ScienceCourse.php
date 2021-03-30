@@ -47,7 +47,7 @@ class ScienceCourse extends Controller
                 $other_sub = Subject::create([
                     'courses_id' => $period['course_id'],
                     'subject_name' => $other_subjects,
-                    'transcript_period' => 'K-8',
+                    'transcript_period' => '9-12',
                     'status' => 1,
                 ]);
                 TranscriptCourse9_12::create([
