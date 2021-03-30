@@ -16,7 +16,11 @@ class CollegeController extends Controller
         $transcript9_12id = $request->transcript9_12id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        return view('transcript9to12.college-info', compact('transcript_id', 'student_id', 'transcript9_12id', 'credits'));
+        if ($request->is_apCourse == 'Yes') {
+            return view('transcript9to12.college-info', compact('transcript_id', 'student_id', 'transcript9_12id', 'credits'));
+        } else {
+            return redirect()->route('display.grades', $student_id);
+        }
     }
     public function store(Request $request)
     {

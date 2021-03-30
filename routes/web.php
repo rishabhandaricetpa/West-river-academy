@@ -328,4 +328,25 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::post('student-college/{student_id}', 'TranscriptController\CollegeController@addCollege')->name('collegeDetails');
     Route::post('college-course', 'TranscriptController\CollegeController@store')->name('collegeCourse.store');
+
+    // display all courses
+    Route::get('display-all-grades/{student_id}', 'TranscriptController\Transcript9to12@displayAllGrades')->name('display.grades');
+
+    //operation - delete and edit in transript 9-12
+    Route::get('delete/school-transcript/{transcript_id}', 'TranscriptController\Transcript9to12@deleteSchool')->name('delete.transcript.school');
+    Route::get('course-details/{transcript_id}/{student_id}', 'TranscriptController\Transcript9to12@displayAllCourse')->name('displayCourseDetails');
+
+    //show specific course details
+
+    Route::get('display-course-details/{transcript_id}/{student_id}', 'TranscriptController\Transcript9to12@showCourseDetails')->name('showCourseDetails');
+
+    // edit course
+
+    //english edit transcript
+    Route::get('edit-transcript-english/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editEnglish')->name('edit.englishTranscriptCourse');
+    Route::post('edit-transcript-english', 'EditTranscript9_12Courses\EditCourse@storeEnglish')->name('editEnglishTranscriptCourse.store');
+
+    //mathematics edit transcript
+    Route::get('edit-mathematics-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editMathematics')->name('edit.mathematicsTranscriptCourse');
+    Route::post('edit-mathematics-transcript', 'EditTranscript9_12Courses\EditCourse@storeMathematics')->name('editMathematicsTranscriptCourse.store');
 });

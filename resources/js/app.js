@@ -63,6 +63,11 @@ Vue.component('another-transcript-course', require('./components/TranscriptCours
 // college information
 Vue.component('college-course', require('./components/Trancript9to12OtherCourses/CollegeCourse.vue').default);
 
+
+// edit transcript 9-12 courses
+Vue.component('edit-english-transcript-course', require('./components/EditTranscriptCourses/EditEnglishCourse.vue').default);
+Vue.component('edit-mathematics-transcript-course', require('./components/EditTranscriptCourses/EditMathematicsCourse.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -26,6 +26,7 @@
                 value=""
                 v-model="collegeCourse.name"
                 aria-describedby=""
+                required
               />
             </div>
           </div>
@@ -42,6 +43,7 @@
                 value=""
                 v-model="collegeCourse.course_name"
                 aria-describedby=""
+                required
               />
             </div>
           </div>
@@ -245,15 +247,9 @@ export default {
     submitCourse() {
       axios
         .post(route("collegeCourse.store"), this.form)
-        // .then(response => {
-        //   window.location =
-        //     "/another-grade-transcript/" +
-        //     this.student_id +
-        //     "/" +
-        //     this.trans_id +
-        //     "/" +
-        //     this.transcript_id;
-        // })
+        .then(response => {
+          window.location = "/display-all-grades/" + this.student_id;
+        })
         .catch(error => {
           alert("Please choose the course or remove it");
         });

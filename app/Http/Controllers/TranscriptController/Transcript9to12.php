@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdvancePlacement;
 use App\Models\Credits;
 use App\Models\StudentProfile;
+use App\Models\Transcript;
 use App\Models\Transcript9_12;
 use App\Models\TranscriptCourse9_12;
 use DB;
@@ -167,17 +168,60 @@ class Transcript9to12 extends Controller
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('transcript.create', [$trans_id, $student_id]);
         } else {
-            // $student_transcripts = TranscriptCourse9_12::where('student_profile_id', $student_id)->select('transcript9_12_id')->groupBy('transcript9_12_id')->get();
-            // $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses9_12()->get();
-            // $details9_12 = StudentProfile::find($student_id)->Transcript912()->get();
 
-            // $student = StudentProfile::find($student_id);
-            // $transcriptDatas = Transcript9_12::where('student_profile_id', $student_id)
-            //     ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
-            //     ->get();
-            // //dd($transcriptDatas);
-            // return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas'));
             return view('transcript9to12.Is-college', compact('student_id', 'trans_id', 'transcript9_12id'));
+        }
+    }
+    public function displayAllGrades($student_id)
+    {
+        $student_transcripts = TranscriptCourse9_12::where('student_profile_id', $student_id)->select('transcript9_12_id')->groupBy('transcript9_12_id')->get();
+        $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses9_12()->get();
+        $details9_12 = StudentProfile::find($student_id)->Transcript912()->get();
+
+        $student = StudentProfile::find($student_id);
+        $transcriptDatas = Transcript9_12::where('student_profile_id', $student_id)
+            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
+            ->get();
+        //   dd($transcriptDatas);
+        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas'));
+    }
+
+    public function deleteSchool($transcript_id)
+    {
+        try {
+            $transcriptDetails = Transcript9_12::find($transcript_id)->delete();
+            $notification = [
+                'message' => 'School Record Deleted Successfully!',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    public function showCourseDetails($transcript_id, $student_id)
+    {
+        $transcriptData9_12 = Transcript9_12::where('id', $transcript_id)->first();
+
+        $transcript = Transcript::where('id', $transcriptData9_12->transcript_id)->first();
+        if ($transcript->status == 'approved') {
+            dd('To edit this school course please pay $25 since this transcript is approved by WRA.');
+        } else {
+            $courses = TranscriptCourse9_12::where('transcript9_12_id', $transcript_id)
+                ->join('transcript9_12', 'transcript9_12.id', 'transcript_course9_12s.transcript9_12_id')
+                ->join('courses', 'courses.id', 'transcript_course9_12s.courses_id')
+                ->join('subjects', 'subjects.id', 'transcript_course9_12s.subject_id')
+                ->get();
+            $studentInfo = StudentProfile::find($student_id);
+            $school = Transcript9_12::find($transcript_id);
+
+            return view('transcript9to12.show-course-details', compact('courses', 'transcript_id', 'student_id', 'studentInfo', 'school'));
         }
     }
 }
