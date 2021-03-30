@@ -328,6 +328,7 @@ class TranscriptController extends Controller
 
     public function previewTranscript($student_id, $transcript_id)
     {
+        // dd($transcript_id);
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);
@@ -339,20 +340,19 @@ class TranscriptController extends Controller
             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
             ->get();
         $transcript_course_id = TranscriptK8::select('id')->where('transcript_id', $transcript_id)->get();
-        // $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('paid')->orWhere('status', 'paid')->first();
         $groupCourses = TranscriptCourse::with(['subject'])->whereIn('k8transcript_id', $transcript_course_id)->get()->unique('subject_id');
         if ($transcript_id) {
-            $enrollment_periods = StudentProfile::find($student_id)->TranscriptK8()->get();
+            $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
             $items = [];
             foreach ($enrollment_periods as $key => $enrollment_period) {
                 $items[] = $enrollment_period->enrollment_year;
             }
+
             $maxYear =  max($items);
             $minYear = min($items);
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         } else {
-            $enrollment_periods = StudentProfile::find($student_id)->TranscriptK8()->get();
-
+            $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
             $items = [];
             foreach ($enrollment_periods as $key => $enrollment_period) {
                 $items[] = $enrollment_period->enrollment_year;

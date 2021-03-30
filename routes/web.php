@@ -349,4 +349,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //mathematics edit transcript
     Route::get('edit-mathematics-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editMathematics')->name('edit.mathematicsTranscriptCourse');
     Route::post('edit-mathematics-transcript', 'EditTranscript9_12Courses\EditCourse@storeMathematics')->name('editMathematicsTranscriptCourse.store');
+
+    //health edit transcript
+    Route::get('edit-health-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editHealth')->name('edit.healthTranscriptCourse');
+    Route::post('edit-health-transcript', 'EditTranscript9_12Courses\EditCourse@storeHealth')->name('editHealthTranscriptCourse.store');
+
+    //Foreign language edit transcript
+    Route::get('edit-foreign-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editForeign')->name('edit.foreignTranscriptCourse');
+    Route::post('edit-foreign-transcript', 'EditTranscript9_12Courses\EditCourse@storeForeign')->name('editForeignTranscriptCourse.store');
+
+    //elective edit transcript
+    Route::get('edit-elective-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editElective')->name('edit.electiveTranscriptCourse');
+    Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
 });

@@ -67,6 +67,10 @@ Vue.component('college-course', require('./components/Trancript9to12OtherCourses
 // edit transcript 9-12 courses
 Vue.component('edit-english-transcript-course', require('./components/EditTranscriptCourses/EditEnglishCourse.vue').default);
 Vue.component('edit-mathematics-transcript-course', require('./components/EditTranscriptCourses/EditMathematicsCourse.vue').default);
+Vue.component('edit-health-transcript-course', require('./components/EditTranscriptCourses/EditHealthCourse.vue').default);
+Vue.component('edit-foreign-transcript-course', require('./components/EditTranscriptCourses/EditForeignCourse.vue').default);
+Vue.component('edit-elective-transcript-course', require('./components/EditTranscriptCourses/EditElectiveCourse.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
