@@ -349,4 +349,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //mathematics edit transcript
     Route::get('edit-mathematics-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editMathematics')->name('edit.mathematicsTranscriptCourse');
     Route::post('edit-mathematics-transcript', 'EditTranscript9_12Courses\EditCourse@storeMathematics')->name('editMathematicsTranscriptCourse.store');
+
+    //social science 
+    Route::get('edit-socialScience-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editSocialScience')->name('edit.SocialScienceTranscriptCourse');
+    Route::post('edit-socialScience-transcript', 'EditTranscript9_12Courses\EditCourse@storeSocialScience')->name('editSocialScienceTranscriptCourse.store');
+
+    //science 
+    Route::get('edit-science-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editScience')->name('edit.ScienceTranscriptCourse');
+    Route::post('edit-science-transcript', 'EditTranscript9_12Courses\EditCourse@storeScience')->name('editScienceTranscriptCourse.store');
+
+    //physical Education
+    Route::get('edit-physicalEducation-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editPhysicalEducation')->name('edit.PhysicalEducationTranscriptCourse');
+    Route::post('edit-physicalEducation-transcript', 'EditTranscript9_12Courses\EditCourse@storePhysicalEducation')->name('editPhysicalEducationTranscriptCourse.store');
 });

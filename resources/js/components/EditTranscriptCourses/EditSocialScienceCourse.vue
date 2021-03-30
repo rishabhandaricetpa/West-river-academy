@@ -6,8 +6,8 @@
   >
     <div
       class="seperator mt-4"
-      v-for="mathsCourse in form.mathsCourse"
-      :key="mathsCourse.id"
+      v-for="scienceCourse in form.scienceCourse"
+      :key="scienceCourse.id"
     >
       <div class="position-relative">
         <span class="remove" @click="removeCourse(index)"
@@ -17,9 +17,9 @@
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
-              v-model="mathsCourse.subject_name"
+              v-model="scienceCourse.subject_name"
             >
-              <option v-for="Course in mathscourse" :key="Course">
+              <option v-for="Course in sciencecourse" :key="Course">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -32,7 +32,7 @@
                 class="form-control"
                 name=""
                 value="other"
-                v-model="mathsCourse.other_subject"
+                v-model="scienceCourse.other_subject"
                 aria-describedby=""
               />
             </div>
@@ -53,7 +53,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="mathsCourse.grade"
+                v-model="scienceCourse.grade"
                 value="A"
               />
               <label class="form-check-label" for="">A</label>
@@ -63,7 +63,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="mathsCourse.grade"
+                v-model="scienceCourse.grade"
                 value="B"
               />
               <label class="form-check-label" for="">B</label>
@@ -73,7 +73,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="mathsCourse.grade"
+                v-model="scienceCourse.grade"
                 value="C"
               />
               <label class="form-check-label" for="">C</label>
@@ -82,7 +82,7 @@
               <input
                 class="form-check-input"
                 type="radio"
-                v-model="mathsCourse.grade"
+                v-model="scienceCourse.grade"
                 name="D"
                 value="D"
               />
@@ -92,7 +92,7 @@
               <input
                 class="form-check-input"
                 type="radio"
-                v-model="mathsCourse.grade"
+                v-model="scienceCourse.grade"
                 name=""
                 value="Pass"
               />
@@ -108,7 +108,7 @@
                 data-toggle="collapse"
                 href="#remainingCredits"
                 role="button"
-                v-model="mathsCourse.selectedCredit"
+                v-model="scienceCourse.selectedCredit"
                 v-on:change="showCredit"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
@@ -119,7 +119,7 @@
               </select>
               <h3 v-if="isCredit">
                 You have
-                {{ outofcredit.total_credit - mathsCourse.selectedCredit }}
+                {{ outofcredit.total_credit - scienceCourse.selectedCredit }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
@@ -137,7 +137,7 @@
     </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add another Mathematics Course</a
+        >Add another  History/Social Science Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
@@ -157,13 +157,13 @@ export default {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
-        mathsCourse: []
+        scienceCourse: []
       }
     };
   },
 
   props: [
-    "mathscourse",
+    "sciencecourse",
     "transcript_id",
     "student_id",
     "courses_id",
@@ -187,7 +187,7 @@ export default {
         };
       });
 
-      this.form.mathsCourse = courses;
+      this.form.scienceCourse = courses;
     },
     showCredit(e) {
       this.isCredit = true;
@@ -196,7 +196,7 @@ export default {
       return this.isCredit;
     },
     addCourse() {
-      this.form.mathsCourse.push({
+      this.form.scienceCourse.push({
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
@@ -208,7 +208,7 @@ export default {
       });
     },
     removeCourse(index) {
-      this.form.mathsCourse.splice(index, 1);
+      this.form.scienceCourse.splice(index, 1);
     },
     submitCourse() {
       this.errors = [];
@@ -233,10 +233,10 @@ export default {
         this.validateCredit()
       ) {
         axios
-          .post(route("editMathematicsTranscriptCourse.store"), this.form)
+          .post(route("editSocialScienceTranscriptCourse.store"), this.form)
           .then(response => {
             window.location =
-              "/edit-socialScience-transcript/" +
+              "/edit-science-transcript/" +
               this.student_id +
               "/" +
               this.transcript_id;
@@ -247,17 +247,17 @@ export default {
       }
     },
     vallidateGrades() {
-      for (let i = 0; i < this.form.mathsCourse.length; i++) {
-        const mathsCourse = this.form.mathsCourse[i];
-        if (!mathsCourse.grade) {
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const scienceCourse = this.form.scienceCourse[i];
+        if (!scienceCourse.grade) {
           return false;
         }
       }
       return true;
     },
     validateSubject() {
-      for (let i = 0; i < this.form.mathsCourse.length; i++) {
-        const enrollmentSubject = this.form.mathsCourse[i];
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const enrollmentSubject = this.form.scienceCourse[i];
         if (!enrollmentSubject.subject_name) {
           return false;
         }
@@ -265,8 +265,8 @@ export default {
       return true;
     },
     validateCredit() {
-      for (let i = 0; i < this.form.mathsCourse.length; i++) {
-        const enrollmentSubject = this.form.mathsCourse[i];
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const enrollmentSubject = this.form.scienceCourse[i];
         if (!enrollmentSubject.selectedCredit) {
           return false;
         }
