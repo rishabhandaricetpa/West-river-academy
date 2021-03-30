@@ -216,14 +216,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
 
     Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
-    Route::get('preview-transcript/{student_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
+    Route::get('preview-transcript/{student_id}/{trans_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
     Route::get('new-grade/{student_id}/{transcript_id}', function () {
         return view('transcript/dashboard-another-languages');
     })->name('new-grade');
 
     Route::get('choose-another/{student_id}/{trans_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
-    Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
+    Route::get('another-grade/{student_id}/{trans_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
     Route::post('another/required', 'Courses\AnotherCourseController@anotherGradeRequired')->name('another.grade.requirement');
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
@@ -361,4 +361,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //physical Education
     Route::get('edit-physicalEducation-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editPhysicalEducation')->name('edit.PhysicalEducationTranscriptCourse');
     Route::post('edit-physicalEducation-transcript', 'EditTranscript9_12Courses\EditCourse@storePhysicalEducation')->name('editPhysicalEducationTranscriptCourse.store');
+    //health edit transcript
+    Route::get('edit-health-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editHealth')->name('edit.healthTranscriptCourse');
+    Route::post('edit-health-transcript', 'EditTranscript9_12Courses\EditCourse@storeHealth')->name('editHealthTranscriptCourse.store');
+
+    //Foreign language edit transcript
+    Route::get('edit-foreign-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editForeign')->name('edit.foreignTranscriptCourse');
+    Route::post('edit-foreign-transcript', 'EditTranscript9_12Courses\EditCourse@storeForeign')->name('editForeignTranscriptCourse.store');
+
+    //elective edit transcript
+    Route::get('edit-elective-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editElective')->name('edit.electiveTranscriptCourse');
+    Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
 });

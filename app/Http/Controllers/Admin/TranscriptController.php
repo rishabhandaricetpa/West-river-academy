@@ -24,16 +24,24 @@ class TranscriptController extends Controller
     public function index()
     {
         $students = StudentProfile::all();
+        $type = "k-8";
+        return view('admin.transcript.view-student', compact('students', 'type'));
+    }
 
-        return view('admin.transcript.view-student', compact('students'));
+    public function viewtranscripts9_12()
+    {
+        $students = StudentProfile::all();
+        $type = "9-12";
+        return view('admin.transcript.view-student', compact('students', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
-        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
+        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
-            ->get();
+            ->get()->unique('transcript_id');
+        // dd($transcript);
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
@@ -41,6 +49,20 @@ class TranscriptController extends Controller
 
         return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
     }
+
+    public function edit9_12($id)
+    {
+        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcript9_12')
+            ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
+            ->get()->unique('transcript_id');
+        $transcriptData = TranscriptK8::where('student_profile_id', $id)
+            ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
+            ->get();
+        $student = StudentProfile::find($id);
+
+        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
+    }
+
 
     //fetch all the transcript data and Genrate the unsigned transcript
 
@@ -53,17 +75,16 @@ class TranscriptController extends Controller
         return view('admin.transcript.view-transcript', compact('student', 'transcriptData', 'transcript_id'));
     }
 
-    public function editSubGrades($subject_id, $transcript_id)
+    public function editSubGrades($subject_id, $transcript_id, $grade_value)
     {
-        $schoolDetails = TranscriptK8::Where('transcript_id', $transcript_id)->first();
-
+        $schoolDetails = TranscriptK8::Where('transcript_id', $transcript_id)
+            ->where('grade', $grade_value)->first();
         $subjectDeatils = TranscriptCourse::where('k8transcript_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->first();
 
         $subjects = Subject::whereId($subject_id)->first();
-
-        return view('admin.transcript.edit_subject_grade', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id'));
+        return view('admin.transcript.edit_subject_grade', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id', 'grade_value'));
     }
 
     public function genrateTranscript($id, $transcript_id)
@@ -179,16 +200,16 @@ class TranscriptController extends Controller
     //updateScore
     public function updateScore(Request $request, $subject_id, $transcript_id)
     {
-        $schoolDetails = TranscriptK8::whereStudent_profile_id($subject_id)->orWhere('transcript_id', $transcript_id)->first();
+        $schoolDetails = TranscriptK8::where('transcript_id', $transcript_id)
+            ->where('grade', $request->get('grade_value'))
+            ->first();
         $subjectDeatils = TranscriptCourse::where('k8transcript_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->update(['score' => $request['grade']]);
-
         $notification = [
             'message' => 'score update Successfully!',
             'alert-type' => 'success',
         ];
-
         return redirect()->back()->with($notification);
     }
 

@@ -48,7 +48,7 @@
                                 </div>
                                 <div class='form-row row col-12'>
                                     <div class='col-xs-12 form-group required'>
-                                        <label class='control-label'>What are you paying for</label> <input class='form-control' size='4' type='text' name="description" required>
+                                        <label class='control-label'>What are you paying for?</label> <input class='form-control' size='4' type='text' name="description" required>
                                     </div>
                                 </div>
                             </div>

@@ -35,7 +35,7 @@
           <input class="form-control" id="cell_phone" name="cell_phone" value="{{$student->cell_phone}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Student ID<sup>*</sup></label>
+          <label>National ID<sup>*</sup></label>
           <input class="form-control" id="student_id" name="student_id" value="{{$student->student_Id}}">
         </div>
         <div class="form-group col-sm-6">

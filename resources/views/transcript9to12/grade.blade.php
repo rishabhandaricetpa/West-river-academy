@@ -19,7 +19,7 @@
                     @csrf
                     <div class="form-group mb-2 lato-italic info-detail pb-2">
                         <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="student_grade" value="9">
+                            <input class="form-check-input" type="radio" name="student_grade" value="9" required>
                             <label class="form-check-label" for="">
                                 9
                             </label>

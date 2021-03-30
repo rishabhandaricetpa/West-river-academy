@@ -14,7 +14,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Date of Birth</th>
-                        <th>Student ID</th>
+                        <th>National ID</th>
                         <th>Email</th>
                         <th>Action</th>
                     </tr>

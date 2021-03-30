@@ -98,18 +98,18 @@
                   @elseif($transcriptData->status === 'approved')
                   <td>Approved</td>
                   @elseif($transcriptData->status === 'completed')
-                  <td>Payment Received</td>
+                  <td>Submitted</td>
                   @else
                   <td>-</td>
                   @endif
                   @if($transcriptData->status === 'paid')
                   <td>-</td>
                   @elseif($transcriptData->status === 'canEdit')
-                  <td><a href="{{route('another.grade',$transcriptData->student_profile_id)}}">Edit Transcript</a></td>
+                  <td><a href="{{route('another.grade',[$transcriptData->student_profile_id,$transcriptData->id])}}">Edit Transcript</a></td>
                   @elseif($transcriptData->status === 'approved')
                   <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
                   @elseif($transcriptData->status === 'completed')
-                  <td><a href="{{ route ('preview.transcript',$transcriptData['student']['id'])}}" role="button">Preview Transcript</a></td>
+                  <td><a href="{{route('preview.transcript',[$transcriptData->student_profile_id,$transcriptData->id])}}">Preview Transcript</a></td>
                   @else
                   <td>-</td>
                   @endif

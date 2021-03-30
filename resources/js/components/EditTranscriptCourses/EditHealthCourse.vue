@@ -6,8 +6,8 @@
   >
     <div
       class="seperator mt-4"
-      v-for="physicalCourse in form.physicalCourse"
-      :key="physicalCourse.id"
+      v-for="healthCourse in form.healthCourse"
+      :key="healthCourse.id"
     >
       <div class="position-relative">
         <span class="remove" @click="removeCourse(index)"
@@ -17,9 +17,9 @@
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
-              v-model="physicalCourse.subject_name"
+              v-model="healthCourse.subject_name"
             >
-              <option v-for="Course in physicalcourses" :key="Course">
+              <option v-for="Course in healthcourse" :key="Course">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -32,7 +32,7 @@
                 class="form-control"
                 name=""
                 value="other"
-                v-model="physicalCourse.other_subject"
+                v-model="healthCourse.other_subject"
                 aria-describedby=""
               />
             </div>
@@ -53,7 +53,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="physicalCourse.grade"
+                v-model="healthCourse.grade"
                 value="A"
               />
               <label class="form-check-label" for="">A</label>
@@ -63,7 +63,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="physicalCourse.grade"
+                v-model="healthCourse.grade"
                 value="B"
               />
               <label class="form-check-label" for="">B</label>
@@ -73,7 +73,7 @@
                 class="form-check-input"
                 type="radio"
                 name=""
-                v-model="physicalCourse.grade"
+                v-model="healthCourse.grade"
                 value="C"
               />
               <label class="form-check-label" for="">C</label>
@@ -82,7 +82,7 @@
               <input
                 class="form-check-input"
                 type="radio"
-                v-model="physicalCourse.grade"
+                v-model="healthCourse.grade"
                 name="D"
                 value="D"
               />
@@ -92,7 +92,7 @@
               <input
                 class="form-check-input"
                 type="radio"
-                v-model="physicalCourse.grade"
+                v-model="healthCourse.grade"
                 name=""
                 value="Pass"
               />
@@ -108,7 +108,7 @@
                 data-toggle="collapse"
                 href="#remainingCredits"
                 role="button"
-                v-model="physicalCourse.selectedCredit"
+                v-model="healthCourse.selectedCredit"
                 v-on:change="showCredit"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
@@ -119,7 +119,7 @@
               </select>
               <h3 v-if="isCredit">
                 You have
-                {{ outofcredit.total_credit - physicalCourse.selectedCredit }}
+                {{ outofcredit.total_credit - healthCourse.selectedCredit }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
@@ -137,7 +137,7 @@
     </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add another Physical Education Course</a
+        >Add another Health Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
@@ -148,7 +148,7 @@
 
 <script>
 export default {
-  name: "MathsCourse",
+  name: "HealthCourse",
   data() {
     return {
       isCredit: false,
@@ -157,13 +157,13 @@ export default {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
-        physicalCourse: []
+        healthCourse: []
       }
     };
   },
 
   props: [
-    "physicalcourses",
+    "healthcourse",
     "transcript_id",
     "student_id",
     "courses_id",
@@ -187,7 +187,7 @@ export default {
         };
       });
 
-      this.form.physicalCourse = courses;
+      this.form.healthCourse = courses;
     },
     showCredit(e) {
       this.isCredit = true;
@@ -196,7 +196,7 @@ export default {
       return this.isCredit;
     },
     addCourse() {
-      this.form.physicalCourse.push({
+      this.form.healthCourse.push({
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
@@ -208,7 +208,7 @@ export default {
       });
     },
     removeCourse(index) {
-      this.form.physicalCourse.splice(index, 1);
+      this.form.healthCourse.splice(index, 1);
     },
     submitCourse() {
       this.errors = [];
@@ -233,10 +233,10 @@ export default {
         this.validateCredit()
       ) {
         axios
-          .post(route("editPhysicalEducationTranscriptCourse.store"), this.form)
+          .post(route("editHealthTranscriptCourse.store"), this.form)
           .then(response => {
             window.location =
-              "/edit-health-transcript/" +
+              "/edit-foreign-transcript/" +
               this.student_id +
               "/" +
               this.transcript_id;
@@ -247,17 +247,17 @@ export default {
       }
     },
     vallidateGrades() {
-      for (let i = 0; i < this.form.physicalCourse.length; i++) {
-        const physicalCourse = this.form.physicalCourse[i];
-        if (!physicalCourse.grade) {
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const healthCourse = this.form.healthCourse[i];
+        if (!healthCourse.grade) {
           return false;
         }
       }
       return true;
     },
     validateSubject() {
-      for (let i = 0; i < this.form.physicalCourse.length; i++) {
-        const enrollmentSubject = this.form.physicalCourse[i];
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const enrollmentSubject = this.form.healthCourse[i];
         if (!enrollmentSubject.subject_name) {
           return false;
         }
@@ -265,8 +265,8 @@ export default {
       return true;
     },
     validateCredit() {
-      for (let i = 0; i < this.form.physicalCourse.length; i++) {
-        const enrollmentSubject = this.form.physicalCourse[i];
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const enrollmentSubject = this.form.healthCourse[i];
         if (!enrollmentSubject.selectedCredit) {
           return false;
         }

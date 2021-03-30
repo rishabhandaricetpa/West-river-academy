@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
-          <label for="">Student ID</label>
+          <label for="">National ID</label>
           <div>
             <p>{{$student ->student_Id}}</p>
           </div>
