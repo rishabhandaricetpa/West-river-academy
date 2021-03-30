@@ -52,9 +52,9 @@
                       <td>{{$student->email}}</td>
                       <td>{{$student->student_Id}}</td>
                       <td>{{$student->cell_phone}}</td>
-                      @if($type===" k-8") <td>
+                      @if($type == 'k-8') <td>
                             <a href=" {{route('admin.edit.transcript',$student->id)}}">
-                                <i class="fas fa-arrow-alt-circle-right"></i></a>
+                            <i class="fas fa-arrow-alt-circle-right"></i></a>
                             </td>
                             @else
                             <td>

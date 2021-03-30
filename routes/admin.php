@@ -118,7 +118,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //transcript 9-12
     Route::get('/view/transcript9_12', 'TranscriptController@viewtranscripts9_12')->name('view.transcript9_12');
-    Route::get('edit-transcript9_12/{id}', 'TranscriptController@edit9_12')->name('edit.transcript9_12');
+    Route::get('edit-transcript9_12/{id}', 'TranscriptController@edit9_12')->name('edit.');
 
 
     //transcrip payments
@@ -130,7 +130,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
     Route::get('view-pdf/{student_id}', 'TranscriptController@fetchfile')->name('view.pdf');
-    Route::get('edit-subGrades/{subject_id}/{transcript_id}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
+    Route::get('edit-subGrades/{subject_id}/{transcript_id}/{grade_value}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
     Route::get('delete-subGrades/{subject_id}/{transcript_id}', 'TranscriptController@deleteSubGrades')->name('delete.subGrades');
 
     //genrate Unsigned Transcript for student
