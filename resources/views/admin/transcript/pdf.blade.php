@@ -260,7 +260,7 @@
  </table>
  <p style="font-size:13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, asperiores?</p>
  </td>
- <td width="33.33%" style="vertical-align:top;">
+ <td width="33.33%" style="vertical-align:top;padding:0 4px 4px 4px;">
   <p style="text-align:center;font-weight:600;margin-bottom:0;"><span style="border-bottom:1px solid #000;margin-bottom:0;">Grading System</span></p>
   <p style="text-align:center;font-weight:600;margin-top:5px;"><span style="border-bottom:1px solid #000;margin-top:0;">Grade Percent Points AP Points</span></p>
   <table>
