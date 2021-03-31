@@ -68,55 +68,173 @@
         <table width="100%">
           <tbody>
             <tr style="width:100%;">
-              <td width="70%">
-                <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
-                  <thead>
-                    <tr>
-                      <th colspan="3" style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">course name</th>
-                      @foreach($grades as $grade)
-                      <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;width:15%;padding:3px;">Grade {{$grade->grade}}</th>
-                      @endforeach
-                    </tr>
+           <table style="width:100%;" border="1">
+           <tr>
+              <td style="width:50%;">
+                <table border="1" style="width:100%;border:0;">
+                  <thead style="background-color:#cccccc70">
+                   <tr>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">course name</th>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">yr</th>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">cr</th>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">gr</th>
+                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($groupCourses as $course)
-                    <tr>
-                      <td colspan="3" style="border-bottom:1px solid #000;width:70%;padding:3px;font-size:11px;">{{$course->subject->subject_name}}</td>
-                      @foreach($transcriptData as $niddle => $data)
-                      <td style="border-bottom:1px solid #000;border-left:1px solid #000;width:15%;padding:3px;font-size:11px;text-align:center;">{{ getMetrixValues($course, $data, $transcriptData) }}</td>
-                      @endforeach
-                    </tr>
-                    @endforeach
+                  <tr>
+                    <td style="font-weight:700;text-align:center;font-size:14px;">Acadmic Year 2014 - 2015</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
                   </tbody>
                 </table>
               </td>
-              <td width="30%" style="text-align:right;">
-                <table width="100%">
+              <td style="width:50%;">
+              <table border="1" style="width:100%;border:0;">
+                  <thead style="background-color:#cccccc70">
+                   <tr>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">course name</th>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">yr</th>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">cr</th>
+                    <th style="text-transform:uppercase;font-size:14px;padding:7px;line-height: 1;">gr</th>
+                   </tr>
+                  </thead>
                   <tbody>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:22px;"><span style="border-bottom:1px solid #000;display:inline-block;font-size:11px;">GRADING SYSTEM</span></td>
-                    </tr>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;padding-left:22px;font-size:11px;">A = 90-100%</td>
-                    </tr>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;padding-left:22px;font-size:11px;">B = 80-89%</td>
-                    </tr>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;padding-left:22px;font-size:11px;">C = 70-79%</td>
-                    </tr>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;padding-left:22px;font-size:11px;">D = 60-69%</td>
-                    </tr>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;padding-left:22px;font-size:11px;">F = 0-59%</td>
-                    </tr>
-                    <tr style="width:100%;">
-                      <td style="white-space: pre;padding-left:22px;font-size:11px;">P = PASS</td>
-                    </tr>
+                  <tr>
+                    <td style="font-weight:700;text-align:center;font-size:14px;">Acadmic Year 2014 - 2015</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">B</td>
+                  </tr>
                   </tbody>
                 </table>
               </td>
+           </tr>
+           <tr>
+              <td style="width:50%;">
+                <table border="1" style="width:100%;border:0;">
+                  <tbody>
+                  <tr>
+                    <td style="font-weight:700;text-align:center;font-size:14px;">Acadmic Year 2014 - 2015</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="width:50%;">
+                <table border="1" style="width:100%;border:0;">
+                  <tbody>
+                  <tr>
+                    <td style="font-weight:700;text-align:center;font-size:14px;">Acadmic Year 2014 - 2015</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:7px;line-height:1;font-size:14px;">Mathematics 9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">9</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;">1.00</td>
+                    <td style="padding:7px;line-height:1;font-size:14px;min-width:35px;">B</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+           </tr>
+           </table>
+              
             </tr>
           </tbody>
         </table>
