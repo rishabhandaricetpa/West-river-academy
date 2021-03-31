@@ -10,7 +10,7 @@ class Transcript9_12 extends Model
     use HasFactory;
     protected $table = 'transcript9_12';
     protected $fillable = [
-        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name', 'transcript_id', 'is_carnegie'
+        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name', 'transcript_id', 'is_carnegie',
     ];
 
     public function TranscriptCourse9_12()

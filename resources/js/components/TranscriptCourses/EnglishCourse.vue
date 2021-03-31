@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="englishCourse in form.englishCourse"
+      v-for="(englishCourse,index) in form.englishCourse"
       :key="englishCourse.id"
     >
       <div class="position-relative">
@@ -15,7 +15,7 @@
         </span>
         <div class="col-sm-7 px-0">
           <h3 class="mb-3">
-            Select an English/Language Arts course:<i
+            Select an English/Language course:<i
               class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
               data-toggle="tooltip"
               data-placement="top"
@@ -137,15 +137,15 @@
                 remaining credits for this year.
               </h3>
             </div>
-              <p v-if="errors.length" >
+          </div>
+        </div>
+      </div> 
+    </div>
+    <p v-if="errors.length" >
        <ul>
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
       </ul>
     </p> 
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
         >Add another English/Language Arts Course</a
@@ -222,20 +222,21 @@ export default {
 
     if (!this.vallidateGrades()) {
         this.errors.push(
-          "Grade is required Field! Please select a Grade and then continue"
+          "Grade is required Field! Please select a Grade"
         );
       }
-      if(!this.validateSubject()){
-         this.errors.push(
-          "Course name is required Field! Please select a Grade and then continue"
+  
+      if(!this.validateSubject() && !this.validateOtherSubject()){
+          this.errors.push(
+          "Course name is required Field! Please select a Course name"
         );
       }
          if(!this.validateCredit()){
          this.errors.push(
-          "Credit is required Field! Please select a Grade and then continue"
+          "Credit is required Field! Please select a credit "
         );
       }
-      if(this.vallidateGrades() && this.validateSubject() && this.validateCredit()){
+      
          axios
         .post(route("english-transcript.store"), this.form)
         .then(response => {
@@ -248,7 +249,7 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
-      }
+      
     
     },
       vallidateGrades() {
@@ -277,7 +278,17 @@ export default {
         }
      }
      return true;
+    },
+    validateOtherSubject(){
+      for(let i=0;i<this.form.englishCourse.length;i++){
+        const enrollmentOtherSubject = this.form.englishCourse[i];
+         if(!enrollmentOtherSubject.other_subject){
+         return false;
+        }
+     }
+         return true;
     } 
+    
 
   }
 };

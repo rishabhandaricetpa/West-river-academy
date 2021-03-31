@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="scienceCourse in form.scienceCourse"
+      v-for="(scienceCourse, index) in form.scienceCourse"
       :key="scienceCourse.id"
     >
       <div class="position-relative">
@@ -15,7 +15,7 @@
         </span>
         <div class="col-sm-7 px-0">
           <h3 class="mb-3">
-            Select an Science Arts course:<i
+            Select an Science course:<i
               class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
               data-toggle="tooltip"
               data-placement="top"
@@ -140,6 +140,11 @@
         </div>
       </div>
     </div>
+                  <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
         >Add another Science Course</a
@@ -157,6 +162,7 @@ export default {
   data() {
     return {
       isCredit: false,
+      errors: [],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -208,6 +214,20 @@ export default {
       this.form.scienceCourse.splice(index, 1);
     },
     submitCourse() {
+      this.errors = [];
+      if (!this.vallidateGrades()) {
+        this.errors.push("Grade is required Field! Please select a Grade");
+      }
+
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
+        this.errors.push(
+          "Course name is required Field! Please select a Course name"
+        );
+      }
+      if (!this.validateCredit()) {
+        this.errors.push("Credit is required Field! Please select a credit ");
+      }
+
       axios
         .post(route("science-transcript.store"), this.form)
         .then(response => {
@@ -218,8 +238,44 @@ export default {
             this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please fill in the fields");
         });
+    },
+    vallidateGrades() {
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const englishCourse = this.form.scienceCourse[i];
+        if (!englishCourse.grade) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateSubject() {
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const enrollmentSubject = this.form.scienceCourse[i];
+        if (!enrollmentSubject.subject_name) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateCredit() {
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const enrollmentSubject = this.form.scienceCourse[i];
+        if (!enrollmentSubject.selectedCredit) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateOtherSubject() {
+      for (let i = 0; i < this.form.scienceCourse.length; i++) {
+        const enrollmentOtherSubject = this.form.scienceCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 };

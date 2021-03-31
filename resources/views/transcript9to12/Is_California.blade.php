@@ -20,22 +20,22 @@
                   <h3 class="mb-3">Is the transcript going to be presented in the United States?</h3>
                   <input type="hidden" value="{{$transcript->id}}" name="transcript_id">
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" data-toggle="collapse" data-target="#transcript-country" aria-expanded="false" aria-controls="transcript-country" name="is_united_states" value="Yes" required>
+                     <input class="form-check-input" type="radio" name="is_united_states" value="Yes" id="transcript-country">
                      <label class="form-check-label" for="">
                         Yes
                      </label>
                   </div>
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="is_united_states" value="No" id="not_california">
+                     <input class="form-check-input" type="radio" name="is_united_states" value="No" id="transcript-present">
                      <label class="form-check-label" for="">
                         No
                      </label>
                   </div>
                </div>
-               <div class="form-group mb-2 lato-italic info-detail pb-3 collapse" id="transcript-country">
+               <div class="form-group mb-2 lato-italic info-detail pb-3 collapse transcript-detail">
                   <h3 class="mb-3">Is the transcript going to be presented in California ?</h3>
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="is_california" value="Yes" required>
+                     <input class="form-check-input" type="radio" name="is_california" value="Yes">
                      <label class="form-check-label" for="">
                         Yes
                      </label>
@@ -45,6 +45,19 @@
                      <label class="form-check-label" for="">
                         No
                      </label>
+                  </div>
+               </div>
+               <div class="form-group mb-2 lato-italic info-detail pb-3 collapse present-detail">
+                  <h3 class="mb-3">Select the Country where the transcript will be presented.</h3>
+                  <div class="form-group px-0 col-md-7">
+                     <select class="form-control text-uppercase" name="select_country">
+                        <option value="">Please select one</option>
+                        @foreach($countries as $country)
+                        <option value="{{$country->country}}">
+                           {{$country->country}}
+                        </option>
+                        @endforeach
+                     </select>
                   </div>
                </div>
                <div class="text-center">

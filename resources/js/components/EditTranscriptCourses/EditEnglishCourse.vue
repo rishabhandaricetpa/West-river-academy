@@ -139,6 +139,9 @@
       <a class="btn btn-primary" @click="addCourse"
         >Add another English/Language Arts Course</a
       >
+        <a class="btn btn-primary" @click="showAllCourses"
+        >View All Courses</a
+      >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
       </button>
@@ -242,7 +245,7 @@ export default {
               this.transcript_id;
           })
           .catch(error => {
-            alert("Please choose the course or remove it");
+            alert("Please fill in the fields");
           });
       }
     },
@@ -272,6 +275,13 @@ export default {
         }
       }
       return true;
+    },
+        showAllCourses(){
+       window.location =
+            "/display-course-details/" +
+            this.transcript_id +
+            "/" +
+            this.student_id;
     }
   },
   created() {

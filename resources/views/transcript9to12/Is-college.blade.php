@@ -19,7 +19,7 @@
                <div class="form-group mb-2 lato-italic info-detail">
                   <h3 class="mb-3">Did you take any college or university courses during high school?</h3>
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="is_apCourse" value="Yes" data-target="#collegecourse" data-toggle="modal">
+                     <input class="form-check-input" type="radio" name="is_apCourse" value="Yes" data-target="#collegecourse" data-toggle="modal" required>
                      <label class="form-check-label" for="">
                         Yes
                      </label>

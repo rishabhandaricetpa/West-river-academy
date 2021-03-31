@@ -242,7 +242,7 @@ export default {
               this.transcript_id;
           })
           .catch(error => {
-            alert("Please choose the course or remove it");
+            alert("Please fill in the fields");
           });
       }
     },
