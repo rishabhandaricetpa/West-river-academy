@@ -19,7 +19,7 @@ class CollegeController extends Controller
         if ($request->is_apCourse == 'Yes') {
             return view('transcript9to12.college-info', compact('transcript_id', 'student_id', 'transcript9_12id', 'credits'));
         } else {
-            return redirect()->route('display.grades', $student_id);
+            return redirect()->route('display.grades', [$student_id, $transcript_id]);
         }
     }
     public function store(Request $request)

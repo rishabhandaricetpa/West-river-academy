@@ -267,7 +267,17 @@
           "data": "apostille_country"
         },
         {
-          "data": "status"
+          "data": "status",
+          "render": function(status) {
+            if (status === 'pending')
+              return `<td> Pending</td>`;
+            if (status === 'approved')
+              return `<td> Approved </td>`;
+            if (status === 'paid')
+              return `<td> Paid </td>`;
+            if (status === 'completed')
+              return `<td> Completed </td>`;
+          }
         },
         {
           "data": "id",
@@ -302,7 +312,15 @@
           "data": "payment_mode"
         },
         {
-          "data": "status"
+          "data": "status",
+          "render": function(status) {
+            if (status === 'pending')
+              return `<td> Pending</td>`;
+            if (status === 'paid')
+              return `<td> Paid </td>`;
+            if (status === 'active')
+              return `<td> Active </td>`;
+          }
         },
         {
           "data": "id",
@@ -336,7 +354,17 @@
           "data": "payment_mode"
         },
         {
-          "data": "status"
+          "data": "status",
+          "render": function(status) {
+            if (status === 'pending')
+              return `<td> Pending</td>`;
+            if (status === 'approved')
+              return `<td> Approved </td>`;
+            if (status === 'paid')
+              return `<td> Paid </td>`;
+            if (status === 'completed')
+              return `<td> Completed </td>`;
+          }
         },
         {
           "data": "id",

@@ -94,9 +94,9 @@
                 type="radio"
                 v-model="healthCourse.grade"
                 name=""
-                value="Pass"
+                value="PASS"
               />
-              <label class="form-check-label" for="">Pass</label>
+              <label class="form-check-label" for="">PASS</label>
             </div>
             <div class="form-group mb-1 mt-2r">
               <h3 class="text-black">

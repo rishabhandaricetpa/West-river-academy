@@ -183,7 +183,7 @@
         <a href="{{ url('admin/fees-services')}}" class="nav-link">
           <i class="nav-icon fas fa-dollar-sign"></i>
           <p>
-            Fees an Services
+            Fee and Services
           </p>
         </a>
       </li>

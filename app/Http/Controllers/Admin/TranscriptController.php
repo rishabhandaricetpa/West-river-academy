@@ -12,6 +12,7 @@ use App\Models\TranscriptCourse;
 use App\Models\TranscriptK8;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptPdf;
+use App\Models\Transcript9_12;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -27,17 +28,11 @@ class TranscriptController extends Controller
         $type = "k-8";
         return view('admin.transcript.view-student', compact('students', 'type'));
     }
-
-    public function viewtranscripts9_12()
-    {
-        $students = StudentProfile::all();
-        $type = "9-12";
-        return view('admin.transcript.view-student', compact('students', 'type'));
-    }
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
+        $type = "k-8";
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
             ->get()->unique('transcript_id');
@@ -47,26 +42,12 @@ class TranscriptController extends Controller
             ->get();
         $student = StudentProfile::find($id);
 
-        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
+        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript', 'type'));
     }
-
-    public function edit9_12($id)
-    {
-        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcript9_12')
-            ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
-            ->get()->unique('transcript_id');
-        $transcriptData = TranscriptK8::where('student_profile_id', $id)
-            ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
-            ->get();
-        $student = StudentProfile::find($id);
-
-        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
-    }
-
 
     //fetch all the transcript data and Genrate the unsigned transcript
 
-    public function editTranscript($student_id, $transcript_id)
+    public function editTranscriptk_8($student_id, $transcript_id)
     {
         $transcriptData = TranscriptK8::Where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])

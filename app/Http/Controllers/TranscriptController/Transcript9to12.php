@@ -9,6 +9,7 @@ use App\Models\StudentProfile;
 use App\Models\Transcript;
 use App\Models\Transcript9_12;
 use App\Models\TranscriptCourse9_12;
+use App\Models\ParentProfile;
 use DB;
 use Illuminate\Http\Request;
 
@@ -172,18 +173,17 @@ class Transcript9to12 extends Controller
             return view('transcript9to12.Is-college', compact('student_id', 'trans_id', 'transcript9_12id'));
         }
     }
-    public function displayAllGrades($student_id)
+    public function displayAllGrades($student_id, $transcript_id)
     {
         $student_transcripts = TranscriptCourse9_12::where('student_profile_id', $student_id)->select('transcript9_12_id')->groupBy('transcript9_12_id')->get();
         $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses9_12()->get();
         $details9_12 = StudentProfile::find($student_id)->Transcript912()->get();
 
         $student = StudentProfile::find($student_id);
-        $transcriptDatas = Transcript9_12::where('student_profile_id', $student_id)
+        $transcriptDatas = Transcript9_12::where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
             ->get();
-        //   dd($transcriptDatas);
-        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas'));
+        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id'));
     }
 
     public function deleteSchool($transcript_id)
@@ -222,6 +222,55 @@ class Transcript9to12 extends Controller
             $school = Transcript9_12::find($transcript_id);
 
             return view('transcript9to12.show-course-details', compact('courses', 'transcript_id', 'student_id', 'studentInfo', 'school'));
+        }
+    }
+
+
+    /**
+     *Preview the transcript befor submission
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function previewTranscript($student_id, $transcript_id)
+    {
+        // dd($transcript_id);
+        $parentId = ParentProfile::getParentId();
+        $address = ParentProfile::where('id', $parentId)->first();
+        $student = StudentProfile::find($student_id);
+
+        $year = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('enrollment_year', 'ASC')->get(['enrollment_year'])->unique('enrollment_year');
+
+        $grades  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
+
+        $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
+            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course'])
+            ->get();
+        $transcript_course_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
+
+        $groupCourses = TranscriptCourse9_12::with(['subject'])->whereIn('transcript9_12_id', $transcript_course_id)->get()->unique('subject_id');
+        if ($transcript_id) {
+            $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
+            $items = [];
+            foreach ($enrollment_periods as $key => $enrollment_period) {
+                $items[] = $enrollment_period->enrollment_year;
+            }
+
+            $maxYear =  max($items);
+            $minYear = min($items);
+
+            return view('transcript9to12/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
+        } else {
+            $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
+            $items = [];
+            foreach ($enrollment_periods as $key => $enrollment_period) {
+                $items[] = $enrollment_period->enrollment_year;
+            }
+            $maxYear =  max($items);
+            $minYear = min($items);
+
+            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
+            return view('transcript9to12/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         }
     }
 }

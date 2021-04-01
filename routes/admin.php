@@ -116,12 +116,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
     Route::post('score/{subject_id}/{transcript_id}', 'TranscriptController@updateScore')->name('score.update');
 
-    //transcript 9-12
-    Route::get('/view/transcript9_12', 'TranscriptController@viewtranscripts9_12')->name('view.transcript9_12');
-    Route::get('edit-transcript9_12/{id}', 'TranscriptController@edit9_12')->name('edit.');
+    //transcripk_8 payments and edits
 
-
-    //transcrip payments
     Route::get('transcript-payments', 'TranscriptController@viewAllPayments')->name('transcript.payments');
     Route::get('transcript-edit/payments/{transpay_id}', 'TranscriptController@editAllPayments')->name('transpayment.edit');
     Route::get('delete/transcript-payments/{transpay_id}', 'TranscriptController@destroyeachPayments')->name('transpayment.delete');
@@ -133,15 +129,24 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('edit-subGrades/{subject_id}/{transcript_id}/{grade_value}', 'TranscriptController@editSubGrades')->name('edit.subGrades');
     Route::get('delete-subGrades/{subject_id}/{transcript_id}', 'TranscriptController@deleteSubGrades')->name('delete.subGrades');
 
+    //transcript 9-12
+    Route::get('/view/transcript9_12', 'Transcript9_12Controller@viewtranscripts9_12')->name('view.transcript9_12');
+    Route::get('edit-transcript9_12/{id}', 'Transcript9_12Controller@edit9_12')->name('edit.transcript9_12');
+    Route::post('score9_12/{subject_id}/{transcript_id}', 'Transcript9_12Controller@updateScore9_12')->name('score9_12.update');
+    Route::get('edit-subGrades9_12/{subject_id}/{transcript_id}/{grade_value}', 'TranscriptController@editSubGrades9_12')->name('edit.subGrades9_12');
+    Route::get('delete/school9_12/{transcript_id}', 'CourseController@deleteSchool9_12')->name('deleteSchool9_12');
+
+    //transcript9_12 payments and edits
+    Route::get('edit-subGrades9_12/{subject_id}/{transcript_id}/{grade_value}', 'Transcript9_12Controller@editSubGrades9_12')->name('edit.subGrades9_12');
+
     //genrate Unsigned Transcript for student
     Route::get('generate-transcript/{id}/{transcript_id}', 'TranscriptController@genrateTranscript')->name('genrate.transcript');
-    Route::get('viewfull-transcript/{student_id}/{transcript_id}', 'TranscriptController@editTranscript')->name('viewfull.transcript');
+    Route::get('viewfull-transcript/{student_id}/{transcript_id}', 'TranscriptController@editTranscriptk_8')->name('viewfull.transcript');
+    Route::get('viewfull-transcript9_12/{student_id}/{transcript_id}', 'Transcript9_12Controller@editTranscript9_12')->name('viewfull.transcript9_12');
     Route::get('signed-transcript/{id}/{transcript_id}', 'TranscriptController@genrateSignedTranscript')->name('signed.transcript');
-
     Route::get('other-subjects/{course_id}', 'CourseController@otherSubjects')->name('other.subjects');
     Route::get('add-other/{subject_id}', 'CourseController@addSubjects')->name('add.other');
     Route::get('delete/others/{subject_id}', 'CourseController@deleteSubjects')->name('delete.other');
-
     Route::get('delete/school/{transcript_id}', 'CourseController@deleteSchool')->name('deleteSchool');
 
     //record transfer request

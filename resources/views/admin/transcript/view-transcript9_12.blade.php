@@ -35,8 +35,8 @@
                 </div>
 
 
-                <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
-                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
+                <a type="button" href="" class="btn btn-primary">Generate Unsigned Transcript</a>
+                <a type="button" href="" class="btn btn-primary">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
             </form>
         </div>
@@ -48,7 +48,7 @@
                 Grade: {{$school->grade}}<br>
             </p>
             <table id="addressData" class="table table-bordered table-striped data-table"">
-            <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary">Delete School Record</a>
+            <a type=" button" href="{{ route('admin.deleteSchool9_12',$school->id) }}" class="btn btn-primary">Delete School Record</a>
                 <thead>
                     <tr>
                         <th>Courses</th>
@@ -58,7 +58,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($school->TranscriptCourse as $course)
+                    @foreach($school->TranscriptCourse9_12 as $course)
                     @foreach ($course->subjects as $subject)
                     <tr>
                         <td>
@@ -71,7 +71,7 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
+                        <td><a type=" button" href="{{ route('admin.edit.subGrades9_12',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                     @endforeach

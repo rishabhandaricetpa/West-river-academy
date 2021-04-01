@@ -24,4 +24,8 @@ class TranscriptCourse9_12 extends Model
     {
         return $this->hasOne('App\Models\Subject', 'id', 'subject_id');
     }
+    public function Transcript9_12()
+    {
+        return $this->belongsTo('App\Models\Transcript9_12');
+    }
 }

@@ -283,6 +283,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('select/enrollmentyear/{student_id}', 'TranscriptController\Transcript9to12@enrollSchool')->name('enrollSchool');
     Route::post('choose/apcourse/{student_id}', 'TranscriptController\Transcript9to12@enrollYear')->name('select.apCourse');
     Route::post('apCourses/{student_id}', 'TranscriptController\Transcript9to12@apCourses')->name('apCourse');
+    Route::get('preview-transcript9_12/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@previewTranscript')->name('preview.transcript9_12');
 
     // ap course
     Route::post('apcourse/store', 'TranscriptController\Transcript9to12@storeApCourses')->name('apCourse.store');
@@ -330,7 +331,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('college-course', 'TranscriptController\CollegeController@store')->name('collegeCourse.store');
 
     // display all courses
-    Route::get('display-all-grades/{student_id}', 'TranscriptController\Transcript9to12@displayAllGrades')->name('display.grades');
+    Route::get('display-all-grades/{student_id}/{transcript_id}', 'TranscriptController\Transcript9to12@displayAllGrades')->name('display.grades');
 
     //operation - delete and edit in transript 9-12
     Route::get('delete/school-transcript/{transcript_id}', 'TranscriptController\Transcript9to12@deleteSchool')->name('delete.transcript.school');

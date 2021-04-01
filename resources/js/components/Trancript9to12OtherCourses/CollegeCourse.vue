@@ -248,7 +248,8 @@ export default {
       axios
         .post(route("collegeCourse.store"), this.form)
         .then(response => {
-          window.location = "/display-all-grades/" + this.student_id;
+          window.location =
+            "/display-all-grades/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
           alert("Please choose the course or remove it");

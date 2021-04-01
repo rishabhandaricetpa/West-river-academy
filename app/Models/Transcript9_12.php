@@ -15,7 +15,7 @@ class Transcript9_12 extends Model
 
     public function TranscriptCourse9_12()
     {
-        return $this->hasMany(TranscriptCourse9_12::class);
+        return $this->hasMany('App\Models\TranscriptCourse9_12', 'transcript9_12_id', 'id');
     }
 
     public function transcript()

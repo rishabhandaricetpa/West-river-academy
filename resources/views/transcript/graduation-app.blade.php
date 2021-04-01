@@ -6,7 +6,7 @@
     <h1 class="text-center text-white text-uppercase">Purchase Transcript</h1>
     <div class="form-wrap border bg-light py-5 px-25">
 
-        <h2 class="mb-3">Select the student who wishes to purchase transcript</h2>
+        <h2 class="mb-3">Select the student(s) who needtranscripts. You may select more than one</h2>
         <div class="overflow-auto">
             <table class="w-100 table-styling">
                 <thead>
