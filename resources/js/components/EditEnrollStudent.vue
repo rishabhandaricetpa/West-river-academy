@@ -322,7 +322,7 @@ export default {
         last_name: this.students.last_name,
         gender: this.students.gender,
         email: this.students.email,
-        dob: this.students.date_of_birth,
+        dob: this.date_of_birth,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
         student_situation: this.students.student_situation,
@@ -512,6 +512,10 @@ export default {
       type: Object,
       required: true,
     },
+  date_of_birth:{
+    type:Object,
+    required:true
+  },
     periods: {
       type: Array,
       required: true,

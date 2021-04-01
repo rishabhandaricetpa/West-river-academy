@@ -165,8 +165,8 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose {{new Date(startdate) | moment("MMMM Do")}} (the first day of the Annual enrollment period),
-              {{new Date(sem) | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
+              Choose {{startdate | moment("MMMM Do")}} (the first day of the Annual enrollment period),
+              {{sem | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
               another date. This date will appear on your confirmation of
               enrollment letter. You will be considered enrolled for the full
               12-month period for Annual or 7-month period for Second Semester
@@ -202,9 +202,9 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose before {{new Date(enddate) | moment("MMMM Do")}}
+              Choose before {{ enddate | moment("MMMM Do")}}
               (the last day of your enrollment) or another
-              date before {{new Date(enddate) | moment("MMMM Do")}}. This date will appear on your confirmation of
+              date before {{ enddate | moment("MMMM Do")}}. This date will appear on your confirmation of
               enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
             </p>
           </div>
@@ -328,8 +328,8 @@ export default {
         studentID: "",
         enrollPeriods: [
           {
-            selectedStartDate: new Date(this.startdate),
-            selectedEndDate: new Date(this.enddate),
+            selectedStartDate: this.startdate,
+            selectedEndDate:this.enddate,
             grade: "",
             configstartdate: {
               altFormat: "F j, Y",
@@ -420,7 +420,7 @@ export default {
     },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
-        selectedStartDate: new Date(this.startdate),
+        selectedStartDate: this.startdate,
         selectedEndDate: new Date(this.enddate),
         grade: "",
         configstartdate: {

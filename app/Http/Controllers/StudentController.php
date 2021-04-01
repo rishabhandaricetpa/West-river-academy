@@ -340,8 +340,8 @@ class StudentController extends Controller
                 ->select('enrollment_periods.*', 'enrollment_payments.status')
                 ->orderBy('enrollment_payments.status', 'desc')
                 ->get();
-
-            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+            $birth = Carbon::parse($studentData->d_o_b)->toDateString();
+            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'birth'));
         } else {
             $countryData = Country::where('country', 'other')->first();
             $start_date = $countryData->start_date;
