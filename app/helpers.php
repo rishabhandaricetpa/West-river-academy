@@ -43,7 +43,7 @@ function getFeeDetails($type)
         return false;
     }
 }
-function getPromotedGrades($grades)
+function getPromotedGrades($grades, $modify_last_value = true)
 {
     try {
         $gradeDetails = array();
@@ -71,6 +71,10 @@ function getPromotedGrades($grades)
             return $grade;
         });
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
+        $len = count($sortedOrder);
+        if($modify_last_value && $len > 1){
+            $sortedOrder[$len - 1] =  " and " . $sortedOrder[$len - 1];
+        }
 
         return implode(", ", $sortedOrder);
     } catch (\Throwable $th) {
@@ -81,7 +85,7 @@ function getPromotedGrades($grades)
 function getPromtedGrade($grades)
 {
     try {
-        $getArrayOrder = getPromotedGrades($grades);
+        $getArrayOrder = getPromotedGrades($grades, false);
         $eplode = explode(", ", $getArrayOrder);
         $last = end($eplode);
         if ($last == 'Ungraded') {
