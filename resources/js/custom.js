@@ -39,8 +39,12 @@ $(document).on("click", function (event) {
 
 // country transcript
 
+$("#transcript-country").click(function () {
+  $('.transcript-detail').addClass('show');
+  $('.present-detail').removeClass('show');
+ });
 
-$("#not_california").click(function () { 
-  $("#transcript-country").removeClass("show");
-
-});
+ $("#transcript-present").click(function () {
+   $('.present-detail').addClass('show');
+    $('.transcript-detail').removeClass('show');
+ });

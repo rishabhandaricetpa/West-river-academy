@@ -22,6 +22,9 @@
               title="Tooltip on top"
             ></i>
           </h3>
+          <label for="" class="h3 text-black"
+            >Enter an elective, such as MUSIC, ART, DANCE. DRAMA. etc.</label
+          >
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
@@ -140,9 +143,14 @@
         </div>
       </div>
     </div>
+                    <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add Another Foregin Course</a
+        >Add Another Elective Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
@@ -153,11 +161,11 @@
 
 <script>
 export default {
-  name: "ForeginCourse",
+  name: "ElectiveCourse",
   data() {
     return {
       isCredit: false,
-
+  errors: [],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -210,6 +218,18 @@ export default {
       this.form.anotherCourse.splice(index, 1);
     },
     submitCourse() {
+         this.errors = [];
+               if (!this.vallidateGrades()) {
+        this.errors.push("Grade is required Field! Please select a Grade");
+      }
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
+        this.errors.push(
+          "Course name is required Field! Please select a Course name"
+        );
+      }
+      if (!this.validateCredit()) {
+        this.errors.push("Credit is required Field! Please select a credit ");
+      }
       axios
         .post(route("another-transcript.store"), this.form)
         .then(response => {
@@ -222,8 +242,44 @@ export default {
             this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please fill in the fields");
         });
+    },
+        vallidateGrades() {
+      for (let i = 0; i < this.form.anotherCourse.length; i++) {
+        const foreignCourse = this.form.anotherCourse[i];
+        if (!foreignCourse.grade) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateSubject() {
+      for (let i = 0; i < this.form.anotherCourse.length; i++) {
+        const enrollmentSubject = this.form.anotherCourse[i];
+        if (!enrollmentSubject.subject_name) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateCredit() {
+      for (let i = 0; i < this.form.anotherCourse.length; i++) {
+        const enrollmentSubject = this.form.anotherCourse[i];
+        if (!enrollmentSubject.selectedCredit) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateOtherSubject() {
+      for (let i = 0; i < this.form.anotherCourse.length; i++) {
+        const enrollmentOtherSubject = this.form.anotherCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 };

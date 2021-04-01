@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TranscriptController;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvancePlacement;
+use App\Models\Country;
 use App\Models\Credits;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
@@ -18,7 +19,7 @@ class Transcript9to12 extends Controller
     public function selectCountry($student_id, $transcript_id)
     {
         /** 
-         * 
+         * select the country for transcript
          * 
          */
         try {
@@ -27,6 +28,7 @@ class Transcript9to12 extends Controller
                 'student_profile_id' => $student_id,
                 'transcript_id' => $transcript_id,
             ]);
+            $countries = Country::all();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -38,20 +40,19 @@ class Transcript9to12 extends Controller
             return redirect()->back()->with($notification);
         }
 
-        return view('transcript9to12.Is_California', compact('student_id', 'transcript'));
+        return view('transcript9to12.Is_California', compact('student_id', 'transcript', 'countries'));
     }
     public function selectGrade(Request $request, $student_id)
     {
-        // dd($request->all());
         $transcript = Transcript9_12::find($request->input('transcript_id'));
         // dd($transcript);
         if ($request->is_united_states == 'Yes' && $request->is_california == 'Yes') {
-
             /**  is carnegia means all country expect california not carnegia  */
-
+            /** 0 means no carnegia -i.e belongs to california so  credits are mutiplied by 10 */
             try {
                 DB::beginTransaction();
                 $transcript->is_carnegie = 0;
+                $transcript->country = "";
                 $transcript->save();
                 DB::commit();
             } catch (\Exception $e) {
@@ -67,6 +68,7 @@ class Transcript9to12 extends Controller
         } else {
             try {
                 DB::beginTransaction();
+                $transcript->country = $request->get('select_country');
                 $transcript->is_carnegie = 1;
                 $transcript->save();
                 DB::commit();

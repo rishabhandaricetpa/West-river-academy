@@ -10,7 +10,7 @@
       :key="collegeCourse.id"
     >
       <div class="position-relative">
-        <span class="remove" @click="removeEnglishCourse(index)"
+        <span class="remove" @click="removeCollegeCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-lg-9 px-0">
@@ -200,7 +200,13 @@
           </div>
         </div>
       </div>
+                          <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     </div>
+
     <div class="mt-2r">
       <a @click="addCourse" class="btn btn-primary"
         >Add another College Course</a
@@ -216,7 +222,9 @@
 export default {
   data() {
     return {
+       errors: [],
       form: {
+       
         student_id: this.student_id,
         transcript_id: this.transcript_id,
         collegeCourse: [
@@ -245,6 +253,21 @@ export default {
       });
     },
     submitCourse() {
+      this.errors = [];
+      if (!this.validateCollegeGrade()) {
+        this.errors.push("Please select grade when you took the course?");
+      }
+     if(!this.validateIsCollege()){
+      this.errors.push("Please select status of college level course");
+      }
+
+        if(!this.validateGrade()){
+      this.errors.push("Please select grade");
+      }
+   
+         if(!this.validateCredit()){
+      this.errors.push("Please select credit");
+      }
       axios
         .post(route("collegeCourse.store"), this.form)
         .then(response => {
@@ -252,10 +275,52 @@ export default {
             "/display-all-grades/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please fill in all fields");
         });
+    },
+    removeCollegeCourse(index) {
+      this.form.collegeCourse.splice(index, 1);
+    },
+        validateCollegeGrade() {
+      for (let i = 0; i < this.form.collegeCourse.length; i++) {
+        const enrollmentSubject = this.form.collegeCourse[i];
+        if (!enrollmentSubject.grade) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateIsCollege(){
+     for (let i = 0; i < this.form.collegeCourse.length; i++) {
+        const enrollmentSubject = this.form.collegeCourse[i];
+        if (!enrollmentSubject.is_college_level) {
+          return false;
+        }
+      }
+      return true;
+
+    },
+    validateGrade(){
+           for (let i = 0; i < this.form.collegeCourse.length; i++) {
+        const enrollmentSubject = this.form.collegeCourse[i];
+        if (!enrollmentSubject.course_grade) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateCredit(){
+                 for (let i = 0; i < this.form.collegeCourse.length; i++) {
+        const enrollmentSubject = this.form.collegeCourse[i];
+        if (!enrollmentSubject.selectedCredit) {
+          return false;
+        }
+      }
+      return true;
     }
-  }
+  },
+
+
 };
 </script>
 

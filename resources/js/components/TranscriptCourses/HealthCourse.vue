@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="healthCourse in form.healthCourse"
+      v-for="(healthCourse, index) in form.healthCourse"
       :key="healthCourse.id"
     >
       <div class="position-relative">
@@ -140,6 +140,11 @@
         </div>
       </div>
     </div>
+                  <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
         >Add Another Health Course</a
@@ -157,7 +162,7 @@ export default {
   data() {
     return {
       isCredit: false,
-
+      errors: [],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -209,6 +214,20 @@ export default {
       this.form.healthCourse.splice(index, 1);
     },
     submitCourse() {
+      this.errors = [];
+      if (!this.vallidateGrades()) {
+        this.errors.push("Grade is required Field! Please select a Grade");
+      }
+
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
+        this.errors.push(
+          "Course name is required Field! Please select a Course name"
+        );
+      }
+      if (!this.validateCredit()) {
+        this.errors.push("Credit is required Field! Please select a credit ");
+      }
+
       axios
         .post(route("healthEducation-transcript.store"), this.form)
         .then(response => {
@@ -219,8 +238,44 @@ export default {
             this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please fill in the fields");
         });
+    },
+    vallidateGrades() {
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const englishCourse = this.form.healthCourse[i];
+        if (!englishCourse.grade) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateSubject() {
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const enrollmentSubject = this.form.healthCourse[i];
+        if (!enrollmentSubject.subject_name) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateCredit() {
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const enrollmentSubject = this.form.healthCourse[i];
+        if (!enrollmentSubject.selectedCredit) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateOtherSubject() {
+      for (let i = 0; i < this.form.healthCourse.length; i++) {
+        const enrollmentOtherSubject = this.form.healthCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 };

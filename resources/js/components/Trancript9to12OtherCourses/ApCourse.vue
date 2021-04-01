@@ -88,6 +88,11 @@
         </div>
       </div>
     </div>
+                        <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="text-center mt-5">
       <button type="submit" class="btn btn-primary">
         I'm finished adding AP Courses
@@ -104,6 +109,7 @@ export default {
   name: "ApCourses",
   data() {
     return {
+      errors: [],
       form: {
         student_id: this.student_id,
         transcript_id: this.transcript_id,
@@ -127,6 +133,13 @@ export default {
       });
     },
     submitCredit() {
+      this.errors = [];
+      if (!this.vallidateGrades()) {
+        this.errors.push("Grade is required Field! Please select a Grade");
+      }
+      if (!this.validateCredit()) {
+        this.errors.push("Credit is required Field! Please select a credit ");
+      }
       axios
         .post(route("apCourse.store"), this.form)
         .then(response => {
@@ -134,8 +147,26 @@ export default {
             "/english-transcript/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
-          alert("Unable to add course. Please try later!");
+          alert("Please fill in the fields!");
         });
+    },
+    vallidateGrades() {
+      for (let i = 0; i < this.form.apCourses.length; i++) {
+        const apCourses = this.form.apCourses[i];
+        if (!apCourses.grade) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateCredit() {
+      for (let i = 0; i < this.form.apCourses.length; i++) {
+        const apCourses = this.form.apCourses[i];
+        if (!apCourses.credit) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 };
