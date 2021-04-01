@@ -28,4 +28,8 @@ class TranscriptCourse9_12 extends Model
     {
         return $this->belongsTo('App\Models\Transcript9_12');
     }
+    public function credit()
+    {
+        return $this->belongsTo('App\Models\Credits', 'credit_id');
+    }
 }
