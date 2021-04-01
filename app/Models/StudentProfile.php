@@ -32,18 +32,8 @@ class StudentProfile extends Model
     }
     public function getDateOfBirthAttribute()
     {
-        return $this->d_o_b->toDateString();
+        return $this->d_o_b === null ? '' : $this->d_o_b->toDateString();
     }
-
-    // public function getstartDateAttribute()
-    // {
-    //     return $this->start_date_of_enrollment->toDateString();
-    // }
-
-    // public function getendDateAttribute()
-    // {
-    //     return $this->d_o_b->toDateString();
-    // }
     public function getFullnameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
