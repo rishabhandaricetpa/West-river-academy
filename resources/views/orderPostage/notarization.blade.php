@@ -10,59 +10,104 @@
             <p><span class="font-weight-bold">Apostille:</span> If you will present your document(s) to a country that is a member of The Hague Convention, you may order an
                Apostille. The documents will first be notarized and then sent to the Secretary of State of Colorado for the Apostille. The
                fee is $75 for each document to be sent for an Apostille. The fee includes notarization. Allow 3-6 weeks for processing.</p>
-            <p><span class="font-weight-bold">Notarization:</span>The document will be signed in front of a notary public, who will add the official stamp. The fee is $20 per
-               document. Allow 3 days for processing.</p>
-               <div class="form-group d-sm-flex mb-2">
-               <div class="col-md-4 px-0">
-               <p class="font-weight-bold">How many Apostilles would you like to order?</p>
-               </div>
-                <div class="col-md-4 row">
-                <select class="form-control col-3" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
- <span class="col-3 text-center">=</span>
- <input type="text" class="form-control col-3">
+
+               <div class="form-group d-md-flex mb-2">
+               <div class="col-md-6 d-sm-flex px-0 mb-4">
+               <p class="font-weight-bold">Quantity</p>
+                    <div class="row ml-3 mx-0">
+                    <select class="form-control col-3" >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                </select>
+                <span class="col-3 text-center">=</span>
+                <input type="text" class="form-control col-3">
                 </div>
-            </div>
-            <div class="form-group mb-2">
-               <div class="col-md-4 px-0 d-sm-flex">
+                </div>
+                <div class="col-md-6 mb-4 px-0 d-sm-flex">
+             
                <p class="font-weight-bold">Country</p>
                <select class="form-control mx-sm-3">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-               </div>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    </select>
+              
                 
             </div>
-            <div class="form-group d-sm-flex mb-2">
-               <div class="col-md-4 px-0">
-               <p class="font-weight-bold">How many Apostilles would you like to order?</p>
-               </div>
-                <div class="col-md-4 row">
-                <select class="form-control col-3">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
- <span class="col-3 text-center">=</span>
- <input type="text" class="form-control col-3">
+            </div>
+           
+            <p>
+                <span class="font-weight-bold">Notarization:</span>
+                $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately.
+Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
+             </p>
+             <div class="form-group d-md-flex mb-2">
+               <div class="col-md-6 d-sm-flex px-0 mb-4">
+               <p class="font-weight-bold">Quantity</p>
+                    <div class="row ml-3 mx-0">
+                    <select class="form-control col-3" >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                </select>
+                <span class="col-3 text-center">=</span>
+                <input type="text" class="form-control col-3">
+                </div>
+                </div>
+            </div>
+            <div class="form-group mb-2 row">
+                <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized and/or sent for Apostilles?</p>
+                <div class="form-group col-3 mb-3">
+                    <label for="" class="w-auto">Transcript</label>
+                    <div class="w-100">
+                        <select  multiple="multiple" class="multiple-select form-control" >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-3 mb-3">
+                    <label for="" class="w-auto">Confirmation of Enrollment Letter</label>
+                    <div  class="w-100">
+                        <select  multiple="multiple" class="multiple-select form-control" >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-3 mb-3">
+                    <label for="" class="w-auto">Custom Letter</label>
+                    <div >
+                        <select  multiple="multiple" class="multiple-select form-control" >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="form-group mb-2">
-                <p class="font-weight-bold">Please tell us what documents are to be notarized and/or sent for Apostilles:</p>
-                <div>
-                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"></textarea>
-                </div>
+                <p class="font-weight-bold mb-1">Use this space to add comments.</p>
+                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"></textarea> 
             </div>
+
+ 
+
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <p id="GFG_UP">

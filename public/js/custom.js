@@ -3,6 +3,10 @@ $(document).ready(function() {
     $("#country").select2({
     });
 
+    $(".multiple-select").select2({
+    });
+    
+
     $("#month").select2({
     });
 
