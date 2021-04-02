@@ -35,9 +35,9 @@
                 </div>
 
 
-                <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
-                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
-                <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
+                <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Unsigned Transcript</a>
+                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Signed Transcript</a>
+                <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Signed Transcript</a>
             </form>
         </div>
         @foreach($transcriptData as $school)
@@ -48,7 +48,7 @@
                 Grade: {{$school->grade}}<br>
             </p>
             <table id="addressData" class="table table-bordered table-striped data-table"">
-            <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary">Delete School Record</a>
+            <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3">Delete School Record</a>
                 <thead>
                     <tr>
                         <th>Courses</th>
