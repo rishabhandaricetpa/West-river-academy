@@ -24,7 +24,7 @@ class StudentProfile extends Model
         'd_o_b',
     ];
 
-    protected $appends = ['birthdate', 'fullname', 'date_of_birth'];
+    protected $appends = ['birthdate', 'fullname'];
 
     public function getBirthdateAttribute()
     {
