@@ -219,12 +219,6 @@ export default {
     submitCourse() {
       this.errors = [];
      
-
-    if (!this.vallidateGrades()) {
-        this.errors.push(
-          "Grade is required Field! Please select a Grade"
-        );
-      }
   
       if(!this.validateSubject() && !this.validateOtherSubject()){
           this.errors.push(
@@ -252,15 +246,7 @@ export default {
       
     
     },
-      vallidateGrades() {
-      for (let i = 0; i < this.form.englishCourse.length; i++) {
-        const englishCourse = this.form.englishCourse[i];
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-      return true;
-    },
+
     validateSubject(){
       for(let i=0;i<this.form.englishCourse.length;i++){
         const enrollmentSubject = this.form.englishCourse[i];

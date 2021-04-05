@@ -215,9 +215,7 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
+
 
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
@@ -241,15 +239,7 @@ export default {
           alert("Please fill in the fields");
         });
     },
-    vallidateGrades() {
-      for (let i = 0; i < this.form.scienceCourse.length; i++) {
-        const englishCourse = this.form.scienceCourse[i];
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-      return true;
-    },
+
     validateSubject() {
       for (let i = 0; i < this.form.scienceCourse.length; i++) {
         const enrollmentSubject = this.form.scienceCourse[i];

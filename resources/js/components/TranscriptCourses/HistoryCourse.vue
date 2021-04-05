@@ -219,9 +219,7 @@ export default {
     submitCourse() {
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
+  
 
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
