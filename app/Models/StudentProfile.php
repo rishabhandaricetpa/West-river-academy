@@ -30,7 +30,10 @@ class StudentProfile extends Model
     {
         return  $this->d_o_b === null ? '' : $this->d_o_b->format('m/d/Y');
     }
-
+    public function getDateOfBirthAttribute()
+    {
+        return $this->d_o_b === null ? '' : $this->d_o_b->toDateString();
+    }
     public function getFullnameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;

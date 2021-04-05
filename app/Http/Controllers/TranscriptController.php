@@ -84,21 +84,20 @@ class TranscriptController extends Controller
     public function purchaseNew($student_id)
     {
         $enroll_student = StudentProfile::find($student_id);
-        $allEnrollmentPeriods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
+        // $allEnrollmentPeriods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
 
-        $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
+        // $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
 
-        $payment_info = DB::table('enrollment_periods')
-            ->whereIn('enrollment_payment_id', $enrollment_ids)
-            ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
-            ->where('enrollment_payments.status', 'paid')
-            ->get();
-        if (count($payment_info) == 0) {
-            return view('transcript.dashboard-notify', compact('enroll_student'));
-        } else {
-
-            return view('transcript.transcript-wizard', compact('enroll_student'));
-        }
+        // $payment_info = DB::table('enrollment_periods')
+        //     ->whereIn('enrollment_payment_id', $enrollment_ids)
+        //     ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+        //     ->where('enrollment_payments.status', 'paid')
+        //     ->get();
+        // if (count($payment_info) == 0) {
+        // return view('transcript.dashboard-notify', compact('enroll_student'));
+        // } else {
+        return view('transcript.transcript-wizard', compact('enroll_student'));
+        // }
     }
 
     /**
@@ -109,7 +108,7 @@ class TranscriptController extends Controller
     public function getAllTranscript($student_id)
     {
         $enroll_student = StudentProfile::find($student_id);
-        $allEnrollmentPeriods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
+        $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();
 
         $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
 
@@ -125,9 +124,11 @@ class TranscriptController extends Controller
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
                 ->where('transcript_payments.status', 'paid')
                 ->get();
-            $student = StudentProfile::find($student_id);
-            return view('transcript.student-transcripts', compact('student', 'transcriptPayments'));
+            if (count($transcriptPayments) == 0) {
+            }
         }
+        return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
+        // }
     }
 
     /**
