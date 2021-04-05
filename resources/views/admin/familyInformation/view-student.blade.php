@@ -39,6 +39,7 @@
                     <th>Payment</th>
                     <th>Transcript</th>
                     <th>Graduation</th>
+                    <th>Record Transfer</th>
                   </tr>
                   </thead>
                   <tbody>

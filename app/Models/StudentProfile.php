@@ -112,6 +112,6 @@ class StudentProfile extends Model
 
     public function recordTransfers()
     {
-        return $this->hasMany(RecordTransfer::class);
+        return $this->hasOne(RecordTransfer::class);
     }
 }

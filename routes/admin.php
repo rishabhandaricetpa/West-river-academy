@@ -151,6 +151,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //record transfer request
     Route::get('record/request', 'RecordTransferController@index')->name('record.request');
+    Route::get('student/record/transfer/{student_id}', 'RecordTransferController@studentRecords')->name('student.request.transfer');
 
     //custom Payments
     Route::get('custom', 'CustomController@index')->name('custom.payments');
@@ -184,7 +185,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('fees-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@edit')->name('edit.fees');
     Route::post('fees-services/{id}', '\App\Http\Controllers\FeeStructureController@update')->name('update.fees');
     //record request
-    Route::get('student/record/{student_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
+    Route::get('student/record/{student_id}/{record_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
     Route::post('student/requestSent/{student_id}', 'RecordTransferController@sendRecordToSchool')->name('sendRecordToSchool');
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');

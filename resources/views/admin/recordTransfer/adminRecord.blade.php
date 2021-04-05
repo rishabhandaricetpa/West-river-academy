@@ -56,7 +56,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{route('admin.student.schoolRecord',$record->student_profile_id)}}">
+                                        <a href="{{route('admin.student.schoolRecord',[$record->student_profile_id,$record->id])}}">
                                             <i class=" fas fa-arrow-alt-circle-right"></i></a>
                                     </td>
                                 </tr>

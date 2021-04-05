@@ -36,21 +36,17 @@
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-    // $('#example1').dataTable({
-    //   "ordering": false,
-    //   "pagination": true,
-    //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
 
     //parent datatable
     $("#family-table").DataTable({
       "ajax": "{{ route('admin.datatable.parent') }}",
       "processing": true,
       "serverSide": true,
+      "ordering": false,
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "columns": [{
           "data": "p1_first_name"
         },
@@ -87,7 +83,7 @@
         },
 
       ]
-    });
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     //fees -info table
     $("#fees-table").DataTable({
@@ -179,8 +175,20 @@
             }
           }
         },
+        {
+          "data": "record_transfers.id",
+          "render": function(data) {
+
+            if (data == null) {
+              return `<label> Not Applied </label>`;
+            } else {
+              return `<a href="student/record/transfer/${data}">Record Transfer</a>`;
+            }
+          }
+        },
       ]
     });
+
     //coupon datatable
     $("#coupons-table").DataTable({
       "ajax": "{{ route('admin.coupons.dt') }}",

@@ -7,11 +7,11 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1>Student List</h1>
+        <h1>Students Information</h1>
         <div class="d-flex">
             <ol class="breadcrumb ml-auto">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Student Information</li>
+                <li class="breadcrumb-item active">Record Transfer Information</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.container-fluid -->
@@ -34,37 +34,23 @@
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>Date of Birth</th>
-                                    <th>Gender</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                    <th>View Payments</th>
-                                    <th>View Transcript</th>
-                                    <th>View Graduation</th>
-
+                                    <th>School Name</th>
+                                    <th>School Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($students as $student)
+                                @foreach($studentRecords as $studentRecord)
                                 <tr>
-                                    <td>{{$student->fullname}}</td>
-                                    <td>{{$student->d_o_b->format('M d Y')}}</td>
-                                    <td>{{$student->gender}}</td>
-                                    <td>{{$student->email}}</td>
-                                    <td>{{$student->payment_status}} </br>
-                                    </td>
+                                    <td>{{$studentRecord['student']['first_name']}}</td>
+                                    <td>{{$studentRecord->school_name}}</td>
+                                    <td>{{$studentRecord->email}}</td>
+                                    <td>{{$studentRecord->phone_number}}</td>
                                     <td>
-                                        <a href="{{route('admin.edit-student',$student->id)}}"><i class="fas fa-edit"></i></a>
-                                        <a href="{{route('admin.delete.student',$student->id)}}"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{route('admin.student.schoolRecord',[ $studentRecord['student']['id'], $studentRecord->id] )}}">
+                                            <i class=" fas fa-arrow-alt-circle-right"></i></a>
                                     </td>
-                                    <td><a href="{{route('admin.edit.student.payment',$student->id)}}">View Payments</a></br></td>
-                                    <td><a href="{{route('admin.edit.transcript',$student->id)}}">View Transcripts</a></br></td>
-                                    @if($student->graduation)
-                                    <td><a href="{{route('admin.view.graduation',$student->graduation->id)}}">View Graduation</a></br></td>
-                                    @else
-                                    <td>Not applied</td>
-                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
