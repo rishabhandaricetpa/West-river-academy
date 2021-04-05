@@ -80,6 +80,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('previous-school', function () {
             return view('previous-school');
         }); 
+        Route::get('order-postage', function () {
+            return view('frontendpages.order-postage');
+        }); 
 
         Route::get('college-info', function () {
             return view('frontendpages.college-info');
