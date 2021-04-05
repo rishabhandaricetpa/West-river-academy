@@ -79,7 +79,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('previous-school', function () {
             return view('previous-school');
-        }); 
+        });
 
         Route::get('college-info', function () {
             return view('frontendpages.college-info');
@@ -263,6 +263,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
 
     //Record Transfer
+    Route::get('transfer/record', 'RecordTransferController@getStudents')->name('transferSchoolRecord');
     Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
     Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
     Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');

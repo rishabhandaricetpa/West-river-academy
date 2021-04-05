@@ -64,8 +64,9 @@
                 <!-- /.card-body -->
                 <div class="row">
                     <div class="col-md-6 mt-4">
+                        <a href="{{route('admin.download.record',[$studentRecord->id,$studentRecord->student_profile_id])}}" class="btn btn-primary">Download & Preview Record</a>
                         <button type="submit" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();" class="btn btn-primary">Send Record To School</button>
-                        <a href="{{route('admin.resend.request',[$studentRecord->id,$studentRecord->student_profile_id])}}" class=" btn btn-primary">ReSend Request</a>
+                        <a href="{{route('admin.resend.request',[$studentRecord->id,$studentRecord->student_profile_id] )}}" class=" btn btn-primary">ReSend Request</a>
                     </div>
                     <div class="col-md-6 mt-4">
                         <table class='table-styling w-100 min-w-100' border="1">

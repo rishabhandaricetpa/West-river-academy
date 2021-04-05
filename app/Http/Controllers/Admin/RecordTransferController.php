@@ -97,4 +97,18 @@ class RecordTransferController extends Controller
 
         return redirect()->back()->with($notification);
     }
+    public function downloadRecord($record_id, $student_id)
+    {
+        $record = RecordTransfer::find($record_id);
+        $student_grade = StudentProfile::find($record->student_profile_id)->enrollmentPeriods()->get();
+        $studentData = StudentProfile::where('id', $record->student_profile_id)->first();
+        $data['email'] = $record->email;
+        $data['title'] = 'West River Academy';
+        $data['name'] = $studentData->first_name;
+        $data['date'] = \Carbon\Carbon::now()->format('M d Y');
+        $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
+        $data['grade'] = $student_grade;
+        $pdf = PDF::loadView('schoolResendRecord', $data);
+        return $pdf->download();
+    }
 }
