@@ -37,6 +37,7 @@
               <input class="form-check-input" type="radio" name="grade" value="K-8" required>
               <label class="form-check-label" for="">k-8</label>
             </div>
+            <input type="hidden" name="type_of_transcript" value="{{$type ?? ''=='K-8'?'transcript_K-8':'transcript_9-12'}}">
             <div class="form-check mb-1">
               <input class="form-check-input" type="radio" name="grade" value="9-12">
               <label class="form-check-label" for="">9-12</label>

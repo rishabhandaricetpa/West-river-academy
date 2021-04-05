@@ -5,13 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $dashboardData = Dashboard::select()->orderBy('id', 'DESC')->get();
-        return view('admin.dashboard-screen', compact('dashboardData'));
+        $adminid = Auth::guard('admin')->user()->id;
+        $admin_data = DB::table('admins')->where('id', $adminid)->first();
+        $dateS = Carbon::now()->startOfMonth()->subMonth(6);
+        if ($admin_data->name == "Administrator") {
+            $dashboardData = Dashboard::select()->with('student')->orderBy('id', 'DESC')->get();
+            return view('admin.dashboard-screen', compact('dashboardData'));
+        } else {
+            $dashboardData = Dashboard::select()->with('student')->where('assigned_to', $admin_data->name)->orderBy('id', 'DESC')->get();
+            return view('admin.dashboard-screen', compact('dashboardData'));
+        }
     }
 
     public function updateDashboard(Request $request)

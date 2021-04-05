@@ -27,17 +27,20 @@
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
   $(function() {
-    // $("#example1").DataTable({
-    //   "responsive": true,
-    //   "lengthChange": false,
-    //   "autoWidth": false,
+    $("#example1").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "ordering": false,
+      "pagination": true,
+      "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    // $('#example1').dataTable({
+    //   "ordering": false,
+    //   "pagination": true,
     //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-    $('#example1').dataTable({
-      "ordering": false,
-      "pagination": true
-    });
 
 
     //parent datatable
@@ -49,12 +52,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "p1_first_name"
         },
         {
@@ -69,7 +66,7 @@
             if (status === 0)
               return `<td> Active User</td>`;
             else
-              return `<td> Deactive User </td>`;
+              return `<td> Inactive User </td>`;
           }
         },
         {
@@ -78,6 +75,8 @@
             return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
               `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
               `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
+
+
           }
         },
         {
@@ -131,19 +130,22 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "fullname"
         },
         {
-          "data": "birthdate"
+          "data": "birthdate",
+          "render": function(data) {
+            return (moment(data).format("MMM DD YYYY"));
+          }
         },
         {
           "data": "gender"
+        },
+        // {
+        //   "data": "parent_profile.state"
+        // },
+        {
+          "data": "parent_profile.country"
         },
         {
           "data": "email"
@@ -168,12 +170,12 @@
           }
         },
         {
-          "data": "id",
-          "render": function(id) {
-            if (id == null) {
-              return `<a href="graduations/${id}/edit">Graduations</a>`;
-            } else {
+          "data": "graduation.id",
+          "render": function(data) {
+            if (data == null) {
               return `<label> Not Applied </label>`;
+            } else {
+              return `<a href="graduations/${data}/edit">Graduation</a>`;
             }
           }
         },
@@ -238,7 +240,10 @@
           "data": "student.email"
         },
         {
-          "data": "student.birthdate"
+          "data": "student.birthdate",
+          "render": function(data) {
+            return (moment(data).format("MMMM DD YYYY"));
+          }
         },
         {
           "data": "grade_9_info",
@@ -262,7 +267,17 @@
           "data": "apostille_country"
         },
         {
-          "data": "status"
+          "data": "status",
+          "render": function(status) {
+            if (status === 'pending')
+              return `<td> Pending</td>`;
+            if (status === 'approved')
+              return `<td> Approved </td>`;
+            if (status === 'paid')
+              return `<td> Paid </td>`;
+            if (status === 'completed')
+              return `<td> Completed </td>`;
+          }
         },
         {
           "data": "id",
@@ -272,6 +287,8 @@
         }
       ]
     });
+
+    //custom payments datatable
     $("#custom-table").DataTable({
       "ajax": "{{ route('admin.datatable.custom') }}",
       "processing": true,
@@ -280,12 +297,6 @@
       "lengthChange": false,
       "autoWidth": false,
       "columns": [{
-          "data": "id",
-          "render": function(data, type, row, meta) {
-            return meta.row + 1;
-          }
-        },
-        {
           "data": "parent_profile.p1_first_name"
         },
         {
@@ -301,11 +312,138 @@
           "data": "payment_mode"
         },
         {
+          "data": "status",
+          "render": function(status) {
+            if (status === 'pending')
+              return `<td> Pending</td>`;
+            if (status === 'paid')
+              return `<td> Paid </td>`;
+            if (status === 'active')
+              return `<td> Active </td>`;
+          }
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="custom-payments/${id}"><i class="fas fa-edit"></i></a>`;
+          }
+        }
+      ]
+    });
+    //order postage payments datatable
+    $("#postage-table").DataTable({
+      "ajax": "{{ route('admin.datatable.postage') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "parent_profile.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "paying_for"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
+          "data": "status",
+          "render": function(status) {
+            if (status === 'pending')
+              return `<td> Pending</td>`;
+            if (status === 'approved')
+              return `<td> Approved </td>`;
+            if (status === 'paid')
+              return `<td> Paid </td>`;
+            if (status === 'completed')
+              return `<td> Completed </td>`;
+          }
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="edit-postage/${id}"><i class="fas fa-edit"></i></a>`;
+          }
+        }
+      ]
+    });
+    //notarization and postage
+    $("#notarization-table").DataTable({
+      "ajax": "{{ route('admin.datatable.notarization') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "parent_profile.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "pay_for"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
           "data": "status"
         },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="edit-notarization/${id}"><i class="fas fa-edit"></i></a>`;
+          }
+        }
+      ]
+    });
+    //custom letter payments datatable
+    $("#customletter-table").DataTable({
+      "ajax": "{{ route('admin.datatable.customletter')}}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "parent_profile.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "type_of_payment"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
+          "data": "status"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="edit-customletter/${id}"><i class="fas fa-edit"></i></a>`;
+          }
+        }
       ]
     });
 
+    //generate coupon code
 
     $("#generate-code").on('click', function() {
       let _this = $(this);

@@ -70,7 +70,7 @@
             <div class="modal-body">
                 <p>Thank you for your application.</p>
                 <p>We will review it and notify you of the next steps.</p>
-                <a href="{{ route('dashboard') }}" class="btn btn-primary">Okay</a>
+                <a href="{{ route('dashboard') }}" class="btn btn-primary">Ok</a>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"> Payment Status of {{$student->first_name}}</h3>
+                        <h3 class="card-title"> Payment Status of {{$student->fullname}}</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -30,15 +30,19 @@
                   @foreach($payment_info as $payment)
                   <tr>
                   
-                      <td>{{$payment->start_date_of_enrollment}}</td>
-                      <td>{{$payment->end_date_of_enrollment}}</td>
+                      <td>{{Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M d Y')}}</td>
+                      <td>{{Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M d Y')}}</td>
                       <td>{{$payment->grade_level}}</td>
                       <td>{{$payment->amount}}</td>
-                      <td>{{$payment->status}}
-                            </td>
+                      @if($payment->status ==='paid')
+                      <td>Paid</td>
+                      @elseif($payment->status ==='active')
+                      <td>Active</td>
+                      @elseif($payment->status ==='pending')
+                      <td>Pending</td>
+                      @endif
                             <td>
-                                <a href=" {{route('admin.edit.payment.status',$payment->id )}}"><i class=" fas fa-edit"
-                                onclick="return myFunction();"></i></a>
+                                <a href=" {{route('admin.edit.payment.status',$payment->id )}}"><i class=" fas fa-edit" onclick="return myFunction();"></i></a>
                             </td>
                             </tr>
                             @endforeach

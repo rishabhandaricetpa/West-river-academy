@@ -9,9 +9,9 @@
 
 <body>
 
-<div style="text-align:center;width:300px;margin:0 auto;">
-      <img src="../public/images/letterhead.png" style="width:100%;object-fit:contain;" alt="logo-img">
-    </div>
+  <div style="text-align:center;width:300px;margin:0 auto;">
+    <img src="../public/images/letterhead.png" style="width:100%;object-fit:contain;" alt="logo-img">
+  </div>
 
   <div style="max-width: 1000px; margin: 0 auto;">
     <h1 style="font-size:23px;text-align:center;margin:70px 0 60px;">Confirmation of Enrollment</h1>
@@ -27,12 +27,15 @@
     </div>
   </div>
   <table style="padding-top:70%;width:100%;">
-  <tbody>
-    <tr>
-     <td><img src="../public/images/signature.png" alt="signature"><p>Stacey Nishikawa</p><p>Administrative Director</p></td>
-     <td><img src="../public/images/Stamp.png" style="width:150px;height:150px;object-fit:contain;" alt="Stamp"></td>
-    </tr>
-  </tbody>
+    <tbody>
+      <tr>
+        <td><img src="../public/images/signature.png" alt="signature">
+          <p>Stacey Nishikawa</p>
+          <p>Administrative Director</p>
+        </td>
+        <td><img src="../public/images/Stamp.png" style="width:150px;height:150px;object-fit:contain;" alt="Stamp"></td>
+      </tr>
+    </tbody>
   </table>
 </body>
 
@@ -69,4 +72,3 @@
 </body>
 
 </html>
-

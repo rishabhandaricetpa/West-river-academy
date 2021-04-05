@@ -7,11 +7,11 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1>Students Information</h1>
+        <h1>Student List</h1>
         <div class="d-flex">
             <ol class="breadcrumb ml-auto">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Record Transfer Information</li>
+                <li class="breadcrumb-item active">Student Information</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.container-fluid -->
@@ -35,18 +35,20 @@
                                 <tr>
                                     <th>Student Name</th>
                                     <th>Date od Birth</th>
+                                    <th>Gender</th>
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                     <th>View Payments</th>
                                     <th>View Transcript</th>
-                                    <th>View Graduations</th>
+                                    <th>View Graduation</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($students as $student)
                                 <tr>
                                     <td>{{$student->fullname}}</td>
+                                    <td>{{$student->d_o_b->format('M d Y')}}</td>
                                     <td>{{$student->gender}}</td>
                                     <td>{{$student->email}}</td>
                                     <td>{{$student->payment_status}} </br>
@@ -57,8 +59,11 @@
                                     </td>
                                     <td><a href="{{route('admin.edit.student.payment',$student->id)}}">View Payments</a></br></td>
                                     <td><a href="{{route('admin.edit.transcript',$student->id)}}">View Transcripts</a></br></td>
-                                    <td><a href="{{route('admin.view.graduation',$student->id)}}">View Graduations</a></br></td>
-
+                                    @if($student->graduation)
+                                    <td><a href="{{route('admin.view.graduation',$student->graduation->id)}}">View Graduation</a></br></td>
+                                    @else
+                                    <td>Not applied</td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

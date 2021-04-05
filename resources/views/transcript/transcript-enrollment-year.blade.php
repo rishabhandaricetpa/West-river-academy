@@ -11,13 +11,13 @@
         <h3 class="mb-3">Select the year for this grade. It must be a year that you were either enrolled in West River Academy or you have provided a transcript from another school.</h3>
         @foreach ($result as $year)
         <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" value="{{$year}}-{{$year+1}}" name="enrollment_year">
+          <input class="form-check-input" type="radio" value="{{$year}}" name="enrollment_year">
           <label class="form-check-label" for="">
             {{$year}}-{{$year+1}}
           </label>
         </div>
         @endforeach
-        Choose Other Year <input type="text" name="other_year">
+        Choose Other Year <input type="number" name="other_year">
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary" data-dismiss="modal">Continue</button>

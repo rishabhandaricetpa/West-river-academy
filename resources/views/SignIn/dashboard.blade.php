@@ -98,18 +98,18 @@
                   @elseif($transcriptData->status === 'approved')
                   <td>Approved</td>
                   @elseif($transcriptData->status === 'completed')
-                  <td>Payment Received</td>
+                  <td>Submitted</td>
                   @else
                   <td>-</td>
                   @endif
                   @if($transcriptData->status === 'paid')
                   <td>-</td>
                   @elseif($transcriptData->status === 'canEdit')
-                  <td><a href="{{route('another.grade',$transcriptData->student_profile_id)}}">Edit Transcript</a></td>
+                  <td><a href="{{route('another.grade',[$transcriptData->student_profile_id,$transcriptData->id])}}">Edit Transcript</a></td>
                   @elseif($transcriptData->status === 'approved')
                   <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
                   @elseif($transcriptData->status === 'completed')
-                  <td><a href="{{ route ('preview.transcript',$transcriptData['student']['id'])}}" role="button">Preview Transcript</a></td>
+                  <td><a href="{{route('preview.transcript',[$transcriptData->student_profile_id,$transcriptData->id])}}">Preview Transcript</a></td>
                   @else
                   <td>-</td>
                   @endif
@@ -146,7 +146,11 @@
                <tr>
                   <td>{{$student->fullname}}</td>
                   <td>{{$student->student_Id}}</td>
-                  <td>Active</td>
+                  @if(($student->status === 'completed') || ($student->status === 'paid'))
+                  <td>Completed</td>
+                  @elseif($student->status === 'pending')
+                  <td>Not Paid for Enrollment</td>
+                  @endif
                   @if(($student->status === 'completed') || ($student->status === 'paid'))
                   <td><a href="{{ route('view.confirm',$student->student_profile_id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
                   @elseif($student->status === 'pending')
@@ -199,8 +203,8 @@
             </tbody>
          </table>
       </div>
-      <div class="mt-2 text-md-right">
-         <p>Download your Enrollment Confirmation Letters from the download links above.</p>
+      <div class="mt-2 text-right">
+         <p></p>
       </div>
       <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
       </form>

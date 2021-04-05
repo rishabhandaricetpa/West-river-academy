@@ -7,9 +7,10 @@
         <h1>Edit Student Payment Information</h1>
         <div class="form-wrap border py-5 px-25 position-relative">
             <!-- form start -->
+            <h3>Payment Status of: {{$student->fullname}}</h3>
+
             <form method="post" class="row" action="{{route('admin.update-payment',$enroll_payment->id)}}">
                 @csrf
-
                 <div class="form-group col-sm-6">
                     <label>Grade Level <sup>*</sup></label>
                     <select name="grade_level" class="form-control">
@@ -68,11 +69,11 @@
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Start Date of Enrollment <sup>*</sup></label>
-                    <input name="start_date_of_enrollment" class="form-control datepicker" value="{{$enrollment_periods->start_date_of_enrollment}}">
+                    <input name="start_date_of_enrollment" class="form-control datepicker" value="{{Carbon\Carbon::parse($enrollment_periods->start_date_of_enrollment)->format('M d Y')}}">
                 </div>
                 <div class="form-group col-sm-6">
                     <label>End Date of Enrollment <sup>*</sup></label>
-                    <input name="end_date_of_enrollment" class="form-control datepicker" value="{{$enrollment_periods->end_date_of_enrollment}}">
+                    <input name="end_date_of_enrollment" class="form-control datepicker" value="{{Carbon\Carbon::parse($enrollment_periods->end_date_of_enrollment)->format('M d Y')}}">
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Amount <sup>*</sup></label>
@@ -101,10 +102,10 @@
                 </div>
                 <div class="form-group col-sm-6">
                     @if(empty($enroll_payment->payment_mode))
-                    <label>Payment Mode <sup>*</sup></label>
+                    <label>Payment Method <sup>*</sup></label>
                     <input class="form-control" id="payment_mode" value="{{$enroll_payment->payment_mode}}" name="payment_mode">
                     @else
-                    <label>Payment Mode <sup>*</sup></label>
+                    <label>Payment Method<sup>*</sup></label>
                     <input class="form-control" id="payment_mode" value="{{$enroll_payment->payment_mode}}" name="payment_mode" readonly>
                     @endif
                 </div>

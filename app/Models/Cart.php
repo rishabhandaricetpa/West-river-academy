@@ -500,11 +500,11 @@ class Cart extends Model
                         $confirmlink->status = 'paid';
                     }
                     $confirmlink->save();
-                    Dashboard::create([
-                        'linked_to' => 'New Student Record is created',
-                        'notes' => 'New Student Record is created for parent  ' . $parentName->p1_first_name,
-                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
-                    ]);
+                    // Dashboard::create([
+                    //     'linked_to' => 'New Student Record Received',
+                    //     'notes' => 'New Student Record Received for parent  ' . $parentName->p1_first_name,
+                    //     'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    // ]);
                     break;
 
                 case 'graduation':
@@ -521,18 +521,25 @@ class Cart extends Model
 
                     break;
                 case 'transcript':
-                    $transcript_payment = TranscriptPayment::where('transcript_id', $cart->item_id)->first();
-                    $transcript_payment->payment_mode = $type;
-                    if ($payment_id != null) {
-                        $transcript_payment->transcation_id = $payment_id;
-                        $transcript_payment->status = 'paid';
+                    $transcript_payment = TranscriptPayment::where('transcript_id', $cart->item_id)->get();
+                    foreach ($transcript_payment as $ts_payment) {
+                        $ts_payment->payment_mode = $type;
+                        if ($payment_id != null) {
+                            $ts_payment->transcation_id = $payment_id;
+                            $ts_payment->status = 'paid';
+                        }
+                        $ts_payment->save();
                     }
-                    $transcript_payment->save();
 
-                    $transcript = Transcript::whereId($cart->item_id)->first();
-                    $transcript->status = 'paid';
-                    $transcript->save();
 
+                    $transcripts = Transcript::whereId($cart->item_id)->get();
+                    foreach ($transcripts as $transcript) {
+                        // $current_count = $transcript->count_for_transcript;
+                        $transcript->status = 'paid';
+                        // $transcript->count_for_transcript = $current_count + 1;
+                        $transcript->save();
+                        // $clearpendingtranscrit = Transcript::where('status', 'pending')->delete();
+                    }
                     break;
 
                 case 'custom':
@@ -541,10 +548,13 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $custom_payment->transcation_id = $payment_id;
                         $custom_payment->status = 'paid';
+                    } else {
+                        $custom_payment->status = 'active';
                     }
                     $custom_payment->save();
                     Dashboard::create([
-                        'linked_to' => 'Custom Payment Received',
+                        'linked_to' => $cart->item_id,
+                        'related_to' => 'custom_record_received',
                         'notes' => 'Custom Payment Received From : ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -556,6 +566,8 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $transcript_payment->transcation_id = $payment_id;
                         $transcript_payment->status = 'paid';
+                    } else {
+                        $transcript_payment->status = 'active';
                     }
                     $transcript_payment->save();
 
@@ -563,7 +575,8 @@ class Cart extends Model
                     $transcript->status = 'canEdit';
                     $transcript->save();
                     Dashboard::create([
-                        'linked_to' => 'Transcript Edit Request is made by user',
+                        'linked_to' =>  $cart->item_id,
+                        'related_to' => 'transcript_edit_record_received',
                         'notes' => 'Transcript Edit' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -575,10 +588,13 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $postage_payment->transcation_id = $payment_id;
                         $postage_payment->status = 'paid';
+                    } else {
+                        $postage_payment->status = 'active';
                     }
                     $postage_payment->save();
                     Dashboard::create([
-                        'linked_to' => 'Postage payment made by user',
+                        'linked_to' =>  $cart->item_id,
+                        'related_to' => 'postage_record_received',
                         'notes' => 'Postage is Ordered by ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -589,14 +605,17 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $notarization_payment->transcation_id = $payment_id;
                         $notarization_payment->status = 'paid';
+                    } else {
+                        $notarization_payment->status = 'paid';
                     }
                     $notarization_payment->save();
 
                     $notarization = Notarization::whereId($cart->item_id)->first();
-                    $notarization->status = 'paid';
+                    // $notarization->status = 'paid';
                     $notarization->save();
                     Dashboard::create([
-                        'linked_to' => 'Notarization and appostile  payment made by user',
+                        'linked_to' =>  $cart->item_id,
+                        'related_to' => 'appostile_record_received',
                         'notes' => 'Notarization and appostile is Ordered by ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -608,10 +627,13 @@ class Cart extends Model
                     if ($payment_id != null) {
                         $customletter_payment->transcation_id = $payment_id;
                         $customletter_payment->status = 'paid';
+                    } else {
+                        $customletter_payment->status = 'active';
                     }
                     $customletter_payment->save();
                     Dashboard::create([
-                        'linked_to' => 'Custom Letter is Ordered',
+                        'linked_to' =>  $cart->item_id,
+                        'related_to' => 'custom_letter_record_received',
                         'notes' => 'Custom Letter is Ordered by ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);

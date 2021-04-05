@@ -13,6 +13,7 @@ use App\Models\StudentProfile;
 use App\Models\Transcript;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
+use App\Models\Dashboard;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -104,7 +105,7 @@ class StudentController extends Controller
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
-        $confirmLetter = StudentProfile::where('parent_profile_id', $parentId)
+        $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter'));
@@ -174,6 +175,7 @@ class StudentController extends Controller
                 $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
                 $enrollPeriod->save();
                 $confirmlink = ConfirmationLetter::create([
+                    'parent_profile_id' => $id,
                     'student_profile_id' => $student->id,
                     'pdf_link' => '',
                     'status' => 'pending',
@@ -181,6 +183,13 @@ class StudentController extends Controller
                 ]);
                 $confirmlink->save();
             }
+            Dashboard::create([
+                'student_profile_id' => $student->id,
+                'linked_to' => $student->Name,
+                'related_to' => 'student_record_received',
+                'notes' => 'New Student Record Received for' . $student->first_name . $student->last_name,
+                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            ]);
             DB::commit();
 
             if ($data->expectsJson()) {
@@ -255,6 +264,7 @@ class StudentController extends Controller
 
     public function updateEnrollPeriod($period, $student, $enrollPeriod)
     {
+        $parent_profile = ParentProfile::getParentId();
         $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
         $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
@@ -281,7 +291,9 @@ class StudentController extends Controller
         ]);
         $enrollPeriod->save();
         //confirmation periods 
+
         $confirmlink = ConfirmationLetter::create([
+            'parent_profile_id' => $parent_profile,
             'student_profile_id' => $student->id,
             'pdf_link' => '',
             'status' => 'pending',
@@ -328,8 +340,8 @@ class StudentController extends Controller
                 ->select('enrollment_periods.*', 'enrollment_payments.status')
                 ->orderBy('enrollment_payments.status', 'desc')
                 ->get();
-
-            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+            $birth = Carbon::parse($studentData->d_o_b)->toDateString();
+            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'birth'));
         } else {
             $countryData = Country::where('country', 'other')->first();
             $start_date = $countryData->start_date;

@@ -17,7 +17,12 @@ class EnrollmentPeriods extends Model
     {
         return $this->belongsTo('App\Models\StudentProfile');
     }
+    protected $appends = ['start_date_rate'];
 
+    public function getstartDateRateAttribute()
+    {
+        return $this->start_date_of_enrollment;
+    }
     public function Country()
     {
         return $this->belongsTo(Country::class);

@@ -16,7 +16,7 @@
       </div>
 
       <div class="form-group col-sm-6">
-        Birthdate: {{ $graduation->student->birthdate }}
+        Birthdate: {{ Carbon\Carbon::parse($graduation->student->birthdate)->format('M d Y') }}
       </div>
 
       <div class="form-group col-sm-6">
@@ -76,7 +76,7 @@
       </div>
 
       <div class="form-group col-sm-4">
-        <label for="status">status:</label>
+        <label for="status">Status:</label>
         <select class="form-control" name="status" id="status">
           <option @if($graduation->status === 'pending') selected @endif value="pending">Pending Approval</option>
           <option @if($graduation->status === 'approved') selected @endif value="approved">Approved</option>

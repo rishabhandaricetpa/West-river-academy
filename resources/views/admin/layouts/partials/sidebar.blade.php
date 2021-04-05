@@ -18,8 +18,8 @@
           </p>
         </a>
       </li>
-      <a href="" class="nav-link active">
-      <i class="fas fa-user-friends nav-icon"></i>
+      <a href="" class="nav-link ">
+        <i class="fas fa-user-friends nav-icon"></i>
         <p>
           Parent Profile
           <i class="right fas fa-angle-left"></i>
@@ -39,7 +39,7 @@
       </li>
       <li class="nav-item menu">
         <a href="" class="nav-link ">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-user"></i>
           <p>
             Students
             <i class="right fas fa-angle-left"></i>
@@ -48,7 +48,7 @@
         <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="{{ url('admin/view-student')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fas fa-eye"></i>
               <p>
                 View Students
               </p>
@@ -58,7 +58,7 @@
       </li>
       <li class="nav-item menu">
         <a href="" class="nav-link ">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-wallet"></i>
           <p>
             Payments
             <i class="right fas fa-angle-left"></i>
@@ -67,7 +67,7 @@
         <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="{{route('admin.payments')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fas fa-eye"></i>
               <p>
                 View Payments
               </p>
@@ -75,15 +75,39 @@
           </li>
           <li class="nav-item">
             <a href="{{route('admin.custom.payments')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fas fa-money-check-alt"></i>
               <p>
-                Custom Payment
+                Custom Payments
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.order.postage')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Order Postage
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.order.customletter')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Custom Letter
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.apostille.notarization')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Notarization
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ url('admin/payment-address')}}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-address-book"></i>
               <p>Change Address</p>
             </a>
           </li>
@@ -91,7 +115,7 @@
       </li>
       <li class="nav-item menu">
         <a href="" class="nav-link ">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-scroll"></i>
           <p>
             Transcripts
             <i class="right fas fa-angle-left"></i>
@@ -99,16 +123,32 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{ url('admin/view/transcript') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="{{ route('admin.view.transcript') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
               <p>
-                View Transcript
+                Transcript K-8
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.view.transcript9_12') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
+              <p>
+                Transcript 9-12
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.transcript.payments') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
+              <p>
+                Transcript Payments
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ url('admin/manage-courses')}}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-tasks"></i>
               <p>Manage Course</p>
             </a>
           </li>
@@ -126,7 +166,7 @@
         <a href="{{ route('admin.view.graduation') }}" class="nav-link">
           <i class="nav-icon fas fa-user-graduate"></i>
           <p>
-            Graduations
+            Graduation
           </p>
         </a>
       </li>
@@ -143,7 +183,7 @@
         <a href="{{ url('admin/fees-services')}}" class="nav-link">
           <i class="nav-icon fas fa-dollar-sign"></i>
           <p>
-            Fees
+            Fee and Services
           </p>
         </a>
       </li>
@@ -159,7 +199,7 @@
         <a href="{{ route('admin.logout')}}" class="nav-link">
           <i class="nav-icon fas fa-sign-out-alt"></i>
           <p>
-            Logout
+            Log Out
           </p>
         </a>
       </li>

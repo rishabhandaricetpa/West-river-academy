@@ -3,7 +3,6 @@
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
-    <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Order an Apostille or Notarization</h2>
         <form class="mb-0" method="post" action="{{route('add.cart')}}">
@@ -124,9 +123,16 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                     </thead>
                     <tbody>
                         @foreach($transcriptdoc as $doc)
+                        @if($doc->pdf_link)
                         <tr>
                             <td><input class="form-check-input" type="checkbox" name="documents[]" value="{{$doc->pdf_link}}">{{$doc->pdf_link}}</td>
                         </tr>
+                        @endif
+                        @if($doc->confirm)
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox" name="documents[]" value="{{$doc->pdf_link}}">{{$doc->confirm}}</td>
+                        </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -253,14 +259,14 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                     <tr>
                         <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="united_postal_service">
                             <h3 class="mb-0 mt-1">United Postal Service (UPS)</h3>
-                            <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
+                            <p class="mb-1">Recommended for South and Central American Countries. Tracking included.</p>
                         </td>
                         <td>${{ getFeeDetails('united_postal_service') }}</td>
                     </tr>
                     <tr>
                         <td><input class="form-check-input" type="Radio" name="payment_for_postage" value="global_guaranteed_international">
                             <h3 class="mb-0 mt-1">Global Express Guaranteed</h3>
-                            <p class="mb-1">6-10 business days to arrive, customs tracking until it leaves the U.S., but not past that.</p>
+                            <p class="mb-1">1-3 business days to arrive, tracking door to door, $100 insurance.</p>
                         </td>
                         <td>${{ getFeeDetails('global_guaranteed_international') }}</td>
                     </tr>

@@ -36,3 +36,15 @@ $(document).on("click", function (event) {
     $(".notification").removeClass("d-block");
   }
 });
+
+// country transcript
+
+$("#transcript-country").click(function () {
+  $('.transcript-detail').addClass('show');
+  $('.present-detail').removeClass('show');
+ });
+
+ $("#transcript-present").click(function () {
+   $('.present-detail').addClass('show');
+    $('.transcript-detail').removeClass('show');
+ });

@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\ParentProfile;
 use App\Models\Subject;
 use App\Models\TranscriptK8;
+use App\Models\Transcript9_12;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -187,6 +188,28 @@ class CourseController extends Controller
         try {
             DB::beginTransaction();
             $transcriptDetails = TranscriptK8::find($transcript_id)->delete();
+            DB::commit();
+            $notification = [
+                'message' => 'School Record Deleted Successfully!',
+                'alert-type' => 'success',
+            ];
+
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+    }
+    public function deleteSchool9_12($transcript_id)
+    {
+        try {
+            DB::beginTransaction();
+            $transcriptDetails = Transcript9_12::find($transcript_id)->delete();
             DB::commit();
             $notification = [
                 'message' => 'School Record Deleted Successfully!',
