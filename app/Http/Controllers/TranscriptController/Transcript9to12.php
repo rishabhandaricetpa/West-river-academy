@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TranscriptController;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvancePlacement;
+use App\Models\CollegeCourse;
 use App\Models\Country;
 use App\Models\Credits;
 use App\Models\StudentProfile;
@@ -164,7 +165,6 @@ class Transcript9to12 extends Controller
     }
     public function getAnotherGradeStatus(Request $request)
     {
-        //  dd($request->all());
         $trans_id = $request->get('trans_id');
         $transcript9_12id = $request->get('transcript9_12id');
         $student_id = $request->get('student_id');
@@ -248,12 +248,13 @@ class Transcript9to12 extends Controller
         // START: Transcript data for rendring course data in tabluar format.
 
         $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
-            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit'])
+            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses'])
             ->get();
 
-        $transcript_9_10 = $transcriptData->whereIn("grade",config('constants.GRADES.9_10'))->sortBy("grade")->toArray();
 
-        $transcript_11_12 = $transcriptData->whereIn("grade",config('constants.GRADES.11_12'))->sortBy("grade")->toArray();
+        //$collegeCourses = CollegeCourse::where('transcript9_12_id',)
+        $transcript_9_10 = $transcriptData->whereIn("grade", config('constants.GRADES.9_10'))->sortBy("grade")->toArray();
+        $transcript_11_12 = $transcriptData->whereIn("grade", config('constants.GRADES.11_12'))->sortBy("grade")->toArray();
 
         $transcriptData = [
             $transcript_9_10,

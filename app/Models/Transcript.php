@@ -27,7 +27,10 @@ class Transcript extends Model
     {
         return $this->hasMany('App\Models\TranscriptPdf', 'transcript_id', 'id');
     }
-
+    public function collegeCourses()
+    {
+        return $this->hasMany(CollegeCourse::class);
+    }
     public function studentTranscript()
     {
         return $this->hasOne(TranscriptK8::class);

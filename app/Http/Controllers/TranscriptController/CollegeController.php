@@ -24,12 +24,15 @@ class CollegeController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         foreach ($request->get('collegeCourse', [])  as $course) {
             CollegeCourse::create([
                 'student_profile_id' => $request->get('student_id'),
                 'name' => $course['name'],
                 'course_name' => $course['course_name'],
                 "grade" => $course['grade'],
+                "transcript9_12_id" => $request->transcript9_12_id,
+                "transcript_id" => $request->transcript_id,
                 "is_college_level" => $course['is_college_level'],
                 "course_grade" => $course['course_grade'],
                 "selectedCredit" => $course['selectedCredit']
