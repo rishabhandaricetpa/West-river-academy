@@ -121,6 +121,30 @@
       ]
     });
 
+
+
+    //country postage
+    $("#country_shipping").DataTable({
+      "ajax": "{{ route('admin.datatable.shipping') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "country"
+        },
+        {
+          "data": "postage_charges"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="{{ url('admin/country-services')}}/${id}/edit">Edit</a>`;
+          }
+        },
+      ]
+    });
     //student datatable
     $("#student-table").DataTable({
       "ajax": "{{ route('admin.datatable.student') }}",
@@ -532,6 +556,7 @@
       }
     });
   }
+
   //custom payments
 </script>
 

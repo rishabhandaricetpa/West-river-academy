@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1 class="text-center">Fees and Services</h1>
+        <h1 class="text-center">Postage Charges List</h1>
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -18,14 +18,11 @@
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <a type="button" href="{{ route('admin.fees.country')}}" class="btn btn-primary">Modify Postage Charges</a>
-                        <table id="fees-table" class="table table-bordered table-striped data-table">
+                        <table id="country_shipping" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
-                                    <th>Sno</th>
-                                    <th>Fee For</th>
-                                    <th>Description</th>
-                                    <th>Amount</th>
+                                    <th>Country</th>
+                                    <th>Postage Charge</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

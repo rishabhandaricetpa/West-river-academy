@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\FeesInfo;
+use App\Models\Country;
 
 /**
  * Compare given route with current route and return output if they match.
@@ -72,7 +73,7 @@ function getPromotedGrades($grades, $modify_last_value = true)
         });
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
         $len = count($sortedOrder);
-        if($modify_last_value && $len > 1){
+        if ($modify_last_value && $len > 1) {
             $sortedOrder[$len - 1] =  " and " . $sortedOrder[$len - 1];
         }
 
@@ -109,4 +110,10 @@ function getCustomLetterQuantity($amount)
     $customletterfee = FeesInfo::getFeeAmount('custom_letter');
     $quantity = $amount / $customletterfee;
     return $quantity;
+}
+//get country postage chanrgess
+function getCountryAmount($country)
+{
+    $postage_charges = Country::select('postage_charges')->where('country', $country)->first();
+    return $postage_charges;
 }

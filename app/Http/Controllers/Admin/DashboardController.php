@@ -38,7 +38,6 @@ class DashboardController extends Controller
     public function assignRecord(Request $request)
     {
         $record = Dashboard::find($request->get('assign_id'));
-
         return response()->json($record);
     }
 }

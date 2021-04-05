@@ -79,7 +79,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('previous-school', function () {
             return view('previous-school');
-        }); 
+        });
 
         Route::get('college-info', function () {
             return view('frontendpages.college-info');
@@ -144,8 +144,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
 
-    //fees and services
-    Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
 
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
@@ -270,6 +268,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
     Route::get('notarization', 'NotarizationController@index')->name('notarization');
     Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
+
+    //return shipping charges
+    Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
 
 
     Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');

@@ -183,6 +183,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('feestable', '\App\Http\Controllers\FeeStructureController@dataTable')->name('datatable.fees');
     Route::get('fees-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@edit')->name('edit.fees');
     Route::post('fees-services/{id}', '\App\Http\Controllers\FeeStructureController@update')->name('update.fees');
+    Route::get('country/shipping', '\App\Http\Controllers\FeeStructureController@viewShippingDataTable')->name('datatable.shipping');
+    Route::get('country-services', '\App\Http\Controllers\FeeStructureController@countryData')->name('fees.country');
+    Route::get('country-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@countryPostageEdit')->name('edit.countryPostage');
+    Route::post('country-services/{id}', '\App\Http\Controllers\FeeStructureController@countryPostageupdate')->name('update.countryPostage');
     //record request
     Route::get('student/record/{student_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
     Route::post('student/requestSent/{student_id}', 'RecordTransferController@sendRecordToSchool')->name('sendRecordToSchool');
