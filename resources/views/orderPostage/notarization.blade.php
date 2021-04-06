@@ -65,11 +65,11 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                     <label for="" class="w-auto">Transcript</label>
                     <div class="w-100">
                         <select  multiple="multiple" class="multiple-select form-control" >
+                            <option>What is to be notarized and/or sent for Apostilles?</option>
                             <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option>nancy.shalini@ithands.biz </option>
+                            <option>What is to be notarized and/or sent for Apostilles?</option>
+                            <option>What is to be notarized and/or sent for Apostilles?</option>
                         </select>
                     </div>
                 </div>
