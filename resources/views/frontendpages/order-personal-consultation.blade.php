@@ -21,20 +21,20 @@
      <div class="form-group mb-2 lato-italic info-detail pb-4">
                   <h3 class="mb-3">Please choose the language you prefer.</h3>
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 3">
+                     <input class="form-check-input"  id="select-english" type="radio" name="student_grade" value="Preschool Age 3">
                      <label class="form-check-label" for="">
                        English
                      </label>
                   </div>
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 4">
-                     <label class="form-check-label" for="">
+                     <input class="form-check-input" id="select-spanish" type="radio" name="student_grade" value="Preschool Age 4">
+                     <label class="form-check-label" for="" >
                        Spanish
                      </label>
                   </div>
                </div>
-               <div class="form-group mb-2 lato-italic info-detail pb-4">
-                  <h3 class="mb-3">You will initiate the call. How do you wish to call us?</h3>
+               <h3 class="mb-3">You will initiate the call. How do you wish to call us?</h3>
+               <div class="form-group mb-2 lato-italic info-detail pb-4 d-none" id="call_method_1">
                   <div class="form-check mb-2">
                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 3">
                      <label class="form-check-label" for="">
@@ -54,7 +54,7 @@
                      </label>
                   </div>
                </div>
-               <div class="form-group mb-2 lato-italic info-detail pb-4">
+               <div class="form-group mb-2 lato-italic info-detail pb-4 d-none" id="call_method_2">
                   <div class="form-check mb-2">
                      <input class="form-check-input" type="radio" name="student_grade" value="Preschool Age 4">
                      <label class="form-check-label" for="">

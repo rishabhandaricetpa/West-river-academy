@@ -48,5 +48,24 @@ $("#transcript-country").click(function () {
    $('.present-detail').addClass('show');
     $('.transcript-detail').removeClass('show');
  });
+/* order a personal consultation */
+ $("#select-english").click(function () {
+  $('#call_method_1').addClass('d-block');
+  $('#call_method_2').removeClass('d-block');
+ });
 
- var usa_selected = document.getElementById("select-particular").value="usa";
+ $("#select-spanish").click(function () {
+   $('#call_method_2').addClass('d-block');
+    $('#call_method_1').removeClass('d-block');
+ });
+
+ $(function() {
+  $("#select-particular").change(function() {
+  if(( $('option:selected', this).text() =='United states of america' )){
+      $('#select-us').addClass('d-block');
+      }
+      else{
+          $('#select-us').removeClass('d-block'); 
+      }
+  });
+});
