@@ -186,6 +186,7 @@ class StudentController extends Controller
             Dashboard::create([
                 'student_profile_id' => $student->id,
                 'linked_to' => $student->Name,
+                'is_archieved' => 0,
                 'related_to' => 'student_record_received',
                 'notes' => 'New Student Record Received for' . $student->first_name . $student->last_name,
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),

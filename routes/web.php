@@ -272,9 +272,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('notarization', 'NotarizationController@index')->name('notarization');
     Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
 
-
+    // assign record to sub admin by super admin
     Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');
     Route::post('update/dashboard', 'Admin\DashboardController@updateDashboard');
+
+    // provide status to record
+    Route::post('assign/status', 'Admin\DashboardController@assignRecordStatus')->name('dashboard.update');
+    Route::post('update/record/status', 'Admin\DashboardController@updateRecordStatus');
+
+    //archieve records
+    Route::post('archieve/record', 'Admin\DashboardController@archieveRecord');
     //order Postage
     Route::get('orderpostage', function () {
         return view('orderPostage/purchase_postage');

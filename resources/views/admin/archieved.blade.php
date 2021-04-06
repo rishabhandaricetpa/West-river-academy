@@ -103,9 +103,7 @@
                         <table id="example1" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
-                                    @if($isAdmin)
-                                    <th> Select </th>
-                                    @endif
+
                                     <th>Date Created</th>
                                     <th>Orders</th>
                                     <th>Notes</th>
@@ -114,17 +112,13 @@
                                     <th>Action</th>
                                     @endif
                                     <th>Task Status</th>
-                                    @if(!$isAdmin)
-                                    <th>Action</th>
-                                    @endif
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($dashboardData as $data)
                                 <tr>
-                                    @if($isAdmin)
-                                    <td> <input type="checkbox" value="{{$data->id}}" name="is_archived" onclick="archieve(this.value)"> </td>
-                                    @endif
+
                                     <td>{{$data->created_date}}</td>
                                     @if($data->related_to === 'student_record_received')
                                     <td><a href=" {{route('admin.edit.student.payment',$data->student->id)}}">New Student Enrolled</a></td>
@@ -156,13 +150,11 @@
                                     <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboard(event.target)" data-toggle="modal" data-target="#assignRecord" class="btn btn-primary">Assign</a></td>
                                     @endif
                                     @if(empty($data->status))
-                                    <td class="">No Status</td>
+                                    <td class="">No Status </td>
                                     @elseif($data->status)
                                     <td class="bg-success">{{$data->status}}</td>
                                     @endif
-                                    @if(!$isAdmin)
-                                    <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboardForStatus(event.target)" data-toggle="modal" data-target="#assignStatusToRecord" class="btn btn-primary">Status</a></td>
-                                    @endif
+
 
                                 </tr>
                                 @endforeach

@@ -10,7 +10,7 @@ class Dashboard extends Model
     use HasFactory;
     protected $table = 'dashboards';
     protected $fillable = [
-        'linked_to', 'notes', 'assigned_to', 'created_date', 'updated_date', 'student_profile_id', 'related_to'
+        'linked_to', 'notes', 'assigned_to', 'created_date', 'updated_date', 'student_profile_id', 'related_to', 'is_completed', 'status', 'is_archieved'
     ];
     public function student()
     {

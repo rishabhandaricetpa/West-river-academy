@@ -192,5 +192,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //dashboard notification
     Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
+    // archieved tasks
+    Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
 });

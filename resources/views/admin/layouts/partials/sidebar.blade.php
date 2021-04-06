@@ -18,6 +18,16 @@
           </p>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a href="{{route('admin.archieved.tasks')}}" class="nav-link">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Archieved Tasks
+          </p>
+        </a>
+      </li>
+
       <a href="" class="nav-link ">
         <i class="fas fa-user-friends nav-icon"></i>
         <p>
