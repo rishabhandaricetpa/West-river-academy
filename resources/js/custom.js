@@ -48,3 +48,5 @@ $("#transcript-country").click(function () {
    $('.present-detail').addClass('show');
     $('.transcript-detail').removeClass('show');
  });
+
+ var usa_selected = document.getElementById("select-particular").value="usa";

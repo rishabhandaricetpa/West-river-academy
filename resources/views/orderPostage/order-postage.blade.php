@@ -18,11 +18,12 @@
    <form method="POST" class="mb-0" action="">
       @csrf
      <p>Select the country you are shipping to. We only ship Express outside the US.</p>
-     <div class="form-row col-md-10">
+     <div class="form-row col-md-10 px-0">
     <div class="form-group col-md-9">
-      <select id="inputState" class="form-control col-md-4">
-        <option selected="">Choose...</option>
-        <option>...</option>
+      <select id="select-particular" class="form-control col-md-4">
+        <option selected="">United states of america</option>
+        <option>india</option>
+        <option>America</option>
       </select>
     </div>
     <div class="form-group col-md-3 d-md-flex">
@@ -35,9 +36,9 @@
     </div>
     <button type="submit" class="btn btn-primary ml-auto">Add to cart</button>
   </div>
-  <div>
+  <div id="select-us" class="d-none">
   <p>If country is US:</p>
-  <div class="form-row col-md-10">
+  <div class="form-row col-md-10 px-0">
     <div class="form-group col-md-10 form-row">
       <select id="inputState" class="form-control col-md-4 mr-5">
         <option selected="">United States of America</option>
@@ -47,7 +48,7 @@
     </div>
  
   </div>
-     <div class="form-row col-md-10">
+     <div class="form-row col-md-10 px-0">
     <div class="form-group col-md-9 form-row">
     <select id="inputState" class="form-control col-md-2  offset-md-6">
         <option selected="">United States of America</option>
