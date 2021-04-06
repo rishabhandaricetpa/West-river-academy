@@ -83,6 +83,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('order-postage', function () {
             return view('frontendpages.order-postage');
         }); 
+        Route::get('order-personal-consultation', function () {
+            return view('frontendpages.order-personal-consultation');
+        }); 
 
         Route::get('college-info', function () {
             return view('frontendpages.college-info');
