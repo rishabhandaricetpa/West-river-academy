@@ -271,14 +271,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     //return shipping charges
     Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
+    Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
 
 
     Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');
     Route::post('update/dashboard', 'Admin\DashboardController@updateDashboard');
     //order Postage
-    Route::get('orderpostage', function () {
-        return view('orderPostage/purchase_postage');
-    });
+    Route::get('orderpostage', 'NotarizationController@viewOrderPostage')->name('notarization.viewOrderPostage');
     Route::get('custom-letter', 'PaymentMethod\CustomLetterController@index')->name('custom.letter');
 
     // transcript 9-12

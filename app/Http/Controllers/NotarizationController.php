@@ -45,6 +45,22 @@ class NotarizationController extends Controller
         return response()->json($country_shipping);
     }
 
+    public function getPostageShippingTypes(Request $request)
+    {
+        dd($request);
+        $country_shipping = getCountryAmount($request->country_name);
+        return response()->json($country_shipping);
+    }
+
+
+
+    public function viewOrderPostage()
+    {
+        $parent_id = ParentProfile::getParentId();
+        $countries = Country::get();
+        return view('orderPostage/purchase_postage', compact('countries'));
+    }
+
     // public function store(Request $request)
     // {
     //     try {

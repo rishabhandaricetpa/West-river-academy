@@ -213,7 +213,6 @@ class CartController extends Controller
                         'confirmation_doc' => $confirmation_doc_total,
                         'custom_doc' => $custom_doc_total,
                     ]);
-
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' =>  $request->get('country_postage'),

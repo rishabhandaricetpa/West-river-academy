@@ -31,7 +31,7 @@
                         <span class="col-3 text-center">=</span>
 
                         <i class="fas fa-dollar-sign additional-sign"></i>
-                        <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due">
+                        <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due" disabled>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                         </select>
                         <span class="col-3 text-center">=</span>
                         <i class="fas fa-dollar-sign additional-sign"></i>
-                        <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due">
+                        <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due" disabled>
                     </div>
                 </div>
             </div>
@@ -164,7 +164,7 @@
                     </div>
                     <label for="county">Shipping Charge</label>
                     <i class="fas fa-dollar-sign additional-sign"></i>
-                    <input name="country_postage" type="text" class="form-control col-3" id="postage_charges">
+                    <input name="country_postage" type="text" class="form-control col-3" id="postage_charges" disabled>
                 </div>
             </div>
     </div>
