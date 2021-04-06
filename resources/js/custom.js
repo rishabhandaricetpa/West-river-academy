@@ -49,4 +49,3 @@ $("#transcript-country").click(function () {
     $('.transcript-detail').removeClass('show');
  });
 
- var usa_selected = document.getElementById("select-particular").value="usa";

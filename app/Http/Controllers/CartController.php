@@ -215,12 +215,12 @@ class CartController extends Controller
                     ]);
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
-                        'amount' =>  $request->get('country_postage'),
+                        'amount' =>  $request->get('postage_charges'),
                         'paying_for' => 'postage',
                         'type_of_payment' => '',
                         'status' => 'pending'
                     ]);
-                    $amount = $request->get('apostille_due') + $request->get('notarization_due') + $request->get('country_postage');
+                    $amount = $request->get('apostille_due') + $request->get('notarization_due') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'notarization_id' => $notarizationDetails->id,

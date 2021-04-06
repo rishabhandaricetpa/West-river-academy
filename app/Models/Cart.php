@@ -48,6 +48,7 @@ class Cart extends Model
                 $transcript_edit_data =  Self::getEditTranscriptData();
                 $postage_data = Self::getPostageData();
                 $notarization_data = Self::getNotarizationData();
+
                 $custom_letter_data = Self::getcustomLetterData();
 
                 return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data);
@@ -347,7 +348,7 @@ class Cart extends Model
     {
         return self::where('cart.parent_profile_id', ParentProfile::getParentId())
             ->where('cart.item_type', 'notarization')
-            ->leftJoin('notarizations', 'notarizations.parent_profile_id', 'cart.item_id')
+            ->leftJoin('notarizations', 'notarizations.id', 'cart.item_id')
             ->leftJoin('notarization_payments', 'cart.item_id', 'notarization_payments.notarization_id')->where('notarization_payments.status', 'pending')
             ->leftJoin('parent_profiles', 'notarizations.parent_profile_id', 'parent_profiles.id');
     }

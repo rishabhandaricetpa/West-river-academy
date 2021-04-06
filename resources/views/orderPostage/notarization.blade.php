@@ -2,7 +2,6 @@
 @section('pageTitle', 'Notarization & Appostile')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
@@ -29,9 +28,8 @@
                             <option value="10">10</option>
                         </select>
                         <span class="col-3 text-center">=</span>
-
                         <i class="fas fa-dollar-sign additional-sign"></i>
-                        <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due" disabled>
+                        <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due" readonly>
                     </div>
                 </div>
 
@@ -71,7 +69,7 @@
                         </select>
                         <span class="col-3 text-center">=</span>
                         <i class="fas fa-dollar-sign additional-sign"></i>
-                        <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due" disabled>
+                        <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due" readonly>
                     </div>
                 </div>
             </div>
@@ -164,7 +162,7 @@
                     </div>
                     <label for="county">Shipping Charge</label>
                     <i class="fas fa-dollar-sign additional-sign"></i>
-                    <input name="country_postage" type="text" class="form-control col-3" id="postage_charges" disabled>
+                    <input name="postage_charges" type="text" class="form-control col-3" id="postage_charges" readonly>
                 </div>
             </div>
     </div>

@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-row col-md-10">
                         <div class="form-group col-md-9 form-row">
-                            <select id="postage_type" class="form-control col-md-2  offset-md-6" onchange="(event)">
+                            <select id="postage_type" class="form-control col-md-2  offset-md-6" onchange="getUSAFees(event)">
                                 <option selected="" value="express_usa">Express</option>
                                 <option value="priority_usa">Priority</option>
                             </select>
@@ -52,7 +52,7 @@
                             <p class="pr-md-3 space-pre">Total Due:</p>
                             <div class="d-flex">
                                 <i class="fas fa-dollar-sign additional-sign"></i>
-                                <input type="text" class="form-control" id="inputZip" name="usa_shiiping">
+                                <input type="text" class="form-control" id="usa_shiiping" name="usa_shiiping">
 
                             </div>
 
@@ -94,15 +94,16 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{url('postage/type')}}",
+            url: "{{ url('postage/type')}}",
             type: "POST",
             data: {
                 postage_type: postage_type,
             },
             success: function(response) {
                 if (response) {
-                    $("#postage_charges").val(response.postage_charges);
+                    $("#usa_shiiping").val(response);
                 }
+
             }
         });
     }

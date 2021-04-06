@@ -47,9 +47,12 @@ class NotarizationController extends Controller
 
     public function getPostageShippingTypes(Request $request)
     {
-        dd($request);
-        $country_shipping = getCountryAmount($request->country_name);
-        return response()->json($country_shipping);
+        if ($request->postage_type === 'express_usa') {
+            $express = getFeeDetails('express_usa');
+            return response()->json($express);
+        } else
+            $priority = getFeeDetails('priority_usa');
+        return response()->json($priority);
     }
 
 
@@ -58,7 +61,8 @@ class NotarizationController extends Controller
     {
         $parent_id = ParentProfile::getParentId();
         $countries = Country::get();
-        return view('orderPostage/purchase_postage', compact('countries'));
+        // return view('orderPostage/purchase_postage', compact('countries'));
+        return view('orderPostage/order-postage', compact('countries'));
     }
 
     // public function store(Request $request)
