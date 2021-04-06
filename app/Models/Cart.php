@@ -334,7 +334,6 @@ class Cart extends Model
             ->leftJoin('transcripts', 'transcripts.id', 'cart.item_id')
             ->leftJoin('transcript_payments', 'cart.item_id', 'transcript_payments.transcript_id')
             ->leftJoin('student_profiles', 'transcripts.student_profile_id', 'student_profiles.id');
-        // dd($dd);
     }
 
     private static function getPostageQuery()

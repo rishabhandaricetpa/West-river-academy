@@ -167,11 +167,11 @@ class CartController extends Controller
 
                 case 'postage':
                     $clearpendingPayments = OrderPostage::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
-                    $amount = FeesInfo::getFeeAmount($request->get('payment_for'));
+                    $amount = $request->get('postage_charges') + $request->get('usa_shiiping');
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' =>   $amount,
-                        'paying_for' => $request->get('payment_for'),
+                        'paying_for' => $request->get('type'),
                         'type_of_payment' => '',
                         'status' => 'pending',
                     ]);

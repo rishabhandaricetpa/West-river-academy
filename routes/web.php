@@ -40,7 +40,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/welcome-video', function () {
             return view('welcome-video');
         });
-
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student
