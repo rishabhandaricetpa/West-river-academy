@@ -18,7 +18,7 @@
           </p>
         </a>
       </li>
-
+      @can('isAdmin')
       <li class="nav-item">
         <a href="{{route('admin.archieved.tasks')}}" class="nav-link">
           <i class="nav-icon fas fa-copy"></i>
@@ -27,7 +27,7 @@
           </p>
         </a>
       </li>
-
+      @endcan
       <a href="" class="nav-link ">
         <i class="fas fa-user-friends nav-icon"></i>
         <p>
