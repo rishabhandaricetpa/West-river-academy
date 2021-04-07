@@ -95,9 +95,9 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"></h3>
+
                     </div>
-                    <button class="form-control btn btn-primary" type="submit" onclick="sendArchieve()">Archieve</button>
+
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped data-table">
