@@ -7,7 +7,7 @@ use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-use Carbon\Carbon;
+
 
 class DashboardController extends Controller
 {
@@ -16,7 +16,6 @@ class DashboardController extends Controller
     {
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
-        $dateS = Carbon::now()->startOfMonth()->subMonth(6);
         if ($admin_data->name == "Stacey") {
             $dashboardData = Dashboard::select()->with('student')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
             $isAdmin = true;
@@ -67,7 +66,6 @@ class DashboardController extends Controller
     {
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
-        $dateS = Carbon::now()->startOfMonth()->subMonth(6);
         if ($admin_data->name == "Stacey") {
             $dashboardData = Dashboard::select()->with('student')->where('is_archieved', 1)->orderBy('id', 'DESC')->get();
             $isAdmin = true;
