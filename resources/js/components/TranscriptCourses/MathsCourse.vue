@@ -14,14 +14,6 @@
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
-          <h3 class="mb-3">
-            Select an Mathematics/Language course:<i
-              class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Tooltip on top"
-            ></i>
-          </h3>
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
@@ -149,7 +141,6 @@
       <a class="btn btn-primary" @click="addCourse"
         >Add another Mathematics/Language Arts Course</a
       >
-      <a class="btn btn-primary" @click="addCourse">View All Courses</a>
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
       </button>
