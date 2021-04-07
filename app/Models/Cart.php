@@ -483,7 +483,6 @@ class Cart extends Model
         $parent_profile_id = ParentProfile::getParentId();
         $parentName = ParentProfile::whereId($parent_profile_id)->first();
         $cartItems = self::select()->where('parent_profile_id', $parent_profile_id)->get();
-
         foreach ($cartItems as $cart) {
             switch ($cart->item_type) {
                 case 'enrollment_period':
@@ -600,8 +599,10 @@ class Cart extends Model
                     ]);
                     break;
                 case 'notarization':
-                    $notarization_payment =  NotarizationPayment::where('notarization_id', $cart->item_id)->first();
-                    $notarization_payment->payment_mode = $type;
+                    $notarization_payment =  NotarizationPayment::where('notarization_id', $cart->item_id)->where('pay_for', 'notarization')->first();
+                    if ($notarization_payment) {
+                        $notarization_payment->payment_mode = $type;
+                    }
                     if ($payment_id != null) {
                         $notarization_payment->transcation_id = $payment_id;
                         $notarization_payment->status = 'paid';
@@ -609,9 +610,8 @@ class Cart extends Model
                         $notarization_payment->status = 'paid';
                     }
                     $notarization_payment->save();
-
                     $notarization = Notarization::whereId($cart->item_id)->first();
-                    // $notarization->status = 'paid';
+                    $notarization->status = 'paid';
                     $notarization->save();
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,

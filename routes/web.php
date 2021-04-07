@@ -76,9 +76,20 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('generate-pdf/{student_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
 
+        //fees and services
+        Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
         Route::get('previous-school', function () {
             return view('previous-school');
         });
+        // Route::get('order-postage', function () {
+        //     return view('frontendpages.order-postage');
+        // });
+        Route::get('order-consultation', function () {
+            return view('orderPostage.order_consultation');
+        });
+        Route::get('video-tutorials', function () {
+            return view('videos.video_library');
+        })->name('video.tutorials');
 
         Route::get('college-info', function () {
             return view('frontendpages.college-info');

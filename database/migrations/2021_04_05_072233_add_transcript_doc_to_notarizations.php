@@ -17,6 +17,7 @@ class AddTranscriptDocToNotarizations extends Migration
             $table->string('transcript_doc')->nullable();
             $table->string('confirmation_doc')->nullable();
             $table->string('custom_doc')->nullable();
+            $table->string('status')->nullable();
             $table->dropColumn('number_of_documents');
         });
     }
