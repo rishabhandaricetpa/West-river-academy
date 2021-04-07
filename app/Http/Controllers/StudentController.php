@@ -14,6 +14,7 @@ use App\Models\Transcript;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
 use App\Models\Dashboard;
+use App\Models\OrderPersonalConsultation;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -108,7 +109,8 @@ class StudentController extends Controller
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter'));
+        $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->with('parent')->get();
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter', 'personal_consultation'));
     }
 
     public function confirmationpage($student_id)

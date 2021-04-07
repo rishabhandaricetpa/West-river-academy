@@ -14,7 +14,7 @@
                 <p>Select the country you are shipping to. We only ship Express outside the US.</p>
                 <div class="form-row col-md-10">
                     <div class="form-group col-md-9">
-                        <select name="country_name" id="country_name" class="form-control col-md-4" onchange="getPostageCharges(event)">
+                        <select name="country_name" id="select-particular" class="form-control col-md-4" onchange="getPostageCharges(event)">
                             <option value="">Select country</option>
                             @foreach ($countries as $country)
                             <option value="{{ $country->country }}">{{ $country->country }}</option>

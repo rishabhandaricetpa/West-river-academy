@@ -39,6 +39,13 @@ class NotarizationController extends Controller
     }
 
 
+    public function getConsultationChrages()
+    {
+        $hourly_charge = getFeeDetails('consultation_fee');
+        return view('orderPostage.order_consultation', compact('hourly_charge'));
+    }
+
+
     public function getCountryShippingCharges(Request $request)
     {
         $country_shipping = getCountryAmount($request->country_name);
@@ -65,35 +72,10 @@ class NotarizationController extends Controller
         return view('orderPostage/order-postage', compact('countries'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         DB::beginTransaction();
-    //         $parent_id = ParentProfile::getParentId();
-    //         $doctotal = count(collect($request)->get('documents'));
-    //         $notarizationDetails = Notarization::create([
-    //             'parent_profile_id' => $parent_id,
-    //             'additional_message' => $request['message'],
-    //             'postage_option' => $request['payfor'],
-    //             'first_name' => $request['first_name'],
-    //             'last_name' => $request['last_name'],
-    //             'street' => $request['street'],
-    //             'city' => $request['city'],
-    //             'state' => $request['state'],
-    //             'zip_code' => $request['zip_code'],
-    //             'country' => $request['country'],
-    //             'apostille_country' =>  $request['apostille_country'],
-    //         ]);
 
-    //         DB::commit();
-    //         if ($request->expectsJson()) {
-    //             return response()->json(['status' => 'success', 'message' => 'Record added successfully', 'data' => $notarizationDetails]);
-    //         }
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         if ($request->expectsJson()) {
-    //             return response()->json(['status' => 'error', 'message' => 'Failed to Record']);
-    //         }
-    //     }
+    // //store order Consultation data
+    // public function storeConsultationData(Request $request)
+    // {
+    //     dd($request);
     // }
 }

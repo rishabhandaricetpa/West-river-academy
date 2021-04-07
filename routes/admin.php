@@ -178,6 +178,14 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/customletter/{id}', 'CustomController@updateCustomletter')->name('update.customletter');
     Route::get('view-customletter/{id}', 'CustomController@getAllParentsCustomLetters')->name('each.customletters');
 
+
+    //order personal consultation
+    Route::get('order-conultation', 'CustomController@viewOrderConultation')->name('order.conultation');
+    Route::get('conultationpayment', 'CustomController@orderConultationDataTable')->name('datatable.conultation');
+    Route::get('edit-conultation/{id}', 'CustomController@editConultation')->name('edit.conultation');
+    Route::post('update/conultation/{id}', 'CustomController@updateConultation')->name('update.conultation');
+    Route::get('view-conultation/{id}', 'CustomController@getAllParentsConultation')->name('each.conultation');
+
     //dynamic fees &services for backend admin
     Route::get('fees-services', '\App\Http\Controllers\FeeStructureController@index')->name('fees.services');
     Route::get('feestable', '\App\Http\Controllers\FeeStructureController@dataTable')->name('datatable.fees');

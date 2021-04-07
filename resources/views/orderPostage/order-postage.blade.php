@@ -13,7 +13,7 @@
       <div class="form-row px-0">
         <div class="form-group col-lg-6 col-xl-3 d-md-flex">
           <label for="inputState">Country</label>
-          <select name="country_name" id="country_name" class="form-control" onchange="getPostageCharges(event)">
+          <select name="country_name" id="select-particular" class="form-control" onchange="getPostageCharges(event)">
             <option value="">Select country</option>
             @foreach ($countries as $country)
             <option value="{{ $country->country }}">{{ $country->country }}</option>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div id="select-us">
+      <div id="select-us" class="d-none">
         <p>If country is US:</p>
         <div class="form-row px-0 seperator-top">
 

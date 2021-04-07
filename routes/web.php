@@ -78,26 +78,26 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         //fees and services
         Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
-        Route::get('previous-school', function () {
-            return view('previous-school');
-        });
+        // Route::get('previous-school', function () {
+        //     return view('previous-school');
+        // });
         // Route::get('order-postage', function () {
         //     return view('frontendpages.order-postage');
         // });
-        Route::get('order-consultation', function () {
-            return view('orderPostage.order_consultation');
-        });
+        // Route::get('order-consultation', function () {
+        //     return view('orderPostage.order_consultation');
+        // });
         Route::get('video-tutorials', function () {
             return view('videos.video_library');
         })->name('video.tutorials');
 
-        Route::get('college-info', function () {
-            return view('frontendpages.college-info');
-        });
+        // Route::get('college-info', function () {
+        //     return view('frontendpages.college-info');
+        // });
 
-        Route::get('college-info', function () {
-            return view('frontendpages.college-info');
-        });
+        // Route::get('college-info', function () {
+        //     return view('frontendpages.college-info');
+        // });
 
         Route::get('notification', function () {
             return Notification::getParentNotifications();
@@ -387,4 +387,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //elective edit transcript
     Route::get('edit-elective-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editElective')->name('edit.electiveTranscriptCourse');
     Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+
+    //order personal consultation
+    Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+    Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
+    Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
+
+    // Route::get('order-consultation', function () {
+    //     return view('orderPostage.order_consultation');
+    // });
 });

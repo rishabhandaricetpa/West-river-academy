@@ -8,7 +8,7 @@
       <h2 class="mb-5">What would you like to do?</h2>
       <div class="row dashboard-options">
          <div class="col-md-3 col-sm-6 text-center">
-            <a href="https://www.westriveracademy.com/schedule-a-call/" class="d-inline-block mb-5 decoration-none">
+            <a href="{{route('order.consultation')}}" class="d-inline-block mb-5 decoration-none">
                <i class="fas fa-comments rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Order a Personal Consultation</h3>
             </a>
@@ -210,6 +210,53 @@
       </form>
    </div>
 
+
+   <div class="form-wrap border bg-light py-5 px-25 mb-4">
+      <h2 class="mb-3">Personal Consultation</h2>
+      <div class="mb-2 text-center text-sm-left">
+      </div>
+      <div class="overflow-auto max-table">
+         <table class="table-styling w-100">
+            <thead>
+               <tr>
+                  <th>Parent Name</th>
+                  <th>Preferred language</th>
+                  <th>Call Type</th>
+                  <th>Status</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+               @foreach($personal_consultation as $consultations)
+               <tr>
+                  <td>{{$consultations['parent']['p1_first_name']}} {{$consultations['parent']['p1_last_name']}}</td>
+                  <td>{{$consultations->preferred_language}}</td>
+                  @if($consultations->preferred_language==='English')
+                  <td>{{$consultations->en_call_type}}</td>
+                  @else
+                  <td>{{$consultations->sp_call_type}}</td>
+                  @endif
+                  @if($consultations->status === 'paid')
+                  <td>Paid</td>
+                  @else
+                  <td>{{$consultations->status}}</td>
+                  @endif
+                  @if($consultations->preferred_language==='English')
+                  <td><a class="btn btn-primary" href="https://calendly.com/westriveracademy-peggywebb/consult">Schedule Consultation</a></td>
+                  @else
+                  <td><a class="btn btn-primary" href=" https://calendly.com/apoyowra/consulta">Schedule Consultation</a></td>
+                  @endif
+               </tr>
+               @endforeach
+            </tbody>
+         </table>
+      </div>
+      <div class="mt-2 text-right">
+         <p></p>
+      </div>
+      <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
+      </form>
+   </div>
 
 </main>
 @endsection
