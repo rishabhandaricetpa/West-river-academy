@@ -165,13 +165,4 @@ $(document).ready(function() {
 });
 
 
-$(function() {
-    $("#select-particular").change(function() {
-    if(( $('option:selected', this).text() =='United states of america' )){
-        $('#select-us').addClass('d-block');
-        }
-        else{
-            $('#select-us').removeClass('d-block'); 
-        }
-    });
-});
+

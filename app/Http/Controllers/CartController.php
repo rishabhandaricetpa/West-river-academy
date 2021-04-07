@@ -17,6 +17,7 @@ use App\Models\OrderPostage;
 use App\Models\NotarizationPayment;
 use App\Models\CustomLetterPayment;
 use App\Models\Notarization;
+use App\Models\OrderPersonalConsultation;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -166,7 +167,7 @@ class CartController extends Controller
                     break;
 
                 case 'postage':
-                    $clearpendingPayments = OrderPostage::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = OrderPostage::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = $request->get('postage_charges') + $request->get('usa_shiiping');
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -186,8 +187,8 @@ class CartController extends Controller
                     }
                     break;
                 case 'notarization':
-                    $clearpendingPayments = Notarization::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
-                    $clearpendingPayments = NotarizationPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = Notarization::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = NotarizationPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
                     $confirmation_doc_total = json_encode($request->get('confirmation_doc'));
@@ -235,7 +236,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom_letter':
-                    $clearpendingPayments = CustomLetterPayment::where('status', 'pending')->orWhere('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = CustomLetterPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = FeesInfo::getFeeAmount('custom_letter') * $request->get('quantity');
                     $customletterPaymentsData = CustomLetterPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -254,11 +255,33 @@ class CartController extends Controller
                         ]);
                     }
                     break;
+                case 'order_consultation':
+                    $clearpendingPayments = OrderPersonalConsultation::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $amount = $request->get('amount_due');
+                    $orderConsultancyData = OrderPersonalConsultation::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'preferred_language' => $request->get('preferred_language'),
+                        'en_call_type' => $request->get('en_call_type'),
+                        'sp_call_type' => $request->get('sp_call_type'),
+                        'amount' =>   $amount,
+                        'consulting_about' => $request->get('consulting_about'),
+                        'paying_for' => $request->get('type'),
+                        'type_of_payment' => 'Order personal Consltation',
+                        'status' => 'pending',
+                    ]);
+                    $parent_profile_id = ParentProfile::getParentId();
+                    if (!Cart::where('item_id', $parent_profile_id)->where('item_type', 'order_consultation')->exists()) {
+                        Cart::create([
+                            'item_type' => 'order_consultation',
+                            'item_id' => $parent_profile_id,
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
                 default:
                     break;
             }
             DB::commit();
-
             return redirect('/cart');
         } catch (\Exception $e) {
             dd($e);

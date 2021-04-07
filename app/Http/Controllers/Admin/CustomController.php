@@ -7,6 +7,7 @@ use App\Models\CustomPayment;
 use App\Models\OrderPostage;
 use App\Models\ParentProfile;
 use App\Models\NotarizationPayment;
+use App\Models\OrderPersonalConsultation;
 use App\Models\CustomLetterPayment;
 
 use Illuminate\Http\Request;
@@ -229,5 +230,58 @@ class CustomController extends Controller
     {
         $customLettersPaymentsData = CustomLetterPayment::where('parent_profile_id', $parent_id)->with('ParentProfile')->get();
         return view('admin.payment.customLetterPayment.view-each', compact('customLettersPaymentsData'));
+    }
+
+
+
+    /**
+     *Personal consultation to view all the  purchase made by users
+     *
+     */
+    public function viewOrderConultation()
+    {
+        return view('admin.payment.orderConsltation.view');
+    }
+    //fetch data for Personal consultation payment
+
+    public function orderConultationDataTable()
+    {
+        return datatables(OrderPersonalConsultation::with('parent')->get())->toJson();
+    }
+
+    public function editConultation($id)
+    {
+        $order_conultation = OrderPersonalConsultation::whereId($id)->with('parent')->first();
+        // dd($order_conultation);
+        return view('admin.payment.orderConsltation.edit', compact('order_conultation'));
+    }
+
+    //update Personal consultation data in in backend
+    public function updateConultation(Request $request, $id)
+    {
+        // dd($request);
+        $order_conultation = OrderPersonalConsultation::find($id);
+        $order_conultation->transcation_id = $request->get('transcation_id');
+        $order_conultation->payment_mode = $request->get('payment_mode');
+        $order_conultation->amount = $request->get('amount');
+        $order_conultation->status = $request->get('paymentStatus');
+        $order_conultation->preferred_language = $request->get('preferred_language');
+        $order_conultation->sp_call_type = $request->get('sp_call_type');
+        $order_conultation->en_call_type = $request->get('en_call_type');
+        $order_conultation->consulting_about = $request->get('consulting_about');
+        $order_conultation->save();
+        $notification = [
+            'message' => 'Record updated successfully!',
+            'alert-type' => 'success',
+        ];
+        return redirect()->back()->with($notification);
+    }
+
+
+    //fetch data for Personal consultation
+    public function getAllParentsConultation($parent_id)
+    {
+        $order_conultationPayments = OrderPersonalConsultation::where('parent_profile_id', $parent_id)->with('parent')->get();
+        return view('admin.payment.orderConsltation.view-each', compact('order_conultationPayments'));
     }
 }

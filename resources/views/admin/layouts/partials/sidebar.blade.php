@@ -106,6 +106,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.order.conultation')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Personal Consultation
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('admin/payment-address')}}" class="nav-link">
               <i class="fas fa-address-book"></i>
               <p>Change Address</p>

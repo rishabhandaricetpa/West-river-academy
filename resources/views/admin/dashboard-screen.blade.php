@@ -104,6 +104,8 @@
                                     <td><a href="{{ route('admin.each.notarization',$data->linked_to)}}">Notarization And Appostile</a></td>
                                     @elseif($data->related_to === 'custom_letter_record_received')
                                     <td><a href="{{ route('admin.each.customletters',$data->linked_to)}}">Custom Letter</a></td>
+                                    @elseif($data->related_to === 'orderconsultation_record_received')
+                                    <td><a href="{{ route('admin.each.conultation',$data->linked_to)}}">Personal Consultation</a></td>
                                     @endif
                                     <td>{{$data->notes}}</td>
                                     @if(is_null($data->assigned_to))
