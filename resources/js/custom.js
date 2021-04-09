@@ -64,6 +64,13 @@ $("#select-english").click(function () {
     $('#call_method_1').removeClass('d-block');
  });
 
+ $('#select-apostille:checkbox').change(function(){
+  if($(this).is(":checked")) {
+      $('div.menuitem').addClass("menuitemshow");
+  } else {
+      $('div.menuitem').removeClass("menuitemshow");
+  }
+});
  $(function() {
   $("#select-particular").change(function() {
   if(( $('option:selected', this).text() =='United States' )){
