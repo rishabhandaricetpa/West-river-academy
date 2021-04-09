@@ -19,21 +19,15 @@
 </head>
 
 <body>
-  <table>
-    <tbody>
-      <tr width="100%">
-        <td style="width:100%;color:#EC1D1D;font-weight:400;font-size:20px;margin:0 auto;">After this transcript is approved by you, any further changes will incure a $25 fee.</td>
-      </tr>
-    </tbody>
-  </table>
+
   <table style="margin-bottom:20px;">
     <tbody>
       <tr style="width:100%;">
         <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
         <td width="50%" style="text-align:center;">
           <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
-          <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
-          <p style="margin:0;font-size:14px;">949.492.5240 info@westriveracademy.com</p>
+          <p style="margin:0;font-size:13px;">Califorinia Colorado USA</p>
+          <p style="margin:0;font-size:13px;">949.492.5240 info@westriveracademy.com</p>
         </td>
       </tr>
     </tbody>
@@ -61,93 +55,398 @@
   <table style="margin-bottom:20px;">
     <tbody>
       <tr style="width:100%;">
-        <td style="text-transform:uppercase;font-size:14px;width:10%;"></td>
-        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:50%;"></td>
+        <td style="text-transform:uppercase;font-size:13px;width:10%;"></td>
+        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:13px;width:50%;"></td>
         <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level</td>
         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">4 and 5</td>
       </tr>
     </tbody>
   </table>
+  <table width="100%" style="border-collapse:collapse;" >
+          <tbody>
+            <tr style="width:100%;">
+           <table style="width:100%;border-collapse:collapse;" border="1">
+           <tr>
+              <td style="width:50%;">
+                <table  style="width:100%;border-collapse:collapse;">
+                  <thead style="background-color:#cccccc70">
+                   <tr style="line-height:1;">
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">course name</th>
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">yr</th>
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">cr</th>
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">gr</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                  <tr style="line-height:1;">
+                    <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4"><span style="text-decoration:underline;">Acadmic Year 2014 - 2015</span></td>
+
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">spanish</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">english 9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">health</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world geography</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world history</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">algebra 1</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">biology</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">painting</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">art</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                   <tr style="line-height:1;">
+                    <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4"><span style="text-decoration:underline">Acadmic Year 2014 - 2015</span></td>
+
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">spanish</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">english 9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">health</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world geography</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world history</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4"><span style="text-decoration:underline;">Acadmic Year 2014 - 2015</span></td>
+
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">spanish</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">english 9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">health</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world geography</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world history</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td style="width:50%;">
+                <table  style="width:100%;border-collapse:collapse;">
+                  <thead style="background-color:#cccccc70">
+                   <tr style="line-height:1;">
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">course name</th>
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">yr</th>
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">cr</th>
+                    <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">gr</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                  <tr style="line-height:1;">
+                    <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4"><span style="text-decoration:underline;">Acadmic Year 2014 - 2015</span></td>
+
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">spanish</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">english 9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">health</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world geography</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world history</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">algebra 1</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">biology</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">painting</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">art</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                   <tr style="line-height:1;">
+                    <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4"><span style="text-decoration:underline;">Acadmic Year 2014 - 2015</span></td>
+
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">spanish</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">english 9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">health</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world geography</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world history</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4"><span style="text-decoration:underline;">Acadmic Year 2014 - 2015</span></td>
+
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">spanish</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">english 9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">health</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world geography</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  <tr style="line-height:1;">
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">world history</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">9</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">1.00</td>
+                    <td style="padding:3px 6px;line-height:1;font-size:13px;">B</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+           </tr>
+           </table>   
+            </tr>
+          </tbody>
+        </table>
+<table width="100%" style="padding-top:30px;vertical-align:top;">
+<tr>
+ <td width="35%" style="vertical-align:top;">
+ <table width="100%" style="border:1px solid #000;">
+ <tr>
+ <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned</th>
+ <td style="padding:3px 5px;font-size:13px;line-height:1;">26.00</td>
+ </tr>
+ <tr>
+ <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">G.P.A</th>
+ <td style="padding:3px 5px;font-size:13px;line-height:1;">3.66</td>
+ </tr>
+ <tr>
+ <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned</th>
+ <td style="padding:3px 5px;font-size:13px;line-height:1;">26.00</td>
+ </tr>
+ </table>
+ <p style="font-size:13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, asperiores?</p>
+ </td>
+ <td width="45%" style="vertical-align:top;padding:0 4px 4px 4px; border:1px solid #000;">
+  <p style="text-align:center;font-weight:600;margin-bottom:0;"><span style="border-bottom:1px solid #000;margin-bottom:0;margin-top:-20px;font-size:13px;">Grading System</span></p>
   <table>
-    <tbody>
+  <thead>
+  <tr>
+    <th style="font-size:13px;text-decoration:underline;text-align:left;">Grade</th>
+    <th style="font-size:13px;text-decoration:underline;text-align:left;">percent</th>
+    <th style="font-size:13px;text-decoration:underline;text-align:left;">Points</th>
+    <th style="font-size:13px;text-decoration:underline;text-align:left;">AP Points</th>
+  </tr>
+  </thead>
+  <tr>
+  <td style="font-size:13px;">A</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">4.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  <tr>
+  <td style="font-size:13px;">B</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">3.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  <tr>
+  <td style="font-size:13px;">C</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">4.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  <tr>
+  <td style="font-size:13px;">D</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">4.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  <tr>
+  <td style="font-size:13px;">D</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">4.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  <tr>
+  <td style="font-size:13px;">F</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">4.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  <tr>
+  <td style="font-size:13px;">P</td>
+  <td style="font-size:13px;">90-100</td>
+  <td style="font-size:13px;">4.00</td>
+  <td style="font-size:13px;">5.00</td>
+  </tr>
+  </table>
+ </td>
+ <td width="40%" style="vertical-align:top;">
+ <table>
+        <tbody>
+            <tr>
+                <td width="60%"  style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
+                <td width="40%" ><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%">
       <tr style="width:100%;">
-        <td width="70%">
-          <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
-            <thead>
-              <tr>
-                <th style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">Course name</th>
-                @foreach($grades as $grade)
-                <th style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;width:15%;padding:3px 20px;white-spane:initial;word-break:break-all;">Grade {{$grade->grade}}</th>
-                @endforeach
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($groupCourses as $course)
-              <tr>
-                <td style="border-bottom:1px solid #000;width:70%;padding:3px;font-size:11px;">{{$course->subject->subject_name}}</td>
-                @foreach($transcriptData as $niddle => $data)
-                <td style="border-bottom:1px solid #000;border-left:1px solid #000;width:15%;padding:3px;font-size:11px;text-align:center;">{{ getMetrixValues($course, $data, $transcriptData) }}</td>
-                @endforeach
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </td>
-        <td width="30%" style="text-align:right;">
-          <table width="100%">
-            <tbody>
-              <tr style="width:100%;">
-                <td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:52px;"><span style="border-bottom:1px solid #000;display:inline-block;font-size:11px;">GRADING SYSTEM</span></td>
-              </tr>
-              <tr style="width:100%;">
-                <td style="white-space: pre;padding-left:52px;font-size:11px;">A = 90-100%</td>
-              </tr>
-              <tr style="width:100%;">
-                <td style="white-space: pre;padding-left:52px;font-size:11px;">B = 80-89%</td>
-              </tr>
-              <tr style="width:100%;">
-                <td style="white-space: pre;padding-left:52px;font-size:11px;">C = 70-79%</td>
-              </tr>
-              <tr style="width:100%;">
-                <td style="white-space: pre;padding-left:52px;font-size:11px;">D = 60-69%</td>
-              </tr>
-              <tr style="width:100%;">
-                <td style="white-space: pre;padding-left:52px;font-size:11px;">F = 0-59%</td>
-              </tr>
-              <tr style="width:100%;">
-                <td style="white-space: pre;padding-left:52px;font-size:11px;">P = PASS</td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <table style="margin:10px 0 20px;">
-    <tbody>
-      <tr width="100%">
-        <td style="padding-top:20px;width:100%;font-size:12px;">The Student has met West River Academy's requirments for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is promoted to grade <span style="font-weight:700;">6</span>.</td>
-      </tr>
-    </tbody>
-  </table>
-  <table style="margin-top:3%">
-    <tbody>
-      <tr>
-        <td width="50%" style="text-align:center;padding-right:30px;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
-        <td width="15%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
-        <td width="35%" style="text-align:right;"> <img src="../public/images/Stamp.png" style="width:150px;heigth:150px;object-fit:contain;" alt="logo"></td>
-      </tr>
-    </tbody>
-  </table>
-  <table>
-    <tbody>
-      <tr>
-        <td>
-          <p style="font-size:11px;">West River Academy is accredited by the National Association for the Legal Auppotr of Alternative Schools (NALSAS) and registered in the California School Directory.CDS Code 30 66464 6134720. Country:Orange Address:33721 BlueWater Ln.Dana Point ,CA 92629-2173</p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td style="text-align:center;width:100%;" colspan="2"> 
+          <div style="margin:0 auto;"><img src="../public/images/Stamp.png" style="width: 120px;height:120px;object-fit:contain;display:block;"  alt="Stamp"></div>
+          </td>
+        </tr>
+    </table>
+ </td>
+</tr>
+</table>
+
+  
 </body>
 
 </html>

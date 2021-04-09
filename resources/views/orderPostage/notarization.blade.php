@@ -5,7 +5,23 @@
 <main class="position-relative container form-content mt-4">
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Order an Apostille or Notarization</h2>
+        <div class="form-group mb-2 lato-italic info-detail pb-4 label-md">
+                  <h3 class="mb-3">Please choose the language you prefer.</h3>
+                  <div class="form-check mb-2">
+                     <input class="form-check-input"  data-toggle="collapse" data-target="#apostile" aria-expanded="false" aria-controls="apostile" type="checkbox" name="student_grade" value="Preschool Age 3">
+                     <label class="form-check-label ml-1" for="">
+                     Apostille
+                     </label>
+                  </div>
+                  <div class="form-check mb-2">
+                     <input class="form-check-input" type="checkbox" name="student_grade" value="Preschool Age 4"  data-toggle="collapse" data-target="#notarization" aria-expanded="false" aria-controls="notarization">
+                     <label class="form-check-label ml-1" for="" >
+                     Notarization
+                     </label>
+                  </div>
+               </div>
         <form class="mb-0" method="post" action="{{route('add.cart')}}">
+           <div class="collapse" id="apostile">
             <p><span class="font-weight-bold">Apostille:</span> If you will present your document(s) to a country that is a member of The Hague Convention, you may order an
                Apostille. The documents will first be notarized and then sent to the Secretary of State of Colorado for the Apostille. The
                fee is $75 for each document to be sent for an Apostille. The fee includes notarization. Allow 3-6 weeks for processing.</p>
@@ -37,7 +53,8 @@
                     </select>
             </div>
             </div>
-           
+            </div>
+            <div class="collapse" id="notarization">
             <p>
                 <span class="font-weight-bold">Notarization:</span>
                 $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately.
@@ -58,6 +75,7 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                 <input type="text" class="form-control col-3">
                 </div>
                 </div>
+            </div>
             </div>
             <div class="form-group mb-2 row">
                 <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized and/or sent for Apostilles?</p>
