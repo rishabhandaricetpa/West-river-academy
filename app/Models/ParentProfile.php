@@ -103,7 +103,7 @@ class ParentProfile extends Model
     {
         return $this->hasOne('App\Models\Notarization', 'parent_profile_id', 'id');
     }
-    
+
     public function notarizationPyaments()
     {
         return $this->hasOne('App\Models\NotarizationPayment', 'parent_profile_id', 'id');

@@ -209,24 +209,23 @@ class CartController extends Controller
                         'confirmation_doc' => $confirmation_doc_total,
                         'custom_doc' => $custom_doc_total,
                     ]);
-                    $orderPostageData = OrderPostage::create([
-                        'parent_profile_id' => ParentProfile::getParentId(),
-                        'amount' =>  $request->get('postage_charges'),
-                        'paying_for' => 'postage',
-                        'type_of_payment' => '',
-                        'status' => 'pending'
-                    ]);
+                    // $orderPostageData = OrderPostage::create([
+                    //     'parent_profile_id' => ParentProfile::getParentId(),
+                    //     'amount' =>  $request->get('postage_charges'),
+                    //     'paying_for' => 'postage',
+                    //     'type_of_payment' => '',
+                    //     'status' => 'pending'
+                    // ]);
                     $amount = $request->get('apostille_due') + $request->get('notarization_due') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'notarization_id' => $notarizationDetails->id,
-                        'order_postages_id' => $orderPostageData->id,
+                        // 'order_postages_id' => $orderPostageData->id,
                         'amount' =>   $amount,
                         'pay_for' => 'notarization',
                         'type_of_payment' => '',
                         'status' => 'pending'
                     ]);
-
                     if (!Cart::where('item_id', $notarizationDetails->id)->where('item_type', 'notarization')->exists()) {
                         Cart::create([
                             'item_type' => 'notarization',

@@ -69,7 +69,7 @@
             </a>
          </div>
          <div class="col-sm-12">
-            <p>Needs Help? Check out our <a href="#">Dashboard Tuorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
+            <p>Needs Help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
          </div>
       </div>
    </div>
@@ -241,7 +241,7 @@
                   @else
                   <td>{{$consultations->status}}</td>
                   @endif
-                  @if($consultations->preferred_language==='English')
+                  @if($consultations->preferred_language ==='English')
                   <td><a class="btn btn-primary" href="https://calendly.com/westriveracademy-peggywebb/consult">Schedule Consultation</a></td>
                   @else
                   <td><a class="btn btn-primary" href=" https://calendly.com/apoyowra/consulta">Schedule Consultation</a></td>

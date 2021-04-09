@@ -20,13 +20,15 @@ class NotarizationController extends Controller
     {
         $parent_id = ParentProfile::getParentId();
         $countries = Country::get();
-        $students = StudentProfile::select('id', 'first_name', 'last_name', 'gender')
-            ->selectRaw('DATE(d_o_b) as dob')
-            ->where('parent_profile_id', $parent_id)
-            ->with('graduation')
-            ->get();
+        // $students = StudentProfile::select('id', 'first_name', 'last_name', 'gender')
+        //     ->selectRaw('DATE(d_o_b) as dob')
+        //     ->where('parent_profile_id', $parent_id)
+        //     ->with('graduation', 'parentProfile')
+        //     ->get();
+        $students = StudentProfile::where('parent_profile_id', $parent_id)->with(['graduation', 'parentProfile'])->first();
+
+        // dd($students->toArray());
         $transcript = TranscriptPdf::where('status', 'approved')->get();
-        // dd($transcript);
         $confirmationLetter = ConfirmationLetter::where('status', 'completed')->get();
         $custom_letter = CustomLetterPayment::where('status', 'completed')->get();
         $transcriptdoc = DB::table('confirmation_letters')->select('transcript_pdf.pdf_link', 'confirmation_letters.pdf_link as confirm')
@@ -62,20 +64,10 @@ class NotarizationController extends Controller
         return response()->json($priority);
     }
 
-
-
     public function viewOrderPostage()
     {
         $parent_id = ParentProfile::getParentId();
         $countries = Country::get();
-        // return view('orderPostage/purchase_postage', compact('countries'));
         return view('orderPostage/order-postage', compact('countries'));
     }
-
-
-    // //store order Consultation data
-    // public function storeConsultationData(Request $request)
-    // {
-    //     dd($request);
-    // }
 }

@@ -29,13 +29,7 @@
         </div>
       </div>
       <div id="select-us" class="d-none">
-        <p>If country is US:</p>
         <div class="form-row px-0 seperator-top">
-
-          <div class="form-group  col-lg-3  d-md-flex">
-            <label for="inputCity">Country</label>
-            <input type="text" class="form-control" id="country_name_usa" name="country_name_usa">
-          </div>
           <div class="form-group  col-lg-3  d-md-flex">
             <label for="inputZip">Zip</label>
             <input type="text" class="form-control" id="Zip" name="zip">
@@ -43,12 +37,12 @@
           <div class="form-group  col-lg-3  d-md-flex">
             <label for="inputState">Postage Type</label>
             <select id="postage_type" class="form-control" onchange="getUSAFees(event)">
-              <option selected="" value="">Select Potage Type</option>
+              <option selected="" value="">Postage Type</option>
               <option value="express_usa">Express</option>
               <option value="priority_usa">Priority</option>
             </select>
           </div>
-          <div class="form-group  col-lg-3  d-md-flex">
+          <div class="form-group  col-lg-3 d-md-flex ml-lg-auto">
             <p class="pr-md-3 space-pre ml-auto">Total Due:</p>
             <div class="d-flex">
               <i class="fas fa-dollar-sign additional-sign"></i>

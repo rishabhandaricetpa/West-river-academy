@@ -8,8 +8,12 @@
         <h2 class="mb-3">Order Apostilles or Notarizations</h2>
         <form class="mb-0" method="post" action="{{ route('add.cart')}}">
             @csrf
-            <p><span class="font-weight-bold">Apostilles: ONLY</span>for documents presented outside of the U.S. to countries who are members of The Hague Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at checkout. Allow 3-6 weeks for processing plus shipping time.</p>
+            <input type="hidden" name="type" value="notarization" class="form-control col-3">
+            @if ($students->parentProfile->country !== 'United States')
 
+            <p><span class="font-weight-bold">Apostilles: ONLY</span>
+                for documents presented outside of the U.S. to countries who are members of The Hague Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at checkout. Allow 3-6 weeks for processing plus shipping time.
+            </p>
             <div class="form-group d-md-flex mb-2">
                 <div class="col-md-6 d-sm-flex px-0 mb-4">
                     <p class="font-weight-bold">Quantity</p>
@@ -32,20 +36,17 @@
                         <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due" readonly>
                     </div>
                 </div>
-
-                <input type="hidden" name="type" value="notarization" class="form-control col-3">
-
-                <div class="col-md-6 mb-4 px-0 d-sm-flex">
-                    <p class="font-weight-bold">Country</p>
-                    <select name="apostille_country" class="form-control mx-sm-3">
-                        <option value="">Select country</option>
-                        @foreach ($countries as $country)
-                        <option value="{{ $country->country }}">{{ $country->country }}</option>
-                        @endforeach
-                    </select>
-                </div>
             </div>
-
+            <div class="col-md-6 mb-4 px-0 d-sm-flex">
+                <p class="font-weight-bold">Country</p>
+                <select name="apostille_country" class="form-control mx-sm-3">
+                    <option value="">Select country</option>
+                    @foreach ($countries as $country)
+                    <option value="{{ $country->country }}">{{ $country->country }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
             <p>
                 <span class="font-weight-bold">Notarizations:</span>
                 $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.

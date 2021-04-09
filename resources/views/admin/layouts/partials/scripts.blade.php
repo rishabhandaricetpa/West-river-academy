@@ -422,6 +422,9 @@
           "data": "payment_mode"
         },
         {
+          "data": "notarization.country"
+        },
+        {
           "data": "status"
         },
         {

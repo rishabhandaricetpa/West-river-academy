@@ -54,7 +54,7 @@ $("#transcript-country").click(function () {
 
 /* order a personal consultation */
 $("#select-english").click(function () {
-  console.log("click me");
+  // console.log("click me");
   $('#call_method_1').addClass('d-block');
   $('#call_method_2').removeClass('d-block');
  });

@@ -7,6 +7,7 @@ use App\Models\CustomPayment;
 use App\Models\OrderPostage;
 use App\Models\ParentProfile;
 use App\Models\NotarizationPayment;
+use App\Models\Notarization;
 use App\Models\OrderPersonalConsultation;
 use App\Models\CustomLetterPayment;
 
@@ -156,12 +157,14 @@ class CustomController extends Controller
     //fetch data for appostile and notarization  payment
     public function orderNotrizationDataTable()
     {
-        return datatables(NotarizationPayment::with('ParentProfile')->get())->toJson();
+        // dd(NotarizationPayment::with('ParentProfile', 'notarization')->get()->toArray());
+        return datatables(NotarizationPayment::with('ParentProfile', 'notarization')->get())->toJson();
     }
 
     public function editNotarization($id)
     {
-        $notarizationData = NotarizationPayment::whereId($id)->with('ParentProfile')->first();
+        $notarizationData = NotarizationPayment::whereId($id)->with('ParentProfile', 'notarization')->first();
+        // $notarizationdetails = Notarization::whereId($id)->with('ParentProfile')->first();
         return view('admin.payment.notarizationPayments.edit', compact('notarizationData'));
     }
 
@@ -183,7 +186,7 @@ class CustomController extends Controller
 
     public function getAllParentsNotarization($parent_id)
     {
-        $notarizationPaymentData = NotarizationPayment::where('parent_profile_id', $parent_id)->with('ParentProfile')->get();
+        $notarizationPaymentData = NotarizationPayment::where('parent_profile_id', $parent_id)->with('ParentProfile', 'notarization')->get();
         return view('admin.payment.notarizationPayments.view-each', compact('notarizationPaymentData'));
     }
 
