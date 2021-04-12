@@ -34,7 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>Date od Birth</th>
+                                    <th>Date of Birth</th>
                                     <th>Gender</th>
                                     <th>Email</th>
                                     <th>Status</th>
@@ -42,6 +42,7 @@
                                     <th>View Payments</th>
                                     <th>View Transcript</th>
                                     <th>View Graduation</th>
+                                    <th>View Record Transfer</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,6 +62,11 @@
                                     <td><a href="{{route('admin.edit.transcript',$student->id)}}">View Transcripts</a></br></td>
                                     @if($student->graduation)
                                     <td><a href="{{route('admin.view.graduation',$student->graduation->id)}}">View Graduation</a></br></td>
+                                    @else
+                                    <td>Not applied</td>
+                                    @endif
+                                    @if($student->recordTransfers)
+                                    <td><a href="{{route('admin.student.schoolRecord',[ $student['recordTransfers']['student_profile_id'], $student['recordTransfers']['id'] ])}}">View Record Transfer</a></br></td>
                                     @else
                                     <td>Not applied</td>
                                     @endif

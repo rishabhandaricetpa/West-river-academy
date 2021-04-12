@@ -72,6 +72,7 @@ function getPromotedGrades($grades, $modify_last_value = true)
             return $grade;
         });
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
+
         $len = count($sortedOrder);
         if ($modify_last_value && $len > 1) {
             $sortedOrder[$len - 1] =  " and " . $sortedOrder[$len - 1];
@@ -87,6 +88,7 @@ function getPromtedGrade($grades)
 {
     try {
         $getArrayOrder = getPromotedGrades($grades, false);
+
         $eplode = explode(", ", $getArrayOrder);
         $last = end($eplode);
         if ($last == 'Ungraded') {

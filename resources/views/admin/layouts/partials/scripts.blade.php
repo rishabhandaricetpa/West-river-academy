@@ -36,21 +36,17 @@
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-    // $('#example1').dataTable({
-    //   "ordering": false,
-    //   "pagination": true,
-    //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
 
     //parent datatable
     $("#family-table").DataTable({
       "ajax": "{{ route('admin.datatable.parent') }}",
       "processing": true,
       "serverSide": true,
+      "ordering": false,
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "columns": [{
           "data": "p1_first_name"
         },
@@ -87,7 +83,7 @@
         },
 
       ]
-    });
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     //fees -info table
     $("#fees-table").DataTable({
@@ -203,8 +199,20 @@
             }
           }
         },
+        {
+          "data": "record_transfers.id",
+          "render": function(data) {
+
+            if (data == null) {
+              return `<label> Not Applied </label>`;
+            } else {
+              return `<a href="student/record/transfer/${data}">Record Transfer</a>`;
+            }
+          }
+        },
       ]
     });
+
     //coupon datatable
     $("#coupons-table").DataTable({
       "ajax": "{{ route('admin.coupons.dt') }}",
@@ -545,7 +553,7 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
   });
-  // edit Dashboard Record
+  // edit Dashboard Record For Super Admin
   function editDashboard(event) {
     var id = $(event).data("id");
     console.log(id);
@@ -567,7 +575,7 @@
       }
     });
   }
-  // assign Record of Dashboard
+  // assign Record of Dashboard For Super Admin
   function assignTo() {
     console.log('created');
     var assignee = $('#assigned_to').val();
@@ -592,9 +600,87 @@
       }
     });
   }
+  // provide status for sub admin - completed or pending
+  function editDashboardForStatus(event) {
+    var id = $(event).data("id");
+    console.log(id);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{url('assign/status')}}",
+      type: "POST",
+      data: {
+        assign_id: id,
+      },
+      success: function(response) {
+        console.log(response);
+        if (response) {
+          $("#task_status").val(response.status);
+          $("#notes").val(response.notes);
+          $("#datarecord_id").val(response.id);
+        }
+      }
+    });
+  }
+  // update the status for sub admin 
 
-  //custom payments
+  function updateStatus() {
+    console.log('created');
+    var assignee = $('#task_status').val();
+    var notes = $('#notes').val();
+    var id = $('#datarecord_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{url('update/record/status')}}",
+      type: "POST",
+      data: {
+        id: id,
+        assigned: assignee,
+        notes: notes
+      },
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(response) {
+
+      }
+    });
+  }
+
+  // check the archieve status
+  function archieve() {
+    var checkedTasksId = [];
+    $("input:checkbox[name=is_archived]:checked").each(function() {
+      checkedTasksId.push($(this).val());
+    });
+    return checkedTasksId;
+  }
+
+  function sendArchieve() {
+    var archieve_ids = archieve();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "{{url('archieve/record')}}",
+      type: "POST",
+      data: {
+        id: archieve_ids,
+      },
+      success: function(response) {
+        location.reload()
+        console.log(response);
+      },
+      error: function(response) {
+
+      }
+    });
+  }
 </script>
+
 
 
 </script>

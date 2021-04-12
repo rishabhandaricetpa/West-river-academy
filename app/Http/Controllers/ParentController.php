@@ -6,8 +6,16 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\Coupon;
+use App\Models\CustomPayment;
+use App\Models\EnrollmentPayment;
+use App\Models\EnrollmentPeriods;
+use App\Models\Graduation;
+use App\Models\GraduationPayment;
+use App\Models\Notarization;
+use App\Models\NotarizationPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
+use App\Models\Transcript;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -126,8 +134,34 @@ class ParentController extends Controller
     {
         $user_id = Auth::user()->id;
         $parent = ParentProfile::where('user_id', $user_id)->first();
+        /** Receiving payment history data for transcript*/
+        $studentData = $parent->studentProfile()->get();
 
-        return view('MyAccounts/myaccount', compact('parent', 'user_id'));
+        $studentId = collect($studentData)->pluck('id');
+        $transcript_payments = Transcript::with('student', 'transcriptPayment')->whereIn('student_profile_id', $studentId)->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->get();
+
+        /** Receiving payment history data for custom payment*/
+        $customPayments = CustomPayment::with('ParentProfile')->where('parent_profile_id', $user_id)->where('status', 'paid')->get();
+
+        /** Receiving payment history data for enrollments*/
+
+        $enrollmentPayments = DB::table('enrollment_periods')->whereIn('student_profile_id', $studentId)
+            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+            ->join('student_profiles', 'student_profiles.id', 'enrollment_periods.student_profile_id')
+            ->whereIn('enrollment_payments.status', ['active', 'paid'])
+            ->get();
+        /** Receiving payment history data for graduation*/
+
+        $graduationPayments = Graduation::join('graduation_payments', 'graduation_payments.graduation_id', 'graduations.id')
+            ->whereIn('graduations.student_profile_id', $studentId)
+            ->whereIn('graduations.status', ['paid', 'approved', 'completed'])
+            ->join('student_profiles', 'student_profiles.id', 'graduations.student_profile_id')
+            ->get();
+
+        /** Receiving payment history data for notirization*/
+        $notirizationPayments = NotarizationPayment::with('notarization')->where('parent_profile_id', $user_id)->get();
+
+        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments'));
     }
 
     public function editmysettings($user_id)

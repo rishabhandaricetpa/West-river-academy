@@ -448,6 +448,7 @@ class TranscriptController extends Controller
             Dashboard::create([
                 'student_profile_id' => $student_id,
                 'linked_to' => $transcript_payment->id,
+                'is_archieved' => 0,
                 'related_to' => 'transcript_ordered',
                 'notes' => 'Name of Student: ' . $transcriptData['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),

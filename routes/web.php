@@ -98,6 +98,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Route::get('college-info', function () {
         //     return view('frontendpages.college-info');
         // });
+        Route::get('previous-school', function () {
+            return view('previous-school');
+        });
+
+        Route::get('college-info', function () {
+            return view('frontendpages.college-info');
+        });
+
+        Route::get('college-info', function () {
+            return view('frontendpages.college-info');
+        });
 
         Route::get('notification', function () {
             return Notification::getParentNotifications();
@@ -271,6 +282,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
 
     //Record Transfer
+    Route::get('transfer/record', 'RecordTransferController@getStudents')->name('transferSchoolRecord');
     Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
     Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
     Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
@@ -279,13 +291,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('notarization', 'NotarizationController@index')->name('notarization');
     Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
 
-    //return shipping charges
-    Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
-    Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
-
-
+    // assign record to sub admin by super admin
     Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');
     Route::post('update/dashboard', 'Admin\DashboardController@updateDashboard');
+
+    // provide status to record
+    Route::post('assign/status', 'Admin\DashboardController@assignRecordStatus')->name('dashboard.update');
+    Route::post('update/record/status', 'Admin\DashboardController@updateRecordStatus');
+
+    //archieve records
+    Route::post('archieve/record', 'Admin\DashboardController@archieveRecord');
     //order Postage
     Route::get('orderpostage', 'NotarizationController@viewOrderPostage')->name('notarization.viewOrderPostage');
     Route::get('custom-letter', 'PaymentMethod\CustomLetterController@index')->name('custom.letter');

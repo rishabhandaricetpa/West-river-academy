@@ -14,14 +14,6 @@
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
-          <h3 class="mb-3">
-            Select an Science course:<i
-              class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Tooltip on top"
-            ></i>
-          </h3>
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
@@ -215,9 +207,7 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
+
 
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
@@ -241,15 +231,7 @@ export default {
           alert("Please fill in the fields");
         });
     },
-    vallidateGrades() {
-      for (let i = 0; i < this.form.scienceCourse.length; i++) {
-        const englishCourse = this.form.scienceCourse[i];
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-      return true;
-    },
+
     validateSubject() {
       for (let i = 0; i < this.form.scienceCourse.length; i++) {
         const enrollmentSubject = this.form.scienceCourse[i];

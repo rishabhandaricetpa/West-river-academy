@@ -17,7 +17,10 @@ class Transcript9_12 extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse9_12', 'transcript9_12_id', 'id');
     }
-
+    public function collegeCourses()
+    {
+        return $this->hasMany(CollegeCourse::class);
+    }
     public function transcript()
     {
         return $this->belongsTo(Transcript::class);

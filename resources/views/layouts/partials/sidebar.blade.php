@@ -5,7 +5,7 @@
       <ul class="list-unstyled">
         <li><a href="{{ url('/enroll-student') }}"><span>Enroll</span><i class="fas fa-2x fa-edit"></i></a></li>
         <li><a href="{{ url('/reviewstudents') }}"><span>View Students</span><i class="fas fa-2x fa-user-graduate"></i></a></li>
-        <li><a href="#"><span>Record Transfer</span><i class="fas fa-2x fa-user-graduate"></i></a></li>
+        <li><a href="{{route('transferSchoolRecord')}}"><span>Record Transfer</span><i class="fas fa-2x fa-user-graduate"></i></a></li>
       </ul>
     </li>
     <li><a href="{{ url('/cart') }}"><span>Cart</span><i class="fas fa-2x fa-shopping-cart"></i></a></li>

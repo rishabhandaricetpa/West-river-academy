@@ -87,9 +87,7 @@
     </div>
 </div>
 <!-- Main content -->
-@php
-$date= \Carbon\Carbon::now()->toDateString()
-@endphp
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -97,9 +95,7 @@ $date= \Carbon\Carbon::now()->toDateString()
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
-                        @if($isAdmin)
-                        <button class="btn btn-primary mr-auto" type="submit" onclick="sendArchieve()">Archive</button>
-                        @endif
+
                     </div>
 
                     <!-- /.card-header -->
@@ -107,9 +103,7 @@ $date= \Carbon\Carbon::now()->toDateString()
                         <table id="example1" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
-                                    @if($isAdmin)
-                                    <th> Select </th>
-                                    @endif
+
                                     <th>Date Created</th>
                                     <th>Orders</th>
                                     <th>Notes</th>
@@ -118,17 +112,13 @@ $date= \Carbon\Carbon::now()->toDateString()
                                     <th>Action</th>
                                     @endif
                                     <th>Task Status</th>
-                                    @if(!$isAdmin)
-                                    <th>Action</th>
-                                    @endif
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($dashboardData as $data)
                                 <tr>
-                                    @if($isAdmin)
-                                    <td> <input type="checkbox" value="{{$data->id}}" name="is_archived" onclick="archieve(this.value)"> </td>
-                                    @endif
+
                                     <td>{{$data->created_date}}</td>
                                     @if($data->related_to === 'student_record_received')
                                     <td><a href=" {{route('admin.edit.student.payment',$data->student->id)}}">New Student Enrolled</a></td>
@@ -136,14 +126,8 @@ $date= \Carbon\Carbon::now()->toDateString()
                                     <td><a href="{{ route('admin.view.graduation')}}/{{$data->linked_to}}/edit">Graduation Application</a></td>
                                     @elseif($data->related_to === 'transcript_ordered')
                                     <td><a href="{{ route ('admin.transpayment.edit',$data->linked_to)}}">Transcript Ordered</a></td>
-                                    @elseif($data->related_to === 'record_transfer' )
-                                    @if($data->created_at->diffInDays($date) >7 && $data['recordTransfer']['request_status'] !== 'Record Received')
-                                    <td class="btn btn-primary"><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id']] )}}">Alert:Resend Request For Record Transfer</a></td>
-                                    @else
-                                    <td><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id'] ] )}}">Record Transfer</a></td>
-                                    @endif
-
-
+                                    @elseif($data->related_to === 'record_transfer')
+                                    <td><a href="{{route('admin.student.request.transfer',$data->student_profile_id)}}">Record Transfer</a></td>
                                     @elseif($data->related_to === 'custom_record_received')
                                     <td><a href="{{ route('edit.custompayment',$data->linked_to)}}">Custom Payment</a></td>
                                     @elseif($data->related_to === 'transcript_edit_record_received')
@@ -154,8 +138,6 @@ $date= \Carbon\Carbon::now()->toDateString()
                                     <td><a href="{{ route('admin.each.notarization',$data->linked_to)}}">Notarization And Appostile</a></td>
                                     @elseif($data->related_to === 'custom_letter_record_received')
                                     <td><a href="{{ route('admin.each.customletters',$data->linked_to)}}">Custom Letter</a></td>
-                                    @elseif($data->related_to === 'orderconsultation_record_received')
-                                    <td><a href="{{ route('admin.each.conultation',$data->linked_to)}}">Personal Consultation</a></td>
                                     @endif
                                     <td>{{$data->notes}}</td>
                                     @if(empty($data->assigned_to))
@@ -168,13 +150,11 @@ $date= \Carbon\Carbon::now()->toDateString()
                                     <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboard(event.target)" data-toggle="modal" data-target="#assignRecord" class="btn btn-primary">Assign</a></td>
                                     @endif
                                     @if(empty($data->status))
-                                    <td class="">No Status</td>
+                                    <td class="">No Status </td>
                                     @elseif($data->status)
                                     <td class="bg-success">{{$data->status}}</td>
                                     @endif
-                                    @if(!$isAdmin)
-                                    <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboardForStatus(event.target)" data-toggle="modal" data-target="#assignStatusToRecord" class="btn btn-primary">Status</a></td>
-                                    @endif
+
 
                                 </tr>
                                 @endforeach

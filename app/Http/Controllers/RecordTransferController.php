@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dashboard;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,10 @@ class RecordTransferController extends Controller
 
         return view('recordTransfer.studentDetails', compact('students', 'parentId'));
     }
-
+    public function getStudents()
+    {
+        return redirect()->route('record.transfer', Auth::user()->id);
+    }
     public function sendRecordRequest($student_id, $parent_id)
     {
         return view('recordTransfer.previous-school', compact('student_id', 'parent_id'));
@@ -44,14 +48,15 @@ class RecordTransferController extends Controller
             $recordTransfer->zip_code = $request->get('zip_code');
             $recordTransfer->country = $request->get('country');
             $recordTransfer->status = 'In Review';
-            //   dd($recordTransfer);
-            $recordTransfer->save();
 
+            $recordTransfer->save();
             Dashboard::create([
                 'student_profile_id' => $student_id,
                 'linked_to' => $recordTransfer->id,
                 'related_to' => 'record_transfer',
                 'linked_to' => 'Record Transfer Request',
+                'is_archieved' => 0,
+                'record_transfer_id' => $recordTransfer->id,
                 'notes' => 'Student Name : ' . $recordTransfer['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);

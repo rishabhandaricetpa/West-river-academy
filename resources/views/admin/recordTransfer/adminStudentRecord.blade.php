@@ -35,28 +35,20 @@
                                 <tr>
                                     <th>Student Name</th>
                                     <th>School Name</th>
-                                    <th>Email</th>
+                                    <th>School Email</th>
                                     <th>Phone Number</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($schoolRecords as $record)
+                                @foreach($studentRecords as $studentRecord)
                                 <tr>
-                                    <td>{{$record['student']['fullname']}}</td>
-                                    <td>{{$record->school_name}}</td>
-                                    <td>{{$record->email}}</td>
-                                    <td>{{$record->phone_number}}</td>
-
-                                    <td>{{$record->status}} </br>
-                                        @if($record->resendCount)
-                                        Resend Requested:{{$record->resendCount}}
-                                        @endif
-                                    </td>
-
+                                    <td>{{$studentRecord['student']['first_name']}}</td>
+                                    <td>{{$studentRecord->school_name}}</td>
+                                    <td>{{$studentRecord->email}}</td>
+                                    <td>{{$studentRecord->phone_number}}</td>
                                     <td>
-                                        <a href="{{route('admin.student.schoolRecord',[$record->student_profile_id,$record->id])}}">
+                                        <a href="{{route('admin.student.schoolRecord',[ $studentRecord['student']['id'], $studentRecord->id] )}}">
                                             <i class=" fas fa-arrow-alt-circle-right"></i></a>
                                     </td>
                                 </tr>

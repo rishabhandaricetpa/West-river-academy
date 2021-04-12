@@ -20,6 +20,10 @@ class TranscriptCourse9_12 extends Model
     {
         return $this->hasMany('App\Models\Course', 'id', 'courses_id');
     }
+    public function collegeCourses()
+    {
+        return $this->hasMany('App\Models\TranscriptCourse9_12', 'transcript_id', 'id');
+    }
     public function subject()
     {
         return $this->hasOne('App\Models\Subject', 'id', 'subject_id');

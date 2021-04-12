@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TranscriptController;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvancePlacement;
+use App\Models\CollegeCourse;
 use App\Models\Country;
 use App\Models\Credits;
 use App\Models\StudentProfile;
@@ -164,7 +165,6 @@ class Transcript9to12 extends Controller
     }
     public function getAnotherGradeStatus(Request $request)
     {
-        //  dd($request->all());
         $trans_id = $request->get('trans_id');
         $transcript9_12id = $request->get('transcript9_12id');
         $student_id = $request->get('student_id');
@@ -247,18 +247,38 @@ class Transcript9to12 extends Controller
 
         // START: Transcript data for rendring course data in tabluar format.
 
-        $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
-            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit'])
+        $transcriptDatas = Transcript9_12::select()->where('transcript_id', $transcript_id)
+            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses'])
             ->get();
 
-        $transcript_9_10 = $transcriptData->whereIn("grade",config('constants.GRADES.9_10'))->sortBy("grade")->toArray();
 
-        $transcript_11_12 = $transcriptData->whereIn("grade",config('constants.GRADES.11_12'))->sortBy("grade")->toArray();
+        // $collegeCourses = CollegeCourse::where('transcript9_12_id',)
+        $courses = collect([]);
+        $transcriptData = $transcriptDatas->each(function ($transcript_courses) use ($courses) {
+            $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses) {
+                $courses->push(
+                    (object)[
+                        'id' => $course->id,
+                        'score' => $course->score,
+                        'name' => $course->subject->subject_name,
+                        'credit' => $course->credit->credit,
+                        'year' => $transcript_courses->enrollment_year,
+                        'grade' => $transcript_courses->grade,
+                    ]
+                );
+            });
+        });
+        //  dd($courses);
 
-        $transcriptData = [
-            $transcript_9_10,
-            $transcript_11_12
-        ];
+
+
+        // dd($transcriptData);
+        // $transcript_11_12 = $transcriptDatas->whereIn("grade", config('constants.GRADES.11_12'))->sortBy("grade")->toArray();
+
+        // $transcriptData = [
+        //     $transcript_9_10,
+        //     $transcript_11_12
+        // ];
 
         // END: Transcript data for rendring course data in tabluar format.
 
@@ -275,7 +295,7 @@ class Transcript9to12 extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            return view('transcript9to12/preview-transcript', compact('student', 'transcriptData', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
+            return view('transcript9to12.transcript-pdf', compact('student', 'transcriptData', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses'));
         } else {
             $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
             $items = [];
@@ -286,7 +306,7 @@ class Transcript9to12 extends Controller
             $minYear = min($items);
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-            return view('transcript9to12/preview-transcript', compact('student', 'transcriptData', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
+            return view('transcript9to12.transcript-pdf', compact('student', 'transcriptData', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses'));
         }
     }
 }

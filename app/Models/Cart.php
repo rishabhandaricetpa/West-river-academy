@@ -595,6 +595,7 @@ class Cart extends Model
                     Dashboard::create([
                         'linked_to' => $cart->item_id,
                         'related_to' => 'custom_record_received',
+                        'is_archieved' => 0,
                         'notes' => 'Custom Payment Received From : ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -617,6 +618,7 @@ class Cart extends Model
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'transcript_edit_record_received',
+                        'is_archieved' => 0,
                         'notes' => 'Transcript Edit' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -635,6 +637,7 @@ class Cart extends Model
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'postage_record_received',
+                        'is_archieved' => 0,
                         'notes' => 'Postage is Ordered by ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -656,6 +659,7 @@ class Cart extends Model
                     $notarization->save();
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
+                        'is_archieved' => 0,
                         'related_to' => 'appostile_record_received',
                         'notes' => 'Notarization and apostille is Ordered by ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -675,6 +679,7 @@ class Cart extends Model
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'custom_letter_record_received',
+                        'is_archieved' => 0,
                         'notes' => 'Custom Letter is Ordered by ' . $parentName->p1_first_name,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);

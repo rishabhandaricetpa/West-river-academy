@@ -31,7 +31,6 @@ class PhysicalEducationCourse extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
         // delete if course already exists
         $id = $request->get('course_id');
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $request->get('course_id'))->where('transcript9_12_id', $request->get('transcript_id'))->get();
@@ -54,7 +53,7 @@ class PhysicalEducationCourse extends Controller
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
-                    'score' => $period['grade'],
+                    'score' => isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'remaining_credits' => $total_credits - $period['selectedCredit'],
                     'credit_id' =>  $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
@@ -70,7 +69,7 @@ class PhysicalEducationCourse extends Controller
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['course_id'],
                     'subject_id' => $subject->id,
-                    'score' => $period['grade'],
+                    'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'remaining_credits' => $total_credits - $period['selectedCredit'],
