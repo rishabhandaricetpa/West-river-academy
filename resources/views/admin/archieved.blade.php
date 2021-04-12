@@ -140,7 +140,7 @@
                                     <td><a href="{{ route('admin.each.customletters',$data->linked_to)}}">Custom Letter</a></td>
                                     @endif
                                     <td>{{$data->notes}}</td>
-                                    @if(is_null($data->assigned_to))
+                                    @if(empty($data->assigned_to))
                                     <td class="odd bg-primary">Not Yet Assigned</td>
                                     @elseif($data->assigned_to)
                                     <td>{{$data->assigned_to}}</td>

@@ -10,10 +10,14 @@ class Dashboard extends Model
     use HasFactory;
     protected $table = 'dashboards';
     protected $fillable = [
-        'linked_to', 'notes', 'assigned_to', 'created_date', 'updated_date', 'student_profile_id', 'related_to', 'is_completed', 'status', 'is_archieved'
+        'linked_to', 'notes', 'assigned_to', 'created_date', 'updated_date', 'student_profile_id', 'related_to', 'is_completed', 'status', 'is_archieved', 'record_transfer_id'
     ];
     public function student()
     {
         return $this->belongsTo('App\Models\StudentProfile', 'student_profile_id', 'id');
+    }
+    public function recordTransfer()
+    {
+        return $this->belongsTo('App\Models\RecordTransfer', 'record_transfer_id', 'id');
     }
 }

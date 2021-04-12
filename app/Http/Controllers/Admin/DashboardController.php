@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
         if ($admin_data->name == "Stacey") {
-            $dashboardData = Dashboard::select()->with('student')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
+            $dashboardData = Dashboard::select()->with('student', 'recordTransfer')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
             $isAdmin = true;
             return view('admin.dashboard-screen', compact('dashboardData', 'isAdmin'));
         } else {

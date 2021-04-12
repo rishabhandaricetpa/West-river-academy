@@ -192,10 +192,10 @@
                   <td>{{$record->school_name}}</td>
                   <td>{{$record->email}}</td>
                   <td>{{$record->phone_number}}</td>
-                  @if($record->status === 'In Review')
-                  <td>{{$record->status}}</td>
-                  @elseif($record->status === 'Request Sent')
-                  <td>Record Reviewed</td>
+                  @if($record->request_status === 'Pending' || empty($record->request_status))
+                  <td>Pending</td>
+                  @elseif($record->request_status === 'Record Received')
+                  <td>Record Received</td>
                   @endif
                   <td><a class="btn btn-primary" href="{{route('edit.record',$record->id)}}">Edit</a></td>
                </tr>

@@ -116,4 +116,15 @@ class RecordTransferController extends Controller
         $pdf = PDF::loadView('schoolResendRecord', $data);
         return $pdf->download();
     }
+    public function receivedRecord($record_id)
+    {
+        $record = RecordTransfer::find($record_id);
+        $record->request_status = 'Record Received';
+        $record->save();
+        $notification = [
+            'message' => 'Record Received Successfully From School',
+            'alert-type' => 'success',
+        ];
+        return redirect()->back()->with($notification);
+    }
 }

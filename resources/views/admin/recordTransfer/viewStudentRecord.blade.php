@@ -7,6 +7,10 @@
     <div class="container-fluid position-relative">
         <h1>Edit Student Information</h1>
         <div class="form-wrap border py-5 px-25 position-relative">
+            <a class="btn btn-primary" href="{{route('admin.recordReceived',$studentRecord->id)}}">Record Received</a>
+            @if($studentRecord->request_status)
+            <span>{{$studentRecord->request_status}}</span>
+            @endif
             <form method="post" action="{{route('admin.sendRecordToSchool',$studentRecord->student_profile_id)}}">
                 @csrf
                 <div class="card-body p-0 row">
@@ -62,12 +66,14 @@
                 </div>
 
                 <!-- /.card-body -->
+                @if($studentRecord->request_status !== 'Record Received')
                 <div class="row">
                     <div class="col-md-6 mt-4">
                         <a href="{{route('admin.download.record',[$studentRecord->id,$studentRecord->student_profile_id])}}" class="btn btn-primary">Download & Preview Record</a>
                         <button type="submit" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();" class="btn btn-primary">Send Record To School</button>
                         <a href="{{route('admin.resend.request',[$studentRecord->id,$studentRecord->student_profile_id] )}}" class=" btn btn-primary">ReSend Request</a>
                     </div>
+
                     <div class="col-md-6 mt-4">
                         <table class='table-styling w-100 min-w-100' border="1">
 
@@ -94,6 +100,7 @@
                             </tr>
                         </table>
                     </div>
+                    @endif
                 </div>
 
 

@@ -46,6 +46,7 @@
                   <th scope="col">Student Name</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Payment Method</th>
+                  <th scope="col">Transcation Id</th>
                </tr>
             </thead>
             <tbody>
@@ -53,8 +54,9 @@
                <tr>
 
                   <td>{{$transcript_payment['student']['first_name']}}</td>
-                  <td>{{$transcript_payment['transcriptPayment']['amount']}}</td>
+                  <td>${{$transcript_payment['transcriptPayment']['amount']}}</td>
                   <td>{{$transcript_payment['transcriptPayment']['payment_mode']}}</td>
+                  <td>{{$transcript_payment['transcriptPayment']['transcation_id']}}</td>
                </tr>
                @endforeach
             </tbody>
@@ -76,6 +78,7 @@
                <th scope="col">Parent Name</th>
                <th scope="col">Amount</th>
                <th scope="col">Payment Method</th>
+               <th scope="col">Transcation Id</th>
             </tr>
          </thead>
          <tbody>
@@ -83,8 +86,10 @@
             <tr>
 
                <td>{{$customPayment['ParentProfile']['p1_first_name']}}</td>
-               <td>{{$customPayment['amount']}}</td>
+               <td>${{$customPayment['amount']}}</td>
                <td>{{$customPayment['payment_mode']}}</td>
+               <td>{{$customPayment['transcation_id']}}</td>
+
             </tr>
             @endforeach
          </tbody>
@@ -107,14 +112,16 @@
                <th scope="col">Student Name</th>
                <th scope="col">Amount</th>
                <th scope="col">Payment Method</th>
+               <th scope="col">Transcation Id</th>
             </tr>
          </thead>
          <tbody>
             @foreach($enrollmentPayments as $enrollmentPayment)
             <tr>
                <td>{{$enrollmentPayment->first_name}}</td>
-               <td>{{$enrollmentPayment->amount}}</td>
+               <td>${{$enrollmentPayment->amount}}</td>
                <td>{{$enrollmentPayment->payment_mode}}</td>
+               <td>{{$enrollmentPayment->transcation_id}}</td>
             </tr>
             @endforeach
          </tbody>
@@ -132,14 +139,16 @@
                <th scope="col">Student Name</th>
                <th scope="col">Amount</th>
                <th scope="col">Payment Method</th>
+               <th scope="col">Transcation Id</th>
             </tr>
          </thead>
          <tbody>
             @foreach($graduationPayments as $graduationPayment)
             <tr>
                <td>{{$graduationPayment->first_name}}</td>
-               <td>{{$graduationPayment->amount}}</td>
+               <td>${{$graduationPayment->amount}}</td>
                <td>{{$graduationPayment->payment_mode}}</td>
+               <td>{{$graduationPayment->transcation_id}}</td>
             </tr>
             @endforeach
          </tbody>
@@ -170,7 +179,7 @@
                <tr>
 
                   <td>{{$notirizationPayment['notarization']['first_name']}}</td>
-                  <td>{{$notirizationPayment->amount}}</td>
+                  <td>${{$notirizationPayment->amount}}</td>
                   <td>{{$notirizationPayment['notarization']['number_of_documents']}}</td>
                   <td>{{$notirizationPayment['notarization']['apostille_country']}}</td>
                   <td>{{$notirizationPayment->payment_mode}}</td>

@@ -87,7 +87,9 @@
     </div>
 </div>
 <!-- Main content -->
-
+@php
+$date= \Carbon\Carbon::now()->toDateString()
+@endphp
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -96,7 +98,7 @@
                 <div class="card">
                     <div class="card-header">
                         @if($isAdmin)
-                        <button class="btn btn-primary mr-auto" type="submit" onclick="sendArchieve()">Archieve</button>
+                        <button class="btn btn-primary mr-auto" type="submit" onclick="sendArchieve()">Archive</button>
                         @endif
                     </div>
 
@@ -134,8 +136,14 @@
                                     <td><a href="{{ route('admin.view.graduation')}}/{{$data->linked_to}}/edit">Graduation Application</a></td>
                                     @elseif($data->related_to === 'transcript_ordered')
                                     <td><a href="{{ route ('admin.transpayment.edit',$data->linked_to)}}">Transcript Ordered</a></td>
-                                    @elseif($data->related_to === 'record_transfer')
-                                    <td><a href="{{route('admin.student.request.transfer',$data->student_profile_id)}}">Record Transfer</a></td>
+                                    @elseif($data->related_to === 'record_transfer' )
+                                    @if($data->created_at->diffInDays($date) >7 && $data['recordTransfer']['request_status'] !== 'Record Received')
+                                    <td class="btn btn-primary"><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id']] )}}">Alert:Resend Request For Record Transfer</a></td>
+                                    @else
+                                    <td><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id'] ] )}}">Record Transfer</a></td>
+                                    @endif
+
+
                                     @elseif($data->related_to === 'custom_record_received')
                                     <td><a href="{{ route('edit.custompayment',$data->linked_to)}}">Custom Payment</a></td>
                                     @elseif($data->related_to === 'transcript_edit_record_received')
@@ -148,7 +156,7 @@
                                     <td><a href="{{ route('admin.each.customletters',$data->linked_to)}}">Custom Letter</a></td>
                                     @endif
                                     <td>{{$data->notes}}</td>
-                                    @if(is_null($data->assigned_to))
+                                    @if(empty($data->assigned_to))
                                     <td class="odd bg-primary">Not Yet Assigned</td>
                                     @elseif($data->assigned_to)
                                     <td>{{$data->assigned_to}}</td>
