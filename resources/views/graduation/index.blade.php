@@ -6,7 +6,7 @@
     <h1 class="text-center text-white text-uppercase">Apply for Graduation</h1>
     <div class="form-wrap border bg-light py-5 px-25">
 
-        <h2 class="mb-3">Select the student who wishes to apply for graduation</h2>
+        <h2 class="mb-3">Select the student who wishes to apply for graduation.</h2>
         <form action="{{ route('graduation.application') }}">
             <div class="overflow-auto">
                 <table class="w-100 table-styling enlarge-input">

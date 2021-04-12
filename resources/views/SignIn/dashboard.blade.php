@@ -69,7 +69,7 @@
             </a>
          </div>
          <div class="col-sm-12">
-            <p>Needs Help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
+            <p>Needs help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
          </div>
       </div>
    </div>
@@ -136,7 +136,7 @@
             <thead>
                <tr>
                   <th>Student First Name</th>
-                  <th>Student Id</th>
+                  <th>National Id</th>
                   <th>Status</th>
                   <th>Download</th>
                </tr>

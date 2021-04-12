@@ -58,8 +58,7 @@
           <input class="form-check-input" type="radio" name="student_grade" id="" value="10">
           <label class="form-check-label w-100" for="">
             I understand that by enrolling in West River Academy for grade 10, 11 or 12, I agree to provide transcripts
-            from a previous school or to enroll in West River Academy for previous years before enrolling in the
-            Graduation Program or requesting a high school transcript to transfer out of West River Academy to another
+            from a previous school or to enroll in West River Academy for previous years before applying to graduate or requesting a high school transcript to transfer out of West River Academy to another
             school.
           </label>
         </div>
