@@ -210,7 +210,8 @@ class Transcript9to12 extends Controller
     public function showCourseDetails($transcript_id, $student_id)
     {
         $transcriptData9_12 = Transcript9_12::where('id', $transcript_id)->first();
-
+        // for getting trans id - $transcriptData9_12->transcript_id); -  redirect back to all course screen from here
+        $trans_id = $transcriptData9_12->transcript_id;
         $transcript = Transcript::where('id', $transcriptData9_12->transcript_id)->first();
         if ($transcript->status == 'approved') {
             dd('To edit this school course please pay $25 since this transcript is approved by WRA.');
@@ -223,7 +224,7 @@ class Transcript9to12 extends Controller
             $studentInfo = StudentProfile::find($student_id);
             $school = Transcript9_12::find($transcript_id);
 
-            return view('transcript9to12.show-course-details', compact('courses', 'transcript_id', 'student_id', 'studentInfo', 'school'));
+            return view('transcript9to12.show-course-details', compact('courses', 'transcript_id', 'student_id', 'studentInfo', 'school', 'trans_id'));
         }
     }
 
@@ -251,10 +252,9 @@ class Transcript9to12 extends Controller
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses'])
             ->get();
 
-
-        // $collegeCourses = CollegeCourse::where('transcript9_12_id',)
         $courses = collect([]);
-        $transcriptData = $transcriptDatas->each(function ($transcript_courses) use ($courses) {
+        // for academic years and courses
+        $transcriptDatas->each(function ($transcript_courses) use ($courses) {
             $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses) {
                 $courses->push(
                     (object)[
@@ -262,23 +262,32 @@ class Transcript9to12 extends Controller
                         'score' => $course->score,
                         'name' => $course->subject->subject_name,
                         'credit' => $course->credit->credit,
-                        'year' => $transcript_courses->enrollment_year,
+                        'groupBy' => $transcript_courses->enrollment_year,
                         'grade' => $transcript_courses->grade,
+                        'type' => 'year'
                     ]
                 );
             });
         });
-        //  dd($courses);
 
-
-
-        // dd($transcriptData);
-        // $transcript_11_12 = $transcriptDatas->whereIn("grade", config('constants.GRADES.11_12'))->sortBy("grade")->toArray();
-
-        // $transcriptData = [
-        //     $transcript_9_10,
-        //     $transcript_11_12
-        // ];
+        // for college courses
+        $collegeCourses = collect([]);
+        $transcriptDatas->each(function ($college_courses) use ($collegeCourses) {
+            $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
+                $collegeCourses->push(
+                    (object)[
+                        'id' => $cllg_course->id,
+                        'groupBy' => $cllg_course->name,
+                        'course_name' => $cllg_course->course_name,
+                        'grade' => $cllg_course->grade,
+                        'course_grade'  => $cllg_course->course_grade,
+                        'selectedCredit' => $cllg_course->selectedCredit,
+                        'type' => 'college'
+                    ]
+                );
+            });
+        });
+        $courses =  $courses->merge($collegeCourses);
 
         // END: Transcript data for rendring course data in tabluar format.
 
@@ -295,7 +304,7 @@ class Transcript9to12 extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            return view('transcript9to12.transcript-pdf', compact('student', 'transcriptData', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses'));
+            return view('transcript9to12.transcript-pdf', compact('student', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses'));
         } else {
             $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
             $items = [];
@@ -306,7 +315,7 @@ class Transcript9to12 extends Controller
             $minYear = min($items);
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-            return view('transcript9to12.transcript-pdf', compact('student', 'transcriptData', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses'));
+            return view('transcript9to12.transcript-pdf', compact('student',  'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses'));
         }
     }
 }

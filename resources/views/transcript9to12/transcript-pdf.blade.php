@@ -1,14 +1,15 @@
 @php
+// for annual years
+$groups = $courses->sortByDesc('type')->split(2);
+$leftGroup = $groups->first()->groupBy('groupBy');
 
-$groups = $courses->sortBy('year')->splitIn(2);
-$leftGroup = $groups->first()->groupBy('year');
-$rightGroup = $groups->last()->groupBy('year');
+$rightGroup = $groups->last()->groupBy('groupBy');
 
 $leftCount = $leftGroup->count() + $leftGroup->flatten()->count();
 
 $rightCount = $rightGroup->count() + $rightGroup->flatten()->count();
 
-// balance both side items
+// balance both side items for annual year courses
 
 if($leftCount < $rightCount) {
      for($i=1 ; $i <=($rightCount - $leftCount); $i++){ // push dummy course having -1 id
@@ -21,7 +22,9 @@ if($leftCount < $rightCount) {
              $rightGroup->last()->push((object)['id'=> -1]);
         }
         }
-        @endphp
+
+
+         @endphp
         <!DOCTYPE html>
         <html lang="en">
 
@@ -101,12 +104,14 @@ if($leftCount < $rightCount) {
                             <tr>
                                 <td style="width:50%;">
                                     @include('transcript9to12.courseComponent',[
-                                    'yearGroup'=> $leftGroup
+                                    'yearGroup'=> $leftGroup,
+                                  
                                     ])
                                 </td>
                                 <td style="width:50%;">
                                     @include('transcript9to12.courseComponent',[
-                                    'yearGroup'=> $rightGroup
+                                    'yearGroup'=> $rightGroup,
+                                  
                                     ])
                                 </td>
                             </tr>
