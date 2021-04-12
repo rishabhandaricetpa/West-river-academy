@@ -40,7 +40,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/welcome-video', function () {
             return view('welcome-video');
         });
-
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student
@@ -77,6 +76,28 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('generate-pdf/{student_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
 
+        //fees and services
+        Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
+        // Route::get('previous-school', function () {
+        //     return view('previous-school');
+        // });
+        // Route::get('order-postage', function () {
+        //     return view('frontendpages.order-postage');
+        // });
+        // Route::get('order-consultation', function () {
+        //     return view('orderPostage.order_consultation');
+        // });
+        Route::get('video-tutorials', function () {
+            return view('videos.video_library');
+        })->name('video.tutorials');
+
+        // Route::get('college-info', function () {
+        //     return view('frontendpages.college-info');
+        // });
+
+        // Route::get('college-info', function () {
+        //     return view('frontendpages.college-info');
+        // });
         Route::get('previous-school', function () {
             return view('previous-school');
         });
@@ -144,8 +165,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
 
-    //fees and services
-    Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
 
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
@@ -283,9 +302,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //archieve records
     Route::post('archieve/record', 'Admin\DashboardController@archieveRecord');
     //order Postage
-    Route::get('orderpostage', function () {
-        return view('orderPostage/purchase_postage');
-    });
+    Route::get('orderpostage', 'NotarizationController@viewOrderPostage')->name('notarization.viewOrderPostage');
     Route::get('custom-letter', 'PaymentMethod\CustomLetterController@index')->name('custom.letter');
 
     // transcript 9-12
@@ -385,4 +402,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     //elective edit transcript
     Route::get('edit-elective-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editElective')->name('edit.electiveTranscriptCourse');
     Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+
+    //order personal consultation
+    Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+    Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
+    Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
+
+    // Route::get('order-consultation', function () {
+    //     return view('orderPostage.order_consultation');
+    // });
 });

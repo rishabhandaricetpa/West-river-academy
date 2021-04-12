@@ -117,6 +117,30 @@
       ]
     });
 
+
+
+    //country postage
+    $("#country_shipping").DataTable({
+      "ajax": "{{ route('admin.datatable.shipping') }}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "country"
+        },
+        {
+          "data": "postage_charges"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="{{ url('admin/country-services')}}/${id}/edit">Edit</a>`;
+          }
+        },
+      ]
+    });
     //student datatable
     $("#student-table").DataTable({
       "ajax": "{{ route('admin.datatable.student') }}",
@@ -406,6 +430,9 @@
           "data": "payment_mode"
         },
         {
+          "data": "notarization.country"
+        },
+        {
           "data": "status"
         },
         {
@@ -450,7 +477,40 @@
         }
       ]
     });
-
+    //Order Cosltation datatable
+    $("#orderConsltation-table").DataTable({
+      "ajax": "{{ route('admin.datatable.conultation')}}",
+      "processing": true,
+      "serverSide": true,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "columns": [{
+          "data": "parent.p1_first_name"
+        },
+        {
+          "data": "amount"
+        },
+        {
+          "data": "type_of_payment"
+        },
+        {
+          "data": "transcation_id"
+        },
+        {
+          "data": "payment_mode"
+        },
+        {
+          "data": "status"
+        },
+        {
+          "data": "id",
+          "render": function(id) {
+            return `<a href="edit-conultation/${id}"><i class="fas fa-edit"></i></a>`;
+          }
+        }
+      ]
+    });
     //generate coupon code
 
     $("#generate-code").on('click', function() {

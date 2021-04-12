@@ -74,6 +74,8 @@ Vue.component('edit-health-transcript-course', require('./components/EditTranscr
 Vue.component('edit-foreign-transcript-course', require('./components/EditTranscriptCourses/EditForeignCourse.vue').default);
 Vue.component('edit-elective-transcript-course', require('./components/EditTranscriptCourses/EditElectiveCourse.vue').default);
 
+//order personal consulation
+Vue.component('order-consultation', require('./components/PersonalConsultation.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

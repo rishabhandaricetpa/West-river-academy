@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1 class="text-center">Notarization & Appostile Payments List</h1>
+        <h1 class="text-center">Notarization & Apostille Payments List</h1>
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -26,6 +26,7 @@
                                     <th>Paying for</th>
                                     <th>Transaction Id</th>
                                     <th>Payment Method</th>
+                                    <th>Country Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

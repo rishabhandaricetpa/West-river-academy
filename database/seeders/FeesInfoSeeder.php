@@ -27,13 +27,15 @@ class FeesInfoSeeder extends Seeder
             ['type' => 'global_guaranteed_international', 'description' => 'Glaboal Guanteed International', 'amount' => '145'],
             ['type' => 'united_postal_service', 'description' => 'United Postal Service (UPS)', 'amount' => '85'],
             ['type' => 'priority_international', 'description' => 'Priority International', 'amount' => '55'],
-            ['type' => 'priority_usa', 'description' => 'Priority USA', 'amount' => '10'],
+            ['type' => 'priority_usa', 'description' => 'Priority USA', 'amount' => '20'],
             ['type' => 'express_usa', 'description' => 'Express USA', 'amount' => '30'],
             ['type' => 'usa_domestic_prioirity_mail', 'description' => 'USA Domestic Priority Mail', 'amount' => '0'],
             ['type' => 'notarization_doc_fee', 'description' => 'Fees for Notarization Documents', 'amount' => '20'],
             ['type' => 'apostille_doc_fee', 'description' => 'Fees for Apostille Documents', 'amount' => '75'],
             ['type' => 'custom_letter', 'description' => 'Fees for Custom Letter', 'amount' => '35'],
             ['type' => 'additional_transcript', 'description' => 'Fees for Additional Transcript for user', 'amount' => '25'],
+            ['type' => 'consultation_fee', 'description' => 'Order Personal Consultation Fee per hours', 'amount' => '80'],
+
         ];
         FeesInfo::insert($data);
     }

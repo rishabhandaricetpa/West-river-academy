@@ -37,6 +37,11 @@ label {
   padding-bottom: 2rem;
 }
 
+.seperator-top{
+  border-top: 2px solid #ccc;
+  padding-top: 2rem;
+}
+
 .min-select {
   width: 100px;
 }
@@ -183,6 +188,7 @@ label.h3 {
 }
 
 .additional-sign {
+  height: 33px;
   width: 32px;
   border: 1px solid #ccc;
   border-right: 0;
@@ -288,4 +294,9 @@ input[type=radio]:checked:before {
 
 .max-table{
     max-height: 275px;
+}
+
+.select2-selection__choice__remove{
+  z-index: 2;
+    position: relative !important;
 }
