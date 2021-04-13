@@ -1,14 +1,15 @@
 @php
+// for annual years
+$groups = $courses->sortByDesc('type')->split(2);
+$leftGroup = $groups->first()->groupBy('groupBy');
 
-$groups = $courses->sortBy('year')->splitIn(2);
-$leftGroup = $groups->first()->groupBy('year');
-$rightGroup = $groups->last()->groupBy('year');
+$rightGroup = $groups->last()->groupBy('groupBy');
 
 $leftCount = $leftGroup->count() + $leftGroup->flatten()->count();
 
 $rightCount = $rightGroup->count() + $rightGroup->flatten()->count();
 
-// balance both side items
+// balance both side items for annual year courses
 
 if($leftCount < $rightCount) {
      for($i=1 ; $i <=($rightCount - $leftCount); $i++){ // push dummy course having -1 id
@@ -21,7 +22,9 @@ if($leftCount < $rightCount) {
              $rightGroup->last()->push((object)['id'=> -1]);
         }
         }
-        @endphp
+
+
+         @endphp
         <!DOCTYPE html>
         <html lang="en">
 
@@ -77,7 +80,7 @@ if($leftCount < $rightCount) {
                         </td>
                         <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
                         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
-                            2019-20
+                        {{$minYear}} -  {{$maxYear}}
                         </td>
                     </tr>
                 </tbody>
@@ -101,12 +104,14 @@ if($leftCount < $rightCount) {
                             <tr>
                                 <td style="width:50%;">
                                     @include('transcript9to12.courseComponent',[
-                                    'yearGroup'=> $leftGroup
+                                    'yearGroup'=> $leftGroup,
+                                  
                                     ])
                                 </td>
                                 <td style="width:50%;">
                                     @include('transcript9to12.courseComponent',[
-                                    'yearGroup'=> $rightGroup
+                                    'yearGroup'=> $rightGroup,
+                                  
                                     ])
                                 </td>
                             </tr>
@@ -121,7 +126,7 @@ if($leftCount < $rightCount) {
                             <tr>
                                 <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned
                                 </th>
-                                <td style="padding:3px 5px;font-size:13px;line-height:1;">26.00</td>
+                                <td style="padding:3px 5px;font-size:13px;line-height:1;">{{$totalSelectedGrades}}</td>
                             </tr>
                             <tr>
                                 <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">G.P.A</th>
