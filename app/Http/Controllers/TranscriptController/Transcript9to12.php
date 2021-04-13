@@ -46,7 +46,6 @@ class Transcript9to12 extends Controller
     public function selectGrade(Request $request, $student_id)
     {
         $transcript = Transcript9_12::find($request->input('transcript_id'));
-        // dd($transcript);
         if ($request->is_united_states == 'Yes' && $request->is_california == 'Yes') {
             /**  is carnegia means all country expect california not carnegia  */
             /** 0 means no carnegia -i.e belongs to california so  credits are mutiplied by 10 */
@@ -270,7 +269,7 @@ class Transcript9to12 extends Controller
             });
         });
 
-        // for college courses
+        /** for college courses */
         $collegeCourses = collect([]);
         $transcriptDatas->each(function ($college_courses) use ($collegeCourses) {
             $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
@@ -291,9 +290,22 @@ class Transcript9to12 extends Controller
 
         // END: Transcript data for rendring course data in tabluar format.
 
-        $transcript_course_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
+        $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
 
-        $groupCourses = TranscriptCourse9_12::with(['subject'])->whereIn('transcript9_12_id', $transcript_course_id)->get()->unique('subject_id');
+        $course = TranscriptCourse9_12::whereIn('transcript9_12_id', $transcript_9_12_id)->with('subject')->get();
+        /** collected sum for annual year  */
+        $collectSelectedGrade = collect($course->pluck('selectedCredit'));
+
+        $sumOfSeletedEnrollmentGrade = $collectSelectedGrade->sum();
+        /** collected sum for college course if exits */
+        $college_course = CollegeCourse::whereIn('transcript9_12_id', $transcript_9_12_id)->get();
+        if (isset($college_course)) {
+            $collectSelectedGradeCollege = collect($college_course)->pluck('selectedCredit');
+            $sumOfSeletedCollegeGrade = $collectSelectedGradeCollege->sum();
+            $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade);
+        }
+
+        $groupCourses = TranscriptCourse9_12::with(['subject'])->whereIn('transcript9_12_id', $transcript_9_12_id)->get()->unique('subject_id');
         if ($transcript_id) {
             $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
             $items = [];
@@ -304,7 +316,7 @@ class Transcript9to12 extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            return view('transcript9to12.transcript-pdf', compact('student', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses'));
+            return view('transcript9to12.transcript-pdf', compact('student', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades'));
         } else {
             $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
             $items = [];
@@ -315,7 +327,7 @@ class Transcript9to12 extends Controller
             $minYear = min($items);
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-            return view('transcript9to12.transcript-pdf', compact('student',  'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses'));
+            return view('transcript9to12.transcript-pdf', compact('student',  'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades'));
         }
     }
 }

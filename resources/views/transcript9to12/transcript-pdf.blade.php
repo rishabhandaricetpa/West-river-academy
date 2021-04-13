@@ -80,7 +80,7 @@ if($leftCount < $rightCount) {
                         </td>
                         <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
                         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
-                            2019-20
+                        {{$minYear}} -  {{$maxYear}}
                         </td>
                     </tr>
                 </tbody>
@@ -126,7 +126,7 @@ if($leftCount < $rightCount) {
                             <tr>
                                 <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned
                                 </th>
-                                <td style="padding:3px 5px;font-size:13px;line-height:1;">26.00</td>
+                                <td style="padding:3px 5px;font-size:13px;line-height:1;">{{$totalSelectedGrades}}</td>
                             </tr>
                             <tr>
                                 <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">G.P.A</th>
