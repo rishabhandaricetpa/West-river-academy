@@ -133,7 +133,7 @@
       li {
         li {
           a {
-            padding-left: 0.5rem;
+            padding-left: 0.4rem;
           }
         }
       }
@@ -150,10 +150,15 @@
           top: 50%;
           position: absolute;
           background-color: $primary;
-          padding: 7px;
+          padding: 10px 7px;
           min-width: 100%;
           white-space: nowrap;
-        }
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+}
       }
 
       .fas {
@@ -217,12 +222,6 @@
     width: 100%;
   }
 
-  .form-group .fa-calendar-alt {
-    position: absolute;
-    left: auto;
-    right: 11px;
-    top: 35px;
-  }
 }
 
 // Based on min width

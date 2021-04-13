@@ -1,6 +1,7 @@
 /** =============== Global Variables =============== **/
 
 // Colors
+$blue: #004C99;
 $primary: #fc0;
 // $blue: #1D3F7A;
 $gray-100: #eeeeee;
@@ -13,11 +14,12 @@ $link-color: #ff9900;
 $box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 $danger: #f55;
 $gray-800: #393b48;
-$gray-600: rgb(78, 156, 186);
-$light-blue: #2a9dbe;
+$gray-600: $blue;
+$light-blue: $blue;
 $gray-base: #c2c2c2;
 $text-color: #203258;
 $gray-dark: #202020;
+$secondary: $blue;
 //Headings
 $h1-font-size: 56px;
 $h2-font-size: 21px;
