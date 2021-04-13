@@ -14,8 +14,7 @@ class SubjectTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        {
+    { {
             $array = [
                 //english
 
@@ -73,7 +72,7 @@ class SubjectTableSeeder extends Seeder
                 ['2', 'WORLD HISTORY, CULTURE & GEOGRAPHY', '9-12'],
                 ['2', 'WORLD GEOGRAPHY', '9-12'],
                 ['2', 'ECONOMICS', '9-12'],
-                ['2', 'ANCINT HISTORY', '9-12'],
+                ['2', 'ANCIENT HISTORY', '9-12'],
                 ['2', 'MEDIEVAL HISTORY', '9-12'],
                 ['2', 'RENAISSANCE HISTORY', '9-12'],
                 ['2', 'WESTERN CIVILIZATION', '9-12'],
@@ -96,9 +95,9 @@ class SubjectTableSeeder extends Seeder
                 ['3', 'GENERAL MATH', '9-12'],
                 ['3', 'PROBABILITY &STATISTICS', '9-12'],
                 ['3', 'PERSONAL FINANCE', '9-12'],
-                ['3', 'COMPOUTER SCIENCE', '9-12'],
-                ['3', 'COMPOUTER SKILLS', '9-12'],
-                ['3', 'COMPOUTER PROGRAMMMING', '9-12'],
+                ['3', 'COMPUTER SCIENCE', '9-12'],
+                ['3', 'COMPUTER SKILLS', '9-12'],
+                ['3', 'COMPUTER PROGRAMMMING', '9-12'],
                 ['3', 'APPLIED MATH', '9-12'],
                 ['3', 'BUSINESS MATH', '9-12'],
                 ['3', 'PRACTICAL MATH', '9-12'],
@@ -142,12 +141,12 @@ class SubjectTableSeeder extends Seeder
                 ['8', 'DRAMA', '9-12'],
 
             ];
-            foreach ($array as $key => $value):
+            foreach ($array as $key => $value) :
                 $array2[] = [
-                    'courses_id'=> $value[0],
+                    'courses_id' => $value[0],
                     'subject_name'  => $value[1],
-                    'other_subject'=>'',
-                    'transcript_period'=>$value[2],
+                    'other_subject' => '',
+                    'transcript_period' => $value[2],
                     'created_at' => Carbon::now()->toDateTimeString(),
                     'updated_at' => Carbon::now()->toDateTimeString(),
                 ];

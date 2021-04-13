@@ -192,17 +192,9 @@
           </div>
           </div>
         </div>
-        <div class="form-group mt-2r d-sm-flex links-list mb-5">
-          <!-- Button trigger modal -->
-          <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
-            >what if i need to skip a year?</a
-          >
-        </div>
-
         <div class="form-group d-sm-flex mb-2r lato-italic info-detail ">
           <label for=""
-            >Select grade level(s) for your enrollment period
-            <p>(You may select more than one for multiple years)</p></label
+            >Select grade level(s) for your enrollment period.</label
           >
           <div class="row pl-sm-5">
             <div v-for="(grade, index) in grades" :key="index" class="col-6 col-sm-3">
