@@ -47,4 +47,8 @@ class Transcript extends Model
     {
         return $this->belongsTo('App\Models\Transcript9_12', 'id', 'transcript_id');
     }
+    public function apCourses()
+    {
+        return $this->hasMany(AdvancePlacement::class);
+    }
 }
