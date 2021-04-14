@@ -12,15 +12,15 @@
     <tbody>
     <!-- for annual courses -->
         @foreach($yearGroup as $year => $courses)
-   
-        <tr style="line-height:1;">
+                <tr style="line-height:1;">
             <td style="font-weight:700;text-align:center;font-size:13px;" colspan="4">
 
                 <span style="text-decoration:underline;">
+               
                 @if(strtotime($year))
                 Academic Year {{$year}}
-                    @else
-                    {{$year}}
+                  @elseif(!empty($year))
+                   {{$year}}
                      @endif
                 </span>
            
@@ -41,7 +41,7 @@
             <td style="padding:3px 6px;line-height:1;font-size:13px;">{{$course->score}}</td>
         </tr>
 
-        @else
+        @elseif($course->type =='college')
          <tr style="line-height:1;">
             <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">{{$course->groupBy}}</td>
             <td style="padding:3px 6px;line-height:1;font-size:13px;"> {{$course->grade}}</td>
