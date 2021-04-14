@@ -424,7 +424,6 @@ class TranscriptController extends Controller
         $data = TranscriptPdf::where('transcript_id', $transcrip_id)->first();
         $pdflink = $data->pdf_link;
         $students = StudentProfile::whereId($student_id)->first();
-
         return view('transcript/download-transcript', compact('students', 'transcrip_id', 'student_id', 'pdflink'));
     }
 

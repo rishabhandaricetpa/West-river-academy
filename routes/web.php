@@ -312,7 +312,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('select/enrollmentyear/{student_id}', 'TranscriptController\Transcript9to12@enrollSchool')->name('enrollSchool');
     Route::post('choose/apcourse/{student_id}', 'TranscriptController\Transcript9to12@enrollYear')->name('select.apCourse');
     Route::post('apCourses/{student_id}', 'TranscriptController\Transcript9to12@apCourses')->name('apCourse');
-    Route::get('preview-transcript9_12/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@previewTranscript')->name('preview.transcript9_12');
+    // Route::get('preview-transcript9_12/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@previewTranscript')->name('preview.transcript9_12');
 
     // ap course
     Route::post('apcourse/store', 'TranscriptController\Transcript9to12@storeApCourses')->name('apCourse.store');
@@ -407,6 +407,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
     Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
     Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
+
+    //return shipping charges
+    Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
+    Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
 
     // Route::get('order-consultation', function () {
     //     return view('orderPostage.order_consultation');

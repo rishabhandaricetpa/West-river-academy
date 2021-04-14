@@ -44,7 +44,7 @@ function getFeeDetails($type)
         return false;
     }
 }
-function getPromotedGrades($grades, $modify_last_value = true)
+function getPromotedGrades($grades, $last_value = true)
 {
     try {
         $gradeDetails = array();
@@ -71,11 +71,12 @@ function getPromotedGrades($grades, $modify_last_value = true)
             $grade->order = $orders[$grade->grade];
             return $grade;
         });
-        $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
+        // dd($grades);
 
-        $len = count($sortedOrder);
-        if ($modify_last_value && $len > 1) {
-            $sortedOrder[$len - 1] =  " and " . $sortedOrder[$len - 1];
+        $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
+        $length = count($sortedOrder);
+        if ($last_value && $length > 1) {
+            $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
         }
 
         return implode(", ", $sortedOrder);
@@ -118,4 +119,44 @@ function getCountryAmount($country)
 {
     $postage_charges = Country::select('postage_charges')->where('country', $country)->first();
     return $postage_charges;
+}
+
+
+//get G.P.A for the student
+function getGPAvalue($courses, $total_credits_earned)
+{
+    $calculated_points = array();
+    $academy_points = array(
+        "A" => 4,
+        "B" => 3,
+        "C" => 2,
+        'D' => 1,
+        'F' => 0,
+        'P' => 0,
+    );
+    $college_points = array(
+        "A" => 5,
+        "B" => 4,
+        "C" => 3,
+        'D' => 2,
+        'F' => 0,
+        'P' => 0,
+    );
+    foreach ($courses as $course) {
+        if ($course->type === 'year') {
+            $courses = $courses->map(function ($course) use ($academy_points) {
+                if ($course->credit === 1.0) {
+                    $course->order = $academy_points[$course->score];
+                } elseif ($course->credit === 0.5) {
+                    $course->order = $academy_points[$course->score] / 2;
+                } else {
+                    $course->order = $academy_points[$course->score] / 3;
+                }
+                return $course;
+            });
+        }
+    }
+    $sumForAcademicYear = collect($courses)->pluck('order')->sum();
+    $academicGpa = $sumForAcademicYear / $total_credits_earned;
+    return round($academicGpa, 2);
 }

@@ -148,6 +148,7 @@ class Transcript9to12 extends Controller
     }
     public function storeApCourses(Request $request)
     {
+        // dd($request->all());
         $student_id = $request->get('student_id');
         $courses = $request->get('apCourses');
         foreach ($courses as $course) {
