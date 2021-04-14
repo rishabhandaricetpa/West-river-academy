@@ -124,7 +124,9 @@
   .vdp-datepicker__calendar {
     width: 100% !important;
   }
-
+  .form-group label + .fa-calendar-alt {
+    top: 35px !important;
+}
   /* sidebar */
   .main-sidebar {
     width: 50px;

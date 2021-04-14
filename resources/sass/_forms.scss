@@ -85,6 +85,10 @@ textarea {
   color: $gray-700;
   pointer-events: none;
 }
+.form-group label + .fa-calendar-alt{
+  top: 40px !important;
+  right: 24px;
+}
 
 .enlarge-input {
   input {
