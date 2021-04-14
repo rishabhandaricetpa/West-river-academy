@@ -11,20 +11,16 @@ $rightCount = $rightGroup->count() + $rightGroup->flatten()->count();
 
 // balance both side items for annual year courses
 
-if($leftCount < $rightCount) {
-     for($i=1 ; $i <=($rightCount - $leftCount); $i++){ // push dummy course having -1 id
-      $leftGroup->last()->push((object)['id'=> -1]);
+if($leftCount < $rightCount) { for($i=1 ; $i <=($rightCount - $leftCount); $i++){ // push dummy course having -1 id $leftGroup->last()->push((object)['id'=> -1]);
     }
     }
 
-    if($rightCount < $leftCount) { 
-        for($i=1 ; $i <=($leftCount - $rightCount); $i++) {
-             $rightGroup->last()->push((object)['id'=> -1]);
+    if($rightCount < $leftCount) { for($i=1 ; $i <=($leftCount - $rightCount); $i++) { $rightGroup->last()->push((object)['id'=> -1]);
         }
         }
 
 
-         @endphp
+        @endphp
         <!DOCTYPE html>
         <html lang="en">
 
@@ -41,6 +37,7 @@ if($leftCount < $rightCount) {
                 table {
                     width: 100%;
                 }
+
             </style>
         </head>
 
@@ -61,13 +58,11 @@ if($leftCount < $rightCount) {
             <table>
                 <tbody>
                     <tr style="width:100%;">
-                        <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">{{$student->fullname}}</td>
-                        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">name
+                        <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Name</td>
+                        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$student->fullname}}
                         </td>
-                        <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">{{$student->d_o_b->format(' M d Y')}}</td>
-                        <td style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">12 12
-                            2012
-                        </td>
+                        <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
+                        <td style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">{{$student->d_o_b->format(' M d Y')}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -75,12 +70,10 @@ if($leftCount < $rightCount) {
                 <tbody>
                     <tr style="width:100%;">
                         <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
-                        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
-                            {{$address->street_address}} {{$address->city}}, {{$address->zip_code}}, {{$address->country}}
-                        </td>
+                        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$address->street_address}} {{$address->city}}, {{$address->zip_code}}, {{$address->country}}</td>
                         <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
                         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
-                        {{$minYear}} -  {{$maxYear}}
+                            {{$minYear}} - {{$maxYear}}
                         </td>
                     </tr>
                 </tbody>
@@ -91,8 +84,7 @@ if($leftCount < $rightCount) {
                         <td style="text-transform:uppercase;font-size:13px;width:10%;"></td>
                         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:13px;width:50%;"></td>
                         <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level</td>
-                        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">4 and
-                            5
+                        <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">{{ getPromotedGrades($grades_data) }}
                         </td>
                     </tr>
                 </tbody>
@@ -105,13 +97,13 @@ if($leftCount < $rightCount) {
                                 <td style="width:50%;">
                                     @include('transcript9to12.courseComponent',[
                                     'yearGroup'=> $leftGroup,
-                                  
+
                                     ])
                                 </td>
                                 <td style="width:50%;">
                                     @include('transcript9to12.courseComponent',[
                                     'yearGroup'=> $rightGroup,
-                                  
+
                                     ])
                                 </td>
                             </tr>
@@ -130,15 +122,15 @@ if($leftCount < $rightCount) {
                             </tr>
                             <tr>
                                 <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">G.P.A</th>
-                                <td style="padding:3px 5px;font-size:13px;line-height:1;">3.66</td>
+                                <td style="padding:3px 5px;font-size:13px;line-height:1;">{{getGPAvalue($courses,$totalSelectedGrades)}}</td>
                             </tr>
                             <tr>
-                                <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned
+                                <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Transcript
                                 </th>
-                                <td style="padding:3px 5px;font-size:13px;line-height:1;">26.00</td>
+                                <td style="padding:3px 5px;font-size:13px;line-height:1;"></td>
                             </tr>
                         </table>
-                        <p style="font-size:13px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, asperiores?</p>
+                        <p style="font-size:13px;">West River Academy is accredited by the National Association for the Legal Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>
                     </td>
                     <td width="45%" style="vertical-align:top;padding:0 4px 4px 4px; border:1px solid #000;">
                         <p style="text-align:center;font-weight:600;margin-bottom:0;"><span style="border-bottom:1px solid #000;margin-bottom:0;margin-top:-20px;font-size:13px;">Grading System</span>

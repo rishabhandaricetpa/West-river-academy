@@ -408,6 +408,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
     Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
 
+    //return shipping charges
+    Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
+    Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
+
     // Route::get('order-consultation', function () {
     //     return view('orderPostage.order_consultation');
     // });

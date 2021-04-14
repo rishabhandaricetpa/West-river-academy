@@ -87,6 +87,8 @@
   }
 
   function getUSAFees(e) {
+    console.log(e.target.value);
+
     var postage_type = e.target.value;
     $.ajax({
       headers: {

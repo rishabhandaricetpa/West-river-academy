@@ -288,6 +288,7 @@ class Transcript9to12 extends Controller
         });
         $courses =  $courses->merge($collegeCourses);
 
+
         // END: Transcript data for rendring course data in tabluar format.
 
         $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();

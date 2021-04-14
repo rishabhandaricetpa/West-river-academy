@@ -44,7 +44,7 @@ function getFeeDetails($type)
         return false;
     }
 }
-function getPromotedGrades($grades, $modify_last_value = true)
+function getPromotedGrades($grades, $last_value = true)
 {
     try {
         $gradeDetails = array();
@@ -72,10 +72,9 @@ function getPromotedGrades($grades, $modify_last_value = true)
             return $grade;
         });
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
-
-        $len = count($sortedOrder);
-        if ($modify_last_value && $len > 1) {
-            $sortedOrder[$len - 1] =  " and " . $sortedOrder[$len - 1];
+        $length = count($sortedOrder);
+        if ($last_value && $length > 1) {
+            $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
         }
 
         return implode(", ", $sortedOrder);
@@ -118,4 +117,10 @@ function getCountryAmount($country)
 {
     $postage_charges = Country::select('postage_charges')->where('country', $country)->first();
     return $postage_charges;
+}
+
+
+//get G.P.A for the student
+function getGPAvalue($courses, $total_credits_earned)
+{
 }

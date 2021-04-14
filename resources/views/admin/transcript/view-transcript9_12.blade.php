@@ -5,7 +5,7 @@
 <main class="content">
     <div class="position-relative container-fluid mt-0">
         <div class="content-header">
-            <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
+            <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">{{$student->fullname}}</h2>
