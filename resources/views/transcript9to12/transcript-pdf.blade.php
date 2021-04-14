@@ -152,38 +152,32 @@ if($leftCount < $rightCount) { for($i=1 ; $i <=($rightCount - $leftCount); $i++)
                             </tr>
                             <tr>
                                 <td style="font-size:13px;">B</td>
-                                <td style="font-size:13px;">90-100</td>
+                                <td style="font-size:13px;">80-89</td>
                                 <td style="font-size:13px;">3.00</td>
                                 <td style="font-size:13px;">5.00</td>
                             </tr>
                             <tr>
                                 <td style="font-size:13px;">C</td>
-                                <td style="font-size:13px;">90-100</td>
-                                <td style="font-size:13px;">4.00</td>
+                                <td style="font-size:13px;">70-79</td>
+                                <td style="font-size:13px;">2.00</td>
                                 <td style="font-size:13px;">5.00</td>
                             </tr>
                             <tr>
                                 <td style="font-size:13px;">D</td>
-                                <td style="font-size:13px;">90-100</td>
-                                <td style="font-size:13px;">4.00</td>
-                                <td style="font-size:13px;">5.00</td>
-                            </tr>
-                            <tr>
-                                <td style="font-size:13px;">D</td>
-                                <td style="font-size:13px;">90-100</td>
-                                <td style="font-size:13px;">4.00</td>
+                                <td style="font-size:13px;">60-69</td>
+                                <td style="font-size:13px;">1.00</td>
                                 <td style="font-size:13px;">5.00</td>
                             </tr>
                             <tr>
                                 <td style="font-size:13px;">F</td>
-                                <td style="font-size:13px;">90-100</td>
-                                <td style="font-size:13px;">4.00</td>
+                                <td style="font-size:13px;">0-59</td>
+                                <td style="font-size:13px;">0.00</td>
                                 <td style="font-size:13px;">5.00</td>
                             </tr>
                             <tr>
                                 <td style="font-size:13px;">P</td>
-                                <td style="font-size:13px;">90-100</td>
-                                <td style="font-size:13px;">4.00</td>
+                                <td style="font-size:13px;">60-100</td>
+                                <td style="font-size:13px;">0.00</td>
                                 <td style="font-size:13px;">5.00</td>
                             </tr>
                         </table>
@@ -209,7 +203,5 @@ if($leftCount < $rightCount) { for($i=1 ; $i <=($rightCount - $leftCount); $i++)
                     </td>
                 </tr>
             </table>
-
         </body>
-
         </html>
