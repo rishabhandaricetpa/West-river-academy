@@ -29,4 +29,8 @@ class Transcript9_12 extends Model
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
     }
+    public function apCourses()
+    {
+        return $this->hasMany(AdvancePlacement::class);
+    }
 }
