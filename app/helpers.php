@@ -169,23 +169,37 @@ function getGPAvalue($courses, $total_credits_earned)
 function fetchTranscript9_12Details($transcriptData)
 {
     $courses = collect([]);
+    $courseInProgress = collect([]);
     // for academic years and courses
-    $transcriptData->each(function ($transcript_courses) use ($courses) {
-        $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses) {
-            $courses->push(
-                (object)[
-                    'id' => $course->id,
-                    'score' => $course->score,
-                    'name' => $course->subject->subject_name,
-                    'credit' => $course->credit->credit,
-                    'groupBy' => $transcript_courses->enrollment_year,
-                    'grade' => $transcript_courses->grade,
-                    'type' => 'year'
-                ]
-            );
+    $transcriptData->each(function ($transcript_courses) use ($courses, $courseInProgress) {
+        $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses, $courseInProgress) {
+            if ($course->score !== 'In Progress') {
+                $courses->push(
+                    (object)[
+                        'id' => $course->id,
+                        'score' => $course->score,
+                        'name' => $course->subject->subject_name,
+                        'credit' => $course->credit->credit,
+                        'groupBy' => $transcript_courses->enrollment_year,
+                        'grade' => $transcript_courses->grade,
+                        'type' => 'year'
+                    ]
+                );
+            } else {
+                $courseInProgress->push(
+                    (object)[
+                        'id' => $course->id,
+                        'score' => '-',
+                        'name' => $course->subject->subject_name,
+                        'credit' => $course->credit->credit,
+                        'groupBy' => 'Courses In Progres',
+                        'grade' => $transcript_courses->grade,
+                        'type' => 'year'
+                    ]
+                );
+            }
         });
     });
-
     /** for college courses */
     $collegeCourses = collect([]);
     $transcriptData->each(function ($college_courses) use ($collegeCourses) {
@@ -203,7 +217,7 @@ function fetchTranscript9_12Details($transcriptData)
             );
         });
     });
-    $courses =  $courses->merge($collegeCourses);
+    $courses = $courses->merge($collegeCourses)->merge($courseInProgress);
     return $courses;
 }
 
