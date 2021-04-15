@@ -11,12 +11,13 @@
             <div class="row ">
                <div class="col-sm-3">
                   <div class="form-check mb-2">
-                     <input class="form-check-input" type="radio" name="another_grade" value="Yes">
+                     <input class="form-check-input" type="radio" name="another_grade" value="Yes" required>
                      <label class="form-check-label" for="">
                         Yes
                      </label>
                      <input type="hidden" name="student_id" value="{{$student_id}}">
                      <input type="hidden" name="trans_id" value="{{$trans_id}}">
+                     <input type="hidden" name="transcript9_12id" value="{{$transcript9_12_id}}">
                   </div>
                   <div class="form-check mb-2">
                      <input class="form-check-input" type="radio" name="another_grade" value="No">

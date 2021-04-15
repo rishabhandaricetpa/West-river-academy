@@ -30,26 +30,26 @@ class CreditTableSeeder extends Seeder
                 'total_credit' => 7.25
             ],
             [
-                'credit' => '2.5',
+                'credit' => '0.25',
                 'country' => 'Others',
                 'is_carnegia' => 1,
                 'total_credit' => 7.25
 
             ],
             [
-                'credit' => '10',
+                'credit' => '2.50',
                 'country' => 'California',
                 'is_carnegia' => 0,
                 'total_credit' => 72.5
             ],
             [
-                'credit' => '20',
+                'credit' => '5.00',
                 'country' => 'California',
                 'is_carnegia' => 0,
                 'total_credit' => 72.5
             ],
             [
-                'credit' => '30',
+                'credit' => '10.00',
                 'country' => 'California',
                 'is_carnegia' => 0,
                 'total_credit' => 72.5

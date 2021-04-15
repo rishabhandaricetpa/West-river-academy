@@ -3,7 +3,7 @@
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
+  <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
   <form method="POST" action="{{ route('add.cart') }}">
     @csrf
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
@@ -21,6 +21,7 @@
           <input type="hidden" name="transcript_id" value="{{$transcript_id}}">
           <input type="hidden" name="type" value="transcript">
           <input type="hidden" name="student_id" value="{{ $student->id }}">
+          <input type="hidden" name="type_for_cart" value="{{$type}}">
           <div class="col-sm-6 d-flex justify-content-center align-items-center">
             <div class="text-center">
               <p>Make an Online Payment:</p>

@@ -40,7 +40,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/welcome-video', function () {
             return view('welcome-video');
         });
-
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student
@@ -77,8 +76,38 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('generate-pdf/{student_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
         // admin dashboard
 
+        //fees and services
+        Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
+        // Route::get('previous-school', function () {
+        //     return view('previous-school');
+        // });
+        // Route::get('order-postage', function () {
+        //     return view('frontendpages.order-postage');
+        // });
+        // Route::get('order-consultation', function () {
+        //     return view('orderPostage.order_consultation');
+        // });
+        Route::get('video-tutorials', function () {
+            return view('videos.video_library');
+        })->name('video.tutorials');
+
+        // Route::get('college-info', function () {
+        //     return view('frontendpages.college-info');
+        // });
+
+        // Route::get('college-info', function () {
+        //     return view('frontendpages.college-info');
+        // });
         Route::get('previous-school', function () {
             return view('previous-school');
+        });
+
+        Route::get('college-info', function () {
+            return view('frontendpages.college-info');
+        });
+
+        Route::get('college-info', function () {
+            return view('frontendpages.college-info');
         });
 
         Route::get('notification', function () {
@@ -136,8 +165,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
 
-    //fees and services
-    Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
 
     //Transcript K-8
     Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
@@ -212,14 +239,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
 
     Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
-    Route::get('preview-transcript/{student_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
+    Route::get('preview-transcript/{student_id}/{trans_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
     Route::get('new-grade/{student_id}/{transcript_id}', function () {
         return view('transcript/dashboard-another-languages');
     })->name('new-grade');
 
     Route::get('choose-another/{student_id}/{trans_id}', 'Courses\AnotherCourseController@anotherGrade')->name('choose.another');
-    Route::get('another-grade/{student_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
+    Route::get('another-grade/{student_id}/{trans_id}', 'Courses\AnotherCourseController@storeAnotherGrade')->name('another.grade');
     Route::post('another/required', 'Courses\AnotherCourseController@anotherGradeRequired')->name('another.grade.requirement');
 
     Route::get('all-course/{transcript_id}/{student_id}', 'TranscriptController@displayAllCourse')->name('displayAllCourse');
@@ -255,6 +282,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('delete/school/{transcript_id}', 'TranscriptController@deleteSchool')->name('delete.school');
 
     //Record Transfer
+    Route::get('transfer/record', 'RecordTransferController@getStudents')->name('transferSchoolRecord');
     Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
     Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
     Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
@@ -263,13 +291,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('notarization', 'NotarizationController@index')->name('notarization');
     Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
 
-
+    // assign record to sub admin by super admin
     Route::post('assign/dashboard', 'Admin\DashboardController@assignRecord')->name('dashboard.update');
     Route::post('update/dashboard', 'Admin\DashboardController@updateDashboard');
+
+    // provide status to record
+    Route::post('assign/status', 'Admin\DashboardController@assignRecordStatus')->name('dashboard.update');
+    Route::post('update/record/status', 'Admin\DashboardController@updateRecordStatus');
+
+    //archieve records
+    Route::post('archieve/record', 'Admin\DashboardController@archieveRecord');
     //order Postage
-    Route::get('orderpostage', function () {
-        return view('orderPostage/purchase_postage');
-    });
+    Route::get('orderpostage', 'NotarizationController@viewOrderPostage')->name('notarization.viewOrderPostage');
     Route::get('custom-letter', 'PaymentMethod\CustomLetterController@index')->name('custom.letter');
 
     // transcript 9-12
@@ -279,6 +312,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('select/enrollmentyear/{student_id}', 'TranscriptController\Transcript9to12@enrollSchool')->name('enrollSchool');
     Route::post('choose/apcourse/{student_id}', 'TranscriptController\Transcript9to12@enrollYear')->name('select.apCourse');
     Route::post('apCourses/{student_id}', 'TranscriptController\Transcript9to12@apCourses')->name('apCourse');
+    Route::get('preview-transcript9_12/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@previewTranscript')->name('preview.transcript9_12');
 
     // ap course
     Route::post('apcourse/store', 'TranscriptController\Transcript9to12@storeApCourses')->name('apCourse.store');
@@ -317,10 +351,68 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('anotherCourse', 'TranscriptCourses\AnotherCourse@store')->name('another-transcript.store');
 
     // another grade
-    Route::get('another-grade-transcript/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@anotherGrade')->name('another.transcript.grade');
+    Route::get('another-grade-transcript/{student_id}/{trans_id}/{transcript9_12id}', 'TranscriptController\Transcript9to12@anotherGrade')->name('another.transcript.grade');
     Route::post('all-students-grades', 'TranscriptController\Transcript9to12@getAnotherGradeStatus')->name('another-transcript9_12.required');
 
     // student college information
 
     Route::post('student-college/{student_id}', 'TranscriptController\CollegeController@addCollege')->name('collegeDetails');
+    Route::post('college-course', 'TranscriptController\CollegeController@store')->name('collegeCourse.store');
+
+    // display all courses
+    Route::get('display-all-grades/{student_id}/{transcript_id}', 'TranscriptController\Transcript9to12@displayAllGrades')->name('display.grades');
+
+    //operation - delete and edit in transript 9-12
+    Route::get('delete/school-transcript/{transcript_id}', 'TranscriptController\Transcript9to12@deleteSchool')->name('delete.transcript.school');
+    //Route::get('course-details/{transcript_id}/{student_id}', 'TranscriptController\Transcript9to12@displayAllCourse')->name('displayCourseDetails');
+
+    //show specific course details
+
+    Route::get('display-course-details/{transcript_id}/{student_id}', 'TranscriptController\Transcript9to12@showCourseDetails')->name('showCourseDetails');
+
+    // edit course
+
+    //english edit transcript
+    Route::get('edit-transcript-english/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editEnglish')->name('edit.englishTranscriptCourse');
+    Route::post('edit-transcript-english', 'EditTranscript9_12Courses\EditCourse@storeEnglish')->name('editEnglishTranscriptCourse.store');
+
+    //mathematics edit transcript
+    Route::get('edit-mathematics-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editMathematics')->name('edit.mathematicsTranscriptCourse');
+    Route::post('edit-mathematics-transcript', 'EditTranscript9_12Courses\EditCourse@storeMathematics')->name('editMathematicsTranscriptCourse.store');
+
+    //social science 
+    Route::get('edit-socialScience-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editSocialScience')->name('edit.SocialScienceTranscriptCourse');
+    Route::post('edit-socialScience-transcript', 'EditTranscript9_12Courses\EditCourse@storeSocialScience')->name('editSocialScienceTranscriptCourse.store');
+
+    //science 
+    Route::get('edit-science-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editScience')->name('edit.ScienceTranscriptCourse');
+    Route::post('edit-science-transcript', 'EditTranscript9_12Courses\EditCourse@storeScience')->name('editScienceTranscriptCourse.store');
+
+    //physical Education
+    Route::get('edit-physicalEducation-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editPhysicalEducation')->name('edit.PhysicalEducationTranscriptCourse');
+    Route::post('edit-physicalEducation-transcript', 'EditTranscript9_12Courses\EditCourse@storePhysicalEducation')->name('editPhysicalEducationTranscriptCourse.store');
+    //health edit transcript
+    Route::get('edit-health-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editHealth')->name('edit.healthTranscriptCourse');
+    Route::post('edit-health-transcript', 'EditTranscript9_12Courses\EditCourse@storeHealth')->name('editHealthTranscriptCourse.store');
+
+    //Foreign language edit transcript
+    Route::get('edit-foreign-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editForeign')->name('edit.foreignTranscriptCourse');
+    Route::post('edit-foreign-transcript', 'EditTranscript9_12Courses\EditCourse@storeForeign')->name('editForeignTranscriptCourse.store');
+
+    //elective edit transcript
+    Route::get('edit-elective-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editElective')->name('edit.electiveTranscriptCourse');
+    Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+
+    //order personal consultation
+    Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+    Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
+    Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
+
+    //return shipping charges
+    Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
+    Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
+
+    // Route::get('order-consultation', function () {
+    //     return view('orderPostage.order_consultation');
+    // });
 });

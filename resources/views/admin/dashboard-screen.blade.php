@@ -19,7 +19,7 @@
 
 <!-- Button trigger modal -->
 
-<!-- Modal -->
+<!-- Modal for Super Admin -->
 <div class="modal fade" id="assignRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -58,9 +58,38 @@
         </div>
     </div>
 </div>
+<!-- Modal for Sub Admin -->
+<div class="modal fade" id="assignStatusToRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Task Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
 
-
+                </button>
+            </div>
+            <form id="assign">
+                <input type="hidden" name="datarecord_id" id="datarecord_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="assigned_to" class="col-form-label">Status:</label>
+                        <select class="form-control" id="task_status" name="assigned_to">
+                            <option value="" disabled>Please Select One</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="updateStatus()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Main content -->
+@php
+$date= \Carbon\Carbon::now()->toDateString()
+@endphp
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -68,34 +97,55 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"></h3>
+                        @if($isAdmin)
+                        <button class="btn btn-primary mr-auto" type="submit" onclick="sendArchieve()">Archive</button>
+                        @endif
                     </div>
+
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
+                                    @if($isAdmin)
+                                    <th> Select </th>
+                                    @endif
                                     <th>Date Created</th>
                                     <th>Orders</th>
                                     <th>Notes</th>
                                     <th>Assigned To:</th>
+                                    @if($isAdmin)
                                     <th>Action</th>
+                                    @endif
+                                    <th>Task Status</th>
+                                    @if(!$isAdmin)
+                                    <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($dashboardData as $data)
                                 <tr>
+                                    @if($isAdmin)
+                                    <td> <input type="checkbox" value="{{$data->id}}" name="is_archived" onclick="archieve(this.value)"> </td>
+                                    @endif
                                     <td>{{$data->created_date}}</td>
                                     @if($data->related_to === 'student_record_received')
-                                    <td><a href="{{route('admin.edit-student',$data->student->id)}}">New Student Enrolled</a></td>
+                                    <td><a href=" {{route('admin.edit.student.payment',$data->student->id)}}">New Student Enrolled</a></td>
                                     @elseif($data->related_to === 'graduation_record_received')
                                     <td><a href="{{ route('admin.view.graduation')}}/{{$data->linked_to}}/edit">Graduation Application</a></td>
                                     @elseif($data->related_to === 'transcript_ordered')
-                                    <td><a href="{{ route('admin.viewfull.transcript',[$data->student_profile_id,$data->linked_to])}}">Transcript Ordered</a></td>
-                                    @elseif($data->related_to === 'record_transfer')
-                                    <td><a href="{{route('admin.student.schoolRecord',$data->student_profile_id)}}">Record Transfer</a></td>
+                                    <td><a href="{{ route ('admin.transpayment.edit',$data->linked_to)}}">Transcript Ordered</a></td>
+                                    @elseif($data->related_to === 'record_transfer' )
+                                    @if($data->created_at->diffInDays($date) >7 && $data['recordTransfer']['request_status'] !== 'Record Received')
+                                    <td class="btn btn-primary"><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id']] )}}">Alert:Resend Request For Record Transfer</a></td>
+                                    @else
+                                    <td><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id'] ] )}}">Record Transfer</a></td>
+                                    @endif
+
+
                                     @elseif($data->related_to === 'custom_record_received')
-                                    <td><a href="{{ route('admin.each.payments',$data->linked_to)}}">Custom Payment</a></td>
+                                    <td><a href="{{ route('edit.custompayment',$data->linked_to)}}">Custom Payment</a></td>
                                     @elseif($data->related_to === 'transcript_edit_record_received')
                                     <td><a href="">Transcript Edit Request</a></td>
                                     @elseif($data->related_to === 'postage_record_received')
@@ -104,14 +154,28 @@
                                     <td><a href="{{ route('admin.each.notarization',$data->linked_to)}}">Notarization And Appostile</a></td>
                                     @elseif($data->related_to === 'custom_letter_record_received')
                                     <td><a href="{{ route('admin.each.customletters',$data->linked_to)}}">Custom Letter</a></td>
+                                    @elseif($data->related_to === 'orderconsultation_record_received')
+                                    <td><a href="{{ route('admin.each.conultation',$data->linked_to)}}">Personal Consultation</a></td>
                                     @endif
                                     <td>{{$data->notes}}</td>
-                                    @if(is_null($data->assigned_to))
-                                    <td class=" odd bg-primary">Not Yet Assigned</td>
+                                    @if(empty($data->assigned_to))
+                                    <td class="odd bg-primary">Not Yet Assigned</td>
                                     @elseif($data->assigned_to)
                                     <td>{{$data->assigned_to}}</td>
                                     @endif
+
+                                    @if($isAdmin)
                                     <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboard(event.target)" data-toggle="modal" data-target="#assignRecord" class="btn btn-primary">Assign</a></td>
+                                    @endif
+                                    @if(empty($data->status))
+                                    <td class="">No Status</td>
+                                    @elseif($data->status)
+                                    <td class="bg-success">{{$data->status}}</td>
+                                    @endif
+                                    @if(!$isAdmin)
+                                    <td><a href="javascript:void(0)" data-id="{{ $data->id }}" onclick="editDashboardForStatus(event.target)" data-toggle="modal" data-target="#assignStatusToRecord" class="btn btn-primary">Status</a></td>
+                                    @endif
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -129,9 +193,3 @@
 </div>
 <!-- /.content -->
 @endsection
-<script type="text/javascript">
-    function myFunction() {
-        if (!confirm("Are You Sure to delete this"))
-            event.preventDefault();
-    }
-</script>

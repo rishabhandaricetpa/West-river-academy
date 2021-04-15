@@ -40,7 +40,7 @@
                   class="btn btn-primary"
                   >Help me Decide</a
                 >
-                <div class="row pl-sm-5">
+                <div class="row pl-sm-5 mt-3">
                   <div
                     v-for="(grade, index) in grades"
                     :key="index"

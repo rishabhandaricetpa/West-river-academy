@@ -7,13 +7,14 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1 class="m-0 text-center">Parent Details</h1>
+        <h1 class="m-0 text-center">Parent List</h1>
         <div class="d-flex">
             <ol class="breadcrumb ml-auto">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Parent List</li>
             </ol>
         </div><!-- /.container-fluid -->
+    </div>
     </div>
     <!-- /.content-header -->
 
@@ -52,6 +53,6 @@
                         </div>
                         <!-- /.row -->
                     </section>
-                    </div>
+                  
              <!-- /.content -->
 @endsection

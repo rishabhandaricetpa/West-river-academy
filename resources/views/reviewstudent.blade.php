@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="form-group d-sm-flex mb-2">
-          <label for="">Student ID</label>
+          <label for="">National ID</label>
           <div>
             <p>{{$student ->student_Id}}</p>
           </div>
@@ -54,10 +54,10 @@
           <table class="px-0 w-100 table-styling">
             <thead>
               <tr>
-                <th></th>
                 <th>Name</th>
                 <th>Enrollment Period</th>
                 <th>Amount</th>
+                <th>Select or De-select</th>
               </tr>
             </thead>
             <tbody>
@@ -66,13 +66,13 @@
               @endphp
               @foreach ($fees as $fee)
               <tr>
-                <td style="min-width: 2rem; text-align:center"> <input v-on:click="changeAmount($event, '{{ $fee->amount }}')" type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
                 <td>{{ $fee->first_name }}</td>
                 <td class="ml-2">
                   @if ($fee->type == 'annual') Annual @else Second Semester Only @endif
                   <span class="small"> ({{ Carbon\Carbon::parse($fee->start_date_of_enrollment)->format('M d Y') }} - {{ Carbon\Carbon::parse($fee->end_date_of_enrollment)->format('M d Y') }} ) </span>
                 </td>
                 <td class="text-center">${{ $fee->amount }}</td>
+                <td style="min-width: 2rem; text-align:center"> <input v-on:click="changeAmount($event, '{{ $fee->amount }}')" type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
                 @php
                 $total_amount += $fee->amount;
                 @endphp

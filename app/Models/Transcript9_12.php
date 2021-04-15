@@ -10,16 +10,27 @@ class Transcript9_12 extends Model
     use HasFactory;
     protected $table = 'transcript9_12';
     protected $fillable = [
-        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name', 'transcript_id', 'is_carnegie'
+        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name', 'transcript_id', 'is_carnegie',
     ];
 
     public function TranscriptCourse9_12()
     {
-        return $this->hasMany(TranscriptCourse9_12::class);
+        return $this->hasMany('App\Models\TranscriptCourse9_12', 'transcript9_12_id', 'id');
     }
-
+    public function collegeCourses()
+    {
+        return $this->hasMany(CollegeCourse::class);
+    }
     public function transcript()
     {
         return $this->belongsTo(Transcript::class);
+    }
+    public function transcripts()
+    {
+        return $this->hasMany('App\Models\TranscriptCourse', 'k8transcript_id', 'id');
+    }
+    public function apCourses()
+    {
+        return $this->hasMany(AdvancePlacement::class);
     }
 }

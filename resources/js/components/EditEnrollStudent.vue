@@ -1,6 +1,6 @@
 <template>
- <div class="form-wrap border bg-light py-5 px-25 position-relative">
-  <form method="POST" @submit.prevent="EditStudent()">
+ 
+  <form method="POST" class="mb-0" @submit.prevent="EditStudent()">
     <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
       <div>
@@ -79,11 +79,12 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <p class="position-relative mb-0">
+      <div class="position-relative mb-0  col-md-3 col-xl-2 px-0">
         <flat-pickr required id="dob" name="dob" :config="config" v-model="form.dob">
         </flat-pickr>
-      </p>
-      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+        <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+      </div>
+      
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -192,17 +193,9 @@
           </div>
           </div>
         </div>
-        <div class="form-group mt-2r d-sm-flex links-list mb-5">
-          <!-- Button trigger modal -->
-          <a href="#skipYear" data-toggle="modal" class="ml-sm-4"
-            >what if i need to skip a year?</a
-          >
-        </div>
-
         <div class="form-group d-sm-flex mb-2r lato-italic info-detail ">
           <label for=""
-            >Select grade level(s) for your enrollment period
-            <p>(You may select more than one for multiple years)</p></label
+            >Select grade level(s) for your enrollment period.</label
           >
           <div class="row pl-sm-5">
             <div v-for="(grade, index) in grades" :key="index" class="col-6 col-sm-3">
@@ -220,7 +213,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
+      <div v-else class="overflow-auto">
             <table class="table-styling border w-100 my-5">
             <thead>
             <tr>
@@ -289,7 +282,7 @@
       <button type="submit" class="btn btn-primary mb-4 mb-sm-0">Continue</button>
     </div>
   </form>
-</div>
+
 </template>
 
 <script>
@@ -322,7 +315,7 @@ export default {
         last_name: this.students.last_name,
         gender: this.students.gender,
         email: this.students.email,
-        dob: this.students.d_o_b,
+        dob: this.date_of_birth,
         cell_phone: this.students.cell_phone,
         student_Id: this.students.student_Id,
         student_situation: this.students.student_situation,
@@ -512,6 +505,10 @@ export default {
       type: Object,
       required: true,
     },
+  date_of_birth:{
+    type:Object,
+    required:true
+  },
     periods: {
       type: Array,
       required: true,

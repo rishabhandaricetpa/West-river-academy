@@ -27,7 +27,7 @@ class HealthCourse extends Controller
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
-        $total_credits = Credits::where('is_carnegia', $is_carnegie)->select('total_credit')->first();
+        $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
         return view('transcript9to12_courses.healthCourse', compact('courses_id', 'healthEducation', 'student_id', 'transcript_id', 'all_credits', 'total_credits'));
     }
     public function store(Request $request)
@@ -42,20 +42,21 @@ class HealthCourse extends Controller
         foreach ($request->get('healthCourse', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
+            $total_credits = $period['total_credits'];
             $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([
                     'courses_id' => $period['course_id'],
                     'subject_name' => $other_subjects,
-                    'transcript_period' => 'K-8',
+                    'transcript_period' => '9-12',
                     'status' => 1,
                 ]);
                 TranscriptCourse9_12::create([
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
-                    'score' => $period['grade'],
-                    'remaining_credits' => $request->get('remainingCredit'),
+                    'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
+                    'remaining_credits' => $total_credits - $period['selectedCredit'],
                     'selectedCredit' => $period['selectedCredit'],
                     'credit_id' => $credit->id,
                     'other_subject' => $other_sub->subject_name,
@@ -70,10 +71,10 @@ class HealthCourse extends Controller
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['course_id'],
                     'subject_id' => $subject->id,
-                    'score' => $period['grade'],
+                    'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'selectedCredit' => $period['selectedCredit'],
                     'credit_id' => $credit->id,
-                    'remaining_credits' => $request->get('remainingCredit'),
+                    'remaining_credits' =>  $total_credits - $period['selectedCredit'],
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

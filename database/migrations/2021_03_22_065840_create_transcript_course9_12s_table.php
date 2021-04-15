@@ -28,6 +28,7 @@ class CreateTranscriptCourse912sTable extends Migration
             $table->unsignedBigInteger('transcript9_12_id');
             $table->foreign('transcript9_12_id')->references('id')->on('transcript9_12')->nullable()->onDelete('cascade');
             $table->float('selectedCredit');
+            $table->string('other_subject')->nullable();
             $table->timestamps();
         });
     }

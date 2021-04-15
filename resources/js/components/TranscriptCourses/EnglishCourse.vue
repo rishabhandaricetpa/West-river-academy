@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="englishCourse in form.englishCourse"
+      v-for="(englishCourse,index) in form.englishCourse"
       :key="englishCourse.id"
     >
       <div class="position-relative">
@@ -14,14 +14,6 @@
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
-          <h3 class="mb-3">
-            Select an English/Language Arts course:<i
-              class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Tooltip on top"
-            ></i>
-          </h3>
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
@@ -46,6 +38,7 @@
               />
             </div>
           </div>
+          
           <div class="form-group">
             <div class="d-sm-flex mt-4">
               <h3>Select a Grade</h3>
@@ -103,9 +96,9 @@
                 type="radio"
                 v-model="englishCourse.grade"
                 name=""
-                value="Pass"
+                value="PASS"
               />
-              <label class="form-check-label" for="">Pass</label>
+              <label class="form-check-label" for="">PASS</label>
             </div>
             <div class="form-group mb-1 mt-2r">
               <h3 class="text-black">
@@ -138,8 +131,13 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
+    <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
         >Add another English/Language Arts Course</a
@@ -157,11 +155,12 @@ export default {
   data() {
     return {
       isCredit: false,
-
+      errors: [],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
+
         englishCourse: [
           {
             course_id: this.courses_id,
@@ -170,7 +169,8 @@ export default {
             subject_name: "",
             other_subject: "",
             selectedCredit: "",
-            grade: ""
+            grade: "",
+            total_credits: this.total_credits.total_credit
           }
         ]
       }
@@ -186,6 +186,7 @@ export default {
     "total_credits"
   ],
   methods: {
+    
     showCredit(e) {
       this.isCredit = true;
       this.form.remainingCredit =
@@ -200,14 +201,29 @@ export default {
         subject_name: "",
         other_subject: "",
         selectedCredit: "",
-        grade: ""
+        grade: "",
+        total_credits: this.total_credits.total_credit
       });
     },
     removeCourse(index) {
       this.form.englishCourse.splice(index, 1);
     },
     submitCourse() {
-      axios
+      this.errors = [];
+     
+  
+      if(!this.validateSubject() && !this.validateOtherSubject()){
+          this.errors.push(
+          "Course name is required Field! Please select a Course name"
+        );
+      }
+         if(!this.validateCredit()){
+         this.errors.push(
+          "Credit is required Field! Please select a credit "
+        );
+      }
+      
+         axios
         .post(route("english-transcript.store"), this.form)
         .then(response => {
           window.location =
@@ -217,9 +233,41 @@ export default {
             this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please fill in the fields");
         });
-    }
+      
+    
+    },
+
+    validateSubject(){
+      for(let i=0;i<this.form.englishCourse.length;i++){
+        const enrollmentSubject = this.form.englishCourse[i];
+         if(!enrollmentSubject.subject_name){
+         return false;
+        }
+     }
+     return true;
+    },
+      validateCredit(){
+      for(let i=0;i<this.form.englishCourse.length;i++){
+        const enrollmentSubject = this.form.englishCourse[i];
+         if(!enrollmentSubject.selectedCredit){
+         return false;
+        }
+     }
+     return true;
+    },
+    validateOtherSubject(){
+      for(let i=0;i<this.form.englishCourse.length;i++){
+        const enrollmentOtherSubject = this.form.englishCourse[i];
+         if(!enrollmentOtherSubject.other_subject){
+         return false;
+        }
+     }
+         return true;
+    } 
+    
+
   }
 };
 </script>

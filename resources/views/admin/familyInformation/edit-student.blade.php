@@ -35,7 +35,7 @@
           <input class="form-control" id="cell_phone" name="cell_phone" value="{{$student->cell_phone}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Student ID<sup>*</sup></label>
+          <label>National ID<sup>*</sup></label>
           <input class="form-control" id="student_id" name="student_id" value="{{$student->student_Id}}">
         </div>
         <div class="form-group col-sm-6">
@@ -51,21 +51,21 @@
         </div>
         <div>
         </div>
-        <label>Enrollment Period <sup>*</sup></label>
+        <label class="px-3">Enrollment Period <sup>*</sup></label>
         @foreach($enrollment_periods as $enrollment_period)
-        <div class="form-group w-100 row align-items-center">
+        <div class="form-group w-100 row mx-0">
           <input type="hidden" name="id[]" value="{{$enrollment_period->id}}">
-          <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
-            <label>Start Date </label>
-            <input class="datepicker" type="text" name="start_date[]" value="{{Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M d Y')}}">
+          <div class="col-md-4 mb-4 mb-sm-0">
+            <label class="w-auto">Start Date </label>
+            <input class="datepicker form-control" type="text" name="start_date[]" value="{{Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M d Y')}}">
           </div>
-          <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
-            <label>End Date </label>
-            <input class="datepicker" type="text" name="end_date[]" value="{{Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M d Y')}}">
+          <div class="col-md-4  mb-4 mb-sm-0">
+            <label class="w-auto">End Date </label>
+            <input class="datepicker form-control" type="text" name="end_date[]" value="{{Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M d Y')}}">
           </div>
 
-          <div class="col-md-4 d-sm-flex mb-4 mb-sm-0">
-            <label>Grade Level</label>
+          <div class="col-md-4 mb-4 mb-sm-0">
+            <label class="w-auto">Grade Level</label>
             <select name="grade[]" class="form-control">
               <option value="Ungraded" @if($enrollment_period->grade_level == 'Ungraded')
                 selected="selected" @endif>Ungraded</option>
@@ -123,9 +123,11 @@
         </div>
         @endforeach
         <!-- /.card-body -->
+        <div class="px-3">
         <button type="submit" class="btn btn-primary">Update</button>
-        <a type="button" href="{{ route('admin.genrate.adminConfirmition',$student->id) }}" class="btn btn-primary">Generate Confirmation</a>
-    </div>
+        <a type="button" href="{{ route('admin.genrate.adminConfirmition',$student->id) }}" class="btn btn-primary ml-3">Generate Confirmation</a>
+        </div>
+      </div>
   </div>
 
   </form>

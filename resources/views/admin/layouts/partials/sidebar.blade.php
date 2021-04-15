@@ -18,6 +18,16 @@
           </p>
         </a>
       </li>
+      @can('isAdmin')
+      <li class="nav-item">
+        <a href="{{route('admin.archieved.tasks')}}" class="nav-link">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Archived Tasks
+          </p>
+        </a>
+      </li>
+      @endcan
       <a href="" class="nav-link ">
         <i class="fas fa-user-friends nav-icon"></i>
         <p>
@@ -106,6 +116,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.order.conultation')}}" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Personal Consultation
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('admin/payment-address')}}" class="nav-link">
               <i class="fas fa-address-book"></i>
               <p>Change Address</p>
@@ -123,10 +141,26 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{ url('admin/view/transcript') }}" class="nav-link">
+            <a href="{{ route('admin.view.transcript') }}" class="nav-link">
               <i class="fas fa-eye"></i>
               <p>
-                View Transcript
+                Transcript K-8
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.view.transcript9_12') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
+              <p>
+                Transcript 9-12
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.transcript.payments') }}" class="nav-link">
+              <i class="fas fa-eye"></i>
+              <p>
+                Transcript Payments
               </p>
             </a>
           </li>
@@ -167,7 +201,7 @@
         <a href="{{ url('admin/fees-services')}}" class="nav-link">
           <i class="nav-icon fas fa-dollar-sign"></i>
           <p>
-            Fees an Services
+            Fee and Services
           </p>
         </a>
       </li>

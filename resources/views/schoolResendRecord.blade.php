@@ -30,6 +30,7 @@
         .mt-40 {
             margin-top: 40px;
         }
+
     </style>
 </head>
 
@@ -61,14 +62,14 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>To: {{$email}}</td>
+                    <td>To:{{$email}}</td>
                 </tr>
             </tbody>
         </table>
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Attention: School Records:</td>
+                    <td>Attention: School Records</td>
                 </tr>
             </tbody>
         </table>

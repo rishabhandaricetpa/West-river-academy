@@ -5,7 +5,7 @@
 <main class="content">
     <div class="position-relative container-fluid mt-0">
         <div class="content-header">
-            <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
+            <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">{{$student->fullname}}</h2>
@@ -35,9 +35,9 @@
                 </div>
 
 
-                <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
-                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
-                <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
+                <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Unsigned Transcript</a>
+                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Signed Transcript</a>
+                <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Signed Transcript</a>
             </form>
         </div>
         @foreach($transcriptData as $school)
@@ -47,7 +47,7 @@
                 Academic School Year(s):{{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
             </p>
-            <table id="recordData" class="table table-bordered table-striped data-table">
+            <table id="addressData" class="table table-bordered table-striped data-table">
                 <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3">Delete School Record</a>
                 <thead>
                     <tr>
@@ -61,7 +61,6 @@
                     @foreach($school->TranscriptCourse as $course)
                     @foreach ($course->subjects as $subject)
                     <tr>
-
                         <td>
                             @php
                             $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
@@ -72,8 +71,11 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a>
-                        </td>
+                        <<<<<<< HEAD <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a>
+                            =======
+                            <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
+                                >>>>>>> origin
+                            </td>
                     </tr>
                     @endforeach
                     @endforeach
@@ -91,4 +93,5 @@
         if (!confirm("Are You Sure to delete this"))
             event.preventDefault();
     }
+
 </script>

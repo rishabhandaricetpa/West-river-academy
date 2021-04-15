@@ -11,7 +11,7 @@
         <div class="d-flex">
             <ol class="breadcrumb ml-auto">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">View Student Information</li>
+                <li class="breadcrumb-item active">Student Information</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.container-fluid -->
@@ -34,19 +34,22 @@
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>Date od Birth</th>
+                                    <th>Date of Birth</th>
+                                    <th>Gender</th>
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                     <th>View Payments</th>
                                     <th>View Transcript</th>
                                     <th>View Graduation</th>
+                                    <th>View Record Transfer</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($students as $student)
                                 <tr>
                                     <td>{{$student->fullname}}</td>
+                                    <td>{{$student->d_o_b->format('M d Y')}}</td>
                                     <td>{{$student->gender}}</td>
                                     <td>{{$student->email}}</td>
                                     <td>{{$student->payment_status}} </br>
@@ -59,6 +62,11 @@
                                     <td><a href="{{route('admin.edit.transcript',$student->id)}}">View Transcripts</a></br></td>
                                     @if($student->graduation)
                                     <td><a href="{{route('admin.view.graduation',$student->graduation->id)}}">View Graduation</a></br></td>
+                                    @else
+                                    <td>Not applied</td>
+                                    @endif
+                                    @if($student->recordTransfers)
+                                    <td><a href="{{route('admin.student.schoolRecord',[ $student['recordTransfers']['student_profile_id'], $student['recordTransfers']['id'] ])}}">View Record Transfer</a></br></td>
                                     @else
                                     <td>Not applied</td>
                                     @endif

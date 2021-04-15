@@ -7,14 +7,14 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-                <h1>Students Information</h1>
-            <div class="d-flex">
-                <ol class="breadcrumb ml-auto">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Students Information</li>
-                    <li class="breadcrumb-item active">Transcript</li>
-                </ol>
-            </div><!-- /.col -->
+        <h1>Students Information</h1>
+        <div class="d-flex">
+            <ol class="breadcrumb ml-auto">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Students Information</li>
+                <li class="breadcrumb-item active">Transcript</li>
+            </ol>
+        </div><!-- /.col -->
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -52,10 +52,17 @@
                       <td>{{$student->email}}</td>
                       <td>{{$student->student_Id}}</td>
                       <td>{{$student->cell_phone}}</td>
-                      <td>
-                            <a href="{{route('admin.edit.transcript',$student->id)}}">
+                      @if($type == 'k-8') <td>
+                            <a href=" {{route('admin.edit.transcript',$student->id)}}">
                             <i class="fas fa-arrow-alt-circle-right"></i></a>
                             </td>
+                            @else
+                            <td>
+                                <a href=" {{route('admin.edit.transcript9_12',$student->id)}}">
+                                    <i class="fas fa-arrow-alt-circle-right"></i></a>
+                            </td>
+                            @endif
+
                             </tr>
                             @endforeach
                             </tbody>
@@ -74,7 +81,7 @@
 @endsection
 <script>
     function myFunction() {
-      if(!confirm("Are You Sure to delete this"))
-      event.preventDefault();
-  }
+        if (!confirm("Are You Sure to delete this"))
+            event.preventDefault();
+    }
 </script>

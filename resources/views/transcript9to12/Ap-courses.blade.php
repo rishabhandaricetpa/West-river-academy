@@ -14,7 +14,7 @@
         <a data-toggle="collapse" href="#ap-courses" role="button" aria-expanded="false" aria-controls="ap-courses" class="btn btn-primary px-2r py-1">yes</a>
         <a href="{{route('english.transcript.course',[$student_id,$transcript_id])}}" role="button" class="btn btn-primary px-2r py-1 ml-4">no</a>
       </div>
-      <ap-course :transcript_id='@json($transcript_id)' :student_id='@json($student_id)' :all_credits='@json($all_credits)'></ap-course>
+      <ap-course :transcript_id='@json($transcript_id)' :student_id='@json($student_id)' :all_credits='@json($all_credits)' :trans_id='@json($trans_id)'></ap-course>
     </div>
 
 

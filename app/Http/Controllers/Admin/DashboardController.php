@@ -7,26 +7,26 @@ use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-use Carbon\Carbon;
+
 
 class DashboardController extends Controller
 {
+    /** Display all records to the admin */
     public function index()
     {
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
-        $dateS = Carbon::now()->startOfMonth()->subMonth(6);
-        if ($admin_data->name === "Administrator") {
-            dd('here');
-            $dashboardData = Dashboard::select()->with('student')->orderBy('id', 'DESC')->where('created_at', '>', $dateS)->get();
-            return view('admin.dashboard-screen', compact('dashboardData'));
+        if ($admin_data->name == "Stacey") {
+            $dashboardData = Dashboard::select()->with('student', 'recordTransfer')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
+            $isAdmin = true;
+            return view('admin.dashboard-screen', compact('dashboardData', 'isAdmin'));
         } else {
-            $dashboardData = Dashboard::select()->with('student')->where('assigned_to', $admin_data->name)->where('created_at', '>', $dateS)->orderBy('id', 'DESC')->get();
-            return view('admin.dashboard-screen', compact('dashboardData'));
+            $isAdmin = false;
+            $dashboardData = Dashboard::select()->with('student')->where('assigned_to', $admin_data->name)->orderBy('id', 'DESC')->get();
+            return view('admin.dashboard-screen', compact('dashboardData', 'isAdmin'));
         }
     }
-
-
+    /** Update the dashboard of sub admin which is provided by super admin stacey */
     public function updateDashboard(Request $request)
     {
         $record = Dashboard::where('id', $request->id)->first();
@@ -40,7 +40,35 @@ class DashboardController extends Controller
     public function assignRecord(Request $request)
     {
         $record = Dashboard::find($request->get('assign_id'));
+        return response()->json($record);
+    }
+    public function assignRecordStatus(Request $request)
+    {
+        $record = Dashboard::find($request->get('assign_id'));
 
         return response()->json($record);
+    }
+    public function updateRecordStatus(Request $request)
+    {
+        $record = Dashboard::where('id', $request->id)->first();
+        $record->status = $request->assigned;
+        $record->save();
+
+        return response()->json(['code' => 200, 'message' => 'Task status updated successfully', 'data' => $record], 200);
+    }
+    public function archieveRecord(Request $request)
+    {
+        $dashboard = Dashboard::whereIn('id', $request->id)->update(array('is_archieved' => 1));
+        return response()->json(['code' => 200, 'message' => 'Task status updated successfully', 'data' => $dashboard], 200);
+    }
+    public function ArchievedTasks()
+    {
+        $adminid = Auth::guard('admin')->user()->id;
+        $admin_data = DB::table('admins')->where('id', $adminid)->first();
+        if ($admin_data->name == "Stacey") {
+            $dashboardData = Dashboard::select()->with('student')->where('is_archieved', 1)->orderBy('id', 'DESC')->get();
+            $isAdmin = true;
+            return view('admin.archieved', compact('dashboardData', 'isAdmin'));
+        }
     }
 }

@@ -38,6 +38,14 @@ h3,
   z-index: 0;
 }
 
+p:empty{
+  display: none;
+}
+
+.flex-grow{
+  flex-grow: 1;
+}
+
 .black-overlay {
   position: relative;
 
@@ -52,6 +60,10 @@ h3,
     content: "";
     background-color: rgba(0, 0, 0, 0.3);
   }
+}
+
+.bg-blue{
+  background-color: $blue !important;
 }
 
 .absolute-center {
@@ -83,6 +95,10 @@ h3,
   background-color: #ccc !important;
 }
 
+.bg-light{
+  background-image: none !important;
+}
+
 /* buttons */
 button {
   &:focus {
@@ -97,7 +113,6 @@ button {
 
 .btn-secondary {
   letter-spacing: 2px;
-  color: $black;
 }
 
 .btn-primary {
@@ -144,6 +159,7 @@ button {
   padding-right: 2rem !important;
 }
 
+
 .pt-2r {
   padding-top: 2rem !important;
 }
@@ -186,7 +202,7 @@ table {
   }
   tfoot {
     td {
-      color: #2a9dbe;
+      color: $blue;
     }
   }
 }
@@ -230,7 +246,7 @@ sup {
   td,
   th {
     padding: 12px 10px;
-    font-family: "Catamaran", sans-serif;
+    font-family: $lato-font;
     line-height: 1.2;
     font-size: 1rem;
     vertical-align: middle;
@@ -240,6 +256,7 @@ sup {
       p {
         line-height: 1.2;
         font-size: 1rem;
+        font-family: $lato-font;
       }
     }
     tr:nth-child(even) {
@@ -269,4 +286,24 @@ a.btn {
 /* width */
 .min-w-100 {
   min-width: 100% !important;
+}
+
+/* overlay */
+
+.overlay-black{
+ top: 0;
+ left: 0;
+ width: 100%;
+ bottom: 0;
+ right: 0;
+ &::after{
+   content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $blue;
+  opacity: .5;
+ }
 }

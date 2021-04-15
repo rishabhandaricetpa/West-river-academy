@@ -1,6 +1,6 @@
 <template>
  <div class="form-wrap border bg-light py-5 px-25 position-relative">
-    <h2>Enroll Student 1</h2> 
+    <h2>Enroll Student</h2> 
     <p class="required-option">* Fields are required</p>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-sm-flex mb-2">
@@ -81,11 +81,12 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <p class="position-relative mb-0">
+      <div class="position-relative mb-0 col-md-3 col-xl-2 px-0">
         <flat-pickr id="dob" name="dob" :config="config" v-model="form.dob" required>
         </flat-pickr>
-      </p>
-      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+         <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+      </div>
+     
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -144,7 +145,7 @@
       <span  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
       <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-sm-flex mb-2 mt-2r">
-        <label for="">Select your START date of enrollment</label>
+        <label for="">Select your START date of enrollment<sup>*</sup></label>
         <div class="row">
           <div class="col-md-4 col-lg-3">
             <div class="form-group w-100 datepicker-full">
@@ -165,8 +166,8 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose {{new Date(startdate) | moment("MMMM Do")}} (the first day of the Annual enrollment period),
-              {{new Date(sem) | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
+              Choose {{startdate | moment("MMMM Do")}} (the first day of the Annual enrollment period),
+              {{sem | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
               another date. This date will appear on your confirmation of
               enrollment letter. You will be considered enrolled for the full
               12-month period for Annual or 7-month period for Second Semester
@@ -180,7 +181,7 @@
       </div>
 
       <div class="form-group d-sm-flex mb-2 mt-2r">
-        <label for="">Select your END date of enrollment</label>
+        <label for="">Select your END date of enrollment<sup>*</sup></label>
         <div class="row">
           <div class="col-md-4 col-lg-3">
             <div class="form-group w-100 datepicker-full">
@@ -202,9 +203,9 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose before {{new Date(enddate) | moment("MMMM Do")}}
+              Choose before {{ enddate | moment("MMMM Do")}}
               (the last day of your enrollment) or another
-              date before {{new Date(enddate) | moment("MMMM Do")}}. This date will appear on your confirmation of
+              date before {{ enddate | moment("MMMM Do")}}. This date will appear on your confirmation of
               enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
             </p>
           </div>
@@ -213,16 +214,10 @@
           </div>
         </div>
       </div>
-      <div class="form-group mt-2r d-sm-flex links-list mb-5">
-        <!-- Button trigger modal -->
-        <a href="#skipYear" data-toggle="modal" 
-          >what if i need to skip a year?</a
-        >
-      </div>
+    
       <div class="form-group d-sm-flex mb-2 lato-italic info-detail">
         <label for=""
-          >Select grade level(s) for your enrollment period
-          <p>(You may select more than one for multiple years)</p></label
+          >Select grade level(s) for your enrollment period.<sup>*</sup></label
         >
         <div class="row pl-sm-5">
           <div v-for="(grade, index) in grades" :key="index" class="col-6 col-sm-3">
@@ -259,7 +254,7 @@
         </div>
       </div>
       <div class="form-group d-sm-flex">
-        <label for="">Tell us more about your situation </label>
+        <label for="">Use this space to tell us anything you'd like us to know.</label>
         <div>
         <textarea
           class="form-control"
@@ -328,8 +323,8 @@ export default {
         studentID: "",
         enrollPeriods: [
           {
-            selectedStartDate: new Date(this.startdate),
-            selectedEndDate: new Date(this.enddate),
+            selectedStartDate: this.startdate,
+            selectedEndDate:this.enddate,
             grade: "",
             configstartdate: {
               altFormat: "F j, Y",
@@ -420,7 +415,7 @@ export default {
     },
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
-        selectedStartDate: new Date(this.startdate),
+        selectedStartDate: this.startdate,
         selectedEndDate: new Date(this.enddate),
         grade: "",
         configstartdate: {

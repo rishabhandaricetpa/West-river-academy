@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class AdvancePlacement extends Model
 {
     use HasFactory;
-    protected $fillable = ['student_profile_id', 'ap_course_name', 'ap_course_grade', 'ap_course_credits', 'transcript_id'];
+    protected $fillable = ['student_profile_id', 'ap_course_name', 'ap_course_grade', 'ap_course_credits', 'transcript_id', 'transcript9_12_id'];
 }

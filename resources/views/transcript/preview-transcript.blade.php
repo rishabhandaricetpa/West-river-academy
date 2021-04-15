@@ -8,7 +8,7 @@
   <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
     <p>I'm finished with this transcript. I want to see what it looks like</p>
     <a href="{{ url('/transcript-pdf') }}" class="btn btn-primary mt-4 font-weight-bold" data-toggle="modal" data-target="#previewTranscriptModal">View Transcript</a>
-    <a href="{{ route('submit.transcript',[$student->id,$transcript_id->id]) }}" class="btn btn-primary mt-4 font-weight-bold">Submit</a>
+    <a href="{{ route('submit.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mt-4 font-weight-bold">Submit</a>
   </div>
 </main>
 
@@ -51,7 +51,7 @@
               <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
               <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$address->street_address}} {{$address->city}}, {{$address->zip_code}}, {{$address->country}}</td>
               <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
-              <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">2021</td>
+              <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">{{$minYear}}-{{$maxYear}}</td>
             </tr>
           </tbody>
         </table>
@@ -132,7 +132,7 @@
             <tr>
               <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
               <td width="20%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
-              <td width="20%"> <img src="https://picsum.photos/200" style="width:100%;height:100%;object-fit:contain;" alt="logo"></td>
+              <td><img src="../public/images/Stamp.png" style="width:150px;height:150px;object-fit:contain;" alt="Stamp"></td>
             </tr>
           </tbody>
         </table>
@@ -148,8 +148,8 @@
         <table width="100%">
           <tbody>
             <tr>
-              <td width="50%" style="text-align:center;position: relative;"> <a href="{{route('another.grade',$student->id)}}" style="background-color: #FC0;line-height:1;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:45%;top:10px;">Edit</button></td>
-              <td width="50%" style="text-align:center;position: relative;"> <a type="submit" href="{{ route('submit.transcript',[$student->id,$transcript_id->id]) }}" style="line-height:1;background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:42%;top:10px;">Submit</button></td>
+              <td width="50%" style="text-align:center;position: relative;"> <a href="{{route('another.grade',[$student->id,$transcript_id])}}" style="background-color: #FC0;line-height:1;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:45%;top:10px;">Edit</button></td>
+              <td width="50%" style="text-align:center;position: relative;"> <a type="submit" href="{{ route('submit.transcript',[$student->id,$transcript_id]) }}" style="line-height:1;background-color: #FC0;color: #000;border: 0;border-radius: 5px;padding: 10px 16px;font-size: 14px;display:inline-block; position: absolute; left:42%;top:10px;">Submit</button></td>
             </tr>
           </tbody>
         </table>

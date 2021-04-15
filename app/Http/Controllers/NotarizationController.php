@@ -9,6 +9,8 @@ use App\Models\StudentProfile;
 use App\Models\TranscriptPdf;
 use App\Models\NotarizationPayment;
 use App\Models\Notarization;
+use App\Models\ConfirmationLetter;
+use App\Models\CustomLetterPayment;
 use DB;
 
 class NotarizationController extends Controller
@@ -17,49 +19,55 @@ class NotarizationController extends Controller
     public function index()
     {
         $parent_id = ParentProfile::getParentId();
-        $countries = Country::select('country')->get();
-        $students = StudentProfile::select('id', 'first_name', 'last_name', 'gender')
-            ->selectRaw('DATE(d_o_b) as dob')
-            ->where('parent_profile_id', $parent_id)
-            ->with('graduation')
-            ->get();
+        $countries = Country::get();
+        // $students = StudentProfile::select('id', 'first_name', 'last_name', 'gender')
+        //     ->selectRaw('DATE(d_o_b) as dob')
+        //     ->where('parent_profile_id', $parent_id)
+        //     ->with('graduation', 'parentProfile')
+        //     ->get();
+        $students = StudentProfile::where('parent_profile_id', $parent_id)->with(['graduation', 'parentProfile'])->first();
+
+        // dd($students->toArray());
+        $transcript = TranscriptPdf::where('status', 'approved')->get();
+        $confirmationLetter = ConfirmationLetter::where('status', 'completed')->get();
+        $custom_letter = CustomLetterPayment::where('status', 'completed')->get();
         $transcriptdoc = DB::table('confirmation_letters')->select('transcript_pdf.pdf_link', 'confirmation_letters.pdf_link as confirm')
             ->where('confirmation_letters.parent_profile_id', $parent_id)->where('confirmation_letters.status', 'completed')
             ->join('transcript_pdf', 'transcript_pdf.parent_profile_id', 'confirmation_letters.parent_profile_id')
             ->get();
-        return view('orderPostage/notarization', compact('countries', 'students', 'transcriptdoc'));
+        $notarization_fee = getFeeDetails('notarization_doc_fee');
+        $appostile_fee = getFeeDetails('apostille_doc_fee');
+        return view('orderPostage/notarization', compact('countries', 'students', 'transcriptdoc', 'notarization_fee', 'appostile_fee', 'transcript', 'confirmationLetter', 'custom_letter'));
     }
 
-    public function store(Request $request)
-    {
-        try {
-            DB::beginTransaction();
-            $parent_id = ParentProfile::getParentId();
-            $doctotal = count(collect($request)->get('documents'));
-            $notarizationDetails = Notarization::create([
-                'parent_profile_id' => $parent_id,
-                'number_of_documents' => $doctotal,
-                'additional_message' => $request['message'],
-                'postage_option' => $request['payfor'],
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'street' => $request['street'],
-                'city' => $request['city'],
-                'state' => $request['state'],
-                'zip_code' => $request['zip_code'],
-                'country' => $request['country'],
-                'apostille_country' =>  $request['apostille_country'],
-            ]);
 
-            DB::commit();
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'success', 'message' => 'Record added successfully', 'data' => $notarizationDetails]);
-            }
-        } catch (\Exception $e) {
-            DB::rollBack();
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'error', 'message' => 'Failed to Record']);
-            }
-        }
+    public function getConsultationChrages()
+    {
+        $hourly_charge = getFeeDetails('consultation_fee');
+        return view('orderPostage.order_consultation', compact('hourly_charge'));
+    }
+
+
+    public function getCountryShippingCharges(Request $request)
+    {
+        $country_shipping = getCountryAmount($request->country_name);
+        return response()->json($country_shipping);
+    }
+
+    public function getPostageShippingTypes(Request $request)
+    {
+        if ($request->postage_type === 'express_usa') {
+            $express = getFeeDetails('express_usa');
+            return response()->json($express);
+        } else
+            $priority = getFeeDetails('priority_usa');
+        return response()->json($priority);
+    }
+
+    public function viewOrderPostage()
+    {
+        $parent_id = ParentProfile::getParentId();
+        $countries = Country::get();
+        return view('orderPostage/order-postage', compact('countries'));
     }
 }

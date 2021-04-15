@@ -12,6 +12,7 @@ use App\Models\TranscriptCourse;
 use App\Models\TranscriptK8;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptPdf;
+use App\Models\Transcript9_12;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -24,28 +25,29 @@ class TranscriptController extends Controller
     public function index()
     {
         $students = StudentProfile::all();
-
-        return view('admin.transcript.view-student', compact('students'));
+        $type = "k-8";
+        return view('admin.transcript.view-student', compact('students', 'type'));
     }
-
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
-        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
+        $type = "k-8";
+        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
-            ->get();
+            ->get()->unique('transcript_id');
+        // dd($transcript);
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
         $student = StudentProfile::find($id);
 
-        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript'));
+        return view('admin.transcript.all-transcript', compact('student', 'transcriptData', 'transcript', 'type'));
     }
 
     //fetch all the transcript data and Genrate the unsigned transcript
 
-    public function editTranscript($student_id, $transcript_id)
+    public function editTranscriptk_8($student_id, $transcript_id)
     {
         $transcriptData = TranscriptK8::Where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
@@ -54,17 +56,16 @@ class TranscriptController extends Controller
         return view('admin.transcript.view-transcript', compact('student', 'transcriptData', 'transcript_id'));
     }
 
-    public function editSubGrades($subject_id, $transcript_id)
+    public function editSubGrades($subject_id, $transcript_id, $grade_value)
     {
-        $schoolDetails = TranscriptK8::Where('transcript_id', $transcript_id)->first();
-
+        $schoolDetails = TranscriptK8::Where('transcript_id', $transcript_id)
+            ->where('grade', $grade_value)->first();
         $subjectDeatils = TranscriptCourse::where('k8transcript_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->first();
 
         $subjects = Subject::whereId($subject_id)->first();
-
-        return view('admin.transcript.edit_subject_grade', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id'));
+        return view('admin.transcript.edit_subject_grade', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id', 'grade_value'));
     }
 
     public function genrateTranscript($id, $transcript_id)
@@ -180,16 +181,16 @@ class TranscriptController extends Controller
     //updateScore
     public function updateScore(Request $request, $subject_id, $transcript_id)
     {
-        $schoolDetails = TranscriptK8::whereStudent_profile_id($subject_id)->orWhere('transcript_id', $transcript_id)->first();
+        $schoolDetails = TranscriptK8::where('transcript_id', $transcript_id)
+            ->where('grade', $request->get('grade_value'))
+            ->first();
         $subjectDeatils = TranscriptCourse::where('k8transcript_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->update(['score' => $request['grade']]);
-
         $notification = [
             'message' => 'score update Successfully!',
             'alert-type' => 'success',
         ];
-
         return redirect()->back()->with($notification);
     }
 
@@ -197,6 +198,45 @@ class TranscriptController extends Controller
 
     public function deleteSubGrades($subject_id, $transcript_id)
     {
-        dd($transcript_id);
+        // dd($transcript_id);
+    }
+
+    /* *
+     *view all the payments of the transcript methods
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     */
+    public function viewAllPayments()
+    {
+        $getAlltranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->get();
+        return view('admin.transcript.transcript_payments', compact('getAlltranscriptPayments'));
+    }
+    public function editAllPayments($transpay_id)
+    {
+        $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
+        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments'));
+    }
+
+    public function  destroyeachPayments($transpay_id)
+    {
+        try {
+            DB::beginTransaction();
+
+            TranscriptPayment::where('id', $transpay_id)->delete();
+            DB::commit();
+            $notification = [
+                'message' => 'Trannscript Payment is Deleted Successfully!',
+                'alert-type' => 'warning',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
+        }
     }
 }

@@ -14,14 +14,6 @@
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
-          <h3 class="mb-3">
-            Select a Foregin course:<i
-              class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Tooltip on top"
-            ></i>
-          </h3>
           <div class="form-group d-sm-flex  align-items-center">
             <select
               class="form-control text-uppercase"
@@ -103,9 +95,9 @@
                 type="radio"
                 v-model="foreignCourse.grade"
                 name=""
-                value="Pass"
+                value="PASS"
               />
-              <label class="form-check-label" for="">Pass</label>
+              <label class="form-check-label" for="">PASS</label>
             </div>
             <div class="form-group mb-1 mt-2r">
               <h3 class="text-black">
@@ -140,6 +132,11 @@
         </div>
       </div>
     </div>
+                <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
         >Add Another Foregin Course</a
@@ -157,7 +154,7 @@ export default {
   data() {
     return {
       isCredit: false,
-
+      errors: [],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -170,7 +167,8 @@ export default {
             subject_name: "",
             other_subject: "",
             selectedCredit: "",
-            grade: ""
+            grade: "",
+            total_credits: this.total_credits.total_credit
           }
         ]
       }
@@ -200,13 +198,26 @@ export default {
         subject_name: "",
         other_subject: "",
         selectedCredit: "",
-        grade: ""
+        grade: "",
+        total_credits: this.total_credits.total_credit
       });
     },
     removeCourse(index) {
       this.form.foreignCourse.splice(index, 1);
     },
     submitCourse() {
+      this.errors = [];
+
+
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
+        this.errors.push(
+          "Course name is required Field! Please select a Course name"
+        );
+      }
+      if (!this.validateCredit()) {
+        this.errors.push("Credit is required Field! Please select a credit ");
+      }
+
       axios
         .post(route("foreign-transcript.store"), this.form)
         .then(response => {
@@ -217,8 +228,36 @@ export default {
             this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please fill in the fields");
         });
+    },
+
+    validateSubject() {
+      for (let i = 0; i < this.form.foreignCourse.length; i++) {
+        const enrollmentSubject = this.form.foreignCourse[i];
+        if (!enrollmentSubject.subject_name) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateCredit() {
+      for (let i = 0; i < this.form.foreignCourse.length; i++) {
+        const enrollmentSubject = this.form.foreignCourse[i];
+        if (!enrollmentSubject.selectedCredit) {
+          return false;
+        }
+      }
+      return true;
+    },
+    validateOtherSubject() {
+      for (let i = 0; i < this.form.foreignCourse.length; i++) {
+        const enrollmentOtherSubject = this.form.foreignCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 };

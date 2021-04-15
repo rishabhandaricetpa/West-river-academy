@@ -79,25 +79,26 @@ class AnotherCourseController extends Controller
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('transcript.create', [$request->get('trans_id'), $request->get('student_id')]);
         } elseif ($request->get('another_grade') == 'No') {
-            return redirect()->route('another.grade', $request->get('student_id'));
+            return redirect()->route('another.grade', [$request->get('student_id'), $request->get('trans_id')]);
         }
     }
 
-    public function storeAnotherGrade(Request $request, $student_id)
+    public function storeAnotherGrade(Request $request, $student_id, $trans_id)
     {
         $student_transcripts = TranscriptCourse::where('student_profile_id', $student_id)->select('k8transcript_id')->groupBy('k8transcript_id')->get();
 
         $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses()->get();
         $k8details = StudentProfile::find($student_id)->TranscriptK8()->get();
 
-        $transcriptDatas = TranscriptK8::where('student_profile_id', $student_id)
+        $transcriptDatas = TranscriptK8::where('student_profile_id', $student_id)->where('transcript_id', $trans_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course', 'transcript'])
             ->get();
+
         $student = StudentProfile::find($student_id);
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('display.studentProfile', $request->get('student_id'));
         } else {
-            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas'));
+            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas', 'trans_id'));
         }
     }
 }

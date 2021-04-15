@@ -220,7 +220,7 @@
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2>Coupon</h2>
-      <div class="form-group d-sm-flex mb-2 w-50">
+      <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
         <label for="">Select Coupon</label>
         <div>
           <v-select
@@ -231,8 +231,8 @@
           ></v-select>
         </div>
       </div>
-      <div class="text-center w-50">OR</div>
-      <div class="form-group d-sm-flex mb-2 w-50">
+      <div class="text-center col-md-6">OR</div>
+      <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
         <label for="">Enter Code</label>
         <div>
           <input
@@ -251,6 +251,7 @@
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Payment Total</h2>
+      <div class="overflow-auto">
       <table class="w-100 table-styling">
         <tfoot>
           <tr>
@@ -259,6 +260,7 @@
           </tr>
         </tfoot>
       </table>
+      </div>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
       <h2>Select your method of payment...</h2>
