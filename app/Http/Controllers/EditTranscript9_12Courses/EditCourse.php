@@ -413,7 +413,7 @@ class EditCourse extends Controller
     public function editForeign($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Foriegn Language')
+            ->where('course_name', 'Foreign Language')
             ->first();
         $foreignCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
