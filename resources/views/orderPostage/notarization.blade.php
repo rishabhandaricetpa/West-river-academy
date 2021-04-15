@@ -8,10 +8,11 @@
         @csrf
         <input type="hidden" name="type" value="notarization" class="form-control col-3">
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            @if ($students->parentProfile->country !== 'United States')
-            <h2 class="mb-3">Order an Apostille or Notarization</h2>
-            @endif
+            @if ($students->parentProfile->country === 'United States')
             <h2 class="mb-3">Order Notarization</h2>
+            @endif
+            <h2 class="mb-3">Order an Apostille or Notarization</h2>
+
             <div class="form-group mb-2 lato-italic info-detail pb-4 label-md">
                 <div class="form-check mb-2">
                     @if ($students->parentProfile->country !== 'United States')
@@ -57,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4 px-0 d-sm-flex">
+                    <div class="col-md-6 px-0 d-sm-flex">
                         <p class="font-weight-bold">Country</p>
                         <select name="apostille_country" class="form-control mx-sm-3">
                             <option value="">Select country</option>
@@ -176,19 +177,27 @@
                             <input type="text" name="zip_code" id="zip_code" value="" class="w-100 ml-sm-3 form-control">
                         </div>
                     </div>
-                    <div class="form-group d-sm-flex mb-2">
-                        <label for="county">Country</label>
-                        <div class="col-md-6 mb-4 px-0 d-sm-flex">
-                            <select name="country_name" id="country_name" class="form-control mx-sm-3" onchange="getPostageCharges(event)" required>
-                                <option value="">Select country</option>
-                                @foreach ($countries as $country)
-                                <option value="{{ $country->country }}">{{ $country->country }}</option>
-                                @endforeach
-                            </select>
+                    <div class="row">
+                        <div class="form-group d-sm-flex mb-2 col-xl-6">
+                            <label for="county">Country</label>
+                            <div>
+                                <select name="country_name" id="country_name" class="form-control mx-sm-3" onchange="getPostageCharges(event)" required>
+                                    <option value="">Select country</option>
+                                    @foreach ($countries as $country)
+                                    <option value="{{ $country->country }}">{{ $country->country }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
-                        <label for="county">Shipping Charge</label>
-                        <i class="fas fa-dollar-sign additional-sign"></i>
-                        <input name="postage_charges" type="text" class="form-control col-3" id="postage_charges" readonly>
+                        <div class="form-group d-sm-flex mb-2 col-xl-6 px-0 pl-xl-3">
+                            <label for="county">Shipping Charge</label>
+
+                            <div class=" mb-xl-4 d-sm-flex pl-33">
+                                <i class="fas fa-dollar-sign additional-sign"></i>
+                                <input name="postage_charges" type="text" class="form-control" id="postage_charges" readonly></div>
+
+                        </div>
                     </div>
                 </div>
         </div>
