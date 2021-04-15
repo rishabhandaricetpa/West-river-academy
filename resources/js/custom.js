@@ -82,3 +82,20 @@ $("#select-english").click(function () {
   });
 });
 });
+
+$('#select-apostille:checkbox').change(function(){
+  if($(this).is(":checked")) {
+      $('div.menuitem').addClass("menuitemshow");
+  } else {
+      $('div.menuitem').removeClass("menuitemshow");
+  }
+});
+
+
+
+  $( document ).ready(function() {
+     var bodyHeight = jQuery(document ).height(); 
+  jQuery('body').css({
+    'height':  bodyHeight + 'px'
+  });
+});

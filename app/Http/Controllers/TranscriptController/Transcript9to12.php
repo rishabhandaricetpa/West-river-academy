@@ -255,6 +255,7 @@ class Transcript9to12 extends Controller
             ->get();
         // $arr = collect([]);
         $courses = fetchTranscript9_12Details($transcriptData);
+        $collegeCourses = getCollegeCourses($transcriptData);
         // $courses = collect([]);
         // // for academic years and courses
         // $transcriptDatas->each(function ($transcript_courses) use ($courses) {
@@ -360,7 +361,7 @@ class Transcript9to12 extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            return view('transcript9to12.transcript-pdf', compact('student', 'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
+            return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
         } else {
 
             $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();

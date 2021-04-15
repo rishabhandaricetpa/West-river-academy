@@ -8,7 +8,7 @@
       <!-- form start -->
       <form method="post" class="row" action="{{route('admin.parent.update',$parent->id)}}">
         @csrf
-        <div class="form-group col-sm-6">
+        <div class="form-group col-sm-12">
           <label>User Status<sup>*</sup> <sup>{{$parent->status===0 ?'Active':'Inactive'}}</sup></label>
           <select id="status" name="status" class="form-control" value="{{$parent->status===0?'Active':'Inactive'}}">
             <option value="0" @if($parent->status == 0)
@@ -30,7 +30,9 @@
           <input class="form-control" id="p1_last_name" name="p1_last_name" value="{{$parent->p1_last_name}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Parent1 Email<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
+      
+          <label>Parent1 Email<sup>*</sup> </label>
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
           <input class="form-control" id="p1_email" name="p1_email" value="{{$parent->p1_email}}" disabled>
         </div>
         <div class="form-group col-sm-6">
@@ -50,7 +52,8 @@
           <input class="form-control" id="p2_middle_name" name="p2_middle_name" value="{{$parent->p2_middle_name}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Parent2 Email<i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
+          <label>Parent2 Email</label>
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
           <input class="form-control" id="p2_email" name="p2_email" value="{{$parent->p2_email}}">
         </div>
         <div class="form-group col-sm-6">
@@ -92,6 +95,7 @@
 
     </div>
   </div><!-- /.container-fluid -->
+
 </section>
 
 @endsection

@@ -229,17 +229,18 @@
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "{{url('country/shipping')}}",
-            type: "POST",
-            data: {
-                country_name: country_name,
-            },
-            success: function(response) {
+            }
+            , url: "{{url('country/shipping')}}"
+            , type: "POST"
+            , data: {
+                country_name: country_name
+            , }
+            , success: function(response) {
                 if (response) {
                     $("#postage_charges").val(response.postage_charges);
                 }
             }
         });
     }
+
 </script>

@@ -1,6 +1,6 @@
 <!-- Navbar -->
 
-<nav class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-secondary">
+<nav class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">

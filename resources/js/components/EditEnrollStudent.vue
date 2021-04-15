@@ -1,6 +1,6 @@
 <template>
- <div class="form-wrap border bg-light py-5 px-25 position-relative">
-  <form method="POST" @submit.prevent="EditStudent()">
+ 
+  <form method="POST" class="mb-0" @submit.prevent="EditStudent()">
     <div class="form-group d-sm-flex mb-2">
       <label for="">First/Given Name <sup>*</sup></label>
       <div>
@@ -79,11 +79,12 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <p class="position-relative mb-0">
+      <div class="position-relative mb-0  col-md-3 col-xl-2 px-0">
         <flat-pickr required id="dob" name="dob" :config="config" v-model="form.dob">
         </flat-pickr>
-      </p>
-      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+        <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+      </div>
+      
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>
@@ -212,7 +213,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
+      <div v-else class="overflow-auto">
             <table class="table-styling border w-100 my-5">
             <thead>
             <tr>
@@ -281,7 +282,7 @@
       <button type="submit" class="btn btn-primary mb-4 mb-sm-0">Continue</button>
     </div>
   </form>
-</div>
+
 </template>
 
 <script>

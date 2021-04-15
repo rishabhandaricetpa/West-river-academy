@@ -221,6 +221,26 @@ function fetchTranscript9_12Details($transcriptData)
     return $courses;
 }
 
+function  getCollegeCourses($transcriptData)
+{
+    $collegeCourses = collect([]);
+    $transcriptData->each(function ($college_courses) use ($collegeCourses) {
+        $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
+            $collegeCourses->push(
+                (object)[
+                    'id' => $cllg_course->id,
+                    'groupBy' => $cllg_course->name,
+                    'course_name' => $cllg_course->course_name,
+                    'grade' => $cllg_course->grade,
+                    'course_grade'  => $cllg_course->course_grade,
+                    'selectedCredit' => $cllg_course->selectedCredit,
+                    'type' => 'college'
+                ]
+            );
+        });
+    });
+    return $collegeCourses;
+}
 
 function getTotalCredits($transcript_id, $transcript_9_12_id)
 {
