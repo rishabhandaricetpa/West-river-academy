@@ -83,13 +83,13 @@ class StudentController extends Controller
                 if ($request->expectsJson()) {
                     return response()->json($start_date);
                 }
-                return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
             } else {
                 $start_date = Carbon::now()->format('Y/m/d');
                 $end_date = Carbon::now()->addYears(1)->format('Y/m/d');
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
-                return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -99,10 +99,14 @@ class StudentController extends Controller
 
     public function showstudents()
     {
-        $id = Auth::user()->id;
-        $parentProfileData = User::find($id)->parentProfile()->first();
-        $parentId = $parentProfileData->id;
+        $parentId = ParentProfile::getParentId();
+
+        // $id = Auth::user()->id;
+        // $parentProfileData = User::find($id)->parentProfile()->first();
+        // $parentId = $parentProfileData->id;
         $student = StudentProfile::where('parent_profile_id', $parentId)->get();
+        $student_data = StudentProfile::where('parent_profile_id', $parentId)->with('parentProfile')->first();
+
         $transcript = Transcript::where('parent_profile_id', $parentId)
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
@@ -111,7 +115,7 @@ class StudentController extends Controller
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->with('parent')->get();
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter', 'personal_consultation'));
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation'));
     }
 
     public function confirmationpage($student_id)
@@ -345,7 +349,7 @@ class StudentController extends Controller
                 ->orderBy('enrollment_payments.status', 'desc')
                 ->get();
             $birth = Carbon::parse($studentData->d_o_b)->toDateString();
-            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'birth'));
+            return view('enrollment.edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'birth'));
         } else {
             $countryData = Country::where('country', 'other')->first();
             $start_date = $countryData->start_date;
@@ -358,7 +362,7 @@ class StudentController extends Controller
                 ->orderBy('enrollment_payments.status', 'desc')
                 ->get();
 
-            return view('edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+            return view('enrollment.edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
         }
     }
 

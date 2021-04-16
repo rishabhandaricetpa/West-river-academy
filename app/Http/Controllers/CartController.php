@@ -21,6 +21,7 @@ use App\Models\OrderPersonalConsultation;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Apostille;
 
 class CartController extends Controller
 {
@@ -188,7 +189,6 @@ class CartController extends Controller
                     break;
                 case 'notarization':
                     $clearpendingPayments = Notarization::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
-                    $clearpendingPayments = NotarizationPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
                     $confirmation_doc_total = json_encode($request->get('confirmation_doc'));
@@ -196,7 +196,7 @@ class CartController extends Controller
                     $notarizationDetails = Notarization::create([
                         'parent_profile_id' => $parent_profile_id,
                         'additional_message' => $request['message'],
-                        'postage_option' => 'Notarization & Apostille',
+                        'postage_option' => 'Notarization',
                         'first_name' => $request['first_name'],
                         'last_name' => $request['last_name'],
                         'street' => $request['street'],
@@ -208,28 +208,63 @@ class CartController extends Controller
                         'transcript_doc' => $transcript_doc_total,
                         'confirmation_doc' => $confirmation_doc_total,
                         'custom_doc' => $custom_doc_total,
+                        'status' => 'pending',
                     ]);
-                    // $orderPostageData = OrderPostage::create([
-                    //     'parent_profile_id' => ParentProfile::getParentId(),
-                    //     'amount' =>  $request->get('postage_charges'),
-                    //     'paying_for' => 'postage',
-                    //     'type_of_payment' => '',
-                    //     'status' => 'pending'
-                    // ]);
-                    $amount = $request->get('apostille_due') + $request->get('notarization_due') + $request->get('postage_charges');
+
+                    $amount = $request->get('notarization_due') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'notarization_id' => $notarizationDetails->id,
-                        // 'order_postages_id' => $orderPostageData->id,
                         'amount' =>   $amount,
                         'pay_for' => 'notarization',
                         'type_of_payment' => '',
                         'status' => 'pending'
                     ]);
-                    if (!Cart::where('item_id', $notarizationDetails->id)->where('item_type', 'notarization')->exists()) {
+                    if (!Cart::where('item_type', 'notarization')->exists()) {
                         Cart::create([
                             'item_type' => 'notarization',
                             'item_id' => $notarizationDetails->id,
+                            'parent_profile_id' => $parent_profile_id,
+                        ]);
+                    }
+                    break;
+                case 'apostille':
+                    $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $parent_profile_id = ParentProfile::getParentId();
+                    $transcript_doc_total = json_encode($request->get('transcript_doc'));
+                    $confirmation_doc_total = json_encode($request->get('confirmation_doc'));
+                    $custom_doc_total = json_encode($request->get('custom_doc'));
+                    $apostilleDetails = Apostille::create([
+                        'parent_profile_id' => $parent_profile_id,
+                        'additional_message' => $request['message'],
+                        'postage_option' => 'Apostille',
+                        'first_name' => $request['first_name'],
+                        'last_name' => $request['last_name'],
+                        'street' => $request['street'],
+                        'city' => $request['city'],
+                        'state' => $request['state'],
+                        'zip_code' => $request['zip_code'],
+                        'country' => $request['country_name'],
+                        'apostille_country' =>  $request['apostille_country'],
+                        'transcript_doc' => $transcript_doc_total,
+                        'confirmation_doc' => $confirmation_doc_total,
+                        'custom_doc' => $custom_doc_total,
+                        'status' => 'pending',
+                    ]);
+
+                    $amount = $request->get('apostille_due') + $request->get('postage_charges');
+                    $notarizationData = NotarizationPayment::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
+                        'apostille_id' => $apostilleDetails->id,
+                        'amount' =>   $amount,
+                        'pay_for' => 'apostille',
+                        'type_of_payment' => '',
+                        'status' => 'pending'
+                    ]);
+                    if (!Cart::where('item_type', 'apostille')->exists()) {
+                        Cart::create([
+                            'item_type' => 'apostille',
+                            'item_id' => $apostilleDetails->id,
                             'parent_profile_id' => $parent_profile_id,
                         ]);
                     }
