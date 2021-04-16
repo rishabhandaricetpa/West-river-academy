@@ -33,13 +33,14 @@
                         {{$student->ParentProfile->country}}
                     </div>
                 </div>
-
-
                 <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Unsigned Transcript</a>
-                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Signed Transcript</a>
-                <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Signed Transcript</a>
+                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate & Approve Signed Transcript</a>
+                <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Approved Signed Transcript</a>
+                <sup>Click on the Generate Signed Transcript to approve the transcript</sup>
+
             </form>
         </div>
+
         @foreach($transcriptData as $school)
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">{{$school->school_name}}</h2>
@@ -71,11 +72,8 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <<<<<<< HEAD <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a>
-                            =======
-                            <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
-                                >>>>>>> origin
-                            </td>
+                        <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
+                        </td>
                     </tr>
                     @endforeach
                     @endforeach

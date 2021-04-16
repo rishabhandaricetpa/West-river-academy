@@ -157,13 +157,12 @@ class CustomController extends Controller
     //fetch data for appostile and notarization  payment
     public function orderNotrizationDataTable()
     {
-        // dd(NotarizationPayment::with('ParentProfile', 'notarization')->get()->toArray());
-        return datatables(NotarizationPayment::with('ParentProfile', 'notarization')->get())->toJson();
+        return datatables(NotarizationPayment::with('ParentProfile', 'notarization', 'apostille')->get())->toJson();
     }
 
     public function editNotarization($id)
     {
-        $notarizationData = NotarizationPayment::whereId($id)->with('ParentProfile', 'notarization')->first();
+        $notarizationData = NotarizationPayment::whereId($id)->with('ParentProfile', 'notarization', 'apostille')->first();
         // $notarizationdetails = Notarization::whereId($id)->with('ParentProfile')->first();
         return view('admin.payment.notarizationPayments.edit', compact('notarizationData'));
     }

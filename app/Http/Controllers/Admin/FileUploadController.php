@@ -41,24 +41,44 @@ class FileUploadController extends Controller
             if ($storetranscript != null) {
                 $storetranscript->pdf_link = $fileName;
                 $storetranscript->save();
+            } else {
+                return back()
+                    ->with('error', 'Transcript Not Submitted By User')
+                    ->with('file', $fileName);
             }
             $updateTranscriptStatus = Transcript::whereId($request->get('transcript_id'))
                 ->where('status', 'completed')->first();
             if ($updateTranscriptStatus != null) {
                 $updateTranscriptStatus->status = 'approved';
                 $updateTranscriptStatus->save();
+            } else {
+                $notification = [
+                    'message' => 'Transcript Not Submitted By User',
+                    'alert-type' => 'error',
+                ];
+
+                return back()->with($notification);
             }
             $paymentsTranscriptStatus = TranscriptPayment::where('transcript_id', $request->get('transcript_id'))
                 ->where('status', 'completed')->first();
             if ($paymentsTranscriptStatus != null) {
                 $paymentsTranscriptStatus->status = 'approved';
                 $paymentsTranscriptStatus->save();
+            } else {
+                $notification = [
+                    'message' => 'Transcript Not Submitted By User',
+                    'alert-type' => 'error',
+                ];
+
+                return back()->with($notification);
             }
             DB::commit();
+            $notification = [
+                'message' => 'You have successfully upload file.',
+                'alert-type' => 'success',
+            ];
 
-            return back()
-                ->with('success', 'You have successfully upload file.')
-                ->with('file', $fileName);
+            return back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
             $notification = [

@@ -289,6 +289,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
     Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
     Route::get('notarization', 'NotarizationController@index')->name('notarization');
+    Route::post('notarization', 'NotarizationController@chooseType')->name('notarization.apostille');
     Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
 
     // assign record to sub admin by super admin
@@ -412,7 +413,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
     Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
 
-    // Route::get('order-consultation', function () {
-    //     return view('orderPostage.order_consultation');
-    // });
+    Route::get('choose_notarization', function () {
+        return view('orderPostage.choose_notarization');
+    })->name('choose_notarization');
 });

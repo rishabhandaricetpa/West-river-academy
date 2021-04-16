@@ -29,6 +29,7 @@
                             <label>Amount<sup>*</sup></label>
                             <input class="form-control" id="amount" value="{{$notarizationData->amount}}" name="amount">
                         </div>
+                        @if($notarizationData->notarization)
                         <div class="form-group col-sm-6">
                             <label>Apostille Country<sup>*</sup></label>
                             <input class="form-control" value="{{$notarizationData->notarization->apostille_country}}" name="transcation_id">
@@ -49,6 +50,29 @@
                             <label>Postage Country<sup>*</sup></label>
                             <input class="form-control" id="amount" value="{{$notarizationData->notarization->country}}" disabled>
                         </div>
+                        @endif
+                        @if($notarizationData->apostille)
+                        <div class="form-group col-sm-6">
+                            <label>Apostille Country<sup>*</sup></label>
+                            <input class="form-control" value="{{$notarizationData->apostille->apostille_country}}" name="transcation_id">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Transcript Doc<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->apostille->transcript_doc}}" disabled>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Confirmation Doc<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->apostille->confirmation_doc}}" disabled>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Custom Letter Doc<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->apostille->custom_doc}}" disabled>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Postage Country<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->apostille->country}}" disabled>
+                        </div>
+                        @endif
                         <div class="form-group col-sm-6">
                             <label>Payment Status<sup>*</sup></label>
                             <select name="paymentStatus" class="form-control">

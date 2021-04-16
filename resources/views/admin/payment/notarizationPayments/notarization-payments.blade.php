@@ -26,7 +26,6 @@
                                     <th>Paying for</th>
                                     <th>Transaction Id</th>
                                     <th>Payment Method</th>
-                                    <th>Country Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

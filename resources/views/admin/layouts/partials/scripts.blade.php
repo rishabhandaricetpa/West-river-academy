@@ -45,6 +45,8 @@
             , "processing": true
             , "serverSide": true
             , "ordering": false
+            , "pagination": true
+            , "lengthChange": false
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
@@ -85,7 +87,7 @@
                 },
 
             ]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#family-table_wrapper .col-md-6:eq(0)');
 
         //fees -info table
         $("#fees-table").DataTable({
@@ -430,9 +432,6 @@
                 }
                 , {
                     "data": "payment_mode"
-                }
-                , {
-                    "data": "notarization.country"
                 }
                 , {
                     "data": "status"

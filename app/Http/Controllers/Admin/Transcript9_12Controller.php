@@ -89,7 +89,6 @@ class Transcript9_12Controller extends Controller
 
     public function genrateTranscript($id, $transcript_id)
     {
-
         //fetch data for the transcript pdf
         $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
         $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
@@ -138,123 +137,93 @@ class Transcript9_12Controller extends Controller
         return $pdf->download($pdfname . '.pdf');
     }
 
-    // //genrate signed transcript
-    // public function genrateSignedTranscript($id, $transcript_id)
-    // {
-    //     try {
-    //         DB::beginTransaction();
-    //         //fetch data for the transcript pdf
-    //         $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
-    //         $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
+    //genrate signed transcript
+    public function genrateSignedTranscript($id, $transcript_id)
+    {
+        try {
+            DB::beginTransaction();
+            //fetch data for the transcript pdf
+            $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
+            $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
+            $student = StudentProfile::find($id);
 
-    //         $student = StudentProfile::find($id);
+            $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
 
-    //         $grades = TranscriptK8::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
+            $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
+                ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses', 'apCourses'])
+                ->get();
 
-    //         $transcriptData = TranscriptK8::select()->where('transcript_id', $transcript_id)
-    //             ->with(['TranscriptDetails', 'TranscriptCourse.subject', 'TranscriptCourse.course'])
-    //             ->get();
+            $courses = fetchTranscript9_12Details($transcriptData);
+            $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
+            $totalSelectedGrades = getTotalCredits($transcript_id, $transcript_9_12_id);
+            if ($transcript_id) {
+                $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
+                $items = [];
+                foreach ($enrollment_periods as $key => $enrollment_period) {
+                    $items[] = $enrollment_period->enrollment_year;
+                }
 
-    //         $groupCourses = TranscriptCourse::with(['subject'])->where('student_profile_id', $id)->get()->unique('subject_id');
+                $maxYear =  max($items);
+                $minYear = min($items);
+            } else {
 
-    //         $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'signed_transcript_letter';
+                $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
+                $years = collect($enrollment_years)->pluck('enrollment_year');
+                $maxYear = $years->max();
+                $minYear = $years->min();
 
-    //         $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
+                $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
+            }
+            $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'Signed_transcript_letter';
+            $data = [
+                'student' => $student,
+                'transcript_id' => $transcript_id,
+                'grades_data' => $grades_data,
+                'address' => $address,
+                'minYear' => $minYear,
+                'maxYear' => $maxYear,
+                'courses' => $courses,
+                'totalSelectedGrades' => $totalSelectedGrades,
+                'date' => date('m/d/Y'),
+            ];
 
-    //         $data = [
-    //             'student' => $student,
-    //             'transcriptData' => $transcriptData,
-    //             'grades' => $grades,
-    //             'groupCourses' => $groupCourses,
-    //             'transcript_id' => $transcript_id,
-    //             'address' => $address,
-    //             'enrollment' => $enrollment_periods,
-    //             'title' => 'transcript',
-    //             'date' => date('m/d/Y'),
-    //         ];
+            $pdf = PDF::loadView('admin.transcript.signed_pdf9_12', $data);
 
-    //         $pdf = PDF::loadView('admin.transcript.signed_pdf', $data);
+            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
-    //         Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
+            //store pdf link
+            $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
+                ->where('status', 'completed')->first();
+            if ($storetranscript != null) {
+                $storetranscript->pdf_link = $pdfname . '.pdf';
+                $storetranscript->save();
+            }
 
-    //         //store pdf link
-    //         $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
-    //             ->where('status', 'completed')->first();
-    //         if ($storetranscript != null) {
-    //             $storetranscript->pdf_link = $pdfname . '.pdf';
-    //             $storetranscript->save();
-    //         }
+            //MOVE CODE FROM HERE TO UPLOAD SIGNED CODE CHANGE THE STATUS TO UPLOAD IN UPLOAD SIGNED
+            $updateTranscriptStatus = Transcript::whereId($transcript_id)
+                ->where('status', 'completed')->first();
+            if ($updateTranscriptStatus != null) {
+                $updateTranscriptStatus->status = 'approved';
+                $updateTranscriptStatus->save();
+            }
+            $paymentsTranscriptStatus = TranscriptPayment::where('transcript_id', $transcript_id)
+                ->where('status', 'completed')->first();
+            if ($paymentsTranscriptStatus != null) {
+                $paymentsTranscriptStatus->status = 'approved';
+                $paymentsTranscriptStatus->save();
+            }
+            DB::commit();
 
-    //         //MOVE CODE FROM HERE TO UPLOAD SIGNED CODE CHANGE THE STATUS TO UPLOAD IN UPLOAD SIGNED
-    //         $updateTranscriptStatus = Transcript::whereId($transcript_id)
-    //             ->where('status', 'completed')->first();
-    //         if ($updateTranscriptStatus != null) {
-    //             $updateTranscriptStatus->status = 'approved';
-    //             $updateTranscriptStatus->save();
-    //         }
-    //         $paymentsTranscriptStatus = TranscriptPayment::where('transcript_id', $transcript_id)
-    //             ->where('status', 'completed')->first();
-    //         if ($paymentsTranscriptStatus != null) {
-    //             $paymentsTranscriptStatus->status = 'approved';
-    //             $paymentsTranscriptStatus->save();
-    //         }
-    //         DB::commit();
+            return $pdf->download($pdfname . '.pdf');
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollback();
+            $notification = [
+                'message' => 'Data Missmatch',
+                'alert-type' => 'error',
+            ];
 
-    //         return $pdf->download($pdfname . '.pdf');
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         $notification = [
-    //             'message' => 'Data Missmatch',
-    //             'alert-type' => 'error',
-    //         ];
-
-    //         return redirect()->back()->with($notification);
-    //     }
-    // }
-
-    // //delete subject from transcript
-
-    // public function deleteSubGrades($subject_id, $transcript_id)
-    // {
-    //     // dd($transcript_id);
-    // }
-
-    // /* *
-    //  *view all the payments of the transcript methods
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  * 
-    //  */
-    // public function viewAllPayments()
-    // {
-    //     $getAlltranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->get();
-    //     return view('admin.transcript.transcript_payments', compact('getAlltranscriptPayments'));
-    // }
-    // public function editAllPayments($transpay_id)
-    // {
-    //     $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
-    //     return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments'));
-    // }
-
-    // public function  destroyeachPayments($transpay_id)
-    // {
-    //     try {
-    //         DB::beginTransaction();
-
-    //         TranscriptPayment::where('id', $transpay_id)->delete();
-    //         DB::commit();
-    //         $notification = [
-    //             'message' => 'Trannscript Payment is Deleted Successfully!',
-    //             'alert-type' => 'warning',
-    //         ];
-    //         return redirect()->back()->with($notification);
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         $notification = [
-    //             'message' => 'Failed to update Record!',
-    //             'alert-type' => 'error',
-    //         ];
-    //         return redirect()->back()->with($notification);
-    //     }
-    // }
+            return redirect()->back()->with($notification);
+        }
+    }
 }

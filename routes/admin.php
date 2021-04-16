@@ -144,6 +144,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('viewfull-transcript/{student_id}/{transcript_id}', 'TranscriptController@editTranscriptk_8')->name('viewfull.transcript');
     Route::get('viewfull-transcript9_12/{student_id}/{transcript_id}', 'Transcript9_12Controller@editTranscript9_12')->name('viewfull.transcript9_12');
     Route::get('signed-transcript/{id}/{transcript_id}', 'TranscriptController@genrateSignedTranscript')->name('signed.transcript');
+    Route::get('signed-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateSignedTranscript')->name('signed.transcript');
     Route::get('other-subjects/{course_id}', 'CourseController@otherSubjects')->name('other.subjects');
     Route::get('add-other/{subject_id}', 'CourseController@addSubjects')->name('add.other');
     Route::get('delete/others/{subject_id}', 'CourseController@deleteSubjects')->name('delete.other');

@@ -6,6 +6,11 @@ use App\Models\Transcript9_12;
 use App\Models\AdvancePlacement;
 use App\Models\TranscriptCourse9_12;
 use App\Models\CollegeCourse;
+use App\Models\TranscriptPdf;
+use App\Models\StudentProfile;
+use App\Models\ConfirmationLetter;
+use App\Models\CustomLetterPayment;
+use App\Models\ParentProfile;
 
 /**
  * Compare given route with current route and return output if they match.
@@ -75,8 +80,6 @@ function getPromotedGrades($grades, $last_value = true)
             $grade->order = $orders[$grade->grade];
             return $grade;
         });
-        // dd($grades);
-
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
         $length = count($sortedOrder);
         if ($last_value && $length > 1) {

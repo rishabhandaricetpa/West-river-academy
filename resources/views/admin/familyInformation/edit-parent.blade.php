@@ -32,7 +32,6 @@
                 <div class="form-group col-sm-6">
 
                     <label>Parent1 Email<sup>*</sup> </label>
-                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     <input class="form-control" id="p1_email" name="p1_email" value="{{$parent->p1_email}}" disabled>
                 </div>
                 <div class="form-group col-sm-6">
@@ -53,7 +52,6 @@
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Parent2 Email</label>
-                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     <input class="form-control" id="p2_email" name="p2_email" value="{{$parent->p2_email}}">
                 </div>
                 <div class="form-group col-sm-6">
