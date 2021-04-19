@@ -372,7 +372,7 @@ class Transcript9to12 extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            return view('transcript9to12.transcript-pdf', compact('student', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
+            return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
         } else {
 
             $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
@@ -381,7 +381,7 @@ class Transcript9to12 extends Controller
             $minYear = $years->min();
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-            return view('transcript9to12.transcript-pdf', compact('student',  'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
+            return view('transcript9to12.transcript-preview', compact('student',  'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
         }
     }
 }
