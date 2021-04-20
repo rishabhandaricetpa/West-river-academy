@@ -43693,7 +43693,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 links-list pl-0" }, [
+    return _c("div", { staticClass: "col-lg-4 links-list pl-0 mt-3 mt-sm-0" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])
@@ -43703,7 +43703,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 links-list pl-0" }, [
+    return _c("div", { staticClass: "col-lg-4 links-list pl-0 mt-3 mt-sm-0" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])
@@ -47797,7 +47797,7 @@ var render = function() {
                                     "label",
                                     {
                                       staticClass:
-                                        "form-check-label pl-1 pl-sm-0",
+                                        "form-check-label pl-2 pl-sm-0",
                                       attrs: { for: "" }
                                     },
                                     [_vm._v(" " + _vm._s(val) + " ")]
@@ -48016,7 +48016,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 links-list" }, [
+    return _c("div", { staticClass: "col-lg-3 links-list mt-3 mt-sm-0" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])
@@ -48026,7 +48026,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 links-list" }, [
+    return _c("div", { staticClass: "col-lg-3 links-list mt-3 mt-sm-0" }, [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])

@@ -5,6 +5,7 @@
     position: fixed !important;
     ul .fas{
         display: inline-block !important;
+        font-size: 11px;
     }  
     .nav-treeview{
         .nav-item{
@@ -43,6 +44,7 @@
 }
 
 .admin-wrapper{
+    position: relative;
     .page-item.disabled .page-link{
         color: $blue;
     }

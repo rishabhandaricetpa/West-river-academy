@@ -174,7 +174,7 @@
               Only.
             </p>
           </div>
-           <div class="col-lg-3 links-list">
+           <div class="col-lg-3 links-list mt-3 mt-sm-0">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
         </div>
@@ -209,7 +209,7 @@
               enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
             </p>
           </div>
-          <div class="col-lg-3 links-list">
+          <div class="col-lg-3 links-list mt-3 mt-sm-0">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
         </div>
@@ -235,7 +235,7 @@
                 v-model="enrollPeriod.grade"
                 required
               />
-              <label class="form-check-label pl-1 pl-sm-0" for=""> {{ val }} </label>
+              <label class="form-check-label pl-2 pl-sm-0" for=""> {{ val }} </label>
             </div>
           </div>
         </div>

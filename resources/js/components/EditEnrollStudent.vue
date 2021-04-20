@@ -157,7 +157,7 @@
                 Only.
               </p>
             </div>
-             <div class="col-lg-4 links-list pl-0">
+             <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
           </div>
@@ -188,7 +188,7 @@
                 enrollment letter. Your enrollment will officially end on {{new Date(semesters.end_date) | moment("MMMM Do")}}.
               </p>
             </div>
-             <div class="col-lg-4 links-list pl-0">
+             <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
           </div>

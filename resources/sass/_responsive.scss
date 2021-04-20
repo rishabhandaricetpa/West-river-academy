@@ -120,6 +120,7 @@
     font-size: 16px !important;
   }
 
+
   /* Datepicker */
   .vdp-datepicker__calendar {
     width: 100% !important;
@@ -128,9 +129,16 @@
     top: 35px !important;
 }
   /* sidebar */
-  .main-sidebar {
-    width: 50px;
 
+  .admin-wrapper.content-wrapper,.collapse-nav {
+    width: calc(100% - 85px);
+}
+
+  .main-sidebar {
+    width: 85px;
+   a{
+     text-align: center;
+   }
     ul {
       li {
         li {
@@ -174,7 +182,7 @@
   }
 
   .main-content {
-    width: calc(100% - 50px);
+    width: calc(100% - 85px);
   }
 }
 
@@ -197,6 +205,12 @@
   /* Fees and services*/
   .service-list .col-sm-9{
     min-height: 130px;
+  }
+
+  /* enrollment */
+
+  .select2-container{
+     width: 100% !important;
   }
 
   /* Admin css */

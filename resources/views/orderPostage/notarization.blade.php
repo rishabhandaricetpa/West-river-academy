@@ -30,15 +30,15 @@
                <div class="col-md-6 d-sm-flex px-0 mb-4">
                <p class="font-weight-bold">Quantity</p>
                     <div class="row ml-3 mx-0">
-                    <select class="form-control col-3" >
+                    <select class="form-control col-md-3" >
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
                 </select>
-                <span class="col-3 text-center">=</span>
-                <input type="text" class="form-control col-3">
+                <span class="col-md-3 text-center">=</span>
+                <input type="text" class="form-control col-md-3">
                 </div>
                 </div>
                 <div class="col-md-6 mb-4 px-0 d-sm-flex">
@@ -64,22 +64,22 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                <div class="col-md-6 d-sm-flex px-0 mb-4">
                <p class="font-weight-bold">Quantity</p>
                     <div class="row ml-3 mx-0">
-                    <select class="form-control col-3" >
+                    <select class="form-control col-md-3" >
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
                 </select>
-                <span class="col-3 text-center">=</span>
-                <input type="text" class="form-control col-3">
+                <span class="col-md-3 text-center">=</span>
+                <input type="text" class="form-control col-md-3">
                 </div>
                 </div>
             </div>
             </div>
             <div class="form-group mb-2 row">
                 <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized and/or sent for Apostilles?</p>
-                <div class="form-group col-3 mb-3">
+                <div class="form-group col-md-3 mb-3">
                     <label for="" class="w-auto">Transcript</label>
                     <div class="w-100">
                         <select  multiple="multiple" class="multiple-select form-control" >
@@ -91,7 +91,7 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-3 mb-3">
+                <div class="form-group col-md-3 mb-3">
                     <label for="" class="w-auto">Confirmation of Enrollment Letter</label>
                     <div  class="w-100">
                         <select  multiple="multiple" class="multiple-select form-control" >
@@ -103,7 +103,7 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-3 mb-3">
+                <div class="form-group col-md-3 mb-3">
                     <label for="" class="w-auto">Custom Letter</label>
                     <div class="w-100">
                         <select  multiple="multiple" class="multiple-select form-control" >
