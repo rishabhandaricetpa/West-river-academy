@@ -79,10 +79,15 @@ textarea {
 }
 
 .form-group .fa-calendar-alt {
-  position: relative;
-  top: 7px;
-  left: 9px;
+  position: absolute;
+  top: 9px !important;
+  right: 10px;
   color: $gray-700;
+  pointer-events: none;
+}
+.form-group label + .fa-calendar-alt{
+  top: 40px !important;
+  right: 24px;
 }
 
 .enlarge-input {
@@ -164,14 +169,15 @@ label.h3 {
 .remove {
   position: absolute;
   right: 0;
-  top: -20px;
+  top: -32px;
+  color: $white;
   text-decoration: none;
   width: 25px;
   height: 25px;
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
-  background-color: #4e9cba;
+  background-color: $blue;
   transition: all ease .2s;
   -webkit-transition: all ease .2s;
   -moz-transition: all ease .2s;
@@ -299,4 +305,8 @@ input[type=radio]:checked:before {
 .select2-selection__choice__remove{
   z-index: 2;
     position: relative !important;
+}
+
+.flatpickr-input + input{
+  padding-right: 30px;
 }

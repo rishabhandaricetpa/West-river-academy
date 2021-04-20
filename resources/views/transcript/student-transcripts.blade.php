@@ -32,7 +32,7 @@
                         <td>Completed & Submitted</td>
                         @endif
                         <td>{{$transcriptPayment->payment_mode}}</td>
-                        <td><a href="{{route('transcript.create',[$transcriptPayment->transcript_id,$enroll_student->id])}}" class="btn btn-primary">Start Creating Transcript</a></td>
+                        <td><a href="{{route('transcript.create',[$transcriptPayment->transcript_id,$student->id])}}" class="btn btn-primary">Start Creating Transcript</a></td>
                     </tr>
                     @endforeach
                     @else

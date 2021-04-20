@@ -47,8 +47,8 @@
                 Academic School Year(s):{{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
             </p>
-            <table id="addressData" class="table table-bordered table-striped data-table"">
-            <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3">Delete School Record</a>
+            <table id="addressData" class="table table-bordered table-striped data-table">
+                <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3">Delete School Record</a>
                 <thead>
                     <tr>
                         <th>Courses</th>
@@ -71,8 +71,11 @@
                         </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
-                        <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
-                        </td>
+                        <<<<<<< HEAD <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id])}}" class="btn btn-primary">Edit</a>
+                            =======
+                            <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>
+                                >>>>>>> origin
+                            </td>
                     </tr>
                     @endforeach
                     @endforeach
@@ -90,4 +93,5 @@
         if (!confirm("Are You Sure to delete this"))
             event.preventDefault();
     }
+
 </script>

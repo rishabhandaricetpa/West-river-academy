@@ -1,20 +1,30 @@
 /** Footer CSS  **/
 
-.social-icons{
-    i{
-        font-size: 1.9rem;
-        color: $border-color;
+.social-icons {
+  li {
+    a {
+      width: 30px;
+      height: 30px;
+      &:hover {
+        filter: grayscale(1);
+      }
     }
+  }
+  i {
+    font-size: 1.9rem;
+    color: $border-color;
+  }
 }
 
-.main-footer{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    *:not(.btn){
-        color: $border-color;
-    }
+.main-footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  bottom: -3px;
+  *:not(.btn) {
+    color: $border-color;
+  }
 }
 
-.copyright{
-    font-size: 1.1875rem;
+.copyright {
+  font-size: 1.1875rem;
 }

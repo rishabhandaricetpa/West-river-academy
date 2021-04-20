@@ -17,7 +17,7 @@
           </label>
         </div>
         @endforeach
-        Choose Other Year <input type="number" name="other_year">
+        <div class="d-md-flex mt-3">Choose Other Year <input type="number" class="ml-md-2 form-control col-md-3" name="other_year"></div>
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary" data-dismiss="modal">Continue</button>

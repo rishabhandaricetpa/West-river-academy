@@ -46,7 +46,7 @@ class SubjectTableSeeder extends Seeder
                 ['1', 'INTRO. TO LOGIC', '9-12'],
                 ['1', 'FILM AS LITERATURE', '9-12'],
 
-                //foriegn language
+                //foreign language
                 ['6', 'SPANISH', 'K-8'],                                    //FROM K-8
                 ['6', 'FRENCH', 'K-8'],
                 ['6', 'AMERICAN SIGN LANGUAGE', 'K-8'],                      //TO K-8

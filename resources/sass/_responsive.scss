@@ -3,24 +3,27 @@
 // Based on min width
 
 //Extra Large devices
-@media (max-width: 1420px) {}
+@media (max-width: 1420px) {
+}
 
 // Large devices
 @media (max-width: 1200px) {
-
   /* Header */
   .site-header {
     .navbar-brand {
       max-width: 265px;
     }
 
-    .navbar-nav>.nav-item {
+    .navbar-nav > .nav-item {
       padding: 0 3px;
     }
 
     .navbar-collapse {
       padding-right: 5px;
     }
+  }
+  .pl-33 {
+    padding-left: 33px;
   }
 }
 
@@ -91,7 +94,7 @@
       width: 100vw;
       background-color: $gray-600;
       height: 100vh !important;
-      transition: left .5s ease;
+      transition: left 0.5s ease;
       top: 0;
       display: block !important;
       overflow-y: auto;
@@ -124,7 +127,9 @@
   .vdp-datepicker__calendar {
     width: 100% !important;
   }
-
+  .form-group label + .fa-calendar-alt {
+    top: 35px !important;
+  }
   /* sidebar */
   .main-sidebar {
     width: 50px;
@@ -133,7 +138,7 @@
       li {
         li {
           a {
-            padding-left: 0.5rem;
+            padding-left: 0.4rem;
           }
         }
       }
@@ -150,9 +155,14 @@
           top: 50%;
           position: absolute;
           background-color: $primary;
-          padding: 7px;
+          padding: 10px 7px;
           min-width: 100%;
           white-space: nowrap;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
         }
       }
 
@@ -188,7 +198,7 @@
   }
 
   /* Fees and services*/
-  .service-list .col-sm-9{
+  .service-list .col-sm-9 {
     min-height: 130px;
   }
 
@@ -207,7 +217,6 @@
         -ms-border-radius: 0 !important;
         -o-border-radius: 0 !important;
       }
-
     }
   }
 
@@ -216,26 +225,18 @@
   .vdp-datepicker input {
     width: 100%;
   }
-
-  .form-group .fa-calendar-alt {
-    position: absolute;
-    left: auto;
-    right: 11px;
-    top: 35px;
-  }
 }
 
 // Based on min width
 
-
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   /* edit */
-  .links-list{
-  &.form-group{
-    padding-left: 135px;
+  .links-list {
+    &.form-group {
+      padding-left: 135px;
+    }
   }
-}
   /* global classes*/
   .space-pre {
     white-space: pre;
@@ -245,8 +246,8 @@
   .service-list {
     .col-sm-9 {
       padding: 2.5rem 2rem;
-      >.h-100 {
-        &+.h-100 {
+      > .h-100 {
+        & + .h-100 {
           border-left: 1px solid #ccc;
         }
       }
@@ -257,18 +258,19 @@
   label {
     width: 135px;
 
-    &+div {
+    & + div {
       width: calc(100% - 135px);
     }
   }
 }
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 767px) {}
+@media (min-width: 767px) {
+}
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .auto-label label{
+  .auto-label label {
     width: auto !important;
   }
   .site-header {
@@ -280,14 +282,14 @@
       background-color: $navy-blue;
       width: 230px;
       box-shadow: $box-shadow;
-      border-top: 8px solid #FFF;
+      border-top: 8px solid #fff;
       border-radius: 0;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       -ms-border-radius: 0;
       -o-border-radius: 0;
 
-      >li {
+      > li {
         line-height: 1;
       }
 
@@ -299,7 +301,6 @@
         background-color: transparent !important;
         letter-spacing: 3px;
         padding: 12px 15px;
-
       }
 
       li {
@@ -310,7 +311,7 @@
         }
 
         &:hover {
-          opacity: .8;
+          opacity: 0.8;
         }
       }
     }

@@ -15,6 +15,7 @@
             </ol>
         </div><!-- /.container-fluid -->
     </div>
+    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -52,6 +53,6 @@
                         </div>
                         <!-- /.row -->
                     </section>
-                    </div>
+                  
              <!-- /.content -->
 @endsection

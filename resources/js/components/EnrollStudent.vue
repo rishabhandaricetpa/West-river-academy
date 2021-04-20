@@ -81,11 +81,12 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <p class="position-relative mb-0">
+      <div class="position-relative mb-0 col-md-3 col-xl-2 px-0">
         <flat-pickr id="dob" name="dob" :config="config" v-model="form.dob" required>
         </flat-pickr>
-      </p>
-      <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+         <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+      </div>
+     
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">Email Address</label>

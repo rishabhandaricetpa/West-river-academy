@@ -39,7 +39,7 @@
          </div>
          <div class="col-md-3 col-sm-6 text-center">
             <a href="{{route('order-transcript',Auth::user()->id)}}" class="d-inline-block mb-5 decoration-none">
-               <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
+               <i class="fas fa-folder-open rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Purchase a Transcript </h3>
             </a>
          </div>
@@ -58,13 +58,13 @@
          </div>
          <div class="col-md-3 col-sm-6 text-center">
             <a href="{{ route('reviewstudent') }}" class="d-inline-block mb-5 decoration-none">
-               <i class="fas fa-sync rounded-circle circled-grid fa-2x text-secondary"></i>
+               <i class="fas fa-user-friends rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Renew my Family’s Enrollment</h3>
             </a>
          </div>
          <div class="col-md-3 col-sm-6 text-center">
             <a href="{{ url('/enroll-student')}}" class="d-inline-block mb-5 decoration-none">
-               <i class="fas fa-user-graduate rounded-circle circled-grid fa-2x text-secondary"></i>
+               <i class="fas fa-user rounded-circle circled-grid fa-2x text-secondary"></i>
                <h3 class="mt-3 text-black font-weight-normal">Enroll a new Student in my Family</h3>
             </a>
          </div>
