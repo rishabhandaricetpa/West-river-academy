@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('pageTitle', 'Transcript Wizard')
+@section('pageTitle', 'Transcript Information')
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
@@ -30,6 +30,7 @@
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Edit Courses/Subjects</h2>
+        <a class="btn btn-primary mb-3" href="{{route('display.grades',[$student_id,$trans_id])}}">Back To View All Courses</a>
         <div class="overflow-auto">
             <table class="table-styling w-100">
                 <thead>

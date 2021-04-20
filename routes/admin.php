@@ -151,6 +151,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //record transfer request
     Route::get('record/request', 'RecordTransferController@index')->name('record.request');
+    Route::get('student/record/transfer/{student_id}', 'RecordTransferController@studentRecords')->name('student.request.transfer');
 
     //custom Payments
     Route::get('custom', 'CustomController@index')->name('custom.payments');
@@ -178,18 +179,35 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/customletter/{id}', 'CustomController@updateCustomletter')->name('update.customletter');
     Route::get('view-customletter/{id}', 'CustomController@getAllParentsCustomLetters')->name('each.customletters');
 
+
+    //order personal consultation
+    Route::get('order-conultation', 'CustomController@viewOrderConultation')->name('order.conultation');
+    Route::get('conultationpayment', 'CustomController@orderConultationDataTable')->name('datatable.conultation');
+    Route::get('edit-conultation/{id}', 'CustomController@editConultation')->name('edit.conultation');
+    Route::post('update/conultation/{id}', 'CustomController@updateConultation')->name('update.conultation');
+    Route::get('view-conultation/{id}', 'CustomController@getAllParentsConultation')->name('each.conultation');
+
     //dynamic fees &services for backend admin
     Route::get('fees-services', '\App\Http\Controllers\FeeStructureController@index')->name('fees.services');
     Route::get('feestable', '\App\Http\Controllers\FeeStructureController@dataTable')->name('datatable.fees');
     Route::get('fees-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@edit')->name('edit.fees');
     Route::post('fees-services/{id}', '\App\Http\Controllers\FeeStructureController@update')->name('update.fees');
+    Route::get('country/shipping', '\App\Http\Controllers\FeeStructureController@viewShippingDataTable')->name('datatable.shipping');
+    Route::get('country-services', '\App\Http\Controllers\FeeStructureController@countryData')->name('fees.country');
+    Route::get('country-services/{id}/edit', '\App\Http\Controllers\FeeStructureController@countryPostageEdit')->name('edit.countryPostage');
+    Route::post('country-services/{id}', '\App\Http\Controllers\FeeStructureController@countryPostageupdate')->name('update.countryPostage');
     //record request
-    Route::get('student/record/{student_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
+    Route::get('student/record/{student_id}/{record_id}', 'RecordTransferController@viewStudentRecord')->name('student.schoolRecord');
     Route::post('student/requestSent/{student_id}', 'RecordTransferController@sendRecordToSchool')->name('sendRecordToSchool');
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
-
+    Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     //dashboard notification
     Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
+    // archieved tasks
+    Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
+
+    //transcript 9-12th backend
+    Route::get('generate-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateTranscript')->name('genrate.transcript9_12');
 });

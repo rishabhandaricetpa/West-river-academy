@@ -11,7 +11,7 @@
         <div class="d-flex">
             <ol class="breadcrumb ml-auto">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Notarization & Appostille List</li>
+                <li class="breadcrumb-item active">Notarization & Apostille List</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.container-fluid -->

@@ -15,15 +15,14 @@ class CourseTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('courses')->delete();
-        {
+        DB::table('courses')->delete(); {
             $array = [
                 ['1', 'English / Language Arts', 'K-8'],
                 ['2', 'History / Social Science', 'K-8'],
                 ['3', 'Mathematics', 'K-8'],
                 ['4', 'Science', 'K-8'],
                 ['5', 'Health', 'K-8'],
-                ['6', 'Foriegn Language', 'K-8'],
+                ['6', 'Foreign Language', 'K-8'],
                 ['7', 'Physical Education', 'K-8'],
                 ['8', 'Another', 'K-8'],
             ];

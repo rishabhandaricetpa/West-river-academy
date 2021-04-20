@@ -113,23 +113,28 @@ export default {
       form: {
         student_id: this.student_id,
         transcript_id: this.transcript_id,
+        trans_id:this.trans_id,
         apCourses: [
           {
             course_name: "",
             grade: "",
-            credit: ""
+            credit: "",
+           transcript_id: this.transcript_id,
+           trans_id:this.trans_id,
           }
         ]
       }
     };
   },
-  props: ["transcript_id", "student_id", "all_credits"],
+  props: ["transcript_id", "student_id", "all_credits","trans_id"],
   methods: {
     addCourses() {
       this.form.apCourses.push({
         course_name: "",
         grade: "",
-        credit: ""
+        credit: "",
+        transcript_id: this.transcript_id,
+        trans_id:this.trans_id,
       });
     },
     submitCredit() {

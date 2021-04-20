@@ -7,6 +7,7 @@
         <h1 class="text-center text-white text-uppercase"></h1>
         <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
             <h3>Select an English / Language Arts course:</h3>
+
             <edit-english-transcript-course :outofcredit='@json($outOfCredit)' :englishcourse='@json($englishCourse)' :transcripts='@json($transcripts)' :student_id='@json($student_id)' :courses_id='@json($courses_id)' :transcript_id='@json($transcript9_12id)' :total_credits='@json($credits)'>
             </edit-english-transcript-course>
         </div>

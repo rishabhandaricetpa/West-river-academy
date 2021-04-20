@@ -17,6 +17,10 @@ class CreateCollegeCoursesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('student_profile_id');
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->nullable()->onDelete('cascade');
+            $table->unsignedBigInteger('transcript9_12_id');
+            $table->foreign('transcript9_12_id')->references('id')->on('transcript9_12')->nullable()->onDelete('cascade');
+            $table->unsignedBigInteger('transcript_id');
+            $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');
             $table->string('name');
             $table->string('course_name');
             $table->integer('grade');

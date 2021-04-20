@@ -18,6 +18,7 @@
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
+                        <a type="button" href="{{ route('admin.fees.country')}}" class="btn btn-primary">Modify Postage Charges</a>
                         <table id="fees-table" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>

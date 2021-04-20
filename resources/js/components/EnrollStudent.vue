@@ -1,6 +1,6 @@
 <template>
  <div class="form-wrap border bg-light py-5 px-25 position-relative">
-    <h2>Enroll Student 1</h2> 
+    <h2>Enroll Student</h2> 
     <p class="required-option">* Fields are required</p>
   <form method="POST" @submit.prevent="addStudent()">
     <div class="form-group d-sm-flex mb-2">
@@ -145,7 +145,7 @@
       <span  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
       <h3>Enrollment Period {{ index + 1 }}</h3>
       <div class="form-group d-sm-flex mb-2 mt-2r">
-        <label for="">Select your START date of enrollment</label>
+        <label for="">Select your START date of enrollment<sup>*</sup></label>
         <div class="row">
           <div class="col-md-4 col-lg-3">
             <div class="form-group w-100 datepicker-full">
@@ -181,7 +181,7 @@
       </div>
 
       <div class="form-group d-sm-flex mb-2 mt-2r">
-        <label for="">Select your END date of enrollment</label>
+        <label for="">Select your END date of enrollment<sup>*</sup></label>
         <div class="row">
           <div class="col-md-4 col-lg-3">
             <div class="form-group w-100 datepicker-full">
@@ -214,16 +214,10 @@
           </div>
         </div>
       </div>
-      <div class="form-group mt-2r d-sm-flex links-list mb-5">
-        <!-- Button trigger modal -->
-        <a href="#skipYear" data-toggle="modal" 
-          >what if i need to skip a year?</a
-        >
-      </div>
+    
       <div class="form-group d-sm-flex mb-2 lato-italic info-detail">
         <label for=""
-          >Select grade level(s) for your enrollment period
-          <p>(You may select more than one for multiple years)</p></label
+          >Select grade level(s) for your enrollment period.<sup>*</sup></label
         >
         <div class="row pl-sm-5">
           <div v-for="(grade, index) in grades" :key="index" class="col-6 col-sm-3">
@@ -260,7 +254,7 @@
         </div>
       </div>
       <div class="form-group d-sm-flex">
-        <label for="">Tell us more about your situation </label>
+        <label for="">Use this space to tell us anything you'd like us to know.</label>
         <div>
         <textarea
           class="form-control"

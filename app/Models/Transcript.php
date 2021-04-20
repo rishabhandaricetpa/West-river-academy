@@ -27,7 +27,10 @@ class Transcript extends Model
     {
         return $this->hasMany('App\Models\TranscriptPdf', 'transcript_id', 'id');
     }
-
+    public function collegeCourses()
+    {
+        return $this->hasMany(CollegeCourse::class);
+    }
     public function studentTranscript()
     {
         return $this->hasOne(TranscriptK8::class);
@@ -43,5 +46,9 @@ class Transcript extends Model
     public function transcript9_12()
     {
         return $this->belongsTo('App\Models\Transcript9_12', 'id', 'transcript_id');
+    }
+    public function apCourses()
+    {
+        return $this->hasMany(AdvancePlacement::class);
     }
 }

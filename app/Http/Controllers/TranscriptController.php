@@ -361,7 +361,7 @@ class TranscriptController extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
+            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         }
     }
@@ -424,7 +424,6 @@ class TranscriptController extends Controller
         $data = TranscriptPdf::where('transcript_id', $transcrip_id)->first();
         $pdflink = $data->pdf_link;
         $students = StudentProfile::whereId($student_id)->first();
-
         return view('transcript/download-transcript', compact('students', 'transcrip_id', 'student_id', 'pdflink'));
     }
 
@@ -448,6 +447,7 @@ class TranscriptController extends Controller
             Dashboard::create([
                 'student_profile_id' => $student_id,
                 'linked_to' => $transcript_payment->id,
+                'is_archieved' => 0,
                 'related_to' => 'transcript_ordered',
                 'notes' => 'Name of Student: ' . $transcriptData['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),

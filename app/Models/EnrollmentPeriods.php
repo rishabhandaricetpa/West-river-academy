@@ -32,4 +32,8 @@ class EnrollmentPeriods extends Model
     {
         return $this->belongsTo('App\Models\FeeStructure');
     }
+    public function enrollmentPayment()
+    {
+        return $this->hasOne(EnrollmentPayment::class);
+    }
 }

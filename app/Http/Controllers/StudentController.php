@@ -14,6 +14,7 @@ use App\Models\Transcript;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
 use App\Models\Dashboard;
+use App\Models\OrderPersonalConsultation;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -63,19 +64,20 @@ class StudentController extends Controller
                 $year = date('Y');
                 $newYear = $year + 1;
                 $year = Carbon::create($year)->format('Y');
-                $month_start_date = Carbon::create($countryData->start_date)->format('m-d');
-                $start_date = $year . '-' . $month_start_date;
+                $month_start_date = Carbon::create($countryData->start_date)->format('m/d');
+                $start_date = $year . '/' . $month_start_date;
+
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
 
-                $year_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                $country_end_date = '12-31';
+                $year_end_date = Carbon::create($countryData->end_date)->format('m/d');
+                $country_end_date = '12/31';
                 if ($year_end_date == $country_end_date) {
-                    $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                    $end_date = $year . '-' . $month_end_date;
+                    $month_end_date = Carbon::create($countryData->end_date)->format('m/d');
+                    $end_date = $year . '/' . $month_end_date;
                 } else {
-                    $month_end_date = Carbon::create($countryData->end_date)->format('m-d');
-                    $end_date = $newYear . '-' . $month_end_date;
+                    $month_end_date = Carbon::create($countryData->end_date)->format('m/d');
+                    $end_date = $newYear . '/' . $month_end_date;
                 }
                 DB::commit();
                 if ($request->expectsJson()) {
@@ -83,8 +85,8 @@ class StudentController extends Controller
                 }
                 return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
             } else {
-                $start_date = Carbon::now()->format('Y-m-d');
-                $end_date = Carbon::now()->addYears(1)->format('Y-m-d');
+                $start_date = Carbon::now()->format('Y/m/d');
+                $end_date = Carbon::now()->addYears(1)->format('Y/m/d');
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
                 return view('enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
@@ -108,7 +110,8 @@ class StudentController extends Controller
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter'));
+        $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->with('parent')->get();
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter', 'personal_consultation'));
     }
 
     public function confirmationpage($student_id)
@@ -130,7 +133,7 @@ class StudentController extends Controller
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
                 'gender' => $data['gender'],
-                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y-m-d'),
+                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y/m/d'),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
                 'student_Id' => $data['studentID'],
@@ -158,8 +161,8 @@ class StudentController extends Controller
 
                 $enrollPeriod = EnrollmentPeriods::create([
                     'student_profile_id' => $student->id,
-                    'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
-                    'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
+                    'start_date_of_enrollment' =>  $selectedStartDate->format('Y/m/d'),
+                    'end_date_of_enrollment' => $selectedEndDate->format('Y/m/d'),
                     'grade_level' => $period['grade'],
                     'type' => $type,
                 ]);
@@ -186,6 +189,7 @@ class StudentController extends Controller
             Dashboard::create([
                 'student_profile_id' => $student->id,
                 'linked_to' => $student->Name,
+                'is_archieved' => 0,
                 'related_to' => 'student_record_received',
                 'notes' => 'New Student Record Received for' . $student->first_name . $student->last_name,
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -229,7 +233,7 @@ class StudentController extends Controller
             $student->last_name = $request->input('last_name');
             $student->email = $request->input('email');
             $student->gender = $request->input('gender');
-            $student->d_o_b = \Carbon\Carbon::parse($request->input('dob'))->format('Y-m-d');
+            $student->d_o_b = \Carbon\Carbon::parse($request->input('dob'))->format('Y/m/d');
             $student->cell_phone = $request->input('cell_phone');
             $student->student_Id = $request->input('student_Id');
             $student->immunized_status = $request->input('immunized_status');
@@ -284,8 +288,8 @@ class StudentController extends Controller
 
         $enrollPeriod->fill([
             'student_profile_id' => $student->id,
-            'start_date_of_enrollment' =>  $selectedStartDate->format('Y-m-d'),
-            'end_date_of_enrollment' => $selectedEndDate->format('Y-m-d'),
+            'start_date_of_enrollment' =>  $selectedStartDate->format('Y/m/d'),
+            'end_date_of_enrollment' => $selectedEndDate->format('Y/m/d'),
             'grade_level' => $period['grade'],
             'type' => $type,
         ]);

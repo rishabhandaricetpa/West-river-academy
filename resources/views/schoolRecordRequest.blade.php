@@ -54,21 +54,21 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Date:{{$date}} </td>
+                    <td>Date: {{$date}} </td>
                 </tr>
             </tbody>
         </table>
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>To:</td>
+                    <td>To: {{$email}}</td>
                 </tr>
             </tbody>
         </table>
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Attention: School Records:</td>
+                    <td>Attention: School Records</td>
                 </tr>
             </tbody>
         </table>
@@ -83,10 +83,10 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Student Name:{{$name}}</td>
+                    <td>Student Name: {{$name}}</td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Date of Birth:{{$dob}} </td>
+                    <td>Date of Birth: {{$dob}} </td>
                 </tr>
                 <tr style="width:100%">
                     <td>Grade Level:@foreach($grade as $gradelevel)

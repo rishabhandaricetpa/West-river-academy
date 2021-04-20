@@ -138,6 +138,13 @@
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
         >Add another Foreign Language Course</a
+      >  
+      <a
+        type="button"
+        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
+        id="addEnglish"
+        @click="viewCourses"
+        >View All Courses</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
@@ -272,6 +279,13 @@ export default {
         }
       }
       return true;
+    },
+        viewCourses(){
+  window.location =
+            "/display-course-details/" +
+            this.transcript_id +
+            "/" +
+            this.student_id;
     }
   },
   created() {

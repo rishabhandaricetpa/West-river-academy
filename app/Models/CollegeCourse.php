@@ -10,6 +10,6 @@ class CollegeCourse extends Model
     use HasFactory;
     protected $fillable = [
         'student_profile_id', 'name', 'course_name', 'grade', 'is_college_level', 'course_grade',
-        'selectedCredit'
+        'selectedCredit', 'transcript9_12_id',  'transcript_id'
     ];
 }

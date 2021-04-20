@@ -1,6 +1,11 @@
 <?php
 
 use App\Models\FeesInfo;
+use App\Models\Country;
+use App\Models\Transcript9_12;
+use App\Models\AdvancePlacement;
+use App\Models\TranscriptCourse9_12;
+use App\Models\CollegeCourse;
 
 /**
  * Compare given route with current route and return output if they match.
@@ -43,7 +48,7 @@ function getFeeDetails($type)
         return false;
     }
 }
-function getPromotedGrades($grades, $modify_last_value = true)
+function getPromotedGrades($grades, $last_value = true)
 {
     try {
         $gradeDetails = array();
@@ -70,10 +75,12 @@ function getPromotedGrades($grades, $modify_last_value = true)
             $grade->order = $orders[$grade->grade];
             return $grade;
         });
+        // dd($grades);
+
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
-        $len = count($sortedOrder);
-        if($modify_last_value && $len > 1){
-            $sortedOrder[$len - 1] =  " and " . $sortedOrder[$len - 1];
+        $length = count($sortedOrder);
+        if ($last_value && $length > 1) {
+            $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
         }
 
         return implode(", ", $sortedOrder);
@@ -86,6 +93,7 @@ function getPromtedGrade($grades)
 {
     try {
         $getArrayOrder = getPromotedGrades($grades, false);
+
         $eplode = explode(", ", $getArrayOrder);
         $last = end($eplode);
         if ($last == 'Ungraded') {
@@ -109,4 +117,162 @@ function getCustomLetterQuantity($amount)
     $customletterfee = FeesInfo::getFeeAmount('custom_letter');
     $quantity = $amount / $customletterfee;
     return $quantity;
+}
+//get country postage chanrgess
+function getCountryAmount($country)
+{
+    $postage_charges = Country::select('postage_charges')->where('country', $country)->first();
+    return $postage_charges;
+}
+
+
+//get G.P.A for the student
+function getGPAvalue($courses, $total_credits_earned)
+{
+    $calculated_points = array();
+    $academy_points = array(
+        "A" => 4,
+        "B" => 3,
+        "C" => 2,
+        'D' => 1,
+        'F' => 0,
+        'P' => 0,
+    );
+    $college_points = array(
+        "A" => 5,
+        "B" => 4,
+        "C" => 3,
+        'D' => 2,
+        'F' => 0,
+        'P' => 0,
+    );
+    foreach ($courses as $course) {
+        if ($course->type === 'year') {
+            $courses = $courses->map(function ($course) use ($academy_points) {
+                if ($course->credit === 1.0) {
+                    $course->order = $academy_points[$course->score];
+                } elseif ($course->credit === 0.5) {
+                    $course->order = $academy_points[$course->score] / 2;
+                } else {
+                    $course->order = $academy_points[$course->score] / 3;
+                }
+                return $course;
+            });
+        }
+    }
+    $sumForAcademicYear = collect($courses)->pluck('order')->sum();
+    $academicGpa = floatval($sumForAcademicYear) / floatval($total_credits_earned);
+    return round($academicGpa, 2);
+}
+
+
+function fetchTranscript9_12Details($transcriptData)
+{
+    $courses = collect([]);
+    $courseInProgress = collect([]);
+    // for academic years and courses
+    $transcriptData->each(function ($transcript_courses) use ($courses, $courseInProgress) {
+        $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses, $courseInProgress) {
+            if ($course->score !== 'In Progress') {
+                $courses->push(
+                    (object)[
+                        'id' => $course->id,
+                        'score' => $course->score,
+                        'name' => $course->subject->subject_name,
+                        'credit' => $course->credit->credit,
+                        'groupBy' => $transcript_courses->enrollment_year,
+                        'grade' => $transcript_courses->grade,
+                        'type' => 'year'
+                    ]
+                );
+            } else {
+                $courseInProgress->push(
+                    (object)[
+                        'id' => $course->id,
+                        'score' => '-',
+                        'name' => $course->subject->subject_name,
+                        'credit' => $course->credit->credit,
+                        'groupBy' => 'Courses In Progres',
+                        'grade' => $transcript_courses->grade,
+                        'type' => 'year'
+                    ]
+                );
+            }
+        });
+    });
+    /** for college courses */
+    $collegeCourses = collect([]);
+    $transcriptData->each(function ($college_courses) use ($collegeCourses) {
+        $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
+            $collegeCourses->push(
+                (object)[
+                    'id' => $cllg_course->id,
+                    'groupBy' => $cllg_course->name,
+                    'course_name' => $cllg_course->course_name,
+                    'grade' => $cllg_course->grade,
+                    'course_grade'  => $cllg_course->course_grade,
+                    'selectedCredit' => $cllg_course->selectedCredit,
+                    'type' => 'college'
+                ]
+            );
+        });
+    });
+    $courses = $courses->merge($collegeCourses)->merge($courseInProgress);
+    return $courses;
+}
+
+function  getCollegeCourses($transcriptData)
+{
+    $collegeCourses = collect([]);
+    $transcriptData->each(function ($college_courses) use ($collegeCourses) {
+        $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
+            $collegeCourses->push(
+                (object)[
+                    'id' => $cllg_course->id,
+                    'groupBy' => $cllg_course->name,
+                    'course_name' => $cllg_course->course_name,
+                    'grade' => $cllg_course->grade,
+                    'course_grade'  => $cllg_course->course_grade,
+                    'selectedCredit' => $cllg_course->selectedCredit,
+                    'type' => 'college'
+                ]
+            );
+        });
+    });
+    return $collegeCourses;
+}
+
+function getTotalCredits($transcript_id, $transcript_9_12_id)
+{
+    $course = TranscriptCourse9_12::whereIn('transcript9_12_id', $transcript_9_12_id)->with('subject')->get();
+
+
+    /** collected sum for annual year  */
+    $collectSelectedGrade = collect($course->pluck('selectedCredit'));
+    $sumOfSeletedEnrollmentGrade = $collectSelectedGrade->sum();
+
+    /** collected sum for college course if exits */
+    $college_course = CollegeCourse::whereIn('transcript9_12_id', $transcript_9_12_id)->get();
+    if (count($college_course) > 0) {
+        $collectSelectedGradeCollege = collect($college_course)->pluck('selectedCredit');
+        $sumOfSeletedCollegeGrade = $collectSelectedGradeCollege->sum();
+        $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade);
+    } else {
+        $sumOfSeletedCollegeGrade = 0;
+    }
+
+
+    /** collected sum for ap courses course if exits */
+
+    $apCourses = AdvancePlacement::whereIn('transcript9_12_id', $transcript_9_12_id)->get();
+    if (count($apCourses) > 0) {
+        $collectSelectedGradeApCourse = collect($apCourses)->pluck('ap_course_credits');
+        $sumOfSeletedApCourseGrade = $collectSelectedGradeApCourse->sum();
+    } else {
+        $sumOfSeletedApCourseGrade = 0;
+    }
+
+    /** getting total credit from sum of annual year course , college grade courses and ap courses*/
+    $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade) + floatval($sumOfSeletedApCourseGrade);
+    return $totalSelectedGrades;
 }

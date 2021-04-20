@@ -4905,14 +4905,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5289,6 +5281,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ElectiveCourse",
   data: function data() {
@@ -5399,6 +5398,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -5847,6 +5849,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ForeignCourse",
   data: function data() {
@@ -5957,6 +5966,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -5975,6 +5987,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6233,6 +6252,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -6251,6 +6273,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6509,6 +6538,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -6527,6 +6559,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6785,6 +6824,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -6803,6 +6845,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7061,6 +7110,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -7079,6 +7131,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7337,6 +7396,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    viewCourses: function viewCourses() {
+      window.location = "/display-course-details/" + this.transcript_id + "/" + this.student_id;
     }
   },
   created: function created() {
@@ -7363,12 +7425,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_css__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7906,6 +7962,228 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PersonalConsultation.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PersonalConsultation.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PersonalConsultation",
+  data: function data() {
+    return {
+      form: {
+        preferred_language: [],
+        en_call_type: "",
+        sp_call_type: "",
+        amount_due: "",
+        consulting_about: "",
+        type: "order_consultation"
+      },
+      errors: []
+    };
+  },
+  props: {
+    fees: {
+      required: true
+    }
+  },
+  methods: {
+    gethourlyCharges: function gethourlyCharges(event) {
+      var amount = this.fees * event.target.value;
+      this.form.amount_due = amount;
+    },
+    addconsultation: function addconsultation() {
+      this.errors = [];
+
+      if (!this.form.amount_due) {
+        this.errors.push("Please select the number of hourse for consultation");
+        alert("Please fill the required data");
+      }
+
+      if (this.form.amount_due) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("add.cart"), this.form).then(function (response) {
+          window.location = "/cart";
+        })["catch"](function (error) {
+          alert("Invalid Input");
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trancript9to12OtherCourses/ApCourse.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trancript9to12OtherCourses/ApCourse.vue?vue&type=script&lang=js& ***!
@@ -8029,21 +8307,26 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         student_id: this.student_id,
         transcript_id: this.transcript_id,
+        trans_id: this.trans_id,
         apCourses: [{
           course_name: "",
           grade: "",
-          credit: ""
+          credit: "",
+          transcript_id: this.transcript_id,
+          trans_id: this.trans_id
         }]
       }
     };
   },
-  props: ["transcript_id", "student_id", "all_credits"],
+  props: ["transcript_id", "student_id", "all_credits", "trans_id"],
   methods: {
     addCourses: function addCourses() {
       this.form.apCourses.push({
         course_name: "",
         grade: "",
-        credit: ""
+        credit: "",
+        transcript_id: this.transcript_id,
+        trans_id: this.trans_id
       });
     },
     submitCredit: function submitCredit() {
@@ -8326,6 +8609,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errors: [],
       form: {
+        transcript9_12_id: this.transcript9_12id,
         student_id: this.student_id,
         transcript_id: this.transcript_id,
         collegeCourse: [{
@@ -8372,11 +8656,13 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push("Please select credit");
       }
 
-      axios.post(route("collegeCourse.store"), this.form).then(function (response) {
-        window.location = "/display-all-grades/" + _this.student_id + "/" + _this.transcript_id;
-      })["catch"](function (error) {
-        alert("Please fill in all fields");
-      });
+      if (this.validateCollegeGrade() && this.validateIsCollege() && this.validateGrade() && this.validateCredit()) {
+        axios.post(route("collegeCourse.store"), this.form).then(function (response) {
+          window.location = "/display-all-grades/" + _this.student_id + "/" + _this.transcript_id;
+        })["catch"](function (error) {
+          alert("Please fill in all fields");
+        });
+      }
     },
     removeCollegeCourse: function removeCollegeCourse(index) {
       this.form.collegeCourse.splice(index, 1);
@@ -8592,14 +8878,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ElectiveCourse",
   data: function data() {
@@ -8650,10 +8928,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -8667,17 +8941,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.anotherCourse.length; i++) {
-        var foreignCourse = this.form.anotherCourse[i];
-
-        if (!foreignCourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.anotherCourse.length; i++) {
@@ -8726,14 +8989,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8935,10 +9190,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -8952,17 +9203,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.englishCourse.length; i++) {
-        var englishCourse = this.form.englishCourse[i];
-
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.englishCourse.length; i++) {
@@ -9011,14 +9251,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9219,10 +9451,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -9236,17 +9464,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.foreignCourse.length; i++) {
-        var foreignCourse = this.form.foreignCourse[i];
-
-        if (!foreignCourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.foreignCourse.length; i++) {
@@ -9295,14 +9512,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9503,10 +9712,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -9520,17 +9725,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.healthCourse.length; i++) {
-        var englishCourse = this.form.healthCourse[i];
-
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.healthCourse.length; i++) {
@@ -9579,13 +9773,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9789,10 +9976,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.errors = [];
-
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
 
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
@@ -10016,15 +10199,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MathsCourse",
   data: function data() {
@@ -10075,10 +10249,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -10092,17 +10262,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.mathscourse.length; i++) {
-        var mathscourse = this.form.mathscourse[i];
-
-        if (!mathscourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.mathscourse.length; i++) {
@@ -10151,14 +10310,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -10362,10 +10513,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -10379,17 +10526,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.physicalEducationCourse.length; i++) {
-        var englishCourse = this.form.physicalEducationCourse[i];
-
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.physicalEducationCourse.length; i++) {
@@ -10438,14 +10574,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -10646,10 +10774,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
 
-      if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push("Course name is required Field! Please select a Course name");
       }
@@ -10663,17 +10787,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert("Please fill in the fields");
       });
-    },
-    vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.scienceCourse.length; i++) {
-        var englishCourse = this.form.scienceCourse[i];
-
-        if (!englishCourse.grade) {
-          return false;
-        }
-      }
-
-      return true;
     },
     validateSubject: function validateSubject() {
       for (var i = 0; i < this.form.scienceCourse.length; i++) {
@@ -43415,8 +43528,6 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(6, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   {
@@ -43424,7 +43535,11 @@ var render = function() {
                       "form-group d-sm-flex mb-2r lato-italic info-detail "
                   },
                   [
-                    _vm._m(7, true),
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v(
+                        "Select grade level(s) for your enrollment period."
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -43484,7 +43599,7 @@ var render = function() {
                   "table",
                   { staticClass: "table-styling border w-100 my-5" },
                   [
-                    _vm._m(8, true),
+                    _vm._m(6, true),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -43707,34 +43822,6 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
         _vm._v("help me choose a date")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "form-group mt-2r d-sm-flex links-list mb-5" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "ml-sm-4",
-            attrs: { href: "#skipYear", "data-toggle": "modal" }
-          },
-          [_vm._v("what if i need to skip a year?")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "" } }, [
-      _vm._v("Select grade level(s) for your enrollment period\n          "),
-      _c("p", [_vm._v("(You may select more than one for multiple years)")])
     ])
   },
   function() {
@@ -44143,6 +44230,16 @@ var render = function() {
           "a",
           { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
           [_vm._v("Add another Elective Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
         ),
         _vm._v(" "),
         _c(
@@ -45010,6 +45107,16 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
+        ),
+        _vm._v(" "),
+        _c(
           "button",
           {
             staticClass: "btn btn-primary ml-4 float-right",
@@ -45437,6 +45544,16 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
+        ),
+        _vm._v(" "),
+        _c(
           "button",
           {
             staticClass: "btn btn-primary ml-4 float-right",
@@ -45861,6 +45978,16 @@ var render = function() {
           "a",
           { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
           [_vm._v("Add another Mathematics Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
         ),
         _vm._v(" "),
         _c(
@@ -46293,6 +46420,16 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
+        ),
+        _vm._v(" "),
+        _c(
           "button",
           {
             staticClass: "btn btn-primary ml-4 float-right",
@@ -46719,6 +46856,16 @@ var render = function() {
           "a",
           { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
           [_vm._v("Add another  History/Social Science Course")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
         ),
         _vm._v(" "),
         _c(
@@ -47151,6 +47298,16 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+            attrs: { type: "button", id: "addEnglish" },
+            on: { click: _vm.viewCourses }
+          },
+          [_vm._v("View All Courses")]
+        ),
+        _vm._v(" "),
+        _c(
           "button",
           {
             staticClass: "btn btn-primary ml-4 float-right",
@@ -47211,7 +47368,7 @@ var render = function() {
     "div",
     { staticClass: "form-wrap border bg-light py-5 px-25 position-relative" },
     [
-      _c("h2", [_vm._v("Enroll Student 1")]),
+      _c("h2", [_vm._v("Enroll Student")]),
       _vm._v(" "),
       _c("p", { staticClass: "required-option" }, [
         _vm._v("* Fields are required")
@@ -47579,9 +47736,7 @@ var render = function() {
                     "div",
                     { staticClass: "form-group d-sm-flex mb-2 mt-2r" },
                     [
-                      _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Select your START date of enrollment")
-                      ]),
+                      _vm._m(5, true),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-4 col-lg-3" }, [
@@ -47648,7 +47803,7 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(5, true)
+                        _vm._m(6, true)
                       ])
                     ]
                   ),
@@ -47657,9 +47812,7 @@ var render = function() {
                     "div",
                     { staticClass: "form-group d-sm-flex mb-2 mt-2r" },
                     [
-                      _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Select your END date of enrollment")
-                      ]),
+                      _vm._m(7, true),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-4 col-lg-3" }, [
@@ -47730,12 +47883,10 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(6, true)
+                        _vm._m(8, true)
                       ])
                     ]
                   ),
-                  _vm._v(" "),
-                  _vm._m(7, true),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -47744,7 +47895,7 @@ var render = function() {
                         "form-group d-sm-flex mb-2 lato-italic info-detail"
                     },
                     [
-                      _vm._m(8, true),
+                      _vm._m(9, true),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -47879,7 +48030,9 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group d-sm-flex" }, [
             _c("label", { attrs: { for: "" } }, [
-              _vm._v("Tell us more about your situation ")
+              _vm._v(
+                "Use this space to tell us anything you'd like us to know."
+              )
             ]),
             _vm._v(" "),
             _c("div", [
@@ -48016,10 +48169,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 links-list mt-3 mt-sm-0" }, [
-      _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
-        _vm._v("help me choose a date")
-      ])
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Select your START date of enrollment"),
+      _c("sup", [_vm._v("*")])
     ])
   },
   function() {
@@ -48031,28 +48183,33 @@ var staticRenderFns = [
         _vm._v("help me choose a date")
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "form-group mt-2r d-sm-flex links-list mb-5" },
-      [
-        _c("a", { attrs: { href: "#skipYear", "data-toggle": "modal" } }, [
-          _vm._v("what if i need to skip a year?")
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _vm._v("Select grade level(s) for your enrollment period\n         "),
-      _c("p", [_vm._v("(You may select more than one for multiple years)")])
+      _vm._v("Select your END date of enrollment"),
+      _c("sup", [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-3 links-list mt-3 mt-sm-0" }, [
+      _c("a", { attrs: { href: "#chooseDates", "data-toggle": "modal" } }, [
+        _vm._v("help me choose a date")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Select grade level(s) for your enrollment period."),
+      _c("sup", [_vm._v("*")])
     ])
   }
 ]
@@ -48122,6 +48279,463 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PersonalConsultation.vue?vue&type=template&id=641e7d58&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PersonalConsultation.vue?vue&type=template&id=641e7d58& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: { method: "POST" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.addconsultation()
+        }
+      }
+    },
+    [
+      _c("p", [
+        _vm._v(
+          "\n    We would be happy to speak with you and your student(s) to advise on\n    educational situations, materials, resources and transcripts. You may\n    choose English or Spanish as your preferred language for the consultation.\n  "
+        )
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.form.type,
+            expression: "form.type"
+          }
+        ],
+        staticClass: "form-control col-3",
+        attrs: { type: "hidden", name: "order_consultation" },
+        domProps: { value: _vm.form.type },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.form, "type", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group mb-2 lato-italic info-detail pb-4" },
+        [
+          _c("h3", { staticClass: "mb-3" }, [
+            _vm._v("Please choose the languge you prefer.")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.preferred_language,
+                  expression: "form.preferred_language"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: {
+                type: "radio",
+                name: "preferred_language",
+                id: "select-english",
+                value: "English",
+                required: ""
+              },
+              domProps: {
+                checked: _vm._q(_vm.form.preferred_language, "English")
+              },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.form, "preferred_language", "English")
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n        English\n      ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.preferred_language,
+                  expression: "form.preferred_language"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: {
+                type: "radio",
+                id: "select-spanish",
+                name: "preferred_language",
+                value: "Spanish"
+              },
+              domProps: {
+                checked: _vm._q(_vm.form.preferred_language, "Spanish")
+              },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.form, "preferred_language", "Spanish")
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n        Spanish\n      ")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("h3", { staticClass: "mb-3" }, [
+        _vm._v(
+          "\n        You will inititate the call. How do you wish to call us?\n      "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "form-group mb-2 lato-italic info-detail pb-4 d-none",
+          attrs: { id: "call_method_1" }
+        },
+        [
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.en_call_type,
+                  expression: "form.en_call_type"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: {
+                type: "radio",
+                name: "en_call_type",
+                value: "My service provider"
+              },
+              domProps: {
+                checked: _vm._q(_vm.form.en_call_type, "My service provider")
+              },
+              on: {
+                change: function($event) {
+                  return _vm.$set(
+                    _vm.form,
+                    "en_call_type",
+                    "My service provider"
+                  )
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n          My service provider\n        ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.en_call_type,
+                  expression: "form.en_call_type"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: { type: "radio", name: "en_call_type", value: "WhatsApp" },
+              domProps: { checked: _vm._q(_vm.form.en_call_type, "WhatsApp") },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.form, "en_call_type", "WhatsApp")
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n          WhatsApp\n        ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.en_call_type,
+                  expression: "form.en_call_type"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: { type: "radio", name: "en_call_type", Value: "Telegram" },
+              domProps: { checked: _vm._q(_vm.form.en_call_type, null) },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.form, "en_call_type", null)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n          Telegram\n        ")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "form-group mb-2 lato-italic info-detail pb-4 d-none",
+          attrs: { id: "call_method_2" }
+        },
+        [
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.sp_call_type,
+                  expression: "form.sp_call_type"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: { type: "radio", name: "sp_call_type", Value: "Zoom" },
+              domProps: { checked: _vm._q(_vm.form.sp_call_type, null) },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.form, "sp_call_type", null)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n          Zoom\n        ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mb-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.sp_call_type,
+                  expression: "form.sp_call_type"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: {
+                type: "radio",
+                name: "sp_call_type",
+                value: "Google Meet"
+              },
+              domProps: {
+                checked: _vm._q(_vm.form.sp_call_type, "Google Meet")
+              },
+              on: {
+                change: function($event) {
+                  return _vm.$set(_vm.form, "sp_call_type", "Google Meet")
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "form-check-label", attrs: { for: "" } },
+              [_vm._v("\n          Google Meet\n        ")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-lg-flex mb-3" }, [
+        _c("p", [
+          _vm._v("The fee is $80 per hour. Select the number of hours:")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row ml-lg-3 mx-0 align-items-center" }, [
+          _c(
+            "select",
+            {
+              staticClass: "form-control col-4",
+              on: {
+                change: function($event) {
+                  return _vm.gethourlyCharges($event)
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("Select hours")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "4" } }, [_vm._v("4")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "6" } }, [_vm._v("6")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "8" } }, [_vm._v("8")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "9" } }, [_vm._v("9")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "10" } }, [_vm._v("10")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "col-2 text-center" }, [_vm._v("=")]),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-dollar-sign additional-sign" }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.amount_due,
+                expression: "form.amount_due"
+              }
+            ],
+            staticClass: "form-control col-3",
+            attrs: { type: "text", name: "amount_due" },
+            domProps: { value: _vm.form.amount_due },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "amount_due", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("p", { staticClass: "mb-2" }, [
+          _vm._v("what would you like about during the consultation?")
+        ]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.consulting_about,
+              expression: "form.consulting_about"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "exampleFormControlTextarea1",
+            name: "consulting_about",
+            rows: "3",
+            required: ""
+          },
+          domProps: { value: _vm.form.consulting_about },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "consulting_about", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm.errors.length
+        ? _c("p", [
+            _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c(
+                  "li",
+                  { key: error.id, staticStyle: { color: "red" } },
+                  [_vm._v("  " + _vm._s(error) + " ")]
+                )
+              }),
+              0
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(0)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "form-wrap border bg-light py-5 px-25 dashboard-info mt-4"
+      },
+      [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary ml-auto", attrs: { type: "submit" } },
+          [_vm._v("Add to cart")]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -49080,8 +49694,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "label",
                   { staticClass: "h3 text-black", attrs: { for: "" } },
@@ -49192,7 +49804,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -49461,23 +50073,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select a Elective course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-sm-flex mt-4" }, [
       _c("h3", [_vm._v("Select a Grade")]),
       _vm._v(" "),
@@ -49550,8 +50145,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -49652,7 +50245,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -49921,23 +50514,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select an English/Language course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-sm-flex mt-4" }, [
       _c("h3", [_vm._v("Select a Grade")]),
       _vm._v(" "),
@@ -50010,8 +50586,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -50112,7 +50686,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -50381,23 +50955,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select a Foregin course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-sm-flex mt-4" }, [
       _c("h3", [_vm._v("Select a Grade")]),
       _vm._v(" "),
@@ -50470,8 +51027,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -50572,7 +51127,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -50839,23 +51394,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select a Health course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-sm-flex mt-4" }, [
       _c("h3", [_vm._v("Select a Grade")]),
       _vm._v(" "),
@@ -50931,8 +51469,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -51033,7 +51569,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -51310,23 +51846,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select an History / Social Science course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-sm-flex mt-4" }, [
       _c("h3", [_vm._v("Select a Grade")]),
       _vm._v(" "),
@@ -51399,8 +51918,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -51501,7 +52018,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -51751,12 +52268,6 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
-          "a",
-          { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
-          [_vm._v("View All Courses")]
-        ),
-        _vm._v(" "),
-        _c(
           "button",
           {
             staticClass: "btn btn-primary ml-4 float-right",
@@ -51770,23 +52281,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select an Mathematics/Language course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51866,8 +52360,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -51970,7 +52462,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -52251,23 +52743,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select a Physical Education course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-sm-flex mt-4" }, [
       _c("h3", [_vm._v("Select a Grade")]),
       _vm._v(" "),
@@ -52340,8 +52815,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group d-sm-flex  align-items-center" },
@@ -52442,7 +52915,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check mb-1" }, [
                     _c("input", {
@@ -52707,23 +53180,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mb-3" }, [
-      _vm._v("\n          Select an Science course:"),
-      _c("i", {
-        staticClass:
-          "ml-2 fas fa-question-circle tooltip-styling text-secondary",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Tooltip on top"
-        }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -73331,7 +73787,9 @@ Vue.component('edit-science-transcript-course', __webpack_require__(/*! ./compon
 Vue.component('edit-physical-transcript-course', __webpack_require__(/*! ./components/EditTranscriptCourses/EditPhysicalEducationCourse.vue */ "./resources/js/components/EditTranscriptCourses/EditPhysicalEducationCourse.vue")["default"]);
 Vue.component('edit-health-transcript-course', __webpack_require__(/*! ./components/EditTranscriptCourses/EditHealthCourse.vue */ "./resources/js/components/EditTranscriptCourses/EditHealthCourse.vue")["default"]);
 Vue.component('edit-foreign-transcript-course', __webpack_require__(/*! ./components/EditTranscriptCourses/EditForeignCourse.vue */ "./resources/js/components/EditTranscriptCourses/EditForeignCourse.vue")["default"]);
-Vue.component('edit-elective-transcript-course', __webpack_require__(/*! ./components/EditTranscriptCourses/EditElectiveCourse.vue */ "./resources/js/components/EditTranscriptCourses/EditElectiveCourse.vue")["default"]);
+Vue.component('edit-elective-transcript-course', __webpack_require__(/*! ./components/EditTranscriptCourses/EditElectiveCourse.vue */ "./resources/js/components/EditTranscriptCourses/EditElectiveCourse.vue")["default"]); //order personal consulation
+
+Vue.component('order-consultation', __webpack_require__(/*! ./components/PersonalConsultation.vue */ "./resources/js/components/PersonalConsultation.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -75343,6 +75801,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PersonalConsultation.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/PersonalConsultation.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PersonalConsultation_vue_vue_type_template_id_641e7d58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PersonalConsultation.vue?vue&type=template&id=641e7d58& */ "./resources/js/components/PersonalConsultation.vue?vue&type=template&id=641e7d58&");
+/* harmony import */ var _PersonalConsultation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PersonalConsultation.vue?vue&type=script&lang=js& */ "./resources/js/components/PersonalConsultation.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PersonalConsultation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PersonalConsultation_vue_vue_type_template_id_641e7d58___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PersonalConsultation_vue_vue_type_template_id_641e7d58___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PersonalConsultation.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PersonalConsultation.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/PersonalConsultation.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalConsultation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PersonalConsultation.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PersonalConsultation.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalConsultation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PersonalConsultation.vue?vue&type=template&id=641e7d58&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/PersonalConsultation.vue?vue&type=template&id=641e7d58& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalConsultation_vue_vue_type_template_id_641e7d58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PersonalConsultation.vue?vue&type=template&id=641e7d58& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PersonalConsultation.vue?vue&type=template&id=641e7d58&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalConsultation_vue_vue_type_template_id_641e7d58___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalConsultation_vue_vue_type_template_id_641e7d58___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Trancript9to12OtherCourses/ApCourse.vue":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/Trancript9to12OtherCourses/ApCourse.vue ***!
@@ -76109,67 +76636,77 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-/* Bootstrap dropdown on hover */
-$(".dropdown-menu").css('margin-top', 0);
-$(".dropdown").mouseover(function () {
-  $(this).addClass('show').attr('aria-expanded', "true");
-  $(this).find('.dropdown-menu').addClass('show');
-}).mouseout(function () {
-  $(this).removeClass('show').attr('aria-expanded', "false");
-  $(this).find('.dropdown-menu').removeClass('show');
-});
-/* Header on scroll */
+$(document).ready(function () {
+  /* Bootstrap dropdown on hover */
+  $(".dropdown-menu").css('margin-top', 0);
+  $(".dropdown").mouseover(function () {
+    $(this).addClass('show').attr('aria-expanded', "true");
+    $(this).find('.dropdown-menu').addClass('show');
+  }).mouseout(function () {
+    $(this).removeClass('show').attr('aria-expanded', "false");
+    $(this).find('.dropdown-menu').removeClass('show');
+  });
+  /* Header on scroll */
 
-$(window).scroll(function () {
-  var scroll = $(window).scrollTop(); //>=, not <=
+  $(window).scroll(function () {
+    var scroll = $(window).scrollTop(); //>=, not <=
 
-  if (scroll >= 500) {
-    //clearHeader, not clearheader - caps H
-    $(".site-header").addClass("stickyHeader");
-  } else {
-    $(".site-header").removeClass("stickyHeader");
-  }
-}); //missing );
-
-/* Notifications */
-
-$(".notify-btn").click(function () {
-  $(".notification").toggleClass('d-block');
-});
-/* Show transcript popup by default */
-
-$('#transcript-notification').modal('show');
-$(document).on("click", function (event) {
-  if (!$(event.target).closest(".notification-wrap").length) {
-    $(".notification").removeClass("d-block");
-  }
-}); // country transcript
-
-$("#transcript-country").click(function () {
-  $('.transcript-detail').addClass('show');
-  $('.present-detail').removeClass('show');
-});
-$("#transcript-present").click(function () {
-  $('.present-detail').addClass('show');
-  $('.transcript-detail').removeClass('show');
-});
-/* order a personal consultation */
-
-$("#select-english").click(function () {
-  $('#call_method_1').addClass('d-block');
-  $('#call_method_2').removeClass('d-block');
-});
-$("#select-spanish").click(function () {
-  $('#call_method_2').addClass('d-block');
-  $('#call_method_1').removeClass('d-block');
-});
-$(function () {
-  $("#select-particular").change(function () {
-    if ($('option:selected', this).text() == 'United states of america') {
-      $('#select-us').addClass('d-block');
+    if (scroll >= 500) {
+      //clearHeader, not clearheader - caps H
+      $(".site-header").addClass("stickyHeader");
     } else {
-      $('#select-us').removeClass('d-block');
+      $(".site-header").removeClass("stickyHeader");
     }
+  }); //missing );
+
+  /* Notifications */
+
+  $(".notify-btn").click(function () {
+    $(".notification").toggleClass('d-block');
+  });
+  /* Show transcript popup by default */
+
+  $('#transcript-notification').modal('show');
+  $(document).on("click", function (event) {
+    if (!$(event.target).closest(".notification-wrap").length) {
+      $(".notification").removeClass("d-block");
+    }
+  }); // country transcript
+
+  $("#transcript-country").click(function () {
+    $('.transcript-detail').addClass('show');
+    $('.present-detail').removeClass('show');
+  });
+  $("#transcript-present").click(function () {
+    $('.present-detail').addClass('show');
+    $('.transcript-detail').removeClass('show');
+  });
+  /* order a personal consultation */
+
+  $("#select-english").click(function () {
+    // console.log("click me");
+    $('#call_method_1').addClass('d-block');
+    $('#call_method_2').removeClass('d-block');
+  });
+  $("#select-spanish").click(function () {
+    $('#call_method_2').addClass('d-block');
+    $('#call_method_1').removeClass('d-block');
+  });
+  $('#select-apostille:checkbox').change(function () {
+    if ($(this).is(":checked")) {
+      $('div.menuitem').addClass("menuitemshow");
+    } else {
+      $('div.menuitem').removeClass("menuitemshow");
+    }
+  });
+  $(function () {
+    $("#select-particular").change(function () {
+      if ($('option:selected', this).text() == 'United States') {
+        $('#select-us').addClass('d-block');
+      } else {
+        $('#select-us').removeClass('d-block');
+      }
+    });
   });
 });
 $('#select-apostille:checkbox').change(function () {

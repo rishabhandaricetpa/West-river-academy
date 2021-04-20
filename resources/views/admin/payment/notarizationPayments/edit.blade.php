@@ -4,7 +4,7 @@
 
 <section class="content">
     <div class="container-fluid position-relative">
-        <h1>Appostile And Notrization Details</h1>
+        <h1>Apostille And Notrization Details</h1>
         <div class="form-wrap border py-5 px-25 position-relative">
             <!-- form start -->
             <h3>Payment Status of Parent : {{$notarizationData->ParentProfile->p1_first_name}}
@@ -28,6 +28,26 @@
                         <div class="form-group col-sm-6">
                             <label>Amount<sup>*</sup></label>
                             <input class="form-control" id="amount" value="{{$notarizationData->amount}}" name="amount">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Apostille Country<sup>*</sup></label>
+                            <input class="form-control" value="{{$notarizationData->notarization->apostille_country}}" name="transcation_id">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Transcript Doc<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->notarization->transcript_doc}}" disabled>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Confirmation Doc<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->notarization->confirmation_doc}}" disabled>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Custom Letter Doc<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->notarization->custom_doc}}" disabled>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Postage Country<sup>*</sup></label>
+                            <input class="form-control" id="amount" value="{{$notarizationData->notarization->country}}" disabled>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Payment Status<sup>*</sup></label>

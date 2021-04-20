@@ -25,7 +25,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.english-course', compact('englishCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -90,7 +90,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.mathematics-course', compact('mathsCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -155,7 +155,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.socialScience-course', compact('socialScienceCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -221,7 +221,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.science-course', compact('scienceCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -287,7 +287,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.physicalEducation-course', compact('physicalEducationCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -355,7 +355,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.health-course', compact('healthCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -413,7 +413,7 @@ class EditCourse extends Controller
     public function editForeign($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Foriegn Language')
+            ->where('course_name', 'Foreign Language')
             ->first();
         $foreignCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -422,7 +422,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.foreign-course', compact('foreignCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }
@@ -491,7 +491,7 @@ class EditCourse extends Controller
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
-        $outOfCredit = Credits::where('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
         return view('editTranscript9_12Courses.elective-course', compact('electiveCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
     }

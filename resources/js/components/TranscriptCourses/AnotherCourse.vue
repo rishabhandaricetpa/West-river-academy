@@ -14,14 +14,6 @@
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
-          <h3 class="mb-3">
-            Select a Elective course:<i
-              class="ml-2 fas fa-question-circle tooltip-styling text-secondary"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Tooltip on top"
-            ></i>
-          </h3>
           <label for="" class="h3 text-black"
             >Enter an elective, such as MUSIC, ART, DANCE. DRAMA. etc.</label
           >
@@ -219,9 +211,7 @@ export default {
     },
     submitCourse() {
          this.errors = [];
-               if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
-      }
+
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
           "Course name is required Field! Please select a Course name"
@@ -245,15 +235,7 @@ export default {
           alert("Please fill in the fields");
         });
     },
-        vallidateGrades() {
-      for (let i = 0; i < this.form.anotherCourse.length; i++) {
-        const foreignCourse = this.form.anotherCourse[i];
-        if (!foreignCourse.grade) {
-          return false;
-        }
-      }
-      return true;
-    },
+
     validateSubject() {
       for (let i = 0; i < this.form.anotherCourse.length; i++) {
         const enrollmentSubject = this.form.anotherCourse[i];

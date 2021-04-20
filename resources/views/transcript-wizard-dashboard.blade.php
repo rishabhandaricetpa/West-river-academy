@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('pageTitle', 'Transcript Wizard')
+@section('pageTitle', 'Transcript Information')
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">

@@ -27,7 +27,7 @@ class AnotherCourse extends Controller
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
-        $total_credits = Credits::where('is_carnegia', $is_carnegie)->select('total_credit')->first();
+        $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
         /**
          *  transcript table id required if student select yes for another grade creation
          */
@@ -66,7 +66,7 @@ class AnotherCourse extends Controller
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
-                    'score' => $period['grade'],
+                    'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'remaining_credits' => $total_credits - $period['selectedCredit'],
                     'credit_id' => $credit->id,
                     'other_subject' => $other_sub->subject_name,
@@ -82,7 +82,7 @@ class AnotherCourse extends Controller
                     'student_profile_id' => $period['student_id'],
                     'courses_id' => $period['course_id'],
                     'subject_id' => $subject->id,
-                    'score' => $period['grade'],
+                    'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'remaining_credits' => $total_credits - $period['selectedCredit'],

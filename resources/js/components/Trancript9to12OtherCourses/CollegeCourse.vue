@@ -224,7 +224,7 @@ export default {
     return {
        errors: [],
       form: {
-       
+       transcript9_12_id:this.transcript9_12id,
         student_id: this.student_id,
         transcript_id: this.transcript_id,
         collegeCourse: [
@@ -268,7 +268,8 @@ export default {
          if(!this.validateCredit()){
       this.errors.push("Please select credit");
       }
-      axios
+      if(this.validateCollegeGrade() && this.validateIsCollege() && this.validateGrade() && this.validateCredit()){
+       axios
         .post(route("collegeCourse.store"), this.form)
         .then(response => {
           window.location =
@@ -277,6 +278,7 @@ export default {
         .catch(error => {
           alert("Please fill in all fields");
         });
+          }
     },
     removeCollegeCourse(index) {
       this.form.collegeCourse.splice(index, 1);

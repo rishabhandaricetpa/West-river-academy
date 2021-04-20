@@ -130,12 +130,19 @@
 }
   /* sidebar */
 
+  .main-sidebar.admin-sidebar{
+    width: 85px;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+  }
+
   .admin-wrapper.content-wrapper,.collapse-nav {
     width: calc(100% - 85px);
 }
-
+  
   .main-sidebar {
-    width: 85px;
+    width: 60px;
    a{
      text-align: center;
    }
@@ -182,7 +189,7 @@
   }
 
   .main-content {
-    width: calc(100% - 85px);
+    width: calc(100% - 60px);
   }
 }
 
@@ -202,9 +209,19 @@
     height: 27px;
   }
 
+  div.dataTables_wrapper div.dataTables_filter input{
+    width: 76% !important;
+  }
+
   /* Fees and services*/
   .service-list .col-sm-9{
     min-height: 130px;
+  }
+
+  .service-list{
+       .h-100{
+         height: auto !important;
+       }
   }
 
   /* enrollment */
