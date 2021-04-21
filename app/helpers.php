@@ -139,6 +139,7 @@ function getGPAvalue($courses, $total_credits_earned)
         "C" => 2,
         'D' => 1,
         'F' => 0,
+        'PASS' => 0,
         'P' => 0,
     );
     $college_points = array(
@@ -147,7 +148,9 @@ function getGPAvalue($courses, $total_credits_earned)
         "C" => 3,
         'D' => 2,
         'F' => 0,
+        'PASS' => 0,
         'P' => 0,
+
     );
     foreach ($courses as $course) {
         if ($course->type === 'year') {
