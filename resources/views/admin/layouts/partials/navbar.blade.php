@@ -13,7 +13,7 @@
       <a href="#" class="nav-link"></a>
     </li>
   </ul>
-
+  <img src="/images/wra_logo.svg" class="site-logo d-lg-none d-block" alt="wra_logo">
   <!-- SEARCH FORM -->
 
   <!-- Right navbar links -->

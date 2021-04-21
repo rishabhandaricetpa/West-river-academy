@@ -2,7 +2,7 @@
 <aside class="main-sidebar  admin-sidebar">
   <!-- Brand Logo -->
 
-  <img src="/images/wra_logo.svg" alt="wra_logo">
+  <img src="/images/wra_logo.svg" class="d-none d-lg-block" alt="wra_logo">
   </a>
   <!-- Sidebar Menu -->
   <nav class="mt-2">
