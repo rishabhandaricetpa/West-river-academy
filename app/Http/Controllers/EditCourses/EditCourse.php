@@ -340,7 +340,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Foriegn Language')
+            ->where('course_name', 'Foreign Language')
             ->first();
         $courses_id = $course->id;
         $foreign_course = Subject::where('courses_id', $course->id)
