@@ -20,14 +20,9 @@ class NotarizationController extends Controller
     {
         $parent_id = ParentProfile::getParentId();
         $countries = Country::get();
-        // $students = StudentProfile::select('id', 'first_name', 'last_name', 'gender')
-        //     ->selectRaw('DATE(d_o_b) as dob')
-        //     ->where('parent_profile_id', $parent_id)
-        //     ->with('graduation', 'parentProfile')
-        //     ->get();
+
         $students = StudentProfile::where('parent_profile_id', $parent_id)->with(['graduation', 'parentProfile'])->first();
 
-        // dd($students->toArray());
         $transcript = TranscriptPdf::where('status', 'approved')->get();
         $confirmationLetter = ConfirmationLetter::where('status', 'completed')->get();
         $custom_letter = CustomLetterPayment::where('status', 'completed')->get();
@@ -40,7 +35,29 @@ class NotarizationController extends Controller
         return view('orderPostage/notarization', compact('countries', 'students', 'transcriptdoc', 'notarization_fee', 'appostile_fee', 'transcript', 'confirmationLetter', 'custom_letter'));
     }
 
+    public function chooseType(Request $request)
+    {
+        $parent_id = ParentProfile::getParentId();
+        $countries = Country::get();
 
+        $students = StudentProfile::where('parent_profile_id', $parent_id)->with(['graduation', 'parentProfile'])->first();
+
+        $transcript = TranscriptPdf::where('status', 'approved')->get();
+        $confirmationLetter = ConfirmationLetter::where('status', 'completed')->get();
+        $custom_letter = CustomLetterPayment::where('status', 'completed')->get();
+        $transcriptdoc = DB::table('confirmation_letters')->select('transcript_pdf.pdf_link', 'confirmation_letters.pdf_link as confirm')
+            ->where('confirmation_letters.parent_profile_id', $parent_id)->where('confirmation_letters.status', 'completed')
+            ->join('transcript_pdf', 'transcript_pdf.parent_profile_id', 'confirmation_letters.parent_profile_id')
+            ->get();
+        $notarization_fee = getFeeDetails('notarization_doc_fee');
+        $appostile_fee = getFeeDetails('apostille_doc_fee');
+        $type = $request->get('type');
+        if ($type == 'apostille') {
+            return view('orderPostage/apostille', compact('countries', 'students', 'transcriptdoc', 'notarization_fee', 'appostile_fee', 'transcript', 'confirmationLetter', 'custom_letter', 'type'));
+        } else {
+            return view('orderPostage/notarization', compact('countries', 'students', 'transcriptdoc', 'notarization_fee', 'appostile_fee', 'transcript', 'confirmationLetter', 'custom_letter', 'type'));
+        }
+    }
     public function getConsultationChrages()
     {
         $hourly_charge = getFeeDetails('consultation_fee');

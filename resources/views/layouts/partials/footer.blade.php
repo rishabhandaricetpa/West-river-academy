@@ -21,7 +21,7 @@
         <div class="copyright">
             Copyright © 2020 West River Academy.
             <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-            <a href="#" class="d-block">Website design, development and maintenance by eXcelisys, Inc.</a>
+            <a href="https://www.ithands.com" class="d-block">Website design, development and maintenance by IT Hands</a>
         </div>
     </div>
 </footer>

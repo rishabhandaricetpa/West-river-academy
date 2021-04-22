@@ -33,13 +33,14 @@ class Cart extends Model
                 $transcript_edit_total = Self::getEditTranscriptQuery()->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
                 $postage_total = Self::getPostageQuery()->select(DB::raw('sum(order_postages.amount) as amount'))->first();
                 $notarization_total = Self::getNotarizationQuery()->select(DB::raw('sum(notarization_payments.amount) as amount'))->first();
+                $apostille_total = Self::getApostilleQuery()->select(DB::raw('sum(notarization_payments.amount) as amount'))->first();
                 $custom_letter_total = Self::getCustomLetterQuery()->select(DB::raw('sum(custom_letter_payments.amount) as amount'))->first();
                 $consultation_total = Self::getConsultationQuery()->select(DB::raw('sum(order_personal_consultations.amount) as amount'))->first();
 
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
-                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount + $notarization_total->amount + $custom_letter_total->amount + $consultation_total->amount;
+                $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount + $notarization_total->amount + $custom_letter_total->amount + $consultation_total->amount + $apostille_total->amount;
                 return $total_amount;
             } else {
                 $enroll_data = Self::getEnrollData();
@@ -49,10 +50,10 @@ class Cart extends Model
                 $transcript_edit_data =  Self::getEditTranscriptData();
                 $postage_data = Self::getPostageData();
                 $notarization_data = Self::getNotarizationData();
-
+                $apostille_data = Self::getApostilleData();
                 $custom_letter_data = Self::getcustomLetterData();
                 $consultation_data = Self::getConsultationData();
-                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data, $consultation_data);
+                return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data, $consultation_data, $apostille_data);
             }
         } catch (\Exception $e) {
             dd($e);
@@ -121,7 +122,7 @@ class Cart extends Model
         return $cart_valid;
     }
 
-    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data, $consultation_data)
+    private static function calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data, $consultation_data, $apostille_data)
     {
         $data = [];
 
@@ -270,6 +271,25 @@ class Cart extends Model
                 ];
             }
         }
+        foreach ($apostille_data as $key => $val) {
+            $type = 'Apostille Payment';
+            $arr = [
+                'id' => $val['id'],
+                'type' => $type,
+                'amount' => $val['amount'],
+            ];
+            if (array_key_exists($val['parent_db_id'], $data)) {
+                array_push(
+                    $data[$val['parent_db_id']]['enroll_items'],
+                    $arr
+                );
+            } else {
+                $data[$val['parent_db_id']] = [
+                    'name' => ucfirst($val['first_name']),
+                    'enroll_items' => [$arr],
+                ];
+            }
+        }
         foreach ($custom_letter_data as $key => $val) {
             $type = 'Custom Letter Payment';
 
@@ -371,6 +391,14 @@ class Cart extends Model
             ->leftJoin('notarizations', 'notarizations.id', 'cart.item_id')
             ->leftJoin('notarization_payments', 'cart.item_id', 'notarization_payments.notarization_id')->where('notarization_payments.status', 'pending')
             ->leftJoin('parent_profiles', 'notarizations.parent_profile_id', 'parent_profiles.id');
+    }
+    private static function getApostilleQuery()
+    {
+        return self::where('cart.parent_profile_id', ParentProfile::getParentId())
+            ->where('cart.item_type', 'apostille')
+            ->leftJoin('apostilles', 'apostilles.id', 'cart.item_id')
+            ->leftJoin('notarization_payments', 'cart.item_id', 'notarization_payments.apostille_id')->where('notarization_payments.status', 'pending')
+            ->leftJoin('parent_profiles', 'apostilles.parent_profile_id', 'parent_profiles.id');
     }
     private static function getCustomLetterQuery()
     {
@@ -492,6 +520,19 @@ class Cart extends Model
             ->groupBy('notarization_payments.amount')
             ->get();
     }
+    private static function getApostilleData()
+    {
+        return Self::getApostilleQuery()->select(
+            'parent_profiles.p1_first_name',
+            'parent_profiles.id as parent_db_id',
+            'cart.id',
+            'notarization_payments.amount',
+        )
+            ->groupBy('parent_profiles.id')
+            ->groupBy('cart.id')
+            ->groupBy('notarization_payments.amount')
+            ->get();
+    }
     private static function getcustomLetterData()
     {
         return self::getCustomLetterQuery()->select(
@@ -521,6 +562,7 @@ class Cart extends Model
     }
     public static function emptyCartAfterPayment($type, $status, $payment_id = null)
     {
+        // dd($payment_id);
         $parent_profile_id = ParentProfile::getParentId();
         $parentName = ParentProfile::whereId($parent_profile_id)->first();
         $cartItems = self::select()->where('parent_profile_id', $parent_profile_id)->get();
@@ -583,7 +625,7 @@ class Cart extends Model
                     break;
 
                 case 'custom':
-                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->first();
+                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $custom_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $custom_payment->transcation_id = $payment_id;
@@ -625,7 +667,7 @@ class Cart extends Model
 
                     break;
                 case 'postage':
-                    $postage_payment = OrderPostage::where('parent_profile_id', $cart->item_id)->first();
+                    $postage_payment = OrderPostage::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $postage_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $postage_payment->transcation_id = $payment_id;
@@ -666,8 +708,32 @@ class Cart extends Model
                     ]);
 
                     break;
+                case 'apostille':
+                    $apostille_payment =  NotarizationPayment::where('apostille_id', $cart->item_id)->where('pay_for', 'apostille')->first();
+                    if ($apostille_payment) {
+                        $apostille_payment->payment_mode = $type;
+                    }
+                    if ($payment_id != null) {
+                        $apostille_payment->transcation_id = $payment_id;
+                        $apostille_payment->status = 'paid';
+                    } else {
+                        $apostille_payment->status = 'paid';
+                    }
+                    $apostille_payment->save();
+                    $apostille = Apostille::whereId($cart->item_id)->first();
+                    $apostille->status = 'paid';
+                    $apostille->save();
+                    Dashboard::create([
+                        'linked_to' =>  $cart->item_id,
+                        'is_archieved' => 0,
+                        'related_to' => 'appostile_record_received',
+                        'notes' => 'Apostille is Ordered by ' . $parentName->p1_first_name,
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
+
+                    break;
                 case 'custom_letter':
-                    $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->first();
+                    $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $customletter_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $customletter_payment->transcation_id = $payment_id;
@@ -685,7 +751,7 @@ class Cart extends Model
                     ]);
                     break;
                 case 'order_consultation':
-                    $consultation_payment = OrderPersonalConsultation::where('parent_profile_id', $cart->item_id)->first();
+                    $consultation_payment = OrderPersonalConsultation::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $consultation_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $consultation_payment->transcation_id = $payment_id;

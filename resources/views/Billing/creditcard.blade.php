@@ -31,20 +31,20 @@
 
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group card required border-0'>
-                                    <label class='control-label'>Card Number<sup>*</sup></label> <input autocomplete='off' class='form-control card-num' size='20' type='text'>
+                                    <label class='control-label'>Card Number<sup>*</sup></label> <input autocomplete='off' class='form-control card-num' size='20' type='text' required>
                                 </div>
                             </div>
 
                             <div class='form-row row'>
                                 <div class='col-xs-12 col-md-4 form-group cvc required'>
                                     <label class='control-label'>CVC<sup>*</sup></label>
-                                    <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4' type='text'>
+                                    <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4' type='text' required>
                                 </div>
                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Month<sup>*</sup></label> <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+                                    <label class='control-label'>Expiration Month<sup>*</sup></label> <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text' required>
                                 </div>
                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Year<sup>*</sup></label> <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+                                    <label class='control-label'>Expiration Year<sup>*</sup></label> <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text' required>
                                 </div>
                                 <div class='form-row row col-12'>
                                     <div class='col-xs-12 form-group required'>

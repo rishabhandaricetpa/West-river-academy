@@ -21,6 +21,7 @@ class CreateTranscriptsTable extends Migration
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->onDelete('cascade');
             $table->string('legacy_name')->nullable();
             $table->string('period');
+            $table->string('transcript_wiz')->nullable();
             $table->enum('status', ['pending', 'approved', 'paid', 'completed', 'canEdit']);
             $table->timestamps();
         });

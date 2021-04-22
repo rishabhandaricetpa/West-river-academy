@@ -18,7 +18,7 @@ class ForeignCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Foriegn Language')
+            ->where('course_name', 'Foreign Language')
             ->first();
         $courses_id = $course->id;
         $foreignSubjects = Subject::where('courses_id', $course->id)

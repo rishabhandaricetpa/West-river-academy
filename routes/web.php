@@ -251,6 +251,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('edit-physical-education/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editPhysicalEducation')->name('edit.editPhysicaEducationCourse');
         Route::post('edit-physical-education', 'EditCourses\EditCourse@storePhysicalEducation')->name('editPhysicaEducationCourse.store');
 
+        //Record Transfer
+        Route::get('transfer/record', 'RecordTransferController@getStudents')->name('transferSchoolRecord');
+        Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
+        Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
+        Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
+        Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
+        Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
+        Route::get('notarization', 'NotarizationController@index')->name('notarization');
+        Route::post('notarization', 'NotarizationController@chooseType')->name('notarization.apostille');
+        Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
         Route::get('edit-health/{student_id}/{transcript_id}', 'EditCourses\EditCourse@editHealth')->name('edit.editHealthCourse');
         Route::post('edit-health', 'EditCourses\EditCourse@storeHealth')->name('editHealthCourse.store');
 
@@ -396,8 +406,39 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
         Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
 
+        //physical Education
+        Route::get('edit-physicalEducation-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editPhysicalEducation')->name('edit.PhysicalEducationTranscriptCourse');
+        Route::post('edit-physicalEducation-transcript', 'EditTranscript9_12Courses\EditCourse@storePhysicalEducation')->name('editPhysicalEducationTranscriptCourse.store');
+        //health edit transcript
+        Route::get('edit-health-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editHealth')->name('edit.healthTranscriptCourse');
+        Route::post('edit-health-transcript', 'EditTranscript9_12Courses\EditCourse@storeHealth')->name('editHealthTranscriptCourse.store');
+
+        //Foreign language edit transcript
+        Route::get('edit-foreign-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editForeign')->name('edit.foreignTranscriptCourse');
+        Route::post('edit-foreign-transcript', 'EditTranscript9_12Courses\EditCourse@storeForeign')->name('editForeignTranscriptCourse.store');
+
+        //elective edit transcript
+        Route::get('edit-elective-transcript/{student_id}/{transcript_id}', 'EditTranscript9_12Courses\EditCourse@editElective')->name('edit.electiveTranscriptCourse');
+        Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+
+        //order personal consultation
+        Route::post('edit-elective-transcript', 'EditTranscript9_12Courses\EditCourse@storeElective')->name('editElectiveTranscriptCourse.store');
+        Route::get('order-consultation', 'NotarizationController@getConsultationChrages')->name('order.consultation');
+        Route::post('/order-consultation', 'NotarizationController@storeConsultationData')->name('store.consultation');
+
         //return shipping charges
         Route::post('country/shipping', 'NotarizationController@getCountryShippingCharges')->name('country.shipping');
         Route::post('postage/type', 'NotarizationController@getPostageShippingTypes')->name('postage.type');
+
+        Route::get('choose_notarization', function () {
+            return view('orderPostage.choose_notarization');
+        })->name('choose_notarization');
+
+        //transcript Wizard
+        Route::get('enrolled_students', 'TranscriptWizardController@index')->name('enrolled.students');
+        Route::get('viewall-transcriptwizard/{student_id}', 'TranscriptWizardController@getAllTranscript')->name('transcriptwizard.viewall');
+        Route::post('transcriptwizard/create/{student_id}', 'TranscriptWizardController@createTranscript')->name('transcriptwizard.create');
+
+        Route::get('viewall-wiz/{student_id}', 'TranscriptWizardController@getAllTranscriptForWiz')->name('transcriptwizard.details');
     });
 });

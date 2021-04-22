@@ -10,7 +10,7 @@ class NotarizationPayment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'notarization_id', 'parent_profile_id', 'student_profile_id	', 'order_postages_id', 'amount', 'status', 'transcation_id', 'payment_mode', 'pay_for'
+        'notarization_id', 'parent_profile_id', 'student_profile_id	', 'order_postages_id', 'amount', 'status', 'transcation_id', 'payment_mode', 'pay_for', 'apostille_id'
     ];
 
     public function ParentProfile()
@@ -20,5 +20,9 @@ class NotarizationPayment extends Model
     public function notarization()
     {
         return $this->belongsTo('App\Models\Notarization');
+    }
+    public function apostille()
+    {
+        return $this->belongsTo('App\Models\Apostille');
     }
 }

@@ -46,6 +46,8 @@
             , "processing": true
             , "serverSide": true
             , "ordering": false
+            , "pagination": true
+            , "lengthChange": false
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
@@ -448,9 +450,6 @@
                 }
                 , {
                     "data": "payment_mode"
-                }
-                , {
-                    "data": "notarization.country"
                 }
                 , {
                     "data": "status"
