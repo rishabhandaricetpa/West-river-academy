@@ -42,12 +42,14 @@
         //parent datatable
         $("#family-table").DataTable({
             "ajax": "{{ route('admin.datatable.parent') }}"
+          
             , "processing": true
             , "serverSide": true
             , "ordering": false
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+             ,  "dom":"Bfrtip"
             , "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "p1_first_name"
@@ -85,16 +87,18 @@
                 },
 
             ]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#family-table_wrapper .col-md-6:eq(0)');
 
         //fees -info table
         $("#fees-table").DataTable({
             "ajax": "{{ route('admin.datatable.fees') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "id"
                     , "render": function(data, type, row, meta) {
@@ -124,11 +128,13 @@
         //country postage
         $("#country_shipping").DataTable({
             "ajax": "{{ route('admin.datatable.shipping') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "country"
                 }
@@ -146,11 +152,13 @@
         //student datatable
         $("#student-table").DataTable({
             "ajax": "{{ route('admin.datatable.student') }}"
+              , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+          ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "fullname"
                 }
@@ -218,12 +226,14 @@
         //coupon datatable
         $("#coupons-table").DataTable({
             "ajax": "{{ route('admin.coupons.dt') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
             , "ordering": false
+            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "id"
                     , "render": function(data, type, row, meta) {
@@ -255,11 +265,13 @@
         //graduation datatable
         $("#graduation-table").DataTable({
             "ajax": "{{ route('admin.graduation.dt') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+           ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "id"
                     , "render": function(data, type, row, meta) {
@@ -325,10 +337,12 @@
         //custom payments datatable
         $("#custom-table").DataTable({
             "ajax": "{{ route('admin.datatable.custom') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
+            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "autoWidth": false
             , "columns": [{
                     "data": "parent_profile.p1_first_name"
@@ -367,11 +381,13 @@
         //order postage payments datatable
         $("#postage-table").DataTable({
             "ajax": "{{ route('admin.datatable.postage') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+             ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "parent_profile.p1_first_name"
                 }
@@ -411,11 +427,13 @@
         //notarization and postage
         $("#notarization-table").DataTable({
             "ajax": "{{ route('admin.datatable.notarization') }}"
+             , "dom":"Bfrtip"
             , "processing": true
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "parent_profile.p1_first_name"
                 }
@@ -449,10 +467,12 @@
         $("#customletter-table").DataTable({
             "ajax": "{{ route('admin.datatable.customletter')}}"
             , "processing": true
+             , "dom":"Bfrtip"
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "parent_profile.p1_first_name"
                 }
@@ -483,10 +503,12 @@
         $("#orderConsltation-table").DataTable({
             "ajax": "{{ route('admin.datatable.conultation')}}"
             , "processing": true
+              , "dom":"Bfrtip"
             , "serverSide": true
             , "responsive": true
             , "lengthChange": false
             , "autoWidth": false
+             ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             , "columns": [{
                     "data": "parent.p1_first_name"
                 }

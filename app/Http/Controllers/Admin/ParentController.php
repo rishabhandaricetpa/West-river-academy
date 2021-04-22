@@ -30,7 +30,11 @@ class ParentController extends Controller
     {
         return view('admin.familyInformation.view-parent');
     }
-
+    public function viewStudentParent($parent_id)
+    {
+        $parent = ParentProfile::find($parent_id);
+        return view('admin.familyInformation.view-student-parent', compact('parent'));
+    }
     public function dataTable()
     {
         return datatables(ParentProfile::with(['studentProfile', 'address'])->get())->toJson();

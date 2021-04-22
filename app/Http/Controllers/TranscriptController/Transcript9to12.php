@@ -255,65 +255,7 @@ class Transcript9to12 extends Controller
             ->get();
         // $arr = collect([]);
         $courses = fetchTranscript9_12Details($transcriptData);
-        $collegeCourses = getCollegeCourses($transcriptData);
-        // $courses = collect([]);
-        // // for academic years and courses
-        // $transcriptDatas->each(function ($transcript_courses) use ($courses) {
-        //     $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses) {
-        //         $courses->push(
-        //             (object)[
-        //                 'id' => $course->id,
-        //                 'score' => $course->score,
-        //                 'name' => $course->subject->subject_name,
-        //                 'credit' => $course->credit->credit,
-        //                 'groupBy' => $transcript_courses->enrollment_year,
-        //                 'grade' => $transcript_courses->grade,
-        //                 'type' => 'year'
-        //             ]
-        //         );
-        //     });
-        // });
-
-        // /** for college courses */
-        // $collegeCourses = collect([]);
-        // $transcriptDatas->each(function ($college_courses) use ($collegeCourses) {
-        //     $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
-        //         $collegeCourses->push(
-        //             (object)[
-        //                 'id' => $cllg_course->id,
-        //                 'groupBy' => $cllg_course->name,
-        //                 'course_name' => $cllg_course->course_name,
-        //                 'grade' => $cllg_course->grade,
-        //                 'course_grade'  => $cllg_course->course_grade,
-        //                 'selectedCredit' => $cllg_course->selectedCredit,
-        //                 'type' => 'college'
-        //             ]
-        //         );
-        //     });
-        // });
-        // $courses =  $courses->merge($collegeCourses);
-
-        /** for ap courses */
-        $apCourses = collect([]);
-        $transcriptData->each(function ($ap_courses) use ($apCourses) {
-            $ap_courses->apCourses->map(function ($ap_course) use ($apCourses) {
-                $apCourses->push(
-                    (object)[
-                        'id' => $ap_course->id,
-                        'groupBy' => $ap_course->ap_course_name,
-                        'course_name' => $ap_course->ap_course_name,
-                        'grade' => 111,
-                        'course_grade'  => $ap_course->course_grade,
-                        'selectedCredit' => $ap_course->ap_course_credits,
-                        'type' => 'apCourse'
-                    ]
-                );
-            });
-        });
-
-        // ap courses
-
-        $allCourse = $courses->merge($apCourses);
+        // $allCourse = $courses->merge($apCourses);
         // END: Transcript data for rendring course data in tabluar format.
 
         $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
@@ -361,7 +303,7 @@ class Transcript9to12 extends Controller
             $maxYear =  max($items);
             $minYear = min($items);
 
-            return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
+            return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'totalSelectedGrades'));
         } else {
 
             $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
@@ -370,7 +312,7 @@ class Transcript9to12 extends Controller
             $minYear = $years->min();
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-            return view('transcript9to12.transcript-preview', compact('student',  'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades', 'allCourse'));
+            return view('transcript9to12.transcript-preview', compact('student',  'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'totalSelectedGrades'));
         }
     }
 }

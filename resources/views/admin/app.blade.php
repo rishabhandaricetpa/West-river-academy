@@ -18,7 +18,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper admin-wrapper">
-  <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
+  <div class="overlay-black position-absolute main-bg h-100"><img src="/images/gradient-bg.jpg" class="h-100 o-cover" alt="bg-img"></div>
     @yield('content')
   </div>
   <!-- /.content-wrapper -->

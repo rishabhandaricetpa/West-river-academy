@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
+<div class="overlay-black position-absolute main-bg h-100"><img src="/images/gradient-bg.jpg" class="h-100 o-cover" alt="bg-img"></div>
     <div class="row justify-content-center pt-5">
         <div class="col-md-8">
             <div class="card">

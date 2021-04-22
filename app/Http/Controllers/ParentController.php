@@ -13,6 +13,7 @@ use App\Models\Graduation;
 use App\Models\GraduationPayment;
 use App\Models\Notarization;
 use App\Models\NotarizationPayment;
+use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
@@ -161,7 +162,10 @@ class ParentController extends Controller
         /** Receiving payment history data for notirization*/
         $notirizationPayments = NotarizationPayment::with('notarization')->where('parent_profile_id', $user_id)->get();
 
-        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments'));
+        /** Receiving payment history data for order personal consultation*/
+
+        $orderConsulationPayments = OrderPersonalConsultation::with('parent')->where('parent_profile_id', $user_id)->get();
+        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments'));
     }
 
     public function editmysettings($user_id)

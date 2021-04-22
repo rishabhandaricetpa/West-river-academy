@@ -87,56 +87,134 @@ class Transcript9_12Controller extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function genrateTranscript($id, $transcript_id)
-    {
+    // public function genrateTranscript($id, $transcript_id)
+    // {
 
-        //fetch data for the transcript pdf
-        $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
-        $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
-        $student = StudentProfile::find($id);
+    //     $parentId = ParentProfile::getParentId();
+    //     $address = ParentProfile::where('id', $parentId)->first();
+    //     $student = StudentProfile::find($student_id);
 
-        $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
+    //     $year = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('enrollment_year', 'ASC')->get(['enrollment_year'])->unique('enrollment_year');
 
-        $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
-            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses', 'apCourses'])
-            ->get();
+    //     $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
 
-        $courses = fetchTranscript9_12Details($transcriptData);
-        $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
-        $totalSelectedGrades = getTotalCredits($transcript_id, $transcript_9_12_id);
-        if ($transcript_id) {
-            $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
-            $items = [];
-            foreach ($enrollment_periods as $key => $enrollment_period) {
-                $items[] = $enrollment_period->enrollment_year;
-            }
+    //     // START: Transcript data for rendring course data in tabluar format.
 
-            $maxYear =  max($items);
-            $minYear = min($items);
-        } else {
+    //     $transcriptDatas = Transcript9_12::select()->where('transcript_id', $transcript_id)
+    //         ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses', 'apCourses'])
+    //         ->get();
 
-            $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
-            $years = collect($enrollment_years)->pluck('enrollment_year');
-            $maxYear = $years->max();
-            $minYear = $years->min();
+    //     $courses = collect([]);
+    //     // for academic years and courses
+    //     $transcriptDatas->each(function ($transcript_courses) use ($courses) {
+    //         $transcript_courses->TranscriptCourse9_12->map(function ($course) use ($transcript_courses, $courses) {
+    //             $courses->push(
+    //                 (object)[
+    //                     'id' => $course->id,
+    //                     'score' => $course->score,
+    //                     'name' => $course->subject->subject_name,
+    //                     'credit' => $course->credit->credit,
+    //                     'groupBy' => $transcript_courses->enrollment_year,
+    //                     'grade' => $transcript_courses->grade,
+    //                     'type' => 'year'
+    //                 ]
+    //             );
+    //         });
+    //     });
 
-            $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-        }
-        $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'unsigned_transcript_letter';
-        $data = [
-            'student' => $student,
-            'transcript_id' => $transcript_id,
-            'grades_data' => $grades_data,
-            'address' => $address,
-            'minYear' => $minYear,
-            'maxYear' => $maxYear,
-            'courses' => $courses,
-            'totalSelectedGrades' => $totalSelectedGrades,
-            'date' => date('m/d/Y'),
-        ];
-        $pdf = PDF::loadView('admin.transcript.pdf9_12', $data);
-        return $pdf->download($pdfname . '.pdf');
-    }
+    //     /** for college courses */
+    //     $collegeCourses = collect([]);
+    //     $transcriptDatas->each(function ($college_courses) use ($collegeCourses) {
+    //         $college_courses->collegeCourses->map(function ($cllg_course) use ($collegeCourses) {
+    //             $collegeCourses->push(
+    //                 (object)[
+    //                     'id' => $cllg_course->id,
+    //                     'groupBy' => $cllg_course->name,
+    //                     'course_name' => $cllg_course->course_name,
+    //                     'grade' => $cllg_course->grade,
+    //                     'course_grade'  => $cllg_course->course_grade,
+    //                     'selectedCredit' => $cllg_course->selectedCredit,
+    //                     'type' => 'college'
+    //                 ]
+    //             );
+    //         });
+    //     });
+    //     $courses =  $courses->merge($collegeCourses);
+
+
+    //     // END: Transcript data for rendring course data in tabluar format.
+
+    //     $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
+    //     $course = TranscriptCourse9_12::whereIn('transcript9_12_id', $transcript_9_12_id)->with('subject')->get();
+
+
+    //     /** collected sum for annual year  */
+    //     $collectSelectedGrade = collect($course->pluck('selectedCredit'));
+    //     $sumOfSeletedEnrollmentGrade = $collectSelectedGrade->sum();
+
+    //     /** collected sum for college course if exits */
+    //     $college_course = CollegeCourse::whereIn('transcript9_12_id', $transcript_9_12_id)->get();
+    //     if (count($college_course) > 0) {
+    //         $collectSelectedGradeCollege = collect($college_course)->pluck('selectedCredit');
+    //         $sumOfSeletedCollegeGrade = $collectSelectedGradeCollege->sum();
+    //         // $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade);
+    //     } else {
+    //         $sumOfSeletedCollegeGrade = 0;
+    //     }
+
+
+    //     /** collected sum for ap courses course if exits */
+
+    //     $apCourses = AdvancePlacement::whereIn('transcript9_12_id', $transcript_9_12_id)->get();
+    //     if (count($apCourses) > 0) {
+    //         $collectSelectedGradeApCourse = collect($apCourses)->pluck('ap_course_credits');
+    //         $sumOfSeletedApCourseGrade = $collectSelectedGradeApCourse->sum();
+    //     } else {
+    //         $sumOfSeletedApCourseGrade = 0;
+    //     }
+
+    //     /** getting total credit from sum of annual year course , college grade courses and ap courses*/
+    //     $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade) + floatval($sumOfSeletedApCourseGrade);
+
+    //     $groupCourses = TranscriptCourse9_12::with(['subject'])->whereIn('transcript9_12_id', $transcript_9_12_id)->get()->unique('subject_id');
+    //     if ($transcript_id) {
+    //         $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
+    //         $items = [];
+    //         foreach ($enrollment_periods as $key => $enrollment_period) {
+    //             $items[] = $enrollment_period->enrollment_year;
+    //         }
+
+    //         $maxYear =  max($items);
+    //         $minYear = min($items);
+
+    //         return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades'));
+    //     } else {
+
+    //         $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
+    //         $years = collect($enrollment_years)->pluck('enrollment_year');
+    //         $maxYear = $years->max();
+    //         $minYear = $years->min();
+
+    //         $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
+    //         return view('transcript9to12.transcript-preview', compact('student',  'grades_data', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear', 'courses', 'collegeCourses', 'totalSelectedGrades'));
+    //     }
+    // }
+    //     $data = [
+    //         'student' => $student,
+    //         'transcriptData' => $transcriptData,
+    //         'grades' => $grades,
+    //         'groupCourses' => $groupCourses,
+    //         'transcript_id' => $transcript_id,
+    //         'address' => $address,
+    //         'enrollment' => $enrollment_periods,
+    //         'title' => 'transcript',
+    //         'date' => date('m/d/Y'),
+    //     ];
+
+    //     $pdf = PDF::loadView('admin.transcript.pdf', $data);
+
+    //     return $pdf->download($pdfname . '.pdf');
+    // }
 
     // //genrate signed transcript
     // public function genrateSignedTranscript($id, $transcript_id)

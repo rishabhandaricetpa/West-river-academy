@@ -3,6 +3,7 @@
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
+<<<<<<< HEAD
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Order an Apostille or Notarization</h2>
         <div class="form-group mb-2 lato-italic info-detail pb-4 label-md">
@@ -25,6 +26,25 @@
             <p><span class="font-weight-bold">Apostille:</span> If you will present your document(s) to a country that is a member of The Hague Convention, you may order an
                Apostille. The documents will first be notarized and then sent to the Secretary of State of Colorado for the Apostille. The
                fee is $75 for each document to be sent for an Apostille. The fee includes notarization. Allow 3-6 weeks for processing.</p>
+=======
+    <form class="mb-0" method="post" action="{{ route('add.cart')}}">
+        @csrf
+        <input type="hidden" name="type" value="notarization" class="form-control col-3">
+        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+            @if ($students->parentProfile->country === 'United States')
+            <h2 class="mb-3">Order Notarization</h2>
+            @endif
+            <h2 class="mb-3">Order an Apostille or Notarization</h2>
+
+            <div class="form-group mb-2 lato-italic info-detail pb-4 label-md">
+                <div class="form-check mb-2">
+                    @if ($students->parentProfile->country !== 'United States')
+                    <input class="form-check-input" data-toggle="collapse" data-target="#apostile" aria-expanded="false" aria-controls="apostile" type="checkbox" name="student_grade" value="Preschool Age 3">
+                    <label class="form-check-label ml-1" for="">
+                        Apostille
+                    </label>
+                    @endif
+>>>>>>> ff16c9da01e86c9cf483fe54b656194a3e0ea8bc
 
                <div class="form-group d-md-flex mb-2">
                <div class="col-md-6 d-sm-flex px-0 mb-4">
@@ -52,6 +72,7 @@
                     <option>5</option>
                     </select>
             </div>
+<<<<<<< HEAD
             </div>
             </div>
             <div class="collapse" id="notarization">
@@ -88,6 +109,43 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                             <option>nancy.shalini@ithands.biz </option>
                             <option>What is to be notarized and/or sent for Apostilles?</option>
                             <option>What is to be notarized and/or sent for Apostilles?</option>
+=======
+            <form class="mb-0" method="post" action="{{route('add.cart')}}">
+                <div class="collapse" id="apostile">
+                    <p><span class="font-weight-bold">Apostilles: ONLY</span>
+                        for documents presented outside of the U.S. to countries who are members of The Hague Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at checkout. Allow 3-6 weeks for processing plus shipping time.
+                    </p>
+                    <div class="form-group d-md-flex mb-2">
+                        <div class="col-md-6 d-sm-flex px-0 mb-4">
+                            <p class="font-weight-bold">Quantity</p>
+                            <div class="row ml-3 mx-0">
+                                <select class="form-control col-3" onchange="getApostilleAmount(event,'{{$appostile_fee}}')">
+                                    <option value="">Select Quantity</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <span class="col-3 text-center">=</span>
+                                <i class="fas fa-dollar-sign additional-sign"></i>
+                                <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-0 d-sm-flex">
+                        <p class="font-weight-bold">Country</p>
+                        <select name="apostille_country" class="form-control mx-sm-3">
+                            <option value="">Select country</option>
+                            @foreach ($countries as $country)
+                            <option value="{{ $country->country }}">{{ $country->country }}</option>
+                            @endforeach
+>>>>>>> ff16c9da01e86c9cf483fe54b656194a3e0ea8bc
                         </select>
                     </div>
                 </div>
@@ -163,6 +221,7 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
             </div>
     </div>
 
+<<<<<<< HEAD
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Notarization or Apostille</h2>
         <p>Apostilles are optional for international students whose countries are members of The Hague Convention. An Apostille includes notarization. Express Mail is strongly recommended to ensure delivery.</p>
@@ -193,6 +252,69 @@ Express Mail shipping outside the USA is added at checkout. Allow 3 days for pro
                     </tr>
                 </tbody>
             </table>
+=======
+                <div class="form-group mb-2">
+                    <h2 class="mb-3 mt-5">Please provide the address to send the document to:</h2>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="name">First Name</label>
+                        <div>
+                            <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control">
+                        </div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="name">Last Name</label>
+                        <div>
+                            <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control">
+                        </div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="street">Street</label>
+                        <div>
+                            <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control">
+                        </div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="city">City</label>
+                        <div>
+                            <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control">
+                        </div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="gcountry">State</label>
+                        <div>
+                            <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control">
+                        </div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="postal_code">Zip Code</label>
+                        <div>
+                            <input type="text" name="zip_code" id="zip_code" value="" class="w-100 ml-sm-3 form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group d-sm-flex mb-2 col-xl-6">
+                            <label for="county">Country</label>
+                            <div>
+                                <select name="country_name" id="country_name" class="form-control mx-sm-3" onchange="getPostageCharges(event)" required>
+                                    <option value="">Select country</option>
+                                    @foreach ($countries as $country)
+                                    <option value="{{ $country->country }}">{{ $country->country }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group d-sm-flex mb-2 col-xl-6 px-0 pl-xl-3">
+                            <label for="county">Shipping Charge</label>
+
+                            <div class=" mb-xl-4 d-sm-flex pl-33">
+                                <i class="fas fa-dollar-sign additional-sign"></i>
+                                <input name="postage_charges" type="text" class="form-control" id="postage_charges" readonly></div>
+
+                        </div>
+                    </div>
+                </div>
+>>>>>>> ff16c9da01e86c9cf483fe54b656194a3e0ea8bc
         </div>
         <div class="form-group d-sm-flex mb-2 seperator mt-4">
             <label for="">Apostille Country</label>

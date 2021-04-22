@@ -19,7 +19,7 @@ class CreateAdvancePlacementsTable extends Migration
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->nullable()->onDelete('cascade');
             $table->string('ap_course_name');
             $table->string('ap_course_grade');
-            $table->string('ap_course_credits');
+            $table->float('ap_course_credits');
             $table->timestamps();
         });
     }

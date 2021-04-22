@@ -35,7 +35,7 @@ class StudentProfileController extends Controller
     public function studentInformation($id)
     {
         $students = StudentProfile::where('parent_profile_id', $id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers'])->get();
-        return view('admin.familyInformation.student', compact('students'));
+        return view('admin.familyInformation.student', compact('students', 'id'));
     }
 
     /**
