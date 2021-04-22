@@ -11,6 +11,7 @@ use App\Models\StudentProfile;
 use App\Models\ConfirmationLetter;
 use App\Models\CustomLetterPayment;
 use App\Models\ParentProfile;
+use App\Models\Transcript;
 
 /**
  * Compare given route with current route and return output if they match.
@@ -327,4 +328,13 @@ function getTotalCredits($transcript_id, $transcript_9_12_id)
     /** getting total credit from sum of annual year course , college grade courses and ap courses*/
     $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade) + floatval($sumOfSeletedApCourseGrade);
     return $totalSelectedGrades;
+}
+function getTranscriptdata($enroll_student)
+{
+    $tanscript = Transcript::where('student_profile_id', $enroll_student)->whereIn('status', ['paid', 'canEdit', 'completed', 'approved'])->get();
+    if (count($tanscript) > 0) {
+        return 'true';
+    } else {
+        return 'false';
+    }
 }

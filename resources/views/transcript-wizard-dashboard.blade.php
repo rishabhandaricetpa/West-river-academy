@@ -97,15 +97,17 @@
     @else
     <div class="form-wrap border bg-light py-5 px-25">
         <p>If you are finished with this transcript and would like to see what it looks like, you can click the "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click the "Submit Transcript" button.</p>
-        <a href="{{route('dashboard')}}" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
-        <form method="post" action="{{route('transcript.purchase',$student->id)}}" class="mb-0 mt-5 label-large">
-            @csrf
-            <input type="hidden" name="transcript_wiz" value="{{$transcriptWizStatus->transcript_wiz}}">
-            <input type="hidden" name="type" value="K-8">
-            <input type="hidden" name="transcript_id" value="{{$transcriptWizStatus->id}}">
-            <button type="submit" class="btn btn-primary mt-3 ml-2" role="button">Add To Cart K-8</button>
-        </form>
-        <a href="" class="btn btn-primary mt-3 ml-2" role="button">Save As A Draft</a>
+        <div class="d-sm-flex align-items-center">
+            <a href="{{route('dashboard')}}" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
+            <form method="post" action="{{route('transcript.purchase',$student->id)}}" class="mb-0 label-large">
+                @csrf
+                <input type="hidden" name="transcript_wiz" value="{{$transcriptWizStatus->transcript_wiz}}">
+                <input type="hidden" name="type" value="K-8">
+                <input type="hidden" name="transcript_id" value="{{$transcriptWizStatus->id}}">
+                <button type="submit" class="btn btn-primary mt-3 ml-sm-2" role="button">Add To Cart K-8</button>
+            </form>
+            <a href="" class="btn btn-primary mt-3 ml-sm-2" role="button">Save As A Draft</a>
+        </div>
     </div>
     @endif
 </main>

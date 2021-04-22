@@ -53,42 +53,42 @@
                     <h3 class="mt-3 text-black font-weight-normal">Purchase a Transcript </h3>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-6 text-center">
+            {{-- <div class="col-md-3 col-sm-6 text-center">
                 <a href="{{ route('enrolled.students') }}" class="d-inline-block mb-5 decoration-none">
-                    <i class="fas fa-gamepad rounded-circle circled-grid fa-2x text-secondary"></i>
-                    <h3 class="mt-3 text-black font-weight-normal">Transcript Wizard</h3>
-                </a>
-            </div>
+            <i class="fas fa-gamepad rounded-circle circled-grid fa-2x text-secondary"></i>
+            <h3 class="mt-3 text-black font-weight-normal">Transcript Wizard</h3>
+            </a>
+        </div> --}}
 
-            <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ route('graduation.apply') }}" class="d-inline-block mb-5 decoration-none">
-                    <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
+        <div class="col-md-3 col-sm-6 text-center">
+            <a href="{{ route('graduation.apply') }}" class="d-inline-block mb-5 decoration-none">
+                <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
 
-                    <h3 class="mt-3 text-black font-weight-normal">Apply for Graduation</h3>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ route('custom.letter')}}" class="d-inline-block mb-5 decoration-none">
-                    <i class="fas fa-clipboard rounded-circle circled-grid fa-2x text-secondary"></i>
-                    <h3 class="mt-3 text-black font-weight-normal">Order a Custom Letter</h3>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ route('reviewstudent') }}" class="d-inline-block mb-5 decoration-none">
-                    <i class="fas fa-user-friends rounded-circle circled-grid fa-2x text-secondary"></i>
-                    <h3 class="mt-3 text-black font-weight-normal">Renew my Family’s Enrollment</h3>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ url('/enroll-student')}}" class="d-inline-block mb-5 decoration-none">
-                    <i class="fas fa-user rounded-circle circled-grid fa-2x text-secondary"></i>
-                    <h3 class="mt-3 text-black font-weight-normal">Enroll a new Student in my Family</h3>
-                </a>
-            </div>
-            <div class="col-sm-12">
-                <p>Needs help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
-            </div>
+                <h3 class="mt-3 text-black font-weight-normal">Apply for Graduation</h3>
+            </a>
         </div>
+        <div class="col-md-3 col-sm-6 text-center">
+            <a href="{{ route('custom.letter')}}" class="d-inline-block mb-5 decoration-none">
+                <i class="fas fa-clipboard rounded-circle circled-grid fa-2x text-secondary"></i>
+                <h3 class="mt-3 text-black font-weight-normal">Order a Custom Letter</h3>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 text-center">
+            <a href="{{ route('reviewstudent') }}" class="d-inline-block mb-5 decoration-none">
+                <i class="fas fa-user-friends rounded-circle circled-grid fa-2x text-secondary"></i>
+                <h3 class="mt-3 text-black font-weight-normal">Renew my Family’s Enrollment</h3>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 text-center">
+            <a href="{{ url('/enroll-student')}}" class="d-inline-block mb-5 decoration-none">
+                <i class="fas fa-user rounded-circle circled-grid fa-2x text-secondary"></i>
+                <h3 class="mt-3 text-black font-weight-normal">Enroll a new Student in my Family</h3>
+            </a>
+        </div>
+        <div class="col-sm-12">
+            <p>Needs help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
+        </div>
+    </div>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Transcripts</h2>
@@ -135,7 +135,7 @@
                         @elseif($transcriptData->status === 'completed')
                         <td>Waiting For Approval</td>
                         @elseif($transcriptData->status === 'paid')
-                        <td><a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary">Create a Transcript</a></td>
+                        <td><a href="{{route('enrolled.students')}}" class="btn btn-primary">Create a Transcript</a></td>
                         @endif
                     </tr>
                     @endforeach

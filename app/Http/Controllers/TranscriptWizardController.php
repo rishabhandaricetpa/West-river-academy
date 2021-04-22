@@ -13,6 +13,8 @@ class TranscriptWizardController extends Controller
     public function index()
     {
         $enroll_students = StudentProfile::all();
+        // $tanscript = Transcript::where('student_profile_id', $id)->get();
+        // dd($tanscript);
         return view('transcript_wizard.view_students', compact('enroll_students'));
     }
     /**

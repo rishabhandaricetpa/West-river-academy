@@ -16,6 +16,7 @@
                         <th>Email</th>
                         <th>Create transcript</th>
                         <th>View Saved Transcript</th>
+                        <th>View All</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,8 +26,13 @@
                         <td>{{$enroll_student->d_o_b->format('M d Y')}}</td>
                         <td>{{$enroll_student->email}}</td>
                         <td><a href="{{route('transcriptwizard.viewall',$enroll_student->id)}}" class="btn btn-primary">Create Transcript</a></td>
-                        <td><a href="{{route('transcriptwizard.details',$enroll_student->id)}}" class="btn btn-primary">View All</a></td>
-
+                        @if(getTranscriptdata($enroll_student->id) === 'true')
+                        <td><a href="{{route('transcriptwizard.details',$enroll_student->id)}}" class="btn btn-primary">View Saved Tramscript</a></td>
+                        <td><a href="{{route('transcript.viewall',$enroll_student->id)}}" class="btn btn-primary">View Recent Purchase</a></td>
+                        @else
+                        <td><a href="{{route('transcriptwizard.details',$enroll_student->id)}}" class="btn btn-primary disabled">View Saved Tramscript</a></td>
+                        <td><a href="{{route('transcript.viewall',$enroll_student->id)}}" class="btn btn-primary disabled">View Recent Purchase</a></td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
