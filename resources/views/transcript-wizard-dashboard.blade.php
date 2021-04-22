@@ -6,21 +6,19 @@
     <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
     <div class="form-wrap border bg-light py-5 px-25 mb-4 school-record">
         <h2 class="mb-3">{{$student->first_name}}</h2>
-        <form method="POST" action="" class="mb-0">
 
-            <div class="form-group d-sm-flex mb-2">
-                <label for="">Name</label>
-                <div>
-                    {{$student->first_name}}
-                </div>
+        <div class="form-group d-sm-flex mb-2">
+            <label for="">Name</label>
+            <div>
+                {{$student->first_name}}
             </div>
-            <div class="form-group d-sm-flex mb-2">
-                <label for="">Date of Birth</label>
-                <div>
-                    {{$student->d_o_b->format('d M Y ')}}
-                </div>
+        </div>
+        <div class="form-group d-sm-flex mb-2">
+            <label for="">Date of Birth</label>
+            <div>
+                {{$student->d_o_b->format('d M Y ')}}
             </div>
-        </form>
+        </div>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
 
@@ -90,11 +88,26 @@
         <p>You can use the button below to add classes from other schools, colleges, and universities. Course selection, credits, and grades must match exactly the transcript we have on file from the other school. Heading on transcript will indicate the name of the school.</p>
         <a href="#" class="btn btn-primary mt-3" role="button">Add Other School, College, or University</a>
     </div>
+    @if($transcriptWizStatus->transcript_wiz !=='Yes')
     <div class="form-wrap border bg-light py-5 px-25">
         <p>If you are finished with this transcript and would like to see what it looks like, you can click the "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click the "Submit Transcript" button.</p>
         <a href="{{route('dashboard')}}" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
         <a href="{{url ('preview-transcript',[$student->id,$trans_id])}}" class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
     </div>
+    @else
+    <div class="form-wrap border bg-light py-5 px-25">
+        <p>If you are finished with this transcript and would like to see what it looks like, you can click the "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click the "Submit Transcript" button.</p>
+        <a href="{{route('dashboard')}}" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
+        <form method="post" action="{{route('transcript.purchase',$student->id)}}" class="mb-0 mt-5 label-large">
+            @csrf
+            <input type="hidden" name="transcript_wiz" value="{{$transcriptWizStatus->transcript_wiz}}">
+            <input type="hidden" name="type" value="K-8">
+            <input type="hidden" name="transcript_id" value="{{$transcriptWizStatus->id}}">
+            <button type="submit" class="btn btn-primary mt-3 ml-2" role="button">Add To Cart K-8</button>
+        </form>
+        <a href="" class="btn btn-primary mt-3 ml-2" role="button">Save As A Draft</a>
+    </div>
+    @endif
 </main>
 
 <!-- * =============== /Main =============== * -->

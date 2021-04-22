@@ -183,12 +183,13 @@ class Transcript9to12 extends Controller
         $student_transcripts = TranscriptCourse9_12::where('student_profile_id', $student_id)->select('transcript9_12_id')->groupBy('transcript9_12_id')->get();
         $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses9_12()->get();
         $details9_12 = StudentProfile::find($student_id)->Transcript912()->get();
+        $transcriptWizStatus = Transcript::where('id', $transcript_id)->first();
 
         $student = StudentProfile::find($student_id);
         $transcriptDatas = Transcript9_12::where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
             ->get();
-        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id'));
+        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id', 'transcriptWizStatus'));
     }
 
     public function deleteSchool($transcript_id)

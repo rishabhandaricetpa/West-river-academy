@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('pageTitle', 'Dashbord')
+@section('pageTitle', 'Dashboard')
 @section('content')
 
 <main class="position-relative container form-content mt-4">
@@ -53,6 +53,13 @@
                     <h3 class="mt-3 text-black font-weight-normal">Purchase a Transcript </h3>
                 </a>
             </div>
+            <div class="col-md-3 col-sm-6 text-center">
+                <a href="{{ route('enrolled.students') }}" class="d-inline-block mb-5 decoration-none">
+                    <i class="fas fa-gamepad rounded-circle circled-grid fa-2x text-secondary"></i>
+                    <h3 class="mt-3 text-black font-weight-normal">Transcript Wizard</h3>
+                </a>
+            </div>
+
             <div class="col-md-3 col-sm-6 text-center">
                 <a href="{{ route('graduation.apply') }}" class="d-inline-block mb-5 decoration-none">
                     <i class="fas fa-graduation-cap rounded-circle circled-grid fa-2x text-secondary"></i>
@@ -264,7 +271,6 @@
         <div class="mt-2 text-right">
             <p></p>
         </div>
-        <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
         </form>
     </div>
 

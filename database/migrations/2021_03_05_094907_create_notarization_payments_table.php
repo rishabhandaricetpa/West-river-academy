@@ -17,8 +17,6 @@ class CreateNotarizationPaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('notarization_id');
             $table->foreign('notarization_id')->references('id')->on('notarizations')->nullable()->onDelete('cascade');
-            $table->unsignedBigInteger('apostille_id');
-            $table->foreign('apostille_id')->references('id')->on('apostilles')->nullable()->onDelete('cascade');
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('pay_for');

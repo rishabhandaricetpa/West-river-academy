@@ -416,4 +416,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('choose_notarization', function () {
         return view('orderPostage.choose_notarization');
     })->name('choose_notarization');
+
+    //transcript Wizard
+    Route::get('enrolled_students', 'TranscriptWizardController@index')->name('enrolled.students');
+    Route::get('viewall-transcriptwizard/{student_id}', 'TranscriptWizardController@getAllTranscript')->name('transcriptwizard.viewall');
+    Route::post('transcriptwizard/create/{student_id}', 'TranscriptWizardController@createTranscript')->name('transcriptwizard.create');
+
+    Route::get('viewall-wiz/{student_id}', 'TranscriptWizardController@getAllTranscriptForWiz')->name('transcriptwizard.details');
 });

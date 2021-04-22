@@ -562,6 +562,7 @@ class Cart extends Model
     }
     public static function emptyCartAfterPayment($type, $status, $payment_id = null)
     {
+        // dd($payment_id);
         $parent_profile_id = ParentProfile::getParentId();
         $parentName = ParentProfile::whereId($parent_profile_id)->first();
         $cartItems = self::select()->where('parent_profile_id', $parent_profile_id)->get();
@@ -624,7 +625,7 @@ class Cart extends Model
                     break;
 
                 case 'custom':
-                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->first();
+                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $custom_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $custom_payment->transcation_id = $payment_id;
@@ -666,7 +667,7 @@ class Cart extends Model
 
                     break;
                 case 'postage':
-                    $postage_payment = OrderPostage::where('parent_profile_id', $cart->item_id)->first();
+                    $postage_payment = OrderPostage::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $postage_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $postage_payment->transcation_id = $payment_id;
@@ -732,7 +733,7 @@ class Cart extends Model
 
                     break;
                 case 'custom_letter':
-                    $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->first();
+                    $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $customletter_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $customletter_payment->transcation_id = $payment_id;
@@ -750,7 +751,7 @@ class Cart extends Model
                     ]);
                     break;
                 case 'order_consultation':
-                    $consultation_payment = OrderPersonalConsultation::where('parent_profile_id', $cart->item_id)->first();
+                    $consultation_payment = OrderPersonalConsultation::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
                     $consultation_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $consultation_payment->transcation_id = $payment_id;
