@@ -137,14 +137,12 @@ $date= \Carbon\Carbon::now()->toDateString()
                                     @elseif($data->related_to === 'transcript_ordered')
                                     <td><a href="{{ route ('admin.transpayment.edit',$data->linked_to)}}">Transcript Ordered</a></td>
                                     @elseif($data->related_to === 'record_transfer' )
-                                    @if($data->created_at->diffInDays($date) >7 && $data['recordTransfer']['request_status'] !== 'Record Received')
+                                    @if($data->created_at->diffInDays($date) >6 && $data['recordTransfer']['request_status'] !== 'Record Received')
                                     <td class="btn btn-primary"><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id']] )}}">Alert:Resend Request For Record Transfer</a></td>
                                     @else
                                     <td><a href="{{route('admin.student.schoolRecord',[$data->student_profile_id,$data['recordTransfer']['id'] ] )}}">Record Transfer</a></td>
                                     @endif
-
-
-                                    @elseif($data->related_to === 'custom_record_received')
+                                  @elseif($data->related_to === 'custom_record_received')
                                     <td><a href="{{ route('edit.custompayment',$data->linked_to)}}">Custom Payment</a></td>
                                     @elseif($data->related_to === 'transcript_edit_record_received')
                                     <td><a href="">Transcript Edit Request</a></td>

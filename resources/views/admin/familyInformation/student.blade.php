@@ -26,10 +26,15 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
+                    @if($students->count()>0)
+                     Belongs To Parent : {{$students[0]['parentProfile']['p1_first_name']}}
+                     <a href="{{route('admin.view.students.parent',$id)}}">View Parent</a>
+                     @endif
                         <h3 class="card-title"></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                   
                         <table id="example1" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>

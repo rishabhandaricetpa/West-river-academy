@@ -164,7 +164,6 @@ class GraduationController extends Controller
     public function edit(Request $request, $id)
     {
         $graduation = Graduation::whereId($id)->with(['details', 'student', 'parent'])->first();
-
         return view('admin.graduation.edit', compact('graduation'));
     }
 

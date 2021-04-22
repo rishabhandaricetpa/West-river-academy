@@ -19,6 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
+             
                     @if($transcriptPayments)
                     @foreach($transcriptPayments as $transcriptPayment)
                     <tr>

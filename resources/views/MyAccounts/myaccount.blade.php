@@ -194,6 +194,36 @@
    </div>
 
    @endif
+   <!-- Order Personal Consulation Payment History Start-->
+     @if(count($orderConsulationPayments)>0)
+   <div class="form-wrap border bg-light py-5 px-25 mt-2r">
+      <h2 class="mb-3">Paid For: Order Consulation Payments</h2>
+      <table class="table-styling w-100">
+         <thead>
+            <tr>
+               <th scope="col">Parent Name</th>
+               <th scope="col">Preferred Language</th>
+                <th scope="col">Amount</th>
+               <th scope="col">Payment Method</th>
+               <th scope="col">Transcation Id</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach($orderConsulationPayments as $orderConsulationPayment)
+            <tr>
+               <td>{{$orderConsulationPayment['parent']['p1_first_name']}}</td>
+               <td>{{$orderConsulationPayment->preferred_language}}</td>
+               <td>${{$orderConsulationPayment->amount}}</td>
+               <td>{{$orderConsulationPayment->payment_mode}}</td>
+               <td>{{$orderConsulationPayment->transcation_id}}</td>
+            </tr>
+            @endforeach
+         </tbody>
+      </table>
+      <div>
+      </div>
+   </div>
+   @endif
 </main>
 
 <!-- * =============== /Main =============== * -->

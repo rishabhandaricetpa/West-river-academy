@@ -24,7 +24,7 @@ class StudentProfile extends Model
         'd_o_b',
     ];
 
-    protected $appends = ['birthdate', 'fullname', 'date_of_birth'];
+    protected $appends = ['birthdate', 'fullname'];
 
     public function getBirthdateAttribute()
     {
@@ -32,7 +32,7 @@ class StudentProfile extends Model
     }
     public function getDateOfBirthAttribute()
     {
-        return $this->d_o_b === null ? '' : $this->d_o_b->format('m/d/Y');
+        return $this->d_o_b === null ? '' : $this->d_o_b->toDateString();
     }
     public function getFullnameAttribute()
     {

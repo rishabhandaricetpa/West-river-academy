@@ -2,7 +2,6 @@
 @routes
 @include('layouts.partials.scripts')
 @yield('manualscript')
-</html>
 <footer class="bg-dark position-relative text-center main-footer">
     <div class="container">
         <ul class="social-icons list-unstyled d-flex justify-content-center">
@@ -27,4 +26,5 @@
     </div>
 </footer>
 </div>
+</html>
 <!-- Footer scripts -->

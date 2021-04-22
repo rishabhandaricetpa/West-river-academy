@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-  <div class="overlay-black position-absolute main-bg h-100"><img src="/images/gradient-bg.jpg" class="h-100 o-cover" alt="bg-img"></div>
+  <img src="/images/gradient-bg.jpg" class="img-absolute" alt="bg-img">
 
 </head>
 <!-- * =============== Header =============== * -->

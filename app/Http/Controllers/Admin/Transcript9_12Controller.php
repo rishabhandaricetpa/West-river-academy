@@ -93,48 +93,6 @@ class Transcript9_12Controller extends Controller
         $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
         $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
         $student = StudentProfile::find($id);
-
-        $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
-
-        $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
-            ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses', 'apCourses'])
-            ->get();
-
-        $courses = fetchTranscript9_12Details($transcriptData);
-        $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
-        $totalSelectedGrades = getTotalCredits($transcript_id, $transcript_9_12_id);
-        if ($transcript_id) {
-            $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
-            $items = [];
-            foreach ($enrollment_periods as $key => $enrollment_period) {
-                $items[] = $enrollment_period->enrollment_year;
-            }
-
-            $maxYear =  max($items);
-            $minYear = min($items);
-        } else {
-
-            $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
-            $years = collect($enrollment_years)->pluck('enrollment_year');
-            $maxYear = $years->max();
-            $minYear = $years->min();
-
-            $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
-        }
-        $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'unsigned_transcript_letter';
-        $data = [
-            'student' => $student,
-            'transcript_id' => $transcript_id,
-            'grades_data' => $grades_data,
-            'address' => $address,
-            'minYear' => $minYear,
-            'maxYear' => $maxYear,
-            'courses' => $courses,
-            'totalSelectedGrades' => $totalSelectedGrades,
-            'date' => date('m/d/Y'),
-        ];
-        $pdf = PDF::loadView('admin.transcript.pdf9_12', $data);
-        return $pdf->download($pdfname . '.pdf');
     }
 
     //genrate signed transcript

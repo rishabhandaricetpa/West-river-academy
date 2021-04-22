@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/parent/{id}', 'ParentController@update')->name('parent.update');
     Route::get('delete/parent/{id}', 'ParentController@destroy')->name('parent.delete');
     Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
-
+    Route::get('view/student/parent/{parent_id}', 'ParentController@viewStudentParent')->name('view.students.parent');
     // Crud for student profile
     Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student');
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
@@ -153,6 +153,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //record transfer request
     Route::get('record/request', 'RecordTransferController@index')->name('record.request');
     Route::get('student/record/transfer/{student_id}', 'RecordTransferController@studentRecords')->name('student.request.transfer');
+    Route::get('record/received/{student_id}', 'RecordTransferController@receivedRecord')->name('recordReceived');
 
     //custom Payments
     Route::get('custom', 'CustomController@index')->name('custom.payments');
