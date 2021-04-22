@@ -7,9 +7,13 @@
     <div class="container-fluid position-relative">
         <h1>Edit Student Information</h1>
         <div class="form-wrap border py-5 px-25 position-relative">
-            <a class="btn btn-primary" href="{{route('admin.recordReceived',$studentRecord->id)}}">Record Received</a>
+        <form method="get" action="{{route('admin.recordReceived',$studentRecord->id)}}" >
+        <select></select>
+            <button type="submit" class="btn btn-primary mb-2" >Record Received</button>
+
+            </form>
             @if($studentRecord->request_status)
-            <span>{{$studentRecord->request_status}}</span>
+            <h2 class="float-right text-bold">{{$studentRecord->request_status}}</h2>
             @endif
             <form method="post" action="{{route('admin.sendRecordToSchool',$studentRecord->student_profile_id)}}">
                 @csrf

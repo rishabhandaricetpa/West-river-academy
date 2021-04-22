@@ -40,6 +40,13 @@
             <td style="padding:3px 6px;line-height:1;font-size:13px;">{{$course->credit}}</td>
             <td style="padding:3px 6px;line-height:1;font-size:13px;">{{$course->score}}</td>
         </tr>
+      @elseif($course->type =='courseInProgress')
+     <tr style="line-height:1;">
+            <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">{{$course->name}}</td>
+            <td style="padding:3px 6px;line-height:1;font-size:13px;"> {{$course->grade}}</td>
+            <td style="padding:3px 6px;line-height:1;font-size:13px;">{{$course->credit}}</td>
+            <td style="padding:3px 6px;line-height:1;font-size:13px;">{{$course->score}}</td>
+        </tr>
 
         @elseif($course->type =='college')
          <tr style="line-height:1;">
