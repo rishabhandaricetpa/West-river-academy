@@ -20,7 +20,6 @@ class RecordTransferController extends Controller
     public function studentRecords($student_id)
     {
         $studentRecords = RecordTransfer::where('student_profile_id', $student_id)->with('student')->get();
-
         return view('admin.recordTransfer.adminStudentRecord', compact('studentRecords'));
     }
 
@@ -116,10 +115,11 @@ class RecordTransferController extends Controller
         $pdf = PDF::loadView('schoolResendRecord', $data);
         return $pdf->download();
     }
-    public function receivedRecord($record_id)
+    public function receivedRecord(Request $request, $record_id)
     {
         $record = RecordTransfer::find($record_id);
         $record->request_status = 'Record Received';
+        $record->medium_of_transfer = $request->mediumOfDelivery;
         $record->save();
         $notification = [
             'message' => 'Record Received Successfully From School',

@@ -154,7 +154,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //record transfer request
     Route::get('record/request', 'RecordTransferController@index')->name('record.request');
     Route::get('student/record/transfer/{student_id}', 'RecordTransferController@studentRecords')->name('student.request.transfer');
-    Route::get('record/received/{student_id}', 'RecordTransferController@receivedRecord')->name('recordReceived');
+    Route::post('record/received/{student_id}', 'RecordTransferController@receivedRecord')->name('recordReceived');
 
     //custom Payments
     Route::get('custom', 'CustomController@index')->name('custom.payments');
@@ -213,4 +213,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //transcript 9-12th backend
     Route::get('generate-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateTranscript')->name('genrate.transcript9_12');
+
+    //upload document
+    Route::get('student/upload/document/{student_id}', 'Transcript9_12Controller@uploadedDocument')->name('upload.document');
+    Route::get('student/upload-documents', 'Transcript9_12Controller@uploadStudentDocument')->name('upload.student.document');
 });
