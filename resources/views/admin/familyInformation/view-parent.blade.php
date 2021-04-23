@@ -29,8 +29,8 @@
                             <h3 class="card-title"></h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="family-table" class="table table-bordered table-striped data-table"">
+                        <div class="card-body overflow-auto">
+                            <table id="family-table" class="w-100 table-styling data-table">
                                       <thead>
                                       <tr>
                                         <th>Parents</th>

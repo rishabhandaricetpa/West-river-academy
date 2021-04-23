@@ -39,7 +39,7 @@
    @if(count($transcript_payments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Transcript</h2>
-      <div>
+      <div class="overflow-auto">
          <table class="table-styling w-100">
             <thead>
                <tr>
@@ -105,7 +105,7 @@
    @if(count($enrollmentPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Enrollment Payments</h2>
-
+   <div class="overflow-auto">
       <table class="table-styling w-100">
          <thead>
             <tr>
@@ -126,6 +126,7 @@
             @endforeach
          </tbody>
       </table>
+      </div>
    </div>
    @endif
    <!-- Graduation Payment History Start-->
@@ -133,6 +134,7 @@
    @if(count($graduationPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Graduation </h2>
+      <div class="overflow-auto">
       <table class="table-styling w-100">
          <thead>
             <tr>
@@ -155,6 +157,7 @@
       </table>
       <div>
       </div>
+      </div>
    </div>
    @endif
 
@@ -163,7 +166,7 @@
    @if(count($graduationPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Notarization </h2>
-      <div>
+      <div class="overflow-auto">
          <table class="table-styling w-100">
             <thead>
                <tr>

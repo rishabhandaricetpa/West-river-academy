@@ -33,10 +33,6 @@
     font-size: 15px;
   }
 
-  main {
-    min-height: auto;
-  }
-
   /* header */
   .site-header {
     max-width: 100%;
@@ -123,6 +119,7 @@
     font-size: 16px !important;
   }
 
+
   /* Datepicker */
   .vdp-datepicker__calendar {
     width: 100% !important;
@@ -131,9 +128,23 @@
     top: 35px !important;
   }
   /* sidebar */
-  .main-sidebar {
-    width: 50px;
 
+  .main-sidebar.admin-sidebar{
+    width: 85px;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+  }
+
+  .admin-wrapper.content-wrapper,.collapse-nav {
+    width: calc(100% - 85px);
+}
+  
+  .main-sidebar {
+    width: 60px;
+   a{
+     text-align: center;
+   }
     ul {
       li {
         li {
@@ -177,7 +188,7 @@
   }
 
   .main-content {
-    width: calc(100% - 50px);
+    width: calc(100% - 60px);
   }
 }
 
@@ -197,9 +208,25 @@
     height: 27px;
   }
 
+  div.dataTables_wrapper div.dataTables_filter input{
+    width: 76% !important;
+  }
+
   /* Fees and services*/
   .service-list .col-sm-9 {
     min-height: 130px;
+  }
+
+  .service-list{
+       .h-100{
+         height: auto !important;
+       }
+  }
+
+  /* enrollment */
+
+  .select2-container{
+     width: 100% !important;
   }
 
   /* Admin css */

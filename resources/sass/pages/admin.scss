@@ -3,17 +3,18 @@
 
   &.main-sidebar {
     position: fixed !important;
-    ul .fas {
-      display: inline-block !important;
-    }
-    .nav-treeview {
-      .nav-item {
-        p {
-          font-size: 14px;
+    ul .fas{
+        display: inline-block !important;
+        font-size: 11px;
+    }  
+    .nav-treeview{
+        .nav-item{
+            p{
+                font-size: 14px;
+            }
         }
       }
     }
-  }
 
   .nav-sidebar {
     a {
@@ -191,6 +192,10 @@
   cursor: pointer;
 }
 
-.vs__dropdown-toggle {
-  @extend .d-flex;
+.vs__dropdown-toggle{
+@extend .d-flex;
+}
+
+.site-logo{
+    width: 17rem;
 }
