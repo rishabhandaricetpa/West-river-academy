@@ -120,6 +120,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     Route::get('transcript-payments', 'TranscriptController@viewAllPayments')->name('transcript.payments');
     Route::get('transcript-edit/payments/{transpay_id}', 'TranscriptController@editAllPayments')->name('transpayment.edit');
+    Route::post('update-transcriptpay/{transpay_id}', 'TranscriptController@updateAllPayments')->name('update.transcriptpay');
     Route::get('delete/transcript-payments/{transpay_id}', 'TranscriptController@destroyeachPayments')->name('transpayment.delete');
 
     Route::get('file-upload/{student_id}/{transcript_id}', 'FileUploadController@fileUpload')->name('file.upload');

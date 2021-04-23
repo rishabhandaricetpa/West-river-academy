@@ -9,7 +9,7 @@
             <!-- form start -->
             <h3>Payment Status of Student : {{$geteachtranscriptPayments->transcript->student->fullname}}
                 <h3>
-                    <form method="post" class="row" action="">
+                    <form action="{{route('admin.update.transcriptpay',$geteachtranscriptPayments->id)}}" method="post" class="row">
                         @csrf
                         <div class="form-group col-sm-6">
                             <label>Student Name<sup>*</sup></label>

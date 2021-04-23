@@ -218,6 +218,35 @@ class TranscriptController extends Controller
         return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments'));
     }
 
+    public function updateAllPayments(Request $request, $transpay_id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $transpayPayments = TranscriptPayment::find($transpay_id);
+            $transpayPayments->transcation_id = $request->input('transcation_id');
+            $transpayPayments->amount = $request->input('amount');
+            $transpayPayments->status = $request->input('paymentStatus');
+            $transpayPayments->payment_mode = $request->input('payment_mode');
+            $transpayPayments->save();
+            DB::commit();
+
+            $notification = [
+                'message' => 'Record Updated Successfully!',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
+        }
+    }
+
     public function  destroyeachPayments($transpay_id)
     {
         try {
