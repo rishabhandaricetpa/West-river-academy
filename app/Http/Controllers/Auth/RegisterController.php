@@ -64,8 +64,8 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $country_list = Country::select('country')
-                        ->orderBy('country')
-                        ->get();
+            ->orderBy('country')
+            ->get();
 
         return view('auth.register')->with('country_list', $country_list);
     }
@@ -102,7 +102,7 @@ class RegisterController extends Controller
             'zip_code' => $data['zip_code'],
             'country' => $data['country'],
             'reference' => $data['refrence'],
-            'immunized' => 'non immunized',
+            'immunized' => 'Non immunized',
         ]);
         $parent->save();
 

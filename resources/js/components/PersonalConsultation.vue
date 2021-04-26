@@ -114,10 +114,10 @@
           </label>
         </div>
       </div>
-    <div class="d-sm-flex mb-3">
+    <div class="d-lg-flex mb-3">
       <p>The fee is $80 per hour. Select the number of hours:</p>
-      <div class="row ml-3 mx-0">
-        <select class="form-control col-3" @change="gethourlyCharges($event)">
+      <div class="row ml-lg-3 mx-0 align-items-center">
+        <select class="form-control col-4" @change="gethourlyCharges($event)">
           <option value="">Select hours</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -130,7 +130,7 @@
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
-        <span class="col-3 text-center">=</span>
+        <span class="col-2 text-center">=</span>
         <i class="fas fa-dollar-sign additional-sign"></i>
         <input
           type="text"

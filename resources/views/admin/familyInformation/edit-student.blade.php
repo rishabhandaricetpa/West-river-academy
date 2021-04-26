@@ -23,8 +23,8 @@
           <input class="form-control" id="last_name" name="last_name" value="{{$student->last_name}}">
         </div>
         <div class="form-group col-sm-6">
-          <label>Date of Birth<sup>*</sup> <i class="fas fa-calendar-alt" aria-hidden="true"></i></label>
-          <input class="form-control datepicker" id="dob" name="dob" value="{{$student->d_o_b->format('M d Y')}}" required>
+          <label>Date of Birth<sup>*</sup></label>
+         <div class="position-relative w-100"> <i class="fas fa-calendar-alt" aria-hidden="true"></i><input class="form-control datepicker" id="dob" name="dob" value="{{$student->d_o_b->format('M d Y')}}" required></div>
         </div>
         <div class="form-group col-sm-6">
           <label>Email Address</label>

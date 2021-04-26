@@ -14,25 +14,25 @@
         {{ session('status') }}
       </div>
       @endif
-      <div class="form-group d-flex mb-2">
+      <div class="form-group d-sm-flex mb-2">
         <label for="">First Name</label>
         <div>
           <input class="form-control " name="first_name" value="{{$parent->p1_first_name}}" required autocomplete="p1_first_name" autofocus>
         </div>
       </div>
-      <div class="form-group d-flex mb-2">
+      <div class="form-group d-sm-flex mb-2">
         <label for="">Last Name</label>
         <div>
           <input class="form-control " name="last_name" value="{{$parent->p1_last_name}}" required autocomplete="p1_last_name" autofocus>
         </div>
       </div>
-      <div class="form-group d-flex mb-2">
+      <div class="form-group d-sm-flex mb-2">
         <label for="">Parent 1 Email Address</label>
         <div>
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" value="{{$parent->p1_email}}" name="email" required autocomplete="p1_email" autofocus>
         </div>
       </div>
-      <div class="form-group d-flex mb-2">
+      <div class="form-group d-sm-flex mb-2">
         <label for="">Phone Number</label>
         <div>
           <input class="form-control " name="phone" value="{{$parent->p1_cell_phone}}" required autocomplete="p1_cell_phone" autofocus>
