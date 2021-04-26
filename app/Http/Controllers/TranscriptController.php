@@ -358,7 +358,7 @@ class TranscriptController extends Controller
 
     public function purchase(Request $request, $id)
     {
-
+        // dd($request);
         if ($request->transcript_wiz !== 'Yes') {
             DB::beginTransaction();
             $type = $request->get('grade');
@@ -370,6 +370,7 @@ class TranscriptController extends Controller
             ]);
         } else {
             $type = $request->get('type');
+            dd($type);
             $transcriptData = Transcript::where('id', $request->get('transcript_id'))->first();
             $enroll_student = StudentProfile::find($id);
             $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();
