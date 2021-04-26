@@ -7,13 +7,22 @@
     <div class="container-fluid position-relative">
         <h1>Edit Student Information</h1>
         <div class="form-wrap border py-5 px-25 position-relative">
-        <form method="get" action="{{route('admin.recordReceived',$studentRecord->id)}}" >
-        <select></select>
+        <form method="post" action="{{route('admin.recordReceived',$studentRecord->id)}}" >
+        @csrf
+        @if($studentRecord->request_status !== 'Record Received')
+       Medium Of Delivery <select name="mediumOfDelivery">
+        <option value="">Select If Received</option>
+        <option value="Digital">Digital</option>
+        <option value="Physical">Physical</option>
+        </select>
+        @endif
             <button type="submit" class="btn btn-primary mb-2" >Record Received</button>
 
             </form>
             @if($studentRecord->request_status)
-            <h2 class="float-right text-bold">{{$studentRecord->request_status}}</h2>
+            <h2 class="float-right text-bold bg-success">Medium Of Delivery: {{$studentRecord->medium_of_transfer}}</h2>
+            <h2 class=" text-bold">{{$studentRecord->request_status}}</h2>
+            
             @endif
             <form method="post" action="{{route('admin.sendRecordToSchool',$studentRecord->student_profile_id)}}">
                 @csrf

@@ -221,6 +221,28 @@
                             return `<a href="student/record/transfer/${data}">Record Transfer</a>`;
                         }
                     }
+                },
+                {
+                    "data": "id"
+                    , "render": function(data) {
+
+                        if (data == null) {
+                            return `<label> Not Applied </label>`;
+                        } else {
+                            return `<a href="view-documents/${data}">View</a>`;
+                        }
+                    }
+                },
+                 {
+                    "data": "id"
+                    , "render": function(data) {
+
+                        if (data == null) {
+                            return `<label> Not Applied </label>`;
+                        } else {
+                            return `<a href="edit-upload/${data}">Upload</a>`;
+                        }
+                    }
                 }
             , ]
         });
@@ -672,6 +694,53 @@
             }
         });
     }
+   // upload student upload documents
+  $("#student-document-table").DataTable({
+            "ajax": "{{ route('admin.datatable.student') }}"
+              , "dom":"Bfrtip"
+            , "processing": true
+            , "serverSide": true
+            , "responsive": true
+            , "lengthChange": false
+            , "autoWidth": false
+          ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            , "columns": [{
+                    "data": "fullname"
+                }
+                , {
+                    "data": "birthdate"
+                    , "render": function(data) {
+                        return (moment(data).format("MMM DD YYYY"));
+                    }
+                } , {
+                    "data": "gender"
+                },
+                {
+                    "data": "parent_profile.country"
+                } ,
+                 {
+                    "data": "email"
+                }, 
+                {
+                      "data": "id"
+                    , "render": function(id) {
+                        return `<a href="edit-upload/${id}">Upload Document</a>` 
+                }
+                },
+             {
+                     "data": "id"
+                    , "render": function(id) {
+                     
+                      return `<a href="view-documents/${id}">View Document</a>`;
+                }
+                }
+
+
+                 ]
+        });
+            
+
+
 
     // check the archieve status
     function archieve() {

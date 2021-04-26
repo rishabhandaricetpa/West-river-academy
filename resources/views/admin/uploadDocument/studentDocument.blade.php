@@ -27,7 +27,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="student-table" class="table table-bordered table-striped data-table"">
+            <table id="student-document-table" class="table table-bordered table-striped data-table"">
                   <thead>
                   <tr>
                     <th>Student</th>
@@ -35,13 +35,8 @@
                     <th>Gender</th>
                     <th>Country</th>
                     <th>Email</th>
-                    <th>Action</th>
-                    <th>Payment</th>
-                    <th>Transcript</th>
-                    <th>Graduation</th>
-                    <th>Record Transfer</th>
-                    <th>View Uploaded Document :</th>
-                     <th>Upload Document :</th>
+                    <th>Upload Document</th>
+                    <th>View Uploaded Documents</th>
                   </tr>
                   </thead>
                   <tbody>

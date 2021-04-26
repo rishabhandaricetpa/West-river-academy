@@ -214,6 +214,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('generate-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateTranscript')->name('genrate.transcript9_12');
 
     //upload document
-    Route::get('student/upload/document/{student_id}', 'Transcript9_12Controller@uploadedDocument')->name('upload.document');
-    Route::get('student/upload-documents', 'Transcript9_12Controller@uploadStudentDocument')->name('upload.student.document');
+    Route::get('upload-document', 'UploadDocument@index')->name('upload.documents');
+    Route::get('dataTable/upload', 'UploadDocument@dataTable')->name('datatable.student');
+    Route::get('edit-upload/{student_id}', 'UploadDocument@editUpload')->name('edit.upload');
+    Route::post('store-uploaded', 'UploadDocument@storeUploadedDocument')->name('store.uploadDocument');
+    Route::get('view-documents/{student_id}', 'UploadDocument@viewAllDocuments')->name('change.uploadDocument');
+    Route::get('edit-uploaded-doc/{document_id}', 'UploadDocument@changeNameOfUploadedDocument')->name('edit.uploadedDocument');
+    Route::post('update-document', 'UploadDocument@updateDocument')->name('update.uploadedDocument');
+    Route::get('donwload-document/{document_id}', 'UploadDocument@downloadDocument')->name('download.document');
 });

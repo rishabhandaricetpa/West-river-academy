@@ -15,12 +15,14 @@ use App\Models\ConfirmationLetter;
 use App\Models\User;
 use App\Models\Dashboard;
 use App\Models\OrderPersonalConsultation;
+use App\Models\UploadDocuments;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Storage;
 
 class StudentController extends Controller
 {
@@ -101,9 +103,7 @@ class StudentController extends Controller
     {
         $parentId = ParentProfile::getParentId();
 
-        // $id = Auth::user()->id;
-        // $parentProfileData = User::find($id)->parentProfile()->first();
-        // $parentId = $parentProfileData->id;
+
         $student = StudentProfile::where('parent_profile_id', $parentId)->get();
         $student_data = StudentProfile::where('parent_profile_id', $parentId)->with('parentProfile')->first();
 
@@ -115,7 +115,8 @@ class StudentController extends Controller
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->with('parent')->get();
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation'));
+        $uploadedDocuments = UploadDocuments::where('student_profile_id', $student_data->id)->where('is_upload_to_student', 1)->get();
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments'));
     }
 
     public function confirmationpage($student_id)
@@ -466,5 +467,10 @@ class StudentController extends Controller
                 return response()->json(['status' => 'error', 'message' => 'Failed to remove enroll period']);
             }
         }
+    }
+    public function downloadDocument($document_id)
+    {
+        $document = UploadDocuments::where('id', $document_id)->first();
+        return Storage::download('uploadDocument/' . $document->filename);
     }
 }
