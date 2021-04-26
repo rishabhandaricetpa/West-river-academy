@@ -16,8 +16,13 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-body">
-        <p>Annual enrollment covers the 12 months from {{Carbon\Carbon::parse($countryData->start_date)->format('F d')}} - {{Carbon\Carbon::parse($countryData->end_date)->format('F d')}}. Second Semester Only covers {{Carbon\Carbon::parse($semestermonth)->format('F d')}} - {{Carbon\Carbon::parse($countryData->end_date)->format('F d')}}. If you prefer to start your enrollment on the date you enroll, select that date. If you want your enrollment to date back to {{Carbon\Carbon::parse($countryData->start_date)->format('F d')}}, even though it is now later in the year, you can do so.</p>
-        <p>The dates you select will appear on your confirmation of enrollment letter. Regardless of the date you select, your enrollment will include the full 12-month period for Annual or the full 7-month period for Second Semester Only.</p>
+        <p>Annual enrollment covers the 12 months from {{Carbon\Carbon::parse($countryData->start_date)->format('F d')}} - {{Carbon\Carbon::parse($countryData->end_date)->format('F d')}}. 
+        Second Semester Only covers {{Carbon\Carbon::parse($semestermonth)->format('F d')}} - {{Carbon\Carbon::parse($countryData->end_date)->format('F d')}}.
+         You can enter an earlier date to end your own academic year.That date will appear on your Confirmation of Enrollment letter.
+           </p>
+        <p>
+        Regardless of the date you select, your enrollment will include the full 12-month period for Annual or the full 7-month 
+        period for Second Semester Only.</p>
         <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
       </div>
     </div>

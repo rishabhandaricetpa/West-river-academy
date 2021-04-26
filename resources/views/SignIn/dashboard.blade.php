@@ -311,5 +311,37 @@
         </form>
     </div>
 
+   <div class="form-wrap border bg-light py-5 px-25 mb-4">
+        <h2 class="mb-3">Uploaded Document From West River Academy</h2>
+        <div class="mb-2 text-center text-sm-left">
+        </div>
+        <div class="overflow-auto max-table">
+            <table class="table-styling w-100">
+                <thead>
+                    <tr>
+                        <th>Document Type</th>
+                        <th>Download & preview</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($uploadedDocuments as $uploadedDocument)
+                    <tr>
+                    @if(!empty($uploadedDocument->document_type))
+                   <td>{{$uploadedDocument->document_type}}</td>
+                   @else
+                   <td>Uploaded By West River Academy</td>
+                   @endif
+                   <td><a href="{{route('download.uploadedDocument',$uploadedDocument->id)}}">Download & Preview</a></td>
+                    </tr>
+                 @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-2 text-right">
+            <p></p>
+        </div>
+        </form>
+    </div>
 </main>
 @endsection

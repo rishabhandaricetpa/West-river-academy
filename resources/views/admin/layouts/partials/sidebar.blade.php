@@ -213,6 +213,14 @@
           </p>
         </a>
       </li>
+        <li class="nav-item">
+        <a href="{{ route('admin.upload.documents') }}" class="nav-link">
+          <i class="nav-icon fas fa-exchange-alt"></i>
+          <p>
+            Upload Documents
+          </p>
+        </a>
+      </li>
       <li class="nav-item">
         <a href="{{ route('admin.logout')}}" class="nav-link">
           <i class="nav-icon fas fa-sign-out-alt"></i>

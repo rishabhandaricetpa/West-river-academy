@@ -330,21 +330,15 @@ class TranscriptController extends Controller
         $groupCourses = TranscriptCourse::with(['subject'])->whereIn('k8transcript_id', $transcript_course_id)->get()->unique('subject_id');
         if ($transcript_id) {
             $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
-            $items = [];
-            foreach ($enrollment_periods as $key => $enrollment_period) {
-                $items[] = $enrollment_period->enrollment_year;
-            }
-            $maxYear =  max($items);
-            $minYear = min($items);
+            $years = collect($enrollment_periods)->pluck('enrollment_year');
+            $maxYear = $years->max();
+            $minYear = $years->min();
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         } else {
             $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
-            $items = [];
-            foreach ($enrollment_periods as $key => $enrollment_period) {
-                $items[] = $enrollment_period->enrollment_year;
-            }
-            $maxYear =  max($items);
-            $minYear = min($items);
+            $years = collect($enrollment_periods)->pluck('enrollment_year');
+            $maxYear = $years->max();
+            $minYear = $years->min();
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         }
@@ -456,6 +450,8 @@ class TranscriptController extends Controller
             ]);
         }
         $transcriptData->save();
+        // notification bell for succesfully creating transcript
+
 
         //store pdf link
         $storetranscript = TranscriptPdf::create([
