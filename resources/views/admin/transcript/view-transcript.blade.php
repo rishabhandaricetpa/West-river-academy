@@ -33,10 +33,11 @@
                         {{$student->ParentProfile->country}}
                     </div>
                 </div>
+                <p>Click on the Generate Signed Transcript to approve the transcript</p>
                 <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Unsigned Transcript</a>
                 <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate & Approve Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Approved Signed Transcript</a>
-                <sup>Click on the Generate Signed Transcript to approve the transcript</sup>
+
 
             </form>
         </div>
