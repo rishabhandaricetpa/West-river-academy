@@ -88,7 +88,7 @@ class CountryController extends Controller
                 'alert-type' => 'success',
             ];
 
-            return redirect('admin/countryenrollments')->with($notification);
+            return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollBack();
             if ($request->expectsJson()) {
