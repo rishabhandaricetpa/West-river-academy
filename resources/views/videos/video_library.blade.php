@@ -7,17 +7,23 @@
     <h1 class="text-center text-white text-uppercase">Video</h1>
     <div class="border bg-light form-wrap mb-4">
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="images/WelcomeVideo.mp4" allowfullscreen></iframe>
+        <video loop="" autoplay controls playsinline="" class="embed-responsive-item">
+                <source src="images/WelcomeVideo.mp4"  type="video/mp4">
+            </video>
         </div>
     </div>
     <div class="border bg-light form-wrap mb-4">
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="images/year-endreport.mp4" allowfullscreen></iframe>
+            <video loop="" controls playsinline="" class="embed-responsive-item">
+                <source src="images/year-endreport.mp4"  type="video/mp4">
+            </video>
         </div>
     </div>
     <div class="border bg-light form-wrap mb-4">
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="images/FinalTranscriptTutorial.mp4" allowfullscreen></iframe>
+            <video loop=""  controls playsinline="" class="embed-responsive-item">
+                <source src="images/FinalTranscriptTutorial.mp4"  type="video/mp4">
+            </video>
         </div>
     </div>
     </div>

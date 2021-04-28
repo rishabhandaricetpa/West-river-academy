@@ -24,7 +24,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Assign Task To:</h5>
+                <h2  id="exampleModalLabel">Assign Task To:</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
 
@@ -32,7 +32,7 @@
             </div>
             <form id="assign">
                 <input type="hidden" name="data_id" id="data_id">
-                <div class="modal-body">
+                <div class="modal-body p-3">
                     <div class="form-group">
                         <label for="assigned_to" class="col-form-label">Assigned To:</label>
                         <select class="form-control" id="assigned_to" name="assigned_to">

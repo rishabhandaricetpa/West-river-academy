@@ -8167,7 +8167,7 @@ __webpack_require__.r(__webpack_exports__);
       this.errors = [];
 
       if (!this.form.amount_due) {
-        this.errors.push("Please select the number of hourse for consultation");
+        this.errors.push("Please select the number of hours for consultation");
         alert("Please fill the required data");
       }
 
