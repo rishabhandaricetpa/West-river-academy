@@ -102,11 +102,10 @@ class StudentController extends Controller
     public function showstudents()
     {
         $parentId = ParentProfile::getParentId();
-
-
+        $parentData = ParentProfile::whereId($parentId)->first();
         $student = StudentProfile::where('parent_profile_id', $parentId)->get();
-        $student_data = StudentProfile::where('parent_profile_id', $parentId)->with('parentProfile')->first();
 
+        $student_data = StudentProfile::where('parent_profile_id', $parentId)->with('parentProfile')->first();
         $transcript = Transcript::where('parent_profile_id', $parentId)
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
@@ -114,9 +113,13 @@ class StudentController extends Controller
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
-        $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->with('parent')->get();
-        $uploadedDocuments = UploadDocuments::where('student_profile_id', $student_data->id)->where('is_upload_to_student', 1)->get();
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments'));
+        $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
+        if ($student_data) {
+            $uploadedDocuments = UploadDocuments::where('student_profile_id', $student_data->id)->where('is_upload_to_student', 1)->get();
+        } else {
+            $uploadedDocuments = '';
+        }
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));
     }
 
     public function confirmationpage($student_id)
@@ -220,7 +223,7 @@ class StudentController extends Controller
     public function reviewStudent()
     {
         $user_id = Auth::user()->id;
-        $students = ParentProfile::find($user_id)->studentProfile()->get();
+        $students = StudentProfile::where('parent_profile_id', $user_id)->get();
 
         $fees = ParentProfile::getParentPendingFees($user_id);
 

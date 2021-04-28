@@ -26,64 +26,61 @@
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
-<script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=mp0jjck0nvualenzblz7ig" async="true"></script>
+<script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=mp0jjck0nvualenzblz7ig" async="true">
+</script>
 <script>
     $(function() {
         $("#example1").DataTable({
-            "responsive": true
-            , "lengthChange": false
-            , "ordering": false
-            , "pagination": true
-            , "autoWidth": false
-            , "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "responsive": true,
+            "lengthChange": false,
+            "ordering": false,
+            "pagination": true,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
         //parent datatable
         $("#family-table").DataTable({
             "ajax": "{{ route('admin.datatable.parent') }}"
-          
-            , "processing": true
-            , "serverSide": true
-            , "ordering": false
-            , "pagination": true
-            , "lengthChange": false
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-             ,  "dom":"Bfrtip"
-            , "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
+
+                ,
+            "processing": true,
+            "serverSide": true,
+            "ordering": false,
+            "pagination": true,
+            "lengthChange": false,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "dom": "Bfrtip",
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
                     "data": "p1_first_name"
-                }
-                , {
+                }, {
                     "data": "country"
-                }
-                , {
+                }, {
                     "data": "state"
-                }
-                , {
-                    "data": "status"
-                    , "render": function(status) {
+                }, {
+                    "data": "status",
+                    "render": function(status) {
                         if (status === 0)
                             return `<td> Active User</td>`;
                         else
                             return `<td> Inactive User </td>`;
                     }
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
+                }, {
+                    "data": "id",
+                    "render": function(id) {
                         return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
                             `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
                             `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
 
 
                     }
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
+                }, {
+                    "data": "id",
+                    "render": function(id) {
                         return `<a href="view-student/${id}">View Students</a>`;
                     }
                 },
@@ -93,84 +90,74 @@
 
         //fees -info table
         $("#fees-table").DataTable({
-            "ajax": "{{ route('admin.datatable.fees') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "id"
-                    , "render": function(data, type, row, meta) {
-                        return meta.row + 1;
-                    }
+            "ajax": "{{ route('admin.datatable.fees') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "id",
+                "render": function(data, type, row, meta) {
+                    return meta.row + 1;
                 }
-                , {
-                    "data": "type"
+            }, {
+                "data": "type"
+            }, {
+                "data": "description"
+            }, {
+                "data": "amount"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="{{ route('admin.fees.services') }}/${id}/edit">Edit</a>`;
                 }
-                , {
-                    "data": "description"
-                }
-                , {
-                    "data": "amount"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="{{ route('admin.fees.services')}}/${id}/edit">Edit</a>`;
-                    }
-                }
-            ]
+            }]
         });
 
 
 
         //country postage
         $("#country_shipping").DataTable({
-            "ajax": "{{ route('admin.datatable.shipping') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "country"
+            "ajax": "{{ route('admin.datatable.shipping') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "country"
+            }, {
+                "data": "postage_charges"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="{{ url('admin/country-services') }}/${id}/edit">Edit</a>`;
                 }
-                , {
-                    "data": "postage_charges"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="{{ url('admin/country-services')}}/${id}/edit">Edit</a>`;
-                    }
-                }
-            , ]
+            }, ]
         });
         //student datatable
         $("#student-table").DataTable({
-            "ajax": "{{ route('admin.datatable.student') }}"
-              , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-          ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
+            "ajax": "{{ route('admin.datatable.student') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
                     "data": "fullname"
-                }
-                , {
-                    "data": "birthdate"
-                    , "render": function(data) {
+                }, {
+                    "data": "birthdate",
+                    "render": function(data) {
                         return (moment(data).format("MMM DD YYYY"));
                     }
-                }
-                , {
+                }, {
                     "data": "gender"
                 },
                 // {
@@ -178,42 +165,45 @@
                 // },
                 {
                     "data": "parent_profile.country"
-                }
-                , {
+                }, {
                     "data": "email"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
+                }, {
+                    "data": "id",
+                    "render": function(id) {
                         return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>` +
                             `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
                     }
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
+                }, {
+                    "data": "id",
+                    "render": function(id) {
                         return `<a href="edit-payment/${id}">View Payments</a>`;
                     }
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
+                }, {
+                    "data": "id",
+                    "render": function(id) {
                         return `<a href="edit-transcript/${id}">Transcripts</a>`;
                     }
-                }
-                , {
-                    "data": "graduation.id"
-                    , "render": function(data) {
+                }, {
+
+                    "data": function(row, type, val, meta) {
+                        return row.graduation?.id
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+
                         if (data == null) {
                             return `<label> Not Applied </label>`;
                         } else {
                             return `<a href="graduations/${data}/edit">Graduation</a>`;
                         }
                     }
-                }
-                , {
-                    "data": "record_transfers.id"
-                    , "render": function(data) {
+                }, {
+
+                    "data": function(row, type, val, meta) {
+                        return row.record_transfers?.id
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
 
                         if (data == null) {
                             return `<label> Not Applied </label>`;
@@ -223,8 +213,8 @@
                     }
                 },
                 {
-                    "data": "id"
-                    , "render": function(data) {
+                    "data": "id",
+                    "render": function(data) {
 
                         if (data == null) {
                             return `<label> Not Applied </label>`;
@@ -233,9 +223,9 @@
                         }
                     }
                 },
-                 {
-                    "data": "id"
-                    , "render": function(data) {
+                {
+                    "data": "id",
+                    "render": function(data) {
 
                         if (data == null) {
                             return `<label> Not Applied </label>`;
@@ -243,82 +233,74 @@
                             return `<a href="edit-upload/${data}">Upload</a>`;
                         }
                     }
-                }
-            , ]
+                },
+            ]
         });
 
         //coupon datatable
         $("#coupons-table").DataTable({
-            "ajax": "{{ route('admin.coupons.dt') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-            , "ordering": false
-            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "id"
-                    , "render": function(data, type, row, meta) {
+            "ajax": "{{ route('admin.coupons.dt') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "ordering": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                    "data": "id",
+                    "render": function(data, type, row, meta) {
                         return meta.row + 1;
                     }
-                }
-                , {
+                }, {
                     "data": "code"
-                }
-                , {
+                }, {
                     "data": "amount"
-                }
-                , {
+                }, {
                     "data": "status"
                 },
                 // { "data": "redeem_left" },
                 {
                     "data": "expire_at"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
+                }, {
+                    "data": "id",
+                    "render": function(id) {
                         return `<a href="{{ route('admin.view.coupon') }}/${id}/edit">Edit</a>`;
                     }
-                }
-            , ]
+                },
+            ]
         });
 
         //graduation datatable
         $("#graduation-table").DataTable({
-            "ajax": "{{ route('admin.graduation.dt') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-           ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "id"
-                    , "render": function(data, type, row, meta) {
-                        return meta.row + 1;
-                        e
-                    }
+            "ajax": "{{ route('admin.graduation.dt') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "id",
+                "render": function(data, type, row, meta) {
+                    return meta.row + 1;
+                    e
                 }
-                , {
-                    "data": "student.fullname"
+            }, {
+                "data": "student.fullname"
+            }, {
+                "data": "student.email"
+            }, {
+                "data": "student.birthdate",
+                "render": function(data) {
+                    return (moment(data).format("MMMM DD YYYY"));
                 }
-                , {
-                    "data": "student.email"
-                }
-                , {
-                    "data": "student.birthdate"
-                    , "render": function(data) {
-                        return (moment(data).format("MMMM DD YYYY"));
-                    }
-                }
-                , {
-                    "data": "grade_9_info"
-                    , "render": function(data, type, row, meta) {
-                        return `
+            }, {
+                "data": "grade_9_info",
+                "render": function(data, type, row, meta) {
+                    return `
                           <ul>
                             <li>
                                 Grade 9 : ${ row.grade_9_info }
@@ -331,230 +313,191 @@
                             </li>
                           </ul>
                         `;
-                    }
                 }
-                , {
-                    "data": "apostille_country"
+            }, {
+                "data": "apostille_country"
+            }, {
+                "data": "status",
+                "render": function(status) {
+                    if (status === 'pending')
+                        return `<td> Pending</td>`;
+                    if (status === 'approved')
+                        return `<td> Approved </td>`;
+                    if (status === 'paid')
+                        return `<td> Paid </td>`;
+                    if (status === 'completed')
+                        return `<td> Completed </td>`;
                 }
-                , {
-                    "data": "status"
-                    , "render": function(status) {
-                        if (status === 'pending')
-                            return `<td> Pending</td>`;
-                        if (status === 'approved')
-                            return `<td> Approved </td>`;
-                        if (status === 'paid')
-                            return `<td> Paid </td>`;
-                        if (status === 'completed')
-                            return `<td> Completed </td>`;
-                    }
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
                 }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
-                    }
-                }
-            ]
+            }]
         });
 
         //custom payments datatable
         $("#custom-table").DataTable({
-            "ajax": "{{ route('admin.datatable.custom') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "autoWidth": false
-            , "columns": [{
-                    "data": "parent_profile.p1_first_name"
+            "ajax": "{{ route('admin.datatable.custom') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "autoWidth": false,
+            "columns": [{
+                "data": "parent_profile.p1_first_name"
+            }, {
+                "data": "amount"
+            }, {
+                "data": "paying_for"
+            }, {
+                "data": "transcation_id"
+            }, {
+                "data": "payment_mode"
+            }, {
+                "data": "status",
+                "render": function(status) {
+                    if (status === 'pending')
+                        return `<td> Pending</td>`;
+                    if (status === 'paid')
+                        return `<td> Paid </td>`;
+                    if (status === 'active')
+                        return `<td> Active </td>`;
                 }
-                , {
-                    "data": "amount"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="custom-payments/${id}"><i class="fas fa-edit"></i></a>`;
                 }
-                , {
-                    "data": "paying_for"
-                }
-                , {
-                    "data": "transcation_id"
-                }
-                , {
-                    "data": "payment_mode"
-                }
-                , {
-                    "data": "status"
-                    , "render": function(status) {
-                        if (status === 'pending')
-                            return `<td> Pending</td>`;
-                        if (status === 'paid')
-                            return `<td> Paid </td>`;
-                        if (status === 'active')
-                            return `<td> Active </td>`;
-                    }
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="custom-payments/${id}"><i class="fas fa-edit"></i></a>`;
-                    }
-                }
-            ]
+            }]
         });
         //order postage payments datatable
         $("#postage-table").DataTable({
-            "ajax": "{{ route('admin.datatable.postage') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-             ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "parent_profile.p1_first_name"
+            "ajax": "{{ route('admin.datatable.postage') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "parent_profile.p1_first_name"
+            }, {
+                "data": "amount"
+            }, {
+                "data": "paying_for"
+            }, {
+                "data": "transcation_id"
+            }, {
+                "data": "payment_mode"
+            }, {
+                "data": "status",
+                "render": function(status) {
+                    if (status === 'pending')
+                        return `<td> Pending</td>`;
+                    if (status === 'approved')
+                        return `<td> Approved </td>`;
+                    if (status === 'paid')
+                        return `<td> Paid </td>`;
+                    if (status === 'completed')
+                        return `<td> Completed </td>`;
                 }
-                , {
-                    "data": "amount"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="edit-postage/${id}"><i class="fas fa-edit"></i></a>`;
                 }
-                , {
-                    "data": "paying_for"
-                }
-                , {
-                    "data": "transcation_id"
-                }
-                , {
-                    "data": "payment_mode"
-                }
-                , {
-                    "data": "status"
-                    , "render": function(status) {
-                        if (status === 'pending')
-                            return `<td> Pending</td>`;
-                        if (status === 'approved')
-                            return `<td> Approved </td>`;
-                        if (status === 'paid')
-                            return `<td> Paid </td>`;
-                        if (status === 'completed')
-                            return `<td> Completed </td>`;
-                    }
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="edit-postage/${id}"><i class="fas fa-edit"></i></a>`;
-                    }
-                }
-            ]
+            }]
         });
         //notarization and postage
         $("#notarization-table").DataTable({
-            "ajax": "{{ route('admin.datatable.notarization') }}"
-             , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "parent_profile.p1_first_name"
+            "ajax": "{{ route('admin.datatable.notarization') }}",
+            "dom": "Bfrtip",
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "parent_profile.p1_first_name"
+            }, {
+                "data": "amount"
+            }, {
+                "data": "pay_for"
+            }, {
+                "data": "transcation_id"
+            }, {
+                "data": "payment_mode"
+            }, {
+                "data": "status"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="edit-notarization/${id}"><i class="fas fa-edit"></i></a>`;
                 }
-                , {
-                    "data": "amount"
-                }
-                , {
-                    "data": "pay_for"
-                }
-                , {
-                    "data": "transcation_id"
-                }
-                , {
-                    "data": "payment_mode"
-                }
-                , {
-                    "data": "status"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="edit-notarization/${id}"><i class="fas fa-edit"></i></a>`;
-                    }
-                }
-            ]
+            }]
         });
         //custom letter payments datatable
         $("#customletter-table").DataTable({
-            "ajax": "{{ route('admin.datatable.customletter')}}"
-            , "processing": true
-             , "dom":"Bfrtip"
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-            ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "parent_profile.p1_first_name"
+            "ajax": "{{ route('admin.datatable.customletter') }}",
+            "processing": true,
+            "dom": "Bfrtip",
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "parent_profile.p1_first_name"
+            }, {
+                "data": "amount"
+            }, {
+                "data": "type_of_payment"
+            }, {
+                "data": "transcation_id"
+            }, {
+                "data": "payment_mode"
+            }, {
+                "data": "status"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="edit-customletter/${id}"><i class="fas fa-edit"></i></a>`;
                 }
-                , {
-                    "data": "amount"
-                }
-                , {
-                    "data": "type_of_payment"
-                }
-                , {
-                    "data": "transcation_id"
-                }
-                , {
-                    "data": "payment_mode"
-                }
-                , {
-                    "data": "status"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="edit-customletter/${id}"><i class="fas fa-edit"></i></a>`;
-                    }
-                }
-            ]
+            }]
         });
         //Order Cosltation datatable
         $("#orderConsltation-table").DataTable({
-            "ajax": "{{ route('admin.datatable.conultation')}}"
-            , "processing": true
-              , "dom":"Bfrtip"
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-             ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "parent.p1_first_name"
+            "ajax": "{{ route('admin.datatable.conultation') }}",
+            "processing": true,
+            "dom": "Bfrtip",
+            "serverSide": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columns": [{
+                "data": "parent.p1_first_name"
+            }, {
+                "data": "amount"
+            }, {
+                "data": "type_of_payment"
+            }, {
+                "data": "transcation_id"
+            }, {
+                "data": "payment_mode"
+            }, {
+                "data": "status"
+            }, {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="edit-conultation/${id}"><i class="fas fa-edit"></i></a>`;
                 }
-                , {
-                    "data": "amount"
-                }
-                , {
-                    "data": "type_of_payment"
-                }
-                , {
-                    "data": "transcation_id"
-                }
-                , {
-                    "data": "payment_mode"
-                }
-                , {
-                    "data": "status"
-                }
-                , {
-                    "data": "id"
-                    , "render": function(id) {
-                        return `<a href="edit-conultation/${id}"><i class="fas fa-edit"></i></a>`;
-                    }
-                }
-            ]
+            }]
         });
         //generate coupon code
 
@@ -566,14 +509,14 @@
             _this.text('Generating...');
 
             $.ajax({
-                type: "get"
-                , url: "{{route('admin.coupons.generate')}}"
-                , success: function(response) {
+                type: "get",
+                url: "{{ route('admin.coupons.generate') }}",
+                success: function(response) {
                     $("#code").val(response);
                     _this.attr('disabled', false);
                     _this.text(text);
-                }
-                , error: function() {
+                },
+                error: function() {
                     _this.attr('disabled', false);
                     _this.text(text);
                 }
@@ -581,8 +524,8 @@
         });
 
         $('#assign-select').select2({
-            placeholder: 'Select Parents to assign Coupon'
-            , allowClear: true
+            placeholder: 'Select Parents to assign Coupon',
+            allowClear: true
         });
 
     });
@@ -592,10 +535,10 @@
             dateFormat: "yy-mm-dd"
         });
         $("#addressData").DataTable({
-            "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-        , }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     });
     // edit Dashboard Record For Super Admin
@@ -605,13 +548,13 @@
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            , url: "{{url('assign/dashboard')}}"
-            , type: "POST"
-            , data: {
-                assign_id: id
-            , }
-            , success: function(response) {
+            },
+            url: "{{ url('assign/dashboard') }}",
+            type: "POST",
+            data: {
+                assign_id: id,
+            },
+            success: function(response) {
                 if (response) {
                     $("#assigned_to").val(response.assigned_to);
                     $("#notes").val(response.notes);
@@ -629,18 +572,18 @@
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            , url: "{{url('update/dashboard')}}"
-            , type: "POST"
-            , data: {
-                id: id
-                , assigned: assignee
-                , notes: notes
-            }
-            , success: function(response) {
+            },
+            url: "{{ url('update/dashboard') }}",
+            type: "POST",
+            data: {
+                id: id,
+                assigned: assignee,
+                notes: notes
+            },
+            success: function(response) {
                 console.log(response);
-            }
-            , error: function(response) {
+            },
+            error: function(response) {
 
             }
         });
@@ -652,13 +595,13 @@
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            , url: "{{url('assign/status')}}"
-            , type: "POST"
-            , data: {
-                assign_id: id
-            , }
-            , success: function(response) {
+            },
+            url: "{{ url('assign/status') }}",
+            type: "POST",
+            data: {
+                assign_id: id,
+            },
+            success: function(response) {
                 console.log(response);
                 if (response) {
                     $("#task_status").val(response.status);
@@ -678,67 +621,66 @@
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            , url: "{{url('update/record/status')}}"
-            , type: "POST"
-            , data: {
-                id: id
-                , assigned: assignee
-                , notes: notes
-            }
-            , success: function(response) {
+            },
+            url: "{{ url('update/record/status') }}",
+            type: "POST",
+            data: {
+                id: id,
+                assigned: assignee,
+                notes: notes
+            },
+            success: function(response) {
                 console.log(response);
-            }
-            , error: function(response) {
+            },
+            error: function(response) {
 
             }
         });
     }
-   // upload student upload documents
-  $("#student-document-table").DataTable({
-            "ajax": "{{ route('admin.datatable.student') }}"
-              , "dom":"Bfrtip"
-            , "processing": true
-            , "serverSide": true
-            , "responsive": true
-            , "lengthChange": false
-            , "autoWidth": false
-          ,"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            , "columns": [{
-                    "data": "fullname"
+    // upload student upload documents
+    $("#student-document-table").DataTable({
+        "ajax": "{{ route('admin.datatable.student') }}",
+        "dom": "Bfrtip",
+        "processing": true,
+        "serverSide": true,
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "columns": [{
+                "data": "fullname"
+            }, {
+                "data": "birthdate",
+                "render": function(data) {
+                    return (moment(data).format("MMM DD YYYY"));
                 }
-                , {
-                    "data": "birthdate"
-                    , "render": function(data) {
-                        return (moment(data).format("MMM DD YYYY"));
-                    }
-                } , {
-                    "data": "gender"
-                },
-                {
-                    "data": "parent_profile.country"
-                } ,
-                 {
-                    "data": "email"
-                }, 
-                {
-                      "data": "id"
-                    , "render": function(id) {
-                        return `<a href="edit-upload/${id}">Upload Document</a>` 
+            }, {
+                "data": "gender"
+            },
+            {
+                "data": "parent_profile.country"
+            },
+            {
+                "data": "email"
+            },
+            {
+                "data": "id",
+                "render": function(id) {
+                    return `<a href="edit-upload/${id}">Upload Document</a>`
                 }
-                },
-             {
-                     "data": "id"
-                    , "render": function(id) {
-                     
-                      return `<a href="view-documents/${id}">View Document</a>`;
+            },
+            {
+                "data": "id",
+                "render": function(id) {
+
+                    return `<a href="view-documents/${id}">View Document</a>`;
                 }
-                }
+            }
 
 
-                 ]
-        });
-            
+        ]
+    });
+
 
 
 
@@ -756,17 +698,17 @@
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            , url: "{{url('archieve/record')}}"
-            , type: "POST"
-            , data: {
-                id: archieve_ids
-            , }
-            , success: function(response) {
+            },
+            url: "{{ url('archieve/record') }}",
+            type: "POST",
+            data: {
+                id: archieve_ids,
+            },
+            success: function(response) {
                 location.reload()
                 console.log(response);
-            }
-            , error: function(response) {
+            },
+            error: function(response) {
 
             }
         });
@@ -802,25 +744,25 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('backend/dist/js/pages/dashboard.js') }}"></script>
 <script>
-    @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch (type) {
+    @if (Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch (type) {
         case 'info':
-            toastr.info("{{ Session::get('message') }}");
-            break;
-
+        toastr.info("{{ Session::get('message') }}");
+        break;
+    
         case 'warning':
-            toastr.warning("{{ Session::get('message') }}");
-            break;
-
+        toastr.warning("{{ Session::get('message') }}");
+        break;
+    
         case 'success':
-            toastr.success("{{ Session::get('message') }}");
-            break;
-
+        toastr.success("{{ Session::get('message') }}");
+        break;
+    
         case 'error':
-            toastr.error("{{ Session::get('message') }}");
-            break;
-    }
+        toastr.error("{{ Session::get('message') }}");
+        break;
+        }
     @endif
 
 </script>

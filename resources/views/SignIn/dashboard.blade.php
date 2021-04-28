@@ -8,7 +8,7 @@
         <h2 class="mb-5">What would you like to do?</h2>
         <div class="row dashboard-options">
             <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{route('order.consultation')}}" class="d-inline-block mb-5 decoration-none">
+                <a href="{{ route('order.consultation') }}" class="d-inline-block mb-5 decoration-none">
                     <i class="fas fa-comments rounded-circle circled-grid fa-2x text-secondary"></i>
                     <h3 class="mt-3 text-black font-weight-normal">Order a Personal Consultation</h3>
                 </a>
@@ -25,30 +25,34 @@
                     <h3 class="mt-3 text-black font-weight-normal">Order a Student ID Card</h3>
                 </a>
             </div>
-            @if ($student_data->parentProfile->country === 'United States')
+
+            @if ($parentData->country === 'United States')
             <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ route('notarization')}}" class="d-inline-block mb-5 decoration-none">
+                <a href="{{ route('notarization') }}" class="d-inline-block mb-5 decoration-none">
                     <i class="fas fa-file-alt rounded-circle circled-grid fa-2x text-secondary"></i>
                     <h3 class="mt-3 text-black font-weight-normal">Order an Apostille or Notarization</h3>
                 </a>
             </div>
             @endif
-            @if ($student_data->parentProfile->country !== 'United States')
+
+
+            @if ($parentData->country !== 'United States')
             <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ route('choose_notarization')}}" class="d-inline-block mb-5 decoration-none">
+                <a href="{{ route('choose_notarization') }}" class="d-inline-block mb-5 decoration-none">
                     <i class="fas fa-file-alt rounded-circle circled-grid fa-2x text-secondary"></i>
                     <h3 class="mt-3 text-black font-weight-normal">Order an Apostille or Notarization</h3>
                 </a>
             </div>
             @endif
+
             <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{ route('custom.payment')}}" class="d-inline-block mb-5 decoration-none">
+                <a href="{{ route('custom.payment') }}" class="d-inline-block mb-5 decoration-none">
                     <i class="fas fa-credit-card rounded-circle circled-grid fa-2x text-secondary"></i>
                     <h3 class="mt-3 text-black font-weight-normal">Make a Custom Payment</h3>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6 text-center">
-                <a href="{{route('order-transcript',Auth::user()->id)}}" class="d-inline-block mb-5 decoration-none">
+                <a href="{{ route('order-transcript', Auth::user()->id) }}" class="d-inline-block mb-5 decoration-none">
                     <i class="fas fa-folder-open rounded-circle circled-grid fa-2x text-secondary"></i>
                     <h3 class="mt-3 text-black font-weight-normal">Purchase a Transcript </h3>
                 </a>
@@ -68,7 +72,7 @@
             </a>
         </div>
         <div class="col-md-3 col-sm-6 text-center">
-            <a href="{{ route('custom.letter')}}" class="d-inline-block mb-5 decoration-none">
+            <a href="{{ route('custom.letter') }}" class="d-inline-block mb-5 decoration-none">
                 <i class="fas fa-clipboard rounded-circle circled-grid fa-2x text-secondary"></i>
                 <h3 class="mt-3 text-black font-weight-normal">Order a Custom Letter</h3>
             </a>
@@ -80,7 +84,7 @@
             </a>
         </div>
         <div class="col-md-3 col-sm-6 text-center">
-            <a href="{{ url('/enroll-student')}}" class="d-inline-block mb-5 decoration-none">
+            <a href="{{ url('/enroll-student') }}" class="d-inline-block mb-5 decoration-none">
                 <i class="fas fa-user rounded-circle circled-grid fa-2x text-secondary"></i>
                 <h3 class="mt-3 text-black font-weight-normal">Enroll a new Student in my Family</h3>
             </a>
@@ -92,7 +96,8 @@
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Transcripts</h2>
-        <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to download it.</p>
+        <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to
+            download it.</p>
 
         <div class="overflow-auto max-table mb-2">
             <table class="table-styling w-100">
@@ -106,11 +111,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($transcript as $transcriptData)
-                    @if($transcriptData->period==='K-8')
+                    @foreach ($transcript as $transcriptData)
+                    @if ($transcriptData->period === 'K-8')
                     <tr>
-                        <td>{{$transcriptData['student']['fullname']}}</td>
-                        @if($transcriptData->status === 'paid')
+                        <td>{{ $transcriptData['student']['fullname'] }}</td>
+                        @if ($transcriptData->status === 'paid')
                         <td>Paid</td>
                         @elseif($transcriptData->status === 'canEdit')
                         <td>Edit</td>
@@ -121,30 +126,33 @@
                         @else
                         <td>-</td>
                         @endif
-                        <td>{{$transcriptData->period}}</td>
-                        @if($transcriptData->status === 'paid')
+                        <td>{{ $transcriptData->period }}</td>
+                        @if ($transcriptData->status === 'paid')
                         <td>-</td>
                         @elseif($transcriptData->status === 'canEdit' && $transcriptData->period='K-8')
-                        <td><a href="{{route('another.grade',[$transcriptData->student_profile_id,$transcriptData->id])}}">Edit Transcript</a></td>
+                        <td><a href="{{ route('another.grade', [$transcriptData->student_profile_id, $transcriptData->id]) }}">Edit
+                                Transcript</a></td>
                         @elseif($transcriptData->status === 'approved')
-                        <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
+                        <td><a href="{{ route('edit.transcript', [$transcriptData->id, $transcriptData->student_profile_id]) }}">Click
+                                here to Change in Transcript</a></td>
                         @elseif($transcriptData->status === 'completed' && $transcriptData->period='K-8')
-                        <td><a href="{{route('preview.transcript',[$transcriptData->student_profile_id,$transcriptData->id])}}">Preview Transcript</a></td>
+                        <td><a href="{{ route('preview.transcript', [$transcriptData->student_profile_id, $transcriptData->id]) }}">Preview
+                                Transcript</a></td>
                         @else
                         <td>-</td>
                         @endif
-                        @if($transcriptData->status === 'approved')
-                        <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}"><i class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
+                        @if ($transcriptData->status === 'approved')
+                        <td><a href="{{ route('download.transcript', [$transcriptData->id, $transcriptData->student_profile_id]) }}"><i class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                         @elseif($transcriptData->status === 'completed')
                         <td>Waiting For Approval</td>
                         @elseif($transcriptData->status === 'paid')
-                        <td><a href="{{route('transcript.create',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Create a Transcript</a></td>
+                        <td><a href="{{ route('transcript.create', [$transcriptData->id, $transcriptData->student_profile_id]) }}" class="btn btn-primary">Create a Transcript</a></td>
                         @endif
                     </tr>
                     @else
                     <tr>
-                        <td>{{$transcriptData['student']['fullname']}}</td>
-                        @if($transcriptData->status === 'paid')
+                        <td>{{ $transcriptData['student']['fullname'] }}</td>
+                        @if ($transcriptData->status === 'paid')
                         <td>Paid</td>
                         @elseif($transcriptData->status === 'canEdit')
                         <td>Edit</td>
@@ -155,23 +163,26 @@
                         @else
                         <td>-</td>
                         @endif
-                        <td>{{$transcriptData->period}}</td>
-                        @if($transcriptData->status === 'paid')
+                        <td>{{ $transcriptData->period }}</td>
+                        @if ($transcriptData->status === 'paid')
                         <td>-</td>
                         @elseif($transcriptData->status === 'canEdit')
-                        <td><a href="{{route('display.grades',[$transcriptData->student_profile_id,$transcriptData->id])}}">Edit Transcript</a></td> @elseif($transcriptData->status === 'approved')
-                        <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
+                        <td><a href="{{ route('display.grades', [$transcriptData->student_profile_id, $transcriptData->id]) }}">Edit
+                                Transcript</a></td> @elseif($transcriptData->status === 'approved')
+                        <td><a href="{{ route('edit.transcript', [$transcriptData->id, $transcriptData->student_profile_id]) }}">Click
+                                here to Change in Transcript</a></td>
                         @elseif($transcriptData->status === 'completed')
-                        <td><a href="{{route('preview.transcript9_12',[$transcriptData->student_profile_id,$transcriptData->id])}}">Preview Transcript</a></td>
+                        <td><a href="{{ route('preview.transcript9_12', [$transcriptData->student_profile_id, $transcriptData->id]) }}">Preview
+                                Transcript</a></td>
                         @else
                         <td>-</td>
                         @endif
-                        @if($transcriptData->status === 'approved')
-                        <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}"><i class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
+                        @if ($transcriptData->status === 'approved')
+                        <td><a href="{{ route('download.transcript', [$transcriptData->id, $transcriptData->student_profile_id]) }}"><i class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                         @elseif($transcriptData->status === 'completed')
                         <td>Waiting For Approval</td>
                         @elseif($transcriptData->status === 'paid')
-                        <td><a href="{{route('transcript.create',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Create a Transcript</a></td>
+                        <td><a href="{{ route('transcript.create', [$transcriptData->id, $transcriptData->student_profile_id]) }}" class="btn btn-primary">Create a Transcript</a></td>
                         @endif
                     </tr>
                     @endif
@@ -179,7 +190,8 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{route('order-transcript',Auth::user()->id)}}" class="btn btn-primary mt-4">Purchase Transcripts</a>
+        <a href="{{ route('order-transcript', Auth::user()->id) }}" class="btn btn-primary mt-4">Purchase
+            Transcripts</a>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Download Your Confirmation Letter</h2>
@@ -196,17 +208,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($confirmLetter as $student)
+                    @foreach ($confirmLetter as $student)
                     <tr>
-                        <td>{{$student->fullname}}</td>
-                        <td>{{$student->student_Id}}</td>
-                        @if(($student->status === 'completed') || ($student->status === 'paid'))
+                        <td>{{ $student->fullname }}</td>
+                        <td>{{ $student->student_Id }}</td>
+                        @if ($student->status === 'completed' || $student->status === 'paid')
                         <td>Completed</td>
                         @elseif($student->status === 'pending')
                         <td>Not Paid for Enrollment</td>
                         @endif
-                        @if(($student->status === 'completed') || ($student->status === 'paid'))
-                        <td><a href="{{ route('view.confirm',$student->student_profile_id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
+                        @if ($student->status === 'completed' || $student->status === 'paid')
+                        <td><a href="{{ route('view.confirm', $student->student_profile_id) }}" class="d-flex align-items-center"><i class="fas fa-file-pdf mr-2"></i>Download</a></td>
                         @elseif($student->status === 'pending')
                         <td>Please pay your Enrollment Fees</td>
                         @endif
@@ -222,7 +234,7 @@
         </form>
 
     </div>
-
+    @if (count($record_transfer) > 0)
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Record Transfer</h2>
         <div class="mb-2 text-center text-sm-left">
@@ -240,18 +252,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($record_transfer as $record)
+                    @foreach ($record_transfer as $record)
                     <tr>
-                        <td>{{$record['student']['fullname']}}</td>
-                        <td>{{$record->school_name}}</td>
-                        <td>{{$record->email}}</td>
-                        <td>{{$record->phone_number}}</td>
-                        @if($record->request_status === 'Pending' || empty($record->request_status))
+                        <td>{{ $record['student']['fullname'] }}</td>
+                        <td>{{ $record->school_name }}</td>
+                        <td>{{ $record->email }}</td>
+                        <td>{{ $record->phone_number }}</td>
+                        @if ($record->request_status === 'Pending' || empty($record->request_status))
                         <td>Pending</td>
                         @elseif($record->request_status === 'Record Received')
                         <td>Record Received</td>
                         @endif
-                        <td><a class="btn btn-primary" href="{{route('edit.record',$record->id)}}">Edit</a></td>
+                        <td><a class="btn btn-primary" href="{{ route('edit.record', $record->id) }}">Edit</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -260,10 +273,9 @@
         <div class="mt-2 text-right">
             <p></p>
         </div>
-        <a class="btn btn-primary" href="{{route('record.transfer',$parentId)}}">Request Record Transfer</a>
+        <a class="btn btn-primary" href="{{ route('record.transfer', $parentId) }}">Request Record Transfer</a>
         </form>
     </div>
-
 
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Personal Consultation</h2>
@@ -308,40 +320,42 @@
         <div class="mt-2 text-right">
             <p></p>
         </div>
-        </form>
-    </div>
 
-    <div class="form-wrap border bg-light py-5 px-25 mb-4">
-        <h2 class="mb-3">Uploaded Document From West River Academy</h2>
-        <div class="mb-2 text-center text-sm-left">
-        </div>
-        <div class="overflow-auto max-table">
-            <table class="table-styling w-100">
-                <thead>
-                    <tr>
-                        <th>Document Type</th>
-                        <th>Download & preview</th>
+        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+            <h2 class="mb-3">Uploaded Document From West River Academy</h2>
+            <div class="mb-2 text-center text-sm-left">
+            </div>
+            <div class="overflow-auto max-table">
+                <table class="table-styling w-100">
+                    <thead>
+                        <tr>
+                            <th>Document Type</th>
+                            <th>Download & preview</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($uploadedDocuments as $uploadedDocument)
-                    <tr>
-                        @if(!empty($uploadedDocument->document_type))
-                        <td>{{$uploadedDocument->document_type}}</td>
-                        @else
-                        <td>Uploaded By West River Academy</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!empty($uploadedDocuments))
+                        @foreach ($uploadedDocuments as $uploadedDocument)
+                        <tr>
+                            @if (!empty($uploadedDocument->document_type))
+                            <td>{{ $uploadedDocument->document_type }}</td>
+                            @else
+                            <td>Uploaded By West River Academy</td>
+                            @endif
+                            <td><a href="{{ route('download.uploadedDocument', $uploadedDocument->id) }}">Download
+                                    &
+                                    Preview</a></td>
+                        </tr>
+                        @endforeach
                         @endif
-                        <td><a href="{{route('download.uploadedDocument',$uploadedDocument->id)}}">Download & Preview</a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-2 text-right">
+                <p></p>
+            </div>
+            </form>
         </div>
-        <div class="mt-2 text-right">
-            <p></p>
-        </div>
-        </form>
-    </div>
 </main>
 @endsection
