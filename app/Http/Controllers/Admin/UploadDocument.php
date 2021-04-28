@@ -19,7 +19,7 @@ class UploadDocument extends Controller
     }
     public function dataTable()
     {
-        return datatables(StudentProfile::with(['parentProfile'])->get())->toJson();
+        return datatables(StudentProfile::with(['parentProfile', 'recordTransfers', 'graduation'])->get())->toJson();
     }
     public function editUpload($student_id)
     {

@@ -17,9 +17,10 @@ class RecordTransferController extends Controller
         $schoolRecords = RecordTransfer::select()->orderBy('id', 'DESC')->get();
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }
-    public function studentRecords($student_id)
+    public function studentRecords($record_id)
     {
-        $studentRecords = RecordTransfer::where('student_profile_id', $student_id)->with('student')->get();
+        $record = RecordTransfer::where('id', $record_id)->first();
+        $studentRecords = RecordTransfer::whereIn('student_profile_id', [$record->student_profile_id])->get();
         return view('admin.recordTransfer.adminStudentRecord', compact('studentRecords'));
     }
 
