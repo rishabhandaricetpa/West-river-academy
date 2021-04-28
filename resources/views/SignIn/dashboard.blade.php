@@ -101,11 +101,13 @@
                         <th>Student</th>
                         <th>Status</th>
                         <th>Edit Transcript</th>
+                        <th>Transcript Period</th>
                         <th>Download</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($transcript as $transcriptData)
+                    @if($transcriptData->period==='K-8')
                     <tr>
                         <td>{{$transcriptData['student']['fullname']}}</td>
                         @if($transcriptData->status === 'paid')
@@ -119,13 +121,14 @@
                         @else
                         <td>-</td>
                         @endif
+                        <td>{{$transcriptData->period}}</td>
                         @if($transcriptData->status === 'paid')
                         <td>-</td>
                         @elseif($transcriptData->status === 'canEdit' && $transcriptData->period='K-8')
                         <td><a href="{{route('another.grade',[$transcriptData->student_profile_id,$transcriptData->id])}}">Edit Transcript</a></td>
                         @elseif($transcriptData->status === 'approved')
                         <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
-                        @elseif($transcriptData->status === 'completed')
+                        @elseif($transcriptData->status === 'completed' && $transcriptData->period='K-8')
                         <td><a href="{{route('preview.transcript',[$transcriptData->student_profile_id,$transcriptData->id])}}">Preview Transcript</a></td>
                         @else
                         <td>-</td>
@@ -135,9 +138,43 @@
                         @elseif($transcriptData->status === 'completed')
                         <td>Waiting For Approval</td>
                         @elseif($transcriptData->status === 'paid')
-                        <td><a href="{{route('enrolled.students')}}" class="btn btn-primary">Create a Transcript</a></td>
+                        <td><a href="{{route('transcript.create',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Create a Transcript</a></td>
                         @endif
                     </tr>
+                    @else
+                    <tr>
+                        <td>{{$transcriptData['student']['fullname']}}</td>
+                        @if($transcriptData->status === 'paid')
+                        <td>Paid</td>
+                        @elseif($transcriptData->status === 'canEdit')
+                        <td>Edit</td>
+                        @elseif($transcriptData->status === 'approved')
+                        <td>Approved</td>
+                        @elseif($transcriptData->status === 'completed')
+                        <td>Submitted</td>
+                        @else
+                        <td>-</td>
+                        @endif
+                        <td>{{$transcriptData->period}}</td>
+                        @if($transcriptData->status === 'paid')
+                        <td>-</td>
+                        @elseif($transcriptData->status === 'canEdit')
+                        <td><a href="{{route('display.grades',[$transcriptData->student_profile_id,$transcriptData->id])}}">Edit Transcript</a></td> @elseif($transcriptData->status === 'approved')
+                        <td><a href="{{route('edit.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}">Click here to Change in Transcript</a></td>
+                        @elseif($transcriptData->status === 'completed')
+                        <td><a href="{{route('preview.transcript9_12',[$transcriptData->student_profile_id,$transcriptData->id])}}">Preview Transcript</a></td>
+                        @else
+                        <td>-</td>
+                        @endif
+                        @if($transcriptData->status === 'approved')
+                        <td><a href="{{route('download.transcript',[$transcriptData->id,$transcriptData->student_profile_id])}}"><i class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
+                        @elseif($transcriptData->status === 'completed')
+                        <td>Waiting For Approval</td>
+                        @elseif($transcriptData->status === 'paid')
+                        <td><a href="{{route('transcript.create',[$transcriptData->id,$transcriptData->student_profile_id])}}" class="btn btn-primary">Create a Transcript</a></td>
+                        @endif
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
