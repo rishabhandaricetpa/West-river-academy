@@ -98,7 +98,7 @@
                 <input type="hidden" name="transcript_wiz" value="{{$transcriptWizStatus->transcript_wiz}}">
                 <input type="hidden" name="type" value="K-8">
                 <input type="hidden" name="transcript_id" value="{{$transcriptWizStatus->id}}">
-                <button type="submit" class="btn btn-primary mt-3 ml-sm-2" role="button">Add To Cart K-8</button>
+                <button type="submit" class="btn btn-primary mt-3 ml-sm-2" role="button">Add To Cart</button>
             </form>
             <a href="" class="btn btn-primary mt-3 ml-sm-2" role="button">Save As A Draft</a>
         </div>
