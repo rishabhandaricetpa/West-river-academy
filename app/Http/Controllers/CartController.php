@@ -189,6 +189,7 @@ class CartController extends Controller
                     break;
                 case 'notarization':
                     $clearpendingPayments = Notarization::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearCart=Cart::where('item_type','notarization')->delete();
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
                     $confirmation_doc_total = json_encode($request->get('confirmation_doc'));
@@ -210,7 +211,6 @@ class CartController extends Controller
                         'custom_doc' => $custom_doc_total,
                         'status' => 'pending',
                     ]);
-
                     $amount = $request->get('notarization_due') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),

@@ -296,9 +296,9 @@
                         <td>{{$consultations->status}}</td>
                         @endif
                         @if($consultations->preferred_language ==='English')
-                        <td><a class="btn btn-primary" href="https://calendly.com/westriveracademy-peggywebb/consult">Schedule Consultation</a></td>
+                        <td><a class="btn btn-primary" href="https://calendly.com/westriveracademy-peggywebb/consult" target="_blank">Schedule Consultation</a></td>
                         @else
-                        <td><a class="btn btn-primary" href=" https://calendly.com/apoyowra/consulta">Schedule Consultation</a></td>
+                        <td><a class="btn btn-primary" href=" https://calendly.com/apoyowra/consulta" target="_blank">Schedule Consultation</a></td>
                         @endif
                     </tr>
                     @endforeach
