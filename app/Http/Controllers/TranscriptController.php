@@ -10,6 +10,7 @@ use App\Models\Dashboard;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\FeesInfo;
+use App\Models\Notification;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Subject;
@@ -450,6 +451,25 @@ class TranscriptController extends Controller
         }
         $transcriptData->save();
         // notification bell for succesfully creating transcript
+        if ($transcriptData->period == 'K-8') {
+            Notification::create([
+                'parent_profile_id' => ParentProfile::getParentId(),
+                'content' => 'Your transcript has been sucessfully created for student' . ' ' . $transcriptData['student']['fullname'],
+                'type' => 'transcript_submitted_k8',
+                'read' => 'false',
+                'student_profile_id' => $student_id,
+                'transcript_id' => $transcrip_id
+            ]);
+        } else {
+            Notification::create([
+                'parent_profile_id' => ParentProfile::getParentId(),
+                'content' => 'Your transcript has been sucessfully created for student' . ' ' . $transcriptData['student']['fullname'],
+                'type' => 'transcript_submitted_9_12',
+                'read' => 'false',
+                'student_profile_id' => $student_id,
+                'transcript_id' => $transcrip_id
+            ]);
+        }
 
 
         //store pdf link

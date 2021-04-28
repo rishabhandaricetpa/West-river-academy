@@ -116,13 +116,9 @@ class Transcript9_12Controller extends Controller
             $totalSelectedGrades = getTotalCredits($transcript_id, $transcript_9_12_id);
             if ($transcript_id) {
                 $enrollment_periods = Transcript9_12::where('transcript_id', $transcript_id)->get();
-                $items = [];
-                foreach ($enrollment_periods as $key => $enrollment_period) {
-                    $items[] = $enrollment_period->enrollment_year;
-                }
-
-                $maxYear =  max($items);
-                $minYear = min($items);
+                $years = collect($enrollment_periods)->pluck('enrollment_year');
+                $maxYear = $years->max();
+                $minYear = $years->min();
             } else {
 
                 $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
