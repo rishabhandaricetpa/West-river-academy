@@ -12,8 +12,9 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group col-sm-6">
-                            <label>Upload Single/Multiple Documents<sup>*</sup></label>
-                            <label>For Student {{ $parentStudentData->first_name }}</label>
+                            <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
+                            <label class="font-weight-bold text-secondary">For Student
+                                {{ $parentStudentData->first_name }}</label>
                             <input multiple="multiple" type="file" name="file[]" class="form-control" multiple>
                         </div>
                         <input type="hidden" name="student_id" value="{{ $parentStudentData->id }}">
