@@ -440,5 +440,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('transcriptwizard/create/{student_id}', 'TranscriptWizardController@createTranscript')->name('transcriptwizard.create');
 
         Route::get('viewall-wiz/{student_id}', 'TranscriptWizardController@getAllTranscriptForWiz')->name('transcriptwizard.details');
+        Route::get('social/media', function () {
+            return view('social-media');
+        });
     });
 });

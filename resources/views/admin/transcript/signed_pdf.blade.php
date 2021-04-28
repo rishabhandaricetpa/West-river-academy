@@ -15,6 +15,7 @@
         table {
             width: 100%;
         }
+
     </style>
 </head>
 
@@ -130,33 +131,37 @@
             </tr>
         </tbody>
     </table>
-    <table style="position:fixed;bottom:0;width:100%;">
+    <table style="margin-top:100px;width:100%;">
         <tr>
-        <td>
-    <table style="width:100%;">
-        <tbody>
-            <tr>
-                <td width="50%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
-                <td width="20%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
-                <td width="30%"> <table style="width:100%;"><tr><img src="{{asset('images/Stamp.png')}}" style="width:100%;height:100%;object-fit:contain;" alt="logo"></tr></table></td>
-            </tr>
-        </tbody>
-    </table>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    <p style="font-size:11px;">West River Academy is accredited by the National Association for the Legal Auppotr of Alternative Schools (NALSAS) and registered in the California School Directory.CDS Code 30 66464 6134720. Country:Orange Address:33721 BlueWater Ln.Dana Point ,CA 92629-2173</p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    </td>
-    </tr>
+            <td>
+                <table style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <td width="50%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
+                            <td width="20%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
+                            <td width="30%">
+                                <table style="width:100%;">
+                                    <tr><img src="{{asset('images/Stamp.png')}}" style="width:100%;height:100%;object-fit:contain;" alt="logo"></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p style="font-size:11px;">West River Academy is accredited by the National Association for the Legal Auppotr of Alternative Schools (NALSAS) and registered in the California School Directory.CDS Code 30 66464 6134720. Country:Orange Address:33721 BlueWater Ln.Dana Point ,CA 92629-2173</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
     </table>
 </body>
 
