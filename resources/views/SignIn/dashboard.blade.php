@@ -100,8 +100,8 @@
                     <tr>
                         <th>Student</th>
                         <th>Status</th>
-                        <th>Edit Transcript</th>
                         <th>Transcript Period</th>
+                        <th>Edit Transcript</th>
                         <th>Download</th>
                     </tr>
                 </thead>
@@ -311,7 +311,7 @@
         </form>
     </div>
 
-   <div class="form-wrap border bg-light py-5 px-25 mb-4">
+    <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Uploaded Document From West River Academy</h2>
         <div class="mb-2 text-center text-sm-left">
         </div>
@@ -321,20 +321,20 @@
                     <tr>
                         <th>Document Type</th>
                         <th>Download & preview</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($uploadedDocuments as $uploadedDocument)
                     <tr>
-                    @if(!empty($uploadedDocument->document_type))
-                   <td>{{$uploadedDocument->document_type}}</td>
-                   @else
-                   <td>Uploaded By West River Academy</td>
-                   @endif
-                   <td><a href="{{route('download.uploadedDocument',$uploadedDocument->id)}}">Download & Preview</a></td>
+                        @if(!empty($uploadedDocument->document_type))
+                        <td>{{$uploadedDocument->document_type}}</td>
+                        @else
+                        <td>Uploaded By West River Academy</td>
+                        @endif
+                        <td><a href="{{route('download.uploadedDocument',$uploadedDocument->id)}}">Download & Preview</a></td>
                     </tr>
-                 @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>
