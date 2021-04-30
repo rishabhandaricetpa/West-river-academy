@@ -33,7 +33,7 @@ class UploadDocument extends Controller
         ]);
         $cover = $request->file('file');
         if ($request->file('file')) {
-            foreach ($request->record_transfer_file as $cover) {
+            foreach ($request->file as $cover) {
                 $extension = $cover->getClientOriginalExtension();
                 Storage::disk('public')->put('uploadDocument/' . $cover->getFilename() . '.' . $extension,  File::get($cover));
 
@@ -46,15 +46,12 @@ class UploadDocument extends Controller
             }
         }
 
-
-
-
         $notification = [
             'message' => 'Successfully uploaded Record!',
             'alert-type' => 'success',
         ];
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('admin.upload.documents')->with($notification);
     }
     public function viewAllDocuments($student_id)
     {

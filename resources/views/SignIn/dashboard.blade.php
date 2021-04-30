@@ -92,13 +92,13 @@
                     </a>
                 </div>
                 <div class="col-sm-12">
-                    <p>Need help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#"
-                            role="button" class="btn btn-primary"> Help me Decide</a></p>
+                    <p>Need help? Check out our <a href="{{ route('video.tutorials') }}">Dashboard Tutorial </a> <span
+                            class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
                 </div>
             </div>
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">Transcripts</h2>
+            <h2 class="mb-3">Create Transcripts From Purchased Ones</h2>
             <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to
                 download it.</p>
 

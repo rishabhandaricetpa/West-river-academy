@@ -113,4 +113,8 @@ class ParentProfile extends Model
     {
         return $this->hasMany('App\Models\Notification', 'parent_profile_id', 'id');
     }
+    public function uploadDocuments()
+    {
+        return $this->hasMany(UploadDocuments::class);
+    }
 }

@@ -60,6 +60,7 @@ class StudentController extends Controller
             DB::beginTransaction();
             $id = Auth::user()->id;
             $parentProfileData = User::find($id)->parentProfile()->first();
+            $studentCount = StudentProfile::whereIn('parent_profile_id', [$parentProfileData->id])->get()->count();
             $country = $parentProfileData->country;
             $countryData = Country::where('country', $country)->first();
             if ($countryData != null) {
@@ -85,13 +86,13 @@ class StudentController extends Controller
                 if ($request->expectsJson()) {
                     return response()->json($start_date);
                 }
-                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount'));
             } else {
                 $start_date = Carbon::now()->format('Y/m/d');
                 $end_date = Carbon::now()->addYears(1)->format('Y/m/d');
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
-                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount'));
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -114,11 +115,9 @@ class StudentController extends Controller
             ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods')->get();
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
-        if ($student_data) {
-            $uploadedDocuments = UploadDocuments::where('student_profile_id', $student_data->id)->where('is_upload_to_student', 1)->get();
-        } else {
-            $uploadedDocuments = '';
-        }
+
+        $uploadedDocuments = UploadDocuments::select()
+            ->whereIn('parent_profile_id', [$parentId])->where('is_upload_to_student', 1)->get();
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));
     }
 
@@ -223,10 +222,9 @@ class StudentController extends Controller
     public function reviewStudent()
     {
         $user_id = Auth::user()->id;
-        $students = StudentProfile::where('parent_profile_id', $user_id)->get();
-
+        $parent_id =  ParentProfile::getParentId();
+        $students = StudentProfile::where('parent_profile_id', $parent_id)->get();
         $fees = ParentProfile::getParentPendingFees($user_id);
-
         return view('reviewstudent', compact('students', 'fees'));
     }
 

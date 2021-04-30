@@ -714,6 +714,17 @@
         });
     }
 
+    // for validating start and end date 
+    $("#end_date_of_enrollment").change(function() {
+        var startDate = document.getElementById("start_date_of_enrollment").value;
+        var endDate = document.getElementById("end_date_of_enrollment").value;
+
+        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(endDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("end_date_of_enrollment").value = "";
+        }
+    });
+
 </script>
 
 
