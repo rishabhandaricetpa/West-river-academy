@@ -10,4 +10,12 @@ class UploadDocuments extends Model
     use HasFactory;
     protected $table = 'upload_document';
     protected $fillable = ['student_profile_id', 'original_filename', 'filename', 'parent_profile_id', 'document_type', 'is_upload_to_student'];
+    public function parentProfile()
+    {
+        return $this->hasOne(ParentProfile::class);
+    }
+    public function student()
+    {
+        return $this->hasOne(StudentProfile::class);
+    }
 }

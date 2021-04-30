@@ -10,8 +10,10 @@
       v-for="apCourse in form.apCourses"
       :key="apCourse.id"
     >
+
       <div class="col-sm-7 px-0">
         <div class="form-group d-sm-flex  align-items-center">
+                 <span  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
           <label for="" class="h3 text-black mb-0">AP Course Name</label>
 
           <div class="w-75">
@@ -25,6 +27,7 @@
               required
               aria-describedby=""
             />
+          
           </div>
         </div>
         <div class="form-group mb-2 mt-2r">
@@ -172,6 +175,9 @@ export default {
         }
       }
       return true;
+    },
+     removePeriod(index){
+        this.form.apCourses.splice(index, 1)
     }
   }
 };
