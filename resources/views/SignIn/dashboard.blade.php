@@ -94,6 +94,7 @@
         </div>
     </div>
     </div>
+    @if(count($transcript) > 0)
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Transcripts</h2>
         <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to
@@ -193,6 +194,8 @@
         <a href="{{ route('order-transcript', Auth::user()->id) }}" class="btn btn-primary mt-4">Purchase
             Transcripts</a>
     </div>
+    @endif
+    @if(count($confirmLetter) > 0)
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Download Your Confirmation Letter</h2>
         <div class="mb-2 text-center text-sm-left">
@@ -231,8 +234,7 @@
             <p>Download your Enrollment Confirmation Letters from the download links above.</p>
         </div>
         <a href="{{ route('reviewstudent') }}" class="btn btn-primary" value="Renew Enrollment">Renew Enrollment</a>
-        </form>
-
+        @endif
     </div>
     @if (count($record_transfer) > 0)
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
@@ -274,9 +276,9 @@
             <p></p>
         </div>
         <a class="btn btn-primary" href="{{ route('record.transfer', $parentId) }}">Request Record Transfer</a>
-        </form>
     </div>
-
+    @endif
+    @if (count($personal_consultation) > 0)
     <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Personal Consultation</h2>
         <div class="mb-2 text-center text-sm-left">
@@ -317,47 +319,42 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-2 text-right">
-            <p></p>
+    </div>
+    @endif
+    @if (count($uploadedDocuments) > 0)
+    @if (!empty($uploadedDocuments))
+    <div class="form-wrap border bg-light py-5 px-25 mb-4">
+
+        <h2 class="mb-3">Uploaded Document From West River Academy</h2>
+        <div class="mb-2 text-center text-sm-left">
         </div>
+        <div class="overflow-auto max-table">
+            <table class="table-styling w-100">
+                <thead>
+                    <tr>
+                        <th>Document Type</th>
+                        <th>Download & preview</th>
 
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">Uploaded Document From West River Academy</h2>
-            <div class="mb-2 text-center text-sm-left">
-            </div>
-            <div class="overflow-auto max-table">
-                <table class="table-styling w-100">
-                    <thead>
-                        <tr>
-                            <th>Document Type</th>
-                            <th>Download & preview</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (!empty($uploadedDocuments))
-                        @foreach ($uploadedDocuments as $uploadedDocument)
-                        <tr>
-                            @if (!empty($uploadedDocument->document_type))
-                            <td>{{ $uploadedDocument->document_type }}</td>
-                            @else
-                            <td>Uploaded By West River Academy</td>
-                            @endif
-                            <td><a href="{{ route('download.uploadedDocument', $uploadedDocument->id) }}">Download
-                                    &
-                                    Preview</a></td>
-                        </tr>
-                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($uploadedDocuments as $uploadedDocument)
+                    <tr>
+                        @if (!empty($uploadedDocument->document_type))
+                        <td>{{ $uploadedDocument->document_type }}</td>
+                        @else
+                        <td>Uploaded By West River Academy</td>
                         @endif
-                        @endif
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="mt-2 text-right">
-                <p></p>
-            </div>
-            </form>
+                        <td><a href="{{ route('download.uploadedDocument', $uploadedDocument->id) }}">Download
+                                &
+                                Preview</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+        @endif
+        @endif
+
 </main>
 @endsection
