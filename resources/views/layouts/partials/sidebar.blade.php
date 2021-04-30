@@ -12,7 +12,7 @@
         <li><a href="{{ route('enrolled.students') }}"><span>Transcript Wizard</span><i class="fas fa-2x fa-shopping-cart"></i></a></li>
         <li><a href="{{url('/fees')}}"><span>Fees & Services</span><i class="fas fa-2x fa-dollar-sign"></i></a></li>
         <li><a href="{{route('video.tutorials')}}"><span>Our Library</span><i class="fas fa-2x fa-book-open"></i></a></li>
-        <li><a href="#"><span>Join our Community</span><i class="fas fa-2x fa-book-open"></i></a></li>
+        <li><a href="{{url('social/media')}}"><span>Join our Community</span><i class="fas fa-2x fa-book-open"></i></a></li>
         <li><a href="{{route('mysetting')}}"><span>My Account</span> <i class="fas fa-2x fa-user-circle"></i></a></li>
         <li><a href="{{ url('/logout') }}"><span>Log Out</span><i class="fas fa-2x fa-sign-out-alt"></i></a></li>
     </ul>

@@ -36,7 +36,6 @@ class Cart extends Model
                 $apostille_total = Self::getApostilleQuery()->select(DB::raw('sum(notarization_payments.amount) as amount'))->first();
                 $custom_letter_total = Self::getCustomLetterQuery()->select(DB::raw('sum(custom_letter_payments.amount) as amount'))->first();
                 $consultation_total = Self::getConsultationQuery()->select(DB::raw('sum(order_personal_consultations.amount) as amount'))->first();
-
                 // had to make it an object to make sure it doesn't break anywhere
                 // TODO - remove the amount property and replace it everywhere 
                 $total_amount = (object) array();
@@ -53,6 +52,7 @@ class Cart extends Model
                 $apostille_data = Self::getApostilleData();
                 $custom_letter_data = Self::getcustomLetterData();
                 $consultation_data = Self::getConsultationData();
+
                 return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data, $consultation_data, $apostille_data);
             }
         } catch (\Exception $e) {

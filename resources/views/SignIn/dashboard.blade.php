@@ -92,13 +92,13 @@
                     </a>
                 </div>
                 <div class="col-sm-12">
-                    <p>Need help? Check out our <a href="{{ route('video.tutorials') }}">Dashboard Tutorial </a> <span
-                            class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
+                    <p>Need help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#"
+                            role="button" class="btn btn-primary"> Help me Decide</a></p>
                 </div>
             </div>
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">Create Transcripts From Purchased Ones</h2>
+            <h2 class="mb-3">Transcripts</h2>
             <p>Use the Edit Transcript link to edit your transcript. When a transcript is completed there will be a link to
                 download it.</p>
 
@@ -295,92 +295,92 @@
                 </form>
             </div>
 
-        @endif
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">Personal Consultation</h2>
-            <div class="mb-2 text-center text-sm-left">
-            </div>
-            <div class="overflow-auto max-table">
-                <table class="table-styling w-100">
-                    <thead>
-                        <tr>
-                            <th>Parent Name</th>
-                            <th>Preferred language</th>
-                            <th>Call Type</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($personal_consultation as $consultations)
+            <div class="form-wrap border bg-light py-5 px-25 mb-4">
+                <h2 class="mb-3">Personal Consultation</h2>
+                <div class="mb-2 text-center text-sm-left">
+                </div>
+                <div class="overflow-auto max-table">
+                    <table class="table-styling w-100">
+                        <thead>
                             <tr>
-                                <td>{{ $consultations['parent']['p1_first_name'] }}
-                                    {{ $consultations['parent']['p1_last_name'] }}</td>
-                                <td>{{ $consultations->preferred_language }}</td>
-                                @if ($consultations->preferred_language === 'English')
-                                    <td>{{ $consultations->en_call_type }}</td>
-                                @else
-                                    <td>{{ $consultations->sp_call_type }}</td>
-                                @endif
-                                @if ($consultations->status === 'paid')
-                                    <td>Paid</td>
-                                @else
-                                    <td>{{ $consultations->status }}</td>
-                                @endif
-                                @if ($consultations->preferred_language === 'English')
-                                    <td><a class="btn btn-primary"
-                                            href="https://calendly.com/westriveracademy-peggywebb/consult">Schedule
-                                            Consultation</a></td>
-                                @else
-                                    <td><a class="btn btn-primary" href=" https://calendly.com/apoyowra/consulta">Schedule
-                                            Consultation</a></td>
-                                @endif
+                                <th>Parent Name</th>
+                                <th>Preferred language</th>
+                                <th>Call Type</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="mt-2 text-right">
-                <p></p>
-            </div>
-            </form>
-        </div>
-
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
-            <h2 class="mb-3">Uploaded Document From West River Academy</h2>
-            <div class="mb-2 text-center text-sm-left">
-            </div>
-            <div class="overflow-auto max-table">
-                <table class="table-styling w-100">
-                    <thead>
-                        <tr>
-                            <th>Document Type</th>
-                            <th>Download & preview</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (!empty($uploadedDocuments))
-                            @foreach ($uploadedDocuments as $uploadedDocument)
+                        </thead>
+                        <tbody>
+                            @foreach ($personal_consultation as $consultations)
                                 <tr>
-                                    @if (!empty($uploadedDocument->document_type))
-                                        <td>{{ $uploadedDocument->document_type }}</td>
+                                    <td>{{ $consultations['parent']['p1_first_name'] }}
+                                        {{ $consultations['parent']['p1_last_name'] }}</td>
+                                    <td>{{ $consultations->preferred_language }}</td>
+                                    @if ($consultations->preferred_language === 'English')
+                                        <td>{{ $consultations->en_call_type }}</td>
                                     @else
-                                        <td>Uploaded By West River Academy</td>
+                                        <td>{{ $consultations->sp_call_type }}</td>
                                     @endif
-                                    <td><a href="{{ route('download.uploadedDocument', $uploadedDocument->id) }}">Download
-                                            &
-                                            Preview</a></td>
+                                    @if ($consultations->status === 'paid')
+                                        <td>Paid</td>
+                                    @else
+                                        <td>{{ $consultations->status }}</td>
+                                    @endif
+                                    @if ($consultations->preferred_language === 'English')
+                                        <td><a class="btn btn-primary"
+                                                href="https://calendly.com/westriveracademy-peggywebb/consult"
+                                                target="_blank">Schedule Consultation</a></td>
+                                    @else
+                                        <td><a class="btn btn-primary" href=" https://calendly.com/apoyowra/consulta"
+                                                target="_blank">Schedule Consultation</a></td>
+                                    @endif
                                 </tr>
                             @endforeach
-                        @endif
-                    </tbody>
-                </table>
-            </div>
-            <div class="mt-2 text-right">
-                <p></p>
-            </div>
-            </form>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-2 text-right">
+                    <p></p>
+                </div>
+
+                <div class="form-wrap border bg-light py-5 px-25 mb-4">
+                    <h2 class="mb-3">Uploaded Document From West River Academy</h2>
+                    <div class="mb-2 text-center text-sm-left">
+                    </div>
+                    <div class="overflow-auto max-table">
+                        <table class="table-styling w-100">
+                            <thead>
+                                <tr>
+                                    <th>Document Type</th>
+                                    <th>Download & preview</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (!empty($uploadedDocuments))
+                                    @foreach ($uploadedDocuments as $uploadedDocument)
+                                        <tr>
+                                            @if (!empty($uploadedDocument->document_type))
+                                                <td>{{ $uploadedDocument->document_type }}</td>
+                                            @else
+                                                <td>Uploaded By West River Academy</td>
+                                            @endif
+                                            <td><a
+                                                    href="{{ route('download.uploadedDocument', $uploadedDocument->id) }}">Download
+                                                    &
+                                                    Preview</a></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+        @endif
+
+        </tbody>
+        </table>
+        </div>
+        <div class="mt-2 text-right">
+            <p></p>
+        </div>
+        </form>
         </div>
     </main>
 @endsection
