@@ -4,7 +4,7 @@
 
     <section class="content">
         <div class="container-fluid position-relative">
-            <h1>Custom Payment Details</h1>
+            <h1>Upload Documents</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
                 <h3>
@@ -15,7 +15,7 @@
                             <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
                             <label class="font-weight-bold text-secondary">For Student
                                 {{ $parentStudentData->first_name }}</label>
-                            <input multiple="multiple" type="file" name="file[]" class="form-control" multiple>
+                            <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
                         </div>
                         <input type="hidden" name="student_id" value="{{ $parentStudentData->id }}">
                         <input type="hidden" name="parent_id" value="{{ $parentStudentData['parentProfile']['id'] }}">

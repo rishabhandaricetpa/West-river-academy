@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group mb-2 row">
                     <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized and/or sent for Apostilles?</p>
-                    <div class="form-group col-3 mb-3">
+                    <div class="form-group col-sm-3 mb-3">
                         <label for="" class="w-auto">Transcript</label>
                         <div class="w-100">
                             <select name="transcript_doc[]" multiple="multiple" class="multiple-select form-control">
@@ -62,7 +62,7 @@
 
                         </div>
                     </div>
-                    <div class="form-group col-3 mb-3">
+                    <div class="form-group col-sm-3 mb-3">
                         <label for="" class="w-auto">Confirmation of Enrollment Letter</label>
                         <div class="w-100">
                             <select name="confirmation_doc" multiple="multiple" class="multiple-select form-control">
@@ -72,7 +72,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-3 mb-3">
+                    <div class="form-group col-sm-3 mb-3">
                         <label for="" class="w-auto">Custom Letter</label>
                         <div class="w-100">
                             <select name="custom_doc" multiple="multiple" class="multiple-select form-control">

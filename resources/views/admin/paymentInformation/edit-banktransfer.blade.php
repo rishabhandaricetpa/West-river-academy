@@ -9,7 +9,7 @@
         @csrf
         <div class="form-group col-sm-6">
           <label>User Status<sup>*</sup></label>
-          <select id="status" name="status" value="{{$banktransfer->status==1?'Active':'Inactive'}}">
+          <select id="status" class="form-control" name="status" value="{{$banktransfer->status==1?'Active':'Inactive'}}">
             <option value="1">Active</option>
             <option value="0">Inactive</option>
           </select>

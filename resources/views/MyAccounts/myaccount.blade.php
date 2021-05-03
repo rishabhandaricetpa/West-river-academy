@@ -71,7 +71,7 @@
    @if(count($customPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Custom Payment</h2>
-
+    <div class="overflow-auto">
       <table class="table-styling w-100">
          <thead>
             <tr>
@@ -95,7 +95,7 @@
          </tbody>
       </table>
       <div>
-
+      </div>
 
       </div>
    </div>
@@ -201,6 +201,7 @@
      @if(count($orderConsulationPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Order Consulation Payments</h2>
+      <div class="overflow-auto">
       <table class="table-styling w-100">
          <thead>
             <tr>
@@ -223,6 +224,7 @@
             @endforeach
          </tbody>
       </table>
+      </div>
       <div>
       </div>
    </div>
