@@ -365,7 +365,6 @@ class TranscriptController extends Controller
             ]);
         } else {
             $type = $request->get('type');
-            dd($type);
             $transcriptData = Transcript::where('id', $request->get('transcript_id'))->first();
             $enroll_student = StudentProfile::find($id);
             $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();

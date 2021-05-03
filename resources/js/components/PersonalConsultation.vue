@@ -137,6 +137,7 @@
           class="form-control col-3"
           name="amount_due"
           v-model="form.amount_due"
+          disabled
         />
       </div>
     </div>

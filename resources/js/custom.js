@@ -91,11 +91,29 @@ $('#select-apostille:checkbox').change(function(){
   }
 });
 
-
-
   $( document ).ready(function() {
      var bodyHeight = jQuery(document ).height(); 
   jQuery('body').css({
     'height':  bodyHeight + 'px'
   });
 });
+//for making other school required
+
+
+  $('[id="other_school_name"]').change(function()
+      {
+    if ($(this).is(':checked')) {
+      console.log('required');
+      $('input[id="other_school"]').attr('required', 'required');
+    document.getElementById("other_school").disabled = false;
+    }   ;
+  });
+ 
+  $('[id="wra_school"]').change(function()
+      {
+    if ($(this).is(':checked')) {
+      console.log(' not required');
+      $('input[name="other_school"]').removeAttr('required');
+         document.getElementById("other_school").disabled = true;
+    }   ;
+ });
