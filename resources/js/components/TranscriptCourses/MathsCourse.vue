@@ -10,7 +10,7 @@
       :key="mathscourse.id"
     >
       <div class="position-relative">
-        <span class="remove" @click="removeCourse(index)"
+        <span class="remove place-top" @click="removeCourse(index)"
           ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
@@ -120,7 +120,7 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit">
+              <h3 v-if="isCredit" class="mt-3">
                 You have
                 {{ total_credits.total_credit - mathscourse.selectedCredit }}
                 out of

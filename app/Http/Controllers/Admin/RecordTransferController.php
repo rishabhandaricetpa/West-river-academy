@@ -121,6 +121,7 @@ class RecordTransferController extends Controller
         $record = RecordTransfer::find($record_id);
         $record->request_status = 'Record Received';
         $record->medium_of_transfer = $request->mediumOfDelivery;
+        $record->status = 'Record Received';
         $record->save();
         $notification = [
             'message' => 'Record Received Successfully From School',
