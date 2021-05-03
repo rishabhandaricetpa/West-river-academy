@@ -37,7 +37,6 @@ class TranscriptWizardController extends Controller
         } else {
             $transcriptPayments = DB::table('transcripts')->where('student_profile_id', $student_id)
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
-                ->where('transcript_payments.status', 'paid')
                 ->where('transcripts.transcript_wiz', 'YES')
                 ->get();
             if (count($transcriptPayments) == 0) {
@@ -82,5 +81,16 @@ class TranscriptWizardController extends Controller
 
             return redirect()->back()->with($notification);
         }
+    }
+
+
+    public function saveDraft($student_id,$transcript_id){
+
+        $type=Transcript::whereId($transcript_id)->first();
+        $notification = [
+            'message' => 'Transcript Wizard saved Successfully!',
+            'alert-type' => 'success',
+        ]; 
+        return view('transcript_wizard.thankyou',compact('student_id','transcript_id','type'))->with($notification);
     }
 }
