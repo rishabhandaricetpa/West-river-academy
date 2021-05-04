@@ -21,10 +21,10 @@
                      <div class="card-body">
                          <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
-                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#moneygramModal">Add New Money Gram Address</button>
+                                <button type="submit" class="btn btn-primary mb-4 mb-sm-0" data-toggle="modal" data-target="#moneygramModal">Add New Money Gram Address</button>
                                    
                                    
-                                    <table id="addressData" class="table table-bordered table-striped data-table">
+                                    <table id="addressData" class="table-styling w-100 data-table">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -60,7 +60,8 @@
                   
                             <div class="tab-pane" id="tab_2">
                                 <button type="submit" class="btn btn-primary mb-4" data-toggle="modal" data-target="#bankTransferModal">Add New Bank Transfer Address</button>
-                                     <table id="addressData" class="table table-bordered table-striped data-table">
+                                   <div class="overflow-auto">
+                                     <table id="addressData" class="table-styling data-table">
                                         <thead>
                                             <tr>
                                                 <th>Bank Name</th>
@@ -93,11 +94,13 @@
                                             @endforeach
                                         </tbody>
                                  </table>
+                                 </div>
                             </div>
                   <!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_3">
-                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#transferwiseModal">Add New Transfer Wise Address</button>
-                                    <table id="addressData" class="table table-bordered table-striped data-table">
+                                <button type="submit" class="btn btn-primary mb-4" data-toggle="modal" data-target="#transferwiseModal">Add New Transfer Wise Address</button>
+                                    <div class="overflow-auto">
+                                    <table id="addressData" class="table-styling data-table">
                                         <thead>
                                         <tr>
                                             <th>Account Holder</th>
@@ -130,6 +133,7 @@
                                             @endforeach
                                         </tbody>
                         </table>
+                  </div>
                   </div>
                   <!-- /.tab-pane -->
                 </div>

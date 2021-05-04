@@ -112,7 +112,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('/subject/{id}', 'CourseController@store')->name('create.subject');
 
     //transcript k-8
-    Route::get('/view/transcript', 'TranscriptController@index')->name('view.transcript');
+    Route::get('/view/transcript_K8', 'TranscriptController@index')->name('view.transcript');
     Route::get('edit-transcript/{id}', 'TranscriptController@edit')->name('edit.transcript');
     Route::post('score/{subject_id}/{transcript_id}', 'TranscriptController@updateScore')->name('score.update');
 

@@ -17,8 +17,9 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <!-- /.card-header -->
-                    <div class="card-body overflow-auto">
-                        <table id="notarization-table" class="table table-bordered table-striped data-table table-styling">
+                    <div class="card-body">
+                        <div class="overflow-auto">
+                        <table id="notarization-table" class="w-100 data-table table-styling">
                             <thead>
                                 <tr>
                                     <th>Parent Name</th>
@@ -33,6 +34,7 @@
                             <tbody>
                             </tbody>
                         </table>
+</div>
                     </div>
                     <!-- /.card-body -->
                 </div>
