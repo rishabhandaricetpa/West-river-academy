@@ -1,6 +1,8 @@
 .admin-sidebar {
   background-color: $blue !important;
-
+  .nav-link p{
+    font-size: 15px;
+  }
   &.main-sidebar {
     position: fixed !important;
     ul .fas{
@@ -76,7 +78,7 @@
   .nav-pills {
     .nav-link {
       &.active {
-        color: #212529;
+        color: #212529 !important;
       }
       &:hover {
         color: $primary;
@@ -202,4 +204,8 @@
 
 #assignRecord{
   z-index: 9999;
+}
+
+div.dataTables_wrapper div.dataTables_filter label{
+  @extend .text-right;
 }

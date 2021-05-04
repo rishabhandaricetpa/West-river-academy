@@ -57,8 +57,9 @@ class ImportUsers extends Command
 
                 User::create(
                     [
-                        'name' => $cells[14],
+                        'name' => $cells[14] = null ? "Test Name" :  $cells[14],
                         'email' => $cells[13],
+                        'legacy_name' => $cells[11],
                         'password' => Hash::make('12345678'),
                     ]
                 );

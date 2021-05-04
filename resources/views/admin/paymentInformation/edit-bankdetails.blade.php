@@ -5,7 +5,7 @@
 
 
 <h5 class="mb-2">Payment Address</h5>
-            <div class="container-fluid">
+            <div class="container-fluid position-relative">
                 <div class="col-12">
             <!-- Custom Tabs -->
                     <div class="card">
