@@ -30,7 +30,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped data-table">
+                            <table id="example1" class="table-styling data-table">
                                 <thead>
                                     <tr>
                                         <th>Parent Name</th>

@@ -139,10 +139,10 @@
                             </div>
 
                         </div>
-                        <div class="form-group d-sm-flex mb-2 col-xl-6 px-0 pl-xl-3">
+                        <div class="form-group d-sm-flex mb-2 col-xl-6 px-sm-0 pl-xl-3">
                             <label for="county">Shipping Charge</label>
 
-                            <div class=" mb-xl-4 d-sm-flex pl-33">
+                            <div class=" mb-xl-4 d-flex pl-33">
                                 <i class="fas fa-dollar-sign additional-sign"></i>
                                 <input name="postage_charges" type="text" class="form-control" id="postage_charges" readonly></div>
 

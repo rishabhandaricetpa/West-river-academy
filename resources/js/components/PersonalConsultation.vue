@@ -157,9 +157,9 @@
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
       </ul>
     </p> 
-    <div class="form-wrap border bg-light py-5 px-25 dashboard-info mt-4">
+
       <button type="submit" class="btn btn-primary ml-auto">Add to cart</button>
-    </div>
+ 
   </form>
 </template>
 

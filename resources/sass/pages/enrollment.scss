@@ -122,3 +122,9 @@
   }
 }
 
+[data-target="#chooseGrade"]{
+  pointer-events: none;
+  input{
+    pointer-events: auto;
+  }
+}
