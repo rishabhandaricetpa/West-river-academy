@@ -184,6 +184,8 @@ class StudentController extends Controller
                 ]);
                 $enrollPeriod->enrollment_payment_id = $enrollmentPayment->id;
                 $enrollPeriod->save();
+                $isconfirmlink = ConfirmationLetter::where('enrollment_period_id', $enrollPeriod->id)->get();
+                if (count($isconfirmlink) == 0) {
                 $confirmlink = ConfirmationLetter::create([
                     'parent_profile_id' => $id,
                     'student_profile_id' => $student->id,
@@ -192,6 +194,7 @@ class StudentController extends Controller
                     'enrollment_period_id' => $enrollPeriod->id
                 ]);
                 $confirmlink->save();
+                }
             }
             Dashboard::create([
                 'student_profile_id' => $student->id,
@@ -301,7 +304,8 @@ class StudentController extends Controller
         ]);
         $enrollPeriod->save();
         //confirmation periods 
-
+        $isconfirmlink = ConfirmationLetter::where('enrollment_period_id', $enrollPeriod->id)->get();
+        if (count($isconfirmlink) == 0) {
         $confirmlink = ConfirmationLetter::create([
             'parent_profile_id' => $parent_profile,
             'student_profile_id' => $student->id,
@@ -309,6 +313,7 @@ class StudentController extends Controller
             'status' => 'pending',
             'enrollment_period_id' => $enrollPeriod->id
         ]);
+        }
         $EnrollmentPayment = EnrollmentPayment::where('enrollment_period_id', $enrollPeriod->id)->first();
 
         if (is_null($EnrollmentPayment)) {

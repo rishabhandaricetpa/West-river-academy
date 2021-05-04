@@ -15,8 +15,8 @@ class CreateNotarizationPaymentsTable extends Migration
     {
         Schema::create('notarization_payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('notarization_id');
-            $table->foreign('notarization_id')->references('id')->on('notarizations')->nullable()->onDelete('cascade');
+            // $table->unsignedBigInteger('notarization_id');
+            $table->foreignId('notarization_id')->nullable()->constrained()->references('id')->on('notarizations');
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('pay_for');

@@ -14,8 +14,8 @@ class AddApostilleIdColumnOnNotarizationPaymentsTable extends Migration
     public function up()
     {
         Schema::table('notarization_payments', function (Blueprint $table) {
-            $table->unsignedBigInteger('apostille_id');
-            $table->foreign('apostille_id')->references('id')->on('apostilles')->nullable()->onDelete('cascade');
+            // $table->unsignedBigInteger('apostille_id');
+            $table->foreignId('apostille_id')->nullable()->constrained()->references('id')->on('apostilles');
         });
     }
 

@@ -22,7 +22,7 @@
                         <table id="fees-table" class="table table-bordered table-striped data-table">
                             <thead>
                                 <tr>
-                                    <th>Sno</th>
+                                    <th>S.No.</th>
                                     <th>Fee For</th>
                                     <th>Description</th>
                                     <th>Amount</th>
