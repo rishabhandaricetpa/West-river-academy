@@ -81,43 +81,42 @@
 @section('manualscript')
 <script>
     const graduationApp = new Vue({
-        el: '#mainapp-purchase',
-        data() {
-            return {
-                apostille: "{{ !empty($student->graduation->apostille_country) ? true : false }}",
-                apostilleCountry: "{{ !empty($student->graduation->apostille_country) ? $student->graduation->apostille_country : '' }}",
-                total: "{{ !empty($student->graduation->apostille_country) ? $graduation_fee + $apostille_fee : $graduation_fee }}",
-                graduationFee: {
-                    {
-                        $graduation_fee
-                    }
-                },
-                apostilleFee: {
-                    {
-                        $apostille_fee
-                    }
-                },
-            }
-        },
-        methods: {
-            validate() {
-                if (this.apostille !== false && this.apostilleCountry === '') {
-                    alert('Please choose Country!')
-                    return false;
-                }
-                this.$refs.form.submit();
-            }
-        },
-        watch: {
-            apostille() {
-                if (this.apostille) {
-                    this.total = this.graduationFee + this.apostilleFee;
-                } else {
-                    this.total = this.graduationFee;
-                    this.apostilleCountry = '';
-                }
-            }
-        }
-    });
+                el: '#mainapp-purchase'
+                , data() {
+                    return {
+                        apostille: "{{ !empty($student->graduation->apostille_country) ? true : false }}"
+                        , apostilleCountry: "{{ !empty($student->graduation->apostille_country) ? $student->graduation->apostille_country : '' }}"
+                        , total: "{{ !empty($student->graduation->apostille_country) ? $graduation_fee + $apostille_fee : $graduation_fee }}",
+                        graduationFee: {{ $graduation_fee }},
+                        apostilleFee: {{ $apostille_fee }},
+                    }}
+
+
+
+
+
+
+                        , methods: {
+                            validate() {
+                                if (this.apostille !== false && this.apostilleCountry === '') {
+                                    alert('Please choose Country!')
+                                    return false;
+                                }
+                                this.$refs.form.submit();
+                            }
+                        }
+                        , watch: {
+                            apostille() {
+                                if (this.apostille) {
+                                    this.total = this.graduationFee + this.apostilleFee;
+                                } else {
+                                    this.total = this.graduationFee;
+
+                                    this.apostilleCountry = '';
+                                }
+                            }
+                        }
+                    });
+
 </script>
 @endsection

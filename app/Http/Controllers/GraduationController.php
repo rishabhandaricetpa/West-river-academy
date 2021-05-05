@@ -102,8 +102,8 @@ class GraduationController extends Controller
             $inputs = $request->all();
 
             $graduation = Graduation::whereId($id);
+            $parent_id=$graduation->pluck('parent_profile_id')->first();
             $old_status = $graduation->pluck('status')->first();
-
             $graduation->update(['status' => $inputs['status']]);
 
             if ($inputs['status'] === 'approved' && $inputs['status'] != $old_status) {
@@ -123,7 +123,7 @@ class GraduationController extends Controller
                     $data->total_fee = $total_fee;
                     $data->message = $message;
 
-                    Notification::create(['parent_profile_id' => ParentProfile::getParentId(), 'content' => 'Your application for graduation has been approved!', 'type' => 'graduation_approved', 'read' => 'false']);
+                    Notification::create(['parent_profile_id' => $parent_id, 'content' => 'Your application for graduation has been approved!', 'type' => 'graduation_approved', 'read' => 'false']);
 
                     Mail::to($data->parent->p1_email)->send(new GraduationApproved($data));
                 }
@@ -142,6 +142,7 @@ class GraduationController extends Controller
                 'alert-type' => 'success',
             ]);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
 
             return redirect()->back()->with([
