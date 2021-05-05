@@ -591,6 +591,7 @@ class Cart extends Model
 
                 case 'graduation':
                     $graduation_payment = GraduationPayment::where('graduation_id', $cart->item_id)->first();
+                   if($graduation_payment){
                     $graduation_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $graduation_payment->transcation_id = $payment_id;
@@ -600,7 +601,7 @@ class Cart extends Model
                     $graduation = Graduation::whereId($cart->item_id)->first();
                     $graduation->status = 'paid';
                     $graduation->save();
-
+                }
                     break;
                 case 'transcript':
                     $transcript_payment = TranscriptPayment::where('transcript_id', $cart->item_id)->get();
@@ -626,7 +627,8 @@ class Cart extends Model
 
                 case 'custom':
                     $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
-                    $custom_payment->payment_mode = $type;
+                    if($custom_payment){
+                        $custom_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $custom_payment->transcation_id = $payment_id;
                         $custom_payment->status = 'paid';
@@ -634,6 +636,7 @@ class Cart extends Model
                         $custom_payment->status = 'active';
                     }
                     $custom_payment->save();
+                }
                     Dashboard::create([
                         'linked_to' => $cart->item_id,
                         'related_to' => 'custom_record_received',
@@ -645,7 +648,8 @@ class Cart extends Model
 
                 case 'transcript_edit':
                     $transcript_payment = TranscriptPayment::where('transcript_id', $cart->item_id)->first();
-                    $transcript_payment->payment_mode = $type;
+                    if($transcript_payment){
+                        $transcript_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $transcript_payment->transcation_id = $payment_id;
                         $transcript_payment->status = 'paid';
@@ -653,7 +657,7 @@ class Cart extends Model
                         $transcript_payment->status = 'active';
                     }
                     $transcript_payment->save();
-
+                    }
                     $transcript = Transcript::whereId($cart->item_id)->first();
                     $transcript->status = 'canEdit';
                     $transcript->save();
@@ -668,6 +672,7 @@ class Cart extends Model
                     break;
                 case 'postage':
                     $postage_payment = OrderPostage::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
+                    if($postage_payment){
                     $postage_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $postage_payment->transcation_id = $payment_id;
@@ -676,6 +681,7 @@ class Cart extends Model
                         $postage_payment->status = 'active';
                     }
                     $postage_payment->save();
+                    }
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'postage_record_received',
@@ -734,6 +740,7 @@ class Cart extends Model
                     break;
                 case 'custom_letter':
                     $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
+                    if($customletter_payment){
                     $customletter_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $customletter_payment->transcation_id = $payment_id;
@@ -742,6 +749,7 @@ class Cart extends Model
                         $customletter_payment->status = 'active';
                     }
                     $customletter_payment->save();
+                }
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'custom_letter_record_received',
@@ -752,6 +760,7 @@ class Cart extends Model
                     break;
                 case 'order_consultation':
                     $consultation_payment = OrderPersonalConsultation::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
+                    if($consultation_payment){
                     $consultation_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $consultation_payment->transcation_id = $payment_id;
@@ -760,6 +769,7 @@ class Cart extends Model
                         $consultation_payment->status = 'active';
                     }
                     $consultation_payment->save();
+                }
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'orderconsultation_record_received',

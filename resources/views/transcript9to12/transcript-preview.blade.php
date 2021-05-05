@@ -16,6 +16,8 @@
             <div class="modal-body">
                 @php
                 // for annual years
+                $date = Carbon\Carbon::now()->format('d/m/Y');
+
                 $groups = $courses->sortByDesc('type')->split(2);
                 $leftGroup = $groups->first()->groupBy('groupBy');
 
@@ -120,7 +122,7 @@
                                         <tr>
                                             <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Transcript
                                             </th>
-                                            <td style="padding:3px 5px;font-size:13px;line-height:1;"></td>
+                                            <td style="padding:3px 5px;font-size:13px;line-height:1;">{{$date}}</td>
                                         </tr>
                                     </table>
                                     <p style="font-size:13px;" class="mt-4">West River Academy is accredited by the National Association for the Legal Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>

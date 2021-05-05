@@ -345,4 +345,6 @@ function getTranscriptPaidDetails($transcriptPayment_id){
     } else {
         return 'false';
     }
+
+   
 }
