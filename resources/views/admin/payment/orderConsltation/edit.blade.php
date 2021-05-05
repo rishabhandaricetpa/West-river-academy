@@ -35,9 +35,10 @@
                                     value="{{ $order_conultation->amount }}" name="amount" required>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label>Preferred Language<sup>*</sup></label>
+                                <label>Preferred Languages<sup>*</sup></label>
                                 <input class="form-control" id="amount"
-                                    value="{{ $order_conultation->preferred_language }}" name="preferred_language">
+                                    value="{{ $order_conultation->preferred_language }}" name="preferred_language"
+                                    required>
                             </div>
                             @if ($order_conultation->preferred_language === 'English')
                                 <div class="form-group col-sm-6">

@@ -46,13 +46,16 @@
                                         <tr>
                                             <td>{{ $record['student']['fullname'] }}</td>
                                             <td>{{ $record->school_name }}</td>
-                                            <td>{{ $record->email }}</td>
+                                            <td class="transform-none">{{ $record->email }}</td>
                                             <td>{{ $record->phone_number }}</td>
-
-                                            <td>{{ $record->status }} </br>
-                                                @if ($record->resendCount)
-                                                    Resend Requested:{{ $record->resendCount }}
-                                                @endif
+                                            @if (empty($record->request_status))
+                                                <td>In Review </br>
+                                                @else
+                                                <td>{{ $record->request_status }} </br>
+                                            @endif
+                                            @if ($record->resendCount)
+                                                Resend Requested:{{ $record->resendCount }}
+                                            @endif
                                             </td>
 
                                             <td>

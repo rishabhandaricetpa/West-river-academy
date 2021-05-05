@@ -47,7 +47,6 @@ class RecordTransferController extends Controller
             $recordTransfer->state = $request->get('state');
             $recordTransfer->zip_code = $request->get('zip_code');
             $recordTransfer->country = $request->get('country');
-            $recordTransfer->status = 'In Review';
 
             $recordTransfer->save();
             Dashboard::create([
@@ -101,7 +100,6 @@ class RecordTransferController extends Controller
             $recordTransfer->state = $request->get('state');
             $recordTransfer->zip_code = $request->get('zip_code');
             $recordTransfer->country = $request->get('country');
-            $recordTransfer->status = 'In Review';
             $recordTransfer->save();
             DB::commit();
             $notification = [
