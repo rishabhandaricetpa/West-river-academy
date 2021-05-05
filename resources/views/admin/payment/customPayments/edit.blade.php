@@ -32,7 +32,7 @@
                             <div class="form-group col-sm-6">
                                 <label>Amount<sup>*</sup></label>
                                 <input class="form-control" type="number" min="0" id="amount"
-                                    value="{{ $customPaymentsData->amount }}" name="amount">
+                                    value="{{ $customPaymentsData->amount }}" name="amount" required>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Payment Status<sup>*</sup></label>
