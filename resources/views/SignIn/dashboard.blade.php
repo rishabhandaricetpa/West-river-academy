@@ -90,7 +90,7 @@
             </a>
         </div>
         <div class="col-sm-12">
-            <p>Need help? Check out our <a href="#">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
+            <p>Need help? Check out our <a href="{{route('video.tutorials')}}">Dashboard Tutorial </a> <span class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
         </div>
     </div>
     </div>

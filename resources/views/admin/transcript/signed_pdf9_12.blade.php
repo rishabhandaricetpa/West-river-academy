@@ -123,9 +123,9 @@
                                    <td style="padding:3px 5px;font-size:13px;line-height:1;">{{getGPAvalue($courses,$totalSelectedGrades)}}</td>
                                </tr>
                                <tr>
-                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Transcript
+                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Graduation
                                    </th>
-                                   <td style="padding:3px 5px;font-size:13px;line-height:1;"></td>
+                                   <td style="padding:3px 5px;font-size:13px;line-height:1;">{{ Carbon\Carbon::parse($dateofGraduation->date_of_graduation)->format('d/m/Y') }}</td>
                                </tr>
                            </table>
                            <p style="font-size:13px;">West River Academy is accredited by the National Association for the Legal Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>

@@ -123,7 +123,7 @@
                                    <td style="padding:3px 5px;font-size:13px;line-height:1;">{{getGPAvalue($courses,$totalSelectedGrades)}}</td>
                                </tr>
                                <tr>
-                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Transcript
+                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Graduation
                                    </th>
                                    <td style="padding:3px 5px;font-size:13px;line-height:1;"></td>
                                </tr>

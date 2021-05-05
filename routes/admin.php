@@ -213,6 +213,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //transcript 9-12th backend
     Route::get('generate-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateTranscript')->name('genrate.transcript9_12');
+    Route::post('viewfull-transcript9_12/{student_id}/{transcript_id}', 'Transcript9_12Controller@updateDateofGraduation')->name('viewfull9_12');
 
     //upload document
     Route::get('upload-document', 'UploadDocument@index')->name('upload.documents');
@@ -223,4 +224,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('edit-uploaded-doc/{document_id}', 'UploadDocument@changeNameOfUploadedDocument')->name('edit.uploadedDocument');
     Route::post('update-document', 'UploadDocument@updateDocument')->name('update.uploadedDocument');
     Route::get('donwload-document/{document_id}', 'UploadDocument@downloadDocument')->name('download.document');
+
 });

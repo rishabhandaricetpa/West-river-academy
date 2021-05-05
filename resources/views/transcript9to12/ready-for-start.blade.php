@@ -6,9 +6,9 @@
   <h1 class="text-center text-white text-uppercase">dashboard</h1>
 
   <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info d-flex justify-content-center flex-wrap">
-    <p class="w-100">You are ready to select the courses, credits and grades to put on the transcript for <a href="">{{$enroll_student->first_name}}</a>. Be sure you have watched the tutorial and read the recommended course distribution before starting. </p>
+    <p class="w-100">You are ready to select the courses, credits and grades to put on the transcript for <a href="{{ route('reviewstudent') }}">{{$enroll_student->first_name}}</a>. Be sure you have watched the tutorial and read the recommended course distribution before starting. </p>
     <div class="mt-auto col-xl-9 d-xl-flex justify-content-between">
-      <a href="#" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">View Transcript Tutorial</a>
+      <a href="{{route('video.tutorials')}}" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">View Transcript Tutorial</a>
       <a href="{{route('selecting.country',[$id,$transcript_id] )}}" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">Start to create transcript</a>
       <a href="#recommendedCourse" class="btn btn-primary font-weight-bold mb-4 mb-xl-0" data-toggle="modal">View recommended course distribution</a>
     </div>

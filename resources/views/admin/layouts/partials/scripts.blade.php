@@ -262,7 +262,10 @@
                 },
                 // { "data": "redeem_left" },
                 {
-                    "data": "expire_at"
+                    "data": "expire_at",
+                    "render": function(data) {
+                    return (moment(data).format("MMM DD YYYY"));
+                }
                 }, {
                     "data": "id",
                     "render": function(id) {

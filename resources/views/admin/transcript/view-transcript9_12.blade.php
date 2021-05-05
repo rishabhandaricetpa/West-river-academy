@@ -9,8 +9,8 @@
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">{{$student->fullname}}</h2>
-            <form method="POST" action="" class="mb-0">
-
+            <form method="POST" action="{{ route('admin.viewfull9_12',[$student->id,$transcript_id]) }}" class="mb-0">
+                @csrf
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Name</label>
                     <div>
@@ -33,8 +33,14 @@
                         {{$student->ParentProfile->country}}
                     </div>
                 </div>
-
-
+                <div class="form-group d-sm-flex mb-2">
+                    <label for="">Date of Graduation</label>
+                    <div>
+                        <input type="text" name="graduation_date" value ="{{ Carbon\Carbon::parse($dateofGraduation->date_of_graduation)->format('M d Y') }}" class="form-control-sm datepicker" id="getgraduationDate"></input>
+                    </div>
+                    <button type="submit" href="" class="btn btn-primary">Update</button>   
+                  </div>
+                  </form>
                 <a type="button" href="{{ route('admin.genrate.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
                 <a type="button" href="{{ route('admin.signed.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate & Approve Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
@@ -90,5 +96,4 @@
         if (!confirm("Are You Sure to delete this"))
             event.preventDefault();
     }
-
 </script>
