@@ -254,8 +254,8 @@
                 </div>
                 <a href="{{ route('reviewstudent') }}" class="btn btn-primary" value="Renew Enrollment">Renew
                     Enrollment</a>
-        @endif
         </div>
+        @endif
         @if (count($record_transfer) > 0)
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <h2 class="mb-3">Record Transfer</h2>
@@ -380,9 +380,6 @@
                     </div>
             @endif
         @endif
-
-
-        </div>
         </div>
     </main>
 @endsection
