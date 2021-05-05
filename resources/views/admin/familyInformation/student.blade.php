@@ -56,7 +56,7 @@
                                             <td>{{ $student->fullname }}</td>
                                             <td>{{ $student->d_o_b->format('M d Y') }}</td>
                                             <td>{{ $student->gender }}</td>
-                                            <td>{{ $student->email }}</td>
+                                            <td class="transform-none">{{ $student->email }}</td>
                                             <td>{{ $student->payment_status }} </br>
                                             </td>
                                             <td>
