@@ -28,35 +28,35 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="student-table" class="table table-bordered table-striped data-table"">
-                      <thead>
-                      <tr>
-                        <th>Student</th>
-                        <th>DOB</th>
-                        <th>Gender</th>
-                        <th>Country</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                        <th>Payment</th>
-                        <th>Transcript</th>
-                        <th>Graduation</th>
-                        <th>Record Transfer</th>
-                        <th>View Uploaded Document :</th>
-                         <th>Upload Document :</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                     
-                    </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
+                              <thead>
+                              <tr>
+                                <th>Student</th>
+                                <th>DOB</th>
+                                <th>Gender</th>
+                                <th>Country</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                                <th>Payment</th>
+                                <th>Transcript</th>
+                                <th>Graduation</th>
+                                <th>Record Transfer</th>
+                                <th>View Uploaded Document</th>
+                                 <th>Upload Document</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                             
+                            </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
             </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-    </section>
-    </div>
-    <!-- /.content -->
+            <!-- /.content -->
 @endsection
