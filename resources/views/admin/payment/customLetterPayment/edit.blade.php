@@ -10,7 +10,8 @@
                 <h3>Payment Status of Parent : {{ $customLetter->ParentProfile->p1_first_name }}
                     <h3>
 
-                        <form method="post" class="row" action="{{ route('admin.update.customletter', $customLetter->id) }}">
+                        <form method="post" class="row"
+                            action="{{ route('admin.update.customletter', $customLetter->id) }}">
 
                             @csrf
                             <div class="form-group col-sm-6">
@@ -31,7 +32,7 @@
                             <div class="form-group col-sm-6">
                                 <label>Amount<sup>*</sup></label>
                                 <input class="form-control" id="amount" type="number" min="0"
-                                    value="{{ $customLetter->amount }}" name="amount">
+                                    value="{{ $customLetter->amount }}" name="amount" required>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Requested Quantity<sup>*</sup></label>

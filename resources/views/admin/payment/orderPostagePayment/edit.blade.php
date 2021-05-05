@@ -31,8 +31,8 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Amount<sup>*</sup></label>
-                                <input class="form-control" id="amount" value="{{ $orderPostageData->amount }}"
-                                    name="amount" required>
+                                <input class="form-control" id="amount" type="number" min="0"
+                                    value="{{ $orderPostageData->amount }}" name="amount" required>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Payment Status<sup>*</sup></label>
