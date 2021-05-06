@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="mathscourse in form.mathscourse"
+      v-for="(mathscourse,index) in form.mathscourse"
       :key="mathscourse.id"
     >
       <div class="position-relative">
@@ -105,7 +105,7 @@
                 selected. You may change it.
               </h3>
               <select
-                class="form-control min-select"
+                class="form-control col-sm-3"
                 data-toggle="collapse"
                 href="#remainingCredits"
                 role="button"

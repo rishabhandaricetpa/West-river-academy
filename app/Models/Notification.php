@@ -24,7 +24,7 @@ class Notification extends Model
         try {
             $notifications = Notification::where('parent_profile_id', ParentProfile::getParentId())
                 ->orderBy('id', 'desc')
-                ->limit(10)
+                ->limit(5)
                 ->get();
 
             $data = [];

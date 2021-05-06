@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="anotherCourse in form.anotherCourse"
+      v-for="(anotherCourse,index) in form.anotherCourse"
       :key="anotherCourse.id"
     >
       <div class="position-relative">

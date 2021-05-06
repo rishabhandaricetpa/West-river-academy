@@ -17,7 +17,7 @@
                             <label>Amount</label>
                             <input type="hidden" class="form-control" id="id" name="id" value="{{ $fees->id }}">
                             <input class="form-control" min="0" type="number" id="amount" name="amount"
-                                value="{{ $fees->amount }}">
+                                value="{{ $fees->amount }}" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>

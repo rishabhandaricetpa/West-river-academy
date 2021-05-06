@@ -153,7 +153,8 @@ export default {
       this.form.Course = courses;
     },
     viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location =
+        "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse(index) {
       this.form.Course.splice(index, 1);

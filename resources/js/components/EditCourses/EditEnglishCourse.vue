@@ -157,7 +157,8 @@ export default {
       this.form.englishCourse = courses;
     },
     viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location =
+        "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
 
     removeEnglishCourse(index) {

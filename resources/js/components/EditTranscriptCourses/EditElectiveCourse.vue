@@ -146,9 +146,9 @@
         @click="viewCourses"
         >View All Courses</a
       >
-      <button type="submit" class="btn btn-primary ml-4 float-right">
+      <a type="button" @click="viewCourses" class="btn btn-primary ml-4 float-right">
         Continue
-      </button>
+      </a>
     </div>
   </form>
 </template>
