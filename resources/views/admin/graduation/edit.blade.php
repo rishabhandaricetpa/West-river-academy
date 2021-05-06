@@ -57,7 +57,7 @@
 
       <div class="form-group col-sm-6">
         <label for="grad_date">Expected Grad Date:</label>
-        <input type="text" class="form-control datepicker" id="grad_date" value="{{ Carbon\Carbon::parse($graduation->details->grad_date)->format('M d Y') }}" name="grad_date">
+        <input type="date" class="form-control" id="grad_date" value="{{ Carbon\Carbon::parse($graduation->details->grad_date)->format('M d Y') }}" name="grad_date">
       </div>
 
       <div class="form-group col-sm-6">

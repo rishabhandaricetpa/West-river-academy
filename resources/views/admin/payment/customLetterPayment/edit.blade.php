@@ -32,7 +32,7 @@
                             <div class="form-group col-sm-6">
                                 <label>Amount<sup>*</sup></label>
                                 <input class="form-control" id="amount" type="number" min="0"
-                                    value="{{ $customLetter->amount }}" name="amount" required>
+                                    value="{{ $customLetter->amount }}" name="amount" disabled>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Requested Quantity<sup>*</sup></label>
@@ -42,7 +42,7 @@
 
                             <div class="form-group col-sm-6">
                                 <label>Payment Status<sup>*</sup></label>
-                                <select name="paymentStatus" class="form-control">
+                                <select name="paymentStatus" class="form-control"  value="{{ $customLetter->status}}">>
                                     <option value="pending" @if ($customLetter->status == 'pending') selected="selected" @endif>Pending</option>
                                     <option valu e="paid" @if ($customLetter->status == 'paid') selected="selected" @endif>Paid</option>
                                     <option value="active" @if ($customLetter->status == 'active') selected="selected" @endif>Active</option>

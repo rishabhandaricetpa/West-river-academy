@@ -36,12 +36,6 @@
                             </div>
                             @if ($notarizationData->notarization)
                                 <div class="form-group col-sm-6">
-                                    <label>Apostille Country<sup>*</sup></label>
-                                    <input class="form-control"
-                                        value="{{ $notarizationData->notarization->apostille_country }}"
-                                        name="transcation_id">
-                                </div>
-                                <div class="form-group col-sm-6">
                                     <label>Transcript Doc<sup>*</sup></label>
                                     <input class="form-control" id="amount"
                                         value="{{ $notarizationData->notarization->transcript_doc }}" disabled>
@@ -63,12 +57,6 @@
                                 </div>
                             @endif
                             @if ($notarizationData->apostille)
-                                <div class="form-group col-sm-6">
-                                    <label>Apostille Country<sup>*</sup></label>
-                                    <input class="form-control"
-                                        value="{{ $notarizationData->apostille->apostille_country }}"
-                                        name="transcation_id">
-                                </div>
                                 <div class="form-group col-sm-6">
                                     <label>Transcript Doc<sup>*</sup></label>
                                     <input class="form-control" id="amount"

@@ -397,16 +397,17 @@
             }, {
                 "data": "payment_mode"
             }, {
-                "data": "status",
-                "render": function(status) {
-                    if (status === 'pending')
+                "data":  function(row, type, val, meta) {
+                        return row.status
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                    if (data === 'pending')
                         return `<td> Pending</td>`;
-                    if (status === 'approved')
-                        return `<td> Approved </td>`;
-                    if (status === 'paid')
+                    if (data === 'paid')
                         return `<td> Paid </td>`;
-                    if (status === 'completed')
-                        return `<td> Completed </td>`;
+                    if (data === 'active')
+                        return `<td> Active </td>`;
                 }
             }, {
                 "data": "id",

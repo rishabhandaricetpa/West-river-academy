@@ -8,7 +8,7 @@
     <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
         <p>You can not create the Transacript for this Student. Because you have not paid for any Transcript</a></p>
         <p>We recommend that you to first pay atleast for one enrollment to buy the Transacript</p>
-        <td><a href="{{route('transcript.studentInfo',$student_id)}}" class="btn btn-primary">Purchase</a></td>
+        <td><a href="{{route('transcript.studentInfo',$id)}}" class="btn btn-primary">Purchase</a></td>
     </div>
 </main>
 
