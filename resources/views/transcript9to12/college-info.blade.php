@@ -17,7 +17,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <p>Yes means the course would appear in the list of AP courses here:
-          https://apstudents.collegeboard.org/course-index-page</p>
+          <a href="https://apstudents.collegeboard.org/course-index-page" target="_blank">https://apstudents.collegeboard.org/course-index-page</a></p>
         <p>It will receive an extra grade point. If you took elective courses which have no AP equivalent, you should select NO.</p>
         <div class="text-right mt-3"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
       </div>

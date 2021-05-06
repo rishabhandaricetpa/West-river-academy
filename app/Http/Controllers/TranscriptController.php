@@ -153,7 +153,7 @@ class TranscriptController extends Controller
                     return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
                 }
             } else {
-                return view('transcript.pending-payments', compact('student_id'));
+                return view('transcript.pending-payments', compact('id'));
             }
         }
     }

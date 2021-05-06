@@ -7,7 +7,7 @@
             <h1>Edit Student Payment Information</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3>Payment Status of: {{ $student->fullname }}</h3>
+                <h3>Payment Status of: {{ $student?$student->fullname:'' }}</h3>
 
                 <form method="post" class="row" action="{{ route('admin.update-payment', $enroll_payment->id) }}">
                     @csrf

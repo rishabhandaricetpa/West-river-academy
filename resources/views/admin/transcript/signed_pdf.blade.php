@@ -32,7 +32,7 @@
             <tr style="width:100%;">
                 <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
                 <td width="50%" style="text-align:center;">
-                    <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
+                    <img src="../public/images/letterhead.png" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
                     <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
                     <p style="margin:0;font-size:14px;">949.492.5240 info@westriveracademy.com</p>
                 </td>
