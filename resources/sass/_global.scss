@@ -199,6 +199,7 @@ table {
     line-height: 2;
     font-family: $lato-font;
   }
+
   tfoot {
     td {
       color: $blue;
@@ -222,15 +223,27 @@ sup {
   top: 0;
 }
 
+.table-vertical_scroll{
+thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #ccc;
+}
+}
+
+
 .table-styling,
 .data-table {
   min-width: 500px;
+
   &.enlarge-input {
     td {
       &:first-child {
         position: relative;
         padding-left: 45px;
       }
+
       input {
         position: absolute;
         left: 26px;
@@ -240,9 +253,12 @@ sup {
       }
     }
   }
+
   thead {
-    background-color: #cccc;
+    background-color: #ccc;
+
   }
+
   td,
   th {
     padding: 12px 10px;
@@ -252,6 +268,7 @@ sup {
     vertical-align: middle;
     text-transform: capitalize;
   }
+
   tbody {
     td {
       p {
@@ -260,6 +277,7 @@ sup {
         font-family: $lato-font;
       }
     }
+
     tr:nth-child(even) {
       background-color: $white;
     }
@@ -279,7 +297,7 @@ a.btn {
 }
 
 .datepicker-full {
-  > p {
+  >p {
     width: 100%;
   }
 }
@@ -297,6 +315,7 @@ a.btn {
   width: 100%;
   bottom: 0;
   right: 0;
+
   &::after {
     content: "";
     position: absolute;
@@ -312,6 +331,7 @@ a.btn {
 .bg-primary {
   background-image: none !important;
 }
+
 sub {
   bottom: 0.25em;
 }
@@ -323,6 +343,7 @@ sub {
 .choose-btn {
   height: 44px;
 }
+
 sub {
   bottom: 0.25em;
 }
