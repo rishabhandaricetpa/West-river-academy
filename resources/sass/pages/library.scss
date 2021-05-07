@@ -1,0 +1,76 @@
+.media-library{
+    .nav-item{
+        width:33.3%;
+        text-align: center;
+        a{
+            text-transform: uppercase;
+            border-radius: 20px 20px 0 0;
+            background-color: grey;
+            color: #eeeeee;
+            border:none;
+            border-bottom: none !important;
+        }
+        .active {
+            background-color: #eeeeee;
+            color:grey !important;
+        }
+    }
+    .video-library {
+        h3{
+            color:grey;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            font-weight: 100;
+        }
+        p{
+            color:grey;  
+        }
+    }
+    .journal-library {
+        h2{
+            color:rgb(109, 109, 109);
+            text-transform: uppercase;
+            font-size: 1.2rem;padding-bottom: 10px;
+            border-bottom: 2px solid grey;
+        }
+        p{
+            color:grey;
+        }
+        .journal{
+            a{
+                color:rgb(109, 109, 109);
+                font-size: 1rem;
+                text-decoration: underline;
+            }
+        }
+        .journal-subscribtion{
+            border-top: 2px solid grey;
+            .button-subscribtion{
+                padding: 5px 20px ;
+                border-radius: 30px;
+                text-transform: uppercase;
+                color: #eeeeee;
+            }
+        }
+        
+    }
+    .audio-library{
+        h2{
+            color:rgb(109, 109, 109);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            border-bottom: 2px solid grey;
+            display: inline-block;
+        }   
+        h3{
+          font-size: 1.1rem;
+          color:rgb(109, 109, 109);
+          font-weight: 200;
+          
+        } 
+        p{
+            color: grey;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
