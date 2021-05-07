@@ -24,7 +24,6 @@
                             <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Fee For</th>
                                     <th>Description</th>
                                     <th>Amount</th>
                                     <th>Action</th>

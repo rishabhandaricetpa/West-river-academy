@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-header">
                             @if ($students->count() > 0)
-                                Belongs To Parent : {{ $students[0]['parentProfile']['p1_first_name'] }}
+                                Parent(s) : {{ $students[0]['parentProfile']['p1_first_name'] }}
                                 <a href="{{ route('admin.view.students.parent', $id) }}">View Parent</a>
                             @endif
                             <h3 class="card-title"></h3>
@@ -39,7 +39,7 @@
                                 <thead>
                                     <tr>
                                         <th>Student Name</th>
-                                        <th>Date of Birth</th>
+                                        <th class="transform-none">Date of Birth</th>
                                         <th>Gender</th>
                                         <th>Email</th>
                                         <th>Status</th>

@@ -29,7 +29,7 @@
                                     <th>Amount</th>
                                     <th>Status</th>
                                     {{-- <th>Redeem left</th> --}}
-                                    <th>Expire at</th>
+                                    <th>Expiration Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

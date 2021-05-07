@@ -65,9 +65,9 @@
                     "data": "status",
                     "render": function(status) {
                         if (status === 0)
-                            return `<td> Active User</td>`;
+                            return `<td> Active</td>`;
                         else
-                            return `<td> Inactive User </td>`;
+                            return `<td> Inactive</td>`;
                     }
                 }, {
                     "data": "id",
@@ -103,8 +103,6 @@
                 "render": function(data, type, row, meta) {
                     return meta.row + 1;
                 }
-            }, {
-                "data": "type"
             }, {
                 "data": "description"
             }, {

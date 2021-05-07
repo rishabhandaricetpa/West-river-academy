@@ -29,7 +29,7 @@
               <input type="number" class="form-control" min="0" id="redeem" name="redeem_left" placeholder="limit the times coupon can be used">
             </div> --}}
         <div class="col-sm-4 form-group">
-          <label for="expire">Expire at <small>(blank for no limit)</small>:</label>
+          <label for="expire">Expiration Date <small>(blank for no limit)</small>:</label>
           <input type="date" class="form-control" id="expire_at" name="expire_at">
         </div>
         <div class="col-sm-4 form-group">

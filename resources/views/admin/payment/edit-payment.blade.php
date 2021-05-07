@@ -10,7 +10,7 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"> Payment Status of {{$student->fullname}}</h3>
+                        <h3 class="card-title"> Enrollment Status of {{$student->fullname}}</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -18,8 +18,8 @@
                   <thead>
                   <tr>
                    
-                    <th>Start Date of Enrollment</th>
-                    <th>End Date of Enrollment</th>
+                    <th class="transform-none">Start Date of Enrollment</th>
+                    <th class="transform-none">End Date of Enrollment</th>
                     <th>Grade Level</th>
                     <th>Amount</th>
                     <th>Payment Status</th>

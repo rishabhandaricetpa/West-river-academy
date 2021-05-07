@@ -25,7 +25,7 @@
               <input type="number" class="form-control w-50" min="0" id="redeem" name="redeem_left" value="{{ $coupon->redeem_left }}" placeholder="limit the times coupon can be used">
     </div> --}}
     <div class="col-sm-6 form-group">
-      <label for="expire">Expire at <small>(blank for no limit)</small>:</label>
+      <label for="expire">Expiration Date <small>(blank for no limit)</small>:</label>
       <input type="text" class="form-control w-50 datepicker" id="expire_at" value="{{ Carbon\Carbon::parse($coupon->expire_at)->format('M d Y') }}" name="expire_at">
     </div>
     <div class="col-sm-6 form-group">

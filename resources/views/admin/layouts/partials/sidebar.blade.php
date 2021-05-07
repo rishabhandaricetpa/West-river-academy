@@ -201,7 +201,7 @@
                 <a href="{{ url('admin/fees-services') }}" class="nav-link">
                     <i class="nav-icon fas fa-dollar-sign"></i>
                     <p>
-                        Fee and Services
+                        Fees and Services
                     </p>
                 </a>
             </li>
@@ -209,7 +209,7 @@
                 <a href="{{ route('admin.record.request') }}" class="nav-link">
                     <i class="nav-icon fas fa-exchange-alt"></i>
                     <p>
-                        Record Transfer
+                        Records Transfer
                     </p>
                 </a>
             </li>
