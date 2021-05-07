@@ -39,7 +39,13 @@ class RecordTransferController extends Controller
         $data['title'] = 'West River Academy';
         $data['name'] = $request->input('name');
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
-        $data['grade'] = $request->get('enrollmentyear');
+
+        $enrollYear = collect($request->get('enrollmentyear'));
+        $count = count($enrollYear);
+        if ($count > 1) {
+            $enrollYear[$count - 1] = 'and ' . $enrollYear[$count - 1];
+        }
+        $data['grade'] = $enrollYear;
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $pdf = PDF::loadView('schoolRecordRequest', $data);
         Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
