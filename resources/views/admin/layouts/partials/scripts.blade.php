@@ -57,7 +57,21 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
                     "data": "p1_first_name"
-                }, {
+                }, 
+                {
+                    "data":  function(row, type, val, meta) {
+                        return row.p1_email
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                        if (data === null) {
+                            return `<label> </label>`;
+                        } else {
+                            return `<a href="mailto:${data}">${data}</a>`;
+                        }
+                }  
+                },
+                {
                     "data": "country"
                 }, {
                     "data": "state"
@@ -65,9 +79,9 @@
                     "data": "status",
                     "render": function(status) {
                         if (status === 0)
-                            return `<td> Active User</td>`;
+                            return `<td> Active</td>`;
                         else
-                            return `<td> Inactive User </td>`;
+                            return `<td> Inactive</td>`;
                     }
                 }, {
                     "data": "id",
@@ -103,8 +117,6 @@
                 "render": function(data, type, row, meta) {
                     return meta.row + 1;
                 }
-            }, {
-                "data": "type"
             }, {
                 "data": "description"
             }, {
@@ -166,7 +178,17 @@
                 {
                     "data": "parent_profile.country"
                 }, {
-                    "data": "email"
+                    "data":  function(row, type, val, meta) {
+                        return row.email
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                        if (data === null) {
+                            return `<label> </label>`;
+                        } else {
+                            return `<a href="mailto:${data}">${data}</a>`;
+                        }
+                }  
                 }, {
                     "data": "id",
                     "render": function(id) {
@@ -294,7 +316,17 @@
             }, {
                 "data": "student.fullname"
             }, {
-                "data": "student.email"
+                "data":  function(row, type, val, meta) {
+                        return row.student.email
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                        if (data === null) {
+                            return `<label> </label>`;
+                        } else {
+                            return `<a href="mailto:${data}">${data}</a>`;
+                        }
+                }  
             }, {
                 "data": "student.birthdate",
                 "render": function(data) {
@@ -669,8 +701,17 @@
                 "data": "parent_profile.country"
             },
             {
-                "data": "email"
-            },
+                "data":  function(row, type, val, meta) {
+                        return row.email
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                        if (data === null) {
+                            return `<label> </label>`;
+                        } else {
+                            return `<a href="mailto:${data}">${data}</a>`;
+                        }
+                }              },
             {
                 "data": "id",
                 "render": function(id) {

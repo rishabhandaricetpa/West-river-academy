@@ -102,7 +102,7 @@ class RegisterController extends Controller
             'zip_code' => $data['zip_code'],
             'country' => $data['country'],
             'reference' => $data['refrence'],
-            'immunized' => 'Non immunized',
+            'immunized' => 'Not immunized',
         ]);
         $parent->save();
 

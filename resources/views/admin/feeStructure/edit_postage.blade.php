@@ -3,7 +3,7 @@
 @section('content')
 <section class="content">
     <div class="container-fluid position-relative">
-        <h1>Postage Details</h1>
+        <h1>Edit Postage By Country</h1>
         <div class="form-wrap border py-5 px-25 position-relative">
             <form method="post" action="{{ route('admin.update.countryPostage',$country_data->id) }}">
                 @csrf

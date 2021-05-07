@@ -23,9 +23,9 @@ class NotarizationController extends Controller
 
         $students = StudentProfile::where('parent_profile_id', $parent_id)->with(['graduation', 'parentProfile'])->first();
 
-        $transcript = TranscriptPdf::where('status', 'approved')->get();
-        $confirmationLetter = ConfirmationLetter::where('status', 'completed')->get();
-        $custom_letter = CustomLetterPayment::where('status', 'completed')->get();
+        $transcript = TranscriptPdf::where('status', 'approved')->where('parent_profile_id',$parent_id)->get();
+        $confirmationLetter = ConfirmationLetter::where('status', 'completed')->where('parent_profile_id',$parent_id)->get();
+        $custom_letter = CustomLetterPayment::where('status', 'completed')->where('parent_profile_id',$parent_id)->get();
         $transcriptdoc = DB::table('confirmation_letters')->select('transcript_pdf.pdf_link', 'confirmation_letters.pdf_link as confirm')
             ->where('confirmation_letters.parent_profile_id', $parent_id)->where('confirmation_letters.status', 'completed')
             ->join('transcript_pdf', 'transcript_pdf.parent_profile_id', 'confirmation_letters.parent_profile_id')

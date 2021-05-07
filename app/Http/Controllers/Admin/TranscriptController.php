@@ -145,7 +145,7 @@ class TranscriptController extends Controller
 
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
-                ->where('status', 'completed')->first();
+            ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->first();
             if ($storetranscript != null) {
                 $storetranscript->pdf_link = $pdfname . '.pdf';
                 $storetranscript->save();

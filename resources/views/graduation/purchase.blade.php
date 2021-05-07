@@ -84,8 +84,12 @@
                 el: '#mainapp-purchase'
                 , data() {
                     return {
-                        apostille: "{{ !empty($student->graduation->apostille_country) ? true : false }}"
-                        , apostilleCountry: "{{ !empty($student->graduation->apostille_country) ? $student->graduation->apostille_country : '' }}"
+                        @if (!empty($student->graduation->apostille_country))
+                        apostille: true,
+                        @else
+                        apostille: false,
+                        @endif  
+                        apostilleCountry: "{{ !empty($student->graduation->apostille_country) ? $student->graduation->apostille_country : '' }}"
                         , total: "{{ !empty($student->graduation->apostille_country) ? $graduation_fee + $apostille_fee : $graduation_fee }}",
                         graduationFee: {{ $graduation_fee }},
                         apostilleFee: {{ $apostille_fee }},
@@ -98,7 +102,7 @@
 
                         , methods: {
                             validate() {
-                                if (this.apostille !== false && this.apostilleCountry === '') {
+                                if (this.apostille !== false && ( this.apostilleCountry === '' || this.apostilleCountry === null ) ) {
                                     alert('Please choose Country!')
                                     return false;
                                 }

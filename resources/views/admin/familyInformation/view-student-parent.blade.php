@@ -49,7 +49,7 @@
                                 @if ($parent->status == 0)
                                     <td>Active</td>
                                 @else
-                                    <td>Inactive User</td>
+                                    <td>Inactive</td>
                                 @endif
                                 <td><a href="{{ route('admin.parent.edit', $parent->id) }}"><i
                                             class="fas fa-edit"></i></a>

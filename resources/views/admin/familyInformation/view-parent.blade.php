@@ -34,6 +34,7 @@
                                 <thead>
                                     <tr>
                                         <th>Parents</th>
+                                        <th>Email</th>
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>Status</th>

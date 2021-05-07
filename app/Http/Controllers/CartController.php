@@ -94,12 +94,13 @@ class CartController extends Controller
                         if (isset($data['apostille_country']) && !empty($data['apostille_country'])) {
                             // change graduation fee amount based on Apostille
                             $amount = FeesInfo::getFeeAmount('apostille') + FeesInfo::getFeeAmount('graduation');
+                            Graduation::whereId($student->graduation->id)->update(['apostille_country' => $data['apostille_country']]);
                         } else {
                             $amount = FeesInfo::getFeeAmount('graduation');
                         }
 
-                        Graduation::whereId($student->graduation->id)->update(['apostille_country' => $data['apostille_country']]);
                         GraduationPayment::where('graduation_id', $student->graduation->id)->update(['amount' => $amount]);
+
 
                         if (!Cart::where('item_id', $student->graduation->id)->where('item_type', 'graduation')->exists()) {
                             Cart::create([

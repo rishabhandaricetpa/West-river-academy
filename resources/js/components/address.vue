@@ -247,6 +247,9 @@
         <button type="button" class="btn btn-primary" @click="applyCoupon">
           Apply Coupon
         </button>
+         <button type="button" class="btn btn-primary ml-3" @click="removeCoupon">
+          Remove Coupon
+        </button>
       </div>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r">
@@ -447,9 +450,30 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+     removeCoupon() {
+      if(this.couponSelected === null){
+        return false;
+      }
+      axios
+        .get(route("coupon.remove", this.couponSelected))
+        .then((response) => {
+          if(response.data.status == 'success'){
+            if(response.data.amount > this.total.amount){
+              this.amount = 0;
+            }else{
+              this.amount = this.total.amount - response.data.amount;
+            }
+          }else{
+            this.couponSelected = null;
+            this.amount = this.total.amount;
+          }
+        })
+        .catch((error) => console.log(error));
+    },
   },
   mounted(){
     this.couponSelected !== null ? this.applyCoupon() : '';
+    this.couponSelected !== null ? this.removeCoupon() : '';
   }
 };
 </script>

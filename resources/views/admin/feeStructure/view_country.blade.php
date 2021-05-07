@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid position-relative">
-        <h1 class="text-center">Postage Charges List</h1>
+        <h1 class="text-center">Express Mail Fees By Country</h1>
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->

@@ -479,7 +479,7 @@ class TranscriptController extends Controller
             'transcript_id' => $transcrip_id, //save the transcript id to column
             'status' => 'completed',
         ]);
-
+        $storetranscript->save();
         $notification = [
             'message' => 'Transcript Submitted Successfully!',
             'alert-type' => 'success',
