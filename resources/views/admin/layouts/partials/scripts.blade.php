@@ -264,8 +264,8 @@
                 {
                     "data": "expire_at",
                     "render": function(data) {
-                    return (moment(data).format("MMM DD YYYY"));
-                }
+                        return (moment(data).format("MMM DD YYYY"));
+                    }
                 }, {
                     "data": "id",
                     "render": function(id) {
@@ -397,11 +397,11 @@
             }, {
                 "data": "payment_mode"
             }, {
-                "data":  function(row, type, val, meta) {
-                        return row.status
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
+                "data": function(row, type, val, meta) {
+                    return row.status
+                },
+                defaultContent: '',
+                "render": function(data) {
                     if (data === 'pending')
                         return `<td> Pending</td>`;
                     if (data === 'paid')
@@ -553,7 +553,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('assign/dashboard') }}",
+            url: "{{ url('admin/assign/dashboard') }}",
             type: "POST",
             data: {
                 assign_id: id,
@@ -568,8 +568,10 @@
         });
     }
     // assign Record of Dashboard For Super Admin
-    function assignTo() {
+    $("#assign-form").on("submit", function(event) {
         console.log('created');
+        event.preventDefault();
+
         var assignee = $('#assigned_to').val();
         var notes = $('#notes').val();
         var id = $('#data_id').val();
@@ -577,7 +579,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('update/dashboard') }}",
+            url: "{{ route('admin.update.assignee') }}",
             type: "POST",
             data: {
                 id: id,
@@ -586,12 +588,13 @@
             },
             success: function(response) {
                 console.log(response);
+                location.reload();
             },
             error: function(response) {
 
             }
         });
-    }
+    });
     // provide status for sub admin - completed or pending
     function editDashboardForStatus(event) {
         var id = $(event).data("id");
@@ -600,7 +603,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('assign/status') }}",
+            url: "{{ url('admin/assign/status') }}",
             type: "POST",
             data: {
                 assign_id: id,
@@ -626,7 +629,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('update/record/status') }}",
+            url: "{{ url('admin/update/record/status') }}",
             type: "POST",
             data: {
                 id: id,
@@ -634,6 +637,7 @@
                 notes: notes
             },
             success: function(response) {
+
                 console.log(response);
             },
             error: function(response) {
@@ -698,12 +702,14 @@
     }
 
     function sendArchieve() {
+
         var archieve_ids = archieve();
+
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('archieve/record') }}",
+            url: "{{ url('admin/archieve/record') }}",
             type: "POST",
             data: {
                 id: archieve_ids,
@@ -723,7 +729,8 @@
         var startDate = document.getElementById("start_date_of_enrollment").value;
         var endDate = document.getElementById("end_date_of_enrollment").value;
 
-        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(endDate))) {
+        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(
+                endDate))) {
             alert("End date should be greater than Start date");
             document.getElementById("end_date_of_enrollment").value = "";
         }
