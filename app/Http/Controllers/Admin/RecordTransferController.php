@@ -39,10 +39,16 @@ class RecordTransferController extends Controller
         $data['title'] = 'West River Academy';
         $data['name'] = $request->input('name');
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
-        $data['grade'] = $request->get('enrollmentyear');
+
+        $enrollYear = collect($request->get('enrollmentyear'));
+        $count = count($enrollYear);
+        if ($count > 1) {
+            $enrollYear[$count - 1] = 'and ' . $enrollYear[$count - 1];
+        }
+        $data['grade'] = $enrollYear;
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $pdf = PDF::loadView('schoolRecordRequest', $data);
-        Mail::send('admin.recordTransfer.sendSchoolRecord', $data, function ($message) use ($data, $pdf) {
+        Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
             $message->to($data['email'], $data['email'])
                 ->subject($data['title'])
                 ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
@@ -82,13 +88,13 @@ class RecordTransferController extends Controller
         $studentData = StudentProfile::where('id', $record->student_profile_id)->first();
 
         $data['email'] = $record->email;
-        $data['title'] = 'West River Academy';
+        $data['title'] = 'Request for Student Records';
         $data['name'] = $studentData->first_name;
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $data['grade'] = $student_grade;
         $pdf = PDF::loadView('schoolResendRecord', $data);
-        Mail::send('admin.recordTransfer.sendSchoolRecord', $data, function ($message) use ($data, $pdf) {
+        Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
             $message->to($data['email'], $data['email'])
                 ->subject($data['title'])
                 ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
