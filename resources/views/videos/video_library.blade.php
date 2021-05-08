@@ -20,7 +20,7 @@
     </li>
   </ul>
   <div class="tab-content bg-light" id="myTabContent">
-    <div class="tab-pane fade container video-library" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade container  show active video-library" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="row align-items-center py-2r ">
         <div class="col-md-4 my-2">
           <div class="embed-responsive embed-responsive-16by9">
@@ -108,7 +108,7 @@
       </div>
     </div>
 
-    <div class="tab-pane fade container show active audio-library py-2r " id="contact" role="tabpanel"
+    <div class="tab-pane fade container  audio-library py-2r " id="contact" role="tabpanel"
       aria-labelledby="contact-tab">
       <h2>podcasts</h2>
       <div class="row">

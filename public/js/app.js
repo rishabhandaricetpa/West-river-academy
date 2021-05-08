@@ -3386,7 +3386,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -3558,7 +3558,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.englishCourse = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeEnglishCourse: function removeEnglishCourse(index) {
       this.form.englishCourse.splice(index, 1);
@@ -3730,7 +3730,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -3902,7 +3902,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -4074,7 +4074,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -4246,7 +4246,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -4418,7 +4418,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -4590,7 +4590,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Course = courses;
     },
     viewCourses: function viewCourses() {
-      window.location = "/another-grade/" + this.student_id;
+      window.location = "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse: function removeCourse(index) {
       this.form.Course.splice(index, 1);
@@ -11217,6 +11217,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -11299,10 +11302,33 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    },
+    removeCoupon: function removeCoupon() {
+      var _this3 = this;
+
+      if (this.couponSelected === null) {
+        return false;
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(route("coupon.remove", this.couponSelected)).then(function (response) {
+        if (response.data.status == 'success') {
+          if (response.data.amount > _this3.total.amount) {
+            _this3.amount = 0;
+          } else {
+            _this3.amount = _this3.total.amount - response.data.amount;
+          }
+        } else {
+          _this3.couponSelected = null;
+          _this3.amount = _this3.total.amount;
+        }
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
   },
   mounted: function mounted() {
     this.couponSelected !== null ? this.applyCoupon() : '';
+    this.couponSelected !== null ? this.removeCoupon() : '';
   }
 });
 
@@ -45625,10 +45651,11 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
-          "button",
+          "a",
           {
             staticClass: "btn btn-primary ml-4 float-right",
-            attrs: { type: "submit" }
+            attrs: { type: "button" },
+            on: { click: _vm.viewCourses }
           },
           [_vm._v("\n      Continue\n    ")]
         )
@@ -51058,7 +51085,7 @@ var render = function() {
       }
     },
     [
-      _vm._l(_vm.form.anotherCourse, function(anotherCourse) {
+      _vm._l(_vm.form.anotherCourse, function(anotherCourse, index) {
         return _c(
           "div",
           { key: anotherCourse.id, staticClass: "seperator mt-4" },
@@ -51070,7 +51097,7 @@ var render = function() {
                   staticClass: "remove  place-top",
                   on: {
                     click: function($event) {
-                      return _vm.removeCourse(_vm.index)
+                      return _vm.removeCourse(index)
                     }
                   }
                 },
@@ -51950,7 +51977,7 @@ var render = function() {
       }
     },
     [
-      _vm._l(_vm.form.foreignCourse, function(foreignCourse) {
+      _vm._l(_vm.form.foreignCourse, function(foreignCourse, index) {
         return _c(
           "div",
           { key: foreignCourse.id, staticClass: "seperator mt-4" },
@@ -51962,7 +51989,7 @@ var render = function() {
                   staticClass: "remove place-top",
                   on: {
                     click: function($event) {
-                      return _vm.removeCourse(_vm.index)
+                      return _vm.removeCourse(index)
                     }
                   }
                 },
@@ -53282,7 +53309,7 @@ var render = function() {
       }
     },
     [
-      _vm._l(_vm.form.mathscourse, function(mathscourse) {
+      _vm._l(_vm.form.mathscourse, function(mathscourse, index) {
         return _c(
           "div",
           { key: mathscourse.id, staticClass: "seperator mt-4" },
@@ -53294,7 +53321,7 @@ var render = function() {
                   staticClass: "remove place-top",
                   on: {
                     click: function($event) {
-                      return _vm.removeCourse(_vm.index)
+                      return _vm.removeCourse(index)
                     }
                   }
                 },
@@ -53557,7 +53584,7 @@ var render = function() {
                             expression: "mathscourse.selectedCredit"
                           }
                         ],
-                        staticClass: "form-control min-select",
+                        staticClass: "form-control col-sm-3",
                         attrs: {
                           "data-toggle": "collapse",
                           href: "#remainingCredits",
@@ -55313,6 +55340,16 @@ var render = function() {
               on: { click: _vm.applyCoupon }
             },
             [_vm._v("\n        Apply Coupon\n      ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary ml-3",
+              attrs: { type: "button" },
+              on: { click: _vm.removeCoupon }
+            },
+            [_vm._v("\n        Remove Coupon\n      ")]
           )
         ])
       ]),
@@ -78124,18 +78161,14 @@ $('[id="wra_school"]').change(function () {
 
   ;
 }); ////tabs
-
-$('#myTab a').on('click', function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-$('#myTab a[href="#profile"]').tab('show'); // Select tab by name
-
-$('#myTab li:first-child a').tab('show'); // Select first tab
-
-$('#myTab li:last-child a').tab('show'); // Select last tab
-
-$('#myTab li:nth-child(3) a').tab('show'); // Select third tab
+//  $('#myTab a').on('click', function (e) {
+//   e.preventDefault()
+//   $(this).tab('show')
+// })
+// $('#myTab a[href="#profile"]').tab('show') // Select tab by name
+// $('#myTab li:first-child a').tab('show') // Select first tab
+// $('#myTab li:last-child a').tab('show') // Select last tab
+// $('#myTab li:nth-child(3) a').tab('show') // Select third tab
 
 /***/ }),
 

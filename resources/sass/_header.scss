@@ -135,6 +135,9 @@ font-size: 12px;
     font-weight: 400;
   }
   ul{
+    padding-top:15px;
+    height:280px;
+    overflow-y: scroll;
     li{
       position: relative;
       padding-left: 16px;

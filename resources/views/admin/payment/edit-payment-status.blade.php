@@ -73,7 +73,7 @@
                         <input class="form-control" type="number" id="amount" min="0"
                             value="{{ $enroll_payment->amount }}" name="amount" required>
                     </div>
-                    <div class="form-group col-sm-12">
+                    <div class="form-group col-sm-6">
                         <label>Payment Status</label>
                         <select name="paymentStatus" class="form-control">
                             <option value="pending" @if ($enroll_payment->status == 'pending') selected="selected" @endif>Pending</option>
