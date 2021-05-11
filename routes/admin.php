@@ -56,7 +56,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student');
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
     Route::get('edit-student/{id}', 'StudentProfileController@edit')->name('edit-student');
-    Route::post('update/{id}', 'StudentProfileController@update')->name('edit-student.update');
+    Route::post('update/{id}', 'StudentProfileController@update')->name('edit-student.update')->whereNumber('id');
     Route::get('delete/{id}', 'StudentProfileController@destroy')->name('delete.student');
 
     // Crud for student enrollment period and payment
@@ -225,4 +225,14 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update-document', 'UploadDocument@updateDocument')->name('update.uploadedDocument');
     Route::get('donwload-document/{document_id}', 'UploadDocument@downloadDocument')->name('download.document');
 
+
+    // assign record to sub admin by super admin
+    Route::post('assign/dashboard', 'DashboardController@assignRecord')->name('dashboard.updateAssign');
+    Route::post('update/dashboard', 'DashboardController@updateDashboard')->name('update.assignee');
+
+    // provide status to record
+    Route::post('assign/status', 'DashboardController@assignRecordStatus')->name('dashboard.update');
+    Route::post('update/record/status', 'DashboardController@updateRecordStatus')->name('update.assigneeStatus');
+
+    Route::post('archieve/record', 'DashboardController@archieveRecord');
 });

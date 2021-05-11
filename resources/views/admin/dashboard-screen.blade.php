@@ -31,7 +31,7 @@
 
                     </button>
                 </div>
-                <form id="assign">
+                <form id="assign-form">
                     <input type="hidden" name="data_id" id="data_id">
                     <div class="modal-body p-3">
                         <div class="form-group">
@@ -53,7 +53,7 @@
                             <label for="message-text" class="col-form-label">Notes:</label>
                             <textarea class="form-control" id="notes"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" onclick="assignTo()">Save</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
@@ -135,7 +135,8 @@
                                             @endif
                                             <td>{{ $data->created_date }}</td>
                                             @if ($data->related_to === 'student_record_received')
-                                                <td><a href=" {{ route('admin.edit.student.payment', $data->student->id) }}">New
+                                                <td><a
+                                                        href=" {{ route('admin.edit.student.payment', $data->student->id) }}">New
                                                         Student Enrolled</a></td>
                                             @elseif($data->related_to === 'graduation_record_received')
                                                 <td><a
