@@ -19,6 +19,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{{route('admin.fees.country')}}" class="btn btn-primary">Back</a>
         </div>
         <!-- /.card-body -->
     </div>

@@ -28,7 +28,7 @@
                         <div class="card-header">
                             @if ($students->count() > 0)
                                 Parent(s) : {{ $students[0]['parentProfile']['p1_first_name'] }}
-                                <a href="{{ route('admin.view.students.parent', $id) }}">View Parent</a>
+                                <a href="{{ route('admin.view.students.parent', $id) }}" class="btn btn-primary float-right">View Parent</a>
                             @endif
                             <h3 class="card-title"></h3>
                         </div>

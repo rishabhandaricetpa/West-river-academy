@@ -22,6 +22,7 @@
                 <!-- /.card-body -->
                 <div class="col-sm-12">
                     <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{route('admin.country.display')}}" class="btn btn-primary">Back</a>
                 </div>
             </form>
         </div>
