@@ -65,7 +65,7 @@ class RecordTransferController extends Controller
                 'alert-type' => 'success',
             ];
 
-            return redirect()->back()->with($notification);
+            return view('recordTransfer.thankyou', compact('parent_id'));
         } catch (\Exception $e) {
             DB::rollback();
             $notification = [

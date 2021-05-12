@@ -85,19 +85,6 @@ class ImportStudents extends Command
                         'legacy_name' => $cells[11],
                         'student_situation' =>  $cells[9],
                     ]);
-                } else {
-                    StudentProfile::create([
-                        'parent_profile_id' => 0,
-                        'first_name' => $cells[12],
-                        'last_name' => $cells[13],
-                        'gender' => $cells[5],
-                        'd_o_b' => $cells[2],
-                        'email' =>  $cells[3],
-                        'cell_phone' => $cells[16],
-                        'student_Id' => $cells[9],
-                        'legacy_name' => $cells[11],
-                        'student_situation' =>  $cells[9],
-                    ]);
                 }
             }
         }

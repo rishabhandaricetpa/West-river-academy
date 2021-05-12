@@ -56,7 +56,6 @@ class ImportTranscript9_12 extends Command
                 }
                 $legacy_name = Str::of($cells[19]);
                 $parent = ParentProfile::where('legacy', $legacy_name)->first();
-                //  dd($parent);
                 $student = StudentProfile::where('legacy_name', $legacy_name)->first();
                 if (!is_null($parent)  && !is_null($student)) {
                     Transcript::create([

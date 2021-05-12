@@ -16,7 +16,7 @@ class ImportPaymentForEnrollments extends Command
      *
      * @var string
      */
-    protected $signature = 'import:payments';
+    protected $signature = 'import:enrollmentpaymentsmethods';
 
     /**
      * The console command description.
@@ -43,7 +43,7 @@ class ImportPaymentForEnrollments extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/paymentsDataforenrollment.csv');
+        $filePath = base_path('csv/enrollmentpayment.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -57,10 +57,6 @@ class ImportPaymentForEnrollments extends Command
                 $order_id = Str::of($cells[19]);
                 $payment_order_id = EnrollmentPayment::where('order_id', $order_id)->first();
                 if ($payment_order_id) {
-                    // $student = EnrollmentPayment::where('order_id', $order_id);
-                    // $student->transcation_id = $cells[15];
-                    // $student->payment_mode =  $cells[17];
-                    // $student->update();
                     $updatePayments = EnrollmentPayment::where('order_id', $order_id)->update(
                         [
                             'transcation_id' => $cells[15],

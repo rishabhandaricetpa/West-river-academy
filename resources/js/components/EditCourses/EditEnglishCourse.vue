@@ -74,13 +74,7 @@
         @click="addNewEnglishCourse"
         >Add another English/Language Arts Course</a
       >
-      <a
-        type="button"
-        class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
-        id="addEnglish"
-        @click="viewCourses"
-        >View All Courses</a
-      >
+
       <button type="submit" class="btn btn-primary mb-sm-0 mb-3">
         Continue
       </button>
@@ -155,10 +149,6 @@ export default {
       });
 
       this.form.englishCourse = courses;
-    },
-    viewCourses() {
-      window.location =
-        "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
 
     removeEnglishCourse(index) {
