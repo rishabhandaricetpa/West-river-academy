@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Transcript;
+use App\Models\TranscriptPayment;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
@@ -56,10 +57,10 @@ class TranscriptPaymentK8 extends Command
                 $transcript = Transcript::where('legacy_name', $legacy_name)->first();
 
                 if ($transcript) {
-                    Transcript::create([
+                    TranscriptPayment::create([
                         'transcript_id' => (isset($transcript)) ? $transcript->id : null,
-                        'amount' => (isset($student)) ? $student->id : null,
-                        'status' => 'K-8',
+                        'amount' => $cells[14],
+                        'status' => $cells[22],
                         'transcation_id' => $cells[8],
                         'payment_mode' => $cells[12]
                     ]);

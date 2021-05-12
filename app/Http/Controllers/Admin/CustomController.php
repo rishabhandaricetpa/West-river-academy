@@ -170,17 +170,38 @@ class CustomController extends Controller
     //update order notarization data in in backend
     public function updateNotarization(Request $request, $id)
     {
-        $notarization = NotarizationPayment::find($id);
-        $notarization->transcation_id = $request->get('transcation_id');
-        $notarization->payment_mode = $request->get('payment _mode');
-        $notarization->amount = $request->get('amount');
-        $notarization->status = $request->get('paymentStatus');
-        $notarization->save();
-        $notification = [
-            'message' => 'Record updated successfully!',
-            'alert-type' => 'success',
-        ];
-        return redirect()->back()->with($notification);
+        try{
+            $notarization = NotarizationPayment::find($id);
+            if($notarization){
+                $notarization->transcation_id = $request->get('transcation_id');
+                $notarization->payment_mode = $request->get('payment _mode');
+                $notarization->amount = $request->get('amount');
+                $notarization->status = $request->get('paymentStatus');
+                $notarization->save();
+                $notification = [
+                    'message' => 'Record updated successfully!',
+                    'alert-type' => 'success',
+                ];
+                return redirect()->back()->with($notification);
+            }
+            else{
+                $notification = [
+                    'message' => 'Data Mismatch!',
+                    'alert-type' => 'error',
+                ];
+                return redirect()->back()->with($notification);
+            }
+        }catch(\Exception $e) {
+            dd($e);
+            DB::rollback();
+            $notification = [
+                'message' => 'Data Mismatch!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
+        }
+       
+      
     }
 
     public function getAllParentsNotarization($parent_id)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
 use App\Models\TranscriptCourse;
+use App\Models\TranscriptK8;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -402,8 +403,9 @@ class EditCourse extends Controller
             ->where('status', 0)
             ->get();
         $transcripts = TranscriptCourse::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('k8transcript_id', $transcript_id)->get();
-
-        return view('editCourses.another-course', compact('another_course', 'student_id', 'courses_id', 'transcript_id', 'transcripts'));
+        $transData = TranscriptK8::where('id', $transcript_id)->first();
+        $trans_id = $transData->transcript_id;
+        return view('editCourses.another-course', compact('another_course', 'student_id', 'courses_id', 'transcript_id', 'transcripts', 'trans_id'));
     }
 
     public function storeAnother(Request $request)

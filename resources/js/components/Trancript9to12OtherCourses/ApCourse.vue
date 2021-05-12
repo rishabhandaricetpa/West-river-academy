@@ -7,7 +7,7 @@
   >
     <div
       class="seperator mt-4 position-relative"
-      v-for="apCourse in form.apCourses"
+      v-for="(apCourse,index) in form.apCourses"
       :key="apCourse.id"
     >
  <span  class="remove place-top" @click="removePeriod(index)"><i class="fas fa-times"></i></span>

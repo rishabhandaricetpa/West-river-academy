@@ -74,13 +74,6 @@
         @click="addNewCourse"
         >Add an Another Course</a
       >
-      <a
-        type="button"
-        class="btn btn-primary float-left  mr-2 mb-sm-0 mb-3"
-        id="addEnglish"
-        @click="viewCourses"
-        >View All Courses</a
-      >
       <button type="submit" class="btn btn-primary mb-sm-0 mb-3">
         Continue
       </button>
@@ -114,14 +107,16 @@ export default {
     "transcripts",
     "student_id",
     "courses_id",
-    "transcript_id"
+    "transcript_id",
+    "trans_id"
   ],
   methods: {
     addCourses() {
       axios
         .post(route("editAnother.store"), this.form)
         .then(response => {
-          window.location = "/another-grade/" + this.student_id;
+          window.location =
+            "/another-grade/" + this.student_id + "/" + this.trans_id;
         })
         .catch(error => {
           alert("Please choose the course or remove it");
@@ -150,10 +145,6 @@ export default {
       });
 
       this.form.Course = courses;
-    },
-    viewCourses() {
-      window.location =
-        "/all-course/" + this.transcript_id + "/" + this.student_id;
     },
     removeCourse(index) {
       this.form.Course.splice(index, 1);
