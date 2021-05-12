@@ -576,10 +576,10 @@ class Cart extends Model
                         $enrollemtpayment->transcation_id = $payment_id;
                     }
                     $enrollemtpayment->save();
-
+                    $confirmationstatus=EnrollmentPayment::select()->where('enrollment_period_id', $cart->item_id)->first();
                     $confirmlink = ConfirmationLetter::select()->where('enrollment_period_id', $cart->item_id)->first();
                     if ($confirmlink != null) {
-                        $confirmlink->status = 'paid';
+                        $confirmlink->status = $status;
                     }
                     $confirmlink->save();
                     // Dashboard::create([

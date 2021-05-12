@@ -59,7 +59,7 @@
                         </a>
                     </div>
                     <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
-                    Find helpful resources on Natural Learning, read student writing, learn what student have done after graduation and more!
+                    Find helpful resources on Natural Learning, read student writing, learn what students have done after graduation and more!
                     </div>
                 </li>
             </ul>

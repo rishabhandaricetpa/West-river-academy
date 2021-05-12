@@ -142,7 +142,7 @@
       </div>
     </div>
     <div class="form-group">
-      <p class="mb-2">what would you like about during the consultation?</p>
+      <p class="mb-2">What would you like to talk about during the consultation?</p>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"
