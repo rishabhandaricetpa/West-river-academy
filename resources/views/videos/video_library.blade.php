@@ -4,7 +4,7 @@
 <!-- * =============== Main =============== * -->
 
 <main class="position-relative container form-content mt-4 media-library">
-  <h1 class="text-center text-white text-uppercase">Video</h1>
+  <h1 class="text-center text-white text-uppercase">Our Library</h1>
   <ul class="nav nav-tabs justify-content-around " id="myTab" role="tablist ">
     <li class="nav-item">
       <a class="nav-link active" id="video-tab" data-toggle="tab" href="#video" role="tab" aria-controls="video"
