@@ -67,7 +67,7 @@
                         if (data === null) {
                             return `<label> </label>`;
                         } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
+                            return `<a class="transform-none" href="mailto:${data}">${data}</a>`;
                         }
                 }  
                 },
@@ -186,7 +186,7 @@
                         if (data === null) {
                             return `<label> </label>`;
                         } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
+                            return `<a class="transform-none" href="mailto:${data}">${data}</a>`;
                         }
                 }  
                 }, {
@@ -324,7 +324,7 @@
                         if (data === null) {
                             return `<label> </label>`;
                         } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
+                            return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
                         }
                 }  
             }, {
@@ -709,7 +709,7 @@
                         if (data === null) {
                             return `<label> </label>`;
                         } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
+                            return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
                         }
                 }              },
             {
