@@ -6,11 +6,11 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Transcript Payment</h1>
+            <h1>Transcript Payment List</h1>
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Transcript Payment</li>
+                    <li class="breadcrumb-item active">Transcript Payment List</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.container-fluid -->

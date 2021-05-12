@@ -77,7 +77,7 @@ class GraduationController extends Controller
                 'linked_to' => $graduation->id,
                 'related_to' => 'graduation_record_received',
                 'is_archieved' => 0,
-                'notes' => 'Graduation Record Received for' . $studentName->fullname,
+                'notes' =>  $studentName->fullname,
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();

@@ -14,7 +14,7 @@
           <a href="/enroll-student" class="btn btn-secondary mb-lg-0 mb-4">Add Student</a>
           <a href="/dashboard" class="btn btn-secondary ml-sm-2 mb-lg-0 mb-4">Add Service</a>
         </div>
-        <a href="{{url('/edit/address', Auth::user()->id)}}" class="btn btn-primary ml-auto mb-lg-0 mb-4">Check Out and Pay</a>
+        <a href="{{url('/edit/address', Auth::user()->id)}}" class="btn btn-primary ml-auto mb-lg-0 mb-4 transform-none">Check Out and Pay</a>
       </div>
     </div>
   </div>

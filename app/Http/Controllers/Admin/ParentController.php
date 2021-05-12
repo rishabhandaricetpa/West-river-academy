@@ -33,7 +33,8 @@ class ParentController extends Controller
     public function viewStudentParent($parent_id)
     {
         $parent = ParentProfile::find($parent_id);
-        return view('admin.familyInformation.view-student-parent', compact('parent'));
+        $allstudent =StudentProfile::where('parent_profile_id',$parent_id)->get();
+        return view('admin.familyInformation.view-student-parent', compact('parent','allstudent'));
     }
     public function dataTable()
     {
@@ -103,8 +104,8 @@ class ParentController extends Controller
     public function edit($id)
     {
         $parent = ParentProfile::find($id);
-
-        return view('admin.familyInformation.edit-parent', compact('parent'));
+        $allstudent =StudentProfile::where('parent_profile_id',$id)->get();
+        return view('admin.familyInformation.edit-parent', compact('parent','allstudent'));
     }
 
     /**

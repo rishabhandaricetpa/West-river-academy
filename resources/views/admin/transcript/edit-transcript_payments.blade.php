@@ -7,7 +7,7 @@
             <h1>Transcript Payment Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3>Payment Status of Student : {{ $geteachtranscriptPayments->transcript->student->fullname }}
+                <h3>Payment Status of Student: {{ $geteachtranscriptPayments->transcript->student->fullname }}
                     <h3>
                         <form action="{{ route('admin.update.transcriptpay', $geteachtranscriptPayments->id) }}"
                             method="post" class="row">
@@ -47,6 +47,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
+                                <a href="{{route('admin.transcript.payments')}}" class="btn btn-primary">Back</a>
                             </div>
                         </form>
             </div>

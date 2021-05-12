@@ -56,7 +56,7 @@ class RecordTransferController extends Controller
                 'linked_to' => 'Record Transfer Request',
                 'is_archieved' => 0,
                 'record_transfer_id' => $recordTransfer->id,
-                'notes' => 'Student Name : ' . $recordTransfer['student']['fullname'],
+                'notes' =>   $recordTransfer['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();

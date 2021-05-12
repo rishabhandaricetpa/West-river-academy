@@ -83,7 +83,7 @@
               <tr>
                 <td></td>
                 <td></td>
-                <td class="text-center">Total to Pay </td>
+                <td class="text-center transform-none">Total to Pay </td>
                 <td class="text-center"> $@{{ totalAmount }}</td>
               </tr>
             </tfoot>
@@ -91,7 +91,7 @@
         </div>
         <div class="text-right mt-4">
           <a href="/enroll-student" class="btn btn-primary mb-4 mb-sm-0">Add Another Student</a>
-          <button type="submit" class="btn btn-primary ml-3"> Add selected items to Cart </button>
+          <button type="submit" class="btn btn-primary ml-3 transform-none"> Add selected items to Cart </button>
         </div>
       </form>
     </div>

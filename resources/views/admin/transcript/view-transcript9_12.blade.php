@@ -42,9 +42,8 @@
                   </div>
                   </form>
                 <a type="button" href="{{ route('admin.genrate.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
-                <a type="button" href="{{ route('admin.signed.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate & Approve Signed Transcript</a>
+                <a type="button" href="{{ route('admin.signed.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
-            </form>
         </div>
         @foreach($transcriptData as $school)
         <div class="form-wrap border bg-light py-5 px-25 mb-4">

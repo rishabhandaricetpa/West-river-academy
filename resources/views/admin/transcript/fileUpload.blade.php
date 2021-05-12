@@ -34,7 +34,11 @@
         </div>
         <div class="col-sm-12">
           <button type="submit" class="btn btn-primary">Upload</button>
-          <a href="/admin/manage-courses" class="btn btn-primary">Back</a>
+          @if($type->period==='9-12')
+          <a href="{{route(admin.viewfull.transcript,[$student_id,$transcript_id])}}" class="btn btn-primary">Back</a>
+          @else
+          <a href="{{route(admin.viewfull.transcript9_12,[$student_id,$transcript_id]}}" class="btn btn-primary">Back</a>
+          @endif
         </div>
       </form>
     </div>

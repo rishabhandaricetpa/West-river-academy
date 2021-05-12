@@ -33,9 +33,9 @@
                         {{$student->ParentProfile->country}}
                     </div>
                 </div>
-                <p>Click on the Generate Signed Transcript to approve the transcript</p>
+                <p>Click on Generate Signed Transcript to approve the transcript.</p>
                 <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Unsigned Transcript</a>
-                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate & Approve Signed Transcript</a>
+                <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Approved Signed Transcript</a>
 
 
@@ -46,7 +46,7 @@
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">{{$school->school_name}}</h2>
             <p>
-                Academic School Year(s):{{$school->enrollment_year}}<br>
+                Academic School Year(s): {{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
             </p>
             <table id="addressData" class="table table-bordered table-striped data-table">

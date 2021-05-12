@@ -4,7 +4,7 @@
 
     <section class="content">
         <div class="container-fluid position-relative">
-            <h1>Edit Student Payment Information</h1>
+            <h1>Student Payment Information</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
                 <h3>Payment Status of: {{ $student?$student->fullname:'' }}</h3>

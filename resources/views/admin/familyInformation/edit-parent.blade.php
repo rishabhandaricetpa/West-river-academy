@@ -95,8 +95,17 @@
                         <label>Immunization Status<sup>*</sup></label>
                         <input class="form-control" id="immunized" name="immunized" value="{{ $parent->immunized }}">
                     </div>
+                    <div class="form-group col-sm-12">
+                    <label>Students<sup>*</sup></label>
+                    @if($allstudent)
+                    @foreach ($allstudent as $student)
+                    <a href="{{ route('admin.edit-student',$student->id)}}">{{ $student->fullname }},</a>
+                    @endforeach
+                    @endif
+                    </div>
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('admin.view.parent')}}" class="btn btn-primary">Back</a>
                     </div>
                 </form>
 

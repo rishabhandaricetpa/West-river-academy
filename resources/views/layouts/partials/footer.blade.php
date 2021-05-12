@@ -13,11 +13,11 @@
         </ul>
         <a href="#" role="button" class="btn btn-secondary text-uppercase mt-4 mb-3">contact us</a>
         <ul class="list-unstyled">
-            <li><a href=""><i class="fas fa-phone-alt mr-2"></i>949 - 492 - 5240</a></li>
+            <li><a href=""><i class="fas fa-phone-alt mr-2"></i>949-456-8753</a></li>
             <li><a href="#"><i class="fas fa-envelope mr-2"></i>contact@westriveracademy.com</a></li>
         </ul>
         <div class="copyright">
-            Copyright © 2020 West River Academy.
+            Copyright © {{ now()->year }} West River Academy.
             <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
             <a href="https://www.ithands.com" target="_blank" class="d-block">Website design, development and maintenance by IT Hands</a>
         </div>

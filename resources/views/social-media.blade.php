@@ -15,7 +15,7 @@
                         </a>
                     </div>
                     <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
-                    Join our private online community to add friends,chat share photos and ask questions. This platform protect your privacy and will not share your data with companies for advertising purpose.
+                    Join our private online community to add friends, chat,  share photos and ask questions. This platform protects your privacy and will not share your data with companies for advertising purpose.
                     </div>
                 </li>
                 <li class="media mb-4">
@@ -26,7 +26,7 @@
                         </a>
                     </div>
                     <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
-                    See photos from WRA familes around the world who are learning their own way.Participate in our annual photo contest!
+                    See photos from WRA familes around the world who are learning their own way. Participate in our annual photo contest!
                     </div>
                 </li>
                 <li class="media mb-4">
@@ -37,7 +37,7 @@
                         </a>
                     </div>
                     <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
-                    Take a look at our custom content;tips,quotes and testimonials.Yo can learn more about our Natural learning philosopy and find blogs written by like-minded people.
+                    Take a look at our custom content, tips, quotes and testimonials.You can learn more about our Natural Learning philosopy and find blogs written by like-minded people.
                     </div>
                 </li>
                 <li class="media mb-4">
@@ -59,7 +59,7 @@
                         </a>
                     </div>
                     <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
-                    Find helpful resources on Natural learning,read student writing,learn what student have done after graduation and more!
+                    Find helpful resources on Natural Learning, read student writing, learn what student have done after graduation and more!
                     </div>
                 </li>
             </ul>

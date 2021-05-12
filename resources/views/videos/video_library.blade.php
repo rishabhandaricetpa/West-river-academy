@@ -76,31 +76,31 @@
       aria-labelledby="profile-tab">
 
       <h2 class="text-center mx-md-4">The WRA Journal</h2>
-      <p class="text-center">click each Volume below to view our montly newletter </p>
+      <p class="text-center">click on Volume below to view our montly newletter.</p>
       <div class="journal py-2">
         <h3><a href="#"> Volume 1: April 1,2021</a></h3>
-        <p>Join our Private WFA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
-          and read blog posts about our natural learning approach</p>
+        <p>Join our Private WRA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
+          and read blog posts about our Natural Learning approach.</p>
       </div>
       <div class="journal py-2">
         <h3><a href="#"> Volume 2: April 1,2021</a></h3>
-        <p>Join our Private WFA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
-          and read blog posts about our natural learning approach</p>
+        <p>Join our Private WRA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
+          and read blog posts about our Natural Learning approach.</p>
       </div>
       <div class="journal py-2">
         <h3><a href="#"> Volume 3: April 1,2021</a></h3>
-        <p>Join our Private WFA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
-          and read blog posts about our natural learning approach</p>
+        <p>Join our Private WRA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
+          and read blog posts about our Natural Learning approach.</p>
       </div>
       <div class="journal py-2">
         <h3><a href="#"> Volume 4: April 1,2021</a></h3>
-        <p>Join our Private WFA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
-          and read blog posts about our natural learning approach</p>
+        <p>Join our Private WRA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
+          and read blog posts about our Natural Learning approach.</p>
       </div>
       <div class="journal py-2">
         <h3><a href="#"> Volume 5: April 1,2021</a></h3>
-        <p>Join our Private WFA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
-          and read blog posts about our natural learning approach</p>
+        <p>Join our Private WRA Families group on the MeWe platform, listen to our Podcasts, read about "Our Story"
+          and read blog posts about our Natural Learning approach.</p>
       </div>
       <div class="journal-subscribtion text-center mt-md-4 mx-md-4 pt-4">
         <p>Haven't recieved our newsletter via mail ?</p>

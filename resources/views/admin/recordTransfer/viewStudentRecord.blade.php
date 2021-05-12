@@ -5,14 +5,14 @@
 @section('content')
     <section class="content">
         <div class="container-fluid position-relative">
-            <h1>Edit Student Information</h1>
+            <h1>Student Information</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <form class="row align-items-center" method="post"
                     action="{{ route('admin.recordReceived', $studentRecord->id) }}">
                     @csrf
                     @if ($studentRecord->request_status !== 'Record Received')
                         <div class="col-sm-6">
-                            <label>Medium Of Delivery </label>
+                            <label>Method Of Delivery </label>
                             <select class="form-control" name="mediumOfDelivery">
                                 <option value="">Select If Received</option>
                                 <option value="Digital">Digital</option>
@@ -22,12 +22,12 @@
                     @endif
                     <div class="col-sm-6 text-sm-right">
                         @if ($studentRecord->request_status !== 'Record Received')
-                            <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Record Received</button>
+                            <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Records Received</button>
                         @endif
                     </div>
                 </form>
                 @if ($studentRecord->request_status == 'Record Received')
-                    <h2 class="text-center">Medium Of Delivery:
+                    <h2 class="text-center">Method Of Delivery:
                         {{ $studentRecord->medium_of_transfer }}</h2>
                     <h3 class="">{{ $studentRecord->request_status }}</h3>
 
@@ -97,12 +97,12 @@
                         <div class="row">
                             <div class="col-md-6 mt-4">
                                 <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                    class="btn btn-primary">Download & Preview Record</a>
+                                    class="btn btn-primary">Download & Preview Records</a>
                                 <button type="submit"
                                     onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
-                                    class="btn btn-primary">Send Record To School</button>
+                                    class="btn btn-primary">Send Records To School</button>
                                 <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                    class=" btn btn-primary">ReSend Request</a>
+                                    class=" btn btn-primary">Re-send Request</a>
                             </div>
 
                             <div class="col-md-6 mt-4">

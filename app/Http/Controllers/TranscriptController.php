@@ -445,7 +445,7 @@ class TranscriptController extends Controller
                 'linked_to' => $transcript_payment->id,
                 'is_archieved' => 0,
                 'related_to' => 'transcript_ordered',
-                'notes' => 'Name of Student: ' . $transcriptData['student']['fullname'],
+                'notes' =>  $transcriptData['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
         }
