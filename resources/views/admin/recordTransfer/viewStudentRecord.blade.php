@@ -29,7 +29,11 @@
                 @if ($studentRecord->request_status == 'Record Received')
                     <h2 class="text-center">Method Of Delivery:
                         {{ $studentRecord->medium_of_transfer }}</h2>
-                    <h3 class="">{{ $studentRecord->request_status }}</h3>
+                    <h3 class="">
+                        @if ($studentRecord->request_status == 'Record Received')
+                            Records Received
+                        @endif
+                    </h3>
 
                 @endif
                 <form method="post" action="{{ route('admin.sendRecordToSchool', $studentRecord->student_profile_id) }}">

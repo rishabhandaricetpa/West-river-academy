@@ -21,7 +21,7 @@ class CreateNotarizationPaymentsTable extends Migration
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('pay_for');
             $table->string('amount');
-            $table->enum('status', ['pending', 'paid', 'approved', 'completed']);
+            $table->enum('status', ['pending', 'paid', 'approved', 'completed','active']);
             $table->string('transcation_id')->nullable();
             $table->string('payment_mode')->nullable();
             // $table->unsignedBigInteger('order_postages_id');

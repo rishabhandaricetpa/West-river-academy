@@ -2,30 +2,28 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-use Hash;
-use Carbon\Carbon;
+use App\Models\ParentProfile;
+use App\Models\StudentProfile;
+use App\Models\Transcript;
+use Illuminate\Support\Str;
 
-
-class ImportUsers extends Command
+class ImportTranscript9_12 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:users';
+    protected $signature = 'import:transcript9_12';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import All Users';
+    protected $description = 'Import for transcript 9_12 ';
 
     /**
      * Create a new command instance.
@@ -45,7 +43,7 @@ class ImportUsers extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/parents.csv');
+        $filePath = base_path('csv/transcript9_12.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -53,21 +51,23 @@ class ImportUsers extends Command
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
                 $cells = $cells->getCells();
-                $date  = Carbon::now();
-
                 if ($rowIndex === 1) {
                     continue;
                 }
-
-                User::create(
-                    [
-                        'name' => $cells[14] = null ? "Test Name" :  $cells[14],
-                        'email' => $cells[13],
-                        'legacy_name' => $cells[11],
-                        'password' => Hash::make('12345678'),
-                        'email_verified_at'=>$date
-                    ]
-                );
+                $legacy_name = Str::of($cells[19]);
+                $parent = ParentProfile::where('legacy', $legacy_name)->first();
+                $student = StudentProfile::where('legacy_name', $legacy_name)->first();
+                if (!is_null($parent)  && !is_null($student)) {
+                    Transcript::create([
+                        'parent_profile_id' => (isset($parent)) ? $parent->id : 0,
+                        'student_profile_id' => (isset($student)) ? $student->id : 0,
+                        'period' => '9-12',
+                        'status' => $cells[8],
+                        'legacy_name' => $cells[12]
+                    ]);
+                } else {
+                    continue;
+                }
             }
         }
 
