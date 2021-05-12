@@ -45,7 +45,13 @@ p:empty {
 .flex-grow {
   flex-grow: 1;
 }
-
+.email-text_style{
+  text-transform: lowercase;
+}
+audio{
+  width:100%;
+  height:50px;
+}
 .black-overlay {
   position: relative;
 
@@ -172,6 +178,7 @@ button {
 
 .modal {
   padding-right: 0 !important;
+  z-index: 1050 !important;
 }
 
 .modal-body {

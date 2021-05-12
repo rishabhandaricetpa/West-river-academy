@@ -44,6 +44,9 @@ label {
 .min-select {
   width: 100px;
 }
+.form-control_upload {
+  height:44px;
+}
 
 select.form-control {
   padding: 3px;
@@ -75,7 +78,10 @@ textarea {
 .form-check[data-toggle="modal"] {
   cursor: pointer;
 }
-
+.form-group select {
+padding: 6px;
+width: 100%;
+}
 .form-group .fa-calendar-alt {
   position: absolute;
   top: 9px !important;
