@@ -9,17 +9,8 @@
             <input type="hidden" name="type" value="apostille" class="form-control col-3">
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <h2 class="mb-3">Order Apostille</h2>
-                <div class="form-group mb-2 lato-italic info-detail pb-4 label-md">
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" data-toggle="collapse" data-target="#apostile" aria-expanded="false"
-                            aria-controls="apostile" type="checkbox" name="student_grade" value="">
-                        <label class="form-check-label ml-1" for="">
-                            Apostille
-                        </label>
-                    </div>
-                </div>
+              
                 <form class="mb-0" method="post" action="{{ route('add.cart') }}">
-                    <div class="collapse" id="apostile">
                         <p><span class="font-weight-bold">Apostilles: ONLY</span>
                             for documents presented outside of the U.S. to countries who are members of The Hague
                             Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at
@@ -59,9 +50,8 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
                     <div class="form-group mb-2 row">
-                        <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized and/or sent for Apostilles?</p>
+                        <p class="font-weight-bold mb-1 col-sm-12">What is to be sent for Apostilles?</p>
                         <div class="form-group col-3 mb-3">
                             <label for="" class="w-auto">Transcript</label>
                             <div class="w-100">
@@ -96,7 +86,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <p class="font-weight-bold mb-1">Use this space to add comments.</p>
+                        <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s) you wish to have apostille and any other comments.</p>
                         <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"></textarea>
                     </div>
 

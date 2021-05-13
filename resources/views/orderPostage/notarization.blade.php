@@ -10,17 +10,9 @@
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">Order Notarization</h2>
 
-            <div class="form-group mb-2 lato-italic info-detail pb-4 label-md">
-                <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" name="student_grade" value="Preschool Age 4" data-toggle="collapse" data-target="#notarization" aria-expanded="false" aria-controls="notarization">
-                    <label class="form-check-label ml-1" for="">
-                        Notarization
-                    </label>
-                </div>
-            </div>
+           
             <form class="mb-0" method="post" action="{{route('add.cart')}}">
 
-                <div class="collapse" id="notarization">
                     <p>
                         <span class="font-weight-bold">Notarizations:</span>
                         $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
@@ -48,9 +40,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 <div class="form-group mb-2 row">
-                    <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized and/or sent for Apostilles?</p>
+                    <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized?</p>
                     <div class="form-group col-sm-3 mb-3">
                         <label for="" class="w-auto">Transcript</label>
                         <div class="w-100">
@@ -84,7 +75,7 @@
                     </div>
                 </div>
                 <div class="form-group mb-2">
-                    <p class="font-weight-bold mb-1">Use this space to add comments.</p>
+                    <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s) you wish to have notarized and any other comments.</p>
                     <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"></textarea>
                 </div>
 
