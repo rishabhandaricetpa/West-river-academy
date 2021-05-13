@@ -18,7 +18,7 @@ class CreateTranscriptPaymentsTable extends Migration
             $table->unsignedBigInteger('transcript_id');
             $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');
             $table->string('amount');
-            $table->enum('status', ['pending', 'paid', 'approved', 'completed']);
+            $table->enum('status', ['pending', 'paid', 'approved', 'completed','active']);
             $table->string('legacy_name')->nullable();
             $table->string('transcation_id')->nullable();
             $table->string('payment_mode')->nullable();

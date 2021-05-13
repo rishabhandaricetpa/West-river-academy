@@ -35,7 +35,7 @@
                       <thead>
                       <div class=" form-group d-sm-flex mb-2">
                                 <h3 for="">Name: {{ $student->fullname }}</h3>
-
+                                <a href="{{ route('admin.view.students.parent', $student->id) }}" class="btn btn-primary float-right">View Parent</a>
                         </div>
                         <tr>
                             <th>Transcript</th>

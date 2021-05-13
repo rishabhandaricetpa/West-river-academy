@@ -234,6 +234,8 @@
                                     <td>{{ $student->student_Id }}</td>
                                     @if ($student->status === 'completed' || $student->status === 'paid')
                                         <td>Completed</td>
+                                    @elseif($student->status === 'active')
+                                        <td>In-Progress</td>
                                     @elseif($student->status === 'pending')
                                         <td>Not Paid for Enrollment</td>
                                     @endif
@@ -243,6 +245,8 @@
                                                     class="fas fa-file-pdf mr-2"></i>Download</a></td>
                                     @elseif($student->status === 'pending')
                                         <td>Please pay your Enrollment Fees</td>
+                                    @elseif($student->status === 'active')
+                                        <td>Payment In-Progress</td>
                                     @endif
                                 </tr>
                             @endforeach

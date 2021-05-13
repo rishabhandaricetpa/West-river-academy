@@ -117,6 +117,7 @@
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a type="button" href="{{ route('admin.genrate.adminConfirmition', $student->id) }}"
                             class="btn btn-primary ml-3">Generate Confirmation</a>
+                            <a href="{{ route('admin.view-student')}}" class="btn btn-primary">Back</a>
                     </div>
             </div>
         </div>

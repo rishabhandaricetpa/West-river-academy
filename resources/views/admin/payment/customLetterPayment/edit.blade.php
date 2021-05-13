@@ -50,6 +50,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
+                                <a href="{{route('admin.order.customletter')}}" class="btn btn-primary">Back</a>
                             </div>
                         </form>
             </div>

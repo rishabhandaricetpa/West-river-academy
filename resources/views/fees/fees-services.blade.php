@@ -15,11 +15,12 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>For the first student Annual</p>
+            <p>Fee for the first student in the family</p>
+            <span>Annual</span>
             <span class="text-secondary">${{ getFeeDetails('first_student_annual') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <p>For the first student Semester</p>
+            <p>Second Semester Only</p>
             <span class="text-secondary">${{ getFeeDetails('first_student_half') }}</span>
           </div>
         </div>
@@ -35,8 +36,13 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>For the additional student in the family for same enrollment year</p>
-            <span class="text-secondary">$ {{ getFeeDetails('additional_student_annual') }}</span>
+            <p>Fee for each additional student in tha same family</p>
+            <span>Annual</span>
+            <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Second Semester Only</p>
+            <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
           </div>
         </div>
       </div>
@@ -51,7 +57,7 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>For the first student</p>
+            <p>Per student fee covers Graduation Project and high school transcript</p>
             <span class="text-secondary">${{ getFeeDetails('graduation') }}</span>
           </div>
         </div>
@@ -62,12 +68,20 @@
         <div class="col-11 col-sm-3">
           <div class="bg-secondary h-100 d-flex align-items-center justify-content-center">
             <img src="/images/pattern.png" alt="pattern" class="img-absolute o-contain">
-            <h2 class="text-white mb-0 text-center pl-3">Apostille</h2>
+            <h2 class="text-white mb-0 text-center pl-3">Notarization and Apostilles</h2>
           </div>
         </div>
-        <div class="col-sm-9 d-sm-flex">
+        <div class="col-sm-9">
           <div class="d-flex justify-content-between align-items-center">
-            <p>For the first student</p>
+            <p>Notarization per document fee</p>
+            <span class="text-secondary">${{ getFeeDetails('notarization_doc_fee') }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Apostille per document fee</p>
+            <span class="text-secondary">${{ getFeeDetails('apostille_doc_fee') }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>Apostille Package includes 2 documents plus Express Mail </p>
             <span class="text-secondary">${{ getFeeDetails('apostille') }}</span>
           </div>
         </div>
@@ -78,7 +92,7 @@
         <div class="col-11 col-sm-3">
           <div class="bg-secondary h-100 d-flex align-items-center justify-content-center">
             <img src="/images/pattern.png" alt="pattern" class="img-absolute o-contain">
-            <h2 class="text-white mb-0 text-center pl-3">Order a Transcript</h2>
+            <h2 class="text-white mb-0 text-center pl-3">Transcript</h2>
           </div>
         </div>
         <div class="col-sm-9 d-sm-flex">
@@ -98,32 +112,31 @@
         <div class="col-11 col-sm-3">
           <div class="bg-secondary h-100 d-flex align-items-center justify-content-center">
             <img src="/images/pattern.png" alt="pattern" class="img-absolute o-contain">
-            <h2 class="text-white mb-0 text-center pl-3">Order Postage<span class="d-block">(for future or past years)</span></h2>
+            <h2 class="text-white mb-0 text-center pl-3">Postage<span class="d-block"></span></h2>
           </div>
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>First class is free.Expedited postage with tracking is available also</p>
-            <span class="text-secondary">$0</span>
+            <p>First class postage is free. Express Mail postge is added to documents that have been Notarized or sent for Apostilles. Other expedited postage fees are listed. We are not responsilble for lost items.</p>
           </div>
           <div class="text-center">
-            <p>Express Mail is recommended for ALL documents mailed outside the U.S. We are not responsible for lost items.</p>
+            <!-- <p>Express Mail is recommended for ALL documents mailed outside the U.S. We are not responsible for lost items.</p> -->
             <h3 style="text-transform: uppercase;">International :</h3>
             <table width="100%">
               <tr>
-                <th>Express</th>
+                <th>Express Mail Tier 1 (for most countries)</th>
                 <td class="text-secondary text-right">${{ getFeeDetails('express_international') }}</td>
               </tr>
               <tr>
-                <th>Global Guaranteed</th>
+                <th>Express Mail Tier 2 (for Hungary, Philippines, Romania, South Africa, Spain)</th>
                 <td class="text-secondary text-right">${{ getFeeDetails('global_guaranteed_international') }}</td>
               </tr>
               <tr>
-                <th>Priority</th>
+                <th>Express Mail Tier 3(for Argentina and Brazil)</th>
                 <td class="text-secondary text-right">${{ getFeeDetails('priority_international') }}</td>
               </tr>
             </table>
-            <h3 style="text-transform: uppercase;">usa :</h3>
+            <h3 style="text-transform: uppercase;">USA :</h3>
             <table width="100%">
               <tr>
                 <th>Priority</th>
