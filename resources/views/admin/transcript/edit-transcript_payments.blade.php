@@ -42,7 +42,6 @@
                                 <select name="paymentStatus" class="form-control">
                                     <option value="pending" @if ($geteachtranscriptPayments->status == 'pending') selected="selected" @endif>Pending</option>
                                     <option valu e="paid" @if ($geteachtranscriptPayments->status == 'paid') selected="selected" @endif>Paid</option>
-                                    <option value="active" @if ($geteachtranscriptPayments->status == 'active') selected="selected" @endif>Active</option>
                                 </select>
                             </div>
                             <div class="col-sm-12">

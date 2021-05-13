@@ -38,8 +38,6 @@
                       <td>{{$payment->amount}}</td>
                       @if($payment->status ==='paid')
                       <td>Paid</td>
-                      @elseif($payment->status ==='active')
-                      <td>Active</td>
                       @elseif($payment->status ==='pending')
                       <td>Pending</td>
                       @endif

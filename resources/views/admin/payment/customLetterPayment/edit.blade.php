@@ -45,7 +45,6 @@
                                 <select name="paymentStatus" class="form-control"  value="{{ $customLetter->status}}">>
                                     <option value="pending" @if ($customLetter->status == 'pending') selected="selected" @endif>Pending</option>
                                     <option valu e="paid" @if ($customLetter->status == 'paid') selected="selected" @endif>Paid</option>
-                                    <option value="active" @if ($customLetter->status == 'active') selected="selected" @endif>Active</option>
                                 </select>
                             </div>
                             <div class="col-sm-12">

@@ -17,7 +17,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="exampleInputPassword1">What are you paying for?</label>
                     <div>
-                        <input type="text" name="paying_for" class="form-control" required>
+                        <textarea type="text" name="paying_for" class="form-control" required></textarea>
                     </div>
                 </div>
                 <div class="mt-2r">

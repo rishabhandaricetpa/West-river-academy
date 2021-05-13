@@ -30,7 +30,7 @@ class TransactionsMethod extends Model
           'transcation_id' => substr(uniqid(), 0, 8),
           'payment_mode' => $type,
           'amount' => $amount,
-          'status' => 'active',
+          'status' => 'pending',
           'coupon_code' => $coupon_code,
           'coupon_amount' => $coupon_amount,
         ]);

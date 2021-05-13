@@ -83,7 +83,6 @@
                                 <select name="paymentStatus" class="form-control">
                                     <option value="pending" @if ($notarizationData->status == 'pending') selected="selected" @endif>Pending</option>
                                     <option valu e="paid" @if ($notarizationData->status == 'paid') selected="selected" @endif>Paid</option>
-                                    <option value="active" @if ($notarizationData->status == 'active') selected="selected" @endif>Active</option>
                                 </select>
                             </div>
                             <div class="col-sm-12">

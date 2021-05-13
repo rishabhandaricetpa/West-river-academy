@@ -51,7 +51,7 @@ class MoneyOrderController extends Controller
 
         //update cart status active
 
-        Cart::emptyCartAfterPayment($type, 'active');
+        Cart::emptyCartAfterPayment($type, 'pending');
 
         Mail::to($email)->send(new MoneyOrder($user, $amount));
 

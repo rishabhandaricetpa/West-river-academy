@@ -63,7 +63,6 @@
                                 <select name="paymentStatus" class="form-control">
                                     <option value="pending" @if ($order_conultation->status == 'pending') selected="selected" @endif>Pending</option>
                                     <option valu e="paid" @if ($order_conultation->status == 'paid') selected="selected" @endif>Paid</option>
-                                    <option value="active" @if ($order_conultation->status == 'active') selected="selected" @endif>Active</option>
                                 </select>
                             </div>
                             <div class="col-sm-12">

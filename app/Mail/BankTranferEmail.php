@@ -38,6 +38,6 @@ class BankTranferEmail extends Mailable
         $address = User::find($id)->parentProfile()->first();
         $amount = $this->amount;
 
-        return  $this->markdown('mail.bankinfo', compact('user', 'date', 'address', 'amount'))->subject('Bank Transfer Details');
+        return  $this->markdown('mail.bankinfo', compact('user', 'date', 'address', 'amount'))->subject('Bank Transfer Instructions');
     }
 }

@@ -398,8 +398,6 @@
                         return `<td> Pending</td>`;
                     if (status === 'paid')
                         return `<td> Paid </td>`;
-                    if (status === 'active')
-                        return `<td> Active </td>`;
                 }
             }, {
                 "data": "id",
@@ -438,8 +436,6 @@
                         return `<td> Pending</td>`;
                     if (data === 'paid')
                         return `<td> Paid </td>`;
-                    if (data === 'active')
-                        return `<td> Active </td>`;
                 }
             }, {
                 "data": "id",

@@ -8,41 +8,16 @@
 </head>
 
 <body>
-    <h2 style="font-family:'Catamaran', sans-serif;">Hi,{{$user->name}}</h2>
-    <h3 style="font-family:'Catamaran', sans-serif;">PAYMENT: MoneyGram </h3>
-    <p style="font-family:'Catamaran', sans-serif;">Use the following link to access the bank info in the private area of the website. You will need to log in to open the web page. <a href="http://westriveracademy.test/moneygram-transfer">http://westriveracademy.test/moneygram-transfer</a></p>
+    <h3 style="font-family:'Catamaran', sans-serif;">West River Academy</h3> 
+    <h3 style="font-family:'Catamaran', sans-serif;">MoneyGram Payment</h3> 
 
-    <h3>BILLING INFORMATION</h3>
-    <table border="1" style="border-collapse:collapse; margin: 20px 0;font-family:'Catamaran', sans-serif;" rowspan>
-        <thead>
-            <tr>
-                <th style="padding:8px;text-align:left" scope="row">DATE</th>
-                <td style="padding:8px;text-align:left"> {{$date}}</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
+    <h2 style="font-family:'Catamaran', sans-serif;">Hi, {{$user->name}}</h2>
+    <p style="font-family:'Catamaran', sans-serif;">Thank you for your order. To pay the total of ${{$amount}} by MoneyGram, please log in to your online account to open the web page with MoneyGram payment instructions. <a href="http://westriveracademy.test/moneygram-transfer">http://westriveracademy.test/moneygram-transfer</a></p>
 
-                <th style="padding:8px;" scope="row">PAYMENT MODE</th>
-                <td style="padding:8px;">MoneyGram</td>
-            </tr>
-            <tr>
+    <p style="font-family:'Catamaran', sans-serif;">We will notify you by the email and in your account notifications when payment has been received.</p>
 
-                <th style="padding:8px;" scope="row">TOTAL TO PAY</th>
-                <td style="padding:8px;">${{$amount}}</td>
-            </tr>
-            <tr>
-
-                <th style="padding:8px;" scope="row">ADDRESS</th>
-                <td style="padding:8px;">{{$address->street_address .'  ' . $address->city.'  '.$address->state }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    Your Address
     <address style="font-family:'Catamaran', sans-serif;">
-        Written by <a href="mailto:xyz@example.com">West River Academy</a>.<br>
-        Visit us at: https://www.westriveracademy.com/
+        <a href="contact@westriveracademy.com">The West River Academy Team</a><br>
     </address>
 </body>
 
