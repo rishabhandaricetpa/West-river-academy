@@ -50,8 +50,8 @@
                                             <td>{{ $record->phone_number }}</td>
                                             @if (empty($record->request_status))
                                                 <td>In Review </br>
-                                                @else
-                                                <td>{{ $record->request_status }} </br>
+                                                @elseif($record->request_status=='Record Received')
+                                                <td>Records Received </br>
                                             @endif
                                             @if ($record->resendCount)
                                                 Resend Requested:{{ $record->resendCount }}

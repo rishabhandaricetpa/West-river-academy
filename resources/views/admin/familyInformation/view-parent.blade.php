@@ -40,6 +40,7 @@
                                         <th>Status</th>
                                         <th>Action</th>
                                         <th>View</th>
+                                        <th>Orders</th>
                                     </tr>
                                 </thead>
                                 <tbody>
