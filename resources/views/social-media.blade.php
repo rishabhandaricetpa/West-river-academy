@@ -14,7 +14,7 @@
                         <h3 class="text-center">MEWE</h3>
                         </a>
                     </div>
-                    <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
+                    <div class="media-body pl-2 pt-0 pl-lg-5 pt-lg-5">
                     Join our private online community to add friends, chat,  share photos and ask questions. This platform protects your privacy and will not share your data with companies for advertising purpose.
                     </div>
                 </li>
@@ -25,7 +25,7 @@
                         <h3 class="text-center">Instagram</h3>
                         </a>
                     </div>
-                    <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
+                    <div class="media-body pl-2 pt-0 pl-lg-5 pt-lg-5">
                     See photos from WRA familes around the world who are learning their own way. Participate in our annual photo contest!
                     </div>
                 </li>
@@ -36,7 +36,7 @@
                         <h3 class="text-center">Pinterest</h3>
                         </a>
                     </div>
-                    <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
+                    <div class="media-body pl-2 pt-0 pl-lg-5 pt-lg-5">
                     Take a look at our custom content, tips, quotes and testimonials.You can learn more about our Natural Learning philosopy and find blogs written by like-minded people.
                     </div>
                 </li>
@@ -47,7 +47,7 @@
                         <h3 class="text-center">Facebook</h3>
                         </a>
                     </div>
-                    <div class="media-body pl-2 pt-2 pl-lg-5 pt-lg-5">
+                    <div class="media-body pl-2 pt-0 pl-lg-5 pt-lg-5">
                     Stay up to date on WRA information and share your learning approach with your friends and family.
                      </div>
                 </li>

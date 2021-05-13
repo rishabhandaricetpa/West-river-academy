@@ -4,23 +4,24 @@
 <!-- * =============== Main =============== * -->
 
 <main class="position-relative container form-content mt-4 media-library">
-  <h1 class="text-center text-white text-uppercase">Video</h1>
+  <h1 class="text-center text-white text-uppercase">Our Library</h1>
   <ul class="nav nav-tabs justify-content-around " id="myTab" role="tablist ">
     <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+      <a class="nav-link active" id="video-tab" data-toggle="tab" href="#video" role="tab" aria-controls="video"
         aria-selected="true">Video</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+      <a class="nav-link" id="audio-tab" data-toggle="tab" href="#audio" role="tab" aria-controls="audio"
         aria-selected="false">Audio</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+      <a class="nav-link" id="journal-tab" data-toggle="tab" href="#journal" role="tab" aria-controls="journal"
         aria-selected="false">Journal</a>
     </li>
   </ul>
   <div class="tab-content bg-light" id="myTabContent">
-    <div class="tab-pane fade container  show active video-library" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade container  show active video-library" id="video" role="tabpanel"
+      aria-labelledby="video-tab">
       <div class="row align-items-center py-2r ">
         <div class="col-md-4 my-2">
           <div class="embed-responsive embed-responsive-16by9">
@@ -72,9 +73,8 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane fade   container journal-library py-2r " id="profile" role="tabpanel"
-      aria-labelledby="profile-tab">
-
+    <div class="tab-pane fade   container journal-library py-2r " id="journal" role="tabpanel"
+      aria-labelledby="audio-tab">
       <h2 class="text-center mx-md-4">The WRA Journal</h2>
       <p class="text-center">click on Volume below to view our montly newletter.</p>
       <div class="journal py-2">
@@ -107,12 +107,10 @@
         <a href="#" class="button-subscribtion bg-secondary">Subscribe</a>
       </div>
     </div>
-
-    <div class="tab-pane fade container  audio-library py-2r " id="contact" role="tabpanel"
-      aria-labelledby="contact-tab">
+    <div class="tab-pane fade container  audio-library py-2r " id="audio" role="tabpanel"
+      aria-labelledby="journal-tab">
       <h2>podcasts</h2>
       <div class="row">
-
         <div class="episodes col-md-6 pb-3">
           <h3 class="pt-3">Episode 1: Natural Learning and Accidental Homescholling</h3>
           <p><span class="time">13 min</span><span class="pl-sm-5 pl-3 date">April 1, 2021</span></p>
@@ -148,29 +146,6 @@
       </div>
     </div>
   </div>
-
-
-  <!-- <div class="border bg-light form-wrap mb-4">
-        <div class="embed-responsive embed-responsive-16by9">
-        <video loop="" autoplay controls playsinline="" class="embed-responsive-item">
-                <source src="images/WelcomeVideo.mp4"  type="video/mp4">
-            </video>
-        </div>
-    </div>
-    <div class="border bg-light form-wrap mb-4">
-        <div class="embed-responsive embed-responsive-16by9">
-            <video loop="" controls playsinline="" class="embed-responsive-item">
-                <source src="images/year-endreport.mp4"  type="video/mp4">
-            </video>
-        </div>
-    </div>
-    <div class="border bg-light form-wrap mb-4">
-        <div class="embed-responsive embed-responsive-16by9">
-            <video loop=""  controls playsinline="" class="embed-responsive-item">
-                <source src="images/FinalTranscriptTutorial.mp4"  type="video/mp4">
-            </video>
-        </div>
-    </div> -->
   </div>
   </div>
 </main>
