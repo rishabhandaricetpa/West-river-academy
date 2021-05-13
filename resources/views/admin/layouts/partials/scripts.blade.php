@@ -57,9 +57,9 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
                     "data": "p1_first_name"
-                }, 
+                },
                 {
-                    "data":  function(row, type, val, meta) {
+                    "data": function(row, type, val, meta) {
                         return row.p1_email
                     },
                     defaultContent: '',
@@ -67,9 +67,9 @@
                         if (data === null) {
                             return `<label> </label>`;
                         } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
+                            return `<a class="transform-none" href="mailto:${data}">${data}</a>`;
                         }
-                }  
+                    }
                 },
                 {
                     "data": "country"
@@ -97,7 +97,12 @@
                     "render": function(id) {
                         return `<a href="view-student/${id}">View Students</a>`;
                     }
-                },
+                }, {
+                    "data": "id",
+                    "render": function(id) {
+                        return `<a href="view-parent-orders/${id}">View Orders</a>`;
+                    }
+                }
 
             ]
         }).buttons().container().appendTo('#family-table_wrapper .col-md-6:eq(0)');
@@ -178,7 +183,7 @@
                 {
                     "data": "parent_profile.country"
                 }, {
-                    "data":  function(row, type, val, meta) {
+                    "data": function(row, type, val, meta) {
                         return row.email
                     },
                     defaultContent: '',
@@ -186,9 +191,9 @@
                         if (data === null) {
                             return `<label> </label>`;
                         } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
+                            return `<a class="transform-none" href="mailto:${data}">${data}</a>`;
                         }
-                }  
+                    }
                 }, {
                     "data": "id",
                     "render": function(id) {
@@ -316,17 +321,17 @@
             }, {
                 "data": "student.fullname"
             }, {
-                "data":  function(row, type, val, meta) {
-                        return row.student.email
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
-                        if (data === null) {
-                            return `<label> </label>`;
-                        } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
-                        }
-                }  
+                "data": function(row, type, val, meta) {
+                    return row.student.email
+                },
+                defaultContent: '',
+                "render": function(data) {
+                    if (data === null) {
+                        return `<label> </label>`;
+                    } else {
+                        return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
+                    }
+                }
             }, {
                 "data": "student.birthdate",
                 "render": function(data) {
@@ -701,17 +706,18 @@
                 "data": "parent_profile.country"
             },
             {
-                "data":  function(row, type, val, meta) {
-                        return row.email
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
-                        if (data === null) {
-                            return `<label> </label>`;
-                        } else {
-                            return `<a href="mailto:${data}">${data}</a>`;
-                        }
-                }              },
+                "data": function(row, type, val, meta) {
+                    return row.email
+                },
+                defaultContent: '',
+                "render": function(data) {
+                    if (data === null) {
+                        return `<label> </label>`;
+                    } else {
+                        return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
+                    }
+                }
+            },
             {
                 "data": "id",
                 "render": function(id) {
