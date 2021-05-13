@@ -237,7 +237,6 @@ class CustomController extends Controller
         $customLetter = CustomLetterPayment::find($id);
         $customLetter->transcation_id = $request->get('transcation_id');
         $customLetter->payment_mode = $request->get('payment_mode');
-        $customLetter->amount = $request->get('amount');
         $customLetter->status = $request->get('paymentStatus');
         $customLetter->save();
         $notification = [
