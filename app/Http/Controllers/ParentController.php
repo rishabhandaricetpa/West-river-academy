@@ -13,6 +13,7 @@ use App\Models\Graduation;
 use App\Models\GraduationPayment;
 use App\Models\Notarization;
 use App\Models\NotarizationPayment;
+use App\Models\Notification;
 use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
@@ -253,5 +254,9 @@ class ParentController extends Controller
         $moneyGram = DB::table('money_gram_details')->where('status', '1')->first();
 
         return view('Billing/moneygram-transfer', compact('moneyGram'));
+    }
+    public function removeNotification($notification_id)
+    {
+        return Notification::removeParentNotifications($notification_id);
     }
 }

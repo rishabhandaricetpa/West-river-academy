@@ -116,8 +116,8 @@
                     <a href="#" class="button-subscribtion bg-secondary">Subscribe</a>
                 </div>
             </div>
-            <div class="tab-pane fade container  audio-library py-2r " id="contact" role="tabpanel"
-                aria-labelledby="contact-tab">
+            <div class="tab-pane fade container  audio-library py-2r " id="audio" role="tabpanel"
+                aria-labelledby="journal-tab">
                 <h2>podcasts</h2>
                 <div class="row">
                     <div class="episodes col-md-6 pb-3">

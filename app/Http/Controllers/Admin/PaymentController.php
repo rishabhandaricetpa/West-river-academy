@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
+use App\Models\Notification;
 use App\Models\StudentProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,7 @@ class PaymentController extends Controller
 
     public function editPaymentStatus(Request $request, $id)
     {
+
         $enroll_payment = EnrollmentPayment::find($id);
         $enrollment_periods = EnrollmentPayment::find($id)->enrollment_period()->first();
         $student = StudentProfile::whereId($enrollment_periods->student_profile_id)->first();
@@ -52,7 +54,6 @@ class PaymentController extends Controller
 
     public function update(Request $request, $payment_id)
     {
-
         // update enrollment payment
         try {
             DB::beginTransaction();
@@ -70,6 +71,18 @@ class PaymentController extends Controller
             $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('M d Y');
             $enrollment_payment->grade_level = $request->input('grade_level');
             $enrollment_periods->save();
+
+            // send notification to user if paid
+            if ($enrollment_payment->status == 'paid') {
+
+                Notification::create([
+                    'parent_profile_id' => $request->parent_id,
+                    'content' => 'Your payment has been received for student ' . $request->student_name . ' by payment mode '
+                        . $enrollment_payment->payment_mode,
+                    'type' => 'offline_paid',
+                    'read' => 'false'
+                ]);
+            }
             DB::commit();
 
             $notification = [
