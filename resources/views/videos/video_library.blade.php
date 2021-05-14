@@ -73,8 +73,8 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane fade   container journal-library py-2r " id="journal" role="tabpanel"
-      aria-labelledby="audio-tab">
+    <div class="tab-pane fade  container journal-library py-2r " id="journal" role="tabpanel"
+      aria-labelledby="journal-tab">
       <h2 class="text-center mx-md-4">The WRA Journal</h2>
       <p class="text-center">click on Volume below to view our montly newletter.</p>
       <div class="journal py-2">
@@ -108,7 +108,7 @@
       </div>
     </div>
     <div class="tab-pane fade container  audio-library py-2r " id="audio" role="tabpanel"
-      aria-labelledby="journal-tab">
+      aria-labelledby="audio-tab">
       <h2>podcasts</h2>
       <div class="row">
         <div class="episodes col-md-6 pb-3">
