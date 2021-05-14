@@ -33,8 +33,8 @@
                         <div class="card-body">
                             <table id="addressData" class="table table-bordered table-striped data-table"">
                       <thead>
-                      <div class=" form-group d-sm-flex mb-2">
-                                <h3 for="">Name: {{ $student->fullname }}</h3>
+                      <div class=" form-group d-sm-flex mb-2 align-items-baseline">
+                                <h3 class="mr-sm-3" for="">Name: {{ $student->fullname }}</h3>
                                 <a href="{{ route('admin.view.students.parent', $student->id) }}" class="btn btn-primary float-right">View Parent</a>
                         </div>
                         <tr>

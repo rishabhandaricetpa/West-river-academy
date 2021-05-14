@@ -89,13 +89,13 @@
                                 <tr style="width:100%;">
                                     <table style="width:100%;border-collapse:collapse;" border="1">
                                         <tr>
-                                            <td style="width:50%;">
+                                            <td style="width:50%;" valign="top">
                                                 @include('transcript9to12.courseComponent',[
                                                 'yearGroup'=> $leftGroup,
 
                                                 ])
                                             </td>
-                                            <td style="width:50%;">
+                                            <td style="width:50%;" valign="top">
                                                 @include('transcript9to12.courseComponent',[
                                                 'yearGroup'=> $rightGroup,
 
@@ -132,16 +132,18 @@
                                     <table style="border:1px solid #000;" width="100%">
                                         <thead>
                                             <tr>
-                                                <span style="text-align:center;font-weight:600;margin-bottom:0;display:block;border:1px solid #000;border-bottom:0;"> Grading System </span>
+                                                <th colspan="4" style="width:100%;text-align:center;font-weight:600;margin-bottom:0;">Grading System </th>
                                             </tr>
-                                            <tr>
-                                                <th style="font-size:13px;text-decoration:underline;text-align:center;">Grade</th>
-                                                <th style="font-size:13px;text-decoration:underline;text-align:center;">Percent</th>
-                                                <th style="font-size:13px;text-decoration:underline;text-align:center;">Points</th>
-                                                <th style="font-size:13px;text-decoration:underline;text-align:center;">AP Points</th>
-                                            </tr>
+                                          
                                         </thead>
+                                        <tbody>
                                         <tr>
+                                                <td style="font-size:13px;text-decoration:underline;text-align:center;">Grade</td>
+                                                <td style="font-size:13px;text-decoration:underline;text-align:center;">Percent</td>
+                                                <td style="font-size:13px;text-decoration:underline;text-align:center;">Points</td>
+                                                <td style="font-size:13px;text-decoration:underline;text-align:center;">AP Points</td>
+                                            </tr>
+                                     <tr>
                                             <td style="font-size:13px;padding:4px;text-align:center">A</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">90-100</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">4.00</td>
@@ -177,6 +179,8 @@
                                             <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
                                         </tr>
+                                        </tbody>
+   
                                     </table>
                                 </td>
                                 <td width="40%" style="vertical-align:top;">
