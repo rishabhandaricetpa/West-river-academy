@@ -85,7 +85,6 @@ class PaymentController extends Controller
                     'read' => 'false'
                 ]);
             }
-            DB::commit();
             // update enrollment period in confirmation
             $transaction_data = TransactionsMethod::where('transcation_id', $enrollment_payment->transcation_id)->first();
             if ($transaction_data) {
