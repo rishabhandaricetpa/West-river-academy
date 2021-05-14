@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\StudentProfile;
 use App\Models\ParentProfile;
+use App\Models\TranscriptPayment;
 use App\Models\Transcript;
 use DB;
 
@@ -64,6 +65,7 @@ class TranscriptWizardController extends Controller
                 'status' => 'pending',
                 'transcript_wiz' => 'Yes',
             ]);
+            TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => '']);
             DB::commit();
             if ($transcriptData->period == 'K-8') {
                 return view('transcript.dashboard-transcript', compact('enroll_student', 'transcriptData'));

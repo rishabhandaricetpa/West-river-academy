@@ -14,7 +14,7 @@ class FileUploadController extends Controller
 {
     public function fileUpload($student_id, $transcript_id)
     {
-        $type=Transcript::whereId($transcript_id);
+        $type=Transcript::whereId($transcript_id)->first();
         return view('admin.transcript.fileUpload', compact('student_id', 'transcript_id','type'));
     }
 
