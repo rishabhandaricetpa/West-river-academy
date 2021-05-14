@@ -53,7 +53,6 @@ class MoneyGramController extends Controller
 
         //update cart status active
 
-        Cart::emptyCartAfterPayment($type, 'pending');
 
         Mail::to($email)->send(new MoneyGram($user, $amount));
 

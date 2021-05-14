@@ -609,7 +609,7 @@ class Cart extends Model
                         $ts_payment->payment_mode = $type;
                         if ($payment_id != null) {
                             $ts_payment->transcation_id = $payment_id;
-                            $ts_payment->status = 'paid';
+                            $ts_payment->status = $status;
                         }
                         $ts_payment->save();
                     }
@@ -618,7 +618,7 @@ class Cart extends Model
                     $transcripts = Transcript::whereId($cart->item_id)->get();
                     foreach ($transcripts as $transcript) {
                         // $current_count = $transcript->count_for_transcript;
-                        $transcript->status = 'paid';
+                        $transcript->status = $status;
                         // $transcript->count_for_transcript = $current_count + 1;
                         $transcript->save();
                         // $clearpendingtranscrit = Transcript::where('status', 'pending')->delete();
@@ -631,7 +631,7 @@ class Cart extends Model
                         $custom_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $custom_payment->transcation_id = $payment_id;
-                        $custom_payment->status = 'paid';
+                        $custom_payment->status = $status;
                     } else {
                         $custom_payment->status = 'active';
                     }
@@ -652,7 +652,7 @@ class Cart extends Model
                         $transcript_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $transcript_payment->transcation_id = $payment_id;
-                        $transcript_payment->status = 'paid';
+                        $transcript_payment->status = $status;
                     } else {
                         $transcript_payment->status = 'active';
                     }
@@ -676,9 +676,9 @@ class Cart extends Model
                     $postage_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $postage_payment->transcation_id = $payment_id;
-                        $postage_payment->status = 'paid';
+                        $postage_payment->status = $status;
                     } else {
-                        $postage_payment->status = 'active';
+                        $postage_payment->status = $status;
                     }
                     $postage_payment->save();
                     }
@@ -697,13 +697,13 @@ class Cart extends Model
                     }
                     if ($payment_id != null) {
                         $notarization_payment->transcation_id = $payment_id;
-                        $notarization_payment->status = 'paid';
+                        $notarization_payment->status = $status;
                     } else {
-                        $notarization_payment->status = 'paid';
+                        $notarization_payment->status = $status;
                     }
                     $notarization_payment->save();
                     $notarization = Notarization::whereId($cart->item_id)->first();
-                    $notarization->status = 'paid';
+                    $notarization->status = $status;
                     $notarization->save();
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
@@ -721,13 +721,13 @@ class Cart extends Model
                     }
                     if ($payment_id != null) {
                         $apostille_payment->transcation_id = $payment_id;
-                        $apostille_payment->status = 'paid';
+                        $apostille_payment->status = $status;
                     } else {
-                        $apostille_payment->status = 'paid';
+                        $apostille_payment->status = $status;
                     }
                     $apostille_payment->save();
                     $apostille = Apostille::whereId($cart->item_id)->first();
-                    $apostille->status = 'paid';
+                    $apostille->status = $status;
                     $apostille->save();
                     Dashboard::create([
                         'linked_to' =>  $cart->item_id,
@@ -744,9 +744,9 @@ class Cart extends Model
                     $customletter_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $customletter_payment->transcation_id = $payment_id;
-                        $customletter_payment->status = 'paid';
+                        $customletter_payment->status = $status;
                     } else {
-                        $customletter_payment->status = 'active';
+                        $customletter_payment->status = $status;
                     }
                     $customletter_payment->save();
                 }
@@ -764,9 +764,9 @@ class Cart extends Model
                     $consultation_payment->payment_mode = $type;
                     if ($payment_id != null) {
                         $consultation_payment->transcation_id = $payment_id;
-                        $consultation_payment->status = 'paid';
+                        $consultation_payment->status = $status;
                     } else {
-                        $consultation_payment->status = 'active';
+                        $consultation_payment->status = $status;
                     }
                     $consultation_payment->save();
                 }

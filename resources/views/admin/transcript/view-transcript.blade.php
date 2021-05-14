@@ -13,19 +13,19 @@
 
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Name</label>
-                    <div>
+                    <div class="float-left">
                         {{$student->fullname}}
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Date of Birth</label>
-                    <div>
+                    <div class="float-left">
                         {{$student->d_o_b->format('M d Y ')}}
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Address</label>
-                    <div>
+                    <div class="float-left">
                         {{$student->ParentProfile->street_address}},
                         {{$student->ParentProfile->city}},
                         {{$student->ParentProfile->state}},
@@ -50,10 +50,9 @@
                 Grade: {{$school->grade}}<br>
             </p>
             <table id="addressData" class="table table-bordered table-striped data-table">
-                <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3">Delete School Record</a>
+                <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3 transform-none">Delete this Year from Transcript</a>
                 <thead>
                     <tr>
-                        <th>Courses</th>
                         <th>Subjects</th>
                         <th>Grade</th>
                         <th>Action</th>
@@ -63,14 +62,6 @@
                     @foreach($school->TranscriptCourse as $course)
                     @foreach ($course->subjects as $subject)
                     <tr>
-                        <td>
-                            @php
-                            $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
-                            return $value['id'] == $subject['courses_id'];
-                            });
-                            @endphp
-                            {{$firstCourse->course_name}}
-                        </td>
                         <td>{{$subject->subject_name}}</td>
                         <td>{{$course->score}}</td>
                         <td><a type=" button" href="{{ route('admin.edit.subGrades',[$subject->id,$school->transcript_id,$school->grade])}}" class="btn btn-primary">Edit</a>

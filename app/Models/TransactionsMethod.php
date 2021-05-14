@@ -34,5 +34,8 @@ class TransactionsMethod extends Model
           'coupon_code' => $coupon_code,
           'coupon_amount' => $coupon_amount,
         ]);
+         $payment_id=$paymentinfo->transcation_id;
+        Cart::emptyCartAfterPayment($type, 'pending',$payment_id);
+
     }
 }

@@ -164,8 +164,8 @@
                                                 <td><a href="{{ route('admin.each.postage', $data->linked_to) }}">Postage
                                                         Request</a></td>
                                             @elseif($data->related_to === 'appostile_record_received')
-                                                <td><a href="{{ route('admin.each.notarization', $data->linked_to) }}">Notarization
-                                                        And Appostile</a></td>
+                                                <td><a href="{{ route('admin.each.notarization', $data->linked_to) }}" class="transform-none">Notarization
+                                                        or Apostille</a></td>
                                             @elseif($data->related_to === 'custom_letter_record_received')
                                                 <td><a href="{{ route('admin.each.customletters', $data->linked_to) }}">Custom
                                                         Letter</a></td>

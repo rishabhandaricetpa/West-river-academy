@@ -68,7 +68,7 @@
         <div class="col-11 col-sm-3">
           <div class="bg-secondary h-100 d-flex align-items-center justify-content-center">
             <img src="/images/pattern.png" alt="pattern" class="img-absolute o-contain">
-            <h2 class="text-white mb-0 text-center pl-3">Notarization and Apostilles</h2>
+            <h2 class="text-white mb-0 text-center pl-3 transform-none">Notarization or Apostilles</h2>
           </div>
         </div>
         <div class="col-sm-9">

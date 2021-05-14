@@ -46,8 +46,6 @@ class BankTranferController extends Controller
         $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);
         //update cart status active
 
-        Cart::emptyCartAfterPayment($type, 'pending');
-
         Mail::to($email)->send(new BankTranferEmail($user, $amount));
 
         return view('mail.banktransfer', compact('email', 'date'));

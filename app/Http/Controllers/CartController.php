@@ -136,7 +136,7 @@ class CartController extends Controller
                     $customPaymentsData = CustomPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $request->get('amount'),
-                        'paying_for' => 'custom',
+                        'paying_for' => $request->get('paying_for'),
                         'type_of_payment' => 'Custom Payments',
                         'status' => 'pending',
                     ]);
@@ -276,7 +276,7 @@ class CartController extends Controller
                     $customletterPaymentsData = CustomLetterPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $amount,
-                        'paying_for' => 'custom_letter',
+                        'paying_for' => $request->get('paying_for'),
                         'type_of_payment' => 'Custom Letter',
                         'status' => 'pending',
                     ]);
