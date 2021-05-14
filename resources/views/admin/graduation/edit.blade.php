@@ -9,10 +9,10 @@
       @method('put')
       <div class="form-group col-sm-6">
         Student Name: {{ $graduation->student->fullname }}
-      </div>
+ </div>
 
       <div class="form-group col-sm-6">
-        Student Email: {{ $graduation->student->email }}
+        Student Email:  <a class="transform-none" href="mailto:${{ $graduation->student->email }}"> {{ $graduation->student->email }}</a>
       </div>
 
       <div class="form-group col-sm-6">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-group col-sm-6">
-        Parent Email : {{ $graduation->parent->p1_email }}
+      Parent Email :  <a class="transform-none" href="mailto:${{{ $graduation->parent->p1_email }}}">{{{ $graduation->parent->p1_email }}}</a>
       </div>
 
       <div class="form-group col-sm-6">
