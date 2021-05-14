@@ -30,6 +30,7 @@
         .mt-40 {
             margin-top: 40px;
         }
+
     </style>
 </head>
 
@@ -38,7 +39,8 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td style="text-align:center;"><img src="../public/images/letterhead.png" alt="logo" style="height:80px; width:auto; object-fit: contain;"></td>
+                    <td style="text-align:center;"><img src="../public/images/letterhead.png" alt="logo"
+                            style="height:80px; width:auto; object-fit: contain;"></td>
                 </tr>
             </tbody>
         </table>
@@ -54,14 +56,14 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Date: {{$date}} </td>
+                    <td>Date: {{ $date }} </td>
                 </tr>
             </tbody>
         </table>
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>To: {{$email}}</td>
+                    <td>To: {{ $email }}</td>
                 </tr>
             </tbody>
         </table>
@@ -75,7 +77,7 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>The following student is currently enrolled in West River Academy. Please forward all
+                    <td>{{ $name }} is currently enrolled in West River Academy. Please forward all
                         school records and cumulative files for the student to us as soon as possible.</td>
                 </tr>
             </tbody>
@@ -83,14 +85,14 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Student Name: {{$name}}</td>
+                    <td>Student Name: {{ $name }}</td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Date of Birth: {{$dob}} </td>
+                    <td>Date of Birth: {{ $dob }} </td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Grade Level:@foreach($grade as $gradelevel)
-                        {{$gradelevel}}
+                    <td>Grade Level:@foreach ($grade as $gradelevel)
+                            {{ $gradelevel }}
                         @endforeach
                     </td>
                 </tr>
@@ -100,9 +102,10 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td> <span style="max-width:200px; display: block;">Please send records to: <br /> <span>West River Academy
+                    <td> <span style="max-width:200px; display: block;">Please send records to: <br /> <span>
                                 5475 S. Shawnee Way
-                                Aurora, CO 80015 USA</span></span> </td>
+                                Aurora, CO 80015 USA
+                            </span></span> </td>
                 </tr>
             </tbody>
         </table>
@@ -130,7 +133,8 @@
             <tbody>
                 <tr style="width:100%">
                     <td style="width:50%;"> <img src="../public/images/signature.png" alt=""> </td>
-                    <td style="width:50%; text-align:center;"> <img src="../public/images/Stamp.png" style="float:right;width:150px;height:150px;object-fit:contain;" alt=""> </td>
+                    <td style="width:50%; text-align:center;"> <img src="../public/images/Stamp.png"
+                            style="float:right;width:150px;height:150px;object-fit:contain;" alt=""> </td>
                 </tr>
             </tbody>
         </table>

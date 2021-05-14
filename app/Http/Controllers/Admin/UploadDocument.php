@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use phpDocumentor\Reflection\Types\Self_;
 use Storage;
+use Str;
 use Validator;
 
 class UploadDocument extends Controller
@@ -29,13 +30,15 @@ class UploadDocument extends Controller
     public function storeUploadedDocument(Request $request)
     {
         request()->validate([
-            'file' => 'required',
+            //  'file' => 'required|file|mimes:jpeg,jpg,png,gif|max:2048',
+            'file' => 'required|mimes:jpeg,png,jpg,gif,svg,mp3,mpeg,mp4,3gp,m4a'
         ]);
         $cover = $request->file('file');
         if ($request->file('file')) {
             foreach ($request->file as $cover) {
                 $extension = $cover->getClientOriginalExtension();
-                Storage::disk('public')->put('uploadDocument/' . $cover->getFilename() . '.' . $extension,  File::get($cover));
+                // Storage::disk('public')->put('uploadDocument/' . $cover->getFilename() . '.' . $extension,  File::get($cover));
+                Storage::put('uploadDocument/' . $cover->getFilename() . '.' . Str::random(10) . '.' . $extension,  File::get($cover));
 
                 $uploadDocument = new UploadDocuments();
                 $uploadDocument->student_profile_id = $request->student_id;
