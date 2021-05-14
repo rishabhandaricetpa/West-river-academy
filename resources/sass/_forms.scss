@@ -45,7 +45,7 @@ label {
   width: 100px;
 }
 .form-control_upload {
-  height:44px;
+  min-height:44px;
 }
 
 select.form-control {
@@ -79,7 +79,7 @@ textarea {
   cursor: pointer;
 }
 .form-group select {
-padding: 6px;
+//padding: 6px;
 width: 100%;
 }
 .form-group .fa-calendar-alt {
