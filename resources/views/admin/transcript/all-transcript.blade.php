@@ -61,14 +61,10 @@
                                     <td>{{ $transcripts->grade }}</td>
                                     @if ($type === 'k-8')
                                         <td>
-                                            <a
-                                                href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
-                                                K-8 Transcript</a>
+                                            <a href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View K-8 Transcript</a>
                                         </td>
                                     @else
-                                        <td><a
-                                                href=" {{ route('admin.viewfull.transcript9_12', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
-                                                9-12 Transcript</a>
+                                        <td><a href=" {{ route('admin.viewfull.transcript9_12', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View 9-12 Transcript</a>
                                         </td>
                                     @endif
                                 </tr>

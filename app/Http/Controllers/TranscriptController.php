@@ -113,10 +113,8 @@ class TranscriptController extends Controller
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
                 ->where('transcript_payments.status', 'paid')
                 ->get();
-            if (count($transcriptPayments) == 0) {
-            }
+                return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         }
-        return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         // }
     }
 

@@ -7,6 +7,8 @@ use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\Notification;
 use App\Models\StudentProfile;
+use App\Models\ConfirmationLetter;
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -84,6 +86,19 @@ class PaymentController extends Controller
                 ]);
             }
             DB::commit();
+            // update enrollment period in confirmation
+            $transaction_data = TransactionsMethod::where('transcation_id', $enrollment_payment->transcation_id)->first();
+            if ($transaction_data) {
+                $transaction_data->status = $request->input('paymentStatus');
+                $transaction_data->save();
+            }
+
+
+            // update enrollment period in confirmation
+            $confirmation_letter = ConfirmationLetter::where('enrollment_period_id', $enrollment_periods->id)->first();
+            $confirmation_letter->status = $request->input('paymentStatus');
+            $confirmation_letter->save();
+            DB::commit();
 
             $notification = [
                 'message' => 'Record Updated Successfully!',
@@ -92,6 +107,7 @@ class PaymentController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
             $notification = [
                 'message' => 'Failed to update Record!',

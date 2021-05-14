@@ -69,21 +69,20 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 id="moneygramModalLabel">Edit Subject Deatils</h3>
+                    <h3 id="moneygramModalLabel">Edit Subject Details</h3>
                 </div>
                 <form method="post" action="{{ route('admin.create.subject', $coursename->id) }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label>Subject Name<sup>*</sup></label>
-                            <input class="form-control" id="subject_name" value="" name="subject_name">
+                            <input class="form-control" id="subject_name" value="" name="subject_name" Required>
                         </div>
                         <div class="form-group">
                             <label>Grade</label>
-                            <select class="form-control" name="grade" value="">
-                                <option>Select Value</option>
-                                <option>K - 8</option>
-                                <option>9 - 12</option>
+                            <select class="form-control" name="grade" value="" Required>
+                                <option value="K - 8">K - 8</option>
+                                <option value="9 - 12">9 - 12</option>
                             </select>
                         </div>
                         <!-- /.card-body -->
