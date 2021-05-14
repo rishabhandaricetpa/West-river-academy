@@ -209,7 +209,7 @@
                 <a href="{{ route('admin.record.request') }}" class="nav-link">
                     <i class="nav-icon fas fa-exchange-alt"></i>
                     <p>
-                        Records Transfer
+                        Record Transfers
                     </p>
                 </a>
             </li>

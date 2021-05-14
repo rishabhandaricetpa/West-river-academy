@@ -48,7 +48,7 @@
                                     <td>{{ $student->first_name }}</td>
                                     <td>{{ $student->middle_name }}</td>
                                     <td>{{ $student->last_name }}</td>
-                                    <td>{{ $student->email }}</td>
+                                    <td><a class="transform-none" href="mailto:${{ $student->email }}"> {{ $student->email }}</a></td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->cell_phone }}</td>
                                     <td>

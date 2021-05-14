@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Student Information</h1>
+            <h1>Student Details</h1>
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
@@ -49,7 +49,7 @@
                                     <td>{{ $student->first_name }}</td>
                                     <td>{{ $student->middle_name }}</td>
                                     <td>{{ $student->last_name }}</td>
-                                    <td>{{ $student->email }}</td>
+                                    <td><a class="transform-none" href="mailto:${{ $student->email }}"> {{ $student->email }}</a></td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->cell_phone }}</td>
                                     @if ($type == 'k-8')

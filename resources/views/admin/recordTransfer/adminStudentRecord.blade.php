@@ -45,7 +45,7 @@
                                         <tr>
                                             <td>{{ $studentRecord['student']['first_name'] }}</td>
                                             <td>{{ $studentRecord->school_name }}</td>
-                                            <td>{{ $studentRecord->email }}</td>
+                                            <td><a class="transform-none" href="mailto:${{ $studentRecord->email }}"> {{ $studentRecord->email }}</a></td>
                                             <td>{{ $studentRecord->phone_number }}</td>
                                             <td>
                                                 <a
