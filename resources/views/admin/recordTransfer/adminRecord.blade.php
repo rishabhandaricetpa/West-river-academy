@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Student Information</h1>
+            <h1>Student Details</h1>
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
@@ -46,12 +46,12 @@
                                         <tr>
                                             <td>{{ $record['student']['fullname'] }}</td>
                                             <td>{{ $record->school_name }}</td>
-                                            <td class="transform-none">{{ $record->email }}</td>
+                                            <td><a class="transform-none" href="mailto:${{ $record->email }}"> {{ $record->email }}</a></td>
                                             <td>{{ $record->phone_number }}</td>
                                             @if (empty($record->request_status))
                                                 <td>In Review </br>
-                                                @else
-                                                <td>{{ $record->request_status }} </br>
+                                                @elseif($record->request_status=='Record Received')
+                                                <td>Records Received </br>
                                             @endif
                                             @if ($record->resendCount)
                                                 Resend Requested:{{ $record->resendCount }}

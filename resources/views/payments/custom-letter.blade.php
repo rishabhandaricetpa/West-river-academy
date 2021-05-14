@@ -3,7 +3,7 @@
 @section('content')
     <main class="position-relative container form-content mt-4">
         <div class="form-wrap border bg-light form-content small-container">
-            <h2>Order Custom Letters</h2>
+            <h2>Order Custom Letter(s)</h2>
             <form method="POST" action="{{ route('add.cart') }}" class="mb-0">
                 @csrf
                 <div class="form-group d-sm-flex mb-2">
@@ -21,7 +21,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="exampleInputPassword1">What is the content of the letter?</label>
                     <div>
-                        <input type="text" name="paying_for" class="form-control">
+                        <textarea  name="paying_for" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="mt-2r">

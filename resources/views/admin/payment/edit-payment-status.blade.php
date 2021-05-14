@@ -7,24 +7,26 @@
             <h1>Student Payment Information</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3>Payment Status of: {{ $student?$student->fullname:'' }}</h3>
+                <h3>Payment Status of: {{ $student ? $student->fullname : '' }}</h3>
 
                 <form method="post" class="row" action="{{ route('admin.update-payment', $enroll_payment->id) }}">
                     @csrf
+                    <input type="hidden" name="parent_id" value="{{ $student->parent_profile_id }}">
+                    <input type="hidden" name="student_name" value="{{ $student->fullname }}">
                     <div class="form-group col-sm-6">
                         <label>Grade Level <sup>*</sup></label>
                         <select name="grade_level" class="form-control" required>
                             <option value="Ungraded" @if ($enrollment_periods->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                             <option value="Preschool Age 3" @if ($enrollment_periods->grade_level ==
         'Preschool
-                                                            Age 3') selected="selected" @endif>
+                                                                            Age 3') selected="selected" @endif>
                                 Preschool
                                 Age 3
                             </option>
 
                             <option value="Preschool Age 4" @if ($enrollment_periods->grade_level ==
         'Preschool
-                                                            Age 4') selected="selected" @endif>
+                                                                            Age 4') selected="selected" @endif>
                                 Preschool
                                 Age 4
                             </option>
@@ -105,7 +107,8 @@
                     </div>
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{route('admin.edit.student.payment',$student->id)}}" class="btn btn-primary">Back</a>
+                        <a href="{{ route('admin.edit.student.payment', $student->id) }}"
+                            class="btn btn-primary">Back</a>
                     </div>
             </div>
 

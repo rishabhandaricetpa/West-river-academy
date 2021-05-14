@@ -186,14 +186,14 @@ class StudentController extends Controller
                 $enrollPeriod->save();
                 $isconfirmlink = ConfirmationLetter::where('enrollment_period_id', $enrollPeriod->id)->get();
                 if (count($isconfirmlink) == 0) {
-                $confirmlink = ConfirmationLetter::create([
-                    'parent_profile_id' => $id,
-                    'student_profile_id' => $student->id,
-                    'pdf_link' => '',
-                    'status' => 'pending',
-                    'enrollment_period_id' => $enrollPeriod->id
-                ]);
-                $confirmlink->save();
+                    $confirmlink = ConfirmationLetter::create([
+                        'parent_profile_id' => $id,
+                        'student_profile_id' => $student->id,
+                        'pdf_link' => '',
+                        'status' => 'pending',
+                        'enrollment_period_id' => $enrollPeriod->id
+                    ]);
+                    $confirmlink->save();
                 }
             }
             Dashboard::create([
@@ -306,13 +306,13 @@ class StudentController extends Controller
         //confirmation periods 
         $isconfirmlink = ConfirmationLetter::where('enrollment_period_id', $enrollPeriod->id)->get();
         if (count($isconfirmlink) == 0) {
-        $confirmlink = ConfirmationLetter::create([
-            'parent_profile_id' => $parent_profile,
-            'student_profile_id' => $student->id,
-            'pdf_link' => '',
-            'status' => 'pending',
-            'enrollment_period_id' => $enrollPeriod->id
-        ]);
+            $confirmlink = ConfirmationLetter::create([
+                'parent_profile_id' => $parent_profile,
+                'student_profile_id' => $student->id,
+                'pdf_link' => '',
+                'status' => 'pending',
+                'enrollment_period_id' => $enrollPeriod->id
+            ]);
         }
         $EnrollmentPayment = EnrollmentPayment::where('enrollment_period_id', $enrollPeriod->id)->first();
 

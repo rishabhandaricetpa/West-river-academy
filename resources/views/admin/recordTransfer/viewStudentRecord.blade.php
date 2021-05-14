@@ -5,7 +5,7 @@
 @section('content')
     <section class="content">
         <div class="container-fluid position-relative">
-            <h1>Student Information</h1>
+            <h1>Student Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <form class="row align-items-center" method="post"
                     action="{{ route('admin.recordReceived', $studentRecord->id) }}">

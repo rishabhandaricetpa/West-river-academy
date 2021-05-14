@@ -33,8 +33,8 @@ class ParentController extends Controller
     public function viewStudentParent($parent_id)
     {
         $parent = ParentProfile::find($parent_id);
-        $allstudent =StudentProfile::where('parent_profile_id',$parent_id)->get();
-        return view('admin.familyInformation.view-student-parent', compact('parent','allstudent'));
+        $allstudent = StudentProfile::where('parent_profile_id', $parent_id)->get();
+        return view('admin.familyInformation.view-student-parent', compact('parent', 'allstudent'));
     }
     public function dataTable()
     {
@@ -73,39 +73,12 @@ class ParentController extends Controller
         return view('admin.familyInformation.edit-parent', compact('parent'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(cr $cr)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $parent = ParentProfile::find($id);
-        $allstudent =StudentProfile::where('parent_profile_id',$id)->get();
-        return view('admin.familyInformation.edit-parent', compact('parent','allstudent'));
+        $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent'));
     }
 
     /**

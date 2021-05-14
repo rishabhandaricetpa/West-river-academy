@@ -96,6 +96,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return Notification::getParentNotifications();
         })->name('notification.get');
 
+        Route::delete('remove/notification/{id}', 'ParentController@removeNotification')->name('notification.delete');
+
 
         //Paypal Payment
         Route::get('payment', function () {

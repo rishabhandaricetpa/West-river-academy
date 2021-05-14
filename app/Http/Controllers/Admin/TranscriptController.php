@@ -214,6 +214,7 @@ class TranscriptController extends Controller
     }
     public function editAllPayments($transpay_id)
     {
+        
         $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
         return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments'));
     }
