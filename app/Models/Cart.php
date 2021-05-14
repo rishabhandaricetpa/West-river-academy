@@ -622,6 +622,14 @@ class Cart extends Model
                         // $transcript->count_for_transcript = $current_count + 1;
                         $transcript->save();
                         // $clearpendingtranscrit = Transcript::where('status', 'pending')->delete();
+                    
+                    Dashboard::create([
+                        'linked_to' => $ts_payment->id,
+                        'related_to' => 'transcript_ordered',
+                        'is_archieved' => 0,
+                        'notes' =>  $transcript['student']['fullname'],
+                        'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    ]);
                     }
                     break;
 

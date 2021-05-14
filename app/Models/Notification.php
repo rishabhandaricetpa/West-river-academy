@@ -24,7 +24,7 @@ class Notification extends Model
         try {
             $notifications = Notification::where('parent_profile_id', ParentProfile::getParentId())
                 ->orderBy('id', 'desc')
-                ->limit(5)
+                ->limit(15)
                 ->get();
 
             $data = [];
@@ -44,12 +44,17 @@ class Notification extends Model
                         break;
                 }
 
-                array_push($data, ['content' => $notification->content, 'read' =>  $notification->content, 'link' => $link]);
+                array_push($data, ['id' => $notification->id, 'content' => $notification->content, 'read' =>  $notification->content, 'link' => $link]);
             }
 
             return response()->json(['status' => 'success', 'notifications' => $data]);
         } catch (\Exception $e) {
             dd($e);
         }
+    }
+    static  public function removeParentNotifications($notification_id)
+    {
+        Notification::where('id', $notification_id)->delete();
+        return response()->json(['status' => 'success']);
     }
 }

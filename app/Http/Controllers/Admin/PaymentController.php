@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
+use App\Models\Notification;
 use App\Models\StudentProfile;
+use App\Models\ConfirmationLetter;
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,6 +47,7 @@ class PaymentController extends Controller
 
     public function editPaymentStatus(Request $request, $id)
     {
+
         $enroll_payment = EnrollmentPayment::find($id);
         $enrollment_periods = EnrollmentPayment::find($id)->enrollment_period()->first();
         $student = StudentProfile::whereId($enrollment_periods->student_profile_id)->first();
@@ -52,7 +56,6 @@ class PaymentController extends Controller
 
     public function update(Request $request, $payment_id)
     {
-
         // update enrollment payment
         try {
             DB::beginTransaction();
@@ -70,6 +73,31 @@ class PaymentController extends Controller
             $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('M d Y');
             $enrollment_payment->grade_level = $request->input('grade_level');
             $enrollment_periods->save();
+
+            // send notification to user if paid
+            if ($enrollment_payment->status == 'paid') {
+
+                Notification::create([
+                    'parent_profile_id' => $request->parent_id,
+                    'content' => 'Your payment has been received for student ' . $request->student_name . ' by payment mode '
+                        . $enrollment_payment->payment_mode,
+                    'type' => 'offline_paid',
+                    'read' => 'false'
+                ]);
+            }
+            DB::commit();
+            // update enrollment period in confirmation
+            $transaction_data = TransactionsMethod::where('transcation_id', $enrollment_payment->transcation_id)->first();
+            if ($transaction_data) {
+                $transaction_data->status = $request->input('paymentStatus');
+                $transaction_data->save();
+            }
+
+
+            // update enrollment period in confirmation
+            $confirmation_letter = ConfirmationLetter::where('enrollment_period_id', $enrollment_periods->id)->first();
+            $confirmation_letter->status = $request->input('paymentStatus');
+            $confirmation_letter->save();
             DB::commit();
 
             $notification = [
@@ -79,6 +107,7 @@ class PaymentController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
             $notification = [
                 'message' => 'Failed to update Record!',

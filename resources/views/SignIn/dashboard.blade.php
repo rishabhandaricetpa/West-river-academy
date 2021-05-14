@@ -218,7 +218,7 @@
                 <div class="mb-2 text-center text-sm-left">
                 </div>
                 <div class="overflow-auto max-table">
-                    <table class="table-styling w-100">
+                    <table class="table-styling w-100 table-vertical_scroll">
                         <thead>
                             <tr>
                                 <th>Student First Name</th>

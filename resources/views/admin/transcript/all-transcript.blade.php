@@ -33,8 +33,8 @@
                         <div class="card-body">
                             <table id="addressData" class="table table-bordered table-striped data-table"">
                       <thead>
-                      <div class=" form-group d-sm-flex mb-2">
-                                <h3 for="">Name: {{ $student->fullname }}</h3>
+                      <div class=" form-group d-sm-flex mb-2 align-items-baseline">
+                                <h3 class="mr-sm-3" for="">Name: {{ $student->fullname }}</h3>
                                 <a href="{{ route('admin.view.students.parent', $student->id) }}" class="btn btn-primary float-right">View Parent</a>
                         </div>
                         <tr>
@@ -61,14 +61,10 @@
                                     <td>{{ $transcripts->grade }}</td>
                                     @if ($type === 'k-8')
                                         <td>
-                                            <a
-                                                href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
-                                                K-8 Transcript</a>
+                                            <a href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View K-8 Transcript</a>
                                         </td>
                                     @else
-                                        <td><a
-                                                href=" {{ route('admin.viewfull.transcript9_12', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
-                                                9-12 Transcript</a>
+                                        <td><a href=" {{ route('admin.viewfull.transcript9_12', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View 9-12 Transcript</a>
                                         </td>
                                     @endif
                                 </tr>

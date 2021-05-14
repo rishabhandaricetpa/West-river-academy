@@ -113,10 +113,8 @@ class TranscriptController extends Controller
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
                 ->where('transcript_payments.status', 'paid')
                 ->get();
-            if (count($transcriptPayments) == 0) {
-            }
+                return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         }
-        return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         // }
     }
 
@@ -454,7 +452,7 @@ class TranscriptController extends Controller
         if ($transcriptData->period == 'K-8') {
             Notification::create([
                 'parent_profile_id' => ParentProfile::getParentId(),
-                'content' => 'Your transcript has been sucessfully created !',
+                'content' => 'Your transcript has been sucessfully created',
                 'type' => 'transcript_submitted_k8',
                 'read' => 'false',
                 'student_profile_id' => $student_id,
@@ -463,7 +461,7 @@ class TranscriptController extends Controller
         } else {
             Notification::create([
                 'parent_profile_id' => ParentProfile::getParentId(),
-                'content' => 'Your transcript has been sucessfully created !',
+                'content' => 'Your transcript has been sucessfully created',
                 'type' => 'transcript_submitted_9_12',
                 'read' => 'false',
                 'student_profile_id' => $student_id,
