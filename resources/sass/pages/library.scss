@@ -15,6 +15,12 @@
             color:grey !important;
         }
     }
+    //.tab-content,
+    .video-library ,.journal-library,.audio-library
+    {
+        min-height:80vh;
+        //overflow-y: scroll;
+    }
     .video-library {
         h3{
             color:grey;

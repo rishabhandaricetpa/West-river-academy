@@ -165,4 +165,20 @@
       color: #7d86a9;
     }
   }
+  
 }
+.nofification-alert{
+  position: relative;
+    &::after{
+      content:'';
+      position: absolute;
+      top:-2px;
+      right: -2px;
+      width:18px;
+      height:18px;
+      background-color: red;
+      border-radius: 50%;
+      z-index: 1;  
+    }    
+  }
+

@@ -53,7 +53,7 @@
         <a href="{{route('register')}}" role="button" class="btn btn-primary">enroll now</a>
         <a href="{{route('login')}}" class="user-login"><img class="o-contain" src="/images/login-img.png" alt=""></a>
       </div>
-      <div id="notification-container">
+      <div id="notification-container" class="nofification-alert">
         <notification-bell></notification-bell>
       </div>
       @else
