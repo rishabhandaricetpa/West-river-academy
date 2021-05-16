@@ -12,7 +12,7 @@
  </div>
 
       <div class="form-group col-sm-6">
-        Student Email:  <a class="transform-none" href="mailto:${{ $graduation->student->email }}"> {{ $graduation->student->email }}</a>
+        Student Email:  <a class="transform-none" href="mailto:{{ $graduation->student->email }}"> {{ $graduation->student->email }}</a>
       </div>
 
       <div class="form-group col-sm-6">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-group col-sm-6">
-      Parent Email :  <a class="transform-none" href="mailto:${{{ $graduation->parent->p1_email }}}">{{{ $graduation->parent->p1_email }}}</a>
+      Parent Email :  <a class="transform-none" href="mailto:{{{ $graduation->parent->p1_email }}}">{{{ $graduation->parent->p1_email }}}</a>
       </div>
 
       <div class="form-group col-sm-6">
@@ -87,6 +87,7 @@
 
       <div class="col-sm-12">
         <input type="submit" class="btn btn-primary" value="Update">
+        <a href="{{route('admin.view.graduation')}}" class="btn btn-primary">Back</a>
       </div>
     </form>
   </div>

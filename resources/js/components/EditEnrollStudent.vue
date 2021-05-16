@@ -90,7 +90,7 @@
       <label for="">Email Address</label>
       <div>
         <input
-          type="text"
+          type="email"
           class="form-control"
           name="email"
           id="email"

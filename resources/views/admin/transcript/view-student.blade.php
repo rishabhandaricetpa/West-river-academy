@@ -11,7 +11,7 @@
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Student Information</li>
+                    <li class="breadcrumb-item active">Student Details</li>
                     <li class="breadcrumb-item active">Transcript</li>
                 </ol>
             </div><!-- /.col -->

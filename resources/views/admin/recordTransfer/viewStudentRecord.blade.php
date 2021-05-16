@@ -12,7 +12,7 @@
                     @csrf
                     @if ($studentRecord->request_status !== 'Record Received')
                         <div class="col-sm-6">
-                            <label>Method Of Delivery </label>
+                            <label>Method of Delivery </label>
                             <select class="form-control" name="mediumOfDelivery">
                                 <option value="">Select If Received</option>
                                 <option value="Digital">Digital</option>
@@ -27,7 +27,7 @@
                     </div>
                 </form>
                 @if ($studentRecord->request_status == 'Record Received')
-                    <h2 class="text-center">Method Of Delivery:
+                    <h2 class="text-center">Method of Delivery:
                         {{ $studentRecord->medium_of_transfer }}</h2>
                     <h3 class="">
                         @if ($studentRecord->request_status == 'Record Received')

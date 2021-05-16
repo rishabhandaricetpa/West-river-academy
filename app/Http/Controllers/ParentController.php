@@ -58,7 +58,7 @@ class ParentController extends Controller
 
         if (!$is_valid) {
             $notification = [
-                'message' => 'Cart is Invalid!',
+                'message' => 'Cart is Invalid! Fee for the first Student enrollment is not paid. ',
                 'alert-type' => 'error',
             ];
 
