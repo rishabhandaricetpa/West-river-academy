@@ -26,12 +26,13 @@
                         <input name="document_type" value="{{ $document->document_type }}" class="form-control">
                     </div>
                     <div class="col-sm-12 mb-3">
-                        <a href="{{ route('admin.download.document', $document->id) }}">Click here to download and
+                        <a href="{{ $document->document_url }}" download target="_blank">Click here to download and
                             preview</a>
                     </div>
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{route('admin.change.uploadDocument',$document->student_profile_id)}}" class="btn btn-primary">Back</a>
+                        <a href="{{ route('admin.change.uploadDocument', $document->student_profile_id) }}"
+                            class="btn btn-primary">Back</a>
                     </div>
             </div>
 
