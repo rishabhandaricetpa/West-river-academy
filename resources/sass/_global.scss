@@ -213,7 +213,9 @@ table {
     }
   }
 }
-
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
 /* global css */
 
 .app {
@@ -263,7 +265,6 @@ thead tr th {
 
   thead {
     background-color: #ccc;
-
   }
 
   td,
@@ -357,5 +358,10 @@ sub {
 
 .transform-none {
   text-transform: none !important;
+}
+
+///pdf 
+.hg-pdf table tr {
+  page-break-inside: avoid;
 }
 
