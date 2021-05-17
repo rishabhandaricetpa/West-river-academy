@@ -6,10 +6,10 @@
       class="text-white bg-transparent border-0"
     >
       <div v-if="notifications.length > 0">
-        <i class="fas fa-bell fa-2x "></i>
+        <i class="fas fa-bell fa-2x nofification-alert"></i>
       </div>
       <div v-else>
-        <i class="fas fa-bell-slash"></i>
+        <i class="fas fa-bell fa-2x "></i>
       </div>
     </button>
     <div :class="['notification', displayClass]">
