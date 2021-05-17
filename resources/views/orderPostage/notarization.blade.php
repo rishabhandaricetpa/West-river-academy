@@ -21,7 +21,7 @@
                         <div class="col-md-6 d-sm-flex px-0 mb-4">
                             <p class="font-weight-bold">Quantity</p>
                             <div class="row ml-3 mx-0">
-                                <select class="form-control col-3" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')">
+                                <select class="form-control col-3" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')" required>
                                     <option value="">Select Quantity</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -84,37 +84,37 @@
                     <div class="form-group d-sm-flex mb-2">
                         <label for="name">First Name</label>
                         <div>
-                            <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control">
+                            <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control" required>
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
                         <label for="name">Last Name</label>
                         <div>
-                            <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control">
+                            <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control" required>
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
                         <label for="street">Street</label>
                         <div>
-                            <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control">
+                            <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control" required>
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
                         <label for="city">City</label>
                         <div>
-                            <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control">
+                            <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control" required>
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
                         <label for="gcountry">State</label>
                         <div>
-                            <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control">
+                            <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control" required>
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
                         <label for="postal_code">Zip Code</label>
                         <div>
-                            <input type="text" name="zip_code" id="zip_code" value="" class="w-100 ml-sm-3 form-control">
+                            <input type="text" name="zip_code" id="zip_code" value="" class="w-100 ml-sm-3 form-control" required>
                         </div>
                     </div>
                     <div class="row">

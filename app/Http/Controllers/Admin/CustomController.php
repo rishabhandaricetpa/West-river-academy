@@ -238,6 +238,7 @@ class CustomController extends Controller
         $customLetter->transcation_id = $request->get('transcation_id');
         $customLetter->payment_mode = $request->get('payment_mode');
         $customLetter->status = $request->get('paymentStatus');
+        $customLetter->paying_for = $request->get('paying_for');
         $customLetter->save();
         $notification = [
             'message' => 'Record updated successfully!',

@@ -47,6 +47,11 @@
                                     <option valu e="paid" @if ($customLetter->status == 'paid') selected="selected" @endif>Paid</option>
                                 </select>
                             </div>
+                            <div class="form-group col-sm-12">
+                                <label>Paid For</label>
+                                <textarea class="form-control" id="paying_for" value="{{ $customLetter->paying_for }}"
+                                    name="paying_for">{{ $customLetter->paying_for }}</textarea>
+                            </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{route('admin.order.customletter')}}" class="btn btn-primary">Back</a>

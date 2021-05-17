@@ -17,6 +17,9 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <!-- /.card-header -->
+                    <div class="card-header">
+                        <a href="{{ route('admin.fees.services')}}" class="btn btn-primary float-right">Back</a>
+                    </div> 
                     <div class="card-body">
                         <table id="country_shipping" class="table table-bordered table-striped data-table">
                             <thead>

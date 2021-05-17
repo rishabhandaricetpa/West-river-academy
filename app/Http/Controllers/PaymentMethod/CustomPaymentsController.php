@@ -41,6 +41,7 @@ class CustomPaymentsController extends Controller
         $customPayments->payment_mode = $request->get('payment_mode');
         $customPayments->amount = $request->get('amount');
         $customPayments->status = $request->get('paymentStatus');
+        $customPayments->paying_for = $request->get('paying_for');
         $customPayments->save();
         $notification = [
             'message' => 'Record updated successfully!',

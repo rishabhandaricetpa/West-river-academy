@@ -27,6 +27,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"></h3>
+                            <a href="{{route('admin.view.parent')}}" class="btn btn-primary">Back</a>
                         </div>
                         <!-- /.card-header -->
 
@@ -128,7 +129,7 @@
 
                         <!-- Notirization Payment History Start-->
 
-                        @if (count($graduationPayments) > 0)
+                        @if (count($notirizationPayments) > 0)
                             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
                                 <h2 class="mb-3">Paid For: Notarization </h2>
                                 <div class="overflow-auto">
@@ -137,22 +138,20 @@
                                             <tr>
                                                 <th scope="col">Student Name</th>
                                                 <th scope="col">Amount</th>
-                                                <th scope="col">Number Of Documents</th>
-                                                <th scope="col">Apostille Country</th>
                                                 <th scope="col">Payment Method</th>
+                                                <th scope="col">Transcation Id</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($notirizationPayments as $notirizationPayment)
                                                 <tr>
 
-                                                    <td>{{ $notirizationPayment['notarization']['first_name'] }}</td>
+                                                    <td>{{ $notirizationPayment['ParentProfile']['p1_first_name'] }}</td>
                                                     <td>${{ $notirizationPayment->amount }}</td>
-                                                    <td>{{ $notirizationPayment['notarization']['number_of_documents'] }}
                                                     </td>
-                                                    <td>{{ $notirizationPayment['notarization']['apostille_country'] }}
                                                     </td>
                                                     <td>{{ $notirizationPayment->payment_mode }}</td>
+                                                    <td>{{ $notirizationPayment->transcation_id }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

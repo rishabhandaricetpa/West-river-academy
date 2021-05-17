@@ -41,6 +41,11 @@
                                     <option value="paid" @if ($customPaymentsData->status == 'paid') selected="selected" @endif>Paid</option>
                                 </select>
                             </div>
+                            <div class="form-group col-sm-12">
+                                <label>Paid For</label>
+                                <textarea class="form-control" id="paying_for" value="{{ $customPaymentsData->paying_for }}"
+                                    name="paying_for">{{ $customPaymentsData->paying_for }}</textarea>
+                            </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{route('admin.custom.payments')}}" class="btn btn-primary">Back</a>

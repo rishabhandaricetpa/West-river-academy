@@ -52,6 +52,10 @@
                             <option>No, for religious reasons.</option>
                         </select>
                     </div>
+                    <div class="form-group col-sm-12">
+                        <label>Student Situation</label>
+                        <textarea class="form-control"  name="student_situation" value="{{ $student->student_situation }}">{{ $student->student_situation }}</textarea>
+                    </div>
                     <div>
                     </div>
                     <label class="px-3">Enrollment Period <sup>*</sup></label>

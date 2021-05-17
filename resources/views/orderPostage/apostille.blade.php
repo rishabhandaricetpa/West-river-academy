@@ -21,7 +21,7 @@
                                 <p class="font-weight-bold">Quantity</p>
                                 <div class="row ml-3 mx-0">
                                     <select class="form-control col-5"
-                                        onchange="getApostilleAmount(event,'{{ $appostile_fee }}')">
+                                        onchange="getApostilleAmount(event,'{{ $appostile_fee }}')" required>
                                         <option value="">Select Quantity</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-6 px-0 d-sm-flex">
                             <p class="font-weight-bold">Country</p>
-                            <select name="apostille_country" class="form-control mx-sm-3">
+                            <select name="apostille_country" class="form-control mx-sm-3" required>
                                 <option value="">Select country</option>
                                 @foreach ($countries as $country)
                                     <option value="{{ $country->country }}">{{ $country->country }}</option>
@@ -95,38 +95,38 @@
                         <div class="form-group d-sm-flex mb-2">
                             <label for="name">First Name</label>
                             <div>
-                                <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control">
+                                <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control" required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="name">Last Name</label>
                             <div>
-                                <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control">
+                                <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control" required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="street">Street</label>
                             <div>
-                                <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control">
+                                <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control" required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="city">City</label>
                             <div>
-                                <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control">
+                                <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control" required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="gcountry">State</label>
                             <div>
-                                <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control">
+                                <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control" required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="postal_code">Zip Code</label>
                             <div>
                                 <input type="text" name="zip_code" id="zip_code" value=""
-                                    class="w-100 ml-sm-3 form-control">
+                                    class="w-100 ml-sm-3 form-control" required>
                             </div>
                         </div>
                         <div class="row">
@@ -157,7 +157,7 @@
                     </div>
             </div>
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <a href="#" class="btn btn-primary" role="button">cancel</a>
+                <a href="{{route ('dashboard')}}" class="btn btn-primary" role="button">Back</a>
                 <button type="submit" class="btn btn-primary">continue</button>
             </div>
         </form>

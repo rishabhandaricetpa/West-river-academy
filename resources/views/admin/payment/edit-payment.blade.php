@@ -10,13 +10,13 @@
                 <!-- /.card-header -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"> Enrollment Status of {{$student->fullname}}</h3>
-                        <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}" class="btn btn-primary float-right">View Parent</a>
-
+                        <h3 class="card-title"> Enrollment Status of {{$student->fullname}}  </h3>
+                        <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}" class="btn btn-primary float-left">View Parent</a>
+                        <a href="{{route ('admin.view-student')}}" class="btn btn-primary float-right">Back</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped data-table"">
+                        <table id="example1" class="table table-bordered table-striped data-table">
                   <thead>
                   <tr>
                    

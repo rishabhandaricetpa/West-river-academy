@@ -106,6 +106,7 @@ class StudentProfileController extends Controller
             $student->cell_phone = $request->get('cell_phone');
             $student->student_Id = $request->get('student_id');
             $student->immunized_status = $request->get('immunized_status');
+            $student->student_situation= $request->get('student_situation');
             $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
 
             foreach ($enrollupdate as $key => $en) {
@@ -124,9 +125,10 @@ class StudentProfileController extends Controller
                 'message' => 'Student Record is updated Successfully!',
                 'alert-type' => 'success',
             ];
-
-            return redirect('admin/view-student')->with($notification);
+            return  redirect()->back()->with($notification);
+            // return view('admin.edit-student',$student->id)->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             $notification = [
                 'message' => 'Failed to update Record!',
                 'alert-type' => 'error',
@@ -235,8 +237,7 @@ class StudentProfileController extends Controller
             ->get();
 
         /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('notarization')->where('parent_profile_id', $parent_id)->get();
-
+        $notirizationPayments = NotarizationPayment::with('ParentProfile','notarization')->where('parent_profile_id', $parent_id)->get();
 
         /** Receiving payment history data for order personal consultation*/
 
