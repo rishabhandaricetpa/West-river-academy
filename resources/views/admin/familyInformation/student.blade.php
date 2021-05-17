@@ -28,7 +28,8 @@
                         <div class="card-header">
                             @if ($students->count() > 0)
                                 Parent(s) : {{ $students[0]['parentProfile']['p1_first_name'] }}
-                                <a href="{{ route('admin.view.students.parent', $id) }}" class="btn btn-primary float-right">View Parent</a>
+                                <a href="{{ route('admin.view.students.parent', $id) }}"
+                                    class="btn btn-primary float-right">View Parent</a>
                             @endif
                             <h3 class="card-title"></h3>
                         </div>
@@ -48,6 +49,8 @@
                                         <th>View Transcript</th>
                                         <th>View Graduation</th>
                                         <th>View Record Transfer</th>
+                                        <th>View Uploaded Document </th>
+                                        <th>Upload Document</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,6 +86,10 @@
                                             @else
                                                 <td>Not applied</td>
                                             @endif
+                                            <td><a href="{{ route('admin.edit.upload', $student->id) }}">Upload</a></td>
+                                            <td> <a
+                                                    href="{{ route('admin.change.uploadDocument', $student->id) }}">View</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

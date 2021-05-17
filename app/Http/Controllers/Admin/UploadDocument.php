@@ -30,14 +30,12 @@ class UploadDocument extends Controller
     public function storeUploadedDocument(Request $request)
     {
         request()->validate([
-            //  'file' => 'required|file|mimes:jpeg,jpg,png,gif|max:2048',
-            'file' => 'required'
+            'file' => 'required|max:2048'
         ]);
         $cover = $request->file('file');
         if ($request->file('file')) {
             foreach ($request->file as $cover) {
                 $extension = $cover->getClientOriginalExtension();
-                // Storage::disk('public')->put('uploadDocument/' . $cover->getFilename() . '.' . $extension,  File::get($cover));
                 $path = Str::random(40) . '.' . $extension;
                 Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($cover));
 

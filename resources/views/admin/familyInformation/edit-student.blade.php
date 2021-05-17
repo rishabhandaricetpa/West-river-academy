@@ -7,13 +7,14 @@
         <div class="container-fluid position-relative">
             <h1>Student Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
-                <form method="post" class="row" action="{{ route('admin.edit-student.update', $student->id) }}">
+                <form method="post" class="row" action="{{ route('admin.edit-student.update', $student->id) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="form-group col-sm-6">
                         <label>First/Given Name <sup>*</sup></label>
                         <input class="form-control" id="first_name" value="{{ $student->first_name }}" name="first_name">
                     </div>
-
+                    <input type='hidden' name="parent_id" value="{{ $student->parent_profile_id }}">
                     <div class="form-group col-sm-6">
                         <label>Middle Name</label>
                         <input class="form-control" id="middle_name" name="middle_name"
@@ -77,11 +78,17 @@
                                     <option value="Ungraded" @if ($enrollment_period->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if ($enrollment_period->grade_level ==
         'Preschool
-                        Age 3') selected="selected" @endif>Preschool Age 3</option>
+                                                                    Age 3') selected="selected" @endif>
+                                        Preschool
+                                        Age 3
+                                    </option>
 
                                     <option value="Preschool Age 4" @if ($enrollment_period->grade_level ==
         'Preschool
-                        Age 4') selected="selected" @endif>Preschool Age 4</option>
+                                                                    Age 4') selected="selected" @endif>
+                                        Preschool
+                                        Age 4
+                                    </option>
 
                                     <option value="Kindergarten" @if ($enrollment_period->grade_level == 'Kindergarten') selected="selected" @endif>Kindergarten</option>
 
@@ -112,13 +119,20 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="col-md-4 mb-4 mb-sm-0">
+                        <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
+                        <label class="font-weight-bold text-secondary">
+                        </label>
+                        <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
+                    </div>
                     <!-- /.card-body -->
                     <div class="px-3">
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a type="button" href="{{ route('admin.genrate.adminConfirmition', $student->id) }}"
                             class="btn btn-primary ml-3">Generate Confirmation</a>
-                            <a href="{{ route('admin.view-student')}}" class="btn btn-primary">Back</a>
+                        <a href="{{ route('admin.view-student') }}" class="btn btn-primary">Back</a>
                     </div>
+
             </div>
         </div>
 
