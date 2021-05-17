@@ -170,22 +170,20 @@
          <table class="table-styling w-100">
             <thead>
                <tr>
-                  <th scope="col">Student Name</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Number Of Documents</th>
-                  <th scope="col">Apostille Country</th>
-                  <th scope="col">Payment Method</th>
+               <th scope="col">Student Name</th>
+               <th scope="col">Amount</th>
+               <th scope="col">Payment Method</th>
+               <th scope="col">Transcation Id</th>
                </tr>
             </thead>
             <tbody>
                @foreach($notirizationPayments as $notirizationPayment)
                <tr>
 
-                  <td>{{$notirizationPayment['notarization']['first_name']}}</td>
-                  <td>${{$notirizationPayment->amount}}</td>
-                  <td>{{$notirizationPayment['notarization']['number_of_documents']}}</td>
-                  <td>{{$notirizationPayment['notarization']['apostille_country']}}</td>
-                  <td>{{$notirizationPayment->payment_mode}}</td>
+               <td>{{ $notirizationPayment['ParentProfile']['p1_first_name'] }}</td>
+               <td>${{ $notirizationPayment->amount }}</td>
+               <td>{{ $notirizationPayment->payment_mode }}</td>
+               <td>{{ $notirizationPayment->transcation_id }}</td>
                </tr>
                @endforeach
             </tbody>

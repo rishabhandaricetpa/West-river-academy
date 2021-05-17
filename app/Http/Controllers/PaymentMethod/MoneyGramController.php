@@ -44,7 +44,7 @@ class MoneyGramController extends Controller
         $coupon_code = session('applied_coupon', null);
         $coupon_amount = session('applied_coupon_amount', 0);
         $amount = $enroll_fees->amount;
-        $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
+        $final_amount = $coupon_amount > $amount ? 1 : $amount - $coupon_amount;
 
         $type = 'Money Gram';
         //store transactions

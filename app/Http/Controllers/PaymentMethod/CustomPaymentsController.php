@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CustomPayment;
 use App\Models\ParentProfile;
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 
 class CustomPaymentsController extends Controller
@@ -56,6 +57,7 @@ class CustomPaymentsController extends Controller
     public function edit($id)
     {
         $customPaymentsData = CustomPayment::whereId($id)->with('ParentProfile')->first();
-        return view('admin.payment.customPayments.edit', compact('customPaymentsData'));
+        $transactionData=TransactionsMethod::where('transcation_id',$customPaymentsData->transcation_id)->first();
+        return view('admin.payment.customPayments.edit', compact('customPaymentsData','transactionData'));
     }
 }

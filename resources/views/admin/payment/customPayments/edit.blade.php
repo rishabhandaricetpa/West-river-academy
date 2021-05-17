@@ -46,6 +46,20 @@
                                 <textarea class="form-control" id="paying_for" value="{{ $customPaymentsData->paying_for }}"
                                     name="paying_for">{{ $customPaymentsData->paying_for }}</textarea>
                             </div>
+                            @if($transactionData)
+                            <div class="form-group col-sm-6">
+                                <label>Coupon Applied<sup>*</sup></label>
+                                <input name="coupon_code" id="coupon_code" class="form-control datepicker"
+                                    value="{{$transactionData->coupon_code}}"
+                                    disabled>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label>Coupon Amount<sup>*</sup></label>
+                                <input name="coupon_amount" id="coupon_amount" class="form-control datepicker"
+                                    value="{{$transactionData->coupon_amount}}"
+                                    disabled>
+                            </div>
+                            @endif
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{route('admin.custom.payments')}}" class="btn btn-primary">Back</a>

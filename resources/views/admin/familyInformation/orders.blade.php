@@ -148,8 +148,6 @@
 
                                                     <td>{{ $notirizationPayment['ParentProfile']['p1_first_name'] }}</td>
                                                     <td>${{ $notirizationPayment->amount }}</td>
-                                                    </td>
-                                                    </td>
                                                     <td>{{ $notirizationPayment->payment_mode }}</td>
                                                     <td>{{ $notirizationPayment->transcation_id }}</td>
                                                 </tr>

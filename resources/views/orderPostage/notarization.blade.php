@@ -43,7 +43,7 @@
                 <div class="form-group mb-2 row">
                     <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized?</p>
                     <div class="form-group col-sm-3 mb-3">
-                        <label for="" class="w-auto">Transcript</label>
+                        <label for="" class="w-auto">Transcript(s)</label>
                         <div class="w-100">
                             <select name="transcript_doc[]" multiple="multiple" class="multiple-select form-control">
                                 @foreach ($transcript as $transcripts)
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-3 mb-3">
-                        <label for="" class="w-auto">Confirmation of Enrollment Letter</label>
+                        <label for="" class="w-auto">Confirmation(s) of Enrollment Letter</label>
                         <div class="w-100">
                             <select name="confirmation_doc" multiple="multiple" class="multiple-select form-control">
                                 @foreach ($confirmationLetter as $enrollment)
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-3 mb-3">
-                        <label for="" class="w-auto">Custom Letter</label>
+                        <label for="" class="w-auto">Custom Letter(s)</label>
                         <div class="w-100">
                             <select name="custom_doc" multiple="multiple" class="multiple-select form-control">
                                 @foreach ($custom_letter as $letter)

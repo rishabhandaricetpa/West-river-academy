@@ -33,7 +33,12 @@ class ParentProfile extends Model
     {
         return $this->hasMany('App\Models\Graduation', 'parent_profile_id', 'id');
     }
+    public function transactionMethod()
+    {
+        return $this->hasMany('App\Models\TransactionsMethod', 'parent_profile_id', 'id');
+    }
 
+    
     public static function getParentPendingFees($parent_profile_id, $total = false)
     {
         try {
