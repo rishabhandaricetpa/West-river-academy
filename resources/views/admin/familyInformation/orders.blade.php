@@ -33,8 +33,8 @@
                         @if (count($customPayments) > 0)
                             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
                                 <h2 class="mb-3">Paid For: Custom Payment</h2>
-                                <div class="overflow-auto">
-                                    <table class="table-styling w-100">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Parent Name</th>
@@ -68,8 +68,8 @@
                         @if (count($enrollmentPayments) > 0)
                             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
                                 <h2 class="mb-3">Paid For: Enrollment Payments</h2>
-                                <div class="overflow-auto">
-                                    <table class="table-styling w-100">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Student Name</th>
@@ -99,8 +99,8 @@
                         @if (count($graduationPayments) > 0)
                             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
                                 <h2 class="mb-3">Paid For: Graduation </h2>
-                                <div class="overflow-auto">
-                                    <table class="table-styling w-100">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Student Name</th>
@@ -131,8 +131,8 @@
                         @if (count($graduationPayments) > 0)
                             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
                                 <h2 class="mb-3">Paid For: Notarization </h2>
-                                <div class="overflow-auto">
-                                    <table class="table-styling w-100">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Student Name</th>
@@ -169,8 +169,8 @@
                         @if (count($orderConsulationPayments) > 0)
                             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
                                 <h2 class="mb-3">Paid For: Order Consulation Payments</h2>
-                                <div class="overflow-auto">
-                                    <table class="table-styling w-100">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Parent Name</th>

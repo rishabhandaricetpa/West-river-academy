@@ -13,7 +13,7 @@
         </ul>
         <a href="#" role="button" class="btn btn-secondary text-uppercase mt-4 mb-3">contact us</a>
         <ul class="list-unstyled">
-            <li><a href=""><i class="fas fa-phone-alt mr-2"></i>949-456-8753</a></li>
+            <li><a href="tel:9494568753" class="contact-phone"><i class="fas fa-phone-alt mr-2"></i>949-456-8753</a></li>
             <li><a href="#"><i class="fas fa-envelope mr-2"></i>contact@westriveracademy.com</a></li>
         </ul>
         <div class="copyright">

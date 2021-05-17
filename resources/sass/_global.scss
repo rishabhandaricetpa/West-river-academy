@@ -202,6 +202,7 @@ button {
 
 /* tables */
 table {
+  width: 100%;
   tr {
     line-height: 2;
     font-family: $lato-font;
@@ -363,5 +364,10 @@ sub {
 ///pdf 
 .hg-pdf table tr {
   page-break-inside: avoid;
+}
+footer {
+  .contact-phone{
+    font-family: "lato";
+  }
 }
 
