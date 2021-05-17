@@ -29,11 +29,11 @@
   <table style="margin-bottom:20px;">
     <tbody>
       <tr style="width:100%;">
-        <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
-        <td width="50%" style="text-align:center;">
-          <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
-          <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
-          <p style="margin:0;font-size:14px;">949.492.5240 info@westriveracademy.com</p>
+        <td valign="middle" style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px">official transcript</td>
+        <td valign="middle" style="text-align:center;width:50%;height:100px;">
+          <img src="../public/images/letterhead.png" alt="logo" style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
+          <!-- <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
+          <p style="margin:0;font-size:14px;">949.492.5240 info@westriveracademy.com</p> -->
         </td>
       </tr>
     </tbody>

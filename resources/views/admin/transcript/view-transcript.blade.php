@@ -48,7 +48,7 @@
                 Academic School Year(s): {{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
             </p>
-            <table id="addressData" class="table table-bordered table-striped data-table">
+            <table id="addressData" class="table table-bordered table-striped data-table mt-3">
                 <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3 transform-none">Delete this Year from Transcript</a>
                 <thead>
                     <tr>
