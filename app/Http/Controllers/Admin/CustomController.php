@@ -311,4 +311,36 @@ class CustomController extends Controller
         $order_conultationPayments = OrderPersonalConsultation::where('parent_profile_id', $parent_id)->with('parent')->get();
         return view('admin.payment.orderConsltation.view-each', compact('order_conultationPayments'));
     }
+    // public function indexCustomPayment()
+    // {
+    //     return view('payments/custom-payment');
+    // }
+
+    public function editCustomPayment($id)
+    {
+        $customPaymentsData = CustomPayment::whereId($id)->with('ParentProfile')->first();
+        $transactionData=TransactionsMethod::where('transcation_id',$customPaymentsData->transcation_id)->first();
+        return view('admin.payment.customPayments.edit', compact('customPaymentsData','transactionData'));
+    }
+
+     //update data from Admin users input in Custom payment table
+     public function updateCustomPayments(Request $request, $id)
+     {
+         $customPayments = CustomPayment::find($id);
+         $customPayments->transcation_id = $request->get('transcation_id');
+         $customPayments->payment_mode = $request->get('payment_mode');
+         $customPayments->amount = $request->get('amount');
+         $customPayments->status = $request->get('paymentStatus');
+         $customPayments->paying_for = $request->get('paying_for');
+         $customPayments->save();
+         $notification = [
+             'message' => 'Record updated successfully!',
+             'alert-type' => 'success',
+         ];
+         return redirect()->back()->with($notification);
+ 
+         return view('payments/custom-payment');
+     }
+ 
+    
 }

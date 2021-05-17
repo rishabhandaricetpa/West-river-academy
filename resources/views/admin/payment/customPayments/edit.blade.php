@@ -11,7 +11,7 @@
                     <h3>
 
                         <form method="post" class="row"
-                            action="{{ route('update.custompayment', $customPaymentsData->id) }}">
+                            action="{{ route('admin.update.custompayment', $customPaymentsData->id) }}">
 
                             @csrf
                             <div class="form-group col-sm-6">
