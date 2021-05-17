@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Mail\SchoolRecordTransfer;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
+use App\Models\UploadDocuments;
+use File;
 use Illuminate\Http\Request;
 use Mail;
 use PDF;
+use Storage;
+use Str;
 
 class RecordTransferController extends Controller
 {
@@ -127,6 +131,23 @@ class RecordTransferController extends Controller
         $record->request_status = 'Record Received';
         $record->medium_of_transfer = $request->mediumOfDelivery;
         $record->save();
+        // upload document 
+        $cover = $request->file('file');
+        if ($request->file('file')) {
+            foreach ($request->file as $cover) {
+                $extension = $cover->getClientOriginalExtension();
+                $path = Str::random(40) . '.' . $extension;
+                Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($cover));
+
+                $uploadDocument = new UploadDocuments();
+                $uploadDocument->student_profile_id = $request->student_id;
+                $uploadDocument->parent_profile_id = $request->parent_id;
+                $uploadDocument->original_filename = $cover->getClientOriginalName();
+                $uploadDocument->is_upload_to_student = 1;
+                $uploadDocument->filename = $path;
+                $uploadDocument->save();
+            }
+        }
         $notification = [
             'message' => 'Record Received Successfully From School',
             'alert-type' => 'success',
