@@ -196,7 +196,7 @@
             </tr>
           </tbody>
         </table>
-        <table width="100%">
+        <table class="my-5">
           <tbody>
             <tr>
               <td width="50%" style="text-align:center;position: relative;"> <a

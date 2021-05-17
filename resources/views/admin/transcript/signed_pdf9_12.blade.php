@@ -87,7 +87,7 @@
                        </tr>
                    </tbody>
                </table>
-               <table width="100%" style="border-collapse:collapse;">
+               <table style="border-collapse:collapse; width:100%;">
                    <tbody>
                        <tr style="width:100%;">
                            <table style="width:100%;border-collapse:collapse;" border="1">
@@ -109,7 +109,7 @@
                        </tr>
                    </tbody>
                </table>
-               <table width="100%" style="padding-top:30px;vertical-align:top;">
+               <table  style="padding-top:30px;vertical-align:top; width:100%;">
                    <tr>
                        <td width="35%" style="vertical-align:top;">
                            <table width="100%" style="border:1px solid #000;">
