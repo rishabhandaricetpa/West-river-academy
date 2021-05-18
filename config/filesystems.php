@@ -65,7 +65,8 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'options' => [
                 'CacheControl' => 'max-age=2592000', //seconds
-            ]
+            ],
+            'visibility' => 'public',
         ],
 
     ],
