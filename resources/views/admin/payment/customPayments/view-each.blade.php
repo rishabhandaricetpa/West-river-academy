@@ -53,7 +53,7 @@
                                             <td>{{ $allcustomPayment->payment_mode }} </td>
                                             <td>{{ $allcustomPayment->status }} </td>
                                             <td>
-                                                <a href="{{ route('edit.custompayment', $allcustomPayment->id) }}"><i
+                                                <a href="{{ route('admin.edit.custompayment', $allcustomPayment->id) }}"><i
                                                         class="fas fa-edit"></i></a>
                                             </td>
                                         </tr>
