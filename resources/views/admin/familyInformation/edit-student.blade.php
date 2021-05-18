@@ -56,7 +56,6 @@
         <div class="form-group col-12">
           <label>Enrollment Period <sup>*</sup></label>
           @foreach ($enrollment_periods as $enrollment_period)
-          </div>
           <div class="form-group w-100 row mx-0">
             <input type="hidden" name="id[]" value="{{ $enrollment_period->id }}">
             <div class="col-md-4 mb-4 mb-sm-0">
@@ -130,7 +129,7 @@
               </select>
             </div>
           </div>
-        
+        </div>
         @endforeach
         <div class="form-group col-sm-6">
           <label>Student Situation</label>
