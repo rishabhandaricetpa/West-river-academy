@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('view-parent-orders/{id}', 'StudentProfileController@viewParentOrders')->name('parents.orders');
     Route::get('view/student/parent/{parent_id}', 'ParentController@viewStudentParent')->name('view.students.parent');
     // Crud for student profile
-    Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student');
+    Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student.data');
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
     Route::get('edit-student/{id}', 'StudentProfileController@edit')->name('edit-student');
     Route::post('update/{id}', 'StudentProfileController@update')->name('edit-student.update')->whereNumber('id');

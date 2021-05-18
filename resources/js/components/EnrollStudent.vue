@@ -166,12 +166,8 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose {{startdate | moment("MMMM Do")}} (the first day of the Annual enrollment period),
-              {{sem | moment("MMMM Do")}} (the first day of the Second Semester), today's date or
-              another date. This date will appear on your confirmation of
-              enrollment letter. You will be considered enrolled for the full
-              12-month period for Annual or 7-month period for Second Semester
-              Only.
+             You can enter a different date AFTER the one entered. The date you enter will appear on your confirmation of enrollment letter. But your official enrollment will START on the date you see in the box. 
+
             </p>
           </div>
            <div class="col-lg-3 links-list mt-3 mt-sm-0">
@@ -203,10 +199,8 @@
           </div>
           <div class="info-detail col-md-8 col-lg-6 lato-italic">
             <p>
-              Choose before {{ enddate | moment("MMMM Do")}}
-              (the last day of your enrollment) or another
-              date before {{ enddate | moment("MMMM Do")}}. This date will appear on your confirmation of
-              enrollment letter. Your enrollment will officially end on {{new Date(enddate) | moment("MMMM Do")}}.
+                           You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter. But your official enrollment will START on the date you see in the box. 
+
             </p>
           </div>
           <div class="col-lg-3 links-list mt-3 mt-sm-0">

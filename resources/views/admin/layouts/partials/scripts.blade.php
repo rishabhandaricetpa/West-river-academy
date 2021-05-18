@@ -159,7 +159,7 @@
         });
         //student datatable
         $("#student-table").DataTable({
-            "ajax": "{{ route('admin.datatable.student') }}",
+            "ajax": "{{ route('admin.datatable.student.data') }}",
             "dom": "Bfrtip",
             "processing": true,
             "serverSide": true,
