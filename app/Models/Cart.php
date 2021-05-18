@@ -646,7 +646,7 @@ class Cart extends Model
                     $custom_payment->save();
                 }
                     Dashboard::create([
-                        'linked_to' => $custom_payment->id,
+                        'linked_to' => $cart->item_id,
                         'related_to' => 'custom_record_received',
                         'is_archieved' => 0,
                         'notes' =>  $parentName->p1_first_name,

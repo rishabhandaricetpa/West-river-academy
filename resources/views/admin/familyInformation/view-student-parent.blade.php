@@ -27,7 +27,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"></h3>
-                        </div>
+                            <a href="{{route ('admin.each.student',$parent->id)}}" class="btn btn-primary" >Back</a>
+                              </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="student-parent" class="table table-bordered table-striped data-table"">

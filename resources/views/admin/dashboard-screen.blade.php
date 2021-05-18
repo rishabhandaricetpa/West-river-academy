@@ -156,7 +156,7 @@
                                                             Transfer</a></td>
                                                 @endif
                                             @elseif($data->related_to === 'custom_record_received')
-                                                <td><a href="{{ route('admin.edit.custompayment', $data->linked_to) }}">Custom
+                                                <td><a href="{{ route('admin.custom.payments', $data->linked_to) }}">Custom
                                                         Payment</a></td>
                                             @elseif($data->related_to === 'transcript_edit_record_received')
                                                 <td><a href="">Transcript Edit Request</a></td>

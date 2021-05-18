@@ -209,6 +209,7 @@ class CustomController extends Controller
 
     public function getAllParentsNotarization($parent_id)
     {
+        dd($parent_id);
         $notarizationPaymentData = NotarizationPayment::whereId($parent_id)->with('ParentProfile', 'notarization')->get();
         return view('admin.payment.notarizationPayments.view-each', compact('notarizationPaymentData'));
     }
