@@ -19,10 +19,10 @@
         <p style="margin-top:25px;font-size: 17px;">This confirms the enrollment of the following student in West River Academy.</p>
         <div class="info-detail" style="margin-top:25px;">
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Name: {{$student->first_name}} {{$student->last_name}}</p>
-            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Date of Birth: {{Carbon\Carbon::parse($student->d_o_b)->format('M d Y')}}</p>
+            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Date of Birth: {{Carbon\Carbon::parse($student->d_o_b)->format('M j, Y')}}</p>
             @foreach($enrollment as $enrollmentperiod)
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Grade: {{$enrollmentperiod->grade_level}}</p>
-            <p style="margin-top:25px;font-size: 17px;">Enrollment Period: {{Carbon\Carbon::parse($enrollmentperiod->start_date_of_enrollment)->format('M d Y')}} - {{Carbon\Carbon::parse($enrollmentperiod->end_date_of_enrollment)->format('M d Y')}}</p>
+            <p style="margin-top:25px;font-size: 17px;">Enrollment Period: {{Carbon\Carbon::parse($enrollmentperiod->start_date_of_enrollment)->format('M j, Y')}} - {{Carbon\Carbon::parse($enrollmentperiod->end_date_of_enrollment)->format('M j, Y')}}</p>
             @endforeach
         </div>
     </div>

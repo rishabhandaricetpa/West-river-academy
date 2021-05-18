@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<h3 style="font-family:'Catamaran', sans-serif; color:black;">West River Academy</h3> 
 <h3 style="font-family:'Catamaran', sans-serif; color:black;">Bank Transfer Instructions</h3>
    
     <h2 style="font-family:'Catamaran', sans-serif;color:black;">Hi {{$user->name}},</h2>

@@ -35,7 +35,7 @@ class PDFController extends Controller
                     'student' => $studentProfileData,
                     'enrollment' => $enrollment_periods,
                     'title' => 'Confirmation of Enrollment',
-                    'date' => date('m/d/Y'),
+                    'date' => date('M j, Y'),
                 ];
                 $pdf = PDF::loadView('confirmationLetter', $data);
                 Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());

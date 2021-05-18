@@ -12,7 +12,7 @@
                     <div class="card-header">
                         <h3 class="card-title"> Enrollment Status of {{$student->fullname}}  </h3>
                         <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}" class="btn btn-primary float-left">View Parent</a>
-                        <a href="{{route ('admin.view-student')}}" class="btn btn-primary float-right">Back</a>
+                        <a href="{{route ('admin.payments')}}" class="btn btn-primary float-right">Back</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

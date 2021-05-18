@@ -209,7 +209,7 @@ class CustomController extends Controller
 
     public function getAllParentsNotarization($parent_id)
     {
-        $notarizationPaymentData = NotarizationPayment::where('parent_profile_id', $parent_id)->with('ParentProfile', 'notarization')->get();
+        $notarizationPaymentData = NotarizationPayment::whereId($parent_id)->with('ParentProfile', 'notarization')->get();
         return view('admin.payment.notarizationPayments.view-each', compact('notarizationPaymentData'));
     }
 
@@ -318,10 +318,8 @@ class CustomController extends Controller
 
     public function editCustomPayment($id)
     {
-        $customPaymentsData = CustomPayment::where('parent_profile_id',$id)->with('ParentProfile')->first();
-        if($customPaymentsData){
-            $transactionData=TransactionsMethod::where('transcation_id',$customPaymentsData->transcation_id)->first();
-        }
+        $customPaymentsData = CustomPayment::whereId($id)->with('ParentProfile')->first();
+        $transactionData=TransactionsMethod::where('transcation_id',$customPaymentsData->transcation_id)->first();
         return view('admin.payment.customPayments.edit', compact('customPaymentsData','transactionData'));
     }
 
