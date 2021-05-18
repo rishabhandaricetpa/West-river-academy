@@ -180,7 +180,7 @@ class StudentProfileController extends Controller
                 'student' => $studentProfileData,
                 'enrollment' => $enrollment_periods,
                 'title' => 'Confirmation of Enrollment',
-                'date' => date('m/d/Y'),
+                'date' => date('M j, Y'),
             ];
 
             $pdf = PDF::loadView('confirmationLetter', $data);

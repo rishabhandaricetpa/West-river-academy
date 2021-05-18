@@ -28,43 +28,21 @@
                     </a>
                 </li>
             @endcan
-            <a href="" class="nav-link ">
-                <i class="fas fa-user-friends nav-icon"></i>
-                <p>
-                    Parent Profile
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ url('admin/view') }}" class="nav-link">
-                        <i class="nav-icon fas fa-eye"></i>
-                        <p>View Parents </p>
-                    </a>
-                </li>
-
-                </li>
-
-            </ul>
-            </li>
-            <li class="nav-item menu">
-                <a href="" class="nav-link ">
-                    <i class="nav-icon fas fa-user"></i>
+            <li class="nav-item">
+                <a href="{{ url('admin/view') }}" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
                     <p>
-                        Students
-                        <i class="right fas fa-angle-left"></i>
+                    View Parents
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ url('admin/view-student') }}" class="nav-link">
-                            <i class="fas fa-eye"></i>
-                            <p>
-                                View Students
-                            </p>
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('admin/view-student') }}" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                    <p>
+                    Students
+                    </p>
+                </a>
             </li>
             <li class="nav-item menu">
                 <a href="" class="nav-link ">

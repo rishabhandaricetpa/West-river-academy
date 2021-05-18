@@ -189,7 +189,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'notarization':
-                    $clearpendingPayments = Notarization::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    // $clearpendingPayments = Notarization::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $clearCart=Cart::where('item_type','notarization')->delete();
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
@@ -230,7 +230,8 @@ class CartController extends Controller
                     }
                     break;
                 case 'apostille':
-                    $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    // $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->get();
+                //   dd($clearpendingPayments);
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
                     $confirmation_doc_total = json_encode($request->get('confirmation_doc'));

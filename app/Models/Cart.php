@@ -646,7 +646,7 @@ class Cart extends Model
                     $custom_payment->save();
                 }
                     Dashboard::create([
-                        'linked_to' => $cart->item_id,
+                        'linked_to' => $custom_payment->id,
                         'related_to' => 'custom_record_received',
                         'is_archieved' => 0,
                         'notes' =>  $parentName->p1_first_name,
@@ -710,7 +710,7 @@ class Cart extends Model
                         $notarization_payment->status = $status;
                     }
                     $notarization_payment->save();
-                    $notarization = Notarization::whereId($cart->item_id)->first();
+                    $notarization = Notarization::whereId($notarization_payment->notarization_id)->first();
                     $notarization->status = $status;
                     $notarization->save();
                     Dashboard::create([
@@ -734,7 +734,7 @@ class Cart extends Model
                         $apostille_payment->status = $status;
                     }
                     $apostille_payment->save();
-                    $apostille = Apostille::whereId($cart->item_id)->first();
+                    $apostille = Apostille::whereId($apostille_payment->apostille_id)->first();
                     $apostille->status = $status;
                     $apostille->save();
                     Dashboard::create([
@@ -779,9 +779,10 @@ class Cart extends Model
                     $consultation_payment->save();
                 }
                     Dashboard::create([
-                        'linked_to' =>  $cart->item_id,
+                        'linked_to' => $cart->item_id,
                         'related_to' => 'orderconsultation_record_received',
                         'notes' =>  $parentName->p1_first_name,
+                        'is_archieved' => 0,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
                     break;

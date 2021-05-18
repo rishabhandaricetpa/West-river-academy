@@ -92,7 +92,7 @@
         <div class="col-11 col-sm-3">
           <div class="bg-secondary h-100 d-flex align-items-center justify-content-center">
             <img src="/images/pattern.png" alt="pattern" class="img-absolute o-contain">
-            <h2 class="text-white mb-0 text-center pl-3">Transcript</h2>
+            <h2 class="text-white mb-0 text-center pl-3">Transcripts</h2>
           </div>
         </div>
         <div class="col-sm-9 d-sm-flex">
@@ -132,7 +132,7 @@
                 <td class="text-secondary text-right">${{ getFeeDetails('global_guaranteed_international') }}</td>
               </tr>
               <tr>
-                <th>Express Mail Tier 3(for Argentina and Brazil)</th>
+                <th>Express Mail Tier 3 (for Argentina and Brazil)</th>
                 <td class="text-secondary text-right">${{ getFeeDetails('priority_international') }}</td>
               </tr>
             </table>

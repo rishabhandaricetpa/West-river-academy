@@ -13,6 +13,7 @@ use App\Models\TranscriptK8;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptPdf;
 use App\Models\Transcript9_12;
+use App\Models\TransactionsMethod;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -216,7 +217,8 @@ class TranscriptController extends Controller
     {
         
         $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
-        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments'));
+        $transactionData=TransactionsMethod::where('transcation_id',$geteachtranscriptPayments->transcation_id)->first();
+        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments','transactionData'));
     }
 
     public function updateAllPayments(Request $request, $transpay_id)
