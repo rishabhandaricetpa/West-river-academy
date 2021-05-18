@@ -16,8 +16,7 @@ class PaymentController extends Controller
 {
     public function view()
     {
-        $students = StudentProfile::all();
-
+        $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         return view('admin.payment.view-payment', compact('students'));
     }
 
@@ -49,9 +48,9 @@ class PaymentController extends Controller
     {
         $enroll_payment = EnrollmentPayment::find($id);
         $enrollment_periods = EnrollmentPayment::find($id)->enrollment_period()->first();
-        $transactionData=TransactionsMethod::where('transcation_id',$enroll_payment->transcation_id)->first();
-        $student = StudentProfile::whereId($enrollment_periods->student_profile_id)->with('parentProfile','parentProfile.transactionMethod')->first();
-        return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods', 'student','transactionData'));
+        $transactionData = TransactionsMethod::where('transcation_id', $enroll_payment->transcation_id)->first();
+        $student = StudentProfile::whereId($enrollment_periods->student_profile_id)->with('parentProfile', 'parentProfile.transactionMethod')->first();
+        return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods', 'student', 'transactionData'));
     }
 
     public function update(Request $request, $payment_id)

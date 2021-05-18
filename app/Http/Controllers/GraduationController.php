@@ -182,7 +182,7 @@ class GraduationController extends Controller
 
     public function dataTable()
     {
-        return datatables(Graduation::with(['details', 'student', 'parent'])->get())->toJson();
+        return datatables(Graduation::with(['details', 'student', 'parent'])->latest()->get())->toJson();
     }
 
     public function edit(Request $request, $id)
