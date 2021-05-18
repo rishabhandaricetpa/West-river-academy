@@ -31,11 +31,11 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="addressData" class="table table-bordered table-striped data-table"">
+                            <table id="addressData" class="table table-bordered table-striped data-table">
                       <thead>
                       <div class=" form-group d-sm-flex mb-2 align-items-baseline">
-                                <h3 class="mr-sm-3" for="">Name: {{ $student->fullname }}</h3>
-                                <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}" class="btn btn-primary float-right">View Parent</a>
+                                <h3 class="mr-sm-3 mr-2" for="">Name: {{ $student->fullname }}</h3>
+                                <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}" class="btn btn-primary float-left mr-sm-3 mr-2">View Parent</a>
                         </div>
                         <tr>
                             <th>Transcript</th>
