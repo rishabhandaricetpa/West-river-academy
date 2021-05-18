@@ -31,59 +31,59 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="addressData" class="table table-bordered table-striped data-table"">
-                      <thead>
-                      <div class=" form-group d-sm-flex mb-2 align-items-baseline">
-                                <h3 class="mr-sm-3" for="">Name: {{ $student->fullname }}</h3>
-                                <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}" class="btn btn-primary float-right">View Parent</a>
-                                @if($type==='k-8')
-                                <a href="{{route ('admin.view.transcript')}}" class="btn btn-primary float-right">Back</a>
-                                @else
-                                <a href="{{route ('admin.view.transcript9_12S')}}" class="btn btn-primary float-right">Back</a>
-                                @endif
+                            <table id="addressData" class="table table-bordered table-striped data-table">
+                                <thead>
+                                    <div class=" form-group d-sm-flex mb-2 align-items-baseline">
+                                        <h3 class="mr-sm-3 mr-2" for="">Name: {{ $student->fullname }}</h3>
+                                        <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}"
+                                            class="btn btn-primary float-left mr-sm-3 mr-2">View Parent</a>
+                                    </div>
+                                    <tr>
+                                        <th>Transcript</th>
+                                        <th>Status</th>
+                                        <th>Enrollment Year</th>
+                                        <th>School Name</th>
+                                        <th>Grade</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($transcript as $transcripts)
+                                        <tr>
+                                            <td>{{ $transcripts->period }}</td>
+                                            @if ($transcripts->status === 'completed')
+                                                <td>Completed</td>
+                                            @elseif($transcripts->status === 'paid') <td>Paid</td>
+                                            @elseif($transcripts->status === 'approved') <td>Approved</td>
+                                            @elseif($transcripts->status === 'canEdit') <td>Edit</td>
+                                            @endif
+                                            <td>{{ $transcripts->enrollment_year }}</td>
+                                            <td>{{ $transcripts->school_name }}</td>
+                                            <td>{{ $transcripts->grade }}</td>
+                                            @if ($type === 'k-8')
+                                                <td>
+                                                    <a
+                                                        href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
+                                                        K-8 Transcript</a>
+                                                </td>
+                                            @else
+                                                <td><a
+                                                        href=" {{ route('admin.viewfull.transcript9_12', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
+                                                        9-12 Transcript</a>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <tr>
-                            <th>Transcript</th>
-                            <th>Status</th>
-                            <th>Enrollment Year</th>
-                            <th>School Name</th>
-                            <th>Grade</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($transcript as $transcripts)
-                                <tr>
-                                    <td>{{ $transcripts->period }}</td>
-                                    @if ($transcripts->status === 'completed')
-                                        <td>Completed</td>
-                                    @elseif($transcripts->status === 'paid') <td>Paid</td>
-                                    @elseif($transcripts->status === 'approved') <td>Approved</td>
-                                    @elseif($transcripts->status === 'canEdit') <td>Edit</td>
-                                    @endif
-                                    <td>{{ $transcripts->enrollment_year }}</td>
-                                    <td>{{ $transcripts->school_name }}</td>
-                                    <td>{{ $transcripts->grade }}</td>
-                                    @if ($type === 'k-8')
-                                        <td>
-                                            <a href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View K-8 Transcript</a>
-                                        </td>
-                                    @else
-                                        <td><a href=" {{ route('admin.viewfull.transcript9_12', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View 9-12 Transcript</a>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                        </table>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
+            <!-- /.row -->
     </section>
     </div>
     <!-- /.content -->

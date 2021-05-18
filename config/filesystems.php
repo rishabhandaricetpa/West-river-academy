@@ -66,7 +66,6 @@ return [
             'options' => [
                 'CacheControl' => 'max-age=2592000', //seconds
             ],
-            'visibility' => 'public',
         ],
 
     ],

@@ -40,7 +40,7 @@
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Transcript</h2>
       <div class="overflow-auto max-table">
-         <table class="table-styling w-100">
+         <table class="table-styling w-100 table-vertical_scroll">
             <thead>
                <tr>
                   <th scope="col">Student Name</th>
