@@ -12,7 +12,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group col-sm-6">
-                            <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
+                            <label>Upload Single/Multiple Documents<sup>*</sup></label>
                             <label class="font-weight-bold text-secondary">For Student
                                 {{ $parentStudentData->first_name }}</label>
                             <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>

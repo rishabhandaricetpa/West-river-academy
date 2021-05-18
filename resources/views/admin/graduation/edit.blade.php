@@ -4,14 +4,16 @@
 <div class="container-fluid position-relative">
   <h1> Graduation Information</h1>
   <div class="form-wrap border py-5 px-25 position-relative">
-    <form action="{{ route('admin.update.graduation',$graduation->id) }}" class="row" method="post" enctype="multipart/form-data">
+    <form action="{{ route('admin.update.graduation',$graduation->id) }}" class="row" method="post"
+      enctype="multipart/form-data">
       @csrf
       @method('put')
       <div class="form-group col-sm-6">
         Student Name: {{ $graduation->student->fullname }}
- </div>
+      </div>
       <div class="form-group col-sm-6">
-        Student Email:  <a class="transform-none" href="mailto:{{ $graduation->student->email }}"> {{ $graduation->student->email }}</a>
+        Student Email: <a class="transform-none" href="mailto:{{ $graduation->student->email }}">
+          {{ $graduation->student->email }}</a>
       </div>
 
       <div class="form-group col-sm-6">
@@ -19,7 +21,8 @@
       </div>
 
       <div class="form-group col-sm-6">
-      Parent Email :  <a class="transform-none" href="mailto:{{{ $graduation->parent->p1_email }}}">{{{ $graduation->parent->p1_email }}}</a>
+        Parent Email : <a class="transform-none"
+          href="mailto:{{{ $graduation->parent->p1_email }}}">{{{ $graduation->parent->p1_email }}}</a>
       </div>
 
       <div class="form-group col-sm-6">
@@ -46,35 +49,36 @@
 
       <div class="form-group col-sm-6">
         <label for="transcript">Transcript:</label>
-        <input type="text" class="form-control" id="transcript" value="{{ $graduation->details->transcript }}" name="transcript">
+        <input type="text" class="form-control" id="transcript" value="{{ $graduation->details->transcript }}"
+          name="transcript">
       </div>
 
       <div class="form-group col-sm-6">
         <label for="records">Records Received:</label>
-        <input type="text" class="form-control" id="records" value="{{ $graduation->details->record_received }}" name="record_received">
+        <input type="text" class="form-control" id="records" value="{{ $graduation->details->record_received }}"
+          name="record_received">
       </div>
 
       <div class="form-group col-sm-6">
         <label for="grad_date">Expected Grad Date:</label>
-        <input type="date" class="form-control" id="grad_date" value="{{ Carbon\Carbon::parse($graduation->details->grad_date)->format('M d Y') }}" name="grad_date">
+        <input type="date" class="form-control" id="grad_date"
+          value="{{ Carbon\Carbon::parse($graduation->details->grad_date)->format('M d Y') }}" name="grad_date">
       </div>
 
       <div class="form-group col-sm-6">
         <label for="apostille_package">Apostille Package:</label>
-        <input type="text" class="form-control" id="apostille_package" value="{{ $graduation->details->apostille_package }}" name="apostille_package">
+        <input type="text" class="form-control" id="apostille_package"
+          value="{{ $graduation->details->apostille_package }}" name="apostille_package">
       </div>
 
-      <div class="form-group col-sm-8">
+      <div class="form-group col-sm-6">
         <label for="notes">Notes:</label>
         <input type="text" class="form-control" id="notes" value="{{ $graduation->details->notes }}" name="notes">
       </div>
 
-      <div class="form-group col-sm-8">
-        <label for="situation">Situation/Updates:</label>
-        <textarea name="situation" class="w-100" id="situation" cols="80" rows="4">{{ $graduation->details->situation }}</textarea>
-      </div>
+      
 
-      <div class="form-group col-sm-4">
+      <div class="form-group col-sm-6">
         <label for="status">Status:</label>
         <select class="form-control" name="status" id="status">
           <option @if($graduation->status === 'pending') selected @endif value="pending">Pending Approval</option>
@@ -83,14 +87,18 @@
           <option @if($graduation->status === 'completed') selected @endif value="completed">Completed</option>
         </select>
       </div>
-         <div class="col-md-4 mb-4 mb-sm-0">
-                            <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
-                            <label class="font-weight-bold text-secondary">
-                            </label>
-                            <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
-                        </div>
+      <div class="form-group col-sm-6">
+        <label for="situation">Situation/Updates:</label>
+        <textarea name="situation" class="w-100" id="situation" cols="80"
+          rows="4">{{ $graduation->details->situation }}</textarea>
+      </div>
+      <div class=" form-group col-sm-6">
+        <label>Upload Single/Multiple Documents<sup>*</sup></label>
+        <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
+      </div>
+     
 
-      <div class="col-sm-12">
+      <div class="col-sm-12 mt-md-4 mt-3">
         <input type="submit" class="btn btn-primary" value="Update">
         <a href="{{route('admin.view.graduation')}}" class="btn btn-primary">Back</a>
       </div>
