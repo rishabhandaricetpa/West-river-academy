@@ -11,10 +11,13 @@ use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
+use Illuminate\Support\Facades\File;
+use App\Models\UploadDocuments;
 use DB;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
+use Str;
 
 class StudentProfileController extends Controller
 {
@@ -39,7 +42,7 @@ class StudentProfileController extends Controller
     }
     public function studentInformation($id)
     {
-        $students = StudentProfile::where('parent_profile_id', $id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers'])->get();
+        $students = StudentProfile::where('parent_profile_id', $id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers', 'uploadDocuments'])->get();
         return view('admin.familyInformation.student', compact('students', 'id'));
     }
 
@@ -120,6 +123,23 @@ class StudentProfileController extends Controller
                 $enroll->save();
             }
             $student->save();
+
+            $cover = $request->file('file');
+            if ($request->file('file')) {
+                foreach ($request->file as $cover) {
+                    $extension = $cover->getClientOriginalExtension();
+                    $path = Str::random(40) . '.' . $extension;
+                    Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($cover));
+
+                    $uploadDocument = new UploadDocuments();
+                    $uploadDocument->student_profile_id = $id;
+                    $uploadDocument->parent_profile_id = $request->parent_id;
+                    $uploadDocument->original_filename = $cover->getClientOriginalName();
+                    $uploadDocument->is_upload_to_student = 1;
+                    $uploadDocument->filename = $path;
+                    $uploadDocument->save();
+                }
+            }
             DB::commit();
             $notification = [
                 'message' => 'Student Record is updated Successfully!',

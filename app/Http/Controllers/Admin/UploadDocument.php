@@ -30,21 +30,20 @@ class UploadDocument extends Controller
     public function storeUploadedDocument(Request $request)
     {
         request()->validate([
-            //  'file' => 'required|file|mimes:jpeg,jpg,png,gif|max:2048',
-            'file' => 'required|mimes:jpeg,png,jpg,gif,svg,mp3,mpeg,mp4,3gp,m4a'
+            'file' => 'required|max:2048'
         ]);
         $cover = $request->file('file');
         if ($request->file('file')) {
             foreach ($request->file as $cover) {
                 $extension = $cover->getClientOriginalExtension();
-                // Storage::disk('public')->put('uploadDocument/' . $cover->getFilename() . '.' . $extension,  File::get($cover));
-                Storage::put('uploadDocument/' . $cover->getFilename() . '.' . Str::random(10) . '.' . $extension,  File::get($cover));
+                $path = Str::random(40) . '.' . $extension;
+                Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($cover));
 
                 $uploadDocument = new UploadDocuments();
                 $uploadDocument->student_profile_id = $request->student_id;
                 $uploadDocument->parent_profile_id = $request->parent_id;
                 $uploadDocument->original_filename = $cover->getClientOriginalName();
-                $uploadDocument->filename = $cover->getFilename() . '.' . $extension;
+                $uploadDocument->filename = $path;
                 $uploadDocument->save();
             }
         }
@@ -83,10 +82,5 @@ class UploadDocument extends Controller
         ];
 
         return redirect()->route('admin.change.uploadDocument', $uploadDocument->student_profile_id)->with($notification);
-    }
-    public function downloadDocument($document_id)
-    {
-        $document = UploadDocuments::where('id', $document_id)->first();
-        return Storage::download('uploadDocument/' . $document->filename);
     }
 }

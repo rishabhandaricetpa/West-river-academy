@@ -56,14 +56,14 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Date:{{ $date }} </td>
+                    <td>Date: {{ $date }} </td>
                 </tr>
             </tbody>
         </table>
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>To:{{ $email }}</td>
+                    <td>To: {{ $email }}</td>
                 </tr>
             </tbody>
         </table>
@@ -102,8 +102,7 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td> <span style="max-width:200px; display: block;">Please send records to: <br /> <span>West River
-                                Academy
+                    <td> <span style="max-width:200px; display: block;">Please send records to: <br /> <span>
                                 5475 S. Shawnee Way
                                 Aurora, CO 80015 USA</span></span> </td>
                 </tr>

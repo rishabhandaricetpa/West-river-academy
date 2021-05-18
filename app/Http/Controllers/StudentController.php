@@ -474,9 +474,4 @@ class StudentController extends Controller
             }
         }
     }
-    public function downloadDocument($document_id)
-    {
-        $document = UploadDocuments::where('id', $document_id)->first();
-        return Storage::download('uploadDocument/' . $document->filename);
-    }
 }

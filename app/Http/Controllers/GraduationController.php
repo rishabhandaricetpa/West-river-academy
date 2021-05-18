@@ -13,9 +13,13 @@ use App\Models\StudentProfile;
 use App\Models\Notification;
 use Auth;
 use App\Models\Dashboard;
+use App\Models\UploadDocuments;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Storage;
+use Str;
 
 class GraduationController extends Controller
 {
@@ -97,12 +101,14 @@ class GraduationController extends Controller
 
     public function update(Request $request, $id)
     {
+
         try {
             DB::beginTransaction();
             $inputs = $request->all();
 
             $graduation = Graduation::whereId($id);
-            $parent_id=$graduation->pluck('parent_profile_id')->first();
+            $student_id = $graduation->pluck('student_profile_id')->first();
+            $parent_id = $graduation->pluck('parent_profile_id')->first();
             $old_status = $graduation->pluck('status')->first();
             $graduation->update(['status' => $inputs['status']]);
 
@@ -135,6 +141,23 @@ class GraduationController extends Controller
 
             GraduationDetail::where('graduation_id', $id)->update($inputs);
 
+            // upload documents
+            $cover = $request->file('file');
+            if ($request->file('file')) {
+                foreach ($request->file as $cover) {
+                    $extension = $cover->getClientOriginalExtension();
+                    $path = Str::random(40) . '.' . $extension;
+                    Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($cover));
+
+                    $uploadDocument = new UploadDocuments();
+                    $uploadDocument->student_profile_id = $student_id;
+                    $uploadDocument->parent_profile_id = $parent_id;
+                    $uploadDocument->original_filename = $cover->getClientOriginalName();
+                    $uploadDocument->is_upload_to_student = 1;
+                    $uploadDocument->filename = $path;
+                    $uploadDocument->save();
+                }
+            }
             DB::commit();
 
             return redirect()->route('admin.view.graduation')->with([

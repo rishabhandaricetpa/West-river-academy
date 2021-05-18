@@ -4,13 +4,12 @@
 <div class="container-fluid position-relative">
   <h1> Graduation Information</h1>
   <div class="form-wrap border py-5 px-25 position-relative">
-    <form action="{{ route('admin.update.graduation',$graduation->id) }}" class="row" method="post">
+    <form action="{{ route('admin.update.graduation',$graduation->id) }}" class="row" method="post" enctype="multipart/form-data">
       @csrf
       @method('put')
       <div class="form-group col-sm-6">
         Student Name: {{ $graduation->student->fullname }}
  </div>
-
       <div class="form-group col-sm-6">
         Student Email:  <a class="transform-none" href="mailto:{{ $graduation->student->email }}"> {{ $graduation->student->email }}</a>
       </div>
@@ -84,6 +83,12 @@
           <option @if($graduation->status === 'completed') selected @endif value="completed">Completed</option>
         </select>
       </div>
+         <div class="col-md-4 mb-4 mb-sm-0">
+                            <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
+                            <label class="font-weight-bold text-secondary">
+                            </label>
+                            <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
+                        </div>
 
       <div class="col-sm-12">
         <input type="submit" class="btn btn-primary" value="Update">

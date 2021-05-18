@@ -8,7 +8,7 @@
             <h1>Student Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <form class="row align-items-center" method="post"
-                    action="{{ route('admin.recordReceived', $studentRecord->id) }}">
+                    action="{{ route('admin.recordReceived', $studentRecord->id) }}" enctype="multipart/form-data">
                     @csrf
                     @if ($studentRecord->request_status !== 'Record Received')
                         <div class="col-sm-6">
@@ -25,6 +25,16 @@
                             <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Records Received</button>
                         @endif
                     </div>
+                    <input type="hidden" name="student_id" value="{{ $studentRecord->student_profile_id }}">
+                    <input type="hidden" name="parent_id" value="{{ $studentRecord->parent_profile_id }}">
+                    @if ($studentRecord->request_status !== 'Record Received')
+                        <div class="col-md-4 mb-4 mb-sm-0">
+                            <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
+                            <label class="font-weight-bold text-secondary">
+                            </label>
+                            <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
+                        </div>
+                    @endif
                 </form>
                 @if ($studentRecord->request_status == 'Record Received')
                     <h2 class="text-center">Method of Delivery:

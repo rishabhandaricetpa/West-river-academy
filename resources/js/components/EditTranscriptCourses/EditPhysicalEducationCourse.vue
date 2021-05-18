@@ -6,7 +6,7 @@
   >
     <div
       class="seperator mt-4"
-      v-for="physicalCourse in form.physicalCourse"
+      v-for="(physicalCourse,index) in form.physicalCourse"
       :key="physicalCourse.id"
     >
       <div class="position-relative">
