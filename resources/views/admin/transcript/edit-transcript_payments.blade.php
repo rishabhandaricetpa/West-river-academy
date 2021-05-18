@@ -58,17 +58,16 @@
                                     disabled>
                             </div>
                             @endif
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('admin.transcript.payments') }}" class="btn btn-primary">Back</a>
-                            </div>
-                            <div class="col-md-4 mb-4 mb-sm-0">
-                                <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
-                                <label class="font-weight-bold text-secondary">
-                                </label>
+                            <div class="col-sm-6">
+                                <label>Upload Single/Multiple Documents<sup>*</sup></label>
                                 <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn"
                                     multiple>
                             </div>
+                            <div class="col-sm-12 my-sm-4 my-3">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                <a href="{{ route('admin.transcript.payments') }}" class="btn btn-primary">Back</a>
+                            </div>
+                           
                         </form>
             </div>
         </div><!-- /.container-fluid -->
