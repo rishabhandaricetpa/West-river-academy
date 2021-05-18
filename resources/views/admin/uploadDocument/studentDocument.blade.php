@@ -28,30 +28,30 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="student-document-table" class="table table-bordered table-striped data-table"">
-                      <thead>
-                      <tr>
-                        <th>Student</th>
-                        <th>DOB</th>
-                        <th>Gender</th>
-                        <th>Country</th>
-                        <th>Email</th>
-                        <th>Upload Document</th>
-                        <th>View Uploaded Documents</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                     
-                    </tbody>
-                </table>
+                          <thead>
+                          <tr>
+                            <th>Student</th>
+                            <th>DOB</th>
+                            <th>Gender</th>
+                            <th>Country</th>
+                            <th>Email</th>
+                            <th>Upload Documents</th>
+                            <th>View Uploaded Documents</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                         
+                        </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
               </div>
-              <!-- /.card-body -->
+              <!-- /.col -->
             </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
+            <!-- /.row -->
+        </section>
         </div>
-        <!-- /.row -->
-    </section>
-    </div>
-    <!-- /.content -->
+        <!-- /.content -->
 @endsection

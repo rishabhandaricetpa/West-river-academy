@@ -148,7 +148,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
         Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
-        Route::get('download/document/{document_id}', 'StudentController@downloadDocument')->name('download.uploadedDocument');
 
         //Transcript K-8
         Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');

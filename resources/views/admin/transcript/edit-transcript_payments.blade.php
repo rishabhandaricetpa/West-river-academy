@@ -10,7 +10,7 @@
                 <h3>Payment Status of Student: {{ $geteachtranscriptPayments->transcript->student->fullname }}
                     <h3>
                         <form action="{{ route('admin.update.transcriptpay', $geteachtranscriptPayments->id) }}"
-                            method="post" class="row">
+                            method="post" class="row" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group col-sm-6">
                                 <label>Student Name<sup>*</sup></label>
@@ -46,7 +46,14 @@
                             </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{route('admin.transcript.payments')}}" class="btn btn-primary">Back</a>
+                                <a href="{{ route('admin.transcript.payments') }}" class="btn btn-primary">Back</a>
+                            </div>
+                            <div class="col-md-4 mb-4 mb-sm-0">
+                                <label class="h2">Upload Single/Multiple Documents<sup>*</sup></label>
+                                <label class="font-weight-bold text-secondary">
+                                </label>
+                                <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn"
+                                    multiple>
                             </div>
                         </form>
             </div>

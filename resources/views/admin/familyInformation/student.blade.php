@@ -50,7 +50,7 @@
                                         <th>View Graduation</th>
                                         <th>View Record Transfer</th>
                                         <th>View Uploaded Document </th>
-                                        <th>Upload Document</th>
+                                        <th>Upload Documents</th>
                                     </tr>
                                 </thead>
                                 <tbody>

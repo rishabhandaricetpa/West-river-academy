@@ -20,8 +20,8 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6 text-center">
-                    <a href="https://www.idcreator.com/custom-id-designs/westriveracademy-id-card.html"
-                        target="_blank"class="d-inline-block mb-5 decoration-none">
+                    <a href="https://www.idcreator.com/custom-id-designs/westriveracademy-id-card.html" target="_blank"
+                        class="d-inline-block mb-5 decoration-none">
                         <i class="fas fa-id-card-alt rounded-circle circled-grid fa-2x text-secondary"></i>
                         <h3 class="mt-3 text-black font-weight-normal">Order a Student ID Card</h3>
                     </a>
@@ -260,7 +260,7 @@
                     Enrollment</a>
             </div>
         @endif
-        @if (count($record_transfer) )
+        @if (count($record_transfer))
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <h2 class="mb-3">Record Transfer</h2>
                 <div class="mb-2 text-center text-sm-left">
@@ -362,7 +362,7 @@
                         <thead>
                             <tr>
                                 <th>Document Type</th>
-                                <th>Download & preview</th>
+                                <th>Preview Documents</th>
 
                             </tr>
                         </thead>
@@ -374,9 +374,13 @@
                                     @else
                                         <td>Uploaded By West River Academy</td>
                                     @endif
-                                    <td><a href="{{ route('download.uploadedDocument', $uploadedDocument->id) }}">Download
-                                            &
-                                            Preview</a></td>
+                                    <td>
+                                        <div class="col-sm-12 mb-3">
+                                            <a href="{{ $uploadedDocument->document_url }}" download
+                                                target="_blank">Click here
+                                                to
+                                                preview</a>
+                                        </div>
                                 </tr>
                             @endforeach
                         </tbody>

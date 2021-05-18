@@ -7,11 +7,11 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Courses</h1>
+            <h1>View Documents</h1>
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Courses</li>
+                    <li class="breadcrumb-item active">View Documents</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.container-fluid -->
@@ -31,16 +31,16 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="addressData" class="table table-bordered table-striped data-table"">
-                      <thead>
-                      <tr>
-                        <th>Original Filename</th>
-                        <th>Document Related To:</th>
-                        <th>Uploaded To Student Dashboard ?</th>
-                        <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                     @foreach ($uploadedDocuments as $uploadedDocument)
+                              <thead>
+                              <tr>
+                                <th>Original Filename</th>
+                                <th>Document Related To:</th>
+                                <th>Uploaded To Student Dashboard ?</th>
+                                <th>Action</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                               @foreach ($uploadedDocuments as $uploadedDocument)
                                 <tr>
                                     <td>{{ $uploadedDocument->original_filename }}</td>
                                     <td>{{ $uploadedDocument->document_type }}</td>
