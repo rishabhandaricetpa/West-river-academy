@@ -44,6 +44,7 @@
                 <a type="button" href="{{ route('admin.genrate.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Unsigned Transcript</a>
                 <a type="button" href="{{ route('admin.signed.transcript9_12',[$student->id,$transcript_id]) }}" class="btn btn-primary">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary">Upload Signed Transcript</a>
+                <a href="{{route('admin.edit.transcript9_12',$student->id)}}" class="btn btn-primary mr-2 mt-3">Back</a>
         </div>
         @foreach($transcriptData as $school)
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
@@ -52,8 +53,9 @@
                 Academic School Year(s):{{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
             </p>
-            <table id="addressData" class="table table-bordered table-striped data-table"">
+            <table id="addressData" class="table table-bordered table-striped data-table mt-3">
             <a type=" button" href="{{ route('admin.deleteSchool9_12',$school->id) }}" class="btn btn-primary transform-none">Delete this Year from Transcript</a>
+
                 <thead>
                     <tr>
                         <th>Subjects</th>

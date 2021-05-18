@@ -58,7 +58,7 @@ class ParentController extends Controller
 
         if (!$is_valid) {
             $notification = [
-                'message' => 'Cart is Invalid!',
+                'message' => 'Cart is Invalid! Fee for the first Student enrollment is not paid. ',
                 'alert-type' => 'error',
             ];
 
@@ -161,7 +161,7 @@ class ParentController extends Controller
             ->get();
 
         /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('notarization')->where('parent_profile_id', $user_id)->get();
+        $notirizationPayments = NotarizationPayment::with('notarization','ParentProfile')->where('parent_profile_id', $user_id)->get();
 
         /** Receiving payment history data for order personal consultation*/
 

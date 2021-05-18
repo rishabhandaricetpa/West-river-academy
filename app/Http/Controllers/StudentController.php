@@ -382,7 +382,7 @@ class StudentController extends Controller
         }
 
         $coupon_amount = session('applied_coupon_amount', 0);
-        $final_amount = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+        $final_amount = $coupon_amount > $enroll_fees->amount ? 1 : $enroll_fees->amount - $coupon_amount;
 
         return $final_amount;
     }

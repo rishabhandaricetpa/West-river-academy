@@ -213,8 +213,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('science', 'Courses\ScienceController@store')->name('science.store');
 
         Route::get('custom-payments', 'PaymentMethod\CustomPaymentsController@index')->name('custom.payment');
-        Route::get('admin/custom-payments/{id}', 'PaymentMethod\CustomPaymentsController@edit')->name('edit.custompayment');
-        Route::post('update/custom-payments/{id}', 'PaymentMethod\CustomPaymentsController@updateCustomPayments')->name('update.custompayment');
         Route::get('delete/custom-payments/{id}', 'PaymentMethod\CustomPaymentsController@destroyCustomPayments')->name('delete.custompayment');
 
 

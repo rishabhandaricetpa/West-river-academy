@@ -43,11 +43,12 @@
            <body>
                <table style="margin-bottom:20px;">
                    <tbody>
-                       <tr style="width:100%;">
-                           <td width="50%" style="text-transform:uppercase;font-weight: 300;font-size:25px;">official transcript</td>
-                           <td width="50%" style="text-align:center;">
-                               <p style="margin:0;font-size:13px;">Califorinia Colorado USA</p>
-                               <p style="margin:0;font-size:13px;">949.492.5240 info@westriveracademy.com</p>
+                   <tr style="width:100%;">
+                           <td valign="middle" style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;">official transcript</td>
+                           <td valign="middle" style="text-align:center;width:50%;height:100px;">
+                               <img src="../public/images/letterhead.png" alt="logo" style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
+                               <!-- <p style="margin:0;font-size:13px;">Califorinia Colorado USA</p>
+                               <p style="margin:0;font-size:13px;">949.492.5240 info@westriveracademy.com</p> -->
                            </td>
                        </tr>
                    </tbody>
@@ -86,7 +87,7 @@
                        </tr>
                    </tbody>
                </table>
-               <table width="100%" style="border-collapse:collapse;">
+               <table style="border-collapse:collapse; width:100%;">
                    <tbody>
                        <tr style="width:100%;">
                            <table style="width:100%;border-collapse:collapse;" border="1">
@@ -108,7 +109,7 @@
                        </tr>
                    </tbody>
                </table>
-               <table width="100%" style="padding-top:30px;vertical-align:top;">
+               <table  style="padding-top:30px;vertical-align:top; width:100%;">
                    <tr>
                        <td width="35%" style="vertical-align:top;">
                            <table width="100%" style="border:1px solid #000;">
@@ -179,26 +180,31 @@
                                </tr>
                            </table>
                        </td>
-                       <td width="40%" style="vertical-align:top;">
-                           <table>
-                               <tbody>
-                                   <tr>
-                                       <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span>
-                                       </td>
-                                       <td width="40%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
-                                       </td>
-                                   </tr>
-                               </tbody>
-                           </table>
-                           <table width="100%">
-                               <tr style="width:100%;">
-                                   <td style="text-align:center;width:100%;" colspan="2">
-                                       <div style="margin:0 auto;"><img src="{{asset('images/Stamp.png')}}" style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp"></div>
-                                   </td>
-                               </tr>
-                           </table>
-                       </td>
                    </tr>
                </table>
+               <table style="margin-top:60px;width:100%;">
+    <tr>
+      <td style="width:60%;" valign="middle">
+        <table style="width:100%;">
+          <tbody>
+            <tr>
+              <td style="text-align:center;width:40%" valign="bottom">
+                <span><img src="../public/images/signature.png" style="width:200px;height:80px;" alt=""></span></br>
+                <span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
+                  signature</span></td>
+              <td style="width:20%;" valign="bottom">
+                <span
+                  style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td style="text-align:center;width:40%;" colspan="2" valign="middle">
+        <span style="margin:0 auto;"><img src="../public/images/stamp.png"
+            style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp"></span>
+      </td>
+    </tr>
+  </table>
            </body>
            </html>

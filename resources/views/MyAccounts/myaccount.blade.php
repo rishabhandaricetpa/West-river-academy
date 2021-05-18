@@ -39,7 +39,7 @@
    @if(count($transcript_payments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Transcript</h2>
-      <div class="overflow-auto">
+      <div class="overflow-auto max-table">
          <table class="table-styling w-100">
             <thead>
                <tr>
@@ -71,8 +71,8 @@
    @if(count($customPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Custom Payment</h2>
-    <div class="overflow-auto">
-      <table class="table-styling w-100">
+    <div class="overflow-auto max-table">
+      <table class="table-styling w-100 table-vertical_scroll">
          <thead>
             <tr>
                <th scope="col">Parent Name</th>
@@ -105,8 +105,8 @@
    @if(count($enrollmentPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Enrollment Payments</h2>
-   <div class="overflow-auto">
-      <table class="table-styling w-100">
+   <div class="overflow-auto max-table">
+      <table class="table-styling w-100 table-vertical_scroll">
          <thead>
             <tr>
                <th scope="col">Student Name</th>
@@ -134,8 +134,8 @@
    @if(count($graduationPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Graduation </h2>
-      <div class="overflow-auto">
-      <table class="table-styling w-100">
+      <div class="overflow-auto max-table">
+      <table class="table-styling w-100 table-vertical_scroll">
          <thead>
             <tr>
                <th scope="col">Student Name</th>
@@ -166,26 +166,24 @@
    @if(count($graduationPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Notarization </h2>
-      <div class="overflow-auto">
-         <table class="table-styling w-100">
+      <div class="overflow-auto max-table">
+         <table class="table-styling w-100 table-vertical_scroll">
             <thead>
                <tr>
-                  <th scope="col">Student Name</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Number Of Documents</th>
-                  <th scope="col">Apostille Country</th>
-                  <th scope="col">Payment Method</th>
+               <th scope="col">Student Name</th>
+               <th scope="col">Amount</th>
+               <th scope="col">Payment Method</th>
+               <th scope="col">Transcation Id</th>
                </tr>
             </thead>
             <tbody>
                @foreach($notirizationPayments as $notirizationPayment)
                <tr>
 
-                  <td>{{$notirizationPayment['notarization']['first_name']}}</td>
-                  <td>${{$notirizationPayment->amount}}</td>
-                  <td>{{$notirizationPayment['notarization']['number_of_documents']}}</td>
-                  <td>{{$notirizationPayment['notarization']['apostille_country']}}</td>
-                  <td>{{$notirizationPayment->payment_mode}}</td>
+               <td>{{ $notirizationPayment['ParentProfile']['p1_first_name'] }}</td>
+               <td>${{ $notirizationPayment->amount }}</td>
+               <td>{{ $notirizationPayment->payment_mode }}</td>
+               <td>{{ $notirizationPayment->transcation_id }}</td>
                </tr>
                @endforeach
             </tbody>
@@ -201,8 +199,8 @@
      @if(count($orderConsulationPayments)>0)
    <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Paid For: Order Consulation Payments</h2>
-      <div class="overflow-auto">
-      <table class="table-styling w-100">
+      <div class="overflow-auto max-table">
+      <table class="table-styling w-100 table-vertical_scroll">
          <thead>
             <tr>
                <th scope="col">Parent Name</th>

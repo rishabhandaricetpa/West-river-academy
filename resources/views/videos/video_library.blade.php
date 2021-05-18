@@ -80,7 +80,7 @@
             <div class="tab-pane fade  container journal-library py-2r " id="journal" role="tabpanel"
                 aria-labelledby="journal-tab">
                 <h2 class="text-center mx-md-4">The WRA Journal</h2>
-                <p class="text-center">click on Volume below to view our montly newletter.</p>
+                <p class="text-center">Click on Volume below to view our montly newletter.</p>
                 <div class="journal py-2">
                     <h3><a href="#"> Volume 1: April 1,2021</a></h3>
                     <p>Join our Private WRA Families group on the MeWe platform, listen to our Podcasts, read about "Our

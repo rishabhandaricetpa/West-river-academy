@@ -12,9 +12,12 @@
                     <label>Subject Name<sup>*</sup></label>
                     <input class="form-control" id="subject_name" value="{{$name->subject_name}}" name="subject_name">
                   </div>
-                  <div class="form-group">
-                    <label>Grade</label>
-                    <input class="form-control" id="grade" value="{{$name->transcript_period}}" name="grade">
+                    <div class="form-group">
+                            <label>Grade</label>
+                            <select class="form-control" name="grade" value="" Required>
+                                <option value="K - 8">K - 8</option>
+                                <option value="9 - 12">9 - 12</option>
+                            </select>
                   </div>
   
                 <div class="col-sm-12">

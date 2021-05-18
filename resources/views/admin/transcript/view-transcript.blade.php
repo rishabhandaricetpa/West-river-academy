@@ -37,8 +37,7 @@
                 <a type="button" href="{{ route('admin.genrate.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Unsigned Transcript</a>
                 <a type="button" href="{{ route('admin.signed.transcript',[$student->id,$transcript_id]) }}" class="btn btn-primary mr-2 mt-3">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload',[$student->id,$transcript_id])}}" class="btn btn-primary mr-2 mt-3">Upload Approved Signed Transcript</a>
-
-
+                <a href="{{route('admin.edit.transcript',$student->id)}}" class="btn btn-primary mr-2 mt-3">Back</a>
             </form>
         </div>
 
@@ -49,7 +48,7 @@
                 Academic School Year(s): {{$school->enrollment_year}}<br>
                 Grade: {{$school->grade}}<br>
             </p>
-            <table id="addressData" class="table table-bordered table-striped data-table">
+            <table id="addressData" class="table table-bordered table-striped data-table mt-3">
                 <a type=" button" href="{{ route('admin.deleteSchool',$school->id) }}" class="btn btn-primary mb-3 transform-none">Delete this Year from Transcript</a>
                 <thead>
                     <tr>

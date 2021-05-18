@@ -28,7 +28,7 @@
         @csrf
         <div class="card-body">
           <label for="transcript_file">Upload Signed Document<sup>*</sup></label>
-          <input type="file" name="transcript_file" id="transcript_file" class="form-control" required>
+          <input type="file" name="transcript_file" id="transcript_file" class="form-control form-control_upload" required>
           <input type="hidden" name="student_id" value="{{$student_id}}" class="form-control">
           <input type="hidden" name="transcript_id" value="{{$transcript_id}}" class="form-control">
         </div>

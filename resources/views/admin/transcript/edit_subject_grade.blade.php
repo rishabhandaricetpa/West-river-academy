@@ -10,7 +10,7 @@
         <div class="card-body p-0">
           <div class="form-group">
             <label>Subject Name<sup>*</sup></label>
-            <input class="form-control" id="subject_name" value="{{$subjects->subject_name}}" name="subject_name">
+            <input class="form-control" id="subject_name" value="{{$subjects->subject_name}}" name="subject_name" disabled>
           </div>
           <div class="form-group">
             <label>Grade</label>

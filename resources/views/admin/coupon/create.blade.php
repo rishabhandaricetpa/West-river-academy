@@ -55,6 +55,7 @@
 
         <div class="form-group col-sm-12 mt-4">
           <input type="submit" class="btn btn-primary" value="Save Coupon">
+          <a href="{{ route('admin.view.coupon')}}" class="btn btn-primary">Back</a>
         </div>
       </form>
     </div>

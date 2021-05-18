@@ -202,6 +202,7 @@ button {
 
 /* tables */
 table {
+  width: 100%;
   tr {
     line-height: 2;
     font-family: $lato-font;
@@ -213,7 +214,9 @@ table {
     }
   }
 }
-
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
 /* global css */
 
 .app {
@@ -263,7 +266,6 @@ thead tr th {
 
   thead {
     background-color: #ccc;
-
   }
 
   td,
@@ -357,5 +359,15 @@ sub {
 
 .transform-none {
   text-transform: none !important;
+}
+
+///pdf 
+.hg-pdf table tr {
+  page-break-inside: avoid;
+}
+footer {
+  .contact-phone{
+    font-family: "lato";
+  }
 }
 

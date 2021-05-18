@@ -439,7 +439,7 @@ export default {
         .then((response) => {
           if(response.data.status == 'success'){
             if(response.data.amount > this.total.amount){
-              this.amount = 0;
+              this.amount = 1;
             }else{
               this.amount = this.total.amount - response.data.amount;
             }
@@ -459,7 +459,7 @@ export default {
         .then((response) => {
           if(response.data.status == 'success'){
             if(response.data.amount > this.total.amount){
-              this.amount = 0;
+              this.amount = 1;
             }else{
               this.amount = this.total.amount - response.data.amount;
             }

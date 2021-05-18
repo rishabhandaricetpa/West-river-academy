@@ -10,6 +10,8 @@ use App\Models\NotarizationPayment;
 use App\Models\Notarization;
 use App\Models\OrderPersonalConsultation;
 use App\Models\CustomLetterPayment;
+use App\Models\TransactionsMethod;
+
 
 use Illuminate\Http\Request;
 
@@ -122,7 +124,8 @@ class CustomController extends Controller
     public function editOrderPostage($id)
     {
         $orderPostageData = OrderPostage::whereId($id)->with('ParentProfile')->first();
-        return view('admin.payment.orderPostagePayment.edit', compact('orderPostageData'));
+        $transactionData=TransactionsMethod::where('transcation_id',$orderPostageData->transcation_id)->first();
+        return view('admin.payment.orderPostagePayment.edit', compact('orderPostageData','transactionData'));
     }
     //update order postage data in in backend
 
@@ -163,8 +166,8 @@ class CustomController extends Controller
     public function editNotarization($id)
     {
         $notarizationData = NotarizationPayment::whereId($id)->with('ParentProfile', 'notarization', 'apostille')->first();
-        // $notarizationdetails = Notarization::whereId($id)->with('ParentProfile')->first();
-        return view('admin.payment.notarizationPayments.edit', compact('notarizationData'));
+        $transactionData=TransactionsMethod::where('transcation_id',$notarizationData->transcation_id)->first();
+        return view('admin.payment.notarizationPayments.edit', compact('notarizationData','transactionData'));
     }
 
     //update order notarization data in in backend
@@ -228,7 +231,8 @@ class CustomController extends Controller
     public function editOrderCustomletter($id)
     {
         $customLetter = CustomLetterPayment::whereId($id)->with('ParentProfile')->first();
-        return view('admin.payment.customLetterPayment.edit', compact('customLetter'));
+        $transactionData=TransactionsMethod::where('transcation_id',$customLetter->transcation_id)->first();
+        return view('admin.payment.customLetterPayment.edit', compact('customLetter','transactionData'));
     }
 
     //update custom letters  data in in backend
@@ -238,6 +242,7 @@ class CustomController extends Controller
         $customLetter->transcation_id = $request->get('transcation_id');
         $customLetter->payment_mode = $request->get('payment_mode');
         $customLetter->status = $request->get('paymentStatus');
+        $customLetter->paying_for = $request->get('paying_for');
         $customLetter->save();
         $notification = [
             'message' => 'Record updated successfully!',
@@ -274,8 +279,8 @@ class CustomController extends Controller
     public function editConultation($id)
     {
         $order_conultation = OrderPersonalConsultation::whereId($id)->with('parent')->first();
-        // dd($order_conultation);
-        return view('admin.payment.orderConsltation.edit', compact('order_conultation'));
+        $transactionData=TransactionsMethod::where('transcation_id',$order_conultation->transcation_id)->first();
+        return view('admin.payment.orderConsltation.edit', compact('order_conultation','transactionData'));
     }
 
     //update Personal consultation data in in backend
@@ -306,4 +311,36 @@ class CustomController extends Controller
         $order_conultationPayments = OrderPersonalConsultation::where('parent_profile_id', $parent_id)->with('parent')->get();
         return view('admin.payment.orderConsltation.view-each', compact('order_conultationPayments'));
     }
+    // public function indexCustomPayment()
+    // {
+    //     return view('payments/custom-payment');
+    // }
+
+    public function editCustomPayment($id)
+    {
+        $customPaymentsData = CustomPayment::whereId($id)->with('ParentProfile')->first();
+        $transactionData=TransactionsMethod::where('transcation_id',$customPaymentsData->transcation_id)->first();
+        return view('admin.payment.customPayments.edit', compact('customPaymentsData','transactionData'));
+    }
+
+     //update data from Admin users input in Custom payment table
+     public function updateCustomPayments(Request $request, $id)
+     {
+         $customPayments = CustomPayment::find($id);
+         $customPayments->transcation_id = $request->get('transcation_id');
+         $customPayments->payment_mode = $request->get('payment_mode');
+         $customPayments->amount = $request->get('amount');
+         $customPayments->status = $request->get('paymentStatus');
+         $customPayments->paying_for = $request->get('paying_for');
+         $customPayments->save();
+         $notification = [
+             'message' => 'Record updated successfully!',
+             'alert-type' => 'success',
+         ];
+         return redirect()->back()->with($notification);
+ 
+         return view('payments/custom-payment');
+     }
+ 
+    
 }

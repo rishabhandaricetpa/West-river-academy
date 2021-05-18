@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CustomPayment;
 use App\Models\ParentProfile;
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 
 class CustomPaymentsController extends Controller
@@ -33,28 +34,5 @@ class CustomPaymentsController extends Controller
     }
 
 
-    //update data from Admin users input in Custom payment table
-    public function updateCustomPayments(Request $request, $id)
-    {
-        $customPayments = CustomPayment::find($id);
-        $customPayments->transcation_id = $request->get('transcation_id');
-        $customPayments->payment_mode = $request->get('payment_mode');
-        $customPayments->amount = $request->get('amount');
-        $customPayments->status = $request->get('paymentStatus');
-        $customPayments->save();
-        $notification = [
-            'message' => 'Record updated successfully!',
-            'alert-type' => 'success',
-        ];
-        return redirect()->back()->with($notification);
-
-        return view('payments/custom-payment');
-    }
-
-
-    public function edit($id)
-    {
-        $customPaymentsData = CustomPayment::whereId($id)->with('ParentProfile')->first();
-        return view('admin.payment.customPayments.edit', compact('customPaymentsData'));
-    }
+   
 }

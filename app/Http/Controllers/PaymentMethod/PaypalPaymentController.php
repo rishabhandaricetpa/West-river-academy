@@ -65,7 +65,7 @@ class PaypalPaymentController extends Controller
             return view('Billing.invalid');
         } else {
             $coupon_amount = session('applied_coupon_amount', 0);
-            $total = $coupon_amount > $enroll_fees->amount ? 0 : $enroll_fees->amount - $coupon_amount;
+            $total = $coupon_amount > $enroll_fees->amount ? 1 : $enroll_fees->amount - $coupon_amount;
 
             $item_1 = new Item();
 

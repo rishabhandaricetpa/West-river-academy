@@ -29,18 +29,22 @@
                             <h3 class="card-title"></h3>
                         </div>
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <a href="{{ route('admin.upload.documents') }}" class="btn btn-primary float-right">Back</a>
+
+                        </div>
                         <div class="card-body">
                             <table id="addressData" class="table table-bordered table-striped data-table"">
-                              <thead>
-                              <tr>
-                                <th>Original Filename</th>
-                                <th>Document Related To:</th>
-                                <th>Uploaded To Student Dashboard ?</th>
-                                <th>Action</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                               @foreach ($uploadedDocuments as $uploadedDocument)
+                                  <thead>
+                                  <tr>
+                                    <th>Original Filename</th>
+                                    <th>Document Related To:</th>
+                                    <th>Uploaded To Student Dashboard ?</th>
+                                    <th>Action</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($uploadedDocuments as $uploadedDocument)
                                 <tr>
                                     <td>{{ $uploadedDocument->original_filename }}</td>
                                     <td>{{ $uploadedDocument->document_type }}</td>
@@ -55,8 +59,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
-
                                 </tbody>
                             </table>
                         </div>

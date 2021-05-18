@@ -37,7 +37,7 @@
                         </a>
                     </div>
                     <div class="media-body pl-2 pt-0 pl-lg-5 pt-lg-5">
-                    Take a look at our custom content, tips, quotes and testimonials.You can learn more about our Natural Learning philosopy and find blogs written by like-minded people.
+                    Take a look at our custom content, tips, quotes and testimonials. You can learn more about our Natural Learning philosopy and find blogs written by like-minded people.
                     </div>
                 </li>
                 <li class="media mb-4">

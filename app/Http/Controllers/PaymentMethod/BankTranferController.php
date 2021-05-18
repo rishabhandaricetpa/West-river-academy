@@ -40,7 +40,7 @@ class BankTranferController extends Controller
         $coupon_code = session('applied_coupon', null);
         $coupon_amount = session('applied_coupon_amount', 0);
         $amount = $enroll_fees->amount;
-        $final_amount = $coupon_amount > $amount ? 0 : $amount - $coupon_amount;
+        $final_amount = $coupon_amount > $amount ? 1 : $amount - $coupon_amount;
         $type = 'Bank Transfer';
         //store transactions
         $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);

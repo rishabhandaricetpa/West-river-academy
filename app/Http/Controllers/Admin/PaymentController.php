@@ -47,11 +47,11 @@ class PaymentController extends Controller
 
     public function editPaymentStatus(Request $request, $id)
     {
-
         $enroll_payment = EnrollmentPayment::find($id);
         $enrollment_periods = EnrollmentPayment::find($id)->enrollment_period()->first();
-        $student = StudentProfile::whereId($enrollment_periods->student_profile_id)->first();
-        return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods', 'student'));
+        $transactionData=TransactionsMethod::where('transcation_id',$enroll_payment->transcation_id)->first();
+        $student = StudentProfile::whereId($enrollment_periods->student_profile_id)->with('parentProfile','parentProfile.transactionMethod')->first();
+        return view('admin.payment.edit-payment-status', compact('enroll_payment', 'enrollment_periods', 'student','transactionData'));
     }
 
     public function update(Request $request, $payment_id)
@@ -85,7 +85,6 @@ class PaymentController extends Controller
                     'read' => 'false'
                 ]);
             }
-            DB::commit();
             // update enrollment period in confirmation
             $transaction_data = TransactionsMethod::where('transcation_id', $enrollment_payment->transcation_id)->first();
             if ($transaction_data) {

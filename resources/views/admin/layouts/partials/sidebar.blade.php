@@ -198,7 +198,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ url('admin/fees-services') }}" class="nav-link">
+                <a href="{{ url('admin/fees-services') }}" class="nav-link transform-none">
                     <i class="nav-icon fas fa-dollar-sign"></i>
                     <p>
                         Fees and Services
