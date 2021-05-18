@@ -69,7 +69,6 @@
               <input class="datepicker form-control" id="end_date_of_enrollment" type="text" name="end_date[]"
                 value="{{ Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M d Y') }}">
             </div>
-
             <div class="col-md-4 mb-4 mb-sm-0">
               <label class="w-auto">Grade Level</label>
               <select name="grade[]" class="form-control">
