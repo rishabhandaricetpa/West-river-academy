@@ -33,16 +33,16 @@ class StudentProfileController extends Controller
 
     public function dataTable()
     {
-        return datatables(StudentProfile::with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers'])->get())->toJson();
+        return datatables(StudentProfile::with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers'])->latest()->get())->toJson();
     }
 
     public function selected($parent_profile_id)
     {
-        return datatables(StudentProfile::where('parent_profile_id', $parent_profile_id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation'])->get())->toJson();
+        return datatables(StudentProfile::where('parent_profile_id', $parent_profile_id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation'])->latest()->get())->toJson();
     }
     public function studentInformation($id)
     {
-        $students = StudentProfile::where('parent_profile_id', $id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers', 'uploadDocuments'])->get();
+        $students = StudentProfile::where('parent_profile_id', $id)->with(['parentProfile', 'enrollmentPeriods', 'transcriptCourses', 'TranscriptK8', 'graduation', 'recordTransfers', 'uploadDocuments'])->latest()->get();
         return view('admin.familyInformation.student', compact('students', 'id'));
     }
 
@@ -109,7 +109,7 @@ class StudentProfileController extends Controller
             $student->cell_phone = $request->get('cell_phone');
             $student->student_Id = $request->get('student_id');
             $student->immunized_status = $request->get('immunized_status');
-            $student->student_situation= $request->get('student_situation');
+            $student->student_situation = $request->get('student_situation');
             $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
 
             foreach ($enrollupdate as $key => $en) {
@@ -257,7 +257,7 @@ class StudentProfileController extends Controller
             ->get();
 
         /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('ParentProfile','notarization')->where('parent_profile_id', $parent_id)->get();
+        $notirizationPayments = NotarizationPayment::with('ParentProfile', 'notarization')->where('parent_profile_id', $parent_id)->get();
 
         /** Receiving payment history data for order personal consultation*/
 
