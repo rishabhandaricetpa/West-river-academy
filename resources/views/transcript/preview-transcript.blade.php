@@ -19,10 +19,10 @@
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <table>
+        <table style="margin-bottom:20px;">
           <tbody>
             <thead>
-              <th>
+              <th colspan="6">
                 <table style="margin-bottom:20px;">
                   <tbody>
                     <tr width="100%">
@@ -31,13 +31,13 @@
                     </tr>
                   </tbody>
                 </table>
-                <table style="margin-bottom:40px;" width="100%">
+                <table style="margin-bottom:20px;" width="100%">
                   <tbody>
                     <tr style="width:100%;">
                       <td width="50%" valign="middle" style="text-transform:uppercase;font-weight: 700;font-size:25px;">
                         official transcript</td>
                       <td width="50%" valign="middle" style="text-align:center;">
-                        <img src="public/images/letterhead.png" alt="logo"
+                        <img src="/images/letterhead.png" alt="logo"
                           style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
                       </td>
                     </tr>
@@ -47,8 +47,63 @@
             </thead>
           <tbody>
             <tr>
-              <td>
-                <table width="100%">
+              <td colspan="3">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
+                      <td
+                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;">
+                        {{$student->fullname}}</td>
+                    </tr>
+                    <tr>
+                      <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;padding:2px;"
+                        valign="top">address</td>
+                      <td valign="top"
+                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1; padding:2px;">
+                        {{$address->street_address}}</br> {{$address->city}}, {{$address->zip_code}},
+                        {{$address->country}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top" style="text-transform:uppercase;font-size:14px;width:10%; padding:2px;"></td>
+                      <td valign="top"
+                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;padding:2px;">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td colspan="3">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td style="text-transform:uppercase;width:15%;font-size:11px;line-height:1;">date of birth</td>
+                      <td
+                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;">
+                        {{$student->d_o_b->format(' M y d')}}</td>
+                    </tr>
+                    <tr>
+                      <td valign="top"
+                        style="text-transform:uppercase;font-size:11px;width:15%;line-height:1;padding:2px;">years(s)
+                      </td>
+                      <td valign="top"
+                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;padding:2px;">
+                        {{$minYear}}-{{$maxYear}}</td>
+                    </tr>
+                    <tr>
+                      <td valign="top"
+                        style="text-transform:uppercase;font-size:11px;width:15%;line-height:1;padding:2px;">grade
+                        level(s)</td>
+                      <td valign="top"
+                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;padding:2px;">
+                        {{ getPromotedGrades($grades) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+
+              <!-- <table width="100%">
                   <tbody>
                     <tr style="width:100%;">
                       <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
@@ -90,7 +145,7 @@
                     </tr>
                   </tbody>
                 </table>
-              </td>
+              </td> -->
             </tr>
           </tbody>
           </tbody>
@@ -134,7 +189,8 @@
                   <tbody>
                     <tr style="width:100%;">
                       <td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:22px;"><span
-                          style="border-bottom:1px solid #000;display:inline-block;font-size:11px;text-align:left;">GRADING SYSTEM</span></td>
+                          style="border-bottom:1px solid #000;display:inline-block;font-size:11px;text-align:left;">GRADING
+                          SYSTEM</span></td>
                     </tr>
                     <tr style="width:100%;">
                       <td style="white-space: pre;padding-left:22px;font-size:11px;">A = 90-100%</td>
@@ -172,14 +228,14 @@
         <table>
           <tbody>
             <tr>
-              <td valign="bottom"  style="text-align:center;width:40%;padding:10px 20px;"><span
+              <td valign="bottom" style="text-align:center;width:40%;padding:10px 20px;"><span
                   style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
                   signature</span></td>
-              <td valign="bottom"  style="text-align:center;width:30%;padding:10px 20px;"><span
+              <td valign="bottom" style="text-align:center;width:30%;padding:10px 20px;"><span
                   style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
               </td>
-              <td valign="middle"  style="width:30%;padding:10px 20px;"><img src="public/images/Stamp.png" style="width:80px;height:80px;object-fit:contain;"
-                  alt="Stamp"></td>
+              <td valign="middle" style="width:30%;padding:10px 20px;"><img src="/images/Stamp.png"
+                  style="width:85px;height:80px;object-fit:contain;" alt="Stamp"></td>
             </tr>
           </tbody>
         </table>
