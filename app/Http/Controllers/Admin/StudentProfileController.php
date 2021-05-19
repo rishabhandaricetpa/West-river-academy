@@ -97,6 +97,7 @@ class StudentProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         try {
             DB::beginTransaction();
             $student = StudentProfile::find($id);
@@ -117,8 +118,8 @@ class StudentProfileController extends Controller
                 $startDates = $request->get('start_date');
                 $endDates = $request->get('end_date');
                 $grade_level = $request->get('grade');
-                $enroll->start_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('M d Y');
-                $enroll->end_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('M d Y');
+                $enroll->start_date_of_enrollment = \Carbon\Carbon::parse($startDates[$key])->format('Y/m/d');
+                $enroll->end_date_of_enrollment = \Carbon\Carbon::parse($endDates[$key])->format('Y/m/d');
                 $enroll->grade_level = $grade_level[$key];
                 $enroll->save();
             }

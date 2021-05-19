@@ -55,10 +55,12 @@
                     </div>
                     <div class="form-group col-sm-12">
                         <label>Student Situation</label>
-                        <textarea class="form-control"  name="student_situation" value="{{ $student->student_situation }}">{{ $student->student_situation }}</textarea>
+                        <textarea class="form-control" name="student_situation"
+                            value="{{ $student->student_situation }}">{{ $student->student_situation }}</textarea>
                     </div>
                     <div>
                     </div>
+
                     <label class="px-3">Enrollment Period <sup>*</sup></label>
                     @foreach ($enrollment_periods as $enrollment_period)
                         <div class="form-group w-100 row mx-0">
@@ -67,13 +69,13 @@
                                 <label class="w-auto">Start Date </label>
                                 <input class="datepicker form-control" id="start_date_of_enrollment" type="text"
                                     name="start_date[]"
-                                    value="{{ Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M d Y') }}">
+                                    value="{{ Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M j, Y') }}">
                             </div>
                             <div class="col-md-4  mb-4 mb-sm-0">
                                 <label class="w-auto">End Date </label>
                                 <input class="datepicker form-control" id="end_date_of_enrollment" type="text"
                                     name="end_date[]"
-                                    value="{{ Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M d Y') }}">
+                                    value="{{ Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M j, Y') }}">
                             </div>
 
                             <div class="col-md-4 mb-4 mb-sm-0">
@@ -82,14 +84,14 @@
                                     <option value="Ungraded" @if ($enrollment_period->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                    Age 3') selected="selected" @endif>
+                                                                                        Age 3') selected="selected" @endif>
                                         Preschool
                                         Age 3
                                     </option>
 
                                     <option value="Preschool Age 4" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                    Age 4') selected="selected" @endif>
+                                                                                        Age 4') selected="selected" @endif>
                                         Preschool
                                         Age 4
                                     </option>
