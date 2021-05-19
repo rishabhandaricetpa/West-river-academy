@@ -10,7 +10,7 @@
         <h2 class="mb-3">Welcome to the Transcript Wizard!</h2>
         <h3>You will be guided through the process of creating a transcript for:</h3>
       </div>
-      <form method="post" action="{{route('transcript.purchase',$enroll_student->id)}}" class="mb-0 mt-5 label-large">
+      <form method="post" action="{{route('transcript.start',$enroll_student->id)}}" class="mb-0 mt-5 label-large">
         @csrf
         <div class="form-group d-sm-flex mb-2">
           <label for="">First name</label>
@@ -30,7 +30,8 @@
             <input type="text" name="last_name" value="{{$enroll_student->last_name}}" class="form-control" readonly>
           </div>
         </div>
-        <div class="mt-2r">
+        <input type="hidden" name="transcript_id" value={{$transcript_id}}>
+                <div class="mt-2r">
           <h3>Is the transcript for grades Kindergarten-8 or for high school (grades 9-12)?</h3>
           <div class="d-sm-flex py-4 col-sm-6 mx-auto">
             <div class="form-check mb-1">

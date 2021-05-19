@@ -345,6 +345,21 @@ function getTranscriptPaidDetails($transcriptPayment_id){
     } else {
         return 'false';
     }
-
-   
 }
+function getEnrollmetForStudents($student_id){
+    $enroll_student = StudentProfile::find($student_id);
+    $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();
+    $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
+    return $enrollment_ids;
+}
+
+function getPaymentInformation($enrollment_ids){
+    $payment_info = DB::table('enrollment_periods')
+    ->whereIn('enrollment_payment_id', $enrollment_ids)
+    ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+    ->where('enrollment_payments.status', 'paid')
+    ->get();
+
+    return $payment_info;
+}
+

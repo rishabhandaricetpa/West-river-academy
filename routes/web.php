@@ -153,6 +153,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
         Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
         Route::post('year', 'TranscriptController@create')->name('year');
+        Route::post('transcript/start/{student_id}', 'TranscriptController@updateTranscriptPeriodAndCreate')->name('transcript.start');
+
         // Graduation Process
         Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
         Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
