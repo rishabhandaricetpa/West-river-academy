@@ -12,7 +12,7 @@
       <div class="form-wrap border bg-light py-5 px-25 mb-4">
         <h2 class="mb-3">Transcript Payment Total</h2>
         <div class="row">
-          <div class="col-sm-6 d-flex justify-content-center align-items-center">
+          <div class="col-sm-6 d-flex align-items-center">
             <div class="text-center">
               <p class="mb-0">Amount Due:</p>
               <span class="total-amount">${{ $transcript_fee }}</span>

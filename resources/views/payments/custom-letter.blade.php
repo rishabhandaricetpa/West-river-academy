@@ -2,7 +2,7 @@
 @section('pageTitle', 'Order Custom Letter')
 @section('content')
     <main class="position-relative container form-content mt-4">
-        <div class="form-wrap border bg-light form-content small-container">
+        <div class="form-wrap border bg-light form-content medium-container">
             <h2>Order Custom Letter(s)</h2>
             <form method="POST" action="{{ route('add.cart') }}" class="mb-0">
                 @csrf
@@ -21,7 +21,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="exampleInputPassword1">What is the content of the letter?</label>
                     <div>
-                        <textarea  name="paying_for" class="form-control"></textarea>
+                        <textarea  name="paying_for" class="form-control textarea_large"></textarea>
                     </div>
                 </div>
                 <div class="mt-2r">

@@ -355,11 +355,15 @@
   .small-container {
     max-width: 50% !important;
   }
+  .medium-container {
+    max-width: 55% !important;
+  }
 
   .form-content {
     max-width: 90%;
   }
 }
+
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
@@ -369,4 +373,5 @@
       max-width: 20%;
     }
   }
+  
 }
