@@ -2,7 +2,7 @@
 @section('pageTitle', 'Custom Payments')
 @section('content')
     <main class="position-relative container form-content mt-4">
-        <div class="form-wrap border bg-light form-content small-container">
+        <div class="form-wrap border bg-light form-content medium-container">
             <h2>Make a Custom Payment</h2>
             <form method="POST" action="{{ route('add.cart') }}" class="mb-0">
                 @csrf
@@ -17,7 +17,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="exampleInputPassword1">What are you paying for?</label>
                     <div>
-                        <textarea type="text" name="paying_for" class="form-control" required></textarea>
+                        <textarea type="text" name="paying_for" class="form-control textarea_large" required></textarea>
                     </div>
                 </div>
                 <div class="mt-2r">
