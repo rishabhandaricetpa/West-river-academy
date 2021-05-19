@@ -30,11 +30,11 @@
         {{Carbon\Carbon::parse($enrollmentperiod->end_date_of_enrollment)->format('M j, Y')}}</p>
       @endforeach
     </div>
-    <table style="padding-top:45%;width:100%;">
+    <table style="padding-top:50px;width:100%;">
         <tbody>
             <tr>
                 <td>
-                    <img src="../public/images/signature.png" alt="signature">
+                    <img style="width:150px;height:60px;object-fit:contain;margin-bottom:-30px;" src="../public/images/signature.png" alt="signature">
                     <p>Stacey Nishikawa</p>
                     <p>Administrative Director</p>
                 </td>
