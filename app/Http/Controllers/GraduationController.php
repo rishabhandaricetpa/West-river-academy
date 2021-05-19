@@ -139,8 +139,19 @@ class GraduationController extends Controller
             unset($inputs['_token']);
             unset($inputs['status']);
 
-            GraduationDetail::where('graduation_id', $id)->update($inputs);
+            //  GraduationDetail::where('graduation_id', $id)->update($inputs);
+            GraduationDetail::where('graduation_id', $id)->update(
+                [
+                    'project' => $inputs['project'],
+                    'diploma' => $inputs['diploma'],
+                    'transcript' => $inputs['transcript'],
+                    'situation' => $inputs['situation'],
+                    'record_received' => $inputs['record_received'],
+                    'grad_date' =>  \Carbon\Carbon::parse($inputs['grad_date'])->format('Y/m/d'),
+                    'notes' => $inputs['notes'],
+                ]
 
+            );
             // upload documents
             $cover = $request->file('file');
             if ($request->file('file')) {
