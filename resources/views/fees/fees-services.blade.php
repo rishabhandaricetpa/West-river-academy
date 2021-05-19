@@ -15,12 +15,12 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>Fee for the first student in the family</p>
+            <p class="max-width__275">Fee for the first student in the family</p>
             <span>Annual</span>
             <span class="text-secondary">${{ getFeeDetails('first_student_annual') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <p>Second Semester Only</p>
+            <p class="max-width__275">Second Semester Only</p>
             <span class="text-secondary">${{ getFeeDetails('first_student_half') }}</span>
           </div>
         </div>
@@ -36,12 +36,12 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>Fee for each additional student in tha same family</p>
+            <p class="max-width__275">Fee for each additional student in the same family</p>
             <span>Annual</span>
             <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <p>Second Semester Only</p>
+            <p class="max-width__275">Second Semester Only</p>
             <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
           </div>
         </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>Per student fee covers Graduation Project and high school transcript</p>
+            <p class="max-width__275">Per student fee covers Graduation Project and high school transcript</p>
             <span class="text-secondary">${{ getFeeDetails('graduation') }}</span>
           </div>
         </div>
@@ -73,15 +73,15 @@
         </div>
         <div class="col-sm-9">
           <div class="d-flex justify-content-between align-items-center">
-            <p>Notarization per document fee</p>
+            <p class="max-width__275">Notarization per document fee</p>
             <span class="text-secondary">${{ getFeeDetails('notarization_doc_fee') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <p>Apostille per document fee</p>
+            <p class="max-width__275">Apostille per document fee</p>
             <span class="text-secondary">${{ getFeeDetails('apostille_doc_fee') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <p>Apostille Package includes 2 documents plus Express Mail </p>
+            <p class="max-width__275">Apostille Package includes 2 documents plus Express Mail </p>
             <span class="text-secondary">${{ getFeeDetails('apostille') }}</span>
           </div>
         </div>
@@ -97,11 +97,11 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>For an initial transcript for a student</p>
+            <p class="max-width__275">For an initial transcript for a student</p>
             <span class="text-secondary">${{ getFeeDetails('transcript') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <p>For a subsequest transcript if an initial one has been issued</p>
+            <p class="max-width__275">For a subsequest transcript if an initial one has been issued</p>
             <span class="text-secondary">${{ getFeeDetails('transcript_edit') }}</span>
           </div>
         </div>
@@ -117,10 +117,10 @@
         </div>
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
-            <p>First class postage is free. Express Mail postge is added to documents that have been Notarized or sent for Apostilles. Other expedited postage fees are listed. We are not responsilble for lost items.</p>
+            <p class="max-width__275">First class postage is free. Express Mail postge is added to documents that have been Notarized or sent for Apostilles. Other expedited postage fees are listed. We are not responsilble for lost items.</p>
           </div>
           <div class="text-center">
-            <!-- <p>Express Mail is recommended for ALL documents mailed outside the U.S. We are not responsible for lost items.</p> -->
+            <!-- <p class="max-width__275">Express Mail is recommended for ALL documents mailed outside the U.S. We are not responsible for lost items.</p> -->
             <h3 style="text-transform: uppercase;">International :</h3>
             <table width="100%">
               <tr>

@@ -78,14 +78,14 @@
                 <table>
                   <tbody>
                     <tr>
-                      <td style="text-transform:uppercase;width:15%;font-size:11px;line-height:1;">date of birth</td>
+                      <td style="text-transform:uppercase;width:35%;font-size:11px;line-height:1;">date of birth</td>
                       <td
                         style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;">
                         {{$student->d_o_b->format(' M y d')}}</td>
                     </tr>
                     <tr>
                       <td valign="top"
-                        style="text-transform:uppercase;font-size:11px;width:15%;line-height:1;padding:2px;">years(s)
+                        style="text-transform:uppercase;font-size:11px;width:35%;line-height:1;padding:2px;">years(s)
                       </td>
                       <td valign="top"
                         style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;padding:2px;">
@@ -93,7 +93,7 @@
                     </tr>
                     <tr>
                       <td valign="top"
-                        style="text-transform:uppercase;font-size:11px;width:15%;line-height:1;padding:2px;">grade
+                        style="text-transform:uppercase;font-size:11px;width:35%;line-height:1;padding:2px;">grade
                         level(s)</td>
                       <td valign="top"
                         style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;padding:2px;">
@@ -189,8 +189,7 @@
                   <tbody>
                     <tr style="width:100%;">
                       <td style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:22px;"><span
-                          style="border-bottom:1px solid #000;display:inline-block;font-size:11px;text-align:left;">GRADING
-                          SYSTEM</span></td>
+                          style="border-bottom:1px solid #000;display:inline-block;font-size:11px;text-align:left;">GRADING SYSTEM</span></td>
                     </tr>
                     <tr style="width:100%;">
                       <td style="white-space: pre;padding-left:22px;font-size:11px;">A = 90-100%</td>
