@@ -4825,6 +4825,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -7627,6 +7628,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -7917,6 +7919,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -44919,7 +44922,8 @@ var render = function() {
               id: "exampleFormControlTextarea1",
               name: "student_situation",
               value: "",
-              rows: "3"
+              rows: "3",
+              maxlength: "2000"
             },
             domProps: { value: _vm.form.student_situation },
             on: {
@@ -49244,7 +49248,8 @@ var render = function() {
                 attrs: {
                   id: "exampleFormControlTextarea1",
                   name: "student_situation",
-                  rows: "3"
+                  rows: "3",
+                  maxlength: "2000"
                 },
                 domProps: { value: _vm.form.student_situation },
                 on: {
@@ -49928,6 +49933,7 @@ var render = function() {
             id: "exampleFormControlTextarea1",
             name: "consulting_about",
             rows: "3",
+            maxlength: "2000",
             required: ""
           },
           domProps: { value: _vm.form.consulting_about },
