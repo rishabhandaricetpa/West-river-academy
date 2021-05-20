@@ -18,10 +18,10 @@
                         $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
                     </p>
                     <div class="form-group d-md-flex mb-2">
-                        <div class="col-md-6 d-sm-flex px-0 mb-4">
-                            <p class="font-weight-bold">Quantity</p>
-                            <div class="row ml-3 mx-0">
-                                <select class="form-control col-3" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')" required>
+                        <div class="col-12 d-sm-flex px-0 mb-4 align-items-center">
+                            <p class="font-weight-bold mb-0 mr-3 ">Quantity</p>
+                            <div class="row mx-0">
+                                <select class="form-control col-5" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')" required>
                                     <option value="">Select Quantity</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -34,7 +34,7 @@
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select>
-                                <span class="col-3 text-center">=</span>
+                                <span class="col-2 text-center">=</span>
                                 <i class="fas fa-dollar-sign additional-sign"></i>
                                 <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due" readonly>
                             </div>

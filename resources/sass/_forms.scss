@@ -317,7 +317,8 @@ input[type="radio"]:checked:before {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.section-notarization{
+.section-notarization,
+.section-apostille{
   .select2-selection__choice {
     padding-left: 0 !important;
   }
