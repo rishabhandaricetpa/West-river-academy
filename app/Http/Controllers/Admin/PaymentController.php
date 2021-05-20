@@ -68,8 +68,8 @@ class PaymentController extends Controller
             // update enrollment period
             $enrollment_periods = EnrollmentPayment::find($payment_id)->enrollment_period()->first();
             $enrollment_periods->grade_level = $request->input('grade_level');
-            $enrollment_periods->start_date_of_enrollment = \Carbon\Carbon::parse($request->input('start_date_of_enrollment'))->format('M d Y');
-            $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('M d Y');
+            $enrollment_periods->start_date_of_enrollment = \Carbon\Carbon::parse($request->input('start_date_of_enrollment'))->format('Y/m/d');
+            $enrollment_periods->end_date_of_enrollment = \Carbon\Carbon::parse($request->input('end_date_of_enrollment'))->format('Y/m/d');
             $enrollment_payment->grade_level = $request->input('grade_level');
             $enrollment_periods->save();
 
