@@ -174,7 +174,7 @@
                 }, {
                     "data": "birthdate",
                     "render": function(data) {
-                        return (moment(data).format("MMM DD YYYY"));
+                        return (moment(data).format("LL"));
                     }
                 }, {
                     "data": "gender"
@@ -293,7 +293,7 @@
                 {
                     "data": "expire_at",
                     "render": function(data) {
-                        return (moment(data).format("MMM DD YYYY"));
+                        return (moment(data).format("LL"));
                     }
                 }, {
                     "data": "id",
@@ -338,7 +338,7 @@
             }, {
                 "data": "student.birthdate",
                 "render": function(data) {
-                    return (moment(data).format("MMMM DD YYYY"));
+                    return (moment(data).format("LL"));
                 }
             }, {
                 "data": "grade_9_info",
@@ -702,7 +702,7 @@
             }, {
                 "data": "birthdate",
                 "render": function(data) {
-                    return (moment(data).format("MMM DD YYYY"));
+                    return (moment(data).format("LL"));
                 }
             }, {
                 "data": "gender"
