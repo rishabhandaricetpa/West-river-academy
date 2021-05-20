@@ -33,12 +33,11 @@
         // balance both side items for annual year courses
 
         if($leftCount < $rightCount) { for($i=1 ; $i <=($rightCount - $leftCount); $i++){ // push dummy course having -1
-          id $leftGroup->last()->push((object)['id'=> -1]);
+           $leftGroup->last()->push((object)['id'=> -1]);
           }
           }
 
-          if($rightCount < $leftCount) { for($i=1 ; $i <=($leftCount - $rightCount); $i++) { $rightGroup->
-            last()->push((object)['id'=> -1]);
+          if($rightCount < $leftCount) { for($i=1 ; $i <=($leftCount - $rightCount); $i++) { $rightGroup->last()->push((object)['id'=> -1]);
             }
             }
             @endphp
