@@ -17,9 +17,9 @@
                             checkout. Allow 3-6 weeks for processing plus shipping time.
                         </p>
                         <div class="form-group d-md-flex mb-2">
-                            <div class="col-md-6 d-sm-flex px-0 mb-4">
-                                <p class="font-weight-bold">Quantity</p>
-                                <div class="row ml-3 mx-0">
+                            <div class="col-12 d-sm-flex px-0 mb-4 align-items-md-center">
+                                <p class="font-weight-bold mr-3 mb-sm-0">Quantity</p>
+                                <div class="row mx-0">
                                     <select class="form-control col-5"
                                         onchange="getApostilleAmount(event,'{{ $appostile_fee }}')" required>
                                         <option value="">Select Quantity</option>
@@ -41,8 +41,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 px-0 d-sm-flex">
-                            <p class="font-weight-bold">Country</p>
+                        <div class="col-md-6 px-0 d-sm-flex align-items-sm-center">
+                            <p class="font-weight-bold mb-sm-0">Country</p>
                             <select name="apostille_country" class="form-control mx-sm-3" required>
                                 <option value="">Select country</option>
                                 @foreach ($countries as $country)
@@ -50,7 +50,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    <div class="form-group mb-2 row">
+                    <div class="form-group mb-2 row mt-3">
                         <p class="font-weight-bold mb-1 col-sm-12">What is to be sent for Apostilles?</p>
                         <div class="form-group col-3 mb-3">
                             <label for="" class="w-auto">Transcript(s)</label>
