@@ -34,7 +34,7 @@ class CreateParentProfilesTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
-            $table->longText('reference')->nullable();
+            $table->string('reference',2000)->nullable();
             $table->string('immunized')->nullable();
             $table->boolean('status')->default('0');
             $table->timestamps();

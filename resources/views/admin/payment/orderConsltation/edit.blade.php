@@ -56,7 +56,7 @@
                             <div class="form-group col-sm-6">
                                 <label>Consutation about</label>
                                 <textarea class="form-control" id="amount"
-                                    value="{{ $order_conultation->consulting_about }}" name="consulting_about"></textarea>
+                                    value="{{ $order_conultation->consulting_about }}" name="consulting_about" maxlength="2000"></textarea>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Payment Status<sup>*</sup></label>

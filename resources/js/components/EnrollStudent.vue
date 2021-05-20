@@ -255,6 +255,7 @@
           id="exampleFormControlTextarea1"
           name="student_situation"
           rows="3"
+          maxlength="2000"
           v-model="form.student_situation"
         ></textarea>
         </div>

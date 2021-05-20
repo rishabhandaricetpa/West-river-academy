@@ -429,7 +429,7 @@ class TranscriptController extends Controller
             }
         }
         try {
-            $getPaidData = Transcript::where('student_profile_id', $id)->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->where('period', $type)->get();
+            $getPaidData = Transcript::where('student_profile_id', $id)->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->get();
             $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
             if (count($getPaidData) > 0) {
                 $transcript_fee = FeesInfo::getFeeAmount('additional_transcript');
