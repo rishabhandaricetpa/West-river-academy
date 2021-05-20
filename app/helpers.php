@@ -363,3 +363,11 @@ function getPaymentInformation($enrollment_ids){
     return $payment_info;
 }
 
+function getallstartenrollmentes($student_id){
+    $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
+    return $enrollment_periods->start_date_of_enrollment;
+}
+function getendallenrollmentes($student_id){
+    $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
+    return $enrollment_periods->end_date_of_enrollment;
+}

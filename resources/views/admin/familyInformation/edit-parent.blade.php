@@ -95,28 +95,12 @@
                   <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item">
-                        <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
-                          aria-controls="first" aria-selected="true">First Tab</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="second-tab" data-toggle="tab" href="#second" role="tab"
-                          aria-controls="second" aria-selected="false">Second Tab</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="third-tab" data-toggle="tab" href="#third" role="tab"
-                          aria-controls="third" aria-selected="false">Third Tab</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="fourth-tab" data-toggle="tab" href="#fourth" role="tab"
-                          aria-controls="fourth" aria-selected="false">Fourth Tab</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="fifth-tab" data-toggle="tab" href="#fifth" role="tab"
-                          aria-controls="fifth" aria-selected="false">Fifth Tab</a>
+                        <a class="nav-link active" id="student-tab" data-toggle="tab" href="#first" role="tab"
+                          aria-controls="first" aria-selected="true">Students</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="sixth-tab" data-toggle="tab" href="#sixth" role="tab"
-                          aria-controls="sixth" aria-selected="false">Sixth Tab</a>
+                          aria-controls="sixth" aria-selected="false">Order</a>
                       </li>
                     </ul>
                   </div>
@@ -124,269 +108,32 @@
               </div>
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
-                    <form action="">
-                      <div class="container row">
-                        <div class="form-group col-sm-6">
-                          <label>First/Given Name <sup>*</sup></label>
-                          <input class="form-control" id="first_name" name="first_name">
+                  <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="student-tab">
+                  @foreach($allstudent as $key=>$student)
+                      <div class="d-flex align-items-center pt-4">
+                        <a href="{{ route('admin.edit-student',$student->id)}}" class="btn btn-primary ml-auto">View Student Details</a>
+                      </div>
+                      <div class="seperator">
+                        <div class="form-group d-sm-flex mb-2">
+                          <label for="">Student Name</label>
+                          <div>
+                            <p>{{$student ->first_name}} {{$student ->last_name}}</p>
+                          </div>
                         </div>
-                        <input type='hidden' name="parent_id">
-                        <div class="form-group col-sm-6">
-                          <label>Middle Name</label>
-                          <input class="form-control" id="middle_name" name="middle_name">
+                        <div class="form-group d-sm-flex mb-2">
+                          <label for="">Date of Birth</label>
+                          <div>
+                            <p>{{$student ->d_o_b->format('M j, Y' )}}</p>
+                          </div>
                         </div>
-                        <div class="form-group col-sm-6">
-                          <label>Last/Family Name <sup>*</sup></label>
-                          <input class="form-control" id="last_name" name="last_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Date of Birth<sup>*</sup></label>
-                          <div class="position-relative w-100"> <i class="fas fa-calendar-alt"
-                              aria-hidden="true"></i><input class="form-control datepicker" id="dob" name="dob"
-                              required></div>
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Email Address</label>
-                          <input class="form-control" name="email" id="email">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Cell Phone<sup>*</sup></label>
-                          <input class="form-control" id="cell_phone" name="cell_phone">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>National ID<sup>*</sup></label>
-                          <input class="form-control" id="student_id" name="student_id">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Immunization Status<sup>*</sup></label>
-                          <select class="form-control" name="immunized_status">
-                            <option>Yes, records will come with school records.</option>
-                            <option>Yes, I will provide records.</option>
-                            <option>Yes, I plan to get immunizations soon.</option>
-                            <option>No, for personal reasons.</option>
-                            <option>No, for medical reasons.</option>
-                            <option>No, for religious reasons.</option>
-                          </select>
-                        </div>
-                        <div class="my-sm-4 my-3 px-3">
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <a type="button" href="#" class="btn btn-primary ml-3">Generate Confirmation</a>
-                          <a href="#" class="btn btn-primary">Back</a>
+                        <div class="form-group d-sm-flex mb-2">
+                          <label for="">Email Address</label>
+                          <div>
+                            <p>{{$student ->email}}</p>
+                          </div>
                         </div>
                       </div>
-                    </form>
-                  </div>
-                  <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
-                    <form action="">
-                      <div class="container row">
-                        <div class="form-group col-sm-6">
-                          <label>First/Given Name <sup>*</sup></label>
-                          <input class="form-control" id="first_name" name="first_name">
-                        </div>
-                        <input type='hidden' name="parent_id">
-                        <div class="form-group col-sm-6">
-                          <label>Middle Name</label>
-                          <input class="form-control" id="middle_name" name="middle_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Last/Family Name <sup>*</sup></label>
-                          <input class="form-control" id="last_name" name="last_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Date of Birth<sup>*</sup></label>
-                          <div class="position-relative w-100"> <i class="fas fa-calendar-alt"
-                              aria-hidden="true"></i><input class="form-control datepicker" id="dob" name="dob"
-                              required></div>
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Email Address</label>
-                          <input class="form-control" name="email" id="email">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Cell Phone<sup>*</sup></label>
-                          <input class="form-control" id="cell_phone" name="cell_phone">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>National ID<sup>*</sup></label>
-                          <input class="form-control" id="student_id" name="student_id">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Immunization Status<sup>*</sup></label>
-                          <select class="form-control" name="immunized_status">
-                            <option>Yes, records will come with school records.</option>
-                            <option>Yes, I will provide records.</option>
-                            <option>Yes, I plan to get immunizations soon.</option>
-                            <option>No, for personal reasons.</option>
-                            <option>No, for medical reasons.</option>
-                            <option>No, for religious reasons.</option>
-                          </select>
-                        </div>
-                        <div class="my-sm-4 my-3 px-3">
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <a type="button" href="#" class="btn btn-primary ml-3">Generate Confirmation</a>
-                          <a href="#" class="btn btn-primary">Back</a>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="third-tab">
-                    <form action="">
-                      <div class="container row">
-                        <div class="form-group col-sm-6">
-                          <label>First/Given Name <sup>*</sup></label>
-                          <input class="form-control" id="first_name" name="first_name">
-                        </div>
-                        <input type='hidden' name="parent_id">
-                        <div class="form-group col-sm-6">
-                          <label>Middle Name</label>
-                          <input class="form-control" id="middle_name" name="middle_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Last/Family Name <sup>*</sup></label>
-                          <input class="form-control" id="last_name" name="last_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Date of Birth<sup>*</sup></label>
-                          <div class="position-relative w-100"> <i class="fas fa-calendar-alt"
-                              aria-hidden="true"></i><input class="form-control datepicker" id="dob" name="dob"
-                              required></div>
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Email Address</label>
-                          <input class="form-control" name="email" id="email">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Cell Phone<sup>*</sup></label>
-                          <input class="form-control" id="cell_phone" name="cell_phone">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>National ID<sup>*</sup></label>
-                          <input class="form-control" id="student_id" name="student_id">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Immunization Status<sup>*</sup></label>
-                          <select class="form-control" name="immunized_status">
-                            <option>Yes, records will come with school records.</option>
-                            <option>Yes, I will provide records.</option>
-                            <option>Yes, I plan to get immunizations soon.</option>
-                            <option>No, for personal reasons.</option>
-                            <option>No, for medical reasons.</option>
-                            <option>No, for religious reasons.</option>
-                          </select>
-                        </div>
-                        <div class="my-sm-4 my-3 px-3">
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <a type="button" href="#" class="btn btn-primary ml-3">Generate Confirmation</a>
-                          <a href="#" class="btn btn-primary">Back</a>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="tab-pane fade" id="fourth" role="tabpanel" aria-labelledby="fourth-tab">
-                    <form action="">
-                      <div class="container row">
-                        <div class="form-group col-sm-6">
-                          <label>First/Given Name <sup>*</sup></label>
-                          <input class="form-control" id="first_name" name="first_name">
-                        </div>
-                        <input type='hidden' name="parent_id">
-                        <div class="form-group col-sm-6">
-                          <label>Middle Name</label>
-                          <input class="form-control" id="middle_name" name="middle_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Last/Family Name <sup>*</sup></label>
-                          <input class="form-control" id="last_name" name="last_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Date of Birth<sup>*</sup></label>
-                          <div class="position-relative w-100"> <i class="fas fa-calendar-alt"
-                              aria-hidden="true"></i><input class="form-control datepicker" id="dob" name="dob"
-                              required></div>
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Email Address</label>
-                          <input class="form-control" name="email" id="email">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Cell Phone<sup>*</sup></label>
-                          <input class="form-control" id="cell_phone" name="cell_phone">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>National ID<sup>*</sup></label>
-                          <input class="form-control" id="student_id" name="student_id">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Immunization Status<sup>*</sup></label>
-                          <select class="form-control" name="immunized_status">
-                            <option>Yes, records will come with school records.</option>
-                            <option>Yes, I will provide records.</option>
-                            <option>Yes, I plan to get immunizations soon.</option>
-                            <option>No, for personal reasons.</option>
-                            <option>No, for medical reasons.</option>
-                            <option>No, for religious reasons.</option>
-                          </select>
-                        </div>
-                        <div class="my-sm-4 my-3 px-3">
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <a type="button" href="#" class="btn btn-primary ml-3">Generate Confirmation</a>
-                          <a href="#" class="btn btn-primary">Back</a>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="tab-pane fade" id="fifth" role="tabpanel" aria-labelledby="fifth-tab">
-                    <form action="">
-                      <div class="container row">
-                        <div class="form-group col-sm-6">
-                          <label>First/Given Name <sup>*</sup></label>
-                          <input class="form-control" id="first_name" name="first_name">
-                        </div>
-                        <input type='hidden' name="parent_id">
-                        <div class="form-group col-sm-6">
-                          <label>Middle Name</label>
-                          <input class="form-control" id="middle_name" name="middle_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Last/Family Name <sup>*</sup></label>
-                          <input class="form-control" id="last_name" name="last_name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Date of Birth<sup>*</sup></label>
-                          <div class="position-relative w-100"> <i class="fas fa-calendar-alt"
-                              aria-hidden="true"></i><input class="form-control datepicker" id="dob" name="dob"
-                              required></div>
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Email Address</label>
-                          <input class="form-control" name="email" id="email">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Cell Phone<sup>*</sup></label>
-                          <input class="form-control" id="cell_phone" name="cell_phone">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>National ID<sup>*</sup></label>
-                          <input class="form-control" id="student_id" name="student_id">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label>Immunization Status<sup>*</sup></label>
-                          <select class="form-control" name="immunized_status">
-                            <option>Yes, records will come with school records.</option>
-                            <option>Yes, I will provide records.</option>
-                            <option>Yes, I plan to get immunizations soon.</option>
-                            <option>No, for personal reasons.</option>
-                            <option>No, for medical reasons.</option>
-                            <option>No, for religious reasons.</option>
-                          </select>
-                        </div>
-                        <div class="my-sm-4 my-3 px-3">
-                          <button type="submit" class="btn btn-primary">Update</button>
-                          <a type="button" href="#" class="btn btn-primary ml-3">Generate Confirmation</a>
-                          <a href="#" class="btn btn-primary">Back</a>
-                        </div>
-                      </div>
+                      @endforeach
                     </form>
                   </div>
                   <div class="tab-pane fade" id="sixth" role="tabpanel" aria-labelledby="sixth-tab">
@@ -450,11 +197,7 @@
                 </div>
               </div>
             </div>
-            @if($allstudent)
-            @foreach ($allstudent as $student)
-            <a href="{{ route('admin.edit-student',$student->id)}}">{{ $student->fullname }},</a>
-            @endforeach
-            @endif
+           
           </div>
           <div class="col-sm-12">
             <button type="submit" class="btn btn-primary">Update</button>
