@@ -311,6 +311,21 @@ input[type="radio"]:checked:before {
   z-index: 2;
   position: relative !important;
 }
+////add a class //@at-root
+.select2-dropdown  li.select2-results__option{
+  overflow: hidden;  
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.section-notarization{
+  .select2-selection__choice {
+    padding-left: 0 !important;
+  }
+  ul.select2-selection__rendered{
+    display: inline-grid !important;  
+    display: -ms-inline-grid !important;
+  }
+}  
 
 .flatpickr-input + input {
   padding-right: 30px;

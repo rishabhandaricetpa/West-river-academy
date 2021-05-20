@@ -2,12 +2,12 @@
 @section('pageTitle', 'Notarization & Appostile')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<!-- * =============== Main =============== * -->
-<main class="position-relative container form-content mt-4">
+<!-- * =============== Main =============== * --> 
+<main class="position-relative container form-content mt-4 ">
     <form class="mb-0" method="post" action="{{ route('add.cart')}}">
         @csrf
         <input type="hidden" name="type" value="notarization" class="form-control col-3">
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+        <div class="form-wrap border bg-light py-5 px-25 mb-4 section-notarization">
             <h2 class="mb-3">Order Notarization</h2>
 
            
@@ -42,7 +42,7 @@
                     </div>
                 <div class="form-group mb-2 row">
                     <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized?</p>
-                    <div class="form-group col-sm-3 mb-3">
+                    <div class="form-group  col-md-4      mb-3">
                         <label for="" class="w-auto">Transcript(s)</label>
                         <div class="w-100">
                             <select name="transcript_doc[]" multiple="multiple" class="multiple-select form-control">
@@ -53,7 +53,7 @@
 
                         </div>
                     </div>
-                    <div class="form-group col-sm-3 mb-3">
+                    <div class="form-group  col-md-4      mb-3">
                         <label for="" class="w-auto">Confirmation(s) of Enrollment Letter</label>
                         <div class="w-100">
                             <select name="confirmation_doc" multiple="multiple" class="multiple-select form-control">
@@ -63,7 +63,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-sm-3 mb-3">
+                    <div class="form-group  col-md-4      mb-3">
                         <label for="" class="w-auto">Custom Letter(s)</label>
                         <div class="w-100">
                             <select name="custom_doc" multiple="multiple" class="multiple-select form-control">
