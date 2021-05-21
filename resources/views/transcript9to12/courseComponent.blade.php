@@ -1,12 +1,12 @@
 <table style="width:100%;border-collapse:collapse;">
     <thead style="background-color:#cccccc70">
         <tr style="line-height:1;">
-            <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">course
+            <th valign="top" va style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">course
                 name
             </th>
-            <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">yr</th>
-            <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">cr</th>
-            <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">gr</th>
+            <th valign="top" style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">yr</th>
+            <th valign="top" style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">cr</th>
+            <th valign="top" style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">gr</th>
         </tr>
     </thead>
     <tbody>

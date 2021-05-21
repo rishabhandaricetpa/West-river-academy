@@ -22,9 +22,9 @@
       <h1 style="width:50%;text-transform:uppercase;font-family:'Judson',serif;font-weight: 300;margin:0;">official transcript</h1>
       <div style="width:50%;display:flex;">
         <div style="margin-left:auto;text-align:center;">
-          <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;">
-          <p style="margin:0;">Califorinia Colorado USA</p>
-          <p style="margin:0;">949.492.5240 info@westriveracademy.com</p>
+          <img src="/image/letterhead.png" alt="logo" style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;">
+          <!-- <p style="margin:0;">Califorinia Colorado USA</p>
+          <p style="margin:0;">949.492.5240 info@westriveracademy.com</p> -->
         </div>
       </div>
       <div style="width:50%;">

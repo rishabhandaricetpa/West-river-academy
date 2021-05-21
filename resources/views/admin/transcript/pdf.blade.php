@@ -32,13 +32,67 @@
         <td valign="middle" style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px">official transcript</td>
         <td valign="middle" style="text-align:center;width:50%;height:100px;">
           <img src="../public/images/letterhead.png" alt="logo" style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
-          <!-- <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
-          <p style="margin:0;font-size:14px;">949.492.5240 info@westriveracademy.com</p> -->
         </td>
       </tr>
     </tbody>
   </table>
-  <table>
+   <!-- ////new code starts// -->
+   <table style="margin-bottom:20px;">
+    <tbody>
+      <tr>
+        <!-- first table -->
+        <td style="width:50%;">
+          <table>
+            <tbody>
+              <tr>
+                <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
+                <td
+                  style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                  {{$student->fullname}}</td>
+              </tr>
+              <tr>
+                <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
+                <td
+                  style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                  {{$address->street_address}}</br> {{$address->city}}, {{$address->zip_code}}, {{$address->country}}</td>
+              </tr>
+              <tr>
+                <td style="text-transform:uppercase;font-size:14px;width:10%;"></td>
+                <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:50%;"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <!-- second table -->
+        <td>
+          <table>
+            <tbody>
+              <tr>
+                <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">date of birth</td>
+                <td
+                  style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
+                  {{$student->d_o_b->format(' M y d')}}</td>
+              </tr>
+              <tr>
+                <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">years(s)</td>
+                <td
+                  style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
+                  2019-20</td>
+              </tr>
+              <tr>
+                <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">GRade level(s)</td>
+                <td
+                  style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
+                  2019-20</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- //new codeends -->
+  <!-- <table>
     <tbody>
       <tr style="width:100%;">
         <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
@@ -53,7 +107,7 @@
       <tr style="width:100%;">
         <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$address->street_address}} {{$address->city}}, {{$address->zip_code}}, {{$address->country}}</td>
-        <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
+        <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">years(s)</td>
         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">2019-20</td>
       </tr>
     </tbody>
@@ -63,11 +117,11 @@
       <tr style="width:100%;">
         <td style="text-transform:uppercase;font-size:14px;width:10%;"></td>
         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:50%;"></td>
-        <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level</td>
+        <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level(s)</td>
         <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">4 and 5</td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
   <table>
     <tbody>
       <tr style="width:100%;">
@@ -126,16 +180,25 @@
   <table style="margin:10px 0 20px;">
     <tbody>
       <tr width="100%">
-        <td style="padding-top:20px;width:100%;font-size:12px;">The Student has met West River Academy's requirments for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is promoted to grade <span style="font-weight:700;">6</span>.</td>
+        <td style="padding-top:20px;width:100%;font-size:12px;">This Student has met West River Academy's requirements for Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span> and is promoted to grade <span style="font-weight:700;">6</span>.</td>
       </tr>
     </tbody>
   </table>
-  <table style="margin-top:3%">
+  <table>
     <tbody>
       <tr>
-        <td width="50%" style="text-align:center;padding-right:30px;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span></td>
-        <td width="15%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span></td>
-        <td width="35%" style="text-align:right;"> <img src="../public/images/Stamp.png" style="width:150px;heigth:150px;object-fit:contain;" alt="logo"></td>
+        <td valign="bottom" style="text-align:center;width:40%;padding:10px 20px;">
+        
+          <span
+            style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
+            signature</span></td>
+        <td valign="bottom" style="text-align:center;width:30%;padding:10px 20px;">
+         
+          <span
+            style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
+        </td>
+        <td valign="middle" style="width:30%;padding:10px 20px;"><img src="../public/images/Stamp.png"
+            style="width:85px;height:80px;object-fit:contain;" alt="Stamp"></td>
       </tr>
     </tbody>
   </table>
@@ -143,7 +206,7 @@
     <tbody>
       <tr>
         <td>
-          <p style="font-size:11px;">West River Academy is accredited by the National Association for the Legal Auppotr of Alternative Schools (NALSAS) and registered in the California School Directory.CDS Code 30 66464 6134720. Country:Orange Address:33721 BlueWater Ln.Dana Point ,CA 92629-2173</p>
+          <p style="font-size:11px;">West River Academy is accredited by the National Association for the Legal Support of Alternative Schools (NALSAS) and registered in the California School Directory: CDS Code 30 66464 6134720. Country: Orange, Address:33721 BlueWater Ln., Dana Point, CA 92629-2173</p>
         </td>
       </tr>
     </tbody>
