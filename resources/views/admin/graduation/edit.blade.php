@@ -90,7 +90,7 @@
       <div class="form-group col-sm-6">
         <label for="situation">Situation/Updates:</label>
         <textarea name="situation" class="w-100" id="situation" cols="80"
-          rows="4">{{ $graduation->details->situation }}</textarea>
+          rows="4" maxlength="2000">{{ $graduation->details->situation }}</textarea>
       </div>
       <div class=" form-group col-sm-6">
         <label>Upload Single/Multiple Documents<sup>*</sup></label>

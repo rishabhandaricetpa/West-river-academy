@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('pageTitle', 'Notarization & Appostile')
+@section('pageTitle', 'Notarization')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- * =============== Main =============== * -->
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s) you wish to have notarized and any other comments.</p>
-                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"></textarea>
+                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message" maxlength="2000"></textarea>
                 </div>
 
                 <div class="form-group mb-2">

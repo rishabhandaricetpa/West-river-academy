@@ -38,7 +38,7 @@
 
     <div class="col-sm-6 form-group">
       <label for="description">Description <small>(optional)</small>:</label>
-      <textarea name="description" placeholder="Enter description.." class="w-100" id="description" cols="80" rows="2">{{ $coupon->description }}</textarea>
+      <textarea name="description" placeholder="Enter description.." class="w-100" id="description" cols="80" rows="2" maxlength="2000">{{ $coupon->description }}</textarea>
     </div>
 
     <div class="col-sm-6 form-group">

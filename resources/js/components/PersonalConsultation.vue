@@ -149,6 +149,7 @@
         name="consulting_about"
         v-model="form.consulting_about"
         rows="3"
+        maxlength="2000"
         required
       ></textarea>
     </div>
