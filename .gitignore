@@ -69,9 +69,6 @@ _ide_helper*.php
 /public/mix-manifest.json
 /public/*.css
 
-# Force yarn usage
-package-lock.json
-
 # Manually publish package assets
 /public/vendor
 /public/js
