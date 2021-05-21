@@ -4,11 +4,11 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Student List</h1>
+            <h1>Order List</h1>
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Student List</li>
+                    <li class="breadcrumb-item active">Order List</li>
                 </ol>
             </div>
         </div><!-- /.container-fluid -->
@@ -38,7 +38,7 @@
                                                                 </tr>
                                                                 </thead>
                                                                  <tbody>                                                                                                                                                                                                                                                 
-                                                                              @foreach ($transcations as $transcation)
+                                @foreach ($transcations as $transcation)
                                 <tr>
                                     <td>{{ $transcation->created_at->format('M j,Y') }}</td>
                                     <td>{{ $transcation->transcation_id }}</td>

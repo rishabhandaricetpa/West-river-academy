@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\User;
+use App\Models\TransactionsMethod;
 use DB;
 use Illuminate\Http\Request;
 
@@ -78,7 +79,8 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent'));
+        $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent','transcations'));
     }
 
     /**
