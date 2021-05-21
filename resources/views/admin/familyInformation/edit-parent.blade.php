@@ -2,7 +2,9 @@
 
 @section('content')
 <section class="content">
-  <div class="container-fluid position-relative">
+
+  <!-- first card parent details -->
+  <div class="container-fluid position-relative my-3">
     <h1>Parent Details</h1>
     <div class="form-wrap border py-5 px-25 position-relative">
       <!-- form start -->
@@ -23,6 +25,7 @@
         </div>
         <div class="container-fluid my-3 parent-info">
           <div class="row">
+            <!-- tab primary details -->
             <div class="col-lg-6">
               <div class="card ">
                 <div class="card-header p-0">
@@ -110,31 +113,32 @@
                     <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="login">
                       <div class="form-group col-12">
                         <label>First Name</label>
-                        <input class="form-control"  id="p2_cell_phone"
-                          value="{{ $parent->p2_cell_phone }}">
+                        <input class="form-control" id="p2_cell_phone" value="{{ $parent->p2_cell_phone }}">
                       </div>
                       <div class="form-group col-12">
                         <label>Last Name</label>
-                        <input class="form-control" id="p2_home_phone" 
-                          value="{{ $parent->p2_home_phone }}">
+                        <input class="form-control" id="p2_home_phone" value="{{ $parent->p2_home_phone }}">
                       </div>
                       <div class="form-group col-12">
                         <label>Email</label>
-                        <input class="form-control" id="p2_home_phone" 
-                          value="{{ $parent->p2_home_phone }}">
+                        <input class="form-control" id="p2_home_phone" value="{{ $parent->p2_home_phone }}">
                       </div>
                       <div class="form-group col-12">
                         <label>Password</label>
-                        <input class="form-control" id="p2_home_phone" 
-                          value="{{ $parent->p2_home_phone }}">
+                        <input class="form-control" id="p2_home_phone" value="{{ $parent->p2_home_phone }}">
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- tab primary details ends -->
+
+
+            <!--    secondary details -->
             <div class="col-lg-6 parent-info__secondary">
               <div class="row">
+                <!-- tab secondary details -->
                 <div class="col-sm-6">
                   <div class="card">
                     <div class="card-header p-0">
@@ -156,7 +160,8 @@
                     </div>
                     <div class="card-body">
                       <div class="tab-content">
-                        <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="primaryaddress">
+                        <div class="tab-pane fade show active" id="first" role="tabpanel"
+                          aria-labelledby="primaryaddress">
                           <div class="form-group col-12">
                             <label>Street Address<sup>*</sup></label>
                             <input class="form-control" id="street_address" name="street_address"
@@ -178,8 +183,7 @@
                         <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="secondaryaddress">
                           <div class="form-group col-12">
                             <label>Address<sup>*</sup></label>
-                            <input class="form-control" id="street_address" 
-                              value="{{ $parent->street_address }}">
+                            <input class="form-control" id="street_address" value="{{ $parent->street_address }}">
                           </div>
                           <div class="form-group col-12">
                             <label>Country</label>
@@ -194,6 +198,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- tab secondary details ends -->
+
+                <!-- family-info starts -->
                 <div class="col-sm-6 card py-3">
                   <h3> Family Info</h3>
                   <div class="form-group">
@@ -205,84 +212,98 @@
                     <input class="form-control" id="reference" name="reference" value="{{ $parent->reference }}">
                   </div>
                 </div>
+                <!-- family-info ends-->
               </div>
             </div>
-            <div class="form-group col-12">
-              <label>Students<sup>*</sup></label>
-                <div class="card my-3 w-100">
-                  <div class="card-header p-0">
-                    <!-- START TABS DIV -->
-                    <div class="tabbable-responsive">
-                      <div class="tabbable">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                          <li class="nav-item">
-                            <a class="nav-link active" id="student-tab" data-toggle="tab" href="#first" role="tab"
-                              aria-controls="first" aria-selected="true">Students</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="tab-content">
-                      <d class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="student-tab">
-                        <div class="card-body">
-                            <table id="#example-1" class="table table-bordered table-striped data-table"">
-                                                                       <thead>
-                                                                         <tr>   
-                                                                   <th>Name </th>
-                                                                    <th>Date of Birth</th>
-                                                                    <th>Email</th>
-                                                                  <th>Enrollments</th>
-                                                                  <th>Actions</th>
-                                                                </tr>
-                                                                </thead>
-                                                                 <tbody>                                                                                                                                                                                                                                                 
-                                @foreach ($allstudent as $student)
-                                <tr>
-                                    <td>{{$student ->first_name}} {{$student ->last_name}}</td>
-                                    <td>{{$student ->d_o_b->format('M j, Y' )}}</td>
-                                    <td>{{$student ->email}}</td>
-                                    <td>{{getendallenrollmentes($student->id)}}</td>
-                                    <td><a href="{{ route('admin.edit-student',$student->id)}}">View
-                                                    Student Details</a></br></td>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
           </div>
+        </div>
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <a href="{{ route('admin.view.parent')}}" class="btn btn-primary">Back</a>
+        </div>
       </form>
     </div>
   </div>
-  </div>
 
-  </div>
-  </div>
-
-
-
-
-  <div class="container-fluid my-3">
-    <div class="card">
-      <div class="card-header p-0">
-        <!-- START TABS DIV -->
-        <div class="tabbable-responsive">
-          <div class="tabbable">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="parent1" data-toggle="tab" href="#first" role="tab" aria-controls="first"
-                  aria-selected="true">Orders</a>
-              </li>
-            </ul>
+  <!-- second card parent details -->
+  <div class="container-fluid position-relative my-3">
+    <div class="form-wrap border py-5 px-25 position-relative">
+      <!-- student details here -->
+      <div class="form-group">
+        <label>Students<sup>*</sup></label>
+        <div class="card my-3 w-100">
+          <div class="card-header p-0">
+            <!-- START TABS DIV -->
+            <div class="tabbable-responsive">
+              <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="student-tab" data-toggle="tab" href="#first" role="tab"
+                      aria-controls="first" aria-selected="true">Students</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="student-tab">
+                <div class="card-body overflow-auto">
+                  <!-- student table -->
+                  <table id="#example-1" class="table table-bordered table-striped data-table">
+                    <thead>
+                      <tr>
+                        <th>Name </th>
+                        <th>Date of Birth</th>
+                        <th>Email</th>
+                        <th>Enrollments</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($allstudent as $student)
+                      <tr>
+                        <td>{{$student ->first_name}} {{$student ->last_name}}</td>
+                        <td>{{$student ->d_o_b->format('M j, Y' )}}</td>
+                        <td>{{$student ->email}}</td>
+                        <td>{{getendallenrollmentes($student->id)}}</td>
+                        <td><a href=" {{ route('admin.edit-student',$student->id)}}">View
+                            Student Details</a></br></td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="parent1">
+    </div>
+  </div>
+
+  <div class="container-fluid position-relative my-3">
+    <div class="form-wrap border py-5 px-25 position-relative">
+ <!-- order details -->
+        <div class="card">
+          <div class="card-header p-0">
+            <!-- START TABS DIV -->
+            <div class="tabbable-responsive">
+              <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="parent1" data-toggle="tab" href="#first" role="tab"
+                      aria-controls="first" aria-selected="true">Orders</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="card-body">
-                            <table id="#example-1" class="table table-bordered table-striped data-table"">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="parent1">
+                <div class="card-body">
+                  <table id="#example-1" class="table table-bordered table-striped data-table"">
                                                                        <thead>
                                                                          <tr>   
                                                                    <th>Date</th>
@@ -303,26 +324,27 @@
                                     <?php $values = getOrders($transcation->transcation_id); ?>
 
                                     <td>{{ $values }}</td>
-                                    <td><a href="{{ route('admin.edit.student.payment', $student->id) }}">View
-                                                    Orders</a></br></td>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    <td><a href=" {{ route('admin.edit.student.payment', $student->id) }}">View
+                    Orders</a></br></td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
-    </div>
-    <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary">Update</button>
-      <a href="{{ route('admin.view.parent')}}" class="btn btn-primary">Back</a>
-    </div>
-    </form>
+
 
   </div>
-  </div><!-- /.container-fluid -->
+
+  
+
+
+
+
 
 </section>
 
