@@ -129,6 +129,40 @@
                 </div>
             </div>
         @endif
+
+        <!-- Custom  Letter History Start-->
+        @if (count($customLetter) > 0)
+            <div class="form-wrap border bg-light py-5 px-25 mt-2r">
+                <h2 class="mb-3">Paid For: Custom Letter Payments</h2>
+                <div class="overflow-auto max-table">
+                    <table class="table-styling w-100 table-vertical_scroll">
+                        <thead>
+                            <tr>
+                                <th scope="col">Parent Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Transcation Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($customLetter as $cl)
+                                <tr>
+
+                                    <td>{{ $cl['ParentProfile']['p1_first_name'] }}</td>
+                                    <td>${{ $cl['amount'] }}</td>
+                                    <td>{{ $cl['payment_mode'] }}</td>
+                                    <td>{{ $cl['transcation_id'] }}</td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div>
+                    </div>
+
+                </div>
+            </div>
+        @endif
         <!-- Graduation Payment History Start-->
 
         @if (count($graduationPayments) > 0)

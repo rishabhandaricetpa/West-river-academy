@@ -3,14 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CustomPayment;
 use App\Models\EnrollmentPeriods;
-use App\Models\Graduation;
-use App\Models\NotarizationPayment;
-use App\Models\OrderPersonalConsultation;
-use App\Models\ParentProfile;
 use App\Models\StudentProfile;
-use App\Models\Transcript;
+use App\Models\TransactionsMethod;
 use Illuminate\Support\Facades\File;
 use App\Models\UploadDocuments;
 use DB;
@@ -225,47 +220,10 @@ class StudentProfileController extends Controller
 
     public function viewParentOrders($parent_id)
     {
-        $parent = ParentProfile::where('user_id', $parent_id)->first();
-        $studentData = $parent->studentProfile()->get();
-
-        $studentId = collect($studentData)->pluck('id');
-        // for transcirpts payment
-        $transcript_payments = Transcript::with('student', 'transcriptPayment')
-            ->whereIn('student_profile_id', $studentId)
-            ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])
-            ->get();
-
-        /** Receiving payment history data for custom payment*/
-        $customPayments = CustomPayment::with('ParentProfile')
-            ->where('parent_profile_id', $parent_id)
-            ->where('status', 'paid')
-            ->get();
-
-        /** Receiving payment history data for enrollments*/
-
-        $enrollmentPayments = DB::table('enrollment_periods')->whereIn('student_profile_id', $studentId)
-            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
-            ->join('student_profiles', 'student_profiles.id', 'enrollment_periods.student_profile_id')
-            ->whereIn('enrollment_payments.status', ['active', 'paid'])
-            ->get();
-
-        /** Receiving payment history data for graduation*/
-
-        $graduationPayments = Graduation::join('graduation_payments', 'graduation_payments.graduation_id', 'graduations.id')
-            ->whereIn('graduations.student_profile_id', $studentId)
-            ->whereIn('graduations.status', ['paid', 'approved', 'completed'])
-            ->join('student_profiles', 'student_profiles.id', 'graduations.student_profile_id')
-            ->get();
-
-        /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('ParentProfile', 'notarization')->where('parent_profile_id', $parent_id)->get();
-
-        /** Receiving payment history data for order personal consultation*/
-
-        $orderConsulationPayments = OrderPersonalConsultation::with('parent')->where('parent_profile_id', $parent_id)->get();
+        $transcations =   TransactionsMethod::where('parent_profile_id', $parent_id)->get();
         return view(
             'admin.familyInformation.orders',
-            compact('transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments')
+            compact('transcations')
         );
     }
 }

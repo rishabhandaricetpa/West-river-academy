@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\Coupon;
+use App\Models\CustomLetterPayment;
 use App\Models\CustomPayment;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
@@ -161,12 +162,17 @@ class ParentController extends Controller
             ->get();
 
         /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('notarization','ParentProfile')->where('parent_profile_id', $user_id)->get();
+        $notirizationPayments = NotarizationPayment::with('notarization', 'ParentProfile')->where('parent_profile_id', $user_id)->get();
 
         /** Receiving payment history data for order personal consultation*/
 
         $orderConsulationPayments = OrderPersonalConsultation::with('parent')->where('parent_profile_id', $user_id)->get();
-        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments'));
+
+        $customLetter = CustomLetterPayment::with('ParentProfile')
+            ->where('parent_profile_id', $user_id)
+            ->where('status', 'paid')
+            ->get();
+        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments', 'customLetter'));
     }
 
     public function editmysettings($user_id)

@@ -238,4 +238,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/record/status', 'DashboardController@updateRecordStatus')->name('update.assigneeStatus');
 
     Route::post('archieve/record', 'DashboardController@archieveRecord');
+
+    // view all orders 
+    Route::get('transaction/{transcation_id}', 'StudentProfileController@orders')->name('transaction.orders');
 });

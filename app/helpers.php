@@ -10,9 +10,15 @@ use App\Models\TranscriptPdf;
 use App\Models\StudentProfile;
 use App\Models\ConfirmationLetter;
 use App\Models\CustomLetterPayment;
+use App\Models\CustomPayment;
+use App\Models\EnrollmentPayment;
+use App\Models\GraduationPayment;
+use App\Models\NotarizationPayment;
+use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\Transcript;
 use App\Models\TranscriptPayment;
+
 /**
  * Compare given route with current route and return output if they match.
  *
@@ -331,14 +337,15 @@ function getTotalCredits($transcript_id, $transcript_9_12_id)
 }
 function getTranscriptdeatils($enroll_student)
 {
-    $tanscript = Transcript::where('student_profile_id', $enroll_student)->whereIn('status', ['pending','paid', 'canEdit', 'completed', 'approved'])->get();
+    $tanscript = Transcript::where('student_profile_id', $enroll_student)->whereIn('status', ['pending', 'paid', 'canEdit', 'completed', 'approved'])->get();
     if (count($tanscript) > 0) {
         return 'true';
     } else {
         return 'false';
     }
 }
-function getTranscriptPaidDetails($transcriptPayment_id){
+function getTranscriptPaidDetails($transcriptPayment_id)
+{
     $tanscript = TranscriptPayment::whereId($transcriptPayment_id)->whereIn('status', ['paid', 'canEdit', 'completed', 'approved'])->get();
     if (count($tanscript) > 0) {
         return 'true';
@@ -346,28 +353,73 @@ function getTranscriptPaidDetails($transcriptPayment_id){
         return 'false';
     }
 }
-function getEnrollmetForStudents($student_id){
+function getEnrollmetForStudents($student_id)
+{
     $enroll_student = StudentProfile::find($student_id);
     $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();
     $enrollment_ids = collect($allEnrollmentPeriods)->pluck('id');
     return $enrollment_ids;
 }
 
-function getPaymentInformation($enrollment_ids){
+function getPaymentInformation($enrollment_ids)
+{
     $payment_info = DB::table('enrollment_periods')
-    ->whereIn('enrollment_payment_id', $enrollment_ids)
-    ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
-    ->where('enrollment_payments.status', 'paid')
-    ->get();
+        ->whereIn('enrollment_payment_id', $enrollment_ids)
+        ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+        ->where('enrollment_payments.status', 'paid')
+        ->get();
 
     return $payment_info;
 }
 
-function getallstartenrollmentes($student_id){
+function getallstartenrollmentes($student_id)
+{
     $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
     return $enrollment_periods->start_date_of_enrollment;
 }
-function getendallenrollmentes($student_id){
+function getendallenrollmentes($student_id)
+{
     $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
     return $enrollment_periods->end_date_of_enrollment;
+}
+function getOrders($transction_id)
+{
+    //  checking from enrollment payments
+    $enrollment_payments = EnrollmentPayment::whereIn('transcation_id', [$transction_id])->get();
+    $enrollment_amount = collect($enrollment_payments)->pluck('amount')->toArray();
+
+    //  checking from custom  payments
+    $custom_payment = CustomPayment::whereIn('transcation_id', [$transction_id])->get();
+    $cp = collect($custom_payment)->pluck('amount')->toArray();
+
+
+    //  checking from custom letter payments
+    $custom_letter = CustomLetterPayment::whereIn('transcation_id', [$transction_id])->get();
+    $custom_letter_amt = collect($custom_letter)->pluck('amount')->toArray();
+
+    //  checking for graduation payments
+    $graduation = GraduationPayment::whereIn('transcation_id', [$transction_id])->get();
+    $graduation_amount = collect($graduation)->pluck('amount')->toArray();
+
+    //checking for notarization payment
+    $notarization = NotarizationPayment::whereIn('transcation_id', [$transction_id])->get();
+    $notarization_payment = collect($notarization)->pluck('amount')->toArray();
+
+    //checking for transcript payment
+    $transcript = TranscriptPayment::whereIn('transcation_id', [$transction_id])->get();
+    $transcript_payment = collect($transcript)->pluck('amount')->toArray();
+
+    // checking for order personal consultation
+    $order = OrderPersonalConsultation::whereIn('transcation_id', [$transction_id])->get();
+    $order_payment = collect($order)->pluck('amount')->toArray();
+
+    $enrollment = count($enrollment_amount) > 0 ? 'Enrollment Payment :' . implode(", ", $enrollment_amount) : '';
+    $cl = count($custom_letter) > 0 ? 'Custom Letter : ' . implode(", ", $custom_letter_amt) : '';
+    $cp = count($custom_payment) > 0 ? 'Custom Payment : ' . implode(", ", $cp) : '';
+    $graduate = count($graduation_amount) > 0 ? 'Graduation Payment : ' . implode(',', $graduation_amount) : '';
+    $notarize = count($notarization_payment) > 0 ? 'Notarization Payment :' . implode(',', $notarization_payment) : '';
+    $transcript = count($transcript_payment) > 0 ? 'Transcript Payment :' . implode(',', $transcript_payment) : '';
+    $orderconsultation = count($order_payment) > 0 ? 'Personal Consultation:' . implode(',', $order_payment) : '';
+
+    return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
 }
