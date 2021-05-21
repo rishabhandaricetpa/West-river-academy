@@ -4,7 +4,7 @@
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
     <h1 class="text-center text-white text-uppercase">Dashboard</h1>
-    <div class="form-wrap border bg-light py-5 px-25">
+    <div class="form-wrap border bg-light py-5 px-25 choose-notarize">
   
             <div class="text-center">
                 <h2 class="mb-3">Order an Apostille or Notarization</h2>
