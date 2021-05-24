@@ -56,7 +56,63 @@
                 </tr>
               </tbody>
             </table>
-            <table width="100%">
+            <table style="width:100%;">
+            <tbody>
+            <tr>
+            <!-- /////first table -->
+            <td>
+            <table>
+            <tbody>
+            <tr><td valign="top" style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Name</td>
+                  <td valign="top"
+                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                    {{$student->fullname}}
+                  </td>
+                  </tr>
+                  <tr>
+                  <td valign="top" style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
+                  <td valign="top"
+                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                    {{$address->street_address}}</br> {{$address->city}}, {{$address->zip_code}}, {{$address->country}}</td>
+                  </tr>
+                  <tr><td valign="top" style="text-transform:uppercase;font-size:13px;width:10%;"></td>
+                  <td valign="top" style="font-weight:700;text-transform:uppercase;text-align:left;font-size:13px;width:50%;"></td>
+
+                  </tr>
+            </tbody>
+            </table>
+            </td>
+             <!-- second table -->
+            <td>
+            <table>
+            <tbody>
+            <tr>
+            <td valign="top" style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
+                  <td valign="top"
+                    style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
+                    {{$student->d_o_b->format(' M d Y')}}</td>
+            </tr>
+            <tr>
+            <td  valign="top" style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">years(s)</td>
+                  <td valign="top"
+                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
+                    {{$minYear}} - {{$maxYear}}
+                  </td>
+            </tr>
+            <tr>
+            <td valign="top" style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level(s)</td>
+                  <td valign="top"
+                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
+                    {{ getPromotedGrades($grades_data) }}
+            </tr>
+            </tbody>
+            </table>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+
+            <!-- <table width="100%">
               <tbody>
                 <tr style="width:100%;">
                   <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Name</td>
@@ -98,7 +154,7 @@
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> -->
             <table width="100%" style="border-collapse:collapse;">
               <tbody>
                 <tr style="width:100%;">
