@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\EnrollmentPeriods;
+use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
 use App\Models\TransactionsMethod;
 use Illuminate\Support\Facades\File;
@@ -78,9 +79,29 @@ class StudentProfileController extends Controller
     public function edit($id)
     {
         $student = StudentProfile::find($id);
+        // information for enrollement tab
         $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods'));
+        $payment_info = DB::table('enrollment_periods')
+            ->where('student_profile_id', $id)
+            ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+            ->select(
+                'enrollment_periods.enrollment_payment_id',
+                'enrollment_payments.amount',
+                'enrollment_payments.status',
+                'enrollment_payments.transcation_id',
+                'enrollment_payments.payment_mode',
+                'enrollment_periods.start_date_of_enrollment',
+                'enrollment_periods.end_date_of_enrollment',
+                'enrollment_periods.grade_level',
+                'enrollment_payments.id'
+            )
+            ->get();
+
+        // information for record trasnsfer tab
+        $schoolRecords = RecordTransfer::where('student_profile_id', $id)->get();
+
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords'));
     }
 
     /**

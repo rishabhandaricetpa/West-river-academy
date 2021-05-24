@@ -25,7 +25,7 @@ class TranscriptController extends Controller
 {
     public function index()
     {
-        $students = StudentProfile::all();
+        $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "k-8";
         return view('admin.transcript.view-student', compact('students', 'type'));
     }
@@ -146,7 +146,7 @@ class TranscriptController extends Controller
 
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
-            ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->first();
+                ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->first();
             if ($storetranscript != null) {
                 $storetranscript->pdf_link = $pdfname . '.pdf';
                 $storetranscript->save();
@@ -215,10 +215,10 @@ class TranscriptController extends Controller
     }
     public function editAllPayments($transpay_id)
     {
-        
+
         $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
-        $transactionData=TransactionsMethod::where('transcation_id',$geteachtranscriptPayments->transcation_id)->first();
-        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments','transactionData'));
+        $transactionData = TransactionsMethod::where('transcation_id', $geteachtranscriptPayments->transcation_id)->first();
+        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments', 'transactionData'));
     }
 
     public function updateAllPayments(Request $request, $transpay_id)
