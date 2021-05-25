@@ -37,11 +37,13 @@
                                         <h3 class="mr-sm-3 mr-2" for="">Name: {{ $student->fullname }}</h3>
                                         <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}"
                                             class="btn btn-primary float-left mr-sm-3 mr-2">View Parent</a>
-                                            @if($type==='k-8')
-                                            <a href="{{route ('admin.view.transcript')}}" class="btn btn-primary float-right">Back</a>
-                                             @else
-                                             <a href="{{route ('admin.view.transcript9_12')}}" class="btn btn-primary float-right">Back</a>
-                                             @endif
+                                        @if ($type === 'k-8')
+                                            <a href="{{ route('admin.view.transcript') }}"
+                                                class="btn btn-primary float-right">Back</a>
+                                        @else
+                                            <a href="{{ route('admin.view.transcript9_12') }}"
+                                                class="btn btn-primary float-right">Back</a>
+                                        @endif
                                     </div>
                                     <tr>
                                         <th>Transcript</th>
