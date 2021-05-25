@@ -27,28 +27,28 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="#example-1" class="table table-bordered table-striped data-table"">
-                                                                       <thead>
-                                                                         <tr>   
-                                                                   <th>Date</th>
-                                                                    <th>Transcation Id </th>
-                                                                    <th>Payment Mode</th>
-                                                                   <th>Amount</th>
-                                                                  <th>Orders</th>
-                                                                </tr>
-                                                                </thead>
-                                                                 <tbody>                                                                                                                                                                                                                                                 
-                                @foreach ($transcations as $transcation)
-                                <tr>
-                                    <td>{{ $transcation->created_at->format('M j,Y') }}</td>
-                                    <td>{{ $transcation->transcation_id }}</td>
-                                    <td>{{ $transcation->payment_mode }}</td>
-                                    <td>{{ $transcation->amount }}</td>
-                                    <?php $values = getOrders($transcation->transcation_id); ?>
+                            <table id="#example-1" class="table table-bordered table-striped data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Transcation Id </th>
+                                        <th>Payment Mode</th>
+                                        <th>Amount</th>
+                                        <th>Orders</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($transcations as $transcation)
+                                        <tr>
+                                            <td>{{ $transcation->created_at->format('M j,Y') }}</td>
+                                            <td>{{ $transcation->transcation_id }}</td>
+                                            <td>{{ $transcation->payment_mode }}</td>
+                                            <td>{{ $transcation->amount }}</td>
+                                            <?php $values = getOrders($transcation->transcation_id); ?>
 
-                                    <td>{{ $values }}</td>
-                                </tr>
-                                @endforeach
+                                            <td>{{ $values }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

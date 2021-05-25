@@ -84,14 +84,14 @@
                                     <option value="Ungraded" @if ($enrollment_period->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                Age 3') selected="selected" @endif>
+                                                                                                                                    Age 3') selected="selected" @endif>
                                         Preschool
                                         Age 3
                                     </option>
 
                                     <option value="Preschool Age 4" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                Age 4') selected="selected" @endif>
+                                                                                                                                    Age 4') selected="selected" @endif>
                                         Preschool
                                         Age 4
                                     </option>
@@ -136,7 +136,7 @@
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a type="button" href="{{ route('admin.genrate.adminConfirmition', $student->id) }}"
                             class="btn btn-primary ml-3">Generate Confirmation</a>
-                        <a href="{{ route('admin.view-student') }}" class="btn btn-primary">Back</a>
+                        <a onclick="goBack()" class="btn btn-primary">Back</a>
                     </div>
                     <!-- student tab -->
                     <div class="col-12">

@@ -30,10 +30,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="main-header">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
+                @if(!Auth::id())
                     <a class="nav-link" href="http://example.com" id="dropdown05" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Enrollment</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown05">
@@ -51,8 +51,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">faq</a>
                 </li>
-
+                @endif
                 @if (Auth::id())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard<span class="sr-only">(current)</span></a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('video.tutorials')}}">Our Library<span class="sr-only">(current)</span></a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('mysetting')}}">My Account<span class="sr-only">(current)</span></a>
+                </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/logout') }}">logout</a>
                     </li>

@@ -9,47 +9,47 @@
             <input type="hidden" name="type" value="apostille" class="form-control col-3">
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <h2 class="mb-3">Order Apostille</h2>
-              
+
                 <form class="mb-0" method="post" action="{{ route('add.cart') }}">
-                        <p><span class="font-weight-bold">Apostilles: ONLY</span>
-                            for documents presented outside of the U.S. to countries who are members of The Hague
-                            Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at
-                            checkout. Allow 3-6 weeks for processing plus shipping time.
-                        </p>
-                        <div class="form-group d-md-flex mb-2">
-                            <div class="col-md-6 d-sm-flex px-0 mb-4">
-                                <p class="font-weight-bold">Quantity</p>
-                                <div class="row ml-3 mx-0">
-                                    <select class="form-control col-5"
-                                        onchange="getApostilleAmount(event,'{{ $appostile_fee }}')" required>
-                                        <option value="">Select Quantity</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                    </select>
-                                    <span class="col-2 text-center">=</span>
-                                    <i class="fas fa-dollar-sign additional-sign"></i>
-                                    <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due"
-                                        readonly>
-                                </div>
+                    <p><span class="font-weight-bold">Apostilles: ONLY</span>
+                        for documents presented outside of the U.S. to countries who are members of The Hague
+                        Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at
+                        checkout. Allow 3-6 weeks for processing plus shipping time.
+                    </p>
+                    <div class="form-group d-md-flex mb-2">
+                        <div class="col-md-6 d-sm-flex px-0 mb-4">
+                            <p class="font-weight-bold">Quantity</p>
+                            <div class="row ml-3 mx-0">
+                                <select class="form-control col-5"
+                                    onchange="getApostilleAmount(event,'{{ $appostile_fee }}')" required>
+                                    <option value="">Select Quantity</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <span class="col-2 text-center">=</span>
+                                <i class="fas fa-dollar-sign additional-sign"></i>
+                                <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due"
+                                    readonly>
                             </div>
                         </div>
-                        <div class="col-md-6 px-0 d-sm-flex">
-                            <p class="font-weight-bold">Country</p>
-                            <select name="apostille_country" class="form-control mx-sm-3" required>
-                                <option value="">Select country</option>
-                                @foreach ($countries as $country)
-                                    <option value="{{ $country->country }}">{{ $country->country }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    </div>
+                    <div class="col-md-6 px-0 d-sm-flex">
+                        <p class="font-weight-bold">Country</p>
+                        <select name="apostille_country" class="form-control mx-sm-3" required>
+                            <option value="">Select country</option>
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->country }}">{{ $country->country }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group mb-2 row">
                         <p class="font-weight-bold mb-1 col-sm-12">What is to be sent for Apostilles?</p>
                         <div class="form-group col-3 mb-3">
@@ -86,8 +86,10 @@
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s) you wish to have apostille and any other comments.</p>
-                        <textarea name="" id="" cols="40" rows="10" class="form-control" name="message" maxlength="2000"></textarea>
+                        <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s)
+                            you wish to have apostille and any other comments.</p>
+                        <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"
+                            maxlength="2000"></textarea>
                     </div>
 
                     <div class="form-group mb-2">
@@ -95,38 +97,43 @@
                         <div class="form-group d-sm-flex mb-2">
                             <label for="name">First Name</label>
                             <div>
-                                <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control" required>
+                                <input type="text" name="first_name" id="name" value="" class="w-100 ml-sm-3 form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="name">Last Name</label>
                             <div>
-                                <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control" required>
+                                <input type="text" name="last_name" id="name" value="" class="w-100 ml-sm-3 form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="street">Street</label>
                             <div>
-                                <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control" required>
+                                <input type="text" name="street" id="street" value="" class="w-100 ml-sm-3 form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="city">City</label>
                             <div>
-                                <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control" required>
+                                <input type="text" name="city" id="city" value="" class="w-100 ml-sm-3 form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="gcountry">State</label>
                             <div>
-                                <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control" required>
+                                <input type="text" name="state" id="state" value="" class="w-100 ml-sm-3 form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="form-group d-sm-flex mb-2">
                             <label for="postal_code">Zip Code</label>
                             <div>
-                                <input type="text" name="zip_code" id="zip_code" value=""
-                                    class="w-100 ml-sm-3 form-control" required>
+                                <input type="text" name="zip_code" id="zip_code" value="" class="w-100 ml-sm-3 form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
@@ -157,7 +164,7 @@
                     </div>
             </div>
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <a href="{{route ('dashboard')}}" class="btn btn-primary" role="button">Back</a>
+                <a onclick="goBack()" class="btn btn-primary" role="button">Back</a>
                 <button type="submit" class="btn btn-primary">continue</button>
             </div>
         </form>

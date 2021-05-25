@@ -30,7 +30,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-header">
-                            <a href="{{ route('admin.upload.documents') }}" class="btn btn-primary float-right">Back</a>
+                            <a onclick="goBack()" class="btn btn-primary float-right">Back</a>
 
                         </div>
                         <div class="card-body">

@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
     Route::get('view-parent-orders/{id}', 'StudentProfileController@viewParentOrders')->name('parents.orders');
     Route::get('view/student/parent/{parent_id}', 'ParentController@viewStudentParent')->name('view.students.parent');
+    Route::get('/allorders/{transaction_id}/{parent_id}', 'ParentController@viewAllOrders')->name('allorders');
+
     // Crud for student profile
     Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student.data');
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
@@ -241,4 +243,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     // view all orders 
     Route::get('transaction/{transcation_id}', 'StudentProfileController@orders')->name('transaction.orders');
+
 });

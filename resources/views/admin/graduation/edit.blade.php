@@ -100,7 +100,7 @@
 
       <div class="col-sm-12 mt-md-4 mt-3">
         <input type="submit" class="btn btn-primary" value="Update">
-        <a href="{{route('admin.view.graduation')}}" class="btn btn-primary">Back</a>
+        <a onclick="goBack()" class="btn btn-primary">Back</a>
       </div>
     </form>
   </div>

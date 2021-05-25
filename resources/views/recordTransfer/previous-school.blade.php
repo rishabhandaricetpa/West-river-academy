@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="mt-4">
-        <a href="{{route('dashboard')}}" role="button" class="btn btn-primary mr-2">Back</a>
+        <a onclick="goBack()" role="button" class="btn btn-primary mr-2">Back</a>
         <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
       </div>
     </form>

@@ -31,8 +31,7 @@
                     </div>
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('admin.change.uploadDocument', $document->student_profile_id) }}"
-                            class="btn btn-primary">Back</a>
+                        <a onclick="goBack()" class="btn btn-primary">Back</a>
                     </div>
             </div>
 

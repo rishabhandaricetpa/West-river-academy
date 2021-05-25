@@ -119,7 +119,7 @@
                                     class="btn btn-primary">Send Records To School</button>
                                 <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
                                     class=" btn btn-primary">Re-send Request</a>
-                                <a href="{{ route('admin.record.request') }}" class=" btn btn-primary">Back</a>
+                                <a onclick="goBack()" class=" btn btn-primary">Back</a>
                             </div>
 
                             <div class="col-md-6 mt-4">

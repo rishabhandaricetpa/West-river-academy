@@ -374,8 +374,9 @@ function getPaymentInformation($enrollment_ids)
 
 function getallstartenrollmentes($student_id)
 {
-    $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
-    return $enrollment_periods->start_date_of_enrollment;
+    $enroll_student = StudentProfile::find($student_id);
+    $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();
+    return $allEnrollmentPeriods;
 }
 function getendallenrollmentes($student_id)
 {
