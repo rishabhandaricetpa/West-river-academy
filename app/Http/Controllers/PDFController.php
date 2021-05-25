@@ -8,9 +8,11 @@ use App\Models\EnrollmentPeriods;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
 use Auth;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Str;
 
 class PDFController extends Controller
 {
@@ -38,8 +40,7 @@ class PDFController extends Controller
                     'date' => date('M j, Y'),
                 ];
                 $pdf = PDF::loadView('confirmationLetter', $data);
-                Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
-
+                Storage::put(ConfirmationLetter::UPLOAD_DIR_STUDENT . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
                 //store pdf link
                 $updatelink = ConfirmationLetter::where('student_profile_id', $student_id)->update(
                     [
