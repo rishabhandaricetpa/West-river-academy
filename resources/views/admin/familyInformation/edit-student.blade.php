@@ -84,14 +84,14 @@
                                     <option value="Ungraded" @if ($enrollment_period->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                                                                                                                            Age 3') selected="selected" @endif>
+                                                                                                                                                                                                                                                Age 3') selected="selected" @endif>
                                         Preschool
                                         Age 3
                                     </option>
 
                                     <option value="Preschool Age 4" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                                                                                                                            Age 4') selected="selected" @endif>
+                                                                                                                                                                                                                                                Age 4') selected="selected" @endif>
                                         Preschool
                                         Age 4
                                     </option>

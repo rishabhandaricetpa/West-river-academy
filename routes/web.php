@@ -37,9 +37,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
     Route::group(['middleware' => ['auth', 'active_user']], function () {
-        Route::get('/welcome-video', function () {
-            return view('welcome-video');
-        });
+        // Route::get('/welcome-video', function () {
+        //     return view('welcome-video');
+        // });
+        Route::get('/welcome-video', 'ParentController@welcomeVideo');
+        Route::post('/welcome-video/{parent_id}', 'ParentController@updatewelcomestatus')->name('update.welcomestatus');
+        
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student

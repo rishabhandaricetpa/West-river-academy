@@ -19,6 +19,7 @@ use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
+use App\Models\UploadDocuments;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -264,5 +265,49 @@ class ParentController extends Controller
     public function removeNotification($notification_id)
     {
         return Notification::removeParentNotifications($notification_id);
+    }
+
+    public function welcomeVideo(){
+     
+
+        $parent_id=ParentProfile::getParentId();
+        $parent_data=ParentProfile::whereId($parent_id)->first();
+        if($parent_data->welcome_video_status===0)
+        {
+        return view('welcome-video',compact('parent_data'));
+        }
+        else{
+            $parentId = ParentProfile::getParentId();
+            $parentData = ParentProfile::whereId($parentId)->first();
+            $student = StudentProfile::where('parent_profile_id', $parentId)->get();
+    
+            $student_data = StudentProfile::where('parent_profile_id', $parentId)->with('parentProfile')->first();
+            $transcript = Transcript::where('parent_profile_id', $parentId)
+                ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
+                ->with('student')->get();
+            $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
+            $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
+                ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
+                ->with('enrollmentPeriods')->get();
+            $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
+    
+            $uploadedDocuments = UploadDocuments::select()
+                ->whereIn('parent_profile_id', [$parentId])->where('is_upload_to_student', 1)->get();
+            return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));        }
+
+    }
+
+
+    public function  updatewelcomestatus($parent_id){
+
+            $parent_data = ParentProfile::find($parent_id)->first();
+            $parent_data->welcome_video_status='1';
+            $parent_data->save();
+            $notification = [
+                'message' => 'Password Updated Successfully!',
+                'alert-type' => 'success',
+            ];
+
+            return redirect()->back()->with($notification);
     }
 }
