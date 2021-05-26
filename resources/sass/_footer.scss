@@ -5,11 +5,13 @@
     a {
       width: 30px;
       height: 30px;
+
       &:hover {
         filter: grayscale(1);
       }
     }
   }
+
   i {
     font-size: 1.9rem;
     color: $border-color;
@@ -20,6 +22,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   bottom: -3px;
+
   *:not(.btn) {
     color: $border-color;
   }
@@ -28,3 +31,5 @@
 .copyright {
   font-size: 1.1875rem;
 }
+
+

@@ -14,11 +14,13 @@
                 <iframe class="embed-responsive-item" src="images/WelcomeVideo.mp4" allowfullscreen></iframe>
             </div>
         </div>
-        <form method="post" class="row" action="{{ route('update.welcomestatus', $parent_data->id) }}">
+        <form method="post" class="row px-3 justify-content-between" action="{{ route('update.welcomestatus', $parent_data->id) }}">
             @csrf
             <div class="checkbox">
-                <label class="sSame">
-                    <input type='checkbox' name='checkbox' onChange='submit();'>Skip Video
+                <label class="sSame container-checkbox mt-4">
+                    <input type='checkbox' name='checkbox' onChange='submit();'>
+                    <span class="checkmark"></span>
+                    Skip Video
                 </label>
 
             </div>
