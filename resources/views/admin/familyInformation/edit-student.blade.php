@@ -84,14 +84,14 @@
                                     <option value="Ungraded" @if ($enrollment_period->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                    Age 3') selected="selected" @endif>
+                                                                                                                                                                                                                                            Age 3') selected="selected" @endif>
                                         Preschool
                                         Age 3
                                     </option>
 
                                     <option value="Preschool Age 4" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                    Age 4') selected="selected" @endif>
+                                                                                                                                                                                                                                            Age 4') selected="selected" @endif>
                                         Preschool
                                         Age 4
                                     </option>
@@ -157,6 +157,16 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="login" data-toggle="tab" href="#third" role="tab"
                                                     aria-controls="third" aria-selected="false">Transcript K-8</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="transcript" data-toggle="tab" href="#transcript1"
+                                                    role="tab" aria-controls="transcript1" aria-selected="false">Transcript
+                                                    9-12</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="doc" data-toggle="tab" href="#documents" role="tab"
+                                                    aria-controls="documents" aria-selected="false">Transcript
+                                                    Documents</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -257,24 +267,119 @@
 
                                     <!--  Transcript k-8 Information Starts-->
                                     <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="login">
-                                        <div class="form-group col-12">
-                                            <label>First Name</label>
-                                            <input class="form-control" id="p2_cell_phone">
-                                        </div>
-                                        <div class="form-group col-12">
-                                            <label>Last Name</label>
-                                            <input class="form-control" id="p2_home_phone">
-                                        </div>
-                                        <div class="form-group col-12">
-                                            <label>Email</label>
-                                            <input class="form-control" id="p2_home_phone">
-                                        </div>
-                                        <div class="form-group col-12">
-                                            <label>Password</label>
-                                            <input class="form-control" id="p2_home_phone">
-                                        </div>
+                                        <table id="addressData" class="table table-bordered table-striped data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Transcript</th>
+                                                    <th>Status</th>
+                                                    <th>Enrollment Year</th>
+                                                    <th>School Name</th>
+                                                    <th>Grade</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($transcript as $transcripts)
+                                                    <tr>
+                                                        <td>{{ $transcripts->period }}</td>
+                                                        @if ($transcripts->status === 'completed')
+                                                            <td>Completed</td>
+                                                        @elseif($transcripts->status === 'paid') <td>Paid</td>
+                                                        @elseif($transcripts->status === 'approved') <td>Approved</td>
+                                                        @elseif($transcripts->status === 'canEdit') <td>Edit</td>
+                                                        @endif
+                                                        <td>{{ $transcripts->enrollment_year }}</td>
+                                                        <td>{{ $transcripts->school_name }}</td>
+                                                        <td>{{ $transcripts->grade }}</td>
+                                                        <td>
+                                                            <a
+                                                                href=" {{ route('admin.viewfull.transcript', [$transcripts->student_profile_id, $transcripts->transcript_id]) }}">View
+                                                                K-8 Transcript</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <!--  Transcript k-8 Information ENDS-->
+
+                                    <!--Transcript 9-12 Information Starts -->
+                                    <div class="tab-pane fade" id="transcript1" role="tabpanel"
+                                        aria-labelledby="transcript">
+                                        <table id="example1" class="table table-bordered table-striped data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Transcript</th>
+                                                    <th>Status</th>
+                                                    <th>Enrollment Year</th>
+                                                    <th>School Name</th>
+                                                    <th>Grade</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($transcript9_12s as $transcript9_12)
+                                                    <tr>
+                                                        <td>{{ $transcript9_12->period }}</td>
+                                                        @if ($transcript9_12->status === 'completed')
+                                                            <td>Completed</td>
+                                                        @elseif($transcript9_12->status === 'paid') <td>Paid</td>
+                                                        @elseif($transcript9_12->status === 'approved') <td>Approved
+                                                            </td>
+                                                        @elseif($transcript9_12->status === 'canEdit') <td>Edit</td>
+                                                        @endif
+                                                        <td>{{ $transcript9_12->enrollment_year }}</td>
+                                                        <td>{{ $transcript9_12->school_name }}</td>
+                                                        <td>{{ $transcript9_12->grade }}</td>
+                                                        <td><a
+                                                                href=" {{ route('admin.viewfull.transcript9_12', [$transcript9_12->student_profile_id, $transcript9_12->transcript_id]) }}">View
+                                                                9-12 Transcript</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!--Transcript 9-12 Information Ends  -->
+
+                                    <!--Documents Information Starts  -->
+                                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="doc">
+                                        <table id="example1" class="table table-bordered table-striped data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Transcript</th>
+                                                    <th>Status</th>
+                                                    <th>Enrollment Year</th>
+                                                    <th>School Name</th>
+                                                    <th>Grade</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($transcript9_12s as $transcript9_12)
+                                                    <tr>
+                                                        <td>{{ $transcript9_12->period }}</td>
+                                                        @if ($transcript9_12->status === 'completed')
+                                                            <td>Completed</td>
+                                                        @elseif($transcript9_12->status === 'paid') <td>Paid</td>
+                                                        @elseif($transcript9_12->status === 'approved') <td>Approved
+                                                            </td>
+                                                        @elseif($transcript9_12->status === 'canEdit') <td>Edit</td>
+                                                        @endif
+                                                        <td>{{ $transcript9_12->enrollment_year }}</td>
+                                                        <td>{{ $transcript9_12->school_name }}</td>
+                                                        <td>{{ $transcript9_12->grade }}</td>
+                                                        <td><a
+                                                                href=" {{ route('admin.viewfull.transcript9_12', [$transcript9_12->student_profile_id, $transcript9_12->transcript_id]) }}">View
+                                                                9-12 Transcript</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--Documents Information Ends  -->
                                 </div>
                             </div>
                         </div>

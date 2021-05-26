@@ -33,7 +33,6 @@ class TranscriptController extends Controller
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
-        $type = "k-8";
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
             ->get()->unique('transcript_id');

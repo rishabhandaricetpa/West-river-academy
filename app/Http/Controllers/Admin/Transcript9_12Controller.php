@@ -26,7 +26,7 @@ class Transcript9_12Controller extends Controller
 
     public function viewtranscripts9_12()
     {
-        $students = StudentProfile::all();
+        $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "9-12";
         return view('admin.transcript.view-student', compact('students', 'type'));
     }
@@ -55,9 +55,9 @@ class Transcript9_12Controller extends Controller
         $transcriptData = Transcript9_12::Where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course'])
             ->get();
-            $dateofGraduation=Transcript::whereId($transcript_id)->first();
+        $dateofGraduation = Transcript::whereId($transcript_id)->first();
         $student = StudentProfile::whereId($student_id)->with('ParentProfile')->first();
-        return view('admin.transcript.view-transcript9_12', compact('student', 'transcriptData', 'transcript_id','dateofGraduation'));
+        return view('admin.transcript.view-transcript9_12', compact('student', 'transcriptData', 'transcript_id', 'dateofGraduation'));
     }
 
     public function editSubGrades9_12($subject_id, $transcript_id, $grade_value)
@@ -94,7 +94,7 @@ class Transcript9_12Controller extends Controller
         $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
         $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
         $student = StudentProfile::find($id);
-        $dateofGraduation=Transcript::whereId($transcript_id)->first();
+        $dateofGraduation = Transcript::whereId($transcript_id)->first();
         $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
 
         $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
@@ -129,7 +129,7 @@ class Transcript9_12Controller extends Controller
             'courses' => $courses,
             'totalSelectedGrades' => $totalSelectedGrades,
             'date' => date('m/d/Y'),
-            'dateofGraduation'=>$dateofGraduation,
+            'dateofGraduation' => $dateofGraduation,
         ];
 
         $pdf = PDF::loadView('admin.transcript.pdf9_12', $data);
@@ -146,7 +146,7 @@ class Transcript9_12Controller extends Controller
             $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
             $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
             $student = StudentProfile::find($id);
-            $dateofGraduation=Transcript::whereId($transcript_id)->first();
+            $dateofGraduation = Transcript::whereId($transcript_id)->first();
             $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
 
             $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
@@ -181,7 +181,7 @@ class Transcript9_12Controller extends Controller
                 'courses' => $courses,
                 'totalSelectedGrades' => $totalSelectedGrades,
                 'date' => date('m/d/Y'),
-                'dateofGraduation'=>$dateofGraduation,
+                'dateofGraduation' => $dateofGraduation,
             ];
 
             $pdf = PDF::loadView('admin.transcript.signed_pdf9_12', $data);
@@ -223,21 +223,20 @@ class Transcript9_12Controller extends Controller
         }
     }
 
-    public function updateDateofGraduation(Request $request,$student_id, $transcript_id)
+    public function updateDateofGraduation(Request $request, $student_id, $transcript_id)
     {
         try {
             $transcript = Transcript::whereId($transcript_id)->first();
             if ($transcript) {
                 $transcript->date_of_graduation = $request->get('graduation_date');
             }
-            $transcript->save();   
+            $transcript->save();
             $notification = [
                 'message' => 'Graduation Date Updated',
                 'alert-type' => 'success',
-            ];  
+            ];
             return redirect()->back()->with($notification);
-        }  
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             dd($e);
             DB::rollback();
             $notification = [

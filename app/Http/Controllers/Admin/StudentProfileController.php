@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ConfirmationLetter;
 use App\Models\EnrollmentPeriods;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
 use App\Models\TransactionsMethod;
+use App\Models\Transcript;
 use Illuminate\Support\Facades\File;
 use App\Models\UploadDocuments;
 use DB;
@@ -101,7 +103,16 @@ class StudentProfileController extends Controller
         // information for record trasnsfer tab
         $schoolRecords = RecordTransfer::where('student_profile_id', $id)->get();
 
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords'));
+        // for transcript k-8
+        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
+            ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
+            ->get()->unique('transcript_id');
+
+        // for transcript 9-12
+        $transcript9_12s = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcript9_12')
+            ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
+            ->get()->unique('transcript_id');
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords', 'transcript', 'transcript9_12s'));
     }
 
     /**
@@ -221,7 +232,7 @@ class StudentProfileController extends Controller
             ];
 
             $pdf = PDF::loadView('confirmationLetter', $data);
-            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
+            Storage::put(ConfirmationLetter::UPLOAD_DIR_ADMIN . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
             dd($e);
