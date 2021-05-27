@@ -49,7 +49,7 @@
                 <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">date of birth</td>
                 <td
                     style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                    {{ $student->d_o_b->format(' M y d') }}</td>
+                    {{ $student->d_o_b->format(' M j, Y') }}</td>
             </tr>
         </tbody>
     </table>
@@ -64,7 +64,7 @@
                 <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
                 <td
                     style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
-                    2019-20</td>
+                    {{ $minYear }} - {{ $maxYear }}</td>
             </tr>
         </tbody>
     </table>
@@ -122,7 +122,8 @@
                                     style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:52px;">
                                     <span
                                         style="border-bottom:1px solid #000;display:inline-block;font-size:11px;">GRADING
-                                        SYSTEM</span></td>
+                                        SYSTEM</span>
+                                </td>
                             </tr>
                             <tr style="width:100%;">
                                 <td style="white-space: pre;padding-left:52px;font-size:11px;">A = 90-100%</td>
@@ -151,11 +152,11 @@
     <table style="margin:10px 0 20px;">
         <tbody>
             <tr width="100%">
-                <td style="padding-top:20px;width:100%;font-size:12px;">The Student has met West River Academy's
-                    requirments for
-                    Grades <span style="font-weight:700;">4</span> and <span style="font-weight:700;">5</span>, and is
-                    promoted to
-                    grade <span style="font-weight:700;">6</span>.</td>
+                <td style="padding-top:20px;width:100%;font-size:12px;">This Student has met West River
+                    Academy's
+                    requirements for Grades <span style="font-weight:700;">{{ getPromotedGrades($grades) }}</span>
+                    and is
+                    promoted to grade <span style="font-weight:700;">{{ getPromtedGrade($grades) }}</span>.</td>
             </tr>
         </tbody>
     </table>

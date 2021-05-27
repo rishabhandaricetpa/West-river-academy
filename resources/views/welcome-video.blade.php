@@ -14,7 +14,8 @@
                 <iframe class="embed-responsive-item" src="images/WelcomeVideo.mp4" allowfullscreen></iframe>
             </div>
         </div>
-        <form method="post" class="row px-3 justify-content-between" action="{{ route('update.welcomestatus', $parent_data->id) }}">
+        <form method="post" class="row px-3 justify-content-between"
+            action="{{ route('update.welcomestatus', $parent_data->id) }}">
             @csrf
             <div class="checkbox">
                 <label class="sSame container-checkbox mt-4">

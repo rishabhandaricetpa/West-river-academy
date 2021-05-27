@@ -59,7 +59,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('verify.email');
 
         Route::get('/dashboard', 'StudentController@showstudents')->name('dashboard');
-
+    
+        Route::get('/select/fields', function () {
+            return view('confirm_letter_select');
+        });
         Route::get('/logout', function () {
             Auth::logout();
 
