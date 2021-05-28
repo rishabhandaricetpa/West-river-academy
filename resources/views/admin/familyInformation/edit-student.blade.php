@@ -84,14 +84,14 @@
                                     <option value="Ungraded" @if ($enrollment_period->grade_level == 'Ungraded') selected="selected" @endif>Ungraded</option>
                                     <option value="Preschool Age 3" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                                                                                                                            Age 3') selected="selected" @endif>
+                                                                                                                                                                                                                                                Age 3') selected="selected" @endif>
                                         Preschool
                                         Age 3
                                     </option>
 
                                     <option value="Preschool Age 4" @if ($enrollment_period->grade_level ==
         'Preschool
-                                                                                                                                                                                                                                            Age 4') selected="selected" @endif>
+                                                                                                                                                                                                                                                Age 4') selected="selected" @endif>
                                         Preschool
                                         Age 4
                                     </option>
@@ -165,7 +165,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" id="doc" data-toggle="tab" href="#documents" role="tab"
-                                                    aria-controls="documents" aria-selected="false">Transcript
+                                                    aria-controls="documents" aria-selected="false">
                                                     Documents</a>
                                             </li>
                                         </ul>
@@ -345,37 +345,33 @@
 
                                     <!--Documents Information Starts  -->
                                     <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="doc">
-                                        <table id="example1" class="table table-bordered table-striped data-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Transcript</th>
-                                                    <th>Status</th>
-                                                    <th>Enrollment Year</th>
-                                                    <th>School Name</th>
-                                                    <th>Grade</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($transcript9_12s as $transcript9_12)
-                                                    <tr>
-                                                        <td>{{ $transcript9_12->period }}</td>
-                                                        @if ($transcript9_12->status === 'completed')
-                                                            <td>Completed</td>
-                                                        @elseif($transcript9_12->status === 'paid') <td>Paid</td>
-                                                        @elseif($transcript9_12->status === 'approved') <td>Approved
-                                                            </td>
-                                                        @elseif($transcript9_12->status === 'canEdit') <td>Edit</td>
-                                                        @endif
-                                                        <td>{{ $transcript9_12->enrollment_year }}</td>
-                                                        <td>{{ $transcript9_12->school_name }}</td>
-                                                        <td>{{ $transcript9_12->grade }}</td>
-                                                        <td><a
-                                                                href=" {{ route('admin.viewfull.transcript9_12', [$transcript9_12->student_profile_id, $transcript9_12->transcript_id]) }}">View
-                                                                9-12 Transcript</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                        <table id="addressData" class="table table-bordered table-striped data-table"">
+                                      <thead>
+                                      <tr>
+                                        <th>Original Filename</th>
+                                        <th>Document Related To:</th>
+                                        <th>Uploaded To Student Dashboard ?</th>
+                                        <th>Action</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                         @foreach ($uploadedDocuments as
+                                            $uploadedDocument)
+                                            <tr>
+                                                <td>{{ $uploadedDocument->original_filename }}</td>
+                                                <td>{{ $uploadedDocument->document_type }}</td>
+                                                @if ($uploadedDocument->is_upload_to_student == 1)
+                                                    <td>Yes</td>
+                                                @else
+                                                    <td>No</td>
+                                                @endif
+                                                <td>
+                                                    <a
+                                                        href="{{ route('admin.edit.uploadedDocument', $uploadedDocument->id) }}">
+                                                        <i class="fas fa-arrow-alt-circle-right"></i></a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>

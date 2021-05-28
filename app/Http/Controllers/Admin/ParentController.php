@@ -96,8 +96,8 @@ class ParentController extends Controller
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
-        $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
-        $documents=UploadDocuments::where('parent_profile_id', $id)->get();
+        //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
+        $documents = UploadDocuments::where('parent_profile_id', $id)->get();
         $payment_info = DB::table('enrollment_periods')
             ->where('student_profile_id', $id)
             ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
@@ -113,7 +113,7 @@ class ParentController extends Controller
                 'enrollment_payments.id'
             )
             ->get();
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent','transcations','recordTransfer','payment_info','documents'));
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents'));
     }
 
     /**
@@ -204,7 +204,8 @@ class ParentController extends Controller
      * @param  \App\Models\cr  $cr
      * @return \Illuminate\Http\Response
      */
-    public function viewAllOrders($transcation_id,$parent_id){
+    public function viewAllOrders($transcation_id, $parent_id)
+    {
 
         $transcript_payments = TranscriptPayment::where('transcation_id', $transcation_id)->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->get();
         /** Receiving payment history data for custom payment*/
@@ -221,7 +222,7 @@ class ParentController extends Controller
 
         $graduationPayments = Graduation::join('graduation_payments', 'graduation_payments.graduation_id', 'graduations.id')
             ->where('graduations.parent_profile_id', $parent_id)
-            ->where('graduation_payments.transcation_id',$transcation_id)
+            ->where('graduation_payments.transcation_id', $transcation_id)
             ->whereIn('graduations.status', ['paid', 'approved', 'completed'])
             ->join('student_profiles', 'student_profiles.id', 'graduations.student_profile_id')
             ->get();
@@ -238,6 +239,5 @@ class ParentController extends Controller
             ->where('status', 'paid')
             ->get();
         return view('admin.familyInformation.view-all-orders', compact('transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments', 'customLetter'));
-    
     }
 }

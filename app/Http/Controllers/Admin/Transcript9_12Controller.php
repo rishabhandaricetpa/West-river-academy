@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Storage;
+use Str;
 
 class Transcript9_12Controller extends Controller
 {
@@ -90,7 +91,6 @@ class Transcript9_12Controller extends Controller
     public function genrateTranscript($id, $transcript_id)
     {
         //fetch data for the transcript pdf
-        // dd('hi');
         $parentId = StudentProfile::select('parent_profile_id')->whereId($id)->first();
         $address = ParentProfile::where('id', $parentId->parent_profile_id)->first();
         $student = StudentProfile::find($id);
@@ -186,13 +186,14 @@ class Transcript9_12Controller extends Controller
 
             $pdf = PDF::loadView('admin.transcript.signed_pdf9_12', $data);
 
-            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
+            $path = Str::random(40) . $pdfname;
+            Storage::put(TranscriptPdf::UPLOAD_DIR_TRANSCRIPT . '/' . $path,  $pdf->output());
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
                 ->where('status', 'completed')->first();
             if ($storetranscript != null) {
-                $storetranscript->pdf_link = $pdfname . '.pdf';
+                $storetranscript->pdf_link = $path;
                 $storetranscript->save();
             }
 

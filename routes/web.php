@@ -221,7 +221,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
         Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
 
-        Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
         Route::get('preview-transcript/{student_id}/{trans_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
         Route::get('new-grade/{student_id}/{transcript_id}', function () {

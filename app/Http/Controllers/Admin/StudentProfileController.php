@@ -112,7 +112,8 @@ class StudentProfileController extends Controller
         $transcript9_12s = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcript9_12')
             ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
             ->get()->unique('transcript_id');
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords', 'transcript', 'transcript9_12s'));
+        $uploadedDocuments = UploadDocuments::where('student_profile_id', $id)->get();
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords', 'transcript', 'transcript9_12s', 'uploadedDocuments'));
     }
 
     /**
@@ -124,7 +125,6 @@ class StudentProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $student = StudentProfile::find($id);
@@ -132,7 +132,7 @@ class StudentProfileController extends Controller
             $student->first_name = $request->get('first_name');
             $student->middle_name = $request->get('first_name');
             $student->last_name = $request->get('last_name');
-            $student->d_o_b = \Carbon\Carbon::parse($request->get('d_o_b'))->format('M d Y');
+            $student->d_o_b = \Carbon\Carbon::parse($request->get('dob'))->format('M d Y');
             $student->email = $request->get('email');
             $student->cell_phone = $request->get('cell_phone');
             $student->student_Id = $request->get('student_id');

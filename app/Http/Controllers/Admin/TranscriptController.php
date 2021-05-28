@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Storage;
+use Str;
 
 class TranscriptController extends Controller
 {
@@ -33,6 +34,7 @@ class TranscriptController extends Controller
     //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
+        $type = "k-8";
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
             ->get()->unique('transcript_id');
@@ -141,13 +143,14 @@ class TranscriptController extends Controller
 
             $pdf = PDF::loadView('admin.transcript.signed_pdf', $data);
 
-            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
+            $path = Str::random(40) . $pdfname;
+            Storage::put(TranscriptPdf::UPLOAD_DIR_TRANSCRIPT . '/' . $path,  $pdf->output());
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
                 ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->first();
             if ($storetranscript != null) {
-                $storetranscript->pdf_link = $pdfname . '.pdf';
+                $storetranscript->pdf_link = $path;
                 $storetranscript->save();
             }
 
