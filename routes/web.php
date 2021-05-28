@@ -41,7 +41,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         //     return view('welcome-video');
         // });
         Route::get('/welcome-video', 'ParentController@welcomeVideo');
-        Route::post('/welcome-video/{parent_id}', 'ParentController@updatewelcomestatus')->name('update.welcomestatus');
+        Route::get('/welcome-video/{parent_id}', 'ParentController@updatewelcomestatus')->name('update.welcomestatus');
         
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
@@ -76,7 +76,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
-        Route::get('generate-pdf/{student_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
+        Route::get('generate-pdf/{student_id}/{grade_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
 
         //fees and services
         Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
@@ -153,7 +153,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('reset.password');
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
-        Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
+        Route::get('/viewConfirmation/{student_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
 
         //Transcript K-8
         Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');

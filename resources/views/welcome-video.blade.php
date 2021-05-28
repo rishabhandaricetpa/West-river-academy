@@ -14,21 +14,10 @@
                 <iframe class="embed-responsive-item" src="images/WelcomeVideo.mp4" allowfullscreen></iframe>
             </div>
         </div>
-        <form method="post" class="row px-3 justify-content-between"
-            action="{{ route('update.welcomestatus', $parent_data->id) }}">
-            @csrf
-            <div class="checkbox">
-                <label class="sSame container-checkbox mt-4">
-                    <input type='checkbox' name='checkbox' onChange='submit();'>
-                    <span class="checkmark"></span>
-                    Skip Video
-                </label>
-
-            </div>
-            <div class="mt-4 text-right">
-                <a href="{{ url('/enroll-student') }}" class="btn btn-secondary">next</a>
-            </div>
-        </form>
+        <div class="mt-4 text-right">
+            <a href="{{ route('update.welcomestatus', $parentData->id) }}"
+                class="btn btn-secondary float-right">next</a>
+        </div>
     </div>
 </main>
 

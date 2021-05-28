@@ -22,4 +22,8 @@ class ConfirmationLetter extends Model
     {
         return Storage::url(self::UPLOAD_DIR_STUDENT . '/' . $this->pdf_link);
     }
+    public function StudentProfile()
+    {
+        return $this->belongsTo('App\Models\StudentProfile');
+    }
 }

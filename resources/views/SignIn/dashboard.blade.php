@@ -156,6 +156,8 @@
                                                         class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                                         @elseif($transcriptData->status === 'completed')
                                             <td>Waiting For Approval</td>
+                                        @elseif($transcriptData->status === 'canEdit')
+                                            <td>-</td>
                                         @elseif($transcriptData->status === 'paid')
                                             <td><a href="{{ route('transcript.create', [$transcriptData->id, $transcriptData->student_profile_id]) }}"
                                                     class="btn btn-primary">Create a Transcript</a></td>
@@ -198,6 +200,8 @@
                                                         class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                                         @elseif($transcriptData->status === 'completed')
                                             <td>Waiting For Approval</td>
+                                        @elseif($transcriptData->status === 'canEdit')
+                                            <td>-</td>
                                         @elseif($transcriptData->status === 'paid')
                                             <td><a href="{{ route('transcript.create', [$transcriptData->id, $transcriptData->student_profile_id]) }}"
                                                     class="btn btn-primary">Create a Transcript</a></td>
@@ -223,6 +227,7 @@
                             <tr>
                                 <th>Student First Name</th>
                                 <th>National Id</th>
+                                <th>Grade</th>
                                 <th>Status</th>
                                 <th>Download</th>
                             </tr>
@@ -232,22 +237,12 @@
                                 <tr>
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
-                                    @if ($student->status === 'completed' || $student->status === 'paid')
-                                        <td>Completed</td>
-                                    @elseif($student->status === 'active')
-                                        <td>In-Progress</td>
-                                    @elseif($student->status === 'pending')
-                                        <td>Not Paid for Enrollment</td>
-                                    @endif
-                                    @if ($student->status === 'completed' || $student->status === 'paid')
-                                        <td><a href="{{ route('view.confirm', $student->student_profile_id) }}"
-                                                class="d-flex align-items-center"><i
-                                                    class="fas fa-file-pdf mr-2"></i>Download</a></td>
-                                    @elseif($student->status === 'pending')
-                                        <td>Please pay your Enrollment Fees</td>
-                                    @elseif($student->status === 'active')
-                                        <td>Payment In-Progress</td>
-                                    @endif
+                                    <td>{{ $student->grade_level }}</td>
+                                    <td>{{ getstatus($student->id) }}</td>
+                                    <td><a href="{{ route('view.confirm', [$student->student_profile_id, $student->grade_level]) }}"
+                                            class="d-flex align-items-center"><i
+                                                class="fas fa-file-pdf mr-2"></i>Download</a></td>
+
                                 </tr>
                             @endforeach
                         </tbody>

@@ -448,3 +448,15 @@ function getOrders($transction_id)
 
     return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
 }
+
+function getstatus($enrollment_period_id)
+{
+    $confirm_status = ConfirmationLetter::where('enrollment_period_id', $enrollment_period_id)->first();
+    if ($confirm_status->status === 'completed' || $confirm_status->status === 'paid'){
+        return 'Completed';
+    }
+    else{
+        return 'Not Paid for Enrollment';
+    }
+}
+
