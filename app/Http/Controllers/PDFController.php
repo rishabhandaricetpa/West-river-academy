@@ -21,17 +21,16 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDF($student_id)
+    public function generatePDF($student_id,$grade_id)
     {
         try {
             $parent_id = ParentProfile::getParentId();
             $studentProfileData = StudentProfile::whereId($student_id)->first();
             $pdfname = $studentProfileData->fullname . '_' . $student_id . '_'  . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
             $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
-                ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')->where('confirmation_letters.status', 'completed')
+                ->where('enrollment_periods.grade_level',$grade_id)
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')->where('enrollment_periods.student_profile_id', $student_id)
-                ->with('enrollmentPeriods')->get();
-
+                ->with('enrollmentPeriods')->first();
             if ($enrollment_periods !== null) {
                 $data = [
                     'student' => $studentProfileData,

@@ -19,6 +19,7 @@ use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
+use App\Models\UploadDocuments;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -264,5 +265,38 @@ class ParentController extends Controller
     public function removeNotification($notification_id)
     {
         return Notification::removeParentNotifications($notification_id);
+    }
+
+    public function welcomeVideo(){
+        $parentId=ParentProfile::getParentId();
+        $parentData=ParentProfile::whereId($parentId)->first();
+        if($parentData->welcome_video_status===0)
+        {
+        return view('welcome-video',compact('parentData'));
+        }
+        else{
+
+            $student = StudentProfile::where('parent_profile_id', $parentId)->get();
+            $transcript = Transcript::where('parent_profile_id', $parentId)
+                ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
+                ->with('student')->get();
+            $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
+            $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
+                ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                ->with('enrollmentPeriods','confirmletter')->get();
+            $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
+    
+            $uploadedDocuments = UploadDocuments::select()
+                ->whereIn('parent_profile_id', [$parentId])->where('is_upload_to_student', 1)->get();
+            return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));        }
+        
+    }
+
+
+    public function  updatewelcomestatus($parent_id){
+            $parent_data = ParentProfile::find($parent_id)->first();
+            $parent_data->welcome_video_status='1';
+            $parent_data->save();
+            return redirect()->back();
     }
 }

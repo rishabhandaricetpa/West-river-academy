@@ -112,8 +112,8 @@ class StudentController extends Controller
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
-            ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
-            ->with('enrollmentPeriods')->get();
+                ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                ->with('enrollmentPeriods','confirmletter')->get();
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
@@ -121,10 +121,10 @@ class StudentController extends Controller
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));
     }
 
-    public function confirmationpage($student_id)
+    public function confirmationpage($student_id,$grade_id)
     {
         $student = StudentProfile::whereId('student_id')->first();
-        return view('viewConfirmation', compact('student', 'student_id'));
+        return view('viewConfirmation', compact('student', 'student_id','grade_id'));
     }
 
     protected function store(Request $data)

@@ -221,9 +221,12 @@ class StudentProfileController extends Controller
 
             $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
             $enrollment_periods = StudentProfile::where('confirmation_letters.parent_profile_id', $parent_id->parent_profile_id)
-                ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')->where('confirmation_letters.status', 'paid')
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
                 ->with('enrollmentPeriods')->get();
+                $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
+                ->where('enrollment_periods.grade_level',$grade_id)
+                ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')->where('enrollment_periods.student_profile_id', $student_id)
+                ->with('enrollmentPeriods')->first();
             $data = [
                 'student' => $studentProfileData,
                 'enrollment' => $enrollment_periods,

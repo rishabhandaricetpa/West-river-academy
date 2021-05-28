@@ -89,6 +89,18 @@ class TranscriptController extends Controller
 
         $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
 
+        if ($transcript_id) {
+            $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+            $years = collect($enrollment_periods)->pluck('enrollment_year');
+            $maxYear = $years->max();
+            $minYear = $years->min();
+        } else {
+            $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+            $years = collect($enrollment_periods)->pluck('enrollment_year');
+            $maxYear = $years->max();
+            $minYear = $years->min();
+            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
+        }
         $data = [
             'student' => $student,
             'transcriptData' => $transcriptData,
@@ -96,6 +108,8 @@ class TranscriptController extends Controller
             'groupCourses' => $groupCourses,
             'transcript_id' => $transcript_id,
             'address' => $address,
+            'minYear' => $minYear,
+            'maxYear' => $maxYear,
             'enrollment' => $enrollment_periods,
             'title' => 'transcript',
             'date' => date('m/d/Y'),
@@ -128,7 +142,18 @@ class TranscriptController extends Controller
             $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'signed_transcript_letter';
 
             $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
-
+            if ($transcript_id) {
+                $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+                $years = collect($enrollment_periods)->pluck('enrollment_year');
+                $maxYear = $years->max();
+                $minYear = $years->min();
+            } else {
+                $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+                $years = collect($enrollment_periods)->pluck('enrollment_year');
+                $maxYear = $years->max();
+                $minYear = $years->min();
+                $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
+            }
             $data = [
                 'student' => $student,
                 'transcriptData' => $transcriptData,
@@ -136,6 +161,8 @@ class TranscriptController extends Controller
                 'groupCourses' => $groupCourses,
                 'transcript_id' => $transcript_id,
                 'address' => $address,
+                'minYear' => $minYear,
+                'maxYear' => $maxYear,
                 'enrollment' => $enrollment_periods,
                 'title' => 'transcript',
                 'date' => date('m/d/Y'),

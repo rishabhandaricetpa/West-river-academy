@@ -221,6 +221,7 @@ function getGPAvalue($courses, $total_credits_earned)
         'PASS' => 0,
         'In Progress' => 0,
         'P' => 0,
+        'Pass'=>0,
     );
     $college_points = array(
         "A" => 5,
@@ -231,6 +232,8 @@ function getGPAvalue($courses, $total_credits_earned)
         'PASS' => 0,
         'In Progress' => 0,
         'P' => 0,
+        'Pass'=>0,
+
     );
     $is_caragie = array(
         "A" => 50,
@@ -241,6 +244,8 @@ function getGPAvalue($courses, $total_credits_earned)
         'PASS' => 0,
         'In Progress' => 0,
         'P' => 0,
+        'Pass'=>0,
+
     );
     $course = $courses->map(function ($course) use ($academy_points, $is_caragie, $college_points) {
         if ($course->type === 'year') {
@@ -443,3 +448,15 @@ function getOrders($transction_id)
 
     return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
 }
+
+function getstatus($enrollment_period_id)
+{
+    $confirm_status = ConfirmationLetter::where('enrollment_period_id', $enrollment_period_id)->first();
+    if ($confirm_status->status === 'completed' || $confirm_status->status === 'paid'){
+        return 'Completed';
+    }
+    else{
+        return 'Not Paid for Enrollment';
+    }
+}
+
