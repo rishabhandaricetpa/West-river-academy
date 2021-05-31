@@ -222,6 +222,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //upload document
     Route::get('upload-document', 'UploadDocument@index')->name('upload.documents');
+    Route::get('upload-podcast', 'PodcastController@index')->name('upload.podcasts');
     Route::get('dataTable/upload', 'UploadDocument@dataTable')->name('datatable.student');
     Route::get('edit-upload/{student_id}', 'UploadDocument@editUpload')->name('edit.upload');
     Route::post('store-uploaded', 'UploadDocument@storeUploadedDocument')->name('store.uploadDocument');
@@ -243,5 +244,4 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     // view all orders 
     Route::get('transaction/{transcation_id}', 'StudentProfileController@orders')->name('transaction.orders');
-
 });
