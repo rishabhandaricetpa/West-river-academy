@@ -200,9 +200,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.upload.podcasts') }}" class="nav-link">
+                <a href="{{ route('admin.upload.podcasts') }}" class="nav-link d-flex">
                     <i class="nav-icon fas fa-exchange-alt"></i>
-                    <p>
+                    <p class="pl-2">
                         Upload Podcast, audios and videos
                     </p>
                 </a>
