@@ -14,7 +14,8 @@
                         <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Journals</a></li>
                         <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Videos</a></li>
                     </ul>
-                </div><!-- /.card-header -->
+                </div>
+                <!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
@@ -68,24 +69,18 @@
                                     <label> Content <sup>*</sup></label>
                                     <textarea class="form-control" value="" name="content" required></textarea>
                                 </div>
-
                                 <div class="form-group col-12">
                                     <input type="submit" class='btn btn-primary'>
                                 </div>
-
                                 @if (count($journals) > 0)
-                                    <div class="row  border-top pt-4 mt-3">
-                                        <div class="col-12">
+                                    <div class="col-12 border-top pt-4 mt-3">
                                             <h2 class="text-center">Uploaded Journal</h2>
-
                                             @foreach ($journals as $journal)
-                                                <h3 class="py-2"><a href="#">{{ $journal->heading }}</a></h3>
+                                                <h3 class="pt-3"><a href="#">{{ $journal->heading }}</a></h3>
                                                 <p>{{ $journal->content }}</p>
                                             @endforeach
                                         </div>
-                                    </div>
                                 @endif
-
                             </form>
                         </div>
                         <!-- /.tab-pane  for videos-->
