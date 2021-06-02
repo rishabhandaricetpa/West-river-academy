@@ -8,14 +8,17 @@ use App\Models\TranscriptK8;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptPdf;
 use DB;
+use File;
 use Illuminate\Http\Request;
+use Storage;
+use Str;
 
 class FileUploadController extends Controller
 {
     public function fileUpload($student_id, $transcript_id)
     {
-        $type=Transcript::whereId($transcript_id)->first();
-        return view('admin.transcript.fileUpload', compact('student_id', 'transcript_id','type'));
+        $type = Transcript::whereId($transcript_id)->first();
+        return view('admin.transcript.fileUpload', compact('student_id', 'transcript_id', 'type'));
     }
 
     /**
@@ -25,30 +28,35 @@ class FileUploadController extends Controller
      */
     public function fileUploadPost(Request $request)
     {
+        //dd($request->all());
         try {
             DB::beginTransaction();
             $request->validate([
-                'transcript_file' => 'required|mimes:pdf|max:2048',
+                'transcript_file' => 'required|max:2048',
             ]);
-            $fileName = $request->transcript_file->getClientOriginalName();
 
-            $request->transcript_file->move(public_path('storage/pdf'), $fileName);
 
+            //   $request->transcript_file->move(public_path('storage/pdf'), $fileName);
+
+            $cover = $request->file('transcript_file');
+            $extension = $cover->getClientOriginalExtension();
+            $path = Str::random(40) . '.' . $extension;
+            Storage::put(TranscriptPdf::UPLOAD_DIR_TRANSCRIPT . '/' . $path,  File::get($cover));
             //store file to the teanscript_pdf table
 
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $request->get('transcript_id'))
                 ->where('status', 'completed')->first();
             if ($storetranscript != null) {
-                $storetranscript->pdf_link = $fileName;
+                $storetranscript->pdf_link = $path;
                 $storetranscript->save();
             } else {
                 return back()
                     ->with('error', 'Transcript Not Submitted By User')
-                    ->with('file', $fileName);
+                    ->with('file', $path);
             }
             $updateTranscriptStatus = Transcript::whereId($request->get('transcript_id'))
-                ->where('status', 'completed')->first();
+                ->whereIn('status', ['completed', 'approved', 'paid', 'canEdit'])->first();
             if ($updateTranscriptStatus != null) {
                 $updateTranscriptStatus->status = 'approved';
                 $updateTranscriptStatus->save();
@@ -61,7 +69,8 @@ class FileUploadController extends Controller
                 return back()->with($notification);
             }
             $paymentsTranscriptStatus = TranscriptPayment::where('transcript_id', $request->get('transcript_id'))
-                ->where('status', 'completed')->first();
+                ->whereIn('status', ['completed', 'approved', 'paid', 'canEdit'])->first();
+            // dd($paymentsTranscriptStatus);
             if ($paymentsTranscriptStatus != null) {
                 $paymentsTranscriptStatus->status = 'approved';
                 $paymentsTranscriptStatus->save();
@@ -81,6 +90,7 @@ class FileUploadController extends Controller
 
             return back()->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             $notification = [
                 'message' => 'Data Missmatch',

@@ -30,17 +30,17 @@
             @endcan
             <li class="nav-item">
                 <a href="{{ url('admin/view') }}" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+                    <i class="nav-icon fas fa-user"></i>
                     <p>
-                    View Parents
+                        View Parents
                     </p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('admin/view-student') }}" class="nav-link">
-                <i class="fas fa-user-friends nav-icon"></i>
+                    <i class="fas fa-user-friends nav-icon"></i>
                     <p>
-                    Students
+                        Students
                     </p>
                 </a>
             </li>
@@ -196,6 +196,14 @@
                     <i class="nav-icon fas fa-exchange-alt"></i>
                     <p>
                         Upload Docs
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.upload.podcasts') }}" class="nav-link d-flex">
+                    <i class="nav-icon fas fa-exchange-alt"></i>
+                    <p class="pl-2">
+                        Upload Podcast, audios and videos
                     </p>
                 </a>
             </li>

@@ -33,7 +33,7 @@
                 {{ Carbon\Carbon::parse($enrollment->start_date_of_enrollment)->format('M j, Y') }} -
                 {{ Carbon\Carbon::parse($enrollment->end_date_of_enrollment)->format('M j, Y') }}</p>
         </div>
-        <table style="padding-top:45%;width:100%;">
+        <table style="padding-top:30px;width:100%;">
             <tbody>
                 <tr>
                     <td>

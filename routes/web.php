@@ -42,7 +42,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // });
         Route::get('/welcome-video', 'ParentController@welcomeVideo');
         Route::get('/welcome-video/{parent_id}', 'ParentController@updatewelcomestatus')->name('update.welcomestatus');
-
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student
@@ -81,11 +80,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         //fees and services
         Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
 
-        Route::get('video-tutorials', function () {
-            return view('videos.video_library');
-        })->name('video.tutorials');
 
-
+        Route::get('video-tutorials', 'VideoLibrary@index')->name('video.tutorials');
         Route::get('previous-school', function () {
             return view('previous-school');
         });
@@ -229,7 +225,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
         Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
 
-        Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
         Route::get('preview-transcript/{student_id}/{trans_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
         Route::get('new-grade/{student_id}/{transcript_id}', function () {
