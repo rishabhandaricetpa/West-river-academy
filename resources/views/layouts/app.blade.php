@@ -1,6 +1,5 @@
 <div class="d-flex">
     <!-- * =============== Sidebar =============== * -->
-    @include('layouts.partials.sidebar')
     <!-- * =============== /Sidebar =============== * -->
 
     <div class="main-content position-relative ml-auto">
@@ -13,6 +12,7 @@
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
+        @include('layouts.partials.sidebar')
 
         <!-- Control Sidebar -->
         @include('layouts.partials.footer')

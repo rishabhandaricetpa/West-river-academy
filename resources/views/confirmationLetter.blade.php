@@ -25,8 +25,10 @@
             </p>
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Date of Birth:
                 {{ Carbon\Carbon::parse($student->d_o_b)->format('M j, Y') }}</p>
+                @if($confirmData->isGrade)
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Grade: {{ $enrollment->grade_level }}
             </p>
+            @endif
             <p style="margin-top:25px;font-size: 17px;">Enrollment Period:
                 {{ Carbon\Carbon::parse($enrollment->start_date_of_enrollment)->format('M j, Y') }} -
                 {{ Carbon\Carbon::parse($enrollment->end_date_of_enrollment)->format('M j, Y') }}</p>

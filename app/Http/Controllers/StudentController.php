@@ -112,8 +112,8 @@ class StudentController extends Controller
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
-                ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
-                ->with('enrollmentPeriods','confirmletter')->get();
+            ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+            ->with('enrollmentPeriods', 'confirmletter')->get();
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
@@ -121,12 +121,33 @@ class StudentController extends Controller
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));
     }
 
-    public function confirmationpage($student_id,$grade_id)
+    public function confirmationpage($student_id, $grade_id)
     {
-        $student = StudentProfile::whereId('student_id')->first();
-        return view('viewConfirmation', compact('student', 'student_id','grade_id'));
+        $student = StudentProfile::whereId($student_id)->first();
+        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->first();
+        return view('confirm_letter_select', compact('student', 'student_id', 'grade_id', 'confirmation_data'));
+        // return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
     }
 
+    public function saveConfirmationInformation(Request $request, $student_id, $grade_id)
+    {
+        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->first();
+        if ($request->input('isDobCity')) {
+            $confirmation_data->isDobCity = "1";
+        }
+        if ($request->input('IsMotherName')) {
+            $confirmation_data->IsMotherName = "1";
+        }
+        if ($request->input('isGrade')) {
+            $confirmation_data->isGrade = "1";
+        }
+        if ($request->input('isStudentId')) {
+            $confirmation_data->isStudentId = "1";
+        }
+        $confirmation_data->save();
+        $student = StudentProfile::whereId($student_id)->first();
+        return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
+    }
     protected function store(Request $data)
     {
         try {

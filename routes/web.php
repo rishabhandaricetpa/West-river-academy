@@ -42,11 +42,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // });
         Route::get('/welcome-video', 'ParentController@welcomeVideo');
         Route::get('/welcome-video/{parent_id}', 'ParentController@updatewelcomestatus')->name('update.welcomestatus');
-        
+
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student
-        Route::get('/enroll-student', 'StudentController@index');
+        Route::get('/enroll-student', 'StudentController@index')->name('enroll');
         Route::post('/enroll-student', 'StudentController@store')->name('enroll.student');
         Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
         Route::get('/reviewstudents', 'StudentController@reviewStudent')->name('reviewstudent');
@@ -59,7 +59,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('verify.email');
 
         Route::get('/dashboard', 'StudentController@showstudents')->name('dashboard');
-    
+
         Route::get('/select/fields', function () {
             return view('confirm_letter_select');
         });
@@ -154,6 +154,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
         Route::get('/viewConfirmation/{student_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
+
+        Route::post('/saveConfirmationData/{student_id}/{grade_id}', 'StudentController@saveConfirmationInformation')->name('save.confirmationData');
 
         //Transcript K-8
         Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');

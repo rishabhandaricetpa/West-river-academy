@@ -270,12 +270,11 @@ class ParentController extends Controller
     public function welcomeVideo(){
         $parentId=ParentProfile::getParentId();
         $parentData=ParentProfile::whereId($parentId)->first();
-        if($parentData->welcome_video_status===0)
+        if($parentData->welcome_video_status==='false')
         {
         return view('welcome-video',compact('parentData'));
         }
         else{
-
             $student = StudentProfile::where('parent_profile_id', $parentId)->get();
             $transcript = Transcript::where('parent_profile_id', $parentId)
                 ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
@@ -292,11 +291,10 @@ class ParentController extends Controller
         
     }
 
-
     public function  updatewelcomestatus($parent_id){
             $parent_data = ParentProfile::find($parent_id)->first();
-            $parent_data->welcome_video_status='1';
+            $parent_data->welcome_video_status='true';
             $parent_data->save();
-            return redirect()->back();
+            return redirect()->route('enroll');
     }
 }

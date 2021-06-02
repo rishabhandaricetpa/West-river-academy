@@ -213,7 +213,7 @@ class StudentProfileController extends Controller
             return redirect()->back()->with($notification);
         }
     }
-    public function generateConfirmation($student_id)
+    public function generateConfirmation($student_id, $grade_id)
     {
         try {
             $parent_id = StudentProfile::select('parent_profile_id')->whereId($student_id)->first();
@@ -223,8 +223,8 @@ class StudentProfileController extends Controller
             $enrollment_periods = StudentProfile::where('confirmation_letters.parent_profile_id', $parent_id->parent_profile_id)
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
                 ->with('enrollmentPeriods')->get();
-                $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
-                ->where('enrollment_periods.grade_level',$grade_id)
+            $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
+                ->where('enrollment_periods.grade_level', $grade_id)
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')->where('enrollment_periods.student_profile_id', $student_id)
                 ->with('enrollmentPeriods')->first();
             $data = [
