@@ -25,9 +25,13 @@ class PhysicalEducationCourse extends Controller
             ->where('status', 0)
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
-        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
+        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
+        $creditWithoutMax = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
+        sort($creditWithoutMax);
+        array_pop($creditWithoutMax);
+        $selectedCreditRequired = max($creditWithoutMax);
         $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
-        return view('transcript9to12_courses.physicaleducationCourse', compact('courses_id', 'physicalEducation', 'student_id', 'transcript_id', 'all_credits', 'total_credits'));
+        return view('transcript9to12_courses.physicaleducationCourse', compact('courses_id', 'physicalEducation', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired'));
     }
     public function store(Request $request)
     {

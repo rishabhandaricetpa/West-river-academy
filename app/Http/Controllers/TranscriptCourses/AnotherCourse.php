@@ -26,7 +26,11 @@ class AnotherCourse extends Controller
             ->where('status', 0)
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
-        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
+        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
+        $creditWithoutMax = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
+        sort($creditWithoutMax);
+        array_pop($creditWithoutMax);
+        $selectedCreditRequired = max($creditWithoutMax);
         $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
         /**
          *  transcript table id required if student select yes for another grade creation
@@ -34,7 +38,7 @@ class AnotherCourse extends Controller
 
         $transData = Transcript9_12::where('id', $transcript_id)->first();
         $trans_id =  $transData->transcript_id;
-        return view('transcript9to12_courses.anotherCourse', compact('courses_id', 'anotherSubjects', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'trans_id'));
+        return view('transcript9to12_courses.anotherCourse', compact('courses_id', 'anotherSubjects', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'trans_id', 'selectedCreditRequired'));
     }
     public function store(Request $request)
     {

@@ -9091,6 +9091,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EnglishCourse",
   data: function data() {
@@ -50554,7 +50555,7 @@ var render = function() {
                         _vm._l(_vm.englishcourse, function(Course) {
                           return _c("option", { key: Course }, [
                             _vm._v(
-                              "\n              " + _vm._s(Course.subject_name)
+                              "\n                " + _vm._s(Course.subject_name)
                             )
                           ])
                         })
@@ -50752,7 +50753,7 @@ var render = function() {
                   _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
                     _c("h3", { staticClass: "text-black" }, [
                       _vm._v(
-                        "\n              Select Credit: The recommended credit for a one-year course is\n              selected. You may change it.\n            "
+                        "\n                Select Credit: The recommended credit for a one-year course is\n                selected. You may change it.\n              "
                       )
                     ]),
                     _vm._v(" "),
@@ -50800,15 +50801,17 @@ var render = function() {
                       },
                       [
                         _c("option", { attrs: { disabled: "", value: "" } }, [
-                          _vm._v("Please select one")
+                          _vm._v("10")
                         ]),
-                        _vm._v(" "),
+                        _vm._v(
+                          "\n" + _vm._s(_vm.all_credits) + "\n                "
+                        ),
                         _vm._l(_vm.all_credits, function(credit) {
                           return _c("option", { key: credit.id }, [
                             _vm._v(
-                              "\n                " +
+                              "\n                 \n                  " +
                                 _vm._s(credit.credit) +
-                                "\n              "
+                                "\n                "
                             )
                           ])
                         })
@@ -50819,14 +50822,14 @@ var render = function() {
                     _vm.isCredit
                       ? _c("h3", { staticClass: "mt-3" }, [
                           _vm._v(
-                            "\n              You have\n              " +
+                            "\n                You have\n                " +
                               _vm._s(
                                 _vm.total_credits.total_credit -
                                   englishCourse.selectedCredit
                               ) +
-                              "\n              out of\n              " +
+                              "\n                out of\n                " +
                               _vm._s(_vm.total_credits.total_credit) +
-                              "\n              remaining credits for this year.\n            "
+                              "\n                remaining credits for this year.\n              "
                           )
                         ])
                       : _vm._e()
@@ -50867,7 +50870,7 @@ var render = function() {
             staticClass: "btn btn-primary ml-4 float-right",
             attrs: { type: "submit" }
           },
-          [_vm._v("\n      Continue\n    ")]
+          [_vm._v("\n        Continue\n      ")]
         )
       ])
     ],
