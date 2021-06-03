@@ -148,7 +148,6 @@ class Transcript9to12 extends Controller
     }
     public function storeApCourses(Request $request)
     {
-        // dd($request->all());
         $student_id = $request->get('student_id');
         $courses = $request->get('apCourses');
         foreach ($courses as $course) {
@@ -189,7 +188,7 @@ class Transcript9to12 extends Controller
         $transcriptDatas = Transcript9_12::where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
             ->get();
-        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id', 'transcriptWizStatus'));
+        return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id', 'transcriptWizStatus', 'details9_12'));
     }
 
     public function deleteSchool($transcript_id)
@@ -280,5 +279,4 @@ class Transcript9to12 extends Controller
             return view('transcript9to12.transcript-preview', compact('student',  'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'totalSelectedGrades'));
         }
     }
-
 }

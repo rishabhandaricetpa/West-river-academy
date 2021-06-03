@@ -39,10 +39,10 @@
             @foreach ($transcriptDatas as $school)
                 <div class="seperator mb-4">
                     <h2 class="mb-2">{{ $school->school_name }}</h2>
-
-                    <a href="{{ route('delete.school', $school->id) }}" class="btn btn-primary float-right" type="submit"
-                        value="Delete School Record">Delete School Record</a>
-
+                    @if (count($k8details) > 1)
+                        <a href="{{ route('delete.school', $school->id) }}" class="btn btn-primary float-right"
+                            type="submit" value="Delete School Record">Delete School Record</a>
+                    @endif
                     <p class="mb-0"><span class="font-weight-bold mr-2">Academic School
                             Year(s):</span>{{ $school->enrollment_year }} </p>
                     <p> <span class="font-weight-bold mr-2"> Grade:</span> {{ $school->grade }}</p>
@@ -111,8 +111,10 @@
                     "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click
                     the "Submit Transcript" button.</p>
                 <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
-                <a href="{{ url('preview-transcript', [$student->id, $trans_id]) }}" class="btn btn-primary mt-3 ml-2"
-                    role="button">Submit Transcript</a>
+                @if (count($k8details) > 0)
+                    <a href="{{ url('preview-transcript', [$student->id, $trans_id]) }}"
+                        class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
+                @endif
             </div>
 
         @endif
