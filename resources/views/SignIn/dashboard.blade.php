@@ -238,11 +238,14 @@
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->grade_level }}</td>
-                                    <td>{{ getstatus($student->id) }}</td>
-                                    <td><a href="{{ route('view.confirm', [$student->student_profile_id, $student->grade_level]) }}"
+                                    <td class="transform-none">{{ getstatus($student->id) }}</td>
+                                    @if(getPaymentstatus($student->enrollment_payment_id)==='paid')
+                                    <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
                                             class="d-flex align-items-center"><i
                                                 class="fas fa-file-pdf mr-2"></i>Download</a></td>
-
+                                    @else
+                                    <td>-</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

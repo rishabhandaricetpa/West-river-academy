@@ -551,6 +551,6 @@ class TranscriptController extends Controller
 
         return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment', 'student_id'));
 
-        return view('transcript/edit_approved');
+        // return view('transcript/edit_approved');
     }
 }

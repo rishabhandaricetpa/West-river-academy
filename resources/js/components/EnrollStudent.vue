@@ -136,6 +136,50 @@
           </div>
         </div>
       </div>
+       <div v-if="countryname==='Hungary'" class="form-group d-sm-flex mb-2">
+        <label for="">Mother's Name</label>
+        <div class="row">
+          <div class="col-md-5 col-lg-3">
+            <div class="form-group w-100 datepicker-full">
+             <input
+                type="text"
+                class="form-control"
+                id="mothers_name"
+                name="mothers_name"
+                aria-describedby="emailHelp"
+                v-model="form.mothersName"
+               />
+            </div>
+          </div>
+          <div class="info-detail col-md-8 col-lg-9 lato-italic">
+            <p>
+              Please enter your Mother's name if you wish to have it on your documents.
+            </p>
+          </div>
+        </div>
+      </div>
+       <div  v-if="countryname ==='Hungary'" class="form-group d-sm-flex mb-2">
+        <label for="">Birth City</label>
+        <div class="row">
+          <div class="col-md-5 col-lg-3">
+            <div class="form-group w-100 datepicker-full">
+             <input
+                type="text"
+                class="form-control"
+                id="birth_city"
+                name="birth_city"
+                aria-describedby="emailHelp"
+                v-model="form.birthCity"
+               />
+            </div>
+          </div>
+          <div class="info-detail col-md-8 col-lg-9 lato-italic">
+            <p>
+              Please enter your Birth city if you wish to have it on your documents.
+            </p>
+          </div>
+        </div>
+      </div>
     <div
       class="seperator mt-4"
       v-for="(enrollPeriod, index) in form.enrollPeriods"
@@ -316,6 +360,8 @@ export default {
         immunized_status: "",
         student_situation: "",
         studentID: "",
+        birthCity:"",
+        mothersName:"",
         enrollPeriods: [
           {
             selectedStartDate: this.startdate,
@@ -365,6 +411,9 @@ export default {
     studentcount:{
       type: Number,
       required:true
+    },
+    countryname:{
+      required:true,
     }
   },
   methods: {

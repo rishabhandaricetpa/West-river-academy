@@ -149,7 +149,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         })->name('reset.password');
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
-        Route::get('/viewConfirmation/{student_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
+        Route::get('/viewConfirmation/{enrollment_payment_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
+        Route::get('/viewdownload/{enrollment_payment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
 
         Route::post('/saveConfirmationData/{student_id}/{grade_id}', 'StudentController@saveConfirmationInformation')->name('save.confirmationData');
 

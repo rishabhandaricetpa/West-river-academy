@@ -6,7 +6,7 @@
 -   Apache v2.4.43 with `mod_rewrite`
 -   MySql 8.0
 -   [Composer](https://getcomposer.org) v2.0.2
--   [node-js](https://github.com/creationix/nvm) >=12.14.0 and [npm](https://www.npmjs.com/) >=7.12.0
+-   [node-js](https://github.com/creationix/nvm) >=14.15.1 and [npm](https://www.npmjs.com/) >=6.14.8
 
 ### Quick setup
 

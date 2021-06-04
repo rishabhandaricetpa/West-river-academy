@@ -114,7 +114,9 @@
     </div>
     <div class="form-group d-sm-flex mb-2">
       <label for="">National ID</label>
-      <div>
+        <div class="row">
+        <div class="col-md-5 col-lg-3">
+        <div class="form-group w-100 datepicker-full">
         <input
           type="text"
           class="form-control"
@@ -124,7 +126,59 @@
           aria-describedby="emailHelp"
         />
       </div>
+      </div>
+        <div class="info-detail col-md-8 col-lg-9 lato-italic">
+            <p>
+              Please enter your National ID if you wish to have it on your documents.
+            </p>
+          </div>
+       </div>
     </div>
+
+       <div v-if="countryname==='Hungary'" class="form-group d-sm-flex mb-2">
+        <label for="">Mother's Name</label>
+        <div class="row">
+          <div class="col-md-5 col-lg-3">
+            <div class="form-group w-100 datepicker-full">
+             <input
+                type="text"
+                class="form-control"
+                id="mothers_name"
+                name="mothers_name"
+                aria-describedby="emailHelp"
+                v-model="form.mothers_name"
+               />
+            </div>
+          </div>
+          <div class="info-detail col-md-8 col-lg-9 lato-italic">
+            <p>
+              Please enter your Mother's name if you wish to have it on your documents.
+            </p>
+          </div>
+        </div>
+      </div>
+       <div v-if="countryname==='Hungary'" class="form-group d-sm-flex mb-2">
+        <label for="">Birth City</label>
+        <div class="row">
+          <div class="col-md-5 col-lg-3">
+            <div class="form-group w-100 datepicker-full">
+             <input
+                type="text"
+                class="form-control"
+                id="birth_city"
+                name="birth_city"
+                aria-describedby="emailHelp"
+                v-model="form.birth_city"
+               />
+            </div>
+          </div>
+          <div class="info-detail col-md-8 col-lg-9 lato-italic">
+            <p>
+              Please enter your Birth city if you wish to have it on your documents.
+            </p>
+          </div>
+        </div>
+      </div>
     <div class="seperator mt-4" v-for="(period, index) in form.periods" :key="period.id">
       <div v-if="period.status === 'pending'" class="position-relative">
         <span v-if="canRemovePeriod"  class="remove" @click="removePeriod(index)"><i class="fas fa-times"></i></span>
@@ -314,6 +368,8 @@ export default {
         student_Id: this.students.student_Id,
         student_situation: this.students.student_situation,
         immunized_status: this.students.immunized_status,
+        birth_city:this.students.birth_city,
+        mothers_name:this.students.mothers_name,
         periods: [],
       },
       config: {
@@ -513,6 +569,9 @@ export default {
      semmonth: {
       required: true,
     },
+    countryname:{
+    
+    }
   },
   computed: {
     canAddMorePeriod() {
