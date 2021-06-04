@@ -68,7 +68,7 @@ _ide_helper*.php
 
 /public/mix-manifest.json
 /public/*.css
-
+/public/js/app.js
 # Force yarn usage
 package-lock.json
 

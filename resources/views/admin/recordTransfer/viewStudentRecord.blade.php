@@ -104,6 +104,11 @@
                             <label>Country<sup>*</sup></label>
                             <input class="form-control" name="country" value="{{ $studentRecord->country }}" readonly>
                         </div>
+                        <div class="form-group col-sm-6">
+                            <label>Last Grade In School<sup>*</sup></label>
+                            <input class="form-control" name="last_grade" value="{{ $studentRecord->last_grade }}"
+                                readonly>
+                        </div>
                         <div>
                         </div>
                     </div>
