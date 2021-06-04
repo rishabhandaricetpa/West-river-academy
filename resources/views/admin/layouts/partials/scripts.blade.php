@@ -174,7 +174,7 @@
                 }, {
                     "data": "birthdate",
                     "render": function(data) {
-                        return (moment(data).format("MMM DD YYYY"));
+                        return (moment(data).format("LL"));
                     }
                 }, {
                     "data": "gender"
@@ -293,7 +293,7 @@
                 {
                     "data": "expire_at",
                     "render": function(data) {
-                        return (moment(data).format("MMM DD YYYY"));
+                        return (moment(data).format("LL"));
                     }
                 }, {
                     "data": "id",
@@ -338,7 +338,7 @@
             }, {
                 "data": "student.birthdate",
                 "render": function(data) {
-                    return (moment(data).format("MMMM DD YYYY"));
+                    return (moment(data).format("LL"));
                 }
             }, {
                 "data": "grade_9_info",
@@ -702,7 +702,7 @@
             }, {
                 "data": "birthdate",
                 "render": function(data) {
-                    return (moment(data).format("MMM DD YYYY"));
+                    return (moment(data).format("LL"));
                 }
             }, {
                 "data": "gender"
@@ -788,11 +788,47 @@
         }
     });
 
+
+
+//// table enable 
+
+document.querySelector(".js-cancel").addEventListener("click",()=>{
+    var form = document.getElementById("sampleForm");
+    form.classList.add("is-readonly");
+    form.classList.remove("is-editing");
+    let elements = document.getElementsByTagName("input");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].disabled = true;
+        }
+})
+
+    document.querySelectorAll(".form-enable").forEach((link) => {
+    link.addEventListener("click", () => {
+      var form = document.getElementById("sampleForm");
+      if (form.classList.contains("is-readonly")) {
+        form.classList.remove("is-readonly");
+        form.classList.add("is-editing");
+        let elements = document.getElementsByTagName("input");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].disabled = false;
+        }
+      } else {
+        form.classList.add("is-readonly");
+        form.classList.remove("is-editing");
+        let elements = document.getElementsByTagName("input");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].disabled = true;
+        }
+      }
+    });
+  });
+  
+
 </script>
 
 
 
-</script>
+{{-- </script> --}}
 <!-- ChartJS -->
 <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>
 <!-- Sparkline -->

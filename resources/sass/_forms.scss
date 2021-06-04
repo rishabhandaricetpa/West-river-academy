@@ -44,8 +44,9 @@ label {
 .min-select {
   width: 100px;
 }
+
 .form-control_upload {
-  min-height:44px;
+  min-height: 44px;
 }
 
 select.form-control {
@@ -58,6 +59,7 @@ textarea {
 
 .links-list {
   text-decoration: underline;
+
   a {
     text-decoration: underline;
     font-size: 18px;
@@ -78,10 +80,12 @@ textarea {
 .form-check[data-toggle="modal"] {
   cursor: pointer;
 }
+
 .form-group select {
-//padding: 6px;
-width: 100%;
+  //padding: 6px;
+  width: 100%;
 }
+
 .form-group .fa-calendar-alt {
   position: absolute;
   top: 9px !important;
@@ -89,7 +93,8 @@ width: 100%;
   color: $gray-700;
   pointer-events: none;
 }
-.form-group label + .fa-calendar-alt {
+
+.form-group label+.fa-calendar-alt {
   top: 40px !important;
   right: 24px;
 }
@@ -152,7 +157,7 @@ width: 100%;
   label {
     width: auto;
 
-    & + div {
+    &+div {
       width: auto;
     }
   }
@@ -193,6 +198,7 @@ label.h3 {
   .fa-times {
     line-height: 25px;
   }
+
   &.place-top {
     top: 0;
   }
@@ -312,9 +318,58 @@ input[type="radio"]:checked:before {
   position: relative !important;
 }
 
-.flatpickr-input + input {
+.flatpickr-input+input {
   padding-right: 30px;
 }
-.textarea_large{
-  height:110px !important;
+
+.textarea_large {
+  height: 110px !important;
 }
+
+
+//////family details form
+
+.family-details {
+  .nav{
+   justify-content: space-around;
+   .nav-link{
+    border-bottom: 2px solid transparent;
+    transition: .2s all;
+  }
+   .nav-link:hover{
+     border-bottom: 2px solid #ff9900;
+   }
+  }
+  form.is-readonly .btn-save {
+    display: none;
+  }
+
+  form.is-readonly input[disabled],
+  form.is-readonly textarea[disabled] {
+    cursor: text;
+    background-color: #fff;
+    border-color: transparent;
+    outline-color: transparent;
+    box-shadow: none;
+  }
+
+  form.is-editing .btn-edit {
+    display: none;
+  }
+  .parents-details {
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;   
+
+      label {
+        max-width: 120px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+}
+
+
+
