@@ -20,21 +20,19 @@
             </thead>
             <tbody>
                 @if($transcriptPayments)
-                @foreach($transcriptPayments as $transcriptPayment)
-                <tr>
-                    <td>{{$transcriptPayment->period}}</td>
-                    <td>{{$transcriptPayment->amount}}</td>
-                    @if($transcriptPayment->status=== 'paid')
-                    <td>Paid</td>
-                    @elseif($transcriptPayment->status=== 'active')
-                    <td>Active</td>
-                    @elseif($transcriptPayment->status=== 'completed')
-                    <td>Completed & Submitted</td>
-                    @elseif($transcriptPayment->status=== 'pending')
-                    <td>Pending</td>
-                    @endif
+                    @foreach($transcriptPayments as $transcriptPayment)
+                    <tr>
+                        <td>{{$transcriptPayment->period}}</td>
+                        <td>{{$transcriptPayment->amount}}</td>
+                        @if($transcriptPayment->status === 'paid')
+                        <td>Paid</td>
+                        @elseif($transcriptPayment->status === 'completed')
+                        <td>Completed & Submitted</td>
+                        @else
+                        <td>-</td>
+                        @endif
                     <td>{{$transcriptPayment->payment_mode}}</td>
-                    @if($transcriptPayment->period=='9-12'))
+                    @if($transcriptPayment->period=='9-12')
                     @if (getTranscriptPaidDetails($transcriptPayment->id) ==='true')
                     <td><a href="{{route('preview.transcript9_12',[$enroll_student->id,$transcriptPayment->transcript_id])}}" class="btn btn-primary">Preview Transcript</a></td>
                     @else
@@ -47,7 +45,7 @@
                     <td><a href="{{route('preview.transcript',[$enroll_student->id,$transcriptPayment->transcript_id])}}" class="btn btn-primary disabled">Preview Transcript</a></td>
                     @endif
                     @endif
-                    @if($transcriptPayment->period=='9-12'))
+                    @if($transcriptPayment->period=='9-12')
                     <td><a href="{{route('display.grades',[$enroll_student->id,$transcriptPayment->transcript_id])}}" class="btn btn-primary">View Saved Transcript</a></td>
                     @else
                     <td><a href="{{route('another.grade',[$enroll_student->id,$transcriptPayment->transcript_id])}}" class="btn btn-primary">View Saved Transcript</a></td>
