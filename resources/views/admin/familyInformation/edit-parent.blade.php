@@ -146,11 +146,13 @@
                     value="+91.955.09.0328" disabled>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
-                  <h3 class="mt-3">Address </h3>
-                  <div  class="d-flex align-items-center">
-                    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                    <label for="vehicle2 ml-2 mb-0">Same Address as Parent 1</label>
+                  <h3 class="mt-3 mb-2">Address </h3>
+                  <div class="text-right d-flex align-items-center">
+                    <input class="mt-3 mb-3" type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                    <label class=" ml-2 mt-3 mb-2" for="vehicle2">Same Address as Parent 1</label>
                   </div>
+                    
+                 
                 </div>
 
                 <div class="form-group">
@@ -255,34 +257,6 @@
                       <button type="button" class="btn btn-primary btn-modal ml-3"
                       data-toggle="modal" data-target="#studentDetailsModal" 
                       data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
-                      <div class="modal fade" id="studentDetailsModal"  tabindex="-1" role="dialog" aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
-                       <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="studentDetailsModalLabel">New message</h5>
-                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                             </button>
-                           </div>
-                           <div class="modal-body">
-                             <form>
-                               <div class="form-group">
-                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                 <input type="text" class="form-control" id="recipient-name">
-                               </div>
-                               <div class="form-group">
-                                 <label for="message-text" class="col-form-label">Message:</label>
-                                 <textarea class="form-control" id="message-text"></textarea>
-                               </div>
-                             </form>
-                           </div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                             <button type="button" class="btn btn-primary">Send message</button>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
                     </span>
                   </th>
                 </tr>
@@ -334,7 +308,34 @@
         </div>
       </div>
     </section>
-
+    <div class="modal fade" id="studentDetailsModal"  tabindex="-1" role="dialog" aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="studentDetailsModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
     {{-- notes--}}
     <section class="notes  py-5 my-3" id="notes">
       <div class="row">
@@ -351,34 +352,6 @@
                       <button type="button" class="btn btn-primary btn-modal ml-3"
                       data-toggle="modal" data-target="#notesModal" 
                       data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
-                      <div class="modal fade" id="notesModal"  tabindex="-1" role="dialog" aria-labelledby="#notesModalLabel" aria-hidden="true">
-                       <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="notesModalLabel">New message</h5>
-                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                             </button>
-                           </div>
-                           <div class="modal-body">
-                             <form>
-                               <div class="form-group">
-                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                 <input type="text" class="form-control" id="recipient-name">
-                               </div>
-                               <div class="form-group">
-                                 <label for="message-text" class="col-form-label">Message:</label>
-                                 <textarea class="form-control" id="message-text"></textarea>
-                               </div>
-                             </form>
-                           </div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                             <button type="button" class="btn btn-primary">Send message</button>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
                     </span>
                   </th>
                 </tr>
@@ -414,7 +387,34 @@
         </div>
       </div>
     </section>
-
+    <div class="modal fade" id="notesModal"  tabindex="-1" role="dialog" aria-labelledby="#notesModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="notesModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {{-- order --}}
     <section class="orders-detail  py-5 my-3" id="orders">
@@ -436,34 +436,7 @@
                       <button type="button" class="btn btn-primary btn-modal ml-3"
                       data-toggle="modal" data-target="#orderModal" 
                       data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
-                      <div class="modal fade" id="orderModal"  tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
-                       <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="orderModalLabel">New message</h5>
-                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                             </button>
-                           </div>
-                           <div class="modal-body">
-                             <form>
-                               <div class="form-group">
-                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                 <input type="text" class="form-control" id="recipient-name">
-                               </div>
-                               <div class="form-group">
-                                 <label for="message-text" class="col-form-label">Message:</label>
-                                 <textarea class="form-control" id="message-text"></textarea>
-                               </div>
-                             </form>
-                           </div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                             <button type="button" class="btn btn-primary">Send message</button>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
+                      
                     </span>
                   </th>
                 </tr>
@@ -508,7 +481,34 @@
         </div>
       </div>
     </section>
-
+    <div class="modal fade" id="orderModal"  tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {{--Enrollments --}}
     <section class="enrollments  py-5 my-3" id="enrollments">
@@ -531,34 +531,7 @@
                       <button type="button" class="btn btn-primary btn-modal ml-3"
                       data-toggle="modal" data-target="#enrollmentsModal" 
                       data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
-                      <div class="modal fade" id="enrollmentsModal"  tabindex="-1" role="dialog" aria-labelledby="enrollmentsModalLabel" aria-hidden="true">
-                       <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="enrollmentsModalLabel">New message</h5>
-                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                             </button>
-                           </div>
-                           <div class="modal-body">
-                             <form>
-                               <div class="form-group">
-                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                 <input type="text" class="form-control" id="recipient-name">
-                               </div>
-                               <div class="form-group">
-                                 <label for="message-text" class="col-form-label">Message:</label>
-                                 <textarea class="form-control" id="message-text"></textarea>
-                               </div>
-                             </form>
-                           </div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                             <button type="button" class="btn btn-primary">Send message</button>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
+                      
                     </span>
                   </th>
                 </tr>
@@ -606,7 +579,34 @@
         </div>
       </div>
     </section>
-    
+    <div class="modal fade" id="enrollmentsModal"  tabindex="-1" role="dialog" aria-labelledby="enrollmentsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enrollmentsModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {{--Records --}}
     <section class="records  py-5 my-3" id="records">
@@ -626,34 +626,7 @@
                       <button type="button" class="btn btn-primary btn-modal ml-3"
                       data-toggle="modal" data-target="#recordsModal" 
                       data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
-                      <div class="modal fade" id="recordsModal"  tabindex="-1" role="dialog" aria-labelledby="recordsModalLabel" aria-hidden="true">
-                       <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="recordsModalLabel">New message</h5>
-                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                             </button>
-                           </div>
-                           <div class="modal-body">
-                             <form>
-                               <div class="form-group">
-                                 <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                 <input type="text" class="form-control" id="recipient-name">
-                               </div>
-                               <div class="form-group">
-                                 <label for="message-text" class="col-form-label">Message:</label>
-                                 <textarea class="form-control" id="message-text"></textarea>
-                               </div>
-                             </form>
-                           </div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                             <button type="button" class="btn btn-primary">Send message</button>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
+                     
                     </span>
                   </th>
                 </tr>
@@ -689,7 +662,34 @@
         </div>
       </div>
     </section>
-
+    <div class="modal fade" id="recordsModal"  tabindex="-1" role="dialog" aria-labelledby="recordsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="recordsModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     {{--Documents --}}
