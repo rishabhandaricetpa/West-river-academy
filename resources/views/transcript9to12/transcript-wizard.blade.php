@@ -111,7 +111,7 @@
             </div>
         @else
             <div class="form-wrap border bg-light py-5 px-25">
-                <p>If you are finishedgfgdefewe with this transcript and would like to see what it looks like, you can click
+                <p>If you are finished with this transcript and would like to see what it looks like, you can click
                     the
                     "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click
                     the "Submit Transcript" button.</p>
