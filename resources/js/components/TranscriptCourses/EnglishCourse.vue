@@ -111,7 +111,7 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="englishCourse.selectedCredit"
-                v-on:change="showCredit"
+                v-on:change="updateFinalCredit($event,englishCourse.component_index)"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
@@ -122,9 +122,9 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit" class="mt-3">
+              <h3  class="mt-3">
                 You have
-                {{ total_credits.total_credit - englishCourse.selectedCredit }}
+                {{ englishCourse.total_credits - englishCourse.selectedCredit }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
@@ -157,8 +157,9 @@ export default {
     return {
       isCredit: false,
       errors: [],
+      final_credits:[this.total_credits.total_credit],
       form: {
-        remainingCredit: "",
+       
         required_credit :this.required_credit,
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
@@ -172,7 +173,8 @@ export default {
             other_subject: "",
             selectedCredit: this.required_credit.credit,
             grade: "",
-            total_credits: this.total_credits.total_credit
+            total_credits: this.total_credits.total_credit,
+            component_index: 0
           }
         ]
       }
@@ -186,15 +188,21 @@ export default {
     "courses_id",
     "all_credits",
     "total_credits",
-    'required_credit'
+    'required_credit',
+    'component_index'
   ],
   methods: {
-    
-    showCredit(e) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+  
+    updateFinalCredit(e,component_index){
+
+      let remainingCredit =this.total_credits.total_credit - e.target.value;
+     if(this.final_credits.length < component_index +1){
+          this.final_credits.push(remainingCredit);
+     }else{
+       console.log('componetindex' ,component_index , 'remaine' ,remainingCredit);
+         this.final_credits[component_index] = remainingCredit;
+     }
+  
     },
     addCourse() {
       this.form.englishCourse.push({
@@ -205,7 +213,8 @@ export default {
         other_subject: "",
         selectedCredit: this.required_credit.credit,
         grade: "",
-        total_credits: this.total_credits.total_credit
+        total_credits: this.final_credits[this.form.englishCourse.length -1],
+        component_index: this.form.englishCourse.length
       });
     },
     removeCourse(index) {
