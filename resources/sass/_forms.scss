@@ -329,7 +329,7 @@ input[type="radio"]:checked:before {
 
 //////family details form
 
-.family-details {
+.family-details{
   .nav{
    justify-content: space-around;
    .nav-link{
@@ -356,7 +356,8 @@ input[type="radio"]:checked:before {
   form.is-editing .btn-edit {
     display: none;
   }
-  .parents-details {
+  .parents-details,
+  .students-details {
     .form-group {
       display: flex;
       align-items: center;
