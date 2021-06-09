@@ -143,7 +143,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/mysettings', 'ParentController@mysettings')->name('mysetting');
         Route::get('/editaccount/{id}', 'ParentController@editmysettings');
+        Route::get('/editMailingAddress/{userid}', 'ParentController@editmyaddress')->name('editMailingAddress');
         Route::post('/updateaccount/{id}', 'ParentController@updatemysettings')->name('update.account');
+        Route::post('updateaddress/{parent_id}', 'ParentController@updateAddress')->name('update.mailingAddress');
         Route::get('/reset', function () {
             return view('MyAccounts/resetpassword');
         })->name('reset.password');

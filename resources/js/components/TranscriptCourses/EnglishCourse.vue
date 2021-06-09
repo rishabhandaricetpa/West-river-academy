@@ -8,7 +8,7 @@
       class="seperator mt-4"
       v-for="(englishCourse,index) in form.englishCourse"
       :key="englishCourse.id"
-    >
+    > 
       <div class="position-relative">
         <span class="remove place-top" @click="removeCourse(index)"
           ><i class="fas fa-times"></i>
@@ -115,9 +115,10 @@
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
-                <option disabled value="">Please select one</option>
+                
 
-                <option v-for="credit in all_credits" :key="credit.id">
+                <option v-for="credit in all_credits" :key="credit.id" >
+                 
                   {{ credit.credit }}
                 </option>
               </select>
@@ -158,6 +159,7 @@ export default {
       errors: [],
       form: {
         remainingCredit: "",
+        required_credit :this.required_credit,
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
 
@@ -168,7 +170,7 @@ export default {
             student_id: this.student_id,
             subject_name: "",
             other_subject: "",
-            selectedCredit: "",
+            selectedCredit: this.required_credit.credit,
             grade: "",
             total_credits: this.total_credits.total_credit
           }
@@ -183,7 +185,8 @@ export default {
     "student_id",
     "courses_id",
     "all_credits",
-    "total_credits"
+    "total_credits",
+    'required_credit'
   ],
   methods: {
     
@@ -200,7 +203,7 @@ export default {
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.required_credit.credit,
         grade: "",
         total_credits: this.total_credits.total_credit
       });
@@ -268,6 +271,14 @@ export default {
     } 
     
 
+  },
+   computed:{
+     showCredit(selectedCredit) {
+      this.isCredit = true;
+      this.form.remainingCredit =
+        this.total_credits.total_credit - selectedCredit;
+      return this.isCredit;
+    },
   }
 };
 </script>

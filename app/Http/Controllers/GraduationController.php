@@ -105,7 +105,6 @@ class GraduationController extends Controller
         try {
             DB::beginTransaction();
             $inputs = $request->all();
-
             $graduation = Graduation::whereId($id);
             $student_id = $graduation->pluck('student_profile_id')->first();
             $parent_id = $graduation->pluck('parent_profile_id')->first();
@@ -139,8 +138,19 @@ class GraduationController extends Controller
             unset($inputs['_token']);
             unset($inputs['status']);
 
-            GraduationDetail::where('graduation_id', $id)->update($inputs);
+            //  GraduationDetail::where('graduation_id', $id)->update($inputs);
+            GraduationDetail::where('graduation_id', $id)->update(
+                [
+                    'project' => $inputs['project'],
+                    'diploma' => $inputs['diploma'],
+                    'transcript' => $inputs['transcript'],
+                    'situation' => $inputs['situation'],
+                    'record_received' => $inputs['record_received'],
+                    'grad_date' =>  \Carbon\Carbon::parse($inputs['grad_date'])->format('Y/m/d'),
+                    'notes' => $inputs['notes'],
+                ]
 
+            );
             // upload documents
             $cover = $request->file('file');
             if ($request->file('file')) {

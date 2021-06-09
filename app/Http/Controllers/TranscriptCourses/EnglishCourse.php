@@ -26,9 +26,11 @@ class EnglishCourse extends Controller
             ->get();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
 
-        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
+        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
+        $selectedCreditRequired = max($all_credits);
+       
         $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
-        return view('transcript9to12_courses.englishCourse', compact('courses_id', 'englishCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits'));
+        return view('transcript9to12_courses.englishCourse', compact('courses_id', 'englishCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired'));
     }
     public function store(Request $request)
     {

@@ -201,6 +201,12 @@ class ParentController extends Controller
             $parent->p1_last_name = $request->get('last_name');
             $parent->p1_email = $request->get('email');
             $parent->p1_cell_phone = $request->get('phone');
+
+            // update parent 2 Information
+            $parent->p2_first_name = $request->input('p2_first_name');
+            $parent->p2_email = $request->input('p2_email');
+            $parent->p2_cell_phone = $request->input('p2_cell_phone');
+            $parent->p2_home_phone = $request->input('p2_home_phone');
             $parent->save();
 
             DB::commit();
@@ -284,5 +290,27 @@ class ParentController extends Controller
         $parent_data->welcome_video_status = 1;
         $parent_data->save();
         return redirect()->route('enroll');
+    }
+
+    public function editmyaddress($user_id)
+    {
+        $parent =  ParentProfile::where('user_id', $user_id)->first();
+        return view('Myaccounts.editAddress', compact('parent'));
+    }
+    public function updateAddress(Request $request, $parent_id)
+    {
+        ParentProfile::where('id', $parent_id)->update([
+            'street_address' => $request->street_address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
+        ]);
+        $notification = [
+            'message' => 'Updated Adsress Successfully!',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

@@ -5,36 +5,99 @@
 
     <main class="position-relative container form-content mt-4">
         <div class="form-wrap border bg-light py-5 px-25">
-            <h2 class="mb-3">User Information</h2>
-            <form>
-                <div class="form-group d-sm-flex mb-2">
-                    <label for="">First Name</label>
-                    <div>{{ $parent->p1_first_name }}</div>
-                </div>
-                <div class="form-group d-sm-flex mb-2">
-                    <label for="">Last Name</label>
-                    <div>{{ $parent->p1_last_name }}</div>
-                </div>
-                <div class="form-group d-sm-flex mb-2">
-                    <label for="">Email</label>
-                    <div>{{ $parent->p1_email }}</div>
-                </div>
-                <div class="form-group d-sm-flex mb-2">
-                    <label for="">Phone</label>
-                    <div>{{ $parent->p1_cell_phone }}</div>
-                </div>
-                <a href="{{ url('/editaccount', $user_id) }}" class="btn btn-primary">Edit Your Login</a>
-        </div>
-        <div class="form-wrap border bg-light py-5 px-25 mt-2r">
-            <h2 class="mb-3">Password</h2>
-            <form>
-                <div class="form-group d-sm-flex mb-2">
-                    <label for="">Password</label>
-                    <div>********</div>
-                </div>
-                <a href="{{ route('reset.password', $user_id) }}" class="btn btn-primary">Change Your Password?</a>
 
+            <form class="row">
+                <div class="col-md-6">
+                    <h2 class="mb-3">User Information</h2>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">First Name</label>
+                        <div>{{ $parent->p1_first_name }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Last Name</label>
+                        <div>{{ $parent->p1_last_name }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Email</label>
+                        <div>{{ $parent->p1_email }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Phone</label>
+                        <div>{{ $parent->p1_cell_phone }}</div>
+                    </div>
+                    <a href="{{ url('/editaccount', $user_id) }}" class="btn btn-primary">Edit Your Login</a>
+                </div>
+
+                <div class="col-md-6">
+                    <h2 class="mb-3">Password</h2>
+                    <form>
+                        <div class="form-group ">
+                            <label for="">Password</label>
+                            <div>********</div>
+                        </div>
+                        <a href="{{ route('reset.password', $user_id) }}" class="btn btn-primary">Change Your
+                            Password?</a>
+
+                </div>
         </div>
+
+        <div class="form-wrap row border bg-light py-5 px-25 mt-2r ">
+            <div class="col-md-6">
+                <h2 class="mb-3">Mailing Address</h2>
+                <form>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Street Address</label>
+                        <div>{{ $parent->street_address }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">City</label>
+                        <div>{{ $parent->city }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">State</label>
+                        <div>{{ $parent->state }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Zip code</label>
+                        <div>{{ $parent->zip_code }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Country</label>
+                        <div>{{ $parent->country }}</div>
+                    </div>
+                    <a href="{{ route('editMailingAddress', $user_id) }}" class="btn btn-primary">Edit Your Mailing
+                        Address</a>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h2 class="mb-3">Parent 2 Information</h2>
+                <form>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for=""> Name</label>
+                        <div>{{ $parent->p2_first_name }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Last Name</label>
+                        <div>{{ $parent->p2_last_name }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Email</label>
+                        <div>{{ $parent->p2_email }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Cell Phone</label>
+                        <div>{{ $parent->p2_cell_phone }}</div>
+                    </div>
+                    <div class="form-group d-sm-flex mb-2">
+                        <label for="">Phone Number</label>
+                        <div>{{ $parent->p2_home_phone }}</div>
+                    </div>
+                    <a href="{{ url('/editaccount', $user_id) }}" class="btn btn-primary">Edit Your Login</a>
+            </div>
+        </div>
+
+
         <!-- Transcript Payment History Start-->
         @if (count($transcript_payments) > 0)
             <div class="form-wrap border bg-light py-5 px-25 mt-2r">
@@ -126,40 +189,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-        @endif
-
-        <!-- Custom  Letter History Start-->
-        @if (count($customLetter) > 0)
-            <div class="form-wrap border bg-light py-5 px-25 mt-2r">
-                <h2 class="mb-3">Paid For: Custom Letter Payments</h2>
-                <div class="overflow-auto max-table">
-                    <table class="table-styling w-100 table-vertical_scroll">
-                        <thead>
-                            <tr>
-                                <th scope="col">Parent Name</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Payment Method</th>
-                                <th scope="col">Transcation Id</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($customLetter as $cl)
-                                <tr>
-
-                                    <td>{{ $cl['ParentProfile']['p1_first_name'] }}</td>
-                                    <td>${{ $cl['amount'] }}</td>
-                                    <td>{{ $cl['payment_mode'] }}</td>
-                                    <td>{{ $cl['transcation_id'] }}</td>
-
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div>
-                    </div>
-
                 </div>
             </div>
         @endif

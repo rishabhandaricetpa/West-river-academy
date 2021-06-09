@@ -47,7 +47,7 @@ class RecordTransferController extends Controller
             $recordTransfer->state = $request->get('state');
             $recordTransfer->zip_code = $request->get('zip_code');
             $recordTransfer->country = $request->get('country');
-
+            $recordTransfer->last_grade = $request->get('last_grade');
             $recordTransfer->save();
             Dashboard::create([
                 'student_profile_id' => $student_id,
@@ -100,6 +100,7 @@ class RecordTransferController extends Controller
             $recordTransfer->state = $request->get('state');
             $recordTransfer->zip_code = $request->get('zip_code');
             $recordTransfer->country = $request->get('country');
+            $recordTransfer->last_grade = $request->get('last_grade');
             $recordTransfer->save();
             DB::commit();
             $notification = [

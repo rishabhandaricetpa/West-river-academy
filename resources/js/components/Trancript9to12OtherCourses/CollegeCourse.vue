@@ -234,13 +234,13 @@ export default {
             grade: "",
             is_college_level: "",
             course_grade: "",
-            selectedCredit: ""
+            selectedCredit: this.required_credit.credit
           }
         ]
       }
     };
   },
-  props: ["student_id", "transcript_id", "transcript9_12id", "credits"],
+  props: ["student_id", 'required_credit',"transcript_id", "transcript9_12id", "credits"],
   methods: {
     addCourse() {
       this.form.collegeCourse.push({
@@ -249,7 +249,7 @@ export default {
         grade: "",
         is_college_level: "",
         course_grade: "",
-        selectedCredit: ""
+        selectedCredit: this.required_credit.credit
       });
     },
     submitCourse() {

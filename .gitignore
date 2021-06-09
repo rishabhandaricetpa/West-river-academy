@@ -68,6 +68,7 @@ _ide_helper*.php
 
 /public/mix-manifest.json
 /public/*.css
+/public/js/app.js
 
 # Manually publish package assets
 /public/vendor

@@ -77,7 +77,7 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>{{ $name }} is currently enrolled in West River Academy. Please forward all
+                    <td> {{ $name }} is currently enrolled in West River Academy. Please forward all
                         school records and cumulative files for the student to us as soon as possible.</td>
                 </tr>
             </tbody>
@@ -85,15 +85,13 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Student Name:{{ $name }}</td>
+                    <td>Student Name: {{ $name }}</td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Date of Birth:{{ $dob }} </td>
+                    <td>Date of Birth: {{ $dob }} </td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Grade Level:@foreach ($grade as $gradelevel)
-                            {{ $gradelevel->grade_level }}
-                        @endforeach
+                    <td>Grade Level: {{ $grade }}
                     </td>
                 </tr>
             </tbody>

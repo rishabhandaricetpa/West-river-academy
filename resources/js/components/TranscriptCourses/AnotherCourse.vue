@@ -169,7 +169,7 @@ export default {
             student_id: this.student_id,
             subject_name: "",
             other_subject: "",
-            selectedCredit: "",
+            selectedCredit: this.required_credit.credit,
             grade: "",
             total_credits: this.total_credits.total_credit
           }
@@ -185,7 +185,8 @@ export default {
     "courses_id",
     "all_credits",
     "total_credits",
-    "trans_id"
+    "trans_id",
+    "required_credit"
   ],
   methods: {
     showCredit(e) {
@@ -201,8 +202,9 @@ export default {
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.required_credit.credit,
         grade: "",
+        
         total_credits: this.total_credits.total_credit
       });
     },
@@ -263,6 +265,14 @@ export default {
       }
       return true;
     }
+  },
+   computed:{
+     showCredit(selectedCredit) {
+      this.isCredit = true;
+      this.form.remainingCredit =
+        this.total_credits.total_credit - selectedCredit;
+      return this.isCredit;
+    },
   }
 };
 </script>
