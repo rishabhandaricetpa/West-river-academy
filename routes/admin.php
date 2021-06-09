@@ -249,4 +249,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('podcast/store', 'PodcastController@storePodcast')->name('podcast.store');
     Route::post('videos/store', 'PodcastController@storeVideos')->name('videos.store');
     Route::post('journal/store', 'PodcastController@storeJournals')->name('journal.store');
+
+
+
+    // dashboard add functionlaity
+    Route::post('store-document-dashboard', 'DashboardController@uploadDocument')->name('dashboard.documents');
+    Route::post('store-record-dashboard', 'DashboardController@uploadRecordTransfer')->name('dashboard.recordtrasnfer');
 });

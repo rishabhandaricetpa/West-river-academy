@@ -586,6 +586,82 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     });
+
+    // dashboard admin upload doc for student
+    $("#add-documents").on("submit", function(event) {
+        event.preventDefault();
+        console.log('created');
+        var student_id = $('#student-name').val();
+        var parent_id = $('#parent_id').val();
+        var file = $('#file').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.dashboard.documents') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                student_id: student_id,
+                file: file
+            },
+            success: function(response) {
+                console.log(response);
+                //location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
+
+    // dashboard admin record transfer doc for student
+    $("#add-record-request").on("submit", function(event) {
+        event.preventDefault();
+        console.log('created');
+        var student_id = $('#student-name').val();
+        var parent_id = $('#parent_id').val();
+        var school_name = $('#school_name').val();
+        var email = $('#email').val();
+        var street_address = $('#street_address').val();
+        var fax_number = $('#fax_number').val();
+        var phone_number = $('#phone_number').val();
+        var city = $('#city').val();
+        var state = $('#state').val();
+        var zipcode = $('#zipcode').val();
+        var country = $('#country').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.dashboard.recordtrasnfer') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                student_id: student_id,
+                school_name: school_name,
+                email: email,
+                street_address: street_address,
+                fax_number: fax_number,
+                phone_number: phone_number,
+                city: city,
+                state: state,
+                zipcode: zipcode,
+                country: country
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
     // edit Dashboard Record For Super Admin
     function editDashboard(event) {
         var id = $(event).data("id");
@@ -790,39 +866,38 @@
 
 
 
-//// table enable 
+    //// table enable 
 
-document.querySelector(".js-cancel").addEventListener("click",()=>{
-    var form = document.getElementById("sampleForm");
-    form.classList.add("is-readonly");
-    form.classList.remove("is-editing");
-    let elements = document.getElementsByTagName("input");
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].disabled = true;
-        }
-})
-
-    document.querySelectorAll(".form-enable").forEach((link) => {
-    link.addEventListener("click", () => {
-      var form = document.getElementById("sampleForm");
-      if (form.classList.contains("is-readonly")) {
-        form.classList.remove("is-readonly");
-        form.classList.add("is-editing");
-        let elements = document.getElementsByTagName("input");
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].disabled = false;
-        }
-      } else {
+    document.querySelector(".js-cancel").addEventListener("click", () => {
+        var form = document.getElementById("sampleForm");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
         let elements = document.getElementsByTagName("input");
         for (let i = 0; i < elements.length; i++) {
-          elements[i].disabled = true;
+            elements[i].disabled = true;
         }
-      }
+    })
+
+    document.querySelectorAll(".form-enable").forEach((link) => {
+        link.addEventListener("click", () => {
+            var form = document.getElementById("sampleForm");
+            if (form.classList.contains("is-readonly")) {
+                form.classList.remove("is-readonly");
+                form.classList.add("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = false;
+                }
+            } else {
+                form.classList.add("is-readonly");
+                form.classList.remove("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+            }
+        });
     });
-  });
-  
 
 </script>
 

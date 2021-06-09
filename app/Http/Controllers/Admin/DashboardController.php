@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard;
+use App\Models\RecordTransfer;
+use App\Models\UploadDocuments;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-
+use File;
+use Storage;
+use Str;
 
 class DashboardController extends Controller
 {
@@ -70,5 +74,37 @@ class DashboardController extends Controller
             $isAdmin = true;
             return view('admin.archieved', compact('dashboardData', 'isAdmin'));
         }
+    }
+    public function uploadDocument(Request $request)
+    {
+        $extension = $request->file->getClientOriginalExtension();
+        $path = Str::random(40) . '.' . $extension;
+        Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($request->file));
+
+        $uploadDocument = new UploadDocuments();
+        $uploadDocument->student_profile_id = $request->student_id;
+        $uploadDocument->parent_profile_id = $request->parent_id;
+        $uploadDocument->original_filename = $request->file->getClientOriginalName();
+        $uploadDocument->filename = $path;
+        $uploadDocument->save();
+    }
+
+    public function uploadRecordTransfer(Request $request)
+    {
+     
+        $recordTransfer = new RecordTransfer();
+        $recordTransfer->student_profile_id = $request->get('student_id');
+        $recordTransfer->parent_profile_id = $request->get('parent_id');
+        $recordTransfer->school_name = $request->get('school_name');
+        $recordTransfer->email = $request->get('email');
+        $recordTransfer->fax_number = $request->get('fax_number');
+        $recordTransfer->phone_number = $request->get('phone_number');
+        $recordTransfer->street_address = $request->get('street_address');
+        $recordTransfer->city = $request->get('city');
+        $recordTransfer->state = $request->get('state');
+        $recordTransfer->zip_code = $request->get('zip_code');
+        $recordTransfer->country = $request->get('country');
+
+        $recordTransfer->save();
     }
 }

@@ -223,6 +223,17 @@ function getGPAvalue($courses, $total_credits_earned)
         'P' => 0,
         'Pass' => 0,
     );
+    $academy_points_carnegia = array(
+        "A" => 40,
+        "B" => 30,
+        "C" => 20,
+        'D' => 10,
+        'F' => 0,
+        'PASS' => 0,
+        'In Progress' => 0,
+        'P' => 0,
+        'Pass' => 0,
+    );
     $college_points = array(
         "A" => 5,
         "B" => 4,
@@ -247,7 +258,7 @@ function getGPAvalue($courses, $total_credits_earned)
         'Pass' => 0,
 
     );
-    $course = $courses->map(function ($course) use ($academy_points, $is_caragie, $college_points) {
+    $course = $courses->map(function ($course) use ($academy_points, $is_caragie, $college_points, $academy_points_carnegia) {
         if ($course->type === 'year') {
             if ($course->credit === 1.0) {
                 $course->order = $academy_points[$course->score];
@@ -257,11 +268,11 @@ function getGPAvalue($courses, $total_credits_earned)
                 $course->order = $academy_points[$course->score] / 3;
             }
             if ($course->credit === 10.0) {
-                $course->order = $academy_points[$course->score];
+                $course->order = $academy_points_carnegia[$course->score];
             } elseif ($course->credit === 5.0) {
-                $course->order = $academy_points[$course->score] / 2;
+                $course->order = $academy_points_carnegia[$course->score] / 2;
             } elseif ($course->credit === 2.5) {
-                $course->order = $academy_points[$course->score] / 3;
+                $course->order = $academy_points_carnegia[$course->score] / 3;
             }
         }
         if ($course->type === 'college') {
