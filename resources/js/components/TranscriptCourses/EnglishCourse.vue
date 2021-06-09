@@ -6,12 +6,12 @@
   >
     <div
       class="seperator mt-4"
-      v-for="(englishCourse,index) in form.englishCourse"
+      v-for="(englishCourse,index) in form.englishCourses"
       :key="englishCourse.id"
-    > 
+    >
       <div class="position-relative">
         <span class="remove place-top" @click="removeCourse(index)"
-          ><i class="fas fa-times"></i>
+        ><i class="fas fa-times"></i>
         </span>
         <div class="col-sm-7 px-0">
           <div class="form-group d-sm-flex  align-items-center">
@@ -20,8 +20,9 @@
               v-model="englishCourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="Course in englishcourse" :key="Course">
-                {{ Course.subject_name }}</option
+              <option v-for="course in englishcourse">
+                {{ course.subject_name }}
+              </option
               >
             </select>
           </div>
@@ -38,7 +39,7 @@
               />
             </div>
           </div>
-          
+
           <div class="form-group">
             <div class="d-sm-flex mt-4">
               <h3>Select a Grade</h3>
@@ -47,7 +48,7 @@
                 class="btn btn-primary ml-auto"
                 data-toggle="modal"
                 data-target="#GradeHelp"
-                >Help me Decide</a
+              >Help me Decide</a
               >
             </div>
             <div class="form-check mb-1">
@@ -111,20 +112,17 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="englishCourse.selectedCredit"
-                v-on:change="updateFinalCredit($event,englishCourse.component_index)"
+                v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
-                
-
-                <option v-for="credit in all_credits" :key="credit.id" >
-                 
+                <option v-for="credit in all_credits" :key="credit.id">
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3  class="mt-3">
+              <h3 class="mt-3">
                 You have
-                {{ englishCourse.total_credits - englishCourse.selectedCredit }}
+                {{ final_credits[englishCourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
@@ -132,16 +130,16 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
-    <p v-if="errors.length" >
-       <ul>
-       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
-      </ul>
-    </p> 
+    <p v-if="errors.length">
+    <ul>
+      <li style="color:red" v-for="error in errors" :key="error.id"> {{ error }}</li>
+    </ul>
+    </p>
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add another English/Language Arts Course</a
+      >Add another English/Language Arts Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
@@ -157,21 +155,21 @@ export default {
     return {
       isCredit: false,
       errors: [],
-      final_credits:[this.total_credits.total_credit],
+      final_credits: [this.total_credits.total_credit],
       form: {
-       
-        required_credit :this.required_credit,
+
+        required_credit: this.required_credit,
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
 
-        englishCourse: [
+        englishCourses: [
           {
             course_id: this.courses_id,
             transcript_id: this.transcript_id,
             student_id: this.student_id,
             subject_name: "",
             other_subject: "",
-            selectedCredit: this.required_credit.credit,
+            selectedCredit: "",
             grade: "",
             total_credits: this.total_credits.total_credit,
             component_index: 0
@@ -181,6 +179,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.form.englishCourses[0].selectedCredit = this.required_credit.credit;
+    this.final_credits.push(this.calculateRemainingCredit(this.form.englishCourses[0]));
+  },
   props: [
     "englishcourse",
     "transcript_id",
@@ -188,24 +190,34 @@ export default {
     "courses_id",
     "all_credits",
     "total_credits",
-    'required_credit',
-    'component_index'
+    'required_credit'
   ],
   methods: {
-  
-    updateFinalCredit(e,component_index){
 
-      let remainingCredit =this.total_credits.total_credit - e.target.value;
-     if(this.final_credits.length < component_index +1){
-          this.final_credits.push(remainingCredit);
-     }else{
-       console.log('componetindex' ,component_index , 'remaine' ,remainingCredit);
-         this.final_credits[component_index] = remainingCredit;
-     }
-  
+    calculateRemainingCredit(englishCourse) {
+      return this.final_credits[englishCourse.component_index] - englishCourse.selectedCredit;
     },
+
+    reIndex(){
+      this.form.englishCourses.forEach((englishCourse, index) => {
+        englishCourse.component_index = index;
+      });
+    },
+
+    reCalculateAll() {
+      this.form.englishCourses.forEach((englishCourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(englishCourse)
+      })
+      this.finalValue();
+    },
+
+    finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      console.log('finalValue ', finalValue);
+    },
+
     addCourse() {
-      this.form.englishCourse.push({
+      const englishCourse = {
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
@@ -213,29 +225,35 @@ export default {
         other_subject: "",
         selectedCredit: this.required_credit.credit,
         grade: "",
-        total_credits: this.final_credits[this.form.englishCourse.length -1],
-        component_index: this.form.englishCourse.length
-      });
+        total_credits: this.final_credits[this.form.englishCourses.length - 1],
+        component_index: this.form.englishCourses.length
+      };
+      this.final_credits.push(this.calculateRemainingCredit(englishCourse))
+      this.form.englishCourses.push(englishCourse);
+      this.finalValue();
     },
     removeCourse(index) {
-      this.form.englishCourse.splice(index, 1);
+      this.form.englishCourses.splice(index, 1);
+      this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];
-     
-  
-      if(!this.validateSubject() && !this.validateOtherSubject()){
-          this.errors.push(
+
+
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
+        this.errors.push(
           "Course name is required Field! Please select a Course name"
         );
       }
-         if(!this.validateCredit()){
-         this.errors.push(
+      if (!this.validateCredit()) {
+        this.errors.push(
           "Credit is required Field! Please select a credit "
         );
       }
-      
-         axios
+
+      axios
         .post(route("english-transcript.store"), this.form)
         .then(response => {
           window.location =
@@ -247,42 +265,42 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
-      
-    
+
+
     },
 
-    validateSubject(){
-      for(let i=0;i<this.form.englishCourse.length;i++){
-        const enrollmentSubject = this.form.englishCourse[i];
-         if(!enrollmentSubject.subject_name){
-         return false;
+    validateSubject() {
+      for (let i = 0; i < this.form.englishCourses.length; i++) {
+        const enrollmentSubject = this.form.englishCourses[i];
+        if (!enrollmentSubject.subject_name) {
+          return false;
         }
-     }
-     return true;
+      }
+      return true;
     },
-      validateCredit(){
-      for(let i=0;i<this.form.englishCourse.length;i++){
-        const enrollmentSubject = this.form.englishCourse[i];
-         if(!enrollmentSubject.selectedCredit){
-         return false;
+    validateCredit() {
+      for (let i = 0; i < this.form.englishCourses.length; i++) {
+        const enrollmentSubject = this.form.englishCourses[i];
+        if (!enrollmentSubject.selectedCredit) {
+          return false;
         }
-     }
-     return true;
+      }
+      return true;
     },
-    validateOtherSubject(){
-      for(let i=0;i<this.form.englishCourse.length;i++){
-        const enrollmentOtherSubject = this.form.englishCourse[i];
-         if(!enrollmentOtherSubject.other_subject){
-         return false;
+    validateOtherSubject() {
+      for (let i = 0; i < this.form.englishCourses.length; i++) {
+        const enrollmentOtherSubject = this.form.englishCourses[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
         }
-     }
-         return true;
-    } 
-    
+      }
+      return true;
+    }
+
 
   },
-   computed:{
-     showCredit(selectedCredit) {
+  computed: {
+    showCredit(selectedCredit) {
       this.isCredit = true;
       this.form.remainingCredit =
         this.total_credits.total_credit - selectedCredit;
