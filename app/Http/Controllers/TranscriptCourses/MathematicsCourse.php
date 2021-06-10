@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TranscriptCourses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -17,13 +18,14 @@ class MathematicsCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Mathematics')
+            ->where('course_name', CourseType::MathsCourse)
             ->first();
         $courses_id = $course->id;
         $mathscourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
             ->where('status', 0)
             ->get();
+        //  $remaining_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript_id)->latest()->first();
         $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
         $selectedCreditRequired = max($all_credits);

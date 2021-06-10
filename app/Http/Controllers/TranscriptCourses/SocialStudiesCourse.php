@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TranscriptCourses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TranscriptCourse9_12;
@@ -17,7 +18,7 @@ class SocialStudiesCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'History / Social Science')
+            ->where('course_name', CourseType::HistoryCourse)
             ->first();
         $courses_id = $course->id;
         $historyCourse = Subject::where('courses_id', $course->id)

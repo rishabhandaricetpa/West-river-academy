@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TranscriptCourses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -18,7 +19,7 @@ class AnotherCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Another')
+            ->where('course_name', CourseType::AnotherCourse)
             ->first();
         $courses_id = $course->id;
         $anotherSubjects = Subject::where('courses_id', $course->id)
