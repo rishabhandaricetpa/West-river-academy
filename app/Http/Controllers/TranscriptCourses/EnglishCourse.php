@@ -28,7 +28,7 @@ class EnglishCourse extends Controller
 
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
         $selectedCreditRequired = max($all_credits);
-       
+
         $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
         return view('transcript9to12_courses.englishCourse', compact('courses_id', 'englishCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired'));
     }
@@ -40,10 +40,10 @@ class EnglishCourse extends Controller
         $refreshCourse->each->delete();
 
         //create new course
-        foreach ($request->get('englishCourse', []) as $period) {
+        foreach ($request->get('englishCourses', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
-            $total_credits = $period['total_credits'];
+            $final_remaining_credit = $request->final_remaining_credit;
             $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([
@@ -57,7 +57,7 @@ class EnglishCourse extends Controller
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
                     'score' => isset($period['grade']) ? $period['grade'] : 'In Progress',
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -75,7 +75,7 @@ class EnglishCourse extends Controller
                     'score' => isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

@@ -20,7 +20,7 @@
               v-model="englishCourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="course in englishcourse">
+              <option v-for="course in englishcourse" :key="course.id">
                 {{ course.subject_name }}
               </option
               >
@@ -157,11 +157,10 @@ export default {
       errors: [],
       final_credits: [this.total_credits.total_credit],
       form: {
-
         required_credit: this.required_credit,
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
-
+        final_remaining_credit:'',
         englishCourses: [
           {
             course_id: this.courses_id,
@@ -182,6 +181,7 @@ export default {
   mounted() {
     this.form.englishCourses[0].selectedCredit = this.required_credit.credit;
     this.final_credits.push(this.calculateRemainingCredit(this.form.englishCourses[0]));
+    this.finalValue();
   },
   props: [
     "englishcourse",
@@ -195,7 +195,9 @@ export default {
   methods: {
 
     calculateRemainingCredit(englishCourse) {
+       this.finalValue();
       return this.final_credits[englishCourse.component_index] - englishCourse.selectedCredit;
+        
     },
 
     reIndex(){
@@ -210,10 +212,11 @@ export default {
       })
       this.finalValue();
     },
-
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
-      console.log('finalValue ', finalValue);
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+      
     },
 
     addCourse() {
@@ -260,7 +263,7 @@ export default {
             "/mathematics-transcript/" +
             this.student_id +
             "/" +
-            this.transcript_id;
+            this.transcript_id + "/" +this.form.final_remaining_credit;
         })
         .catch(error => {
           alert("Please fill in the fields");

@@ -324,7 +324,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('english-transcript', 'TranscriptCourses\EnglishCourse@store')->name('english-transcript.store');
 
         //mathematics course
-        Route::get('mathematics-transcript/{student_id}/{transcript_id}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
+        Route::get('mathematics-transcript/{student_id}/{transcript_id}/{remaining_credit}', 'TranscriptCourses\MathematicsCourse@index')->name('maths.transcript.course');
         Route::post('maths-transcript', 'TranscriptCourses\MathematicsCourse@store')->name('maths-transcript.store');
 
         // histroy 

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class MathematicsCourse extends Controller
 {
-    public function index($student_id, $transcript_id)
+    public function index($student_id, $transcript_id, $remaining_credit)
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
@@ -28,11 +28,10 @@ class MathematicsCourse extends Controller
         $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
         $selectedCreditRequired = max($all_credits);
         $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
-        return view('transcript9to12_courses.mathsCourse', compact('courses_id', 'mathscourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired'));
+        return view('transcript9to12_courses.mathsCourse', compact('courses_id', 'mathscourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired', 'remaining_credit'));
     }
     public function store(Request $request)
     {
-        // dd($request->all());
         // delete if course already exists
         $id = $request->get('course_id');
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $request->get('course_id'))->where('transcript9_12_id', $request->get('transcript_id'))->get();

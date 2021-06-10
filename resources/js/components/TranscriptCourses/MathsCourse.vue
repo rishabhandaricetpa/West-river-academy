@@ -110,7 +110,7 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="mathscourse.selectedCredit"
-                v-on:click="showCredit"
+                v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
@@ -120,9 +120,9 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit" class="mt-3">
+              <h3 class="mt-3">
                 You have
-                {{ total_credits.total_credit - mathscourse.selectedCredit }}
+                {{ final_credits[mathscourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
@@ -155,10 +155,12 @@ export default {
     return {
       isCredit: false,
       errors: [],
+       final_credits: [this.remaining_credit],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
+            final_remaining_credit:'',
         mathscourse: [
           {
             course_id: this.courses_id,
@@ -166,15 +168,20 @@ export default {
             student_id: this.student_id,
             subject_name: "",
             other_subject: "",
-            selectedCredit: this.required_credit.credit,
+            selectedCredit: '',
             grade: "",
-            total_credits: this.total_credits.total_credit
+            total_credits: this.total_credits.total_credit,
+             component_index: 0
           }
         ]
       }
     };
   },
-
+  mounted() {
+    this.form.mathscourse[0].selectedCredit = this.required_credit.credit;
+    this.final_credits.push(this.calculateRemainingCredit(this.form.mathscourse[0]));
+    this.finalValue();
+  },
   props: [
     "maths",
     "transcript_id",
@@ -182,18 +189,35 @@ export default {
     "courses_id",
     "all_credits",
     "total_credits",
-    'required_credit'
+    'required_credit',
+    'remaining_credit'
   ],
   
   methods: {
-    showCredit(e) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+  calculateRemainingCredit(mathscourse) {
+       this.finalValue();
+      return this.final_credits[mathscourse.component_index] - mathscourse.selectedCredit;
+        
+    },
+        reIndex(){
+      this.form.mathscourse.forEach((mathscourse, index) => {
+        mathscourse.component_index = index;
+      });
+    },
+  reCalculateAll() {
+      this.form.mathscourse.forEach((mathscourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(mathscourse)
+      })
+      this.finalValue();
+    },
+      finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+      
     },
     addCourse() {
-      this.form.mathscourse.push({
+     const mathscourse={
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
@@ -201,11 +225,18 @@ export default {
         other_subject: "",
         selectedCredit: this.required_credit.credit,
         grade: "",
-        total_credits: this.total_credits.total_credit
-      });
+        total_credits: this.final_credits[this.form.mathscourse.length - 1],
+         component_index: this.form.mathscourse.length
+      };
+       this.final_credits.push(this.calculateRemainingCredit(mathscourse))
+      this.form.mathscourse.push(mathscourse);
+      this.finalValue();
     },
     removeCourse(index) {
       this.form.mathscourse.splice(index, 1);
+       this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];
