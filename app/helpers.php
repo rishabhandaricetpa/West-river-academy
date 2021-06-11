@@ -475,3 +475,9 @@ function getPaymentstatus($enrollment_payment_id)
     $enrollment_payments = EnrollmentPayment::whereId($enrollment_payment_id)->first();
     return $enrollment_payments->status;
 }
+
+function getStudentData($student_id)
+{
+    $student_name = StudentProfile::whereId($student_id)->first();
+    return $student_name->fullname;
+}

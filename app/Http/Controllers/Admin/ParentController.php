@@ -18,6 +18,7 @@ use App\Models\NotarizationPayment;
 use App\Models\Notification;
 use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
+use App\Models\Notes;
 use App\Models\TranscriptPayment;
 
 use App\Models\RecordTransfer;
@@ -95,6 +96,7 @@ class ParentController extends Controller
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
+        $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
         $documents = UploadDocuments::where('parent_profile_id', $id)->get();
@@ -102,6 +104,7 @@ class ParentController extends Controller
             ->where('student_profile_id', $id)
             ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
             ->select(
+                'enrollment_periods.created_at',
                 'enrollment_periods.enrollment_payment_id',
                 'enrollment_payments.amount',
                 'enrollment_payments.status',
@@ -110,10 +113,11 @@ class ParentController extends Controller
                 'enrollment_periods.start_date_of_enrollment',
                 'enrollment_periods.end_date_of_enrollment',
                 'enrollment_periods.grade_level',
-                'enrollment_payments.id'
+                'enrollment_payments.id',
+                'enrollment_periods.student_profile_id'
             )
             ->get();
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents'));
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes'));
     }
 
     /**

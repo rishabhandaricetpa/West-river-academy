@@ -255,4 +255,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // dashboard add functionlaity
     Route::post('store-document-dashboard', 'DashboardController@uploadDocument')->name('dashboard.documents');
     Route::post('store-record-dashboard', 'DashboardController@uploadRecordTransfer')->name('dashboard.recordtrasnfer');
+    Route::post('store-student', 'StudentProfileController@createNewStudents')->name('create.students');
 });

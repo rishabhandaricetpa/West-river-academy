@@ -662,6 +662,49 @@
         });
     });
 
+ // dashboard admin record transfer doc for student
+ $("#add-new-student").on("submit", function(event) {
+        event.preventDefault();
+        // console.log('created');
+        var parent_id = $('#parent_id').val();
+        var first_name = $('#first_name').val();
+        var middle_name = $('#middle_name').val();
+        var last_name = $('#last_name').val();
+        var gender = $('#gender').val();
+        var d_o_b = $('#d_o_b').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        var student_id = $('#student_id').val();
+        var immunized_status = $('#immunized_status').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.students') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                first_name: student_id,
+                middle_name: middle_name,
+                last_name: last_name,
+                gender: gender,
+                d_o_b: d_o_b,
+                email: email,
+                phone: phone,
+                student_id: student_id,
+                immunized_status: immunized_status,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
+
     // edit Dashboard Record For Super Admin
     function editDashboard(event) {
         var id = $(event).data("id");
@@ -898,6 +941,17 @@
             }
         });
     });
+
+
+    $('#check').click(function() {
+    $("#street2").val($("#street").val());
+    $("#city2").val($("#city").val());
+    $("#country2").val($("#country").val());
+    $("#state2").val($("#state").val());
+    $("#zip_code2").val($("#zip_code").val());
+
+});
+
 
 </script>
 

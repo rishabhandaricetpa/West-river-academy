@@ -261,4 +261,24 @@ class StudentProfileController extends Controller
             compact('transcations')
         );
     }
+
+    /*store New Students */
+    public function createNewStudents(Request $request)
+    {
+
+        $students = new StudentProfile();
+        // $students->student_profile_id = $request->get('student_id');
+        $students->parent_profile_id = $request->get('parent_id');
+        $students->first_name = $request->get('first_name');
+        $students->middle_name = $request->get('middle_name');
+        $students->last_name = $request->get('last_name');
+        $students->gender = $request->get('gender');
+        $students->d_o_b = \Carbon\Carbon::parse($request->get('d_o_b'))->format('M d Y');
+        $students->email = $request->get('email');
+        $students->cell_phone = $request->get('phone');
+        $students->student_Id = $request->get('student_id');
+        $students->immunized_status = $request->get('immunized_status');
+
+        $students->save();
+    }
 }

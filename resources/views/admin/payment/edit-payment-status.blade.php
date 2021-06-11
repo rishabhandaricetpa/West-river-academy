@@ -119,8 +119,7 @@
                     @endif
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('admin.edit.student.payment', $student->id) }}"
-                            class="btn btn-primary">Back</a>
+                        <a onclick="goBack()" class="btn btn-primary">Back</a>
                     </div>
             </div>
 
