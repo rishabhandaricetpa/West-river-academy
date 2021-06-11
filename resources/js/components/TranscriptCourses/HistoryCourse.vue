@@ -1,4 +1,5 @@
 <template>
+<div v-if='this.remaining_credit > 0'>
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -111,7 +112,7 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="socialsciencecourse.selectedCredit"
-                v-on:change="showCredit"
+               v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
@@ -121,11 +122,10 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit" class="mt-3">
+              <h3  class="mt-3">
                 You have
                 {{
-                  total_credits.total_credit -
-                    socialsciencecourse.selectedCredit
+                final_credits[socialsciencecourse.component_index + 1] 
                 }}
                 out of
                 {{ total_credits.total_credit }}
@@ -150,6 +150,10 @@
       </button>
     </div>
   </form>
+  </div>
+  <div v-else>
+    No credits Remaining 
+  </div>
 </template>
 
 <script>
@@ -157,13 +161,13 @@ export default {
   name: "SocialScienceCourse",
   data() {
     return {
-      isCredit: false,
       errors: [],
+      final_credits: [this.remaining_credit],
       form: {
-        remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
         required_credit :this.required_credit,
+          final_remaining_credit:'',
         socialsciencecourse: [
           {
             course_id: this.courses_id,
@@ -173,13 +177,18 @@ export default {
             other_subject: "",
             selectedCredit: this.required_credit.credit,
             grade: "",
-            total_credits: this.total_credits.total_credit
+            total_credits: this.total_credits.total_credit,
+             component_index: 0
           }
         ]
       }
     };
   },
-
+  mounted() {
+    this.form.socialsciencecourse[0].selectedCredit = this.required_credit.credit;
+    this.final_credits.push(this.calculateRemainingCredit(this.form.socialsciencecourse[0]));
+    this.finalValue();
+  },
   props: [
     "historycourse",
     "transcript_id",
@@ -187,17 +196,35 @@ export default {
     "courses_id",
     "all_credits",
     "total_credits",
-    'required_credit'
+    'required_credit',
+    'remaining_credit'
   ],
   methods: {
-    showCredit(e) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+  
+      calculateRemainingCredit(socialsciencecourse) {
+       this.finalValue();
+      return this.final_credits[socialsciencecourse.component_index] - socialsciencecourse.selectedCredit;
+        
+    },
+         reIndex(){
+      this.form.socialsciencecourse.forEach((socialsciencecourse, index) => {
+        socialsciencecourse.component_index = index;
+      });
+    },
+      reCalculateAll() {
+      this.form.socialsciencecourse.forEach((socialsciencecourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(socialsciencecourse)
+      })
+      this.finalValue();
+    },
+     finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+      
     },
     addCourse() {
-      this.form.socialsciencecourse.push({
+    const socialsciencecourse= {
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
@@ -205,17 +232,21 @@ export default {
         other_subject: "",
         selectedCredit: this.required_credit.credit,
         grade: "",
-        total_credits: this.total_credits.total_credit
-      });
+         total_credits: this.final_credits[this.form.socialsciencecourse.length - 1],
+         component_index: this.form.socialsciencecourse.length
+      };
+         this.final_credits.push(this.calculateRemainingCredit(socialsciencecourse))
+      this.form.socialsciencecourse.push(socialsciencecourse);
+      this.finalValue();
     },
     removeCourse(index) {
       this.form.socialsciencecourse.splice(index, 1);
+       this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];
-
-  
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
           "Course name is required Field! Please select a Course name"
@@ -272,13 +303,6 @@ export default {
       return true;
     }
   },
-   computed:{
-     showCredit(selectedCredit) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - selectedCredit;
-      return this.isCredit;
-    },
-  }
+ 
 };
 </script>

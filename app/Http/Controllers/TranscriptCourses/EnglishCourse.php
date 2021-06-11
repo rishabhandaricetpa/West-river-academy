@@ -36,7 +36,6 @@ class EnglishCourse extends Controller
     public function store(Request $request)
     {
         // delete if course already exists
-        $id = $request->get('course_id');
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $request->get('course_id'))->where('transcript9_12_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
 
@@ -44,7 +43,6 @@ class EnglishCourse extends Controller
         foreach ($request->get('englishCourses', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
-            $final_remaining_credit = $request->final_remaining_credit;
             $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([

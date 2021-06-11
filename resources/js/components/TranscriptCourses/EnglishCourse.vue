@@ -153,7 +153,6 @@ export default {
   name: "EnglishCourse",
   data() {
     return {
-      isCredit: false,
       errors: [],
       final_credits: [this.total_credits.total_credit],
       form: {
@@ -263,7 +262,7 @@ export default {
             "/mathematics-transcript/" +
             this.student_id +
             "/" +
-            this.transcript_id + "/" +this.form.final_remaining_credit;
+            this.transcript_id  ;
         })
         .catch(error => {
           alert("Please fill in the fields");
@@ -302,13 +301,5 @@ export default {
 
 
   },
-  computed: {
-    showCredit(selectedCredit) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - selectedCredit;
-      return this.isCredit;
-    },
-  }
 };
 </script>

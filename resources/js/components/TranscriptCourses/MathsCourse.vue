@@ -20,7 +20,7 @@
               v-model="mathscourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="Course in maths" :key="Course">
+              <option v-for="Course in maths" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -126,6 +126,7 @@
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
+                
               </h3>
             </div>
           </div>
@@ -153,14 +154,12 @@ export default {
   name: "MathsCourse",
   data() {
     return {
-      isCredit: false,
       errors: [],
        final_credits: [this.remaining_credit],
       form: {
-        remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
-            final_remaining_credit:'',
+         final_remaining_credit:'',
         mathscourse: [
           {
             course_id: this.courses_id,
@@ -253,7 +252,7 @@ export default {
         .post(route("maths-transcript.store"), this.form)
         .then(response => {
           window.location =
-            "/socialStudies/" + this.student_id + "/" + this.transcript_id;
+            "/socialStudies/" + this.student_id + "/" + this.transcript_id ;
         })
         .catch(error => {
           alert("Please fill in the fields");
@@ -289,13 +288,6 @@ export default {
     },
    
   },
-   computed:{
-     showCredit(selectedCredit) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - selectedCredit;
-      return this.isCredit;
-    },
-  },
+
 };
 </script>

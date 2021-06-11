@@ -25,17 +25,23 @@ class ScienceCourse extends Controller
             ->where('transcript_period', '9-12')
             ->where('status', 0)
             ->get();
-        $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
-        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get()->toArray();
+        $carnegie_status = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
+        $all_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('credit')->get()->toArray();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript_id)->orderBy('id', 'DESC')->first();
+
+        if (is_null($transcript_credit)) {
+            // first course having full credit , so check its country and assign full credit
+            $remaining_credit = $carnegie_status->is_carnegie == 1 ? CourseType::NotCaliforniaTotalCredit : CourseType::CaliforniaTotalCredit;
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
         $selectedCreditRequired = max($all_credits);
-        $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
-        return view('transcript9to12_courses.scienceCourse', compact('courses_id', 'scienceCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired'));
+        $total_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('total_credit')->first();
+        return view('transcript9to12_courses.scienceCourse', compact('courses_id', 'scienceCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired', 'remaining_credit'));
     }
     public function store(Request $request)
     {
-        // dd($request->all());
         // delete if course already exists
-        $id = $request->get('course_id');
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $request->get('course_id'))->where('transcript9_12_id', $request->get('transcript_id'))->get();
         $refreshCourse->each->delete();
 
@@ -43,7 +49,6 @@ class ScienceCourse extends Controller
         foreach ($request->get('scienceCourse', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
-            $total_credits = $period['total_credits'];
             $credit = Credits::where('credit', $selectedCredit)->first();
             if ($other_subjects) {
                 $other_sub = Subject::create([
@@ -57,7 +62,7 @@ class ScienceCourse extends Controller
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
                     'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -75,7 +80,7 @@ class ScienceCourse extends Controller
                     'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

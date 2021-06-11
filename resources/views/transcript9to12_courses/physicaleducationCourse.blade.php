@@ -9,7 +9,9 @@
                 <physical-transcript-course :total_credits='@json($total_credits)'
                     :required_credit='@json($selectedCreditRequired)' :all_credits='@json($all_credits)'
                     :physicalsubjects='@json($physicalEducation)' :transcript_id='@json($transcript_id)'
-                    :courses_id='@json($courses_id)' :student_id='@json($student_id)'></physical-transcript-course>
+                    :courses_id='@json($courses_id)' :student_id='@json($student_id)'
+                    :remaining_credit='@json($remaining_credit)'
+                    ></physical-transcript-course>
             </div>
 
         </main>
