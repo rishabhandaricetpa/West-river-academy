@@ -1,4 +1,5 @@
 <template>
+<div v-if="this.remaining_credit > 0 && this.final_credits[1] >0">
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -146,6 +147,11 @@
       </button>
     </div>
   </form>
+</div>
+  <div v-else>
+    No Credits Remaining
+      <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+  </div>
 </template>
 
 <script>
@@ -188,7 +194,8 @@ export default {
     "all_credits",
     "total_credits",
     'required_credit',
-      'remaining_credit'
+      'remaining_credit',
+     'trans_id' 
   ],
   methods: {
      calculateRemainingCredit(scienceCourse) {
@@ -289,6 +296,15 @@ export default {
       }
       return true;
     },
+        nextCourse(){
+      window.location =
+            "/another-grade-transcript/" +
+            this.student_id +
+            "/" +
+            this.trans_id +
+            "/" +
+            this.transcript_id;
+    } 
   },
   
 };

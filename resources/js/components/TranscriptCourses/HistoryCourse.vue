@@ -1,5 +1,5 @@
 <template>
-<div v-if='this.remaining_credit > 0'>
+<div v-if='this.remaining_credit > 0 && this.final_credits[1] >0'>
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -153,6 +153,7 @@
   </div>
   <div v-else>
     No credits Remaining 
+      <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
   </div>
 </template>
 
@@ -197,10 +198,10 @@ export default {
     "all_credits",
     "total_credits",
     'required_credit',
-    'remaining_credit'
+    'remaining_credit',
+    'trans_id'
   ],
   methods: {
-  
       calculateRemainingCredit(socialsciencecourse) {
        this.finalValue();
       return this.final_credits[socialsciencecourse.component_index] - socialsciencecourse.selectedCredit;
@@ -301,6 +302,15 @@ export default {
         }
       }
       return true;
+    },
+     nextCourse(){
+      window.location =
+            "/another-grade-transcript/" +
+            this.student_id +
+            "/" +
+            this.trans_id +
+            "/" +
+            this.transcript_id;
     }
   },
  
