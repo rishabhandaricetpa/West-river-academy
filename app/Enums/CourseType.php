@@ -15,7 +15,5 @@ final class CourseType extends Enum
     const PhysicalEducationCourse = 'Physical Education';
     const AnotherCourse = 'Another';
 
-    // if is_carnagie 1 then not from california
-    const NotCaliforniaTotalCredit = 7.25;
-    const CaliforniaTotalCredit = 72.5;
+  
 }
