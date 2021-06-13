@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\TranscriptCourses;
 
 use App\Enums\CourseType;
+use App\Enums\CreditType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -29,15 +30,21 @@ class ScienceCourse extends Controller
         $all_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('credit')->get()->toArray();
         $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript_id)->orderBy('id', 'DESC')->first();
 
+        // delete if course already exists
+        $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript_id)->get();
+        $refreshCourse->each->delete();
+        
         if (is_null($transcript_credit)) {
             // first course having full credit , so check its country and assign full credit
-            $remaining_credit = $carnegie_status->is_carnegie == 1 ? CourseType::NotCaliforniaTotalCredit : CourseType::CaliforniaTotalCredit;
+            $remaining_credit = $carnegie_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
         } else {
             $remaining_credit = $transcript_credit->remaining_credits;
         }
         $selectedCreditRequired = max($all_credits);
         $total_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('total_credit')->first();
-        return view('transcript9to12_courses.scienceCourse', compact('courses_id', 'scienceCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired', 'remaining_credit'));
+        $transData = Transcript9_12::where('id', $transcript_id)->first();
+        $trans_id =  $transData->transcript_id;
+        return view('transcript9to12_courses.scienceCourse', compact('courses_id', 'scienceCourse', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'selectedCreditRequired', 'remaining_credit', 'trans_id'));
     }
     public function store(Request $request)
     {

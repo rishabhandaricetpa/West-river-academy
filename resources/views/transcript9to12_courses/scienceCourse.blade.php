@@ -8,9 +8,8 @@
                 <h3>Select an Science course:</h3>
                 <science-transcript-course :total_credits='@json($total_credits)' :all_credits='@json($all_credits)'
                     :science='@json($scienceCourse)' :transcript_id='@json($transcript_id)' :courses_id='@json($courses_id)'
-                    :required_credit='@json($selectedCreditRequired)' :student_id='@json($student_id)'
-                    :remaining_credit='@json($remaining_credit)'
-                    >
+                    :trans_id='@json($trans_id)' :required_credit='@json($selectedCreditRequired)'
+                    :student_id='@json($student_id)' :remaining_credit='@json($remaining_credit)'>
                 </science-transcript-course>
             </div>
 
