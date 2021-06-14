@@ -9,7 +9,7 @@
                 <another-transcript-course :trans_id='@json($trans_id)' :required_credit='@json($selectedCreditRequired)'
                     :total_credits='@json($total_credits)' :all_credits='@json($all_credits)'
                     :anothersubjects='@json($anotherSubjects)' :transcript_id='@json($transcript_id)'
-                    :courses_id='@json($courses_id)' :student_id='@json($student_id)'></another-transcript-course>
+                    :courses_id='@json($courses_id)' :student_id='@json($student_id)' :remaining_credit='@json($remaining_credit)'></another-transcript-course>
             </div>
 
         </main>

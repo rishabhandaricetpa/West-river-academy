@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -15,7 +16,7 @@ class SocialStudiesController extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'History / Social Science')
+            ->where('course_name', CourseType::HistoryCourse)
             ->first();
         $courses_id = $course->id;
         $socialStudiesCourse = Subject::where('courses_id', $course->id)

@@ -1,5 +1,4 @@
 # West River Academy (Laravel App)
-
 ### Prerequisites
 
 -   php v7.4.3, [see](https://laravel.com/docs/installation) Laravel specific requirements
