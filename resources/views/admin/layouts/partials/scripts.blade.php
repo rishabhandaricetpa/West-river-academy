@@ -620,7 +620,7 @@
         var student_id = $('#student-name').val();
         var parent_id = $('#parent_id').val();
         var school_name = $('#school_name').val();
-        var email = $('#email').val();
+        var email_add = $('#email_add').val();
         var street_address = $('#street_address').val();
         var fax_number = $('#fax_number').val();
         var phone_number = $('#phone_number').val();
@@ -639,7 +639,7 @@
                 parent_id: parent_id,
                 student_id: student_id,
                 school_name: school_name,
-                email: email,
+                email_add: email_add,
                 street_address: street_address,
                 fax_number: fax_number,
                 phone_number: phone_number,
@@ -703,7 +703,7 @@
 $("#add-new-order").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
-        var student_name = $('#student_name').val();
+        var student_name_order = $('#student_name_order').val();
         var order_name = $('#order_name').val();
         var amount = $('#amount').val();
         var payment_mode = $('#payment_mode').val();
@@ -719,7 +719,7 @@ $("#add-new-order").on("submit", function(event) {
 
             data: {
                 parent_id: parent_id,
-                student_name: student_name,
+                student_name_order: student_name_order,
                 order_name: order_name,
                 amount: amount,
                 payment_mode: payment_mode,
@@ -805,8 +805,9 @@ $("#sampleForm").on("submit", function(event) {
     $("#add-new-notes").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
-        var student_name = $('#student_name').val();
+        var student_name_for_notes = $('#student_name_for_notes').val();
         var message_text = $('#message_text').val();
+        console.log(student_name_for_notes);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -816,7 +817,7 @@ $("#sampleForm").on("submit", function(event) {
 
             data: {
                 parent_id: parent_id,
-                student_name: student_name,
+                student_name_for_notes: student_name_for_notes,
                 message_text: message_text,
             },
             success: function(response) {

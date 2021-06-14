@@ -286,7 +286,7 @@ class StudentProfileController extends Controller
     {
         $notes = new Notes;
         $notes->parent_profile_id = $request->get('parent_id');
-        $notes->student_profile_id = $request->get('student_name');
+        $notes->student_profile_id = $request->get('student_name_for_notes');
         $notes->notes = $request->get('message_text');
 
         $notes->save();
