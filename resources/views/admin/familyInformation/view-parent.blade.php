@@ -33,11 +33,13 @@
                             <table id="family-table" class="w-100 table-styling data-table">
                                 <thead>
                                     <tr>
-                                        <th>Parents</th>
+                                        <th>Name</th>
                                         <th>Email</th>
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>Status</th>
+                                        <th>Date Created</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         }
 
     );
-    Route::get('deactive/{id}', 'ParentController@deactive')->name('deactive.student');
+    Route::post('deactive/{id}', 'ParentController@deactive')->name('deactive.parent');
 
     // Crud for parent profile
     Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');
@@ -259,4 +259,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
     Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
+    Route::post('store-status', 'ParentController@createOrders')->name('create.orders');
 });

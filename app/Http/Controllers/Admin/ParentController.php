@@ -57,28 +57,29 @@ class ParentController extends Controller
     {
         return datatables(ParentProfile::with(['studentProfile', 'address'])->latest()->get())->toJson();
     }
-    public function deactive($id)
+    public function deactive(Request $request)
     {
-        $parent = ParentProfile::find($id);
-        if ($parent->status === 1) {
-            $notification = [
-                'message' => 'Parent Record is already Deactivated!',
-                'alert-type' => 'Error',
-            ];
-            return redirect()->back()->with($notification);
-        } else {
-            $studentProfileData = StudentProfile::find($parent)->first();
-            $parent->status = '1';
-            $parent->save();
-            // $studentProfileData->status = '1';
-            // $studentProfileData->save();
-            $notification = [
-                'message' => 'Parent Record is Deactivated Successfully!',
-                'alert-type' => 'Success',
-            ];
+        $parent = ParentProfile::find($request->get('parent_id'));
+        $parent->status = $request->get('parent_status');
+        $parent->save();
+        $notification = [
+            'message' => 'Parent Record is Inactive!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
+        // } else {
+        //     $studentProfileData = StudentProfile::find($parent)->first();
+        //     $parent->status = '1';
+        //     $parent->save();
+        //     // $studentProfileData->status = '1';
+        //     // $studentProfileData->save();
+        //     $notification = [
+        //         'message' => 'Parent Record is Deactivated Successfully!',
+        //         'alert-type' => 'Success',
+        //     ];
 
-            return redirect()->back()->with($notification);
-        }
+        //     return redirect()->back()->with($notification);
+        // }
     }
     /**
      * Show the form for creating a new resource.
