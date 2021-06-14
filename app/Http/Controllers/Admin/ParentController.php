@@ -130,6 +130,7 @@ class ParentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         try {
             DB::beginTransaction();
             $userdata = User::find($id);
@@ -148,13 +149,13 @@ class ParentController extends Controller
             $parent->p2_email = $request->get('p2_email');
             $parent->p2_cell_phone = $request->get('p2_cell_phone');
             $parent->p2_home_phone = $request->get('p2_home_phone');
-            $parent->street_address = $request->get('street');
+            $parent->street_address = $request->get('street_address');
             $parent->city = $request->get('city');
             $parent->state = $request->get('state');
             $parent->country = $request->get('country');
             $parent->reference = $request->get('reffered');
             $parent->immunized = $request->get('immunized');
-            $parent->status = $request->get('status');
+            $parent->status = 0;
             $parent->save();
             DB::commit();
             $notification = [
@@ -164,6 +165,7 @@ class ParentController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',

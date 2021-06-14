@@ -59,39 +59,39 @@
               <div class="col-md-6">
                 <h3 class="mt-3">parent-details-1</h3>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">First Name :</label>
+                  <label for="p1_first_name">First Name :</label>
                   <input type="text" class="form-control is-disabled" name="p1_first_name" id="p1_first_name"
                     placeholder="" value="{{ $parent->p1_first_name }}" disabled>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Middle Name :</label>
+                  <label for="p1_middle_name">Middle Name :</label>
                   <input type="text" class="form-control is-disabled" name="p1_middle_name" id="p1_middle_name"
                     placeholder="" value="{{ $parent->p1_middle_name }}" disabled>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Last Name :</label>
+                  <label for="p1_last_name">Last Name :</label>
                   <input type="text" class="form-control is-disabled" name="p1_last_name" id="p1_last_name"
                     placeholder="" value="{{ $parent->p1_last_name }}" disabled>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email :</label>
+                  <label for="p1_email">Email :</label>
                   <input type="email" class="form-control is-disabled" name="p1_email" id="p1_email"
                     placeholder="" value="{{ $parent->p1_email }}" disabled>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Phone :</label>
+                  <label for="p1_cell_phone">Phone :</label>
                   <input type="text" class="form-control is-disabled" name="p1_cell_phone" id="p1_cell_phone"
                     placeholder="" value="{{ $parent->p1_cell_phone }}" disabled>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1"> Home Phone :</label>
+                  <label for="p1_home_phone"> Home Phone :</label>
                   <input type="text" class="form-control is-disabled" name="p1_home_phone" id="p1_home_phone"
                     placeholder="" value="{{ $parent->p1_home_phone }}" disabled>
                 </div>
                 <h3 class="mt-3">Address</h3>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Street :</label>
-                  <input type="text" class="form-control is-disabled" id="street" placeholder="" name="street_address"
+                  <label for="street_address">Street :</label>
+                  <input type="text" class="form-control is-disabled" id="street_address" placeholder="" name="street_address"
                     value="{{ $parent->street_address }}" disabled>
                 </div>
                 <div class="row">

@@ -752,7 +752,7 @@ $("#sampleForm").on("submit", function(event) {
         var p1_email = $('#p1_email').val();
         var p1_cell_phone = $('#p1_cell_phone').val();
         var p1_home_phone = $('#p1_home_phone').val();
-        var street= $('#street').val();
+        var street_address= $('#street_address').val();
         var city= $('#city').val();
         var state = $('#state').val();
         var country = $('#country').val();
@@ -775,7 +775,6 @@ $("#sampleForm").on("submit", function(event) {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            
             url: url,
             type: "POST",
 
@@ -786,7 +785,7 @@ $("#sampleForm").on("submit", function(event) {
                 p1_email: p1_email,
                 p1_cell_phone: p1_cell_phone,
                 p1_home_phone: p1_home_phone,
-                street:street,
+                street_address:street_address,
                 city:city,
                 state: state,
                 country: country,
@@ -806,7 +805,6 @@ $("#sampleForm").on("submit", function(event) {
             },
             success: function(response) {
                 location.reload();
-                // dd($response);
             },
             error: function(response) {
 // dd($response)
