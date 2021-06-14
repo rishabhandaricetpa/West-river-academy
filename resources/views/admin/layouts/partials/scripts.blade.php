@@ -797,11 +797,6 @@ $("#sampleForm").on("submit", function(event) {
                 p2_email: p2_email,
                 p2_cell_phone: p2_cell_phone,
                 p2_home_phone: p2_home_phone,
-                street:street2,
-                city:city2,
-                state: state2,
-                country: country2,
-                zip_code: zip_code2,
             },
             success: function(response) {
                 location.reload();
@@ -1112,7 +1107,6 @@ $("#sampleForm").on("submit", function(event) {
             }
         });
     });
-
 
     $('#check').click(function() {
     $("#street2").val($("#street").val());
