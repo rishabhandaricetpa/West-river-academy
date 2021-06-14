@@ -8,7 +8,7 @@
                     <div class="row confirmation-letter__options border-bottom">
                         <h2 class="mb-3">Select your Confirmation Letter Options</h2>
                         <div id="app">
-                            <list-confirmation :student='@json($student)' :gradeid='@json($grade_id)' :student_id='@json($student_id)' :confirmationdata='@json($confirmation_data)' :enrollments='@json($enrollments)'></list-confirmation>
+                            <list-confirmation :student='@json($student)' :gradeid='@json($grade_id)' :student_id='@json($student_id)' :confirmationdata='@json($confirmation_data)' :enrollments='@json($enrollments)' :countryData='@json($countryData)'></list-confirmation>
                         </div>
             </main>
         </div>

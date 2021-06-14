@@ -238,8 +238,12 @@
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->grade_level }}</td>
-                                    <td class="transform-none">{{ getPaymentstatus($student->enrollment_payment_id) }}</td>
-                                    @if(getPaymentstatus($student->enrollment_payment_id)==='paid')
+                                    @if(getPaymentstatus($student->enrollment_payment_id) ==='paid')
+                                    <td>Paid</td>
+                                    @else
+                                    <td>Not Paid for Enrollment</td>
+                                    @endif
+                                    @if(getPaymentstatus($student->enrollment_payment_id) ==='paid')
                                     <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
                                             class="d-flex align-items-center"><i
                                                 class="fas fa-file-pdf mr-2"></i>Download</a></td>
