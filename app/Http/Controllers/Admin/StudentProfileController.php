@@ -307,7 +307,7 @@ class StudentProfileController extends Controller
         $transction->transcation_id   = substr(uniqid(), 0, 12);
         $transction->payment_mode = "admin created";
         $transction->parent_profile_id = $request->get('parent_id');
-        $transction->amount = $request->get('amount');
+        $transction->amount = $request->get('amount_status');
         $transction->status = $request->get('enrollment_status');
         $transction->save();
 
@@ -316,7 +316,7 @@ class StudentProfileController extends Controller
         $enroll_payment->payment_mode = "admin created";
         $enroll_payment->transcation_id = $transction->transcation_id;
         $enroll_payment->status = $request->get('enrollment_status');
-        $enroll_payment->amount = $request->get('amount');
+        $enroll_payment->amount = $request->get('amount_status');
         $enroll_payment->save();
 
         $enroll->enrollment_payment_id = $enroll_payment->id;

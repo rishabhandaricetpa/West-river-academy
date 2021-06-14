@@ -54,8 +54,6 @@
                                 @endif
                                 <td><a href="{{ route('admin.parent.edit', $parent->id) }}"><i
                                             class="fas fa-edit"></i></a>
-                                    <a href="{{ route('admin.deactive.student', $parent->id) }}"><i
-                                            class="fas fa-ban"></i></a>
                                     <a href="{{ route('admin.parent.delete', $parent->id) }}"><i
                                             class="fas fa-trash-alt"></i></a>
                                 </td>

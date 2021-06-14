@@ -56,8 +56,9 @@
             "dom": "Bfrtip",
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                    "data": "p1_first_name",
-                    
+                "data": function(row, type, val, meta) {
+                        return `<a href="edit/${row.id}">${row.p1_first_name}</a>`
+                    },
                 },
                 {
                     "data": function(row, type, val, meta) {
@@ -84,27 +85,20 @@
                         else
                             return `<td> Inactive</td>`;
                     }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="edit/${id}"><i class="fas fa-edit"></i></a>` +
-                            `<a href="deactive/${id}"><i class="fas fa-ban"></i></a>` +
-                            `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
-
-
-                    }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="view-student/${id}">View Students</a>`;
-                    }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="view-parent-orders/${id}">View Orders</a>`;
+                },{
+                    "data": "created_at",
+                    "render": function(data) {
+                        return (moment(data).format("LL"));
                     }
                 }
+                , {
+                    "data": "id",
+                    "render": function(id) {
+                        return  `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
 
+
+                    }
+                }
             ]
         }).buttons().container().appendTo('#family-table_wrapper .col-md-6:eq(0)');
 
@@ -797,11 +791,6 @@ $("#sampleForm").on("submit", function(event) {
                 p2_email: p2_email,
                 p2_cell_phone: p2_cell_phone,
                 p2_home_phone: p2_home_phone,
-                street:street2,
-                city:city2,
-                state: state2,
-                country: country2,
-                zip_code: zip_code2,
             },
             success: function(response) {
                 location.reload();
@@ -849,7 +838,8 @@ $("#sampleForm").on("submit", function(event) {
         var grade_level = $("input[type='radio']:checked").val();
         var enrollment_period=$('#enrollment_period').val();
         var enrollment_status=$('#enrollment_status').val();
-        var amount=$('#amount').val();
+        var amount_status=$('#amount_status').val();
+        console.log(amount_status);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -865,7 +855,7 @@ $("#sampleForm").on("submit", function(event) {
                 grade_level:grade_level,
                 enrollment_period:enrollment_period,
                 enrollment_status:enrollment_status,
-                amount:amount,
+                amount_status:amount_status,
 
             },
             success: function(response) {
@@ -1113,7 +1103,6 @@ $("#sampleForm").on("submit", function(event) {
         });
     });
 
-
     $('#check').click(function() {
     $("#street2").val($("#street").val());
     $("#city2").val($("#city").val());
@@ -1122,6 +1111,32 @@ $("#sampleForm").on("submit", function(event) {
     $("#zip_code2").val($("#zip_code").val());
 
 });
+
+$('#parent_status').change(function(){
+        var parent_status = $('#parent_status').val();
+        var parent_id=$('#parent_id').val();
+        var url = "{{ route('admin.deactive.parent', ":parent_id") }}";
+        url = url.replace(':parent_id', parent_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            data: {
+                parent_status: parent_status,
+                parent_id: parent_id,
+            },
+            success: function(response) {
+
+                location.reload()
+            },
+            error: function(response) {
+
+            }
+        });
+
+})
 
 
 </script>
