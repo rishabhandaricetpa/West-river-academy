@@ -74,7 +74,7 @@ class TranscriptController extends Controller
     public function purchaseNew($id)
     {
         try {
-
+            $enroll_student = StudentProfile::find($id);
             $enrollment_ids =   getEnrollmetForStudents($id);
             // return view('transcript.transcript-wizard', compact('enroll_student'));
             DB::beginTransaction();
@@ -122,8 +122,8 @@ class TranscriptController extends Controller
      */
     public function getAllTranscript($student_id)
     {
-        $enrollment_ids =   getEnrollmetForStudents($id);
-
+        $enrollment_ids =   getEnrollmetForStudents($student_id);
+        $enroll_student = StudentProfile::find($student_id);
         $payment_info = getPaymentInformation($enrollment_ids);
 
         if (count($payment_info) == 0) {
