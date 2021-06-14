@@ -42,8 +42,8 @@
               {{ $parent->p2_last_name }}</h2>
               <div class="form-group">
                 <select  required class="btn btn-primary dropdown-toggle" id="parent_status">
-                  <option @if($parent->status === 0) selected @endif value="0"id="student_name">Active</option>
-                  <option @if($parent->status === 1) selected @endif value="1"id="student_name">Inactive</option>
+                  <option @if($parent->status === 0) selected @endif value="0">Active</option>
+                  <option @if($parent->status === 1) selected @endif value="1">Inactive</option>
                 </select>
                 <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
               </div>
@@ -369,7 +369,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save</button>
               </div>
             </form>
@@ -427,7 +427,7 @@
 
                 @foreach ($allstudent as $student)
 
-                <option value="{{ $student->id }}" id="student_name">{{ $student->first_name }} </option>
+                <option value="{{ $student->id }}" id="student_name_for_notes">{{ $student->first_name }} </option>
 
                 @endforeach
               </select>
@@ -507,7 +507,7 @@
               <label for="recipient-name" class="col-form-label">For student</label>
               <select id="student-name">
                 @foreach ($allstudent as $student)
-                <option value="{{ $student->id }}" id="student_name">{{ $student->first_name }} </option>
+                <option value="{{ $student->id }}" id="student_name_order">{{ $student->first_name }} </option>
                 @endforeach
               </select>
               <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
@@ -516,7 +516,7 @@
               <label for="recipient-name" class="col-form-label">For Grades</label>
               <select id="enrollment_for">
                 @foreach ($payment_nonpaid as $payment)
-                <option value="{{ $payment->id }}" id="student_name">{{ $payment->grade_level }} </option>
+                <option value="{{ $payment->id }}">{{ $payment->grade_level }} </option>
                 @endforeach
               </select>
             </div>
@@ -536,7 +536,7 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Amount:</label>
-              <input type="text" class="form-control" id="amount">
+              <input type="text" class="form-control" id="amount" required>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Payment Method</label>
@@ -555,8 +555,8 @@
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Enrollment Payment Status</label>
               <select id="enrollment_status">
-                <option value="paid" id="student_name">Paid</option>
-                <option value="pending" id="student_name">Pending</option>
+                <option value="paid" >Paid</option>
+                <option value="pending" >Pending</option>
               </select>
             </div>
         </div>
@@ -739,23 +739,23 @@
             <div class="form-group">
             <label for="recipient-name" class="col-form-label">Enrollment Period</label>
             <select id="enrollment_period" required>
-              <option value="annual" id="student_name">Annual</option>
-              <option value="half" id="student_name">Semester</option>
+              <option value="annual" >Annual</option>
+              <option value="half" >Semester</option>
             </select>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Enrollment Payment Status</label>
             <select id="enrollment_status" required>
-              <option value="paid" id="student_name">Paid</option>
-              <option value="pending" id="student_name">Pending</option>
+              <option value="paid" >Paid</option>
+              <option value="pending" >Pending</option>
             </select>
           </div>
             <div class="form-group">
             <label for="recipient-name" class="col-form-label">Amount</label>
             <select id="amount_status" required>
-              <option value="375" id="student_name">$ 375</option>
-              <option value="200" id="student_name">$ 200</option>
-              <option value="50" id="student_name">$ 50</option>
+              <option value="375" >$ 375</option>
+              <option value="200" >$ 200</option>
+              <option value="50" >$ 50</option>
             </select>
           </div>
         <div class="modal-footer">
@@ -844,7 +844,7 @@
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Email Address:</label>
-              <input type="email" id="email">
+              <input type="email" id="email_add">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Fax Number:</label>
@@ -856,15 +856,15 @@
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Street Address</label>
-              <input type="text" id="street_address">
+              <input type="text" id="street_address1">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">City</label>
-              <input type="text" id="city">
+              <input type="text" id="city1">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">State/Province/Region</label>
-              <input type="text" id="state">
+              <input type="text" id="state1">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Zip/Postal Code</label>
@@ -872,11 +872,15 @@
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Country</label>
-              <input type="text" id="country">
+              <input type="text" id="country1">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Last Grade In School</label>
+              <input type="text" id="last_grade">
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
         </form>
@@ -947,7 +951,7 @@
               <input type="file" id="file" class="form-control choose-btn" required>
             </div>
           </div>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Upload</button>
         </form>
       </div>

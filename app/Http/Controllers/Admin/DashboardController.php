@@ -91,12 +91,12 @@ class DashboardController extends Controller
 
     public function uploadRecordTransfer(Request $request)
     {
-     
+
         $recordTransfer = new RecordTransfer();
         $recordTransfer->student_profile_id = $request->get('student_id');
         $recordTransfer->parent_profile_id = $request->get('parent_id');
         $recordTransfer->school_name = $request->get('school_name');
-        $recordTransfer->email = $request->get('email');
+        $recordTransfer->email = $request->get('email_add');
         $recordTransfer->fax_number = $request->get('fax_number');
         $recordTransfer->phone_number = $request->get('phone_number');
         $recordTransfer->street_address = $request->get('street_address');
@@ -104,7 +104,7 @@ class DashboardController extends Controller
         $recordTransfer->state = $request->get('state');
         $recordTransfer->zip_code = $request->get('zip_code');
         $recordTransfer->country = $request->get('country');
-
+        $recordTransfer->last_grade = $request->get('last_grade');
         $recordTransfer->save();
     }
 }
