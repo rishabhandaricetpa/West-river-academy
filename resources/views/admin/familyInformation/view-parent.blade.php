@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1 class="m-0 text-center">Parent List</h1>
+            <h1 class="m-0 text-center">Family List</h1>
             <div class="d-flex">
                 <ol class="breadcrumb ml-auto">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
@@ -38,9 +38,6 @@
                                         <th>Country</th>
                                         <th>State</th>
                                         <th>Status</th>
-                                        <th>Action</th>
-                                        <th>View</th>
-                                        <th>Orders</th>
                                     </tr>
                                 </thead>
                                 <tbody>

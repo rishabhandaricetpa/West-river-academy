@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ConfirmationLetter;
+use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
@@ -12,6 +13,7 @@ use App\Models\Transcript;
 use Illuminate\Support\Facades\File;
 use App\Models\UploadDocuments;
 use DB;
+use App\Models\Notes;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
@@ -198,7 +200,7 @@ class StudentProfileController extends Controller
             DB::beginTransaction();
             $notification = [
                 'message' => 'Student Record is Deleted Successfully!',
-                'alert-type' => 'warning',
+                'alert-type' => 'Success',
             ];
             StudentProfile::where('id', $id)->delete();
             DB::commit();
@@ -265,9 +267,7 @@ class StudentProfileController extends Controller
     /*store New Students */
     public function createNewStudents(Request $request)
     {
-
         $students = new StudentProfile();
-        // $students->student_profile_id = $request->get('student_id');
         $students->parent_profile_id = $request->get('parent_id');
         $students->first_name = $request->get('first_name');
         $students->middle_name = $request->get('middle_name');
@@ -280,5 +280,46 @@ class StudentProfileController extends Controller
         $students->immunized_status = $request->get('immunized_status');
 
         $students->save();
+    }
+
+    public function createNotes(Request $request)
+    {
+        $notes = new Notes;
+        $notes->parent_profile_id = $request->get('parent_id');
+        $notes->student_profile_id = $request->get('student_name');
+        $notes->notes = $request->get('message_text');
+
+        $notes->save();
+    }
+
+
+    public function createEnrollment(Request $request)
+    {
+        $enroll = new EnrollmentPeriods;
+        $enroll->student_profile_id = $request->get('student_name');
+        $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
+        $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
+        $enroll->grade_level = $request->get('grade_level');
+        $enroll->type = $request->get('enrollment_period');
+        $enroll->save();
+
+        $transction = new TransactionsMethod();
+        $transction->transcation_id   = substr(uniqid(), 0, 12);
+        $transction->payment_mode = "admin created";
+        $transction->parent_profile_id = $request->get('parent_id');
+        $transction->amount = $request->get('amount');
+        $transction->status = $request->get('enrollment_status');
+        $transction->save();
+
+        $enroll_payment = new EnrollmentPayment();
+        $enroll_payment->enrollment_period_id = $enroll->id;
+        $enroll_payment->payment_mode = "admin created";
+        $enroll_payment->transcation_id = $transction->transcation_id;
+        $enroll_payment->status = $request->get('enrollment_status');
+        $enroll_payment->amount = $request->get('amount');
+        $enroll_payment->save();
+
+        $enroll->enrollment_payment_id = $enroll_payment->id;
+        $enroll->save();
     }
 }

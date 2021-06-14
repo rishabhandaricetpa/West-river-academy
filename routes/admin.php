@@ -256,4 +256,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-document-dashboard', 'DashboardController@uploadDocument')->name('dashboard.documents');
     Route::post('store-record-dashboard', 'DashboardController@uploadRecordTransfer')->name('dashboard.recordtrasnfer');
     Route::post('store-student', 'StudentProfileController@createNewStudents')->name('create.students');
+    Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
+    Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
+    Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
 });

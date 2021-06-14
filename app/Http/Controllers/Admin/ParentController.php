@@ -117,7 +117,8 @@ class ParentController extends Controller
                 'enrollment_periods.student_profile_id'
             )
             ->get();
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes'));
+        $payment_nonpaid = $payment_info->where('status', 'pending');
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid'));
     }
 
     /**
@@ -147,11 +148,11 @@ class ParentController extends Controller
             $parent->p2_email = $request->get('p2_email');
             $parent->p2_cell_phone = $request->get('p2_cell_phone');
             $parent->p2_home_phone = $request->get('p2_home_phone');
-            $parent->street_address = $request->get('street_address');
+            $parent->street_address = $request->get('street');
             $parent->city = $request->get('city');
             $parent->state = $request->get('state');
             $parent->country = $request->get('country');
-            $parent->reference = $request->get('reference');
+            $parent->reference = $request->get('reffered');
             $parent->immunized = $request->get('immunized');
             $parent->status = $request->get('status');
             $parent->save();
@@ -161,7 +162,7 @@ class ParentController extends Controller
                 'alert-type' => 'success',
             ];
 
-            return redirect('admin/view')->with($notification);
+            return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             DB::rollback();
             $notification = [
@@ -243,5 +244,75 @@ class ParentController extends Controller
             ->where('status', 'paid')
             ->get();
         return view('admin.familyInformation.view-all-orders', compact('transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments', 'customLetter'));
+    }
+
+    //create orders in family enrollments
+    public function createOrders(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            switch ($request->get('order_name')) {
+                case 'enrollment':
+                    $transction = new TransactionsMethod();
+                    $transction->transcation_id   = substr(uniqid(), 0, 12);
+                    $transction->payment_mode = "admin created";
+                    $transction->parent_profile_id = $request->get('parent_id');
+                    $transction->amount = $request->get('amount');
+                    $transction->status = $request->get('enrollment_status');
+                    $transction->save();
+
+                    $enroll_payment = new EnrollmentPayment();
+                    $enroll_payment->enrollment_period_id = $request->get('enrollment_for');
+                    $enroll_payment->payment_mode = "admin created";
+                    $enroll_payment->transcation_id = $transction->transcation_id;
+                    $enroll_payment->status = $request->get('enrollment_status');
+                    $enroll_payment->amount = $request->get('amount');
+                    $enroll_payment->save();
+
+                    $enroll = EnrollmentPeriods::whereId($request->get('enrollment_for'))->first();
+                    $enroll->enrollment_payment_id = $enroll_payment->id;
+                    $enroll->save();
+                    break;
+
+                case 'graduation':
+
+                    break;
+                case 'transcript':
+
+                    break;
+                case 'custom_payments':
+
+                    break;
+
+                case 'postage':
+
+                    break;
+                case 'notarization':
+
+                    break;
+                case 'apostille':
+
+                    break;
+                case 'custom_letter':
+
+                    break;
+                case 'order_consultation':
+
+                    break;
+                default:
+                    break;
+            }
+            DB::commit();
+            $notification = [
+                'message' => 'parent Record is order Successfully!',
+                'alert-type' => 'warning',
+            ];
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();
+
+            return redirect()->back();
+        }
     }
 }

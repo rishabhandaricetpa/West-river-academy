@@ -238,7 +238,7 @@
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->grade_level }}</td>
-                                    <td class="transform-none">{{ getstatus($student->id) }}</td>
+                                    <td class="transform-none">{{ getPaymentstatus($student->enrollment_payment_id) }}</td>
                                     @if(getPaymentstatus($student->enrollment_payment_id)==='paid')
                                     <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
                                             class="d-flex align-items-center"><i

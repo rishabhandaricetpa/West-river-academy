@@ -463,10 +463,12 @@ function getOrders($transction_id)
 function getstatus($enrollment_period_id)
 {
     $confirm_status = ConfirmationLetter::where('enrollment_period_id', $enrollment_period_id)->first();
-    if ($confirm_status->status === 'completed' || $confirm_status->status === 'paid') {
-        return 'Completed';
-    } else {
-        return 'Not Paid for Enrollment';
+    if ($confirm_status) {
+        if ($confirm_status->status === 'completed' || $confirm_status->status === 'paid') {
+            return 'Completed';
+        } else {
+            return 'Not Paid for Enrollment';
+        }
     }
 }
 

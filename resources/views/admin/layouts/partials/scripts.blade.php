@@ -56,7 +56,8 @@
             "dom": "Bfrtip",
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                    "data": "p1_first_name"
+                    "data": "p1_first_name",
+                    
                 },
                 {
                     "data": function(row, type, val, meta) {
@@ -662,10 +663,9 @@
         });
     });
 
- // dashboard admin record transfer doc for student
+ // add new student from admin 
  $("#add-new-student").on("submit", function(event) {
         event.preventDefault();
-        // console.log('created');
         var parent_id = $('#parent_id').val();
         var first_name = $('#first_name').val();
         var middle_name = $('#middle_name').val();
@@ -685,7 +685,7 @@
 
             data: {
                 parent_id: parent_id,
-                first_name: student_id,
+                first_name: first_name,
                 middle_name: middle_name,
                 last_name: last_name,
                 gender: gender,
@@ -705,6 +705,179 @@
     });
 
 
+// add new order 
+$("#add-new-order").on("submit", function(event) {
+        event.preventDefault();
+        var parent_id = $('#parent_id').val();
+        var student_name = $('#student_name').val();
+        var order_name = $('#order_name').val();
+        var amount = $('#amount').val();
+        var payment_mode = $('#payment_mode').val();
+        var message = $('#message').val();
+        var enrollment_status= $('#enrollment_status').val();
+        var enrollment_for= $('#enrollment_for').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                student_name: student_name,
+                order_name: order_name,
+                amount: amount,
+                payment_mode: payment_mode,
+                message: message,
+                enrollment_status:enrollment_status,
+                enrollment_for:enrollment_for
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
+// add parent information
+$("#sampleForm").on("submit", function(event) {
+        event.preventDefault();
+        var parent_id = $('#parent_id').val();
+        var p1_first_name = $('#p1_first_name').val();
+        var p1_middle_name = $('#p1_middle_name').val();
+        var p1_last_name = $('#p1_last_name').val();
+        var p1_email = $('#p1_email').val();
+        var p1_cell_phone = $('#p1_cell_phone').val();
+        var p1_home_phone = $('#p1_home_phone').val();
+        var street= $('#street').val();
+        var city= $('#city').val();
+        var state = $('#state').val();
+        var country = $('#country').val();
+        var zip_code = $('#zip_code').val();
+        var reffered= $('#reffered').val();
+        var p2_first_name = $('#p2_first_name').val();
+        var p2_middle_name = $('#p2_middle_name').val();
+        var p2_last_name = $('#p2_last_name').val();
+        var p2_email = $('#p2_email').val();
+        var p2_cell_phone = $('#p2_cell_phone').val();
+        var p2_home_phone = $('#p2_home_phone').val();
+        var street2= $('#street2').val();
+        var city2= $('#city2').val();
+        var state2 = $('#state2').val();
+        var country2 = $('#country2').val();
+        var zip_code2 = $('#zip_code2').val();
+        var url = "{{ route('admin.parent.update', ":parent_id") }}";
+        url = url.replace(':parent_id', parent_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            
+            url: url,
+            type: "POST",
+
+            data: {
+                p1_first_name: p1_first_name,
+                p1_middle_name: p1_middle_name,
+                p1_last_name: p1_last_name,
+                p1_email: p1_email,
+                p1_cell_phone: p1_cell_phone,
+                p1_home_phone: p1_home_phone,
+                street:street,
+                city:city,
+                state: state,
+                country: country,
+                zip_code: zip_code,
+                reffered:reffered,
+                p2_first_name: p2_first_name,
+                p2_middle_name: p2_middle_name,
+                p2_last_name: p2_last_name,
+                p2_email: p2_email,
+                p2_cell_phone: p2_cell_phone,
+                p2_home_phone: p2_home_phone,
+                street:street2,
+                city:city2,
+                state: state2,
+                country: country2,
+                zip_code: zip_code2,
+            },
+            success: function(response) {
+                location.reload();
+                // dd($response);
+            },
+            error: function(response) {
+// dd($response)
+            }
+        });
+    });
+
+    //add notes to family 
+    $("#add-new-notes").on("submit", function(event) {
+        event.preventDefault();
+        var parent_id = $('#parent_id').val();
+        var student_name = $('#student_name').val();
+        var message_text = $('#message_text').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.notes') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                student_name: student_name,
+                message_text: message_text,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
+    //Add student enrollment
+    $("#add-new-enrollments").on("submit", function(event) {
+        event.preventDefault();
+        var parent_id = $('#parent_id').val();
+        var student_name = $('#student_name').val();
+        var start_date = $('#start_date').val();
+        var end_date = $('#end_date').val();
+        var grade_level = $("input[type='radio']:checked").val();
+        var enrollment_period=$('#enrollment_period').val();
+        var enrollment_status=$('#enrollment_status').val();
+        var amount=$('#amount').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.enrollments') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                student_name: student_name,
+                start_date: start_date,
+                end_date:end_date,
+                grade_level:grade_level,
+                enrollment_period:enrollment_period,
+                enrollment_status:enrollment_status,
+                amount:amount,
+
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
     // edit Dashboard Record For Super Admin
     function editDashboard(event) {
         var id = $(event).data("id");
