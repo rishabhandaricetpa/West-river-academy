@@ -100,8 +100,7 @@
             </div>
             <div class="form-group mb-1 mt-2r">
               <h3 class="text-black">
-                Select Credit: The recommended credit for a one-year course is
-                selected. You may change it.
+                Select Credit
               </h3>
               <select
                 class="form-control min-select"
@@ -197,7 +196,7 @@ export default {
       this.form.mathsCourse = courses;
     },
     showCredit(e) {
-      this.isCredit = true;
+      this.isCredit = false;
       this.form.remainingCredit =
         this.total_credits.total_credit - e.target.value;
       return this.isCredit;
