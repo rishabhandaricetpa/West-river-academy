@@ -752,13 +752,12 @@
               <thead class="thead-light">
                 <tr>
                   <th scope="col">Date</th>
+                  <th scope="col">Student Name</th>
                   <th scope="col">File Name</th>
                   <th scope="col">Document Type</th>
                   <th scope="col">View Documents</th>
                   <th scope="col">Upload Documents</th>
-                  <th scope="col" class="text-right"> <button type="button" class="btn btn-primary btn-modal ml-3"
-                      data-toggle="modal" data-target="#documentsModal" data-whatever="@getbootstrap"><img
-                        src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+                  <th scope="col" ></th>
 
                 </tr>
               </thead>
@@ -766,6 +765,7 @@
                 @foreach ($documents as $document)
                 <tr>
                   <td>{{ $document->created_at->format('M j,Y') }}</td>
+                   <td>{{ $records['student']['fullname'] }}</td>
                   <td>{{ $document->original_filename }}</td>
                   <td>{{ $document->document_type }}</td>
                   <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View

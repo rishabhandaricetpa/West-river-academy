@@ -19,7 +19,7 @@ class UploadDocuments extends Model
     }
     public function student()
     {
-        return $this->hasOne(StudentProfile::class);
+        return $this->belongsTo('App\Models\StudentProfile', 'student_profile_id', 'id');
     }
     public function getDocumentUrlAttribute()
     {
