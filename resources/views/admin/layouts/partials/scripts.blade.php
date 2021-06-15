@@ -56,7 +56,7 @@
             "dom": "Bfrtip",
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                "data": function(row, type, val, meta) {
+                    "data": function(row, type, val, meta) {
                         return `<a href="edit/${row.id}">${row.p1_first_name}</a>`
                     },
                 },
@@ -85,16 +85,15 @@
                         else
                             return `<td> Inactive</td>`;
                     }
-                },{
+                }, {
                     "data": "created_at",
                     "render": function(data) {
                         return (moment(data).format("LL"));
                     }
-                }
-                , {
+                }, {
                     "data": "id",
                     "render": function(id) {
-                        return  `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                        return `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
 
 
                     }
@@ -585,26 +584,25 @@
     // dashboard admin upload doc for student
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
-        console.log('created');
+
         var student_id = $('#student-name').val();
         var parent_id = $('#parent_id').val();
-        var file = $('#file').val();
 
+        data = new FormData();
+        data.append('file', $('#file')[0].files[0]);
+        data.append('parent_id', parent_id);
+        data.append('student_id', student_id);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: "{{ route('admin.dashboard.documents') }}",
+            processData: false,
+            contentType: false,
             type: "POST",
-
-            data: {
-                parent_id: parent_id,
-                student_id: student_id,
-                file: file
-            },
+            data: data,
             success: function(response) {
-                console.log(response);
-                //location.reload();
+                location.reload();
             },
             error: function(response) {
 
@@ -621,13 +619,15 @@
         var parent_id = $('#parent_id').val();
         var school_name = $('#school_name').val();
         var email_add = $('#email_add').val();
-        var street_address = $('#street_address').val();
+        var street_address = $('#street_address1').val();
         var fax_number = $('#fax_number').val();
         var phone_number = $('#phone_number').val();
-        var city = $('#city').val();
-        var state = $('#state').val();
-        var zipcode = $('#zipcode').val();
-        var country = $('#country').val();
+        var city = $('#city1').val();
+        var state = $('#state1').val();
+        var zipcode = $('#zipcode1').val();
+        var country = $('#country1').val();
+        var last_grade = $('#last_grade').val();
+        console.log(zipcode);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -646,7 +646,8 @@
                 city: city,
                 state: state,
                 zipcode: zipcode,
-                country: country
+                country: country,
+                last_grade: last_grade
             },
             success: function(response) {
                 location.reload();
@@ -657,8 +658,8 @@
         });
     });
 
- // add new student from admin 
- $("#add-new-student").on("submit", function(event) {
+    // add new student from admin 
+    $("#add-new-student").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
         var first_name = $('#first_name').val();
@@ -699,8 +700,8 @@
     });
 
 
-// add new order 
-$("#add-new-order").on("submit", function(event) {
+    // add new order 
+    $("#add-new-order").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
         var student_name_order = $('#student_name_order').val();
@@ -708,8 +709,8 @@ $("#add-new-order").on("submit", function(event) {
         var amount = $('#amount').val();
         var payment_mode = $('#payment_mode').val();
         var message = $('#message').val();
-        var enrollment_status= $('#enrollment_status').val();
-        var enrollment_for= $('#enrollment_for').val();
+        var enrollment_status = $('#enrollment_status').val();
+        var enrollment_for = $('#enrollment_for').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -724,8 +725,8 @@ $("#add-new-order").on("submit", function(event) {
                 amount: amount,
                 payment_mode: payment_mode,
                 message: message,
-                enrollment_status:enrollment_status,
-                enrollment_for:enrollment_for
+                enrollment_status: enrollment_status,
+                enrollment_for: enrollment_for
             },
             success: function(response) {
                 location.reload();
@@ -736,8 +737,8 @@ $("#add-new-order").on("submit", function(event) {
         });
     });
 
-// add parent information
-$("#sampleForm").on("submit", function(event) {
+    // add parent information
+    $("#sampleForm").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
         var p1_first_name = $('#p1_first_name').val();
@@ -746,24 +747,24 @@ $("#sampleForm").on("submit", function(event) {
         var p1_email = $('#p1_email').val();
         var p1_cell_phone = $('#p1_cell_phone').val();
         var p1_home_phone = $('#p1_home_phone').val();
-        var street_address= $('#street_address').val();
-        var city= $('#city').val();
+        var street_address = $('#street_address').val();
+        var city = $('#city').val();
         var state = $('#state').val();
         var country = $('#country').val();
         var zip_code = $('#zip_code').val();
-        var reffered= $('#reffered').val();
+        var reffered = $('#reffered').val();
         var p2_first_name = $('#p2_first_name').val();
         var p2_middle_name = $('#p2_middle_name').val();
         var p2_last_name = $('#p2_last_name').val();
         var p2_email = $('#p2_email').val();
         var p2_cell_phone = $('#p2_cell_phone').val();
         var p2_home_phone = $('#p2_home_phone').val();
-        var street2= $('#street2').val();
-        var city2= $('#city2').val();
+        var street2 = $('#street2').val();
+        var city2 = $('#city2').val();
         var state2 = $('#state2').val();
         var country2 = $('#country2').val();
         var zip_code2 = $('#zip_code2').val();
-        var url = "{{ route('admin.parent.update', ":parent_id") }}";
+        var url = "{{ route('admin.parent.update', ':parent_id') }}";
         url = url.replace(':parent_id', parent_id);
         $.ajax({
             headers: {
@@ -779,12 +780,12 @@ $("#sampleForm").on("submit", function(event) {
                 p1_email: p1_email,
                 p1_cell_phone: p1_cell_phone,
                 p1_home_phone: p1_home_phone,
-                street_address:street_address,
-                city:city,
+                street_address: street_address,
+                city: city,
                 state: state,
                 country: country,
                 zip_code: zip_code,
-                reffered:reffered,
+                reffered: reffered,
                 p2_first_name: p2_first_name,
                 p2_middle_name: p2_middle_name,
                 p2_last_name: p2_last_name,
@@ -796,7 +797,7 @@ $("#sampleForm").on("submit", function(event) {
                 location.reload();
             },
             error: function(response) {
-// dd($response)
+                // dd($response)
             }
         });
     });
@@ -837,9 +838,9 @@ $("#sampleForm").on("submit", function(event) {
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
         var grade_level = $("input[type='radio']:checked").val();
-        var enrollment_period=$('#enrollment_period').val();
-        var enrollment_status=$('#enrollment_status').val();
-        var amount_status=$('#amount_status').val();
+        var enrollment_period = $('#enrollment_period').val();
+        var enrollment_status = $('#enrollment_status').val();
+        var amount_status = $('#amount_status').val();
         console.log(amount_status);
         $.ajax({
             headers: {
@@ -852,11 +853,11 @@ $("#sampleForm").on("submit", function(event) {
                 parent_id: parent_id,
                 student_name: student_name,
                 start_date: start_date,
-                end_date:end_date,
-                grade_level:grade_level,
-                enrollment_period:enrollment_period,
-                enrollment_status:enrollment_status,
-                amount_status:amount_status,
+                end_date: end_date,
+                grade_level: grade_level,
+                enrollment_period: enrollment_period,
+                enrollment_status: enrollment_status,
+                amount_status: amount_status,
 
             },
             success: function(response) {
@@ -1105,18 +1106,18 @@ $("#sampleForm").on("submit", function(event) {
     });
 
     $('#check').click(function() {
-    $("#street2").val($("#street").val());
-    $("#city2").val($("#city").val());
-    $("#country2").val($("#country").val());
-    $("#state2").val($("#state").val());
-    $("#zip_code2").val($("#zip_code").val());
+        $("#street2").val($("#street").val());
+        $("#city2").val($("#city").val());
+        $("#country2").val($("#country").val());
+        $("#state2").val($("#state").val());
+        $("#zip_code2").val($("#zip_code").val());
 
-});
+    });
 
-$('#parent_status').change(function(){
+    $('#parent_status').change(function() {
         var parent_status = $('#parent_status').val();
-        var parent_id=$('#parent_id').val();
-        var url = "{{ route('admin.deactive.parent', ":parent_id") }}";
+        var parent_id = $('#parent_id').val();
+        var url = "{{ route('admin.deactive.parent', ':parent_id') }}";
         url = url.replace(':parent_id', parent_id);
         $.ajax({
             headers: {
@@ -1137,8 +1138,7 @@ $('#parent_status').change(function(){
             }
         });
 
-})
-
+    })
 
 </script>
 

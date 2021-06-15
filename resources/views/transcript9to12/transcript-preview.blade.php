@@ -2,7 +2,7 @@
 @section('pageTitle', 'Preview Transcript9-12')
 @section('content')
     <main class="position-relative container form-content mt-4">
-        <h1 class="text-center text-white text-uppercase">dashboard</h1>
+        <h1 class="text-center text-white text-uppercase">preview transcript</h1>
 
         <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
             <p>I'm finished with this transcript. I want to see what it looks like</p>
@@ -199,31 +199,31 @@
                                             <td style="font-size:13px;padding:4px;text-align:center">B</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">80-89</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">3.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
+                                            <td style="font-size:13px;padding:4px;text-align:center">4.00</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:13px;padding:4px;text-align:center">C</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">70-79</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">2.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
+                                            <td style="font-size:13px;padding:4px;text-align:center">3.00</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:13px;padding:4px;text-align:center">D</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">60-69</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">1.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
+                                            <td style="font-size:13px;padding:4px;text-align:center">2.00</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:13px;padding:4px;text-align:center">F</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">0-59</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
+                                            <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:13px;padding:4px;text-align:center">P</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">60-100</td>
                                             <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
+                                            <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
                                         </tr>
                                     </tbody>
 

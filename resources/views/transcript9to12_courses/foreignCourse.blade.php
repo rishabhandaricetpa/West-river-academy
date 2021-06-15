@@ -7,9 +7,12 @@
             <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
                 <h3> Select a Foregin course:</h3>
                 <foreign-transcript-course :required_credit='@json($selectedCreditRequired)'
+                :trans_id='@json($trans_id)'
                     :total_credits='@json($total_credits)' :all_credits='@json($all_credits)'
                     :foreignsubjects='@json($foreignSubjects)' :transcript_id='@json($transcript_id)'
-                    :courses_id='@json($courses_id)' :student_id='@json($student_id)'></foreign-transcript-course>
+                    :courses_id='@json($courses_id)' :student_id='@json($student_id)'
+                    :remaining_credit='@json($remaining_credit)'
+                    ></foreign-transcript-course>
             </div>
 
         </main>

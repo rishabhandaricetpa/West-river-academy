@@ -9,7 +9,7 @@
 
                 <english-transcript-course :total_credits='@json($total_credits)' :required_credit='@json($selectedCreditRequired)' :all_credits='@json($all_credits)'
                     :englishcourse='@json($englishCourse)' :transcript_id='@json($transcript_id)'
-                    :courses_id='@json($courses_id)' :student_id='@json($student_id)'></english-transcript-course>
+                    :courses_id='@json($courses_id)' :student_id='@json($student_id)' :component_index=0></english-transcript-course>
             </div>
 
         </main>
