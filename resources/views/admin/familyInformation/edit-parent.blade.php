@@ -22,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <ul class="nav overflow-auto" id="to-the-top">
+      <ul class="nav overflow-auto align-items-center" id="to-the-top">
         <li class="nav-item">
           <a class="nav-link" href="#parent-details" aria-controls="parent-details" aria-selected="true">Details</a>
         </li>
@@ -44,6 +44,7 @@
         <li class="nav-item">
           <a class="nav-link" href="#documents" aria-controls="documents" aria-selected="true">Documents</a>
         </li>
+        <li><a href="#"> <img src="/images/back-button.png" alt=""></a></li>
       </ul>
       <div class="row parents-details_name px-3">
         <div class="col-12 d-flex align-items-center">
