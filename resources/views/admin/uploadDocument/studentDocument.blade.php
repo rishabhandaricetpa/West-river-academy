@@ -31,7 +31,7 @@
                           <thead>
                           <tr>
                             <th>Student</th>
-                            <th>DOB</th>
+                            <th>Date of Birth</th>
                             <th>Gender</th>
                             <th>Country</th>
                             <th>Email</th>

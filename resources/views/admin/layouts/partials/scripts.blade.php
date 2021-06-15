@@ -164,7 +164,9 @@
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                    "data": "fullname"
+                    "data": function(row, type, val, meta) {
+                        return `<a href="edit-student/${row.id}">${row.fullname}</a>`
+                    },
                 }, {
                     "data": "birthdate",
                     "render": function(data) {
@@ -193,8 +195,7 @@
                 }, {
                     "data": "id",
                     "render": function(id) {
-                        return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>` +
-                            `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                        return  `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
                     }
                 }, {
                     "data": "id",
@@ -1023,6 +1024,57 @@
         ]
     });
 
+// add student information
+$(".students_store").on("submit", function(event) {
+        event.preventDefault();
+        var students_id= $('#students_id').val();
+        var parent_id = $('#parent_id').val();
+        var first_name = $('#first_name').val();
+        var middle_name = $('#middle_name').val();
+        var last_name = $('#last_name').val();
+        var d_o_b = $('#d_o_b').val();
+        var gender = $('#gender').val();
+        var email= $('#email').val();
+        var cell_phone= $('#cell_phone').val();
+        var mothers_name = $('#mothers_name').val();
+        var birth_city = $('#birth_city').val();
+        var national_id=$('#national_id').val();
+        var immunized_status = $('#immunized_status').val();
+        var student_situation = $('#student_situation').val();
+        var url = "{{ route('admin.edit-student.update', ':student_id') }}";
+        url = url.replace(':student_id', student_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+
+            data: {
+                parent_id:parent_id,
+                students_id:students_id,
+                student_Id:student_Id,
+                first_name: first_name,
+                middle_name: middle_name,
+                last_name: last_name,
+                d_o_b: d_o_b,
+                email:email,
+                cell_phone:cell_phone,
+                gender: gender,
+                mothers_name: mothers_name,
+                birth_city: birth_city,
+                immunized_status: immunized_status,
+                student_situation: student_situation,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+                dd($response)
+                
+            }
+        });
+    });
 
 
 

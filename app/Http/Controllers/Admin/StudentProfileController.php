@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\UploadDocuments;
 use DB;
 use App\Models\Notes;
+use App\Models\ParentProfile;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
@@ -83,6 +84,8 @@ class StudentProfileController extends Controller
     public function edit($id)
     {
         $student = StudentProfile::find($id);
+        $parent = ParentProfile::whereId($student->parent_profile_id)->first();
+
         // information for enrollement tab
         $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
@@ -115,7 +118,7 @@ class StudentProfileController extends Controller
             ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
             ->get()->unique('transcript_id');
         $uploadedDocuments = UploadDocuments::where('student_profile_id', $id)->get();
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords', 'transcript', 'transcript9_12s', 'uploadedDocuments'));
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords', 'transcript', 'transcript9_12s', 'uploadedDocuments', 'parent'));
     }
 
     /**
@@ -135,9 +138,12 @@ class StudentProfileController extends Controller
             $student->middle_name = $request->get('first_name');
             $student->last_name = $request->get('last_name');
             $student->d_o_b = \Carbon\Carbon::parse($request->get('dob'))->format('M d Y');
+            $student->gender = $request->get('gender');
             $student->email = $request->get('email');
+            $student->mothers_name = $request->get('mothers_name');
+            $student->birth_city = $request->get('birth_city');
             $student->cell_phone = $request->get('cell_phone');
-            $student->student_Id = $request->get('student_id');
+            $student->student_Id = $request->get('student_Id');
             $student->immunized_status = $request->get('immunized_status');
             $student->student_situation = $request->get('student_situation');
             $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
