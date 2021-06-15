@@ -208,6 +208,7 @@
         padding: 10px 20px;
         color: black;
         transition: .3s all;
+        text-transform: uppercase;
       }
 
       a.active {
@@ -220,6 +221,9 @@
         color: white;
         background: grey;
         text-decoration: none;
+      }
+      img {
+        margin-right: 0 !important;
       }
     }
 

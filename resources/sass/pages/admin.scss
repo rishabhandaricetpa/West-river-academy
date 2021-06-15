@@ -92,6 +92,7 @@
     @extend .w-100;
   }
   .dataTables_filter {
+    float: right;  
     label {
       @extend .w-100;
     }
@@ -142,6 +143,7 @@
   }
 
   .dt-buttons {
+    margin-left:10px;
     button {
       @extend .btn;
       @extend .btn-primary;
