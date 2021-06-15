@@ -1038,7 +1038,7 @@ $(".students_store").on("submit", function(event) {
         var cell_phone= $('#cell_phone').val();
         var mothers_name = $('#mothers_name').val();
         var birth_city = $('#birth_city').val();
-        var national_id=$('#national_id').val();
+        var student_Id=$('#student_Id').val();
         var immunized_status = $('#immunized_status').val();
         var student_situation = $('#student_situation').val();
         var url = "{{ route('admin.edit-student.update', ':student_id') }}";

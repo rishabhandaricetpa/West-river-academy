@@ -35,7 +35,9 @@
         {{---------------- first tab --}}
         <div class="row">
           <div class="col-12 d-flex align-items-center">
-            <h2 class="pr-3">Benjamin & Chong Livingston</h2>
+            <h2 class="pr-3">{{ $parent->p1_first_name }} {{ $parent->p1_middle_name }}
+              {{ $parent->p1_last_name }} {{ $parent->p2_first_name }} {{ $parent->p2_middle_name }}
+              {{ $parent->p2_last_name }} </h2>
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,7 +98,7 @@
                   <div class="form-group">
                     <label for="exampleInputMothersName">National Id :</label>
                     <input type="text" class="form-control is-disabled" id="student_Id" placeholder=""
-                      value="{{ $student->student_id }}" disabled>
+                      value="{{ $student->student_Id }}" disabled>
                   </div>  
                   <div class="form-group">
                     <label for="exampleInputMothersName">Birth City :</label>

@@ -8,9 +8,9 @@
     <div class="sticky mb-2 pb-1">
       <div class="d-flex justify-content-between main-nav_header align-items-center">
         <ul class="d-flex overflow-scroll">
-          <li class="menu-item"><a href="#">Dashboard</a></li>
-          <li class="menu-item"><a class="active" href="edit-parent">Family</a></li>
-          <li class="menu-item"><a href="#">Student</a></li>
+          <li class="menu-item"><a href="{{ route('admin.dashboard.notification') }}">Dashboard</a></li>
+          <li class="menu-item"><a class="active" href="{{ url('admin/view') }}">Family</a></li>
+          <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
           <li class="menu-item"><a href="#">Representative</a></li>
           <li class="menu-item"><a href="#">Groups</a></li>
           <li class="menu-item"><a href="#"><img src="/images/add.png" alt=""></a></li>
@@ -18,7 +18,7 @@
         <ul class="d-flex">
           <li><img src="/images/search.png" alt="login"></li>
           <li><img src="/images/bell.png" alt="login"></li>
-          <li><a href="#"> <img src="/images/login.png" alt="login"></a>
+          <li><a onclick="goBack()"> <img src="/images/login.png" alt="login"></a>
           </li>
         </ul>
       </div>
@@ -44,7 +44,7 @@
         <li class="nav-item">
           <a class="nav-link" href="#documents" aria-controls="documents" aria-selected="true">Documents</a>
         </li>
-        <li><a href="#"> <img src="/images/back-button.png" alt=""></a></li>
+        <li><a onclick="goBack()" > <img src="/images/back-button.png" alt=""></a></li>
       </ul>
       <div class="row parents-details_name px-3">
         <div class="col-12 d-flex align-items-center">
