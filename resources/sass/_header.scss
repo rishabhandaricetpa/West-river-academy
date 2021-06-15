@@ -32,6 +32,7 @@
     outline: none;
     border-radius: 3px;
     z-index: 99999;
+
     .icon-bar {
       width: 100%;
       height: 2px;
@@ -65,7 +66,7 @@
   }
 
   .navbar-nav {
-    > .nav-item {
+    >.nav-item {
       padding: 0 10px;
     }
   }
@@ -105,10 +106,12 @@
   padding: 8px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   z-index: 999;
+
   a:not(.btn) {
     text-decoration: underline;
     font-size: 12px;
   }
+
   &::before {
     content: "";
     position: absolute;
@@ -123,6 +126,7 @@
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
   }
+
   .btn {
     font-size: 10px;
     padding: 0 8px;
@@ -131,13 +135,16 @@
     letter-spacing: 0;
     font-weight: 400;
   }
+
   ul {
     padding-top: 15px;
     height: 280px;
     overflow-y: scroll;
+
     li {
       position: relative;
       padding-left: 16px;
+
       &:before {
         content: "";
         width: 5px;
@@ -148,10 +155,12 @@
         background-color: $blue;
         border-radius: 50%;
       }
+
       .remove {
         right: 15px;
       }
     }
+
     p {
       font-size: 14px;
       color: $gray-dark;
@@ -165,20 +174,60 @@
       color: #7d86a9;
     }
   }
-  
+
 }
-.nofification-alert{
+
+.nofification-alert {
   position: relative;
-    &::after{
-      content:'';
-      position: absolute;
-      top:1px;
-      right: 4px;
-      width:11px;
-      height:11px;
-      background-color: red;
-      border-radius: 50%;
-      z-index: 1;  
-    }    
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 4px;
+    width: 11px;
+    height: 11px;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 1;
+  }
+}
+
+////// parent-sudent nav header
+.main-nav_header {
+  background-color: #ccc;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+
+    .menu-item {
+      a {
+        padding: 10px 20px;
+        color: black;
+        transition: .3s all;
+      }
+
+      a.active {
+        color: white;
+        background: grey;
+
+      }
+
+      a:hover {
+        color: white;
+        background: grey;
+        text-decoration: none;
+      }
+    }
+
+      li {
+        img {
+          margin-right: 20px;
+        }
+      }
+    }
   }
 
