@@ -625,9 +625,10 @@
         var phone_number = $('#phone_number').val();
         var city = $('#city1').val();
         var state = $('#state1').val();
-        var zipcode = $('#zipcode').val();
+        var zipcode = $('#zipcode1').val();
         var country = $('#country1').val();
         var last_grade = $('#last_grade').val();
+        console.log(zipcode);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

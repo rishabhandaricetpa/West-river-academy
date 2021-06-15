@@ -3,7 +3,7 @@
 @section('content')
 
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">dashboard</h1>
+  <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
 
   <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info d-flex justify-content-center flex-wrap">
     <p class="w-100">You are ready to select the courses, credits and grades to put on the transcript for <a href="{{ route('reviewstudent') }}">{{$enroll_student->first_name}}</a>. Be sure you have watched the tutorial and read the recommended course distribution before starting. </p>

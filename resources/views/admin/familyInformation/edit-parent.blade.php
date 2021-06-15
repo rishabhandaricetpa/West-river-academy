@@ -868,7 +868,7 @@
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Zip/Postal Code</label>
-              <input type="text" id="zipcode">
+              <input type="text" id="zipcode1">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Country</label>
@@ -901,9 +901,7 @@
                 <th scope="col">Document Type</th>
                 <th scope="col">View Documents</th>
                 <th scope="col">Upload Documents</th>
-                <th scope="col" class="text-right"> <button type="button" class="btn btn-primary btn-modal ml-3"
-                    data-toggle="modal" data-target="#documentsModal" data-whatever="@getbootstrap"><img
-                      src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+                <th scope="col" ></th>
               </tr>
             </thead>
             <tbody>

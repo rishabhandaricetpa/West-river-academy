@@ -91,7 +91,6 @@ class DashboardController extends Controller
 
     public function uploadRecordTransfer(Request $request)
     {
-
         $recordTransfer = new RecordTransfer();
         $recordTransfer->student_profile_id = $request->get('student_id');
         $recordTransfer->parent_profile_id = $request->get('parent_id');
@@ -102,7 +101,7 @@ class DashboardController extends Controller
         $recordTransfer->street_address = $request->get('street_address');
         $recordTransfer->city = $request->get('city');
         $recordTransfer->state = $request->get('state');
-        $recordTransfer->zip_code = $request->get('zip_code');
+        $recordTransfer->zip_code = $request->get('zipcode');
         $recordTransfer->country = $request->get('country');
         $recordTransfer->last_grade = $request->get('last_grade');
         $recordTransfer->save();
