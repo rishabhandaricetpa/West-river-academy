@@ -87,6 +87,9 @@ class DashboardController extends Controller
         $uploadDocument->original_filename = $request->file->getClientOriginalName();
         $uploadDocument->filename = $path;
         $uploadDocument->save();
+        if ($request->expectsJson()) {
+            return response()->json(['status' => 'success', 'message' => 'Student updated successfully']);
+        }
     }
 
     public function uploadRecordTransfer(Request $request)
