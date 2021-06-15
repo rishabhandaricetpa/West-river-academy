@@ -585,26 +585,25 @@
     // dashboard admin upload doc for student
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
-        console.log('created');
+
         var student_id = $('#student-name').val();
         var parent_id = $('#parent_id').val();
-        var file = $('#file').val();
 
+        data = new FormData();
+        data.append('file', $('#file')[0].files[0]);
+        data.append('parent_id', parent_id);
+        data.append('student_id', student_id);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: "{{ route('admin.dashboard.documents') }}",
+            processData: false,
+            contentType: false,
             type: "POST",
-
-            data: {
-                parent_id: parent_id,
-                student_id: student_id,
-                file: file
-            },
+            data: data,
             success: function(response) {
-                console.log(response);
-                //location.reload();
+                location.reload();
             },
             error: function(response) {
 
@@ -626,9 +625,10 @@
         var phone_number = $('#phone_number').val();
         var city = $('#city1').val();
         var state = $('#state1').val();
-        var zipcode = $('#zipcode').val();
+        var zipcode = $('#zipcode1').val();
         var country = $('#country1').val();
         var last_grade = $('#last_grade').val();
+        console.log(zipcode);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
