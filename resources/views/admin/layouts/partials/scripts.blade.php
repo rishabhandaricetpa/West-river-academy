@@ -611,6 +611,7 @@
     });
 
 
+
     // dashboard admin record transfer doc for student
     $("#add-record-request").on("submit", function(event) {
         event.preventDefault();
@@ -1023,7 +1024,39 @@
         ]
     });
 
+    // student panel - add graduation
 
+    $("#add-graduation").on("submit", function(event) {
+        event.preventDefault();
+        var parent_id = $('#parent_id').val();
+        var student_id = $('#student_id').val();
+        var grade_9 = $('#grade_9').val();
+        var grade_10 = $('#grade_10').val();
+        var grade_11 = $('#grade_11').val();
+        var status = $('#status-graduation').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.add.graduation') }}",
+            type: "POST",
+
+            data: {
+                parent_id,
+                student_id,
+                grade_9,
+                grade_10,
+                grade_11,
+                status
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
 
 
     // check the archieve status
