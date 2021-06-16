@@ -190,9 +190,9 @@
         </div>
       </div>
     </section>
-    <div class="modal fade" id="studentDetailsModal" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="studentDetailsModal" tabindex="-1" role="dialog"
       aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="studentDetailsModalLabel">New message</h5>
@@ -259,9 +259,9 @@
         </div>
       </div>
     </section>
-    <div class="modal fade" id="transcriptModal" tabindex="-1" role="dialog" aria-labelledby="transcriptModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="transcriptModal" tabindex="-1" role="dialog"
+      aria-labelledby="transcriptModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="transcriptModalLabel">New message</h5>
@@ -342,9 +342,9 @@
         </div>
       </div>
     </section>
-    <div class="modal fade" id="recordModal" tabindex="-1" role="dialog" aria-labelledby="#recordModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="recordModal" tabindex="-1" role="dialog"
+      aria-labelledby="#recordModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="recordModalLabel">Record Transfer Request</h5>
@@ -354,51 +354,75 @@
           </div>
           <div class="modal-body">
             <form id="add-record-request">
-              <div class="form-group">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id" class="form-control">
+                    <input type="hidden" value="{{ $student->id }}" id='student-name' name="student-name"
+                      class="form-control">
+                  </div>
+                </div>
 
-
-                <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id" class="form-control">
-                <input type="hidden" value="{{ $student->id }}" id='student-name' name="student-name" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">School Name:</label>
-                <input type="text" class="form-control" id="school_name" id="recipient-name">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Email Address:</label>
-                <input type="email" id="email_add" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Fax Number:</label>
-                <input type="text" id="fax_number" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Phone Number:</label>
-                <input type="text" id="phone_number" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Street Address</label>
-                <input type="text" id="street_address1" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">City</label>
-                <input type="text" id="city1"class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">State/Province/Region</label>
-                <input type="text" id="state1" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Zip/Postal Code</label>
-                <input type="text" id="zipcode1" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Country</label>
-                <input type="text" id="country1" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Last Grade In School</label>
-                <input type="text" id="last_grade" class="form-control">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">School Name:</label>
+                    <input type="text" class="form-control" id="school_name" id="recipient-name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Email Address:</label>
+                    <input type="email" id="email_add" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Fax Number:</label>
+                    <input type="text" id="fax_number" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Phone Number:</label>
+                    <input type="text" id="phone_number" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Street Address</label>
+                    <input type="text" id="street_address1" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">City</label>
+                    <input type="text" id="city1" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">State/Province/Region</label>
+                    <input type="text" id="state1" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Zip/Postal Code</label>
+                    <input type="text" id="zipcode1" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Country</label>
+                    <input type="text" id="country1" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Last Grade In School</label>
+                    <input type="text" id="last_grade" class="form-control">
+                  </div>
+                </div>
               </div>
           </div>
           <div class="modal-footer">
@@ -409,7 +433,7 @@
         </div>
       </div>
     </div>
-    
+
 
     {{-- Documents --}}
     <section class="student-documents  py-5 my-3" id="student-documents">
@@ -426,7 +450,7 @@
                   <th scope="col">Document Type</th>
                   <th scope="col">View Documents</th>
                   <th scope="col">Upload Documents</th>
-                  <th scope="col"><button type="button" class="btn btn-primary btn-modal ml-3" data-toggle="modal"
+                  <th scope="col" class="text-right"><button type="button" class="btn btn-primary btn-modal ml-auto" data-toggle="modal"
                       data-target="#student-documentsModal" data-whatever="@getbootstrap"><img src="/images/add.png"
                         alt=""><img src="/images.add.png" alt=""></button></th>
                 </tr>
@@ -451,9 +475,9 @@
         </div>
       </div>
     </section>
-    <div class="modal fade" id="student-documentsModal" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="student-documentsModal" tabindex="-1" role="dialog"
       aria-labelledby="student-documentsModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="student-documentsModalLabel">Upload Document</h5>
@@ -461,17 +485,15 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body pt-3">
             <form id="add-documents" enctype="multipart/form-data">
-              <div class="modal-body">
-                <div class="form-group">
-                  <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id">
-                  <input type="hidden" value="{{ $student->id }}" id='student-name' name="student-name">
-                </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Upload Document</label>
-                  <input type="file" id="file" class="form-control choose-btn" required>
-                </div>
+              <div class="form-group">
+                <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id">
+                <input type="hidden" value="{{ $student->id }}" id='student-name' name="student-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Upload Document</label>
+                <input type="file" id="file" class="form-control choose-btn" required>
               </div>
               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Upload</button>
@@ -519,9 +541,9 @@
         </div>
       </div>
     </section>
-    <div class="modal fade" id="GraduationModal" tabindex="-1" role="dialog" aria-labelledby="GraduationModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="GraduationModal" tabindex="-1" role="dialog"
+      aria-labelledby="GraduationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="GraduationModalLabel">Apply For Graduation</h5>
@@ -532,54 +554,69 @@
           <div class="modal-body">
             <form id="add-graduation">
               <div class="form-group">
-                <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id">
-                <input type="hidden" value="{{ $student->id }}" id='student_id' name="student-name">
-                <label for="recipient-name" class="col-form-label">Grade 9</label>
-                <select id="grade_9" required>
-                  <option value="I was enrolled in West River Academy.">I was enrolled in West River
-                    Academy.
-                  </option>
-                  <option value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                    I homeschooled independently. (There are no transcripts that a school can send.)
-                  </option>
-                  <option value="I was enrolled in another school that can send or has already sent transcripts.">
-                    I was enrolled in another school that can send or has already sent transcripts.
-                  </option>
-                  <option value="Others">Others</option>
-                </select>
-                <label for="recipient-name" class="col-form-label">Grade 10</label>
-                <select id="grade_10" required>
-                  <option value="I was enrolled in West River Academy.">I was enrolled in West River
-                    Academy.
-                  </option>
-                  <option value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                    I homeschooled independently. (There are no transcripts that a school can send.)
-                  </option>
-                  <option value="I was enrolled in another school that can send or has already sent transcripts.">
-                    I was enrolled in another school that can send or has already sent transcripts.
-                  </option>
-                  <option value="Others">Others</option>
-                </select>
-                <label for="recipient-name" class="col-form-label">Grade 11</label>
-                <select id="grade_11" required>
-                  <option value="I was enrolled in West River Academy.">I was enrolled in West River
-                    Academy.
-                  </option>
-                  <option value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                    I homeschooled independently. (There are no transcripts that a school can send.)
-                  </option>
-                  <option value="I was enrolled in another school that can send or has already sent transcripts.">
-                    I was enrolled in another school that can send or has already sent transcripts.
-                  </option>
-                  <option value="Others">Others</option>
-                </select>
-                <label for="recipient-name" class="col-form-label">Status</label>
-                <select id="status-graduation">
-                  <option value='pending'>Pending</option>
-                  <option value='approved'>Approved</option>
-                  <option value='paid'>Paid</option>
-                  <option value='completed'>Completed</option>
-                </select>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="hidden" value="{{ $student->id }}" id='student_id' name="student-name"
+                      class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="recipient-name" class="col-form-label">Grade 9</label>
+                    <select id="grade_9" required class="form-control">
+                      <option value="I was enrolled in West River Academy.">I was enrolled in West River
+                        Academy.
+                      </option>
+                      <option value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                        I homeschooled independently. (There are no transcripts that a school can send.)
+                      </option>
+                      <option value="I was enrolled in another school that can send or has already sent transcripts.">
+                        I was enrolled in another school that can send or has already sent transcripts.
+                      </option>
+                      <option value="Others">Others</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="recipient-name" class="col-form-label">Grade 10</label>
+                    <select id="grade_9" required class="form-control">
+                      <option value="I was enrolled in West River Academy.">I was enrolled in West River
+                        Academy.
+                      </option>
+                      <option value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                        I homeschooled independently. (There are no transcripts that a school can send.)
+                      </option>
+                      <option value="I was enrolled in another school that can send or has already sent transcripts.">
+                        I was enrolled in another school that can send or has already sent transcripts.
+                      </option>
+                      <option value="Others">Others</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="recipient-name" class="col-form-label">Grade 11</label>
+                    <select id="grade_9" required class="form-control">
+                      <option value="I was enrolled in West River Academy.">I was enrolled in West River
+                        Academy.
+                      </option>
+                      <option value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                        I homeschooled independently. (There are no transcripts that a school can send.)
+                      </option>
+                      <option value="I was enrolled in another school that can send or has already sent transcripts.">
+                        I was enrolled in another school that can send or has already sent transcripts.
+                      </option>
+                      <option value="Others">Others</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="recipient-name" class="col-form-label">Status</label>
+                    <select id="status-graduation" class="form-control">
+                      <option value='pending'>Pending</option>
+                      <option value='approved'>Approved</option>
+                      <option value='paid'>Paid</option>
+                      <option value='completed'>Completed</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
