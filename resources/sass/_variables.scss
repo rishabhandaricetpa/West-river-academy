@@ -1,9 +1,9 @@
 /** =============== Global Variables =============== **/
 
 // Colors
-$blue: #004C99;
+$secondary-color: #004C99;  
 $primary: #fc0;
-// $blue: #1D3F7A;
+// $secondary-color: #1D3F7A;
 $gray-100: #eeeeee;
 $navy-blue: rgba(95, 135, 175, 0.9);
 $white: #fff;
@@ -14,12 +14,12 @@ $link-color: #ff9900;
 $box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 $danger: #f55;
 $gray-800: #393b48;
-$gray-600: $blue;
-$light-blue: $blue;
+$gray-600: $secondary-color;
+$light-blue: $secondary-color;
 $gray-base: #c2c2c2;
 $text-color: #203258;
 $gray-dark: #202020;
-$secondary: $blue;
+$secondary: $secondary-color;
 //Headings
 $h1-font-size: 56px;
 $h2-font-size: 21px;
@@ -36,9 +36,9 @@ $lato-font: "Lato", sans-serif;
 //Dropdowns
 // $dropdown-border-radius: 0;
 // $dropdown-font-size: 19px;
-// $dropdown-link-color: $blue;
+// $dropdown-link-color: $secondary-color;
 // $dropdown-link-hover-color: $white;
-// $dropdown-link-hover-bg: $blue;
+// $dropdown-link-hover-bg: $secondary-color;
 // $dropdown-padding-y: 0;
 // $dropdown-item-padding-y: .5rem;
 // $border-radius: 0;
