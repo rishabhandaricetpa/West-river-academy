@@ -28,6 +28,7 @@ h3,
   }
 }
 
+
 .img-absolute {
   position: absolute;
   left: 0;
@@ -174,6 +175,9 @@ button {
 .pt-10r {
   padding-top: 10rem !important;
 }
+.pb-5r{
+  padding-bottom: 5rem!important;
+}
 
 .px-25 {
   padding-left: 2.5rem !important;
@@ -282,8 +286,12 @@ tfoot {
 
 /* global css */
 
-.app {
+.app,
+.position-relative {
   position: relative;
+}
+.position-absolute{
+  position: absolute;
 }
 
 main {

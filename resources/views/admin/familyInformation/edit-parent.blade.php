@@ -48,11 +48,11 @@
       </ul>
       <div class="row parents-details_name px-3">
         <div class="col-12 d-flex align-items-center">
-          <h2 class="pr-3">{{ $parent->p1_first_name }} {{ $parent->p1_middle_name }}
+          <h2 class="pr-3 mb-0">{{ $parent->p1_first_name }} {{ $parent->p1_middle_name }}
             {{ $parent->p1_last_name }} {{ $parent->p2_first_name }} {{ $parent->p2_middle_name }}
             {{ $parent->p2_last_name }}</h2>
-          <div class="form-group">
-            <select required class="btn btn-primary dropdown-toggle" id="parent_status">
+          <div class="form-group mb-0">
+            <select required class="btn btn-primary dropdown-toggle dropdown-icon" id="parent_status">
               <option @if($parent->status === 0) selected @endif value="0">Active</option>
               <option @if($parent->status === 1) selected @endif value="1">Inactive</option>
             </select>

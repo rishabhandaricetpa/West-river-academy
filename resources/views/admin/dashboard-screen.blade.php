@@ -36,78 +36,6 @@
     </div>
   </div>
 
-
-<!-- Button trigger modal -->
-
-<!-- Modal for Super Admin -->
-<div class="modal fade" id="assignRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="exampleModalLabel">Assign Task To:</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-
-        </button>
-      </div>
-      <form id="assign-form">
-        <input type="hidden" name="data_id" id="data_id">
-        <div class="modal-body p-3">
-          <div class="form-group">
-            <label for="assigned_to" class="col-form-label">Assigned To:</label>
-            <select class="form-control" id="assigned_to" name="assigned_to">
-              <option value="" disabled>Please Select One</option>
-              <option value="Danielle">Danielle</option>
-              <option value="Karen">Karen</option>
-              <option value="Peggy">Peggy</option>
-              <option value="Paula">Paula</option>
-              <option value="Raelyn">Raelyn</option>
-              <option value="Stacey">Stacey</option>
-              <option value="Ray">Ray</option>
-              <option value="Paige">Paige</option>
-              <option value="Rebecca">Rebecca</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Notes:</label>
-            <textarea class="form-control" id="notes" maxlength="2000"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- Modal for Sub Admin -->
-<div class="modal fade" id="assignStatusToRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Task Status</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-
-        </button>
-      </div>
-      <form id="assign">
-        <input type="hidden" name="datarecord_id" id="datarecord_id">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="assigned_to" class="col-form-label">Status:</label>
-            <select class="form-control" id="task_status" name="assigned_to">
-              <option value="" disabled>Please Select One</option>
-              <option value="Pending">Pending</option>
-              <option value="Completed">Completed</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary" onclick="updateStatus()">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <!-- Main content -->
 @php
 $date = \Carbon\Carbon::now()->toDateString();
@@ -227,6 +155,78 @@ $date = \Carbon\Carbon::now()->toDateString();
     <!-- /.row -->
 </section>
 </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal for Super Admin -->
+<div class="modal fade" id="assignRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="exampleModalLabel">Assign Task To:</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+
+        </button>
+      </div>
+      <form id="assign-form">
+        <input type="hidden" name="data_id" id="data_id">
+        <div class="modal-body p-3">
+          <div class="form-group">
+            <label for="assigned_to" class="col-form-label">Assigned To:</label>
+            <select class="form-control" id="assigned_to" name="assigned_to">
+              <option value="" disabled>Please Select One</option>
+              <option value="Danielle">Danielle</option>
+              <option value="Karen">Karen</option>
+              <option value="Peggy">Peggy</option>
+              <option value="Paula">Paula</option>
+              <option value="Raelyn">Raelyn</option>
+              <option value="Stacey">Stacey</option>
+              <option value="Ray">Ray</option>
+              <option value="Paige">Paige</option>
+              <option value="Rebecca">Rebecca</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Notes:</label>
+            <textarea class="form-control" id="notes" maxlength="2000"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal for Sub Admin -->
+<div class="modal fade" id="assignStatusToRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Task Status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+
+        </button>
+      </div>
+      <form id="assign">
+        <input type="hidden" name="datarecord_id" id="datarecord_id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="assigned_to" class="col-form-label">Status:</label>
+            <select class="form-control" id="task_status" name="assigned_to">
+              <option value="" disabled>Please Select One</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="updateStatus()">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <!-- /.content -->
 @endsection
