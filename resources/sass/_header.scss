@@ -152,7 +152,7 @@
         position: absolute;
         left: 3px;
         top: 6px;
-        background-color: $blue;
+        background-color: $secondary-color;
         border-radius: 50%;
       }
 
@@ -195,7 +195,7 @@
 
 ////// parent-sudent nav header
 .main-nav_header {
-  background-color: #ccc;
+  background-color: $secondary-color;
 
   ul {
     list-style: none;
@@ -206,22 +206,19 @@
     .menu-item {
       a {
         padding: 10px 20px;
-        color: black;
+        color: white;
         transition: .3s all;
         text-transform: uppercase;
       }
 
-      a.active {
-        color: white;
-        background: grey;
-
-      }
-
-      a:hover {
-        color: white;
-        background: grey;
+      a.active,
+      a:hover
+      {
+        color: black;
+        background: $primary; 
         text-decoration: none;
       }
+
       img {
         margin-right: 0 !important;
       }

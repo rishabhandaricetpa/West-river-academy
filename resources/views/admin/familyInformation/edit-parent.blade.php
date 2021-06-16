@@ -4,7 +4,7 @@
 <section class="content container-fluid  my-3">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- first card parent details -->
-  <div class="card my-3 family-details ">
+  <div class="card my-3 family-details">
     <div class="sticky mb-2 pb-1">
       <div class="d-flex justify-content-between main-nav_header align-items-center">
         <ul class="d-flex overflow-scroll">
@@ -22,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <ul class="nav overflow-auto align-items-center" id="to-the-top">
+      <ul class="nav overflow-auto align-items-center">
         <li class="nav-item">
           <a class="nav-link" href="#parent-details" aria-controls="parent-details" aria-selected="true">Details</a>
         </li>
@@ -62,7 +62,7 @@
         <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }} </div>
       </div>
     </div>
-    <div class="px-3">
+    <div class="px-3" id="to-the-top"> 
       {{-- parents-details --}}
       {{-- parents-details --}}
       <section class="parents-details pb-3" id="parent-details">
@@ -255,7 +255,7 @@
 
 
       {{-- student-details --}}
-      <section class="parents-details py-5 my-3" id="student-details">
+      <section class="parents-details pt-10r" id="student-details">
         <div class="row">
           <div class="col-12">
             <h2 class="pr-3">Students</h2>
@@ -401,7 +401,7 @@
         </div>
       </div>
       {{-- notes --}}
-      <section class="notes  py-5 my-3" id="notes">
+      <section class="notes  pt-10r" id="notes">
         <div class="row">
           <div class="col-12">
             <h2 class="pr-3">Notes</h2>
@@ -471,7 +471,7 @@
       </div>
 
       {{-- order --}}
-      <section class="orders-detail  py-5 my-3" id="orders">
+      <section class="orders-detail  pt-10r" id="orders">
         <div class="row">
           <div class="col-12">
             <h2 class="pr-3">Orders</h2>
@@ -592,7 +592,7 @@
         </div>
       </div>
       {{-- Enrollments --}}
-      <section class="enrollments  py-5 my-3" id="enrollments">
+      <section class="enrollments  pt-10r" id="enrollments">
         <div class="row">
           <div class="col-12">
             <h2 class="pr-3">Enrollments</h2>
@@ -817,7 +817,7 @@
         </div>
       </div>
       {{-- Records --}}
-      <section class="records  py-5 my-3" id="records">
+      <section class="records  pt-10r" id="records">
         <div class="row">
           <div class="col-12">
             <h2 class="pr-3">Records</h2>
@@ -935,7 +935,7 @@
         </div>
       </div>
       {{-- Documents --}}
-      <section class="documents  py-5 my-3" id="documents">
+      <section class="documents  pt-10r" id="documents">
         <div class="row">
           <div class="col-12">
             <h2 class="pr-3">Documents</h2>
