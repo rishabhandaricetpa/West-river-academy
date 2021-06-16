@@ -127,8 +127,12 @@ class StudentController extends Controller
         $enrollments = EnrollmentPeriods::where('enrollment_payment_id', $enrollment_payment_id)->where('grade_level', $grade_id)->first();
         $student_id = $enrollments->student_profile_id;
         $student = StudentProfile::whereId($student_id)->first();
+        $id = Auth::user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        $country = $parentProfileData->country;
+        $countryData = Country::where('country', $country)->first();
         $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $enrollment_payment_id)->first();
-        return view('confirm_letter_select', compact('student', 'student_id', 'grade_id', 'confirmation_data', 'enrollments'));
+        return view('confirm_letter_select', compact('student', 'student_id', 'grade_id', 'confirmation_data', 'enrollments', 'countryData'));
         // return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
     }
 

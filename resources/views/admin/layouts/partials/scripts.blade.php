@@ -164,7 +164,9 @@
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                    "data": "fullname"
+                    "data": function(row, type, val, meta) {
+                        return `<a href="edit-student/${row.id}">${row.fullname}</a>`
+                    },
                 }, {
                     "data": "birthdate",
                     "render": function(data) {
@@ -193,8 +195,7 @@
                 }, {
                     "data": "id",
                     "render": function(id) {
-                        return `<a href="edit-student/${id}"><i class="fas fa-edit"></i></a>` +
-                            `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                        return  `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
                     }
                 }, {
                     "data": "id",

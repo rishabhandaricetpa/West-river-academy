@@ -14,6 +14,7 @@
     </table>
     <div class="row confirmation-letter__options">
     <h3 class="mb-3">You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter.</h3>
+                               <div  v-if="countryname ==='Hungary'" class="form-group d-sm-flex mb-2">
                         <label class="container">Birth City
                             <input 
                             type="checkbox" 
@@ -29,6 +30,7 @@
                              v-model="form.IsMotherName">
                             <span class="IsMotherName"></span>
                         </label>
+                        </div>
                         <label class="container">Student ID
                             <input 
                             type="checkbox" 
@@ -71,7 +73,7 @@ export default {
       },
     };
   },
-  props: ["student","gradeid","confirmationdata","student_id","enrollments"],
+  props: ["student","gradeid","confirmationdata","student_id","enrollments","countryData"],
   methods: {
     addItems() {
       axios

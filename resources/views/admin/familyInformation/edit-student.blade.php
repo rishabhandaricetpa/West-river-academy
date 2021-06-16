@@ -248,7 +248,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
+                                      
                                         <td>pending</td>
                                         <td>Melissa Manisha</td>
                                         <td>2020</td>
@@ -269,7 +269,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="transcriptModalLabel">Record Transfer Request</h5>
+                            <h5 class="modal-title" id="transModalLabel">Record Transfer Request</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -331,282 +331,283 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        {{-- record-transfer --}}
-        <section class="record-transfer-detail  py-5 my-3" id="record-transfer">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="pr-3">Record Transfer</h2>
-                    <div class="overflow-auto max-table">
-                        <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Student Name</th>
-                                    <th scope="col">School Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
 
-                                    <th scope="col" class="text-right"><button type="button"
-                                            class="btn btn-primary btn-modal ml-3" data-toggle="modal"
-                                            data-target="#transcriptModal" data-whatever="@getbootstrap"><img
-                                                src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($recordTransfer as $records)
+            {{-- record-transfer --}}
+            <section class="record-transfer-detail  py-5 my-3" id="record-transfer">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="pr-3">Record Transfer</h2>
+                        <div class="overflow-auto max-table">
+                            <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                <thead class="thead-light">
                                     <tr>
-                                        <td>{{ $records['student']['fullname'] }}</td>
-                                        <td>{{ $records->school_name }}</td>
-                                        <td><a class="transform-none" href="mailto:${{ $records->email }}">
-                                                {{ $records->email }}</a></td>
-                                        <td>{{ $records->phone_number }}</td>
-                                        @if (empty($records->request_status))
-                                            <td>In Review
-                                            @elseif($records->request_status=='Record Received')
-                                            <td>Records Received
-                                        @endif
-                                        @if ($records->resendCount)
-                                            Resend Requested:{{ $records->resendCount }}
-                                        @endif
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="{{ route('admin.student.schoolRecord', [$records->student_profile_id, $records->id]) }}">
-                                                <i class=" fas fa-arrow-alt-circle-right"></i></a>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="orderModalLabel">New message</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Recipientsss:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">School Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone Number</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
 
-        {{-- Documents --}}
-        <section class="student-documents  py-5 my-3" id="student-documents">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="pr-3">Documents</h2>
-                    <div class="overflow-auto max-table">
-                        <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Student Name</th>
-                                    <th scope="col">File Name</th>
-                                    <th scope="col">Document Type</th>
-                                    <th scope="col">View Documents</th>
-                                    <th scope="col">Upload Documents</th>
-                                    <th scope="col"><button type="button" class="btn btn-primary btn-modal ml-3"
-                                            data-toggle="modal" data-target="#student-documentsModal"
-                                            data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
-                                                src="/images.add.png" alt=""></button></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($documents as $document)
-                                    <tr>
-                                        <td>{{ $document->created_at->format('M j,Y') }}</td>
-                                        <td>{{ $document['student']['fullname'] }}</td>
-                                        <td>{{ $document->original_filename }}</td>
-                                        <td>{{ $document->document_type }}</td>
-                                        <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
-                                                Documents</a></br></td>
-                                        <td><a href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
-                                                Documents</a></br></td>
-                                        <td></td>
+                                        <th scope="col" class="text-right"><button type="button"
+                                                class="btn btn-primary btn-modal ml-3" data-toggle="modal"
+                                                data-target="#transcriptModal" data-whatever="@getbootstrap"><img
+                                                    src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
+                                        </th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($recordTransfer as $records)
+                                        <tr>
+                                            <td>{{ $records['student']['fullname'] }}</td>
+                                            <td>{{ $records->school_name }}</td>
+                                            <td><a class="transform-none" href="mailto:${{ $records->email }}">
+                                                    {{ $records->email }}</a></td>
+                                            <td>{{ $records->phone_number }}</td>
+                                            @if (empty($records->request_status))
+                                                <td>In Review
+                                                @elseif($records->request_status=='Record Received')
+                                                <td>Records Received
+                                            @endif
+                                            @if ($records->resendCount)
+                                                Resend Requested:{{ $records->resendCount }}
+                                            @endif
+                                            </td>
+                                            <td>
+                                                <a
+                                                    href="{{ route('admin.student.schoolRecord', [$records->student_profile_id, $records->id]) }}">
+                                                    <i class=" fas fa-arrow-alt-circle-right"></i></a>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="modal fade" id="transModalLabel" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="orderModalLabel">New message</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Recipientsss:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Send message</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <div class="modal fade" id="student-documentsModal" tabindex="-1" role="dialog"
-            aria-labelledby="student-documentsModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="student-documentsModalLabel">Upload Document</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+
+            {{-- Documents --}}
+            <section class="student-documents  py-5 my-3" id="student-documents">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="pr-3">Documents</h2>
+                        <div class="overflow-auto max-table">
+                            <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">File Name</th>
+                                        <th scope="col">Document Type</th>
+                                        <th scope="col">View Documents</th>
+                                        <th scope="col">Upload Documents</th>
+                                        <th scope="col"><button type="button" class="btn btn-primary btn-modal ml-3"
+                                                data-toggle="modal" data-target="#student-documentsModal"
+                                                data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
+                                                    src="/images.add.png" alt=""></button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($documents as $document)
+                                        <tr>
+                                            <td>{{ $document->created_at->format('M j,Y') }}</td>
+                                            <td>{{ $document['student']['fullname'] }}</td>
+                                            <td>{{ $document->original_filename }}</td>
+                                            <td>{{ $document->document_type }}</td>
+                                            <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
+                                                    Documents</a></br></td>
+                                            <td><a
+                                                    href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
+                                                    Documents</a></br></td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form id="add-documents" enctype="multipart/form-data">
-                            <div class="modal-body">
+                </div>
+            </section>
+            <div class="modal fade" id="student-documentsModal" tabindex="-1" role="dialog"
+                aria-labelledby="student-documentsModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="student-documentsModalLabel">Upload Document</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-documents" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id">
+                                        <input type="hidden" value="{{ $student->id }}" id='student-name'
+                                            name="student-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Upload Document</label>
+                                        <input type="file" id="file" class="form-control choose-btn" required>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Graduation --}}
+            <section class="Graduation  py-5 my-3" id="Graduation">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="pr-3">Graduation</h2>
+                        <div class="overflow-auto max-table">
+                            <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Date Applied</th>
+                                        <th scope="col">Grade 9</th>
+                                        <th scope="col">Grade 10</th>
+                                        <th scope="col">Grade 11</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">View</th>
+                                        <th scope="col"> <button type="button" class="btn btn-primary btn-modal ml-3"
+                                                data-toggle="modal" data-target="#GraduationModal"
+                                                data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
+                                                    src="/images.add.png" alt=""></button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($graduations as $graduation)
+                                        <tr>
+                                            <td>{{ $graduation->created_at->format('M j, Y') }}</td>
+                                            <td>{{ $graduation->grade_9_info }}</td>
+                                            <td>{{ $graduation->grade_10_info }}</td>
+                                            <td>{{ $graduation->grade_11_info }}</td>
+                                            <td>{{ $graduation->status }}</td>
+                                            <td><a href="{{ route('admin.edit.graduation', $graduation->id) }}">View</td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="modal fade" id="GraduationModal" tabindex="-1" role="dialog" aria-labelledby="GraduationModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="GraduationModalLabel">Apply For Graduation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-graduation">
                                 <div class="form-group">
                                     <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id">
-                                    <input type="hidden" value="{{ $student->id }}" id='student-name'
-                                        name="student-name">
+                                    <input type="hidden" value="{{ $student->id }}" id='student_id' name="student-name">
+                                    <label for="recipient-name" class="col-form-label">Grade 9</label>
+                                    <select id="grade_9" required>
+                                        <option value="I was enrolled in West River Academy.">I was enrolled in West River
+                                            Academy.
+                                        </option>
+                                        <option
+                                            value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                            I homeschooled independently. (There are no transcripts that a school can send.)
+                                        </option>
+                                        <option
+                                            value="I was enrolled in another school that can send or has already sent transcripts.">
+                                            I was enrolled in another school that can send or has already sent transcripts.
+                                        </option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <label for="recipient-name" class="col-form-label">Grade 10</label>
+                                    <select id="grade_10" required>
+                                        <option value="I was enrolled in West River Academy.">I was enrolled in West River
+                                            Academy.
+                                        </option>
+                                        <option
+                                            value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                            I homeschooled independently. (There are no transcripts that a school can send.)
+                                        </option>
+                                        <option
+                                            value="I was enrolled in another school that can send or has already sent transcripts.">
+                                            I was enrolled in another school that can send or has already sent transcripts.
+                                        </option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <label for="recipient-name" class="col-form-label">Grade 11</label>
+                                    <select id="grade_11" required>
+                                        <option value="I was enrolled in West River Academy.">I was enrolled in West River
+                                            Academy.
+                                        </option>
+                                        <option
+                                            value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                            I homeschooled independently. (There are no transcripts that a school can send.)
+                                        </option>
+                                        <option
+                                            value="I was enrolled in another school that can send or has already sent transcripts.">
+                                            I was enrolled in another school that can send or has already sent transcripts.
+                                        </option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <label for="recipient-name" class="col-form-label">Status</label>
+                                    <select id="status-graduation">
+                                        <option value='pending'>Pending</option>
+                                        <option value='approved'>Approved</option>
+                                        <option value='paid'>Paid</option>
+                                        <option value='completed'>Completed</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Upload Document</label>
-                                    <input type="file" id="file" class="form-control choose-btn" required>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-
-        {{-- Graduation --}}
-        <section class="Graduation  py-5 my-3" id="Graduation">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="pr-3">Graduation</h2>
-                    <div class="overflow-auto max-table">
-                        <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Date Applied</th>
-                                    <th scope="col">Grade 9</th>
-                                    <th scope="col">Grade 10</th>
-                                    <th scope="col">Grade 11</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">View</th>
-                                    <th scope="col"> <button type="button" class="btn btn-primary btn-modal ml-3"
-                                            data-toggle="modal" data-target="#GraduationModal"
-                                            data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
-                                                src="/images.add.png" alt=""></button></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($graduations as $graduation)
-                                    <tr>
-                                        <td>{{ $graduation->created_at->format('M j, Y') }}</td>
-                                        <td>{{ $graduation->grade_9_info }}</td>
-                                        <td>{{ $graduation->grade_10_info }}</td>
-                                        <td>{{ $graduation->grade_11_info }}</td>
-                                        <td>{{ $graduation->status }}</td>
-                                        <td><a href="{{ route('admin.edit.graduation', $graduation->id) }}">View</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="modal fade" id="GraduationModal" tabindex="-1" role="dialog" aria-labelledby="GraduationModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="GraduationModalLabel">Apply For Graduation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="add-graduation">
-                            <div class="form-group">
-                                <input type="hidden" value="{{ $parent_id }}" id='parent_id' name="parent_id">
-                                <input type="hidden" value="{{ $student->id }}" id='student_id' name="student-name">
-                                <label for="recipient-name" class="col-form-label">Grade 9</label>
-                                <select id="grade_9" required>
-                                    <option value="I was enrolled in West River Academy.">I was enrolled in West River
-                                        Academy.
-                                    </option>
-                                    <option
-                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                        I homeschooled independently. (There are no transcripts that a school can send.)
-                                    </option>
-                                    <option
-                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                        I was enrolled in another school that can send or has already sent transcripts.
-                                    </option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <label for="recipient-name" class="col-form-label">Grade 10</label>
-                                <select id="grade_10" required>
-                                    <option value="I was enrolled in West River Academy.">I was enrolled in West River
-                                        Academy.
-                                    </option>
-                                    <option
-                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                        I homeschooled independently. (There are no transcripts that a school can send.)
-                                    </option>
-                                    <option
-                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                        I was enrolled in another school that can send or has already sent transcripts.
-                                    </option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <label for="recipient-name" class="col-form-label">Grade 11</label>
-                                <select id="grade_11" required>
-                                    <option value="I was enrolled in West River Academy.">I was enrolled in West River
-                                        Academy.
-                                    </option>
-                                    <option
-                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                        I homeschooled independently. (There are no transcripts that a school can send.)
-                                    </option>
-                                    <option
-                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                        I was enrolled in another school that can send or has already sent transcripts.
-                                    </option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <label for="recipient-name" class="col-form-label">Status</label>
-                                <select id="status-graduation">
-                                    <option value='pending'>Pending</option>
-                                    <option value='approved'>Approved</option>
-                                    <option value='paid'>Paid</option>
-                                    <option value='completed'>Completed</option>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <div class="text-right pb-4">
             <a href="#to-the-top" class="btn btn-primary">Back to Top</a>
         </div>

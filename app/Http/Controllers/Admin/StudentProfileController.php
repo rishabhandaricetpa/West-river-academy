@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\UploadDocuments;
 use DB;
 use App\Models\Notes;
+use App\Models\ParentProfile;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
@@ -86,13 +87,14 @@ class StudentProfileController extends Controller
         $student = StudentProfile::find($id);
         $parent_id = $student->parent_profile_id;
         //get parent info
+        $parent = ParentProfile::whereId($student->parent_profile_id)->first();
 
         // information for enrollement tab
         $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
         $payment_info = DB::table('enrollment_periods')
             ->where('student_profile_id', $id)
-            ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
                 'enrollment_periods.enrollment_payment_id',
                 'enrollment_payments.amount',
@@ -121,7 +123,7 @@ class StudentProfileController extends Controller
         $documents = UploadDocuments::where('student_profile_id', $id)->get();
         //graduation
         $graduations = Graduation::where('student_profile_id', $id)->get();
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcript', 'transcript9_12s', 'documents', 'parent_id', 'graduations'));
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcript', 'transcript9_12s', 'documents', 'parent_id', 'parent', 'graduations'));
     }
 
     /**
@@ -141,9 +143,12 @@ class StudentProfileController extends Controller
             $student->middle_name = $request->get('first_name');
             $student->last_name = $request->get('last_name');
             $student->d_o_b = \Carbon\Carbon::parse($request->get('dob'))->format('M d Y');
+            $student->gender = $request->get('gender');
             $student->email = $request->get('email');
+            $student->mothers_name = $request->get('mothers_name');
+            $student->birth_city = $request->get('birth_city');
             $student->cell_phone = $request->get('cell_phone');
-            $student->student_Id = $request->get('student_id');
+            $student->student_Id = $request->get('student_Id');
             $student->immunized_status = $request->get('immunized_status');
             $student->student_situation = $request->get('student_situation');
             $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
@@ -301,31 +306,44 @@ class StudentProfileController extends Controller
 
     public function createEnrollment(Request $request)
     {
-        $enroll = new EnrollmentPeriods;
-        $enroll->student_profile_id = $request->get('student_name');
-        $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
-        $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
-        $enroll->grade_level = $request->get('grade_level');
-        $enroll->type = $request->get('enrollment_period');
-        $enroll->save();
+        try {
+            DB::beginTransaction();
+            $enroll = new EnrollmentPeriods;
+            $enroll->student_profile_id = $request->get('student_name');
+            $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
+            $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
+            $enroll->grade_level = $request->get('grade_level');
+            $enroll->type = $request->get('enrollment_period');
+            $enroll->save();
 
-        $transction = new TransactionsMethod();
-        $transction->transcation_id   = substr(uniqid(), 0, 12);
-        $transction->payment_mode = "admin created";
-        $transction->parent_profile_id = $request->get('parent_id');
-        $transction->amount = $request->get('amount_status');
-        $transction->status = $request->get('enrollment_status');
-        $transction->save();
+            $transction = new TransactionsMethod();
+            $transction->transcation_id   = substr(uniqid(), 0, 12);
+            $transction->payment_mode = "admin created";
+            $transction->parent_profile_id = $request->get('parent_id');
+            $transction->amount = $request->get('amount_status');
+            $transction->status = $request->get('enrollment_status');
+            $transction->save();
 
-        $enroll_payment = new EnrollmentPayment();
-        $enroll_payment->enrollment_period_id = $enroll->id;
-        $enroll_payment->payment_mode = "admin created";
-        $enroll_payment->transcation_id = $transction->transcation_id;
-        $enroll_payment->status = $request->get('enrollment_status');
-        $enroll_payment->amount = $request->get('amount_status');
-        $enroll_payment->save();
+            $enroll_payment = new EnrollmentPayment();
+            $enroll_payment->enrollment_period_id = $enroll->id;
+            $enroll_payment->payment_mode = "admin created";
+            $enroll_payment->transcation_id = $transction->transcation_id;
+            $enroll_payment->status = $request->get('enrollment_status');
+            $enroll_payment->amount = $request->get('amount_status');
+            $enroll_payment->save();
 
-        $enroll->enrollment_payment_id = $enroll_payment->id;
-        $enroll->save();
+            $enroll->enrollment_payment_id = $enroll_payment->id;
+            $enroll->save();
+            DB::commit();
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error', 'message' => 'Failed to update Record']);
+            }
+        }
     }
 }
