@@ -103,7 +103,7 @@ class ParentController extends Controller
         $documents = UploadDocuments::where('parent_profile_id', $id)->get();
         $payment_info = DB::table('enrollment_periods')
             ->where('student_profile_id', $id)
-            ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
                 'enrollment_periods.created_at',
                 'enrollment_periods.enrollment_payment_id',

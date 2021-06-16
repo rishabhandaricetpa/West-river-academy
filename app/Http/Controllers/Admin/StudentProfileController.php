@@ -91,7 +91,7 @@ class StudentProfileController extends Controller
 
         $payment_info = DB::table('enrollment_periods')
             ->where('student_profile_id', $id)
-            ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
                 'enrollment_periods.enrollment_payment_id',
                 'enrollment_payments.amount',
@@ -301,31 +301,44 @@ class StudentProfileController extends Controller
 
     public function createEnrollment(Request $request)
     {
-        $enroll = new EnrollmentPeriods;
-        $enroll->student_profile_id = $request->get('student_name');
-        $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
-        $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
-        $enroll->grade_level = $request->get('grade_level');
-        $enroll->type = $request->get('enrollment_period');
-        $enroll->save();
+        try {
+            DB::beginTransaction();
+            $enroll = new EnrollmentPeriods;
+            $enroll->student_profile_id = $request->get('student_name');
+            $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
+            $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
+            $enroll->grade_level = $request->get('grade_level');
+            $enroll->type = $request->get('enrollment_period');
+            $enroll->save();
 
-        $transction = new TransactionsMethod();
-        $transction->transcation_id   = substr(uniqid(), 0, 12);
-        $transction->payment_mode = "admin created";
-        $transction->parent_profile_id = $request->get('parent_id');
-        $transction->amount = $request->get('amount_status');
-        $transction->status = $request->get('enrollment_status');
-        $transction->save();
+            $transction = new TransactionsMethod();
+            $transction->transcation_id   = substr(uniqid(), 0, 12);
+            $transction->payment_mode = "admin created";
+            $transction->parent_profile_id = $request->get('parent_id');
+            $transction->amount = $request->get('amount_status');
+            $transction->status = $request->get('enrollment_status');
+            $transction->save();
 
-        $enroll_payment = new EnrollmentPayment();
-        $enroll_payment->enrollment_period_id = $enroll->id;
-        $enroll_payment->payment_mode = "admin created";
-        $enroll_payment->transcation_id = $transction->transcation_id;
-        $enroll_payment->status = $request->get('enrollment_status');
-        $enroll_payment->amount = $request->get('amount_status');
-        $enroll_payment->save();
+            $enroll_payment = new EnrollmentPayment();
+            $enroll_payment->enrollment_period_id = $enroll->id;
+            $enroll_payment->payment_mode = "admin created";
+            $enroll_payment->transcation_id = $transction->transcation_id;
+            $enroll_payment->status = $request->get('enrollment_status');
+            $enroll_payment->amount = $request->get('amount_status');
+            $enroll_payment->save();
 
-        $enroll->enrollment_payment_id = $enroll_payment->id;
-        $enroll->save();
+            $enroll->enrollment_payment_id = $enroll_payment->id;
+            $enroll->save();
+            DB::commit();
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error', 'message' => 'Failed to update Record']);
+            }
+        }
     }
 }
