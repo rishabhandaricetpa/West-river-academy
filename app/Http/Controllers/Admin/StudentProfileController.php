@@ -271,7 +271,7 @@ class StudentProfileController extends Controller
     }
 
     /*store New Students */
-    public function createNewStudents(Request $request)
+    public function updateNewStudents(Request $request)
     {
         $students = new StudentProfile();
         $students->parent_profile_id = $request->get('parent_id');
@@ -285,6 +285,24 @@ class StudentProfileController extends Controller
         $students->student_Id = $request->get('student_id');
         $students->immunized_status = $request->get('immunized_status');
 
+        $students->save();
+    }
+
+    /*store New Students */
+    public function createNewStudents(Request $request)
+    {
+        $students = StudentProfile::create([
+            'parent_profile_id' => $request->get('parents_id'),
+            'first_name' => $request->get('student_first_name'),
+            'middle_name' => $request->get('student_middle_name'),
+            'last_name' => $request->get('student_last_name'),
+            'gender' => $request->get('student_gender'),
+            'd_o_b' => $request->get('student_d_o_b'),
+            'email' => $request->get('student_email'),
+            'cell_phone' => $request->get('student_phone'),
+            'student_Id' => $request->get('students_student_id'),
+            'immunized_status' => $request->get('student_immunized_status'),
+        ]);
         $students->save();
     }
 

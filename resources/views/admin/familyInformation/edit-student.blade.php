@@ -6,6 +6,27 @@
 <section class="content container-fluid  my-3">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- first card student details -->
+
+
+  <div class="card my-3 family-details ">
+    <div class="sticky mb-2 pb-1">
+      <div class="d-flex justify-content-between main-nav_header align-items-center">
+        <ul class="d-flex overflow-scroll">
+          <li class="menu-item"><a href="{{ route('admin.dashboard.notification') }}">Dashboard</a></li>
+          <li class="menu-item"><a class="active" href="{{ url('admin/view') }}">Family</a></li>
+          <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
+          <li class="menu-item"><a href="#">Representative</a></li>
+          <li class="menu-item"><a href="#">Groups</a></li>
+          <li class="menu-item"><a href="#" data-toggle="modal"
+            data-target="#studentsDetailsModal" data-whatever="@getbootstrap"><img src="/images/add.png" alt=""></a></li>
+        </ul>
+        <ul class="d-flex">
+          <li><img src="/images/search.png" alt="login"></li>
+          <li><img src="/images/bell.png" alt="login"></li>
+          <li><a onclick="goBack()"> <img src="/images/login.png" alt="login"></a>
+          </li>
+        </ul>
+      </div>
   <div class="card family-details px-3 my-3">
     <ul class="nav overflow-auto" id="to-the-top">
       <li class="nav-item">
@@ -80,11 +101,25 @@
                   <input type="text" class="form-control is-disabled" id="d_o_b" placeholder="MM/DD/YYYY"
                     value="{{ $student->d_o_b->format('F j, Y') }}" disabled>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputGender">Gender:</label>
-                    <input type="text" class="form-control is-disabled" id="gender" placeholder=""
-                      value="{{ $student->gender }}" disabled>
+                <div class="col-12">
+                  <div class="form-group lato-italic info-detail d-flex">
+                    <div>
+                      <label for="">Gender <sup>*</sup></label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
+                      <label class="form-check-label pl-1 pl-sm-0">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
+                      <label class="form-check-label pl-1 pl-sm-0">
+                        Female
+                      </label>
+                    </div>
                   </div>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputMothersName">Email :</label>
                     <input type="email" class="form-control is-disabled" id="email" placeholder=""
@@ -165,7 +200,208 @@
         </div>
       </div>
     </section>
-   
+    <div class="modal fade bd-example-modal-lg" id="studentsDetailsModal" tabindex="-1" role="dialog"
+        aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="studentDetailsModalLabel">Add New Student</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="new-student-record">
+                <div class="row">
+                  <div class="col-lg-4 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">First Name:</label>
+                      <input class="form-control" type="text" id='student_first_name'>
+                    </div>
+                  </div>
+                  <input type="hidden" value="{{ $parent->id }}" id='parents_id' name="parents_id">
+
+                  <div class="col-lg-4 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Middle Name:</label>
+                      <input type="text" id="student_middle_name" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Last/Family Name:</label>
+                      <input type="text" id="student_last_name" required class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-group lato-italic info-detail d-flex">
+                      <div>
+                        <label for="">Gender <sup>*</sup></label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="student_gender" id="student_gender" value="Male" required>
+                        <label class="form-check-label pl-1 pl-sm-0">
+                          Male
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="student_gender" value="Female" id="gender">
+                        <label class="form-check-label pl-1 pl-sm-0">
+                          Female
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Date of Birth:</label>
+                      <input type="text" id="student_d_o_b" class="form-control datepicker" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Email Address
+                      </label>
+                      <input type="email" id="student_email" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Cell Phone</label>
+                      <input type="text" id="student_phone" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">National ID
+                      </label>
+                      <input type="text" id="students_student_id" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Is this student immunized?
+                      </label>
+                      <input type="text" id="student_immunized_status" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade bd-example-modal-lg" id="studentDetailsModal" tabindex="-1" role="dialog"
+      aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="studentDetailsModalLabel">Add New Student</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="add-new-student">
+              <div class="row">
+
+                <div class="col-lg-4 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">First Name:</label>
+                    <input class="form-control" type="text" id='first_name'>
+                  </div>
+                </div>
+                <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+
+                <div class="col-lg-4 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Middle Name:</label>
+                    <input type="text" id="middle_name" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Last/Family Name:</label>
+                    <input type="text" id="last_name" required class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group lato-italic info-detail d-flex">
+                    <div>
+                      <label for="">Gender <sup>*</sup></label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
+                      <label class="form-check-label pl-1 pl-sm-0">
+                        Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
+                      <label class="form-check-label pl-1 pl-sm-0">
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Date of Birth:</label>
+                    <input type="text" id="d_o_b" class="form-control datepicker" required>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Email Address
+                    </label>
+                    <input type="email" id="email" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Cell Phone</label>
+                    <input type="text" id="phone" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">National ID
+                    </label>
+                    <input type="text" id="student_id" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Is this student immunized?
+                    </label>
+                    <input type="text" id="immunized_status" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     {{-- payments--}}
     <section class="students-details py-5 my-3" id="student-payments">
       <div class="row">

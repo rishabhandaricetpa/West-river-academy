@@ -34,7 +34,12 @@ class CreateParentProfilesTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
-            $table->string('reference',2000)->nullable();
+            $table->string('p2_street_address');
+            $table->string('p2_city')->nullable();
+            $table->string('p2_state')->nullable();
+            $table->string('p2_zip_code')->nullable();
+            $table->string('p2_country')->nullable();
+            $table->string('reference', 2000)->nullable();
             $table->string('immunized')->nullable();
             $table->boolean('status')->default('0');
             $table->boolean('welcome_video_status')->default('0');

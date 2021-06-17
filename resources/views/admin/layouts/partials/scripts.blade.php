@@ -660,7 +660,48 @@
     });
 
     // add new student from admin 
-    $("#add-new-student").on("submit", function(event) {
+    $("#new-student-record").on("submit", function(event) {
+        event.preventDefault();
+        var parents_id = $('#parents_id').val();
+        var student_first_name = $('#student_first_name').val();
+        var student_middle_name = $('#student_middle_name').val();
+        var student_last_name = $('#student_last_name').val();
+        var student_gender = $('#student_gender').val();
+        var student_d_o_b = $('#student_d_o_b').val();
+        var student_email = $('#student_email').val();
+        var student_phone = $('#student_phone').val();
+        var student_student_id = $('#students_student_id').val();
+        var student_immunized_status = $('#student_immunized_status').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.newstudent') }}",
+            type: "POST",
+
+            data: {
+                parents_id: parents_id,
+                student_first_name: student_first_name,
+                student_middle_name: student_middle_name,
+                student_last_name: student_last_name,
+                student_gender: student_gender,
+                student_d_o_b: student_d_o_b,
+                student_email: student_email,
+                student_phone: student_phone,
+                student_student_id: student_student_id,
+                student_immunized_status: student_immunized_status,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
+// add new student from admin 
+$("#add-new-student").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
         var first_name = $('#first_name').val();
@@ -699,7 +740,6 @@
             }
         });
     });
-
 
     // add new order 
     $("#add-new-order").on("submit", function(event) {
@@ -760,11 +800,11 @@
         var p2_email = $('#p2_email').val();
         var p2_cell_phone = $('#p2_cell_phone').val();
         var p2_home_phone = $('#p2_home_phone').val();
-        var street2 = $('#street2').val();
-        var city2 = $('#city2').val();
-        var state2 = $('#state2').val();
-        var country2 = $('#country2').val();
-        var zip_code2 = $('#zip_code2').val();
+        var p2_street_address = $('#p2_street_address').val();
+        var p2_city = $('#p2_city').val();
+        var p2_state = $('#p2_state').val();
+        var p2_country = $('#p2_country').val();
+        var p2_zip_code = $('#p2_zip_code').val();
         var url = "{{ route('admin.parent.update', ':parent_id') }}";
         url = url.replace(':parent_id', parent_id);
         $.ajax({
@@ -793,9 +833,14 @@
                 p2_email: p2_email,
                 p2_cell_phone: p2_cell_phone,
                 p2_home_phone: p2_home_phone,
+                p2_street_address:p2_street_address,
+                p2_city:p2_city,
+                p2_state:p2_state,
+                p2_country:p2_country,
+                p2_zip_code:p2_zip_code,
             },
             success: function(response) {
-                location.reload();
+                dd($response);
             },
             error: function(response) {
                 // dd($response)
@@ -922,7 +967,6 @@
     // provide status for sub admin - completed or pending
     function editDashboardForStatus(event) {
         var id = $(event).data("id");
-        console.log(id);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -969,6 +1013,63 @@
             }
         });
     }
+
+
+    // add parent  record on click information
+    $("#add-new-parent").on("submit", function(event) {
+        event.preventDefault();
+        var parent1_first_name = $('#parent1_first_name').val();
+        var parent1_middle_name = $('#parent1_middle_name').val();
+        var parent1_last_name = $('#parent1_last_name').val();
+        var parent1_email = $('#parent1_email').val();
+        var parent1_cell_phone = $('#parent1_cell_phone').val();
+        var parent1_home_phone = $('#parent1_home_phone').val();
+        var reference = $('#reference').val();
+        var parent2_first_name = $('#parent2_first_name').val();
+        var parent2_middle_name = $('#parent2_middle_name').val();
+        var parent2_last_name = $('#parent2_last_name').val();
+        var parent2_email = $('#parent2_email').val();
+        var parent2_cell_phone = $('#parent2_cell_phone').val();
+        var parent2_home_phone = $('#parent2_home_phone').val();
+        var parent1_street_address = $('#parent1_street_address').val();
+        var parent1_city = $('#parent1_city').val();
+        var parent1_state = $('#parent1_state').val();
+        var parent2_country = $('#parent2_country').val();
+        var parent2_zip_code = $('#parent2_zip_code').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.parent') }}",
+            type: "POST",
+
+            data: {
+                parent1_first_name: parent1_first_name,
+                parent1_middle_name: parent1_middle_name,
+                parent1_last_name: parent1_last_name,
+                parent1_email: parent1_email,
+                parent1_cell_phone: parent1_cell_phone,
+                parent1_home_phone: parent1_home_phone,
+                parent2_first_name: parent2_first_name,
+                parent2_last_name: parent2_last_name,
+                parent2_email: parent2_email,
+                parent2_cell_phone: parent2_cell_phone,
+                parent2_home_phone: parent2_home_phone,
+                parent1_street_address:parent1_street_address,
+                parent1_city:parent1_city,
+                parent1_state:parent1_state,
+                parent2_country:parent2_country,
+                parent2_zip_code:parent2_zip_code,
+                reference:reference,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+                // dd($response)
+            }
+        });
+    });
     // upload student upload documents
     $("#student-document-table").DataTable({
         "ajax": "{{ route('admin.datatable.student') }}",
@@ -1158,11 +1259,11 @@ $(".students_store").on("submit", function(event) {
     });
 
     $('#check').click(function() {
-        $("#street2").val($("#street").val());
-        $("#city2").val($("#city").val());
-        $("#country2").val($("#country").val());
-        $("#state2").val($("#state").val());
-        $("#zip_code2").val($("#zip_code").val());
+        $("#p2_street_address").val($("#street_address").val());
+        $("#p2_city").val($("#city").val());
+        $("#p2_country").val($("#country").val());
+        $("#p2_state").val($("#state").val());
+        $("#p2_zip_code").val($("#zip_code").val());
 
     });
 

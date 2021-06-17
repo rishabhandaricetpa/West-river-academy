@@ -20,6 +20,7 @@ use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\Notes;
 use App\Models\TranscriptPayment;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\RecordTransfer;
 
@@ -56,6 +57,56 @@ class ParentController extends Controller
     public function dataTable()
     {
         return datatables(ParentProfile::with(['studentProfile', 'address'])->latest()->get())->toJson();
+    }
+
+
+    public function createParent(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'name' => $request->get('parent1_first_name'),
+                'email' => $request->get('parent1_email'),
+                'password' => Hash::make($request->get('parent1_cell_phone')),
+            ]);
+            $user->save();
+            $parent =  ParentProfile::create([
+                'user_id' => $user->id,
+                'p1_first_name' => $request->get('parent1_first_name'),
+                'p1_middle_name' => $request->get('parent1_middle_name'),
+                'p1_last_name' => $request->get('parent1_last_name'),
+                'p1_email' => $request->get('parent1_email'),
+                'p1_cell_phone' => $request->get('parent1_cell_phone'),
+                'p1_home_phone' =>  $request->get('parent1_home_phone'),
+                'p2_first_name' => $request->get('parent2_first_name'),
+                'p2_middle_name' => $request->get('parent2_middle_name'),
+                'p2_last_name' => $request->get('parent2_last_name'),
+                'p2_email' => $request->get('parent2_email'),
+                'p2_cell_phone' => $request->get('parent2_cell_phone'),
+                'p2_home_phone' =>  $request->get('parent2_home_phone'),
+                'street_address' => $request->get('parent1_street_address'),
+                'city' => $request->get('parent1_city'),
+                'state' =>  $request->get('parent1_state'),
+                'zip_code' =>  $request->get('parent2_zip_code'),
+                'country' => $request->get('parent2_country'),
+                'reference' =>  $request->get('reference'),
+                'immunized' => $request->get('parent_status'),
+            ]);
+            $parent->save();
+
+            DB::commit();
+
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
+            }
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();
+            report($e);
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error', 'message' => 'Failed to update Record']);
+            }
+        }
     }
     public function deactive(Request $request)
     {
@@ -131,7 +182,6 @@ class ParentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $userdata = User::find($id);
@@ -142,7 +192,7 @@ class ParentController extends Controller
             $parent->p1_first_name = $request->get('p1_first_name');
             $parent->p1_middle_name = $request->get('p1_middle_name');
             $parent->p1_last_name = $request->get('p1_last_name');
-            // $parent->p1_email = $request->get('p1_email');
+            $parent->zip_code = $request->get('zip_code');
             $parent->p1_cell_phone = $request->get('p1_cell_phone');
             $parent->p1_home_phone = $request->get('p1_home_phone');
             $parent->p2_first_name = $request->get('p2_first_name');
@@ -156,6 +206,12 @@ class ParentController extends Controller
             $parent->country = $request->get('country');
             $parent->reference = $request->get('reffered');
             $parent->immunized = $request->get('immunized');
+            $parent->p2_street_address = $request->get('street_address');
+            $parent->p2_city = $request->get('city');
+            $parent->p2_state = $request->get('state');
+            $parent->p2_country = $request->get('p2_country');
+            $parent->p2_zip_code = $request->get('p2_zip_code');
+
             $parent->status = 0;
             $parent->save();
             DB::commit();
