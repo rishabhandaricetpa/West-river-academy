@@ -702,8 +702,7 @@ $(".students_store").on("submit", function(event) {
                 student_situation: student_situation,
             },
             success: function(response) {
-                location.reload();
-
+dd($response);
             },
             error: function(response) {
                 dd($response)
@@ -894,7 +893,7 @@ $("#add-new-student").on("submit", function(event) {
                 p2_zip_code:p2_zip_code,
             },
             success: function(response) {
-                dd($response);
+                location.reload();
             },
             error: function(response) {
                 // dd($response)

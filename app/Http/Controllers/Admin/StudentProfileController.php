@@ -140,7 +140,7 @@ class StudentProfileController extends Controller
             $student = StudentProfile::find($id);
             $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
             $student->first_name = $request->get('first_name');
-            $student->middle_name = $request->get('first_name');
+            $student->middle_name = $request->get('middle_name');
             $student->last_name = $request->get('last_name');
             $student->d_o_b = \Carbon\Carbon::parse($request->get('dob'))->format('M d Y');
             $student->gender = $request->get('gender');
@@ -164,7 +164,6 @@ class StudentProfileController extends Controller
                 $enroll->save();
             }
             $student->save();
-
             $cover = $request->file('file');
             if ($request->file('file')) {
                 foreach ($request->file as $cover) {

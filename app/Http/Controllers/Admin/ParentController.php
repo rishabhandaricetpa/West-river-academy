@@ -184,14 +184,16 @@ class ParentController extends Controller
     {
         try {
             DB::beginTransaction();
-            $userdata = User::find($id);
+            $parent = ParentProfile::find($id);
+            $userdata = User::find($parent->user_id);
             $userdata->name = $request->get('p1_first_name');
-            // $userdata->email = $request->get('p1_email');
+            $userdata->email = $request->get('p1_email');
             $userdata->save();
             $parent = ParentProfile::find($id);
             $parent->p1_first_name = $request->get('p1_first_name');
             $parent->p1_middle_name = $request->get('p1_middle_name');
             $parent->p1_last_name = $request->get('p1_last_name');
+            $parent->p1_email = $request->get('p1_email');
             $parent->zip_code = $request->get('zip_code');
             $parent->p1_cell_phone = $request->get('p1_cell_phone');
             $parent->p1_home_phone = $request->get('p1_home_phone');
@@ -207,8 +209,8 @@ class ParentController extends Controller
             $parent->reference = $request->get('reffered');
             $parent->immunized = $request->get('immunized');
             $parent->p2_street_address = $request->get('street_address');
-            $parent->p2_city = $request->get('city');
-            $parent->p2_state = $request->get('state');
+            $parent->p2_city = $request->get('p2_city');
+            $parent->p2_state = $request->get('p2_state');
             $parent->p2_country = $request->get('p2_country');
             $parent->p2_zip_code = $request->get('p2_zip_code');
 

@@ -36,7 +36,7 @@
              <div class="col-lg-4 col-12">
                <div class="form-group">
                  <label for="message-text" class="col-form-label">First Name:</label>
-                 <input class="form-control" type="text" id='parent1_first_name'>
+                 <input class="form-control" type="text" id='parent1_first_name' required>
                </div>
              </div>
 
@@ -57,20 +57,20 @@
              <div class="col-lg-4 col-12">
                <div class="form-group">
                  <label for="message-text" class="col-form-label">Email Address:</label>
-                 <input class="form-control" type="email" id='parent1_email'>
+                 <input class="form-control" type="email" id='parent1_email' required> 
                </div>
              </div>
              <div class="col-lg-4 col-12">
                <div class="form-group">
                  <label for="message-text" class="col-form-label">Cell Phone:</label>
-                 <input type="text" id="parent1_cell_phone" class="form-control">
+                 <input type="text" id="parent1_cell_phone" class="form-control" required>
                </div>
              </div>
 
              <div class="col-lg-4 col-12">
                <div class="form-group">
                  <label for="message-text" class="col-form-label">Work/Home Phone:</label>
-                 <input type="text" id="parent1_home_phone" required class="form-control">
+                 <input type="text" id="parent1_home_phone"  class="form-control">
                </div>
              </div>
              <label for="message-text" class="col-form-label">Enter Parent 2 Information:</label>
@@ -110,10 +110,10 @@
              <div class="col-lg-4 col-12">
                <div class="form-group">
                  <label for="message-text" class="col-form-label">Work/Home Phone:</label>
-                 <input type="text" id="parent2_home_phone" required class="form-control">
+                 <input type="text" id="parent2_home_phone"  class="form-control">
                </div>
              </div>
-             <label for="message-text" class="col-form-label">Enter Parent 2 Information:</label>
+             <label for="message-text" class="col-form-label">Mailing Address:</label>
 
              <div class="col-lg-6 col-12">
                <div class="form-group">

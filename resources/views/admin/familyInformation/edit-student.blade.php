@@ -78,10 +78,24 @@
                   <input type="text" class="form-control is-disabled" id="d_o_b" placeholder="MM/DD/YYYY"
                     value="{{ $student->d_o_b->format('F j, Y') }}" disabled>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputGender">Gender:</label>
-                    <input type="text" class="form-control is-disabled" id="gender" placeholder=""
-                      value="{{ $student->gender }}" disabled>
+                  <div class="col-12">
+                    <div class="form-group lato-italic info-detail d-flex">
+                      <div>
+                        <label for="">Gender <sup>*</sup></label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
+                        <label class="form-check-label pl-1 pl-sm-0">
+                          Male
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
+                        <label class="form-check-label pl-1 pl-sm-0">
+                          Female
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 <div class="form-group">
                     <label for="exampleInputMothersName">Email :</label>
@@ -96,7 +110,7 @@
                   <div class="form-group">
                     <label for="exampleInputMothersName">National Id :</label>
                     <input type="text" class="form-control is-disabled" id="student_Id" placeholder=""
-                      value="{{ $student->student_id }}" disabled>
+                      value="{{ $student->student_Id }}" disabled>
                   </div>  
                   <div class="form-group">
                     <label for="exampleInputMothersName">Birth City :</label>
@@ -265,107 +279,7 @@
         </div>
       </div>
 
-      <div class="modal fade bd-example-modal-lg" id="studentDetailsModal" tabindex="-1" role="dialog"
-      aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="studentDetailsModalLabel">Add New Student</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="add-new-student">
-              <div class="row">
-
-                <div class="col-lg-4 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">First Name:</label>
-                    <input class="form-control" type="text" id='first_name'>
-                  </div>
-                </div>
-                <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
-
-                <div class="col-lg-4 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Middle Name:</label>
-                    <input type="text" id="middle_name" class="form-control">
-                  </div>
-                </div>
-
-                <div class="col-lg-4 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Last/Family Name:</label>
-                    <input type="text" id="last_name" required class="form-control">
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="form-group lato-italic info-detail d-flex">
-                    <div>
-                      <label for="">Gender <sup>*</sup></label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
-                      <label class="form-check-label pl-1 pl-sm-0">
-                        Male
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
-                      <label class="form-check-label pl-1 pl-sm-0">
-                        Female
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Date of Birth:</label>
-                    <input type="text" id="d_o_b" class="form-control datepicker" required>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Email Address
-                    </label>
-                    <input type="email" id="email" class="form-control">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Cell Phone</label>
-                    <input type="text" id="phone" class="form-control">
-                  </div>
-                </div>
-
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">National ID
-                    </label>
-                    <input type="text" id="student_id" class="form-control">
-                  </div>
-                </div>
-
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Is this student immunized?
-                    </label>
-                    <input type="text" id="immunized_status" class="form-control">
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     {{-- payments--}}
     <section class="students-details py-5 my-3" id="student-payments">
       <div class="row">
@@ -382,7 +296,7 @@
                   <th scope="col">Payment Status</th>
                   <th scope="col">Action</th>
                   <th scope="col" class="text-right"> <button type="button" class="btn btn-primary btn-modal ml-3"
-                      data-toggle="modal" data-target="#studentDetailsModal" data-whatever="@getbootstrap"><img
+                      data-toggle="modal" data-target="#" data-whatever="@getbootstrap"><img
                         src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button>
                   </th>
                 </tr>
@@ -403,36 +317,7 @@
         </div>
       </div>
     </section>
-    <div class="modal fade bd-example-modal-lg" id="studentDetailsModal" tabindex="-1" role="dialog"
-      aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="studentDetailsModalLabel">New message</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                <input type="text" class="form-control" id="recipient-name">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Message:</label>
-                <textarea class="form-control" id="message-text"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send message</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
     {{-- transcript --}}
     <section class="transcript py-5 my-3" id="transcript">
       <div class="row">

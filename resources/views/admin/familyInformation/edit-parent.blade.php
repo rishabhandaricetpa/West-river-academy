@@ -63,9 +63,10 @@
                   <div class="form-group">
                     <label for="p1_first_name">First Name :</label>
                     <input type="text" class="form-control is-disabled" name="p1_first_name" id="p1_first_name"
-                      placeholder="" value="{{ $parent->p1_first_name }}" disabled>
+                      placeholder="" value="{{ $parent->p1_first_name }}" disabled required>
                   </div>
                   <div class="form-group">
+                    <input type='hidden' id="parent_id" name="parent_id" value="{{ $parent->id }}">
                     <label for="p1_middle_name">Middle Name :</label>
                     <input type="text" class="form-control is-disabled" name="p1_middle_name" id="p1_middle_name"
                       placeholder="" value="{{ $parent->p1_middle_name }}" disabled>
@@ -73,12 +74,12 @@
                   <div class="form-group">
                     <label for="p1_last_name">Last Name :</label>
                     <input type="text" class="form-control is-disabled" name="p1_last_name" id="p1_last_name"
-                      placeholder="" value="{{ $parent->p1_last_name }}" disabled>
+                      placeholder="" value="{{ $parent->p1_last_name }}" disabled required>
                   </div>
                   <div class="form-group">
                     <label for="p1_email">Email :</label>
                     <input type="email" class="form-control is-disabled" name="p1_email" id="p1_email" placeholder=""
-                      value="{{ $parent->p1_email }}" disabled>
+                      value="{{ $parent->p1_email }}" disabled required>
                   </div>
                   <div class="form-group">
                     <label for="p1_cell_phone">Phone :</label>
@@ -94,31 +95,31 @@
                   <div class="form-group">
                     <label for="street_address">Street :</label>
                     <input type="text" class="form-control is-disabled" id="street_address" placeholder=""
-                      name="street_address" value="{{ $parent->street_address }}" disabled>
+                      name="street_address" value="{{ $parent->street_address }}" disabled required>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="exampleInputEmail1">City :</label>
                         <input type="text" class="form-control is-disabled" id="city" placeholder="" name="city"
-                          value="{{ $parent->city }}" disabled>
+                          value="{{ $parent->city }}" disabled required>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">State :</label>
                         <input type="text" class="form-control is-disabled" id="state" placeholder="" name="state"
-                          value="{{ $parent->state }}" disabled>
+                          value="{{ $parent->state }}" disabled required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Country :</label>
                         <input type="text" class="form-control is-disabled" id="country" placeholder="" name="country"
-                          value="{{ $parent->country }}" disabled>
+                          value="{{ $parent->country }}" disabled required>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Zip Code :</label>
                         <input type="text" class="form-control is-disabled" id="zip_code" placeholder="" name="state"
-                          value="{{ $parent->zip_code }}" disabled>
+                          value="{{ $parent->zip_code }}" disabled required>
                       </div>
                     </div>
                   </div>
