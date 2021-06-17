@@ -194,9 +194,19 @@
 }
 
 ////// parent-sudent nav header
+.student-detail_documents,
 .main-nav_header {
   background-color: $secondary-color;
-
+  overflow-x: scroll;
+  border-radius: 15px 0 0 0 ;
+}
+.student-detail_documents {
+  .nav-link.active{
+ color:$black;
+ background-color: #e9ecef;
+  }
+}
+.main-nav_header {
   ul {
     list-style: none;
     padding: 0;
@@ -212,10 +222,9 @@
       }
 
       a.active,
-      a:hover
-      {
+      a:hover {
         color: black;
-        background: $primary; 
+        background: $primary;
         text-decoration: none;
       }
 
@@ -224,11 +233,10 @@
       }
     }
 
-      li {
-        img {
-          margin-right: 20px;
-        }
+    li {
+      img {
+        margin-right: 20px;
       }
     }
   }
-
+}

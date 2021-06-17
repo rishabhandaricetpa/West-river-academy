@@ -235,10 +235,12 @@
   .admin-wrapper {
     .dt-buttons {
       display: block;
-
+      margin-left:0;   
+      padding-left: 15px;
+      padding-right: 15px;
       button {
         width: 100%;
-        display: block;
+        display: inline-block;  
         margin-bottom: 15px;
         border-radius: 0 !important;
         -webkit-border-radius: 0 !important;
