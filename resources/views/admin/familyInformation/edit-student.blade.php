@@ -6,28 +6,10 @@
 <section class="content container-fluid  my-3">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- first card student details -->
-
-
   <div class="card my-3 family-details ">
     <div class="sticky mb-2 pb-1">
-      <div class="d-flex justify-content-between main-nav_header align-items-center">
-        <ul class="d-flex overflow-scroll">
-          <li class="menu-item"><a href="{{ route('admin.dashboard.notification') }}">Dashboard</a></li>
-          <li class="menu-item"><a class="active" href="{{ url('admin/view') }}">Family</a></li>
-          <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
-          <li class="menu-item"><a href="#">Representative</a></li>
-          <li class="menu-item"><a href="#">Groups</a></li>
-          <li class="menu-item"><a href="#" data-toggle="modal"
-            data-target="#studentsDetailsModal" data-whatever="@getbootstrap"><img src="/images/add.png" alt=""></a></li>
-        </ul>
-        <ul class="d-flex">
-          <li><img src="/images/search.png" alt="login"></li>
-          <li><img src="/images/bell.png" alt="login"></li>
-          <li><a onclick="goBack()"> <img src="/images/login.png" alt="login"></a>
-          </li>
-        </ul>
-      </div>
-  <div class="card family-details px-3 my-3">
+      @include('admin.familyInformation.student_header')
+      <div class="card family-details px-3 my-3">
     <ul class="nav overflow-auto" id="to-the-top">
       <li class="nav-item">
         <a class="nav-link" href="#student-details" aria-controls="student-details" aria-selected="true">Details</a>
@@ -52,82 +34,76 @@
     </ul>
 
 
-    {{-- students-details --}}
-    <section class="students-details  py-5" id="student-details">
+     {{-- students-details --}}
+     <section class="students-details  py-5" id="student-details">
       <div class="tab-content">
-        {{-- -------------- first tab --}}
+        {{---------------- first tab --}}
         <div class="row">
           <div class="col-12 d-flex align-items-center">
-            <h2 class="pr-3">Benjamin & Chong Livingston</h2>
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Active
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Inactive</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <h2 class="pr-3">{{ $student->fullname }} </h2>
+            <div class="form-group mb-0">
+              <select required class="btn btn-primary dropdown-toggle dropdown-icon" id="student_status">
+                <option @if($student->status === 0) selected @endif value="0">Active</option>
+                <option @if($student->status === 1) selected @endif value="1">Inactive</option>
+              </select>
+              <input type="hidden" value="{{ $student->id }}" id='id' name="id">
             </div>
           </div>
-          <div class="col-12">Date Created:</div>
+          <div class="col-12"> Date Created:{{ $student->created_at->format('M j, Y') }}</div>
 
-          {{-- student detil-1 --}}
+          {{-- student detil-1  --}}
           <div class="col-md-12">
-            <form class="is-readonly row" id="sampleForm">
-
+            <form class="is-readonly row students_store" id="sampleForm">
               <div class="col-md-6">
                 {{-- <h3 class="mt-3">student-details-1</h3> --}}
                 <div class="form-group">
                   <label for="exampleInputPassword1">First Name :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputPassword1" placeholder="Name"
-                    value="Benjamin" disabled>
+                  <input type="text" class="form-control is-disabled" id="first_name" placeholder=""
+                    value="{{ $student->first_name }}" disabled>
+                    <input type='hidden' id="parent_id" name="parent_id" value="{{ $student->parent_profile_id }}">
+                    <input type='hidden' id="students_id" name="students_id" value="{{ $student->id }}">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Middle Name :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputPassword1" placeholder="Name"
-                    value="David" disabled>
+                  <input type="text" class="form-control is-disabled" id="middle_name" placeholder="Name"
+                    value="{{ $student->middle_name }}" disabled>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Last Name :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputPassword1" placeholder="Name"
-                    value="Livingston" disabled>
+                  <input type="text" class="form-control is-disabled" id="last_name" placeholder="Name"
+                    value="{{ $student->last_name }}" disabled>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputDOB">Date Of Birth :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputDOB" placeholder="MM/DD/YYYY"
-                    value="MM/DD/YYYY" disabled>
+                  <input type="text" class="form-control is-disabled" id="d_o_b" placeholder="MM/DD/YYYY"
+                    value="{{ $student->d_o_b->format('F j, Y') }}" disabled>
                 </div>
-                <div class="col-12">
-                  <div class="form-group lato-italic info-detail d-flex">
-                    <div>
-                      <label for="">Gender <sup>*</sup></label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
-                      <label class="form-check-label pl-1 pl-sm-0">
-                        Male
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
-                      <label class="form-check-label pl-1 pl-sm-0">
-                        Female
-                      </label>
-                    </div>
+                <div class="form-group">
+                    <label for="exampleInputGender">Gender:</label>
+                    <input type="text" class="form-control is-disabled" id="gender" placeholder=""
+                      value="{{ $student->gender }}" disabled>
                   </div>
-                </div>
                 <div class="form-group">
-                  <label for="exampleInputMothersName">Mother' Maiden Name :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputMothersName"
-                    placeholder="Mothers Name" value="Mothers Name" disabled>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputStatus">Immunization Status :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputStatus" placeholder="Male"
-                    value="Male" disabled>
-                </div>
+                    <label for="exampleInputMothersName">Email :</label>
+                    <input type="email" class="form-control is-disabled" id="email" placeholder=""
+                      value="{{ $student->email }}" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputMothersName">Phone :</label>
+                    <input type="text" class="form-control is-disabled" id="cell_phone" placeholder=""
+                      value="{{ $student->cell_phone }}" disabled>
+                  </div>  
+                  <div class="form-group">
+                    <label for="exampleInputMothersName">National Id :</label>
+                    <input type="text" class="form-control is-disabled" id="student_Id" placeholder=""
+                      value="{{ $student->student_id }}" disabled>
+                  </div>  
+                  <div class="form-group">
+                    <label for="exampleInputMothersName">Birth City :</label>
+                    <input type="text" class="form-control is-disabled" id="birth_city" placeholder=""
+                      value="{{ $student->birth_city }}" disabled>
+                  </div>
+                  
               </div>
 
               {{-- students details 2 --}}
@@ -136,57 +112,58 @@
                 {{-- <h3 class="mt-3">student-details-2</h3> --}}
                 <div class="form-group">
                   <label for="exampleInputParent1">Parent - 1 :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputParent1" placeholder="Name"
-                    value="Benjamin" disabled>
+                  <input type="text" class="form-control is-disabled" id="p1_last_name" placeholder="Name"
+                    value="{{$parent->p1_first_name}} {{$parent->p1_last_name}}" disabled>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputParent2">Parent - 2 :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputParent2" placeholder="Name"
-                    value="David" disabled>
+                  <input type="text" class="form-control is-disabled" id="p2_last_name" placeholder="Name"
+                    value="{{$parent->p2_first_name}} {{$parent->p2_last_name}}" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputMothersName">Mother' Maiden Name :</label>
+                  <input type="text" class="form-control is-disabled" id="mothers_name" placeholder=""
+                    value="{{ $student->mothers_name }}" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputStatus">Immunization Status :</label>
+                  <input type="text" class="form-control is-disabled" id="immunized_status" placeholder=""
+                    value="{{ $student->immunized_status }}" disabled>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEnrolled">Enrolled :</label>
-                  <input type="text" class="form-control is-disabled" id="exampleInputEnrolled" placeholder="Name"
+                  @if($enrollment_periods)
+                  <input type="text" class="form-control is-disabled" id="enrollment" placeholder="Name"
                     value="Yes" disabled>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputGrade">Grade :</label>
-                  <input type="email" class="form-control is-disabled" id="exampleInputGrade" placeholder="10"
-                    value="10" disabled>
+                    @else
+                    <input type="text" class="form-control is-disabled" id="enrollment" placeholder="Name"
+                    value="No" disabled>
+                    @endif
                 </div>
                 <div class="form-group">
                   <label for="exampleInputGraduate">Graduated :</label>
-                  <input type="email" class="form-control is-disabled" id="exampleInputGraduate" placeholder="No"
+                  <input type="text" class="form-control is-disabled" id="graduation" placeholder="No"
                     value="" disabled>
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputID">Graduated :</label>
-                  <input type="email" class="form-control is-disabled" id="exampleInputID" placeholder="7889887"
-                    value="" disabled>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPhoneNo">Phone :</label>
-                  <input type="email" class="form-control is-disabled" id="exampleInputPhoneNo"
-                    placeholder="+91.898.889.8765" value="" disabled>
-                </div>
-
+                  <div class="form-group">
+                    <label for="exampleInputPhoneNo">Student Situation :</label>
+                    <textarea type="email" class="form-control is-disabled" id="student_situation" placeholder=""
+                      value="{{ $student->student_situation }}" disabled></textarea>
+                  </div>
               </div>
               <div class="col-12 pt-3 d-md-flex">
                 <button type="button"
                   class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2">Edit</button>
-                <button type="button"
+                <button type="submit"
                   class="btn btn-default btn-primary form-enable  btn-save js-save mr-2">Save</button>
                 <button type="button" class="btn btn-default btn-primary  btn-save js-cancel">Cancel</button>
               </div>
-
             </form>
           </div>
-
-
-
         </div>
       </div>
     </section>
+   
     <div class="modal fade bd-example-modal-lg" id="studentsDetailsModal" tabindex="-1" role="dialog"
         aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     );
     Route::post('deactive/{id}', 'ParentController@deactive')->name('deactive.parent');
+    Route::post('deactive_student/{id}', 'StudentProfileController@deactive')->name('deactive.student');
 
     // Crud for parent profile
     Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');

@@ -364,4 +364,17 @@ class StudentProfileController extends Controller
             }
         }
     }
+
+
+    public function deactive(Request $request)
+    {
+        $student = StudentProfile::find($request->get('id'));
+        $student->status = $request->get('student_status');
+        $student->save();
+        $notification = [
+            'message' => 'Student Record is Inactive!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
+    }
 }
