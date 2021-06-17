@@ -612,6 +612,7 @@
     });
 
 
+
     // dashboard admin record transfer doc for student
     $("#add-record-request").on("submit", function(event) {
         event.preventDefault();
@@ -1125,58 +1126,39 @@ $("#add-new-student").on("submit", function(event) {
         ]
     });
 
-// add student information
-$(".students_store").on("submit", function(event) {
+    // student panel - add graduation
+
+    $("#add-graduation").on("submit", function(event) {
         event.preventDefault();
-        var students_id= $('#students_id').val();
         var parent_id = $('#parent_id').val();
-        var first_name = $('#first_name').val();
-        var middle_name = $('#middle_name').val();
-        var last_name = $('#last_name').val();
-        var d_o_b = $('#d_o_b').val();
-        var gender = $('#gender').val();
-        var email= $('#email').val();
-        var cell_phone= $('#cell_phone').val();
-        var mothers_name = $('#mothers_name').val();
-        var birth_city = $('#birth_city').val();
-        var student_Id=$('#student_Id').val();
-        var immunized_status = $('#immunized_status').val();
-        var student_situation = $('#student_situation').val();
-        var url = "{{ route('admin.edit-student.update', ':student_id') }}";
-        url = url.replace(':student_id', student_id);
+        var student_id = $('#student_id').val();
+        var grade_9 = $('#grade_9').val();
+        var grade_10 = $('#grade_10').val();
+        var grade_11 = $('#grade_11').val();
+        var status = $('#status-graduation').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: url,
+            url: "{{ route('admin.add.graduation') }}",
             type: "POST",
 
             data: {
-                parent_id:parent_id,
-                students_id:students_id,
-                student_Id:student_Id,
-                first_name: first_name,
-                middle_name: middle_name,
-                last_name: last_name,
-                d_o_b: d_o_b,
-                email:email,
-                cell_phone:cell_phone,
-                gender: gender,
-                mothers_name: mothers_name,
-                birth_city: birth_city,
-                immunized_status: immunized_status,
-                student_situation: student_situation,
+                parent_id,
+                student_id,
+                grade_9,
+                grade_10,
+                grade_11,
+                status
             },
             success: function(response) {
                 location.reload();
             },
             error: function(response) {
-                dd($response)
-                
+
             }
         });
     });
-
 
 
     // check the archieve status

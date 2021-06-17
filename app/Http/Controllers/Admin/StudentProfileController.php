@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ConfirmationLetter;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
+use App\Models\Graduation;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
 use App\Models\TransactionsMethod;
@@ -84,6 +85,8 @@ class StudentProfileController extends Controller
     public function edit($id)
     {
         $student = StudentProfile::find($id);
+        $parent_id = $student->parent_profile_id;
+        //get parent info
         $parent = ParentProfile::whereId($student->parent_profile_id)->first();
 
         // information for enrollement tab
@@ -106,7 +109,7 @@ class StudentProfileController extends Controller
             ->get();
 
         // information for record trasnsfer tab
-        $schoolRecords = RecordTransfer::where('student_profile_id', $id)->get();
+        $recordTransfer = RecordTransfer::where('student_profile_id', $id)->get();
 
         // for transcript k-8
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
@@ -117,8 +120,10 @@ class StudentProfileController extends Controller
         $transcript9_12s = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcript9_12')
             ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
             ->get()->unique('transcript_id');
-        $uploadedDocuments = UploadDocuments::where('student_profile_id', $id)->get();
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'schoolRecords', 'transcript', 'transcript9_12s', 'uploadedDocuments', 'parent'));
+        $documents = UploadDocuments::where('student_profile_id', $id)->get();
+        //graduation
+        $graduations = Graduation::where('student_profile_id', $id)->get();
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcript', 'transcript9_12s', 'documents', 'parent_id', 'parent', 'graduations'));
     }
 
     /**

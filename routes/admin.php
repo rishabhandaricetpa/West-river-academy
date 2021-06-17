@@ -261,4 +261,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
     Route::post('create-parent', 'ParentController@createParent')->name('create.parent');
+    Route::post('add-graduation', 'DashboardController@addGraduation')->name('add.graduation');
 });

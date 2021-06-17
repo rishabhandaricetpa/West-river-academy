@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard;
+use App\Models\FeesInfo;
+use App\Models\Graduation;
+use App\Models\GraduationDetail;
+use App\Models\GraduationPayment;
 use App\Models\RecordTransfer;
 use App\Models\UploadDocuments;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use Exception;
 use File;
 use Storage;
 use Str;
@@ -108,5 +113,33 @@ class DashboardController extends Controller
         $recordTransfer->country = $request->get('country');
         $recordTransfer->last_grade = $request->get('last_grade');
         $recordTransfer->save();
+    }
+    public function addGraduation(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $graduation = new Graduation();
+            $graduation->parent_profile_id = $request->input('parent_id');
+            $graduation->student_profile_id = $request->input('student_id');
+            $graduation->grade_9_info = $request->input('grade_9');
+            $graduation->grade_10_info = $request->input('grade_10');
+            $graduation->grade_11_info = $request->input('grade_11');
+            $graduation->status = $request->input('status');
+            $graduation->save();
+
+            $graduation_details = new GraduationDetail();
+            $graduation_details->graduation_id = $graduation->id;
+            $graduation_details->grad_date = $graduation->created_at;
+            $graduation_details->save();
+
+            $graduation_payment = new GraduationPayment();
+            $graduation_payment->graduation_id = $graduation->id;
+            $graduation_payment->amount = FeesInfo::getFeeAmount('graduation'); 
+            $graduation_payment->save();
+            DB::commit();
+        } catch (Exception $e) {
+            report($e);
+            DB::rollBack();
+        }
     }
 }

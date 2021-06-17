@@ -53,6 +53,7 @@ select.form-control {
   padding: 3px;
 }
 
+
 textarea {
   resize: none;
 }
@@ -184,7 +185,7 @@ label.h3 {
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
-  background-color: $blue;
+  background-color: $secondary-color;
   transition: all ease 0.2s;
   -webkit-transition: all ease 0.2s;
   -moz-transition: all ease 0.2s;
@@ -223,6 +224,21 @@ label.h3 {
   label {
     font-size: 18px;
   }
+}
+select.dropdown-icon {
+  background-image:
+    linear-gradient(45deg, transparent 50%, $black 50%),
+    linear-gradient(135deg, $black 50%, transparent 50%),
+    linear-gradient(to right, $black, $black);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
 }
 
 input[type="checkbox"],
@@ -374,14 +390,7 @@ input[type="radio"]:checked:before {
   padding:5px;
 }
 }
-.sticky {
-  position: sticky;
-  top:0;
-  background:white;
-  z-index: 9;   
-  box-shadow: 0px 4px 10px rgb(246, 246, 246);
-  
-}
+
 
 
 
