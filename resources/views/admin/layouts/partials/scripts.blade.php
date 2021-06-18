@@ -586,13 +586,16 @@
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
 
-        var student_id = $('#student-name').val();
+        var student_id = $('#student_id').val();
         var parent_id = $('#parent_id').val();
-
+        var doc_type = $('#doc_type').val();
+        var is_upload = $('#is_upload:checked').val();
         data = new FormData();
         data.append('file', $('#file')[0].files[0]);
         data.append('parent_id', parent_id);
         data.append('student_id', student_id);
+        data.append('doc_type', doc_type);
+        data.append('is_upload', is_upload);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -617,7 +620,7 @@
     $("#add-record-request").on("submit", function(event) {
         event.preventDefault();
         console.log('created');
-        var student_id = $('#student-name').val();
+        var student_id = $('#student_id').val();
         var parent_id = $('#parent_id').val();
         var school_name = $('#school_name').val();
         var email_add = $('#email_add').val();
@@ -659,10 +662,10 @@
             }
         });
     });
-// add student information
-$(".students_store").on("submit", function(event) {
+    // add student information
+    $(".students_store").on("submit", function(event) {
         event.preventDefault();
-        var students_id= $('#students_id').val();
+        var students_id = $('#students_id').val();
         var parent_id = $('#parent_id').val();
         var first_name = $('#first_name').val();
         var middle_name = $('#middle_name').val();
@@ -702,11 +705,10 @@ $(".students_store").on("submit", function(event) {
                 student_situation: student_situation,
             },
             success: function(response) {
-dd($response);
+                dd($response);
             },
             error: function(response) {
                 dd($response)
-                
             }
         });
     });
@@ -753,8 +755,10 @@ dd($response);
         });
     });
 
+    // add new student from admin 
 // add new student from admin 
-$("#add-new-student").on("submit", function(event) {
+    // add new student from admin 
+    $("#add-new-student").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
         var first_name = $('#first_name').val();
@@ -1327,9 +1331,9 @@ $("#add-new-student").on("submit", function(event) {
 
     })
 
-//change student status
+    //change student status
 
-$('#student_status').change(function() {
+    $('#student_status').change(function() {
         var student_status = $('#student_status').val();
         var id = $('#id').val();
         var url = "{{ route('admin.deactive.student', ':id') }}";

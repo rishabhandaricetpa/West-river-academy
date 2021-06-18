@@ -91,6 +91,12 @@ class DashboardController extends Controller
         $uploadDocument->parent_profile_id = $request->parent_id;
         $uploadDocument->original_filename = $request->file->getClientOriginalName();
         $uploadDocument->filename = $path;
+        if ($request->is_upload == 1) {
+            $uploadDocument->is_upload_to_student = 1;
+        } else {
+            $uploadDocument->is_upload_to_student = 0;
+        }
+        $uploadDocument->document_type = $request->doc_type;
         $uploadDocument->save();
         if ($request->expectsJson()) {
             return response()->json(['status' => 'success', 'message' => 'Student updated successfully']);
@@ -134,7 +140,7 @@ class DashboardController extends Controller
 
             $graduation_payment = new GraduationPayment();
             $graduation_payment->graduation_id = $graduation->id;
-            $graduation_payment->amount = FeesInfo::getFeeAmount('graduation'); 
+            $graduation_payment->amount = FeesInfo::getFeeAmount('graduation');
             $graduation_payment->save();
             DB::commit();
         } catch (Exception $e) {
