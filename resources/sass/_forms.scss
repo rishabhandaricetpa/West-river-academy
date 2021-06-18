@@ -224,21 +224,33 @@ label.h3 {
   label {
     font-size: 18px;
   }
+}   
+select.dropdown-icon {
+  background-color: $primary;
+  border-radius: 10px;
+  border: none;
+  font: inherit;
+  padding: .3rem 2rem .3rem .5rem;
+  /* reset */
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 select.dropdown-icon {
   background-image:
-    linear-gradient(45deg, transparent 50%, $black 50%),
-    linear-gradient(135deg, $black 50%, transparent 50%),
-    linear-gradient(to right, $black, $black);
-  background-position:
-    calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px),
-    calc(100% - 2.5em) 0.5em;
-  background-size:
-    5px 5px,
-    5px 5px,
-    1px 1.5em;
-  background-repeat: no-repeat;
+  linear-gradient(45deg, transparent 50%, $black 50%),
+  linear-gradient(135deg, $black 50%, transparent 50%);
+background-position:
+  calc(100% - 20px) calc(1rem - 2px),
+  calc(100% - 15px) calc(1rem - 2px);
+background-size:
+  5px 5px,
+  5px 5px,
+  1.5rem 1.5rem;
+background-repeat: no-repeat;
 }
 
 input[type="checkbox"],

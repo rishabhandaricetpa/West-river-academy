@@ -305,11 +305,10 @@ sup {
 }
 
 .table-vertical_scroll {
-  thead tr th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: #ccc;
+  thead {
+    position: sticky;     
+    top:-1px;
+    z-index: 5;
   }
 }
 

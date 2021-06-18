@@ -38,7 +38,7 @@
             {{ $parent->p1_last_name }} {{ $parent->p2_first_name }} {{ $parent->p2_middle_name }}
             {{ $parent->p2_last_name }}</h2>
           <div class="form-group mb-0">
-            <select required class="btn btn-primary dropdown-toggle dropdown-icon" id="parent_status">
+            <select required class="dropdown-icon" id="parent_status">
               <option @if($parent->status === 0) selected @endif value="0">Active</option>
               <option @if($parent->status === 1) selected @endif value="1">Inactive</option>
             </select>
