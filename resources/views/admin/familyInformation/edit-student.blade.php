@@ -45,10 +45,11 @@
                             {{-- -------------- first tab --}}
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
-                                    <h2 class="pr-3">{{ $student->fullname }} </h2>
+                                    <h2 class="pr-3"><a
+                                            href="{{ route('admin.parent.edit', $parent_id) }}">{{ $student->fullname }}</a>
+                                    </h2>
                                     <div class="form-group mb-0">
-                                        <select required class="dropdown-icon"
-                                            id="student_status">
+                                        <select required class="dropdown-icon" id="student_status">
                                             <option @if ($student->status === 0) selected @endif value="0">Active</option>
                                             <option @if ($student->status === 1) selected @endif value="1">Inactive</option>
                                         </select>

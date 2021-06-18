@@ -755,7 +755,7 @@
         });
     });
 
-  
+
     // add new student from admin 
     $("#add-new-student").on("submit", function(event) {
         event.preventDefault();
@@ -896,7 +896,7 @@
                 p2_zip_code: p2_zip_code,
             },
             success: function(response) {
-                location.reload();
+               // location.reload();
             },
             error: function(response) {
                 // dd($response)

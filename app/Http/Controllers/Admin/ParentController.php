@@ -118,19 +118,6 @@ class ParentController extends Controller
             'alert-type' => 'Success',
         ];
         return redirect()->back()->with($notification);
-        // } else {
-        //     $studentProfileData = StudentProfile::find($parent)->first();
-        //     $parent->status = '1';
-        //     $parent->save();
-        //     // $studentProfileData->status = '1';
-        //     // $studentProfileData->save();
-        //     $notification = [
-        //         'message' => 'Parent Record is Deactivated Successfully!',
-        //         'alert-type' => 'Success',
-        //     ];
-
-        //     return redirect()->back()->with($notification);
-        // }
     }
     /**
      * Show the form for creating a new resource.
@@ -197,18 +184,22 @@ class ParentController extends Controller
             $parent->zip_code = $request->get('zip_code');
             $parent->p1_cell_phone = $request->get('p1_cell_phone');
             $parent->p1_home_phone = $request->get('p1_home_phone');
-            $parent->p2_first_name = $request->get('p2_first_name');
-            $parent->p2_middle_name = $request->get('p2_middle_name');
-            $parent->p2_email = $request->get('p2_email');
-            $parent->p2_cell_phone = $request->get('p2_cell_phone');
-            $parent->p2_home_phone = $request->get('p2_home_phone');
+
             $parent->street_address = $request->get('street_address');
             $parent->city = $request->get('city');
             $parent->state = $request->get('state');
             $parent->country = $request->get('country');
             $parent->reference = $request->get('reffered');
             $parent->immunized = $request->get('immunized');
-            $parent->p2_street_address = $request->get('street_address');
+
+
+            $parent->p2_first_name = $request->get('p2_first_name');
+            $parent->p2_last_name = $request->get('p2_last_name');
+            $parent->p2_middle_name = $request->get('p2_middle_name');
+            $parent->p2_email = $request->get('p2_email');
+            $parent->p2_cell_phone = $request->get('p2_cell_phone');
+            $parent->p2_home_phone = $request->get('p2_home_phone');
+            $parent->p2_street_address = $request->get('p2_street_address');
             $parent->p2_city = $request->get('p2_city');
             $parent->p2_state = $request->get('p2_state');
             $parent->p2_country = $request->get('p2_country');
@@ -224,7 +215,7 @@ class ParentController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',
@@ -254,6 +245,7 @@ class ParentController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',
@@ -370,7 +362,7 @@ class ParentController extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
 
             return redirect()->back();
