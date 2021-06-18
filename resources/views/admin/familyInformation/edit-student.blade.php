@@ -195,11 +195,11 @@
                     </section>
 
                     <div class="modal fade bd-example-modal-lg" id="studentsDetailsModal" tabindex="-1" role="dialog"
-                        aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
+                        aria-labelledby="studentGraduationModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="studentDetailsModalLabel">Add New Student</h5>
+                                    <h5 class="modal-title" id="studentGraduationModalLabel">Add New Student</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -310,6 +310,8 @@
                                 role="tab" aria-controls="studentActivity" aria-selected="true">Activity</a>
                             <a class="nav-link" id="studentEnrollments-tab" data-toggle="tab" href="#studentEnrollments"
                                 role="tab" aria-controls="studentEnrollments" aria-selected="false">Enrollments</a>
+                                <a class="nav-link" id="studentGraduation-tab" data-toggle="tab" href="#studentGraduation"
+                                role="tab" aria-controls="studentGraduation" aria-selected="false">Graduation</a>
                             <a class="nav-link" id="studentTranscript-tab" data-toggle="tab" href="#studentTranscript"
                                 role="tab" aria-controls="studentTranscript" aria-selected="false">Transcript</a>
                             <a class="nav-link" id="studentRecords-tab" data-toggle="tab" href="#studentRecords" role="tab"
@@ -720,6 +722,149 @@
                                     </form>
                                 </div>
                             </div>
+                        </div>
+                        {{-- Graduation --}}
+                        <div class="tab-pane fade" id="studentGraduation" role="tabpanel"
+                            aria-labelledby="studentGraduation-tab">
+                            <section id="student-details">
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="overflow-auto max-table">
+                                      <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                        <thead class="thead-light">
+                                          <tr>
+                                            <th scope="col">Student Name</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Date of Birth</th>
+                                            <th scope="col">Grade</th>
+                                            <th scope="col">Enrolled</th>
+                                            <th scope="col">Graduated</th>
+                                            <th scope="col">Email</th>
+                                            <th>Delete</th>
+                                            <th scope="col"><button type="button" class="btn btn-modal ml-3" data-toggle="modal"
+                                                data-target="#studentGraduationModal" data-whatever="@getbootstrap"><img src="/images/add.png"
+                                                  alt=""><img src="/images.add.png" alt=""></button></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Melissa Manisha</td>
+                                            <td>Female</td>
+                                            <td>MM/DD/YY</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                              <div class="modal fade bd-example-modal-lg" id="studentGraduationModal" tabindex="-1" role="dialog"
+                                aria-labelledby="studentGraduationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="studentGraduationModalLabel">Add New Student</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form id="add-new-student">
+                                        <div class="row">
+                        
+                                          <div class="col-lg-4 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">First Name:</label>
+                                              <input class="form-control" type="text" id='first_name'>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" value="" id='parent_id' name="parent_id">
+                        
+                                          <div class="col-lg-4 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">Middle Name:</label>
+                                              <input type="text" id="middle_name" class="form-control">
+                                            </div>
+                                          </div>
+                        
+                                          <div class="col-lg-4 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">Last/Family Name:</label>
+                                              <input type="text" id="last_name" required class="form-control">
+                                            </div>
+                                          </div>
+                        
+                                          <div class="col-12">
+                                            <div class="form-group lato-italic info-detail d-flex">
+                                              <div>
+                                                <label for="">Gender <sup>*</sup></label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
+                                                <label class="form-check-label pl-1 pl-sm-0">
+                                                  Male
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
+                                                <label class="form-check-label pl-1 pl-sm-0">
+                                                  Female
+                                                </label>
+                                              </div>
+                                            </div>
+                                          </div>
+                        
+                                          <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">Date of Birth:</label>
+                                              <input type="text" id="d_o_b" class="form-control datepicker" required>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">Email Address
+                                              </label>
+                                              <input type="email" id="email" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">Cell Phone</label>
+                                              <input type="text" id="phone" class="form-control">
+                                            </div>
+                                          </div>
+                        
+                                          <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">National ID
+                                              </label>
+                                              <input type="text" id="student_id" class="form-control">
+                                            </div>
+                                          </div>
+                        
+                                          <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                              <label for="message-text" class="col-form-label">Is this student immunized?
+                                              </label>
+                                              <input type="text" id="immunized_status" class="form-control">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                         </div>
                         {{-- transcript --}}
                         <div class="tab-pane fade" id="studentTranscript" role="tabpanel"
