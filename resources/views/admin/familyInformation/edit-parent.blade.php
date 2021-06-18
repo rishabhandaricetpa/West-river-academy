@@ -778,7 +778,6 @@
                     <label for="recipient-name" class="col-form-label">Enrollment Payment Status</label>
                     <select id="enrollment_status" required class="form-control">
                       <option value="paid">Paid</option>
-                      <option value="pending">Pending</option>
                     </select>
                   </div>
                   <div class="form-group  col-md-6">

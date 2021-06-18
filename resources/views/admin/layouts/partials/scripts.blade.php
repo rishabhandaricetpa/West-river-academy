@@ -195,7 +195,7 @@
                 }, {
                     "data": "id",
                     "render": function(id) {
-                        return  `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
+                        return `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
                     }
                 }, {
                     "data": "id",
@@ -672,11 +672,11 @@
         var last_name = $('#last_name').val();
         var d_o_b = $('#d_o_b').val();
         var gender = $('#gender').val();
-        var email= $('#email').val();
-        var cell_phone= $('#cell_phone').val();
+        var email = $('#email').val();
+        var cell_phone = $('#cell_phone').val();
         var mothers_name = $('#mothers_name').val();
         var birth_city = $('#birth_city').val();
-        var student_Id=$('#student_Id').val();
+        var student_Id = $('#student_Id').val();
         var immunized_status = $('#immunized_status').val();
         var student_situation = $('#student_situation').val();
         var url = "{{ route('admin.edit-student.update', ':students_id') }}";
@@ -689,15 +689,15 @@
             type: "POST",
 
             data: {
-                parent_id:parent_id,
-                students_id:students_id,
-                student_Id:student_Id,
+                parent_id: parent_id,
+                students_id: students_id,
+                student_Id: student_Id,
                 first_name: first_name,
                 middle_name: middle_name,
                 last_name: last_name,
                 d_o_b: d_o_b,
-                email:email,
-                cell_phone:cell_phone,
+                email: email,
+                cell_phone: cell_phone,
                 gender: gender,
                 mothers_name: mothers_name,
                 birth_city: birth_city,
@@ -755,8 +755,7 @@
         });
     });
 
-    // add new student from admin 
-// add new student from admin 
+  
     // add new student from admin 
     $("#add-new-student").on("submit", function(event) {
         event.preventDefault();
@@ -890,11 +889,11 @@
                 p2_email: p2_email,
                 p2_cell_phone: p2_cell_phone,
                 p2_home_phone: p2_home_phone,
-                p2_street_address:p2_street_address,
-                p2_city:p2_city,
-                p2_state:p2_state,
-                p2_country:p2_country,
-                p2_zip_code:p2_zip_code,
+                p2_street_address: p2_street_address,
+                p2_city: p2_city,
+                p2_state: p2_state,
+                p2_country: p2_country,
+                p2_zip_code: p2_zip_code,
             },
             success: function(response) {
                 location.reload();
@@ -1112,12 +1111,12 @@
                 parent2_email: parent2_email,
                 parent2_cell_phone: parent2_cell_phone,
                 parent2_home_phone: parent2_home_phone,
-                parent1_street_address:parent1_street_address,
-                parent1_city:parent1_city,
-                parent1_state:parent1_state,
-                parent2_country:parent2_country,
-                parent2_zip_code:parent2_zip_code,
-                reference:reference,
+                parent1_street_address: parent1_street_address,
+                parent1_city: parent1_city,
+                parent1_state: parent1_state,
+                parent2_country: parent2_country,
+                parent2_zip_code: parent2_zip_code,
+                reference: reference,
             },
             success: function(response) {
                 location.reload();

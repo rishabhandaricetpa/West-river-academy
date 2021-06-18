@@ -96,6 +96,7 @@ class StudentProfileController extends Controller
             ->where('student_profile_id', $id)
             ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
+                'enrollment_periods.created_at',
                 'enrollment_periods.enrollment_payment_id',
                 'enrollment_payments.amount',
                 'enrollment_payments.status',
@@ -104,7 +105,8 @@ class StudentProfileController extends Controller
                 'enrollment_periods.start_date_of_enrollment',
                 'enrollment_periods.end_date_of_enrollment',
                 'enrollment_periods.grade_level',
-                'enrollment_payments.id'
+                'enrollment_payments.id',
+                'enrollment_periods.student_profile_id'
             )
             ->get();
 

@@ -481,12 +481,13 @@
                                             <table class="table table-striped table-styling w-100 table-vertical_scroll">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th scope="col">Date Created</th>
-                                                        <th scope="col">Date Begins</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Student Name</th>
+                                                        <th scope="col">Start Date</th>
                                                         <th scope="col">End Date</th>
                                                         <th scope="col">Grade</th>
-                                                        <th scope="col">Confirmation Letter</th>
                                                         <th scope="col">Status</th>
+                                                        <th scope="col">Details</th>
                                                         <th scope="col" class="text-right"><button type="button"
                                                                 class="btn btn-modal ml-3" data-toggle="modal"
                                                                 data-target="#enrollmentsModal"
@@ -495,16 +496,30 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>MM/DD/YY</td>
-                                                        <td>MM/DD/YY</td>
-                                                        <td>MM/DD/YY</td>
-                                                        <td>12</td>
-                                                        <td>YES</td>
-                                                        <td>Acitive</td>
-                                                        <td><a href="#"><i class=" fas fa-edit"></i></a></td>
-                                                    </tr>
-
+                                                    @foreach ($payment_info as $payment)
+                                                        <tr>
+                                                            <td>{{ Carbon\Carbon::parse($payment->created_at)->format('M j, Y') }}
+                                                            </td>
+                                                            <td>{{ getStudentData($payment->student_profile_id) }}</td>
+                                                            <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
+                                                            </td>
+                                                            <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
+                                                            </td>
+                                                            <td>{{ $payment->grade_level }}</td>
+                                                            @if ($payment->status === 'paid')
+                                                                <td>Paid</td>
+                                                            @elseif($payment->status ==='pending')
+                                                                <td>Pending</td>
+                                                            @endif
+                                                            <td>
+                                                                <a
+                                                                    href=" {{ route('admin.edit.payment.status', $payment->id) }}"><i
+                                                                        class=" fas fa-edit"
+                                                                        onclick="return myFunction();"></i></a>
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -525,14 +540,10 @@
                                             <form id="add-new-enrollments">
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">For
-                                                            student</label>
-                                                        <select id="student-name" class="form-control">
-
-                                                            <option value="" id="student_name"></option>
-
-                                                        </select>
-                                                        <input type="hidden" value="" id='parent_id' name="parent_id">
+                                                        <input type="hidden" value="{{ $parent_id }}" id='parent_id'
+                                                            name="parent_id" class="form-control">
+                                                        <input type="hidden" value="{{ $student->id }}" id='student_name'
+                                                            name="student_name" class="form-control">
                                                     </div>
                                                     <div class="form-group  col-md-6">
                                                         <label for="recipient-name" class="col-form-label">Enrollment
@@ -687,7 +698,6 @@
                                                             Payment Status</label>
                                                         <select id="enrollment_status" required class="form-control">
                                                             <option value="paid">Paid</option>
-                                                            <option value="pending">Pending</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group  col-md-6">
