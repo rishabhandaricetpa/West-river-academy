@@ -996,6 +996,7 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Date</th>
+                                            <th scope="col">Student Name</th>
                                             <th scope="col">File Name</th>
                                             <th scope="col">Document Type</th>
                                             <th scope="col">View Documents</th>
@@ -1005,12 +1006,14 @@
                                                     data-target="#documentsModal" data-whatever="@getbootstrap"><img
                                                         src="/images/add.png" alt=""><img src="/images.add.png"
                                                         alt=""></button></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($documents as $document)
                                             <tr>
                                                 <td>{{ $document->created_at->format('M j,Y') }}</td>
+                                                <td>{{ $document['student']['fullname'] }}</td>
                                                 <td>{{ $document->original_filename }}</td>
                                                 <td>{{ $document->document_type }}</td>
                                                 <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
@@ -1041,8 +1044,9 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="form-group col-md-6">
+
                                             <label for="recipient-name" class="col-form-label">For student</label>
-                                            <select id="student-name" class="form-control">
+                                            <select id="student_idd" class="form-control">
                                                 @foreach ($allstudent as $student)
                                                     <option value="{{ $student->id }}">{{ $student->first_name }}
                                                     </option>
@@ -1050,6 +1054,17 @@
                                             </select>
                                             <input type="hidden" value="{{ $parent->id }}" id='parent_id'
                                                 name="parent_id">
+                                            <div class="form-group col-md-6">
+                                                <label for="message-text" class="col-form-label">
+                                                    Want to upload in Student Dashboard *</label>
+                                                <input type="checkbox" id="is_upload" value="1"
+                                                    class="form-control choose-btn">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="message-text" class="col-form-label">
+                                                    Document Type</label>
+                                                <textarea id="doc_type" class="form-control choose-btn" required></textarea>
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="message-text" class="col-form-label">Upload Document</label>

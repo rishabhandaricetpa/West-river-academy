@@ -23,7 +23,7 @@ class CreateStudentProfilesTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('d_o_b')->nullable();
             $table->boolean('mothers_name')->nullable();
-            $table->boolean('birth_city')->nullable();
+            $table->string('birth_city')->nullable();
             $table->string('email')->nullable();
             $table->string('cell_phone')->nullable();
             $table->string('student_Id')->nullable();

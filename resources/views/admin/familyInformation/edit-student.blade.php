@@ -60,13 +60,14 @@
 
                                 {{-- student detil-1 --}}
                                 <div class="col-md-12">
-                                    <form class="is-readonly row students_store" id="sampleForm">
+                                    <form class="is-readonly row students_store" id="studentForm1"
+                                        class="edit-student-profile">
                                         <div class="col-md-6">
                                             {{-- <h3 class="mt-3">student-details-1</h3> --}}
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">First Name :</label>
                                                 <input type="text" class="form-control is-disabled" id="first_name"
-                                                    placeholder="" value="{{ $student->first_name }}" disabled>
+                                                    placeholder="" value="{{ $student->first_name }}">
                                                 <input type='hidden' id="parent_id" name="parent_id"
                                                     value="{{ $student->parent_profile_id }}">
                                                 <input type='hidden' id="students_id" name="students_id"
@@ -75,18 +76,18 @@
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Middle Name :</label>
                                                 <input type="text" class="form-control is-disabled" id="middle_name"
-                                                    placeholder="Name" value="{{ $student->middle_name }}" disabled>
+                                                    placeholder="Name" value="{{ $student->middle_name }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Last Name :</label>
                                                 <input type="text" class="form-control is-disabled" id="last_name"
-                                                    placeholder="Name" value="{{ $student->last_name }}" disabled>
+                                                    placeholder="Name" value="{{ $student->last_name }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputDOB">Date Of Birth :</label>
                                                 <input type="text" class="form-control is-disabled" id="d_o_b"
                                                     placeholder="MM/DD/YYYY"
-                                                    value="{{ $student->d_o_b->format('F j, Y') }}" disabled>
+                                                    value="{{ $student->d_o_b->format('F j, Y') }}">
                                             </div>
                                             <div class="form-group lato-italic info-detail d-flex py-1">
                                                 <div>
@@ -94,14 +95,16 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender" id="gender"
-                                                        value="Male" required>
+                                                        value="Male" {{ $student->gender == 'Male' ? 'checked' : '' }} 
+                                                        required>
                                                     <label class="form-check-label pl-1 pl-sm-0">
                                                         Male
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        value="Female" id="gender">
+                                                     value="Female" {{ $student->gender == 'Female' ? 'checked' : '' }}
+                                                        id="gender">
                                                     <label class="form-check-label pl-1 pl-sm-0">
                                                         Female
                                                     </label>
@@ -110,22 +113,22 @@
                                             <div class="form-group">
                                                 <label for="exampleInputMothersName">Email :</label>
                                                 <input type="email" class="form-control is-disabled" id="email"
-                                                    placeholder="" value="{{ $student->email }}" disabled>
+                                                    placeholder="" value="{{ $student->email }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputMothersName">Phone :</label>
                                                 <input type="text" class="form-control is-disabled" id="cell_phone"
-                                                    placeholder="" value="{{ $student->cell_phone }}" disabled>
+                                                    placeholder="" value="{{ $student->cell_phone }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputMothersName">National Id :</label>
-                                                <input type="text" class="form-control is-disabled" id="student_Id"
-                                                    placeholder="" value="{{ $student->student_Id }}" disabled>
+                                                <input type="text" class="form-control is-disabled" id="national_ID"
+                                                    placeholder="" value="{{ $student->student_Id }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputMothersName">Birth City :</label>
                                                 <input type="text" class="form-control is-disabled" id="birth_city"
-                                                    placeholder="" value="{{ $student->birth_city }}" disabled>
+                                                    placeholder="" value="{{ $student->birth_city }}">
                                             </div>
 
                                         </div>
@@ -136,48 +139,53 @@
                                             {{-- <h3 class="mt-3">student-details-2</h3> --}}
                                             <div class="form-group">
                                                 <label for="exampleInputParent1">Parent - 1 :</label>
-                                                <input type="text" class="form-control is-disabled" id="p1_last_name"
+                                                <input type="text" class="form-control is-disabled" id="p1_name"
                                                     placeholder="Name"
                                                     value="{{ $parent->p1_first_name }} {{ $parent->p1_last_name }}"
-                                                    disabled>
+                                                    readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputParent2">Parent - 2 :</label>
                                                 <input type="text" class="form-control is-disabled" id="p2_last_name"
                                                     placeholder="Name"
                                                     value="{{ $parent->p2_first_name }} {{ $parent->p2_last_name }}"
-                                                    disabled>
+                                                    readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputMothersName">Mother' Maiden Name :</label>
                                                 <input type="text" class="form-control is-disabled" id="mothers_name"
-                                                    placeholder="" value="{{ $student->mothers_name }}" disabled>
+                                                    placeholder="" value="{{ $student->mothers_name }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputStatus">Immunization Status :</label>
                                                 <input type="text" class="form-control is-disabled" id="immunized_status"
-                                                    placeholder="" value="{{ $student->immunized_status }}" disabled>
+                                                    placeholder="" value="{{ $student->immunized_status }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEnrolled">Enrolled :</label>
                                                 @if ($enrollment_periods)
                                                     <input type="text" class="form-control is-disabled" id="enrollment"
-                                                        placeholder="Name" value="Yes" disabled>
+                                                        placeholder="Name" value="Yes" readonly>
                                                 @else
                                                     <input type="text" class="form-control is-disabled" id="enrollment"
-                                                        placeholder="Name" value="No" disabled>
+                                                        placeholder="Name" value="No" readonly>
                                                 @endif
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputGraduate">Graduated :</label>
-                                                <input type="text" class="form-control is-disabled" id="graduation"
-                                                    placeholder="No" value="" disabled>
+                                                @if ($graduations)
+                                                    <input type="text" class="form-control is-disabled" id="graduation"
+                                                        placeholder="Yes" value="Yes" readonly>
+                                                @else
+                                                    <input type="text" class="form-control is-disabled" id="graduation"
+                                                        placeholder="No" value="No" readonly>
+                                                @endif
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPhoneNo">Student Situation :</label>
                                                 <textarea type="email" class="form-control is-disabled"
                                                     id="student_situation" placeholder=""
-                                                    value="{{ $student->student_situation }}" disabled></textarea>
+                                                    value="{{ $student->student_situation }}"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12 pt-3 d-md-flex">
@@ -310,7 +318,7 @@
                                 role="tab" aria-controls="studentActivity" aria-selected="true">Activity</a>
                             <a class="nav-link" id="studentEnrollments-tab" data-toggle="tab" href="#studentEnrollments"
                                 role="tab" aria-controls="studentEnrollments" aria-selected="false">Enrollments</a>
-                                <a class="nav-link" id="studentGraduation-tab" data-toggle="tab" href="#studentGraduation"
+                            <a class="nav-link" id="studentGraduation-tab" data-toggle="tab" href="#studentGraduation"
                                 role="tab" aria-controls="studentGraduation" aria-selected="false">Graduation</a>
                             <a class="nav-link" id="studentTranscript-tab" data-toggle="tab" href="#studentTranscript"
                                 role="tab" aria-controls="studentTranscript" aria-selected="false">Transcript</a>
@@ -343,96 +351,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>notes</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora rerum enim voluptates
-                                                            vel necessitatibus possimus mollitia. Odio quam iusto aut
-                                                            voluptates beatae animi doloribus
-                                                            illo officia recusandae quidem dolore, sunt in iste aspernatur,
-                                                            odit voluptas reprehenderit
-                                                            blanditiis repudiandae quasi ullam obcaecati explicabo corrupti
-                                                            laborum! Error perferendis
-                                                            recusandae tempora totam eligendi.</td>
-                                                        <td>
-                                                            <!--keep a extra td-->
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>notes</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora rerum enim voluptates
-                                                            vel necessitatibus possimus mollitia. Odio quam iusto aut
-                                                            voluptates beatae animi doloribus
-                                                            illo officia recusandae quidem dolore, sunt in iste aspernatur,
-                                                            odit voluptas reprehenderit
-                                                            blanditiis repudiandae quasi ullam obcaecati explicabo corrupti
-                                                            laborum! Error perferendis
-                                                            recusandae tempora totam eligendi.</td>
-                                                        <td>
-                                                            <!--keep a extra td-->
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>notes</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora rerum enim voluptates
-                                                            vel necessitatibus possimus mollitia. Odio quam iusto aut
-                                                            voluptates beatae animi doloribus
-                                                            illo officia recusandae quidem dolore, sunt in iste aspernatur,
-                                                            odit voluptas reprehenderit
-                                                            blanditiis repudiandae quasi ullam obcaecati explicabo corrupti
-                                                            laborum! Error perferendis
-                                                            recusandae tempora totam eligendi.</td>
-                                                        <td>
-                                                            <!--keep a extra td-->
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>notes</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora rerum enim voluptates
-                                                            vel necessitatibus possimus mollitia. Odio quam iusto aut
-                                                            voluptates beatae animi doloribus
-                                                            illo officia recusandae quidem dolore, sunt in iste aspernatur,
-                                                            odit voluptas reprehenderit
-                                                            blanditiis repudiandae quasi ullam obcaecati explicabo corrupti
-                                                            laborum! Error perferendis
-                                                            recusandae tempora totam eligendi.</td>
-                                                        <td>
-                                                            <!--keep a extra td-->
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>notes</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora rerum enim voluptates
-                                                            vel necessitatibus possimus mollitia. Odio quam iusto aut
-                                                            voluptates beatae animi doloribus
-                                                            illo officia recusandae quidem dolore, sunt in iste aspernatur,
-                                                            odit voluptas reprehenderit
-                                                            blanditiis repudiandae quasi ullam obcaecati explicabo corrupti
-                                                            laborum! Error perferendis
-                                                            recusandae tempora totam eligendi.</td>
-                                                        <td>
-                                                            <!--keep a extra td-->
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>notes</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora rerum enim voluptates
-                                                            vel necessitatibus possimus mollitia. Odio quam iusto aut
-                                                            voluptates beatae animi doloribus
-                                                            illo officia recusandae quidem dolore, sunt in iste aspernatur,
-                                                            odit voluptas reprehenderit
-                                                            blanditiis repudiandae quasi ullam obcaecati explicabo corrupti
-                                                            laborum! Error perferendis
-                                                            recusandae tempora totam eligendi.</td>
-                                                        <td>
-                                                            <!--keep a extra td-->
-                                                        </td>
-                                                    </tr>
+                                                    @foreach ($notes as $note)
+                                                        <tr>
+                                                            <td>{{ $note->created_at->format('M j, Y') }}</td>
+                                                            <td>{{ $note->notes }}</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -451,17 +376,17 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="add-new-Student-activity">
+                                            <form id="add-new-notes">
                                                 <div class="form-group">
-                                                    <label for="recipient-name" class="col-form-label">For student</label>
-                                                    <select id="student-name" class="form-control">
-                                                        <option value="" id="student_name_for_Student-activity"></option>
-                                                    </select>
-                                                    <input class="form-control" type="hidden" value="" id='' name="">
+                                                    <input type="hidden" value="{{ $student->id }}"
+                                                        id="student_name_for_notes">
+                                                    <input class="form-control" type="hidden" value="{{ $parent->id }}"
+                                                        id='parent_id'>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">Notes:</label>
-                                                    <textarea class="form-control" id="message_text"></textarea>
+                                                    <textarea id="message_text" class="form-control"
+                                                        id="message_text"></textarea>
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -728,143 +653,132 @@
                             aria-labelledby="studentGraduation-tab">
                             <section id="student-details">
                                 <div class="row">
-                                  <div class="col-12">
-                                    <div class="overflow-auto max-table">
-                                      <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                                        <thead class="thead-light">
-                                          <tr>
-                                            <th scope="col">Student Name</th>
-                                            <th scope="col">Gender</th>
-                                            <th scope="col">Date of Birth</th>
-                                            <th scope="col">Grade</th>
-                                            <th scope="col">Enrolled</th>
-                                            <th scope="col">Graduated</th>
-                                            <th scope="col">Email</th>
-                                            <th>Delete</th>
-                                            <th scope="col"><button type="button" class="btn btn-modal ml-3" data-toggle="modal"
-                                                data-target="#studentGraduationModal" data-whatever="@getbootstrap"><img src="/images/add.png"
-                                                  alt=""><img src="/images.add.png" alt=""></button></th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td>Melissa Manisha</td>
-                                            <td>Female</td>
-                                            <td>MM/DD/YY</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                    <div class="col-12">
+                                        <div class="overflow-auto max-table">
+                                            <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">Date Applied</th>
+                                                        <th scope="col">Grade 9</th>
+                                                        <th scope="col">Grade 10</th>
+                                                        <th scope="col">Grade 11</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">View</th>
+                                                        <th scope="col"><button type="button" class="btn btn-modal ml-3"
+                                                                data-toggle="modal" data-target="#studentGraduationModal"
+                                                                data-whatever="@getbootstrap"><img src="/images/add.png"
+                                                                    alt=""><img src="/images.add.png" alt=""></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($graduations as $graduation)
+                                                        <tr>
+                                                            <td>{{ $graduation->created_at->format('M j, Y') }}</td>
+                                                            <td>{{ $graduation->grade_9_info }}</td>
+                                                            <td>{{ $graduation->grade_10_info }}</td>
+                                                            <td>{{ $graduation->grade_11_info }}</td>
+                                                            <td>{{ $graduation->status }}</td>
+                                                            <td><a
+                                                                    href="{{ route('admin.edit.graduation', $graduation->id) }}">View
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </section>
-                              <div class="modal fade bd-example-modal-lg" id="studentGraduationModal" tabindex="-1" role="dialog"
-                                aria-labelledby="studentGraduationModalLabel" aria-hidden="true">
+                            </section>
+                            <div class="modal fade bd-example-modal-lg" id="studentGraduationModal" tabindex="-1"
+                                role="dialog" aria-labelledby="studentGraduationModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="studentGraduationModalLabel">Add New Student</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form id="add-new-student">
-                                        <div class="row">
-                        
-                                          <div class="col-lg-4 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">First Name:</label>
-                                              <input class="form-control" type="text" id='first_name'>
-                                            </div>
-                                          </div>
-                                          <input type="hidden" value="" id='parent_id' name="parent_id">
-                        
-                                          <div class="col-lg-4 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">Middle Name:</label>
-                                              <input type="text" id="middle_name" class="form-control">
-                                            </div>
-                                          </div>
-                        
-                                          <div class="col-lg-4 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">Last/Family Name:</label>
-                                              <input type="text" id="last_name" required class="form-control">
-                                            </div>
-                                          </div>
-                        
-                                          <div class="col-12">
-                                            <div class="form-group lato-italic info-detail d-flex">
-                                              <div>
-                                                <label for="">Gender <sup>*</sup></label>
-                                              </div>
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="gender" value="Male" required>
-                                                <label class="form-check-label pl-1 pl-sm-0">
-                                                  Male
-                                                </label>
-                                              </div>
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" value="Female" id="gender">
-                                                <label class="form-check-label pl-1 pl-sm-0">
-                                                  Female
-                                                </label>
-                                              </div>
-                                            </div>
-                                          </div>
-                        
-                                          <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">Date of Birth:</label>
-                                              <input type="text" id="d_o_b" class="form-control datepicker" required>
-                                            </div>
-                                          </div>
-                                          <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">Email Address
-                                              </label>
-                                              <input type="email" id="email" class="form-control">
-                                            </div>
-                                          </div>
-                                          <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">Cell Phone</label>
-                                              <input type="text" id="phone" class="form-control">
-                                            </div>
-                                          </div>
-                        
-                                          <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">National ID
-                                              </label>
-                                              <input type="text" id="student_id" class="form-control">
-                                            </div>
-                                          </div>
-                        
-                                          <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                              <label for="message-text" class="col-form-label">Is this student immunized?
-                                              </label>
-                                              <input type="text" id="immunized_status" class="form-control">
-                                            </div>
-                                          </div>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="studentGraduationModalLabel">Add New Student</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                          <button type="submit" class="btn btn-primary">Save</button>
+                                        <div class="modal-body">
+                                            <form id="add-graduation">
+                                                <div class="form-group">
+                                                    <input type="hidden" value="{{ $parent_id }}" id='parent_id'
+                                                        name="parent_id">
+                                                    <input type="hidden" value="{{ $student->id }}" id='student_id'
+                                                        name="student-name">
+                                                    <label for="recipient-name" class="col-form-label">Grade 9</label>
+                                                    <select id="grade_9" required>
+                                                        <option value="I was enrolled in West River Academy.">I was enrolled
+                                                            in West River
+                                                            Academy.
+                                                        </option>
+                                                        <option
+                                                            value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                                            I homeschooled independently. (There are no transcripts that a
+                                                            school can send.)
+                                                        </option>
+                                                        <option
+                                                            value="I was enrolled in another school that can send or has already sent transcripts.">
+                                                            I was enrolled in another school that can send or has already
+                                                            sent transcripts.
+                                                        </option>
+                                                        <option value="Others">Others</option>
+                                                    </select>
+                                                    <label for="recipient-name" class="col-form-label">Grade 10</label>
+                                                    <select id="grade_10" required>
+                                                        <option value="I was enrolled in West River Academy.">I was enrolled
+                                                            in West River
+                                                            Academy.
+                                                        </option>
+                                                        <option
+                                                            value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                                            I homeschooled independently. (There are no transcripts that a
+                                                            school can send.)
+                                                        </option>
+                                                        <option
+                                                            value="I was enrolled in another school that can send or has already sent transcripts.">
+                                                            I was enrolled in another school that can send or has already
+                                                            sent transcripts.
+                                                        </option>
+                                                        <option value="Others">Others</option>
+                                                    </select>
+                                                    <label for="recipient-name" class="col-form-label">Grade 11</label>
+                                                    <select id="grade_11" required>
+                                                        <option value="I was enrolled in West River Academy.">I was enrolled
+                                                            in West River
+                                                            Academy.
+                                                        </option>
+                                                        <option
+                                                            value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                                            I homeschooled independently. (There are no transcripts that a
+                                                            school can send.)
+                                                        </option>
+                                                        <option
+                                                            value="I was enrolled in another school that can send or has already sent transcripts.">
+                                                            I was enrolled in another school that can send or has already
+                                                            sent transcripts.
+                                                        </option>
+                                                        <option value="Others">Others</option>
+                                                    </select>
+                                                    <label for="recipient-name" class="col-form-label">Status</label>
+                                                    <select id="status-graduation">
+                                                        <option value='pending'>Pending</option>
+                                                        <option value='approved'>Approved</option>
+                                                        <option value='paid'>Paid</option>
+                                                        <option value='completed'>Completed</option>
+                                                    </select>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                      </form>
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
+                            </div>
                         </div>
                         {{-- transcript --}}
                         <div class="tab-pane fade" id="studentTranscript" role="tabpanel"
@@ -1068,8 +982,6 @@
                                         <div class="modal-body">
                                             <form id="add-record-request">
                                                 <div class="form-group">
-
-
                                                     <input type="hidden" value="{{ $parent_id }}" id='parent_id'
                                                         name="parent_id" class="form-control">
                                                     <input type="hidden" value="{{ $student->id }}" id='student_id'
@@ -1170,6 +1082,7 @@
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -1190,7 +1103,7 @@
                                                     <div class="form-group">
                                                         <input type="hidden" value="{{ $parent_id }}" id='parent_id'
                                                             name="parent_id">
-                                                        <input type="hidden" value="{{ $student->id }}" id='student_id'
+                                                        <input type="hidden" value="{{ $student->id }}" id='student_idd'
                                                             name="student_id">
                                                     </div>
                                                     <div class="form-group col-md-6">

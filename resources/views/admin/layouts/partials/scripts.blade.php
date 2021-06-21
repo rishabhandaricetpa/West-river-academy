@@ -586,7 +586,7 @@
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
 
-        var student_id = $('#student_id').val();
+        var student_id = $('#student_idd').val();
         var parent_id = $('#parent_id').val();
         var doc_type = $('#doc_type').val();
         var is_upload = $('#is_upload:checked').val();
@@ -671,7 +671,7 @@
         var middle_name = $('#middle_name').val();
         var last_name = $('#last_name').val();
         var d_o_b = $('#d_o_b').val();
-        var gender = $('#gender').val();
+        var gender = $("input[type='radio']:checked").val();
         var email = $('#email').val();
         var cell_phone = $('#cell_phone').val();
         var mothers_name = $('#mothers_name').val();
@@ -705,10 +705,10 @@
                 student_situation: student_situation,
             },
             success: function(response) {
-                dd($response);
+
             },
             error: function(response) {
-                dd($response)
+                console.log(error);
             }
         });
     });
@@ -763,7 +763,7 @@
         var first_name = $('#first_name').val();
         var middle_name = $('#middle_name').val();
         var last_name = $('#last_name').val();
-        var gender = $('#gender').val();
+        var gender = $("input[type='radio']:checked").val();
         var d_o_b = $('#d_o_b').val();
         var email = $('#email').val();
         var phone = $('#phone').val();
@@ -790,6 +790,52 @@
             },
             success: function(response) {
                 location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+    // update student from admin student side
+    $("#studentForm1").on("submit", function(event) {
+        event.preventDefault();
+        var parent_id = $('#parent_id').val();
+        var first_name = $('#first_name').val();
+        var middle_name = $('#middle_name').val();
+        var last_name = $('#last_name').val();
+        var gender = $("input[type='radio']:checked").val();
+        var d_o_b = $('#d_o_b').val();
+        var email = $('#email').val();
+        var phone = $('#cell_phone').val();
+        var student_id = $('#student_id').val();
+        var national_ID = $('#national_ID').val();
+        var birth_city = $('#birth_city').val();
+        var immunized_status = $('#immunized_status').val();
+        var student_situation =$('#student_situation').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.update.student.profile') }}",
+            type: "POST",
+
+            data: {
+                parent_id: parent_id,
+                first_name: first_name,
+                middle_name: middle_name,
+                last_name: last_name,
+                gender: gender,
+                d_o_b: d_o_b,
+                email: email,
+                phone: phone,
+                student_id: student_id,
+                national_ID:national_ID,
+                birth_city:birth_city,
+                immunized_status: immunized_status,
+                student_situation:student_situation
+            },
+            success: function(response) {
+                //location.reload();
             },
             error: function(response) {
 
@@ -896,13 +942,14 @@
                 p2_zip_code: p2_zip_code,
             },
             success: function(response) {
-               // location.reload();
+                // location.reload();
             },
-            error: function(response) {
-                // dd($response)
-            }
+            error: function(response) {}
         });
     });
+    //edit-student-profile
+
+
 
     //add notes to family 
     $("#add-new-notes").on("submit", function(event) {
@@ -1121,9 +1168,7 @@
             success: function(response) {
                 location.reload();
             },
-            error: function(response) {
-                // dd($response)
-            }
+            error: function(response) {}
         });
     });
     // upload student upload documents
@@ -1273,10 +1318,40 @@
             elements[i].disabled = true;
         }
     })
+    document.querySelector(".js-cancel").addEventListener("click", () => {
+        var form = document.getElementById("studentForm1");
+        form.classList.add("is-readonly");
+        form.classList.remove("is-editing");
+        let elements = document.getElementsByTagName("input");
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].disabled = true;
+        }
+    })
 
     document.querySelectorAll(".form-enable").forEach((link) => {
         link.addEventListener("click", () => {
             var form = document.getElementById("sampleForm");
+            if (form.classList.contains("is-readonly")) {
+                form.classList.remove("is-readonly");
+                form.classList.add("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = false;
+                }
+            } else {
+                form.classList.add("is-readonly");
+                form.classList.remove("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll(".form-enable").forEach((link) => {
+        link.addEventListener("click", () => {
+            var form = document.getElementById("studentForm1");
             if (form.classList.contains("is-readonly")) {
                 form.classList.remove("is-readonly");
                 form.classList.add("is-editing");

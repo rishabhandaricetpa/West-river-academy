@@ -125,7 +125,9 @@ class StudentProfileController extends Controller
         $documents = UploadDocuments::where('student_profile_id', $id)->get();
         //graduation
         $graduations = Graduation::where('student_profile_id', $id)->get();
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcript', 'transcript9_12s', 'documents', 'parent_id', 'parent', 'graduations'));
+        //notes
+        $notes = Notes::where('student_profile_id', $id)->get();
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcript', 'transcript9_12s', 'documents', 'parent_id', 'parent', 'graduations', 'notes'));
     }
 
     /**
@@ -377,5 +379,23 @@ class StudentProfileController extends Controller
             'alert-type' => 'Success',
         ];
         return redirect()->back()->with($notification);
+    }
+    public function updateStudentProfile(Request $request)
+    {
+        StudentProfile::where('id', $request->student_id)->update(
+            [
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'd_o_b' => $request->d_o_b,
+                'email' => $request->email,
+                'cell_phone' => $request->phone,
+                'student_Id' => $request->national_ID,
+                'immunized_status' => $request->immunized_status,
+                'birth_city' => $request->birth_city,
+                'student_situation'=>$request->student_situation
+            ]
+        );
     }
 }
