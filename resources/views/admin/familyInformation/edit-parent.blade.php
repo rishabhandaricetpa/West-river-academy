@@ -182,7 +182,7 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h3 class="mt-3 mb-2">Address </h3>
                                             <div class="text-right d-flex align-items-center">
-                                                <input class="mt-3 mb-3" type="checkbox" id="check" name="check" value="">
+                                                <input class="mt-3 mb-3" type="checkbox" id="check" name="check" value="" disabled>
                                                 <label class=" ml-2 mt-3 mb-2" for="check">Same Address as Parent 1</label>
                                             </div>
                                         </div>
