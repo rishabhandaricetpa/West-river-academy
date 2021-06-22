@@ -173,7 +173,8 @@ export default {
     "all_credits",
     "total_credits",
     "outofcredit",
-    "transcripts"
+    "transcripts",
+    'selected_credit'
   ],
   methods: {
     initForm() {
@@ -237,7 +238,7 @@ export default {
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: 10,
+        selectedCredit: this.selected_credit.credit,
         grade: "",
         total_credits: this.outofcredit.total_credit,
         component_index: this.form.englishCourses.length
