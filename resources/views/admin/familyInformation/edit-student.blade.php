@@ -95,7 +95,7 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender" id="gender"
-                                                        value="Male" {{ $student->gender == 'Male' ? 'checked' : '' }} 
+                                                        value="Male" {{ $student->gender == 'Male' ? 'checked' : '' }}
                                                         required>
                                                     <label class="form-check-label pl-1 pl-sm-0">
                                                         Male
@@ -103,8 +103,8 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                     value="Female" {{ $student->gender == 'Female' ? 'checked' : '' }}
-                                                        id="gender">
+                                                        value="Female"
+                                                        {{ $student->gender == 'Female' ? 'checked' : '' }} id="gender">
                                                     <label class="form-check-label pl-1 pl-sm-0">
                                                         Female
                                                     </label>
@@ -794,28 +794,60 @@
                                                         <th scope="col">Status</th>
                                                         <th scope="col">Enrollment Year</th>
                                                         <th scope="col">School Name</th>
-                                                        <th scope="col" class="text-right"> <button type="button"
-                                                                class="btn btn-modal ml-3" data-toggle="modal"
-                                                                data-target="#transcriptModal"
-                                                                data-whatever="@getbootstrap"><img src="/images/add.png"
-                                                                    alt=""><img src="/images.add.png" alt=""></button></th>
+                                                        <th scope="col">Grade</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><a href="#"><i class=" fas fa-edit"></i></a></br></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><a href="#"><i class=" fas fa-edit"></i></a></br></td>
-                                                    </tr>
+                                                    @foreach ($transcripts as $transcript)
+                                                        <tr>
+                                                            <td>{{ $transcript->period }}</td>
+                                                            @if ($transcript->status === 'completed')
+                                                                <td>Completed</td>
+                                                            @elseif($transcript->status === 'paid') <td>Paid</td>
+                                                            @elseif($transcript->status === 'approved') <td>Approved
+                                                                </td>
+                                                            @elseif($transcript->status === 'canEdit') <td>Edit</td>
+                                                            @endif
+
+                                                            @if ($transcript->period == 'K-8')
+                                                                <td>{{ $transcript['transcriptk8']['enrollment_year'] }}
+                                                                </td>
+                                                            @else
+                                                                <td>{{ $transcript['transcript9_12']['enrollment_year'] }}
+                                                                </td>
+                                                            @endif
+
+                                                            @if ($transcript->period == 'K-8')
+                                                                <td>{{ $transcript['transcriptk8']['school_name'] }}
+                                                                </td>
+                                                            @else
+                                                                <td>{{ $transcript['transcript9_12']['school_name'] }}
+                                                                </td>
+                                                            @endif
+
+                                                            @if ($transcript->period == 'K-8')
+                                                                <td>{{ $transcript['transcriptk8']['grade'] }}
+                                                                </td>
+                                                            @else
+                                                                <td>{{ $transcript['transcript9_12']['grade'] }}</td>
+                                                            @endif
+
+                                                            @if ($transcript->period == 'K-8')
+                                                                <td>
+                                                                    <a
+                                                                        href=" {{ route('admin.viewfull.transcript', [$transcript->student_profile_id, $transcript['transcriptk8']['transcript_id']]) }}">View
+                                                                        K-8 Transcript</a>
+                                                                </td>
+                                                            @else
+                                                                <td>
+                                                                    <a
+                                                                        href=" {{ route('admin.viewfull.transcript9_12', [$transcript->student_profile_id, $transcript['transcript9_12']['transcript_id']]) }}">View
+                                                                        9-12 Transcript</a>
+                                                                </td>
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

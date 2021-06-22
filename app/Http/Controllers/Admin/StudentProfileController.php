@@ -113,21 +113,19 @@ class StudentProfileController extends Controller
         // information for record trasnsfer tab
         $recordTransfer = RecordTransfer::where('student_profile_id', $id)->get();
 
-        // for transcript k-8
-        $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
-            ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
-            ->get()->unique('transcript_id');
-
-        // for transcript 9-12
-        $transcript9_12s = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcript9_12')
-            ->Join('transcript9_12', 'transcript9_12.transcript_id', 'transcripts.id')->where('transcript9_12.student_profile_id', $id)
-            ->get()->unique('transcript_id');
+        // for transcript information
+        $transcripts = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
+            ->where('student_profile_id', $id)
+            ->with('transcript9_12', 'transcriptk8')
+            ->get();
         $documents = UploadDocuments::where('student_profile_id', $id)->get();
+
         //graduation
         $graduations = Graduation::where('student_profile_id', $id)->get();
+        
         //notes
         $notes = Notes::where('student_profile_id', $id)->get();
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcript', 'transcript9_12s', 'documents', 'parent_id', 'parent', 'graduations', 'notes'));
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcripts', 'documents', 'parent_id', 'parent', 'graduations', 'notes'));
     }
 
     /**
@@ -394,7 +392,7 @@ class StudentProfileController extends Controller
                 'student_Id' => $request->national_ID,
                 'immunized_status' => $request->immunized_status,
                 'birth_city' => $request->birth_city,
-                'student_situation'=>$request->student_situation
+                'student_situation' => $request->student_situation
             ]
         );
     }
