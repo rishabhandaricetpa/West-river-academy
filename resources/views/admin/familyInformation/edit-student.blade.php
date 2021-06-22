@@ -1062,12 +1062,13 @@
                         <div class="form-group col-md-6">
                             <input type="hidden" value="{{ $student->id }}" id='student_idd' name="student_id">
                           </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-12 d-flex">
+                          <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn  mt-1 mr-2">
                           <label for="message-text" class="col-form-label">
                             Want to upload in Student Dashboard *</label>
-                          <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn border">
+                          
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 align-items-center">
                           <label for="message-text" class="col-form-label">Upload
                             Document</label>
                           <input type="file" id="file" class="form-control choose-btn" required>
