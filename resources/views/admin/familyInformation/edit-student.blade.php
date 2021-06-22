@@ -65,7 +65,7 @@
                     <div class="form-group">
                       <label for="exampleInputPassword1">First Name :</label>
                       <input type="text" class="form-control is-disabled" id="first_name" placeholder=""
-                        value="{{ $student->first_name }}">
+                        value="{{ $student->first_name }}" disabled>
                       <input type='hidden' id="parent_id" name="parent_id" value="{{ $student->parent_profile_id }}">
                       <input type='hidden' id="students_id" name="students_id" value="{{ $student->id }}">
                     </div>
@@ -111,7 +111,7 @@
                     <div class="form-group">
                       <label for="exampleInputMothersName">Phone :</label>
                       <input type="text" class="form-control is-disabled" id="cell_phone" placeholder=""
-                        value="{{ $student->cell_phone }}">
+                        value="{{ $student->cell_phone }}" disabled>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputMothersName">National Id :</label>
