@@ -5651,22 +5651,23 @@ __webpack_require__.r(__webpack_exports__);
   name: "EnglishCourse",
   data: function data() {
     return {
-      isCredit: false,
+      isCredit: true,
       errors: [],
+      final_credits: [this.outofcredit.total_credit],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
-        englishCourse: []
+        englishCourses: []
       }
     };
   },
-  props: ["englishcourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits", "outofcredit", "transcripts"],
+  props: ["englishcourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits", "outofcredit", "transcripts", 'selected_credit'],
   methods: {
     initForm: function initForm() {
       var _this = this;
 
-      var courses = this.transcripts.map(function (transcript) {
+      var courses = this.transcripts.map(function (transcript, index) {
         return {
           courses_id: transcript.courses_id,
           transcript_id: _this.transcript_id,
@@ -5675,33 +5676,69 @@ __webpack_require__.r(__webpack_exports__);
           other_subject: transcript.other_subject,
           grade: transcript.score,
           selectedCredit: transcript.selectedCredit,
-          total_credits: _this.outofcredit.total_credit
+          total_credits: _this.outofcredit.total_credit,
+          component_index: index
         };
       });
-      this.form.englishCourse = courses;
+      this.form.englishCourses = courses;
+      this.reCalculateAll();
+    },
+    mounted: function mounted() {
+      this.form.englishCourses[0].selectedCredit = this.required_credit.credit;
+      this.final_credits.push(this.calculateRemainingCredit(this.form.englishCourses[0]));
+      this.finalValue();
     },
     showCredit: function showCredit(e) {
       this.isCredit = false;
       this.form.remainingCredit = this.total_credits.total_credit - e.target.value;
       return this.isCredit;
     },
+    calculateRemainingCredit: function calculateRemainingCredit(englishCourse) {
+      this.finalValue();
+      return this.final_credits[englishCourse.component_index] - englishCourse.selectedCredit;
+    },
+    reIndex: function reIndex() {
+      this.form.englishCourses.forEach(function (englishCourse, index) {
+        englishCourse.component_index = index;
+      });
+    },
+    reCalculateAll: function reCalculateAll() {
+      var _this2 = this;
+
+      this.form.englishCourses.forEach(function (englishCourse, index) {
+        _this2.final_credits[index + 1] = _this2.calculateRemainingCredit(englishCourse);
+      });
+      this.finalValue();
+    },
+    finalValue: function finalValue() {
+      var finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+    },
     addCourse: function addCourse() {
-      this.form.englishCourse.push({
+      var englishCourse = {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.selected_credit.credit,
         grade: "",
-        total_credits: this.outofcredit.total_credit
-      });
+        total_credits: this.outofcredit.total_credit,
+        component_index: this.form.englishCourses.length
+      };
+      this.final_credits.push(this.calculateRemainingCredit(englishCourse));
+      this.form.englishCourses.push(englishCourse);
+      this.finalValue();
     },
     removeCourse: function removeCourse(index) {
-      this.form.englishCourse.splice(index, 1);
+      this.form.englishCourses.splice(index, 1);
+      this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse: function submitCourse() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.errors = [];
 
@@ -5719,15 +5756,15 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.vallidateGrades() && this.validateSubject() && this.validateCredit()) {
         axios.post(route("editEnglishTranscriptCourse.store"), this.form).then(function (response) {
-          window.location = "/edit-mathematics-transcript/" + _this2.student_id + "/" + _this2.transcript_id;
+          window.location = "/edit-mathematics-transcript/" + _this3.student_id + "/" + _this3.transcript_id;
         })["catch"](function (error) {
           alert("Please fill in the fields");
         });
       }
     },
     vallidateGrades: function vallidateGrades() {
-      for (var i = 0; i < this.form.englishCourse.length; i++) {
-        var englishCourse = this.form.englishCourse[i];
+      for (var i = 0; i < this.form.englishCourses.length; i++) {
+        var englishCourse = this.form.englishCourses[i];
 
         if (!englishCourse.grade) {
           return false;
@@ -5737,8 +5774,8 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     validateSubject: function validateSubject() {
-      for (var i = 0; i < this.form.englishCourse.length; i++) {
-        var enrollmentSubject = this.form.englishCourse[i];
+      for (var i = 0; i < this.form.englishCourses.length; i++) {
+        var enrollmentSubject = this.form.englishCourses[i];
 
         if (!enrollmentSubject.subject_name) {
           return false;
@@ -5748,8 +5785,8 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     validateCredit: function validateCredit() {
-      for (var i = 0; i < this.form.englishCourse.length; i++) {
-        var enrollmentSubject = this.form.englishCourse[i];
+      for (var i = 0; i < this.form.englishCourses.length; i++) {
+        var enrollmentSubject = this.form.englishCourses[i];
 
         if (!enrollmentSubject.selectedCredit) {
           return false;
@@ -6502,12 +6539,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MathsCourse",
   data: function data() {
     return {
-      isCredit: false,
+      isCredit: true,
       errors: [],
+      final_credits: [this.remaining_credit],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -6516,12 +6560,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  props: ["mathscourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits", "outofcredit", "transcripts"],
+  props: ["mathscourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits", "outofcredit", "transcripts", 'remaining_credit'],
   methods: {
     initForm: function initForm() {
       var _this = this;
 
-      var courses = this.transcripts.map(function (transcript) {
+      var courses = this.transcripts.map(function (transcript, index) {
         return {
           courses_id: transcript.courses_id,
           transcript_id: _this.transcript_id,
@@ -6530,33 +6574,64 @@ __webpack_require__.r(__webpack_exports__);
           other_subject: transcript.other_subject,
           grade: transcript.score,
           selectedCredit: transcript.selectedCredit,
-          total_credits: _this.outofcredit.total_credit
+          total_credits: _this.outofcredit.total_credit,
+          component_index: index
         };
       });
       this.form.mathsCourse = courses;
+      this.reCalculateAll();
     },
-    showCredit: function showCredit(e) {
-      this.isCredit = false;
-      this.form.remainingCredit = this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+    mounted: function mounted() {
+      this.form.mathsCourse[0].selectedCredit = this.required_credit.credit;
+      this.final_credits.push(this.calculateRemainingCredit(this.form.mathsCourse[0]));
+      this.finalValue();
+    },
+    calculateRemainingCredit: function calculateRemainingCredit(mathsCourse) {
+      this.finalValue();
+      return this.final_credits[mathsCourse.component_index] - mathsCourse.selectedCredit;
+    },
+    reIndex: function reIndex() {
+      this.form.mathsCourse.forEach(function (mathsCourse, index) {
+        mathsCourse.component_index = index;
+      });
+    },
+    reCalculateAll: function reCalculateAll() {
+      var _this2 = this;
+
+      this.form.mathsCourse.forEach(function (mathsCourse, index) {
+        _this2.final_credits[index + 1] = _this2.calculateRemainingCredit(mathsCourse);
+      });
+      this.finalValue();
+    },
+    finalValue: function finalValue() {
+      var finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
     },
     addCourse: function addCourse() {
-      this.form.mathsCourse.push({
+      var mathsCourse = {
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: 10,
         grade: "",
-        total_credits: this.outofcredit.total_credit
-      });
+        total_credits: this.outofcredit.total_credit,
+        component_index: this.form.mathsCourse.length
+      };
+      this.final_credits.push(this.calculateRemainingCredit(mathsCourse));
+      this.form.mathsCourse.push(mathsCourse);
+      this.finalValue();
     },
     removeCourse: function removeCourse(index) {
       this.form.mathsCourse.splice(index, 1);
+      this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse: function submitCourse() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.errors = [];
 
@@ -6572,9 +6647,13 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push("Credit is required Field! Please select a Grade and then continue");
       }
 
-      if (this.vallidateGrades() && this.validateSubject() && this.validateCredit()) {
+      if (!this.validateFinalCredit()) {
+        this.errors.push("Credits cann't be negative");
+      }
+
+      if (this.vallidateGrades() && this.validateSubject() && this.validateCredit() && this.form.final_remaining_credit > 0) {
         axios.post(route("editMathematicsTranscriptCourse.store"), this.form).then(function (response) {
-          window.location = "/edit-socialScience-transcript/" + _this2.student_id + "/" + _this2.transcript_id;
+          window.location = "/edit-socialScience-transcript/" + _this3.student_id + "/" + _this3.transcript_id;
         })["catch"](function (error) {
           alert("Please fill in the fields");
         });
@@ -6587,6 +6666,13 @@ __webpack_require__.r(__webpack_exports__);
         if (!mathsCourse.grade) {
           return false;
         }
+      }
+
+      return true;
+    },
+    validateFinalCredit: function validateFinalCredit() {
+      if (this.form.final_remaining_credit < 0) {
+        return false;
       }
 
       return true;
@@ -45607,7 +45693,7 @@ var render = function() {
       }
     },
     [
-      _vm._l(_vm.form.englishCourse, function(englishCourse, index) {
+      _vm._l(_vm.form.englishCourses, function(englishCourse, index) {
         return _c(
           "div",
           { key: englishCourse.id, staticClass: "seperator mt-4" },
@@ -45903,7 +45989,7 @@ var render = function() {
                                   : $$selectedVal[0]
                               )
                             },
-                            _vm.showCredit
+                            _vm.reCalculateAll
                           ]
                         }
                       },
@@ -45924,8 +46010,9 @@ var render = function() {
                           _vm._v(
                             "\n              You have\n              " +
                               _vm._s(
-                                _vm.outofcredit.total_credit -
-                                  englishCourse.selectedCredit
+                                _vm.final_credits[
+                                  englishCourse.component_index + 1
+                                ]
                               ) +
                               "\n              out of\n              " +
                               _vm._s(_vm.outofcredit.total_credit) +
@@ -46899,396 +46986,448 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      staticClass: "mb-0 px-0 unstyled-label",
-      attrs: { method: "POST" },
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.submitCourse()
-        }
-      }
-    },
-    [
-      _vm._l(_vm.form.mathsCourse, function(mathsCourse, index) {
-        return _c(
-          "div",
-          { key: mathsCourse.id, staticClass: "seperator mt-4" },
+  return this.remaining_credit > 0
+    ? _c("div", [
+        _c(
+          "form",
+          {
+            staticClass: "mb-0 px-0 unstyled-label",
+            attrs: { method: "POST" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.submitCourse()
+              }
+            }
+          },
           [
-            _c("div", { staticClass: "position-relative" }, [
+            _vm._l(_vm.form.mathsCourse, function(mathsCourse, index) {
+              return _c(
+                "div",
+                { key: mathsCourse.id, staticClass: "seperator mt-4" },
+                [
+                  _c("div", { staticClass: "position-relative" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "remove",
+                        on: {
+                          click: function($event) {
+                            return _vm.removeCourse(index)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-times" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-7 px-0" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "form-group d-sm-flex  align-items-center"
+                        },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: mathsCourse.subject_name,
+                                  expression: "mathsCourse.subject_name"
+                                }
+                              ],
+                              staticClass: "form-control text-uppercase",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    mathsCourse,
+                                    "subject_name",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.mathscourse, function(Course) {
+                              return _c("option", { key: Course.id }, [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(Course.subject_name)
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "form-group d-sm-flex  align-items-center"
+                        },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "h3 text-black mb-0",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("Other")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "w-100" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: mathsCourse.other_subject,
+                                  expression: "mathsCourse.other_subject"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "",
+                                value: "other",
+                                "aria-describedby": ""
+                              },
+                              domProps: { value: mathsCourse.other_subject },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    mathsCourse,
+                                    "other_subject",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check mb-1" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: mathsCourse.grade,
+                                expression: "mathsCourse.grade"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", name: "", value: "A" },
+                            domProps: {
+                              checked: _vm._q(mathsCourse.grade, "A")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(mathsCourse, "grade", "A")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("A")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check mb-1" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: mathsCourse.grade,
+                                expression: "mathsCourse.grade"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", name: "", value: "B" },
+                            domProps: {
+                              checked: _vm._q(mathsCourse.grade, "B")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(mathsCourse, "grade", "B")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("B")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check mb-1" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: mathsCourse.grade,
+                                expression: "mathsCourse.grade"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", name: "", value: "C" },
+                            domProps: {
+                              checked: _vm._q(mathsCourse.grade, "C")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(mathsCourse, "grade", "C")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("C")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check mb-1" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: mathsCourse.grade,
+                                expression: "mathsCourse.grade"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", name: "D", value: "D" },
+                            domProps: {
+                              checked: _vm._q(mathsCourse.grade, "D")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(mathsCourse, "grade", "D")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("D")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check mb-1" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: mathsCourse.grade,
+                                expression: "mathsCourse.grade"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", name: "", value: "PASS" },
+                            domProps: {
+                              checked: _vm._q(mathsCourse.grade, "PASS")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(mathsCourse, "grade", "PASS")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "" }
+                            },
+                            [_vm._v("PASS")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
+                          _c("h3", { staticClass: "text-black" }, [
+                            _vm._v(
+                              "\n                Select Credit\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: mathsCourse.selectedCredit,
+                                  expression: "mathsCourse.selectedCredit"
+                                }
+                              ],
+                              staticClass: "form-control min-select",
+                              attrs: {
+                                "data-toggle": "collapse",
+                                href: "#remainingCredits",
+                                role: "button",
+                                "aria-expanded": "false",
+                                "aria-controls": "remainingCredits"
+                              },
+                              on: {
+                                change: [
+                                  function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      mathsCourse,
+                                      "selectedCredit",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  },
+                                  _vm.reCalculateAll
+                                ]
+                              }
+                            },
+                            _vm._l(_vm.total_credits, function(credit) {
+                              return _c("option", { key: credit.id }, [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(credit.credit) +
+                                    "\n                "
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("h3", [
+                            _vm._v(
+                              "\n                You have\n               " +
+                                _vm._s(
+                                  _vm.final_credits[
+                                    mathsCourse.component_index + 1
+                                  ]
+                                ) +
+                                "\n                out of\n                " +
+                                _vm._s(_vm.outofcredit.total_credit) +
+                                "\n                remaining credits for this year.\n              "
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm.errors.length
+              ? _c("p", [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.errors, function(error) {
+                      return _c(
+                        "li",
+                        { key: error.id, staticStyle: { color: "red" } },
+                        [_vm._v("  " + _vm._s(error) + " ")]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "mt-2r" }, [
               _c(
-                "span",
+                "a",
                 {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeCourse(index)
-                    }
-                  }
+                  staticClass: "btn btn-primary",
+                  on: { click: _vm.addCourse }
                 },
-                [_c("i", { staticClass: "fas fa-times" })]
+                [_vm._v("Add another Mathematics Course")]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-7 px-0" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group d-sm-flex  align-items-center" },
-                  [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: mathsCourse.subject_name,
-                            expression: "mathsCourse.subject_name"
-                          }
-                        ],
-                        staticClass: "form-control text-uppercase",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              mathsCourse,
-                              "subject_name",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      _vm._l(_vm.mathscourse, function(Course) {
-                        return _c("option", { key: Course }, [
-                          _vm._v(
-                            "\n              " + _vm._s(Course.subject_name)
-                          )
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "form-group d-sm-flex  align-items-center" },
-                  [
-                    _c(
-                      "label",
-                      { staticClass: "h3 text-black mb-0", attrs: { for: "" } },
-                      [_vm._v("Other")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "w-100" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: mathsCourse.other_subject,
-                            expression: "mathsCourse.other_subject"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "",
-                          value: "other",
-                          "aria-describedby": ""
-                        },
-                        domProps: { value: mathsCourse.other_subject },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              mathsCourse,
-                              "other_subject",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check mb-1" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: mathsCourse.grade,
-                          expression: "mathsCourse.grade"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: { type: "radio", name: "", value: "A" },
-                      domProps: { checked: _vm._q(mathsCourse.grade, "A") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(mathsCourse, "grade", "A")
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v("A")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check mb-1" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: mathsCourse.grade,
-                          expression: "mathsCourse.grade"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: { type: "radio", name: "", value: "B" },
-                      domProps: { checked: _vm._q(mathsCourse.grade, "B") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(mathsCourse, "grade", "B")
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v("B")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check mb-1" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: mathsCourse.grade,
-                          expression: "mathsCourse.grade"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: { type: "radio", name: "", value: "C" },
-                      domProps: { checked: _vm._q(mathsCourse.grade, "C") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(mathsCourse, "grade", "C")
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v("C")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check mb-1" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: mathsCourse.grade,
-                          expression: "mathsCourse.grade"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: { type: "radio", name: "D", value: "D" },
-                      domProps: { checked: _vm._q(mathsCourse.grade, "D") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(mathsCourse, "grade", "D")
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v("D")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check mb-1" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: mathsCourse.grade,
-                          expression: "mathsCourse.grade"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: { type: "radio", name: "", value: "PASS" },
-                      domProps: { checked: _vm._q(mathsCourse.grade, "PASS") },
-                      on: {
-                        change: function($event) {
-                          return _vm.$set(mathsCourse, "grade", "PASS")
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "form-check-label", attrs: { for: "" } },
-                      [_vm._v("PASS")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-1 mt-2r" }, [
-                    _c("h3", { staticClass: "text-black" }, [
-                      _vm._v("\n              Select Credit\n            ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: mathsCourse.selectedCredit,
-                            expression: "mathsCourse.selectedCredit"
-                          }
-                        ],
-                        staticClass: "form-control min-select",
-                        attrs: {
-                          "data-toggle": "collapse",
-                          href: "#remainingCredits",
-                          role: "button",
-                          "aria-expanded": "false",
-                          "aria-controls": "remainingCredits"
-                        },
-                        on: {
-                          change: [
-                            function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                mathsCourse,
-                                "selectedCredit",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                            _vm.showCredit
-                          ]
-                        }
-                      },
-                      _vm._l(_vm.total_credits, function(credit) {
-                        return _c("option", { key: credit.id }, [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(credit.credit) +
-                              "\n              "
-                          )
-                        ])
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _vm.isCredit
-                      ? _c("h3", [
-                          _vm._v(
-                            "\n              You have\n              " +
-                              _vm._s(
-                                _vm.outofcredit.total_credit -
-                                  mathsCourse.selectedCredit
-                              ) +
-                              "\n              out of\n              " +
-                              _vm._s(_vm.outofcredit.total_credit) +
-                              "\n              remaining credits for this year.\n            "
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                ])
-              ])
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
+                  attrs: { type: "button", id: "addEnglish" },
+                  on: { click: _vm.viewCourses }
+                },
+                [_vm._v("View All Courses")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary ml-4 float-right",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("\n        Continue\n      ")]
+              )
             ])
-          ]
-        )
-      }),
-      _vm._v(" "),
-      _vm.errors.length
-        ? _c("p", [
-            _c(
-              "ul",
-              _vm._l(_vm.errors, function(error) {
-                return _c(
-                  "li",
-                  { key: error.id, staticStyle: { color: "red" } },
-                  [_vm._v("  " + _vm._s(error) + " ")]
-                )
-              }),
-              0
-            )
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "mt-2r" }, [
-        _c(
-          "a",
-          { staticClass: "btn btn-primary", on: { click: _vm.addCourse } },
-          [_vm._v("Add another Mathematics Course")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary float-left mr-2 mb-sm-0 mb-3",
-            attrs: { type: "button", id: "addEnglish" },
-            on: { click: _vm.viewCourses }
-          },
-          [_vm._v("View All Courses")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary ml-4 float-right",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("\n      Continue\n    ")]
+          ],
+          2
         )
       ])
-    ],
-    2
-  )
+    : _c("div", [
+        _vm._v("\n  No Credits Remaining\n  "),
+        _c("input", {
+          staticClass: "btn btn-primary ml-4 float-right",
+          attrs: { type: "submit", value: "Continue" },
+          on: { click: _vm.nextCourse }
+        })
+      ])
 }
 var staticRenderFns = [
   function() {
