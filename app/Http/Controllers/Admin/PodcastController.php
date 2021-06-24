@@ -24,7 +24,7 @@ class PodcastController extends Controller
     {
         $extension = $request->file->getClientOriginalExtension();
         $path = Str::random(40) . '.' . $extension;
-        Storage::put(Podcast::UPLOAD_DIR_PODCAST . '/' . $path,  File::get($request->file));
+        Storage::putFile(Podcast::UPLOAD_DIR_PODCAST . '/' . $path, $request->file);
         Podcast::create([
             'heading' => $request->input('heading'),
             'content' => $request->input('content'),
@@ -36,7 +36,7 @@ class PodcastController extends Controller
     {
         $extension = $request->file->getClientOriginalExtension();
         $path = Str::random(40) . '.' . $extension;
-        Storage::put(Video::UPLOAD_DIR_VIDEOS . '/' . $path,  File::get($request->file));
+        Storage::putFile(Video::UPLOAD_DIR_VIDEOS . '/' . $path, $request->file);
         Video::create([
             'heading' => $request->input('heading'),
             'content' => $request->input('content'),
