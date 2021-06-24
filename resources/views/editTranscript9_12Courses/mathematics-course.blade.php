@@ -10,7 +10,7 @@
                 <edit-mathematics-transcript-course :outofcredit='@json($outOfCredit)' :mathscourse='@json($mathsCourse)'
                     :transcripts='@json($transcripts)' :student_id='@json($student_id)' :courses_id='@json($courses_id)'
                     :transcript_id='@json($transcript9_12id)' :total_credits='@json($credits)'
-                    :remaining_credit='@json($remaining_credit)'>
+                    :remaining_credit='@json($remaining_credit)' :selected_credit='@json($selectedCreditRequired)'>
                 </edit-mathematics-transcript-course>
             </div>
         </main>

@@ -42,6 +42,7 @@ class CreateParentProfilesTable extends Migration
             $table->string('reference', 2000)->nullable();
             $table->string('immunized')->nullable();
             $table->boolean('status')->default('0');
+            $table->string('p2_last_name')->nullable();
             $table->boolean('welcome_video_status')->default('0');
             $table->timestamps();
         });

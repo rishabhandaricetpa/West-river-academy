@@ -124,28 +124,10 @@
                 aria-labelledby="audio-tab">
                 <h2>podcasts</h2>
                 <div class="row">
-                    <div class="episodes col-md-6 pb-3">
-                        <h3 class="pt-3">Episode : Natural Learning and Accidental Homescholling</h3>
-                        <p><span class="time">13 min</span><span class="pl-sm-5 pl-3 date">April 1, 2021</span></p>
-                        <p>Peggy Webb and her daughter, Stacey. discuss...</p>
-                        <audio controls="controls"
-                            src="https://p.scdn.co/mp3-preview/0ba9d38f5d1ad30f0e31fc8ee80c1bebf0345a0c">
-                            Your browser does not support the HTML5 audio element.
-                        </audio>
-                    </div>
-                    <div class="episodes col-md-6 pb-3">
-                        <h3 class="pt-3">Episode 1: Natural Learning and Accidental Homescholling</h3>
-                        <p><span class="time">13 min</span><span class="pl-sm-5 pl-3 date">April 1, 2021</span></p>
-                        <p>Peggy Webb and her daughter, Stacey. discuss...</p>
-                        <audio controls="controls"
-                            src="https://p.scdn.co/mp3-preview/0ba9d38f5d1ad30f0e31fc8ee80c1bebf0345a0c">
-                            Your browser does not support the HTML5 audio element.
-                        </audio>
-                    </div>
                     @foreach ($podcasts as $podcast)
                         <div class="episodes col-md-6 pb-3">
                             <h3 class="pt-3"> Episode{{ $episode = $episode + 1 }} : {{ $podcast->heading }}</h3>
-                            <p><span class="time">13 min</span><span
+                            <p><span
                                     class="pl-sm-5 pl-3 date">{{ $podcast->created_at->format('M j, Y') }}</span></p>
                             <p>{{ $podcast->content }}</p>
                             <audio controls="controls" src="{{ $podcast->podcast_url }}">
@@ -153,15 +135,6 @@
                             </audio>
                         </div>
                     @endforeach
-                    <div class="episodes col-md-6 pb-4">
-                        <h3 class="pt-3">Episode 1: Natural Learning and Accidental Homescholling</h3>
-                        <p><span class="time">13 min</span><span class="pl-sm-5 pl-3 date">April 1, 2021</span></p>
-                        <p>Peggy Webb and her daughter, Stacey. discuss...</p>
-                        <audio controls="controls"
-                            src="https://p.scdn.co/mp3-preview/0ba9d38f5d1ad30f0e31fc8ee80c1bebf0345a0c">
-                            Your browser does not support the HTML5 audio element.
-                        </audio>
-                    </div>
                 </div>
             </div>
         </div>
