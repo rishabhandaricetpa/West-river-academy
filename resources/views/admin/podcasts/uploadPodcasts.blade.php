@@ -113,7 +113,7 @@
                                                         <video id="example_video_1"
                                                             class="video-js vjs-default-skin vjs-big-play-centered" controls
                                                             preload="auto">
-                                                            <source src="{{ $video->videos_url }}" />
+                                                            <source type="video/mp4" src="{{ $video->videos_url }}" />
                                                         </video>
                                                     </div>
                                                 </div>

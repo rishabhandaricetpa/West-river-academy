@@ -34,7 +34,7 @@ class CreateParentProfilesTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
-            $table->string('p2_street_address');
+            $table->string('p2_street_address')->nullable();
             $table->string('p2_city')->nullable();
             $table->string('p2_state')->nullable();
             $table->string('p2_zip_code')->nullable();
