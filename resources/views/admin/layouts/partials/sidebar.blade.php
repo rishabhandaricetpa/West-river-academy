@@ -10,14 +10,14 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('admin.dashboard.notification') }}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
                         Dashboard
                     </p>
                 </a>
-            </li>
+            </li> --}}
             @can('isAdmin')
                 <li class="nav-item">
                     <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
@@ -28,22 +28,22 @@
                     </a>
                 </li>
             @endcan
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ url('admin/view') }}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>
                         View Parents
                     </p>
                 </a>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a href="{{ url('admin/view-student') }}" class="nav-link">
                     <i class="fas fa-user-friends nav-icon"></i>
                     <p>
                         Students
                     </p>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item menu">
                 <a href="" class="nav-link ">
                     <i class="nav-icon fas fa-wallet"></i>
