@@ -85,14 +85,14 @@
                         <label for="">Gender <sup>*</sup></label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="gender" value="Male"
+                        <input class="form-check-input mt-1" type="radio" name="gender" id="gender" value="Male"
                           {{ $student->gender == 'Male' ? 'checked' : '' }} required disabled>
                         <label class="form-check-label pl-1 pl-sm-0">
                           Male
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="Female"
+                        <input class="form-check-input mt-1" type="radio" name="gender" value="Female"
                           {{ $student->gender == 'Female' ? 'checked' : '' }} id="gender" disabled>
                         <label class="form-check-label pl-1 pl-sm-0">
                           Female
@@ -227,14 +227,14 @@
                           <label for="">Gender <sup>*</sup></label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="student_gender" id="student_gender"
+                          <input class="form-check-input mt-0" type="radio" name="student_gender" id="student_gender"
                             value="Male" required>
                           <label class="form-check-label pl-1 pl-sm-0">
                             Male
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="student_gender" value="Female" id="gender">
+                          <input class="form-check-input mt-0" type="radio" name="student_gender" value="Female" id="gender">
                           <label class="form-check-label pl-1 pl-sm-0">
                             Female
                           </label>
@@ -470,65 +470,65 @@
 
 
                                 <div class="form-check" required>
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="Ungraded"
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="Ungraded"
                                     required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     Ungraded
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]"
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]"
                                     value="Preschool Age 3">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     Preschool Age 3
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]"
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]"
                                     value="Preschool Age 4">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     Preschool Age 4
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="Kindergarten"
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="Kindergarten"
                                     required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     Kindergarten
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="1" required>
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="1" required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     1
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="2" required>
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="2" required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     2
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="3" required>
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="3" required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     2
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="4" required>
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="4" required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     4
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" id="grade_level[]" value="5" required>
+                                  <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="5" required>
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     5
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="6" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="6" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     6
                                   </label>
@@ -536,37 +536,37 @@
                               </div>
                               <div class="col-6">
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="7" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="7" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     7
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="8" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="8" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     8
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="9" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="9" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     9
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="10" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="10" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     10
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="11" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="11" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     11
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" value="12" id="grade_level[]">
+                                  <input class="form-check-input mt-1" type="radio" value="12" id="grade_level[]">
                                   <label class="form-check-label pl-1 pl-sm-0">
                                     12
                                   </label>
