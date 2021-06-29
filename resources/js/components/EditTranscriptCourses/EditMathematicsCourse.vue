@@ -163,7 +163,6 @@ export default {
   name: "MathsCourse",
   data() {
     return {
-      isCredit: true,
       errors: [],
       final_credits: [this.remaining_credit],
       form: {
