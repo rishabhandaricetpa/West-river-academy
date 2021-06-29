@@ -1,4 +1,5 @@
 <template>
+<div v-if="this.remaining_credit >0 ">
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -108,7 +109,7 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="foreignCourse.selectedCredit"
-                v-on:change="showCredit"
+                 v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
@@ -116,9 +117,9 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit">
+              <h3>
                 You have
-                {{ outofcredit.total_credit - foreignCourse.selectedCredit }}
+             {{ final_credits[foreignCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
@@ -150,6 +151,11 @@
       </button>
     </div>
   </form>
+  </div>
+<div v-else>
+  No Credits Remaining
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+</div>
 </template>
 
 <script>
@@ -157,8 +163,8 @@ export default {
   name: "ForeignCourse",
   data() {
     return {
-      isCredit: false,
       errors: [],
+      final_credits: [this.remaining_credit],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -173,14 +179,15 @@ export default {
     "transcript_id",
     "student_id",
     "courses_id",
-    "all_credits",
     "total_credits",
     "outofcredit",
-    "transcripts"
+    "transcripts",
+    'remaining_credit',
+    'selected_credit'
   ],
   methods: {
     initForm() {
-      const courses = this.transcripts.map(transcript => {
+      const courses = this.transcripts.map((transcript,index )=> {
         return {
           courses_id: transcript.courses_id,
           transcript_id: this.transcript_id,
@@ -189,32 +196,65 @@ export default {
           other_subject: transcript.other_subject,
           grade: transcript.score,
           selectedCredit: transcript.selectedCredit,
-          total_credits: this.outofcredit.total_credit
+          total_credits: this.outofcredit.total_credit,
+           component_index: index
         };
       });
 
       this.form.foreignCourse = courses;
+         this.reCalculateAll();
     },
-    showCredit(e) {
-      this.isCredit = false;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+
+    mounted() {
+      this.form.foreignCourse[0].selectedCredit = this.required_credit.credit;
+      this.final_credits.push(this.calculateRemainingCredit(this.form.foreignCourse[0]));
+      this.finalValue();
+    },
+    
+      calculateRemainingCredit(foreignCourse) {
+      this.finalValue();
+      return this.final_credits[foreignCourse.component_index] - foreignCourse.selectedCredit;
+
+    },
+      reIndex(){
+      this.form.foreignCourse.forEach((foreignCourse, index) => {
+        foreignCourse.component_index = index;
+      });
+    },
+
+    reCalculateAll() {
+      this.form.foreignCourse.forEach((foreignCourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(foreignCourse)
+      })
+      this.finalValue();
+    },
+    finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+
     },
     addCourse() {
-      this.form.foreignCourse.push({
+      const foreignCourse ={
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.selected_credit.credit,
         grade: "",
-        total_credits: this.outofcredit.total_credit
-      });
+        total_credits: this.outofcredit.total_credit,
+        component_index: this.form.foreignCourse.length
+      };
+        this.final_credits.push(this.calculateRemainingCredit(foreignCourse))
+      this.form.foreignCourse.push(foreignCourse);
+      this.finalValue();
     },
     removeCourse(index) {
       this.form.foreignCourse.splice(index, 1);
+        this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];

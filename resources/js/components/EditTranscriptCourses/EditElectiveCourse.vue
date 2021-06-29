@@ -1,4 +1,5 @@
 <template>
+<div v-if="this.remaining_credit >0 ">
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -112,13 +113,13 @@
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
-                <option v-for="credit in total_credits" :key="credit.id">
+                <option v-for="credit in all_credits" :key="credit.id">
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit">
+              <h3 >
                 You have
-                {{ outofcredit.total_credit - electiveCourse.selectedCredit }}
+                {{ final_credits[electiveCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
@@ -150,6 +151,11 @@
       </a>
     </div>
   </form>
+     </div>
+  <div v-else>
+  No Credits Remaining
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+</div>
 </template>
 
 <script>
@@ -159,6 +165,7 @@ export default {
     return {
       isCredit: false,
       errors: [],
+       final_credits: [this.remaining_credit],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -173,14 +180,16 @@ export default {
     "transcript_id",
     "student_id",
     "courses_id",
-    "all_credits",
     "total_credits",
     "outofcredit",
-    "transcripts"
+    "transcripts",
+    'selected_credit',
+    'remaining_credit',
+    'all_credits'
   ],
   methods: {
     initForm() {
-      const courses = this.transcripts.map(transcript => {
+      const courses = this.transcripts.map((transcript,index) => {
         return {
           courses_id: transcript.courses_id,
           transcript_id: this.transcript_id,
@@ -189,32 +198,64 @@ export default {
           other_subject: transcript.other_subject,
           grade: transcript.score,
           selectedCredit: transcript.selectedCredit,
-          total_credits: this.outofcredit.total_credit
+          total_credits: this.outofcredit.total_credit,
+           component_index: index
         };
       });
 
       this.form.electiveCourse = courses;
+        this.reCalculateAll();
     },
-    showCredit(e) {
-      this.isCredit = false;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+      mounted() {
+      this.form.electiveCourse[0].selectedCredit = this.required_credit.credit;
+      this.final_credits.push(this.calculateRemainingCredit(this.form.electiveCourse[0]));
+      this.finalValue();
+    },
+    
+      calculateRemainingCredit(electiveCourse) {
+      this.finalValue();
+      return this.final_credits[electiveCourse.component_index] - electiveCourse.selectedCredit;
+
+    },
+      reIndex(){
+      this.form.physicalCourse.forEach((physicalCourse, index) => {
+        physicalCourse.component_index = index;
+      });
+    },
+
+    reCalculateAll() {
+      this.form.electiveCourse.forEach((electiveCourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(electiveCourse)
+      })
+      this.finalValue();
+    },
+    finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+
     },
     addCourse() {
-      this.form.electiveCourse.push({
+      const electiveCourse ={
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.selected_credit.credit,
         grade: "",
-        total_credits: this.outofcredit.total_credit
-      });
+        total_credits: this.outofcredit.total_credit,
+         component_index: this.form.electiveCourse.length
+      };
+       this.final_credits.push(this.calculateRemainingCredit(electiveCourse))
+      this.form.electiveCourse.push(electiveCourse);
+      this.finalValue();
     },
     removeCourse(index) {
-      this.form.electiveCourse.splice(index, 1);
+       this.form.electiveCourse.splice(index, 1);
+      this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];
