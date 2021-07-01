@@ -154,7 +154,7 @@
 </div>
 <div v-else>
   No Credits Remaining
-  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="viewCourses"/>
 </div>
 </template>
 
@@ -282,7 +282,7 @@ export default {
       if (
         this.vallidateGrades() &&
         this.validateSubject() &&
-        this.validateCredit() && this.form.final_remaining_credit >0
+        this.validateCredit() && this.validateFinalCredit()
       ) {
         axios
           .post(route("editMathematicsTranscriptCourse.store"), this.form)

@@ -20,7 +20,7 @@
               class="form-control text-uppercase"
               v-model="foreignCourse.subject_name"
             >
-              <option v-for="Course in foreigncourse" :key="Course">
+              <option v-for="Course in foreigncourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -154,7 +154,7 @@
   </div>
 <div v-else>
   No Credits Remaining
-  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="viewCourses"/>
 </div>
 </template>
 
@@ -273,10 +273,15 @@ export default {
           "Credit is a required Field! Please select a Grade and then continue."
         );
       }
+       if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
+        );
+      }
       if (
         this.vallidateGrades() &&
         this.validateSubject() &&
-        this.validateCredit()
+        this.validateCredit()  &&  this.validateFinalCredit()
       ) {
         axios
           .post(route("editForeignTranscriptCourse.store"), this.form)
@@ -319,7 +324,14 @@ export default {
       }
       return true;
     },
+       validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+    },
         viewCourses(){
+          
   window.location =
             "/display-course-details/" +
             this.transcript_id +
