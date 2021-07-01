@@ -25,7 +25,7 @@
                                 @if ($student->graduation === null) <input class="form-check-input" required type="radio" value="{{ $student->id }}" name="student"> @endif
                                 {{ $student->fullname }}
                             </td>
-                            <td> {{ Carbon\Carbon::parse($student->dob)->format('M d Y') }}</td>
+                            <td> {{ Carbon\Carbon::parse($student->dob)->format('M j, Y') }}</td>
                             <td>{{ $student->gender }}</td>
                             @if ($student->graduation === null)
                             <td>Not Applied</td>

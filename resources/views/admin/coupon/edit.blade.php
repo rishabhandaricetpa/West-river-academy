@@ -30,7 +30,7 @@
                     <div class="col-sm-6 form-group">
                         <label for="expire">Expiration Date <small>(blank for no limit)</small>:</label>
                         <input type="text" class="form-control w-50 datepicker" id="expire_at"
-                            value="{{ Carbon\Carbon::parse($coupon->expire_at)->format('M d Y') }}" name="expire_at">
+                            value="{{ Carbon\Carbon::parse($coupon->expire_at)->format('M j, Y') }}" name="expire_at">
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="status">Status :</label>

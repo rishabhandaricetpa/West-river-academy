@@ -23,7 +23,7 @@
                         @foreach ($students as $student)
                             <tr>
                                 <td> {{ $student->fullname }}</td>
-                                <td>{{ $student->birthdate }}</td>
+                                <td>{{ Carbon\Carbon::parse($student->birthdate)->format('M j, Y') }}</td>
                                 <td>{{ $student->student_Id }}</td>
                                 <td class="transform-none">{{ $student->email }}</td>
                                 <td><a href="{{ route('record.send', [$student->id, $parentId]) }}"
