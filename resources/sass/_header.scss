@@ -192,13 +192,25 @@
     z-index: 1;
   }
 }
+#admin-header{
+  .add-menu-item svg {
+    width:20px;
+    height:20px;
+   
+  }
+  .add-menu-item:hover {
+    svg path{    
+        fill:$black;
+      }
+
+    }
+
+  }
 
 ////// parent-sudent nav header
 .student-detail_documents,
 .main-nav_header {
-  background-color: $secondary-color;
   overflow-x: scroll;
-  border-radius: 15px 0 0 0 ;
 }
 .student-detail_documents {
   .nav-link.active{
@@ -221,12 +233,13 @@
         text-transform: uppercase;
       }
 
-      a.active,
-      a:hover {
-        color: black;
+      a:active,
+      a:hover {   
+        color: $black;
         background: $primary;
         text-decoration: none;
       }
+      
 
       img {
         margin-right: 0 !important;
@@ -238,5 +251,14 @@
         margin-right: 20px;
       }
     }
+  }
+}
+.back-button{
+  transition: .3s all;
+  padding: 4px;
+  border-radius: 4px; 
+  border: 2px solid white;  
+  &:hover {
+    border: 2px solid #ff9900;
   }
 }

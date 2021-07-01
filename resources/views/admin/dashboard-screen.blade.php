@@ -16,25 +16,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <div class="card m-3 family-details ">
-        <div class="sticky mb-2 pb-1">
-            <div class="d-flex justify-content-between main-nav_header align-items-center">
-                <ul class="d-flex overflow-scroll">
-                    <li class="menu-item"><a class="active" href="#">Dashboard</a></li>
-                    <li class="menu-item"><a href="{{ route('admin.view.parent') }}">Family</a></li>
-                    <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
-                    <li class="menu-item"><a href="#">Representative</a></li>
-                    <li class="menu-item"><a href="#">Groups</a></li>
-                    <li class="menu-item"><a href="#"><img src="/images/add.png" alt=""></a></li>
-                </ul>
-                <ul class="d-flex">
-                    <li><img src="/images/search.png" alt="login"></li>
-                    <li><img src="/images/bell.png" alt="login"></li>
-                    <li><a href="#"> <img src="/images/login.png" alt="login"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div class="card m-3 family-details pt-2">
 
         <!-- Main content -->
         @php

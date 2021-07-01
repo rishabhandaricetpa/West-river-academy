@@ -6560,7 +6560,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  props: ["mathscourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits", "outofcredit", "transcripts", 'remaining_credit'],
+  props: ["mathscourse", "transcript_id", "student_id", "courses_id", "all_credits", "total_credits", "outofcredit", "transcripts", 'remaining_credit', 'selected_credit'],
   methods: {
     initForm: function initForm() {
       var _this = this;
@@ -6615,7 +6615,7 @@ __webpack_require__.r(__webpack_exports__);
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: 10,
+        selectedCredit: this.selected_credit.credit,
         grade: "",
         total_credits: this.outofcredit.total_credit,
         component_index: this.form.mathsCourse.length
@@ -41156,7 +41156,7 @@ var render = function() {
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewForeignCourse }
           },
-          [_vm._v("Add another English/Language Arts Course")]
+          [_vm._v("Add another Foreign Course")]
         ),
         _vm._v(" "),
         _c(
@@ -41408,7 +41408,7 @@ var render = function() {
             attrs: { type: "button", id: "addEnglish" },
             on: { click: _vm.addNewSocialScienceCourse }
           },
-          [_vm._v("Add another English/Language Arts Course")]
+          [_vm._v("Add another Health Course")]
         ),
         _vm._v(" "),
         _c(

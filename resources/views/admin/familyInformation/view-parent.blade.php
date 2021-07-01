@@ -17,12 +17,7 @@
   </div>
 </div>
 <!-- /.content-header -->
-<div class="card m-3 family-details ">
-  <div class="sticky mb-2 pb-1">
-    @include('admin.familyInformation.parent_header')
-
-   
-  </div>
+<div class="card pt-2 m-3 family-details ">
   <table id="family-table" class="w-100 table-styling data-table">
     <thead>
       <tr>

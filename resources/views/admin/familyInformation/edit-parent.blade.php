@@ -6,7 +6,7 @@
         <!-- first card parent details -->
         <div class="card my-3 family-details">
             <div class="sticky mb-2 pb-1">
-                @include('admin.familyInformation.parent_header')
+                {{-- @include('admin.familyInformation.parent_header') --}}
 
                 <ul class="nav overflow-auto align-items-center">
                     <li class="nav-item">
@@ -33,7 +33,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#documents" aria-controls="documents" aria-selected="true">Documents</a>
                     </li>
-                    <li><a onclick="goBack()"> <img src="/images/back-button.png" alt=""></a></li>
+                    <li><a  class="back-button" onclick="goBack()"> <img src="/images/back-button.png" alt=""></a></li>
                 </ul>
                 <div class="row parents-details_name px-3">
                     <div class="col-12 d-flex align-items-center">
@@ -283,7 +283,7 @@
                                             <th scope="col">Graduated</th>
                                             <th scope="col">Email</th>
                                             <th>Delete</th>
-                                            <th scope="col"><button type="button" class="btn btn-modal ml-3"
+                                            <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-auto"
                                                     data-toggle="modal" data-target="#studentDetailsModal"
                                                     data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
                                                         src="/images.add.png" alt=""></button></th>
@@ -1081,7 +1081,7 @@
                     </div>
                 </div>
                 <div class="text-right pb-4">
-                    <a href="#to-the-top" class="btn btn-primary">Back to Top</a>
+                    <a href="#admin-header" class="btn btn-primary">Back to Top</a>
                 </div>
             </div>
         </div>
