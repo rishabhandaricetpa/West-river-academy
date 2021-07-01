@@ -4,12 +4,13 @@
     method="POST"
     class="mb-0 px-0 unstyled-label"
     @submit.prevent="submitCourse()"
-  >
+  > 
     <div
       class="seperator mt-4"
       v-for="(physicalCourse,index) in form.physicalCourse"
       :key="physicalCourse.id"
     >
+   
       <div class="position-relative">
         <span class="remove" @click="removeCourse(index)"
           ><i class="fas fa-times"></i>
@@ -241,7 +242,7 @@ export default {
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: this.selected_credit.credit,
+        selectedCredit: this.selected_credit,
         grade: "",
         total_credits: this.outofcredit.total_credit,
         component_index: this.form.physicalCourse.length

@@ -242,7 +242,7 @@ export default {
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: this.selected_credit.credit,
+        selectedCredit: this.selected_credit,
         grade: "",
         total_credits: this.outofcredit.total_credit,
          component_index: this.form.electiveCourse.length

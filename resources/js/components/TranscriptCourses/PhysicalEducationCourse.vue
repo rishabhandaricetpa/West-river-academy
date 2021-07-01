@@ -173,9 +173,9 @@ export default {
             student_id: this.student_id,
             subject_name: "",
             other_subject: "",
-            selectedCredit: this.required_credit.credit,
+            selectedCredit: this.required_credit,
             grade: "",
-           total_credits: this.total_credits.total_credit,
+            total_credits: this.total_credits.total_credit,
              component_index: 0
           }
         ]
@@ -183,7 +183,7 @@ export default {
     };
   },
   mounted() {
-    this.form.physicalEducationCourse[0].selectedCredit = this.required_credit.credit;
+    this.form.physicalEducationCourse[0].selectedCredit = this.required_credit;
     this.final_credits.push(this.calculateRemainingCredit(this.form.physicalEducationCourse[0]));
     this.finalValue();
   },
@@ -226,7 +226,7 @@ export default {
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: this.required_credit.credit,
+        selectedCredit: this.required_credit,
         grade: "",
         total_credits: this.final_credits[this.form.physicalEducationCourse.length - 1],
          component_index: this.form.physicalEducationCourse.length

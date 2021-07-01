@@ -27,7 +27,7 @@ class MathematicsCourse extends Controller
             ->where('status', 0)
             ->get();
         $carnegie_status = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
-        
+
         // delete if course already exists
         $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript_id)->get();
         $refreshCourse->each->delete();
