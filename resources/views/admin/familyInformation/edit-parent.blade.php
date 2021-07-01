@@ -537,90 +537,84 @@
                     </div>
                 </section>
                 <div class="modal fade bd-example-modal-lg" id="orderModal" tabindex="-1" role="dialog"
-                    aria-labelledby="orderModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="orderModalLabel">Create Orders</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="add-new-order">
-                                    <div class="row">
-                                        <div class="form-group  col-md-6">
-                                            <label for="recipient-name" class="col-form-label">For student</label>
-                                            <select id="student-name" class="form-control">
-                                                @foreach ($allstudent as $student)
-                                                    <option value="{{ $student->id }}" id="student_name_order">
-                                                        {{ $student->first_name }} </option>
-                                                @endforeach
+                aria-labelledby="orderModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="orderModalLabel">Add New Order</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-new-student">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Order*</label>
+                                            <select required class=" form-control " id="student_status">
+                                              <option selected>Active</option>
+                                              <option >Inactive</option>
                                             </select>
-                                            <input type="hidden" value="{{ $parent->id }}" id='parent_id'
-                                                name="parent_id">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="recipient-name" class="col-form-label">For Grades</label>
-                                            <select id="enrollment_for" class="form-control">
-                                                @foreach ($payment_nonpaid as $payment)
-                                                    <option value="{{ $payment->id }}">{{ $payment->grade_level }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Order</label>
-                                            <select id="order_name" required class="form-control">
-                                                <option value="enrollment" id="order_name">Enrollment</option>
-                                                <option value="transcript" id="order_name">Transcript</option>
-                                                <option value="postage" id="order_name">Postage</option>
-                                                <option value="apostille" id="order_name">Apostille</option>
-                                                <option value="notarization" id="order_name">Notarization</option>
-                                                <option value="order_consultation" id="order_name">Personal Consultation
-                                                </option>
-                                                <option value="custom_payments" id="order_name">Custom Payments</option>
-                                                <option value="custom_letter" id="order_name">Custom Letter</option>
-                                                <option value="graduation" id="order_name">Graduation</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Amount:</label>
-                                            <input type="text" class="form-control" id="amount" required>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Payment Method</label>
-                                            <select id="payment_mode" required class="form-control">
-                                                <option value="credit_card" id="payment_mode">Credit Card</option>
-                                                <option value="paypal" id="payment_mode">Paypal</option>
-                                                <option value="Money Gram" id="payment_mode">Postage</option>
-                                                <option value="bankTransfer" id="payment_mode">Bank Transfer</option>
-                                                <option value="checkandMoney" id="payment_mode">Check and Money Order
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Enrollment Payment
-                                                Status</label>
-                                            <select id="enrollment_status" class="form-control">
-                                                <option value="paid">Paid</option>
-                                                <option value="pending">Pending</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="message-text" class="col-form-label">Message:</label>
-                                            <textarea class="form-control" id="message"></textarea>
+                                           
+                                          </div>
+                                    </div>
+    
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Student Name*</label>
+                                            <input type="text" id="d_o_b" class="form-control datepicker" required>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Parent Name*
+                                            </label>
+                                            <input type="email" id="email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Status*</label>
+                                            <input type="text" id="phone" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Quantity*</label>
+                                            <input type="text" id="phone" class="form-control">
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Note
+                                            </label>
+                                            <textarea  style="height:120px;" id="" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Amount*
+                                            </label>
+                                            <input type="text" id="immunized_status" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Total                                        </label>
+                                            <input type="text" id="immunized_status" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div> --}}
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
+            </div>
                 {{-- Enrollments --}}
                 <section class="enrollments  pt-10r" id="enrollments">
                     <div class="row">

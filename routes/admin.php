@@ -212,7 +212,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     //dashboard notification
     Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
-
+    Route::get('order-detail',function(){
+        return view('admin.familyinformation.order-detail');
+    });
     // archieved tasks
     Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
