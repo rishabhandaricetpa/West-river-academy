@@ -17,7 +17,7 @@
       </div>
 
       <div class="form-group col-sm-6">
-        Birthdate: {{ Carbon\Carbon::parse($graduation->student->birthdate)->format('M d Y') }}
+        Birthdate: {{ Carbon\Carbon::parse($graduation->student->birthdate)->format('M j, Y') }}
       </div>
 
       <div class="form-group col-sm-6">

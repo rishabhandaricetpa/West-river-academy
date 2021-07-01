@@ -154,7 +154,7 @@
 </div>
 <div v-else>
   No Credits Remaining
-  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="viewCourses"/>
 </div>
 </template>
 
@@ -163,7 +163,6 @@ export default {
   name: "MathsCourse",
   data() {
     return {
-      isCredit: true,
       errors: [],
       final_credits: [this.remaining_credit],
       form: {
@@ -261,17 +260,17 @@ export default {
       this.errors = [];
       if (!this.vallidateGrades()) {
         this.errors.push(
-          "Grade is required Field! Please select a Grade and then continue"
+          "Grade is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.validateSubject()) {
         this.errors.push(
-          "Course name is required Field! Please select a Grade and then continue"
+          "Course name is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.validateCredit()) {
         this.errors.push(
-          "Credit is required Field! Please select a Grade and then continue"
+          "Credit is a required Field! Please select a Grade and then continue."
         );
       }
       if(!this.validateFinalCredit()){
@@ -283,7 +282,7 @@ export default {
       if (
         this.vallidateGrades() &&
         this.validateSubject() &&
-        this.validateCredit() && this.form.final_remaining_credit >0
+        this.validateCredit() && this.validateFinalCredit()
       ) {
         axios
           .post(route("editMathematicsTranscriptCourse.store"), this.form)

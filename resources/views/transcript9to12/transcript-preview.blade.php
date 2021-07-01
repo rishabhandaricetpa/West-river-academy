@@ -73,7 +73,7 @@
                                 </td>
                                 <td
                                     style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                                    {{ $student->d_o_b->format(' M d Y') }}</td>
+                                    {{ $student->d_o_b->format('M j, Y') }}</td>
                             </tr>
                         </tbody>
                     </table>

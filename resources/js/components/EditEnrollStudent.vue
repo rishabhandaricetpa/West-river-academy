@@ -203,7 +203,7 @@
             </div>
             <div class="info-detail col-md-8 col-lg-6 lato-italic">
               <p>
-              You can enter a different date AFTER the one entered. The date you enter will appear on your confirmation of enrollment letter. But your official enrollment will START on the date you see in the box. 
+              You can enter a different date AFTER the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will START on the date you see in the box. 
               </p>
             </div>
              <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
@@ -232,7 +232,7 @@
             </div>
             <div class="info-detail col-md-8 col-lg-6 lato-italic">
               <p>
-               You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter. But your official enrollment will START on the date you see in the box. 
+               You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will START on the date you see in the box. 
               </p>
             </div>
              <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
@@ -273,8 +273,8 @@
             </thead>
               <tbody>
                 <tr>
-                <td>{{ period.selectedStartDate | moment("MMMM DD YYYY")}}</td>
-                <td>{{ period.selectedEndDate | moment("MMMM DD YYYY") }}</td>
+                <td>{{ period.selectedStartDate | moment("MMMM D, YYYY")}}</td>
+                <td>{{ period.selectedEndDate | moment("MMMM D, YYYY") }}</td>
                 <td>{{ period.grade }} </td>
                 </tr>
               </tbody>
@@ -418,12 +418,12 @@ export default {
       // }
       if (!this.vallidateGrades()) {
         this.errors.push(
-          "Grade is required Field! Please select a Grade and then continue"
+          "Grade is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.vallidateEndDate()) {
         this.errors.push(
-          "End date of Enrollment is required!Please select a End Date and then continue"
+          "End date of Enrollment is a required! Please select a End Date and then continue."
         );
       } else {
         axios

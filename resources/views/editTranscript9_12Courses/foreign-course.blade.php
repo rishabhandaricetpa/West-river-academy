@@ -7,7 +7,11 @@
         <h1 class="text-center text-white text-uppercase"></h1>
         <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
             <h3>Select an Foreign Arts course:</h3>
-            <edit-foreign-transcript-course :outofcredit='@json($outOfCredit)' :foreigncourse='@json($foreignCourse)' :transcripts='@json($transcripts)' :student_id='@json($student_id)' :courses_id='@json($courses_id)' :transcript_id='@json($transcript9_12id)' :total_credits='@json($credits)'>
+            <edit-foreign-transcript-course :outofcredit='@json($outOfCredit)' :foreigncourse='@json($foreignCourse)' 
+            :transcripts='@json($transcripts)' :student_id='@json($student_id)' :courses_id='@json($courses_id)'
+             :transcript_id='@json($transcript9_12id)' :total_credits='@json($credits)'
+             :remaining_credit='@json($remaining_credit)' :selected_credit='@json($selectedCreditRequired)'
+             >
             </edit-foreign-transcript-course>
         </div>
     </main>

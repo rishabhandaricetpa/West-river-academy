@@ -23,7 +23,7 @@ use App\Models\TranscriptPayment;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\RecordTransfer;
-
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -236,19 +236,16 @@ class ParentController extends Controller
     {
         try {
             DB::beginTransaction();
-            $notification = [
-                'message' => 'parent Record is Deleted Successfully!',
-                'alert-type' => 'warning',
-            ];
-            parentProfile::where('id', $id)->delete();
-            DB::commit();
 
-            return redirect()->back()->with($notification);
+            ParentProfile::where('id', $id)->delete();
+            User::where('id', $id)->delete();
+            DB::commit();
+            return redirect()->route('admin.view.parent');
         } catch (\Exception $e) {
             report($e);
             DB::rollback();
             $notification = [
-                'message' => 'Failed to update Record!',
+                'message' => 'Failed to delete Record!',
                 'alert-type' => 'error',
             ];
 

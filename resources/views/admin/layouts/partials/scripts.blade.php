@@ -90,14 +90,8 @@
                     "render": function(data) {
                         return (moment(data).format("LL"));
                     }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="delete/parent/${id}"><i class="fas fa-trash-alt"></i></a>`;
-
-
-                    }
-                }
+                }, 
+                
             ]
         }).buttons().container().appendTo('#family-table_wrapper .col-md-6:eq(0)');
 
