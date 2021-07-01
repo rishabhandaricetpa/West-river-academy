@@ -60,7 +60,7 @@
                            <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$student->fullname}}
                            </td>
                            <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
-                           <td style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">{{$student->d_o_b->format(' M d Y')}}</td>
+                           <td style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">{{$student->d_o_b->format('M j, Y')}}</td>
                        </tr>
                    </tbody>
                </table>
