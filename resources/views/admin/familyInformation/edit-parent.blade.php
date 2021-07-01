@@ -33,6 +33,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#documents" aria-controls="documents" aria-selected="true">Documents</a>
                     </li>
+                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin.parent.delete',$parent->id)}}"  onclick="return confirm('Are you sure you want to delete this family?');" aria-controls="documents" aria-selected="true">Delete</a>
+                    </li>
                     <li><a  class="back-button" onclick="goBack()"> <img src="/images/back-button.png" alt=""></a></li>
                 </ul>
                 <div class="row parents-details_name px-3">
