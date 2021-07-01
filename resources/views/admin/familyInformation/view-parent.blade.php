@@ -26,7 +26,9 @@
         <th>Country</th>
         <th>State</th>
         <th>Status</th>
+        <th>Enrollment</th>
         <th>Date Created</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
