@@ -578,7 +578,7 @@ class EditCourse extends Controller
         $all_credit =Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
         $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
 
-        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::PhysicalEducationCourseId)->orderBy('id', 'DESC')->orderBy('id', 'DESC')->first();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::ForeignCourseId)->orderBy('id', 'DESC')->orderBy('id', 'DESC')->first();
         if (is_null($transcript_credit)) {
             $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
             if ($lastCourse) {

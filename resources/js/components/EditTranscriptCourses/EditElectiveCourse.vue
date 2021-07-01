@@ -20,7 +20,7 @@
               class="form-control text-uppercase"
               v-model="electiveCourse.subject_name"
             >
-              <option v-for="Course in electivecourse" :key="Course">
+              <option v-for="Course in electivecourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -109,7 +109,7 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="electiveCourse.selectedCredit"
-                v-on:change="showCredit"
+                  v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
@@ -146,15 +146,15 @@
         @click="viewCourses"
         >View All Courses</a
       >
-      <a type="button" @click="viewCourses" class="btn btn-primary ml-4 float-right">
+  <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
-      </a>
+      </button>
     </div>
   </form>
      </div>
   <div v-else>
   No Credits Remaining
-  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="viewCourses"/>
 </div>
 </template>
 
@@ -218,8 +218,8 @@ export default {
 
     },
       reIndex(){
-      this.form.physicalCourse.forEach((physicalCourse, index) => {
-        physicalCourse.component_index = index;
+      this.form.electiveCourse.forEach((electiveCourse, index) => {
+        electiveCourse.component_index = index;
       });
     },
 
@@ -274,19 +274,24 @@ export default {
           "Credit is required Field! Please select a Grade and then continue"
         );
       }
+        if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
+        );
+      }
       if (
         this.vallidateGrades() &&
         this.validateSubject() &&
-        this.validateCredit()
+        this.validateCredit() && this.validateFinalCredit()
       ) {
         axios
           .post(route("editElectiveTranscriptCourse.store"), this.form)
           .then(response => {
             window.location =
-              "/edit-elective-transcript/" +
-              this.student_id +
-              "/" +
-              this.transcript_id;
+              "/display-course-details/" +
+            this.transcript_id +
+            "/" +
+            this.student_id;
           })
           .catch(error => {
             alert("Please fill in the fields");
@@ -310,6 +315,13 @@ export default {
         }
       }
       return true;
+    },
+     validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+      
     },
     validateCredit() {
       for (let i = 0; i < this.form.electiveCourse.length; i++) {
