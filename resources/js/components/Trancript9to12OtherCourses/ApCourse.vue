@@ -143,10 +143,10 @@ export default {
     submitCredit() {
       this.errors = [];
       if (!this.vallidateGrades()) {
-        this.errors.push("Grade is required Field! Please select a Grade");
+        this.errors.push("Grade is a required Field! Please select a Grade and then continue.");
       }
       if (!this.validateCredit()) {
-        this.errors.push("Credit is required Field! Please select a credit ");
+        this.errors.push("Credit is a required Field! Please select a Grade and then continue. ");
       }
       axios
         .post(route("apCourse.store"), this.form)

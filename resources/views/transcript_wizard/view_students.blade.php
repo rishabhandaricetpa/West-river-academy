@@ -23,7 +23,7 @@
                     @foreach ($enroll_students as $enroll_student)
                     <tr>
                         <td>{{ $enroll_student->fullname }}</td>
-                        <td>{{ $enroll_student->d_o_b->format('M d Y') }}</td>
+                        <td>{{ $enroll_student->d_o_b->format('M j, Y') }}</td>
                         <td class="transform-none">{{ $enroll_student->email }}</td>
                         <td><a href="{{ route('transcriptwizard.viewall', $enroll_student->id) }}" class="btn btn-primary">Create Transcript</a></td>
                         @if (getTranscriptdeatils($enroll_student->id) === 'true')

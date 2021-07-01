@@ -20,7 +20,7 @@
                     <div class="form-group d-sm-flex mb-2">
                         <label for="">Date of Birth</label>
                         <div>
-                            {{ $student->d_o_b->format('M d Y ') }}
+                            {{ $student->d_o_b->format('M j, Y') }}
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
@@ -37,7 +37,7 @@
                         <label for="">Date of Graduation</label>
                         <div>
                             <input type="text" name="graduation_date"
-                                value="{{ Carbon\Carbon::parse($dateofGraduation->date_of_graduation)->format('M d Y') }}"
+                                value="{{ Carbon\Carbon::parse($dateofGraduation->date_of_graduation)->format('M j, Y') }}"
                                 class="form-control-sm datepicker" id="getgraduationDate"></input>
                         </div>
                         <button type="submit" href="" class="btn btn-primary">Update</button>

@@ -260,17 +260,17 @@ export default {
       this.errors = [];
       if (!this.vallidateGrades()) {
         this.errors.push(
-          "Grade is required Field! Please select a Grade and then continue"
+          "Grade is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.validateSubject()) {
         this.errors.push(
-          "Course name is required Field! Please select a Grade and then continue"
+          "Course name is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.validateCredit()) {
         this.errors.push(
-          "Credit is required Field! Please select a Grade and then continue"
+          "Credit is a required Field! Please select a Grade and then continue."
         );
       }
         if(!this.validateFinalCredit()){

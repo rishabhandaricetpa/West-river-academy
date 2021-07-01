@@ -15,7 +15,7 @@
 
                     <p>
                         <span class="font-weight-bold">Notarizations:</span>
-                        $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
+                        $20 per document. Shipping First class in the USA is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
                     </p>
                     <div class="form-group d-md-flex mb-2">
                         <div class="col-md-6 d-sm-flex px-0 mb-4">
