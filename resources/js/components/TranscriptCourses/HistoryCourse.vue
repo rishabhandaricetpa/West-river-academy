@@ -1,5 +1,5 @@
 <template>
-<div v-if='this.remaining_credit > 0 && this.final_credits[1] >0'>
+<div v-if='this.remaining_credit > 0 '>
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -22,7 +22,7 @@
               v-model="socialsciencecourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="Course in historycourse" :key="Course">
+              <option v-for="Course in historycourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -256,8 +256,13 @@ export default {
       if (!this.validateCredit()) {
         this.errors.push("Credit is required Field! Please select a credit ");
       }
-
-      axios
+       if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
+        );
+      }
+      if(this.validateFinalCredit()){
+        axios
         .post(route("socialStudies-transcript.store"), this.form)
         .then(response => {
           window.location =
@@ -266,6 +271,8 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
+      }
+    
     },
     vallidateGrades() {
       for (let i = 0; i < this.form.socialsciencecourse.length; i++) {
@@ -282,6 +289,12 @@ export default {
         if (!enrollmentSubject.subject_name) {
           return false;
         }
+      }
+      return true;
+    },
+     validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
       }
       return true;
     },

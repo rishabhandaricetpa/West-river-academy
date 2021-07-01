@@ -1,5 +1,5 @@
 <template>
-<div v-if="this.remaining_credit >0 && this.final_credits[1] >0">
+<div v-if="this.remaining_credit >0 ">
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -255,7 +255,13 @@ export default {
       if (!this.validateCredit()) {
         this.errors.push("Credit is required Field! Please select a credit ");
       }
-      axios
+       if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
+        );
+      }
+      if(this.validateFinalCredit()){
+         axios
         .post(route("maths-transcript.store"), this.form)
         .then(response => {
           window.location =
@@ -264,6 +270,8 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
+      }
+     
     },
 
     validateSubject() {
@@ -284,6 +292,12 @@ export default {
       }
       return true;
     },
+     validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+    },
     validateOtherSubject() {
       for (let i = 0; i < this.form.mathscourse.length; i++) {
         const enrollmentOtherSubject = this.form.mathscourse[i];
@@ -293,6 +307,7 @@ export default {
       }
       return true;
     },
+    
       nextCourse(){
       window.location =
             "/another-grade-transcript/" +

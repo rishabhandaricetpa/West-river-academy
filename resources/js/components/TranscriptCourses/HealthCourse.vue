@@ -1,5 +1,5 @@
 <template>
-<div v-if="this.remaining_credit > 0 && this.final_credits[1] >0">
+<div v-if="this.remaining_credit > 0 ">
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -21,7 +21,7 @@
               v-model="healthCourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="Course in healthsubjects" :key="Course">
+              <option v-for="Course in healthsubjects" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -252,7 +252,12 @@ export default {
       if (!this.validateCredit()) {
         this.errors.push("Credit is required Field! Please select a credit ");
       }
-
+  if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
+        );
+      }
+      if(this.validateFinalCredit()){
       axios
         .post(route("healthEducation-transcript.store"), this.form)
         .then(response => {
@@ -264,7 +269,7 @@ export default {
         })
         .catch(error => {
           alert("Please fill in the fields");
-        });
+        });}
     },
 
     validateSubject() {
@@ -282,6 +287,12 @@ export default {
         if (!enrollmentSubject.selectedCredit) {
           return false;
         }
+      }
+      return true;
+    },
+       validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
       }
       return true;
     },
