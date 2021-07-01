@@ -4,6 +4,7 @@
     <section class="content container-fluid  my-3">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!-- first card parent details -->
+
         <div class="card my-3 family-details">
             <div class="sticky mb-2 pb-1">
                 {{-- @include('admin.familyInformation.parent_header') --}}
@@ -37,6 +38,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.parent.delete',$parent->id)}}"  onclick="return confirm('Are you sure you want to delete this family?');" aria-controls="documents" aria-selected="true">Delete</a>
                     </li>
+                    <li class="nav-item"><a href="#" class="add-menu-item nav-link"data-toggle="modal"
+                        data-target="#parentDetailsModal" data-whatever="@getbootstrap"><svg  id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.87 477.87"><defs><style>.cls-1{fill:#ff9900;}</style></defs><path class="cls-1" d="M392.53,0H85.33A85.44,85.44,0,0,0,0,85.33v307.2a85.44,85.44,0,0,0,85.33,85.34h307.2a85.45,85.45,0,0,0,85.34-85.34V85.33A85.44,85.44,0,0,0,392.53,0Zm51.2,392.53a51.2,51.2,0,0,1-51.2,51.2H85.33a51.2,51.2,0,0,1-51.2-51.2V85.33a51.21,51.21,0,0,1,51.2-51.2h307.2a51.2,51.2,0,0,1,51.2,51.2Z"/><path class="cls-1" d="M324.27,221.87H256V153.6a17.07,17.07,0,1,0-34.13,0v68.27H153.6a17.07,17.07,0,1,0,0,34.13h68.27v68.27a17.07,17.07,0,0,0,34.13,0V256h68.27a17.07,17.07,0,0,0,0-34.13Z"/></svg></a></li>
                     <li><a  class="back-button" onclick="goBack()"> <img src="/images/back-button.png" alt=""></a></li>
                 </ul>
                 <div class="row parents-details_name px-3">
@@ -55,6 +58,153 @@
                     <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }} </div>
                 </div>
             </div>
+            <div class="modal fade bd-example-modal-xl" id="parentDetailsModal" tabindex="-1" role="dialog"
+   aria-labelledby="parentDetailsModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-xl" role="document">
+     <form id="add-new-parent">
+       <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="studentDetailsModalLabel">Add New Parent</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+           <div class="row">
+             <label for="message-text" class="col-form-label"><h2>Enter Parent 1 Information:</h2></label>
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">First Name:</label>
+                 <input class="form-control" type="text" id='parent1_first_name' required>
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Preferred Nickname:</label>
+                 <input type="text" id="parent1_middle_name" class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Last Name:</label>
+                 <input type="text" id="parent1_last_name" required class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Email Address:</label>
+                 <input class="form-control" type="email" id='parent1_email' required> 
+               </div>
+             </div>
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Cell Phone:</label>
+                 <input type="text" id="parent1_cell_phone" class="form-control" required>
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Work/Home Phone:</label>
+                 <input type="text" id="parent1_home_phone"  class="form-control">
+               </div>
+             </div>
+             <label for="message-text" class="col-form-label"><h2>Enter Parent 2 Information:</h2></label>
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">First Name:</label>
+                 <input class="form-control" type="text" id='parent2_first_name'>
+               </div>
+             </div>
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Preferred Nickname:</label>
+                 <input type="text" id="parent2_middle_name" class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Last Name:</label>
+                 <input type="text" id="parent2_last_name" required class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Email Address:</label>
+                 <input class="form-control" type="email" id='parent2_email'>
+               </div>
+             </div>
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Cell Phone:</label>
+                 <input type="text" id="parent2_cell_phone" class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-4 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Work/Home Phone:</label>
+                 <input type="text" id="parent2_home_phone"  class="form-control">
+               </div>
+             </div>
+             <label for="message-text" class="col-form-label"><h2>Mailing Address:</h2> </label>
+
+             <div class="col-lg-6 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Street Address:</label>
+                 <input type="text" id="parent1_street_address" class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-6 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">City:</label>
+                 <input type="text" id="parent1_city" required class="form-control">
+               </div>
+             </div> <div class="col-lg-3 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">State:</label>
+                 <input type="text" id="parent1_state" class="form-control">
+               </div>
+             </div>
+
+             <div class="col-lg-3 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Zip Code:</label>
+                 <input type="text" id="parent2_zip_code" required class="form-control">
+               </div>
+             </div>
+             <div class="col-lg-3 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Country:</label>
+                 <input type="text" id="parent2_country" required class="form-control">
+               </div>
+             </div>
+             <div class="col-lg-3 col-12">
+               <div class="form-group">
+                 <label for="message-text" class="col-form-label">Who referred you to WRA?
+                 </label>
+                 <input type="text" id="reference" class="form-control">
+               </div>
+             </div>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+             <button type="submit" class="btn btn-primary">Save</button>
+           </div>
+         </form>
+       </div>
+     </div>
+
+
+   </div>
+ </div>
+
             <div class="px-3" id="to-the-top">
                 {{-- parents-details --}}
                 {{-- parents-details --}}

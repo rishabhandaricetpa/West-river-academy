@@ -22,7 +22,6 @@
         <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
         <li class="menu-item"><a href="#">Representative</a></li>
         <li class="menu-item"><a href="#">Groups</a></li>
-        <li class="menu-item"><a href="#" class="add-menu-item"><svg  id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.87 477.87"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M392.53,0H85.33A85.44,85.44,0,0,0,0,85.33v307.2a85.44,85.44,0,0,0,85.33,85.34h307.2a85.45,85.45,0,0,0,85.34-85.34V85.33A85.44,85.44,0,0,0,392.53,0Zm51.2,392.53a51.2,51.2,0,0,1-51.2,51.2H85.33a51.2,51.2,0,0,1-51.2-51.2V85.33a51.21,51.21,0,0,1,51.2-51.2h307.2a51.2,51.2,0,0,1,51.2,51.2Z"/><path class="cls-1" d="M324.27,221.87H256V153.6a17.07,17.07,0,1,0-34.13,0v68.27H153.6a17.07,17.07,0,1,0,0,34.13h68.27v68.27a17.07,17.07,0,0,0,34.13,0V256h68.27a17.07,17.07,0,0,0,0-34.13Z"/></svg></a></li>
     </ul>
     <ul class="d-flex">
         <li><img src="/images/search.png" alt="login"></li>
