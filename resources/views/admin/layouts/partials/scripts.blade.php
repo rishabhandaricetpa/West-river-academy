@@ -1321,7 +1321,7 @@
             elements[i].disabled = true;
         }
     })
-
+/////form enable 
     document.querySelectorAll(".form-enable").forEach((link) => {
         link.addEventListener("click", () => {
             var form = document.getElementById("sampleForm");
@@ -1363,6 +1363,54 @@
             }
         });
     });
+/////// changeing form -select
+
+// $("orderDetailsModal").on("change","#order-detail_add", function(){
+//     alert("check");
+// })
+
+document.getElementById("order-detail_add").addEventListener("change",function(){
+    // alert("js");
+    var value= this.value;
+    // alert(value);
+    if(value=="order-detail_transcript")
+    {
+        $("#order-detail_transcript").show();
+        $("#order-detail_enrollment").hide();
+    }
+})
+document.getElementById("order-detail_add").addEventListener("change",function(){
+    // alert("js");
+    var value= this.value;
+    // alert(value);
+    if(value=="order-detail_enrollment")
+    {
+        $("#order-detail_enrollment").show();
+        $("#order-detail_transcript").hide();
+    }
+})
+
+// $("#order-detail_add").change(function(){
+//     alert("jq");
+// })
+
+  //$('#order-detail_add').change(function(){
+     // alert ('hi');
+     // alert(this.value)
+      //var val= $(this.value);
+      //if(val=="order-detail_transcript")
+      //{
+          //alert("entered");
+        //$("#order-detail_transcript").show();
+       // $("#order-detail_enrollment").hide();
+      //}
+      //else
+      //{
+      //    alert("no");
+      //}
+  //})
+// })
+
 
     $('#check').click(function() {
         $("#p2_street_address").val($("#street_address").val());

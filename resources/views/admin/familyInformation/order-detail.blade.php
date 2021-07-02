@@ -205,6 +205,112 @@
         </div>
       </div>
     </section>
+    {{-- <form id="add-new-order">
+        <div class="form-group">
+          <label for="message-text" class="col-form-label">Order*</label>
+          <select required class=" form-control order-detail_add" name="order-detail_add" id="order-detail_add">
+            <option value="order-detail_transcript">Transcript</option>
+            <option value="order-detail_enrollment">Enrollment</option>
+          </select>
+        </div>
+
+
+        <div class="order-detail_transcript row" id="order-detail_transcript">
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Student Name*</label>
+              <input type="text" id="d_o_b" class="form-control datepicker" required>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Parent Name*
+              </label>
+              <input type="email" id="email" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Status*</label>
+              <input type="text" id="phone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Quantity*</label>
+              <input type="text" id="phone" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Note
+              </label>
+              <textarea style="height:120px;" id="" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Amount*
+              </label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Total </label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Period</label>
+              <select type="" id="" class="form-control">
+                <option>K-8</option>
+                <option>9-12</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="order-detail_enrollment row" id="order-detail_enrollment">
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Start Date</label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">End Date</label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Grade</label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Type</label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Amount</label>
+              <input type="text" id="" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Period</label>
+              <select type="" id="" class="form-control">
+                <option>K-8</option>
+                <option>9-12</option>
+              </select>
+            </div>
+          </div>
+        </div> 
+      </form> --}}
     <div class="modal fade bd-example-modal-lg" id="orderDetailsModal" tabindex="-1" role="dialog"
       aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
@@ -216,18 +322,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="add-new-student">
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Order*</label>
-                    <select required class=" form-control " id="student_status">
-                      <option selected>Active</option>
-                      <option>Inactive</option>
-                    </select>
-                  </div>
-                </div>
+            <form id="add-new-order">
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Order*</label>
+                <select required class=" form-control " id="order-detail_add">
+                  <option value="order-detail_transcript">Transcript</option>
+                  <option value="order-detail_enrollment">Enrollment</option>
+                </select>
+              </div>
 
+
+              <div class="order-detail_transcript row" id="order-detail_transcript">
                 <div class="col-md-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Student Name*</label>
@@ -251,7 +356,6 @@
                     <input type="text" id="phone" class="form-control">
                   </div>
                 </div>
-
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Note
@@ -259,7 +363,6 @@
                     <textarea style="height:120px;" id="" class="form-control"></textarea>
                   </div>
                 </div>
-
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Amount*
@@ -273,36 +376,136 @@
                     <input type="text" id="" class="form-control">
                   </div>
                 </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Period</label>
+                    <select type="" id="" class="form-control">
+                      <option>K-8</option>
+                      <option>9-12</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              {{-- <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div> --}}
+              <div class="order-detail_enrollment display-none" id="order-detail_enrollment">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">End Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{-- <div class="row" id="">
+                      <div class="col-md-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Student Name*</label>
+                          <input type="text" id="d_o_b" class="form-control datepicker" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Parent Name*
+                          </label>
+                          <input type="email" id="email" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Status*</label>
+                          <input type="text" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Quantity*</label>
+                          <input type="text" id="phone" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Note
+                          </label>
+                          <textarea style="height:120px;" id="" class="form-control"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Amount*
+                          </label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Total </label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                    </div> --}}
             </form>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
+        </div>
+    
       </div>
     </div>
-    <div class="row justify-content-end pt-2">
-      <div class="col-md-4 col-12">
-        <div class="d-flex align-items-center form-group">
-          <label for="message-text" class="col-form-label col-form-label_highlights">Coupon</label>
-          <select required class=" form-control " id="student_status">
-            <option selected>Active</option>
-            <option>Inactive</option>
-          </select>
-          <input type="text" id="" class="form-control">
-          <input type="text" id="" class="form-control">
-        </div>
-        <div class="d-flex align-items-center form-group">
-          <label for="message-text" class="col-form-label col-form-label_highlights">Total</label>
-          <input type="text" id="" class="form-control">
-
-        </div>
-      </div>
-    </div>
-
   </div>
+</div>
+<div class="row justify-content-end pt-2">
+  <div class="col-md-4 col-12">
+    <div class="d-flex align-items-center form-group">
+      <label for="message-text" class="col-form-label col-form-label_highlights">Coupon</label>
+      <select required class=" form-control " id="student_status">
+        <option selected>Active</option>
+        <option>Inactive</option>
+      </select>
+      <input type="text" id="" class="form-control">
+      <input type="text" id="" class="form-control">
+    </div>
+    <div class="d-flex align-items-center form-group">
+      <label for="message-text" class="col-form-label col-form-label_highlights">Total</label>
+      <input type="text" id="" class="form-control">
+
+    </div>
+  </div>
+</div>
+
+</div>
 </div>
 
 @endsection
