@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TranscriptCourses;
 
 use App\Enums\CourseType;
 use App\Enums\CreditType;
+use App\Enums\MaximumCreditType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -39,9 +40,8 @@ class PhysicalEducationCourse extends Controller
         } else {
             $remaining_credit = $transcript_credit->remaining_credits;
         }
-        sort($all_credits);
-        array_pop($all_credits);
-        $selectedCreditRequired = max($all_credits);
+
+        $selectedCreditRequired = $carnegie_status->is_carnegie == 1 ? MaximumCreditType::MaxCreditForSubjectsNotInCalifornia : MaximumCreditType::MaxCreditForSubjectsInCalifornia;
         $total_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('total_credit')->first();
         $transData = Transcript9_12::where('id', $transcript_id)->first();
         $trans_id =  $transData->transcript_id;
