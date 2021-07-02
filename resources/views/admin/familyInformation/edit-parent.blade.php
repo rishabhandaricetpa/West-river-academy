@@ -59,9 +59,9 @@
         <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }} </div>
       </div>
     </div>
-    <div class="modal fade bd-example-modal-xl pt-4" id="parentDetailsModal" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg pt-4" id="parentDetailsModal" tabindex="-1" role="dialog"
       aria-labelledby="parentDetailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <form id="add-new-parent">
           <div class="modal-content">
             <div class="modal-header">
@@ -161,39 +161,39 @@
                   <h2>Mailing Address:</h2>
                 </label>
 
-                <div class="col-lg-6 col-12">
+                <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Street Address:</label>
                     <input type="text" id="parent1_street_address" class="form-control">
                   </div>
                 </div>
 
-                <div class="col-lg-6 col-12">
+                <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">City:</label>
                     <input type="text" id="parent1_city" required class="form-control">
                   </div>
                 </div>
-                <div class="col-lg-3 col-12">
+                <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">State:</label>
                     <input type="text" id="parent1_state" class="form-control">
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-12">
+                <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Zip Code:</label>
                     <input type="text" id="parent2_zip_code" required class="form-control">
                   </div>
                 </div>
-                <div class="col-lg-3 col-12">
+                <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Country:</label>
                     <input type="text" id="parent2_country" required class="form-control">
                   </div>
                 </div>
-                <div class="col-lg-3 col-12">
+                <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Who referred you to WRA?
                     </label>
@@ -676,19 +676,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="add-new-student">
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Order*</label>
-                    <select required class=" form-control " id="student_status">
-                      <option selected>Active</option>
-                      <option>Inactive</option>
-                    </select>
+            <form id="add-new-order">
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Order*</label>
+                <select required class=" form-control " id="order-detail_add">
+                  <option value="order-detail_transcript">Transcript</option>
+                  <option value="order-detail_enrollment">Enrollment</option>
+                </select>
+              </div>
 
-                  </div>
-                </div>
 
+              <div class="order-detail_transcript row" id="order-detail_transcript">
                 <div class="col-md-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Student Name*</label>
@@ -712,7 +710,6 @@
                     <input type="text" id="phone" class="form-control">
                   </div>
                 </div>
-
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Note
@@ -720,25 +717,117 @@
                     <textarea style="height:120px;" id="" class="form-control"></textarea>
                   </div>
                 </div>
-
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Amount*
                     </label>
-                    <input type="text" id="immunized_status" class="form-control">
+                    <input type="text" id="" class="form-control">
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Total </label>
-                    <input type="text" id="immunized_status" class="form-control">
+                    <input type="text" id="" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Period</label>
+                    <select type="" id="" class="form-control">
+                      <option>K-8</option>
+                      <option>9-12</option>
+                    </select>
                   </div>
                 </div>
               </div>
-              {{-- <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div> --}}
+              <div class="order-detail_enrollment display-none" id="order-detail_enrollment">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">End Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{-- <div class="row" id="">
+                      <div class="col-md-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Student Name*</label>
+                          <input type="text" id="d_o_b" class="form-control datepicker" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Parent Name*
+                          </label>
+                          <input type="email" id="email" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Status*</label>
+                          <input type="text" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Quantity*</label>
+                          <input type="text" id="phone" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Note
+                          </label>
+                          <textarea style="height:120px;" id="" class="form-control"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Amount*
+                          </label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Total </label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                    </div> --}}
             </form>
           </div>
         </div>
