@@ -2,7 +2,7 @@
 @section('pageTitle', 'Another')
 @section('content')
 <main class="position-relative container form-content mt-4 label-styling label-md">
-  <h1 class="text-center text-white text-uppercase">enroll students</h1>
+  <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
   <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
     <h3 class="mb-3">Do you want to add another grade level?</h3>
     <!-- <form method="get" class="mb-0" action="{{ route ('download.transcript')}}"> -->

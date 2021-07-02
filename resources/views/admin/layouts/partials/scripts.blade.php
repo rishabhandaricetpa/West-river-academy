@@ -85,7 +85,11 @@
                         else
                             return `<td> Inactive</td>`;
                     }
-                }, {
+                }, 
+                {
+                    "data": "student_profile.length"
+                }, 
+                {
                     "data": "created_at",
                     "render": function(data) {
                         return (moment(data).format("LL"));
@@ -943,8 +947,6 @@
     });
     //edit-student-profile
 
-
-
     //add notes to family 
     $("#add-new-notes").on("submit", function(event) {
         event.preventDefault();
@@ -981,10 +983,6 @@
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
         var grade_level = $("input[type='radio']:checked").val();
-        var enrollment_period = $('#enrollment_period').val();
-        var enrollment_status = $('#enrollment_status').val();
-        var amount_status = $('#amount_status').val();
-        console.log(amount_status);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -998,10 +996,6 @@
                 start_date: start_date,
                 end_date: end_date,
                 grade_level: grade_level,
-                enrollment_period: enrollment_period,
-                enrollment_status: enrollment_status,
-                amount_status: amount_status,
-
             },
             success: function(response) {
                 location.reload();
@@ -1053,7 +1047,6 @@
                 notes: notes
             },
             success: function(response) {
-                console.log(response);
                 location.reload();
             },
             error: function(response) {

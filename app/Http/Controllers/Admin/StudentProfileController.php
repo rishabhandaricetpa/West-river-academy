@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ConfirmationLetter;
 use App\Models\EnrollmentPayment;
+use App\Models\FeesInfo;
 use App\Models\EnrollmentPeriods;
 use App\Models\Graduation;
 use App\Models\RecordTransfer;
@@ -122,7 +123,7 @@ class StudentProfileController extends Controller
 
         //graduation
         $graduations = Graduation::where('student_profile_id', $id)->get();
-        
+
         //notes
         $notes = Notes::where('student_profile_id', $id)->get();
         return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcripts', 'documents', 'parent_id', 'parent', 'graduations', 'notes'));
@@ -326,29 +327,49 @@ class StudentProfileController extends Controller
     public function createEnrollment(Request $request)
     {
         try {
+            $student_id = $request->get('student_name');
+            $parent_id = $request->get('parent_id');
+            $selectedStartDate = \Carbon\Carbon::parse($request->get('start_date'));
+            $selectedEndDate = \Carbon\Carbon::parse($request->get('end_date'));
+            $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
+            $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
+                ->where('student_profiles.id', '!=', $student_id)
+                ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                ->whereDate('enrollment_periods.start_date_of_enrollment', '<=', $selectedStartDate)
+                ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
+                ->exists();
+            if (!$student_enrolled) {
+                $student_type = 'first_student';
+            } else {
+                $student_type = 'additional_student';
+            }
+            $fee_type = $student_type . '_' . $type;
+            $fee = FeesInfo::getFeeAmount($fee_type);
+
             DB::beginTransaction();
             $enroll = new EnrollmentPeriods;
             $enroll->student_profile_id = $request->get('student_name');
             $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
             $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
             $enroll->grade_level = $request->get('grade_level');
-            $enroll->type = $request->get('enrollment_period');
+            $enroll->type = $type;
             $enroll->save();
 
             $transction = new TransactionsMethod();
             $transction->transcation_id   = substr(uniqid(), 0, 12);
             $transction->payment_mode = "admin created";
             $transction->parent_profile_id = $request->get('parent_id');
-            $transction->amount = $request->get('amount_status');
-            $transction->status = $request->get('enrollment_status');
+            $transction->amount = $fee;
+            $transction->status = 'pending';
             $transction->save();
 
             $enroll_payment = new EnrollmentPayment();
             $enroll_payment->enrollment_period_id = $enroll->id;
             $enroll_payment->payment_mode = "admin created";
             $enroll_payment->transcation_id = $transction->transcation_id;
-            $enroll_payment->status = $request->get('enrollment_status');
-            $enroll_payment->amount = $request->get('amount_status');
+            $enroll_payment->status = 'pending';
+            $enroll_payment->amount = $fee;
             $enroll_payment->save();
 
             $enroll->enrollment_payment_id = $enroll_payment->id;
@@ -358,6 +379,7 @@ class StudentProfileController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
             }
         } catch (\Exception $e) {
+            // dd($e);
             DB::rollBack();
             report($e);
             if ($request->expectsJson()) {

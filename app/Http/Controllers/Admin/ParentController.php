@@ -68,6 +68,7 @@ class ParentController extends Controller
                 'name' => $request->get('parent1_first_name'),
                 'email' => $request->get('parent1_email'),
                 'password' => Hash::make($request->get('parent1_cell_phone')),
+                'email_verified_at' => now(),
             ]);
             $user->save();
             $parent =  ParentProfile::create([
@@ -134,13 +135,15 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
+        $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
+
         $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
         $documents = UploadDocuments::where('parent_profile_id', $id)->get();
         $payment_info = DB::table('enrollment_periods')
-            ->where('student_profile_id', $id)
+            ->whereIn('student_profile_id', $student_ids)
             ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
                 'enrollment_periods.created_at',

@@ -635,7 +635,7 @@
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
                                             <th scope="col">Grade</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Enrolled</th>
                                             <th scope="col">Details</th>
                                             <th scope="col" class="text-right"><button type="button"
                                                     class="btn btn-modal ml-3" data-toggle="modal"
@@ -656,9 +656,9 @@
                                                 </td>
                                                 <td>{{ $payment->grade_level }}</td>
                                                 @if ($payment->status === 'paid')
-                                                    <td>Paid</td>
+                                                    <td>Yes</td>
                                                 @elseif($payment->status ==='pending')
-                                                    <td>Pending</td>
+                                                    <td>No</td>
                                                 @endif
                                                 <td>
                                                     <a href=" {{ route('admin.edit.payment.status', $payment->id) }}"><i
@@ -688,7 +688,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="recipient-name" class="col-form-label">For student</label>
-                                            <select id="student-name" class="form-control">
+                                            <select id="student-name" class="form-control" required>
                                                 @foreach ($allstudent as $student)
                                                     <option value="{{ $student->id }}" id="student_name">
                                                         {{ $student->first_name }} </option>
@@ -696,13 +696,6 @@
                                             </select>
                                             <input type="hidden" value="{{ $parent->id }}" id='parent_id'
                                                 name="parent_id">
-                                        </div>
-                                        <div class="form-group  col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Enrollment Period</label>
-                                            <select id="enrollment_period" required class="form-control">
-                                                <option value="annual">Annual</option>
-                                                <option value="half">Semester</option>
-                                            </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="recipient-name" class="col-form-label">Start Date of
@@ -840,22 +833,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group  col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Enrollment Payment
-                                                Status</label>
-                                            <select id="enrollment_status" required class="form-control">
-                                                <option value="paid">Paid</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group  col-md-6">
-                                            <label for="recipient-name" class="col-form-label">Amount</label>
-                                            <select id="amount_status" required class="form-control">
-                                                <option value="375">$ 375</option>
-                                                <option value="200">$ 200</option>
-                                                <option value="50">$ 50</option>
-                                            </select>
-                                        </div>
-                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
