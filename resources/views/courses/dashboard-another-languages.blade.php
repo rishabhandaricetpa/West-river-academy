@@ -4,7 +4,7 @@
   <!-- * =============== /Sidebar =============== * -->
 
   <div class="main-content position-relative ml-auto">
-    <title> @yield('pageTitle', 'Enroll Students') | {{config('app.name')}}</title>
+    <title> @yield('pageTitle', 'Transcript Wizard') | {{config('app.name')}}</title>
     <!-- <sup>*</sup> =============== Header =============== <sup>*</sup> -->
     @include('layouts.partials.header')
     <!-- <sup>*</sup> =============== /Header =============== <sup>*</sup> -->
@@ -12,7 +12,7 @@
     <!-- * =============== Main =============== * -->
 
     <main class="position-relative container form-content mt-4 label-styling label-md">
-      <h1 class="text-center text-white text-uppercase">enroll students</h1>
+      <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
       <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
         <h3 class="mb-3">Do you want to add another grade level?</h3>
         <form method="post" class="mb-0" action="{{route('another.grade.requirement')}}">
