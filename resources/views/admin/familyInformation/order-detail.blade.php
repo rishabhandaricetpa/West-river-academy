@@ -38,14 +38,12 @@
     </ul>
     <div class="row parents-details_name px-3">
       <div class="col-12 d-flex align-items-center">
-        <h2 class="pr-3 mb-0">
-          Family: Kate Green
-        </h2>
-
+        <h2 class="pr-3 mb-0">Family: Kate Green</h2>
       </div>
       <div class="col-12">Date Created: </div>
     </div>
   </div>
+
   <div class="px-3" id="to-the-top">
     {{-- parents-details --}}
     {{-- parents-details --}}
@@ -69,7 +67,6 @@
                   <input type="text" class="form-control is-disabled" name="p1_last_name" id="p1_last_name"
                     placeholder="" value="" disabled required>
                 </div>
-
                 <div class="form-group">
                   <label for="street_address">Street :</label>
                   <input type="text" class="form-control is-disabled" id="street_address" placeholder=""
@@ -106,7 +103,6 @@
                   <input type="email" class="form-control is-disabled" name="p1_email" id="p1_email" placeholder=""
                     value="" disabled required>
                 </div>
-
               </div>
 
               {{-- shipping details 2 --}}
@@ -122,7 +118,6 @@
                   <input type="text" class="form-control is-disabled" name="p1_last_name" id="p2_last_name"
                     placeholder="" value="" disabled required>
                 </div>
-
                 <div class="form-group">
                   <label for="street_address">Street :</label>
                   <input type="text" class="form-control is-disabled" id="street_address2" placeholder=""
@@ -161,6 +156,7 @@
                 </div>
 
               </div>
+
               <div class="col-12 pt-3 d-md-flex">
                 <button type="button"
                   class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2">Edit</button>
@@ -168,13 +164,13 @@
                   class="btn btn-default btn-primary form-enable  btn-save js-save mr-2">Save</button>
                 <button type="button" class="btn btn-default btn-primary  btn-save js-cancel">Cancel</button>
               </div>
+
+            </form>
           </div>
-          </form>
         </div>
       </div>
     </section>
     </form>
-
     {{-- student-details --}}
     <section class="parents-detail  pt-5" id="student-details">
       <div class="row">
@@ -287,6 +283,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_enrollment display-none" id="order-detail_enrollment">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -330,6 +327,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_Graduation display-none" id="order-detail_Graduation">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -367,6 +365,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_CustomPayment display-none" id="order-detail_CustomPayment">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -410,6 +409,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_OrderPostage display-none" id="order-detail_OrderPostage">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -478,11 +478,9 @@
                       </div>
                     </div>
                   </div>
-
-
-
                 </div>
               </div>
+
               <div class="order-detail_Notarization display-none" id="order-detail_Notarization">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -526,6 +524,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_ApostilePackage display-none" id="order-detail_ApostilePackage">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -569,6 +568,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_CustomLetter display-none" id="order-detail_CustomLetter">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -612,6 +612,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_OrderConsultaion display-none" id="order-detail_OrderConsultaion">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -687,6 +688,7 @@
                   </div>
                 </div>
               </div>
+
             </form>
           </div>
           <div class="modal-footer">
@@ -694,31 +696,34 @@
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
+      </div>
+    </div>
 
+
+  </div>
+
+  <div class="row justify-content-end pt-2">
+    <div class="col-md-4 col-12">
+      <div class="d-flex align-items-center form-group">
+        <label for="message-text" class="col-form-label col-form-label_highlights">Coupon</label>
+        <select required class=" form-control " id="student_status">
+          <option selected>Active</option>
+          <option>Inactive</option>
+        </select>
+        <input type="text" id="" class="form-control">
+        <input type="text" id="" class="form-control">
+      </div>
+      <div class="d-flex align-items-center form-group">
+        <label for="message-text" class="col-form-label col-form-label_highlights">Total</label>
+        <input type="text" id="" class="form-control">
+  
       </div>
     </div>
   </div>
-</div>
-<div class="row justify-content-end pt-2">
-  <div class="col-md-4 col-12">
-    <div class="d-flex align-items-center form-group">
-      <label for="message-text" class="col-form-label col-form-label_highlights">Coupon</label>
-      <select required class=" form-control " id="student_status">
-        <option selected>Active</option>
-        <option>Inactive</option>
-      </select>
-      <input type="text" id="" class="form-control">
-      <input type="text" id="" class="form-control">
-    </div>
-    <div class="d-flex align-items-center form-group">
-      <label for="message-text" class="col-form-label col-form-label_highlights">Total</label>
-      <input type="text" id="" class="form-control">
-
-    </div>
-  </div>
-</div>
 
 </div>
-</div>
+
+
+
 
 @endsection
