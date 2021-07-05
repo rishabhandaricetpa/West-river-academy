@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\StudentProfile;
 use App\Models\User;
 use App\Models\TransactionsMethod;
+use App\Models\Cart;
 use App\Models\EnrollmentPeriods;
 use App\Models\UploadDocuments;
 use App\Models\CustomLetterPayment;
@@ -23,6 +24,7 @@ use App\Models\TranscriptPayment;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\RecordTransfer;
+use App\Models\Transcript;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -304,8 +306,8 @@ class ParentController extends Controller
     {
         try {
             DB::beginTransaction();
-            switch ($request->get('order_name')) {
-                case 'enrollment':
+            switch ($request->get('order_detail_val')) {
+                case 'order-detail_enrollment':
                     $transction = new TransactionsMethod();
                     $transction->transcation_id   = substr(uniqid(), 0, 12);
                     $transction->payment_mode = "admin created";
@@ -330,8 +332,40 @@ class ParentController extends Controller
                 case 'graduation':
 
                     break;
-                case 'transcript':
+                case 'order-detail_transcript':
+                    for ($x = 1; $x <= $request->get('quantity'); $x++) {
+                        $transcript_type = "transcript";
+                        $transcript = new Transcript();
+                        $transcript->parent_profile_id   = $request->get('parent_id');
+                        $transcript->student_profile_id = $request->get('student_id_val');
+                        $transcript->period = $request->get('transcript_period');
+                        $transcript->status = $request->get('status');
+                        $transcript->save();
 
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   = substr(uniqid(), 0, 12);
+                        $transction->payment_mode = "admin created";
+                        $transction->parent_profile_id = $request->get('parent_id');
+                        $transction->amount = $request->get('amount');
+                        $transction->status = $request->get('status');
+                        $transction->save();
+
+                        $transcript_payment = new TranscriptPayment();
+                        $transcript_payment->transcript_id   =  $transcript->id;
+                        $transcript_payment->amount = $request->get('amount');
+                        $transcript_payment->status = $request->get('status');
+                        $transcript_payment->transcation_id = $transction->transcation_id;
+                        $transcript_payment->payment_mode = "admin created";
+                        $transcript_payment->save();
+
+                        if (!Cart::where('item_id', $transcript->id)->where('item_type', $transcript_type)->exists()) {
+                            Cart::create([
+                                'item_type' => $transcript_type,
+                                'item_id' => $transcript->id,
+                                'parent_profile_id' => $request->get('parent_id'),
+                            ]);
+                        }
+                    }
                     break;
                 case 'custom_payments':
 

@@ -106,7 +106,7 @@ class ParentController extends Controller
                     'email' => $request['email'],
                 ]
             );
-            $parentaddress = ParentProfile::find($Userid);
+            $parentaddress = ParentProfile::where('user_id', $Userid)->first();
             $parentaddress->fill([
                 'street_address' => $billing_data['street_address'],
                 'city' => $billing_data['city'],
