@@ -682,6 +682,13 @@
                 <select required class=" form-control " id="order-detail_add">
                   <option value="order-detail_transcript">Transcript</option>
                   <option value="order-detail_enrollment">Enrollment</option>
+                  <option value="order-detail_Graduation">Graduation</option>
+                  <option value="order-detail_CustomPayment">Custom Payments</option>
+                  <option value="order-detail_OrderPostage">Order Postage</option>
+                  <option value="order-detail_Notarization">Notarization</option>
+                  <option value="order-detail_ApostilePackage">Apostile Package</option>
+                  <option value="order-detail_CustomLetter">Custom Letter</option>
+                  <option value="order-detail_OrderConsultaion">Order Personal Consultaion</option>
                 </select>
               </div>
 
@@ -740,6 +747,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="order-detail_enrollment display-none" id="order-detail_enrollment">
                 <div class="row">
                   <div class="col-lg-6 col-12">
@@ -783,52 +791,372 @@
                   </div>
                 </div>
               </div>
-              {{-- <div class="row" id="">
-                      <div class="col-md-6 col-12">
+
+              <div class="order-detail_Graduation display-none" id="order-detail_Graduation">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-detail_CustomPayment display-none" id="order-detail_CustomPayment">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">End Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-detail_OrderPostage display-none" id="order-detail_OrderPostage">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Parent Name</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Paying for</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Quanity</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Note
+                      </label>
+                      <textarea style="height:120px;" id="" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Total</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="OrderPostage-paymentDetails" class="form-control">
+                        <option>Pending</option>
+                        <option value="order-detail_OrderPostage-paid">Paid</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 order-detail_OrderPostage-paid display-none" id="order-detail_OrderPostage-paid">
+                    <div class="row">
+                      <div class="col-lg-6 col-12 ">
                         <div class="form-group">
-                          <label for="message-text" class="col-form-label">Student Name*</label>
-                          <input type="text" id="d_o_b" class="form-control datepicker" required>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-12">
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Parent Name*
-                          </label>
-                          <input type="email" id="email" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-12">
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Status*</label>
-                          <input type="text" id="phone" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Quantity*</label>
-                          <input type="text" id="phone" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-12">
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Note
-                          </label>
-                          <textarea style="height:120px;" id="" class="form-control"></textarea>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-12">
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Amount*
-                          </label>
+                          <label for="message-text" class="col-form-label">Payment Mode</label>
                           <input type="text" id="" class="form-control">
                         </div>
                       </div>
                       <div class="col-lg-6 col-12">
                         <div class="form-group">
-                          <label for="message-text" class="col-form-label">Total </label>
+                          <label for="message-text" class="col-form-label">Transaction ID</label>
                           <input type="text" id="" class="form-control">
                         </div>
                       </div>
-                    </div> --}}
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Type of Payment</label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-detail_Notarization display-none" id="order-detail_Notarization">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">End Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-detail_ApostilePackage display-none" id="order-detail_ApostilePackage">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">End Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-detail_CustomLetter display-none" id="order-detail_CustomLetter">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Start Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">End Date</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Grade</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Type</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="" class="form-control">
+                        <option>K-8</option>
+                        <option>9-12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-detail_OrderConsultaion display-none" id="order-detail_OrderConsultaion">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Parent Name</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Preferred Language</label>
+                      <select type="" class="form-control">
+                        <option>English</option>
+                        <option value="">Spanish</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Amount</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Paying for</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Quanity</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Total</label>
+                      <input type="text" id="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Period</label>
+                      <select type="" id="OrderConsultaion-paymentDetails" class="form-control">
+                        <option>Pending</option>
+                        <option value="order-detail_OrderConsultaion-paid">Paid</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 order-detail_OrderConsultaion-paid display-none"
+                    id="order-detail_OrderConsultaion-paid">
+                    <div class="row">
+                      <div class="col-lg-6 col-12 ">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Payment Mode</label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Transaction ID</label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Type of Payment</label>
+                          <input type="text" id="" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>
@@ -1031,224 +1359,226 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save</button>
               </div>
-          </div>
 
-          </form>
+
+            </form>
+          </div>
 
         </div>
       </div>
-      {{-- Records --}}
-      <section class="records  pt-10r" id="records">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="pr-3">Records</h2>
-            <div class="overflow-auto max-table">
-              <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">School Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                    <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
-                        data-toggle="modal" data-target="#recordsModal" data-whatever="@getbootstrap"><img
-                          src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($recordTransfer as $records)
-                  <tr>
-                    <td>{{ $records['student']['fullname'] }}</td>
-                    <td>{{ $records->school_name }}</td>
-                    <td><a class="transform-none" href="mailto:${{ $records->email }}">
-                        {{ $records->email }}</a></td>
-                    <td>{{ $records->phone_number }}</td>
-                    @if (empty($records->request_status))
-                    <td>In Review
-                      @elseif($records->request_status=='Record Received')
-                    <td>Records Received
-                      @endif
-                      @if ($records->resendCount)
-                      Resend Requested:{{ $records->resendCount }}
-                      @endif
-                    </td>
-                    <td>
-                      <a href="{{ route('admin.student.schoolRecord', [$records->student_profile_id, $records->id]) }}">
-                        <i class=" fas fa-arrow-alt-circle-right"></i></a>
-                    </td>
-                    <td></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
+    </div>
+    {{-- Records --}}
+    <section class="records  pt-10r" id="records">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="pr-3">Records</h2>
+          <div class="overflow-auto max-table">
+            <table class="table table-striped table-styling w-100 table-vertical_scroll">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">School Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                  <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
+                      data-toggle="modal" data-target="#recordsModal" data-whatever="@getbootstrap"><img
+                        src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($recordTransfer as $records)
+                <tr>
+                  <td>{{ $records['student']['fullname'] }}</td>
+                  <td>{{ $records->school_name }}</td>
+                  <td><a class="transform-none" href="mailto:${{ $records->email }}">
+                      {{ $records->email }}</a></td>
+                  <td>{{ $records->phone_number }}</td>
+                  @if (empty($records->request_status))
+                  <td>In Review
+                    @elseif($records->request_status=='Record Received')
+                  <td>Records Received
+                    @endif
+                    @if ($records->resendCount)
+                    Resend Requested:{{ $records->resendCount }}
+                    @endif
+                  </td>
+                  <td>
+                    <a href="{{ route('admin.student.schoolRecord', [$records->student_profile_id, $records->id]) }}">
+                      <i class=" fas fa-arrow-alt-circle-right"></i></a>
+                  </td>
+                  <td></td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
-      <div class="modal fade bd-example-modal-lg" id="recordsModal" tabindex="-1" role="dialog"
-        aria-labelledby="recordsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="recordsModalLabel">Create New Record</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+      </div>
+    </section>
+    <div class="modal fade bd-example-modal-lg" id="recordsModal" tabindex="-1" role="dialog"
+      aria-labelledby="recordsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="recordsModalLabel">Create New Record</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="add-record-request">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="recipient-name" class="col-form-label">For student</label>
+                  <select id="student-name" class="form-control">
+                    @foreach ($allstudent as $student)
+                    <option value="{{ $student->id }}">{{ $student->first_name }}
+                    </option>
+                    @endforeach
+                  </select>
+                  <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="recipient-name" class="col-form-label">School Name:</label>
+                  <input type="text" class="form-control" id="school_name" id="recipient-name">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Email Address:</label>
+                  <input type="email" id="email_add" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Fax Number:</label>
+                  <input type="text" id="fax_number" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Phone Number:</label>
+                  <input type="text" id="phone_number" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Street Address</label>
+                  <input type="text" id="street_address" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">City</label>
+                  <input type="text" id="city" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">State/Province/Region</label>
+                  <input type="text" id="state" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Zip/Postal Code</label>
+                  <input type="text" id="zipcode" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Country</label>
+                  <input type="text" id="country" class="form-control">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{-- Documents --}}
+    <section class="documents  pt-10r" id="documents">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="pr-3">Documents</h2>
+          <div class="overflow-auto max-table">
+            <table class="table table-striped table-styling w-100 table-vertical_scroll">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">File Name</th>
+                  <th scope="col">Document Type</th>
+                  <th scope="col">View Documents</th>
+                  <th scope="col">Upload Documents</th>
+                  <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
+                      data-toggle="modal" data-target="#documentsModal" data-whatever="@getbootstrap"><img
+                        src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($documents as $document)
+                <tr>
+                  <td>{{ $document->created_at->format('M j,Y') }}</td>
+                  <td>{{ $document['student']['fullname'] }}</td>
+                  <td>{{ $document->original_filename }}</td>
+                  <td>{{ $document->document_type }}</td>
+                  <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
+                      Documents</a></br></td>
+                  <td><a href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
+                      Documents</a></br></td>
+                  <td></td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="modal fade bd-example-modal-lg" id="documentsModal" tabindex="-1" role="dialog"
+      aria-labelledby="documentsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="documentsModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="add-documents" enctype="multipart/form-data">
             <div class="modal-body">
-              <form id="add-record-request">
-                <div class="row">
+              <div class="row">
+                <div class="form-group col-md-6">
+
+                  <label for="recipient-name" class="col-form-label">For student</label>
+                  <select id="student_idd" class="form-control">
+                    @foreach ($allstudent as $student)
+                    <option value="{{ $student->id }}">{{ $student->first_name }}
+                    </option>
+                    @endforeach
+                  </select>
+                  <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
                   <div class="form-group col-md-6">
-                    <label for="recipient-name" class="col-form-label">For student</label>
-                    <select id="student-name" class="form-control">
-                      @foreach ($allstudent as $student)
-                      <option value="{{ $student->id }}">{{ $student->first_name }}
-                      </option>
-                      @endforeach
-                    </select>
-                    <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+                    <label for="message-text" class="col-form-label">
+                      Want to upload in Student Dashboard *</label>
+                    <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="recipient-name" class="col-form-label">School Name:</label>
-                    <input type="text" class="form-control" id="school_name" id="recipient-name">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Email Address:</label>
-                    <input type="email" id="email_add" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Fax Number:</label>
-                    <input type="text" id="fax_number" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Phone Number:</label>
-                    <input type="text" id="phone_number" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Street Address</label>
-                    <input type="text" id="street_address" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">City</label>
-                    <input type="text" id="city" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">State/Province/Region</label>
-                    <input type="text" id="state" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Zip/Postal Code</label>
-                    <input type="text" id="zipcode" class="form-control">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Country</label>
-                    <input type="text" id="country" class="form-control">
+                    <label for="message-text" class="col-form-label">
+                      Document Type</label>
+                    <textarea id="doc_type" class="form-control choose-btn" required></textarea>
                   </div>
                 </div>
+                <div class="form-group col-md-6">
+                  <label for="message-text" class="col-form-label">Upload Document</label>
+                  <input type="file" id="file" class="form-control choose-btn" required>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary">Upload</button>
             </div>
-            </form>
-          </div>
+          </form>
         </div>
-      </div>
-      {{-- Documents --}}
-      <section class="documents  pt-10r" id="documents">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="pr-3">Documents</h2>
-            <div class="overflow-auto max-table">
-              <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Document Type</th>
-                    <th scope="col">View Documents</th>
-                    <th scope="col">Upload Documents</th>
-                    <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
-                        data-toggle="modal" data-target="#documentsModal" data-whatever="@getbootstrap"><img
-                          src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($documents as $document)
-                  <tr>
-                    <td>{{ $document->created_at->format('M j,Y') }}</td>
-                    <td>{{ $document['student']['fullname'] }}</td>
-                    <td>{{ $document->original_filename }}</td>
-                    <td>{{ $document->document_type }}</td>
-                    <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
-                        Documents</a></br></td>
-                    <td><a href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
-                        Documents</a></br></td>
-                    <td></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="modal fade bd-example-modal-lg" id="documentsModal" tabindex="-1" role="dialog"
-        aria-labelledby="documentsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="documentsModalLabel">New message</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form id="add-documents" enctype="multipart/form-data">
-              <div class="modal-body">
-                <div class="row">
-                  <div class="form-group col-md-6">
-
-                    <label for="recipient-name" class="col-form-label">For student</label>
-                    <select id="student_idd" class="form-control">
-                      @foreach ($allstudent as $student)
-                      <option value="{{ $student->id }}">{{ $student->first_name }}
-                      </option>
-                      @endforeach
-                    </select>
-                    <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
-                    <div class="form-group col-md-6">
-                      <label for="message-text" class="col-form-label">
-                        Want to upload in Student Dashboard *</label>
-                      <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="message-text" class="col-form-label">
-                        Document Type</label>
-                      <textarea id="doc_type" class="form-control choose-btn" required></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="message-text" class="col-form-label">Upload Document</label>
-                    <input type="file" id="file" class="form-control choose-btn" required>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Upload</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="text-right pb-4">
-        <a href="#admin-header" class="btn btn-primary">Back to Top</a>
       </div>
     </div>
+    <div class="text-right pb-4">
+      <a href="#admin-header" class="btn btn-primary">Back to Top</a>
+    </div>
+  </div>
   </div>
 </section>
 </section>
