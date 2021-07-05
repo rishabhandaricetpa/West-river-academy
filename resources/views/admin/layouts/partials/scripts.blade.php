@@ -1421,8 +1421,8 @@ document.getElementById("order-detail_add").addEventListener("change",function()
     // alert(value);
     if(value=="order-detail_enrollment")
     {
-        $("#order-detail_enrollment").show();
         $("#order-detail_transcript").hide();
+        $("#order-detail_enrollment").show();
         $("#order-detail_Graduation").hide();
         $("#order-detail_CustomPayment").hide();
         $("#order-detail_OrderPostage").hide();
@@ -1472,7 +1472,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
     // alert(value);
     if(value=="order-detail_CustomPayment")
     {
-        $("#order-detail_transcript").hide();	        $("#order-detail_transcript").hide();
+        $("#order-detail_transcript").hide();
         $("#order-detail_enrollment").hide();
         $("#order-detail_Graduation").hide();
         $("#order-detail_CustomPayment").show();
@@ -1481,8 +1481,8 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_ApostilePackage").hide();
         $("#order-detail_CustomLetter").hide();
         $("#order-detail_OrderConsultaion").hide();
-    }	    }
-})	})
+    }
+})
 document.getElementById("order-detail_add").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
