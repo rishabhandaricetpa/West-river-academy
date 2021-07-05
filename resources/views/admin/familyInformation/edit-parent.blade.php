@@ -679,7 +679,7 @@
             <form id="add-new-order">
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Order*</label>
-                <select required class=" form-control " id="order-detail_add">
+                <select required class="form-control" id="order_detail_val">
                   <option value="order-detail_transcript">Transcript</option>
                   <option value="order-detail_enrollment">Enrollment</option>
                   <option value="order-detail_Graduation">Graduation</option>
@@ -695,53 +695,63 @@
                 <div class="col-md-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Student Name*</label>
-                    <input type="text" id="d_o_b" class="form-control datepicker" required>
-                  </div>
+                    <select id="student_id_val" class="form-control" required>
+                      @foreach ($allstudent as $student)
+                          <option value="{{ $student->id }}" id="student_name_order">
+                              {{ $student->fullname }} </option>
+                      @endforeach
+                  </select>     
+                  <input type="hidden" value="{{ $parent->id }}" id='parent_val'
+                  name="parent_val">             
+                </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Parent Name*
                     </label>
-                    <input type="email" id="email" class="form-control">
+                    <input type="text" id="parent_name" class="form-control" value="{{ $parent->p1_first_name }}">
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
-                    <label for="message-text" class="col-form-label">Status*</label>
-                    <input type="text" id="phone" class="form-control">
+                    <label for="message-text" class="col-form-label">Period</label>
+                    <select type="" id="transcript_period" class="form-control">
+                      <option value="K-8">K-8</option>
+                      <option value="9-12">9-12</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Amount*</label>
+                    <input type="text" id="amount" class="form-control"> 
                   </div>
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Quantity*</label>
-                    <input type="text" id="phone" class="form-control">
+                    <input type="text" id="quantity" class="form-control">
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Note
                     </label>
-                    <textarea style="height:120px;" id="" class="form-control"></textarea>
+                    <textarea style="height:120px;" id="notes" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
-                    <label for="message-text" class="col-form-label">Amount*
+                    <label for="message-text" class="col-form-label">Status*
                     </label>
-                    <input type="text" id="" class="form-control">
+                    <select id="status" class="form-control" required>
+                          <option value="paid">Paid</option>
+                          <option value="pending">Pending</option>
+                  </select>  
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
-                    <label for="message-text" class="col-form-label">Total </label>
-                    <input type="text" id="" class="form-control">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-12">
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Period</label>
-                    <select type="" id="" class="form-control">
-                      <option>K-8</option>
-                      <option>9-12</option>
-                    </select>
+                    <label for="message-text" class="col-form-label">Total</label>
+                    <input type="text" id="total_val" class="form-control">
                   </div>
                 </div>
               </div>
@@ -1142,12 +1152,12 @@
                   </div>
                 </div>
               </div>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
+        </form>
         </div>
       </div>
     </div>

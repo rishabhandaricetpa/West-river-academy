@@ -1394,11 +1394,11 @@
     });
 /////// changeing form -select
 
-// $("orderDetailsModal").on("change","#order-detail_add", function(){
+// $("orderDetailsModal").on("change","#order_detail_val", function(){
 //     alert("check");
 // })
 
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1415,10 +1415,9 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
-    // alert(value);
     if(value=="order-detail_enrollment")
     {
         $("#order-detail_transcript").hide();
@@ -1432,7 +1431,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1449,7 +1448,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1466,7 +1465,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1483,10 +1482,10 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
-    // alert(value);
+console.log(value);
     if(value=="order-detail_OrderPostage")
     {
         $("#order-detail_transcript").hide();
@@ -1500,7 +1499,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1517,7 +1516,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1534,7 +1533,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1551,7 +1550,7 @@ document.getElementById("order-detail_add").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
-document.getElementById("order-detail_add").addEventListener("change",function(){
+document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;
     // alert(value);
@@ -1594,11 +1593,11 @@ document.getElementById("OrderConsultaion-paymentDetails").addEventListener("cha
     // }
 })
 
-// $("#order-detail_add").change(function(){
+// $("#order_detail_val").change(function(){
 //     alert("jq");
 // })
 
-  //$('#order-detail_add').change(function(){
+  //$('#order_detail_val').change(function(){
      // alert ('hi');
      // alert(this.value)
       //var val= $(this.value);
