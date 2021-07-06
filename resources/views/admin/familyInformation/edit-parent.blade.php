@@ -709,13 +709,13 @@
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Parent Name*
                     </label>
-                    <input type="text" id="parent_name" class="form-control" value="{{ $parent->p1_first_name }}">
+                    <input type="text" id="parent_name" class="form-control" value="{{ $parent->p1_first_name }}" disabled>
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Period</label>
-                    <select type="" id="transcript_period" class="form-control">
+                    <select type="" id="transcript_period" class="form-control" onchange="getTranscriptval();">
                       <option value="K-8">K-8</option>
                       <option value="9-12">9-12</option>
                     </select>
@@ -724,11 +724,11 @@
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Amount*</label>
-                    <input type="text" id="amount" class="form-control"> 
+                    <input type="text" id="amount" class="form-control" disabled> 
                   </div>
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Quantity*</label>
-                    <input type="text" id="quantity" class="form-control">
+                    <input type="text" id="quantity" class="form-control" onchange="getTotalTranscript();">
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
@@ -751,7 +751,7 @@
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Total</label>
-                    <input type="text" id="total_val" class="form-control">
+                    <input type="text" id="total_val" class="form-control" disabled>
                   </div>
                 </div>
               </div>
@@ -883,43 +883,55 @@
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Parent Name</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="p1_parent_name" class="form-control" value="{{ $parent->p1_first_name}}">
+                      <input type="hidden" value="{{ $parent->id }}" id='parent_value'>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Postge Country</label>
+                      <select class="form-control" id="postage_country" name="postage_country" onchange="getCountryVal();">
+                        <option value="">Select country</option>
+                        @foreach ($countries as $country)
+                        <option value="{{ $country->country }}">{{ $country->country }}</option>
+                        @endforeach
+                    </select>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="postage_charge" class="form-control" disabled>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Paying for</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="paying_for" class="form-control">
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Quanity</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="postage_quantity" class="form-control" onchange="getTotal();">
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Note
                       </label>
-                      <textarea style="height:120px;" id="" class="form-control"></textarea>
+                      <textarea style="height:120px;" id="notes_val" class="form-control"></textarea>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Total</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="postage_total" class="form-control" disabled>
                     </div>
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
+                      <label for="message-text" class="col-form-label">Status</label>
                       <select type="" id="OrderPostage-paymentDetails" class="form-control">
-                        <option>Pending</option>
+                        <option value="pending">Pending</option>
                         <option value="order-detail_OrderPostage-paid">Paid</option>
                       </select>
                     </div>
@@ -929,19 +941,19 @@
                       <div class="col-lg-6 col-12 ">
                         <div class="form-group">
                           <label for="message-text" class="col-form-label">Payment Mode</label>
-                          <input type="text" id="" class="form-control">
+                          <select type="" id="postage_payment_mode" class="form-control">
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Pay Pal">Pay Pal</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Money Gram">Money Gram</option>
+                            <option value="Check or Money Order">Check or Money Order</option>
+                          </select>
                         </div>
                       </div>
                       <div class="col-lg-6 col-12">
                         <div class="form-group">
                           <label for="message-text" class="col-form-label">Transaction ID</label>
-                          <input type="text" id="" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-12">
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Type of Payment</label>
-                          <input type="text" id="" class="form-control">
+                          <input type="text" id="postage_transaction_id" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -952,41 +964,86 @@
                 <div class="row">
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">Start Date</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
+                      <label for="message-text" class="col-form-label">Quantity</label>
+                      <select type="" id="notarization_quantity" class="form-control" onchange="getNoatrizationAmount();">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>  
+                      </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">End Date</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Grade</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Type</label>
-                      <input type="text" id="" class="form-control">
+                      <label for="message-text" class="col-form-label">Shipping Country</label>
+                      <select class="form-control" id="shipping_country" name="apostille_country" onchange="getCountryValnotar(); getTotal();">
+                        <option value="">Select country</option>
+                        @foreach ($countries as $country)
+                        <option value="{{ $country->country }}">{{ $country->country }}</option>
+                        @endforeach
+                    </select>
+                    <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
+
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="notar_amount" class="form-control" disabled>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
-                      <select type="" id="" class="form-control">
-                        <option>K-8</option>
-                        <option>9-12</option>
-                      </select>
+                      <label for="message-text" class="col-form-label">Shipping Amount</label>
+                      <input type="text" id="shipping_amount" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Note
+                      </label>
+                      <textarea style="height:120px;" id="notar_notes" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Status</label>
+                    <select type="" id="noatrization_status" class="form-control">
+                      <option value="pending">Pending</option>
+                      <option value="paid">Paid</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Total</label>
+                      <input type="text" id="notar_total" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12" id="">
+                  <div class="row">
+                    <div class="col-lg-6 col-12 ">
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">Payment Mode</label>
+                        <select type="" id="notar_payment_mode" class="form-control">
+                          <option value="Credit Card">Credit Card</option>
+                          <option value="Pay Pal">Pay Pal</option>
+                          <option value="Bank Transfer">Bank Transfer</option>
+                          <option value="Money Gram">Money Gram</option>
+                          <option value="Check or Money Order">Check or Money Order</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">Transaction ID</label>
+                        <input type="text" id="notar_transaction_id" class="form-control">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -995,42 +1052,98 @@
                 <div class="row">
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">Start Date</label>
-                      <input type="text" id="" class="form-control">
+                      <label for="message-text" class="col-form-label">Quantity</label>
+                      <select type="" id="apostille_quantity" class="form-control" onchange="getApostilleAmount(); ">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>  
+                      <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
+
+                      </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Apostille Country</label>
+                      <select class="form-control" id="apostille_country" name="apostille_country" onchange="getCountryVal();">
+                        <option value="">Select country</option>
+                        @foreach ($countries as $country)
+                        <option value="{{ $country->country }}">{{ $country->country }}</option>
+                        @endforeach
+                    </select>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">End Date</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Grade</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Type</label>
-                      <input type="text" id="" class="form-control">
+                      <label for="message-text" class="col-form-label">Shiping Country</label>
+                      <select class="form-control" id="shipp_country"  onchange="getCountryValappostille(); getTotal();">
+                        <option value="">Select country</option>
+                        @foreach ($countries as $country)
+                        <option value="{{ $country->country }}">{{ $country->country }}</option>
+                        @endforeach
+                    </select>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="apostille_amount" class="form-control" disabled >
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
-                      <select type="" id="" class="form-control">
-                        <option>K-8</option>
-                        <option>9-12</option>
-                      </select>
+                      <label for="message-text" class="col-form-label">Shipping Charges</label>
+                      <input type="text" id="ship_amount" class="form-control" disabled>
                     </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Note
+                      </label>
+                      <textarea style="height:120px;" id="apostille_notes" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Status</label>
+                    <select type="" id="apostille_status" class="form-control" >
+                      <option value="pending">Pending</option>
+                      <option value="">Paid</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12" id="">
+                  <div class="row">
+                    <div class="col-lg-6 col-12 ">
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">Payment Mode</label>
+                        <select type="" id="apostille_payment_mode" class="form-control">
+                          <option value="Credit Card">Credit Card</option>
+                          <option value="Pay Pal">Pay Pal</option>
+                          <option value="Bank Transfer">Bank Transfer</option>
+                          <option value="Money Gram">Money Gram</option>
+                          <option value="Check or Money Order">Check or Money Order</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">Transaction ID</label>
+                        <input type="text" id="apostille_transaction_id" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Total</label>
+                    <input type="text" id="apostille_total" class="form-control" disabled>
                   </div>
                 </div>
               </div>
@@ -1082,47 +1195,55 @@
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Parent Name</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="consul_parent_name" class="form-control" value="{{ $parent->p1_first_name}}">
+                      <input type="hidden" value="{{ $parent->id }}" id='p1_profile_id'>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Preferred Language</label>
-                      <select type="" class="form-control">
-                        <option>English</option>
-                        <option value="">Spanish</option>
+                      <select type="" class="form-control" id="language">
+                        <option value="English">English</option>
+                        <option value="Spanish">Spanish</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Hours</label>
+                      <select type="" id="consul_quantity" class="form-control" onchange="getConsulatationAmount();">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="consul_amount" class="form-control" disabled>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Paying for</label>
-                      <input type="text" id="" class="form-control">
+                      <input type="text" id="consul_paying_for" class="form-control">
                     </div>
                   </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Quanity</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Total</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
+                 
+                 
                   <div class="col-lg-6 col-12">
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Period</label>
                       <select type="" id="OrderConsultaion-paymentDetails" class="form-control">
-                        <option>Pending</option>
+                        <option value="pending">Pending</option>
                         <option value="order-detail_OrderConsultaion-paid">Paid</option>
                       </select>
                     </div>
@@ -1133,19 +1254,19 @@
                       <div class="col-lg-6 col-12 ">
                         <div class="form-group">
                           <label for="message-text" class="col-form-label">Payment Mode</label>
-                          <input type="text" id="" class="form-control">
+                          <select type="" id="consul_payment_mode" class="form-control">
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Pay Pal">Pay Pal</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Money Gram">Money Gram</option>
+                            <option value="Check or Money Order">Check or Money Order</option>
+                          </select>
                         </div>
                       </div>
                       <div class="col-lg-6 col-12">
                         <div class="form-group">
                           <label for="message-text" class="col-form-label">Transaction ID</label>
-                          <input type="text" id="" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-12">
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Type of Payment</label>
-                          <input type="text" id="" class="form-control">
+                          <input type="text" id="consul_transaction_id" class="form-control">
                         </div>
                       </div>
                     </div>

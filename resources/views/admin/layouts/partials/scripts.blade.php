@@ -911,7 +911,172 @@
 
             }
         });
-        }        
+        }
+        if(type == 'order-detail_OrderPostage'){
+        var order_detail_val = $('#order_detail_val').val();
+        var parent_value = $('#parent_value').val();
+        var postage_country = $('#postage_country').val();
+        var postage_charge = $('#postage_charge').val();
+        var paying_for = $('#paying_for').val();
+        var postage_quantity = $('#postage_quantity').val();
+        var notes_val = $('#notes_val').val();
+        var postage_total = $('#postage_total').val();
+        var paymentDetails=$('#OrderPostage-paymentDetails').val();
+        var postage_payment_mode = $('#postage_payment_mode').val();
+        var postage_transaction_id = $('#postage_transaction_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val:order_detail_val,
+                parent_value: parent_value,
+                postage_country: postage_country,
+                postage_charge: postage_charge,
+                paying_for: paying_for,
+                postage_quantity: postage_quantity,
+                notes_val:notes_val,
+                postage_total:postage_total,
+                postage_payment_mode:postage_payment_mode,
+                postage_transaction_id:postage_transaction_id,
+                paymentDetails:paymentDetails,
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(response) {
+
+            }
+        });
+        }
+        if(type == 'order-detail_OrderConsultaion'){
+        var order_detail_val = $('#order_detail_val').val();
+        var p1_profile_id = $('#p1_profile_id').val();
+        var language = $('#language').val();
+        var consul_amount = $('#consul_amount').val();
+        var consul_paying_for = $('#consul_paying_for').val();
+        var consul_quantity = $('#consul_quantity').val();
+        var consul_total = $('#consul_total').val();
+        var consul_payment_mode = $('#consul_payment_mode').val();
+        var paymentDetails=$('#OrderPostage-paymentDetails').val();
+        var consul_transaction_id = $('#consul_transaction_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val:order_detail_val,
+                p1_profile_id: p1_profile_id,
+                language: language,
+                consul_amount: consul_amount,
+                consul_paying_for: consul_paying_for,
+                consul_quantity: consul_quantity,
+                consul_total:consul_total,
+                consul_payment_mode:consul_payment_mode,
+                consul_transaction_id:consul_transaction_id,
+                paymentDetails:paymentDetails,
+
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(response) {
+
+            }
+        });
+        }
+
+        if(type == 'order-detail_Notarization'){
+        var order_detail_val = $('#order_detail_val').val();
+        var parent_profile_id = $('#parent_profile_id').val();
+        var notarization_quantity = $('#studnotarization_quantityent_name').val();
+        var shipping_country = $('#shipping_country').val();
+        var notar_amount = $('#notar_amount').val();
+        var shipping_amount = $('#shipping_amount').val();
+        var notar_notes = $('#notar_notes').val();
+        var noatrization_status = $('#noatrization_status').val();
+        var notar_total = $('#notar_total').val();
+        var notar_payment_mode = $('#notar_payment_mode').val();
+        var notar_transaction_id = $('#notar_transaction_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val:order_detail_val,
+                parent_profile_id: parent_profile_id,
+                notarization_quantity: notarization_quantity,
+                shipping_country: shipping_country,
+                notar_amount:notar_amount,
+                shipping_amount: shipping_amount,
+                notar_notes: notar_notes,
+                noatrization_status:noatrization_status,
+                notar_total:notar_total,
+                notar_payment_mode:notar_payment_mode,
+                notar_transaction_id:notar_transaction_id
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(response) {
+
+            }
+        });
+        }
+        if(type == 'order-detail_ApostilePackage'){
+        var order_detail_val = $('#order_detail_val').val();
+        var parent_profile_id = $('#parent_profile_id').val();
+        var apostille_quantity=$('#apostille_quantity').val();
+        var apostille_country = $('#apostille_country').val();
+        var shipp_country = $('#shipp_country').val();
+        var apostille_amount = $('#apostille_amount').val();
+        var ship_amount = $('#ship_amount').val();
+        var apostille_notes=$('#apostille_notes').val();
+        var apostille_status = $('#apostille_status').val();
+        var apostille_payment_mode = $('#apostille_payment_mode').val();
+        var apostille_transaction_id = $('#apostille_transaction_id').val();
+        var apostille_total = $('#apostille_total').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val:order_detail_val,
+                parent_profile_id: parent_profile_id,
+                apostille_quantity: apostille_quantity,
+                apostille_country: apostille_country,
+                shipp_country: shipp_country,
+                apostille_amount: apostille_amount,
+                ship_amount:ship_amount,
+                apostille_notes:apostille_notes,
+                apostille_status:apostille_status,
+                apostille_payment_mode:apostille_payment_mode,
+                apostille_transaction_id:apostille_transaction_id,
+                apostille_total:apostille_total
+
+            },
+            success: function(response) {
+            },
+            error: function(response) {
+
+            }
+        });
+        }
     });
 
     // add parent information
@@ -1592,7 +1757,13 @@ document.getElementById("OrderConsultaion-paymentDetails").addEventListener("cha
     //     $("#order-detail_OrderConsultaion-paid").hide();
     // }
 })
-
+document.getElementById("postage_country").addEventListener("change",function(){
+    // alert("js");
+    var value= this.value;
+    if(value=="India"){
+        $("#postage_charge").val()=100;
+    }
+})
 // $("#order_detail_val").change(function(){
 //     alert("jq");
 // })
@@ -1677,8 +1848,144 @@ document.getElementById("OrderConsultaion-paymentDetails").addEventListener("cha
         });
 
     })
+    function getTranscriptval(){
+        var transcript = $('#transcript_period').val();
+        var student_id = $('#student_name_order').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.transcriptcharges') }}",
+            type: "POST",
 
+            data: {
+                transcript: transcript,
+                student_id:student_id,
+            },
+            success: function(response) {
+                $("#amount").val(response);
+            },
+            error: function(response) {
+
+            }
+        });   
+    }
+    function getCountryVal() {
+        var countryname = $('#postage_country').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.postagecharges') }}",
+            type: "POST",
+
+            data: {
+                countryname: countryname,
+            },
+            success: function(response) {
+                $("#postage_charge").val(response);
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+    function getCountryValnotar() {
+            var countryname = $('#shipping_country').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.postagecharges') }}",
+            type: "POST",
+
+            data: {
+                countryname: countryname,
+            },
+            success: function(response) {
+                $("#shipping_amount").val(response);
+                $("#apostille_shipping_amount").val(response);
+
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
+    function getCountryValappostille() {
+            var countryname = $('#shipp_country').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.postagecharges') }}",
+            type: "POST",
+
+            data: {
+                countryname: countryname,
+            },
+            success: function(response) {
+                $("#ship_amount").val(response);
+
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+    function getApostilleAmount(){
+        var quantity=$('#apostille_quantity').val();
+        var amount=75;
+        var total=amount*quantity;
+        $("#apostille_amount").val(total);
+
+    }
+    function getNoatrizationAmount(){
+        var quantity=$('#notarization_quantity').val();
+        var amount=20;
+        var total=amount*quantity;
+        $("#notar_amount").val(total);
+
+    }
+
+    function getTotal() {
+        var type=$('#order_detail_val').val();
+        console.log(type);
+        if(type == 'order-detail_OrderPostage'){
+        var amount = $('#postage_charge').val();
+        var quantity=$('#postage_quantity').val();
+        var total=amount*quantity;
+        $("#postage_total").val(total);
+        }
+        if(type == 'order-detail_Notarization'){
+        var amount1 = $('#notar_amount').val();
+        var shipp1 = $('#shipping_amount').val();
+        var total1= (1 * amount1) + (1 * shipp1);
+        $("#notar_total").val(total1);
+        }
+        if(type == 'order-detail_ApostilePackage'){
+        var amount2 = $('#apostille_amount').val();
+        var shipp2=$('#ship_amount').val();
+        var total2= (1 * amount2) + (1 * shipp2);
+        $("#apostille_total").val(total2);
+        }
+    }
+    function getTotalTranscript() {
+        var amount = $('#amount').val();
+        var quantity=$('#quantity').val();
+        var total=amount*quantity;
+        $("#total_val").val(total);
+    }
+    function getConsulatationAmount() {
+        var hours = $('#consul_quantity').val();
+        var total=hours * 80;
+        $("#consul_amount").val(total);
+    }
+
+    
 </script>
+
 
 
 

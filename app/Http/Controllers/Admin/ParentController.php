@@ -7,10 +7,13 @@ use App\Models\StudentProfile;
 use App\Models\User;
 use App\Models\TransactionsMethod;
 use App\Models\Cart;
+use App\Models\Country;
+use App\Models\Apostille;
 use App\Models\EnrollmentPeriods;
 use App\Models\UploadDocuments;
 use App\Models\CustomLetterPayment;
 use App\Models\CustomPayment;
+use App\Models\OrderPostage;
 use App\Models\EnrollmentPayment;
 use App\Models\Graduation;
 use App\Models\GraduationPayment;
@@ -138,6 +141,7 @@ class ParentController extends Controller
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
+        $countries = Country::all();
 
         $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
@@ -162,7 +166,7 @@ class ParentController extends Controller
             )
             ->get();
         $payment_nonpaid = $payment_info->where('status', 'pending');
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid'));
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
     }
 
     /**
@@ -371,19 +375,157 @@ class ParentController extends Controller
 
                     break;
 
-                case 'postage':
+                case 'order-detail_OrderPostage':
+                    $charge = Country::where('country', $request->get('postage_country'))->select('postage_charges')->first();
+                    $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
+                    for ($x = 1; $x <= $request->get('postage_quantity'); $x++) {
+                        $postage_type = "postage";
+                        $postage = new OrderPostage();
+                        $postage->parent_profile_id   = $request->get('parent_value');
+                        $postage->amount = $charge->postage_charges;
+                        $postage->paying_for = $request->get('paying_for');
+                        $postage->type_of_payment = 'Postage';
+                        $postage->transcation_id   = $request->get('postage_transaction_id');
+                        $postage->payment_mode = $request->get('postage_payment_mode');
+                        $postage->status = $status;
+                        $postage->save();
+
+                        $transction = new TransactionsMethod();
+                        if ($status == 'paid') {
+                            $transction->transcation_id   = $postage->transcation_id;
+                        }
+                        $transction->transcation_id   = substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('postage_payment_mode');
+                        $transction->parent_profile_id = $request->get('parent_value');
+                        $transction->amount = $charge->postage_charges;
+                        $transction->status = $status;
+                        $transction->save();
+
+                        if (!Cart::where('item_id', $request->get('parent_value'))->where('item_type', $postage_type)->exists()) {
+                            Cart::create([
+                                'item_type' => $postage_type,
+                                'item_id' =>  $request->get('parent_value'),
+                                'parent_profile_id' => $request->get('parent_value'),
+                            ]);
+                        }
+                    }
+                    break;
+                case 'order-detail_Notarization':
+                    $notarization_type = "notarization";
+                    $status = ($request->get('noatrization_status') == 'pending') ? 'pending' : 'paid';
+                    $notarization = new Notarization();
+                    $notarization->parent_profile_id   = $request->get('parent_profile_id');
+                    $notarization->additional_message = $request->get('notar_notes');
+                    $notarization->postage_option = 'Notarization';
+                    $notarization->country = $request->get('shipping_country');
+                    $notarization->status = $request->get('noatrization_status');
+                    $notarization->save();
+
+                    $transction = new TransactionsMethod();
+                    if ($status == 'paid') {
+                        $transction->transcation_id   =   $request->get('notar_transaction_id');
+                    } else {
+                        $transction->transcation_id   = substr(uniqid(), 0, 12);
+                    }
+                    $transction->payment_mode = $request->get('notar_payment_mode');
+                    $transction->parent_profile_id = $request->get('parent_profile_id');
+                    $transction->amount = $request->get('notar_total');
+                    $transction->status = $request->get('noatrization_status');
+                    $transction->save();
+                    $notarization_payment = new NotarizationPayment();
+                    $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
+                    $notarization_payment->notarization_id =  $notarization->id;
+                    $notarization_payment->amount = $request->get('notar_total');
+                    $notarization_payment->status = $status;
+                    $notarization_payment->pay_for = "notarization";
+                    $notarization_payment->save();
+
+                    if (!Cart::where('item_type', 'notarization')->exists()) {
+                        Cart::create([
+                            'item_type' => 'notarization',
+                            'item_id' => $notarization->id,
+                            'parent_profile_id' => $request->get('parent_profile_id'),
+                        ]);
+                    }
 
                     break;
-                case 'notarization':
+                case 'order-detail_ApostilePackage':
 
-                    break;
-                case 'apostille':
+                    $apotille_type = "apostille";
+                    $status = ($request->get('apostille_status') == 'pending') ? 'pending' : 'paid';
+                    $apostille = new Apostille();
+                    $apostille->parent_profile_id   = $request->get('parent_profile_id');
+                    $apostille->additional_message = $request->get('apostille_notes');
+                    $apostille->postage_option = 'Apostille';
+                    $apostille->country = $request->get('shipp_country');
+                    $apostille->apostille_country = $request->get('apostille_country');
+                    $apostille->status = $status;
+                    $apostille->save();
+
+                    $transction = new TransactionsMethod();
+                    if ($status == 'paid') {
+                        $transction->transcation_id   =   $request->get('apostille_transaction_id');
+                    } else {
+                        $transction->transcation_id   = substr(uniqid(), 0, 12);
+                    }
+                    $transction->payment_mode = $request->get('apostille_payment_mode');
+                    $transction->parent_profile_id = $request->get('parent_profile_id');
+                    $transction->amount = $request->get('apostille_total');
+                    $transction->status = $status;
+                    $transction->save();
+
+                    $notarization_payment = new NotarizationPayment();
+                    $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
+                    $notarization_payment->notarization_id =  $apostille->id;
+                    $notarization_payment->amount = $request->get('apostille_total');
+                    $notarization_payment->status = $status;
+                    $notarization_payment->pay_for = "apostille";
+                    $notarization_payment->save();
+
+                    if (!Cart::where('item_type', 'apostille')->exists()) {
+                        Cart::create([
+                            'item_type' => 'apostille',
+                            'item_id' => $apostille->id,
+                            'parent_profile_id' => $request->get('parent_profile_id'),
+                        ]);
+                    }
 
                     break;
                 case 'custom_letter':
 
                     break;
-                case 'order_consultation':
+                case 'order-detail_OrderConsultaion':
+                    $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
+                    $consultation_type = "order_consultation";
+                    $consultation = new OrderPersonalConsultation();
+                    $consultation->parent_profile_id   = $request->get('p1_profile_id');
+                    $consultation->preferred_language = $request->get('language');
+                    $consultation->amount = $request->get('consul_amount');
+                    $consultation->consulting_about = $request->get('consul_paying_for');
+                    $consultation->paying_for = $request->get('consul_paying_for');
+                    $consultation->type_of_payment = 'Order a personal consultation';
+                    $consultation->transcation_id   = $request->get('consul_transaction_id');
+                    $consultation->payment_mode = $request->get('consul_payment_mode');
+                    $consultation->status = $status;
+                    $consultation->save();
+                    $transction = new TransactionsMethod();
+                    if ($status == 'paid') {
+                        $transction->transcation_id   = $consultation->transcation_id;
+                    }
+                    $transction->transcation_id   = substr(uniqid(), 0, 12);
+                    $transction->payment_mode =  $request->get('consul_payment_mode');
+                    $transction->parent_profile_id = $request->get('p1_profile_id');
+                    $transction->amount = $request->get('consul_amount');
+                    $transction->status = $status;
+                    $transction->save();
+
+                    if (!Cart::where('item_id', $request->get('p1_profile_id'))->where('item_type', $consultation_type)->exists()) {
+                        Cart::create([
+                            'item_type' => $consultation_type,
+                            'item_id' =>  $request->get('p1_profile_id'),
+                            'parent_profile_id' => $request->get('p1_profile_id'),
+                        ]);
+                    }
 
                     break;
                 default:
@@ -396,10 +538,27 @@ class ParentController extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             report($e);
             DB::rollBack();
 
             return redirect()->back();
         }
+    }
+
+    //fetch postage charges according to the country
+    public function getCountryVal(Request $request)
+    {
+        $charge = Country::where('country', $request->get('countryname'))->select('postage_charges')->first();
+        return $charge->postage_charges;
+    }
+    public function getTranscriptval(Request $request)
+    {
+        $getPaidData = Transcript::where('student_profile_id', $request->get('student_id'))->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->get();
+        if (count($getPaidData) > 0) {
+            return 85;
+        } else {
+        }
+        return 25;
     }
 }
