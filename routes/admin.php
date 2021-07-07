@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
     Route::get('view-parent-orders/{id}', 'StudentProfileController@viewParentOrders')->name('parents.orders');
     Route::get('view/student/parent/{parent_id}', 'ParentController@viewStudentParent')->name('view.students.parent');
-    Route::get('/allorders/{transaction_id}/{parent_id}', 'ParentController@viewAllOrders')->name('allorders');
+
 
     // Crud for student profile
     Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student.data');
@@ -212,9 +212,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     //dashboard notification
     Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
-    Route::get('order-detail', function () {
-        return view('admin.familyinformation.order-detail');
-    });
+
+    Route::get('orders/details/{parent_id}', 'ParentController@orderDetails')->name('orders.details');
     // archieved tasks
     Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');

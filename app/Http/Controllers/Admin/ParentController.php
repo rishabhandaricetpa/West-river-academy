@@ -386,13 +386,14 @@ class ParentController extends Controller
                         $transcript_payment->transcation_id = $transction->transcation_id;
                         $transcript_payment->payment_mode = "admin created";
                         $transcript_payment->save();
-
-                        if (!Cart::where('item_id', $transcript->id)->where('item_type', $transcript_type)->exists()) {
-                            Cart::create([
-                                'item_type' => $transcript_type,
-                                'item_id' => $transcript->id,
-                                'parent_profile_id' => $request->get('parent_id'),
-                            ]);
+                        if ($request->get('status') == 'pending') {
+                            if (!Cart::where('item_id', $transcript->id)->where('item_type', $transcript_type)->exists()) {
+                                Cart::create([
+                                    'item_type' => $transcript_type,
+                                    'item_id' => $transcript->id,
+                                    'parent_profile_id' => $request->get('parent_id'),
+                                ]);
+                            }
                         }
                     }
                     break;
@@ -452,13 +453,14 @@ class ParentController extends Controller
                         $transction->amount = $charge->postage_charges;
                         $transction->status = $status;
                         $transction->save();
-
-                        if (!Cart::where('item_id', $request->get('parent_value'))->where('item_type', $postage_type)->exists()) {
-                            Cart::create([
-                                'item_type' => $postage_type,
-                                'item_id' =>  $request->get('parent_value'),
-                                'parent_profile_id' => $request->get('parent_value'),
-                            ]);
+                        if ($status == 'pending') {
+                            if (!Cart::where('item_id', $request->get('parent_value'))->where('item_type', $postage_type)->exists()) {
+                                Cart::create([
+                                    'item_type' => $postage_type,
+                                    'item_id' =>  $request->get('parent_value'),
+                                    'parent_profile_id' => $request->get('parent_value'),
+                                ]);
+                            }
                         }
                     }
                     break;
@@ -491,15 +493,15 @@ class ParentController extends Controller
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "notarization";
                     $notarization_payment->save();
-
-                    if (!Cart::where('item_type', 'notarization')->exists()) {
-                        Cart::create([
-                            'item_type' => 'notarization',
-                            'item_id' => $notarization->id,
-                            'parent_profile_id' => $request->get('parent_profile_id'),
-                        ]);
+                    if ($status == 'pending') {
+                        if (!Cart::where('item_type', 'notarization')->exists()) {
+                            Cart::create([
+                                'item_type' => 'notarization',
+                                'item_id' => $notarization->id,
+                                'parent_profile_id' => $request->get('parent_profile_id'),
+                            ]);
+                        }
                     }
-
                     break;
                 case 'order-detail_ApostilePackage':
 
@@ -533,13 +535,14 @@ class ParentController extends Controller
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "apostille";
                     $notarization_payment->save();
-
-                    if (!Cart::where('item_type', 'apostille')->exists()) {
-                        Cart::create([
-                            'item_type' => 'apostille',
-                            'item_id' => $apostille->id,
-                            'parent_profile_id' => $request->get('parent_profile_id'),
-                        ]);
+                    if ($status == 'pending') {
+                        if (!Cart::where('item_type', 'apostille')->exists()) {
+                            Cart::create([
+                                'item_type' => 'apostille',
+                                'item_id' => $apostille->id,
+                                'parent_profile_id' => $request->get('parent_profile_id'),
+                            ]);
+                        }
                     }
 
                     break;
@@ -598,15 +601,15 @@ class ParentController extends Controller
                     $transction->amount = $request->get('consul_amount');
                     $transction->status = $status;
                     $transction->save();
-
-                    if (!Cart::where('item_id', $request->get('p1_profile_id'))->where('item_type', $consultation_type)->exists()) {
-                        Cart::create([
-                            'item_type' => $consultation_type,
-                            'item_id' =>  $request->get('p1_profile_id'),
-                            'parent_profile_id' => $request->get('p1_profile_id'),
-                        ]);
+                    if ($status) {
+                        if (!Cart::where('item_id', $request->get('p1_profile_id'))->where('item_type', $consultation_type)->exists()) {
+                            Cart::create([
+                                'item_type' => $consultation_type,
+                                'item_id' =>  $request->get('p1_profile_id'),
+                                'parent_profile_id' => $request->get('p1_profile_id'),
+                            ]);
+                        }
                     }
-
                     break;
                 default:
                     break;
@@ -648,5 +651,37 @@ class ParentController extends Controller
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
         $amount = $type == 'annual' ? '375' : '50';
         return response()->json(['type' => $type, 'amount' => $amount]);
+    }
+    public function orderDetails($id)
+    {
+        $parent = ParentProfile::find($id);
+        $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
+        $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
+        $countries = Country::all();
+
+        $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
+        $getNotes = Notes::where('parent_profile_id', $id)->get();
+        $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
+        //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
+        $documents = UploadDocuments::where('parent_profile_id', $id)->get();
+        $payment_info = DB::table('enrollment_periods')
+            ->whereIn('student_profile_id', $student_ids)
+            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+            ->select(
+                'enrollment_periods.created_at',
+                'enrollment_periods.enrollment_payment_id',
+                'enrollment_payments.amount',
+                'enrollment_payments.status',
+                'enrollment_payments.transcation_id',
+                'enrollment_payments.payment_mode',
+                'enrollment_periods.start_date_of_enrollment',
+                'enrollment_periods.end_date_of_enrollment',
+                'enrollment_periods.grade_level',
+                'enrollment_payments.id',
+                'enrollment_periods.student_profile_id'
+            )
+            ->get();
+        $payment_nonpaid = $payment_info->where('status', 'pending');
+        return view('admin.familyinformation.order-detail', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
     }
 }

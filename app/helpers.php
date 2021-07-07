@@ -14,10 +14,14 @@ use App\Models\CustomPayment;
 use App\Models\EnrollmentPayment;
 use App\Models\GraduationPayment;
 use App\Models\NotarizationPayment;
+use App\Models\Notes;
 use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
+use App\Models\RecordTransfer;
+use App\Models\TransactionsMethod;
 use App\Models\Transcript;
 use App\Models\TranscriptPayment;
+use App\Models\UploadDocuments;
 
 /**
  * Compare given route with current route and return output if they match.
