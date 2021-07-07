@@ -18,7 +18,7 @@ class CreateCustomLetterPaymentsTable extends Migration
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('amount');
-            $table->string('paying_for');
+            $table->string('paying_for',2000);
             $table->string('type_of_payment');
             $table->string('transcation_id')->nullable();
             $table->string('payment_mode')->nullable();

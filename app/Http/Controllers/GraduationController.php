@@ -105,7 +105,6 @@ class GraduationController extends Controller
         try {
             DB::beginTransaction();
             $inputs = $request->all();
-
             $graduation = Graduation::whereId($id);
             $student_id = $graduation->pluck('student_profile_id')->first();
             $parent_id = $graduation->pluck('parent_profile_id')->first();

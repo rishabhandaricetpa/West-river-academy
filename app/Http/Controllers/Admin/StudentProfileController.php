@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CustomPayment;
+use App\Models\ConfirmationLetter;
+use App\Models\EnrollmentPayment;
+use App\Models\FeesInfo;
 use App\Models\EnrollmentPeriods;
 use App\Models\Graduation;
-use App\Models\NotarizationPayment;
-use App\Models\OrderPersonalConsultation;
-use App\Models\ParentProfile;
+use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
+use App\Models\TransactionsMethod;
 use App\Models\Transcript;
 use Illuminate\Support\Facades\File;
 use App\Models\UploadDocuments;
 use DB;
+use App\Models\Notes;
+use App\Models\ParentProfile;
 use Illuminate\Http\Request;
 use PDF;
 use Storage;
@@ -83,9 +86,47 @@ class StudentProfileController extends Controller
     public function edit($id)
     {
         $student = StudentProfile::find($id);
+        $parent_id = $student->parent_profile_id;
+        //get parent info
+        $parent = ParentProfile::whereId($student->parent_profile_id)->first();
+
+        // information for enrollement tab
         $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
 
-        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods'));
+        $payment_info = DB::table('enrollment_periods')
+            ->where('student_profile_id', $id)
+            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
+            ->select(
+                'enrollment_periods.created_at',
+                'enrollment_periods.enrollment_payment_id',
+                'enrollment_payments.amount',
+                'enrollment_payments.status',
+                'enrollment_payments.transcation_id',
+                'enrollment_payments.payment_mode',
+                'enrollment_periods.start_date_of_enrollment',
+                'enrollment_periods.end_date_of_enrollment',
+                'enrollment_periods.grade_level',
+                'enrollment_payments.id',
+                'enrollment_periods.student_profile_id'
+            )
+            ->get();
+
+        // information for record trasnsfer tab
+        $recordTransfer = RecordTransfer::where('student_profile_id', $id)->get();
+
+        // for transcript information
+        $transcripts = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
+            ->where('student_profile_id', $id)
+            ->with('transcript9_12', 'transcriptk8')
+            ->get();
+        $documents = UploadDocuments::where('student_profile_id', $id)->get();
+
+        //graduation
+        $graduations = Graduation::where('student_profile_id', $id)->get();
+
+        //notes
+        $notes = Notes::where('student_profile_id', $id)->get();
+        return view('admin.familyInformation.edit-student', compact('student', 'enrollment_periods', 'payment_info', 'recordTransfer', 'transcripts', 'documents', 'parent_id', 'parent', 'graduations', 'notes'));
     }
 
     /**
@@ -97,18 +138,20 @@ class StudentProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $student = StudentProfile::find($id);
             $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
             $student->first_name = $request->get('first_name');
-            $student->middle_name = $request->get('first_name');
+            $student->middle_name = $request->get('middle_name');
             $student->last_name = $request->get('last_name');
-            $student->d_o_b = \Carbon\Carbon::parse($request->get('d_o_b'))->format('M d Y');
+            $student->d_o_b = \Carbon\Carbon::parse($request->get('dob'))->format('M d Y');
+            $student->gender = $request->get('gender');
             $student->email = $request->get('email');
+            $student->mothers_name = $request->get('mothers_name');
+            $student->birth_city = $request->get('birth_city');
             $student->cell_phone = $request->get('cell_phone');
-            $student->student_Id = $request->get('student_id');
+            $student->student_Id = $request->get('student_Id');
             $student->immunized_status = $request->get('immunized_status');
             $student->student_situation = $request->get('student_situation');
             $enrollupdate = EnrollmentPeriods::select('id')->where('student_profile_id', $id)->get();
@@ -124,7 +167,6 @@ class StudentProfileController extends Controller
                 $enroll->save();
             }
             $student->save();
-
             $cover = $request->file('file');
             if ($request->file('file')) {
                 foreach ($request->file as $cover) {
@@ -171,7 +213,7 @@ class StudentProfileController extends Controller
             DB::beginTransaction();
             $notification = [
                 'message' => 'Student Record is Deleted Successfully!',
-                'alert-type' => 'warning',
+                'alert-type' => 'Success',
             ];
             StudentProfile::where('id', $id)->delete();
             DB::commit();
@@ -186,7 +228,7 @@ class StudentProfileController extends Controller
             return redirect()->back()->with($notification);
         }
     }
-    public function generateConfirmation($student_id)
+    public function generateConfirmation($student_id, $grade_id)
     {
         try {
             $parent_id = StudentProfile::select('parent_profile_id')->whereId($student_id)->first();
@@ -194,9 +236,12 @@ class StudentProfileController extends Controller
 
             $pdfname = $studentProfileData->first_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->last_name . '_' . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
             $enrollment_periods = StudentProfile::where('confirmation_letters.parent_profile_id', $parent_id->parent_profile_id)
-                ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')->where('confirmation_letters.status', 'paid')
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
                 ->with('enrollmentPeriods')->get();
+            $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
+                ->where('enrollment_periods.grade_level', $grade_id)
+                ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')->where('enrollment_periods.student_profile_id', $student_id)
+                ->with('enrollmentPeriods')->first();
             $data = [
                 'student' => $studentProfileData,
                 'enrollment' => $enrollment_periods,
@@ -205,7 +250,7 @@ class StudentProfileController extends Controller
             ];
 
             $pdf = PDF::loadView('confirmationLetter', $data);
-            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
+            Storage::put(ConfirmationLetter::UPLOAD_DIR_ADMIN . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
             dd($e);
@@ -225,47 +270,152 @@ class StudentProfileController extends Controller
 
     public function viewParentOrders($parent_id)
     {
-        $parent = ParentProfile::where('user_id', $parent_id)->first();
-        $studentData = $parent->studentProfile()->get();
-
-        $studentId = collect($studentData)->pluck('id');
-        // for transcirpts payment
-        $transcript_payments = Transcript::with('student', 'transcriptPayment')
-            ->whereIn('student_profile_id', $studentId)
-            ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])
-            ->get();
-
-        /** Receiving payment history data for custom payment*/
-        $customPayments = CustomPayment::with('ParentProfile')
-            ->where('parent_profile_id', $parent_id)
-            ->where('status', 'paid')
-            ->get();
-
-        /** Receiving payment history data for enrollments*/
-
-        $enrollmentPayments = DB::table('enrollment_periods')->whereIn('student_profile_id', $studentId)
-            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
-            ->join('student_profiles', 'student_profiles.id', 'enrollment_periods.student_profile_id')
-            ->whereIn('enrollment_payments.status', ['active', 'paid'])
-            ->get();
-
-        /** Receiving payment history data for graduation*/
-
-        $graduationPayments = Graduation::join('graduation_payments', 'graduation_payments.graduation_id', 'graduations.id')
-            ->whereIn('graduations.student_profile_id', $studentId)
-            ->whereIn('graduations.status', ['paid', 'approved', 'completed'])
-            ->join('student_profiles', 'student_profiles.id', 'graduations.student_profile_id')
-            ->get();
-
-        /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('ParentProfile', 'notarization')->where('parent_profile_id', $parent_id)->get();
-
-        /** Receiving payment history data for order personal consultation*/
-
-        $orderConsulationPayments = OrderPersonalConsultation::with('parent')->where('parent_profile_id', $parent_id)->get();
+        $transcations =   TransactionsMethod::where('parent_profile_id', $parent_id)->get();
         return view(
             'admin.familyInformation.orders',
-            compact('transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments')
+            compact('transcations')
+        );
+    }
+
+    /*store New Students */
+    public function updateNewStudents(Request $request)
+    {
+        $students = new StudentProfile();
+        $students->parent_profile_id = $request->get('parent_id');
+        $students->first_name = $request->get('first_name');
+        $students->middle_name = $request->get('middle_name');
+        $students->last_name = $request->get('last_name');
+        $students->gender = $request->get('gender');
+        $students->d_o_b = \Carbon\Carbon::parse($request->get('d_o_b'))->format('M d Y');
+        $students->email = $request->get('email');
+        $students->cell_phone = $request->get('phone');
+        $students->student_Id = $request->get('student_id');
+        $students->immunized_status = $request->get('immunized_status');
+
+        $students->save();
+    }
+
+    /*store New Students */
+    public function createNewStudents(Request $request)
+    {
+        $students = StudentProfile::create([
+            'parent_profile_id' => $request->get('parents_id'),
+            'first_name' => $request->get('student_first_name'),
+            'middle_name' => $request->get('student_middle_name'),
+            'last_name' => $request->get('student_last_name'),
+            'gender' => $request->get('student_gender'),
+            'd_o_b' => $request->get('student_d_o_b'),
+            'email' => $request->get('student_email'),
+            'cell_phone' => $request->get('student_phone'),
+            'student_Id' => $request->get('students_student_id'),
+            'immunized_status' => $request->get('student_immunized_status'),
+        ]);
+        $students->save();
+    }
+
+    public function createNotes(Request $request)
+    {
+        $notes = new Notes;
+        $notes->parent_profile_id = $request->get('parent_id');
+        $notes->student_profile_id = $request->get('student_name_for_notes');
+        $notes->notes = $request->get('message_text');
+
+        $notes->save();
+    }
+
+
+    public function createEnrollment(Request $request)
+    {
+        try {
+            $student_id = $request->get('student_name');
+            $parent_id = $request->get('parent_id');
+            $selectedStartDate = \Carbon\Carbon::parse($request->get('start_date'));
+            $selectedEndDate = \Carbon\Carbon::parse($request->get('end_date'));
+            $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+
+            $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
+                ->where('student_profiles.id', '!=', $student_id)
+                ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+                ->whereDate('enrollment_periods.start_date_of_enrollment', '<=', $selectedStartDate)
+                ->whereDate('enrollment_periods.end_date_of_enrollment', '>=', $selectedEndDate)
+                ->exists();
+            if (!$student_enrolled) {
+                $student_type = 'first_student';
+            } else {
+                $student_type = 'additional_student';
+            }
+            $fee_type = $student_type . '_' . $type;
+            $fee = FeesInfo::getFeeAmount($fee_type);
+
+            DB::beginTransaction();
+            $enroll = new EnrollmentPeriods;
+            $enroll->student_profile_id = $request->get('student_name');
+            $enroll->start_date_of_enrollment     = \Carbon\Carbon::parse($request->get('start_date'))->format('Y/m/d');
+            $enroll->end_date_of_enrollment     = \Carbon\Carbon::parse($request->get('end_date'))->format('Y/m/d');
+            $enroll->grade_level = $request->get('grade_level');
+            $enroll->type = $type;
+            $enroll->save();
+
+            $transction = new TransactionsMethod();
+            $transction->transcation_id   = substr(uniqid(), 0, 12);
+            $transction->payment_mode = "admin created";
+            $transction->parent_profile_id = $request->get('parent_id');
+            $transction->amount = $fee;
+            $transction->status = 'pending';
+            $transction->save();
+
+            $enroll_payment = new EnrollmentPayment();
+            $enroll_payment->enrollment_period_id = $enroll->id;
+            $enroll_payment->payment_mode = "admin created";
+            $enroll_payment->transcation_id = $transction->transcation_id;
+            $enroll_payment->status = 'pending';
+            $enroll_payment->amount = $fee;
+            $enroll_payment->save();
+
+            $enroll->enrollment_payment_id = $enroll_payment->id;
+            $enroll->save();
+            DB::commit();
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
+            }
+        } catch (\Exception $e) {
+            // dd($e);
+            DB::rollBack();
+            report($e);
+            if ($request->expectsJson()) {
+                return response()->json(['status' => 'error', 'message' => 'Failed to update Record']);
+            }
+        }
+    }
+
+
+    public function deactive(Request $request)
+    {
+        $student = StudentProfile::find($request->get('id'));
+        $student->status = $request->get('student_status');
+        $student->save();
+        $notification = [
+            'message' => 'Student Record is Inactive!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
+    }
+    public function updateStudentProfile(Request $request)
+    {
+        StudentProfile::where('id', $request->student_id)->update(
+            [
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'd_o_b' => $request->d_o_b,
+                'email' => $request->email,
+                'cell_phone' => $request->phone,
+                'student_Id' => $request->national_ID,
+                'immunized_status' => $request->immunized_status,
+                'birth_city' => $request->birth_city,
+                'student_situation' => $request->student_situation
+            ]
         );
     }
 }

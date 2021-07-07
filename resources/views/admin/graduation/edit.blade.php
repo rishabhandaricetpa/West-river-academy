@@ -17,7 +17,7 @@
       </div>
 
       <div class="form-group col-sm-6">
-        Birthdate: {{ Carbon\Carbon::parse($graduation->student->birthdate)->format('M d Y') }}
+        Birthdate: {{ Carbon\Carbon::parse($graduation->student->birthdate)->format('M j, Y') }}
       </div>
 
       <div class="form-group col-sm-6">
@@ -90,7 +90,7 @@
       <div class="form-group col-sm-6">
         <label for="situation">Situation/Updates:</label>
         <textarea name="situation" class="w-100" id="situation" cols="80"
-          rows="4">{{ $graduation->details->situation }}</textarea>
+          rows="4" maxlength="2000">{{ $graduation->details->situation }}</textarea>
       </div>
       <div class=" form-group col-sm-6">
         <label>Upload Single/Multiple Documents<sup>*</sup></label>
@@ -100,7 +100,7 @@
 
       <div class="col-sm-12 mt-md-4 mt-3">
         <input type="submit" class="btn btn-primary" value="Update">
-        <a href="{{route('admin.view.graduation')}}" class="btn btn-primary">Back</a>
+        <a onclick="goBack()" class="btn btn-primary">Back</a>
       </div>
     </form>
   </div>

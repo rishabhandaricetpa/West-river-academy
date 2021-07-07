@@ -11,7 +11,9 @@ h3,
 .h3 {
   color: #235;
 }
-
+.display-none{
+  display:none;
+}
 /* custom classes */
 
 .lato-italic {
@@ -27,6 +29,7 @@ h3,
     }
   }
 }
+
 
 .img-absolute {
   position: absolute;
@@ -45,13 +48,16 @@ p:empty {
 .flex-grow {
   flex-grow: 1;
 }
-.email-text_style{
+
+.email-text_style {
   text-transform: lowercase;
 }
-audio{
-  width:100%;
-  height:50px;
+
+audio {
+  width: 100%;
+  height: 50px;
 }
+
 .black-overlay {
   position: relative;
 
@@ -69,7 +75,7 @@ audio{
 }
 
 .bg-blue {
-  background-color: $blue !important;
+  background-color: $secondary-color !important;
 }
 
 .absolute-center {
@@ -168,20 +174,46 @@ button {
 .pt-2r {
   padding-top: 2rem !important;
 }
+.pt-10r {
+  padding-top: 10rem !important;
+}
+.pb-5r{
+  padding-bottom: 5rem!important;
+}
 
 .px-25 {
   padding-left: 2.5rem !important;
   padding-right: 2.5rem !important;
 }
-.max-width__275{
-  max-width:275px;
+
+.max-width__275 {
+  max-width: 275px;
+}
+
+.h-120 {
+  height: 120px !important;
 }
 
 /* popup css */
 
+.modal-open .main-sidebar .main-sidebar::before,
+.modal-open .main-header::before{
+  content: '';
+  position: absolute;  
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: 1040 !important;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .modal {
-  padding-right: 0 !important;
-  z-index: 1050 !important;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop {
+  display: none !important;
 }
 
 .modal-body {
@@ -206,6 +238,7 @@ button {
 /* tables */
 table {
   width: 100%;
+
   tr {
     line-height: 2;
     font-family: $lato-font;
@@ -213,13 +246,21 @@ table {
 
   tfoot {
     td {
-      color: $blue;
+      color: $secondary-color;
     }
   }
 }
-table, tr, td, th, tbody, thead, tfoot {
+
+table,
+tr,
+td,
+th,
+tbody,
+thead,
+tfoot {
   page-break-inside: avoid !important;
 }
+
 ////tabs 
 .tabbable-responsive {
   display: block;
@@ -228,28 +269,32 @@ table, tr, td, th, tbody, thead, tfoot {
 }
 
 .tabbable {
+  min-width: 100%;
+
+  .nav-tabs {
+    white-space: nowrap;
+    display: inline-block;
     min-width: 100%;
-    
-    .nav-tabs {
-      white-space: nowrap;
+    padding: 0px 21px;
+
+    .nav-item {
       display: inline-block;
-      min-width: 100%;
-      padding: 0px 21px;
-      
-      .nav-item {
+
+      .nav-link {
         display: inline-block;
-        
-        .nav-link {
-          display: inline-block;
-        }
       }
     }
+  }
 }
 
 /* global css */
 
-.app {
+.app,
+.position-relative {
   position: relative;
+}
+.position-absolute{
+  position: absolute;
 }
 
 main {
@@ -262,13 +307,12 @@ sup {
   top: 0;
 }
 
-.table-vertical_scroll{
-thead tr th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: #ccc;
-}
+.table-vertical_scroll {
+  thead {
+    position: sticky;     
+    top:-1px;
+    z-index: 5;
+  }
 }
 
 
@@ -361,7 +405,7 @@ a.btn {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $blue;
+    background-color: $secondary-color;
     opacity: 0.5;
   }
 }
@@ -394,9 +438,91 @@ sub {
 .hg-pdf table tr {
   page-break-inside: avoid;
 }
+
 footer {
-  .contact-phone{
+  .contact-phone {
     font-family: "lato";
   }
 }
 
+/*  checkbox  */
+
+.container-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 12px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 150px;
+
+  /* Hide the browser's default checkbox */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #eee;
+  }
+
+  /* On mouse-over, add a grey background color */
+  &:hover input~.checkmark {
+    background-color: #ccc;
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  input:checked~.checkmark {
+    background-color: #004C99;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+
+  /* Show the checkmark when checked */
+  input:checked~.checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+//  stikcy nav bar
+.sticky {
+  position: sticky;
+  top:0;
+  background:white;
+  z-index: 9;   
+  box-shadow: 0px 4px 10px rgb(246, 246, 246);
+  
+}

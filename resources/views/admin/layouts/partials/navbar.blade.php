@@ -1,19 +1,35 @@
 <!-- Navbar -->
 
-<nav class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue">
+<nav id="admin-header" class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue p-0 d-flex justify-content-between main-nav_header align-items-center">
   <!-- Left navbar links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars text-white"></i></a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="index3.html" class="nav-link"></a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link"></a>
-    </li>
-  </ul>
-  <img src="/images/wra_logo.svg" class="site-logo d-lg-none d-block" alt="wra_logo">
+  
+    <ul class="d-flex overflow-scroll">
+      <ul class="navbar-nav">
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars text-white"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="index3.html" class="nav-link"></a>
+        </li>
+       
+      </ul>
+      <img src="/images/wra_logo.svg" class="site-logo d-lg-none d-block" alt="wra_logo">
+        <li class="menu-item"><a href="{{ route('admin.dashboard.notification') }}">Dashboard</a></li>
+        <li class="menu-item"><a href="{{ route('admin.view.parent') }}">Family</a></li>
+        <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
+        <li class="menu-item"><a href="#">Representative</a></li>
+        <li class="menu-item"><a href="#">Groups</a></li>
+    </ul>
+    <ul class="d-flex">
+        <li><img src="/images/search.png" alt="login"></li>
+        <li><img src="/images/bell.png" alt="login"></li>
+        <li><a href="#"> <img src="/images/login.png" alt="login"></a>
+        </li>
+    </ul>
+
   <!-- SEARCH FORM -->
 
   <!-- Right navbar links -->

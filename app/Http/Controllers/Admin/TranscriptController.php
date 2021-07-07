@@ -20,12 +20,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Storage;
+use Str;
 
 class TranscriptController extends Controller
 {
     public function index()
     {
-        $students = StudentProfile::all();
+        $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "k-8";
         return view('admin.transcript.view-student', compact('students', 'type'));
     }
@@ -88,6 +89,18 @@ class TranscriptController extends Controller
 
         $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
 
+        if ($transcript_id) {
+            $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+            $years = collect($enrollment_periods)->pluck('enrollment_year');
+            $maxYear = $years->max();
+            $minYear = $years->min();
+        } else {
+            $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+            $years = collect($enrollment_periods)->pluck('enrollment_year');
+            $maxYear = $years->max();
+            $minYear = $years->min();
+            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
+        }
         $data = [
             'student' => $student,
             'transcriptData' => $transcriptData,
@@ -95,6 +108,8 @@ class TranscriptController extends Controller
             'groupCourses' => $groupCourses,
             'transcript_id' => $transcript_id,
             'address' => $address,
+            'minYear' => $minYear,
+            'maxYear' => $maxYear,
             'enrollment' => $enrollment_periods,
             'title' => 'transcript',
             'date' => date('m/d/Y'),
@@ -127,7 +142,18 @@ class TranscriptController extends Controller
             $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'signed_transcript_letter';
 
             $enrollment_periods = StudentProfile::find($student->id)->enrollmentPeriods()->get();
-
+            if ($transcript_id) {
+                $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+                $years = collect($enrollment_periods)->pluck('enrollment_year');
+                $maxYear = $years->max();
+                $minYear = $years->min();
+            } else {
+                $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
+                $years = collect($enrollment_periods)->pluck('enrollment_year');
+                $maxYear = $years->max();
+                $minYear = $years->min();
+                $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
+            }
             $data = [
                 'student' => $student,
                 'transcriptData' => $transcriptData,
@@ -135,6 +161,8 @@ class TranscriptController extends Controller
                 'groupCourses' => $groupCourses,
                 'transcript_id' => $transcript_id,
                 'address' => $address,
+                'minYear' => $minYear,
+                'maxYear' => $maxYear,
                 'enrollment' => $enrollment_periods,
                 'title' => 'transcript',
                 'date' => date('m/d/Y'),
@@ -142,13 +170,14 @@ class TranscriptController extends Controller
 
             $pdf = PDF::loadView('admin.transcript.signed_pdf', $data);
 
-            Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
 
+            $path = Str::random(40) . $pdfname;
+            Storage::put(TranscriptPdf::UPLOAD_DIR_TRANSCRIPT . '/' . $path,  $pdf->output());
             //store pdf link
             $storetranscript = TranscriptPdf::where('transcript_id', $transcript_id)
-            ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->first();
+                ->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->first();
             if ($storetranscript != null) {
-                $storetranscript->pdf_link = $pdfname . '.pdf';
+                $storetranscript->pdf_link = $path;
                 $storetranscript->save();
             }
 
@@ -215,10 +244,10 @@ class TranscriptController extends Controller
     }
     public function editAllPayments($transpay_id)
     {
-        
+
         $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
-        $transactionData=TransactionsMethod::where('transcation_id',$geteachtranscriptPayments->transcation_id)->first();
-        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments','transactionData'));
+        $transactionData = TransactionsMethod::where('transcation_id', $geteachtranscriptPayments->transcation_id)->first();
+        return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments', 'transactionData'));
     }
 
     public function updateAllPayments(Request $request, $transpay_id)

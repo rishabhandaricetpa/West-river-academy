@@ -1,5 +1,5 @@
 .admin-sidebar {
-  background-color: $blue !important;
+  background-color: $secondary-color !important;
   .nav-link p{
     font-size: 15px;
   }
@@ -52,7 +52,7 @@
     z-index: 1;
   }
   .page-item.disabled .page-link {
-    color: $blue;
+    color: $secondary-color;
   }
   .content-header,
   .content-wrapper,
@@ -67,7 +67,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $blue;
+    background-color: $secondary-color;
     opacity: 0.5;
     z-index: 0;
   }
@@ -92,6 +92,7 @@
     @extend .w-100;
   }
   .dataTables_filter {
+    float: right;  
     label {
       @extend .w-100;
     }
@@ -127,7 +128,7 @@
   .dt-button {
     &.dropdown-item {
       &:hover {
-        background-color: $blue;
+        background-color: $secondary-color;
       }
     }
   }
@@ -142,6 +143,7 @@
   }
 
   .dt-buttons {
+    margin-left:10px;
     button {
       @extend .btn;
       @extend .btn-primary;

@@ -22,11 +22,13 @@ class CreateStudentProfilesTable extends Migration
             $table->string('legacy_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('d_o_b')->nullable();
+            $table->boolean('mothers_name')->nullable();
+            $table->string('birth_city')->nullable();
             $table->string('email')->nullable();
             $table->string('cell_phone')->nullable();
             $table->string('student_Id')->nullable();
             $table->string('immunized_status')->nullable();
-            $table->string('student_situation')->nullable();
+            $table->string('student_situation', 2000)->nullable();
             $table->boolean('status')->default('0')->nullable();
             $table->timestamps();
         });

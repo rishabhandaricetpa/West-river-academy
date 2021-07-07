@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -16,7 +17,7 @@ class ForeignController extends Controller
         $student_id = $id;
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Foreign Language')
+            ->where('course_name', CourseType::ForeignCourse)
             ->first();
         $courses_id = $course->id;
         $foreignCourse = Subject::where('courses_id', $course->id)

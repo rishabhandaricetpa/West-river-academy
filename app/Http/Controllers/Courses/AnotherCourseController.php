@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\StudentProfile;
@@ -19,7 +20,7 @@ class AnotherCourseController extends Controller
         $student_id = $id;
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Another')
+            ->where('course_name', CourseType::AnotherCourse)
             ->first();
         $courses_id = $course->id;
         $anotherCourse = Subject::where('courses_id', $course->id)
@@ -91,7 +92,6 @@ class AnotherCourseController extends Controller
         $transcriptWizStatus = Transcript::where('id', $trans_id)->first();
         $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses()->get();
         $k8details = StudentProfile::find($student_id)->TranscriptK8()->get();
-        // dd($transcriptWizStatus);
         $transcriptDatas = TranscriptK8::where('student_profile_id', $student_id)->where('transcript_id', $trans_id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course', 'transcript'])
             ->get();
@@ -99,7 +99,7 @@ class AnotherCourseController extends Controller
         if ($request->get('another_grade') == 'Yes') {
             return redirect()->route('display.studentProfile', $request->get('student_id'));
         } else {
-            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas', 'trans_id', 'transcriptWizStatus'));
+            return view('transcript-wizard-dashboard', compact('student', 'transcriptDatas', 'trans_id', 'transcriptWizStatus', 'k8details'));
         }
     }
 }

@@ -27,23 +27,23 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"></h3>
-                            <a href="{{route ('admin.each.student',$parent->id)}}" class="btn btn-primary" >Back</a>
-                              </div>
+                            <a onclick="goBack()" class="btn btn-primary">Back</a>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="student-parent" class="table table-bordered table-striped data-table"">
-                                              <thead>
-                                              <tr>
-                                                <th>Parents</th>
-                                                <th>Country</th>
-                                                <th>State</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                                <th>View</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody>
-                                                @if (!empty($parent))
+                                                  <thead>
+                                                  <tr>
+                                                    <th>Parents</th>
+                                                    <th>Country</th>
+                                                    <th>State</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                    <th>View</th>
+                                                  </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                     @if (!empty($parent))
                                 <td>{{ $parent->p1_first_name }}</td>
                                 <td>{{ $parent->country }}</td>
                                 <td>{{ $parent->state }}</td>
@@ -54,8 +54,6 @@
                                 @endif
                                 <td><a href="{{ route('admin.parent.edit', $parent->id) }}"><i
                                             class="fas fa-edit"></i></a>
-                                    <a href="{{ route('admin.deactive.student', $parent->id) }}"><i
-                                            class="fas fa-ban"></i></a>
                                     <a href="{{ route('admin.parent.delete', $parent->id) }}"><i
                                             class="fas fa-trash-alt"></i></a>
                                 </td>

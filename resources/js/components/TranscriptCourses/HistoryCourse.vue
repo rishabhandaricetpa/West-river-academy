@@ -1,4 +1,5 @@
 <template>
+<div v-if='this.remaining_credit > 0 '>
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -21,7 +22,7 @@
               v-model="socialsciencecourse.subject_name"
             >
               <option disabled value="">Please select one</option>
-              <option v-for="Course in historycourse" :key="Course">
+              <option v-for="Course in historycourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -111,7 +112,7 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="socialsciencecourse.selectedCredit"
-                v-on:change="showCredit"
+               v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
@@ -121,11 +122,10 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit" class="mt-3">
+              <h3  class="mt-3">
                 You have
                 {{
-                  total_credits.total_credit -
-                    socialsciencecourse.selectedCredit
+                final_credits[socialsciencecourse.component_index + 1] 
                 }}
                 out of
                 {{ total_credits.total_credit }}
@@ -150,6 +150,11 @@
       </button>
     </div>
   </form>
+  </div>
+  <div v-else>
+    No credits Remaining 
+      <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="nextCourse"/>
+  </div>
 </template>
 
 <script>
@@ -157,12 +162,13 @@ export default {
   name: "SocialScienceCourse",
   data() {
     return {
-      isCredit: false,
       errors: [],
+      final_credits: [this.remaining_credit],
       form: {
-        remainingCredit: "",
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
+        required_credit :this.required_credit,
+          final_remaining_credit:'',
         socialsciencecourse: [
           {
             course_id: this.courses_id,
@@ -170,50 +176,78 @@ export default {
             student_id: this.student_id,
             subject_name: "",
             other_subject: "",
-            selectedCredit: "",
+            selectedCredit: this.required_credit.credit,
             grade: "",
-            total_credits: this.total_credits.total_credit
+            total_credits: this.total_credits.total_credit,
+             component_index: 0
           }
         ]
       }
     };
   },
-
+  mounted() {
+    this.form.socialsciencecourse[0].selectedCredit = this.required_credit.credit;
+    this.final_credits.push(this.calculateRemainingCredit(this.form.socialsciencecourse[0]));
+    this.finalValue();
+  },
   props: [
     "historycourse",
     "transcript_id",
     "student_id",
     "courses_id",
     "all_credits",
-    "total_credits"
+    "total_credits",
+    'required_credit',
+    'remaining_credit',
+    'trans_id'
   ],
   methods: {
-    showCredit(e) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+      calculateRemainingCredit(socialsciencecourse) {
+       this.finalValue();
+      return this.final_credits[socialsciencecourse.component_index] - socialsciencecourse.selectedCredit;
+        
+    },
+         reIndex(){
+      this.form.socialsciencecourse.forEach((socialsciencecourse, index) => {
+        socialsciencecourse.component_index = index;
+      });
+    },
+      reCalculateAll() {
+      this.form.socialsciencecourse.forEach((socialsciencecourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(socialsciencecourse)
+      })
+      this.finalValue();
+    },
+     finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+      
     },
     addCourse() {
-      this.form.socialsciencecourse.push({
+    const socialsciencecourse= {
         course_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.required_credit.credit,
         grade: "",
-        total_credits: this.total_credits.total_credit
-      });
+         total_credits: this.final_credits[this.form.socialsciencecourse.length - 1],
+         component_index: this.form.socialsciencecourse.length
+      };
+         this.final_credits.push(this.calculateRemainingCredit(socialsciencecourse))
+      this.form.socialsciencecourse.push(socialsciencecourse);
+      this.finalValue();
     },
     removeCourse(index) {
       this.form.socialsciencecourse.splice(index, 1);
+       this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];
-
-  
-
       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
           "Course name is required Field! Please select a Course name"
@@ -222,8 +256,13 @@ export default {
       if (!this.validateCredit()) {
         this.errors.push("Credit is required Field! Please select a credit ");
       }
-
-      axios
+       if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
+        );
+      }
+      if(this.validateFinalCredit()){
+        axios
         .post(route("socialStudies-transcript.store"), this.form)
         .then(response => {
           window.location =
@@ -232,6 +271,8 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
+      }
+    
     },
     vallidateGrades() {
       for (let i = 0; i < this.form.socialsciencecourse.length; i++) {
@@ -248,6 +289,12 @@ export default {
         if (!enrollmentSubject.subject_name) {
           return false;
         }
+      }
+      return true;
+    },
+     validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
       }
       return true;
     },
@@ -268,7 +315,17 @@ export default {
         }
       }
       return true;
+    },
+     nextCourse(){
+      window.location =
+            "/another-grade-transcript/" +
+            this.student_id +
+            "/" +
+            this.trans_id +
+            "/" +
+            this.transcript_id;
     }
-  }
+  },
+ 
 };
 </script>

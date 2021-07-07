@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\EditTranscript9_12Courses;
 
+use App\Enums\CourseType;
+use App\Enums\CreditType;
+use App\Enums\MaximumCreditType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -16,7 +19,7 @@ class EditCourse extends Controller
     public function editEnglish($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'English / Language Arts')
+            ->where('course_name', CourseType::EnglishCourse)
             ->first();
         $englishCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -24,10 +27,12 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $selectedCreditRequired = max($credits);
+
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.english-course', compact('englishCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.english-course', compact('englishCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'selectedCreditRequired'));
     }
     public function storeEnglish(Request $request)
     {
@@ -37,7 +42,7 @@ class EditCourse extends Controller
         $refreshCourse->each->delete();
 
         //create new course
-        foreach ($request->get('englishCourse', []) as $period) {
+        foreach ($request->get('englishCourses', []) as $period) {
             $other_subjects = $period['other_subject'];
             $selectedCredit =  $period['selectedCredit'];
             $total_credits = $period['total_credits'];
@@ -54,7 +59,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' =>  $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -72,7 +77,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' =>  $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -81,7 +86,7 @@ class EditCourse extends Controller
     public function editMathematics($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Mathematics')
+            ->where('course_name', CourseType::MathsCourse)
             ->first();
         $mathsCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -89,10 +94,20 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
+        $selectedCreditRequired = max($credits);
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::EnglishCourseId)->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            // first course having full credit , so check its country and assign full credit
+            $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+        } else {
+
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.mathematics-course', compact('mathsCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+
+        return view('editTranscript9_12Courses.mathematics-course', compact('mathsCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'remaining_credit', 'selectedCreditRequired'));
     }
     public function storeMathematics(Request $request)
     {
@@ -119,7 +134,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -137,7 +152,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -146,7 +161,7 @@ class EditCourse extends Controller
     public function editSocialScience($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'History / Social Science')
+            ->where('course_name', CourseType::HistoryCourse)
             ->first();
         $socialScienceCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -154,10 +169,23 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::MathsCourseId)->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
+            if ($lastCourse) {
+                $remaining_credit = $lastCourse->remaining_credits;
+            } else {
+                // first course having full credit , so check its country and assign full credit
+                $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+            }
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
+        $selectedCreditRequired = max($credits);
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.socialScience-course', compact('socialScienceCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.socialScience-course', compact('socialScienceCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'selectedCreditRequired', 'remaining_credit'));
     }
 
     public function storeSocialScience(Request $request)
@@ -185,7 +213,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -203,7 +231,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -212,7 +240,7 @@ class EditCourse extends Controller
     public function editScience($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Science')
+            ->where('course_name', CourseType::ScienceCourse)
             ->first();
         $scienceCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -220,10 +248,25 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::HistoryCourseId)->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
+            if ($lastCourse) {
+                $remaining_credit = $lastCourse->remaining_credits;
+            } else {
+                // first course having full credit , so check its country and assign full credit
+                $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+            }
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
+        $selectedCreditRequired = max($credits);
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.science-course', compact('scienceCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.science-course', compact('scienceCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'remaining_credit', 'selectedCreditRequired'));
     }
 
     public function storeScience(Request $request)
@@ -251,7 +294,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -269,7 +312,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -278,7 +321,7 @@ class EditCourse extends Controller
     public function editPhysicalEducation($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Physical Education')
+            ->where('course_name',CourseType::PhysicalEducationCourse)
             ->first();
         $physicalEducationCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -286,10 +329,23 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::ScienceCourseId)->orderBy('id', 'DESC')->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
+            if ($lastCourse) {
+                $remaining_credit = $lastCourse->remaining_credits;
+            } else {
+                // first course having full credit , so check its country and assign full credit
+                $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+            }
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+        $selectedCreditRequired = $carnegia_status->is_carnegie == 1 ? MaximumCreditType::MaxCreditForSubjectsNotInCalifornia : MaximumCreditType::MaxCreditForSubjectsInCalifornia;
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.physicalEducation-course', compact('physicalEducationCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.physicalEducation-course', compact('physicalEducationCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'selectedCreditRequired', 'remaining_credit'));
     }
     public function storePhysicalEducation(Request $request)
     {
@@ -316,7 +372,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -334,7 +390,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -346,7 +402,7 @@ class EditCourse extends Controller
     public function editHealth($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Health')
+            ->where('course_name', CourseType::HealthCourse)
             ->first();
         $healthCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -354,10 +410,23 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::PhysicalEducationCourseId)->orderBy('id', 'DESC')->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
+            if ($lastCourse) {
+                $remaining_credit = $lastCourse->remaining_credits;
+            } else {
+                // first course having full credit , so check its country and assign full credit
+                $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+            }
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+        $selectedCreditRequired = $carnegia_status->is_carnegie == 1 ? MaximumCreditType::MaxCreditForSubjectsNotInCalifornia : MaximumCreditType::MaxCreditForSubjectsInCalifornia;
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.health-course', compact('healthCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.health-course', compact('healthCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'remaining_credit', 'selectedCreditRequired'));
     }
     public function storeHealth(Request $request)
     {
@@ -384,7 +453,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -402,7 +471,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -413,7 +482,7 @@ class EditCourse extends Controller
     public function editForeign($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Foreign Language')
+            ->where('course_name', CourseType::ForeignCourse)
             ->first();
         $foreignCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -421,10 +490,23 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::HealthCourseId)->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
+            if ($lastCourse) {
+                $remaining_credit = $lastCourse->remaining_credits;
+            } else {
+                // first course having full credit , so check its country and assign full credit
+                $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+            }
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+        $selectedCreditRequired = max($credits);
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.foreign-course', compact('foreignCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.foreign-course', compact('foreignCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'selectedCreditRequired', 'remaining_credit'));
     }
     public function storeForeign(Request $request)
     {
@@ -451,7 +533,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -469,7 +551,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }
@@ -482,7 +564,7 @@ class EditCourse extends Controller
     public function editElective($student_id, $transcript9_12id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'Another')
+            ->where('course_name', CourseType::AnotherCourse)
             ->first();
         $electiveCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
@@ -490,10 +572,25 @@ class EditCourse extends Controller
             ->get();
         $courses_id = $course->id;
         $carnegia_status = Transcript9_12::whereId($transcript9_12id)->select('is_carnegie')->first();
-        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $all_credit =Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get();
+        $credits = Credits::whereIn('is_carnegia', $carnegia_status)->select('credit')->get()->toArray();
+
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->where('courses_id', CourseType::ForeignCourseId)->orderBy('id', 'DESC')->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            $lastCourse = TranscriptCourse9_12::where('transcript9_12_id', $transcript9_12id)->orderBy('id', 'DESC')->first();
+            if ($lastCourse) {
+                $remaining_credit = $lastCourse->remaining_credits;
+            } else {
+                // first course having full credit , so check its country and assign full credit
+                $remaining_credit = $carnegia_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+            }
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+        $selectedCreditRequired = $carnegia_status->is_carnegie == 1 ? MaximumCreditType::MaxCreditForSubjectsNotInCalifornia : MaximumCreditType::MaxCreditForSubjectsInCalifornia;
         $outOfCredit = Credits::whereIn('is_carnegia', $carnegia_status)->select('total_credit')->first();
         $transcripts = TranscriptCourse9_12::with('subject')->where('student_profile_id', $student_id)->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript9_12id)->get();
-        return view('editTranscript9_12Courses.elective-course', compact('electiveCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit'));
+        return view('editTranscript9_12Courses.elective-course', compact('electiveCourse', 'credits', 'transcripts', 'student_id', 'transcript9_12id', 'courses_id', 'outOfCredit', 'selectedCreditRequired', 'remaining_credit', 'all_credit'));
     }
     public function storeElective(Request $request)
     {
@@ -520,7 +617,7 @@ class EditCourse extends Controller
                     'courses_id' => $period['courses_id'],
                     'subject_id' => $other_sub->id,
                     'score' => $period['grade'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
                     'other_subject' => $other_sub->subject_name,
@@ -538,7 +635,7 @@ class EditCourse extends Controller
                     'score' => $period['grade'],
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

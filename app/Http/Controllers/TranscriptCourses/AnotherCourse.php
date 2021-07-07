@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\TranscriptCourses;
 
+use App\Enums\CourseType;
+use App\Enums\CreditType;
+use App\Enums\MaximumCreditType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -18,23 +21,35 @@ class AnotherCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Another')
+            ->where('course_name', CourseType::AnotherCourse)
             ->first();
         $courses_id = $course->id;
         $anotherSubjects = Subject::where('courses_id', $course->id)
             ->where('transcript_period', '9-12')
             ->where('status', 0)
             ->get();
-        $is_carnegie = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
-        $all_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('credit')->get();
-        $total_credits = Credits::whereIn('is_carnegia', $is_carnegie)->select('total_credit')->first();
+        $carnegie_status = Transcript9_12::where('id', $transcript_id)->select('is_carnegie')->first();
+        // delete if course already exists
+        $refreshCourse = TranscriptCourse9_12::select()->where('courses_id', $courses_id)->where('transcript9_12_id', $transcript_id)->get();
+        $refreshCourse->each->delete();
+        
+        $all_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('credit')->get()->toArray();
+        $transcript_credit = TranscriptCourse9_12::where('transcript9_12_id', $transcript_id)->orderBy('id', 'DESC')->first();
+        if (is_null($transcript_credit)) {
+            // first course having full credit , so check its country and assign full credit
+            $remaining_credit = $carnegie_status->is_carnegie == 1 ? CreditType::NotCaliforniaTotalCredit : CreditType::CaliforniaTotalCredit;
+        } else {
+            $remaining_credit = $transcript_credit->remaining_credits;
+        }
+        $selectedCreditRequired = $carnegie_status->is_carnegie == 1 ? MaximumCreditType::MaxCreditForSubjectsNotInCalifornia : MaximumCreditType::MaxCreditForSubjectsInCalifornia;
+        $total_credits = Credits::whereIn('is_carnegia', $carnegie_status)->select('total_credit')->first();
         /**
          *  transcript table id required if student select yes for another grade creation
          */
 
         $transData = Transcript9_12::where('id', $transcript_id)->first();
         $trans_id =  $transData->transcript_id;
-        return view('transcript9to12_courses.anotherCourse', compact('courses_id', 'anotherSubjects', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'trans_id'));
+        return view('transcript9to12_courses.anotherCourse', compact('courses_id', 'anotherSubjects', 'student_id', 'transcript_id', 'all_credits', 'total_credits', 'trans_id', 'selectedCreditRequired', 'remaining_credit'));
     }
     public function store(Request $request)
     {
@@ -67,7 +82,7 @@ class AnotherCourse extends Controller
                     'courses_id' => $period['course_id'],
                     'subject_id' => $other_sub->id,
                     'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'credit_id' => $credit->id,
                     'other_subject' => $other_sub->subject_name,
                     'selectedCredit' => $period['selectedCredit'],
@@ -85,7 +100,7 @@ class AnotherCourse extends Controller
                     'score' =>  isset($period['grade']) ? $period['grade'] : 'In Progress',
                     'credit_id' => $credit->id,
                     'selectedCredit' => $period['selectedCredit'],
-                    'remaining_credits' => $total_credits - $period['selectedCredit'],
+                    'remaining_credits' => $request->final_remaining_credit,
                     'transcript9_12_id' => $period['transcript_id'],
                 ]);
             }

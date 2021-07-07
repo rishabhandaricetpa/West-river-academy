@@ -12,7 +12,7 @@ class StudentProfile extends Model
     protected $fillable = [
         'parent_profile_id', 'first_name', 'middle_name', 'last_name', 'd_o_b', 'email', 'cell_phone', 'gender',
         'student_Id', 'start_date_of_enrollment', 'end_date_of_enrollment', 'grade_level', 'immunized_status',
-        'student_situation', 'legacy_name'
+        'student_situation', 'legacy_name', 'birth_city', 'mothers_name'
     ];
     protected $table = 'student_profiles';
     /**
@@ -49,6 +49,10 @@ class StudentProfile extends Model
         return $this->hasMany('App\Models\EnrollmentPeriods', 'student_profile_id', 'id');
     }
 
+    public function confirmletter()
+    {
+        return $this->hasMany('App\Models\ConfirmationLetter', 'student_profile_id', 'id');
+    }
     public function transcriptCourses()
     {
         return $this->hasMany('App\Models\TranscriptCourse', 'student_profile_id', 'id');

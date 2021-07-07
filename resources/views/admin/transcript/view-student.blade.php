@@ -32,24 +32,25 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped data-table"">
-                      <thead>
-                      <tr>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>National ID</th>
-                        <th>Cell Phone</th>
-                        <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                       @foreach ($students as $student)
+                          <thead>
+                          <tr>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>National ID</th>
+                            <th>Cell Phone</th>
+                            <th>Action</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($students as $student)
                                 <tr>
                                     <td>{{ $student->first_name }}</td>
                                     <td>{{ $student->middle_name }}</td>
                                     <td>{{ $student->last_name }}</td>
-                                    <td><a class="transform-none" href="mailto:${{ $student->email }}"> {{ $student->email }}</a></td>
+                                    <td><a class="transform-none" href="mailto:${{ $student->email }}">
+                                            {{ $student->email }}</a></td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->cell_phone }}</td>
                                     @if ($type == 'k-8')

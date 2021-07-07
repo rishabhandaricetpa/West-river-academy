@@ -92,8 +92,7 @@
                     </a>
                 </div>
                 <div class="col-sm-12">
-                    <p>Need help? Check out our <a href="{{ route('video.tutorials') }}">Dashboard Tutorial </a> <span
-                            class="px-4">or</span><a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
+                    <p>Need help? Check out our <a href="{{ route('video.tutorials') }}"  class="btn btn-primary">Dashboard Tutorial </a> or <a href="#" role="button" class="btn btn-primary"> Help me Decide</a></p>
                 </div>
             </div>
         </div>
@@ -156,6 +155,8 @@
                                                         class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                                         @elseif($transcriptData->status === 'completed')
                                             <td>Waiting For Approval</td>
+                                        @elseif($transcriptData->status === 'canEdit')
+                                            <td>-</td>
                                         @elseif($transcriptData->status === 'paid')
                                             <td><a href="{{ route('transcript.create', [$transcriptData->id, $transcriptData->student_profile_id]) }}"
                                                     class="btn btn-primary">Create a Transcript</a></td>
@@ -198,6 +199,8 @@
                                                         class="fas fa-file-pdf mr-2"></i>Download Transcript</a></td>
                                         @elseif($transcriptData->status === 'completed')
                                             <td>Waiting For Approval</td>
+                                        @elseif($transcriptData->status === 'canEdit')
+                                            <td>-</td>
                                         @elseif($transcriptData->status === 'paid')
                                             <td><a href="{{ route('transcript.create', [$transcriptData->id, $transcriptData->student_profile_id]) }}"
                                                     class="btn btn-primary">Create a Transcript</a></td>
@@ -223,6 +226,7 @@
                             <tr>
                                 <th>Student First Name</th>
                                 <th>National Id</th>
+                                <th>Grade</th>
                                 <th>Status</th>
                                 <th>Download</th>
                             </tr>
@@ -232,21 +236,18 @@
                                 <tr>
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
-                                    @if ($student->status === 'completed' || $student->status === 'paid')
-                                        <td>Completed</td>
-                                    @elseif($student->status === 'active')
-                                        <td>In-Progress</td>
-                                    @elseif($student->status === 'pending')
-                                        <td>Not Paid for Enrollment</td>
+                                    <td>{{ $student->grade_level }}</td>
+                                    @if(getPaymentstatus($student->enrollment_payment_id) ==='paid')
+                                    <td>Paid</td>
+                                    @else
+                                    <td>Not Paid for Enrollment</td>
                                     @endif
-                                    @if ($student->status === 'completed' || $student->status === 'paid')
-                                        <td><a href="{{ route('view.confirm', $student->student_profile_id) }}"
-                                                class="d-flex align-items-center"><i
-                                                    class="fas fa-file-pdf mr-2"></i>Download</a></td>
-                                    @elseif($student->status === 'pending')
-                                        <td>Please pay your Enrollment Fees</td>
-                                    @elseif($student->status === 'active')
-                                        <td>Payment In-Progress</td>
+                                    @if(getPaymentstatus($student->enrollment_payment_id) ==='paid')
+                                    <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
+                                            class="d-flex align-items-center"><i
+                                                class="fas fa-file-pdf mr-2"></i>Download</a></td>
+                                    @else
+                                    <td>-</td>
                                     @endif
                                 </tr>
                             @endforeach

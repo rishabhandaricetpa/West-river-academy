@@ -3,7 +3,7 @@
 @section('content')
 <!-- * =============== Main =============== * -->
 <main class="position-relative container form-content mt-4">
-    <h1 class="text-center text-white text-uppercase">Dashboard</h1>
+    <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
     <div class="form-wrap border bg-light py-5 px-25">
         <div class="col-sm-6 mx-auto">
             <div class="text-center">

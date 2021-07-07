@@ -19,7 +19,7 @@
         <div class="copyright">
             Copyright © {{ now()->year }} West River Academy.
             <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-            <a href="https://www.ithands.com" target="_blank" class="d-block">Website design, development and maintenance by IT Hands</a>
+            <a href="https://www.ithands.com" target="_blank" class="d-block">Website design, development and maintenance by ITH.</a>
         </div>
     </div>
 </footer>

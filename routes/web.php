@@ -37,13 +37,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
     Route::group(['middleware' => ['auth', 'active_user']], function () {
-        Route::get('/welcome-video', function () {
-            return view('welcome-video');
-        });
+        // Route::get('/welcome-video', function () {
+        //     return view('welcome-video');
+        // });
+        Route::get('/welcome-video', 'ParentController@welcomeVideo');
+        Route::get('/welcome-video/{parent_id}', 'ParentController@updatewelcomestatus')->name('update.welcomestatus');
         Route::get('/reviewstudent/{id}', 'StudentController@reviewStudent')->name('reviewstudent');
 
         //enroll student
-        Route::get('/enroll-student', 'StudentController@index');
+        Route::get('/enroll-student', 'StudentController@index')->name('enroll');
         Route::post('/enroll-student', 'StudentController@store')->name('enroll.student');
         Route::post('/update-student/{id}', 'StudentController@update')->name('update.student');
         Route::get('/reviewstudents', 'StudentController@reviewStudent')->name('reviewstudent');
@@ -57,6 +59,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/dashboard', 'StudentController@showstudents')->name('dashboard');
 
+        Route::get('/select/fields', function () {
+            return view('confirm_letter_select');
+        });
         Route::get('/logout', function () {
             Auth::logout();
 
@@ -70,16 +75,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
 
-        Route::get('generate-pdf/{student_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
+        Route::get('generate-pdf/{student_id}/{grade_id}', 'PDFController@generatePDF')->name('genrate.confirmition');
 
         //fees and services
         Route::get('fees', 'FeeStructureController@viewdata')->name('fees');
 
-        Route::get('video-tutorials', function () {
-            return view('videos.video_library');
-        })->name('video.tutorials');
 
-
+        Route::get('video-tutorials', 'VideoLibrary@index')->name('video.tutorials');
         Route::get('previous-school', function () {
             return view('previous-school');
         });
@@ -141,18 +143,25 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/mysettings', 'ParentController@mysettings')->name('mysetting');
         Route::get('/editaccount/{id}', 'ParentController@editmysettings');
+        Route::get('/editMailingAddress/{userid}', 'ParentController@editmyaddress')->name('editMailingAddress');
         Route::post('/updateaccount/{id}', 'ParentController@updatemysettings')->name('update.account');
+        Route::post('updateaddress/{parent_id}', 'ParentController@updateAddress')->name('update.mailingAddress');
         Route::get('/reset', function () {
             return view('MyAccounts/resetpassword');
         })->name('reset.password');
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
 
-        Route::get('/viewConfirmation/{student_id}', 'StudentController@confirmationpage')->name('view.confirm');
+        Route::get('/viewConfirmation/{enrollment_payment_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
+        Route::get('/viewdownload/{enrollment_payment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
+
+        Route::post('/saveConfirmationData/{student_id}/{grade_id}', 'StudentController@saveConfirmationInformation')->name('save.confirmationData');
 
         //Transcript K-8
         Route::get('order-transcript/{id}', 'TranscriptController@index')->name('order-transcript');
         Route::get('view-enrollment/{id}', 'TranscriptController@viewEnrollment')->name('view.enrollment');
         Route::post('year', 'TranscriptController@create')->name('year');
+        Route::post('transcript/start/{student_id}', 'TranscriptController@updateTranscriptPeriodAndCreate')->name('transcript.start');
+
         // Graduation Process
         Route::get('graduation', 'GraduationController@index')->name('graduation.apply');
         Route::get('graduation-application', 'GraduationController@gradutaionApplication')->name('graduation.application');
@@ -219,7 +228,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('download-transcript/{transcrip_id}/{student_id}', 'TranscriptController@downlaodTranscript')->name('download.transcript');
         Route::get('edit-transcript/{transcrip_id}/{student_id}', 'TranscriptController@editApprovedTranscript')->name('edit.transcript');
 
-        Route::get('fetchfile/{transcrip_id}/{student_id}', 'TranscriptController@fetchfile')->name('fetch.transcript');
         Route::get('preview-transcript/{student_id}/{trans_id}', 'TranscriptController@previewTranscript')->name('preview.transcript');
 
         Route::get('new-grade/{student_id}/{transcript_id}', function () {

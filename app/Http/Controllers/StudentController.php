@@ -63,6 +63,7 @@ class StudentController extends Controller
             $studentCount = StudentProfile::whereIn('parent_profile_id', [$parentProfileData->id])->get()->count();
             $country = $parentProfileData->country;
             $countryData = Country::where('country', $country)->first();
+            $country_name = $countryData->country;
             if ($countryData != null) {
                 $year = date('Y');
                 $newYear = $year + 1;
@@ -86,13 +87,13 @@ class StudentController extends Controller
                 if ($request->expectsJson()) {
                     return response()->json($start_date);
                 }
-                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount', 'country_name'));
             } else {
                 $start_date = Carbon::now()->format('Y/m/d');
                 $end_date = Carbon::now()->addYears(1)->format('Y/m/d');
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
-                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount', 'country_name'));
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -112,8 +113,8 @@ class StudentController extends Controller
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
-            ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')
-            ->with('enrollmentPeriods')->get();
+            ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+            ->with('enrollmentPeriods', 'confirmletter')->get();
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
@@ -121,12 +122,55 @@ class StudentController extends Controller
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));
     }
 
-    public function confirmationpage($student_id)
+    public function confirmationpage($enrollment_payment_id, $grade_id)
     {
-        $student = StudentProfile::whereId('student_id')->first();
-        return view('viewConfirmation', compact('student', 'student_id'));
+        $enrollments = EnrollmentPeriods::where('enrollment_payment_id', $enrollment_payment_id)->where('grade_level', $grade_id)->first();
+        $student_id = $enrollments->student_profile_id;
+        $student = StudentProfile::whereId($student_id)->first();
+        $id = Auth::user()->id;
+        $parentProfileData = User::find($id)->parentProfile()->first();
+        $country = $parentProfileData->country;
+        $countryData = Country::where('country', $country)->first();
+        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $enrollment_payment_id)->first();
+        return view('confirm_letter_select', compact('student', 'student_id', 'grade_id', 'confirmation_data', 'enrollments', 'countryData'));
+        // return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
     }
 
+    public function viewDownload($enrollment_payment_id, $grade_id)
+    {
+        $enrollments = EnrollmentPeriods::where('enrollment_payment_id', $enrollment_payment_id)->where('grade_level', $grade_id)->first();
+        $student_id = $enrollments->student_profile_id;
+        $student = StudentProfile::whereId($student_id)->first();
+        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $enrollment_payment_id)->first();
+        return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
+    }
+    public function saveConfirmationInformation(Request $request, $student_id, $grade_id)
+    {
+        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $request->input('enrolment_id'))->first();
+        if ($request->input('isDobCity')) {
+            $confirmation_data->isDobCity = $request->input('isDobCity');
+        } else {
+            $confirmation_data->isDobCity = 0;
+        }
+        if ($request->input('IsMotherName')) {
+            $confirmation_data->IsMotherName = $request->input('IsMotherName');
+        } else {
+            $confirmation_data->IsMotherName = 0;
+        }
+        if ($request->input('isGrade')) {
+            $confirmation_data->isGrade = $request->input('isGrade');
+        } else {
+            $confirmation_data->isGrade = 0;
+        }
+        if ($request->input('isStudentId')) {
+            $confirmation_data->isStudentId = $request->input('isStudentId');
+        } else {
+            $confirmation_data->isStudentId = 0;
+        }
+        $confirmation_data->save();
+        $student = StudentProfile::whereId($student_id)->first();
+        return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
+    }
     protected function store(Request $data)
     {
         try {
@@ -146,6 +190,8 @@ class StudentController extends Controller
                 'student_Id' => $data['studentID'],
                 'immunized_status' => $data['immunized_status'],
                 'student_situation' => $data['student_situation'],
+                'mothers_name' => $data['mothersName'],
+                'birth_city' => $data['birthCity'],
                 'status' => 0,
             ]);
             foreach ($data->get('enrollPeriods', []) as $period) {
@@ -247,6 +293,8 @@ class StudentController extends Controller
             $student->student_Id = $request->input('student_Id');
             $student->immunized_status = $request->input('immunized_status');
             $student->student_situation = $request->input('student_situation');
+            $student->mothers_name = $request->input('mothers_name');
+            $student->birth_city = $request->input('birth_city');
             $student->save();
             $periods = collect($request->get('periods'));
 
@@ -344,6 +392,7 @@ class StudentController extends Controller
         $parentProfileData = User::find(auth()->user()->id)->parentProfile()->first();
         $country = $parentProfileData->country;
         $countryData = Country::where('country', $country)->first();
+        $country_name = $countryData->country;
         if ($countryData != null) {
             $start_date = $countryData->start_date;
             $sem = Carbon::parse($start_date);
@@ -356,7 +405,7 @@ class StudentController extends Controller
                 ->orderBy('enrollment_payments.status', 'desc')
                 ->get();
             $birth = Carbon::parse($studentData->d_o_b)->toDateString();
-            return view('enrollment.edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'birth'));
+            return view('enrollment.edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'birth', 'country_name'));
         } else {
             $countryData = Country::where('country', 'other')->first();
             $start_date = $countryData->start_date;
@@ -369,7 +418,7 @@ class StudentController extends Controller
                 ->orderBy('enrollment_payments.status', 'desc')
                 ->get();
 
-            return view('enrollment.edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth'));
+            return view('enrollment.edit-enrollstudent', compact('studentData', 'enrollPeriods', 'countryData', 'semestermonth', 'country_name'));
         }
     }
 

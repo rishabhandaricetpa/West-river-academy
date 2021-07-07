@@ -32,7 +32,7 @@
 
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary">Upload</button>
-                            <a href="{{ route('admin.upload.documents')}}" class="btn btn-primary">Back</a>
+                            <a onclick="goBack()" class="btn btn-primary">Back</a>
                         </div>
 
                         </ul>

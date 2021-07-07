@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\Coupon;
+use App\Models\CustomLetterPayment;
 use App\Models\CustomPayment;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
@@ -18,6 +19,7 @@ use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
+use App\Models\UploadDocuments;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -104,7 +106,7 @@ class ParentController extends Controller
                     'email' => $request['email'],
                 ]
             );
-            $parentaddress = ParentProfile::find($Userid);
+            $parentaddress = ParentProfile::where('user_id', $Userid)->first();
             $parentaddress->fill([
                 'street_address' => $billing_data['street_address'],
                 'city' => $billing_data['city'],
@@ -161,12 +163,17 @@ class ParentController extends Controller
             ->get();
 
         /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('notarization','ParentProfile')->where('parent_profile_id', $user_id)->get();
+        $notirizationPayments = NotarizationPayment::with('notarization', 'ParentProfile')->where('parent_profile_id', $user_id)->get();
 
         /** Receiving payment history data for order personal consultation*/
 
         $orderConsulationPayments = OrderPersonalConsultation::with('parent')->where('parent_profile_id', $user_id)->get();
-        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments'));
+
+        $customLetter = CustomLetterPayment::with('ParentProfile')
+            ->where('parent_profile_id', $user_id)
+            ->where('status', 'paid')
+            ->get();
+        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments', 'customLetter'));
     }
 
     public function editmysettings($user_id)
@@ -194,6 +201,12 @@ class ParentController extends Controller
             $parent->p1_last_name = $request->get('last_name');
             $parent->p1_email = $request->get('email');
             $parent->p1_cell_phone = $request->get('phone');
+
+            // update parent 2 Information
+            $parent->p2_first_name = $request->input('p2_first_name');
+            $parent->p2_email = $request->input('p2_email');
+            $parent->p2_cell_phone = $request->input('p2_cell_phone');
+            $parent->p2_home_phone = $request->input('p2_home_phone');
             $parent->save();
 
             DB::commit();
@@ -258,5 +271,46 @@ class ParentController extends Controller
     public function removeNotification($notification_id)
     {
         return Notification::removeParentNotifications($notification_id);
+    }
+
+    public function welcomeVideo()
+    {
+        $parentId = ParentProfile::getParentId();
+        $parentData = ParentProfile::whereId($parentId)->first();
+        if ($parentData->welcome_video_status == 0) {
+            return view('welcome-video', compact('parentData'));
+        } else {
+            return redirect()->route('enroll');
+        }
+    }
+
+    public function  updatewelcomestatus($parent_id)
+    {
+        $parent_data = ParentProfile::whereId($parent_id)->first();
+        $parent_data->welcome_video_status = 1;
+        $parent_data->save();
+        return redirect()->route('enroll');
+    }
+
+    public function editmyaddress($user_id)
+    {
+        $parent =  ParentProfile::where('user_id', $user_id)->first();
+        return view('Myaccounts.editAddress', compact('parent'));
+    }
+    public function updateAddress(Request $request, $parent_id)
+    {
+        ParentProfile::where('id', $parent_id)->update([
+            'street_address' => $request->street_address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
+        ]);
+        $notification = [
+            'message' => 'Updated Adsress Successfully!',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

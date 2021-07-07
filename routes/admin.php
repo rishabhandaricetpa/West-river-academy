@@ -42,7 +42,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
         }
 
     );
-    Route::get('deactive/{id}', 'ParentController@deactive')->name('deactive.student');
+    Route::post('deactive/{id}', 'ParentController@deactive')->name('deactive.parent');
+    Route::post('deactive_student/{id}', 'StudentProfileController@deactive')->name('deactive.student');
 
     // Crud for parent profile
     Route::get('parentdata', 'ParentController@dataTable')->name('datatable.parent');
@@ -53,6 +54,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
     Route::get('view-parent-orders/{id}', 'StudentProfileController@viewParentOrders')->name('parents.orders');
     Route::get('view/student/parent/{parent_id}', 'ParentController@viewStudentParent')->name('view.students.parent');
+    Route::get('/allorders/{transaction_id}/{parent_id}', 'ParentController@viewAllOrders')->name('allorders');
+
     // Crud for student profile
     Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student.data');
     Route::get('view-student', 'StudentProfileController@index')->name('view-student');
@@ -209,7 +212,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     //dashboard notification
     Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
-
+    Route::get('order-detail', function () {
+        return view('admin.familyinformation.order-detail');
+    });
     // archieved tasks
     Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
@@ -220,6 +225,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //upload document
     Route::get('upload-document', 'UploadDocument@index')->name('upload.documents');
+    Route::get('upload-podcast', 'PodcastController@index')->name('upload.podcasts');
     Route::get('dataTable/upload', 'UploadDocument@dataTable')->name('datatable.student');
     Route::get('edit-upload/{student_id}', 'UploadDocument@editUpload')->name('edit.upload');
     Route::post('store-uploaded', 'UploadDocument@storeUploadedDocument')->name('store.uploadDocument');
@@ -238,4 +244,29 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/record/status', 'DashboardController@updateRecordStatus')->name('update.assigneeStatus');
 
     Route::post('archieve/record', 'DashboardController@archieveRecord');
+
+    // view all orders 
+    Route::get('transaction/{transcation_id}', 'StudentProfileController@orders')->name('transaction.orders');
+
+    // video library
+    Route::post('podcast/store', 'PodcastController@storePodcast')->name('podcast.store');
+    Route::post('videos/store', 'PodcastController@storeVideos')->name('videos.store');
+    Route::post('journal/store', 'PodcastController@storeJournals')->name('journal.store');
+
+
+
+    // dashboard add functionlaity
+    Route::post('store-document-dashboard', 'DashboardController@uploadDocument')->name('dashboard.documents');
+    Route::post('store-record-dashboard', 'DashboardController@uploadRecordTransfer')->name('dashboard.recordtrasnfer');
+    Route::post('store-student', 'StudentProfileController@updateNewStudents')->name('create.students');
+    Route::post('create-student', 'StudentProfileController@createNewStudents')->name('create.newstudent');
+    Route::post('update-student-profile', 'StudentProfileController@updateStudentProfile')->name('update.student.profile');
+    Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
+    Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
+    Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
+    Route::post('create-parent', 'ParentController@createParent')->name('create.parent');
+    Route::post('add-graduation', 'DashboardController@addGraduation')->name('add.graduation');
+    Route::post('get-charges', 'ParentController@getCountryVal')->name('get.postagecharges');
+    Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
+    Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
 });

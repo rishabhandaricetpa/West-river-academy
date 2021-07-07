@@ -73,7 +73,7 @@
         class="btn btn-primary float-left mr-2 mb-sm-0 mb-3"
         id="addEnglish"
         @click="addNewSocialScienceCourse"
-        >Add another English/Language Arts Course</a
+        >Add another Health Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
     </div>

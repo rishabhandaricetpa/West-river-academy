@@ -4,10 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard;
+use App\Models\FeesInfo;
+use App\Models\Graduation;
+use App\Models\GraduationDetail;
+use App\Models\GraduationPayment;
+use App\Models\RecordTransfer;
+use App\Models\UploadDocuments;
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-
+use Exception;
+use File;
+use Storage;
+use Str;
 
 class DashboardController extends Controller
 {
@@ -69,6 +79,112 @@ class DashboardController extends Controller
             $dashboardData = Dashboard::select()->with('student')->where('is_archieved', 1)->orderBy('id', 'DESC')->get();
             $isAdmin = true;
             return view('admin.archieved', compact('dashboardData', 'isAdmin'));
+        }
+    }
+    public function uploadDocument(Request $request)
+    {
+        $extension = $request->file->getClientOriginalExtension();
+        $path = Str::random(40) . '.' . $extension;
+        Storage::put(UploadDocuments::UPLOAD_DIR . '/' . $path,  File::get($request->file));
+
+        $uploadDocument = new UploadDocuments();
+        $uploadDocument->student_profile_id = $request->student_id;
+        $uploadDocument->parent_profile_id = $request->parent_id;
+        $uploadDocument->original_filename = $request->file->getClientOriginalName();
+        $uploadDocument->filename = $path;
+        if ($request->is_upload == 1) {
+            $uploadDocument->is_upload_to_student = 1;
+        } else {
+            $uploadDocument->is_upload_to_student = 0;
+        }
+        $uploadDocument->document_type = $request->doc_type;
+        $uploadDocument->save();
+        if ($request->expectsJson()) {
+            return response()->json(['status' => 'success', 'message' => 'Student updated successfully']);
+        }
+    }
+
+    public function uploadRecordTransfer(Request $request)
+    {
+        $recordTransfer = new RecordTransfer();
+        $recordTransfer->student_profile_id = $request->get('student_id');
+        $recordTransfer->parent_profile_id = $request->get('parent_id');
+        $recordTransfer->school_name = $request->get('school_name');
+        $recordTransfer->email = $request->get('email_add');
+        $recordTransfer->fax_number = $request->get('fax_number');
+        $recordTransfer->phone_number = $request->get('phone_number');
+        $recordTransfer->street_address = $request->get('street_address');
+        $recordTransfer->city = $request->get('city');
+        $recordTransfer->state = $request->get('state');
+        $recordTransfer->zip_code = $request->get('zipcode');
+        $recordTransfer->country = $request->get('country');
+        $recordTransfer->last_grade = $request->get('last_grade');
+        $recordTransfer->save();
+    }
+    public function addGraduation(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $graduation =   Graduation::updateOrCreate(
+                [
+                    'student_profile_id' => $request->input('student_id')
+                ],
+                [
+                    'parent_profile_id' => $request->input('parent_id'),
+                    'student_profile_id' => $request->input('student_id'),
+                    'grade_9_info' => $request->input('grade_9'),
+                    'grade_10_info' => $request->input('grade_10'),
+                    'grade_11_info' => $request->input('grade_11'),
+                    'status' => $request->input('status')
+                ]
+            );
+
+
+            $graduation_details =   GraduationDetail::updateOrCreate(
+                [
+                    'graduation_id' => $graduation->id
+                ],
+                [
+                    'grad_date' => $graduation->created_at,
+                ]
+            );
+
+
+            $graduation_payment =   GraduationPayment::updateOrCreate(
+                [
+                    'graduation_id' => $graduation->id
+                ],
+                [
+                    'graduation_id' => $graduation->id,
+                    'amount' => FeesInfo::getFeeAmount('graduation'),
+
+                ]
+            );
+
+
+            if ($request->get('status') == 'paid') {
+                $graduation_payment->transcation_id = $request->get('grad_transction_id');
+                $graduation_payment->payment_mode = $request->get('custom_payment_mode');
+                $graduation_payment->save();
+            }
+
+            if (
+                !empty($request->get('custom_payment_mode'))
+            ) {
+                $transction = new TransactionsMethod();
+                $transction->transcation_id   = $request->get('grad_transction_id') ? $request->get('grad_transction_id')  : substr(uniqid(), 0, 12);
+                $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : 'pending';
+                $transction->parent_profile_id = $request->get('parent_id');
+                $transction->amount = 395;
+                $transction->status = 'succeeded';
+                $transction->save();
+            }
+
+
+            DB::commit();
+        } catch (Exception $e) {
+            report($e);
+            DB::rollBack();
         }
     }
 }

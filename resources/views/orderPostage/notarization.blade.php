@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('pageTitle', 'Notarization & Appostile')
+@section('pageTitle', 'Notarization')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- * =============== Main =============== * --> 
@@ -15,7 +15,7 @@
 
                     <p>
                         <span class="font-weight-bold">Notarizations:</span>
-                        $20 per document. Shipping First class in the US is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
+                        $20 per document. Shipping First class in the USA is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
                     </p>
                     <div class="form-group d-md-flex mb-2">
                         <div class="col-12 d-sm-flex px-0 mb-4 align-items-center">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s) you wish to have notarized and any other comments.</p>
-                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"></textarea>
+                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message" maxlength="2000"></textarea>
                 </div>
 
                 <div class="form-group mb-2">

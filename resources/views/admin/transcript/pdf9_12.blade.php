@@ -43,27 +43,33 @@
          </style>
        </head>
 
-       <body>
-         <table style="margin-bottom:20px;">
-           <tbody>
-             <tr style="width:100%;">
-               <td valign="middle"
-                 style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;">official
-                 transcript</td>
-               <td valign="middle" style="text-align:center;width:50%;height:100px;">
-                 <img src="../public/images/letterhead.png" alt="logo"
-                   style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
-               </td>
-             </tr>
-           </tbody>
-         </table>
-         <!-- new code starts -->
-         <table style="margin-bottom:20px;">
-           <tbody>
-             <tr>
-               <!-- first table -->
-               <td valign="top" style="width:50%">
-                 <table>
+               </style>
+           </head>
+           <body>
+               <table style="margin-bottom:20px;">
+                   <tbody>
+                       <tr style="width:100%;">
+                           <td valign="middle" style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;">official transcript</td>
+                           <td valign="middle" style="text-align:center;width:50%;height:100px;">
+                               <img src="../public/images/letterhead.png" alt="logo" style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
+                               <!-- <p style="margin:0;font-size:13px;">Califorinia Colorado USA</p>
+                               <p style="margin:0;font-size:13px;">949.492.5240 info@westriveracademy.com</p> -->
+                           </td>
+                       </tr>
+                   </tbody>
+               </table>
+               <table>
+                   <tbody>
+                       <tr style="width:100%;">
+                           <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Name</td>
+                           <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">{{$student->fullname}}
+                           </td>
+                           <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
+                           <td style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">{{$student->d_o_b->format('M j, Y')}}</td>
+                       </tr>
+                   </tbody>
+               </table>
+               <table>
                    <tbody>
                      <tr>
                        <td valign="top" style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Name</td>
@@ -216,10 +222,94 @@
                <table>
                  <thead>
                    <tr>
-                     <th style="font-size:13px;text-decoration:underline;text-align:left;">Grade</th>
-                     <th style="font-size:13px;text-decoration:underline;text-align:left;">percent</th>
-                     <th style="font-size:13px;text-decoration:underline;text-align:left;">Points</th>
-                     <th style="font-size:13px;text-decoration:underline;text-align:left;">AP Points</th>
+                       <td width="35%" style="vertical-align:top;">
+                           <table width="100%" style="border:1px solid #000;">
+                               <tr>
+                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned
+                                   </th>
+                                   <td style="padding:3px 5px;font-size:13px;line-height:1;">{{$totalSelectedGrades}}</td>
+                               </tr>
+                               <tr>
+                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">G.P.A</th>
+                                   <td style="padding:3px 5px;font-size:13px;line-height:1;">{{getGPAvalue($courses,$totalSelectedGrades)}}</td>
+                               </tr>
+                               <tr>
+                                   <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of Graduation
+                                   </th>
+                                   <td style="padding:3px 5px;font-size:13px;line-height:1;"></td>
+                               </tr>
+                           </table>
+                           <p style="font-size:13px;">West River Academy is accredited by the National Association for the Legal Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>
+                       </td>
+                       <td width="45%" style="vertical-align:top;padding:0 4px 4px 4px; border:1px solid #000;">
+                           <p style="text-align:center;font-weight:600;margin-bottom:0;"><span style="border-bottom:1px solid #000;margin-bottom:0;margin-top:-20px;font-size:13px;">Grading System</span>
+                           </p>
+                           <table>
+                               <thead>
+                                   <tr>
+                                       <th style="font-size:13px;text-decoration:underline;text-align:left;">Grade</th>
+                                       <th style="font-size:13px;text-decoration:underline;text-align:left;">percent</th>
+                                       <th style="font-size:13px;text-decoration:underline;text-align:left;">Points</th>
+                                       <th style="font-size:13px;text-decoration:underline;text-align:left;">AP Points</th>
+                                   </tr>
+                               </thead>
+                               <tr>
+                                   <td style="font-size:13px;">A</td>
+                                   <td style="font-size:13px;">90-100</td>
+                                   <td style="font-size:13px;">4.00</td>
+                                   <td style="font-size:13px;">5.00</td>
+                               </tr>
+                               <tr>
+                                   <td style="font-size:13px;">B</td>
+                                   <td style="font-size:13px;">80-89</td>
+                                   <td style="font-size:13px;">3.00</td>
+                                   <td style="font-size:13px;">4.00</td>
+                               </tr>
+                               <tr>
+                                   <td style="font-size:13px;">C</td>
+                                   <td style="font-size:13px;">70-79</td>
+                                   <td style="font-size:13px;">2.00</td>
+                                   <td style="font-size:13px;">3.00</td>
+                               </tr>
+                               <tr>
+                                   <td style="font-size:13px;">D</td>
+                                   <td style="font-size:13px;">60-69</td>
+                                   <td style="font-size:13px;">1.00</td>
+                                   <td style="font-size:13px;">2.00</td>
+                               </tr>
+                               <tr>
+                                   <td style="font-size:13px;">F</td>
+                                   <td style="font-size:13px;">0-59</td>
+                                   <td style="font-size:13px;">0.00</td>
+                                   <td style="font-size:13px;">0.00</td>
+                               </tr>
+                               <tr>
+                                   <td style="font-size:13px;">P</td>
+                                   <td style="font-size:13px;">60-100</td>
+                                   <td style="font-size:13px;">0.00</td>
+                                   <td style="font-size:13px;">0.00</td>
+                               </tr>
+                           </table>
+                       </td>
+                       <td width="40%" style="vertical-align:top;">
+                           <table>
+                               <tbody>
+                                   <tr>
+                                       <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span>
+                                       </td>
+                                       <td width="40%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
+                                       </td>
+                                   </tr>
+                               </tbody>
+                           </table>
+                           <table width="100%">
+                               <tr style="width:100%;">
+                                   <td style="text-align:center;width:100%;" colspan="2">
+                                       <div style="margin:0 auto;"><img src="{{asset('images/Stamp.png')}}" style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp"></div>
+                                   </td>
+                               </tr>
+                           </table>
+                       </td>
                    </tr>
                  </thead>
                  <tr>

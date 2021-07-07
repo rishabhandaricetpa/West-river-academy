@@ -8,9 +8,11 @@ use App\Models\EnrollmentPeriods;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
 use Auth;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Str;
 
 class PDFController extends Controller
 {
@@ -19,27 +21,27 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatePDF($student_id)
+    public function generatePDF($student_id, $grade_id)
     {
         try {
             $parent_id = ParentProfile::getParentId();
             $studentProfileData = StudentProfile::whereId($student_id)->first();
             $pdfname = $studentProfileData->fullname . '_' . $student_id . '_'  . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
             $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
-                ->join('confirmation_letters', 'confirmation_letters.student_profile_id', 'student_profiles.id')->where('confirmation_letters.status', 'completed')
+                ->where('enrollment_periods.grade_level', $grade_id)
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')->where('enrollment_periods.student_profile_id', $student_id)
-                ->with('enrollmentPeriods')->get();
-
+                ->with('enrollmentPeriods')->first();
+            $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->first();
             if ($enrollment_periods !== null) {
                 $data = [
                     'student' => $studentProfileData,
                     'enrollment' => $enrollment_periods,
                     'title' => 'Confirmation of Enrollment',
                     'date' => date('M j, Y'),
+                    'confirmData' => $confirmation_data,
                 ];
                 $pdf = PDF::loadView('confirmationLetter', $data);
-                Storage::disk('local')->put('public/pdf/' . $pdfname . '.pdf', $pdf->output());
-
+                Storage::put(ConfirmationLetter::UPLOAD_DIR_STUDENT . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
                 //store pdf link
                 $updatelink = ConfirmationLetter::where('student_profile_id', $student_id)->update(
                     [

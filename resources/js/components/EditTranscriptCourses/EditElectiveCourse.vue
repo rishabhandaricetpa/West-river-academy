@@ -1,4 +1,5 @@
 <template>
+<div v-if="this.remaining_credit >0 ">
   <form
     method="POST"
     class="mb-0 px-0 unstyled-label"
@@ -19,7 +20,7 @@
               class="form-control text-uppercase"
               v-model="electiveCourse.subject_name"
             >
-              <option v-for="Course in electivecourse" :key="Course">
+              <option v-for="Course in electivecourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -100,8 +101,7 @@
             </div>
             <div class="form-group mb-1 mt-2r">
               <h3 class="text-black">
-                Select Credit: The recommended credit for a one-year course is
-                selected. You may change it.
+                Select Credit
               </h3>
               <select
                 class="form-control min-select"
@@ -109,17 +109,17 @@
                 href="#remainingCredits"
                 role="button"
                 v-model="electiveCourse.selectedCredit"
-                v-on:change="showCredit"
+                  v-on:change="reCalculateAll"
                 aria-expanded="false"
                 aria-controls="remainingCredits"
               >
-                <option v-for="credit in total_credits" :key="credit.id">
+                <option v-for="credit in all_credits" :key="credit.id">
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit">
+              <h3 >
                 You have
-                {{ outofcredit.total_credit - electiveCourse.selectedCredit }}
+                {{ final_credits[electiveCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
@@ -146,11 +146,16 @@
         @click="viewCourses"
         >View All Courses</a
       >
-      <a type="button" @click="viewCourses" class="btn btn-primary ml-4 float-right">
+  <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
-      </a>
+      </button>
     </div>
   </form>
+     </div>
+  <div v-else>
+  No Credits Remaining
+  <input type="submit" value="Continue" class="btn btn-primary ml-4 float-right" @click="viewCourses"/>
+</div>
 </template>
 
 <script>
@@ -160,6 +165,7 @@ export default {
     return {
       isCredit: false,
       errors: [],
+       final_credits: [this.remaining_credit],
       form: {
         remainingCredit: "",
         course_id: this.courses_id,
@@ -174,14 +180,16 @@ export default {
     "transcript_id",
     "student_id",
     "courses_id",
-    "all_credits",
     "total_credits",
     "outofcredit",
-    "transcripts"
+    "transcripts",
+    'selected_credit',
+    'remaining_credit',
+    'all_credits'
   ],
   methods: {
     initForm() {
-      const courses = this.transcripts.map(transcript => {
+      const courses = this.transcripts.map((transcript,index) => {
         return {
           courses_id: transcript.courses_id,
           transcript_id: this.transcript_id,
@@ -190,63 +198,100 @@ export default {
           other_subject: transcript.other_subject,
           grade: transcript.score,
           selectedCredit: transcript.selectedCredit,
-          total_credits: this.outofcredit.total_credit
+          total_credits: this.outofcredit.total_credit,
+           component_index: index
         };
       });
 
       this.form.electiveCourse = courses;
+        this.reCalculateAll();
     },
-    showCredit(e) {
-      this.isCredit = true;
-      this.form.remainingCredit =
-        this.total_credits.total_credit - e.target.value;
-      return this.isCredit;
+      mounted() {
+      this.form.electiveCourse[0].selectedCredit = this.required_credit.credit;
+      this.final_credits.push(this.calculateRemainingCredit(this.form.electiveCourse[0]));
+      this.finalValue();
+    },
+    
+      calculateRemainingCredit(electiveCourse) {
+      this.finalValue();
+      return this.final_credits[electiveCourse.component_index] - electiveCourse.selectedCredit;
+
+    },
+      reIndex(){
+      this.form.electiveCourse.forEach((electiveCourse, index) => {
+        electiveCourse.component_index = index;
+      });
+    },
+
+    reCalculateAll() {
+      this.form.electiveCourse.forEach((electiveCourse, index) => {
+        this.final_credits[index + 1] = this.calculateRemainingCredit(electiveCourse)
+      })
+      this.finalValue();
+    },
+    finalValue(){
+      const finalValue = this.final_credits[this.final_credits.length - 1];
+      this.form.final_remaining_credit = finalValue;
+      console.log('finalValue ', this.final_remaining_credit);
+
     },
     addCourse() {
-      this.form.electiveCourse.push({
+      const electiveCourse ={
         courses_id: this.courses_id,
         transcript_id: this.transcript_id,
         student_id: this.student_id,
         subject_name: "",
         other_subject: "",
-        selectedCredit: "",
+        selectedCredit: this.selected_credit,
         grade: "",
-        total_credits: this.outofcredit.total_credit
-      });
+        total_credits: this.outofcredit.total_credit,
+         component_index: this.form.electiveCourse.length
+      };
+       this.final_credits.push(this.calculateRemainingCredit(electiveCourse))
+      this.form.electiveCourse.push(electiveCourse);
+      this.finalValue();
     },
     removeCourse(index) {
-      this.form.electiveCourse.splice(index, 1);
+       this.form.electiveCourse.splice(index, 1);
+      this.final_credits.splice(this.final_credits.length - 1, 1);
+      this.reIndex();
+      this.reCalculateAll();
     },
     submitCourse() {
       this.errors = [];
       if (!this.vallidateGrades()) {
         this.errors.push(
-          "Grade is required Field! Please select a Grade and then continue"
+          "Grade is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.validateSubject()) {
         this.errors.push(
-          "Course name is required Field! Please select a Grade and then continue"
+          "Course name is a required Field! Please select a Grade and then continue."
         );
       }
       if (!this.validateCredit()) {
         this.errors.push(
-          "Credit is required Field! Please select a Grade and then continue"
+          "Credit is a required Field! Please select a Grade and then continue."
+        );
+      }
+        if(!this.validateFinalCredit()){
+         this.errors.push(
+          "Credits cann't be negative"
         );
       }
       if (
         this.vallidateGrades() &&
         this.validateSubject() &&
-        this.validateCredit()
+        this.validateCredit() && this.validateFinalCredit()
       ) {
         axios
           .post(route("editElectiveTranscriptCourse.store"), this.form)
           .then(response => {
             window.location =
-              "/edit-elective-transcript/" +
-              this.student_id +
-              "/" +
-              this.transcript_id;
+              "/display-course-details/" +
+            this.transcript_id +
+            "/" +
+            this.student_id;
           })
           .catch(error => {
             alert("Please fill in the fields");
@@ -270,6 +315,13 @@ export default {
         }
       }
       return true;
+    },
+     validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+      
     },
     validateCredit() {
       for (let i = 0; i < this.form.electiveCourse.length; i++) {

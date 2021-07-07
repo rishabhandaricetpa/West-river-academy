@@ -44,13 +44,15 @@ label {
 .min-select {
   width: 100px;
 }
+
 .form-control_upload {
-  min-height:44px;
+  min-height: 44px;
 }
 
 select.form-control {
   padding: 3px;
 }
+
 
 textarea {
   resize: none;
@@ -58,6 +60,7 @@ textarea {
 
 .links-list {
   text-decoration: underline;
+
   a {
     text-decoration: underline;
     font-size: 18px;
@@ -78,10 +81,12 @@ textarea {
 .form-check[data-toggle="modal"] {
   cursor: pointer;
 }
+
 .form-group select {
-//padding: 6px;
-width: 100%;
+  //padding: 6px;
+  width: 100%;
 }
+
 .form-group .fa-calendar-alt {
   position: absolute;
   top: 9px !important;
@@ -89,7 +94,8 @@ width: 100%;
   color: $gray-700;
   pointer-events: none;
 }
-.form-group label + .fa-calendar-alt {
+
+.form-group label+.fa-calendar-alt {
   top: 40px !important;
   right: 24px;
 }
@@ -152,7 +158,7 @@ width: 100%;
   label {
     width: auto;
 
-    & + div {
+    &+div {
       width: auto;
     }
   }
@@ -179,7 +185,7 @@ label.h3 {
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
-  background-color: $blue;
+  background-color: $secondary-color;
   transition: all ease 0.2s;
   -webkit-transition: all ease 0.2s;
   -moz-transition: all ease 0.2s;
@@ -193,6 +199,7 @@ label.h3 {
   .fa-times {
     line-height: 25px;
   }
+
   &.place-top {
     top: 0;
   }
@@ -217,6 +224,33 @@ label.h3 {
   label {
     font-size: 18px;
   }
+}   
+select.dropdown-icon {
+  background-color: $primary;
+  border-radius: 10px;
+  border: none;
+  font: inherit;
+  padding: .3rem 2rem .3rem .5rem;
+  /* reset */
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select.dropdown-icon {
+  background-image:
+  linear-gradient(45deg, transparent 50%, $black 50%),
+  linear-gradient(135deg, $black 50%, transparent 50%);
+background-position:
+  calc(100% - 20px) calc(1rem - 2px),
+  calc(100% - 15px) calc(1rem - 2px);
+background-size:
+  5px 5px,
+  5px 5px,
+  1.5rem 1.5rem;
+background-repeat: no-repeat;
 }
 
 input[type="checkbox"],
@@ -328,9 +362,64 @@ input[type="radio"]:checked:before {
   }
 }  
 
-.flatpickr-input + input {
+.flatpickr-input+input {
   padding-right: 30px;
 }
-.textarea_large{
-  height:110px !important;
+
+.textarea_large {
+  height: 110px !important;
 }
+
+
+//////family details form
+
+.family-details{
+  .nav{
+   justify-content: space-around;
+   .nav-link{
+    border-bottom: 2px solid transparent;
+    transition: .2s all;
+  }
+   .nav-link:hover{
+     border-bottom: 2px solid #ff9900;
+   }
+  }
+  form.is-readonly .btn-save {
+    display: none;
+  }
+
+  form.is-readonly input[disabled],
+  form.is-readonly textarea[disabled] {
+    cursor: text;
+    background-color: #fff;
+    border-color: transparent;
+    outline-color: transparent;
+    box-shadow: none;
+  }
+
+  form.is-editing .btn-edit {
+    display: none;
+  }
+  .parents-details,
+  .students-details,
+  .order-details {
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;   
+
+      label {
+        max-width: 120px;
+        margin-bottom: 0;
+      }
+    }
+  }
+.btn-modal {
+  background-color: #fc0;
+  padding:5px;
+}
+}
+
+
+
+
