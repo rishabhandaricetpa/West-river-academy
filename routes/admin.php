@@ -260,6 +260,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-student', 'StudentProfileController@updateNewStudents')->name('create.students');
     Route::post('create-student', 'StudentProfileController@createNewStudents')->name('create.newstudent');
     Route::post('update-student-profile', 'StudentProfileController@updateStudentProfile')->name('update.student.profile');
+
+    // create order from parent admin side
     Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
     Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
@@ -268,4 +270,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('get-charges', 'ParentController@getCountryVal')->name('get.postagecharges');
     Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
+    Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
 });

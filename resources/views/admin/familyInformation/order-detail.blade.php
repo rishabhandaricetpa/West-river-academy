@@ -56,106 +56,105 @@
                     <div class="row">
                         {{-- billing detil-1 --}}
                         <div class="col-md-12">
-                            <form class="is-readonly row" id="sampleForm">
+                            <form class="is-readonly row" id="orderForm1">
                                 @csrf
                                 <div class="col-md-6">
                                     <h3 class="mt-3">Billing Iinformation</h3>
                                     <div class="form-group">
                                         <label for="p1_first_name">First Name :</label>
                                         <input type="text" class="form-control is-disabled" name="p1_first_name"
-                                            id="p1_first_name" placeholder="" value="" disabled required>
+                                            id="p1_first_name" placeholder="" value="{{ $parent->p1_first_name }}"
+                                            disabled required>
                                     </div>
+                                    <input type="hidden" value="{{ $parent->id }}" id="parent_address_id">
+                                    <input type="hidden" value="{{ $address->id }}" id="address_id">
                                     <div class="form-group">
                                         <label for="p1_last_name">Last Name :</label>
                                         <input type="text" class="form-control is-disabled" name="p1_last_name"
-                                            id="p1_last_name" placeholder="" value="" disabled required>
+                                            id="p1_last_name" placeholder="" value="{{ $parent->p1_last_name }}" disabled
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="street_address">Street :</label>
-                                        <input type="text" class="form-control is-disabled" id="street_address"
-                                            placeholder="" name="street_address" value="" disabled required>
+                                        <input type="text" class="form-control is-disabled" id="billing_street_address"
+                                            placeholder="" name="street_address" value="{{ $parent->street_address }}"
+                                            disabled required>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">City :</label>
-                                        <input type="text" class="form-control is-disabled" id="city" placeholder=""
-                                            name="city" value="" disabled required>
+                                        <input type="text" class="form-control is-disabled" id="billing_city" placeholder=""
+                                            name="city" value="{{ $parent->city }}" disabled required>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">State/Zip :</label>
-                                                <input type="text" class="form-control is-disabled" id="state"
-                                                    placeholder="" name="state" value="" disabled required>
+                                                <label for="exampleInputEmail1">State :</label>
+                                                <input type="text" class="form-control is-disabled" id="billing_state"
+                                                    placeholder="" name="state" value="{{ $parent->state }}" disabled
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">FL :</label>
-                                                <input type="text" class="form-control is-disabled" id="zip_code"
-                                                    placeholder="" name="state" value="33707" disabled required>
+                                                <label for="exampleInputEmail1">Zip Code :</label>
+                                                <input type="text" class="form-control is-disabled" id="billing_zip_code"
+                                                    placeholder="" name="state" value="{{ $parent->zip_code }}" disabled
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Country :</label>
-                                        <input type="text" class="form-control is-disabled" id="country" placeholder=""
-                                            name="country" value="" disabled required>
+                                        <input type="text" class="form-control is-disabled" id="billing_country"
+                                            placeholder="" name="country" value="{{ $parent->country }}" disabled
+                                            required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="p1_email">Email :</label>
-                                        <input type="email" class="form-control is-disabled" name="p1_email" id="p1_email"
-                                            placeholder="" value="" disabled required>
-                                    </div>
+                               
                                 </div>
 
                                 {{-- shipping details 2 --}}
                                 <div class="col-md-6">
                                     <h3 class="mt-3">Shipping Iinformation</h3>
                                     <div class="form-group">
-                                        <label for="p1_first_name">First Name :</label>
-                                        <input type="text" class="form-control is-disabled" name="p1_first_name"
-                                            id="p2_first_name" placeholder="" value="" disabled required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="p1_last_name">Last Name :</label>
-                                        <input type="text" class="form-control is-disabled" name="p1_last_name"
-                                            id="p2_last_name" placeholder="" value="" disabled required>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="street_address">Street :</label>
-                                        <input type="text" class="form-control is-disabled" id="street_address2"
-                                            placeholder="" name="street_address" value="" disabled required>
+                                        <input type="text" class="form-control is-disabled" id="shipping_street_address2"
+                                            placeholder="" name="street_address"
+                                            value="{{ $address->shipping_street_address }}" disabled required>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">City :</label>
-                                        <input type="text" class="form-control is-disabled" id="city2" placeholder=""
-                                            name="city" value="" disabled required>
+                                        <input type="text" class="form-control is-disabled" id="shipping_city2"
+                                            placeholder="" name="city" value="{{ $address->shipping_city }}" disabled
+                                            required>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">State/Zip :</label>
-                                                <input type="text" class="form-control is-disabled" id="state2"
-                                                    placeholder="" name="state" value="" disabled required>
+                                                <label for="exampleInputEmail1">State :</label>
+                                                <input type="text" class="form-control is-disabled" id="shipping_state2"
+                                                    placeholder="" name="state" value="{{ $address->shipping_state }}"
+                                                    disabled required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">FL :</label>
-                                                <input type="text" class="form-control is-disabled" id="zip_code2"
-                                                    placeholder="" name="state" value="33707" disabled required>
+                                                <label for="exampleInputEmail1">Zip Code :</label>
+                                                <input type="text" class="form-control is-disabled" id="shipping_zip_code2"
+                                                    placeholder="" name="state" value="{{ $address->shipping_zip_code }}"
+                                                    disabled required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Country :</label>
-                                        <input type="text" class="form-control is-disabled" id="country2" placeholder=""
-                                            name="country" value="" disabled required>
+                                        <input type="text" class="form-control is-disabled" id="shipping_country2"
+                                            placeholder="" name="country" value="{{ $address->shipping_country }}"
+                                            disabled required>
                                     </div>
                                     <div class="form-group">
                                         <label for="p1_email">Email :</label>
-                                        <input type="email" class="form-control is-disabled" name="p1_email2" id="p1_email"
-                                            placeholder="" value="" disabled required>
+                                        <input type="email" class="form-control is-disabled" name="shipping_email"
+                                            id="p1_email" placeholder="" value="{{ $address->email }}" disabled required>
                                     </div>
 
                                 </div>

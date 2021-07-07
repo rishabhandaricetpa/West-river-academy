@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\StudentProfile;
 use App\Models\User;
 use App\Models\TransactionsMethod;
@@ -658,7 +659,7 @@ class ParentController extends Controller
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
-
+        $address = Address::where('parent_profile_id', $id)->first();
         $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
@@ -682,6 +683,38 @@ class ParentController extends Controller
             )
             ->get();
         $payment_nonpaid = $payment_info->where('status', 'pending');
-        return view('admin.familyinformation.order-detail', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
+        return view('admin.familyinformation.order-detail', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'address'));
+    }
+    public function editAddress(Request $request)
+    {
+        ParentProfile::where('id', $request->parent_address_id)->updateOrCreate(
+            ['id' => $request->parent_address_id],
+            [
+                'street_address' => $request->billing_street_address,
+                'city' => $request->billing_city,
+                'state' => $request->billing_state,
+                'zip_code' => $request->billing_zip_code,
+                'country' => $request->billing_country,
+                'p1_email' => $request->parent1_email
+            ]
+        );
+        Address::where('parent_profile_id', $request->parent_address_id)->updateOrCreate(
+            ['parent_profile_id' => $request->parent_address_id],
+            [
+                'billing_street_address' => $request->billing_street_address,
+                'billing_city' => $request->billing_city,
+                'billing_state' => $request->billing_state,
+                'billing_zip_code' => $request->billing_zip_code,
+                'billing_country' => $request->billing_country,
+                'email' => $request->parent1_email,
+                'shipping_street_address' => $request->shipping_street_address2,
+                'shipping_city' => $request->shipping_city2,
+                'shipping_state' => $request->shipping_state2,
+                'shipping_zip_code' => $request->shipping_zip_code2,
+                'shipping_country' => $request->shipping_country2,
+
+            ]
+
+        );
     }
 }
