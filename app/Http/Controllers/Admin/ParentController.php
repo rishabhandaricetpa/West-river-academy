@@ -12,6 +12,7 @@ use App\Models\Apostille;
 use App\Models\EnrollmentPeriods;
 use App\Models\UploadDocuments;
 use App\Models\CustomLetterPayment;
+use App\Models\ConfirmationLetter;
 use App\Models\CustomPayment;
 use App\Models\OrderPostage;
 use App\Models\EnrollmentPayment;
@@ -317,24 +318,48 @@ class ParentController extends Controller
                     $transction->payment_mode = "admin created";
                     $transction->parent_profile_id = $request->get('parent_id');
                     $transction->amount = $request->get('amount');
-                    $transction->status = $request->get('enrollment_status');
+                    $transction->status = $request->get('status');
                     $transction->save();
 
+                    $enrollment_period = new EnrollmentPeriods();
+                    $enrollment_period->student_profile_id = $request->get('student_id');
+                    $enrollment_period->start_date_of_enrollment = \Carbon\Carbon::parse($request->get('start_date'));
+                    $enrollment_period->end_date_of_enrollment = \Carbon\Carbon::parse($request->get('end_date'));
+                    $enrollment_period->grade_level = $request->get('grade');
+                    $enrollment_period->type = $request->get('type');
+
+                    $enrollment_period->save();
+
+                    if ($request->get('status') == 'pending') {
+                        $cart = new Cart();
+                        $cart->item_type = 'enrollment_period';
+                        $cart->item_id = $enrollment_period->id;
+                        $cart->parent_profile_id = $request->get('parent_id');
+                        $cart->save();
+                    }
                     $enroll_payment = new EnrollmentPayment();
-                    $enroll_payment->enrollment_period_id = $request->get('enrollment_for');
-                    $enroll_payment->payment_mode = "admin created";
-                    $enroll_payment->transcation_id = $transction->transcation_id;
-                    $enroll_payment->status = $request->get('enrollment_status');
+                    $enroll_payment->enrollment_period_id  = $enrollment_period->id;
                     $enroll_payment->amount = $request->get('amount');
+                    $enroll_payment->status = $request->get('status');
+                    if ($enroll_payment->status == 'paid') {
+                        $enroll_payment->transcation_id = substr(uniqid(), 0, 12);
+                        $enroll_payment->payment_mode =  'admin_created';
+                        $enrollment_period->enrollment_payment_id = $enroll_payment->id;
+                    }
+
                     $enroll_payment->save();
+                    // update enrollment period with enrollement payment_id
+                    $enrollment_period->enrollment_payment_id = $enroll_payment->id;
+                    $enrollment_period->save();
 
-                    $enroll = EnrollmentPeriods::whereId($request->get('enrollment_for'))->first();
-                    $enroll->enrollment_payment_id = $enroll_payment->id;
-                    $enroll->save();
-                    break;
+                    // add in confirmation letter
 
-                case 'graduation':
-
+                    $confirmationLetter = new ConfirmationLetter();
+                    $confirmationLetter->student_profile_id = $request->get('student_id');
+                    $confirmationLetter->status = $request->get('status');
+                    $confirmationLetter->enrollment_period_id = $enrollment_period->id;
+                    $confirmationLetter->parent_profile_id = $request->get('parent_id');
+                    $confirmationLetter->save();
                     break;
                 case 'order-detail_transcript':
                     for ($x = 1; $x <= $request->get('quantity'); $x++) {
@@ -371,8 +396,35 @@ class ParentController extends Controller
                         }
                     }
                     break;
-                case 'custom_payments':
+                case 'order-detail_CustomLetter':
+                    $custom_payment = new CustomLetterPayment();
+                    $custom_payment->parent_profile_id = $request->get('parent_id');
+                    $custom_payment->amount = $request->get('custom_letter_amount');
+                    $custom_payment->paying_for = $request->get('custom_letter_paying');
+                    $custom_payment->type_of_payment = 'Custom Letter';
+                    $custom_payment->transcation_id = $request->get('custom_letter_transction');
+                    $custom_payment->payment_mode = $request->get('custom_letter_payment_mode');
+                    $custom_payment->status = $request->get('custom_letter_status');
+                    $custom_payment->save();
+                    if (
+                        !empty($request->get('custom_letter_payment_mode'))
+                    ) {
 
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   = $request->get('custom_letter_transction') ? $request->get('custom_letter_transction')  : substr(uniqid(), 0, 12);
+                        $transction->payment_mode =  $request->get('custom_letter_payment_mode') ? $request->get('custom_letter_payment_mode')  : 'pending';
+                        $transction->parent_profile_id = $request->get('parent_id');
+                        $transction->amount = $request->get('custom_letter_amount');
+                        $transction->status = $request->get('custom_letter_status');
+                        $transction->save();
+                    }
+                    if ($request->get('custom_letter_status') == 'pending') {
+                        Cart::create([
+                            'item_type' => 'custom_letter',
+                            'item_id' => $request->get('parent_id'),
+                            'parent_profile_id' => $request->get('parent_id'),
+                        ]);
+                    }
                     break;
 
                 case 'order-detail_OrderPostage':
@@ -491,7 +543,35 @@ class ParentController extends Controller
                     }
 
                     break;
-                case 'custom_letter':
+                case 'order-detail_CustomPayment':
+
+                    $custom_payment = new CustomPayment();
+                    $custom_payment->parent_profile_id = $request->get('parent_id');
+                    $custom_payment->amount = $request->get('custom_amount');
+                    $custom_payment->paying_for = $request->get('custom_paying_for');
+                    $custom_payment->type_of_payment = 'Custom Payments';
+                    $custom_payment->transcation_id = $request->get('custom_transcation');
+                    $custom_payment->payment_mode = $request->get('custom_payment_mode');
+                    $custom_payment->status = $request->get('custom_status');
+                    $custom_payment->save();
+                    if (
+                        !empty($request->get('custom_payment_mode'))
+                    ) {
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   = $request->get('custom_transcation') ? $request->get('custom_transcation')  : substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : 'pending';
+                        $transction->parent_profile_id = $request->get('parent_id');
+                        $transction->amount = $request->get('custom_amount');
+                        $transction->status = $request->get('custom_status');
+                        $transction->save();
+                    }
+                    if ($request->get('custom_status') == 'pending') {
+                        Cart::create([
+                            'item_type' => 'custom',
+                            'item_id' => $request->get('parent_id'),
+                            'parent_profile_id' => $request->get('parent_id'),
+                        ]);
+                    }
 
                     break;
                 case 'order-detail_OrderConsultaion':
@@ -560,5 +640,13 @@ class ParentController extends Controller
         } else {
         }
         return 25;
+    }
+    public function  calculateType(Request $request)
+    {
+        $selectedStartDate = \Carbon\Carbon::parse($request->start_date);
+        $selectedEndDate = \Carbon\Carbon::parse($request->end_date);
+        $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
+        $amount = $type == 'annual' ? '375' : '50';
+        return response()->json(['type' => $type, 'amount' => $amount]);
     }
 }

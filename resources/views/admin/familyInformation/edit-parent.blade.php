@@ -757,125 +757,209 @@
               </div>
               <div class="order-detail_enrollment display-none" id="order-detail_enrollment">
                 <div class="row">
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Start Date</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Start Date</label>
+                            <input type="date" id="order-start_date" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">End Date</label>
-                      <input type="text" id="" class="form-control">
+                    <input class="form-control" type="hidden" value="{{ $parent->id }}"
+                        id='parent_id' name="parent_id">
+                    <div class="col-lg-6 col-12">
+                        <label for="recipient-name" class="col-form-label">For student</label>
+                        <select id="order-student-name" class="form-control">
+                            @foreach ($allstudent as $student)
+                                <option value="{{ $student->id }}">{{ $student->first_name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Grade</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">End Date</label>
+                            <input type="date" id="order-end-date" class="form-control"
+                                onchange="calculateType()">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Type</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Grade</label>
+                            <input type="text" id="order-grade" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Type</label>
+                            <input type="text" id="order-type" class="form-control" readonly>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
-                      <select type="" id="" class="form-control">
-                        <option>K-8</option>
-                        <option>9-12</option>
-                      </select>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Amount</label>
+                            <input type="text" id="order-amount" class="form-control" readonly>
+                        </div>
                     </div>
-                  </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Status</label>
+                            <select id="order-status" class="form-control">
+                                <option value="pending">Pending</option>
+                                <option value="paid">Paid </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
               </div>
               <div class="order-detail_Graduation display-none" id="order-detail_Graduation">
                 <div class="row">
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Start Date</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Grade</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Type</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
-                      <select type="" id="" class="form-control">
-                        <option>K-8</option>
-                        <option>9-12</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                    <form id="add-graduation">
+                        <div class="form-group row">
+                            <input type="hidden" value="{{ $parent->id }}" id='parent_id'
+                                name="parent_id">
+                            <div class="col-md-6 pb-2">
+                                <label for="recipient-name" class="col-form-label">For student</label>
+                                <select id="student_ids" class="form-control">
+                                    @foreach ($allstudent as $student)
+                                        <option value="{{ $student->id }}">{{ $student->first_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 pb-2">
+                                <label for="recipient-name" class="col-form-label">Grade 9</label>
+                                <select id="grade_9" required class="form-control">
+                                    <option value="I was enrolled in West River Academy.">I was enrolled
+                                        in West River
+                                        Academy.
+                                    </option>
+                                    <option
+                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                        I homeschooled independently. (There are no transcripts that a
+                                        school can send.)
+                                    </option>
+                                    <option
+                                        value="I was enrolled in another school that can send or has already sent transcripts.">
+                                        I was enrolled in another school that can send or has already
+                                        sent transcripts.
+                                    </option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 pb-2">
+                                <label for="recipient-name" class="col-form-label">Grade 10</label>
+                                <select id="grade_10" required class="form-control">
+                                    <option value="I was enrolled in West River Academy.">I was enrolled
+                                        in West River
+                                        Academy.
+                                    </option>
+                                    <option
+                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                        I homeschooled independently. (There are no transcripts that a
+                                        school can send.)
+                                    </option>
+                                    <option
+                                        value="I was enrolled in another school that can send or has already sent transcripts.">
+                                        I was enrolled in another school that can send or has already
+                                        sent transcripts.
+                                    </option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 pb-2">
+                                <label for="recipient-name" class="col-form-label">Grade 11</label>
+                                <select id="grade_11" required class="form-control">
+                                    <option value="I was enrolled in West River Academy.">I was enrolled
+                                        in West River
+                                        Academy.
+                                    </option>
+                                    <option
+                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                        I homeschooled independently. (There are no transcripts that a
+                                        school can send.)
+                                    </option>
+                                    <option
+                                        value="I was enrolled in another school that can send or has already sent transcripts.">
+                                        I was enrolled in another school that can send or has already
+                                        sent transcripts.
+                                    </option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 pb-2">
+                                <label for="recipient-name" class="col-form-label">Status</label>
+                                <select id="status-graduation" class="form-control">
+                                    <option value='paid'>Paid</option>
+                                    <option value='pending'>Pending</option>
+                                    <option value='approved'>Approved</option>
+                                    <option value='completed'>Completed</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 pb-2">
+                                <div class="form-group" id="grad-div-transction">
+                                    <label for="message-text" class="col-form-label">Transcation ID</label>
+                                    <input type="text" id="grad_transction_id" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pb-2">
+                                <div class="form-group" id="payment-div-grad">
+                                    <label for="message-text" class="col-form-label">Payment Mode</label>
+                                    <select type="" id="custom_payment_mode" class="form-control">
+                                        <option value="">Select One </option>
+                                        <option value="Credit Card">Credit Card</option>
+                                        <option value="Paypal">Paypal</option>
+                                        <option value="Bank Transfer">Bank Transfer</option>
+                                        <option value="MoneyGram">MoneyGram</option>
+                                        <option value="Check Or Money Order"> Check Or Money Order</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
               </div>
               <div class="order-detail_CustomPayment display-none" id="order-detail_CustomPayment">
                 <div class="row">
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Start Date</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Amount</label>
+                            <input type="text" id="custom_amount" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">End Date</label>
-                      <input type="text" id="" class="form-control">
+                    <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Paying For</label>
+                            <input type="text" id="custom_paying_for" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Grade</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Status</label>
+                            <select type="" id="custom_status" class="form-control">
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Type</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group" id="transction-div-custom">
+                            <label for="message-text" class="col-form-label">Transcation Id</label>
+                            <input type="text" id="custom_transcation" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group" id="payment-div-custom">
+                            <label for="message-text" class="col-form-label">Payment Mode</label>
+                            <select type="" id="custom_payment_mode" class="form-control">
+                                <option value="">Select One </option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Paypal">Paypal</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="MoneyGram">MoneyGram</option>
+                                <option value="Check Or Money Order"> Check Or Money Order</option>
+                            </select>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
-                      <select type="" id="" class="form-control">
-                        <option>K-8</option>
-                        <option>9-12</option>
-                      </select>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="order-detail_OrderPostage display-none" id="order-detail_OrderPostage">
@@ -1149,45 +1233,56 @@
               </div>
               <div class="order-detail_CustomLetter display-none" id="order-detail_CustomLetter">
                 <div class="row">
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Start Date</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Quanity Needed</label>
+                            <input type="text" id="custom_letter_quantity" class="form-control"
+                                onchange="calculateLetterAmount()">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">End Date</label>
-                      <input type="text" id="" class="form-control">
+                    <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Amount</label>
+                            <input type="text" id="custom_letter_amount" class="form-control" readonly>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Grade</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Paying For</label>
+                            <input type="text" id="custom_letter_paying" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Type</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Status</label>
+                            <select type="" id="custom_letter_status" class="form-control">
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+
+                            </select>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Amount</label>
-                      <input type="text" id="" class="form-control">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group" id="transction-div">
+                            <label for="message-text" class="col-form-label">Transcation ID</label>
+                            <input type="text" id="custom_letter_transction" class="form-control">
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-12">
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Period</label>
-                      <select type="" id="" class="form-control">
-                        <option>K-8</option>
-                        <option>9-12</option>
-                      </select>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-group" id="payment-div">
+                            <label for="message-text" class="col-form-label">Payment Mode</label>
+                            <select type="" id="custom_letter_payment_mode" class="form-control">
+                                <option value="">Select One </option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Paypal">Paypal</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="MoneyGram">MoneyGram</option>
+                                <option value="Check Or Money Order"> Check Or Money Order</option>
+
+                            </select>
+                        </div>
                     </div>
-                  </div>
                 </div>
               </div>
               <div class="order-detail_OrderConsultaion display-none" id="order-detail_OrderConsultaion">

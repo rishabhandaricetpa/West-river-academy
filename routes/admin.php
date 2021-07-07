@@ -268,4 +268,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('add-graduation', 'DashboardController@addGraduation')->name('add.graduation');
     Route::post('get-charges', 'ParentController@getCountryVal')->name('get.postagecharges');
     Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
+    Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
 });

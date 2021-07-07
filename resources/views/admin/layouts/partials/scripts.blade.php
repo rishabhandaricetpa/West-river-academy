@@ -884,33 +884,43 @@
             }
         });
         }
-        if(type == 'order-detail_enrollment'){
-        var parent_profile_id = $('#parent_profile_id').val();
-        var student_name = $('#student_name').val();
-        var start_date_enrollment = $('#start_date_enrollment').val();
-        var end_date_enrollment = $('#end_date_enrollment').val();
-        var grade = $('#grade').val();
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "{{ route('admin.create.enrollments') }}",
-            type: "POST",
+        if (type == 'order-detail_enrollment') {
+            var order_detail_val = $('#order_detail_val').val();
+            var parent_id = $('#parent_id').val();
+            var student_id = $('#order-student-name').val();
+            var start_date = $('#order-start_date').val();
+            var end_date = $('#order-end-date').val();
+            var amount = $('#order-amount').val();
+            var grade = $('#order-grade').val();
+            var type = $('#order-type').val();
+            var status = $('#order-status').val();
+            var order_name = 'enrollment';
+            console.log(status);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('admin.create.orders') }}",
+                type: "POST",
 
-            data: {
-                parent_id: parent_id,
-                student_name: student_name,
-                start_date: start_date,
-                end_date: end_date,
-                grade_level: grade_level,
-            },
-            success: function(response) {
-                location.reload();
-            },
-            error: function(response) {
+                data: {
+                    order_detail_val:order_detail_val,
+                    parent_id: parent_id,
+                    student_id: student_id,
+                    start_date: start_date,
+                    end_date: end_date,
+                    amount: amount,
+                    grade: grade,
+                    type: type,
+                    status: status,
+                    order_name: order_name
+                },
+                success: function(response) {
+                },
+                error: function(response) {
 
-            }
-        });
+                }
+            });
         }
         if(type == 'order-detail_OrderPostage'){
         var order_detail_val = $('#order_detail_val').val();
@@ -1077,6 +1087,105 @@
             }
         });
         }
+
+        if(type == 'order-detail_CustomPayment'){
+        var order_detail_val = $('#order_detail_val').val();
+        var custom_amount = $('#custom_amount').val();
+        var custom_paying_for = $('#custom_paying_for').val();
+        var custom_transcation = $('#custom_transcation').val();
+        var custom_payment_mode = $('#custom_payment_mode').val();
+        var custom_status = $('#custom_status').val();
+        var parent_id = $('#parent_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val:order_detail_val,
+                custom_amount: custom_amount,
+                custom_paying_for: custom_paying_for,
+                custom_transcation: custom_transcation,
+                custom_payment_mode: custom_payment_mode,
+                custom_status: custom_status,
+                parent_id: parent_id
+            },
+            success: function(response) {
+            },
+            error: function(response) {
+
+            }
+        });
+        }
+
+        if(type == 'order-detail_CustomLetter'){
+        var order_detail_val = $('#order_detail_val').val();
+        var custom_letter_amount = $('#custom_letter_amount').val();
+        var custom_letter_paying = $('#custom_letter_paying').val();
+        var custom_letter_transction = $('#custom_letter_transction').val();
+        var custom_letter_payment_mode = $('#custom_letter_payment_mode').val();
+        var custom_letter_status = $('#custom_letter_status').val();
+        var parent_id = $('#parent_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.orders') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val:order_detail_val,
+                custom_letter_amount: custom_letter_amount,
+                custom_letter_paying: custom_letter_paying,
+                custom_letter_transction: custom_letter_transction,
+                custom_letter_payment_mode: custom_letter_payment_mode,
+                custom_letter_status: custom_letter_status,
+                parent_id: parent_id
+            },
+            success: function(response) {
+            },
+            error: function(response) {
+
+            }
+        });
+        }
+        if(type == 'order-detail_Graduation'){
+        var order_detail_val = $('#order_detail_val').val();
+        var parent_id = $('#parent_id').val();
+        var student_id = $('#student_ids').val();
+        var grade_9 = $('#grade_9').val();
+        var grade_10 = $('#grade_10').val();
+        var grade_11 = $('#grade_11').val();
+        var status = $('#status-graduation').val();
+        var grad_transction_id = $('#grad_transction_id').val();
+        var custom_payment_mode = $('#custom_payment_mode').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.add.graduation') }}",
+            type: "POST",
+
+            data: {
+                order_detail_val,
+                parent_id,
+                student_id,
+                grade_9,
+                grade_10,
+                grade_11,
+                status,
+                grad_transction_id,
+                custom_payment_mode
+            },
+            success: function(response) {
+            },
+            error: function(response) {
+
+            }
+        });
+    }
     });
 
     // add parent information
@@ -1419,11 +1528,13 @@
     $("#add-graduation").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
-        var student_id = $('#student_id').val();
+        var student_id = $('#student_ids').val();
         var grade_9 = $('#grade_9').val();
         var grade_10 = $('#grade_10').val();
         var grade_11 = $('#grade_11').val();
         var status = $('#status-graduation').val();
+        var grad_transction_id = $('#grad_transction_id').val();
+        var custom_payment_mode = $('#custom_payment_mode').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1437,10 +1548,11 @@
                 grade_9,
                 grade_10,
                 grade_11,
-                status
+                status,
+                grad_transction_id,
+                custom_payment_mode
             },
             success: function(response) {
-                location.reload();
             },
             error: function(response) {
 
@@ -1557,6 +1669,64 @@
             }
         });
     });
+
+    // for custom payment hide and show payment mode inaccordance to status
+    document.getElementById("custom_status").addEventListener("change", function() {
+
+var value = this.value;
+if (value == "paid") {
+    $("#transction-div-custom").show();
+    $('#payment-div-custom').show();
+} else {
+    $("#transction-div-custom").hide();
+    $("#payment-div-custom").hide();
+
+}
+});
+
+function calculateLetterAmount() {
+        var quantity = $('#custom_letter_quantity').val();
+        $("#custom_letter_amount").val(quantity * 35);
+    }
+
+document.getElementById("custom_letter_status").addEventListener("change", function() {
+
+var value = this.value;
+console.log(value);
+if (value == "paid") {
+    $("#transction-div").show();
+    $('#payment-div').show();
+} else {
+    $("#payment-div").hide();
+    $("#transction-div").hide();
+
+}
+})
+function calculateType() {
+        var start_date = $('#order-start_date').val();
+        var end_date = $('#order-end-date').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.calculate.annualtype') }}",
+            type: "POST",
+
+            data: {
+                start_date: start_date,
+                end_date: end_date
+            },
+            success: function(response) {
+                console.log(response);
+                $("#order-type").val(response.type);
+                $('#order-amount').val(response.amount);
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
 /////// changeing form -select
 
 // $("orderDetailsModal").on("change","#order_detail_val", function(){
@@ -1715,6 +1885,23 @@ document.getElementById("order_detail_val").addEventListener("change",function()
         $("#order-detail_OrderConsultaion").hide();
     }
 })
+
+// for graduation hide and show payment mode inaccordance to status
+document.getElementById("status-graduation").addEventListener("change", function() {
+
+var value = this.value;
+console.log(value);
+if (value == "paid") {
+    $("#grad-div-transction").show();
+    $('#payment-div-grad').show();
+} else {
+    $("#grad-div-transction").hide();
+    $("#payment-div-grad").hide();
+
+}
+})
+
+
 document.getElementById("order_detail_val").addEventListener("change",function(){
     // alert("js");
     var value= this.value;

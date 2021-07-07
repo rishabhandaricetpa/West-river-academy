@@ -10,6 +10,7 @@ use App\Models\GraduationDetail;
 use App\Models\GraduationPayment;
 use App\Models\RecordTransfer;
 use App\Models\UploadDocuments;
+use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -124,24 +125,62 @@ class DashboardController extends Controller
     {
         try {
             DB::beginTransaction();
-            $graduation = new Graduation();
-            $graduation->parent_profile_id = $request->input('parent_id');
-            $graduation->student_profile_id = $request->input('student_id');
-            $graduation->grade_9_info = $request->input('grade_9');
-            $graduation->grade_10_info = $request->input('grade_10');
-            $graduation->grade_11_info = $request->input('grade_11');
-            $graduation->status = $request->input('status');
-            $graduation->save();
+            $graduation =   Graduation::updateOrCreate(
+                [
+                    'student_profile_id' => $request->input('student_id')
+                ],
+                [
+                    'parent_profile_id' => $request->input('parent_id'),
+                    'student_profile_id' => $request->input('student_id'),
+                    'grade_9_info' => $request->input('grade_9'),
+                    'grade_10_info' => $request->input('grade_10'),
+                    'grade_11_info' => $request->input('grade_11'),
+                    'status' => $request->input('status')
+                ]
+            );
 
-            $graduation_details = new GraduationDetail();
-            $graduation_details->graduation_id = $graduation->id;
-            $graduation_details->grad_date = $graduation->created_at;
-            $graduation_details->save();
 
-            $graduation_payment = new GraduationPayment();
-            $graduation_payment->graduation_id = $graduation->id;
-            $graduation_payment->amount = FeesInfo::getFeeAmount('graduation');
-            $graduation_payment->save();
+            $graduation_details =   GraduationDetail::updateOrCreate(
+                [
+                    'graduation_id' => $graduation->id
+                ],
+                [
+                    'grad_date' => $graduation->created_at,
+                ]
+            );
+
+
+            $graduation_payment =   GraduationPayment::updateOrCreate(
+                [
+                    'graduation_id' => $graduation->id
+                ],
+                [
+                    'graduation_id' => $graduation->id,
+                    'amount' => FeesInfo::getFeeAmount('graduation'),
+
+                ]
+            );
+
+
+            if ($request->get('status') == 'paid') {
+                $graduation_payment->transcation_id = $request->get('grad_transction_id');
+                $graduation_payment->payment_mode = $request->get('custom_payment_mode');
+                $graduation_payment->save();
+            }
+
+            if (
+                !empty($request->get('custom_payment_mode'))
+            ) {
+                $transction = new TransactionsMethod();
+                $transction->transcation_id   = $request->get('grad_transction_id') ? $request->get('grad_transction_id')  : substr(uniqid(), 0, 12);
+                $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : 'pending';
+                $transction->parent_profile_id = $request->get('parent_id');
+                $transction->amount = 395;
+                $transction->status = 'succeeded';
+                $transction->save();
+            }
+
+
             DB::commit();
         } catch (Exception $e) {
             report($e);
