@@ -119,7 +119,14 @@ class StudentController extends Controller
 
         $uploadedDocuments = UploadDocuments::select()
             ->whereIn('parent_profile_id', [$parentId])->where('is_upload_to_student', 1)->get();
-        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData'));
+        $cartAmount =  Cart::getCartAmount($parentId);
+        $amount = 0;
+        foreach ($cartAmount as $cart) {
+            foreach ($cart['enroll_items'] as $enroll) {
+                $amount += $enroll['amount'];
+            }
+        }
+        return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData', 'amount'));
     }
 
     public function confirmationpage($enrollment_payment_id, $grade_id)
