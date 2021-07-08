@@ -14,6 +14,7 @@ use App\Models\Transcript;
 use App\Models\ConfirmationLetter;
 use App\Models\User;
 use App\Models\Dashboard;
+use App\Models\Notification as Notification;
 use App\Models\OrderPersonalConsultation;
 use App\Models\UploadDocuments;
 use App\Providers\RouteServiceProvider;
@@ -22,7 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Storage;
+
 
 class StudentController extends Controller
 {
@@ -126,6 +127,21 @@ class StudentController extends Controller
                 $amount += $enroll['amount'];
             }
         }
+
+        Notification::updateOrCreate(
+            [
+                'parent_profile_id' => $parentId,
+                'type' => 'PayAmount'
+            ],
+            [
+                'parent_profile_id' => $parentId,
+                'content' => 'Pay Amount' . ' : ' . $amount,
+                'type' => 'PayAmount',
+                'read' => 'false',
+            ]
+        );
+
+
         return view('SignIn.dashboard', compact('student', 'transcript', 'parentId', 'record_transfer', 'student_data', 'confirmLetter', 'personal_consultation', 'uploadedDocuments', 'parentData', 'amount'));
     }
 
