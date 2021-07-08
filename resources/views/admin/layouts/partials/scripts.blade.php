@@ -1872,6 +1872,10 @@
         } else if (value == "order-detail_CustomLetter") {
             $("#order-detail_CustomLetter").show();
         }
+        else if(value=="order-detail_OrderConsultaion")
+        {
+            $("#order-detail_OrderConsultaion").show();
+        }
     })
 
     document.querySelectorAll(".paymentDisplay").

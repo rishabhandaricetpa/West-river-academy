@@ -149,9 +149,10 @@
                         </div>
 
                         <div class="col-12">
-                            <div class="form-group">
+                            <div class="form-group d-flex align-items-center justify-content-end">
                                 <label for="message-text"
-                                    class="bg-light col-form-label font-size-large pl-2  pt-2">Total:</label>
+                                    class="col-form-label col-2 font-size-large  pt-2">Total:</label>
+                                    <input type="text" id="" class="form-control col-6">
                             </div>
                         </div>
                     </div>
@@ -499,9 +500,10 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group">
+                                <div class="form-group d-flex align-items-center justify-content-end">
                                     <label for="message-text"
-                                        class="bg-light col-form-label font-size-large pl-2  pt-2">Total:</label>
+                                        class="col-form-label col-2 font-size-large  pt-2">Total:</label>
+                                        <input type="text" id="" class="form-control col-6">
                                 </div>
                             </div>
 
@@ -590,11 +592,11 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group">
+                                <div class="form-group d-flex align-items-center justify-content-end">
                                     <label for="message-text"
-                                        class="bg-light col-form-label font-size-large pl-2  pt-2">Total:</label>
+                                        class="col-form-label col-2 font-size-large  pt-2">Total:</label>
+                                        <input type="text" id="" class="form-control col-6">
                                 </div>
-
                             </div>
 
                         </div>
@@ -696,9 +698,10 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group">
+                                <div class="form-group d-flex align-items-center justify-content-end">
                                     <label for="message-text"
-                                        class="bg-light col-form-label font-size-large pl-2  pt-2">Total:</label>
+                                        class="col-form-label col-2 font-size-large  pt-2">Total:</label>
+                                        <input type="text" id="" class="form-control col-6">
                                 </div>
                             </div>
                         </div>
