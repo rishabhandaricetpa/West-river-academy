@@ -915,7 +915,9 @@
                     status: status,
                     order_name: order_name
                 },
-                success: function(response) {},
+                success: function(response) {
+                    location.reload();
+                },
                 error: function(response) {
 
                 }
@@ -1079,7 +1081,9 @@
                     apostille_total: apostille_total
 
                 },
-                success: function(response) {},
+                success: function(response) {
+                    location.reload();
+                },
                 error: function(response) {
 
                 }
@@ -1110,7 +1114,9 @@
                     custom_status: custom_status,
                     parent_id: parent_id
                 },
-                success: function(response) {},
+                success: function(response) {
+                    location.reload();
+                },
                 error: function(response) {
 
                 }
@@ -1141,7 +1147,9 @@
                     custom_letter_status: custom_letter_status,
                     parent_id: parent_id
                 },
-                success: function(response) {},
+                success: function(response) {
+                    location.reload();
+                },
                 error: function(response) {
 
                 }
@@ -1175,7 +1183,9 @@
                     grad_transction_id,
                     custom_payment_mode
                 },
-                success: function(response) {},
+                success: function(response) {
+                    location.reload();
+                },
                 error: function(response) {
 
                 }
@@ -1761,6 +1771,20 @@
 
         }
     });
+    // for graduation hide and show payment mode inaccordance to status
+    document.getElementById("status-graduation").addEventListener("change", function() {
+
+        var value = this.value;
+        console.log(value);
+        if (value == "paid") {
+            $("#grad-div-transction").show();
+            $('#payment-div-grad').show();
+        } else {
+            $("#grad-div-transction").hide();
+            $("#payment-div-grad").hide();
+
+        }
+    })
 
     function calculateLetterAmount() {
         var quantity = $('#custom_letter_quantity').val();
@@ -1806,238 +1830,74 @@
         });
     }
 
-    /////// changeing form -select
-
-    // $("orderDetailsModal").on("change","#order_detail_val", function(){
-    //     alert("check");
-    // })
 
     document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
+        var elem = this;
         var value = this.value;
-        // alert(value);
+        $("#order-detail_transcript").hide();
+        $("#order-detail_enrollment").hide();
+        $("#order-detail_Graduation").hide();
+        $("#order-detail_CustomPayment").hide();
+        $("#order-detail_OrderPostage").hide();
+        $("#order-detail_Notarization").hide();
+        $("#order-detail_ApostilePackage").hide();
+        $("#order-detail_CustomLetter").hide();
+        $("#order-detail_OrderConsultaion").hide();
+
+        var mainElem = document.getElementById(this.value);
+        let selectElem = mainElem.querySelector(".paymentDisplay");
+        if (selectElem.value == "paid") {
+            $(".transction-div").show();
+            $('.payment-div').show();
+        } else {
+            $(".payment-div").hide();
+            $(".transction-div").hide();
+
+        }
+
         if (value == "order-detail_transcript") {
             $("#order-detail_transcript").show();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        if (value == "order-detail_enrollment") {
-            $("#order-detail_transcript").hide();
+        } else if (value == "order-detail_enrollment") {
             $("#order-detail_enrollment").show();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_Graduation") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
+        } else if (value == "order-detail_Graduation") {
             $("#order-detail_Graduation").show();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_Graduation") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").show();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_CustomPayment") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
+        } else if (value == "order-detail_CustomPayment") {
             $("#order-detail_CustomPayment").show();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        console.log(value);
-        if (value == "order-detail_OrderPostage") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
+        } else if (value == "order-detail_OrderPostage") {
             $("#order-detail_OrderPostage").show();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_Notarization") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
+        } else if (value == "order-detail_Notarization") {
             $("#order-detail_Notarization").show();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_ApostilePackage") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
+        } else if (value == "order-detail_ApostilePackage") {
             $("#order-detail_ApostilePackage").show();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").hide();
-        }
-    })
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_CustomLetter") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
+        } else if (value == "order-detail_CustomLetter") {
             $("#order-detail_CustomLetter").show();
-            $("#order-detail_OrderConsultaion").hide();
         }
     })
 
-    // for graduation hide and show payment mode inaccordance to status
-    document.getElementById("status-graduation").addEventListener("change", function() {
+    document.querySelectorAll(".paymentDisplay").
+    forEach((element) => {
+        element.addEventListener("change", function() {
 
-        var value = this.value;
-        console.log(value);
-        if (value == "paid") {
-            $("#grad-div-transction").show();
-            $('#payment-div-grad').show();
-        } else {
-            $("#grad-div-transction").hide();
-            $("#payment-div-grad").hide();
+            var value = this.value;
+            console.log(value);
+            if (value == "paid") {
+                $(".transction-div").show();
+                $('.payment-div').show();
+            } else {
+                $(".payment-div").hide();
+                $(".transction-div").hide();
 
-        }
-    })
+            }
+        })
+    });
 
-
-    document.getElementById("order_detail_val").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_OrderConsultaion") {
-            $("#order-detail_transcript").hide();
-            $("#order-detail_enrollment").hide();
-            $("#order-detail_Graduation").hide();
-            $("#order-detail_CustomPayment").hide();
-            $("#order-detail_OrderPostage").hide();
-            $("#order-detail_Notarization").hide();
-            $("#order-detail_ApostilePackage").hide();
-            $("#order-detail_CustomLetter").hide();
-            $("#order-detail_OrderConsultaion").show();
-        }
-    })
-    document.getElementById("OrderPostage-paymentDetails").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_OrderPostage-paid") {
-            $("#order-detail_OrderPostage-paid").show();
-        }
-        // else{ 
-        //     $("#order-detail_OrderPostage-paid".hide();
-        // }
-    })
-    document.getElementById("OrderConsultaion-paymentDetails").addEventListener("change", function() {
-        // alert("js");
-        var value = this.value;
-        // alert(value);
-        if (value == "order-detail_OrderConsultaion-paid") {
-            $("#order-detail_OrderConsultaion-paid").show();
-
-        }
-        // else{
-        //     $("#order-detail_OrderConsultaion-paid").hide();
-        // }
-    })
     document.getElementById("postage_country").addEventListener("change", function() {
-        // alert("js");
+
         var value = this.value;
         if (value == "India") {
             $("#postage_charge").val() = 100;
         }
     })
-    // $("#order_detail_val").change(function(){
-    //     alert("jq");
-    // })
-
-    //$('#order_detail_val').change(function(){
-    // alert ('hi');
-    // alert(this.value)
-    //var val= $(this.value);
-    //if(val=="order-detail_transcript")
-    //{
-    //alert("entered");
-    //$("#order-detail_transcript").show();
-    // $("#order-detail_enrollment").hide();
-    //}
-    //else
-    //{
-    //    alert("no");
-    //}
-    //})
-    // })
 
 
     $('#check').click(function() {
