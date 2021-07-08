@@ -39,6 +39,9 @@ class Notification extends Model
                     case 'transcript_submitted_9_12':
                         $link = ['name' => 'Preview', 'url' => route('preview.transcript9_12', [$notification->student_profile_id, $notification->transcript_id])];
                         break;
+                    case 'PayAmount':
+                        $link = ['name' => 'Go To Cart', 'url' => route('add.cart')];
+                        break;
                     default:
                         $link = null;
                         break;
