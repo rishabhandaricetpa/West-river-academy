@@ -51,7 +51,11 @@
                                             <td>{{ $allcustomPayment->paying_for }}</td>
                                             <td>{{ $allcustomPayment->transction_id }} </td>
                                             <td>{{ $allcustomPayment->payment_mode }} </td>
-                                            <td>{{ $allcustomPayment->status }} </td>
+                                            @if($allcustomPayment->status=='paid')
+                                            <td>Paid</td>
+                                            @else
+                                            <td>Pending</td>
+                                            @endif
                                             <td>
                                                 <a href="{{ route('admin.edit.custompayment', $allcustomPayment->parent_profile_id) }}"><i
                                                         class="fas fa-edit"></i></a>

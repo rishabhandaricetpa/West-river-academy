@@ -135,7 +135,8 @@ class DashboardController extends Controller
                     'grade_9_info' => $request->input('grade_9'),
                     'grade_10_info' => $request->input('grade_10'),
                     'grade_11_info' => $request->input('grade_11'),
-                    'status' => $request->input('status')
+                    'status' => $request->input('status'),
+                    'apostille_country' => $request->input('apostille_country_gard')
                 ]
             );
 
@@ -149,17 +150,30 @@ class DashboardController extends Controller
                 ]
             );
 
+            if ($request->input('apostille_country_gard')) {
+                $graduation_payment =   GraduationPayment::updateOrCreate(
+                    [
+                        'graduation_id' => $graduation->id
+                    ],
+                    [
+                        'graduation_id' => $graduation->id,
+                        'amount' => FeesInfo::getFeeAmount('graduation') + FeesInfo::getFeeAmount('apostille'),
 
-            $graduation_payment =   GraduationPayment::updateOrCreate(
-                [
-                    'graduation_id' => $graduation->id
-                ],
-                [
-                    'graduation_id' => $graduation->id,
-                    'amount' => FeesInfo::getFeeAmount('graduation'),
+                    ]
+                );
+            } else {
+                $graduation_payment =   GraduationPayment::updateOrCreate(
+                    [
+                        'graduation_id' => $graduation->id
+                    ],
+                    [
+                        'graduation_id' => $graduation->id,
+                        'amount' => FeesInfo::getFeeAmount('graduation'),
 
-                ]
-            );
+                    ]
+                );
+            }
+
 
 
             if ($request->get('status') == 'paid') {

@@ -856,6 +856,8 @@
             var notes = $('#notes').val();
             var status = $('#status').val();
             var total_val = $('#total_val').val();
+            var transcript_transaction_id = $('#transcript_transaction_id').val();
+            var transcript_pay_mode = $('#transcript_pay_mode').val();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -874,10 +876,11 @@
                     notes: notes,
                     status: status,
                     total_val: total_val,
+                    transcript_pay_mode:transcript_pay_mode,
+                    transcript_transaction_id:transcript_transaction_id,
                 },
                 success: function(response) {
                     location.reload();
-
                 },
                 error: function(response) {
 
@@ -965,6 +968,7 @@
             });
         }
         if (type == 'order-detail_OrderConsultaion') {
+
             var order_detail_val = $('#order_detail_val').val();
             var p1_profile_id = $('#p1_profile_id').val();
             var language = $('#language').val();
@@ -1006,6 +1010,7 @@
         }
 
         if (type == 'order-detail_Notarization') {
+
             var order_detail_val = $('#order_detail_val').val();
             var parent_profile_id = $('#parent_profile_id').val();
             var notarization_quantity = $('#studnotarization_quantityent_name').val();
@@ -1165,6 +1170,8 @@
             var status = $('#status-graduation').val();
             var grad_transction_id = $('#grad_transction_id').val();
             var custom_payment_mode = $('#custom_payment_mode').val();
+            var apostille_package = $('#apostille_package').val();
+            var apostille_country_gard = $('#apostille_country_gard').val();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1181,7 +1188,9 @@
                     grade_11,
                     status,
                     grad_transction_id,
-                    custom_payment_mode
+                    custom_payment_mode,
+                    apostille_package,
+                    apostille_country_gard
                 },
                 success: function(response) {
                     location.reload();
@@ -1843,7 +1852,6 @@
         $("#order-detail_ApostilePackage").hide();
         $("#order-detail_CustomLetter").hide();
         $("#order-detail_OrderConsultaion").hide();
-
         var mainElem = document.getElementById(this.value);
         let selectElem = mainElem.querySelector(".paymentDisplay");
         if (selectElem.value == "paid") {
@@ -1876,12 +1884,12 @@
         {
             $("#order-detail_OrderConsultaion").show();
         }
+       
     })
 
     document.querySelectorAll(".paymentDisplay").
     forEach((element) => {
         element.addEventListener("change", function() {
-
             var value = this.value;
             console.log(value);
             if (value == "paid") {
@@ -1890,10 +1898,18 @@
             } else {
                 $(".payment-div").hide();
                 $(".transction-div").hide();
-
             }
         })
     });
+    document.getElementById("apostille_package").addEventListener("change", function() {
+            var value =  this.value;
+            console.log(value);
+            if (value == "on") {
+                $(".apostille_country_pac").show();
+            } else {
+                $(".apostille_country_pac").hide();
+            }
+        })
 
     document.getElementById("postage_country").addEventListener("change", function() {
 
