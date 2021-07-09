@@ -41,9 +41,9 @@ class ParentController extends Controller
         });
     }
 
+
     public function address($id)
     {
-        // $parentdata = ParentProfile::getParentId();
         $parent = ParentProfile::where('id', ParentProfile::getParentId())->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
 
@@ -67,6 +67,7 @@ class ParentController extends Controller
             return redirect()->back()->with($notification);
         }
 
+        //get the coupons for the parent
         $coupons = Coupon::getParentCoupons();
 
         $country_list = Country::select('country')->get();
