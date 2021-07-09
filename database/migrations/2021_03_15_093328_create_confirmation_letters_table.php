@@ -18,8 +18,12 @@ class CreateConfirmationLettersTable extends Migration
             $table->unsignedBigInteger('student_profile_id');
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->nullable()->onDelete('cascade');
             $table->string('pdf_link')->nullable();
-            $table->enum('status', ['pending', 'paid', 'completed','active']);
+            $table->enum('status', ['pending', 'paid', 'completed', 'active']);
             $table->unsignedBigInteger('enrollment_period_id');
+            $table->boolean('isStudentId')->nullable();
+            $table->boolean('isDobCity')->nullable();
+            $table->boolean('IsMotherName')->nullable();
+            $table->boolean('isGrade')->nullable();
             $table->foreign('enrollment_period_id')->references('id')->on('enrollment_periods')->onDelete('cascade');
             $table->timestamps();
         });
