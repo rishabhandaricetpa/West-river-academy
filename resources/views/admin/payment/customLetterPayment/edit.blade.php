@@ -50,7 +50,7 @@
                             <div class="form-group col-sm-12">
                                 <label>Paid For</label>
                                 <textarea class="form-control" id="paying_for" value="{{ $customLetter->paying_for }}"
-                                    name="paying_for" maxlength="2000">{{ $customLetter->paying_for }}</textarea>
+                                    name="paying_for" onKeyPress="if(this.value.length==2000) return false;"  maxlength="2000">{{ $customLetter->paying_for }}</textarea>
                             </div>
                             @if ($transactionData)
                                 <div class="form-group col-sm-6">

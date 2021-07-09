@@ -16,6 +16,7 @@ use App\Models\EnrollmentPeriods;
 use App\Models\GraduationPayment;
 use App\Models\NotarizationPayment;
 use App\Models\Notes;
+use App\Models\Cart;
 use App\Models\OrderPersonalConsultation;
 use App\Models\OrderPostage;
 use App\Models\ParentProfile;
@@ -38,6 +39,7 @@ function active_route($pattern, $output = 'active')
     return \Illuminate\Support\Facades\Route::is($pattern) ? $output : null;
 }
 
+//used to calculate the k-8 transcript
 function getMetrixValues($course, $data, $transcriptData)
 {
     try {
@@ -57,6 +59,8 @@ function getMetrixValues($course, $data, $transcriptData)
         return false;
     }
 }
+
+//get fee deatils
 function getFeeDetails($type)
 {
     try {
@@ -66,6 +70,8 @@ function getFeeDetails($type)
         return false;
     }
 }
+
+//fetch promoted grads for transcript according to last value
 function getPromotedGrades($grades, $last_value = true)
 {
     try {
@@ -105,6 +111,7 @@ function getPromotedGrades($grades, $last_value = true)
     }
 }
 
+//fetch promoted grads for the transcript
 function getPromtedGrade($grades)
 {
     try {
@@ -128,12 +135,14 @@ function getPromtedGrade($grades)
     }
 }
 
+//Get the custom letter Quantity
 function getCustomLetterQuantity($amount)
 {
     $customletterfee = FeesInfo::getFeeAmount('custom_letter');
     $quantity = $amount / $customletterfee;
     return $quantity;
 }
+
 //get country postage chanrgess
 function getCountryAmount($country)
 {
@@ -141,6 +150,7 @@ function getCountryAmount($country)
     return $postage_charges;
 }
 
+//fetch transcript 9_12 data deatils for transcript print view
 function fetchTranscript9_12Details($transcriptData)
 {
     $courses = collect([]);
@@ -215,7 +225,7 @@ function fetchTranscript9_12Details($transcriptData)
     return $courses;
 }
 
-//get G.P.A for the student
+//get G.P.A for the student for transcript
 function getGPAvalue($courses, $total_credits_earned)
 {
     $academy_points = array(
@@ -324,9 +334,7 @@ function getGPAvalue($courses, $total_credits_earned)
 }
 
 
-
-
-
+//get Total credits for the student on transcript view
 function getTotalCredits($transcript_id, $transcript_9_12_id)
 {
     $course = TranscriptCourse9_12::whereIn('transcript9_12_id', $transcript_9_12_id)->with('subject')->get();
@@ -357,6 +365,7 @@ function getTotalCredits($transcript_id, $transcript_9_12_id)
     $totalSelectedGrades = floatval($sumOfSeletedEnrollmentGrade) + floatval($sumOfSeletedCollegeGrade) + floatval($sumOfSeletedApCourseGrade);
     return $totalSelectedGrades;
 }
+//Get the transcript details according to the enrollment ids
 function getTranscriptdeatils($enroll_student)
 {
     $tanscript = Transcript::where('student_profile_id', $enroll_student)->whereIn('status', ['pending', 'paid', 'canEdit', 'completed', 'approved'])->get();
@@ -366,6 +375,8 @@ function getTranscriptdeatils($enroll_student)
         return 'false';
     }
 }
+
+//get the transcript details if paid or not
 function getTranscriptPaidDetails($transcriptPayment_id)
 {
     $tanscript = TranscriptPayment::whereId($transcriptPayment_id)->whereIn('status', ['paid', 'canEdit', 'completed', 'approved'])->get();
@@ -375,6 +386,8 @@ function getTranscriptPaidDetails($transcriptPayment_id)
         return 'false';
     }
 }
+
+//Get the student enrollment ids
 function getEnrollmetForStudents($student_id)
 {
     $enroll_student = StudentProfile::find($student_id);
@@ -383,6 +396,7 @@ function getEnrollmetForStudents($student_id)
     return $enrollment_ids;
 }
 
+//Get payment information according to the enrollment ids
 function getPaymentInformation($enrollment_ids)
 {
     $payment_info = DB::table('enrollment_periods')
@@ -394,12 +408,7 @@ function getPaymentInformation($enrollment_ids)
     return $payment_info;
 }
 
-function getallstartenrollmentes($student_id)
-{
-    $enroll_student = StudentProfile::find($student_id);
-    $allEnrollmentPeriods = $enroll_student->enrollmentPeriods()->get();
-    return $allEnrollmentPeriods;
-}
+//get all the enrollments on student id start date and end date
 function getendallenrollmentes($student_id)
 {
     $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
@@ -410,7 +419,7 @@ function getendallenrollmentes($student_id)
     return $strtdate . '    ' . $enddate;
 }
 
-//get pending orders
+//get pending orders for the admin user datatable
 function getOrderAmount($item_type, $item_code)
 {
     if ($item_type == "enrollment_period") {
@@ -449,6 +458,8 @@ function getOrderAmount($item_type, $item_code)
             return false;
     }
 }
+
+//get Orders for order detail page
 function getOrders($transction_id)
 {
     //  checking from enrollment payments
@@ -507,7 +518,7 @@ function getOrders($transction_id)
 }
 
 
-
+//get the status for dashboard to check is status is paid or pending
 
 function getstatus($enrollment_period_id)
 {
@@ -521,14 +532,25 @@ function getstatus($enrollment_period_id)
     }
 }
 
+//Get Enrollment Payments status for blade file
 function getPaymentstatus($enrollment_payment_id)
 {
     $enrollment_payments = EnrollmentPayment::whereId($enrollment_payment_id)->first();
     return $enrollment_payments->status;
 }
 
+//Get the student data
 function getStudentData($student_id)
 {
     $student_name = StudentProfile::whereId($student_id)->first();
     return $student_name->fullname;
+}
+
+
+//To check if cart is empty or not
+function getcartval()
+{
+    $parent_profile_id = ParentProfile::getParentId();
+    $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
+    return $count;
 }

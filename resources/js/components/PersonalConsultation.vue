@@ -150,6 +150,7 @@
         v-model="form.consulting_about"
         rows="3"
         maxlength="2000"
+        onKeyPress="if(this.value.length==2000) return false;"
         required
       ></textarea>
     </div>

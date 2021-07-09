@@ -57,7 +57,7 @@
                                 <label>Consutation about</label>
                                 <textarea class="form-control" id="amount"
                                     value="{{ $order_conultation->consulting_about }}" name="consulting_about"
-                                    maxlength="2000"></textarea>
+                                    maxlength="2000" onKeyPress="if(this.value.length==2000) return false;"></textarea>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Payment Status<sup>*</sup></label>

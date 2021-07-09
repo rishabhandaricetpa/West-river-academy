@@ -137,7 +137,7 @@
     </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add another  History/Social Science Course</a
+        >Add another History/Social Science Course</a
       >
          <a
         type="button"

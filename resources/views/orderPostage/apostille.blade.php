@@ -89,7 +89,7 @@
                         <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s)
                             you wish to have apostille and any other comments.</p>
                         <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"
-                            maxlength="2000"></textarea>
+                            maxlength="2000" onKeyPress="if(this.value.length==2000) return false;"></textarea>
                     </div>
 
                     <div class="form-group mb-2">

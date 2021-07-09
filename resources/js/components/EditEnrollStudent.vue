@@ -232,7 +232,7 @@
             </div>
             <div class="info-detail col-md-8 col-lg-6 lato-italic">
               <p>
-               You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will START on the date you see in the box. 
+               You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will END on the date you see in the box. 
               </p>
             </div>
              <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
@@ -308,6 +308,7 @@
         value=""
         rows="3"
         maxlength="2000"
+        onKeyPress="if(this.value.length==2000) return false;"
         v-model="form.student_situation"
       ></textarea>
       </div>

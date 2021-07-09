@@ -17,70 +17,70 @@
                     <label for="">School Name</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->school_name }}" required
-                            name="school_name" placeholder="Name of School" required aria-describedby="" />
+                            name="school_name" required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Email Address</label>
                     <div>
                         <input type="email" class="form-control" value="{{ $school_record->email }}" name="email" required
-                            placeholder="Email Address of School" required aria-describedby="" />
+                             required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Fax Number</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->fax_number }}" name="fax_number"
-                            required placeholder="Fax Number of School" required aria-describedby="" />
+                            required  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Phone Number</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->phone_number }}" required
-                            name="phone_number" placeholder="Phone Number of School" required aria-describedby="" />
+                            name="phone_number"  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Street Address</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->street_address }}" required
-                            name="street_address" placeholder="Street Address of School" required aria-describedby="" />
+                            name="street_address"  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">City</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->city }}" id="" name="city"
-                            required placeholder="City" required aria-describedby="" />
+                            required  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">State/Province/Region</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->state }}" id="" name="state"
-                            required placeholder="State/Province/Region" required aria-describedby="" />
+                            required  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Zip/Postal Code</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->zip_code }}" id="" required
-                            name="zip_code" required placeholder="Zip/Postal Code" required aria-describedby="" />
+                            name="zip_code" required  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Country</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->country }}" id="" required
-                            name="country" required placeholder="Country" required aria-describedby="" />
+                            name="country" required  required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Last Grade In School</label>
                     <div>
                         <input type="text" class="form-control" value="{{ $school_record->last_grade }}" required
-                            name="last_grade" placeholder="Last grade" required aria-describedby="" />
+                            name="last_grade"  required aria-describedby="" />
                     </div>
                 </div>
 

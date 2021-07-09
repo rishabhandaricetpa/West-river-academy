@@ -249,7 +249,7 @@
                                     @if (getPaymentstatus($student->enrollment_payment_id) === 'paid')
                                         <td>Paid</td>
                                     @else
-                                        <td>Not Paid for Enrollment</td>
+                                        <td>Pending</td>
                                     @endif
                                     @if (getPaymentstatus($student->enrollment_payment_id) === 'paid')
                                         <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
