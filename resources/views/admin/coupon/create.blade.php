@@ -45,7 +45,7 @@
                     <div class="col-sm-4 form-group">
                         <label for="description">Description <small>(optional)</small>:</label>
                         <textarea name="description" placeholder="Enter description.." class="w-100" id="description"
-                            cols="80" rows="2" maxlength="2000"></textarea>
+                            cols="80" rows="2" maxlength="2000" onKeyPress="if(this.value.length==2000) return false;"></textarea>
                     </div>
 
                     <div class="form-group col-sm-12">

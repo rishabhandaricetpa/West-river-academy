@@ -21,7 +21,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="exampleInputPassword1">What is the content of the letter?</label>
                     <div>
-                        <textarea  name="paying_for" class="form-control textarea_large" required maxlength="2000"></textarea>
+                        <textarea  name="paying_for" class="form-control textarea_large" onKeyPress="if(this.value.length==2000) return false;" required maxlength="2000"></textarea>
                     </div>
                 </div>
                 <div class="mt-2r">
