@@ -756,7 +756,7 @@
                           <div class="form-check">
                             <input class="form-check-input" type="radio" id="grade_level[]" value="3" required>
                             <label class="form-check-label pl-1 pl-sm-0">
-                              2
+                              3
                             </label>
                           </div>
                           <div class="form-check">
@@ -765,6 +765,9 @@
                               4
                             </label>
                           </div>
+                          
+                        </div>
+                        <div class="col-6">
                           <div class="form-check">
                             <input class="form-check-input" type="radio" id="grade_level[]" value="5" required>
                             <label class="form-check-label pl-1 pl-sm-0">
@@ -777,8 +780,6 @@
                               6
                             </label>
                           </div>
-                        </div>
-                        <div class="col-6">
                           <div class="form-check">
                             <input class="form-check-input" type="radio" value="7" id="grade_level[]">
                             <label class="form-check-label pl-1 pl-sm-0">
