@@ -22,7 +22,7 @@
                                 <td>{{ $transcation->created_at->format('M j,Y') }}</td>
                                 <td>{{ $transcation->item_type }}</td>
                                 <td>Pending</td>
-                                <td>{{ getOrderAmount( $transcation->item_type, $transcation->item_id) }}</td>
+                                <td>{{ getOrderAmount($transcation->item_type, $transcation->item_id) }}</td>
                                 <?php $values = getOrders($transcation->transcation_id); ?>
                                 <td>{{ $values }}</td>
                                 <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
@@ -752,7 +752,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Amount</label>
-                                    <input type="text" id="custom_letter_amount" class="form-control" readonly>
+                                    <input type="text" id="custom_letter_amount" class="form-control" >
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -765,12 +765,6 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_l_status" class="form-control paymentDisplay">
-                                        <option value="">Select...</option>
-                                        <option value="">Select...</option>
-                                        <option value="">Select...</option>
-                                        <option value="">Select...</option>
-                                        <option value="">Select...</option>
-                                        <option value="">Select...</option>
                                         <option value="">Select...</option>
                                         <option value="paid">Paid</option>
                                         <option value="pending">Pending</option>

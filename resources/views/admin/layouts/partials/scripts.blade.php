@@ -1772,19 +1772,6 @@
         });
     });
 
-    // for custom payment hide and show payment mode inaccordance to status
-    document.getElementById("custom_status").addEventListener("change", function() {
-
-        var value = this.value;
-        if (value == "paid") {
-            $("#transction-div-custom").show();
-            $('#payment-div-custom').show();
-        } else {
-            $("#transction-div-custom").hide();
-            $("#payment-div-custom").hide();
-
-        }
-    });
     // for graduation hide and show payment mode inaccordance to status
     document.getElementById("status-graduation").addEventListener("change", function() {
 
@@ -1857,16 +1844,8 @@
         $("#order-detail_ApostilePackage").hide();
         $("#order-detail_CustomLetter").hide();
         $("#order-detail_OrderConsultaion").hide();
-        var mainElem = document.getElementById(this.value);
-        let selectElem = mainElem.querySelector(".paymentDisplay");
-        if (selectElem.value == "paid") {
-            $(".transction-div").show();
-            $('.payment-div').show();
-        } else {
-            $(".payment-div").hide();
-            $(".transction-div").hide();
 
-        }
+
 
         if (value == "order-detail_transcript") {
             $("#order-detail_transcript").show();
@@ -1883,6 +1862,10 @@
         } else if (value == "order-detail_ApostilePackage") {
             $("#order-detail_ApostilePackage").show();
         } else if (value == "order-detail_CustomLetter") {
+            $('#custom_letter_quantity').attr('required', 'required');
+            $('#custom_letter_amount').attr('required', 'required');
+            $('#custom_letter_paying').attr('required', 'required');
+            $('#custom_l_status').attr('required', 'required');
             $("#order-detail_CustomLetter").show();
         } else if (value == "order-detail_OrderConsultaion") {
             $("#order-detail_OrderConsultaion").show();
@@ -1894,13 +1877,17 @@
     forEach((element) => {
         element.addEventListener("change", function() {
             var value = this.value;
-            console.log(value);
             if (value == "paid") {
                 $(".transction-div").show();
                 $('.payment-div').show();
+                $('#custom_letter_transction').attr('required', 'required');
+                $('#custom_letter_payment_mode').attr('required', 'required');
+
             } else {
                 $(".payment-div").hide();
                 $(".transction-div").hide();
+                $('#custom_letter_transction').removeAttr('required');
+                $('#custom_letter_payment_mode').removeAttr('required');
             }
         })
     });
