@@ -190,41 +190,61 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Grade</label>
-                                    <input type="text" id="order-grade" class="form-control">
+                                    <select id="order-grade" class="form-control">
+                                        <option value="Ungraded">Ungraded</option>
+                                        <option value="Preschool Age 3">Preschool Age 3 </option>
+                                        <option value="Preschool Age 4">Preschool Age 4</option>
+                                        <option value="Kindergarten">Kindergarten</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-12">
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Type</label>
-                                    <input type="text" id="order-type" class="form-control" readonly>
-                                </div>
+                                <label for="message-text" class="col-form-label">Type</label>
+                                <select type="" id="order-type" class="form-control paymentDisplay">
+                                    <option value="half">Second Semester</option>
+                                    <option value="annual">Annual</option>
+                                </select>
                             </div>
                             <div class="col-lg-6 col-12">
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Amount</label>
-                                    <input type="text" id="order-amount" class="form-control" readonly>
-                                </div>
+                                <label for="message-text" class="col-form-label">Amount</label>
+                                <select type="" id="order-amount" class="form-control paymentDisplay">
+                                    <option value="200">$200</option>
+                                    <option value="50">$50</option>
+                                    <option value="375">$375</option>
+                                </select>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_letter_status" class="form-control paymentDisplay">
-                                        <option value="paid">Paid</option>
                                         <option value="pending">Pending</option>
+                                        <option value="paid">Paid</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div">
                                     <label for="message-text" class="col-form-label">Transcation ID</label>
-                                    <input type="text" id="custom_letter_transction" class="form-control">
+                                    <input type="text" id="enrollment_transction_id" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="custom_letter_payment_mode" class="form-control">
+                                    <select type="" id="enrollment_pay_mode" class="form-control">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>
                                         <option value="Paypal">Paypal</option>
@@ -677,8 +697,8 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="apostille_status" class="form-control paymentDisplay">
-                                      <option value="">Select...</option>  
-                                      <option value="paid">Paid</option>
+                                        <option value="">Select...</option>
+                                        <option value="paid">Paid</option>
                                         <option value="pending">Pending</option>
                                     </select>
                                 </div>
@@ -687,9 +707,9 @@
                             <div class="col-lg-6 col-12 ">
                                 <div class="form-group  payment-div">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="apostille_payment_mode" class="form-control">  
-                                      <option value="">Select...</option>
-                                      <option value="Credit Card">Credit Card</option>
+                                    <select type="" id="apostille_payment_mode" class="form-control">
+                                        <option value="">Select...</option>
+                                        <option value="Credit Card">Credit Card</option>
                                         <option value="Pay Pal">Pay Pal</option>
                                         <option value="Bank Transfer">Bank Transfer</option>
                                         <option value="Money Gram">Money Gram</option>
@@ -715,7 +735,7 @@
                                 <div class="form-group d-flex align-items-center justify-content-end">
                                     <label for="message-text"
                                         class="col-form-label col-2 font-size-large  pt-2">Total:</label>
-                                        <input type="text" id="apostille_total" class="form-control col-6">
+                                    <input type="text" id="apostille_total" class="form-control col-6">
                                 </div>
                             </div>
                         </div>
@@ -747,11 +767,11 @@
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_l_status" class="form-control paymentDisplay">
                                         <option value="">Select...</option>
-                                      <option value="">Select...</option>  
                                         <option value="">Select...</option>
-                                      <option value="">Select...</option>  
                                         <option value="">Select...</option>
-                                      <option value="">Select...</option>  
+                                        <option value="">Select...</option>
+                                        <option value="">Select...</option>
+                                        <option value="">Select...</option>
                                         <option value="">Select...</option>
                                         <option value="paid">Paid</option>
                                         <option value="pending">Pending</option>
@@ -852,11 +872,11 @@
                                                 Mode</label>
                                             <select type="" id="consul_payment_mode" class="form-control">
                                                 <option value="">Select...</option>
-                                              <option value="">Select...</option>  
                                                 <option value="">Select...</option>
-                                              <option value="">Select...</option>  
                                                 <option value="">Select...</option>
-                                              <option value="">Select...</option>  
+                                                <option value="">Select...</option>
+                                                <option value="">Select...</option>
+                                                <option value="">Select...</option>
                                                 <option value="">Select...</option>
                                                 <option value="Credit Card">Credit Card</option>
                                                 <option value="Pay Pal">Pay Pal</option>
