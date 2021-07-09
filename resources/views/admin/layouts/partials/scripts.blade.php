@@ -1134,7 +1134,7 @@
             var custom_letter_paying = $('#custom_letter_paying').val();
             var custom_letter_transction = $('#custom_letter_transction').val();
             var custom_letter_payment_mode = $('#custom_letter_payment_mode').val();
-            var custom_letter_status = $('#custom_letter_status').val();
+            var custom_letter_status = $('#custom_l_status').val();
             var parent_id = $('#parent_id').val();
             $.ajax({
                 headers: {
@@ -1901,15 +1901,15 @@
             }
         })
     });
-    document.getElementById("apostille_package").addEventListener("change", function() {
-            var value =  this.value;
-            console.log(value);
-            if (value == "on") {
-                $(".apostille_country_pac").show();
-            } else {
-                $(".apostille_country_pac").hide();
-            }
-        })
+
+
+    $('input[name=apostille_package]').change(function() {
+        if ($(this).is(':checked')) {
+            $("#apostille_country_pac").show();
+        } else {
+            $("#apostille_country_pac").hide();
+        }
+    });
 
     document.getElementById("postage_country").addEventListener("change", function() {
 

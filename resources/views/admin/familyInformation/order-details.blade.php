@@ -102,12 +102,11 @@
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Amount<span
                                         class="required">*</span></label>
-                                        <select type="" id="amount" class="form-control"
-                                        >
-                                        <option value="">Select...</option>
-                                        <option value="25">25</option>
-                                        <option value="80">80</option>
-                                    </select>
+                                <select type="" id="amount" class="form-control">
+                                    <option value="">Select...</option>
+                                    <option value="25">25</option>
+                                    <option value="80">80</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
@@ -158,7 +157,7 @@
                             <div class="form-group d-flex align-items-center justify-content-end">
                                 <label for="message-text"
                                     class="col-form-label col-2 font-size-large  pt-2">Total:</label>
-                                    <input type="text" id="total_val" class="form-control col-6">
+                                <input type="text" id="total_val" class="form-control col-6">
                             </div>
                         </div>
                     </div>
@@ -257,24 +256,28 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 pb-2">
-                                          <div class="form-group">
-                                              <label for="recipient-name" class="col-form-label">Include the Apostille package</label>
-                                              <input type="checkbox" id="apostille_package" name="apostille_package">
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-6 col-12">
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label apostille_country_pac">Apostille Country</label>
-                                            <select class="form-control" id="apostille_country_gard" name="apostille_country_gard"
-                                                >
-                                                <option value="">Select country</option>
-                                                @foreach ($countries as $country)
-                                                    <option value="{{ $country->country }}">
-                                                        {{ $country->country }}</option>
-                                                @endforeach
-                                            </select>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Include the Apostille
+                                                    package</label>
+                                                <input type="checkbox" id="apostille_package" name="apostille_package"
+                                                    checked>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-lg-6 col-12" id="apostille_country_pac">
+                                            <div class="form-group">
+                                                <label for="message-text"
+                                                    class="col-form-label apostille_country_pac">Apostille
+                                                    Country</label>
+                                                <select class="form-control" id="apostille_country_gard"
+                                                    name="apostille_country_gard">
+                                                    <option value="">Select country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->country }}">
+                                                            {{ $country->country }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Grade 9</label>
@@ -297,7 +300,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                       
+
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Grade 10</label>
@@ -343,6 +346,14 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 pb-2">
+                                            <label for="recipient-name" class="col-form-label">Status</label>
+                                            <select id="status-graduation" class="form-control paymentDisplay">
+                                                <option value='paid'>Paid</option>
+                                                <option value='pending'>Pending</option>
+                                                <option value='approved'>Approved</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 pb-2">
                                             <div class="form-group" id="grad-div-transction">
                                                 <label for="message-text" class="col-form-label">Transcation
                                                     ID</label>
@@ -365,35 +376,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 pb-2">
-                                            <label for="recipient-name" class="col-form-label">Status</label>
-                                            <select id="status-graduation" class="form-control paymentDisplay">
-                                                <option value='paid'>Paid</option>
-                                                <option value='pending'>Pending</option>
-                                                <option value='approved'>Approved</option>
-                                                <option value='completed'>Completed</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group transction-div">
-                                                <label for="message-text" class="col-form-label">Transcation ID</label>
-                                                <input type="text" id="custom_letter_transction" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group payment-div">
-                                                <label for="message-text" class="col-form-label">Payment Mode</label>
-                                                <select type="" id="custom_letter_payment_mode" class="form-control">
-                                                    <option value="">Select One </option>
-                                                    <option value="Credit Card">Credit Card</option>
-                                                    <option value="Paypal">Paypal</option>
-                                                    <option value="Bank Transfer">Bank Transfer</option>
-                                                    <option value="MoneyGram">MoneyGram</option>
-                                                    <option value="Check Or Money Order"> Check Or Money Order</option>
 
-                                                </select>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                         </div>
@@ -529,7 +512,7 @@
                                 <div class="form-group d-flex align-items-center justify-content-end">
                                     <label for="message-text"
                                         class="col-form-label col-2 font-size-large  pt-2">Total:</label>
-                                        <input type="text" id="postage_total" class="form-control col-6">
+                                    <input type="text" id="postage_total" class="form-control col-6">
                                 </div>
                             </div>
 
@@ -623,7 +606,7 @@
                                 <div class="form-group d-flex align-items-center justify-content-end">
                                     <label for="message-text"
                                         class="col-form-label col-2 font-size-large  pt-2">Total:</label>
-                                        <input type="text" id="notar_total" class="form-control col-6">
+                                    <input type="text" id="notar_total" class="form-control col-6">
                                 </div>
                             </div>
 
@@ -762,9 +745,15 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
-                                    <select type="" id="custom_letter_status" class="form-control paymentDisplay">
+                                    <select type="" id="custom_l_status" class="form-control paymentDisplay">
+                                        <option value="">Select...</option>
                                       <option value="">Select...</option>  
-                                      <option value="paid">Paid</option>
+                                        <option value="">Select...</option>
+                                      <option value="">Select...</option>  
+                                        <option value="">Select...</option>
+                                      <option value="">Select...</option>  
+                                        <option value="">Select...</option>
+                                        <option value="paid">Paid</option>
                                         <option value="pending">Pending</option>
                                     </select>
                                 </div>
@@ -862,8 +851,14 @@
                                             <label for="message-text" class="col-form-label">Payment
                                                 Mode</label>
                                             <select type="" id="consul_payment_mode" class="form-control">
+                                                <option value="">Select...</option>
                                               <option value="">Select...</option>  
-                                              <option value="Credit Card">Credit Card</option>
+                                                <option value="">Select...</option>
+                                              <option value="">Select...</option>  
+                                                <option value="">Select...</option>
+                                              <option value="">Select...</option>  
+                                                <option value="">Select...</option>
+                                                <option value="Credit Card">Credit Card</option>
                                                 <option value="Pay Pal">Pay Pal</option>
                                                 <option value="Bank Transfer">Bank Transfer</option>
                                                 <option value="Money Gram">Money Gram</option>
@@ -883,7 +878,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

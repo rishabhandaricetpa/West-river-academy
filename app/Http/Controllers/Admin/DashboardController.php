@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Dashboard;
 use App\Models\FeesInfo;
 use App\Models\Graduation;
@@ -180,6 +181,13 @@ class DashboardController extends Controller
                 $graduation_payment->transcation_id = $request->get('grad_transction_id');
                 $graduation_payment->payment_mode = $request->get('custom_payment_mode');
                 $graduation_payment->save();
+            }
+            if ($request->get('status') == 'pending') {
+                Cart::create([
+                    'item_type' => 'graduation',
+                    'item_id' => $graduation->id,
+                    'parent_profile_id' => $request->get('parent_id')
+                ]);
             }
 
             if (
