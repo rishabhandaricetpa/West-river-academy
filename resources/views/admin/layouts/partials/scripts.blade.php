@@ -876,8 +876,8 @@
                     notes: notes,
                     status: status,
                     total_val: total_val,
-                    transcript_pay_mode:transcript_pay_mode,
-                    transcript_transaction_id:transcript_transaction_id,
+                    transcript_pay_mode: transcript_pay_mode,
+                    transcript_transaction_id: transcript_transaction_id,
                 },
                 success: function(response) {
                     location.reload();
@@ -896,7 +896,10 @@
             var amount = $('#order-amount').val();
             var grade = $('#order-grade').val();
             var type = $('#order-type').val();
-            var status = $('#order-status').val();
+            var status = $('#custom_letter_status').val();
+            var enrollment_transction_id = $('#enrollment_transction_id').val();
+            var enrollment_pay_mode = $('#enrollment_pay_mode').val();
+
             var order_name = 'enrollment';
             console.log(status);
             $.ajax({
@@ -916,7 +919,9 @@
                     grade: grade,
                     type: type,
                     status: status,
-                    order_name: order_name
+                    order_name: order_name,
+                    enrollment_pay_mode: enrollment_pay_mode,
+                    enrollment_transction_id: enrollment_transction_id
                 },
                 success: function(response) {
                     location.reload();
@@ -1879,12 +1884,10 @@
             $("#order-detail_ApostilePackage").show();
         } else if (value == "order-detail_CustomLetter") {
             $("#order-detail_CustomLetter").show();
-        }
-        else if(value=="order-detail_OrderConsultaion")
-        {
+        } else if (value == "order-detail_OrderConsultaion") {
             $("#order-detail_OrderConsultaion").show();
         }
-       
+
     })
 
     document.querySelectorAll(".paymentDisplay").

@@ -315,13 +315,15 @@ class ParentController extends Controller
             DB::beginTransaction();
             switch ($request->get('order_detail_val')) {
                 case 'order-detail_enrollment':
-                    $transction = new TransactionsMethod();
-                    $transction->transcation_id   = substr(uniqid(), 0, 12);
-                    $transction->payment_mode = "admin created";
-                    $transction->parent_profile_id = $request->get('parent_id');
-                    $transction->amount = $request->get('amount');
-                    $transction->status = $request->get('status');
-                    $transction->save();
+                    if ($request->get('status') == 'paid') {
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   = $request->get('enrollment_transction_id');
+                        $transction->payment_mode = $request->get('enrollment_pay_mode');
+                        $transction->parent_profile_id = $request->get('parent_id');
+                        $transction->amount = $request->get('amount');
+                        $transction->status = $request->get('status');
+                        $transction->save();
+                    }
 
                     $enrollment_period = new EnrollmentPeriods();
                     $enrollment_period->student_profile_id = $request->get('student_id');
@@ -344,8 +346,8 @@ class ParentController extends Controller
                     $enroll_payment->amount = $request->get('amount');
                     $enroll_payment->status = $request->get('status');
                     if ($enroll_payment->status == 'paid') {
-                        $enroll_payment->transcation_id = substr(uniqid(), 0, 12);
-                        $enroll_payment->payment_mode =  'admin_created';
+                        $enroll_payment->transcation_id = $request->get('enrollment_transction_id');
+                        $enroll_payment->payment_mode =  $enroll_payment->enrollment_pay_mode;
                         $enrollment_period->enrollment_payment_id = $enroll_payment->id;
                     }
 
