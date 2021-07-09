@@ -145,7 +145,7 @@ class ParentController extends Controller
         $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
 
-        $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
+        $transcations =   Cart::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
@@ -310,6 +310,7 @@ class ParentController extends Controller
     //create orders in family enrollments
     public function createOrders(Request $request)
     {
+
         try {
             DB::beginTransaction();
             switch ($request->get('order_detail_val')) {
@@ -519,7 +520,6 @@ class ParentController extends Controller
                     }
                     break;
                 case 'order-detail_ApostilePackage':
-
                     $apotille_type = "apostille";
                     $status = ($request->get('apostille_status') == 'pending') ? 'pending' : 'paid';
 
@@ -542,10 +542,9 @@ class ParentController extends Controller
                     $apostille->status = $status;
                     $apostille->save();
 
-
                     $notarization_payment = new NotarizationPayment();
                     $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
-                    $notarization_payment->notarization_id =  $apostille->id;
+                    $notarization_payment->apostille_id =  $apostille->id;
                     $notarization_payment->amount = $request->get('apostille_total');
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "apostille";
@@ -596,24 +595,21 @@ class ParentController extends Controller
                 case 'order-detail_OrderConsultaion':
 
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
-
                     if ($status == 'paid') {
 
                         $transction = new TransactionsMethod();
                         $transction->transcation_id   = $request->get('consul_transaction_id');
                         $transction->payment_mode =  $request->get('consul_payment_mode');
                         $transction->parent_profile_id = $request->get('p1_profile_id');
-                        $transction->amount = $request->get('consul_total');
+                        $transction->amount = $request->get('consul_amount');
                         $transction->status = $status;
                         $transction->save();
                     }
-
                     $consultation_type = "order_consultation";
                     $consultation = new OrderPersonalConsultation();
-
                     $consultation->parent_profile_id   = $request->get('p1_profile_id');
                     $consultation->preferred_language = $request->get('language');
-                    $consultation->amount = $request->get('consul_total');
+                    $consultation->amount = $request->get('consul_amount');
                     $consultation->consulting_about = $request->get('consul_paying_for');
                     $consultation->paying_for = $request->get('consul_paying_for');
                     $consultation->type_of_payment = 'Order a personal consultation';
@@ -621,7 +617,6 @@ class ParentController extends Controller
                     $consultation->payment_mode = $request->get('consul_payment_mode');
                     $consultation->status = $status;
                     $consultation->save();
-
                     if ($status) {
                         if (!Cart::where('item_type', $consultation_type)->exists()) {
                             Cart::create([
@@ -675,14 +670,17 @@ class ParentController extends Controller
     }
     public function orderDetails($id)
     {
+        $parentProfileData = User::find($id)->parentProfile()->first();
+
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
         $address = Address::where('parent_profile_id', $id)->first();
-        $transcations =   TransactionsMethod::where('parent_profile_id', $id)->get();
+        $transcations =   Cart::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
+
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
         $documents = UploadDocuments::where('parent_profile_id', $id)->get();
         $payment_info = DB::table('enrollment_periods')
@@ -702,8 +700,18 @@ class ParentController extends Controller
                 'enrollment_periods.student_profile_id'
             )
             ->get();
+
+        $cartAmount =  Cart::getCartAmount($id);
+
+        $amount = 0;
+        foreach ($cartAmount as $cart) {
+            foreach ($cart['enroll_items'] as $enroll) {
+                $amount += $enroll['amount'];
+            }
+        }
+
         $payment_nonpaid = $payment_info->where('status', 'pending');
-        return view('admin.familyinformation.order-detail', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'address'));
+        return view('admin.familyinformation.order-detail', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'address', 'amount'));
     }
     public function editAddress(Request $request)
     {

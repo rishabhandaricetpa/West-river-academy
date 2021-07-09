@@ -195,7 +195,7 @@
                 </div>
                 <div class="d-flex align-items-center form-group">
                     <label for="message-text" class="col-form-label col-form-label_highlights">Total</label>
-                    <input type="text" id="" class="form-control">
+                    <input type="text" id="" value={{$amount}} class="form-control">
 
                 </div>
             </div>

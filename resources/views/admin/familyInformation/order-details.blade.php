@@ -7,10 +7,9 @@
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">Date</th>
-                            <th scope="col">Paid By</th>
-                            <th scope="col">Order Total</th>
-                            <th scope="col">Payment Method</th>
+                            <th scope="col">Order</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Amount</th>
                             <th scope="col">Details</th>
                             <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                     data-toggle="modal" data-target="#orderModal" data-whatever="@getbootstrap"><img
@@ -21,12 +20,12 @@
                         @foreach ($transcations as $transcation)
                             <tr>
                                 <td>{{ $transcation->created_at->format('M j,Y') }}</td>
-                                <td>{{ $transcation->payment_mode }}</td>
-                                <td>{{ $transcation->amount }}</td>
-                                <td>{{ $transcation->payment_mode }}</td>
+                                <td>{{ $transcation->item_type }}</td>
+                                <td>Pending</td>
+                                <td>{{ getOrderAmount( $transcation->item_type, $transcation->item_id) }}</td>
                                 <?php $values = getOrders($transcation->transcation_id); ?>
                                 <td>{{ $values }}</td>
-                                <td><a href=" {{ route('admin.orders.details', $parent->id) }}"><i
+                                <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
                                             class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
                                 </td>
                                 <td></td>
@@ -638,7 +637,7 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Quantity</label>
                                     <select type="" id="apostille_quantity" class="form-control"
-                                        onchange="getApostilleAmount(); ">
+                                        onchange="getApostilleAmount(); getTotal();">
                                         <option value="">Select...</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>

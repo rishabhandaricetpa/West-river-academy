@@ -12,10 +12,12 @@ use App\Models\ConfirmationLetter;
 use App\Models\CustomLetterPayment;
 use App\Models\CustomPayment;
 use App\Models\EnrollmentPayment;
+use App\Models\EnrollmentPeriods;
 use App\Models\GraduationPayment;
 use App\Models\NotarizationPayment;
 use App\Models\Notes;
 use App\Models\OrderPersonalConsultation;
+use App\Models\OrderPostage;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
 use App\Models\TransactionsMethod;
@@ -407,6 +409,46 @@ function getendallenrollmentes($student_id)
     }
     return $strtdate . '    ' . $enddate;
 }
+
+//get pending orders
+function getOrderAmount($item_type, $item_code)
+{
+    if ($item_type == "enrollment_period") {
+        $payment_id = EnrollmentPeriods::whereId($item_code)->first();
+        $amount = EnrollmentPayment::whereId($payment_id->enrollment_payment_id)->first();
+        return $amount->amount;
+    } elseif ($item_type == "graduation") {
+        $amount = GraduationPayment::where('graduation_id', $item_code)->first();
+        return $amount->amount;
+    } elseif ($item_type == "transcript") {
+        $amount = TranscriptPayment::where('transcript_id', $item_code)->first();
+        return $amount->amount;
+    } elseif ($item_type == "postage") {
+        $amount = OrderPostage::where('parent_profile_id', $item_code)->first();
+        return $amount->amount;
+    } elseif ($item_type == "notarization") {
+        $amount = NotarizationPayment::where('notarization_id', $item_code)->first();
+        if ($amount)
+            return $amount->amount;
+        else
+            return false;
+    } elseif ($item_type == "apostille") {
+        $amount = NotarizationPayment::where('apostille_id', $item_code)->first();
+        return $amount->amount;
+    } elseif ($item_type == "custom_letter") {
+        $amount = CustomLetterPayment::where('parent_profile_id', $item_code)->first();
+        return $amount->amount;
+    } elseif ($item_type == "order_consultation") {
+        $amount = OrderPersonalConsultation::where('parent_profile_id', $item_code)->first();
+        return $amount->amount;
+    } elseif ($item_type == "custom") {
+        $amount = CustomPayment::where('parent_profile_id', $item_code)->first();
+        if ($amount)
+            return ($amount->amount);
+        else
+            return false;
+    }
+}
 function getOrders($transction_id)
 {
     //  checking from enrollment payments
@@ -463,6 +505,9 @@ function getOrders($transction_id)
 
     return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
 }
+
+
+
 
 function getstatus($enrollment_period_id)
 {
