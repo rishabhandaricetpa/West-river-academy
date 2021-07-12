@@ -9,7 +9,8 @@
             </ul>
         </li>
         @if(getcartval()>0)
-            <li><a href="{{ url('/cart') }}"><span> Cart {{getcartval()}}</span><i class="fas fa-2x fa-shopping-cart"></i></a></li>
+            <li><a href="{{ url('/cart') }}" class="d-flex cart-item-no"><span class="ml-2"> Cart <span class="item-no d-flex justify-content-center align-items-center">{{getcartval()}}
+                </span> </span><i class="fas fa-2x fa-shopping-cart"></i></a></li>
         @else
             <li><a href="{{ url('/cart') }}"><span>Cart</span><i class="fas fa-2x fa-shopping-cart"></i></a></li>
         @endif
