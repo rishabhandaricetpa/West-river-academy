@@ -3,7 +3,7 @@
 @section('content')
 
 <main class="position-relative container form-content mt-4">
-  <h1 class="text-center text-white text-uppercase">dashboard</h1>
+  <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
 
   <div class="form-wrap border bg-light py-2r px-25 dashboard-info">
     <form class="mb-0 inner-form-wrapper" method="post" action="{{route('update.studentProfile',$studentProfile->id)}}">

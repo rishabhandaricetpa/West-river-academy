@@ -11,21 +11,21 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">School Name</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="school_name" placeholder="Name of School"
+                        <input type="text" class="form-control" id="" name="school_name" 
                             required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Email Address</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="email" placeholder="Email Address of School"
+                        <input type="text" class="form-control" id="" name="email" 
                             required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Fax Number</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="fax_number" placeholder="Fax Number of School"
+                        <input type="text" class="form-control" id="" name="fax_number" 
                             required aria-describedby="" />
                     </div>
                 </div>
@@ -33,48 +33,48 @@
                     <label for="">Phone Number</label>
                     <div>
                         <input type="text" class="form-control" id="" name="phone_number"
-                            placeholder="Phone Number of School" required aria-describedby="" />
+                             required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Street Address</label>
                     <div>
                         <input type="text" class="form-control" id="" name="street_address"
-                            placeholder="Street Address of School" required aria-describedby="" />
+                             required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">City</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="city" placeholder="City" required
+                        <input type="text" class="form-control" id="" name="city"  required
                             aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">State/Province/Region</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="state" placeholder="State/Province/Region"
+                        <input type="text" class="form-control" id="" name="state" 
                             required aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Zip/Postal Code</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="zip_code" placeholder="Zip/Postal Code" required
+                        <input type="text" class="form-control" id="" name="zip_code"  required
                             aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Country</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="country" placeholder="Country" required
+                        <input type="text" class="form-control" id="" name="country"  required
                             aria-describedby="" />
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Last Grade In School</label>
                     <div>
-                        <input type="text" class="form-control" id="" name="last_grade" placeholder="Last grade" required
+                        <input type="text" class="form-control" id="" name="last_grade"  required
                              aria-describedby="" />
                     </div>
                 </div>

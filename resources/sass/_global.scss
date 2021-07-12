@@ -11,7 +11,9 @@ h3,
 .h3 {
   color: #235;
 }
-
+.display-none{
+  display:none;
+}
 /* custom classes */
 
 .lato-italic {
@@ -187,6 +189,14 @@ button {
 .max-width__275 {
   max-width: 275px;
 }
+.font-size-large{
+  font-size: 20px !important;;
+  color: $text-color!important;
+  font-weight: 700!important;
+}
+.required{
+  color:rgb(193, 10, 10);
+}
 
 .h-120 {
   height: 120px !important;
@@ -194,9 +204,10 @@ button {
 
 /* popup css */
 
-.modal-open .main-sidebar .main-sidebar::before {
+.modal-open .main-sidebar .main-sidebar::before,
+.modal-open .main-header::before{
   content: '';
-  position: absolute;
+  position: absolute;  
   top: 0;
   bottom: 0;
   width: 100vw;

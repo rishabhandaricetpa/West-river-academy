@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('view-student/{id}', 'StudentProfileController@studentInformation')->name('each.student');
     Route::get('view-parent-orders/{id}', 'StudentProfileController@viewParentOrders')->name('parents.orders');
     Route::get('view/student/parent/{parent_id}', 'ParentController@viewStudentParent')->name('view.students.parent');
-    Route::get('/allorders/{transaction_id}/{parent_id}', 'ParentController@viewAllOrders')->name('allorders');
+
 
     // Crud for student profile
     Route::get('student-data', 'StudentProfileController@dataTable')->name('datatable.student.data');
@@ -213,6 +213,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //dashboard notification
     Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
+    Route::get('orders/details/{parent_id}', 'ParentController@orderDetails')->name('orders.details');
     // archieved tasks
     Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
@@ -259,9 +260,15 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-student', 'StudentProfileController@updateNewStudents')->name('create.students');
     Route::post('create-student', 'StudentProfileController@createNewStudents')->name('create.newstudent');
     Route::post('update-student-profile', 'StudentProfileController@updateStudentProfile')->name('update.student.profile');
+
+    // create order from parent admin side
     Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
     Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
     Route::post('create-parent', 'ParentController@createParent')->name('create.parent');
     Route::post('add-graduation', 'DashboardController@addGraduation')->name('add.graduation');
+    Route::post('get-charges', 'ParentController@getCountryVal')->name('get.postagecharges');
+    Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
+    Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
+    Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
 });

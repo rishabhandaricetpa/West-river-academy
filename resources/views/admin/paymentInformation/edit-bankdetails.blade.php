@@ -167,27 +167,27 @@
         <div class="card-body">
           <div class="form-group">
             <label>Name<sup>*</sup></label>
-            <input class="form-control" id="name" value="" name="name">
+            <input class="form-control" id="name" value="" name="name" required>
           </div>
           <div class="form-group">
             <label>Address</label>
-            <input class="form-control" id="address" name="address" value="">
+            <input class="form-control" id="address" name="address" value="" required>
           </div>
           <div class="form-group">
             <label>City <sup>*</sup></label>
-            <input class="form-control" id="city" name="city" value="">
+            <input class="form-control" id="city" name="city" value="" required>
           </div>
           <div class="form-group">
             <label>State</label>
-            <input class="form-control" name="state" id="state" value="">
+            <input class="form-control" name="state" id="state" value="" required>
           </div>
           <div class="form-group">
             <label>Zip Code</label>
-            <input class="form-control" id="zip" name="zip" value="">
+            <input class="form-control" id="zip" name="zip" value="" required>
           </div>
           <div class="form-group">
             <label>ID</label>
-            <input class="form-control" id="money_gram_id" name="money_gram_id" value="">
+            <input class="form-control" id="money_gram_id" name="money_gram_id" value="" required>
           </div>
           <!-- /.card-body -->
           <div class="modal-footer py-3 px-0">
@@ -215,35 +215,35 @@
         <div class="card-body">
           <div class="form-group">
             <label>Bank Name<sup>*</sup></label>
-            <input class="form-control" id="bank_name" value="" name="bank_name">
+            <input class="form-control" id="bank_name" value="" name="bank_name" required>
           </div>
           <div class="form-group">
             <label>Swift Code</label>
-            <input class="form-control" id="swift_code" name="swift_code" value="">
+            <input class="form-control" id="swift_code" name="swift_code" value="" required>
           </div>
           <div class="form-group">
             <label>Bank Address <sup>*</sup></label>
-            <input class="form-control" id="bank_address" name="bank_address" value="">
+            <input class="form-control" id="bank_address" name="bank_address" value="" required>
           </div>
           <div class="form-group">
             <label>Street</label>
-            <input class="form-control" name="street" id="street" value="">
+            <input class="form-control" name="street" id="street" value="" required>
           </div>
           <div class="form-group">
             <label>Phone Number</label>
-            <input class="form-control" id="phone_number" name="phone_number" value="">
+            <input class="form-control" id="phone_number" name="phone_number" value="" required>
           </div>
           <div class="form-group">
             <label>Routing Number</label>
-            <input class="form-control" id="routing_number" name="routing_number" value="">
+            <input class="form-control" id="routing_number" name="routing_number" value="" required>
           </div>
           <div class="form-group">
             <label>Account Name</label>
-            <input class="form-control" id="account_name" name="account_name" value="">
+            <input class="form-control" id="account_name" name="account_name" value="" required>
           </div>
           <div class="form-group">
             <label>Account Number</label>
-            <input class="form-control" id="account_number" name="account_number" value="">
+            <input class="form-control" id="account_number" name="account_number" value="" required>
           </div>
           <!-- /.card-body -->
           <div class="modal-footer py-3">
@@ -270,39 +270,39 @@
         <div class="card-body">
           <div class="form-group">
             <label>Account Holder<sup>*</sup></label>
-            <input class="form-control" id="account_holder" value="" name="account_holder">
+            <input class="form-control" id="account_holder" value="" name="account_holder" required>
           </div>
           <div class="form-group">
             <label>Account Number</label>
-            <input class="form-control" id="account_number" name="account_number" value="">
+            <input class="form-control" id="account_number" name="account_number" value="" required>
           </div>
           <div class="form-group">
             <label>Wire Transfer Number <sup>*</sup></label>
-            <input class="form-control" id="wire_transfer_number" name="wire_transfer_number" value="">
+            <input class="form-control" id="wire_transfer_number" name="wire_transfer_number" value="" required>
           </div>
           <div class="form-group">
             <label>Swift Code</label>
-            <input class="form-control" name="swift_code" id="swift_code" value="">
+            <input class="form-control" name="swift_code" id="swift_code" value="" required>
           </div>
           <div class="form-group">
             <label>Routing Number</label>
-            <input class="form-control" name="routing_number" id="routing_number" value="">
+            <input class="form-control" name="routing_number" id="routing_number" value="" required>
           </div>
           <div class="form-group">
             <label>Address</label>
-            <input class="form-control" name="address" id="address" value="">
+            <input class="form-control" name="address" id="address" value="" required>
           </div>
           <div class="form-group">
             <label>State</label>
-            <input class="form-control" id="state" name="state" value="">
+            <input class="form-control" id="state" name="state" value="" required>
           </div>
           <div class="form-group">
             <label>Country</label>
-            <input class="form-control" id="country" name="country" value="">
+            <input class="form-control" id="country" name="country" value="" required>
           </div>
           <div class="form-group">
             <label>Website</label>
-            <input class="form-control" id="website" name="website" value="">
+            <input class="form-control" id="website" name="website" value="" required>
           </div>
           <!-- /.card-body -->
           <div class="modal-footer">

@@ -179,7 +179,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Notes:</label>
-                            <textarea class="form-control" id="notes" maxlength="2000"></textarea>
+                            <textarea class="form-control" id="notes"  onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>

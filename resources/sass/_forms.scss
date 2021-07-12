@@ -385,7 +385,8 @@ input[type="radio"]:checked:before {
     display: none;
   }
   .parents-details,
-  .students-details {
+  .students-details,
+  .order-details {
     .form-group {
       display: flex;
       align-items: center;
