@@ -891,8 +891,8 @@
             var order_detail_val = $('#order_detail_val').val();
             var parent_id = $('#parent_id').val();
             var student_id = $('#order-student-name').val();
-            var start_date = $('#order-start_date').val();
-            var end_date = $('#order-end-date').val();
+            var start_date = $('#start_date_of_enrollment').val();
+            var end_date = $('#end_date_of_enrollment').val();
             var amount = $('#order-amount').val();
             var grade = $('#order-grade').val();
             var type = $('#order-type').val();
@@ -1780,9 +1780,15 @@
         if (value == "paid") {
             $("#grad-div-transction").show();
             $('#payment-div-grad').show();
+            $('#grad_transction_id').attr('required', 'required');
+            $('#custom_payment_mode').attr('required', 'required');
+
+
         } else {
             $("#grad-div-transction").hide();
             $("#payment-div-grad").hide();
+            $('#grad_transction_id').removeAttr('required');
+            $('#custom_payment_mode').removeAttr('required');
 
         }
     })
@@ -1850,10 +1856,23 @@
         if (value == "order-detail_transcript") {
             $("#order-detail_transcript").show();
         } else if (value == "order-detail_enrollment") {
+
+            $('#start_date_of_enrollment').attr('required', 'required');
+            $('#order-student-name').attr('required', 'required');
+            $('#end_date_of_enrollment').attr('required', 'required');
+            $('#order-grade').attr('required', 'required');
+            $('#order-type').attr('required', 'required');
+            $('#order-amount').attr('required', 'required');
+            $('#custom_letter_status').attr('required', 'required');
+
             $("#order-detail_enrollment").show();
         } else if (value == "order-detail_Graduation") {
+
             $("#order-detail_Graduation").show();
         } else if (value == "order-detail_CustomPayment") {
+            $('#custom_amount').attr('required', 'required');
+            $('#custom_paying_for').attr('required', 'required');
+            $('#custom1').attr('required', 'required');
             $("#order-detail_CustomPayment").show();
         } else if (value == "order-detail_OrderPostage") {
             $("#order-detail_OrderPostage").show();
@@ -1880,14 +1899,14 @@
             if (value == "paid") {
                 $(".transction-div").show();
                 $('.payment-div').show();
-                $('#custom_letter_transction').attr('required', 'required');
-                $('#custom_letter_payment_mode').attr('required', 'required');
+                $('.custom_letter_transction').attr('required', 'required');
+                $('.custom_letter_payment_mode').attr('required', 'required');
 
             } else {
                 $(".payment-div").hide();
                 $(".transction-div").hide();
-                $('#custom_letter_transction').removeAttr('required');
-                $('#custom_letter_payment_mode').removeAttr('required');
+                $('.custom_letter_transction').removeAttr('required');
+                $('.custom_letter_payment_mode').removeAttr('required');
             }
         })
     });
@@ -1896,8 +1915,10 @@
     $('input[name=apostille_package]').change(function() {
         if ($(this).is(':checked')) {
             $("#apostille_country_pac").show();
+            //$('.apostille_country_gard').attr('required', 'required');
         } else {
             $("#apostille_country_pac").hide();
+            $('.apostille_country_gard').removeAttr('required');
         }
     });
 

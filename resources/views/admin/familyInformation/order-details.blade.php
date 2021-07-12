@@ -126,13 +126,15 @@
                         <div class="col-lg-6 col-12">
                             <div class="form-group transction-div">
                                 <label for="message-text" class="col-form-label">Transcation ID</label>
-                                <input type="text" id="transcript_transaction_id" class="form-control">
+                                <input type="text" id="transcript_transaction_id"
+                                    class="form-control custom_letter_transction">
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group payment-div">
                                 <label for="message-text" class="col-form-label">Payment Mode</label>
-                                <select type="" id="transcript_pay_mode" class="form-control">
+                                <select type="" id="transcript_pay_mode"
+                                    class="form-control custom_letter_payment_mode">
                                     <option value="">Select One </option>
                                     <option value="Credit Card">Credit Card</option>
                                     <option value="Paypal">Paypal</option>
@@ -164,7 +166,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Start Date</label>
-                                    <input type="date" id="order-start_date" class="form-control">
+                                    <input type="date" id="start_date_of_enrollment" class="form-control">
                                 </div>
                             </div>
                             <input class="form-control" type="hidden" value="{{ $parent->id }}" id='parent_id'
@@ -181,7 +183,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">End Date</label>
-                                    <input type="date" id="order-end-date" class="form-control"
+                                    <input type="date" id="end_date_of_enrollment" class="form-control"
                                         onchange="calculateType()">
                                 </div>
                             </div>
@@ -228,6 +230,7 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_letter_status" class="form-control paymentDisplay">
+                                        <option value="">Select One </option>
                                         <option value="pending">Pending</option>
                                         <option value="paid">Paid</option>
                                     </select>
@@ -236,13 +239,15 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div">
                                     <label for="message-text" class="col-form-label">Transcation ID</label>
-                                    <input type="text" id="enrollment_transction_id" class="form-control">
+                                    <input type="text" id="enrollment_transction_id"
+                                        class="form-control custom_letter_transction">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="enrollment_pay_mode" class="form-control">
+                                    <select type="" id="enrollment_pay_mode"
+                                        class="form-control custom_letter_payment_mode">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>
                                         <option value="Paypal">Paypal</option>
@@ -264,7 +269,7 @@
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">For student</label>
-                                                <select id="student_ids" class="form-control">
+                                                <select id="student_ids" class="form-control grad-student">
                                                     @foreach ($allstudent as $student)
                                                         <option value="{{ $student->id }}">
                                                             {{ $student->first_name }}
@@ -278,7 +283,7 @@
                                                 <label for="recipient-name" class="col-form-label">Include the Apostille
                                                     package</label>
                                                 <input type="checkbox" id="apostille_package" name="apostille_package"
-                                                    checked>
+                                                    checked class="apostille_package">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12" id="apostille_country_pac">
@@ -286,8 +291,8 @@
                                                 <label for="message-text"
                                                     class="col-form-label apostille_country_pac">Apostille
                                                     Country</label>
-                                                <select class="form-control" id="apostille_country_gard"
-                                                    name="apostille_country_gard">
+                                                <select class="form-control apostille_country_gard"
+                                                    id="apostille_country_gard" >
                                                     <option value="">Select country</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->country }}">
@@ -299,7 +304,7 @@
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Grade 9</label>
-                                                <select id="grade_9" required class="form-control">
+                                                <select id="grade_9" required class="form-control grade_9">
                                                     <option value="I was enrolled in West River Academy.">I was enrolled
                                                         in West River
                                                         Academy.
@@ -322,7 +327,7 @@
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Grade 10</label>
-                                                <select id="grade_10" required class="form-control">
+                                                <select id="grade_10" required class="form-control grade_10">
                                                     <option value="I was enrolled in West River Academy.">I was enrolled
                                                         in West River
                                                         Academy.
@@ -344,7 +349,7 @@
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Grade 11</label>
-                                                <select id="grade_11" required class="form-control">
+                                                <select id="grade_11" required class="form-control grade_11">
                                                     <option value="I was enrolled in West River Academy.">I was enrolled
                                                         in West River
                                                         Academy.
@@ -366,6 +371,7 @@
                                         <div class="col-md-6 pb-2">
                                             <label for="recipient-name" class="col-form-label">Status</label>
                                             <select id="status-graduation" class="form-control paymentDisplay">
+                                                <option value=''>Select</option>
                                                 <option value='paid'>Paid</option>
                                                 <option value='pending'>Pending</option>
                                                 <option value='approved'>Approved</option>
@@ -375,14 +381,14 @@
                                             <div class="form-group" id="grad-div-transction">
                                                 <label for="message-text" class="col-form-label">Transcation
                                                     ID</label>
-                                                <input type="text" id="grad_transction_id" class="form-control">
+                                                <input type="text" id="grad_transction_id" class="form-control ">
                                             </div>
                                         </div>
                                         <div class="col-md-6 pb-2">
                                             <div class="form-group" id="payment-div-grad">
                                                 <label for="message-text" class="col-form-label">Payment
                                                     Mode</label>
-                                                <select type="" id="custom_payment_mode" class="form-control">
+                                                <select type="" id="custom_payment_mode" class="form-control ">
                                                     <option value="">Select One </option>
                                                     <option value="Credit Card">Credit Card</option>
                                                     <option value="Paypal">Paypal</option>
@@ -418,7 +424,8 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
-                                    <select type="" id="custom_status" class="form-control paymentDisplay">
+                                    <select type="" id="custom1" class="form-control paymentDisplay">
+                                        <option value="">Select...</option>
                                         <option value="paid">Paid</option>
                                         <option value="pending">Pending</option>
                                     </select>
@@ -427,13 +434,15 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div" id="transction-div-custom">
                                     <label for="message-text" class="col-form-label">Transcation Id</label>
-                                    <input type="text" id="custom_transcation" class="form-control">
+                                    <input type="text" id="custom_transcation1"
+                                        class="form-control custom_letter_transction">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div" id="payment-div-custom">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="custom_payment_mode" class="form-control">
+                                    <select type="" id="custom_payment_mode"
+                                        class="form-control custom_letter_payment_mode">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>
                                         <option value="Paypal">Paypal</option>
@@ -751,7 +760,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Amount</label>
-                                    <input type="text" id="custom_letter_amount" class="form-control" >
+                                    <input type="text" id="custom_letter_amount" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -773,13 +782,15 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div" id="transction-div">
                                     <label for="message-text" class="col-form-label">Transcation ID</label>
-                                    <input type="text" id="custom_letter_transction" class="form-control">
+                                    <input type="text" id="custom_letter_transction"
+                                        class="form-control custom_letter_transction">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div" id="payment-div">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="custom_letter_payment_mode" class="form-control">
+                                    <select type="" id="custom_letter_payment_mode"
+                                        class="form-control custom_letter_payment_mode">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>
                                         <option value="Paypal">Paypal</option>
