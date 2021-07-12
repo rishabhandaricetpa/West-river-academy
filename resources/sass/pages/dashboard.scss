@@ -16,13 +16,11 @@
 }
 
 .dashboard-info {
-  h3 {
+  h3,p ,input,label {
     font-weight: 500;
-  }
-  p {
     font-size: 1.2rem;
-    font-weight: 500;
   }
+ 
 
   a:not(.btn) {
     text-decoration: underline;

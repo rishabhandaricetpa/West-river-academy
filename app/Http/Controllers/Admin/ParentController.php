@@ -142,16 +142,18 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
-        $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
+        // $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
+        $studentData = $parent->studentProfile()->get();
 
+        $studentId = collect($studentData)->pluck('id');
         $transcations =   Cart::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
         $documents = UploadDocuments::where('parent_profile_id', $id)->get();
         $payment_info = DB::table('enrollment_periods')
-            ->whereIn('student_profile_id', $student_ids)
+            ->whereIn('student_profile_id', $studentId)
             ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
                 'enrollment_periods.created_at',
@@ -167,6 +169,7 @@ class ParentController extends Controller
                 'enrollment_periods.student_profile_id'
             )
             ->get();
+
         $payment_nonpaid = $payment_info->where('status', 'pending');
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
     }

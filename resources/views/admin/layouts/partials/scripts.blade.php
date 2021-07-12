@@ -1308,7 +1308,7 @@
     $("#add-new-enrollments").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
-        var student_name = $('#student_name').val();
+        var student_name = $('#student_name_enroll').val();
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
         var grade_level = $("input[type='radio']:checked").val();
@@ -1328,6 +1328,7 @@
             },
             success: function(response) {
                 location.reload();
+
             },
             error: function(response) {
 

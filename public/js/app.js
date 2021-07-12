@@ -4981,6 +4981,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -8198,6 +8199,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -8493,6 +8495,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -45392,7 +45395,8 @@ var render = function() {
               name: "student_situation",
               value: "",
               rows: "3",
-              maxlength: "2000"
+              maxlength: "2000",
+              onKeyPress: "if(this.value.length==2000) return false;"
             },
             domProps: { value: _vm.form.student_situation },
             on: {
@@ -45570,7 +45574,7 @@ var staticRenderFns = [
       [
         _c("p", [
           _vm._v(
-            "\n             You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will START on the date you see in the box. \n            "
+            "\n             You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will END on the date you see in the box. \n            "
           )
         ])
       ]
@@ -49386,7 +49390,7 @@ var render = function() {
                   staticClass: "btn btn-primary",
                   on: { click: _vm.addCourse }
                 },
-                [_vm._v("Add another  History/Social Science Course")]
+                [_vm._v("Add another History/Social Science Course")]
               ),
               _vm._v(" "),
               _c(
@@ -50202,7 +50206,8 @@ var render = function() {
                   id: "exampleFormControlTextarea1",
                   name: "student_situation",
                   rows: "3",
-                  maxlength: "2000"
+                  maxlength: "2000",
+                  onKeyPress: "if(this.value.length==2000) return false;"
                 },
                 domProps: { value: _vm.form.student_situation },
                 on: {
@@ -50404,7 +50409,7 @@ var staticRenderFns = [
       [
         _c("p", [
           _vm._v(
-            "\n                          You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will START on the date you see in the box. \n\n           "
+            "\n                          You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will END on the date you see in the box. \n\n           "
           )
         ])
       ]
@@ -50919,6 +50924,7 @@ var render = function() {
             name: "consulting_about",
             rows: "3",
             maxlength: "2000",
+            onKeyPress: "if(this.value.length==2000) return false;",
             required: ""
           },
           domProps: { value: _vm.form.consulting_about },
