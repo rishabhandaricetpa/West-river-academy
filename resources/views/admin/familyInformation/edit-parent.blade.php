@@ -651,6 +651,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {{-- {{dd($payment_info)}} --}}
                   @foreach ($payment_info as $payment)
                   <tr>
                     <td>{{ Carbon\Carbon::parse($payment->created_at)->format('M j, Y') }}
@@ -694,7 +695,7 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="recipient-name" class="col-form-label">For student</label>
-                    <select id="student-name" class="form-control" required>
+                    <select id="student_name_enroll" class="form-control" required>
                       @foreach ($allstudent as $student)
                       <option value="{{ $student->id }}" id="student_name">
                         {{ $student->first_name }} </option>
