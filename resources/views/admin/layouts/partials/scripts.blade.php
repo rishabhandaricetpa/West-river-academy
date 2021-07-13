@@ -1735,6 +1735,15 @@
             elements[i].disabled = true;
         }
     })
+    document.querySelector(".js-cancel").addEventListener("click", () => {
+        var form = document.getElementById("sampleForm");
+        form.classList.add("is-readonly");
+        form.classList.remove("is-editing");
+        let elements = document.getElementsByTagName("input");
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].disabled = true;
+        }
+    })
     /////form enable 
     document.querySelectorAll(".form-enable").forEach((link) => {
         link.addEventListener("click", () => {
@@ -1777,6 +1786,7 @@
             }
         });
     });
+
     document.querySelectorAll(".form-enable").forEach((link) => {
         link.addEventListener("click", () => {
             var form = document.getElementById("orderForm1");
@@ -1797,7 +1807,47 @@
             }
         });
     });
-
+   
+    document.querySelectorAll(".form-enable").forEach((link) => {
+        link.addEventListener("click", () => {
+            var form = document.getElementById("orderForm1");
+            if (form.classList.contains("is-readonly")) {
+                form.classList.remove("is-readonly");
+                form.classList.add("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = false;
+                }
+            } else {
+                form.classList.add("is-readonly");
+                form.classList.remove("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+            }
+        });
+    });
+    document.querySelectorAll(".form-enable").forEach((link) => {
+        link.addEventListener("click", () => {
+            var form = document.getElementById("repForm");
+            if (form.classList.contains("is-readonly")) {
+                form.classList.remove("is-readonly");
+                form.classList.add("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = false;
+                }
+            } else {
+                form.classList.add("is-readonly");
+                form.classList.remove("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+            }
+        });
+    });
     // for graduation hide and show payment mode inaccordance to status
     document.getElementById("status-graduation").addEventListener("change", function() {
 
