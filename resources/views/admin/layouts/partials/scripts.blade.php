@@ -1112,7 +1112,7 @@
             var custom_paying_for = $('#custom_paying_for').val();
             var custom_transcation = $('#custom_transcation').val();
             var custom_payment_mode = $('#custom_payment_mode').val();
-            var custom_status = $('#custom_status').val();
+            var custom_status = $('#custom1').val();
             var parent_id = $('#parent_id').val();
             $.ajax({
                 headers: {
@@ -1875,6 +1875,7 @@
             $('#custom_letter_status').attr('required', 'required');
             $("#order-detail_enrollment").show();
         } else if (value == "order-detail_Graduation") {
+            $('#status-graduation').attr('required', 'required');
             $("#order-detail_Graduation").show();
         } else if (value == "order-detail_CustomPayment") {
             $('#custom_amount').attr('required', 'required');
@@ -1932,14 +1933,10 @@
             if (value == "paid") {
                 $(".transction-div").show();
                 $('.payment-div').show();
-                // $('.custom_letter_transction').attr('required', 'required');
-                // $('.custom_letter_payment_mode').attr('required', 'required');
 
             } else {
                 $(".payment-div").hide();
                 $(".transction-div").hide();
-                // $('.custom_letter_transction').removeAttr('required');
-                // $('.custom_letter_payment_mode').removeAttr('required');
             }
         })
     });

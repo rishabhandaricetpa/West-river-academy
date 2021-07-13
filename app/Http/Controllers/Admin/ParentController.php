@@ -100,7 +100,18 @@ class ParentController extends Controller
                 'reference' =>  $request->get('reference'),
                 'immunized' => $request->get('parent_status'),
             ]);
-            $parent->save();
+            $billinAddress = Address::updateOrCreate(
+                ['parent_profile_id' => $parent->id],
+                [
+                    'parent_profile_id' => $parent->id,
+                    'billing_street_address' => $request->get('parent1_street_address'),
+                    'billing_city' => $request->get('parent1_city'),
+                    'billing_state' => $request->get('parent1_state'),
+                    'billing_zip_code' => $request->get('parent2_zip_code'),
+                    'billing_country' => $request->get('parent2_country'),
+                    'email' => $request->get('parent1_email'),
+                ]
+            );
 
             DB::commit();
 
