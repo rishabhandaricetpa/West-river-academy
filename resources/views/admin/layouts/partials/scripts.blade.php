@@ -617,8 +617,7 @@
     // dashboard admin record transfer doc for student
     $("#add-record-request").on("submit", function(event) {
         event.preventDefault();
-        console.log('created');
-        var student_id = $('#student_id').val();
+        var student_id = $('#record_student_id').val();
         var parent_id = $('#parent_id').val();
         var school_name = $('#school_name').val();
         var email_add = $('#email_add').val();
@@ -630,7 +629,11 @@
         var zipcode = $('#zipcode1').val();
         var country = $('#country1').val();
         var last_grade = $('#last_grade').val();
-        console.log(zipcode);
+        var record_street_address = $('#record_street_address').val();
+        var record_city = $('#record_city').val();
+        var record_state = $('#record_state').val();
+        var record_zip_code = $('#record_zip_code').val();
+        var record_country = $('#record_country').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -650,7 +653,13 @@
                 state: state,
                 zipcode: zipcode,
                 country: country,
-                last_grade: last_grade
+                last_grade: last_grade,
+                record_street_address,
+                record_city,
+                record_state,
+                record_zip_code,
+                record_country
+
             },
             success: function(response) {
                 location.reload();
