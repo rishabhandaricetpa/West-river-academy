@@ -1106,7 +1106,7 @@
             var custom_paying_for = $('#custom_paying_for').val();
             var custom_transcation = $('#custom_transcation').val();
             var custom_payment_mode = $('#custom_payment_mode').val();
-            var custom_status = $('#custom_status').val();
+            var custom_status = $('#custom1').val();
             var parent_id = $('#parent_id').val();
             $.ajax({
                 headers: {
