@@ -262,147 +262,146 @@
                     </div>
                     <div class="order-detail_Graduation display-none" id="order-detail_Graduation">
                         <div class="row">
-                            <form id="add-graduation">
-                                <div class="form-group col-12">
-                                    <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
-                                    <div class="row">
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">For student</label>
-                                                <select id="student_ids" class="form-control grad-student">
-                                                    @foreach ($allstudent as $student)
-                                                        <option value="{{ $student->id }}">
-                                                            {{ $student->first_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Include the Apostille
-                                                    package</label>
-                                                <input type="checkbox" id="apostille_package" name="apostille_package"
-                                                    checked class="apostille_package">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-12" id="apostille_country_pac">
-                                            <div class="form-group">
-                                                <label for="message-text"
-                                                    class="col-form-label apostille_country_pac">Apostille
-                                                    Country</label>
-                                                <select class="form-control apostille_country_gard"
-                                                    id="apostille_country_gard" >
-                                                    <option value="">Select country</option>
-                                                    @foreach ($countries as $country)
-                                                        <option value="{{ $country->country }}">
-                                                            {{ $country->country }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Grade 9</label>
-                                                <select id="grade_9" required class="form-control grade_9">
-                                                    <option value="I was enrolled in West River Academy.">I was enrolled
-                                                        in West River
-                                                        Academy.
+                            <div class="form-group col-12">
+                                <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+                                <div class="row">
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">For student</label>
+                                            <select id="student_ids" class="form-control grad-student">
+                                                @foreach ($allstudent as $student)
+                                                    <option value="{{ $student->id }}">
+                                                        {{ $student->first_name }}
                                                     </option>
-                                                    <option
-                                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                                        I homeschooled independently. (There are no transcripts that a
-                                                        school can send.)
-                                                    </option>
-                                                    <option
-                                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                                        I was enrolled in another school that can send or has already
-                                                        sent transcripts.
-                                                    </option>
-                                                    <option value="Others">Others</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Grade 10</label>
-                                                <select id="grade_10" required class="form-control grade_10">
-                                                    <option value="I was enrolled in West River Academy.">I was enrolled
-                                                        in West River
-                                                        Academy.
-                                                    </option>
-                                                    <option
-                                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                                        I homeschooled independently. (There are no transcripts that a
-                                                        school can send.)
-                                                    </option>
-                                                    <option
-                                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                                        I was enrolled in another school that can send or has already
-                                                        sent transcripts.
-                                                    </option>
-                                                    <option value="Others">Others</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Grade 11</label>
-                                                <select id="grade_11" required class="form-control grade_11">
-                                                    <option value="I was enrolled in West River Academy.">I was enrolled
-                                                        in West River
-                                                        Academy.
-                                                    </option>
-                                                    <option
-                                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                                        I homeschooled independently. (There are no transcripts that a
-                                                        school can send.)
-                                                    </option>
-                                                    <option
-                                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                                        I was enrolled in another school that can send or has already
-                                                        sent transcripts.
-                                                    </option>
-                                                    <option value="Others">Others</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 pb-2">
-                                            <label for="recipient-name" class="col-form-label">Status</label>
-                                            <select id="status-graduation" class="form-control paymentDisplay">
-                                                <option value=''>Select</option>
-                                                <option value='paid'>Paid</option>
-                                                <option value='pending'>Pending</option>
-                                                <option value='approved'>Approved</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group" id="grad-div-transction">
-                                                <label for="message-text" class="col-form-label">Transcation
-                                                    ID</label>
-                                                <input type="text" id="grad_transction_id" class="form-control ">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 pb-2">
-                                            <div class="form-group" id="payment-div-grad">
-                                                <label for="message-text" class="col-form-label">Payment
-                                                    Mode</label>
-                                                <select type="" id="custom_payment_mode" class="form-control ">
-                                                    <option value="">Select One </option>
-                                                    <option value="Credit Card">Credit Card</option>
-                                                    <option value="Paypal">Paypal</option>
-                                                    <option value="Bank Transfer">Bank Transfer</option>
-                                                    <option value="MoneyGram">MoneyGram</option>
-                                                    <option value="Check Or Money Order"> Check Or Money Order
-                                                    </option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-
                                     </div>
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Include the Apostille
+                                                package</label>
+                                            <input type="checkbox" id="apostille_package" name="apostille_package"
+                                                checked class="apostille_package">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12" id="apostille_country_pac">
+                                        <div class="form-group">
+                                            <label for="message-text"
+                                                class="col-form-label apostille_country_pac">Apostille
+                                                Country</label>
+                                            <select class="form-control apostille_country_gard"
+                                                id="apostille_country_gard">
+                                                <option value="">Select country</option>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->country }}">
+                                                        {{ $country->country }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Grade 9</label>
+                                            <select id="grade_9" required class="form-control grade_9">
+                                                <option value="I was enrolled in West River Academy.">I was enrolled
+                                                    in West River
+                                                    Academy.
+                                                </option>
+                                                <option
+                                                    value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                                    I homeschooled independently. (There are no transcripts that a
+                                                    school can send.)
+                                                </option>
+                                                <option
+                                                    value="I was enrolled in another school that can send or has already sent transcripts.">
+                                                    I was enrolled in another school that can send or has already
+                                                    sent transcripts.
+                                                </option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Grade 10</label>
+                                            <select id="grade_10" required class="form-control grade_10">
+                                                <option value="I was enrolled in West River Academy.">I was enrolled
+                                                    in West River
+                                                    Academy.
+                                                </option>
+                                                <option
+                                                    value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                                    I homeschooled independently. (There are no transcripts that a
+                                                    school can send.)
+                                                </option>
+                                                <option
+                                                    value="I was enrolled in another school that can send or has already sent transcripts.">
+                                                    I was enrolled in another school that can send or has already
+                                                    sent transcripts.
+                                                </option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Grade 11</label>
+                                            <select id="grade_11" required class="form-control grade_11">
+                                                <option value="I was enrolled in West River Academy.">I was enrolled
+                                                    in West River
+                                                    Academy.
+                                                </option>
+                                                <option
+                                                    value="I homeschooled independently. (There are no transcripts that a school can send.)">
+                                                    I homeschooled independently. (There are no transcripts that a
+                                                    school can send.)
+                                                </option>
+                                                <option
+                                                    value="I was enrolled in another school that can send or has already sent transcripts.">
+                                                    I was enrolled in another school that can send or has already
+                                                    sent transcripts.
+                                                </option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <label for="recipient-name" class="col-form-label">Status</label>
+                                        <select id="status-graduation" class="form-control paymentDisplay">
+                                            <option value=''>Select</option>
+                                            <option value='paid'>Paid</option>
+                                            <option value='pending'>Pending</option>
+                                            <option value='approved'>Approved</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group" id="grad-div-transction">
+                                            <label for="message-text" class="col-form-label">Transcation
+                                                ID</label>
+                                            <input type="text" id="grad_transction_id" class="form-control ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <div class="form-group" id="payment-div-grad">
+                                            <label for="message-text" class="col-form-label">Payment
+                                                Mode</label>
+                                            <select type="" id="custom_payment_mode" class="form-control ">
+                                                <option value="">Select One </option>
+                                                <option value="Credit Card">Credit Card</option>
+                                                <option value="Paypal">Paypal</option>
+                                                <option value="Bank Transfer">Bank Transfer</option>
+                                                <option value="MoneyGram">MoneyGram</option>
+                                                <option value="Check Or Money Order"> Check Or Money Order
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
+                            </div>
                         </div>
                     </div>
                     <div class="order-detail_CustomPayment display-none" id="order-detail_CustomPayment">

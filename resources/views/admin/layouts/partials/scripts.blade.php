@@ -1868,7 +1868,7 @@
 
             $("#order-detail_enrollment").show();
         } else if (value == "order-detail_Graduation") {
-
+            $('#status-graduation').attr('required', 'required');
             $("#order-detail_Graduation").show();
         } else if (value == "order-detail_CustomPayment") {
             $('#custom_amount').attr('required', 'required');
@@ -1900,14 +1900,12 @@
             if (value == "paid") {
                 $(".transction-div").show();
                 $('.payment-div').show();
-                $('.custom_letter_transction').attr('required', 'required');
-                $('.custom_letter_payment_mode').attr('required', 'required');
+
 
             } else {
                 $(".payment-div").hide();
                 $(".transction-div").hide();
-                $('.custom_letter_transction').removeAttr('required');
-                $('.custom_letter_payment_mode').removeAttr('required');
+
             }
         })
     });
