@@ -100,7 +100,18 @@ class ParentController extends Controller
                 'reference' =>  $request->get('reference'),
                 'immunized' => $request->get('parent_status'),
             ]);
-            $parent->save();
+            $billinAddress = Address::updateOrCreate(
+                ['parent_profile_id' => $parent->id],
+                [
+                    'parent_profile_id' => $parent->id,
+                    'billing_street_address' => $request->get('parent1_street_address'),
+                    'billing_city' => $request->get('parent1_city'),
+                    'billing_state' => $request->get('parent1_state'),
+                    'billing_zip_code' => $request->get('parent2_zip_code'),
+                    'billing_country' => $request->get('parent2_country'),
+                    'email' => $request->get('parent1_email'),
+                ]
+            );
 
             DB::commit();
 
@@ -142,16 +153,18 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::find($id);
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
-        $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
+        // $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
+        $studentData = $parent->studentProfile()->get();
 
+        $studentId = collect($studentData)->pluck('id');
         $transcations =   Cart::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
         $documents = UploadDocuments::where('parent_profile_id', $id)->get();
         $payment_info = DB::table('enrollment_periods')
-            ->whereIn('student_profile_id', $student_ids)
+            ->whereIn('student_profile_id', $studentId)
             ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
             ->select(
                 'enrollment_periods.created_at',
@@ -167,6 +180,7 @@ class ParentController extends Controller
                 'enrollment_periods.student_profile_id'
             )
             ->get();
+
         $payment_nonpaid = $payment_info->where('status', 'pending');
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
     }
@@ -466,7 +480,6 @@ class ParentController extends Controller
                         $postage->payment_mode = $request->get('postage_payment_mode');
                         $postage->status = $status;
                         $postage->save();
-
                         if ($status == 'pending') {
                             if (!Cart::where('item_id', $request->get('parent_value'))->where('item_type', $postage_type)->exists()) {
                                 Cart::create([
@@ -479,7 +492,7 @@ class ParentController extends Controller
                     }
                     break;
                 case 'order-detail_Notarization':
-
+                    $total_notar = $request->get('notar_amount') + $request->get('shipping_amount');
                     $notarization_type = "notarization";
                     $status = ($request->get('noatrization_status') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
@@ -487,7 +500,7 @@ class ParentController extends Controller
                         $transction->transcation_id   =   $request->get('notar_transaction_id');
                         $transction->payment_mode = $request->get('notar_payment_mode');
                         $transction->parent_profile_id = $request->get('parent_profile_id');
-                        $transction->amount = $request->get('notar_total');
+                        $transction->amount = $total_notar;
                         $transction->status = $request->get('noatrization_status');
                         $transction->save();
                     }
@@ -504,7 +517,7 @@ class ParentController extends Controller
                     $notarization_payment = new NotarizationPayment();
                     $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
                     $notarization_payment->notarization_id =  $notarization->id;
-                    $notarization_payment->amount = $request->get('notar_total');
+                    $notarization_payment->amount = $total_notar;
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "notarization";
                     $notarization_payment->save();
@@ -522,13 +535,14 @@ class ParentController extends Controller
                 case 'order-detail_ApostilePackage':
                     $apotille_type = "apostille";
                     $status = ($request->get('apostille_status') == 'pending') ? 'pending' : 'paid';
+                    $amount_total = $request->get('apostille_amount') + $request->get('ship_amount');
 
                     if ($status == 'paid') {
                         $transction = new TransactionsMethod();
                         $transction->transcation_id   =   $request->get('apostille_transaction_id');
                         $transction->payment_mode = $request->get('apostille_payment_mode');
                         $transction->parent_profile_id = $request->get('parent_profile_id');
-                        $transction->amount = $request->get('apostille_total');
+                        $transction->amount = $amount_total;
                         $transction->status = $status;
                         $transction->save();
                     }
@@ -545,7 +559,7 @@ class ParentController extends Controller
                     $notarization_payment = new NotarizationPayment();
                     $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
                     $notarization_payment->apostille_id =  $apostille->id;
-                    $notarization_payment->amount = $request->get('apostille_total');
+                    $notarization_payment->amount = $amount_total;
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "apostille";
                     $notarization_payment->save();
@@ -593,10 +607,8 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_OrderConsultaion':
-
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
-
                         $transction = new TransactionsMethod();
                         $transction->transcation_id   = $request->get('consul_transaction_id');
                         $transction->payment_mode =  $request->get('consul_payment_mode');
@@ -617,6 +629,7 @@ class ParentController extends Controller
                     $consultation->payment_mode = $request->get('consul_payment_mode');
                     $consultation->status = $status;
                     $consultation->save();
+
                     if ($status) {
                         if (!Cart::where('item_type', $consultation_type)->exists()) {
                             Cart::create([

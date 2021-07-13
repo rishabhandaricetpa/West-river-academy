@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Country;
 use App\Models\ParentProfile;
 use App\Models\User;
@@ -104,7 +105,18 @@ class RegisterController extends Controller
             'reference' => $data['refrence'],
             'immunized' => 'Not immunized',
         ]);
-        $parent->save();
+        $billinAddress = Address::updateOrCreate(
+            ['parent_profile_id' => $parent->id],
+            [
+                'parent_profile_id' => $parent->id,
+                'billing_street_address' => $data['street_address'],
+                'billing_city' => $data['city'],
+                'billing_state' => $data['state'],
+                'billing_zip_code' => $data['zip_code'],
+                'billing_country' =>  $data['country'],
+                'email' =>  $data['email'],
+            ]
+        );
 
         return $user;
     }
