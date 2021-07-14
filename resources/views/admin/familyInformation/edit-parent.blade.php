@@ -440,9 +440,7 @@
                                         <th scope="col">Student Name</th>
                                         <th scope="col">Gender</th>
                                         <th scope="col">Date of Birth</th>
-                                        <th scope="col">Grade</th>
                                         <th scope="col">Enrolled</th>
-                                        <th scope="col">Graduated</th>
                                         <th scope="col">Email</th>
                                         <th>Delete</th>
                                         <th scope="col" class="text-right"><button type="button"
@@ -452,6 +450,7 @@
                                         </th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @foreach ($allstudent as $student)
                                         <tr>
@@ -460,11 +459,10 @@
                                             </td>
                                             <td>{{ $student->gender }}</td>
                                             <td>{{ $student->d_o_b->format('M j, Y') }}</td>
-                                            <td></td>
                                             <td>Yes</td>
-                                            <td></td>
                                             <td>{{ $student->email }}</td>
-                                            <td><a href="{{ route('admin.delete.student', $student->id) }}"><i
+                                            <td><a href="{{ route('admin.delete.student', $student->id) }}"
+                                                    onclick="return confirm('Are you sure you want to delete this family?');"><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </td>
                                             <td></td>
@@ -493,7 +491,7 @@
                                     <div class="col-lg-4 col-12">
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">First Name:</label>
-                                            <input class="form-control" type="text" id='first_name'>
+                                            <input class="form-control" type="text" id='first_name' required>
                                         </div>
                                     </div>
                                     <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
@@ -537,7 +535,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Date of Birth:</label>
-                                            <input type="text" id="d_o_b" class="form-control datepicker" required>
+                                            <input type="date" id="d_o_b" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -734,11 +732,11 @@
                                     <div class="form-group col-md-6">
                                         <label for="recipient-name" class="col-form-label">Start Date of
                                             Enrollment:</label>
-                                        <input type="text" class="form-control datepicker" id="start_date" required>
+                                        <input type="date" class="form-control" id="start_date" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="message-text" class="col-form-label">End Date of Enrollment:</label>
-                                        <input type="text" class="form-control datepicker" id="end_date" required>
+                                        <input type="date" class="form-control" id="end_date" required>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group lato-italic info-detail">
@@ -965,26 +963,6 @@
                                     <div class="form-group col-md-6">
                                         <label for="message-text" class="col-form-label">Phone Number:</label>
                                         <input type="text" id="phone_number" class="form-control" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">Street Address</label>
-                                        <input type="text" id="street_address" class="form-control" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">City</label>
-                                        <input type="text" id="city" class="form-control" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">State/Province/Region</label>
-                                        <input type="text" id="state" class="form-control" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">Zip/Postal Code</label>
-                                        <input type="text" id="zipcode" class="form-control" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">Country</label>
-                                        <input type="text" id="country" class="form-control" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="message-text" class="col-form-label">Last Grade In School</label>

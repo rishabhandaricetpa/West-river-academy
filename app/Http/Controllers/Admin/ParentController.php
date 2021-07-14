@@ -180,7 +180,6 @@ class ParentController extends Controller
                 'enrollment_periods.student_profile_id'
             )
             ->get();
-
         $payment_nonpaid = $payment_info->where('status', 'pending');
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
     }
