@@ -20,7 +20,7 @@ class CreateUploadDocumentTable extends Migration
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('original_filename');
-            $table->string('document_type')->nullable();
+            $table->string('document_type', 5000)->nullable();
             $table->boolean('is_upload_to_student')->nullable();
             $table->string('filename');
 
