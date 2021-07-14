@@ -58,7 +58,7 @@
                             <option value="order-detail_CustomPayment">Custom Payments</option>
                             <option value="order-detail_OrderPostage">Postage</option>
                             <option value="order-detail_Notarization">Notarization</option>
-                            <option value="order-detail_ApostilePackage">Apostile</option>
+                            <option value="order-detail_ApostilePackage">Apostille</option>
                             <option value="order-detail_CustomLetter">Custom Letter</option>
                             <option value="order-detail_OrderConsultaion">Personal Consultaion</option>
                         </select>
@@ -556,7 +556,7 @@
                                         <option value="">Select...</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
-                                        <option value="3">2</option>
+                                        <option value="3">3</option>
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                         <option value="6">6</option>
@@ -642,7 +642,7 @@
                                         <option value="">Select...</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
-                                        <option value="3">2</option>
+                                        <option value="3">3</option>
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                         <option value="6">6</option>

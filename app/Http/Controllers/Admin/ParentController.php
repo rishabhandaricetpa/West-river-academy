@@ -16,6 +16,7 @@ use App\Models\CustomLetterPayment;
 use App\Models\ConfirmationLetter;
 use App\Models\CustomPayment;
 use App\Models\OrderPostage;
+use App\Models\FeesInfo;
 use App\Models\EnrollmentPayment;
 use App\Models\Graduation;
 use App\Models\GraduationPayment;
@@ -667,10 +668,12 @@ class ParentController extends Controller
     {
         $getPaidData = Transcript::where('student_profile_id', $request->get('student_id'))->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->get();
         if (count($getPaidData) > 0) {
-            return 25;
+            $transcript_fee = FeesInfo::getFeeAmount('additional_transcript');
+            return $transcript_fee;
         } else {
+            $transcript_fee = FeesInfo::getFeeAmount('transcript');
+            return $transcript_fee;
         }
-        return 80;
     }
     public function  calculateType(Request $request)
     {

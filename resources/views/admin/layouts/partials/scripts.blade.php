@@ -902,7 +902,6 @@
             var enrollment_pay_mode = $('#enrollment_pay_mode').val();
 
             var order_name = 'enrollment';
-            console.log(status);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1690,6 +1689,32 @@
         }
     });
 
+    /////pagination
+    $(document).ready(function() {
+    $('.datatable-pagination').DataTable({
+      //disable sorting on last column
+      "columnDefs": [
+        { "orderable": false, "targets": 4 }
+      ],
+      language: {
+        //customize pagination prev and next buttons: use arrows instead of words
+        'paginate': {
+          'previous': '<span class="fa fa-chevron-left"></span>',
+          'next': '<span class="fa fa-chevron-right"></span>'
+        },
+        //customize number of elements to be displayed
+        "lengthMenu": 'Display <select class="form-control input-sm">'+
+        '<option value="10">10</option>'+
+        '<option value="20">20</option>'+
+        '<option value="30">30</option>'+
+        '<option value="40">40</option>'+
+        '<option value="50">50</option>'+
+        '<option value="-1">All</option>'+
+        '</select> results'
+      }
+    })  
+} );
+
 
 
     //// table enable 
@@ -1714,6 +1739,15 @@
     })
     document.querySelector(".js-cancel").addEventListener("click", () => {
         var form = document.getElementById("orderForm1");
+        form.classList.add("is-readonly");
+        form.classList.remove("is-editing");
+        let elements = document.getElementsByTagName("input");
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].disabled = true;
+        }
+    })
+    document.querySelector(".js-cancel").addEventListener("click", () => {
+        var form = document.getElementById("sampleForm");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
         let elements = document.getElementsByTagName("input");
@@ -1763,6 +1797,7 @@
             }
         });
     });
+
     document.querySelectorAll(".form-enable").forEach((link) => {
         link.addEventListener("click", () => {
             var form = document.getElementById("orderForm1");
@@ -1783,7 +1818,47 @@
             }
         });
     });
-
+   
+    document.querySelectorAll(".form-enable").forEach((link) => {
+        link.addEventListener("click", () => {
+            var form = document.getElementById("orderForm1");
+            if (form.classList.contains("is-readonly")) {
+                form.classList.remove("is-readonly");
+                form.classList.add("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = false;
+                }
+            } else {
+                form.classList.add("is-readonly");
+                form.classList.remove("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+            }
+        });
+    });
+    document.querySelectorAll(".form-enable").forEach((link) => {
+        link.addEventListener("click", () => {
+            var form = document.getElementById("repForm");
+            if (form.classList.contains("is-readonly")) {
+                form.classList.remove("is-readonly");
+                form.classList.add("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = false;
+                }
+            } else {
+                form.classList.add("is-readonly");
+                form.classList.remove("is-editing");
+                let elements = document.getElementsByTagName("input");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].disabled = true;
+                }
+            }
+        });
+    });
     // for graduation hide and show payment mode inaccordance to status
     document.getElementById("status-graduation").addEventListener("change", function() {
 
@@ -2031,7 +2106,7 @@
 
     function getTranscriptval() {
         var transcript = $('#transcript_period').val();
-        var student_id = $('#student_name_order').val();
+        var student_id = $('#student_id_val').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
