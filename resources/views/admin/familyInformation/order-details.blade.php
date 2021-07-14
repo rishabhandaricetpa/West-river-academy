@@ -89,9 +89,8 @@
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Period</label>
-                                <select type="" id="transcript_period" class="form-control"
-                                    onchange="getTranscriptval();">
-                                    <option value="K-8">Select...</option>
+                                <select id="transcript_period" class="form-control" onchange="getTranscriptval();">
+                                    <option value="">Select...</option>
                                     <option value="K-8">K-8</option>
                                     <option value="9-12">9-12</option>
                                 </select>
@@ -174,7 +173,7 @@
                             <input class="form-control" type="hidden" value="{{ $parent->id }}" id='parent_id'
                                 name="parent_id">
                             <div class="col-lg-6 col-12">
-                                <label for="recipient-name" class="col-form-label">For student</label>
+                                <label for="recipient-name" class="col-form-label">For Student</label>
                                 <select id="order-student-name" class="form-control">
                                     @foreach ($allstudent as $student)
                                         <option value="{{ $student->id }}">{{ $student->first_name }}
@@ -494,7 +493,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Quantity</label>
-                                    <input type="text" id="postage_quantity" class="form-control" 
+                                    <input type="text" id="postage_quantity" class="form-control"
                                         onchange="getTotal();">
                                 </div>
                             </div>
