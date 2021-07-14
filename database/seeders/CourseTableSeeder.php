@@ -17,8 +17,8 @@ class CourseTableSeeder extends Seeder
     {
         DB::table('courses')->delete(); {
             $array = [
-                ['1', 'English / Language Arts', 'K-8'],
-                ['2', 'History / Social Science', 'K-8'],
+                ['1', 'English/Language Arts', 'K-8'],
+                ['2', 'History/Social Science', 'K-8'],
                 ['3', 'Mathematics', 'K-8'],
                 ['4', 'Science', 'K-8'],
                 ['5', 'Health', 'K-8'],

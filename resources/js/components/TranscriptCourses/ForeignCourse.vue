@@ -140,7 +140,7 @@
     </p> 
     <div class="mt-2r">
       <a class="btn btn-primary" @click="addCourse"
-        >Add Another Foregin Course</a
+        >Add Another Foreign Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue

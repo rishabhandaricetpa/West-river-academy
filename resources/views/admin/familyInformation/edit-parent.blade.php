@@ -470,7 +470,7 @@
                 <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">First Name:</label>
-                    <input class="form-control" type="text" id='first_name'>
+                    <input class="form-control" type="text" id='first_name' required>
                   </div>
                 </div>
                 <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
@@ -485,7 +485,7 @@
                 <div class="col-lg-4 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Last/Family Name:</label>
-                    <input type="text" id="last_name" required class="form-control">
+                    <input type="text" id="last_name" required class="form-control" required>
                   </div>
                 </div>
 
@@ -512,7 +512,7 @@
                 <div class="col-md-6 col-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Date of Birth:</label>
-                    <input type="text" id="d_o_b" class="form-control datepicker" required>
+                    <input type="date" id="d_o_b" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
@@ -612,7 +612,7 @@
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Notes:</label>
-                <textarea class="form-control" id="message_text"></textarea>
+                <textarea class="form-control" id="message_text" onKeyPress="if(this.value.length==2000) return false;"></textarea>
               </div>
           </div>
           <div class="modal-footer">

@@ -901,7 +901,6 @@
             var enrollment_pay_mode = $('#enrollment_pay_mode').val();
 
             var order_name = 'enrollment';
-            console.log(status);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2052,7 +2051,7 @@
 
     function getTranscriptval() {
         var transcript = $('#transcript_period').val();
-        var student_id = $('#student_name_order').val();
+        var student_id = $('#student_id_val').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
