@@ -54,6 +54,7 @@
               <div class="col-12"> Date Created:{{ $student->created_at->format('M j, Y') }}</div>
 
               {{-- student detil-1 --}}
+              
               <div class="col-md-12">
                 <form class="is-readonly row students_store" id="studentForm1" class="edit-student-profile">
                   <div class="col-md-6">

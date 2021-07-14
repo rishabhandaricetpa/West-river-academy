@@ -56,10 +56,10 @@
                     <div class="row">
                         {{-- billing detil-1 --}}
                         <div class="col-md-12">
-                            <form class="is-readonly row" id="orderForm1">
+                            <form class="is-readonly row" id="sampleForm">
                                 @csrf
                                 <div class="col-md-6">
-                                    <h3 class="mt-3">Billing Iinformation</h3>
+                                    <h3 class="mt-3">Billing Information</h3>
                                     <div class="form-group">
                                         <label for="p1_first_name">First Name :</label>
                                         <input type="text" class="form-control is-disabled" name="p1_first_name"

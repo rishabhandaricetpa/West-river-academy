@@ -356,6 +356,22 @@ input[type="radio"]:checked:before {
 
 
 //////family details form
+form.is-readonly .btn-save {
+  display: none;
+}   
+
+form.is-readonly input[disabled],
+form.is-readonly textarea[disabled] {
+  cursor: text;
+  background-color: #fff;
+  border-color: transparent;
+  outline-color: transparent;
+  box-shadow: none;
+}
+
+form.is-editing .btn-edit {
+  display: none;
+}
 
 .family-details{
   .nav{
@@ -368,26 +384,12 @@ input[type="radio"]:checked:before {
      border-bottom: 2px solid #ff9900;
    }
   }
-  form.is-readonly .btn-save {
-    display: none;
-  }
-
-  form.is-readonly input[disabled],
-  form.is-readonly textarea[disabled] {
-    cursor: text;
-    background-color: #fff;
-    border-color: transparent;
-    outline-color: transparent;
-    box-shadow: none;
-  }
-
-  form.is-editing .btn-edit {
-    display: none;
-  }
+}
   .parents-details,
   .students-details,
-  .order-details {
-    .form-group {
+  .order-details,
+  .rep-details {
+    .form-group { 
       display: flex;
       align-items: center;
       margin-bottom: 5px;   
@@ -397,12 +399,12 @@ input[type="radio"]:checked:before {
         margin-bottom: 0;
       }
     }
-  }
+  }     
 .btn-modal {
   background-color: #fc0;
   padding:5px;
 }
-}
+
 
 
 
