@@ -624,10 +624,6 @@
         var street_address = $('#street_address1').val();
         var fax_number = $('#fax_number').val();
         var phone_number = $('#phone_number').val();
-        var city = $('#city1').val();
-        var state = $('#state1').val();
-        var zipcode = $('#zipcode1').val();
-        var country = $('#country1').val();
         var last_grade = $('#last_grade').val();
         var record_street_address = $('#record_street_address').val();
         var record_city = $('#record_city').val();
@@ -649,10 +645,6 @@
                 street_address: street_address,
                 fax_number: fax_number,
                 phone_number: phone_number,
-                city: city,
-                state: state,
-                zipcode: zipcode,
-                country: country,
                 last_grade: last_grade,
                 record_street_address,
                 record_city,
@@ -1612,7 +1604,6 @@
     // student panel - add graduation
 
     $("#add-graduation").on("submit", function(event) {
-        event.preventDefault();
         var parent_id = $('#parent_id').val();
         var student_id = $('#student_ids').val();
         var grade_9 = $('#grade_9').val();
@@ -1621,6 +1612,8 @@
         var status = $('#status-graduation').val();
         var grad_transction_id = $('#grad_transction_id').val();
         var custom_payment_mode = $('#custom_payment_mode').val();
+        var apostille_package = $('#apostille_package').val();
+        var apostille_country_gard = $('#apostille_country_gard').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1636,9 +1629,13 @@
                 grade_11,
                 status,
                 grad_transction_id,
-                custom_payment_mode
+                custom_payment_mode,
+                apostille_package,
+                apostille_country_gard
             },
-            success: function(response) {},
+            success: function(response) {
+                // location.reload();
+            },
             error: function(response) {
 
             }
