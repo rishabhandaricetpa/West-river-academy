@@ -951,7 +951,6 @@
                 var postage_charge = $('#postage_charge').val();
                 var paying_for = $('#paying_for').val();
                 var postage_quantity = $('#postage_quantity').val();
-                var notes_val = $('#notes_val').val();
                 var paymentDetails = $('#OrderPostage-paymentDetails').val();
                 var postage_payment_mode = $('#postage_payment_mode').val();
                 var postage_transaction_id = $('#postage_transaction_id').val();
@@ -969,7 +968,6 @@
                         postage_charge: postage_charge,
                         paying_for: paying_for,
                         postage_quantity: postage_quantity,
-                        notes_val: notes_val,
                         postage_total: postage_total,
                         postage_payment_mode: postage_payment_mode,
                         postage_transaction_id: postage_transaction_id,

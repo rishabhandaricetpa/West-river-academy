@@ -622,7 +622,7 @@
                             <form id="add-new-notes">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">For student</label>
-                                    <select id="student-name" class="form-control">
+                                    <select id="student-name" class="form-control" required>
 
                                         @foreach ($allstudent as $student)
 
@@ -637,7 +637,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Notes:</label>
-                                    <textarea class="form-control" id="message_text"></textarea>
+                                    <textarea class="form-control" id="message_text" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                                 </div>
                         </div>
                         <div class="modal-footer">
@@ -1071,7 +1071,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="message-text" class="col-form-label">
                                                 Document Type</label>
-                                            <textarea id="doc_type" class="form-control choose-btn" required></textarea>
+                                            <textarea id="doc_type" class="form-control choose-btn" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">

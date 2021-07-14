@@ -523,13 +523,11 @@ class ParentController extends Controller
                     $notarization_payment->save();
 
                     if ($status == 'pending') {
-                        if (!Cart::where('item_type', 'notarization')->exists()) {
-                            Cart::create([
-                                'item_type' => 'notarization',
-                                'item_id' => $notarization->id,
-                                'parent_profile_id' => $request->get('parent_profile_id'),
-                            ]);
-                        }
+                        Cart::create([
+                            'item_type' => 'notarization',
+                            'item_id' => $notarization->id,
+                            'parent_profile_id' => $request->get('parent_profile_id'),
+                        ]);
                     }
                     break;
                 case 'order-detail_ApostilePackage':

@@ -362,7 +362,7 @@
                       </div>
                       <div class="form-group">
                         <label for="message-text" class="col-form-label">Notes:</label>
-                        <textarea id="message_text" class="form-control" id="message_text"></textarea>
+                        <textarea id="message_text" class="form-control" id="message_text" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                       </div>
                   </div>
                   <div class="modal-footer">
