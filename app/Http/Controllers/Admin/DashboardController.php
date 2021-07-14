@@ -114,11 +114,11 @@ class DashboardController extends Controller
         $recordTransfer->email = $request->get('email_add');
         $recordTransfer->fax_number = $request->get('fax_number');
         $recordTransfer->phone_number = $request->get('phone_number');
-        $recordTransfer->street_address = $request->get('street_address');
-        $recordTransfer->city = $request->get('city');
-        $recordTransfer->state = $request->get('state');
-        $recordTransfer->zip_code = $request->get('zipcode');
-        $recordTransfer->country = $request->get('country');
+        $recordTransfer->street_address = $request->get('record_street_address');
+        $recordTransfer->city = $request->get('record_city');
+        $recordTransfer->state = $request->get('record_state');
+        $recordTransfer->zip_code = $request->get('record_zip_code');
+        $recordTransfer->country = $request->get('record_country');
         $recordTransfer->last_grade = $request->get('last_grade');
         $recordTransfer->save();
     }

@@ -221,7 +221,7 @@ class StudentProfileController extends Controller
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
             $notification = [
-                'message' => 'Failed to update Record!',
+                'message' => 'Delete Parent Record for deleting last student !',
                 'alert-type' => 'error',
             ];
 

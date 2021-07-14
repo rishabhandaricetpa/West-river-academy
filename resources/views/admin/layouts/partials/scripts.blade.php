@@ -617,8 +617,7 @@
     // dashboard admin record transfer doc for student
     $("#add-record-request").on("submit", function(event) {
         event.preventDefault();
-        console.log('created');
-        var student_id = $('#student_id').val();
+        var student_id = $('#record_student_id').val();
         var parent_id = $('#parent_id').val();
         var school_name = $('#school_name').val();
         var email_add = $('#email_add').val();
@@ -630,7 +629,11 @@
         var zipcode = $('#zipcode1').val();
         var country = $('#country1').val();
         var last_grade = $('#last_grade').val();
-        console.log(zipcode);
+        var record_street_address = $('#record_street_address').val();
+        var record_city = $('#record_city').val();
+        var record_state = $('#record_state').val();
+        var record_zip_code = $('#record_zip_code').val();
+        var record_country = $('#record_country').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -650,7 +653,13 @@
                 state: state,
                 zipcode: zipcode,
                 country: country,
-                last_grade: last_grade
+                last_grade: last_grade,
+                record_street_address,
+                record_city,
+                record_state,
+                record_zip_code,
+                record_country
+
             },
             success: function(response) {
                 location.reload();
@@ -932,50 +941,49 @@
         }
         if (type == 'order-detail_OrderPostage') {
             var postage_total = $('#postage_total').val();
-            if(postage_total==0){
+            if (postage_total == 0) {
                 alert('Total cannot be 0');
                 return false;
+            } else {
+                var order_detail_val = $('#order_detail_val').val();
+                var parent_value = $('#parent_value').val();
+                var postage_country = $('#postage_country').val();
+                var postage_charge = $('#postage_charge').val();
+                var paying_for = $('#paying_for').val();
+                var postage_quantity = $('#postage_quantity').val();
+                var notes_val = $('#notes_val').val();
+                var paymentDetails = $('#OrderPostage-paymentDetails').val();
+                var postage_payment_mode = $('#postage_payment_mode').val();
+                var postage_transaction_id = $('#postage_transaction_id').val();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('admin.create.orders') }}",
+                    type: "POST",
+
+                    data: {
+                        order_detail_val: order_detail_val,
+                        parent_value: parent_value,
+                        postage_country: postage_country,
+                        postage_charge: postage_charge,
+                        paying_for: paying_for,
+                        postage_quantity: postage_quantity,
+                        notes_val: notes_val,
+                        postage_total: postage_total,
+                        postage_payment_mode: postage_payment_mode,
+                        postage_transaction_id: postage_transaction_id,
+                        paymentDetails: paymentDetails,
+                    },
+                    success: function(response) {
+                        location.reload();
+
+                    },
+                    error: function(response) {
+
+                    }
+                });
             }
-            else{
-            var order_detail_val = $('#order_detail_val').val();
-            var parent_value = $('#parent_value').val();
-            var postage_country = $('#postage_country').val();
-            var postage_charge = $('#postage_charge').val();
-            var paying_for = $('#paying_for').val();
-            var postage_quantity = $('#postage_quantity').val();
-            var notes_val = $('#notes_val').val();
-            var paymentDetails = $('#OrderPostage-paymentDetails').val();
-            var postage_payment_mode = $('#postage_payment_mode').val();
-            var postage_transaction_id = $('#postage_transaction_id').val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ route('admin.create.orders') }}",
-                type: "POST",
-
-                data: {
-                    order_detail_val: order_detail_val,
-                    parent_value: parent_value,
-                    postage_country: postage_country,
-                    postage_charge: postage_charge,
-                    paying_for: paying_for,
-                    postage_quantity: postage_quantity,
-                    notes_val: notes_val,
-                    postage_total: postage_total,
-                    postage_payment_mode: postage_payment_mode,
-                    postage_transaction_id: postage_transaction_id,
-                    paymentDetails: paymentDetails,
-                },
-                success: function(response) {
-                    location.reload();
-
-                },
-                error: function(response) {
-
-                }
-            });
-        }
         }
         if (type == 'order-detail_OrderConsultaion') {
 
@@ -1951,6 +1959,7 @@
             $("#order-detail_enrollment").show();
         } else if (value == "order-detail_Graduation") {
             $('#status-graduation').attr('required', 'required');
+            $('#apostille_country_gard').attr('required', 'required');
             $("#order-detail_Graduation").show();
         } else if (value == "order-detail_CustomPayment") {
             $('#custom_amount').attr('required', 'required');
@@ -2020,7 +2029,6 @@
     $('input[name=apostille_package]').change(function() {
         if ($(this).is(':checked')) {
             $("#apostille_country_pac").show();
-            //$('.apostille_country_gard').attr('required', 'required');
         } else {
             $("#apostille_country_pac").hide();
             $('.apostille_country_gard').removeAttr('required');
@@ -2141,8 +2149,7 @@
                 $("#postage_total").val(response);
                 $("#postage_quantity").val('');
             },
-            error: function(response) {
-            }
+            error: function(response) {}
         });
     }
 
@@ -2212,7 +2219,7 @@
         if (type == 'order-detail_OrderPostage') {
             var amount = $('#postage_charge').val();
             var quantity = $('#postage_quantity').val();
-            var total = amount * quantity ;
+            var total = amount * quantity;
             $("#postage_total").val(total);
         }
         // if (type == 'order-detail_Notarization') {
