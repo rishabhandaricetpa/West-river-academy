@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('content')
     <section class="content">
         <div class="container-fluid position-relative">
@@ -15,8 +16,10 @@
                             <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Records Received</button>
                         @endif
                     </div>
-                    <input type="hidden" name="student_id" value="{{ $studentRecord->student_profile_id }}">
-                    <input type="hidden" name="parent_id" value="{{ $studentRecord->parent_profile_id }}">
+                    <input type="hidden" name="student_id" value="{{ $studentRecord->student_profile_id }}"
+                        id="record_student_id">
+                    <input type="hidden" name="parent_id" value="{{ $studentRecord->parent_profile_id }}"
+                        id="record_parentid">
                     @if ($studentRecord->request_status !== 'Record Received')
                         <div class="col-sm-6">
                             <label>Method of Delivery </label>
@@ -51,12 +54,12 @@
                 <form method="post" action="{{ route('admin.sendRecordToSchool', $studentRecord->student_profile_id) }}">
                     @csrf
                     <div class="card-body p-0 row">
-                        <input type="hidden" value="{{ $studentRecord->id }}" name="record_id">
+                        <input type="hidden" value="{{ $studentRecord->id }}" name="record_id" id="record_id">
                         <input type="hidden" value="{{ $studentRecord->status }}" name="status">
                         <div class="form-group col-sm-6">
                             <label>Student Name <sup>*</sup></label>
                             <input class="form-control" id="name" value="{{ $studentRecord['student']['fullname'] }}"
-                                name="name" readonly>
+                                name="name" id="record_student_name" required>
                         </div>
                         @if ($studentEnrollmentYear)
                             @foreach ($studentEnrollmentYear as $year)
@@ -66,104 +69,111 @@
                         <div class="form-group col-sm-6">
                             <label>School Name</label>
                             <input class="form-control" name="school_name" value="{{ $studentRecord->school_name }}"
-                                readonly>
+                                id="record_school_name" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>School Email<sup>*</sup></label>
-                            <input class="form-control" id="cell_phone" name="email" value="{{ $studentRecord->email }}"
-                                readonly>
+                            <input class="form-control" name="email" type="email" value="{{ $studentRecord->email }}"
+                                id="record_school_email" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Fax Number<sup>*</sup></label>
-                            <input class="form-control" id="cell_phone" name="fax_number"
-                                value="{{ $studentRecord->fax_number }}" readonly>
+                            <input class="form-control" name="fax_number" value="{{ $studentRecord->fax_number }}"
+                                id="school_fax_number" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Phone Number<sup>*</sup></label>
                             <input class="form-control" name="phone_number" value="{{ $studentRecord->phone_number }}"
-                                readonly>
+                                id="school_phone_number" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Street Address<sup>*</sup></label>
                             <input class="form-control" name="street_address"
-                                value="{{ $studentRecord->street_address }}" readonly>
+                                value="{{ $studentRecord->street_address }}" id="school_street_address" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>City<sup>*</sup></label>
-                            <input class="form-control" name="city" value="{{ $studentRecord->city }}" readonly>
+                            <input class="form-control" name="city" value="{{ $studentRecord->city }}" id="school_city"
+                                required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>State<sup>*</sup></label>
-                            <input class="form-control" name="state" value="{{ $studentRecord->state }}" readonly>
+                            <input class="form-control" name="state" value="{{ $studentRecord->state }}"
+                                id="school_state" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Zip Code<sup>*</sup></label>
-                            <input class="form-control" name="zip_code" value="{{ $studentRecord->zip_code }}" readonly>
+                            <input class="form-control" name="zip_code" value="{{ $studentRecord->zip_code }}"
+                                id="school_zip_code" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Country<sup>*</sup></label>
-                            <input class="form-control" name="country" value="{{ $studentRecord->country }}" readonly>
+                            <input class="form-control" name="country" value="{{ $studentRecord->country }}"
+                                id="school_country" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Last Grade In School<sup>*</sup></label>
-                            <input class="form-control" name="last_grade" value="{{ $studentRecord->last_grade }}"
-                                readonly>
+                            <input class="form-control" name="last_grade" id="last_grade_in"
+                                value=" {{ $studentRecord->last_grade }}" required>
                         </div>
                         <div>
                         </div>
                     </div>
 
                     <!-- /.card-body -->
-                    @if ($studentRecord->request_status !== 'Record Received')
-                        <div class="row">
-                            <div class="col-md-6 mt-4">
-                                <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                    class="btn btn-primary">Download & Preview Records</a>
-                                <button type="submit"
-                                    onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
-                                    class="btn btn-primary">Send Records To School</button>
-                                <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                    class=" btn btn-primary">Re-send Request</a>
-                                <a onclick="goBack()" class=" btn btn-primary">Back</a>
-                            </div>
 
-                            <div class="col-md-6 mt-4">
-                                <table class='table-styling w-100 min-w-100' border="1">
+                    <div class="row">
+                        <div class="col-md-6 mt-4">
+                            <a class="btn btn-primary" onclick="updateRecord()">Update</a>
+                            <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
+                                class="btn btn-primary">Download & Preview Records</a>
+                            <button type="submit"
+                                onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
+                                class="btn btn-primary">Send Records To School</button>
+                            <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
+                                class=" btn btn-primary">Re-send Request</a>
 
-                                    <tr>
-                                        @if ($studentRecord->resendCount)
-                                            <th> Resend Request Count: </th>
-                                            <td>{{ $studentRecord->resendCount }}</td>
-                                        @endif
-                                    </tr>
 
-                                    <tr>
-                                        @if ($studentRecord->firstRequestDate)
-                                            <th> First Request Date:</th>
-                                            <td>{{ $studentRecord->firstRequestDate }}</td>
-                                    </tr>
-                    @endif
-                    <tr>
-                        @if ($studentRecord->secondRequestDate)
-                            <th> Second Request Date:</th>
-                            <td> {{ $studentRecord->secondRequestDate }}</td>
-                    </tr>
-                    @endif
-                    <tr>
-                        @if ($studentRecord->thirdRequest)
-                            <th> Third Request Date:</th>
-                            <td>{{ $studentRecord->thirdRequest }}</td>
+                            <a onclick="goBack()" class=" btn btn-primary">Back</a>
+                        </div>
+
+                        <div class="col-md-6 mt-4">
+                            <table class='table-styling w-100 min-w-100' border="1">
+
+                                <tr>
+                                    @if ($studentRecord->resendCount)
+                                        <th> Resend Request Count: </th>
+                                        <td>{{ $studentRecord->resendCount }}</td>
+                                    @endif
+                                </tr>
+
+                                <tr>
+                                    @if ($studentRecord->firstRequestDate)
+                                        <th> First Request Date:</th>
+                                        <td>{{ $studentRecord->firstRequestDate }}</td>
+                                </tr>
+
+                                <tr>
+                                    @if ($studentRecord->secondRequestDate)
+                                        <th> Second Request Date:</th>
+                                        <td> {{ $studentRecord->secondRequestDate }}</td>
+                                </tr>
+                                @endif
+                                <tr>
+                                    @if ($studentRecord->thirdRequest)
+                                        <th> Third Request Date:</th>
+                                        <td>{{ $studentRecord->thirdRequest }}</td>
+                                    @endif
+                                </tr>
+                            </table>
+                        </div>
                         @endif
-                    </tr>
-                    </table>
+                    </div>
+
+
             </div>
-            @endif
-        </div>
 
-
-        </div>
-
-        </form>
+            </form>
         </div>
         </div>
         <!-- /.card -->

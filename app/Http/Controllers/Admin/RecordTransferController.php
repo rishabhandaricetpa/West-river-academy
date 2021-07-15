@@ -34,7 +34,29 @@ class RecordTransferController extends Controller
         $studentEnrollmentYear = StudentProfile::find($student_id)->enrollmentPeriods()->get();
         return view('admin.recordTransfer.viewStudentRecord', compact('studentRecord', 'studentEnrollmentYear'));
     }
+    public function updateRecord(Request $request)
+    {
+        RecordTransfer::updateOrCreate(
+            [
+                'student_profile_id' => $request->record_student_id,
+                'id' => $request->record_id
+            ],
+            [
+                'parent_profile_id' => $request->parent_id,
+                'school_name' => $request->school_name,
+                'email' => $request->record_school_email,
+                'fax_number' => $request->school_fax_number,
+                'street_address' => $request->street_address,
+                'phone_number' => $request->phone_number,
+                'city' => $request->city,
+                'state' => $request->state,
+                'zip_code' => $request->zip_code,
+                'country' => $request->country,
+                'last_grade' => $request->last_grade,
+            ]
 
+        );
+    }
     public function sendRecordToSchool(Request $request, $student_id)
     {
         $record = RecordTransfer::find($request->record_id);
