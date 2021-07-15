@@ -34,7 +34,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                 @if(!Auth::id())
-                    <a class="nav-link" href="http://example.com" id="dropdown05" data-toggle="dropdown"
+                    <a class="nav-link" href="#" id="dropdown05" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Enrollment</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown05">
                         <li><a class="dropdown-item" href="#">international</a></li>

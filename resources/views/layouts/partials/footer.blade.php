@@ -4,8 +4,6 @@
 @yield('manualscript')
 <footer class="bg-dark position-relative text-center main-footer">
     <div class="container">
-        <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=mp0jjck0nvualenzblz7ig"
-            async="true"></script>
         <ul class="social-icons list-unstyled d-flex justify-content-center">
             <li><a href="https://www.facebook.com/WestRiverAcademy" target="_blank" class="mx-2"> <img
                         src="/images/Facebook.png" class="o-contain" alt="facebook" /> </a></li>
@@ -22,7 +20,7 @@
         <ul class="list-unstyled">
             <li><a href="tel:9494568753" class="contact-phone"><i class="fas fa-phone-alt mr-2"></i>949-456-8753</a>
             </li>
-            <li><a href="#"><i class="fas fa-envelope mr-2"></i>contact@westriveracademy.com</a></li>
+            <li><a href="mailto:contact@westriveracademy.com"><i class="fas fa-envelope mr-2"></i>contact@westriveracademy.com</a></li>
         </ul>
         <div class="copyright">
             Copyright © {{ now()->year }} West River Academy.

@@ -126,7 +126,7 @@
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group transction-div">
-                                <label for="message-text" class="col-form-label">Transcation ID</label>
+                                <label for="message-text" class="col-form-label">Transaction ID</label>
                                 <input type="text" id="transcript_transaction_id"
                                     class="form-control custom_letter_transction">
                             </div>
@@ -197,18 +197,11 @@
                                         <option value="Preschool Age 3">Preschool Age 3 </option>
                                         <option value="Preschool Age 4">Preschool Age 4</option>
                                         <option value="Kindergarten">Kindergarten</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
+                                        <?php 
+                                        for($i=1; $i<=12; $i++){
+                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                        }   
+                                        ?>  
                                     </select>
                                 </div>
                             </div>
@@ -239,7 +232,7 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div">
-                                    <label for="message-text" class="col-form-label">Transcation ID</label>
+                                    <label for="message-text" class="col-form-label">Transaction ID</label>
                                     <input type="text" id="enrollment_transction_id"
                                         class="form-control custom_letter_transction">
                                 </div>
@@ -379,7 +372,7 @@
                                     </div>
                                     <div class="col-md-6 pb-2">
                                         <div class="form-group" id="grad-div-transction">
-                                            <label for="message-text" class="col-form-label">Transcation
+                                            <label for="message-text" class="col-form-label">Transaction
                                                 ID</label>
                                             <input type="text" id="grad_transction_id" class="form-control ">
                                         </div>
@@ -435,7 +428,7 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div" id="transction-div-custom">
-                                    <label for="message-text" class="col-form-label">Transcation Id</label>
+                                    <label for="message-text" class="col-form-label">Transaction Id</label>
                                     <input type="text" id="custom_transcation1"
                                         class="form-control custom_letter_transction">
                                 </div>
@@ -515,7 +508,7 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div" id="transction-div-custom">
-                                    <label for="message-text" class="col-form-label">Transcation Id</label>
+                                    <label for="message-text" class="col-form-label">Transaction Id</label>
                                     <input type="text" id="custom_transcation" class="form-control">
                                 </div>
                             </div>
@@ -549,17 +542,12 @@
                                     <label for="message-text" class="col-form-label">Quantity</label>
                                     <select type="" id="notarization_quantity" class="form-control"
                                         onchange="getNoatrizationAmount(); getTotal();">
-                                        <option value="">Select...</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
+                                        <option value="">Select</option>
+                                        <?php 
+                                        for($i=1; $i<=10; $i++){
+                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                        }   
+                                        ?>                                      
                                     </select>
                                 </div>
                             </div>
@@ -602,7 +590,7 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div" id="transction-div-custom">
-                                    <label for="message-text" class="col-form-label">Transcation Id</label>
+                                    <label for="message-text" class="col-form-label">Transaction Id</label>
                                     <input type="text" id="notar_transaction_id" class="form-control">
                                 </div>
                             </div>
@@ -637,17 +625,12 @@
                                     <label for="message-text" class="col-form-label">Quantity</label>
                                     <select type="" id="apostille_quantity" class="form-control"
                                         onchange="getApostilleAmount(); getTotal();">
-                                        <option value="">Select...</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
+                                        <option value="">Select</option>
+                                        <?php 
+                                        for($i=1; $i<=4; $i++){
+                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                        }   
+                                        ?>  
                                     </select>
                                     <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
 
@@ -768,7 +751,7 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group transction-div" id="transction-div">
-                                    <label for="message-text" class="col-form-label">Transcation ID</label>
+                                    <label for="message-text" class="col-form-label">Transaction ID</label>
                                     <input type="text" id="custom_letter_transction"
                                         class="form-control custom_letter_transction">
                                 </div>
@@ -814,17 +797,12 @@
                                     <label for="message-text" class="col-form-label">Hours</label>
                                     <select type="" id="consul_quantity" class="form-control"
                                         onchange="getConsulatationAmount();">
-                                        <option value="">Select...</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
+                                        <option value="">Select</option>
+                                        <?php 
+                                        for($i=1; $i<=4; $i++){
+                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                        }   
+                                        ?>  
                                     </select>
                                 </div>
                             </div>

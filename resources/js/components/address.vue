@@ -220,19 +220,7 @@
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2>Coupon</h2>
-      <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
-        <label for="">Select Coupon</label>
-        <div>
-          <v-select
-            :reduce="(label) => label.value"
-            v-model="couponSelected"
-            :options="coupons"
-            :selected="couponSelected"
-          ></v-select>
-        </div>
-      </div>
-      <div class="text-center col-md-6">OR</div>
-      <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
+            <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
         <label for="">Enter Code</label>
         <div>
           <input

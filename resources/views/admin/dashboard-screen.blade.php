@@ -66,8 +66,7 @@
                                             <td><a href=" {{ route('admin.edit.student.payment', $data->student->id) }}">New
                                                     Student Enrolled</a></td>
                                         @elseif($data->related_to === 'graduation_record_received')
-                                            <td><a
-                                                    href="{{ route('admin.view.graduation') }}/{{ $data->linked_to }}/edit">Graduation
+                                            <td><a href="{{ route('admin.view.graduation') }}/{{ $data->linked_to }}/edit">Graduation
                                                     Application</a></td>
                                         @elseif($data->related_to === 'transcript_ordered')
                                             <td><a href="{{ route('admin.transpayment.edit', $data->linked_to) }}">Transcript

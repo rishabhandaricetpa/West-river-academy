@@ -115,50 +115,6 @@
                                         </tbody>
                                     </table>
                                 </td>
-
-                                <!-- <table width="100%">
-                      <tbody>
-                        <tr style="width:100%;">
-                          <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
-                          <td
-                            style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:35%;line-height:1;">
-                            {{ $student->fullname }}</td>
-                          <td style="text-transform:uppercase;width:15%;font-size:11px;line-height:1;">date of birth</td>
-                          <td
-                            style="font-weight:700;text-transform:uppercase;text-align:left;width:30%;font-size:11px;line-height:1;">
-                            {{ $student->d_o_b->format(' M j, Y') }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table width="100%">
-                      <tbody>
-                        <tr style="width:100%;">
-                          <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;padding:2px;" valign="top">address</td>
-                          <td  valign="top"
-                            style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:35%;line-height:1; padding:2px;">
-                            {{ $address->street_address }}</br> {{ $address->city }}, {{ $address->zip_code }}, {{ $address->country }}
-                          </td>
-                          <td  valign="top" style="text-transform:uppercase;font-size:11px;width:15%;line-height:1;padding:2px;">years(s)</td>
-                          <td valign="top"
-                            style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:30%;line-height:1;padding:2px;">
-                            {{ $minYear }}-{{ $maxYear }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table style="margin-bottom:40px;" width="100%">
-                      <tbody>
-                        <tr style="width:100%;">
-                          <td  valign="top" style="text-transform:uppercase;font-size:14px;width:10%; padding:2px;"></td>
-                          <td  valign="top"style="font-weight:700;text-transform:uppercase;text-align:left;font-size:14px;width:35%;padding:2px;">
-                          </td>
-                          <td  valign="top"style="text-transform:uppercase;font-size:11px;width:15%;line-height:1;padding:2px;">grade level(s)</td>
-                          <td valign="top"
-                            style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:30%;line-height:1;padding:2px;">
-                            {{ getPromotedGrades($grades) }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td> -->
                             </tr>
                         </tbody>
                         </tbody>

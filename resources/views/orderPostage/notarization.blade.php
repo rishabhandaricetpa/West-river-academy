@@ -23,16 +23,11 @@
                             <div class="row ml-3 mx-0">
                                 <select class="form-control col-3" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')" required>
                                     <option value="">Select Quantity</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    <?php 
+                                    for($i=1; $i<=10; $i++){
+                                        echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                    }   
+                                    ?>    
                                 </select>
                                 <span class="col-3 text-center">=</span>
                                 <i class="fas fa-dollar-sign additional-sign"></i>
