@@ -2215,68 +2215,68 @@
             var total = amount * quantity;
             $("#postage_total").val(total);
         }
-    
 
-    function getTotalTranscript() {
-        var amount = $('#amount').val();
-        var quantity = $('#quantity').val();
-        var total = amount * quantity;
-        $("#total_val").val(total);
-    }
 
-    function getConsulatationAmount() {
-        var hours = $('#consul_quantity').val();
-        var total = hours * 80;
-        $("#consul_amount").val(total);
-    }
+        function getTotalTranscript() {
+            var amount = $('#amount').val();
+            var quantity = $('#quantity').val();
+            var total = amount * quantity;
+            $("#total_val").val(total);
+        }
 
-    function updateRecord() {
-        var record_id = $('#record_id').val();
-        var record_student_id = $('#record_student_id').val();
-        var parent_id = $('#record_parentid').val();
-        var record_student_name = $('#record_student_name').val();
-        var school_name = $('#record_school_name').val();
-        var record_school_email = $('#record_school_email').val();
-        var school_fax_number = $('#school_fax_number').val();
-        var phone_number = $('#school_phone_number').val();
-        var street_address = $('#school_street_address').val();
-        var city = $('#school_city').val();
-        var state = $('#school_state').val();
-        var zip_code = $('#school_zip_code').val();
-        var country = $('#school_country').val();
-        var last_grade = $('#last_grade_in').val();
-        console.log(record_student_id);
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "{{ route('admin.update.record') }}",
-            type: "POST",
+        function getConsulatationAmount() {
+            var hours = $('#consul_quantity').val();
+            var total = hours * 80;
+            $("#consul_amount").val(total);
+        }
 
-            data: {
-                parent_id,
-                record_id,
-                record_student_id,
-                record_student_name,
-                school_name,
-                record_school_email,
-                school_fax_number,
-                phone_number,
-                street_address,
-                city,
-                state,
-                zip_code,
-                country,
-                last_grade
-            },
-            success: function(response) {
+        function updateRecord() {
+            var record_id = $('#record_id').val();
+            var record_student_id = $('#record_student_id').val();
+            var parent_id = $('#record_parentid').val();
+            var record_student_name = $('#record_student_name').val();
+            var school_name = $('#record_school_name').val();
+            var record_school_email = $('#record_school_email').val();
+            var school_fax_number = $('#school_fax_number').val();
+            var phone_number = $('#school_phone_number').val();
+            var street_address = $('#school_street_address').val();
+            var city = $('#school_city').val();
+            var state = $('#school_state').val();
+            var zip_code = $('#school_zip_code').val();
+            var country = $('#school_country').val();
+            var last_grade = $('#last_grade_in').val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('admin.update.record') }}",
+                type: "POST",
 
-                location.reload();
-            },
-            error: function(response) {
+                data: {
+                    parent_id,
+                    record_id,
+                    record_student_id,
+                    record_student_name,
+                    school_name,
+                    record_school_email,
+                    school_fax_number,
+                    phone_number,
+                    street_address,
+                    city,
+                    state,
+                    zip_code,
+                    country,
+                    last_grade
+                },
+                success: function(response) {
 
-            }
-        });
+                    location.reload();
+                },
+                error: function(response) {
+
+                }
+            });
+        }
     }
 
 </script>
