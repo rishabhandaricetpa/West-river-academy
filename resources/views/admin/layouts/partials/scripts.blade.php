@@ -26,8 +26,7 @@
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
-<script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=mp0jjck0nvualenzblz7ig" async="true">
-</script>
+
 <script>
     $(function() {
         $("#example1").DataTable({

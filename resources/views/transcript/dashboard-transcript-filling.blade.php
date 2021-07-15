@@ -13,21 +13,18 @@
         <label for="exampleInputEmail1">First Name</label>
         <div>
           <input type="text" class="form-control " name="first_name" value="{{$studentProfile->first_name}}" autofocus="" required>
-          <!--   <div class="alert alert-danger">Enter your user ID.</div> -->
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="">Middle Name</label>
         <div>
           <input type="text" class="form-control " name="middle_name" value="{{$studentProfile->middle_name}}" autocomplete="">
-          <!--  <div class="alert alert-danger">Enter your password.</div> -->
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
         <label for="">Last Name</label>
         <div>
           <input type="text" class="form-control " name="last_name" value="{{$studentProfile->last_name}}" autocomplete="" required>
-          <!--  <div class="alert alert-danger">Enter your password.</div> -->
         </div>
       </div>
       <div class="form-group d-sm-flex mb-2">
@@ -47,7 +44,6 @@
       <div class="mt-5 text-center">
         <button type="submit" class="btn btn-primary">Continue</button>
       </div>
-      <!-- <div class="register-info">Don't have an account yet? <a href="http://127.0.0.1:8000/register">Click this link to create one.</a></div> -->
     </form>
   </div>
 </main>

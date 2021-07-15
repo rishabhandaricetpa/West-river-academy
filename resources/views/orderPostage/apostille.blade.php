@@ -10,7 +10,6 @@
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <h2 class="mb-3">Order Apostille</h2>
 
-                <form class="mb-0" method="post" action="{{ route('add.cart') }}">
                     <p><span class="font-weight-bold">Apostilles: ONLY</span>
                         for documents presented outside of the U.S. to countries who are members of The Hague
                         Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at
@@ -23,16 +22,11 @@
                                 <select class="form-control col-5"
                                     onchange="getApostilleAmount(event,'{{ $appostile_fee }}')" required>
                                     <option value="">Select Quantity</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    <?php 
+                                    for($i=1; $i<=10; $i++){
+                                        echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                    }   
+                                    ?>      
                                 </select>
                                 <span class="col-2 text-center">=</span>
                                 <i class="fas fa-dollar-sign additional-sign"></i>
