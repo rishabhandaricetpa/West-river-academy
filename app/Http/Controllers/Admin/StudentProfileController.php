@@ -361,14 +361,14 @@ class StudentProfileController extends Controller
             $transction->payment_mode = "admin created";
             $transction->parent_profile_id = $request->get('parent_id');
             $transction->amount = $fee;
-            $transction->status = 'pending';
+            $transction->status = 'paid';
             $transction->save();
 
             $enroll_payment = new EnrollmentPayment();
             $enroll_payment->enrollment_period_id = $enroll->id;
             $enroll_payment->payment_mode = "admin created";
             $enroll_payment->transcation_id = $transction->transcation_id;
-            $enroll_payment->status = 'pending';
+            $enroll_payment->status = 'paid';
             $enroll_payment->amount = $fee;
             $enroll_payment->save();
 
@@ -379,7 +379,6 @@ class StudentProfileController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
             }
         } catch (\Exception $e) {
-            // dd($e);
             DB::rollBack();
             report($e);
             if ($request->expectsJson()) {

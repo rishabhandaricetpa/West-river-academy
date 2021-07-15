@@ -88,10 +88,9 @@
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
-                                <label for="message-text " class="col-form-label">Period</label>
-                                <select type="" id="transcript_period" class="form-control transcript_period"
-                                    onchange="getTranscriptval();">
-                                    <option value="K-8">Select...</option>
+                                <label for="message-text" class="col-form-label">Period</label>
+                                <select id="transcript_period" class="form-control" onchange="getTranscriptval();">
+                                    <option value="">Select...</option>
                                     <option value="K-8">K-8</option>
                                     <option value="9-12">9-12</option>
                                 </select>
@@ -151,7 +150,8 @@
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Note
                                 </label>
-                                <textarea style="height:120px;" id="notes" class="form-control" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                <textarea style="height:120px;" id="notes" class="form-control"
+                                    onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
                             <input class="form-control" type="hidden" value="{{ $parent->id }}" id='parent_id'
                                 name="parent_id">
                             <div class="col-lg-6 col-12">
-                                <label for="recipient-name" class="col-form-label">For student</label>
+                                <label for="recipient-name" class="col-form-label">For Student</label>
                                 <select id="order-student-name" class="form-control">
                                     @foreach ($allstudent as $student)
                                         <option value="{{ $student->id }}">{{ $student->first_name }}
@@ -410,7 +410,9 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Paying For</label>
-                                    <textarea type="text" id="custom_paying_for" class="form-control" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                    <textarea type="text" id="custom_paying_for" class="form-control"
+                                        onKeyPress="if(this.value.length==2000) return false;"
+                                        maxlength="2000"></textarea>
                                 </div>
                             </div>
 
@@ -461,7 +463,9 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Paying for</label>
-                                    <textarea type="text" id="paying_for" class="form-control" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                    <textarea type="text" id="paying_for" class="form-control"
+                                        onKeyPress="if(this.value.length==2000) return false;"
+                                        maxlength="2000"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -487,7 +491,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Quantity</label>
-                                    <input type="text" id="postage_quantity" class="form-control" 
+                                    <input type="text" id="postage_quantity" class="form-control"
                                         onchange="getTotal();">
                                 </div>
                             </div>
@@ -607,7 +611,9 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Note
                                     </label>
-                                    <textarea style="height:120px;" id="notar_notes" class="form-control" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                    <textarea style="height:120px;" id="notar_notes" class="form-control"
+                                        onKeyPress="if(this.value.length==2000) return false;"
+                                        maxlength="2000"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -702,7 +708,8 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Note
                                     </label>
-                                    <textarea style="height:120px;" id="apostille_notes" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"
+                                    <textarea style="height:120px;" id="apostille_notes"
+                                        onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"
                                         class="form-control"></textarea>
                                 </div>
                             </div>
@@ -727,7 +734,9 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Paying For</label>
-                                    <textarea type="text" id="custom_letter_paying" class="form-control" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                    <textarea type="text" id="custom_letter_paying" class="form-control"
+                                        onKeyPress="if(this.value.length==2000) return false;"
+                                        maxlength="2000"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -806,7 +815,9 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Paying for</label>
-                                    <textarea type="text" id="consul_paying_for" class="form-control" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                    <textarea type="text" id="consul_paying_for" class="form-control"
+                                        onKeyPress="if(this.value.length==2000) return false;"
+                                        maxlength="2000"></textarea>
                                 </div>
                             </div>
 
