@@ -3,14 +3,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @section('content')
-    <section class="content container-fluid  my-3">
+    <section class="content container-fluid">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!-- first card student details -->
-        <div class="card my-3 family-details ">
+        <div class="card family-details ">
             <div class="sticky mb-2 pb-1">
                 @include('admin.familyInformation.student_header')
-                <div class="card family-details px-3 mb-4">
-                    <ul class="nav overflow-auto" id="to-the-top">
+                <div class="card family-details px-3 mb-4 pt-3">
+                    {{-- <ul class="nav overflow-auto" id="to-the-top">
                         <li class="nav-item">
                             <a class="nav-link" href="#student-details" aria-controls="student-details"
                                 aria-selected="true">Details</a>
@@ -36,7 +36,7 @@
                             <a class="nav-link" href="#Graduation" aria-controls="Graduation"
                                 aria-selected="true">Graduation</a>
                         </li>
-                    </ul>
+                    </ul> --}}
 
 
                     {{-- students-details --}}
@@ -682,6 +682,10 @@
                                                         <th scope="col">School Name</th>
                                                         <th scope="col">Grade</th>
                                                         <th scope="col">Action</th>
+                                                        <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
+                                                            data-toggle="modal" data-target="#transcriptModal"
+                                                            data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
+                                                                src="/images.add.png" alt=""></button></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -732,6 +736,7 @@
                                                                         9-12 Transcript</a>
                                                                 </td>
                                                             @endif
+                                                            <td></td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

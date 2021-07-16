@@ -12123,18 +12123,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -53267,7 +53255,7 @@ var render = function() {
                   staticClass: "btn btn-primary",
                   on: { click: _vm.addCourse }
                 },
-                [_vm._v("Add Another Foregin Course")]
+                [_vm._v("Add Another Foreign Course")]
               ),
               _vm._v(" "),
               _c(
@@ -54280,7 +54268,7 @@ var render = function() {
                   staticClass: "btn btn-primary",
                   on: { click: _vm.addCourse }
                 },
-                [_vm._v("Add another History / Social Science Course")]
+                [_vm._v("Add another History/Social Science Course")]
               ),
               _vm._v(" "),
               _c(
@@ -56513,35 +56501,6 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "form-wrap border bg-light py-5 px-25 mt-2r" }, [
         _c("h2", [_vm._v("Coupon")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group d-sm-flex mb-2 col-md-6 px-0" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Select Coupon")]),
-          _vm._v(" "),
-          _c(
-            "div",
-            [
-              _c("v-select", {
-                attrs: {
-                  reduce: function(label) {
-                    return label.value
-                  },
-                  options: _vm.coupons,
-                  selected: _vm.couponSelected
-                },
-                model: {
-                  value: _vm.couponSelected,
-                  callback: function($$v) {
-                    _vm.couponSelected = $$v
-                  },
-                  expression: "couponSelected"
-                }
-              })
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "text-center col-md-6" }, [_vm._v("OR")]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group d-sm-flex mb-2 col-md-6 px-0" }, [
           _c("label", { attrs: { for: "" } }, [_vm._v("Enter Code")]),

@@ -1063,16 +1063,17 @@
                                             @endforeach
                                         </select>
                                         <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
-                                        <div class="form-group col-md-6">
-                                            <label for="message-text" class="col-form-label">
-                                                Want to upload in Student Dashboard <span class="required">*</span></label>
-                                            <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="message-text" class="col-form-label">
-                                                Document Type</label>
-                                            <textarea id="doc_type" class="form-control choose-btn" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
-                                        </div>
+                                       
+                                    </div>
+                                    <div class="form-group col-md-6 d-flex">
+                                        <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn mt-2 mr-2">
+                                        <label for="message-text" class="col-form-label">
+                                            Want to upload in Student Dashboard <span class="required">*</span></label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="message-text" class="col-form-label">
+                                            Document Type</label>
+                                        <textarea id="doc_type" class="form-control choose-btn" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="message-text" class="col-form-label">Upload Document</label>
