@@ -115,9 +115,9 @@ class StudentProfileController extends Controller
         $recordTransfer = RecordTransfer::where('student_profile_id', $id)->get();
 
         // for transcript information
-        $transcripts = Transcript::whereIn('status', ['paid', 'approved', 'completed'])
+        $transcripts = Transcript::whereIn('status', ['paid', 'approved', 'completed', 'pending'])
             ->where('student_profile_id', $id)
-            ->with('transcript9_12', 'transcriptk8')
+            ->with('transcript9_12', 'transcriptk8', 'transcriptPayment')
             ->get();
         $documents = UploadDocuments::where('student_profile_id', $id)->get();
 

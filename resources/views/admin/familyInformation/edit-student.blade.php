@@ -10,34 +10,6 @@
             <div class="sticky mb-2 pb-1">
                 @include('admin.familyInformation.student_header')
                 <div class="card family-details px-3 mb-4 pt-3">
-                    {{-- <ul class="nav overflow-auto" id="to-the-top">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#student-details" aria-controls="student-details"
-                                aria-selected="true">Details</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#student-payments" aria-controls="student-payments"
-                                aria-selected="true">Payments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#transcript" aria-controls="transcript"
-                                aria-selected="true">Transcript</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#record-transfer" aria-controls="record-transfer"
-                                aria-selected="true">Record
-                                Transfer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#student-documents" aria-controls="student-documents"
-                                aria-selected="true">Documents</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#Graduation" aria-controls="Graduation"
-                                aria-selected="true">Graduation</a>
-                        </li>
-                    </ul> --}}
-
 
                     {{-- students-details --}}
                     <section class="students-details pt-2 pb-5" id="student-details">
@@ -226,6 +198,8 @@
                                                     <input class="form-control" type="text" id='student_first_name'>
                                                 </div>
                                             </div>
+                                            <input type="hidden" value="{{ $student->id }}" id='student'
+                                                name="student-name" class="form-control">
                                             <input type="hidden" value="{{ $parent->id }}" id='parents_id'
                                                 name="parents_id">
 
@@ -388,8 +362,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">Notes:</label>
-                                                    <textarea id="message_text" class="form-control"
-                                                        id="message_text" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                                                    <textarea id="message_text" class="form-control" id="message_text"
+                                                        required onKeyPress="if(this.value.length==2000) return false;"
+                                                        maxlength="2000"></textarea>
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -678,65 +653,27 @@
                                                     <tr>
                                                         <th scope="col">Transcript</th>
                                                         <th scope="col">Status</th>
-                                                        <th scope="col">Enrollment Year</th>
-                                                        <th scope="col">School Name</th>
-                                                        <th scope="col">Grade</th>
+                                                        <th scope="col">Amount</th>
                                                         <th scope="col">Action</th>
-                                                        <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
-                                                            data-toggle="modal" data-target="#transcriptModal"
-                                                            data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
-                                                                src="/images.add.png" alt=""></button></th>
+                                                        <th scope="col" class="text-right"><button type="button"
+                                                                class="btn btn-modal ml-3" data-toggle="modal"
+                                                                data-target="#transcriptModal"
+                                                                data-whatever="@getbootstrap"><img src="/images/add.png"
+                                                                    alt=""><img src="/images.add.png" alt=""></button></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($transcripts as $transcript)
                                                         <tr>
                                                             <td>{{ $transcript->period }}</td>
-                                                            @if ($transcript->status === 'completed')
-                                                                <td>Completed</td>
-                                                            @elseif($transcript->status === 'paid') <td>Paid</td>
-                                                            @elseif($transcript->status === 'approved') <td>Approved
-                                                                </td>
-                                                            @elseif($transcript->status === 'canEdit') <td>Edit</td>
-                                                            @endif
 
-                                                            @if ($transcript->period == 'K-8')
-                                                                <td>{{ $transcript['transcriptk8']['enrollment_year'] }}
-                                                                </td>
-                                                            @else
-                                                                <td>{{ $transcript['transcript9_12']['enrollment_year'] }}
-                                                                </td>
-                                                            @endif
-
-                                                            @if ($transcript->period == 'K-8')
-                                                                <td>{{ $transcript['transcriptk8']['school_name'] }}
-                                                                </td>
-                                                            @else
-                                                                <td>{{ $transcript['transcript9_12']['school_name'] }}
-                                                                </td>
-                                                            @endif
-
-                                                            @if ($transcript->period == 'K-8')
-                                                                <td>{{ $transcript['transcriptk8']['grade'] }}
-                                                                </td>
-                                                            @else
-                                                                <td>{{ $transcript['transcript9_12']['grade'] }}</td>
-                                                            @endif
-
-                                                            @if ($transcript->period == 'K-8')
-                                                                <td>
-                                                                    <a
-                                                                        href=" {{ route('admin.viewfull.transcript', [$transcript->student_profile_id, $transcript['transcriptk8']['transcript_id']]) }}">View
-                                                                        K-8 Transcript</a>
-                                                                </td>
-                                                            @else
-                                                                <td>
-                                                                    <a
-                                                                        href=" {{ route('admin.viewfull.transcript9_12', [$transcript->student_profile_id, $transcript['transcript9_12']['transcript_id']]) }}">View
-                                                                        9-12 Transcript</a>
-                                                                </td>
-                                                            @endif
+                                                            <td>{{ $transcript['transcriptPayment']['status'] }}</td>
+                                                            <td>{{ $transcript['transcriptPayment']['amount'] }}</td>
+                                                            <td> <a
+                                                                    href="{{ route('admin.transpayment.edit', $transcript['transcriptPayment']['id']) }}">
+                                                                    <i class=" fas fa-arrow-alt-circle-right"></i></a></td>
                                                             <td></td>
+
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -744,96 +681,113 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </section>
-                            <div class="modal fade bd-example-modal-lg" id="transcriptModal" tabindex="-1" role="dialog"
-                                aria-labelledby="transcriptModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="transcriptModalLabel">Generate Transcript</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="add-new-transcript">
-                                                <div class="row">
-                                                    <div class="form-group  col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">For
-                                                            student</label>
-                                                        <input type="text" value="" id='parent_id' name="parent_id"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">For
-                                                            Grades</label>
-                                                        <select id="enrollment_for" class="form-control">
+                        </div>
+                        <div class="modal fade bd-example-modal-lg" id="transcriptModal" tabindex="-1" role="dialog"
+                            aria-labelledby="transcriptModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="transcriptModalLabel">Generate Transcript</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="add-transcript">
+                                            <div class="row">
 
-                                                            <option value=""></option>
+                                                <input type="hidden" value="{{ $student->id }}" id='std_id'
+                                                    name="student-name" class="form-control">
 
+                                                <input type="hidden" value="{{ $parent->id }}" id='parent_id'
+                                                    name="parent_id">
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Period</label>
+                                                        <select id="transcript_period" class="form-control"
+                                                            onchange="getTranscriptval();">
+                                                            <option value="">Select...</option>
+                                                            <option value="K-8">K-8</option>
+                                                            <option value="9-12">9-12</option>
                                                         </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">Order</label>
-                                                        <select id="transcript_name" required class="form-control">
-                                                            <option value="enrollment" id="transcript_name">Enrollment
-                                                            </option>
-                                                            <option value="transcript" id="transcript_name">Transcript
-                                                            </option>
-                                                            <option value="postage" id="transcript_name">Postage</option>
-                                                            <option value="apostille" id="transcript_name">Apostille
-                                                            </option>
-                                                            <option value="notarization" id="transcript_name">Notarization
-                                                            </option>
-                                                            <option value="transcript_consultation" id="transcript_name">
-                                                                Personal Consultation</option>
-                                                            <option value="custom_payments" id="transcript_name">Custom
-                                                                Payments</option>
-                                                            <option value="custom_letter" id="transcript_name">Custom Letter
-                                                            </option>
-                                                            <option value="graduation" id="transcript_name">Graduation
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">Amount:</label>
-                                                        <input type="text" class="form-control" id="amount" required>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">Payment
-                                                            Method</label>
-                                                        <select id="payment_mode" required class="form-control">
-                                                            <option value="credit_card" id="payment_mode">Credit Card
-                                                            </option>
-                                                            <option value="paypal" id="payment_mode">Paypal</option>
-                                                            <option value="Money Gram" id="payment_mode">Postage</option>
-                                                            <option value="bankTransfer" id="payment_mode">Bank Transfer
-                                                            </option>
-                                                            <option value="checkandMoney" id="payment_mode">Check and Money
-                                                                Order</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="recipient-name" class="col-form-label">Enrollment
-                                                            Payment Status</label>
-                                                        <select id="enrollment_status" class="form-control">
-                                                            <option value="paid">Paid</option>
-                                                            <option value="pending">Pending</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="message-text" class="col-form-label">Message:</label>
-                                                        <textarea class="form-control" id="message"></textarea>
                                                     </div>
                                                 </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Amount<span
+                                                                class="required">*</span></label>
+                                                        <select type="" id="amount" class="form-control"
+                                                            onchange="getTotalTranscript();">
+                                                            <option value="">Select...</option>
+                                                            <option value="25">25</option>
+                                                            <option value="80">80</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Quantity<span
+                                                                class="required">*</span></label>
+                                                        <input type="text" id="quantity" class="form-control"
+                                                            onchange="getTotalTranscript();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Status</label>
+                                                        <select type="" id="status" class="form-control paymentDisplay">
+                                                            <option value="">Select</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="paid">Paid</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group transction-div">
+                                                        <label for="message-text" class="col-form-label">Transaction
+                                                            ID</label>
+                                                        <input type="text" id="transcript_transaction_id"
+                                                            class="form-control custom_letter_transction">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group payment-div">
+                                                        <label for="message-text" class="col-form-label">Payment
+                                                            Mode</label>
+                                                        <select type="" id="transcript_pay_mode"
+                                                            class="form-control custom_letter_payment_mode">
+                                                            <option value="">Select One </option>
+                                                            <option value="Credit Card">Credit Card</option>
+                                                            <option value="Paypal">Paypal</option>
+                                                            <option value="Bank Transfer">Bank Transfer</option>
+                                                            <option value="MoneyGram">MoneyGram</option>
+                                                            <option value="Check Or Money Order"> Check Or Money Order
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Note
+                                                        </label>
+                                                        <textarea style="height:120px;" id="notes" class="form-control"
+                                                            onKeyPress="if(this.value.length==2000) return false;"
+                                                            maxlength="2000"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+
+                                        </form>
                                     </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -857,7 +811,8 @@
                                                                 class="btn btn-modal ml-3" data-toggle="modal"
                                                                 data-target="#recordsModal"
                                                                 data-whatever="@getbootstrap"><img src="/images/add.png"
-                                                                    alt=""><img src="/images.add.png" alt=""></button></th>
+                                                                    alt=""><img src="/images.add.png" alt=""></button>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -871,7 +826,8 @@
                                                             <td>{{ $records->phone_number }}</td>
                                                             @if (empty($records->request_status))
                                                                 <td>In Review
-                                                                @elseif($records->request_status=='Record Received')
+                                                                @elseif($records->request_status=='Record
+                                                                    Received')
                                                                 <td>Records Received
                                                             @endif
                                                             @if ($records->resendCount)
@@ -922,7 +878,8 @@
                                                         <input type="email" id="email_add" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label for="message-text" class="col-form-label">Fax Number:</label>
+                                                        <label for="message-text" class="col-form-label">Fax
+                                                            Number:</label>
                                                         <input type="text" id="fax_number" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-md-6">
@@ -931,7 +888,8 @@
                                                         <input type="text" id="phone_number" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label for="message-text" class="col-form-label">Last Grade In
+                                                        <label for="message-text" class="col-form-label">Last Grade
+                                                            In
                                                             School</label>
                                                         <input type="text" id="last_grade" class="form-control" required>
                                                     </div>
@@ -950,7 +908,8 @@
                                                         <input type="text" id="record_state" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label for="message-text" class="col-form-label">Zip Code</label>
+                                                        <label for="message-text" class="col-form-label">Zip
+                                                            Code</label>
                                                         <input type="text" id="record_zip_code" class="form-control"
                                                             required>
                                                     </div>
@@ -992,7 +951,8 @@
                                                                 class="btn btn-modal ml-3" data-toggle="modal"
                                                                 data-target="#documentsModal"
                                                                 data-whatever="@getbootstrap"><img src="/images/add.png"
-                                                                    alt=""><img src="/images.add.png" alt=""></button></th>
+                                                                    alt=""><img src="/images.add.png" alt=""></button>
+                                                        </th>
 
                                                     </tr>
                                                 </thead>

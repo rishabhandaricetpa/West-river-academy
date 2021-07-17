@@ -1638,7 +1638,39 @@
             }
         });
     });
+    $('#add-transcript').on('submit', function(event) {
+        var student_id_value = $('#std_id').val();
+        var parent_id = $('#parent_id').val();
+        var transcript_period = $('#transcript_period').val();
+        var amount = $('#amount').val();
+        var quantity = $('#quantity').val();
+        var notes = $('#notes').val();
+        var status = $('#status').val();
+        var total_val = quantity * amount;
+        var transcript_transaction_id = $('#transcript_transaction_id').val();
+        var transcript_pay_mode = $('#transcript_pay_mode').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.add.transcript') }}",
+            type: "POST",
 
+            data: {
+                student_id_val: student_id_value,
+                parent_id: parent_id,
+                transcript_period: transcript_period,
+                amount: amount,
+                quantity: quantity,
+                notes: notes,
+                status: status,
+                total_val: total_val,
+                transcript_pay_mode: transcript_pay_mode,
+                transcript_transaction_id: transcript_transaction_id,
+            },
+
+        });
+    });
 
     // check the archieve status
     function archieve() {

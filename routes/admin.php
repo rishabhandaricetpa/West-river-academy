@@ -268,6 +268,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
     Route::post('create-parent', 'ParentController@createParent')->name('create.parent');
     Route::post('add-graduation', 'DashboardController@addGraduation')->name('add.graduation');
+    Route::post('add-transcript', 'ParentController@addTranscript')->name('add.transcript');
     Route::post('get-charges', 'ParentController@getCountryVal')->name('get.postagecharges');
     Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');

@@ -99,7 +99,7 @@ class TranscriptController extends Controller
             $years = collect($enrollment_periods)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
-            $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
+            $transcript_id = Transcript::select()->where('student_profile_id', $id)->whereStatus('completed')->where('status', 'paid')->first();
         }
         $data = [
             'student' => $student,
@@ -152,7 +152,7 @@ class TranscriptController extends Controller
                 $years = collect($enrollment_periods)->pluck('enrollment_year');
                 $maxYear = $years->max();
                 $minYear = $years->min();
-                $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
+                $transcript_id = Transcript::select()->where('student_profile_id', $id)->whereStatus('completed')->where('status', 'paid')->first();
             }
             $data = [
                 'student' => $student,

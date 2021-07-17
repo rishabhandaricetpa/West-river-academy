@@ -758,4 +758,48 @@ class ParentController extends Controller
 
         );
     }
+    public function addTranscript(Request $request)
+    {    //add one transaction entry if the status is paid
+        if ($request->get('status') == 'paid') {
+            $transction = new TransactionsMethod();
+            $transction->transcation_id   = $request->get('transcript_transaction_id') ? $request->get('transcript_transaction_id')  : substr(uniqid(), 0, 12);
+            $transction->payment_mode = $request->get('transcript_pay_mode') ? $request->get('transcript_pay_mode')  : '';
+            $transction->parent_profile_id = $request->get('parent_id');
+            $transction->amount = $request->get('total_val');
+            $transction->status = $request->get('status');
+            $transction->save();
+        }
+
+        //create the entry to transcript table according to the quantity 
+
+        for ($x = 1; $x <= $request->get('quantity'); $x++) {
+
+            $transcript_type = "transcript";
+            $transcript = new Transcript();
+            $transcript->parent_profile_id   = $request->get('parent_id');
+            $transcript->student_profile_id = $request->get('student_id_val');
+            $transcript->period = $request->get('transcript_period');
+            $transcript->status = $request->get('status');
+            $transcript->save();
+
+            $transcript_payment = new TranscriptPayment();
+            $transcript_payment->transcript_id   =  $transcript->id;
+            $transcript_payment->amount = $request->get('amount');
+            $transcript_payment->status = $request->get('status');
+            $transcript_payment->transcation_id =  $request->get('status') == 'paid' ? $transction->id  : '';
+            $transcript_payment->payment_mode = $request->get('transcript_pay_mode');
+            $transcript_payment->save();
+
+            //add transacript to the cart if there are two transcript orderd
+            if ($request->get('status') == 'pending') {
+                if (!Cart::where('item_id', $transcript->id)->where('item_type', $transcript_type)->exists()) {
+                    Cart::create([
+                        'item_type' => $transcript_type,
+                        'item_id' => $transcript->id,
+                        'parent_profile_id' => $request->get('parent_id'),
+                    ]);
+                }
+            }
+        }
+    }
 }
