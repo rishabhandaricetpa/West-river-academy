@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <a href="{{ route('dashboard') }}" role="button" class="btn btn-primary mr-2">Back</a>
+                    <a href="{{ route('record.transfer',$school_record->parent_profile_id) }}" role="button" class="btn btn-primary mr-2">Back</a>
                     <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
                 </div>
             </form>

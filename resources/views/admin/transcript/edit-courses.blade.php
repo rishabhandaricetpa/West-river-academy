@@ -27,7 +27,8 @@
                                 data-target="#addsubjectsModal">Add New Subject to {{ $coursename->course_name }}</button>
                             <a href="{{ route('admin.other.subjects', $id) }}" class="btn btn-primary">View Other
                                 Subjects</a>
-                            <table id="addressData" class="table table-bordered table-striped data-table"">
+                            <a onclick="goBack()" class="btn btn-primary">Back</a>
+                            <table id="addressData" class="table table-bordered table-striped data-table">
                       <thead>
                       <tr>
                         <th>Subject Name</th>
@@ -81,8 +82,10 @@
                         <div class="form-group">
                             <label>Grade</label>
                             <select class="form-control" name="grade" value="" Required>
-                                <option value="K - 8">K - 8</option>
-                                <option value="9 - 12">9 - 12</option>
+                                <option value="K-8" @if($coursename->transcript_period == 'K-8')
+                                    selected="selected" @endif>K - 8</option>
+                                <option value="9-12" @if($coursename->transcript_period == '9-12')
+                                    selected="selected" @endif>9 - 12</option>
                             </select>
                         </div>
                         <!-- /.card-body -->
