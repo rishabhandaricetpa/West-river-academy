@@ -22,7 +22,7 @@
                     <tbody>
                         @foreach ($enroll_students as $enroll_student)
                             <tr>
-                                <td>{{ $enroll_student->fullname }}</td>
+                                <td class="d-flex align-items-center"><input class="mr-2" type="checkbox" id="" name="" value="">{{ $enroll_student->fullname }}</td>
                                 <td>{{ $enroll_student->d_o_b->format('M j, Y') }}</td>
                                 <td>{{ $enroll_student->student_Id }}</td>
                                 <td class="transform-none">{{ $enroll_student->email }}</td>
