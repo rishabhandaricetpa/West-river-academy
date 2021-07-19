@@ -47,7 +47,7 @@
                             type="submit" value="Delete School Record">Delete School Record</a>
                     @endif
                     <p class="mb-0"><span class="font-weight-bold mr-2">Academic School
-                            Year(s):</span>{{ $school->enrollment_year }} </p>
+                            Year(s):</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }} </p>
                     <p> <span class="font-weight-bold mr-2"> Grade:</span> {{ $school->grade }}</p>
 
                     <div class="overflow-auto">

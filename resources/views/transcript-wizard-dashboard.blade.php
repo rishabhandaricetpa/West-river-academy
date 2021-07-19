@@ -5,12 +5,12 @@
     <main class="position-relative container form-content mt-4">
         <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
         <div class="form-wrap border bg-light py-5 px-25 mb-4 school-record">
-            <h2 class="mb-3">{{ $student->first_name }}</h2>
+            <h2 class="mb-3">{{ $student->fullname }}</h2>
 
             <div class="form-group d-sm-flex mb-2">
                 <label for="">Name</label>
                 <div>
-                    {{ $student->first_name }}
+                    {{ $student->fullname }}
                 </div>
             </div>
             <div class="form-group d-sm-flex mb-2">
@@ -44,15 +44,14 @@
                             type="submit" value="Delete School Record">Delete School Record</a>
                     @endif
                     <p class="mb-0"><span class="font-weight-bold mr-2">Academic School
-                            Year(s):</span>{{ $school->enrollment_year }} </p>
+                            Year(s):</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }}</p>
                     <p> <span class="font-weight-bold mr-2"> Grade:</span> {{ $school->grade }}</p>
 
                     <div class="overflow-auto">
                         <table class="table-styling w-100">
                             <thead>
                                 <tr>
-                                    <th>Subjects</th>
-                                    <th class="hide">Courses</th>
+                                    <th>Courses</th>
                                     <th>Grade</th>
                                 </tr>
                             </thead>
@@ -61,17 +60,8 @@
                                 @foreach ($school->TranscriptCourse as $course)
                                     @foreach ($course->subjects as $subject)
                                         <tr>
-
                                             <td>{{ $subject->subject_name }}</td>
-                                            <td>
-                                                @php
-                                                    $firstCourse = \Arr::first($course->course, function ($value, $key) use ($subject) {
-                                                        return $value['id'] == $subject['courses_id'];
-                                                    });
-                                                @endphp
-                                                {{ $firstCourse->course_name }}
-                                            </td>
-                                            <td>{{ $course->score }}</td>
+                                            <td class="text-uppercase">{{ $course->score }}</td>
                                         </tr>
                                     @endforeach
                                 @endforeach
