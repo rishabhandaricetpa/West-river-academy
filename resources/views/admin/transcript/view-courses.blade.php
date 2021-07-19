@@ -7,12 +7,8 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Courses</h1>
+            <h1> Manage Courses</h1>
             <div class="d-flex">
-                <ol class="breadcrumb ml-auto">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Courses</li>
-                </ol>
             </div><!-- /.col -->
         </div><!-- /.container-fluid -->
     </div>
@@ -33,8 +29,8 @@
                             <table id="addressData" class="table table-bordered table-striped data-table">
                       <thead>
                       <tr>
-                        <th>Course Id</th>
-                        <th>Course Name</th>
+                        <th>Subject Area ID</th>
+                        <th>Subject Area</th>
                         <th>Action</th>
                       </tr>
                       </thead>

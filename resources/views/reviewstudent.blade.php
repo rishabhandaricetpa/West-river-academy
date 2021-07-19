@@ -66,7 +66,7 @@
               @endphp
               @foreach ($fees as $fee)
               <tr>
-                <td>{{ $fee->first_name }}</td>
+                <td>{{ $fee->first_name }} {{ $fee->last_name }}</td>
                 <td class="ml-2">
                   @if ($fee->type == 'annual') Annual @else Second Semester Only @endif
                   <span class="small"> ({{ Carbon\Carbon::parse($fee->start_date_of_enrollment)->format('M j, Y') }} - {{ Carbon\Carbon::parse($fee->end_date_of_enrollment)->format('M j, Y') }} ) </span>

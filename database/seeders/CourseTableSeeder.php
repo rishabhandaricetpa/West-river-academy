@@ -24,7 +24,7 @@ class CourseTableSeeder extends Seeder
                 ['5', 'Health', 'K-8'],
                 ['6', 'Foreign Language', 'K-8'],
                 ['7', 'Physical Education', 'K-8'],
-                ['8', 'Another', 'K-8'],
+                ['8', 'Electives', 'K-8'],
             ];
             foreach ($array as $key => $value) :
                 $array2[] = [

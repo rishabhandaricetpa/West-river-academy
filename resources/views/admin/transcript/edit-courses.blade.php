@@ -3,12 +3,8 @@
 @section('content')
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1>Subject : {{ $coursename->course_name }} </h1>
+            <h1>Subject Area: {{ $coursename->course_name }} </h1>
             <div class="d-flex">
-                <ol class="breadcrumb ml-auto">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.notification') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Subjects</li>
-                </ol>
             </div><!-- /.col -->
         </div><!-- /.container-fluid -->
     </div>
@@ -19,14 +15,13 @@
                     <!-- /.card-header -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> Subjects</h3>
+                            <h3 class="card-title"> Subjects Area</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <button type="submit" class="btn btn-primary" data-toggle="modal"
-                                data-target="#addsubjectsModal">Add New Subject to {{ $coursename->course_name }}</button>
-                            <a href="{{ route('admin.other.subjects', $id) }}" class="btn btn-primary">View Other
-                                Subjects</a>
+                                data-target="#addsubjectsModal">Add New course to {{ $coursename->course_name }}</button>
+                            <a href="{{ route('admin.other.subjects', $id) }}" class="btn btn-primary">View Subject area list</a>
                             <a onclick="goBack()" class="btn btn-primary">Back</a>
                             <table id="addressData" class="table table-bordered table-striped data-table">
                       <thead>

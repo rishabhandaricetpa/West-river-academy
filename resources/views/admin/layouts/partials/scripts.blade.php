@@ -349,6 +349,9 @@
                           </ul>
                         `;
                 }
+            },
+            {
+                "data": "details.project"
             }, {
                 "data": "apostille_country"
             }, {

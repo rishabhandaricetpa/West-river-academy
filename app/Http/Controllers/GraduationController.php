@@ -192,6 +192,7 @@ class GraduationController extends Controller
 
     public function dataTable()
     {
+        // dd(Graduation::with(['details', 'student', 'parent'])->latest()->get()->toArray());
         return datatables(Graduation::with(['details', 'student', 'parent'])->latest()->get())->toJson();
     }
 

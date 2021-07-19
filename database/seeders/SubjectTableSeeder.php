@@ -40,7 +40,7 @@ class SubjectTableSeeder extends Seeder
                 ['1', 'JOURNALISM', '9-12'],
                 ['1', 'THE NOVEL', '9-12'],
                 ['1', 'SHORT STORY WRITING', '9-12'],
-                ['1', 'CONTEMPORARY ENGLISH LITERARURE', '9-12'],
+                ['1', 'CONTEMPORARY ENGLISH LITERATURE', '9-12'],
                 ['1', 'CREATIVE WRITING', '9-12'],
                 ['1', 'CRITICAL THINKING SKILLS', '9-12'],
                 ['1', 'INTRO. TO LOGIC', '9-12'],

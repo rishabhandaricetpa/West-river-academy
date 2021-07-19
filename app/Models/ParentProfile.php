@@ -58,6 +58,8 @@ class ParentProfile extends Model
                     'enrollment_periods.start_date_of_enrollment',
                     'enrollment_periods.end_date_of_enrollment',
                     'student_profiles.first_name',
+                    'student_profiles.middle_name',
+                    'student_profiles.last_name',
                     'student_profiles.student_Id',
                 )
                     ->groupBy('student_profiles.id')

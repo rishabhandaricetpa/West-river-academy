@@ -18,6 +18,7 @@
     <p style="font-family:'Catamaran', sans-serif; color:black;">We will notify you by the email and in your account notifications when payment has been received.</p>
 
     <address style="font-family:'Catamaran', sans-serif; color:black;">
+        <h3 style="font-family:'Catamaran', sans-serif; color:black;"> Thank you,</h3> 
         <a href="contact@westriveracademy.com">The West River Academy Team</a><br>
     </address>
 </body>
