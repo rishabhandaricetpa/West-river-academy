@@ -16,7 +16,7 @@
         </span>
         <div class="col-sm-7 px-0">
           <label for="" class="h3 text-black"
-            >Enter an elective, such as MUSIC, ART, DANCE. DRAMA. etc.</label
+            >Enter an elective, such as MUSIC, ART, DANCE, DRAMA etc.</label
           >
           <div class="form-group d-sm-flex  align-items-center">
             <select

@@ -11,7 +11,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Name</label>
                     <div>
-                        {{ $studentInfo->first_name }}
+                        {{ $studentInfo->fullname }}
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
@@ -30,22 +30,23 @@
         </div>
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">Edit Courses/Subjects</h2>
-            <a class="btn btn-primary mb-3" href="{{ route('display.grades', [$student_id, $trans_id]) }}">Back To View All
+            <a class="btn btn-primary mb-3" href="{{ route('display.grades', [$student_id, $trans_id]) }}">Back To View
+                All
                 Courses</a>
             <div class="overflow-auto">
                 <table class="table-styling w-100">
                     <thead>
 
                         <tr>
+
                             <th>Courses</th>
-                            <th>Subjects</th>
                             <th>Grade</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($courses as $course)
                             <tr>
-                                <td>{{ $course->course_name }}</td>
+
                                 <td>{{ $course->subject_name }}</td>
                                 <td>{{ $course->score }}</td>
                             </tr>

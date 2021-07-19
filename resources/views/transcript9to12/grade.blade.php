@@ -43,7 +43,7 @@
                                 12
                             </label>
                         </div>
-                        <div class="col-sm-6 px-0">
+                        <div class="col-sm-6 px-0 mt-4">
                             <h3 class="mb-3 mt-4">Where were you enrolled for this grade?</h3>
                             <div class="mb-2 form-check">
                                 <input class="form-check-input" type="radio" id="wra_school" name="school_name"
@@ -52,7 +52,7 @@
                                     West River Academy
                                 </label>
                             </div>
-                            <div class="form-check d-sm-flex mb-2">
+                            <div class="form-check d-sm-flex mb-2 mt-2">
                                 <input class="form-check-input" type="radio" id="other_school_name" name="school_name"
                                     value="Others">
                                 <label class="form-check-label" for="">

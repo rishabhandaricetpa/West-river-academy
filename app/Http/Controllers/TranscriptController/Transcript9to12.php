@@ -98,13 +98,20 @@ class Transcript9to12 extends Controller
                 $transcript->school_name = $request->get('other_school');
             }
             $transcript->save();
+            if ($request->get('school_name') == 'West River Academy') {
 
-            $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
-            $items = [];
-            foreach ($enrollment_periods as $key => $enrollment_period) {
-                $items[] = \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('Y');
+                $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
+                $items = [];
+                foreach ($enrollment_periods as $key => $enrollment_period) {
+                    $items[] = \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('Y');
+                }
+                $result = array_unique($items);
+            } else {
+                $result = [
+                    date("Y"), date("Y") + 1, date("Y") + 2, date("Y") + 3, date("Y") + 4, date("Y") + 5,
+                    date("Y") + 6, date("Y") + 7, date("Y") + 8, date("Y") + 9,
+                ];
             }
-            $result = array_unique($items);
             DB::commit();
 
             return view('transcript9to12.year-grade', compact('transcript', 'result', 'student_id'));
@@ -182,12 +189,14 @@ class Transcript9to12 extends Controller
         $student_transcripts = TranscriptCourse9_12::where('student_profile_id', $student_id)->select('transcript9_12_id')->groupBy('transcript9_12_id')->get();
         $transcriptCourses = StudentProfile::find($student_id)->transcriptCourses9_12()->get();
         $details9_12 = StudentProfile::find($student_id)->Transcript912()->get();
+
         $transcriptWizStatus = Transcript::where('id', $transcript_id)->first();
 
         $student = StudentProfile::find($student_id);
         $transcriptDatas = Transcript9_12::where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
             ->get();
+      
         return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id', 'transcriptWizStatus', 'details9_12'));
     }
 

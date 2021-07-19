@@ -56,7 +56,7 @@
                             class="btn btn-primary mb-3 transform-none">Delete this Year from Transcript</a>
                         <thead>
                             <tr>
-                                <th>Subjects</th>
+                                <th>Courses</th>
                                 <th>Grade</th>
                                 <th>Action</th>
                             </tr>

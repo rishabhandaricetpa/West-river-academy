@@ -6,7 +6,7 @@
         <main class="position-relative container form-content mt-4">
             <h1 class="text-center text-white text-uppercase"></h1>
             <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
-                <h3>Enter an elective, such as MUSIC, ART, DANCE. DRAMA. etc :</h3>
+                <h3>Enter an elective, such as MUSIC, ART, DANCE, DRAMA etc :</h3>
                 <another-course :anotherstudies='@json($anotherCourse)' :student_id='@json($student_id)'
                     :courses_id='@json($courses_id)' :transcript_id='@json($transcript_id)' :trans_id=@json($trans_id)>
                 </another-course>
