@@ -10,14 +10,18 @@
 <body>
     <h3 style="font-family:'Catamaran', sans-serif; color:black;">West River Academy - Check Or Money Order Instructions</h3> 
     <h3 style="font-family:'Catamaran', sans-serif; color:black;">Hi {{$user->name}},</h3>
-    <p style="font-family:'Catamaran', sans-serif; color:black;">Thank you for your order. To pay by check or money order, please:</br>
-        1. Make your check or money order payment  to West River Academy.</br>
-        2. Mail your check or money order to:</p>
+    <p style="font-family:'Catamaran', sans-serif; color:black;margin-bottom: 0!important;">Thank you for your order. To pay by check or money order, please:</br>  </p>
+        <p style="font-family:'Catamaran', sans-serif; color:black;margin-bottom: 0!important;"> 1. Make your check or money order payment  to West River Academy.</br></p>
+        <p style="font-family:'Catamaran', sans-serif; color:black;margin-bottom: 0!important;"></p>
+       
+     
 
     <address style="font-family:'Catamaran', sans-serif; color:black;">
-       <p> West River Academy</br>
-        33721 Bluewater Lane</br>
-       Dana Point, CA 92629</p></br>
+       <p style="margin-bottom: 0!important;"> West River Academy</p>
+       <p style="margin-bottom: 0!important;"> 33721 Bluewater Lane</p>
+       <p style="margin-bottom: 0!important;"> Dana Point, CA 92629</p>
+        
+       </p>
     </address>
 
     <p style="font-family:'Catamaran', sans-serif; color:black;">We will notify you by the email and in your account notifications when payment has been received.</p>
