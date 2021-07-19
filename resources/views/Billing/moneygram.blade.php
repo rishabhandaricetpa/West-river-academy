@@ -8,7 +8,7 @@
       <form method="get" action="{{ route('moneygram-email',$final_amount)}}">
          <div class="form-group d-flex mb-2">
             <label for="">Name</label>
-            <div class="ml-auto">{{$address->p1_first_name}} </div>
+            <div class="ml-auto">{{$address->p1_first_name}} {{$address->p1_last_name}} </div>
          </div>
          <div class="form-group d-flex mb-2">
             <label for="">Street</label>

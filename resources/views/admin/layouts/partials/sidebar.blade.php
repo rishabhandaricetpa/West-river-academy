@@ -145,7 +145,7 @@
                     <li class="nav-item">
                         <a href="{{ url('admin/manage-courses') }}" class="nav-link">
                             <i class="fas fa-tasks"></i>
-                            <p>Manage Course</p>
+                            <p>Manage Courses</p>
                         </a>
                     </li>
                 </ul>

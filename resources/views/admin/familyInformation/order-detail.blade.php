@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label for="p1_first_name">First Name :</label>
                                         <input type="text" class="form-control is-disabled" name="p1_first_name"
-                                            id="p1_first_name" placeholder="" value="{{ $parent->p1_first_name }}"
+                                            id="p1_first_name" placeholder="" value="{{ $parent->p1_first_name }} {{ $parent->p1_last_name }}"
                                             disabled required>
                                     </div>
                                     <input type="hidden" value="{{ $parent->id }}" id="parent_address_id">

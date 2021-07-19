@@ -395,7 +395,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Another')
+            ->where('course_name', 'Electives')
             ->first();
         $courses_id = $course->id;
         $another_course = Subject::where('courses_id', $course->id)

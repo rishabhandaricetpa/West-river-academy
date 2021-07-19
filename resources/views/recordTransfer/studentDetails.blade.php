@@ -6,7 +6,7 @@
         <h1 class="text-center text-white text-uppercase">Record Transfer Request</h1>
         <div class="form-wrap border bg-light py-5 px-25">
 
-            <h2 class="mb-3">Select the student who wishes to send a record transfer request.</h2>
+            <h2 class="mb-3">Select the student who needs records transferred.</h2>
             <div class="overflow-auto">
                 <input type="hidden" value="{{ $parentId }}" name="parent_id">
                 <table class="w-100 table-styling">

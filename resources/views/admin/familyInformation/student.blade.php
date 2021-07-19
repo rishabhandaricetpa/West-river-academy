@@ -49,7 +49,7 @@
                                         <th>View Transcript</th>
                                         <th>View Graduation</th>
                                         <th>View Record Transfer</th>
-                                        <th>View Uploaded Document </th>
+                                        <th>View Uploaded Documents </th>
                                         <th>Upload Documents</th>
                                     </tr>
                                 </thead>

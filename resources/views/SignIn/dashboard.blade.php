@@ -364,7 +364,7 @@
 
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
 
-                <h2 class="mb-3">Uploaded Document From West River Academy</h2>
+                <h2 class="mb-3">Uploaded Documents From West River Academy</h2>
                 <div class="mb-2 text-center text-sm-left">
                 </div>
                 <div class="overflow-auto max-table">

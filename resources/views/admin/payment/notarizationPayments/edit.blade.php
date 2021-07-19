@@ -4,10 +4,10 @@
 
     <section class="content">
         <div class="container-fluid position-relative">
-            <h1>Apostille And Notrization Details</h1>
+            <h1>Apostille And Notarization Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3>Payment Status of Parent : {{ $notarizationData->ParentProfile->p1_first_name }}
+                <h3>Payment Status of Parent : {{ $notarizationData->ParentProfile->p1_first_name }} {{ $notarizationData->ParentProfile->p1_last_name }}
                     <h3>
 
                         <form method="post" class="row"
@@ -17,10 +17,10 @@
                             <div class="form-group col-sm-6">
                                 <label>Parent Name<sup>*</sup></label>
                                 <input name="parent_name" class="form-control"
-                                    value="{{ $notarizationData->ParentProfile->p1_first_name }}" disabled>
+                                    value="{{ $notarizationData->ParentProfile->p1_first_name }} {{ $notarizationData->ParentProfile->p1_last_name }}" disabled>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label>Transaction Id<sup>*</sup></label>
+                                <label>Transaction ID<sup>*</sup></label>
                                 <input class="form-control" value="{{ $notarizationData->transcation_id }}"
                                     name="transcation_id">
                             </div>

@@ -13,7 +13,7 @@ final class CourseType extends Enum
     const HealthCourse = 'Health';
     const ForeignCourse = 'Foreign Language';
     const PhysicalEducationCourse = 'Physical Education';
-    const AnotherCourse = 'Another';
+    const AnotherCourse = 'Electives';
 
     // courses_id
     const EnglishCourseId = 1;

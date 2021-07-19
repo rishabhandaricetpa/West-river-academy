@@ -8,9 +8,9 @@
       enctype="multipart/form-data">
       @csrf
       @method('put')
-      <div class="form-group col-sm-6">
-        Student Name: {{ $graduation->student->fullname }}
-      </div>
+      <a  href="{{ route('admin.edit-student',$graduation->student_profile_id)}}"class="form-group col-sm-6">
+        Student Name: {{ $graduation->student->fullname }} edit-student
+      </a>
       <div class="form-group col-sm-6">
         Student Email: <a class="transform-none" href="mailto:{{ $graduation->student->email }}">
           {{ $graduation->student->email }}</a>

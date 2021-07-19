@@ -16,8 +16,10 @@
                         <div class="form-group">
                             <label>Grade</label>
                             <select class="form-control" name="grade" value="" Required>
-                                <option value="K - 8">K - 8</option>
-                                <option value="9 - 12">9 - 12</option>
+                                <option value="K-8" @if($name->transcript_period == 'K-8')
+                                    selected="selected" @endif>K - 8</option>
+                                <option value="9-12" @if($name->transcript_period == '9-12')
+                                    selected="selected" @endif>9 - 12</option>
                             </select>
                         </div>
 
