@@ -7,6 +7,7 @@ use App\Models\StudentProfile;
 use App\Models\ParentProfile;
 use App\Models\TranscriptPayment;
 use App\Models\Transcript;
+use Auth;
 use DB;
 
 class TranscriptWizardController extends Controller
@@ -86,13 +87,14 @@ class TranscriptWizardController extends Controller
     }
 
 
-    public function saveDraft($student_id,$transcript_id){
-
-        $type=Transcript::whereId($transcript_id)->first();
+    public function saveDraft($student_id, $transcript_id)
+    {
+        $id = Auth::user()->id;
+        $type = Transcript::whereId($transcript_id)->first();
         $notification = [
             'message' => 'Transcript Wizard saved Successfully!',
             'alert-type' => 'success',
-        ]; 
-        return view('transcript_wizard.thankyou',compact('student_id','transcript_id','type'))->with($notification);
+        ];
+        return view('transcript_wizard.thankyou', compact('student_id', 'transcript_id', 'type', 'id'))->with($notification);
     }
 }

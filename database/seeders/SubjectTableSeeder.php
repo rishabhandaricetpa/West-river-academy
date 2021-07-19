@@ -19,7 +19,7 @@ class SubjectTableSeeder extends Seeder
                 //english
 
                 ['1', 'ENGLISH', 'K-8'],
-                ['1', 'LANGUAGE ART', 'K-8'],
+                ['1', 'LANGUAGE ARTS', 'K-8'],
                 ['1', 'READING', 'K-8'],
                 ['1', 'WRITING', 'K-8'],
                 ['1', 'ORAL COMMUNICATION', 'K-8'],

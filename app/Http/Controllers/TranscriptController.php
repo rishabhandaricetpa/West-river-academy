@@ -224,6 +224,7 @@ class TranscriptController extends Controller
      */
     public function storeGrade(Request $request, $id)
     {
+
         try {
             DB::beginTransaction();
             $transcript_id = $request->get('transcript_id');
@@ -236,13 +237,21 @@ class TranscriptController extends Controller
                 $transcript->school_name = $request->get('other_school');
             }
             $transcript->save();
+            if ($request->get('school_name') == 'West River Academy') {
 
-            $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
-            $items = [];
-            foreach ($enrollment_periods as $key => $enrollment_period) {
-                $items[] = \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('Y');
+                $enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
+                $items = [];
+                foreach ($enrollment_periods as $key => $enrollment_period) {
+                    $items[] = \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('Y');
+                }
+                $result = array_unique($items);
+                dd($result);
+            } else {
+                $result = [
+                    date("Y"), date("Y") + 1, date("Y") + 2, date("Y") + 3, date("Y") + 4, date("Y") + 5,
+                    date("Y") + 6, date("Y") + 7, date("Y") + 8, date("Y") + 9,
+                ];
             }
-            $result = array_unique($items);
             DB::commit();
 
             return view('transcript.transcript-enrollment-year', compact('transcript', 'id', 'result'));

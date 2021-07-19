@@ -9,7 +9,8 @@
             </div>
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <h2 class="mb-3">{{ $student->fullname }}</h2>
-                <form method="POST" action="{{ route('admin.viewfull9_12', [$student->id, $transcript_id]) }}" class="mb-0">
+                <form method="POST" action="{{ route('admin.viewfull9_12', [$student->id, $transcript_id]) }}"
+                    class="mb-0">
                     @csrf
                     <div class="form-group d-sm-flex mb-2">
                         <label for="">Name</label>

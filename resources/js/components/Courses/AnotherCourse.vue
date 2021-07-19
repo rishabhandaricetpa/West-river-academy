@@ -121,7 +121,7 @@ export default {
             this.trans_id;
         })
         .catch(error => {
-          alert("Please choose the course or remove it");
+          alert("Please choose a course or click the X button on the top right of the screen to continue .");
         });
     },
     addNewSocialScienceCourse() {
