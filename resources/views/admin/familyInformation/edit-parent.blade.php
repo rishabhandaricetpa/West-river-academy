@@ -1029,9 +1029,12 @@
                                             <td>{{ $document->document_type }}</td>
                                             <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
                                                     Documents</a></br></td>
-                                            <td><a
-                                                    href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
-                                                    Documents</a></br></td>
+                                            <td class="d-flex align-items-center">
+                                                <a class="mr-1" href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
+                                                    Documents</a></br>
+                                                    <a class="mr-1" href="#"><img src="/images/document (1).png" alt=""></a>
+                                                    <a class="mr-1" href="#"><img src="/images/document.png" alt=""></a>
+                                                </td>
                                             <td></td>
                                         </tr>
                                     @endforeach

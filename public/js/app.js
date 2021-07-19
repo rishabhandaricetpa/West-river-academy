@@ -2263,7 +2263,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("another.store"), this.form).then(function (response) {
         window.location = "/choose-another/" + _this.student_id + "/" + _this.trans_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewSocialScienceCourse: function addNewSocialScienceCourse() {
@@ -2415,7 +2415,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("englishCourse.store"), this.form).then(function (response) {
         window.location = "/social-studies/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -2567,7 +2567,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("foreign.store"), this.form).then(function (response) {
         window.location = "/another/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewForeignCourse: function addNewForeignCourse() {
@@ -2719,7 +2719,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("health.store"), this.form).then(function (response) {
         window.location = "/foreign/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewSocialScienceCourse: function addNewSocialScienceCourse() {
@@ -2873,7 +2873,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("mathematics.store"), this.form).then(function (response) {
         window.location = "/science/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewMathsCourse: function addNewMathsCourse() {
@@ -3012,7 +3012,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(route("physicalEducation.store"), this.form).then(function (response) {
         window.location = "/health/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -3165,7 +3165,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(route("science.store"), this.form).then(function (response) {
         window.location = "/physical-education/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewSocialScienceCourse: function addNewSocialScienceCourse() {
@@ -3306,7 +3306,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(route("socialStudiesCourse.store"), this.form).then(function (response) {
         window.location = "/mathematics/" + _this.student_id + "/" + _this.transcript_id;
       })["catch"](function (error) {
-        alert("Please choose the course or remove it");
+        alert("Please choose a course or click the X button on the top right of the screen to continue .");
       });
     },
     addNewEnglishCourse: function addNewEnglishCourse() {
@@ -51934,7 +51934,7 @@ var render = function() {
                         { staticClass: "h3 text-black", attrs: { for: "" } },
                         [
                           _vm._v(
-                            "Enter an elective, such as MUSIC, ART, DANCE. DRAMA. etc."
+                            "Enter an elective, such as MUSIC, ART, DANCE, DRAMA etc."
                           )
                         ]
                       ),

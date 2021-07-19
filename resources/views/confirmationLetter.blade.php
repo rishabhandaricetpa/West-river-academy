@@ -50,7 +50,7 @@
                         <p>Stacey Nishikawa</p>
                         <p>Administrative Director</p>
                     </td>
-                    <td><img src="../public/images/Stamp.png" style="width:150px;height:150px;object-fit:contain;"
+                    <td style="text-align: right"><img src="../public/images/Stamp.png" style="width:150px;height:150px;object-fit:contain;"
                             alt="Stamp"></td>
                 </tr>
             </tbody>
