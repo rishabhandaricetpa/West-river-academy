@@ -212,7 +212,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     Route::post('update/record', 'RecordTransferController@updateRecord')->name('update.record');
     //dashboard notification
-    Route::get('generate-pdf/{student_id}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
+    Route::get('generate-pdf/{student_id}/{grade_id}/{type}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
     Route::get('orders/details/{parent_id}', 'ParentController@orderDetails')->name('orders.details');
     // archieved tasks

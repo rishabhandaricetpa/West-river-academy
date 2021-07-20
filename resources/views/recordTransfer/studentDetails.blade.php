@@ -16,18 +16,17 @@
                             <th>Date of Birth</th>
                             <th>National ID</th>
                             <th>Email</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                <td> {{ $student->fullname }}</td>
+                                <td><a
+                                    href="{{ route('record.send', [$student->id, $parentId]) }}">{{ $student->fullname }}</a>
+                                </td>
                                 <td>{{ Carbon\Carbon::parse($student->birthdate)->format('M j, Y') }}</td>
                                 <td>{{ $student->student_Id }}</td>
                                 <td class="transform-none">{{ $student->email }}</td>
-                                <td><a href="{{ route('record.send', [$student->id, $parentId]) }}"
-                                        class="btn btn-primary">Send Record Transfer Request</a></td>
                             </tr>
                         @endforeach
                     </tbody>

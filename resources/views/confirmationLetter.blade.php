@@ -45,6 +45,7 @@
         <table style="padding-top:30px;width:100%;">
             <tbody>
                 <tr>
+                    @if($type=='signed')
                     <td>
                         <img src="../public/images/signature.png" alt="signature">
                         <p>Stacey Nishikawa</p>
@@ -52,6 +53,7 @@
                     </td>
                     <td style="text-align: right"><img src="../public/images/Stamp.png" style="width:150px;height:150px;object-fit:contain;"
                             alt="Stamp"></td>
+                            @endif
                 </tr>
             </tbody>
         </table>
