@@ -150,6 +150,11 @@
                          <td></td>
                      </tr>
                     </tbody>
+                    <tfoot class="tfoot-light">
+                      <tr>
+                        <td colspan="5" class="text-center">CurrentlY Due:<span>$30</span> </td>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
               </div>

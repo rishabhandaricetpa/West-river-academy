@@ -1,4 +1,5 @@
 # West River Academy (Laravel App)
+
 ### Prerequisites
 
 -   php v7.4.3, [see](https://laravel.com/docs/installation) Laravel specific requirements
@@ -45,3 +46,8 @@ php artisan storage:link
 ```
 php artisan optimize
 ```
+
+### 3rd party services used
+
+-   E-mail service
+-   [Sentry](https://docs.sentry.io/platforms/php/laravel/) error reporting service (optional)
