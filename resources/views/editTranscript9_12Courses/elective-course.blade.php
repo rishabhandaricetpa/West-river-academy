@@ -7,7 +7,7 @@
             <h1 class="text-center text-white text-uppercase"></h1>
             <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
                 <h3>Select an Elective course:</h3>
-                <label for="" class="h3 text-black">Enter an elective, such as MUSIC, ART, DANCE, DRAMA etc.</label>
+                <label for="" class="h3 text-black min-w-100">Enter an elective, such as MUSIC, ART, DANCE, DRAMA etc.</label>
                 <edit-elective-transcript-course :outofcredit='@json($outOfCredit)' :electivecourse='@json($electiveCourse)'
                     :transcripts='@json($transcripts)' :student_id='@json($student_id)' :courses_id='@json($courses_id)'
                     :transcript_id='@json($transcript9_12id)' :total_credits='@json($credits)'
