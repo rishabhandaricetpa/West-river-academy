@@ -276,7 +276,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('rep-list/', function () {
         return view('admin/familyInformation/rep-list');
     });
-    Route::get('rep-detail/', function () {
-        return view('admin/familyInformation/rep-detail');
-    });
+
+    Route::get('rep-details/{rep_id}/{parent_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
+    // representative groups
+
+    Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
+    Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
 });

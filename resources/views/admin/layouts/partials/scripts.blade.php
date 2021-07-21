@@ -308,34 +308,34 @@
             "ordering": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                "data": "id",
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                    e
-                }
-            }, {
-                "data": "student.fullname"
-            }, {
-                "data": function(row, type, val, meta) {
-                    return row.student.email
-                },
-                defaultContent: '',
-                "render": function(data) {
-                    if (data === null) {
-                        return `<label> </label>`;
-                    } else {
-                        return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
+                    "data": "id",
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                        e
                     }
-                }
-            }, {
-                "data": "student.birthdate",
-                "render": function(data) {
-                    return (moment(data).format("LL"));
-                }
-            }, {
-                "data": "grade_9_info",
-                "render": function(data, type, row, meta) {
-                    return `
+                }, {
+                    "data": "student.fullname"
+                }, {
+                    "data": function(row, type, val, meta) {
+                        return row.student.email
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                        if (data === null) {
+                            return `<label> </label>`;
+                        } else {
+                            return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
+                        }
+                    }
+                }, {
+                    "data": "student.birthdate",
+                    "render": function(data) {
+                        return (moment(data).format("LL"));
+                    }
+                }, {
+                    "data": "grade_9_info",
+                    "render": function(data, type, row, meta) {
+                        return `
                           <ul>
                             <li>
                                 Grade 9 : ${ row.grade_9_info }
@@ -348,30 +348,31 @@
                             </li>
                           </ul>
                         `;
+                    }
+                },
+                {
+                    "data": "details.project"
+                }, {
+                    "data": "apostille_country"
+                }, {
+                    "data": "status",
+                    "render": function(status) {
+                        if (status === 'pending')
+                            return `<td> Pending</td>`;
+                        if (status === 'approved')
+                            return `<td> Approved </td>`;
+                        if (status === 'paid')
+                            return `<td> Paid </td>`;
+                        if (status === 'completed')
+                            return `<td> Completed </td>`;
+                    }
+                }, {
+                    "data": "id",
+                    "render": function(id) {
+                        return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
+                    }
                 }
-            },
-            {
-                "data": "details.project"
-            }, {
-                "data": "apostille_country"
-            }, {
-                "data": "status",
-                "render": function(status) {
-                    if (status === 'pending')
-                        return `<td> Pending</td>`;
-                    if (status === 'approved')
-                        return `<td> Approved </td>`;
-                    if (status === 'paid')
-                        return `<td> Paid </td>`;
-                    if (status === 'completed')
-                        return `<td> Completed </td>`;
-                }
-            }, {
-                "data": "id",
-                "render": function(id) {
-                    return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
-                }
-            }]
+            ]
         });
 
         //custom payments datatable
@@ -1674,7 +1675,28 @@
 
         });
     });
+    $('#choose-rep').on('submit', function(event) {
+        event.preventDefault();
+        var choosed_rep_id = $('#choosed_rep_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.representative') }}",
+            type: "POST",
 
+            data: {
+                choosed_rep_id
+            },
+            success: function(response) {
+                // location.reload();
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
     // check the archieve status
     function archieve() {
         var checkedTasksId = [];
@@ -1718,6 +1740,47 @@
             document.getElementById("end_date_of_enrollment").value = "";
         }
     });
+    $('#add_new_rep').on('submit', function(event) {
+        event.preventDefault();
+        var rep_type = $('#rep_type').val();
+        var parent_Id = $('#parent_Id').val();
+        var rep_country = $('#rep_country').val();
+        var rep_last_name = $('#rep_last_name').val();
+        var rep_city = $('#rep_city').val();
+        var rep_name = $('#rep_name').val();
+        var rep_admin_group = $('#rep_admin_group').val();
+        var rep_email = $('#rep_email').val();
+        var rep_phone = $('#rep_phone').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.add.representative') }}",
+            type: "POST",
+
+            data: {
+                rep_type,
+                parent_Id,
+                rep_country,
+                rep_last_name,
+                rep_city,
+                rep_name,
+                rep_admin_group,
+                rep_email,
+                rep_phone
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
+
+
+
 
     /////pagination
     $(document).ready(function() {

@@ -15,7 +15,7 @@ class ParentProfile extends Model
         'user_id', 'p1_first_name', 'p1_middle_name', 'p1_last_name', 'p1_email', 'p1_cell_phone', 'p1_home_phone',
         'p2_first_name', 'p2_middle_name', 'p2_email', 'p2_cell_phone', 'p2_home_phone',
         'street_address', 'city', 'state', 'zip_code', 'country', 'reference', 'legacy',
-        'immunized', 'p2_street_address', 'p2_city', 'p2_state', 'p2_country', 'p2_zip_code'
+        'immunized', 'p2_street_address', 'p2_city', 'p2_state', 'p2_country', 'p2_zip_code', 'representative_group_id'
     ];
     protected $table = 'parent_profiles';
 
@@ -123,5 +123,9 @@ class ParentProfile extends Model
     public function uploadDocuments()
     {
         return $this->hasMany(UploadDocuments::class);
+    }
+    public function representative()
+    {
+        return $this->hasOne('App\Models\RepresentativeGroup', 'parent_profile_id', 'id');
     }
 }

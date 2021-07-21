@@ -30,6 +30,7 @@ use App\Models\TranscriptPayment;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\RecordTransfer;
+use App\Models\RepresentativeGroup;
 use App\Models\Transcript;
 use Auth;
 use DB;
@@ -182,7 +183,9 @@ class ParentController extends Controller
             )
             ->get();
         $payment_nonpaid = $payment_info->where('status', 'pending');
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries'));
+        $rep_group = ParentProfile::find($id)->representative()->first();
+        $all_rep_groups = RepresentativeGroup::all();
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups'));
     }
 
     /**
