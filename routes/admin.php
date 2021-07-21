@@ -282,4 +282,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
     Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
+    Route::post('rep-amount', 'RepresentativeGroupController@amountRepGroup')->name('amount.representative');
 });

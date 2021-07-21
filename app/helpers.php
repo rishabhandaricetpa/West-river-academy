@@ -26,6 +26,8 @@ use App\Models\Transcript;
 use App\Models\TranscriptPayment;
 use App\Models\UploadDocuments;
 
+use function Clue\StreamFilter\fun;
+
 /**
  * Compare given route with current route and return output if they match.
  *
@@ -553,4 +555,8 @@ function getcartval()
     $parent_profile_id = ParentProfile::getParentId();
     $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
     return $count;
+}
+function getRepAmount($count, $amount, $extraAmount)
+{
+    return $count * $amount;
 }

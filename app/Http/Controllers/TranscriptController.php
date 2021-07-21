@@ -245,7 +245,6 @@ class TranscriptController extends Controller
                     $items[] = \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('Y');
                 }
                 $result = array_unique($items);
-                dd($result);
             } else {
                 $result = [
                     date("Y"), date("Y") + 1, date("Y") + 2, date("Y") + 3, date("Y") + 4, date("Y") + 5,

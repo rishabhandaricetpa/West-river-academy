@@ -399,8 +399,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <h3>Referred By</h3>
-                        <input type="text" class="form-control is-disabled" id="reffered" value="{{ $parent->reference }}"
-                            disabled>
+                        <input type="text" class="form-control is-disabled" id="reffered"
+                            value="{{ $parent->reference }}" disabled>
                     </div>
                 </div>
                 <div class="col-md-6 ">
@@ -545,13 +545,14 @@
                                                 <label for="message-text" class="col-form-label">Type:</label>
                                                 <select class="form-control" type="text" id='choosed_rep_id'>
                                                     @foreach ($all_rep_groups as $all_rep_group)
-                                                        <option value="1">
+                                                        <option value="{{ $all_rep_group->id }}">
                                                             {{ $all_rep_group->name }}</option>
 
                                                     @endforeach
 
                                                 </select>
-
+                                                <input type="hidden" value="{{ $parent->id }}" id='parent_Id'
+                                                    name="parent_id">
                                             </div>
                                         </div>
 

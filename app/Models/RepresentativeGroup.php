@@ -16,4 +16,8 @@ class RepresentativeGroup extends Model
     {
         return  $this->hasMany('App\Models\ParentProfile', 'representative_group_id', 'id');
     }
+    public static function calculateRepAmount($count)
+    {
+        return $count;
+    }
 }
