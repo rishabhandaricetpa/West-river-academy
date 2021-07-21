@@ -35,8 +35,8 @@
                 </table>
             </div>
             <div class="mt-5">
-
-
+                <a href="{{ route('transcript.studentInfo', $enroll_student->id) }}"
+                    class="btn btn-primary">Add to cart</a>
             </div>
 
     </main>
