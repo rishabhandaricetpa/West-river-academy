@@ -399,7 +399,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <h3>Referred By</h3>
-                        <input type="text" class="form-control is-disabled" id="reffered" value="{{ $rep_group->name }}"
+                        <input type="text" class="form-control is-disabled" id="reffered" value="{{ $parent->reference }}"
                             disabled>
                     </div>
                 </div>
@@ -423,10 +423,18 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><a
-                                            href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
-                                    </td>
-                                    <td>{{ $rep_group->email }}</td>
+                                    @if ($rep_group)
+                                        <td><a
+                                                href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
+                                        </td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                    @if ($rep_group)
+                                        <td>{{ $rep_group->email }}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -547,56 +555,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Country:</label>
-                                                <input type="text" id="ddd" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Last/Family Name
-                                                </label>
-                                                <input type="text" id="reps_last_name" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">City Area:</label>
-                                                <input type="text" id="" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Name of Reps/Group
-                                                </label>
-                                                <input type="text" id="" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Administrator of
-                                                    Group</label>
-                                                <input type="text" id="" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Rep Email
-                                                </label>
-                                                <input type="email" id="" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Rep Phone
-                                                </label>
-                                                <input type="text" id="" class="form-control">
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
