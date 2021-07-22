@@ -21,23 +21,9 @@
                     </div>
                 </div>
             </form>
-        </div>
-        <div class="form-wrap border bg-light py-5 px-25 mb-4">
+        
+        <div class="pt-2 ">
 
-            <div class="overflow-auto">
-                <table class="table-styling w-100">
-                    <thead>
-                        <tr>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-
-                    </tbody>
-                </table>
-            </div>
             @foreach ($transcriptDatas as $school)
 
                 <div class="seperator mb-4">
@@ -86,7 +72,7 @@
         </div>
 
         @if ($transcriptWizStatus->transcript_wiz === 'Yes' && $transcriptWizStatus->status === 'pending')
-            <div class="form-wrap border bg-light py-5 px-25">
+            <div class=" pt-2">
                 <p>If you are finished with this transcript and would like to see what it looks like, you can click the
                     "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click
                     the "Submit Transcript" button.</p>
@@ -106,7 +92,7 @@
                 </div>
             </div>
         @else
-            <div class="form-wrap border bg-light py-5 px-25">
+            <div class="pt-2">
                 <p>If you are finished with this transcript and would like to see what it looks like, you can click
                     the
                     "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click
@@ -119,6 +105,7 @@
             </div>
 
         @endif
+    </div>
     </main>
 
     <!-- * =============== /Main =============== * -->

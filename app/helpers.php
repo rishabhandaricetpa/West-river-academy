@@ -25,6 +25,9 @@ use App\Models\TransactionsMethod;
 use App\Models\Transcript;
 use App\Models\TranscriptPayment;
 use App\Models\UploadDocuments;
+use Illuminate\Support\Carbon;
+
+use function Clue\StreamFilter\fun;
 
 /**
  * Compare given route with current route and return output if they match.
@@ -561,4 +564,8 @@ function getDateVal($value)
     $date = $value->format('F j, Y');
 
     return $date;
+}
+function formatDate($date)
+{
+    return \Carbon\Carbon::parse($date)->format('M j , Y');
 }

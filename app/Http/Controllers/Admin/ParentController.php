@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\FeeStructureType;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\StudentProfile;
@@ -19,10 +20,8 @@ use App\Models\OrderPostage;
 use App\Models\FeesInfo;
 use App\Models\EnrollmentPayment;
 use App\Models\Graduation;
-use App\Models\GraduationPayment;
 use App\Models\Notarization;
 use App\Models\NotarizationPayment;
-use App\Models\Notification;
 use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\Notes;
@@ -33,6 +32,7 @@ use App\Models\RecordTransfer;
 use App\Models\RepresentativeGroup;
 use App\Models\Transcript;
 use Auth;
+use Database\Seeders\FeesInfoSeeder;
 use DB;
 use Illuminate\Http\Request;
 
@@ -153,7 +153,7 @@ class ParentController extends Controller
 
     public function edit($id)
     {
-        $parent = ParentProfile::find($id);
+        $parent = ParentProfile::where('id', $id)->first();
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         // $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
@@ -183,7 +183,9 @@ class ParentController extends Controller
             )
             ->get();
         $payment_nonpaid = $payment_info->where('status', 'pending');
-        $rep_group = ParentProfile::find($id)->representative()->first();
+
+        $parent_rep_group = ParentProfile::where('id', $id)->select('representative_group_id')->first();
+        $rep_group = RepresentativeGroup::where('id', $parent_rep_group->representative_group_id)->first();
         $all_rep_groups = RepresentativeGroup::all();
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups'));
     }
@@ -684,51 +686,7 @@ class ParentController extends Controller
         $amount = $type == 'annual' ? '375' : '50';
         return response()->json(['type' => $type, 'amount' => $amount]);
     }
-    public function orderDetails($id)
-    {
-        $parentProfileData = User::find($id)->parentProfile()->first();
 
-        $parent = ParentProfile::find($id);
-        $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
-        $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
-        $countries = Country::all();
-        $address = Address::where('parent_profile_id', $id)->first();
-        $transcations =   Cart::where('parent_profile_id', $id)->get();
-        $getNotes = Notes::where('parent_profile_id', $id)->get();
-        $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
-
-        //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
-        $documents = UploadDocuments::where('parent_profile_id', $id)->get();
-        $payment_info = DB::table('enrollment_periods')
-            ->whereIn('student_profile_id', $student_ids)
-            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
-            ->select(
-                'enrollment_periods.created_at',
-                'enrollment_periods.enrollment_payment_id',
-                'enrollment_payments.amount',
-                'enrollment_payments.status',
-                'enrollment_payments.transcation_id',
-                'enrollment_payments.payment_mode',
-                'enrollment_periods.start_date_of_enrollment',
-                'enrollment_periods.end_date_of_enrollment',
-                'enrollment_periods.grade_level',
-                'enrollment_payments.id',
-                'enrollment_periods.student_profile_id'
-            )
-            ->get();
-
-        $cartAmount =  Cart::getCartAmount($id);
-
-        $amount = 0;
-        foreach ($cartAmount as $cart) {
-            foreach ($cart['enroll_items'] as $enroll) {
-                $amount += $enroll['amount'];
-            }
-        }
-
-        $payment_nonpaid = $payment_info->where('status', 'pending');
-        return view('admin.familyinformation.order-detail', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'address', 'amount'));
-    }
     public function editAddress(Request $request)
     {
         ParentProfile::where('id', $request->parent_address_id)->updateOrCreate(

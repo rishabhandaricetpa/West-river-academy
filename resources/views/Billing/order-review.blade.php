@@ -37,7 +37,7 @@
       <h2 class="mb-3">Payment Total</h2>
       <div class="form-group d-flex mb-2">
          <label for="">Order Total</label>
-         <div class="ml-auto"><i class="fas fa-dollar-sign"></i>{{$final_amount}}</div>
+         <div class="ml-auto"><i class="fas fa-dollar-sign"></i><span class="font-medium">{{$final_amount}}</span></div>
       </div>
    </div>
    <div class="form-wrap border bg-light py-2r px-25 mt-2r">

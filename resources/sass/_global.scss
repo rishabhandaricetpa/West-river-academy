@@ -242,6 +242,10 @@ button {
     color: $black;
   }
 }
+.font-medium{
+  font-size: 1.2rem;
+  font-family: $lato-font !important;
+}
 
 /* tables */
 table {
@@ -395,6 +399,9 @@ a.btn {
 /* width */
 .min-w-100 {
   min-width: 100% !important;
+}
+.border-bottom-2{
+  border-bottom: 2px solid $gray-800;
 }
 
 /* overlay */
