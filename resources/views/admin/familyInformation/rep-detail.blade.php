@@ -20,6 +20,8 @@
                         </div>
                     </div>
                     <div class="col-12"> Date Created:</div>
+
+                    <button>Rep </button>
                     {{-- parent detil-1 --}}
                     <div class="col-md-12">
                         <h3 class="mt-3">Name :<span>Melissa</span></h3>
@@ -75,7 +77,7 @@
                                             <tbody>
                                                 <tr>
                                                     @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
-                                                        <td>{{ $repGroupAmountDetail->created_at }}</td>
+                                                        <td>{{ formatDate($repGroupAmountDetail->created_at) }}</td>
                                                         <td>{{ $repGroupAmountDetail->amount }}</td>
                                                         <td>{{ $repGroupAmountDetail->notes }}<i class="fa fa-cancel"></i>
                                                         </td>
@@ -161,7 +163,6 @@
                                                 <th scope="col">Date</th>
                                                 <th scope="col">Family Name</th>
                                                 <th scope="col">Amount</th>
-                                                <th scope="col">Paid</th>
                                                 <th scope="col" class="text-right"><button type="button"
                                                         class="btn btn-modal ml-3" data-toggle="modal"
                                                         data-target="#rerepdetail-family_addModal"
@@ -172,10 +173,9 @@
                                         <tbody>
                                             <tr>
                                                 @foreach ($rep_families as $rep_family)
-                                                    <td>{{ $rep_family->created_at }}</td>
+                                                    <td>{{ formatDate($rep_family->created_at) }}</td>
                                                     <td>{{ $rep_family->p1_first_name }}</td>
                                                     <td>{{ $rep_family->amount }}</td>
-                                                    <td><input type="checkbox"></td>
                                                     <td></td>
                                             </tr>
                                             @endforeach
@@ -459,8 +459,9 @@
                                     <table class="table table-striped table-styling w-100 table-vertical_scroll">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">Date Applied</th>
-                                                <th scope="col">Grade 9</th>
+                                                <th scope="col">Filename</th>
+                                                <th scope="col">Notes</th>
+                                                <th scope="col">Preview Document</th>
                                                 <th scope="col"><button type="button" class="btn btn-modal ml-3"
                                                         data-toggle="modal" data-target="#repdetail-docModal"
                                                         data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
@@ -468,11 +469,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+
+                                            @foreach ($repGroupDocuments as $repGroupDocument)
+                                                <tr>
+                                                    <td>{{ $repGroupDocument->original_filename }}</td>
+                                                    <td>{{ $repGroupDocument->document_type }}</td>
+                                                    <td> <a href="{{ $repGroupDocument->rep_document }}" download
+                                                            target="_blank">Click here to download and
+                                                            preview</a></td>
+                                                    <td></td>
+                                                </tr>
+                                            @endforeach
+
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -490,82 +500,21 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="add-graduation">
+                                    <form id="add-rep-doc">
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <input type="hidden" value="" id='parent_id' name="parent_id">
+                                                <input type="hidden" value="{{ $rep_id }}" id='rep_id' name="rep_id">
                                             </div>
-                                            <div class="col-md-6">
-                                                <input type="hidden" value="" id='student_id' name="student-name">
+                                            <div class="form-group col-md-6">
+                                                <label for="message-text" class="col-form-label">
+                                                    Notes</label>
+                                                <textarea id="rep_doc_note" class="form-control choose-btn"
+                                                    onKeyPress="if(this.value.length==2000) return false;"
+                                                    maxlength="2000"></textarea>
                                             </div>
-                                            <div class="col-md-6 pb-2">
-                                                <label for="recipient-name" class="col-form-label">Grade 9</label>
-                                                <select id="grade_9" required class="form-control">
-                                                    <option value="I was enrolled in West River Academy.">I was enrolled
-                                                        in West River
-                                                        Academy.
-                                                    </option>
-                                                    <option
-                                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                                        I homeschooled independently. (There are no transcripts that a
-                                                        school can send.)
-                                                    </option>
-                                                    <option
-                                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                                        I was enrolled in another school that can send or has already
-                                                        sent transcripts.
-                                                    </option>
-                                                    <option value="Others">Others</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 pb-2">
-                                                <label for="recipient-name" class="col-form-label">Grade 10</label>
-                                                <select id="grade_10" required class="form-control">
-                                                    <option value="I was enrolled in West River Academy.">I was enrolled
-                                                        in West River
-                                                        Academy.
-                                                    </option>
-                                                    <option
-                                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                                        I homeschooled independently. (There are no transcripts that a
-                                                        school can send.)
-                                                    </option>
-                                                    <option
-                                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                                        I was enrolled in another school that can send or has already
-                                                        sent transcripts.
-                                                    </option>
-                                                    <option value="Others">Others</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 pb-2">
-                                                <label for="recipient-name" class="col-form-label">Grade 11</label>
-                                                <select id="grade_11" required class="form-control">
-                                                    <option value="I was enrolled in West River Academy.">I was enrolled
-                                                        in West River
-                                                        Academy.
-                                                    </option>
-                                                    <option
-                                                        value="I homeschooled independently. (There are no transcripts that a school can send.)">
-                                                        I homeschooled independently. (There are no transcripts that a
-                                                        school can send.)
-                                                    </option>
-                                                    <option
-                                                        value="I was enrolled in another school that can send or has already sent transcripts.">
-                                                        I was enrolled in another school that can send or has already
-                                                        sent transcripts.
-                                                    </option>
-                                                    <option value="Others">Others</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 pb-2">
-                                                <label for="recipient-name" class="col-form-label">Status</label>
-                                                <select id="status-graduation" class="form-control">
-                                                    <option value='pending'>Pending</option>
-                                                    <option value='approved'>Approved</option>
-                                                    <option value='paid'>Paid</option>
-                                                    <option value='completed'>Completed</option>
-                                                </select>
+                                            <div class="form-group col-md-6">
+                                                <label for="message-text" class="col-form-label">Upload Document</label>
+                                                <input type="file" id="file" class="form-control choose-btn" required>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

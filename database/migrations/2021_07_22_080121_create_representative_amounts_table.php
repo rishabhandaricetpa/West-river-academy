@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RepresentativeAmount extends Migration
+class CreateRepresentativeAmountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class RepresentativeAmount extends Migration
      */
     public function up()
     {
-
-        Schema::create('representative_amount', function (Blueprint $table) {
+        Schema::create('representative_amounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('representative_group_id');
             $table->foreign('representative_group_id')->references('id')->on('representative_groups')->onDelete('cascade');
@@ -32,6 +31,6 @@ class RepresentativeAmount extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('representative_amounts');
     }
 }

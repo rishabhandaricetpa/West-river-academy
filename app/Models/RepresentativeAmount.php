@@ -8,7 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class RepresentativeAmount extends Model
 {
     use HasFactory;
-    protected $table = 'representative_amount';
-
     protected $fillable = ['representative_group_id', 'amount', 'notes', 'status'];
 }

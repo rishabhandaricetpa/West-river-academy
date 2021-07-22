@@ -1727,6 +1727,35 @@
             }
         });
     });
+    $('#add-rep-doc').on('submit', function(event) {
+        event.preventDefault();
+        var rep_id = $('#rep_id').val();
+        var rep_doc_note = $('#rep_doc_note').val();
+
+
+        data = new FormData();
+        data.append('file', $('#file')[0].files[0]);
+        data.append('rep_id', rep_id);
+        data.append('rep_doc_note', rep_doc_note);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.rep.documents') }}",
+            processData: false,
+            contentType: false,
+            type: "POST",
+            data: data,
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+
+    });
+
 
     // check the archieve status
     function archieve() {

@@ -25,6 +25,7 @@ use App\Models\TransactionsMethod;
 use App\Models\Transcript;
 use App\Models\TranscriptPayment;
 use App\Models\UploadDocuments;
+use Illuminate\Support\Carbon;
 
 use function Clue\StreamFilter\fun;
 
@@ -556,7 +557,8 @@ function getcartval()
     $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
     return $count;
 }
-function getRepAmount($count, $amount, $extraAmount)
+
+function formatDate($date)
 {
-    return $count * $amount;
+    return \Carbon\Carbon::parse($date)->format('M j , Y');
 }

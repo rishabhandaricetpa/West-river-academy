@@ -1160,7 +1160,8 @@
                                         <th scope="col">Student Name</th>
                                         <th scope="col">File Name</th>
                                         <th scope="col">Document Type</th>
-                                        <th scope="col">View Documents</th>
+                                        <th scope="col">Preview Document</th>
+                                        <th scope="col">Edit Documents</th>
                                         <th scope="col">Upload Documents</th>
                                         <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                                 data-toggle="modal" data-target="#documentsModal"
@@ -1175,8 +1176,11 @@
                                             <td>{{ $document['student']['fullname'] }}</td>
                                             <td>{{ $document->original_filename }}</td>
                                             <td>{{ $document->document_type }}</td>
-                                            <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">View
-                                                    Documents</a></br></td>
+                                            <td> <a href="{{ $document->document_url }}" download target="_blank">Preview
+                                                    Document
+                                                </a></td>
+                                            <td><a href=" {{ route('admin.edit.uploadedDocument', $document->id) }}">Edit
+                                                    Document</a></br></td>
                                             <td>
                                                 <a
                                                     href=" {{ route('admin.edit.upload', $document->student_profile_id) }}">Upload
