@@ -1780,6 +1780,53 @@
     });
 
 
+    //edit rep details
+
+
+    $('#repForm').on('submit', function(event) {
+        event.preventDefault();
+        var edit_rep_id = $('#edit_rep_id').val();
+        var edit_rep_type = $('#edit_rep_type').val();
+        var edit_parent_id = $('#edit_parent_id').val();
+        var edit_rep_country = $('#edit_rep_country').val();
+        var edit_rep_city = $('#edit_rep_city').val();
+        var edit_rep_name = $('#edit_rep_name').val();
+        var edit_rep_admin = $('#edit_rep_admin').val();
+        var edit_rep_email = $('#edit_rep_email').val();
+        var edit_rep_phone = $('#edit_rep_phone').val();
+        var edit_rep_skype = $('#edit_rep_skype').val();
+        var terms_of_org=$('#terms_of_org').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.update.representative') }}",
+            type: "POST",
+
+            data: {
+                edit_rep_id,
+                edit_rep_type,
+                edit_parent_id,
+                edit_rep_country,
+                edit_rep_city,
+                edit_rep_name,
+                edit_rep_admin,
+                edit_rep_email,
+                edit_rep_phone,
+                edit_rep_skype,
+                terms_of_org,
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
+
 
 
     /////pagination

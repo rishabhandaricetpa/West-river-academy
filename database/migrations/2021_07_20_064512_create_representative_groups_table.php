@@ -22,6 +22,9 @@ class CreateRepresentativeGroupsTable extends Migration
             $table->string('city')->nullable();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
+            $table->string('rep_phone')->nullable();
+            $table->string('rep_skype')->nullable();
+            $table->string('terms_of_agreement', 5000)->nullable();
             $table->timestamps();
         });
     }

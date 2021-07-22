@@ -142,7 +142,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$value['student_db_id']] = [
-                    'name' => ucfirst($value['first_name']),
+                    'name' => ucfirst($value['first_name']) + ucfirst($value['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -453,6 +453,7 @@ class Cart extends Model
     {
         return self::getTranscriptQuery($parent_profile_id)->select(
             'student_profiles.first_name',
+            'student_profiles.last_name',
             'student_profiles.student_Id',
             'student_profiles.id as student_db_id',
             'cart.id',

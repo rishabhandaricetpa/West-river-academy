@@ -9,7 +9,7 @@
       {{-- -------------- first tab --}}
       <div class="row">
         <div class="col-12 d-flex align-items-center">
-          <h2 class="pr-3"><a href="">Melissa Manisha</a>
+          <h2 class="pr-3"><a href="">{{$rep_detail->name}}</a>
           </h2>
           <div class="form-group mb-0">
             <select required class="dropdown-icon" id="student_status">
@@ -19,39 +19,60 @@
             <input type="hidden" value="" id='id' name="id">
           </div>
         </div>
-        <div class="col-12"> Date Created:</div>
+        <div class="col-12"> Date Created:  <span>{{getDateVal($rep_detail->created_at)}}</span> </div>
         {{-- parent detil-1 --}}
         <div class="col-md-12">
-          <h3 class="mt-3">Name :<span>Melissa</span></h3>
+          <h3 class="mt-3">Name: <span>{{$rep_detail->name}}</span></h3>
           
           <form class="is-readonly row" id="repForm">
             @csrf
             <div class="col-md-6">
               <div class="form-group">
-                <label for="p1_first_name"> Type :</label>
-                <input type="text" class="form-control is-disabled" name="p1__name" id="p1__name" placeholder=""
-                  value="" disabled required>
+                <label> Type :</label>
+                <input type="text" class="form-control is-disabled" name="edit_rep_type" id="edit_rep_type" 
+                  value="{{$rep_detail->type}}" disabled required>
+              </div>
+              <input type="hidden" value={{$rep_detail->id}} id="edit_rep_id">
+              <div class="form-group">
+                <input type='hidden' id="edit_parent_id" name="parent_id" value="{{$parent_detail->id}}">
+                <label>Country :</label>
+                <input type="text" class="form-control is-disabled" name="edit_rep_country" id="edit_rep_country"
+                   value="{{$rep_detail->country}}" disabled>
               </div>
               <div class="form-group">
-                <input type='hidden' id="parent_id" name="parent_id" value="">
-                <label for="p1_middle_name">Country :</label>
-                <input type="text" class="form-control is-disabled" name="p1_middle_name" id="p1_middle_name"
-                  placeholder="" value="" disabled>
+                <label >City / Area :</label>
+                <input type="text" class="form-control is-disabled" name="edit_rep_city" id="edit_rep_city" 
+                  value="{{$rep_detail->city}}" disabled required>
               </div>
               <div class="form-group">
-                <label for="p1_last_name">City / Area :</label>
-                <input type="text" class="form-control is-disabled" name="p1_last_name" id="p1_last_name" placeholder=""
-                  value="" disabled required>
+                <label >Name of Rep :</label>
+                <input type="text" class="form-control is-disabled" name="edit_rep_name" id="edit_rep_name" 
+                  value="{{$rep_detail->name}}" disabled required>
               </div>
               <div class="form-group">
-                <label for="p1_email">Name of Rep :</label>
-                <input type="email" class="form-control is-disabled" name="p1_email" id="p1_email" placeholder=""
-                  value="" disabled required>
+                <label >Administrator of group :</label>
+                <input type="text" class="form-control is-disabled" name="edit_rep_admin" id="edit_rep_admin" 
+                  value="{{$rep_detail->name}}" disabled required>
               </div>
               <div class="form-group">
-                <label for="p1_cell_phone">Rep Email :</label>
-                <input type="text" class="form-control is-disabled" name="p1_cell_phone" id="p1_cell_phone"
-                  placeholder="" value="" disabled>
+                <label >Rep Email :</label>
+                <input type="email" class="form-control is-disabled" name="edit_rep_email" id="edit_rep_email"
+                   value="{{$rep_detail->email}}" disabled>
+              </div>
+              <div class="form-group">
+                <label >Rep Phone :</label>
+                <input type="number" class="form-control is-disabled" name="edit_rep_phone" id="edit_rep_phone"
+                   value="{{$rep_detail->rep_phone}}" disabled>
+              </div>
+              <div class="form-group">
+                <label >Rep Skype Name :</label>
+                <input type="text" class="form-control is-disabled" name="edit_rep_skype" id="edit_rep_skype"
+                   value="{{$rep_detail->rep_skype}}" disabled>
+              </div>
+              <div class="form-group">
+                <label >Terms of Agreement :</label>
+                <input type="text" class="form-control is-disabled" name="terms_of_org" id="terms_of_org"
+                   value="{{$rep_detail->terms_of_agreement}}" disabled>
               </div>
             </div>
 
@@ -142,13 +163,15 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($family_groups as $family_group)
                      <tr>
-                         <td>MM/DD/YYYY</td>
-                         <td>Hebert Alex Bascur Norambuena & Flavia Marceia</td>
-                         <td>$35</td>
+                         <td>{{getDateVal($family_group->created_at)}}</td>
+                         <td>{{$family_group->p1_first_name}}{{$family_group->p1_last_name}}</td>
+                         <td></td>
                          <td><input type="checkbox"></td>
                          <td></td>
                      </tr>
+                     @endforeach
                     </tbody>
                     <tfoot class="tfoot-light">
                       <tr>
@@ -208,11 +231,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                     <tr>
-                         <td>MM/DD/YY</td>
-                         <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quas praesentium incidunt amet cum, dolores sint cupiditate ipsa labore doloribus voluptate explicabo facilis qui voluptatem quae distinctio nisi voluptates nostrum.</td>
-                         <td></td>
-                     </tr>
+                      @foreach ($getNotes as $getNote)
+                                        <tr>
+                                            <td>{{ $getNote->created_at->format('M j, Y') }}</td>
+                                            <td>{{ $getNote->notes }}</td>
+                                            <td></td>
+                                        </tr>
+                         @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -224,176 +249,31 @@
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content mt-5">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="repdetail-notes_addModalLabel">Add Enrollments</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                 
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">Add Notes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                  <form id="add-new-repdetail-notes_add">
-                    <div class="row">
-                      <div class="form-group col-md-6">
-                        <input type="hidden" value="" id='parent_id' name="parent_id"
-                          class="form-control">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <input type="hidden" value="" id='student_name' name="student_name"
-                          class="form-control">
-                      </div>
-                      <div class="form-group  col-md-6">
-                        <label for="recipient-name" class="col-form-label">Enrollment
-                          Period</label>
-                        <select id="enrollment_period" required class="form-control">
-                          <option value="annual">Annual</option>
-                          <option value="half">Semester</option>
-                        </select>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="recipient-name" class="col-form-label">Start Date of
-                          Enrollment:</label>
-                        <input type="text" class="form-control datepicker" id="start_date" required>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="message-text" class="col-form-label">End Date of
-                          Enrollment:</label>
-                        <input type="text" class="form-control datepicker" id="end_date" required>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group lato-italic info-detail">
-                          <label for="">Grade <sup>*</sup></label>
-                          <div class="row">
-                            <div class="col-6">
+                    <form id="add-new-notes">
+                        <div class="form-group">                            
+                            <input class="form-control" type="hidden" value="{{ $parent_detail->id }}" id='parent_id'
+                                name="parent_id">
 
-
-                              <div class="form-check" required>
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="Ungraded"
-                                  required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  Ungraded
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]"
-                                  value="Preschool Age 3">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  Preschool Age 3
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]"
-                                  value="Preschool Age 4">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  Preschool Age 4
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="Kindergarten"
-                                  required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  Kindergarten
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="1" required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  1
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="2" required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  2
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="3" required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  2
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="4" required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  4
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" id="grade_level[]" value="5" required>
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  5
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="6" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  6
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-6">
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="7" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  7
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="8" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  8
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="9" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  9
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="10" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  10
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="11" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  11
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input mt-1" type="radio" value="12" id="grade_level[]">
-                                <label class="form-check-label pl-1 pl-sm-0">
-                                  12
-                                </label>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
-                      <div class="form-group  col-md-6">
-                        <label for="recipient-name" class="col-form-label">Enrollment
-                          Payment Status</label>
-                        <select id="enrollment_status" required class="form-control">
-                          <option value="paid">Paid</option>
-                        </select>
-                      </div>
-                      <div class="form-group  col-md-6">
-                        <label for="recipient-name" class="col-form-label">Amount</label>
-                        <select id="amount_status" required class="form-control">
-                          <option value="375">$ 375</option>
-                          <option value="200">$ 200</option>
-                          <option value="50">$ 50</option>
-                        </select>
-                      </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Notes:</label>
+                            <textarea class="form-control" id="message_text" required
+                                onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                        </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-              </div>
-              </form>
+             </form>
             </div>
           </div>
         </div>
