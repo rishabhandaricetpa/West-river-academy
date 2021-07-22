@@ -22,6 +22,8 @@ class CreateRepresentativeAmountsTable extends Migration
             $table->enum('status', ['pending', 'paid'])->nullable();
             $table->timestamps();
         });
+
+
     }
 
     /**
