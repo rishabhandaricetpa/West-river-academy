@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@section('content')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rep Report</title>
+</head>
+
+<body>
+
     <section class="content container-fluid  my-1">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -115,4 +122,4 @@
         </div>
 
     </section>
-@endsection
+    <html>
