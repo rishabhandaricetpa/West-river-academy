@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-12"> Date Created:</div>
 
-                    <button>Rep </button>
+                    <a class="btn btn-primary" href="{{ route('admin.generaterep.report', $rep_id) }}">Rep Report</a>
                     {{-- parent detil-1 --}}
                     <div class="col-md-12">
                         <h3 class="mt-3">Name :<span>Melissa</span></h3>
@@ -72,16 +72,20 @@
                                                     <th>Date Paid</th>
                                                     <th>Amount</th>
                                                     <th>Notes</th>
+                                                    <th>Remove</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
+                                                @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
+                                                    <tr>
                                                         <td>{{ formatDate($repGroupAmountDetail->created_at) }}</td>
                                                         <td>{{ $repGroupAmountDetail->amount }}</td>
-                                                        <td>{{ $repGroupAmountDetail->notes }}<i class="fa fa-cancel"></i>
+                                                        <td>{{ $repGroupAmountDetail->notes }}
                                                         </td>
-                                                </tr>
+                                                        <td><a onclick="return confirm('Are you sure to delete?');"
+                                                                href="{{ route('admin.delete.amount', $repGroupAmountDetail->id) }}">X</a><i
+                                                                class="fa fa-cancel"></i></td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -175,7 +179,7 @@
                                                 @foreach ($rep_families as $rep_family)
                                                     <td>{{ formatDate($rep_family->created_at) }}</td>
                                                     <td>{{ $rep_family->p1_first_name }}</td>
-                                                    <td>{{ $rep_family->amount }}</td>
+                                                    <td>{{ $repAmount }}</td>
                                                     <td></td>
                                             </tr>
                                             @endforeach

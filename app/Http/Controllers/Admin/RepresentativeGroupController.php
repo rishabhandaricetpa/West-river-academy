@@ -11,6 +11,7 @@ use App\Models\RepresentativeGroup;
 use DB;
 use File;
 use Illuminate\Http\Request;
+use PDF;
 use Storage;
 use Str;
 
@@ -78,14 +79,10 @@ class RepresentativeGroupController extends Controller
         $repAmount = FeeStructureType::RepGroupAmount;
         $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
         $repGroupDocuments = RepresentativeDocuments::whereIn('representative_group_id', [$rep_id])->get();
-        $valueAmount = 0;
-        foreach ($repGroupAmountDetails as $repGroupAmountDetail) {
-            $valueAmount = $valueAmount + $repGroupAmountDetail->amount;
-        }
-        $calculatedAmount = ($family_count * $repAmount) + $valueAmount;
+        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount);
 
         // rep documents
-        return view('admin/familyInformation/rep-detail', compact('rep_group', 'rep_families', 'calculatedAmount', 'rep_id', 'repGroupAmountDetails', 'repGroupDocuments'));
+        return view('admin/familyInformation/rep-detail', compact('rep_group', 'rep_families', 'calculatedAmount', 'rep_id', 'repGroupAmountDetails', 'repGroupDocuments', 'repAmount'));
     }
     public function createRepAmount(Request $request)
     {
@@ -109,5 +106,28 @@ class RepresentativeGroupController extends Controller
                 'document_type' => $request->rep_doc_note
             ]);
         }
+    }
+    public function repReport($rep_id)
+    {
+        $rep_families = RepresentativeGroup::where('id',  $rep_id)->first()->families()->get();
+        $family_count = $rep_families->count();
+        $repAmount = FeeStructureType::RepGroupAmount;
+        $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
+        $amountPaid = collect($repGroupAmountDetails)->pluck('amount')->sum();
+        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount);
+        $data = [
+            'calculatedAmount' => $calculatedAmount,
+            'rep_families' =>   $rep_families,
+            'repGroupAmountDetails' => $repGroupAmountDetails,
+            'repAmount' => $repAmount,
+            'amountPaid' => $amountPaid
+        ];
+        $pdf = PDF::loadView('admin.familyInformation.rep-report');
+        return $pdf->download('RepReport');
+    }
+    public function delete($rep_amount_id)
+    {
+        RepresentativeAmount::findOrFail($rep_amount_id)->delete();
+        return redirect()->back();
     }
 }
