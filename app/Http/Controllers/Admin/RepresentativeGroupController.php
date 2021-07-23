@@ -8,6 +8,7 @@ use App\Models\ParentProfile;
 use App\Models\RepresentativeAmount;
 use App\Models\RepresentativeDocuments;
 use App\Models\RepresentativeGroup;
+use App\Models\Notes;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -68,9 +69,7 @@ class RepresentativeGroupController extends Controller
         return response()->json(['status' => 'success', 'data' => $rep]);
     }
     public function repDetails($rep_id, $parent_id)
-
     {
-
         $parent_rep_group = ParentProfile::where('id', $parent_id)->select('representative_group_id')->first();
         $rep_id = $parent_rep_group->representative_group_id;
         $rep_group = RepresentativeGroup::where('id',  $rep_id)->first();
@@ -129,5 +128,39 @@ class RepresentativeGroupController extends Controller
     {
         RepresentativeAmount::findOrFail($rep_amount_id)->delete();
         return redirect()->back();
+    }
+    public function update(Request $request)
+    {
+        // dd($request->all());
+        try {
+            DB::beginTransaction();
+            $representative = RepresentativeGroup::find($request->get('edit_rep_id'));
+            $representative->parent_profile_id = $request->get('edit_parent_id');
+            $representative->type = $request->get('edit_rep_type');
+            $representative->country = $request->get('edit_rep_country');
+            $representative->city = $request->get('edit_rep_city');
+            $representative->name = $request->get('edit_rep_name');
+            $representative->email = $request->get('edit_rep_email');
+            $representative->rep_phone = $request->get('edit_rep_phone');
+            $representative->rep_skype = $request->get('edit_rep_skype');
+            $representative->terms_of_agreement = $request->get('terms_of_org');
+
+            $representative->save();
+
+            DB::commit();
+            $notification = [
+                'message' => 'Record is updated Successfully!',
+                'alert-type' => 'success',
+            ];
+            return  redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            dd($e);
+            $notification = [
+                'message' => 'Failed to update Record!',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
+        }
     }
 }

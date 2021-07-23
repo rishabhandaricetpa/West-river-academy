@@ -557,7 +557,14 @@ function getcartval()
     $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
     return $count;
 }
+//convert date formate
+function getDateVal($value)
+{
 
+    $date = $value->format('F j, Y');
+
+    return $date;
+}
 function formatDate($date)
 {
     return \Carbon\Carbon::parse($date)->format('M j , Y');

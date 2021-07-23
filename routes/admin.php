@@ -281,6 +281,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     });
 });
 
+Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
+Route::post('rep-edit', 'RepresentativeGroupController@update')->name('update.representative');
 Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], function () {
     Route::post('groups', 'RepresentativeGroupController@create')->name('add.representative');
     Route::get('report/{rep_id}', 'RepresentativeGroupController@repReport')->name('generaterep.report');

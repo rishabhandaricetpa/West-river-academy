@@ -56,7 +56,7 @@
                                 <input class="form-check-input" type="radio" id="other_school_name" name="school_name"
                                     value="Others">
                                 <label class="form-check-label" for="">
-                                    Other:Full Name of School
+                                    Other: Full Name of School
                                 </label>
                                 <div>
                                     <input type="text" class="form-control " id="other_school" name="other_school"
