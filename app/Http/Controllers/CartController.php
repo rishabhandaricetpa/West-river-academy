@@ -11,6 +11,7 @@ use App\Models\GraduationPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\TranscriptK8;
+use App\Models\Transcript;
 use App\Models\TranscriptPayment;
 use App\Models\User;
 use App\Models\OrderPostage;
@@ -47,7 +48,7 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->all());
         try {
             DB::beginTransaction();
             $data = $request->all();
@@ -117,18 +118,31 @@ class CartController extends Controller
                     }
                     break;
                 case 'transcript':
-                    $parent_profile_id = ParentProfile::getParentId();
-                    $student = StudentProfile::whereId($data['student_id'])
-                        ->where('parent_profile_id', $parent_profile_id)
-                        ->with('transcript')
-                        ->first();
-                    $amount = FeesInfo::getFeeAmount('transcript');
-                    if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
-                        Cart::create([
-                            'item_type' => 'transcript',
-                            'item_id' => $request->get('transcript_id'),
-                            'parent_profile_id' => $parent_profile_id,
-                        ]);
+                    //change in transcript for purchasing multiple transcript together
+                    $transcript_id = $request->get('transcript_ids');
+                    $isstring = is_string($transcript_id);
+                    if ($isstring) {
+                        $transcript_ids[] = $request->get('transcript_ids');
+                    } else {
+                        $transcript_ids = $request->get('transcript_ids');
+                    }
+                    foreach ($transcript_ids as $trans_id) {
+                        $transcript_id = $trans_id;
+                        $student_id = Transcript::whereId($transcript_id)->first();
+
+                        $parent_profile_id = ParentProfile::getParentId();
+                        $student = StudentProfile::whereId($student_id->student_profile_id)
+                            ->where('parent_profile_id', $parent_profile_id)
+                            ->with('transcript')
+                            ->first();
+                        $amount = FeesInfo::getFeeAmount('transcript');
+                        if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
+                            Cart::create([
+                                'item_type' => 'transcript',
+                                'item_id' => $transcript_id,
+                                'parent_profile_id' => $parent_profile_id,
+                            ]);
+                        }
                     }
                     break;
                 case 'custom':

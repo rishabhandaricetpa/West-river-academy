@@ -416,8 +416,8 @@ function getendallenrollmentes($student_id)
 {
     $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
     foreach ($enrollment_periods as $enrollment_period) {
-        $strtdate = 'Start Date: ' . Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M j, Y');
-        $enddate = 'End Date: ' . Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M j, Y');
+        $strtdate = 'Start Date: ' . \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M j, Y');
+        $enddate = 'End Date: ' . \Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M j, Y');
     }
     return $strtdate . '    ' . $enddate;
 }

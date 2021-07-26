@@ -71,38 +71,44 @@ class TranscriptController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function purchaseNew($id)
+    public function purchaseNew(Request $request)
     {
+        $trans_wiz = "No";
         try {
-            $enroll_student = StudentProfile::find($id);
-            $enrollment_ids =   getEnrollmetForStudents($id);
-            // return view('transcript.transcript-wizard', compact('enroll_student'));
-            DB::beginTransaction();
-            $transcriptData = Transcript::create([
-                'parent_profile_id' => ParentProfile::getParentId(),
-                'student_profile_id' => $id,
-                'period' => '',
-                'status' => 'pending',
-            ]);
-            DB::commit();
-
-            $payment_info = getPaymentInformation($enrollment_ids);
-
-            if (count($payment_info) == 0) {
-                return view('transcript.dashboard-notify', compact('enroll_student'));
+            $count = 0;
+            $transcript_ids = array();
+            $user_input = $request->all();
+            $val = $user_input['transcript_val'];
+            foreach ($val as $id) {
+                $enroll_student = StudentProfile::find($id);
+                $enrollment_ids =   getEnrollmetForStudents($id);
+                DB::beginTransaction();
+                $transcriptData = Transcript::create([
+                    'parent_profile_id' => ParentProfile::getParentId(),
+                    'student_profile_id' => $id,
+                    'period' => '',
+                    'status' => 'pending',
+                ]);
+                DB::commit();
+                $payment_info = getPaymentInformation($enrollment_ids);
+                if (count($payment_info) == 0) {
+                    return view('transcript.dashboard-notify', compact('enroll_student'));
+                }
+                $getPaidData = Transcript::where('student_profile_id', $id)->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->get();
+                $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
+                if (count($getPaidData) > 0) {
+                    $transcript_fee = FeesInfo::getFeeAmount('additional_transcript');
+                    TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
+                    $transcript_id = $transcriptData->id;
+                } else {
+                    $transcript_fee = FeesInfo::getFeeAmount('transcript');
+                    TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
+                    $transcript_id = $transcriptData->id;
+                }
+                $count = $count + $transcript_fee;
+                $transcript_ids[] = $transcript_id;
             }
-            $getPaidData = Transcript::where('student_profile_id', $id)->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->get();
-            $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
-            if (count($getPaidData) > 0) {
-                $transcript_fee = FeesInfo::getFeeAmount('additional_transcript');
-                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
-                $transcript_id = $transcriptData->id;
-            } else {
-                $transcript_fee = FeesInfo::getFeeAmount('transcript');
-                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
-                $transcript_id = $transcriptData->id;
-            }
-            return view('transcript.purchase-transcript', compact('student', 'transcript_fee', 'transcript_id'));
+            return view('transcript.purchase-transcript', compact('student', 'transcript_fee', 'transcript_id', 'count', 'transcript_ids', 'trans_wiz'));
         } catch (\Exception $e) {
             dd($e);
             DB::rollback();
@@ -405,6 +411,7 @@ class TranscriptController extends Controller
 
     public function purchase(Request $request, $id)
     {
+        $trans_wiz = $request->transcript_wiz;
         if ($request->transcript_wiz !== 'Yes') {
             DB::beginTransaction();
             $type = $request->get('grade');
@@ -427,16 +434,16 @@ class TranscriptController extends Controller
             $getPaidData = Transcript::where('student_profile_id', $id)->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])->get();
             $student = StudentProfile::whereId($id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
             if (count($getPaidData) > 0) {
-                $transcript_fee = FeesInfo::getFeeAmount('additional_transcript');
-                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
-                $transcript_id = $transcriptData->id;
+                $count = FeesInfo::getFeeAmount('additional_transcript');
+                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $count]);
+                $transcript_ids = $transcriptData->id;
             } else {
-                $transcript_fee = FeesInfo::getFeeAmount('transcript');
-                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $transcript_fee]);
-                $transcript_id = $transcriptData->id;
+                $count = FeesInfo::getFeeAmount('transcript');
+                TranscriptPayment::updateOrInsert(['transcript_id' => $transcriptData->id], ['amount' => $count]);
+                $transcript_ids = $transcriptData->id;
             }
             DB::commit();
-            return view('transcript.purchase-transcript', compact('student', 'transcript_fee', 'transcript_id', 'type'));
+            return view('transcript.purchase-transcript', compact('student', 'count', 'transcript_ids', 'type', 'trans_wiz'));
         } catch (\Exception $e) {
             dd($e);
             DB::rollback();
