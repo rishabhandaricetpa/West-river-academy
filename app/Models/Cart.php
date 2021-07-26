@@ -142,7 +142,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$value['student_db_id']] = [
-                    'name' => ucfirst($value['first_name']) + ucfirst($value['last_name']),
+                    'name' => ucfirst($value['first_name'])  . ' ' . ucfirst($value['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -166,7 +166,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['student_db_id']] = [
-                    'name' => ucfirst($val['first_name']),
+                    'name' => ucfirst($val['first_name']) . ' ' . ucfirst($val['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -186,7 +186,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['student_db_id']] = [
-                    'name' => ucfirst($val['first_name']),
+                    'name' => ucfirst($val['first_name']) . ' ' . ucfirst($val['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -207,7 +207,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['parent_db_id']] = [
-                    'name' => ucfirst($val['p1_first_name']),
+                    'name' => ucfirst($val['p1_first_name']) . ' ' . ucfirst($val['p1_last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -227,7 +227,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['student_db_id']] = [
-                    'name' => ucfirst($val['first_name']),
+                    'name' => ucfirst($val['first_name']) . ' ' . ucfirst($val['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -247,7 +247,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['parent_db_id']] = [
-                    'name' => ucfirst($val['p1_first_name']),
+                    'name' => ucfirst($val['p1_first_name']) . ' ' . ucfirst($val['p1_last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -266,7 +266,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['parent_db_id']] = [
-                    'name' => ucfirst($val['first_name']),
+                    'name' => ucfirst($val['first_name']) . ' ' . ucfirst($val['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -285,7 +285,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['parent_db_id']] = [
-                    'name' => ucfirst($val['first_name']),
+                    'name' => ucfirst($val['first_name']) . ' ' . ucfirst($val['last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -305,7 +305,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['parent_db_id']] = [
-                    'name' => ucfirst($val['p1_first_name']),
+                    'name' => ucfirst($val['p1_first_name']) . ' ' . ucfirst($val['p1_last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
@@ -325,7 +325,7 @@ class Cart extends Model
                 );
             } else {
                 $data[$val['parent_db_id']] = [
-                    'name' => ucfirst($val['p1_first_name']),
+                    'name' => ucfirst($val['p1_first_name']) . ' ' . ucfirst($val['p1_last_name']),
                     'enroll_items' => [$arr],
                 ];
             }
