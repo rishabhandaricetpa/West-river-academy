@@ -7,5 +7,5 @@ use BenSampo\Enum\Enum;
 
 final class FeeStructureType extends Enum
 {
-    const  RepGroupAmount =   35;
+    const  RepGroupAmount =   50;
 }

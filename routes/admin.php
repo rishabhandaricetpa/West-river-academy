@@ -279,13 +279,16 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('rep-report/', function () {
         return view('admin/familyInformation/rep-report');
     });
+});
 
-    Route::get('rep-details/{rep_id}/{parent_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
-    // representative groups
-
-    Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
-    Route::post('rep-edit', 'RepresentativeGroupController@update')->name('update.representative');
+Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
+Route::post('rep-edit', 'RepresentativeGroupController@update')->name('update.representative');
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], function () {
+    Route::post('groups', 'RepresentativeGroupController@create')->name('add.representative');
+    Route::get('report/{rep_id}', 'RepresentativeGroupController@repReport')->name('generaterep.report');
+    Route::post('amount', 'RepresentativeGroupController@createRepAmount')->name('amount.representative');
+    Route::post('documents', 'RepresentativeGroupController@uploadDocuments')->name('rep.documents');
     Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
-    Route::post('rep-amount', 'RepresentativeGroupController@createRepAmount')->name('amount.representative');
-    Route::post('rep-documents', 'RepresentativeGroupController@uploadDocuments')->name('rep.documents');
+    Route::get('details/{rep_id}/{parent_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
+    Route::get('delete/{repamount_id}', 'RepresentativeGroupController@delete')->name('delete.amount');
 });
