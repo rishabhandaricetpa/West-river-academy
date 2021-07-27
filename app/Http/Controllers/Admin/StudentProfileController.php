@@ -297,6 +297,7 @@ class StudentProfileController extends Controller
                 'enrollment' => $enrollment_periods,
                 'title' => 'Confirmation of Enrollment',
                 'date' => date('M j, Y'),
+                'type' => $type,
             ];
 
             $pdf = PDF::loadView('confirmationLetter', $data);

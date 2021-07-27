@@ -100,7 +100,7 @@
         <!-- -->
         @if ($amount > 0)
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <h2 class="mb-3">Pay Now : {{ $amount }}</h2>
+                <h2 class="mb-3">Pay Now :<i class="fas fa-dollar-sign "></i> {{ $amount }}</h2>
                 <a href="{{ route('add.cart') }}" class="btn btn-primary">Go To Cart</a>
             </div>
         @endif
