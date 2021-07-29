@@ -411,11 +411,11 @@
                                 <tr>
                                     <th scope="col">Rep Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-auto"
+                                    <th scope="col" class="text-right"><button type="button" class="btn btn-primary btn-modal ml-auto"
                                             data-toggle="modal" data-target="#RepsModal" data-whatever="@getbootstrap">Add
                                             new Rep</button>
                                     </th>
-                                    <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-auto"
+                                    <th scope="col" class="text-right"><button type="button" class="btn btn-primary btn-modal ml-auto"
                                             data-toggle="modal" data-target="#groupModal"
                                             data-whatever="@getbootstrap">Choose Rep</button>
                                     </th>
