@@ -221,12 +221,12 @@ class CartController extends Controller
                         'zip_code' => $request['zip_code'],
                         'country' => $request['country_name'],
                         'apostille_country' =>  $request['apostille_country'],
-                        'transcript_doc' => $transcript_doc_total,
-                        'confirmation_doc' => $confirmation_doc_total,
-                        'custom_doc' => $custom_doc_total,
+                        'transcript_doc' => $request->get('transcript_quan'),
+                        'confirmation_doc' => $request->get('confirm_quan'),
+                        'custom_doc' => $request->get('custom_quan'),
                         'status' => 'pending',
                     ]);
-                    $amount = $request->get('notarization_due') + $request->get('postage_charges');
+                    $amount = $request->get('notarization_due') + $request->get('notarization_due1') + $request->get('notarization_due2') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'notarization_id' => $notarizationDetails->id,
@@ -244,6 +244,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'apostille':
+                    dd($request->all());
                     // $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->get();
                     //   dd($clearpendingPayments);
                     $parent_profile_id = ParentProfile::getParentId();
@@ -262,13 +263,13 @@ class CartController extends Controller
                         'zip_code' => $request['zip_code'],
                         'country' => $request['country_name'],
                         'apostille_country' =>  $request['apostille_country'],
-                        'transcript_doc' => $transcript_doc_total,
-                        'confirmation_doc' => $confirmation_doc_total,
-                        'custom_doc' => $custom_doc_total,
+                        'transcript_doc' => $request->get('transcript_quan'),
+                        'confirmation_doc' => $request->get('confirm_quan'),
+                        'custom_doc' => $request->get('custom_quan'),
                         'status' => 'pending',
                     ]);
 
-                    $amount = $request->get('apostille_due') + $request->get('postage_charges');
+                    $amount = $request->get('apostille_due') + $request->get('apostille_due1') + $request->get('apostille_due2') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'apostille_id' => $apostilleDetails->id,

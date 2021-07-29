@@ -40,7 +40,7 @@
                         <table class="table-styling w-100">
                             <thead>
                                 <tr>
-                                    <th>Courses</th>
+                                    <th>Subject</th>
                                     <th>Credit</th>
                                     <th class="hide">Grades</th>
 

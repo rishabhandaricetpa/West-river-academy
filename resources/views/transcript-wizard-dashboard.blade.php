@@ -51,7 +51,7 @@
                         <table class="table-styling w-100">
                             <thead>
                                 <tr>
-                                    <th>Courses</th>
+                                    <th>Subject</th>
                                     <th>Grade</th>
                                 </tr>
                             </thead>
