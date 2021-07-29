@@ -48,7 +48,8 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>        
+
                                     @foreach ($transcript as $transcripts)
                                         <tr>
                                             <td>{{ $transcripts->period }}</td>

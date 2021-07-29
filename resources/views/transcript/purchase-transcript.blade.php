@@ -20,11 +20,10 @@
           </div>
           @if($trans_wiz=='Yes')
             <input type="hidden" name="transcript_ids" value="{{$transcript_ids}}">
-          @else{
+          @else
             @foreach ($transcript_ids as $transcript_id)
             <input type="hidden" name="transcript_ids[]" value="{{$transcript_id}}">
             @endforeach
-          }
            @endif
           <input type="hidden" name="type" value="transcript">
           <input type="hidden" name="student_id" value="{{ $student->id }}">

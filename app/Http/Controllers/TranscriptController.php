@@ -11,6 +11,7 @@ use App\Models\StudentProfile;
 use App\Models\Transcript;
 use App\Models\TranscriptCourse;
 use App\Models\TranscriptK8;
+use App\Models\Transcript9_12;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptPdf;
 use Illuminate\Http\Request;
@@ -151,10 +152,13 @@ class TranscriptController extends Controller
      */
     public function createTranscript(Request $request, $transcript_id, $id)
     {
+        // dd($id);
         $enroll_student = StudentProfile::find($id);
         $enrollment_ids =   getEnrollmetForStudents($id);
         $payment_info = getPaymentInformation($enrollment_ids);
-
+        $student = StudentProfile::find($id);
+        $student_id = $id;
+        $parent = ParentProfile::whereId($student->parent_profile_id)->first();
         if (count($payment_info) == 0) {
             return view('transcript.dashboard-notify', compact('enroll_student'));
         } else {
@@ -164,12 +168,33 @@ class TranscriptController extends Controller
                 ->first();
             if ($transcriptPayment) {
                 if ($transcriptPayment->period == 'K-8') {
+                    $is_transcript = TranscriptK8::where('transcript_id', $transcript_id)->first();
+                    $transcript = TranscriptK8::create(
+                        [
+                            'student_profile_id' => $id,
+                            'country' => $is_transcript->country,
+                            'transcript_id' => $transcript_id,
+                        ]
+                    );
                     $transcriptData = $transcriptPayment->transcript_id;
-                    return view('transcript.dashboard-transcript', compact('enroll_student', 'transcriptPayment', 'transcriptData'));
+                    return view('transcript.grade', compact('student', 'transcript'));
+                    // return view('transcript.dashboard-transcript', compact('enroll_student', 'transcriptPayment', 'transcriptData'));
                 } elseif ($transcriptPayment->period == '9-12') {
-                    $transcript = Transcript::where('student_profile_id', $id)->first();
-                    $transcript_id = $transcript_id;
-                    return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
+                    $is_transcript = Transcript9_12::where('transcript_id', $transcript_id)->first();
+                    if ($is_transcript) {
+                        $transcript = Transcript9_12::create(
+                            [
+                                'student_profile_id' => $id,
+                                'is_carnegie' => $is_transcript->is_carnegie,
+                                'country' => $is_transcript->country,
+                                'transcript_id' => $transcript_id,
+                            ]
+                        );
+                        // $transcript_id = $transcript_id;
+                        return view('transcript9to12.grade', compact('student_id', 'transcript'));
+                    } else {
+                        return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
+                    }
                 } else {
                     return view('transcript.transcript-wizard', compact('enroll_student', 'transcript_id'));
                 }

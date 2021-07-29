@@ -11,14 +11,14 @@
             </div>
             <form method="post" action="{{ route ('notarization.apostille')}}" class="mb-0 mt-5 label-large">
                 @csrf
-                <div class="d-sm-flex py-4 col-sm-6 mx-auto">
-                    <div class="form-check mb-1">
+                <div class="d-sm-flex py-4 col-sm-8 mx-auto justify-content-center">
+                    <div class="form-check mb-1 pl-5 pr-4">
                         <input class="form-check-input" type="radio" name="type" value="apostille" required>
-                        <label class="form-check-label" for="">Apostille</label>
+                        <label class="form-check-label inline" for="">Apostille</label>
                     </div>
-                    <div class="form-check mb-1">
+                    <div class="form-check mb-1 pl-5 pr-4">
                         <input class="form-check-input" type="radio" name="type" value="notarization">
-                        <label class="form-check-label" for="">Notarization</label>
+                        <label class="form-check-label inline" for="">Notarization</label>
                     </div>
                 </div>
                 <div class="text-center">

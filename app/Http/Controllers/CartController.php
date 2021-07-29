@@ -244,7 +244,6 @@ class CartController extends Controller
                     }
                     break;
                 case 'apostille':
-                    dd($request->all());
                     // $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->get();
                     //   dd($clearpendingPayments);
                     $parent_profile_id = ParentProfile::getParentId();

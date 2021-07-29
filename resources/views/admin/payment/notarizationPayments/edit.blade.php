@@ -55,6 +55,11 @@
                                     <input class="form-control" id="amount"
                                         value="{{ $notarizationData->notarization->country }}" disabled>
                                 </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Notes<sup></sup></label>
+                                    <textarea class="form-control" name="notarization_message" disabled
+                                        >{{$notarizationData->notarization->additional_message}}</textarea>
+                                </div>
                             @endif
                             @if ($notarizationData->apostille)
                                 <div class="form-group col-sm-6">
@@ -76,6 +81,11 @@
                                     <label>Postage Country<sup>*</sup></label>
                                     <input class="form-control" id="amount"
                                         value="{{ $notarizationData->apostille->country }}" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Notes<sup></sup></label>
+                                    <textarea class="form-control" name="apostille_message" disabled
+                                        >{{$notarizationData->apostille->additional_message}}</textarea>
                                 </div>
                             @endif
                             <div class="form-group col-sm-6">

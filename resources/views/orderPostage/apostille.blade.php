@@ -15,11 +15,14 @@
                         Convention. Includes notarization. $75 per document. Express Mail shipping is to each order at
                         checkout. Allow 3-6 weeks for processing plus shipping time.
                     </p>
-                    <div class="form-group d-md-flex mb-2">
-                        <div class="col-md-6 d-sm-flex px-0 mb-4">
-                            <p class="font-weight-bold">Transcript(s) Quantity</p>
-                            <div class="row ml-3 mx-0">
-                                <select class="form-control col-5" name="transcript_quan"
+                  
+                        <div class="col-9 px-0 mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p class="font-weight-bold">Transcript(s) Quantity</p>
+                                </div>
+                                <div class="col-md-8 d-flex">
+                                    <select class="form-control col-5" name="transcript_quan"
                                     onchange="getApostilleAmount(event,'{{ $appostile_fee }}')">
                                     <option value="">Select Quantity</option>
                                     <?php 
@@ -32,13 +35,18 @@
                                 <i class="fas fa-dollar-sign additional-sign"></i>
                                 <input type="text" id="apostille_due" class="form-control col-3" name="apostille_due"
                                     readonly>
+                                </div>
                             </div>
+                          
                         </div>
-                    </div>
-                    <div class="col-md-6 d-sm-flex px-0 mb-4">
-                        <p class="font-weight-bold">Confirmation(s) of Enrollment Letter Quantity</p>
-                        <div class="row ml-3 mx-0">
-                            <select class="form-control col-5" name="confirm_quan"
+                  
+                    <div class="col-md-9  px-0 mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="font-weight-bold">Confirmation(s) of Enrollment Letter Quantity</p>
+                            </div>
+                            <div class="col-md-8 d-flex">
+                                <select class="form-control col-5" name="confirm_quan"
                                 onchange="getApostillforconfirmAmount(event,'{{ $appostile_fee }}')">
                                 <option value="">Select Quantity</option>
                                 <?php 
@@ -51,12 +59,16 @@
                             <i class="fas fa-dollar-sign additional-sign"></i>
                             <input type="text" id="apostille_due1" class="form-control col-3" name="apostille_due1"
                                 readonly>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 d-sm-flex px-0 mb-4">
-                        <p class="font-weight-bold"> Custom Letter(s) Quantity</p>
-                        <div class="row ml-3 mx-0">
-                            <select class="form-control col-5" name="custom_quan"
+                    <div class="col-md-9 px-0 mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="font-weight-bold"> Custom Letter(s) Quantity</p>
+                            </div>
+                            <div class="col-md-8 d-flex">
+                                <select class="form-control col-5" name="custom_quan"
                                 onchange="getApostilleAmountforCustom(event,'{{ $appostile_fee }}')">
                                 <option value="">Select Quantity</option>
                                 <?php 
@@ -69,24 +81,30 @@
                             <i class="fas fa-dollar-sign additional-sign"></i>
                             <input type="text" id="apostille_due2" class="form-control col-3" name="apostille_due2"
                                 readonly>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 px-0 d-sm-flex">
-                        <p class="font-weight-bold">Country</p>
-                        <select name="apostille_country" class="form-control mx-sm-3" required>
-                            <option value="">Select country</option>
-                            @foreach ($countries as $country)
-                                <option value="{{ $country->country }}">{{ $country->country }}</option>
-                            @endforeach
-                        </select>
+                    <div class="col-md-9  px-0 mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="font-weight-bold">Country</p>
+                            </div>
+                            <div class="col-md-8">
+                                <select name="apostille_country" class="form-control" required>
+                                    <option value="">Select country</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->country }}">{{ $country->country }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group mb-2">
                         <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s)
                             you wish to have apostille and any other comments.</p>
-                        <textarea name="" id="" cols="40" rows="10" class="form-control" name="message"
+                        <textarea cols="40" rows="10" class="form-control" name="message"
                             maxlength="2000" onKeyPress="if(this.value.length==2000) return false;" required></textarea>
                     </div>
-
                     <div class="form-group mb-2">
                         <h2 class="mb-3 mt-5">Please provide the address to send the document to:</h2>
                         <div class="form-group d-sm-flex mb-2">

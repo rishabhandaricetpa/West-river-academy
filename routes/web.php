@@ -290,16 +290,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('notarization', 'NotarizationController@index')->name('notarization');
         Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
 
-
-
-
-        Route::get('select/country/{student_id}/{transcript_id}', 'TranscriptController\Transcript9to12@selectCountry')->name('selecting.country');
-        Route::post('select/grade/{student_id}', 'TranscriptController\Transcript9to12@selectGrade')->name('select.grade');
-        Route::post('select/enrollmentyear/{student_id}', 'TranscriptController\Transcript9to12@enrollSchool')->name('enrollSchool');
-        Route::post('choose/apcourse/{student_id}', 'TranscriptController\Transcript9to12@enrollYear')->name('select.apCourse');
-        Route::post('apCourses/{student_id}', 'TranscriptController\Transcript9to12@apCourses')->name('apCourse');
-        // Route::get('preview-transcript9_12/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@previewTranscript')->name('preview.transcript9_12');
-
         //archieve records
         // Route::post('archieve/record', 'Admin\DashboardController@archieveRecord');
         //order Postage
