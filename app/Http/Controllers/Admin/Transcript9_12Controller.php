@@ -109,12 +109,18 @@ class Transcript9_12Controller extends Controller
             $years = collect($enrollment_periods)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
+            if ($maxYear == $minYear) {
+                $maxYear = $maxYear + 1;
+            }
         } else {
 
             $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
             $years = collect($enrollment_years)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
+            if ($maxYear == $minYear) {
+                $maxYear = $maxYear + 1;
+            }
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
         }
@@ -161,13 +167,18 @@ class Transcript9_12Controller extends Controller
                 $years = collect($enrollment_periods)->pluck('enrollment_year');
                 $maxYear = $years->max();
                 $minYear = $years->min();
+                if ($maxYear == $minYear) {
+                    $maxYear = $maxYear + 1;
+                }
             } else {
 
                 $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
                 $years = collect($enrollment_years)->pluck('enrollment_year');
                 $maxYear = $years->max();
                 $minYear = $years->min();
-
+                if ($maxYear == $minYear) {
+                    $maxYear = $maxYear + 1;
+                }
                 $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
             }
             $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'Signed_transcript_letter';

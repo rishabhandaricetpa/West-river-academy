@@ -200,13 +200,13 @@
           </div>
         </div>
       </div>
-                          <p v-if="errors.length" >
+      
+    </div>
+                    <p v-if="errors.length" >
        <ul>
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
       </ul>
     </p> 
-    </div>
-
     <div class="mt-2r">
       <a @click="addCourse" class="btn btn-primary"
         >Add another College Course</a

@@ -1855,7 +1855,7 @@
         var edit_rep_email = $('#edit_rep_email').val();
         var edit_rep_phone = $('#edit_rep_phone').val();
         var edit_rep_skype = $('#edit_rep_skype').val();
-        var terms_of_org=$('#terms_of_org').val();
+        var terms_of_org = $('#terms_of_org').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2351,6 +2351,54 @@
         });
     }
 
+    function updateRecord() {
+        var record_id = $('#record_id').val();
+        var record_student_id = $('#record_student_id').val();
+        var parent_id = $('#record_parentid').val();
+        var record_student_name = $('#record_student_name').val();
+        var school_name = $('#record_school_name').val();
+        var record_school_email = $('#record_school_email').val();
+        var school_fax_number = $('#school_fax_number').val();
+        var phone_number = $('#school_phone_number').val();
+        var street_address = $('#school_street_address').val();
+        var city = $('#school_city').val();
+        var state = $('#school_state').val();
+        var zip_code = $('#school_zip_code').val();
+        var country = $('#school_country').val();
+        var last_grade = $('#last_grade_in').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.update.record') }}",
+            type: "POST",
+
+            data: {
+                parent_id,
+                record_id,
+                record_student_id,
+                record_student_name,
+                school_name,
+                record_school_email,
+                school_fax_number,
+                phone_number,
+                street_address,
+                city,
+                state,
+                zip_code,
+                country,
+                last_grade
+            },
+            success: function(response) {
+
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
     function getCountryValnotar() {
         var countryname = $('#shipping_country').val();
         $.ajax({
@@ -2435,53 +2483,6 @@
             $("#consul_amount").val(total);
         }
 
-        function updateRecord() {
-            var record_id = $('#record_id').val();
-            var record_student_id = $('#record_student_id').val();
-            var parent_id = $('#record_parentid').val();
-            var record_student_name = $('#record_student_name').val();
-            var school_name = $('#record_school_name').val();
-            var record_school_email = $('#record_school_email').val();
-            var school_fax_number = $('#school_fax_number').val();
-            var phone_number = $('#school_phone_number').val();
-            var street_address = $('#school_street_address').val();
-            var city = $('#school_city').val();
-            var state = $('#school_state').val();
-            var zip_code = $('#school_zip_code').val();
-            var country = $('#school_country').val();
-            var last_grade = $('#last_grade_in').val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ route('admin.update.record') }}",
-                type: "POST",
-
-                data: {
-                    parent_id,
-                    record_id,
-                    record_student_id,
-                    record_student_name,
-                    school_name,
-                    record_school_email,
-                    school_fax_number,
-                    phone_number,
-                    street_address,
-                    city,
-                    state,
-                    zip_code,
-                    country,
-                    last_grade
-                },
-                success: function(response) {
-
-                    location.reload();
-                },
-                error: function(response) {
-
-                }
-            });
-        }
     }
 
 </script>

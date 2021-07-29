@@ -399,6 +399,11 @@
                                                                 data-target="#enrollmentsModal"
                                                                 data-whatever="@getbootstrap"><img src="/images/add.png"
                                                                     alt=""><img src="/images.add.png" alt=""></button></th>
+                                                        <th scope="col" class="text-right"><a
+                                                                href="{{ route('admin.update.allenrollment', $student->id) }}"
+                                                                class="btn btn-primary">
+                                                                Update All Enrollment Paid</a>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -423,6 +428,7 @@
                                                                         class=" fas fa-edit"
                                                                         onclick="return myFunction();"></i></a>
                                                             </td>
+                                                            <td></td>
                                                             <td></td>
                                                         </tr>
                                                     @endforeach
