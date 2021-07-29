@@ -18,9 +18,11 @@
                     <span style="text-decoration:underline;">
 
                         @if (strtotime($year))
-                            Academic Year {{ $year }}
-                        @elseif(!empty($year))
+                            Academic Year {{ $year }} - {{ $year + 1 }}
+                        @elseif($year == 'Courses In Progres')
                             {{ $year }}
+                        @else
+                            Courses Completed at {{ $year }}
                         @endif
                     </span>
 

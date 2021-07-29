@@ -468,4 +468,11 @@ class StudentProfileController extends Controller
             ]
         );
     }
+    public function updateAllEnrollment($student_id)
+    {
+        $enrollment_period = EnrollmentPeriods::whereIn('student_profile_id', [$student_id])->get();
+        $enrollment_payment_id = collect($enrollment_period)->pluck('enrollment_payment_id');
+        EnrollmentPayment::whereIn('id', $enrollment_payment_id)->update(['status' => 'paid']);
+        return redirect()->back();
+    }
 }

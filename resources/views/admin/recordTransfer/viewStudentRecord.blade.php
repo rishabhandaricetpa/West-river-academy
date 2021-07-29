@@ -59,7 +59,7 @@
                         <div class="form-group col-sm-6">
                             <label>Student Name <sup>*</sup></label>
                             <input class="form-control" id="name" value="{{ $studentRecord['student']['fullname'] }}"
-                                name="name" id="record_student_name" required>
+                                name="name" id="record_student_name" required readonly>
                         </div>
                         @if ($studentEnrollmentYear)
                             @foreach ($studentEnrollmentYear as $year)
@@ -124,7 +124,7 @@
 
                     <div class="row">
                         <div class="col-md-6 mt-4">
-                            <a class="btn btn-primary" onclick="updateRecord()">Update</a>
+                            <a href="#" onclick="updateRecord()" class="btn btn-primary">Update</a>
                             <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
                                 class="btn btn-primary">Download & Preview Records</a>
                             <button type="submit"

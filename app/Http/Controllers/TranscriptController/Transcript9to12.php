@@ -196,7 +196,7 @@ class Transcript9to12 extends Controller
         $transcriptDatas = Transcript9_12::where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subjects', 'TranscriptCourse9_12.course', 'transcript'])
             ->get();
-      
+
         return view('transcript9to12.transcript-wizard', compact('student', 'transcriptDatas', 'transcript_id', 'transcriptWizStatus', 'details9_12'));
     }
 
@@ -253,7 +253,7 @@ class Transcript9to12 extends Controller
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);
 
-        // $year = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('enrollment_year', 'ASC')->get(['enrollment_year'])->unique('enrollment_year');
+      
 
         $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
 
@@ -262,9 +262,9 @@ class Transcript9to12 extends Controller
         $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses', 'apCourses'])
             ->get();
-        // $arr = collect([]);
+        
         $courses = fetchTranscript9_12Details($transcriptData);
-        // $allCourse = $courses->merge($apCourses);
+      
         // END: Transcript data for rendring course data in tabluar format.
 
         $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
@@ -275,7 +275,9 @@ class Transcript9to12 extends Controller
             $years = collect($enrollment_periods)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
-
+            if ($minYear == $maxYear) {
+                $maxYear = $maxYear + 1;
+            }
             return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'totalSelectedGrades'));
         } else {
 
@@ -283,7 +285,9 @@ class Transcript9to12 extends Controller
             $years = collect($enrollment_years)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
-
+            if ($minYear == $maxYear) {
+                $maxYear = $maxYear + 1;
+            }
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->orWhere('status', 'paid')->first();
             return view('transcript9to12.transcript-preview', compact('student',  'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'totalSelectedGrades'));
         }

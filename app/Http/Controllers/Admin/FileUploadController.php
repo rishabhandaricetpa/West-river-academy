@@ -28,7 +28,6 @@ class FileUploadController extends Controller
      */
     public function fileUploadPost(Request $request)
     {
-        //dd($request->all());
         try {
             DB::beginTransaction();
             $request->validate([
@@ -70,7 +69,7 @@ class FileUploadController extends Controller
             }
             $paymentsTranscriptStatus = TranscriptPayment::where('transcript_id', $request->get('transcript_id'))
                 ->whereIn('status', ['completed', 'approved', 'paid', 'canEdit'])->first();
-            // dd($paymentsTranscriptStatus);
+
             if ($paymentsTranscriptStatus != null) {
                 $paymentsTranscriptStatus->status = 'approved';
                 $paymentsTranscriptStatus->save();
