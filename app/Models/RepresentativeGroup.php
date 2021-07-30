@@ -9,6 +9,7 @@ class RepresentativeGroup extends Model
 {
     use HasFactory;
     protected $table = 'representative_groups';
+    public $append = ['full_name'];
     protected $fillable = ['parent_profile_id', 'type', 'country', 'city', 'name', 'email'];
 
 
@@ -19,5 +20,9 @@ class RepresentativeGroup extends Model
     public static function calculateRepAmount($count)
     {
         return $count;
+    }
+    public function getFullNameAttribute()
+    {
+        return strtoupper($this->name);
     }
 }
