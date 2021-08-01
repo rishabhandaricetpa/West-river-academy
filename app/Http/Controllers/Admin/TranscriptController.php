@@ -31,7 +31,6 @@ class TranscriptController extends Controller
         return view('admin.transcript.view-student', compact('students', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
-    //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
         $type = "k-8";

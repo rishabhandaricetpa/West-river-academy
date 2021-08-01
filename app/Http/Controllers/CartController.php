@@ -23,6 +23,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Apostille;
+use App\Models\EnrollmentPeriods;
 
 class CartController extends Controller
 {
@@ -64,11 +65,13 @@ class CartController extends Controller
 
                     for ($i = 0; $i < count($data['eps']); $i++) {
                         $item_id = $data['eps'][$i];
+                        $student_data = EnrollmentPeriods::whereId($item_id)->first();
                         if (!Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
                             Cart::create([
                                 'item_type' => 'enrollment_period',
                                 'item_id' => $item_id,
                                 'parent_profile_id' => $this->parent_profile_id,
+                                'student_profile_id' => $student_data->student_profile_id,
                             ]);
                         }
                     }
@@ -81,7 +84,6 @@ class CartController extends Controller
                         ->where('parent_profile_id', $parent_profile_id)
                         ->with('graduation')
                         ->first();
-
                     if ($student) {
                         GraduationMailingAddress::create([
                             'graduation_id' => $student->graduation->id,
@@ -108,6 +110,7 @@ class CartController extends Controller
                                 'item_type' => 'graduation',
                                 'item_id' => $student->graduation->id,
                                 'parent_profile_id' => $parent_profile_id,
+                                'student_profile_id' => $student->id,
                             ]);
                         }
                     } else {
@@ -141,6 +144,7 @@ class CartController extends Controller
                                 'item_type' => 'transcript',
                                 'item_id' => $transcript_id,
                                 'parent_profile_id' => $parent_profile_id,
+                                'student_profile_id' => $student->id,
                             ]);
                         }
                     }
@@ -178,6 +182,7 @@ class CartController extends Controller
                             'item_type' => 'transcript_edit',
                             'item_id' => $request->get('transcript_id'),
                             'parent_profile_id' => $parent_profile_id,
+                            'student_profile_id' => $student->id,
                         ]);
                     }
                     break;
@@ -340,7 +345,6 @@ class CartController extends Controller
             return redirect()->back();
         }
     }
-
     public function delete($id)
     {
         if (Cart::where('id', $id)->delete()) {

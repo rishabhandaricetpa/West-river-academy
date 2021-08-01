@@ -49,7 +49,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>        
-
                                     @foreach ($transcript as $transcripts)
                                         <tr>
                                             <td>{{ $transcripts->period }}</td>
