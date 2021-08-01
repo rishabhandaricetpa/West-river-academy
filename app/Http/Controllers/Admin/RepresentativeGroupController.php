@@ -108,7 +108,8 @@ class RepresentativeGroupController extends Controller
     }
     public function repReport($rep_id)
     {
-        $rep_families = RepresentativeGroup::where('id',  $rep_id)->first()->families()->get();
+        $rep_families = RepresentativeGroup::find($rep_id)->families()->get();
+        $representative = RepresentativeGroup::where('id', $rep_id)->first();
         $family_count = $rep_families->count();
         $repAmount = FeeStructureType::RepGroupAmount;
         $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
@@ -119,9 +120,10 @@ class RepresentativeGroupController extends Controller
             'rep_families' =>   $rep_families,
             'repGroupAmountDetails' => $repGroupAmountDetails,
             'repAmount' => $repAmount,
-            'amountPaid' => $amountPaid
+            'amountPaid' => $amountPaid,
+            'representative' => $representative->full_name
         ];
-        $pdf = PDF::loadView('admin.familyInformation.rep-report');
+        $pdf = PDF::loadView('admin.familyInformation.rep-report', $data);
         return $pdf->download('RepReport');
     }
     public function delete($rep_amount_id)
@@ -131,7 +133,6 @@ class RepresentativeGroupController extends Controller
     }
     public function update(Request $request)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $representative = RepresentativeGroup::find($request->get('edit_rep_id'));
