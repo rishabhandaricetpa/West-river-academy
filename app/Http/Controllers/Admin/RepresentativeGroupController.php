@@ -71,9 +71,12 @@ class RepresentativeGroupController extends Controller
     public function repDetails($rep_id, $parent_id)
     {
         $parent_rep_group = ParentProfile::where('id', $parent_id)->select('representative_group_id')->first();
+        $parent_detail = ParentProfile::where('id', $parent_id)->first();
         $rep_id = $parent_rep_group->representative_group_id;
+        $family_groups = ParentProfile::where('representative_group_id', $rep_id)->get();
         $rep_group = RepresentativeGroup::where('id',  $rep_id)->first();
         $rep_families =  $rep_group->families()->get();
+        $getNotes = Notes::where('parent_profile_id', $parent_id)->get();
         $family_count = $rep_families->count();
         $repAmount = FeeStructureType::RepGroupAmount;
         $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
@@ -81,7 +84,7 @@ class RepresentativeGroupController extends Controller
         $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount);
 
         // rep documents
-        return view('admin/familyInformation/rep-detail', compact('rep_group', 'rep_families', 'calculatedAmount', 'rep_id', 'repGroupAmountDetails', 'repGroupDocuments', 'repAmount'));
+        return view('admin/familyInformation/rep-detail', compact('rep_group', 'rep_families', 'calculatedAmount', 'rep_id', 'repGroupAmountDetails', 'repGroupDocuments', 'repAmount', 'family_groups', 'getNotes', 'parent_detail'));
     }
     public function createRepAmount(Request $request)
     {

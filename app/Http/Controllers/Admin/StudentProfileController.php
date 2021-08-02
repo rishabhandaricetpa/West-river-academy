@@ -366,12 +366,19 @@ class StudentProfileController extends Controller
 
     public function createNotes(Request $request)
     {
-        $notes = new Notes;
-        $notes->parent_profile_id = $request->get('parent_id');
-        $notes->student_profile_id = $request->get('student_name_for_notes');
-        $notes->notes = $request->get('message_text');
-
-        $notes->save();
+        if ($request->get('rep_group_id')) {
+            $notes = new Notes;
+            $notes->representative_group_id = $request->get('rep_group_id');
+            $notes->parent_profile_id = $request->get('rep_parent_id');
+            $notes->notes = $request->get('rep_message_val');
+            $notes->save();
+        } else {
+            $notes = new Notes;
+            $notes->parent_profile_id = $request->get('parent_id');
+            $notes->student_profile_id = $request->get('student_name_for_notes');
+            $notes->notes = $request->get('message_text');
+            $notes->save();
+        }
     }
 
 
