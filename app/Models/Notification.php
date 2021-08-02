@@ -52,7 +52,7 @@ class Notification extends Model
 
             return response()->json(['status' => 'success', 'notifications' => $data]);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
         }
     }
     static  public function removeParentNotifications($notification_id)

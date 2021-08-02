@@ -49,7 +49,6 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $data = $request->all();
@@ -250,7 +249,6 @@ class CartController extends Controller
                     break;
                 case 'apostille':
                     // $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->get();
-                    //   dd($clearpendingPayments);
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
                     $confirmation_doc_total = json_encode($request->get('confirmation_doc'));
@@ -339,7 +337,6 @@ class CartController extends Controller
             DB::commit();
             return redirect('/cart');
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
 
             return redirect()->back();

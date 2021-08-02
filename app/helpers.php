@@ -558,13 +558,13 @@ function getcartval()
     return $count;
 }
 //convert date formate
-function getDateVal($value)
-{
+// function getDateVal($value)
+// {
 
-    $date = $value->format('F j, Y');
+//     $date = $value->format('F j, Y');
 
-    return $date;
-}
+//     return $date;
+// }
 function formatDate($date)
 {
     return \Carbon\Carbon::parse($date)->format('M j , Y');

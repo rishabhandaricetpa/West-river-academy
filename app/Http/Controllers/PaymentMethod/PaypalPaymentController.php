@@ -148,6 +148,8 @@ class PaypalPaymentController extends Controller
         $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
         $items = collect($cartItems)->pluck('item_type')->toArray();
         $item_type = implode(",", $items);
+        $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
+        $student_id = implode(",", (array_unique($student_data)));
         $paypal = new TransactionsMethod();
         $paypal->transcation_id = $payment_id;
         $paypal->payment_mode = 'PayPal';
@@ -157,6 +159,7 @@ class PaypalPaymentController extends Controller
         $paypal->coupon_code = $coupon_code;
         $paypal->coupon_amount = $coupon_amount;
         $paypal->item_type = $item_type;
+        $paypal->student_profile_id = $student_id;
         $paypal->save();
 
         Cart::emptyCartAfterPayment('PayPal', 'paid', $payment_id);

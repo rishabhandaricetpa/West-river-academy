@@ -105,7 +105,7 @@ class PaymentController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
             $notification = [
                 'message' => 'Failed to update Record!',

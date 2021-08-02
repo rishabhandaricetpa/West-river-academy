@@ -89,7 +89,7 @@ class FileUploadController extends Controller
 
             return back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Data Missmatch',

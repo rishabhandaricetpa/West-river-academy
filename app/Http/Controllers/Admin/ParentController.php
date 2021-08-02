@@ -121,7 +121,7 @@ class ParentController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
             report($e);
             if ($request->expectsJson()) {
@@ -653,7 +653,6 @@ class ParentController extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
             report($e);
             DB::rollBack();
 

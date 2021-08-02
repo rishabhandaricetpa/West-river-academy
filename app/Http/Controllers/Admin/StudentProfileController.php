@@ -191,7 +191,7 @@ class StudentProfileController extends Controller
             return  redirect()->back()->with($notification);
             // return view('admin.edit-student',$student->id)->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             $notification = [
                 'message' => 'Failed to update Record!',
                 'alert-type' => 'error',
@@ -304,7 +304,7 @@ class StudentProfileController extends Controller
             Storage::put(ConfirmationLetter::UPLOAD_DIR_ADMIN . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             $notification = [
                 'message' => 'Failed!',
                 'alert-type' => 'error',

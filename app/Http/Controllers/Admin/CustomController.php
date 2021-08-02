@@ -193,7 +193,7 @@ class CustomController extends Controller
                 return redirect()->back()->with($notification);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Data Mismatch!',
@@ -282,7 +282,6 @@ class CustomController extends Controller
     //update Personal consultation data in in backend
     public function updateConultation(Request $request, $id)
     {
-        // dd($request);
         $order_conultation = OrderPersonalConsultation::find($id);
         $order_conultation->transcation_id = $request->get('transcation_id');
         $order_conultation->payment_mode = $request->get('payment_mode');

@@ -249,7 +249,7 @@ class Transcript9_12Controller extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Data Missmatch',

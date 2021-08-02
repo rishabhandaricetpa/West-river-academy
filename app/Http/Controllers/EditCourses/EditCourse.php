@@ -63,7 +63,6 @@ class EditCourse extends Controller
             }
         }
         DB::commit();
-        //  dd($refreshCourse);
     }
 
     public function editSocialStudies($student_id, $transcript_id)
