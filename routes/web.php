@@ -355,7 +355,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         //operation - delete and edit in transript 9-12
         Route::get('delete/school-transcript/{transcript_id}', 'TranscriptController\Transcript9to12@deleteSchool')->name('delete.transcript.school');
-        //Route::get('course-details/{transcript_id}/{student_id}', 'TranscriptController\Transcript9to12@displayAllCourse')->name('displayCourseDetails');
 
         //show specific course details
 

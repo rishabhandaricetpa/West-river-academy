@@ -347,7 +347,17 @@ class TranscriptController extends Controller
         $transcript = Transcript::where('id', $k8transcriptData->transcript_id)->first();
 
         if ($transcript->status == 'approved') {
-            dd('To edit this school course please pay $25 since this transcript is approved by WRA.');
+            $transcript_id = $k8transcriptData->transcript_id;
+            $transcript_fee = FeesInfo::getFeeAmount('transcript_edit');
+            $transcriptPayment = TranscriptPayment::updateOrCreate(
+                ['transcript_id' => $transcript_id],
+                [
+                    'amount' => $transcript_fee,
+                    'transcript_id' => $transcript_id,
+                    'status' => 'pending',
+                ]
+            );
+            return view('transcript.edit_approved', compact('transcript_id', 'student_id', 'transcriptPayment'));
         } else {
             $courses = TranscriptCourse::where('k8transcript_id', $transcript_id)
                 ->join('k8transcript', 'k8transcript.id', 'transcript_course.k8transcript_id')
@@ -573,6 +583,7 @@ class TranscriptController extends Controller
     public function editApprovedTranscript($transcript_id, $student_id)
     {
         $student = StudentProfile::find($student_id);
+        $student_id = $student->id;
         $transcript_fee = FeesInfo::getFeeAmount('transcript_edit');
         $transcriptPayment = TranscriptPayment::updateOrCreate(
             ['transcript_id' => $transcript_id],
@@ -585,7 +596,5 @@ class TranscriptController extends Controller
         $student = StudentProfile::whereId($student_id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
 
         return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment', 'student_id'));
-
-        // return view('transcript/edit_approved');
     }
 }

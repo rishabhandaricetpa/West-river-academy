@@ -11,6 +11,8 @@ use App\Models\StudentProfile;
 use App\Models\Transcript;
 use App\Models\Transcript9_12;
 use App\Models\TranscriptCourse9_12;
+use App\Models\FeesInfo;
+use App\Models\TranscriptPayment;
 use App\Models\ParentProfile;
 use DB;
 use Illuminate\Http\Request;
@@ -222,11 +224,20 @@ class Transcript9to12 extends Controller
     public function showCourseDetails($transcript_id, $student_id)
     {
         $transcriptData9_12 = Transcript9_12::where('id', $transcript_id)->first();
-        // for getting trans id - $transcriptData9_12->transcript_id); -  redirect back to all course screen from here
         $trans_id = $transcriptData9_12->transcript_id;
         $transcript = Transcript::where('id', $transcriptData9_12->transcript_id)->first();
         if ($transcript->status == 'approved') {
-            dd('To edit this school course please pay $25 since this transcript is approved by WRA.');
+            $transcript_id = $transcriptData9_12->transcript_id;
+            $transcript_fee = FeesInfo::getFeeAmount('transcript_edit');
+            $transcriptPayment = TranscriptPayment::updateOrCreate(
+                ['transcript_id' => $transcript_id],
+                [
+                    'amount' => $transcript_fee,
+                    'transcript_id' => $transcript_id,
+                    'status' => 'pending',
+                ]
+            );
+            return view('transcript.edit_approved', compact('transcript_id', 'student_id', 'transcriptPayment'));
         } else {
             $courses = TranscriptCourse9_12::where('transcript9_12_id', $transcript_id)
                 ->join('transcript9_12', 'transcript9_12.id', 'transcript_course9_12s.transcript9_12_id')
@@ -253,7 +264,7 @@ class Transcript9to12 extends Controller
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);
 
-      
+
 
         $grades_data  = Transcript9_12::where('transcript_id', $transcript_id)->orderBy('grade', 'ASC')->get(['grade']);
 
@@ -262,9 +273,9 @@ class Transcript9to12 extends Controller
         $transcriptData = Transcript9_12::select()->where('transcript_id', $transcript_id)
             ->with(['TranscriptCourse9_12', 'TranscriptCourse9_12.subject', 'TranscriptCourse9_12.course', 'TranscriptCourse9_12.credit', 'collegeCourses', 'apCourses'])
             ->get();
-        
+
         $courses = fetchTranscript9_12Details($transcriptData);
-      
+
         // END: Transcript data for rendring course data in tabluar format.
 
         $transcript_9_12_id = Transcript9_12::select('id')->where('transcript_id', $transcript_id)->get();
