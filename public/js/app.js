@@ -51793,26 +51793,26 @@ var render = function() {
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _vm.errors.length
-              ? _c("p", [
-                  _c(
-                    "ul",
-                    _vm._l(_vm.errors, function(error) {
-                      return _c(
-                        "li",
-                        { key: error.id, staticStyle: { color: "red" } },
-                        [_vm._v("  " + _vm._s(error) + " ")]
-                      )
-                    }),
-                    0
-                  )
-                ])
-              : _vm._e()
+            ])
           ]
         )
       }),
+      _vm._v(" "),
+      _vm.errors.length
+        ? _c("p", [
+            _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c(
+                  "li",
+                  { key: error.id, staticStyle: { color: "red" } },
+                  [_vm._v("  " + _vm._s(error) + " ")]
+                )
+              }),
+              0
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "mt-2r" }, [
         _c(
