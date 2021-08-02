@@ -69,6 +69,9 @@ class StripeController extends Controller
                     'description' => $request->description,
                 ]);
                 $parentProfileData = User::find($userId)->parentProfile()->first();
+                $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
+                $items = collect($cartItems)->pluck('item_type')->toArray();
+                $item_type = implode(",", $items);
                 $paymentinfo = $parentProfileData->TransactionsMethod()->create([
                     'parent_profile_id' => $parentProfileData,
                     'transcation_id' => $charges->id,
@@ -77,6 +80,7 @@ class StripeController extends Controller
                     'status' => $charges->status,
                     'coupon_code' => $coupon_code,
                     'coupon_amount' => $coupon_amount,
+                    'item_type' => $item_type
                 ]);
 
                 Coupon::removeAppliedCoupon();
@@ -101,11 +105,11 @@ class StripeController extends Controller
 
                 return Redirect::route('payment.info')->with($notification);
             } catch (\Stripe\Exception\CardException $e) {
-                echo 'Status is:'.$e->getHttpStatus().'\n';
-                echo 'Type is:'.$e->getError()->type.'\n';
-                echo 'Code is:'.$e->getError()->code.'\n';
-                echo 'Param is:'.$e->getError()->param.'\n';
-                echo 'Message is:'.$e->getError()->message.'\n';
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
             }
         }
     }
