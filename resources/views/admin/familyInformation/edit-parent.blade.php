@@ -842,8 +842,8 @@
                                                 <a class="mr-1"
                                                     href=" {{ route('admin.edit.payment.status', $payment->id) }}"><i
                                                         class=" fas fa-edit" onclick="return myFunction();"></i></a>
-                                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'signed']) }}"><img src="/images/document.png" alt=""></a>
-                                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'unsigned']) }}"><img src="/images/document (1).png" alt=""></a>
+                                                <a class="mr-1" href="#"><img src="/images/document (1).png" alt=""></a>
+                                                <a class="mr-1" href="#"><img src="/images/document.png" alt=""></a>
                                             </td>
                                             <td></td>
                                         </tr>
