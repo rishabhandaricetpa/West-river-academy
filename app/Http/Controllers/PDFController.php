@@ -60,7 +60,7 @@ class PDFController extends Controller
                 return redirect()->back()->with($notification);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             $notification = [
                 'message' => 'Failed!',
                 'alert-type' => 'error',

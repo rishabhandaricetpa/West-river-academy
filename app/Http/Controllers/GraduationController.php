@@ -90,7 +90,7 @@ class GraduationController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record added successfully']);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
 
             if ($request->expectsJson()) {
@@ -175,7 +175,6 @@ class GraduationController extends Controller
                 'alert-type' => 'success',
             ]);
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
 
             return redirect()->back()->with([
@@ -192,7 +191,6 @@ class GraduationController extends Controller
 
     public function dataTable()
     {
-        // dd(Graduation::with(['details', 'student', 'parent'])->latest()->get()->toArray());
         return datatables(Graduation::with(['details', 'student', 'parent'])->latest()->get())->toJson();
     }
 

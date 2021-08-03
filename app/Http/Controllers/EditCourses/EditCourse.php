@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EditCourses;
 
+use App\Enums\CourseType;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Subject;
@@ -15,7 +16,7 @@ class EditCourse extends Controller
     public function editEnglish($student_id, $transcript_id)
     {
         $course = Course::select('id',)
-            ->where('course_name', 'English / Language Arts')
+            ->where('course_name', CourseType::EnglishCourse)
             ->first();
         $englishCourse = Subject::where('courses_id', $course->id)
             ->where('transcript_period', 'K-8')
@@ -63,14 +64,13 @@ class EditCourse extends Controller
             }
         }
         DB::commit();
-        //  dd($refreshCourse);
     }
 
     public function editSocialStudies($student_id, $transcript_id)
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'History / Social Science')
+            ->where('course_name', CourseType::HistoryCourse)
             ->first();
         $courses_id = $course->id;
         $socialStudiesCourse = Subject::where('courses_id', $course->id)
@@ -125,7 +125,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Mathematics')
+            ->where('course_name', CourseType::MathsCourse)
             ->first();
         $courses_id = $course->id;
         $maths_course = Subject::where('courses_id', $course->id)
@@ -179,7 +179,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Science')
+            ->where('course_name', CourseType::ScienceCourse)
             ->first();
         $courses_id = $course->id;
         $science_course = Subject::where('courses_id', $course->id)
@@ -233,7 +233,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Physical Education')
+            ->where('course_name', CourseType::PhysicalEducationCourse)
             ->first();
         $courses_id = $course->id;
         $physical_education = Subject::where('courses_id', $course->id)
@@ -287,7 +287,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Health')
+            ->where('course_name', CourseType::HealthCourse)
             ->first();
         $courses_id = $course->id;
         $health_course = Subject::where('courses_id', $course->id)
@@ -341,7 +341,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Foreign Language')
+            ->where('course_name', CourseType::ForeignCourse)
             ->first();
         $courses_id = $course->id;
         $foreign_course = Subject::where('courses_id', $course->id)
@@ -395,7 +395,7 @@ class EditCourse extends Controller
     {
         $course = Course::select('id', DB::raw('count(*) as total'))
             ->groupBy('id')
-            ->where('course_name', 'Electives')
+            ->where('course_name', CourseType::AnotherCourse)
             ->first();
         $courses_id = $course->id;
         $another_course = Subject::where('courses_id', $course->id)

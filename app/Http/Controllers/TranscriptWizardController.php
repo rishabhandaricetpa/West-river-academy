@@ -75,7 +75,7 @@ class TranscriptWizardController extends Controller
                 return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',

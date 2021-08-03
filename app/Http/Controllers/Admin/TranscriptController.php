@@ -37,7 +37,6 @@ class TranscriptController extends Controller
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
             ->get()->unique('transcript_id');
-        // dd($transcript);
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
@@ -221,13 +220,6 @@ class TranscriptController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->back()->with($notification);
-    }
-
-    //delete subject from transcript
-
-    public function deleteSubGrades($subject_id, $transcript_id)
-    {
-        // dd($transcript_id);
     }
 
     /* *

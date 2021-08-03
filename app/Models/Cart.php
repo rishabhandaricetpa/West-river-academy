@@ -56,7 +56,6 @@ class Cart extends Model
                 return self::calculateItemsPerStudent($enroll_data, $graduation_data, $transcript_data, $custom_data, $transcript_edit_data, $postage_data, $notarization_data, $custom_letter_data, $consultation_data, $apostille_data);
             }
         } catch (\Exception $e) {
-            dd($e);
             return [];
         }
     }
@@ -563,7 +562,6 @@ class Cart extends Model
     }
     public static function emptyCartAfterPayment($type, $status, $payment_id = null)
     {
-        // dd($payment_id);
         $parent_profile_id = ParentProfile::getParentId();
         $parentName = ParentProfile::whereId($parent_profile_id)->first();
         $cartItems = self::select()->where('parent_profile_id', $parent_profile_id)->get();

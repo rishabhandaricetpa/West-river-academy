@@ -279,7 +279,7 @@ class StudentController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Student added successfully', 'data' => $student]);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
 
             if ($data->expectsJson()) {

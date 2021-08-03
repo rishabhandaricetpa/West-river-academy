@@ -37,7 +37,6 @@ class TranscriptController extends Controller
      */
     public function viewEnrollment(Request $request, $id)
     {
-        // dd($request->all());
         try {
             DB::beginTransaction();
             $student = StudentProfile::find($id);
@@ -111,7 +110,6 @@ class TranscriptController extends Controller
             }
             return view('transcript.purchase-transcript', compact('student', 'transcript_fee', 'transcript_id', 'count', 'transcript_ids', 'trans_wiz'));
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',
@@ -152,7 +150,6 @@ class TranscriptController extends Controller
      */
     public function createTranscript(Request $request, $transcript_id, $id)
     {
-        // dd($id);
         $enroll_student = StudentProfile::find($id);
         $enrollment_ids =   getEnrollmetForStudents($id);
         $payment_info = getPaymentInformation($enrollment_ids);
@@ -223,7 +220,6 @@ class TranscriptController extends Controller
                 return view('transcript9to12.ready-for-start', compact('id', 'enroll_student', 'transcript_id'));
             }
         } catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',
@@ -351,7 +347,17 @@ class TranscriptController extends Controller
         $transcript = Transcript::where('id', $k8transcriptData->transcript_id)->first();
 
         if ($transcript->status == 'approved') {
-            dd('To edit this school course please pay $25 since this transcript is approved by WRA.');
+            $transcript_id = $k8transcriptData->transcript_id;
+            $transcript_fee = FeesInfo::getFeeAmount('transcript_edit');
+            $transcriptPayment = TranscriptPayment::updateOrCreate(
+                ['transcript_id' => $transcript_id],
+                [
+                    'amount' => $transcript_fee,
+                    'transcript_id' => $transcript_id,
+                    'status' => 'pending',
+                ]
+            );
+            return view('transcript.edit_approved', compact('transcript_id', 'student_id', 'transcriptPayment'));
         } else {
             $courses = TranscriptCourse::where('k8transcript_id', $transcript_id)
                 ->join('k8transcript', 'k8transcript.id', 'transcript_course.k8transcript_id')
@@ -399,7 +405,6 @@ class TranscriptController extends Controller
 
     public function previewTranscript($student_id, $transcript_id)
     {
-        // dd($transcript_id);
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);
@@ -470,7 +475,7 @@ class TranscriptController extends Controller
             DB::commit();
             return view('transcript.purchase-transcript', compact('student', 'count', 'transcript_ids', 'type', 'trans_wiz'));
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',
@@ -578,6 +583,7 @@ class TranscriptController extends Controller
     public function editApprovedTranscript($transcript_id, $student_id)
     {
         $student = StudentProfile::find($student_id);
+        $student_id = $student->id;
         $transcript_fee = FeesInfo::getFeeAmount('transcript_edit');
         $transcriptPayment = TranscriptPayment::updateOrCreate(
             ['transcript_id' => $transcript_id],
@@ -590,7 +596,5 @@ class TranscriptController extends Controller
         $student = StudentProfile::whereId($student_id)->with(['TranscriptK8', 'transcriptCourses', 'parentProfile'])->first();
 
         return view('transcript.edit_approved', compact('student', 'transcript_fee', 'transcript_id', 'transcriptPayment', 'student_id'));
-
-        // return view('transcript/edit_approved');
     }
 }

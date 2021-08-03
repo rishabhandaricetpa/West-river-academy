@@ -68,7 +68,6 @@ class Transcript9_12Controller extends Controller
         $subjectDeatils = TranscriptCourse9_12::where('transcript9_12_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->first();
-
         $subjects = Subject::whereId($subject_id)->first();
         return view('admin.transcript.edit_subject_grade9_12', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id', 'grade_value'));
     }
@@ -208,7 +207,7 @@ class Transcript9_12Controller extends Controller
                 $storetranscript->save();
             }
 
-            //MOVE CODE FROM HERE TO UPLOAD SIGNED CODE CHANGE THE STATUS TO UPLOAD IN UPLOAD SIGNED
+            //generate the signed transcript and update the column to paid to approved
             $updateTranscriptStatus = Transcript::whereId($transcript_id)
                 ->where('status', 'completed')->first();
             if ($updateTranscriptStatus != null) {
@@ -222,7 +221,6 @@ class Transcript9_12Controller extends Controller
                 $paymentsTranscriptStatus->save();
             }
             DB::commit();
-
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
             DB::rollback();
@@ -230,7 +228,6 @@ class Transcript9_12Controller extends Controller
                 'message' => 'Data Missmatch',
                 'alert-type' => 'error',
             ];
-
             return redirect()->back()->with($notification);
         }
     }
@@ -249,7 +246,7 @@ class Transcript9_12Controller extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Data Missmatch',
