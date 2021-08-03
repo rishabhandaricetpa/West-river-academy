@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\AdminType;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Dashboard;
@@ -27,16 +28,16 @@ class DashboardController extends Controller
     {
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
-        if ($admin_data->name == "Stacey") {
+        if ($admin_data->name == AdminType::SuperAdmin) {
             //$dashboardData = Dashboard::select()->with('student', 'recordTransfer')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
             $dashboardData = TransactionsMethod::select()->where('is_archieved', null)->orderBy('id', 'DESC')->get();
             $isAdmin = true;
-            return view('admin.dashboard-screen', compact('dashboardData', 'isAdmin'));
+            return view('admin.dashboard-admin', compact('dashboardData', 'isAdmin'));
             // return admin dashboard screen
         } else {
             $isAdmin = false;
-            $dashboardData = Dashboard::select()->with('student')->where('assigned_to', $admin_data->name)->orderBy('id', 'DESC')->get();
-            return view('admin.dashboard-screen', compact('dashboardData', 'isAdmin'));
+            $dashboardData = TransactionsMethod::select()->with('student')->where('assigned_to', $admin_data->name)->orderBy('id', 'DESC')->get();
+            return view('admin.dashboard-sub-admin', compact('dashboardData', 'isAdmin'));
         }
     }
     /** Update the dashboard of sub admin which is provided by super admin stacey */
@@ -64,7 +65,7 @@ class DashboardController extends Controller
     public function updateRecordStatus(Request $request)
     {
         $record = TransactionsMethod::where('id', $request->id)->first();
-        $record->status = $request->assigned;
+        $record->task_status = $request->assigned;
         $record->save();
 
         return response()->json(['code' => 200, 'message' => 'Task status updated successfully', 'data' => $record], 200);
@@ -78,10 +79,9 @@ class DashboardController extends Controller
     {
         $adminid = Auth::guard('admin')->user()->id;
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
-        if ($admin_data->name == "Stacey") {
+        if ($admin_data->name == AdminType::SuperAdmin) {
             $dashboardData = TransactionsMethod::select()->with('student')->where('is_archieved', 1)->orderBy('id', 'DESC')->get();
-            $isAdmin = true;
-            return view('admin.archieved', compact('dashboardData', 'isAdmin'));
+            return view('admin.archieved', compact('dashboardData'));
         }
     }
     public function uploadDocument(Request $request)
