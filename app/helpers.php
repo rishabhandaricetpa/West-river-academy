@@ -509,13 +509,13 @@ function getOrders($transction_id)
         $order_payments = '$' . $order_payments;
     }
 
-    $enrollment = count($enrollment_amount) > 0 ? 'Enrollment Payment :' . implode(", ", $enrollment_amount) : '';
-    $cl = count($custom_letter) > 0 ? 'Custom Letter : ' . implode(", ", $custom_letter_amt) : '';
-    $cp = count($custom_payment) > 0 ? 'Custom Payment : ' . implode(", ", $cp) : '';
-    $graduate = count($graduation_amount) > 0 ? 'Graduation Payment : ' . implode(',', $graduation_amount) : '';
-    $notarize = count($notarization_payment) > 0 ? 'Notarization Payment :' . implode(',', $notarization_payment) : '';
-    $transcript = count($transcript_payment) > 0 ? 'Transcript Payment :' . implode(',', $transcript_payment) : '';
-    $orderconsultation = count($order_payment) > 0 ? 'Personal Consultation:' . implode(',', $order_payment) : '';
+    $enrollment = count($enrollment_amount) > 0 ? 'Enrollment Payment: ' . implode(", ", $enrollment_amount) : '';
+    $cl = count($custom_letter) > 0 ? 'Custom Letter: ' . implode(", ", $custom_letter_amt) : '';
+    $cp = count($custom_payment) > 0 ? 'Custom Payment: ' . implode(", ", $cp) : '';
+    $graduate = count($graduation_amount) > 0 ? 'Graduation Payment: ' . implode(',', $graduation_amount) : '';
+    $notarize = count($notarization_payment) > 0 ? 'Notarization Payment: ' . implode(',', $notarization_payment) : '';
+    $transcript = count($transcript_payment) > 0 ? 'Transcript Payment: ' . implode(',', $transcript_payment) : '';
+    $orderconsultation = count($order_payment) > 0 ? 'Personal Consultation: ' . implode(',', $order_payment) : '';
 
     return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
 }
@@ -557,14 +557,7 @@ function getcartval()
     $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
     return $count;
 }
-//convert date formate
-// function getDateVal($value)
-// {
 
-//     $date = $value->format('F j, Y');
-
-//     return $date;
-// }
 function formatDate($date)
 {
     return \Carbon\Carbon::parse($date)->format('M j , Y');
