@@ -15,7 +15,6 @@ class CreateNotesTable extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('representative_group_id')->nullable()->constrained()->references('id')->on('representative_groups')->onDelete('cascade');
             $table->foreignId('parent_profile_id')->nullable()->constrained()->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->foreignId('student_profile_id')->nullable()->constrained()->references('id')->on('student_profiles')->onDelete('cascade');
             $table->foreignId('representative_group_id')->nullable()->constrained()->references('id')->on('representative_groups')->onDelete('cascade');

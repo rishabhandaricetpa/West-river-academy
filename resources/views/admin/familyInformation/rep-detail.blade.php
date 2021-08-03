@@ -29,50 +29,41 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label> Type :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_type" id="edit_rep_type"
-                  value="{{$rep_group->type}}" disabled required>
+                <input type="text" class="form-control is-disabled" name="edit_rep_type" id="edit_rep_type" value="{{$rep_group->type}}" disabled required>
               </div>
               <input type="hidden" value={{$rep_group->id}} id="edit_rep_id">
               <div class="form-group">
                 <input type='hidden' id="edit_parent_id" name="parent_id" value="{{$parent_detail->id}}">
                 <label>Country :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_country" id="edit_rep_country"
-                  value="{{$rep_group->country}}" disabled>
+                <input type="text" class="form-control is-disabled" name="edit_rep_country" id="edit_rep_country" value="{{$rep_group->country}}" disabled>
               </div>
               <div class="form-group">
                 <label>City / Area :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_city" id="edit_rep_city"
-                  value="{{$rep_group->city}}" disabled required>
+                <input type="text" class="form-control is-disabled" name="edit_rep_city" id="edit_rep_city" value="{{$rep_group->city}}" disabled required>
               </div>
               <div class="form-group">
                 <label>Name of Rep :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_name" id="edit_rep_name"
-                  value="{{$rep_group->name}}" disabled required>
+                <input type="text" class="form-control is-disabled" name="edit_rep_name" id="edit_rep_name" value="{{$rep_group->name}}" disabled required>
               </div>
               <div class="form-group">
                 <label>Administrator of group :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_admin" id="edit_rep_admin"
-                  value="{{$rep_group->name}}" disabled required>
+                <input type="text" class="form-control is-disabled" name="edit_rep_admin" id="edit_rep_admin" value="{{$rep_group->name}}" disabled required>
               </div>
               <div class="form-group">
                 <label>Rep Email :</label>
-                <input type="email" class="form-control is-disabled" name="edit_rep_email" id="edit_rep_email"
-                  value="{{$rep_group->email}}" disabled>
+                <input type="email" class="form-control is-disabled" name="edit_rep_email" id="edit_rep_email" value="{{$rep_group->email}}" disabled>
               </div>
               <div class="form-group">
                 <label>Rep Phone :</label>
-                <input type="number" class="form-control is-disabled" name="edit_rep_phone" id="edit_rep_phone"
-                  value="{{$rep_group->rep_phone}}" disabled>
+                <input type="number" class="form-control is-disabled" name="edit_rep_phone" id="edit_rep_phone" value="{{$rep_group->rep_phone}}" disabled>
               </div>
               <div class="form-group">
                 <label>Rep Skype Name :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_skype" id="edit_rep_skype"
-                  value="{{$rep_group->rep_skype}}" disabled>
+                <input type="text" class="form-control is-disabled" name="edit_rep_skype" id="edit_rep_skype" value="{{$rep_group->rep_skype}}" disabled>
               </div>
               <div class="form-group">
                 <label>Terms of Agreement :</label>
-                <input type="text" class="form-control is-disabled" name="terms_of_org" id="terms_of_org"
-                  value="{{$rep_group->terms_of_agreement}}" disabled>
+                <input type="text" class="form-control is-disabled" name="terms_of_org" id="terms_of_org" value="{{$rep_group->terms_of_agreement}}" disabled>
               </div>
             </div>
 
@@ -81,8 +72,8 @@
               <div class="bg-light p-3">
                 <div class="d-flex justify-content-between py-2">
 
-                  <button type="button" class="btn btn-primary ml-2" data-target="#testing1" data-toggle="modal"
-                    data-whatever="@getbootstrap">Add</button>
+                  <button type="button" class="btn btn-primary ml-2" data-target="#testing1" data-toggle="modal" data-whatever="@getbootstrap">Add</button>
+                  <a class="btn btn-primary" href="{{ route('admin.generaterep.report', $rep_id) }}">Rep Report</a>
                 </div>
                 <div class="overflow-auto max-table">
                   <table class="table table-striped table-styling w-100 table-vertical_scroll">
@@ -101,9 +92,7 @@
                         <td>{{ $repGroupAmountDetail->amount }}</td>
                         <td>{{ $repGroupAmountDetail->notes }}
                         </td>
-                        <td><a onclick="return confirm('Are you sure to delete?');"
-                            href="{{ route('admin.delete.amount', $repGroupAmountDetail->id) }}">X</a><i
-                            class="fa fa-cancel"></i></td>
+                        <td><a onclick="return confirm('Are you sure to delete?');" href="{{ route('admin.delete.amount', $repGroupAmountDetail->id) }}">X</a><i class="fa fa-cancel"></i></td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -122,8 +111,7 @@
       </div>
     </div>
     {{-- add payment for rep --}}
-    <div class="modal fade bd-example-modal-lg" id="testing1" tabindex="-1" role="dialog" aria-labelledby="#testing1"
-      aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="testing1" tabindex="-1" role="dialog" aria-labelledby="#testing1" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content mt-5">
           <div class="modal-header">
@@ -158,18 +146,14 @@
 
     <nav class="student-detail_documents pt-4">
       <div class="nav nav-tabs justify-content-start" id="nav-tab" role="tablist">
-        <a class="nav-link active" id="repdetail-family-tab" data-toggle="tab" href="#repdetail-family" role="tab"
-          aria-controls="repdetail-family" aria-selected="true">Family</a>
-        <a class="nav-link" id="repdetail-notes-tab" data-toggle="tab" href="#repdetail-notes" role="tab"
-          aria-controls="repdetail-notes" aria-selected="false">Notes</a>
-        <a class="nav-link" id="repdetail-doc-tab" data-toggle="tab" href="#repdetail-doc" role="tab"
-          aria-controls="repdetail-doc" aria-selected="false">Documents</a>
+        <a class="nav-link active" id="repdetail-family-tab" data-toggle="tab" href="#repdetail-family" role="tab" aria-controls="repdetail-family" aria-selected="true">Family</a>
+        <a class="nav-link" id="repdetail-notes-tab" data-toggle="tab" href="#repdetail-notes" role="tab" aria-controls="repdetail-notes" aria-selected="false">Notes</a>
+        <a class="nav-link" id="repdetail-doc-tab" data-toggle="tab" href="#repdetail-doc" role="tab" aria-controls="repdetail-doc" aria-selected="false">Documents</a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
       {{-- FAMILY --}}
-      <div class="tab-pane fade show active" id="repdetail-family" role="tabpanel"
-        aria-labelledby="repdetail-family-tab">
+      <div class="tab-pane fade show active" id="repdetail-family" role="tabpanel" aria-labelledby="repdetail-family-tab">
         {{-- rerepdetail-family_add --}}
         <section class="" id="">
           <div class="row">
@@ -181,10 +165,7 @@
                       <th scope="col">Date</th>
                       <th scope="col">Family Name</th>
                       <th scope="col">Amount</th>
-                      <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
-                          data-toggle="modal" data-target="#rerepdetail-family_addModal"
-                          data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png"
-                            alt=""></button></th>
+                      <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3" data-toggle="modal" data-target="#rerepdetail-family_addModal" data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -201,7 +182,12 @@
                   <tfoot class="tfoot-light">
                     <tr>
                       <td colspan="5" class="text-center">Currently
-                        Due:<span>${{ $calculatedAmount }}</span>
+                        Due:
+                        @if($calculatedAmount >0)
+                        <span>{{ $calculatedAmount }}</span>
+                        @else
+                        <span>{{'-$'. abs($calculatedAmount) }}</span>
+                        @endif
                       </td>
                     </tr>
                   </tfoot>
@@ -211,8 +197,7 @@
           </div>
         </section>
         {{-- rerepdetail-family_addModal --}}
-        <div class="modal fade bd-example-modal-lg" id="rerepdetail-family_addModal" tabindex="-1" role="dialog"
-          aria-labelledby="#rerepdetail-family_addModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="rerepdetail-family_addModal" tabindex="-1" role="dialog" aria-labelledby="#rerepdetail-family_addModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content mt-5">
               <div class="modal-header">
@@ -252,9 +237,7 @@
                     <tr>
                       <th scope="col">Date</th>
                       <th scope="col">Notes</th>
-                      <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
-                          data-toggle="modal" data-target="#repdetail-notes_addModal" data-whatever="@getbootstrap"><img
-                            src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+                      <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3" data-toggle="modal" data-target="#repdetail-notes_addModal" data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -271,8 +254,7 @@
             </div>
           </div>
         </section>
-        <div class="modal fade bd-example-modal-lg" id="repdetail-notes_addModal" tabindex="-1" role="dialog"
-          aria-labelledby="repdetail-notes_addModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="repdetail-notes_addModal" tabindex="-1" role="dialog" aria-labelledby="repdetail-notes_addModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content mt-5">
               <div class="modal-header">
@@ -289,8 +271,7 @@
                   </div>
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Notes:</label>
-                    <textarea class="form-control" id="rep_message_val" required
-                      onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                    <textarea class="form-control" id="rep_message_val" required onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -302,44 +283,41 @@
           </div>
         </div>
       </div>
-            {{-- DOCUMENTS --}}
-            <div class="tab-pane fade" id="repdetail-doc" role="tabpanel" aria-labelledby="repdetail-doc-tab">
-              <section id="">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="overflow-auto max-table">
-                      <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                        <thead class="thead-light">
-                          <tr>
-                            <th scope="col">Filename</th>
-                            <th scope="col">Notes</th>
-                            <th scope="col">Preview Document</th>
-                            <th scope="col"><button type="button" class="btn btn-modal ml-3" data-toggle="modal"
-                                data-target="#repdetail-docModal" data-whatever="@getbootstrap"><img
-                                  src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
-                          </tr>
-                        </thead>
-                        <tbody>
+      {{-- DOCUMENTS --}}
+      <div class="tab-pane fade" id="repdetail-doc" role="tabpanel" aria-labelledby="repdetail-doc-tab">
+        <section id="">
+          <div class="row">
+            <div class="col-12">
+              <div class="overflow-auto max-table">
+                <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Filename</th>
+                      <th scope="col">Notes</th>
+                      <th scope="col">Preview Document</th>
+                      <th scope="col"><button type="button" class="btn btn-modal ml-3" data-toggle="modal" data-target="#repdetail-docModal" data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                          @foreach ($repGroupDocuments as $repGroupDocument)
-                          <tr>
-                            <td>{{ $repGroupDocument->original_filename }}</td>
-                            <td>{{ $repGroupDocument->document_type }}</td>
-                            <td> <a href="{{ $repGroupDocument->rep_document }}" download target="_blank">Click here
-                                to download and
-                                preview</a></td>
-                            <td></td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+                    @foreach ($repGroupDocuments as $repGroupDocument)
+                    <tr>
+                      <td>{{ $repGroupDocument->original_filename }}</td>
+                      <td>{{ $repGroupDocument->document_type }}</td>
+                      <td> <a href="{{ $repGroupDocument->rep_document }}" download target="_blank">Click here
+                          to download and
+                          preview</a></td>
+                      <td></td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
+          </div>
+      </div>
   </section>
-  <div class="modal fade bd-example-modal-lg" id="repdetail-docModal" tabindex="-1" role="dialog"
-    aria-labelledby="repdetail-docModalLabel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="repdetail-docModal" tabindex="-1" role="dialog" aria-labelledby="repdetail-docModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content mt-5">
         <div class="modal-header">
@@ -357,8 +335,7 @@
               <div class="form-group col-md-6">
                 <label for="message-text" class="col-form-label">
                   Notes</label>
-                <textarea id="rep_doc_note" class="form-control choose-btn"
-                  onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
+                <textarea id="rep_doc_note" class="form-control choose-btn" onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="message-text" class="col-form-label">Upload Document</label>
