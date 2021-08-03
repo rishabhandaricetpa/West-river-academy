@@ -19,7 +19,10 @@ class TransactionsMethod extends Model
     {
         return $this->belongsTo('App\Models\ParentProfile');
     }
-
+    public function student()
+    {
+        return $this->belongsTo('App\Models\StudentProfile', 'student_profile_id', 'id');
+    }
     public static function storeTransactionData($parent_profile_id, $amount, $coupon_code, $coupon_amount, $type, $cartItems)
     {
         $items = collect($cartItems)->pluck('item_type')->toArray();
