@@ -25,11 +25,11 @@
 
                 <tbody>
                     @foreach ($rep_families as $rep_familie)
-                        <tr>
-                            <td>{{ $rep_familie->created_at }}</td>
-                            <td>{{ $rep_familie->p1_first_name }}</td>
-                            <td>{{ $rep_familie->amount }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $rep_familie->created_at }}</td>
+                        <td>{{ $rep_familie->p1_first_name }}</td>
+                        <td>{{ $rep_familie->amount }}</td>
+                    </tr>
                     @endforeach
 
                 </tbody>
@@ -44,8 +44,7 @@
             </table>
 
 
-            <table class="table table-striped" style="border:1px solid black; margin-bottom:20px;" cellspacing="0"
-                width="100%">
+            <table class="table table-striped" style="border:1px solid black; margin-bottom:20px;" cellspacing="0" width="100%">
                 <thead style="border-bottom: 1px solid grey">
                     <tr>
                         <th style="text-align: left">Notes</th>
@@ -56,12 +55,12 @@
 
                 <tbody>
                     @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
-                        <tr>
-                            <td>{{ $repGroupAmountDetail->notes }}</td>
-                            <td></td>
-                            <td>{{ $repGroupAmountDetail->amount }}</td>
+                    <tr>
+                        <td>{{ $repGroupAmountDetail->notes }}</td>
+                        <td></td>
+                        <td>{{ $repGroupAmountDetail->amount }}</td>
 
-                        </tr>
+                    </tr>
                     @endforeach
                 </tbody>
                 <tfoot style="background:grey;padding:5px;">
@@ -83,7 +82,11 @@
                             <p style="font-size: 20px;color:#004C99">Balance of Amount Earned minus Amount Paid:</p>
                         </td>
                         <td>
+                            @if($calculatedAmount > 0)
                             <p style="font-size: 20px;color:#004C99">${{ $calculatedAmount }}</p>
+                            @else
+                            <p style="font-size: 20px;color:#004C99">{{'-$'. abs($calculatedAmount) }}</p>
+                            @endif
                         </td>
                     </tr>
                 </tbody>
