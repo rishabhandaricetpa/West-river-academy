@@ -11,6 +11,7 @@
 
     <section class="content container-fluid  my-1">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <h1 style="text-align:center;">West River Academy Representative Status Report</h1>
         <div class="rep-report bg-white py-3 px-2 overflow-auto">
             <h3>Name of Representative: {{ $representative }}</h3>
             <h3>Family Referred:</h3>
@@ -26,7 +27,7 @@
                 <tbody>
                     @foreach ($rep_families as $rep_familie)
                     <tr>
-                        <td>{{ $rep_familie->created_at }}</td>
+                        <td>{{ formatDate($rep_familie->created_at) }}</td>
                         <td>{{ $rep_familie->p1_first_name }}</td>
                         <td>{{ $rep_familie->amount }}</td>
                     </tr>
@@ -37,7 +38,13 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td class="text-right">Total:{{ $calculatedAmount }}</td>
+
+                        @if($amountPaid >0)
+                        <td class="text-right">Total:{{ $totalFamilyAmount }}</td>
+                        @else
+
+                        <td class="text-right">Total:{{'-$'. abs($totalFamilyAmount) }} </td>
+                        @endif
                     </tr>
 
                 </tfoot>
@@ -67,7 +74,13 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td class="text-right">Total:{{ $amountPaid }}</td>
+                        @if($amountPaid >0)
+                        <td class="text-right">Total: ${{ $amountPaid }}</td>
+                        @else
+
+                        <td class="text-right">Total:{{'-$'. abs($amountPaid) }} </td>
+                        @endif
+
 
                     </tr>
 

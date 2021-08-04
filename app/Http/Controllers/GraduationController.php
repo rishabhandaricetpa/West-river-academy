@@ -77,6 +77,7 @@ class GraduationController extends Controller
             GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
             $studentName = StudentProfile::whereId($inputs['student_id'])->first();
             Dashboard::create([
+                'parent_profile_id' => ParentProfile::getParentId(),
                 'student_profile_id' => $request->student_id,
                 'linked_to' => $graduation->id,
                 'related_to' => 'graduation_record_received',

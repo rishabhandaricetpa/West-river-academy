@@ -274,16 +274,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
-    Route::get('rep-list/', function () {
-        return view('admin/familyInformation/rep-list');
-    });
-    Route::get('rep-report/', function () {
-        return view('admin/familyInformation/rep-report');
-    });
 });
 
-Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
-Route::post('rep-edit', 'RepresentativeGroupController@update')->name('update.representative');
+//Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
 Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], function () {
     Route::post('groups', 'RepresentativeGroupController@create')->name('add.representative');
     Route::get('report/{rep_id}', 'RepresentativeGroupController@repReport')->name('generaterep.report');
@@ -292,4 +285,6 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], funct
     Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
     Route::get('details/{rep_id}/{parent_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
     Route::get('delete/{repamount_id}', 'RepresentativeGroupController@delete')->name('delete.amount');
+    Route::get('view-representatives', 'RepresentativeGroupController@index')->name('replist');
+    Route::post('edit', 'RepresentativeGroupController@update')->name('update.representative');
 });

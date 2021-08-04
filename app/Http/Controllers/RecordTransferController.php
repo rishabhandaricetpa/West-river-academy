@@ -50,6 +50,7 @@ class RecordTransferController extends Controller
             $recordTransfer->last_grade = $request->get('last_grade');
             $recordTransfer->save();
             Dashboard::create([
+                'parent_profile_id' => $parent_id,
                 'student_profile_id' => $student_id,
                 'linked_to' => $recordTransfer->id,
                 'related_to' => 'record_transfer',

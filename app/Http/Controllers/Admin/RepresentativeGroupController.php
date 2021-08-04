@@ -18,6 +18,11 @@ use Str;
 
 class RepresentativeGroupController extends Controller
 {
+    public function index()
+    {
+        $all_rep = RepresentativeGroup::all();
+        return view('admin/familyInformation/rep-list', compact('all_rep'));
+    }
     public function create(Request $request)
     {
         try {
@@ -115,6 +120,7 @@ class RepresentativeGroupController extends Controller
         $representative = RepresentativeGroup::where('id', $rep_id)->first();
         $family_count = $rep_families->count();
         $repAmount = FeeStructureType::RepGroupAmount;
+        $totalFamilyAmount = $family_count * $repAmount;
         $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
         $amountPaid = collect($repGroupAmountDetails)->pluck('amount')->sum();
         $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount);
@@ -124,7 +130,8 @@ class RepresentativeGroupController extends Controller
             'repGroupAmountDetails' => $repGroupAmountDetails,
             'repAmount' => $repAmount,
             'amountPaid' => $amountPaid,
-            'representative' => $representative->full_name
+            'representative' => $representative->full_name,
+            'totalFamilyAmount' => $totalFamilyAmount
         ];
         $pdf = PDF::loadView('admin.familyInformation.rep-report', $data);
         return $pdf->download('RepReport');

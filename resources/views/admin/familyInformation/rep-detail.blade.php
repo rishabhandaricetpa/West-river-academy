@@ -89,7 +89,7 @@
                       @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
                       <tr>
                         <td>{{ formatDate($repGroupAmountDetail->created_at) }}</td>
-                        <td>{{ $repGroupAmountDetail->amount }}</td>
+                        <td>${{ $repGroupAmountDetail->amount }}</td>
                         <td>{{ $repGroupAmountDetail->notes }}
                         </td>
                         <td><a onclick="return confirm('Are you sure to delete?');" href="{{ route('admin.delete.amount', $repGroupAmountDetail->id) }}">X</a><i class="fa fa-cancel"></i></td>
@@ -102,6 +102,7 @@
             </div>
             <div class="col-12 pt-3 d-md-flex">
               <button type="button" class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2">Edit</button>
+              <button type="button" class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2" onclick="goBack()">Go Back To Parent</button>
               <button type="submit" class="btn btn-default btn-primary form-enable  btn-save js-save mr-2">Save</button>
               <button type="button" class="btn btn-default btn-primary  btn-save js-cancel">Cancel</button>
             </div>
@@ -173,7 +174,7 @@
                       @foreach ($rep_families as $rep_family)
                       <td>{{ formatDate($rep_family->created_at) }}</td>
                       <td>{{ $rep_family->p1_first_name }}</td>
-                      <td>{{ $repAmount }}</td>
+                      <td>${{ $repAmount }}</td>
                       <td></td>
                     </tr>
                     @endforeach
@@ -184,7 +185,7 @@
                       <td colspan="5" class="text-center">Currently
                         Due:
                         @if($calculatedAmount >0)
-                        <span>{{ $calculatedAmount }}</span>
+                        <span>${{ $calculatedAmount }}</span>
                         @else
                         <span>{{'-$'. abs($calculatedAmount) }}</span>
                         @endif

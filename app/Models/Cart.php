@@ -623,6 +623,7 @@ class Cart extends Model
                         // $clearpendingtranscrit = Transcript::where('status', 'pending')->delete();
 
                         Dashboard::create([
+                            'parent_profile_id' => ParentProfile::getParentId(),
                             'linked_to' => $ts_payment->id,
                             'related_to' => 'transcript_ordered',
                             'is_archieved' => 0,
@@ -645,6 +646,7 @@ class Cart extends Model
                         $custom_payment->save();
                     }
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' => $cart->item_id,
                         'related_to' => 'custom_record_received',
                         'is_archieved' => 0,
@@ -669,6 +671,7 @@ class Cart extends Model
                     $transcript->status = 'canEdit';
                     $transcript->save();
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'transcript_edit_record_received',
                         'is_archieved' => 0,
@@ -690,6 +693,7 @@ class Cart extends Model
                         $postage_payment->save();
                     }
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'postage_record_received',
                         'is_archieved' => 0,
@@ -713,6 +717,7 @@ class Cart extends Model
                     $notarization->status = $status;
                     $notarization->save();
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' =>  $cart->item_id,
                         'is_archieved' => 0,
                         'related_to' => 'appostile_record_received',
@@ -737,6 +742,7 @@ class Cart extends Model
                     $apostille->status = $status;
                     $apostille->save();
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' =>  $cart->item_id,
                         'is_archieved' => 0,
                         'related_to' => 'appostile_record_received',
@@ -758,6 +764,7 @@ class Cart extends Model
                         $customletter_payment->save();
                     }
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' =>  $cart->item_id,
                         'related_to' => 'custom_letter_record_received',
                         'is_archieved' => 0,
@@ -778,6 +785,7 @@ class Cart extends Model
                         $consultation_payment->save();
                     }
                     Dashboard::create([
+                        'parent_profile_id' => ParentProfile::getParentId(),
                         'linked_to' => $cart->item_id,
                         'related_to' => 'orderconsultation_record_received',
                         'notes' =>  $parentName->p1_first_name,
