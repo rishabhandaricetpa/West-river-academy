@@ -26,7 +26,7 @@
                                     onchange="getApostilleAmount(event,'{{ $appostile_fee }}')">
                                     <option value="">Select Quantity</option>
                                     <?php 
-                                    for($i=1; $i<=50; $i++){
+                                    for($i=1; $i<=10; $i++){
                                         echo'<option value="'.$i.'">'.$i.'</option>'; 
                                     }   
                                     ?>      
@@ -50,7 +50,7 @@
                                 onchange="getApostillforconfirmAmount(event,'{{ $appostile_fee }}')">
                                 <option value="">Select Quantity</option>
                                 <?php 
-                                for($i=1; $i<=50; $i++){
+                                for($i=1; $i<=10; $i++){
                                     echo'<option value="'.$i.'">'.$i.'</option>'; 
                                 }   
                                 ?>      
@@ -72,7 +72,7 @@
                                 onchange="getApostilleAmountforCustom(event,'{{ $appostile_fee }}')">
                                 <option value="">Select Quantity</option>
                                 <?php 
-                                for($i=1; $i<=50; $i++){
+                                for($i=1; $i<=10; $i++){
                                     echo'<option value="'.$i.'">'.$i.'</option>'; 
                                 }   
                                 ?>      
