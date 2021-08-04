@@ -502,6 +502,13 @@ function getOrders($transction_id)
     foreach ($transcript_payment as &$transcript_payments) {
         $transcript_payments = '$' . $transcript_payments;
     }
+    //order_postages
+
+    $postage = OrderPostage::whereIn('transcation_id', [$transction_id])->get();
+    $postage_payments = collect($postage)->pluck('amount')->toArray();
+    foreach ($postage_payments as &$postage_payment) {
+        $postage_payment = '$' . $postage_payment;
+    }
     // checking for order personal consultation
     $order = OrderPersonalConsultation::whereIn('transcation_id', [$transction_id])->get();
     $order_payment = collect($order)->pluck('amount')->toArray();
@@ -516,8 +523,8 @@ function getOrders($transction_id)
     $notarize = count($notarization_payment) > 0 ? 'Notarization Payment: ' . implode(',', $notarization_payment) : '';
     $transcript = count($transcript_payment) > 0 ? 'Transcript Payment: ' . implode(',', $transcript_payment) : '';
     $orderconsultation = count($order_payment) > 0 ? 'Personal Consultation: ' . implode(',', $order_payment) : '';
-
-    return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
+    $orderpostage = count($postage_payments) > 0 ? 'Postage: ' . implode(',', $postage_payments) : '';
+    return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation . '  ' . $orderpostage;
 }
 
 

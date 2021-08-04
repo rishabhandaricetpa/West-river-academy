@@ -24,7 +24,7 @@
                                     <select class="form-control col-3" name="transcript_quan" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')">
                                         <option value="">Select Quantity</option>
                                         <?php 
-                                        for($i=1; $i<=50; $i++){
+                                        for($i=1; $i<=10; $i++){
                                             echo'<option value="'.$i.'">'.$i.'</option>'; 
                                         }   
                                         ?>    
@@ -46,7 +46,7 @@
                                     <select class="form-control col-3"  name="confirm_quan" onchange="getNotarizationAmountForConfirm(event,'{{$notarization_fee}}')">
                                         <option value="">Select Quantity</option>
                                         <?php 
-                                        for($i=1; $i<=50; $i++){
+                                        for($i=1; $i<=10; $i++){
                                             echo'<option value="'.$i.'">'.$i.'</option>'; 
                                         }   
                                         ?>    
@@ -68,7 +68,7 @@
 <select class="form-control col-3" name="custom_quan" onchange="getNotarizationAmountForCustom(event,'{{$notarization_fee}}')">
     <option value="">Select Quantity</option>
     <?php 
-    for($i=1; $i<=50; $i++){
+    for($i=1; $i<=10; $i++){
         echo'<option value="'.$i.'">'.$i.'</option>'; 
     }   
     ?>    
