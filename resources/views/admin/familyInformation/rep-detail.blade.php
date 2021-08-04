@@ -89,7 +89,11 @@
                       @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
                       <tr>
                         <td>{{ formatDate($repGroupAmountDetail->created_at) }}</td>
+                        @if($repGroupAmountDetail->amount >0)
                         <td>${{ $repGroupAmountDetail->amount }}</td>
+                        @else
+                        <td>{{'-$'. abs($repGroupAmountDetail->amount) }}</td>
+                        @endif
                         <td>{{ $repGroupAmountDetail->notes }}
                         </td>
                         <td><a onclick="return confirm('Are you sure to delete?');" href="{{ route('admin.delete.amount', $repGroupAmountDetail->id) }}">X</a><i class="fa fa-cancel"></i></td>
@@ -126,7 +130,7 @@
 
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Amount:</label>
-                <input class="form-control" type="text" value="" id="rep_amount">
+                <input class="form-control" type="number" value="" id="rep_amount" required>
               </div>
 
               <div class="form-group">
