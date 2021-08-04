@@ -16,6 +16,7 @@ use App\Models\UploadDocuments;
 use App\Models\CustomLetterPayment;
 use App\Models\ConfirmationLetter;
 use App\Models\CustomPayment;
+use App\Models\Dashboard;
 use App\Models\OrderPostage;
 use App\Models\FeesInfo;
 use App\Models\EnrollmentPayment;
@@ -187,7 +188,8 @@ class ParentController extends Controller
         $parent_rep_group = ParentProfile::where('id', $id)->select('representative_group_id')->first();
         $rep_group = RepresentativeGroup::where('id', $parent_rep_group->representative_group_id)->first();
         $all_rep_groups = RepresentativeGroup::all();
-        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups'));
+        $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
+        return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups', 'detail_order_lists'));
     }
 
     /**
