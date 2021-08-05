@@ -778,8 +778,8 @@
                                     @endif
                                     <td class="d-flex align-items-center">
                                         <a class="mr-1" href=" {{ route('admin.edit.payment.status', $payment->id) }}"><i class=" fas fa-edit" onclick="return myFunction();"></i></a>
-                                        <a class="mr-1" href="#"><img src="/images/document (1).png" alt=""></a>
-                                        <a class="mr-1" href="#"><img src="/images/document.png" alt=""></a>
+                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'signed']) }}"><img src="/images/document.png" alt=""></a>
+                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'unsigned']) }}"><img src="/images/document (1).png" alt=""></a>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -939,63 +939,51 @@
                     </form>
                 </div>
             </div>
-
-            {{-- order --}}
-            <section class="orders-detail  pt-10r" id="orders">
-                @include('admin.familyInformation.order-details')
-            </section>
-            {{-- Enrollments --}}
-            <section class="enrollments  pt-10r" id="enrollments">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="pr-3">Enrollments</h2>
-                        <div class="overflow-auto max-table">
-                            <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Student Name</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
-                                        <th scope="col">Grade</th>
-                                        <th scope="col">Enrolled</th>
-                                        <th scope="col">Details</th>
-                                        <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3"
-                                                data-toggle="modal" data-target="#enrollmentsModal"
-                                                data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
-                                                    src="/images.add.png" alt=""></button></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- {{dd($payment_info)}} --}}
-                                    @foreach ($payment_info as $payment)
-                                        <tr>
-                                            <td>{{ Carbon\Carbon::parse($payment->created_at)->format('M j, Y') }}
-                                            </td>
-                                            <td>{{ getStudentData($payment->student_profile_id) }}</td>
-                                            <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
-                                            </td>
-                                            <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
-                                            </td>
-                                            <td>{{ $payment->grade_level }}</td>
-                                            @if ($payment->status === 'paid')
-                                                <td>Yes</td>
-                                            @elseif($payment->status ==='pending')
-                                                <td>No</td>
-                                            @endif
-                                            <td class="d-flex align-items-center">
-                                                <a class="mr-1"
-                                                    href=" {{ route('admin.edit.payment.status', $payment->id) }}"><i
-                                                        class=" fas fa-edit" onclick="return myFunction();"></i></a>
-                                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'signed']) }}"><img src="/images/document.png" alt=""></a>
-                                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'unsigned']) }}"><img src="/images/document (1).png" alt=""></a>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+        </div>
+        {{-- Records --}}
+        <section class="records  pt-10r" id="records">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="pr-3">Records</h2>
+                    <div class="overflow-auto max-table">
+                        <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">School Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-right"><button type="button" class="btn btn-modal ml-3" data-toggle="modal" data-target="#recordsModal" data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($recordTransfer as $records)
+                                <tr>
+                                    <td>{{ $records['student']['fullname'] }}</td>
+                                    <td>{{ $records->school_name }}</td>
+                                    <td><a class="transform-none" href="mailto:${{ $records->email }}">
+                                            {{ $records->email }}</a></td>
+                                    <td>{{ $records->phone_number }}</td>
+                                    @if (empty($records->request_status))
+                                    <td>In Review
+                                        @elseif($records->request_status=='Record Received')
+                                    <td>Records Received
+                                        @endif
+                                        @if ($records->resendCount)
+                                        Resend Requested:{{ $records->resendCount }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.student.schoolRecord', [$records->student_profile_id, $records->id]) }}">
+                                            <i class=" fas fa-arrow-alt-circle-right"></i></a>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
