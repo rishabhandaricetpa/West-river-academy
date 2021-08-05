@@ -417,6 +417,7 @@ class Cart extends Model
     {
         return self::getEnrollQuery($parent_profile_id)->select(
             'student_profiles.first_name',
+            'student_profiles.last_name',
             'student_profiles.student_Id',
             'student_profiles.id as student_db_id',
             'enrollment_periods.type',
@@ -436,6 +437,7 @@ class Cart extends Model
     {
         return self::getGraduationQuery($parent_profile_id)->select(
             'student_profiles.first_name',
+            'student_profiles.last_name',
             'student_profiles.student_Id',
             'student_profiles.id as student_db_id',
             'cart.id',
@@ -453,6 +455,7 @@ class Cart extends Model
         return self::getTranscriptQuery($parent_profile_id)->select(
             'student_profiles.first_name',
             'student_profiles.last_name',
+            'student_profiles.last_name',
             'student_profiles.student_Id',
             'student_profiles.id as student_db_id',
             'cart.id',
@@ -468,6 +471,7 @@ class Cart extends Model
     {
         return self::getCustomQuery($parent_profile_id)->select(
             'parent_profiles.p1_first_name',
+            'parent_profiles.p1_last_name',
             'parent_profiles.id as parent_db_id',
             'cart.id',
             'custom_payments.amount',
@@ -482,6 +486,7 @@ class Cart extends Model
     {
         return self::getEditTranscriptQuery($parent_profile_id)->select(
             'student_profiles.first_name',
+            'student_profiles.last_name',
             'student_profiles.student_Id',
             'student_profiles.id as student_db_id',
             'cart.id',
@@ -497,6 +502,7 @@ class Cart extends Model
     {
         return self::getPostageQuery($parent_profile_id)->select(
             'parent_profiles.p1_first_name',
+            'parent_profiles.p1_last_name',
             'parent_profiles.id as parent_db_id',
             'cart.id',
             'order_postages.amount',
@@ -511,6 +517,7 @@ class Cart extends Model
     {
         return Self::getNotarizationQuery($parent_profile_id)->select(
             'parent_profiles.p1_first_name',
+            'parent_profiles.p1_last_name',
             'parent_profiles.id as parent_db_id',
             'cart.id',
             'notarization_payments.amount',
@@ -524,6 +531,7 @@ class Cart extends Model
     {
         return Self::getApostilleQuery($parent_profile_id)->select(
             'parent_profiles.p1_first_name',
+            'parent_profiles.p1_last_name',
             'parent_profiles.id as parent_db_id',
             'cart.id',
             'notarization_payments.amount',
@@ -537,6 +545,7 @@ class Cart extends Model
     {
         return self::getCustomLetterQuery($parent_profile_id)->select(
             'parent_profiles.p1_first_name',
+            'parent_profiles.p1_last_name',
             'parent_profiles.id as parent_db_id',
             'cart.id',
             'custom_letter_payments.amount',
@@ -551,6 +560,7 @@ class Cart extends Model
     {
         return self::getConsultationQuery($parent_profile_id)->select(
             'parent_profiles.p1_first_name',
+            'parent_profiles.p1_last_name',
             'parent_profiles.id as parent_db_id',
             'cart.id',
             'order_personal_consultations.amount',

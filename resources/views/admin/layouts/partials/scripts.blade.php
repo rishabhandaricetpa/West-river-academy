@@ -2474,6 +2474,8 @@ $("#add-rep-notes").on("submit", function(event) {
         });
     }
 
+    
+
     function getApostilleAmount() {
         var quantity = $('#apostille_quantity').val();
         var amount = 75;
@@ -2490,6 +2492,19 @@ $("#add-rep-notes").on("submit", function(event) {
 
     }
 
+    function getConsulatationAmount() {
+            console.log('hi')
+            var hours = $('#consul_quantity').val();
+            var total = hours * 80;
+            $("#consul_amount").val(total);
+        }
+        function getTotalTranscript() {
+            var amount = $('#amount').val();
+            var quantity = $('#quantity').val();
+            var total = amount * quantity;
+            $("#total_val").val(total);
+        }
+
     function getTotal() {
         var type = $('#order_detail_val').val();
         if (type == 'order-detail_OrderPostage') {
@@ -2500,19 +2515,9 @@ $("#add-rep-notes").on("submit", function(event) {
         }
 
 
-        function getTotalTranscript() {
-            var amount = $('#amount').val();
-            var quantity = $('#quantity').val();
-            var total = amount * quantity;
-            $("#total_val").val(total);
-        }
+       
 
-        function getConsulatationAmount() {
-            var hours = $('#consul_quantity').val();
-            var total = hours * 80;
-            $("#consul_amount").val(total);
-        }
-
+        
     }
 
 </script>

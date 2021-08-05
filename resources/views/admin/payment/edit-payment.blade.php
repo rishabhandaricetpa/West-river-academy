@@ -10,7 +10,11 @@
                     <!-- /.card-header -->
                     <div class="card">
                         <div class="card-header">
+                            <h3 class="pr-3"> Payment Status of Parent :<a
+                                href="{{ route('admin.parent.edit',  $student->parent_profile_id) }}">View Parent</a>
+                            </h3>
                             <h3 class="card-title"> Enrollment Status of {{ $student->fullname }} </h3>
+
                             <a href="{{ route('admin.view.students.parent', $student->parent_profile_id) }}"
                                 class="btn btn-primary float-left">View Parent</a>
                             <a onclick="goBack()" class="btn btn-primary float-right">Back</a>

@@ -474,27 +474,26 @@ class ParentController extends Controller
                         $transction->status = $status;
                         $transction->save();
                     }
-                    for ($x = 1; $x <= $request->get('postage_quantity'); $x++) {
-                        $postage_type = "postage";
-                        $postage = new OrderPostage();
-                        $postage->parent_profile_id   = $request->get('parent_value');
-                        $postage->amount = $charge->postage_charges;
-                        $postage->paying_for = $request->get('paying_for');
-                        $postage->type_of_payment = 'Postage';
-                        $postage->transcation_id   = $request->get('postage_transaction_id');
-                        $postage->payment_mode = $request->get('postage_payment_mode');
-                        $postage->status = $status;
-                        $postage->save();
-                        if ($status == 'pending') {
-                            if (!Cart::where('item_id', $request->get('parent_value'))->where('item_type', $postage_type)->exists()) {
-                                Cart::create([
-                                    'item_type' => $postage_type,
-                                    'item_id' =>  $request->get('parent_value'),
-                                    'parent_profile_id' => $request->get('parent_value'),
-                                ]);
-                            }
+                    $postage_type = "postage";
+                    $postage = new OrderPostage();
+                    $postage->parent_profile_id   = $request->get('parent_value');
+                    $postage->amount =  $request->get('postage_total');
+                    $postage->paying_for = $request->get('paying_for');
+                    $postage->type_of_payment = 'Postage';
+                    $postage->transcation_id   = $request->get('postage_transaction_id');
+                    $postage->payment_mode = $request->get('postage_payment_mode');
+                    $postage->status = $status;
+                    $postage->save();
+                    if ($status == 'pending') {
+                        if (!Cart::where('item_id', $request->get('parent_value'))->where('item_type', $postage_type)->exists()) {
+                            Cart::create([
+                                'item_type' => $postage_type,
+                                'item_id' =>  $request->get('parent_value'),
+                                'parent_profile_id' => $request->get('parent_value'),
+                            ]);
                         }
                     }
+
                     break;
                 case 'order-detail_Notarization':
                     $total_notar = $request->get('notar_amount') + $request->get('shipping_amount');
