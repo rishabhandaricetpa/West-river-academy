@@ -43,7 +43,7 @@
                     <div class="col-md-9  px-0 mb-4">
                         <div class="row">
                             <div class="col-md-4">
-                                <p class="font-weight-bold">Confirmation(s) of Enrollment Letter Quantity</p>
+                                <p class="font-weight-bold">Confirmation of Enrollment Letter(s) Quantity</p>
                             </div>
                             <div class="col-md-8 d-flex">
                                 <select class="form-control col-5" name="confirm_quan"
