@@ -518,6 +518,7 @@ class TranscriptController extends Controller
         if ($transcriptData != null) {
             $transcriptData->status = 'completed';
             Dashboard::create([
+                'parent_profile_id' =>  ParentProfile::getParentId(),
                 'student_profile_id' => $student_id,
                 'linked_to' => $transcript_payment->id,
                 'is_archieved' => 0,

@@ -266,6 +266,7 @@ class StudentController extends Controller
                 }
             }
             Dashboard::create([
+                'parent_profile_id' =>  $parentProfileData->id,
                 'student_profile_id' => $student->id,
                 'linked_to' => $student->Name,
                 'is_archieved' => 0,
