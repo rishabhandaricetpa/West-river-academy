@@ -799,7 +799,7 @@
                                         onchange="getConsulatationAmount();">
                                         <option value="">Select</option>
                                         <?php 
-                                        for($i=1; $i<=4; $i++){
+                                        for($i=1; $i<=10; $i++){
                                             echo'<option value="'.$i.'">'.$i.'</option>'; 
                                         }   
                                         ?>  
@@ -809,7 +809,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Amount</label>
-                                    <input type="text" id="consul_amount" class="form-control" disabled>
+                                    <input type="text" id="consul_amount" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">

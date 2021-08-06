@@ -7,9 +7,9 @@
             <h1>Apostille And Notarization Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3>Payment Status of Parent : {{ $notarizationData->ParentProfile->p1_first_name }} {{ $notarizationData->ParentProfile->p1_last_name }}
-                    <h3>
-
+                        <h3 class="pr-3"> Payment Status of Parent :<a
+                            href="{{ route('admin.parent.edit', $notarizationData->parent_profile_id) }}">{{ $notarizationData->ParentProfile->p1_first_name }} {{ $notarizationData->ParentProfile->p1_last_name }}</a>
+                        </h3>
                         <form method="post" class="row"
                             action="{{ route('admin.update.notarization', $notarizationData->id) }}">
 

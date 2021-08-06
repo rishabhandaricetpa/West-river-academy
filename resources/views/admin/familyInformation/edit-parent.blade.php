@@ -544,14 +544,21 @@
                             <tbody>
                                 @foreach ($allstudent as $student)
                                 <tr>
-                                    <td><a href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a></br>
-                                    </td>
-                                    <td>{{ $student->gender }}</td>
-                                    <td>{{ $student->d_o_b->format('M j, Y') }}</td>
-                                    <td>Yes</td>
-                                    <td>{{ $student->email }}</td>
-                                    <td><a href="{{ route('admin.delete.student', $student->id) }}" onclick="return confirm('Are you sure you want to delete this family?');"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
+                                    @if ($rep_group)
+                                        <td><a
+                                                href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
+                                        </td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                    @if ($rep_group)
+                                        <td><a class="transform-none"
+                                            href="mailto:${{ $rep_group->email }}">
+                                            {{ $rep_group->email }}</a></td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                    <td></td>
                                     <td></td>
                                 </tr>
                                 @endforeach
@@ -772,8 +779,8 @@
                                     @endif
                                     <td class="d-flex align-items-center">
                                         <a class="mr-1" href=" {{ route('admin.edit.payment.status', $payment->id) }}"><i class=" fas fa-edit" onclick="return myFunction();"></i></a>
-                                        <a class="mr-1" href="#"><img src="/images/document (1).png" alt=""></a>
-                                        <a class="mr-1" href="#"><img src="/images/document.png" alt=""></a>
+                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'signed']) }}"><img src="/images/document.png" alt=""></a>
+                                        <a class="mr-1" href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level,'unsigned']) }}"><img src="/images/document (1).png" alt=""></a>
                                     </td>
                                     <td></td>
                                 </tr>
