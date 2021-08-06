@@ -265,6 +265,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     // create order from parent admin side
     Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
+    Route::post('store-rep-notes', 'StudentProfileController@createRepNotes')->name('create.rep.notes');
     Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
     Route::post('create-parent', 'ParentController@createParent')->name('create.parent');
@@ -276,15 +277,17 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
 });
 
-//Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
+
 Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], function () {
     Route::post('groups', 'RepresentativeGroupController@create')->name('add.representative');
-    Route::get('report/{rep_id}', 'RepresentativeGroupController@repReport')->name('generaterep.report');
+    Route::post('report', 'RepresentativeGroupController@repReport')->name('generaterep.report');
     Route::post('amount', 'RepresentativeGroupController@createRepAmount')->name('amount.representative');
     Route::post('documents', 'RepresentativeGroupController@uploadDocuments')->name('rep.documents');
     Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
-    Route::get('details/{rep_id}/{parent_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
+    Route::get('details/{rep_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
     Route::get('delete/{repamount_id}', 'RepresentativeGroupController@delete')->name('delete.amount');
     Route::get('view-representatives', 'RepresentativeGroupController@index')->name('replist');
     Route::post('edit', 'RepresentativeGroupController@update')->name('update.representative');
+    Route::get('repdelete/{id}', 'RepresentativeGroupController@deleteRep')->name('delete.rep');
+    Route::get('change/status/{parent_id}', 'RepresentativeGroupController@changeStatusRep')->name('rep.status');
 });

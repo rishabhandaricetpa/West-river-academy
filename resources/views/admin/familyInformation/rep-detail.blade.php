@@ -9,17 +9,11 @@
       {{-- -------------- first tab --}}
       <div class="row">
         <div class="col-12 d-flex align-items-center">
-          <h2 class="pr-3"><a href="">{{$parent_detail->p1_first_name}} {{$parent_detail->p1_last_name}}</a>
+          <h2 class="pr-3"><a href=""></a>
           </h2>
-          <div class="form-group mb-0">
-            <select required class="dropdown-icon" id="parent_status">
-              <option @if ($parent_detail->status === 0) selected @endif value="0">Active</option>
-              <option @if ($parent_detail->status === 1) selected @endif value="1">Inactive</option>
-            </select>
-            <input type="hidden" value="{{ $parent_detail->id }}" id='parent_id' name="parent_id">
-          </div>
+
         </div>
-        <div class="col-12">Date Created: {{ $parent_detail->created_at->format('M j, Y') }} </div>
+        <div class="col-12"></div>
         {{-- parent detil-1 --}}
         <div class="col-md-12">
           <h3 class="mt-3">Name: <span>{{$rep_group->name}}</span></h3>
@@ -31,9 +25,9 @@
                 <label> Type :</label>
                 <input type="text" class="form-control is-disabled" name="edit_rep_type" id="edit_rep_type" value="{{$rep_group->type}}" disabled required>
               </div>
-              <input type="hidden" value={{$rep_group->id}} id="edit_rep_id">
+              <input type="hidden" value="{{$rep_group->id}}" id="edit_rep_id">
               <div class="form-group">
-                <input type='hidden' id="edit_parent_id" name="parent_id" value="{{$parent_detail->id}}">
+                <input type='hidden' id="edit_parent_id" name="parent_id" value="">
                 <label>Country :</label>
                 <input type="text" class="form-control is-disabled" name="edit_rep_country" id="edit_rep_country" value="{{$rep_group->country}}" disabled>
               </div>
@@ -45,10 +39,7 @@
                 <label>Name of Rep :</label>
                 <input type="text" class="form-control is-disabled" name="edit_rep_name" id="edit_rep_name" value="{{$rep_group->name}}" disabled required>
               </div>
-              <div class="form-group">
-                <label>Administrator of group :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_admin" id="edit_rep_admin" value="{{$rep_group->name}}" disabled required>
-              </div>
+
               <div class="form-group">
                 <label>Rep Email :</label>
                 <input type="email" class="form-control is-disabled" name="edit_rep_email" id="edit_rep_email" value="{{$rep_group->email}}" disabled>
@@ -57,10 +48,7 @@
                 <label>Rep Phone :</label>
                 <input type="number" class="form-control is-disabled" name="edit_rep_phone" id="edit_rep_phone" value="{{$rep_group->rep_phone}}" disabled>
               </div>
-              <div class="form-group">
-                <label>Rep Skype Name :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_skype" id="edit_rep_skype" value="{{$rep_group->rep_skype}}" disabled>
-              </div>
+
               <div class="form-group">
                 <label>Terms of Agreement :</label>
                 <input type="text" class="form-control is-disabled" name="terms_of_org" id="terms_of_org" value="{{$rep_group->terms_of_agreement}}" disabled>
@@ -73,7 +61,6 @@
                 <div class="d-flex justify-content-between py-2">
 
                   <button type="button" class="btn btn-primary ml-2" data-target="#testing1" data-toggle="modal" data-whatever="@getbootstrap">Add</button>
-                  <a class="btn btn-primary" href="{{ route('admin.generaterep.report', $rep_id) }}">Rep Report</a>
                 </div>
                 <div class="overflow-auto max-table">
                   <table class="table table-striped table-styling w-100 table-vertical_scroll">
@@ -89,7 +76,11 @@
                       @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
                       <tr>
                         <td>{{ formatDate($repGroupAmountDetail->created_at) }}</td>
+                        @if($repGroupAmountDetail->amount >0)
                         <td>${{ $repGroupAmountDetail->amount }}</td>
+                        @else
+                        <td>{{'-$'. abs($repGroupAmountDetail->amount) }}</td>
+                        @endif
                         <td>{{ $repGroupAmountDetail->notes }}
                         </td>
                         <td><a onclick="return confirm('Are you sure to delete?');" href="{{ route('admin.delete.amount', $repGroupAmountDetail->id) }}">X</a><i class="fa fa-cancel"></i></td>
@@ -102,7 +93,7 @@
             </div>
             <div class="col-12 pt-3 d-md-flex">
               <button type="button" class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2">Edit</button>
-              <button type="button" class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2" onclick="goBack()">Go Back To Parent</button>
+              <button type="button" class="btn btn-default btn-primary form-enable btn-edit js-edit mr-2" onclick="goBack()">Back</button>
               <button type="submit" class="btn btn-default btn-primary form-enable  btn-save js-save mr-2">Save</button>
               <button type="button" class="btn btn-default btn-primary  btn-save js-cancel">Cancel</button>
             </div>
@@ -111,6 +102,14 @@
 
       </div>
     </div>
+    <form method="post" action="{{route('admin.generaterep.report')}}">
+      @csrf
+      Report From <input type="date" name="from">
+      Report To <input type="date" name="to">
+      <input type="hidden" value="{{$rep_id}}" name="rep_id">
+      Note : If dates are not selected then report will have all families mentioned below.
+      <button type="submit" class="btn btn-primary"> Rep Report </button>
+    </form>
     {{-- add payment for rep --}}
     <div class="modal fade bd-example-modal-lg" id="testing1" tabindex="-1" role="dialog" aria-labelledby="#testing1" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
@@ -126,7 +125,7 @@
 
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Amount:</label>
-                <input class="form-control" type="text" value="" id="rep_amount">
+                <input class="form-control" type="number" value="" id="rep_amount" required>
               </div>
 
               <div class="form-group">
@@ -171,10 +170,10 @@
                   </thead>
                   <tbody>
                     <tr>
-                      @foreach ($rep_families as $rep_family)
+                      @foreach ($family_groups as $rep_family)
                       <td>{{ formatDate($rep_family->created_at) }}</td>
-                      <td>{{ $rep_family->p1_first_name }}</td>
-                      <td>${{ $repAmount }}</td>
+                      <td><a href="{{route('admin.parent.edit',$rep_family->id)}}">{{ $rep_family->p1_first_name }}</a></td>
+                      <td>${{ $rep_family->amount }}</td>
                       <td></td>
                     </tr>
                     @endforeach
@@ -211,7 +210,7 @@
                 <form id="add-new-notes">
                   <div class="form-group">
                     <input type="hidden" value="" id="student_name_for_notes">
-                    <input class="form-control" type="hidden" value="" id='parent_id'>
+
                   </div>
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Notes:</label>
@@ -267,8 +266,7 @@
               <div class="modal-body">
                 <form id="add-rep-notes">
                   <div class="form-group">
-                    <input class="form-control" type="hidden" value="{{ $parent_detail->id }}" id='rep_parent_id'>
-                    <input class="form-control" type="hidden" value="{{ $rep_group->id}}" id='rep_group_id'>
+                    <input class="form-control" type="hidden" value="{{ $rep_id}}" id='rep_group_id'>
                   </div>
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Notes:</label>

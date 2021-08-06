@@ -5,7 +5,6 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
-
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('backend/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
@@ -1284,7 +1283,6 @@
 
     //add notes to family 
     $("#add-new-notes").on("submit", function(event) {
-        console.log('hi');
         event.preventDefault();
         var parent_id = $('#parent_id').val();
         var student_name_for_notes = $('#student_name_for_notes').val();
@@ -1302,8 +1300,8 @@
                 student_name_for_notes: student_name_for_notes,
                 message_text: message_text,
             },
-            success: function(response) {  
-                              location.reload();
+            success: function(response) {
+                location.reload();
             },
             error: function(response) {
 
@@ -1311,23 +1309,21 @@
         });
     });
 
-//add-rep-notes
-$("#add-rep-notes").on("submit", function(event) {
+    //add-rep-notes
+    $("#add-rep-notes").on("submit", function(event) {
         event.preventDefault();
-        var rep_parent_id = $('#rep_parent_id').val();
         var rep_message_val = $('#rep_message_val').val();
-        var rep_group_id=$('#rep_group_id').val();
+        var rep_group_id = $('#rep_group_id').val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ route('admin.create.notes') }}",
+            url: "{{ route('admin.create.rep.notes') }}",
             type: "POST",
 
             data: {
-                rep_parent_id: rep_parent_id,
                 rep_message_val: rep_message_val,
-                rep_group_id:rep_group_id,
+                rep_group_id: rep_group_id,
             },
             success: function(response) {
                 location.reload();
@@ -1835,10 +1831,8 @@ $("#add-rep-notes").on("submit", function(event) {
         var rep_type = $('#rep_type').val();
         var parent_Id = $('#parent_Id').val();
         var rep_country = $('#rep_country').val();
-        var rep_last_name = $('#rep_last_name').val();
         var rep_city = $('#rep_city').val();
         var rep_name = $('#rep_name').val();
-        var rep_admin_group = $('#rep_admin_group').val();
         var rep_email = $('#rep_email').val();
         var rep_phone = $('#rep_phone').val();
         $.ajax({
@@ -1852,10 +1846,8 @@ $("#add-rep-notes").on("submit", function(event) {
                 rep_type,
                 parent_Id,
                 rep_country,
-                rep_last_name,
                 rep_city,
                 rep_name,
-                rep_admin_group,
                 rep_email,
                 rep_phone
             },
@@ -1881,10 +1873,8 @@ $("#add-rep-notes").on("submit", function(event) {
         var edit_rep_country = $('#edit_rep_country').val();
         var edit_rep_city = $('#edit_rep_city').val();
         var edit_rep_name = $('#edit_rep_name').val();
-        var edit_rep_admin = $('#edit_rep_admin').val();
         var edit_rep_email = $('#edit_rep_email').val();
         var edit_rep_phone = $('#edit_rep_phone').val();
-        var edit_rep_skype = $('#edit_rep_skype').val();
         var terms_of_org = $('#terms_of_org').val();
         $.ajax({
             headers: {
@@ -1900,10 +1890,8 @@ $("#add-rep-notes").on("submit", function(event) {
                 edit_rep_country,
                 edit_rep_city,
                 edit_rep_name,
-                edit_rep_admin,
                 edit_rep_email,
                 edit_rep_phone,
-                edit_rep_skype,
                 terms_of_org,
             },
             success: function(response) {
@@ -2474,7 +2462,7 @@ $("#add-rep-notes").on("submit", function(event) {
         });
     }
 
-    
+
 
     function getApostilleAmount() {
         var quantity = $('#apostille_quantity').val();
@@ -2493,17 +2481,18 @@ $("#add-rep-notes").on("submit", function(event) {
     }
 
     function getConsulatationAmount() {
-            console.log('hi')
-            var hours = $('#consul_quantity').val();
-            var total = hours * 80;
-            $("#consul_amount").val(total);
-        }
-        function getTotalTranscript() {
-            var amount = $('#amount').val();
-            var quantity = $('#quantity').val();
-            var total = amount * quantity;
-            $("#total_val").val(total);
-        }
+        console.log('hi')
+        var hours = $('#consul_quantity').val();
+        var total = hours * 80;
+        $("#consul_amount").val(total);
+    }
+
+    function getTotalTranscript() {
+        var amount = $('#amount').val();
+        var quantity = $('#quantity').val();
+        var total = amount * quantity;
+        $("#total_val").val(total);
+    }
 
     function getTotal() {
         var type = $('#order_detail_val').val();
@@ -2515,11 +2504,10 @@ $("#add-rep-notes").on("submit", function(event) {
         }
 
 
-       
 
-        
+
+
     }
-
 </script>
 
 
@@ -2551,30 +2539,29 @@ $("#add-rep-notes").on("submit", function(event) {
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('backend/dist/js/pages/dashboard.js') }}"></script>
 <script>
-    @if (Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}";
-        switch (type) {
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch (type) {
         case 'info':
-        toastr.info("{{ Session::get('message') }}");
-        break;
-    
+            toastr.info("{{ Session::get('message') }}");
+            break;
+
         case 'warning':
-        toastr.warning("{{ Session::get('message') }}");
-        break;
-    
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
         case 'success':
-        toastr.success("{{ Session::get('message') }}");
-        break;
-    
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
         case 'error':
-        toastr.error("{{ Session::get('message') }}");
-        break;
-        }
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
     @endif
 
     function goBack() {
         window.history.back();
     }
-
 </script>
 <!-- DataTables  & Plugins -->

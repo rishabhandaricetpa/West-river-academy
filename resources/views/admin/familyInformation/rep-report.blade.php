@@ -39,8 +39,8 @@
                         <td></td>
                         <td></td>
 
-                        @if($amountPaid >0)
-                        <td class="text-right">Total:{{ $totalFamilyAmount }}</td>
+                        @if($totalFamilyAmount >0)
+                        <td class="text-right">Total: ${{ $totalFamilyAmount }}</td>
                         @else
 
                         <td class="text-right">Total:{{'-$'. abs($totalFamilyAmount) }} </td>

@@ -374,18 +374,19 @@
                         <tbody>
                             <tr>
                                 @if ($rep_group)
-                                <td><a href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
-                                </td>
-                                @else
-                                <td></td>
-                                @endif
-                                @if ($rep_group)
+                                <td><a href="{{ route('admin.rep.details', $rep_group->id) }}">{{ $rep_group->name }}</a></td>
                                 <td>{{ $rep_group->email }}</td>
+                                <td><a href="{{route('admin.rep.status', $parent->id )}}" onclick="return confirm('Are you sure you want to deattach this representative from this family?')">X</a></td>
+                                <td></td>
                                 @else
                                 <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 @endif
-                                <td></td>
-                                <td></td>
+
+
+
                             </tr>
 
                         </tbody>
@@ -396,7 +397,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="RepsModalLabel">Add New Reps/Group</h5>
+                            <h5 class="modal-title" id="RepsModalLabel">Add New Reps/Influncer</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -409,14 +410,14 @@
                                             <label for="message-text" class="col-form-label">Type:</label>
                                             <select class="form-control" type="text" id='rep_type'>
                                                 <option value="Respresentative">Respresentative</option>
-
+                                                <option value="Influencer">Influncer</option>
                                             </select>
                                         </div>
                                     </div>
                                     <input type="hidden" value="{{ $parent->id }}" id='parent_Id' name="parent_id">
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Name of Reps/Group
+                                            <label for="message-text" class="col-form-label">Name of Representative/Influncer
                                             </label>
                                             <input type="text" id="rep_name" class="form-control" required>
                                         </div>
@@ -428,13 +429,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-12">
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Last/Family Name:
-                                            </label>
-                                            <input type="text" id="rep_last_name" class="form-control">
-                                        </div>
-                                    </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">City Area:</label>
@@ -442,13 +436,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-12">
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Administrator of
-                                                Group</label>
-                                            <input type="text" id="rep_admin_group" class="form-control">
-                                        </div>
-                                    </div>
 
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
@@ -543,18 +530,16 @@
                                 @foreach ($allstudent as $student)
                                 <tr>
                                     @if ($rep_group)
-                                        <td><a
-                                                href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
-                                        </td>
+                                    <td><a href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
+                                    </td>
                                     @else
-                                        <td></td>
+                                    <td></td>
                                     @endif
                                     @if ($rep_group)
-                                        <td><a class="transform-none"
-                                            href="mailto:${{ $rep_group->email }}">
+                                    <td><a class="transform-none" href="mailto:${{ $rep_group->email }}">
                                             {{ $rep_group->email }}</a></td>
                                     @else
-                                        <td></td>
+                                    <td></td>
                                     @endif
                                     <td></td>
                                     <td></td>

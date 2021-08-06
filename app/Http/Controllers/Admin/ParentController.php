@@ -78,9 +78,9 @@ class ParentController extends Controller
                 'name' => $request->get('parent1_first_name'),
                 'email' => $request->get('parent1_email'),
                 'password' => Hash::make($request->get('parent1_cell_phone')),
-                'email_verified_at' => now(),
+                'email_verified_at' => date("Y-m-d H:i:s"),
             ]);
-            $user->save();
+
             $parent =  ParentProfile::create([
                 'user_id' => $user->id,
                 'p1_first_name' => $request->get('parent1_first_name'),
@@ -185,8 +185,9 @@ class ParentController extends Controller
             ->get();
         $payment_nonpaid = $payment_info->where('status', 'pending');
 
-        $parent_rep_group = ParentProfile::where('id', $id)->select('representative_group_id')->first();
-        $rep_group = RepresentativeGroup::where('id', $parent_rep_group->representative_group_id)->first();
+        $parent->rep_status == 'active' ?  $rep_group = RepresentativeGroup::where('id', $parent->representative_group_id)->first() : $rep_group = '';
+
+
         $all_rep_groups = RepresentativeGroup::all();
         $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups', 'detail_order_lists'));
