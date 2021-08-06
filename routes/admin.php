@@ -277,10 +277,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
 });
 
-//Route::post('rep-groups', 'RepresentativeGroupController@create')->name('add.representative');
+
 Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], function () {
     Route::post('groups', 'RepresentativeGroupController@create')->name('add.representative');
-    Route::get('report/{rep_id}', 'RepresentativeGroupController@repReport')->name('generaterep.report');
+    Route::post('report', 'RepresentativeGroupController@repReport')->name('generaterep.report');
     Route::post('amount', 'RepresentativeGroupController@createRepAmount')->name('amount.representative');
     Route::post('documents', 'RepresentativeGroupController@uploadDocuments')->name('rep.documents');
     Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
@@ -289,4 +289,5 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], funct
     Route::get('view-representatives', 'RepresentativeGroupController@index')->name('replist');
     Route::post('edit', 'RepresentativeGroupController@update')->name('update.representative');
     Route::get('repdelete/{id}', 'RepresentativeGroupController@deleteRep')->name('delete.rep');
+    Route::get('change/status/{parent_id}', 'RepresentativeGroupController@changeStatusRep')->name('rep.status');
 });

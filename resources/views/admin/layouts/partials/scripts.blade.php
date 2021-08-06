@@ -1831,10 +1831,8 @@
         var rep_type = $('#rep_type').val();
         var parent_Id = $('#parent_Id').val();
         var rep_country = $('#rep_country').val();
-        var rep_last_name = $('#rep_last_name').val();
         var rep_city = $('#rep_city').val();
         var rep_name = $('#rep_name').val();
-        var rep_admin_group = $('#rep_admin_group').val();
         var rep_email = $('#rep_email').val();
         var rep_phone = $('#rep_phone').val();
         $.ajax({
@@ -1848,10 +1846,8 @@
                 rep_type,
                 parent_Id,
                 rep_country,
-                rep_last_name,
                 rep_city,
                 rep_name,
-                rep_admin_group,
                 rep_email,
                 rep_phone
             },
@@ -1877,10 +1873,8 @@
         var edit_rep_country = $('#edit_rep_country').val();
         var edit_rep_city = $('#edit_rep_city').val();
         var edit_rep_name = $('#edit_rep_name').val();
-        var edit_rep_admin = $('#edit_rep_admin').val();
         var edit_rep_email = $('#edit_rep_email').val();
         var edit_rep_phone = $('#edit_rep_phone').val();
-        var edit_rep_skype = $('#edit_rep_skype').val();
         var terms_of_org = $('#terms_of_org').val();
         $.ajax({
             headers: {
@@ -1896,10 +1890,8 @@
                 edit_rep_country,
                 edit_rep_city,
                 edit_rep_name,
-                edit_rep_admin,
                 edit_rep_email,
                 edit_rep_phone,
-                edit_rep_skype,
                 terms_of_org,
             },
             success: function(response) {
@@ -2470,7 +2462,7 @@
         });
     }
 
-    
+
 
     function getApostilleAmount() {
         var quantity = $('#apostille_quantity').val();
@@ -2489,17 +2481,18 @@
     }
 
     function getConsulatationAmount() {
-            console.log('hi')
-            var hours = $('#consul_quantity').val();
-            var total = hours * 80;
-            $("#consul_amount").val(total);
-        }
-        function getTotalTranscript() {
-            var amount = $('#amount').val();
-            var quantity = $('#quantity').val();
-            var total = amount * quantity;
-            $("#total_val").val(total);
-        }
+        console.log('hi')
+        var hours = $('#consul_quantity').val();
+        var total = hours * 80;
+        $("#consul_amount").val(total);
+    }
+
+    function getTotalTranscript() {
+        var amount = $('#amount').val();
+        var quantity = $('#quantity').val();
+        var total = amount * quantity;
+        $("#total_val").val(total);
+    }
 
     function getTotal() {
         var type = $('#order_detail_val').val();
@@ -2511,9 +2504,9 @@
         }
 
 
-       
 
-        
+
+
     }
 </script>
 

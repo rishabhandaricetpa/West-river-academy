@@ -15,7 +15,7 @@ class AddRepParentProfileTable extends Migration
     {
         Schema::table('parent_profiles', function (Blueprint $table) {
             $table->string('amount')->nullable();
-            $table->enum('rep_status', ['pending', 'paid'])->nullable();
+            $table->enum('rep_status', ['active', 'inactive'])->nullable();
         });
     }
 

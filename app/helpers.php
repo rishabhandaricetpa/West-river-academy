@@ -569,11 +569,11 @@ function formatDate($date)
 {
     return \Carbon\Carbon::parse($date)->format('M j , Y');
 }
-function getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount)
+function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
 {
     $valueAmount = 0;
     foreach ($repGroupAmountDetails as $repGroupAmountDetail) {
         $valueAmount = $valueAmount + $repGroupAmountDetail->amount;
     }
-    return ($family_count * $repAmount) + $valueAmount;
+    return $repAmount + $valueAmount;
 }

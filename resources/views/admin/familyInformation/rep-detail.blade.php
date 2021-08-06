@@ -39,10 +39,7 @@
                 <label>Name of Rep :</label>
                 <input type="text" class="form-control is-disabled" name="edit_rep_name" id="edit_rep_name" value="{{$rep_group->name}}" disabled required>
               </div>
-              <div class="form-group">
-                <label>Administrator of group :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_admin" id="edit_rep_admin" value="{{$rep_group->name}}" disabled required>
-              </div>
+
               <div class="form-group">
                 <label>Rep Email :</label>
                 <input type="email" class="form-control is-disabled" name="edit_rep_email" id="edit_rep_email" value="{{$rep_group->email}}" disabled>
@@ -51,10 +48,7 @@
                 <label>Rep Phone :</label>
                 <input type="number" class="form-control is-disabled" name="edit_rep_phone" id="edit_rep_phone" value="{{$rep_group->rep_phone}}" disabled>
               </div>
-              <div class="form-group">
-                <label>Rep Skype Name :</label>
-                <input type="text" class="form-control is-disabled" name="edit_rep_skype" id="edit_rep_skype" value="{{$rep_group->rep_skype}}" disabled>
-              </div>
+
               <div class="form-group">
                 <label>Terms of Agreement :</label>
                 <input type="text" class="form-control is-disabled" name="terms_of_org" id="terms_of_org" value="{{$rep_group->terms_of_agreement}}" disabled>
@@ -67,7 +61,6 @@
                 <div class="d-flex justify-content-between py-2">
 
                   <button type="button" class="btn btn-primary ml-2" data-target="#testing1" data-toggle="modal" data-whatever="@getbootstrap">Add</button>
-                  <a class="btn btn-primary" href="{{ route('admin.generaterep.report', $rep_id) }}">Rep Report</a>
                 </div>
                 <div class="overflow-auto max-table">
                   <table class="table table-striped table-styling w-100 table-vertical_scroll">
@@ -109,6 +102,14 @@
 
       </div>
     </div>
+    <form method="post" action="{{route('admin.generaterep.report')}}">
+      @csrf
+      Report From <input type="date" name="from">
+      Report To <input type="date" name="to">
+      <input type="hidden" value="{{$rep_id}}" name="rep_id">
+      Note : If dates are not selected then report will have all families mentioned below.
+      <button type="submit" class="btn btn-primary"> Rep Report </button>
+    </form>
     {{-- add payment for rep --}}
     <div class="modal fade bd-example-modal-lg" id="testing1" tabindex="-1" role="dialog" aria-labelledby="#testing1" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
@@ -172,7 +173,7 @@
                       @foreach ($family_groups as $rep_family)
                       <td>{{ formatDate($rep_family->created_at) }}</td>
                       <td><a href="{{route('admin.parent.edit',$rep_family->id)}}">{{ $rep_family->p1_first_name }}</a></td>
-                      <td>${{ $repAmount }}</td>
+                      <td>${{ $rep_family->amount }}</td>
                       <td></td>
                     </tr>
                     @endforeach

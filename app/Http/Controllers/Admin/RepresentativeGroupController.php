@@ -39,8 +39,8 @@ class RepresentativeGroupController extends Controller
             $parent = ParentProfile::where('id', $request->parent_Id)->first();
 
             $parent->representative_group_id = $rep->id;
-            $parent->amount = FeeStructureType::RepGroupAmount;
-            $parent->rep_status = 'pending';
+            $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+            $parent->rep_status = 'active';
             $parent->save();
 
             DB::commit();
@@ -64,11 +64,12 @@ class RepresentativeGroupController extends Controller
     public function getRepGroup(Request $request)
     {
         $rep = RepresentativeGroup::where('id', $request->choosed_rep_id)->first();
+
         $parent = ParentProfile::where('id', $request->parent_Id)->first();
 
         $parent->representative_group_id = $rep->id;
-        $parent->amount = FeeStructureType::RepGroupAmount;
-        $parent->rep_status = 'pending';
+        $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+        $parent->rep_status = 'active';
         $parent->save();
 
         return response()->json(['status' => 'success', 'data' => $rep]);
@@ -76,18 +77,17 @@ class RepresentativeGroupController extends Controller
     public function repDetails($rep_id)
     {
         $rep_group = RepresentativeGroup::where('id',  $rep_id)->first();
-
-        $family_groups = ParentProfile::whereIn('representative_group_id', [$rep_id])->get();
-
+        // where rep status is active
+        $family_groups = ParentProfile::whereIn('representative_group_id', [$rep_id])->where('rep_status', 'active')->get();
+        $repAmount = collect($family_groups)->pluck('amount')->sum();
         $getNotes = Notes::where('representative_group_id', $rep_id)->get();
-        $family_count = $family_groups->count();
-        $repAmount = FeeStructureType::RepGroupAmount;
+
         $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
         $repGroupDocuments = RepresentativeDocuments::whereIn('representative_group_id', [$rep_id])->get();
-        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount);
+        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails,  $repAmount);
 
         // rep documents
-        return view('admin/familyInformation/rep-detail', compact('rep_group', 'rep_id', 'calculatedAmount', 'repGroupAmountDetails', 'repGroupDocuments', 'repAmount', 'family_groups', 'getNotes'));
+        return view('admin/familyInformation/rep-detail', compact('rep_group', 'rep_id', 'calculatedAmount', 'repGroupAmountDetails', 'repGroupDocuments', 'family_groups', 'getNotes'));
     }
     public function createRepAmount(Request $request)
     {
@@ -112,21 +112,26 @@ class RepresentativeGroupController extends Controller
             ]);
         }
     }
-    public function repReport($rep_id)
+    public function repReport(Request $request)
     {
-        $rep_families = RepresentativeGroup::find($rep_id)->families()->get();
-        $representative = RepresentativeGroup::where('id', $rep_id)->first();
-        $family_count = $rep_families->count();
-        $repAmount = FeeStructureType::RepGroupAmount;
-        $totalFamilyAmount = $family_count * $repAmount;
-        $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$rep_id])->get();
+        $from = $request->from;
+        $to = $request->to;
+        if ($from &&  $to) {
+            $rep_families =   ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->whereBetween('created_at', [$from, $to])->get();
+        } else {
+            $rep_families =     ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->get();
+        }
+
+        $representative = RepresentativeGroup::where('id', $request->rep_id)->first();
+
+        $totalFamilyAmount = collect($rep_families)->pluck('amount')->sum();
+        $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$request->rep_id])->get();
         $amountPaid = collect($repGroupAmountDetails)->pluck('amount')->sum();
-        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails, $family_count,  $repAmount);
+        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails,  $totalFamilyAmount);
         $data = [
             'calculatedAmount' => $calculatedAmount,
             'rep_families' =>   $rep_families,
             'repGroupAmountDetails' => $repGroupAmountDetails,
-            'repAmount' => $repAmount,
             'amountPaid' => $amountPaid,
             'representative' => $representative->full_name,
             'totalFamilyAmount' => $totalFamilyAmount
@@ -172,9 +177,24 @@ class RepresentativeGroupController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+    public function changeStatusRep($parent_id)
+    {
+        ParentProfile::findOrFail($parent_id)->update(['rep_status' => 'inactive']);
+        $notification = [
+            'message' => 'Representative Deattached Successfully!',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->back()->with($notification);
+    }
     public function deleteRep($rep_id)
     {
         RepresentativeGroup::find($rep_id)->delete();
-        return redirect()->route('admin.replist');
+        $notification = [
+            'message' => 'Representative Deleted Successfully!',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->route('admin.replist')->with($notification);
     }
 }

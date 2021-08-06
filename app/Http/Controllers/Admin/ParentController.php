@@ -185,8 +185,9 @@ class ParentController extends Controller
             ->get();
         $payment_nonpaid = $payment_info->where('status', 'pending');
 
-        $parent_rep_group = ParentProfile::where('id', $id)->select('representative_group_id')->first();
-        $rep_group = RepresentativeGroup::where('id', $parent_rep_group->representative_group_id)->first();
+        $parent->rep_status == 'active' ?  $rep_group = RepresentativeGroup::where('id', $parent->representative_group_id)->first() : $rep_group = '';
+
+
         $all_rep_groups = RepresentativeGroup::all();
         $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups', 'detail_order_lists'));
