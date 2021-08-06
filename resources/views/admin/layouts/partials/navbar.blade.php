@@ -25,7 +25,26 @@
   </ul>
   <ul class="d-flex">
     <li><img src="/images/search.png" alt="login"></li>
-    <li><img src="/images/bell.png" alt="login"></li>
+    <li>
+      <div id="notification-container"  class="admin-notification-container">
+        <div class="notification-wrap position-relative">
+          <button type="button" class="text-white bg-transparent border-0 px-0">
+              <i class="fas fa-bell fa-2x nofification-alert"></i>
+          </button> 
+          <div class="notification admin-notification d-block">
+            <ul class="list-unstyled">
+              <li class="border-bottom mb-3 pb-3">
+                <span class="remove  place-top">
+                  <i class="fas fa-times"></i>
+                </span> 
+                <p>Pay Amount : 375</p> 
+                <a href="http://127.0.0.1:8000/cart" class="btn btn-primary">Go To Cart</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
     <li><a href="#"> <img src="/images/login.png" alt="login"></a>
     </li>
   </ul>

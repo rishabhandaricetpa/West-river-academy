@@ -17,7 +17,7 @@
   </div>
 </div>
 <!-- /.content-header -->
-<div class="card pt-2 m-3 family-details ">
+<div class="card pt-2 m-3 px-2 family-details ">
   <table id="family-table" class="w-100 table-styling data-table">
     <thead>
       <tr>

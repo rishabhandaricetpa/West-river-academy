@@ -91,6 +91,11 @@
   height: 32px;
   margin-left: 5px;
 }
+.admin-notification-container{
+  .notification-wrap {               
+    margin-right: 20px !important;
+  }
+}
 
 .notification {
   background-color: $white;
@@ -243,12 +248,14 @@
 
       img {
         margin-right: 0 !important;
+       
       }
     }
 
     li {
       img {
         margin-right: 20px;
+        width: 30px;   
       }
     }
   }

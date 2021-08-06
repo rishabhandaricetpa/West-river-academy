@@ -411,7 +411,6 @@
                                                 <option value="Respresentative">Respresentative</option>
 
                                             </select>
-
                                         </div>
                                     </div>
                                     <input type="hidden" value="{{ $parent->id }}" id='parent_Id' name="parent_id">
