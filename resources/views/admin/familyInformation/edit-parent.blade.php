@@ -374,7 +374,7 @@
                         <tbody>
                             <tr>
                                 @if ($rep_group)
-                                <td><a href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
+                                <td><a href="{{ route('admin.rep.details', $rep_group->id) }}">{{ $rep_group->name }}</a>
                                 </td>
                                 @else
                                 <td></td>
@@ -384,6 +384,7 @@
                                 @else
                                 <td></td>
                                 @endif
+                                <td>X</td>
                                 <td></td>
                                 <td></td>
                             </tr>

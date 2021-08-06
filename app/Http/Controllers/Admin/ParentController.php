@@ -78,9 +78,9 @@ class ParentController extends Controller
                 'name' => $request->get('parent1_first_name'),
                 'email' => $request->get('parent1_email'),
                 'password' => Hash::make($request->get('parent1_cell_phone')),
-                'email_verified_at' => now(),
+                'email_verified_at' => date("Y-m-d H:i:s"),
             ]);
-            $user->save();
+
             $parent =  ParentProfile::create([
                 'user_id' => $user->id,
                 'p1_first_name' => $request->get('parent1_first_name'),

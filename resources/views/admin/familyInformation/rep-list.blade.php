@@ -12,25 +12,19 @@
                     <th>Country</th>
                     <th>City/Area</th>
                     <th>Rep E-mail</th>
-                    <th>Rep Phone</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($all_reps as $rep)
                 <tr>
-                    <td>Name </td>
-                    <td>India</td>
-                    <td>Dehradun</td>
-                    <td class="center">melissa.manisha@ithands.com</td>
-
-
-                <tr>
-                    <td>Name </td>
-                    <td>India</td>
-                    <td>Dehradun</td>
-                    <td class="center">melissa.manisha@ithands.com</td>
-                    <td class="center">9789658563875</td>
+                    <td><a href="{{route('admin.rep.details',$rep->id)}}"> {{$rep->name}} </a></td>
+                    <td>{{$rep->country}}</td>
+                    <td>{{$rep->city}}</td>
+                    <td class="center">{{$rep->email}}</td>
+                    <td><a class="nav-link" href="{{route('admin.delete.rep',$rep->id)}}" onclick="return confirm('Are you sure you want to delete this representative?');" aria-controls="documents" aria-selected="true"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
-
+                @endforeach
             </tbody>
         </table>
     </div>

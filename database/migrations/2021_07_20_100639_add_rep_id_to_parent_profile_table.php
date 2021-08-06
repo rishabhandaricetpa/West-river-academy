@@ -15,7 +15,7 @@ class AddRepIdToParentProfileTable extends Migration
     {
         Schema::table('parent_profiles', function (Blueprint $table) {
 
-            $table->foreignId('representative_group_id')->nullable()->constrained()->references('id')->on('representative_groups')->onDelete('cascade');
+            $table->foreignId('representative_group_id')->nullable()->constrained()->references('id')->on('representative_groups')->onDelete('set null');
         });
     }
 
