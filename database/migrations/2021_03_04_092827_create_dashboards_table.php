@@ -18,8 +18,7 @@ class CreateDashboardsTable extends Migration
             $table->string('created_date')->nullable();
             $table->string('updated_date')->nullable();
             $table->string('linked_to')->nullable();
-            $table->string('notes')->nullable();
-            $table->string('assigned_to')->nullable();
+            $table->string('amount')->nullable();
             $table->timestamps();
         });
     }

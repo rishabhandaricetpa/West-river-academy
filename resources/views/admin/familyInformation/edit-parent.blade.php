@@ -1263,7 +1263,7 @@
                                     <tr>
                                         <th scope="col">Date</th>
                                         <th scope="col">Orders</th>
-
+                                        <th scope="col">Amount</th>
 
                                         <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                                 data-toggle="modal" data-target="#documentsModal"
@@ -1311,7 +1311,7 @@
                                                         Consultation</a></td>
                                             @endif
 
-
+                                            <td>${{ $data->amount }}</td>
                                             <td></td>
                                         </tr>
                                     @endforeach

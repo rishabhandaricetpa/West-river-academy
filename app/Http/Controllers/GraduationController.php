@@ -78,11 +78,10 @@ class GraduationController extends Controller
             $studentName = StudentProfile::whereId($inputs['student_id'])->first();
             Dashboard::create([
                 'parent_profile_id' => ParentProfile::getParentId(),
+                'amount' => $fee,
                 'student_profile_id' => $request->student_id,
                 'linked_to' => $graduation->id,
                 'related_to' => 'graduation_record_received',
-                'is_archieved' => 0,
-                'notes' =>  $studentName->fullname,
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();
