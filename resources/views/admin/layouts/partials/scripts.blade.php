@@ -41,10 +41,9 @@
 
         //parent datatable
         $("#family-table").DataTable({
-            "ajax": "{{ route('admin.datatable.parent') }}"
-
-                ,
+            "ajax": "{{ route('admin.datatable.parent') }}",
             "processing": true,
+            "searching": true,
             "serverSide": true,
             "ordering": false,
             "pagination": true,
@@ -56,7 +55,7 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
                     "data": function(row, type, val, meta) {
-                        return `<a href="edit/${row.id}">${row.p1_first_name}</a>`
+                        return `<a href="edit/${row.id}">${row.p1_first_name + ' '+ row.p1_last_name}</a>`
                     },
                 },
                 {

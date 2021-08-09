@@ -35,7 +35,7 @@
                                     <div class="col-lg-6 col-12">
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Name of
-                                                Representative/Influncer
+                                                Representative/Influencer
                                             </label>
                                             <input type="text" id="rep_name" class="form-control" required>
                                         </div>

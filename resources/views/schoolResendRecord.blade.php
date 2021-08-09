@@ -85,13 +85,13 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Student Name: {{ $name }}</td>
+                    <td>Student Name : {{ $name }}</td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Date of Birth: {{ $dob }} </td>
+                    <td>Date of Birth : {{ $dob }} </td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Grade Level: {{ $grade }}
+                    <td>Grade Level : {{ $grade }}
                     </td>
                 </tr>
             </tbody>
