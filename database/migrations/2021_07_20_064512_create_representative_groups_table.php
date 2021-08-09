@@ -16,7 +16,8 @@ class CreateRepresentativeGroupsTable extends Migration
         Schema::create('representative_groups', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_profile_id');
-            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
+            // $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
+            $table->foreignId('parent_profile_id')->nullable()->constrained()->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('type')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
