@@ -2147,15 +2147,15 @@
     document.getElementById("button-notification").addEventListener("click", function() {
         $('#notification-items').addClass('d-block');
     })
-    document.body.addEventListener("click", function(e) {
-        alert (e.classListjjjj);
-        var notification = $('#notification-items');
+    // document.body.addEventListener("click", function(e) {
+    //     alert (e.classListjjjj);
+    //     var notification = $('#notification-items');
         
-        if (!notification.is(e.target) && notification.has(e.target).length === 0){
+    //     if (!notification.is(e.target) && notification.has(e.target).length === 0){
        
-            $('#notification-items').removeClass('d-block');
-        }
-    }) 
+    //         $('#notification-items').removeClass('d-block');
+    //     }
+    // }) 
    
    
 

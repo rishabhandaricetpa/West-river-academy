@@ -28,39 +28,36 @@
     <ul class="d-flex">
         <li><img src="/images/search.png" alt="login"></li>
         <li>
-
-            <div id="notification-container" class="admin-notification-container">
-                <div class="notification-wrap position-relative">
-                    <button type="button" class="text-white bg-transparent border-0 px-0">
-                        <i class="fas fa-bell fa-2x nofification-alert"></i>
-                    </button>
-                    <div class="notification admin-notification d-block">
-                        <ul class="list-unstyled">
-                            <li class="border-bottom mb-3 pb-3">
-                                <span class="remove  place-top">
-                                    <i class="fas fa-times"></i>
-                                </span>
-                                <p>Pay Amount : 375</p>
-                                <p>Pay Amount 12: 375</p>
-                                <a href="http://127.0.0.1:8000/cart" class="btn btn-primary">Go To Cart</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+          <div id="notification-container"  class="admin-notification-container">
+            <div class="notification-wrap position-relative">
+              <button id="button-notification" type="button" class="text-white bg-transparent border-0 px-0">
+                  <i class="fas fa-bell fa-2x nofification-alert"></i>
+              </button> 
+              <div id="notification-items" class="notification admin-notification display-none">
+                <ul class="list-unstyled">
+                  <li class="border-bottom mb-3 pb-3">
+                    <span class="remove  place-top">
+                      <i class="fas fa-times"></i>
+                    </span> 
+                    <p>Pay Amount : 375</p> 
+                    <a href="http://127.0.0.1:8000/cart" class="btn btn-primary">Go To Cart</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-
+          </div>
         </li>
         <li><a href="#"> <img src="/images/login.png" alt="login"></a>
         </li>
     </ul>
-    <img src="/images/wra_logo.svg" class="site-logo d-lg-none d-block" alt="wra_logo">
+    {{-- {{-- <img src="/images/wra_logo.svg" class="site-logo d-lg-none d-block" alt="wra_logo">
     <li class="menu-item"><a href="{{ route('admin.dashboard.notification') }}">Dashboard</a></li>
     <li class="menu-item"><a href="{{ route('admin.view.parent') }}">Family</a></li>
     <li class="menu-item"><a href="{{ url('admin/view-student') }}">Student</a></li>
     <li class="menu-item"><a href="{{route('admin.replist')}}">Representative</a></li>
     <li class="menu-item"><a href="#">Groups</a></li>
-  </ul>
-  <ul class="d-flex">
+  </ul> --}}
+  {{-- <ul class="d-flex">
     <li><img src="/images/search.png" alt="login"></li>
     <li>
       <div id="notification-container"  class="admin-notification-container">
@@ -84,7 +81,7 @@
     </li>
     <li><a href="#"> <img src="/images/login.png" alt="login"></a>
     </li>
-  </ul>
+  </ul> --}}
 
     <!-- SEARCH FORM -->
 
