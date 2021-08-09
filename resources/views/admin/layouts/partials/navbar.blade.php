@@ -28,10 +28,10 @@
     <li>
       <div id="notification-container"  class="admin-notification-container">
         <div class="notification-wrap position-relative">
-          <button type="button" class="text-white bg-transparent border-0 px-0">
+          <button id="button-notification" type="button" class="text-white bg-transparent border-0 px-0">
               <i class="fas fa-bell fa-2x nofification-alert"></i>
           </button> 
-          <div class="notification admin-notification d-block">
+          <div id="notification-items" class="notification admin-notification display-none">
             <ul class="list-unstyled">
               <li class="border-bottom mb-3 pb-3">
                 <span class="remove  place-top">
