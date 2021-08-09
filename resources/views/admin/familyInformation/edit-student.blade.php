@@ -712,7 +712,7 @@
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
                                                         <label for="message-text" class="col-form-label">Period</label>
-                                                        <select id="transcript_period" class="form-control"
+                                                        <select id="transcript_period" class="form-control" required
                                                             onchange="getTranscriptval();">
                                                             <option value="">Select...</option>
                                                             <option value="K-8">K-8</option>
@@ -724,7 +724,7 @@
                                                     <div class="form-group">
                                                         <label for="message-text" class="col-form-label">Amount<span
                                                                 class="required">*</span></label>
-                                                        <select type="" id="amount" class="form-control"
+                                                        <select type="" id="amount" class="form-control" required
                                                             onchange="getTotalTranscript();">
                                                             <option value="">Select...</option>
                                                             <option value="25">25</option>
@@ -734,16 +734,16 @@
                                                 </div>
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">Quantity<span
-                                                                class="required">*</span></label>
-                                                        <input type="text" id="quantity" class="form-control"
-                                                            onchange="getTotalTranscript();">
+                                                        <label for="message-text" class="col-form-label">Quantity
+                                                            <span class="required">*</span></label>
+                                                        <input type="number" id="quantity" class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
                                                         <label for="message-text" class="col-form-label">Status</label>
-                                                        <select type="" id="status" class="form-control paymentDisplay">
+                                                        <select type="" id="status" class="form-control paymentDisplay"
+                                                            required>
                                                             <option value="">Select</option>
                                                             <option value="pending">Pending</option>
                                                             <option value="paid">Paid</option>

@@ -10,6 +10,7 @@ use App\Models\RepresentativeDocuments;
 use App\Models\RepresentativeGroup;
 use App\Models\Notes;
 use DB;
+use Exception;
 use File;
 use Illuminate\Http\Request;
 use PDF;
@@ -28,20 +29,22 @@ class RepresentativeGroupController extends Controller
         try {
             DB::beginTransaction();
             $rep =  RepresentativeGroup::create([
-                'parent_profile_id' => $request->parent_Id,
+                'parent_profile_id' => $request->parent_Id ? $request->parent_Id : null,
                 'type' => $request->rep_type,
                 'country' => $request->rep_country,
                 'city' => $request->rep_city,
                 'name' => $request->rep_name,
                 'email' => $request->rep_email,
             ]);
+            if ($request->parent_Id) {
+                $parent = ParentProfile::where('id', $request->parent_Id)->first();
 
-            $parent = ParentProfile::where('id', $request->parent_Id)->first();
+                $parent->representative_group_id = $rep->id;
+                $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+                $parent->rep_status = 'active';
+                $parent->save();
+            }
 
-            $parent->representative_group_id = $rep->id;
-            $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
-            $parent->rep_status = 'active';
-            $parent->save();
 
             DB::commit();
             $notification = [
@@ -51,7 +54,7 @@ class RepresentativeGroupController extends Controller
 
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            report($e);
+            dd($e);
             DB::rollback();
             $notification = [
                 'message' => 'Can not Update Representative !',
@@ -66,7 +69,6 @@ class RepresentativeGroupController extends Controller
         $rep = RepresentativeGroup::where('id', $request->choosed_rep_id)->first();
 
         $parent = ParentProfile::where('id', $request->parent_Id)->first();
-
         $parent->representative_group_id = $rep->id;
         $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
         $parent->rep_status = 'active';
@@ -114,30 +116,36 @@ class RepresentativeGroupController extends Controller
     }
     public function repReport(Request $request)
     {
-        $from = $request->from;
-        $to = $request->to;
-        if ($from &&  $to) {
-            $rep_families =   ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->whereBetween('created_at', [$from, $to])->get();
-        } else {
-            $rep_families =     ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->get();
+        try {
+
+
+            $from = $request->from;
+            $to = $request->to;
+            if ($from &&  $to) {
+                $rep_families =   ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->whereBetween('created_at', [$from, $to])->get();
+            } else {
+                $rep_families =     ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->get();
+            }
+
+            $representative = RepresentativeGroup::where('id', $request->rep_id)->first();
+
+            $totalFamilyAmount = collect($rep_families)->pluck('amount')->sum();
+            $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$request->rep_id])->get();
+            $amountPaid = collect($repGroupAmountDetails)->pluck('amount')->sum();
+            $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails,  $totalFamilyAmount);
+            $data = [
+                'calculatedAmount' => $calculatedAmount,
+                'rep_families' =>   $rep_families,
+                'repGroupAmountDetails' => $repGroupAmountDetails,
+                'amountPaid' => $amountPaid,
+                'representative' => $representative->full_name,
+                'totalFamilyAmount' => $totalFamilyAmount
+            ];
+            $pdf = PDF::loadView('admin.familyInformation.rep-report', $data);
+            return $pdf->download('RepReport');
+        } catch (Exception $e) {
+            dd($e);
         }
-
-        $representative = RepresentativeGroup::where('id', $request->rep_id)->first();
-
-        $totalFamilyAmount = collect($rep_families)->pluck('amount')->sum();
-        $repGroupAmountDetails = RepresentativeAmount::whereIn('representative_group_id', [$request->rep_id])->get();
-        $amountPaid = collect($repGroupAmountDetails)->pluck('amount')->sum();
-        $calculatedAmount =  getRepresentativeAmount($repGroupAmountDetails,  $totalFamilyAmount);
-        $data = [
-            'calculatedAmount' => $calculatedAmount,
-            'rep_families' =>   $rep_families,
-            'repGroupAmountDetails' => $repGroupAmountDetails,
-            'amountPaid' => $amountPaid,
-            'representative' => $representative->full_name,
-            'totalFamilyAmount' => $totalFamilyAmount
-        ];
-        $pdf = PDF::loadView('admin.familyInformation.rep-report', $data);
-        return $pdf->download('RepReport');
     }
     public function delete($rep_amount_id)
     {

@@ -20,64 +20,64 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="add-new-enrollments">
+                            <form id="add_new_rep">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <input type="hidden" value="" id='parent_id' name="parent_id" class="form-control">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Type:</label>
+                                            <select class="form-control" type="text" id='rep_type'>
+                                                <option value="Respresentative">Respresentative</option>
+                                                <option value="Influencer">Influencer</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="hidden" value="" id='student_name_enroll' name="student_name"
-                                            class="form-control">
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Name of
+                                                Representative/Influencer
+                                            </label>
+                                            <input type="text" id="rep_name" class="form-control" required>
+                                        </div>
                                     </div>
-                                    <div class="form-group  col-md-6">
-                                        <label for="recipient-name" class="col-form-label">Enrollment
-                                            Period</label>
-                                        <select id="enrollment_period" required class="form-control">
-                                            <option value="annual">Annual</option>
-                                            <option value="half">Semester</option>
-                                        </select>
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Country:</label>
+                                            <input type="text" id="rep_country" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="recipient-name" class="col-form-label">Start Date of
-                                            Enrollment:</label>
-                                        <input type="date" class="form-control" id="start_date" required>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">City Area:</label>
+                                            <input type="text" id="rep_city" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">End Date of
-                                            Enrollment:</label>
-                                        <input type="date" class="form-control" id="end_date" required>
+
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Rep Email
+                                            </label>
+                                            <input type="email" id="rep_email" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="recipient-name" class="col-form-label">Start Date of
-                                            Enrollment:</label>
-                                        <input type="date" class="form-control" id="start_date" required>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="message-text" class="col-form-label">End Date of
-                                            Enrollment:</label>
-                                        <input type="date" class="form-control" id="end_date" required>
-                                    </div>
-                                    <div class="form-group  col-md-6">
-                                        <label for="recipient-name" class="col-form-label">Enrollment
-                                            Payment Status</label>
-                                        <select id="enrollment_status" required class="form-control">
-                                            <option value="paid">Paid</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group  col-md-6">
-                                        <label for="recipient-name" class="col-form-label">Amount</label>
-                                        <select id="amount_status" required class="form-control">
-                                            <option value="375">$ 375</option>
-                                            <option value="200">$ 200</option>
-                                            <option value="50">$ 50</option>
-                                        </select>
+
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Rep Phone
+                                            </label>
+                                            <input type="text" id="rep_phone" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+
                     </div>
                     </form>
                 </div>

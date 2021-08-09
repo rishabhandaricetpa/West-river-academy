@@ -5,6 +5,7 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
+
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('backend/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
@@ -40,10 +41,9 @@
 
         //parent datatable
         $("#family-table").DataTable({
-            "ajax": "{{ route('admin.datatable.parent') }}"
-
-                ,
+            "ajax": "{{ route('admin.datatable.parent') }}",
             "processing": true,
+            "searching": true,
             "serverSide": true,
             "ordering": false,
             "pagination": true,
@@ -55,7 +55,7 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
                     "data": function(row, type, val, meta) {
-                        return `<a href="edit/${row.id}">${row.p1_first_name}</a>`
+                        return `<a href="edit/${row.id}">${row.p1_first_name + ' '+ row.p1_last_name}</a>`
                     },
                 },
                 {
@@ -1661,7 +1661,7 @@
                 apostille_country_gard
             },
             success: function(response) {
-                // location.reload();
+                location.reload();
             },
             error: function(response) {
 
@@ -2557,29 +2557,30 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('backend/dist/js/pages/dashboard.js') }}"></script>
 <script>
-    @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch (type) {
+    @if (Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch (type) {
         case 'info':
-            toastr.info("{{ Session::get('message') }}");
-            break;
-
+        toastr.info("{{ Session::get('message') }}");
+        break;
+    
         case 'warning':
-            toastr.warning("{{ Session::get('message') }}");
-            break;
-
+        toastr.warning("{{ Session::get('message') }}");
+        break;
+    
         case 'success':
-            toastr.success("{{ Session::get('message') }}");
-            break;
-
+        toastr.success("{{ Session::get('message') }}");
+        break;
+    
         case 'error':
-            toastr.error("{{ Session::get('message') }}");
-            break;
-    }
+        toastr.error("{{ Session::get('message') }}");
+        break;
+        }
     @endif
 
     function goBack() {
         window.history.back();
     }
+
 </script>
 <!-- DataTables  & Plugins -->
