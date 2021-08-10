@@ -2115,7 +2115,6 @@
         } else {
             $("#payment-div").hide();
             $("#transction-div").hide();
-
         }
     })
 
@@ -2145,17 +2144,28 @@
     }
   
     document.getElementById("button-notification").addEventListener("click", function() {
-        $('#notification-items').addClass('d-block');
+        if($("#notification-items").hasClass("d-block"))
+            $("#notification-items").removeClass("d-block");
+        else
+            $('#notification-items').addClass('d-block');
     })
-    // document.body.addEventListener("click", function(e) {
-    //     alert (e.classListjjjj);
-    //     var notification = $('#notification-items');
-        
-    //     if (!notification.is(e.target) && notification.has(e.target).length === 0){
-       
-    //         $('#notification-items').removeClass('d-block');
-    //     }
-    // }) 
+    document.body.addEventListener("click", function(e) {
+        //console.log(e);
+        var notification = document.getElementById("notification-container");
+        if(!notification.contains(e.target))
+        {
+            //console.log("entered")
+            $("#notification-items").removeClass("d-block");
+        }
+        //console.log(notification);
+        //var arr=[...e.target.classList]
+        //console.log(arr);
+        //  if (e.target.classList!=null && e.target.classList!=undefined &&
+        //  ![...e.target.classList].includes("nofification-alert")){
+        //    // alert("hi");
+        //     $('#notification-items').removeClass('d-block');
+        // }
+    }) 
    
    
 
