@@ -218,7 +218,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // archieved tasks
     Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
-
+    Route::get('dashboard/alert', 'DashboardController@alertRecordTransfer')->name('recordtransfer.alert');
     //transcript 9-12th backend
     Route::get('generate-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateTranscript')->name('genrate.transcript9_12');
     Route::post('viewfull-transcript9_12/{student_id}/{transcript_id}', 'Transcript9_12Controller@updateDateofGraduation')->name('viewfull9_12');

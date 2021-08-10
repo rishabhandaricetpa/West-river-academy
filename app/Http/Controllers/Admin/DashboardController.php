@@ -18,6 +18,7 @@ use Auth;
 use DB;
 use Exception;
 use File;
+use Illuminate\Support\Carbon;
 use Storage;
 use Str;
 
@@ -210,5 +211,12 @@ class DashboardController extends Controller
             report($e);
             DB::rollBack();
         }
+    }
+    public function alertRecordTransfer(Request $request)
+    {
+
+        $records = RecordTransfer::where('request_status', 'pending')
+            ->orWhere('request_status', null)->get()->toArray();
+        return response()->json($records);
     }
 }

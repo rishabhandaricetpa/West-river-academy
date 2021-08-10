@@ -581,7 +581,65 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     });
+    document.getElementById("button-notification").addEventListener("click", function() {
 
+        if ($("#notification-items").hasClass("d-block"))
+            $("#notification-items").removeClass("d-block");
+        else
+            $('#notification-items').addClass('d-block');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.recordtransfer.alert') }}",
+            type: "GET",
+
+            data: {
+
+
+
+            },
+            success: function(response) {
+                event.preventDefault();
+                console.log(response);
+                var html = '';
+                const s = new Date();
+                const startDate = s.getDate();
+                response.forEach((record) => {
+                    if (Math.abs(startDate - new Date(record.created_at)
+                            .getDate()) > 7) {
+                        html = html + ` <li class="border-bottom mb-3 pb-3">
+                               
+                          <span class=" text-black"> Resend Record Transfer Request To School : ${record.school_name} </span><br>
+
+                                <a href="/admin/student/record/${record.student_profile_id}/${record.id}" class="btn btn-primary">Go To Record</a>
+
+                            </li>`
+                    }
+                    diffInMilliSeconds = Math.abs(startDate - new Date(record.created_at)
+                        .getDate());
+
+
+                })
+                $('#notifiy-list').html(html);
+
+            },
+            error: function(response) {
+
+            }
+        });
+
+    })
+    document.body.addEventListener("click", function(e) {
+
+        var notification = document.getElementById("notification-container");
+        if (!notification.contains(e.target)) {
+
+            $("#notification-items").removeClass("d-block");
+        }
+
+    })
     // dashboard admin upload doc for student
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
@@ -2118,6 +2176,7 @@
         }
     })
 
+
     function calculateType() {
         var start_date = $('#order-start_date').val();
         var end_date = $('#order-end-date').val();
@@ -2142,32 +2201,9 @@
             }
         });
     }
-  
-    document.getElementById("button-notification").addEventListener("click", function() {
-        if($("#notification-items").hasClass("d-block"))
-            $("#notification-items").removeClass("d-block");
-        else
-            $('#notification-items').addClass('d-block');
-    })
-    document.body.addEventListener("click", function(e) {
-        //console.log(e);
-        var notification = document.getElementById("notification-container");
-        if(!notification.contains(e.target))
-        {
-            //console.log("entered")
-            $("#notification-items").removeClass("d-block");
-        }
-        //console.log(notification);
-        //var arr=[...e.target.classList]
-        //console.log(arr);
-        //  if (e.target.classList!=null && e.target.classList!=undefined &&
-        //  ![...e.target.classList].includes("nofification-alert")){
-        //    // alert("hi");
-        //     $('#notification-items').removeClass('d-block');
-        // }
-    }) 
-   
-   
+
+
+
 
 
 
