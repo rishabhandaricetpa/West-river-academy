@@ -658,7 +658,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $custom_payment->amount,
-                        'linked_to' => $cart->item_id,
+                        'linked_to' => $custom_payment->id,
                         'related_to' => 'custom_record_received',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -771,7 +771,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $customletter_payment->amount,
-                        'linked_to' =>  $cart->item_id,
+                        'linked_to' =>  $customletter_payment->id,
                         'related_to' => 'custom_letter_record_received',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -791,7 +791,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $consultation_payment->amount,
-                        'linked_to' => $cart->item_id,
+                        'linked_to' => $consultation_payment->id,
                         'related_to' => 'orderconsultation_record_received',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);

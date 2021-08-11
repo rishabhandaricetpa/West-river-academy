@@ -1,7 +1,7 @@
 <section class="orders-detail  pt-10r" id="orders">
     <div class="row">
         <div class="col-12">
-            <h2 class="pr-3">Orders</h2>
+            <h2 class="pr-3">Create Orders</h2>
             <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                     <thead class="thead-light">
@@ -197,12 +197,8 @@
                                         <option value="Preschool Age 3">Preschool Age 3 </option>
                                         <option value="Preschool Age 4">Preschool Age 4</option>
                                         <option value="Kindergarten">Kindergarten</option>
-                                        <?php 
-                                        for($i=1; $i<=12; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>  
-                                    </select>
+                                        <?php for ($i = 1; $i <= 12; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
                                 </div>
                             </div>
 
@@ -543,12 +539,8 @@
                                     <select type="" id="notarization_quantity" class="form-control"
                                         onchange="getNoatrizationAmount(); getTotal();">
                                         <option value="">Select</option>
-                                        <?php 
-                                        for($i=1; $i<=10; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>                                      
-                                    </select>
+                                        <?php for ($i = 1; $i <= 10; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -626,13 +618,9 @@
                                     <select type="" id="apostille_quantity" class="form-control"
                                         onchange="getApostilleAmount(); getTotal();">
                                         <option value="">Select</option>
-                                        <?php 
-                                        for($i=1; $i<=4; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>  
-                                    </select>
-                                    <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
+                                        <?php for ($i = 1; $i <= 4; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
+                                            <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
 
                                 </div>
                             </div>
@@ -798,12 +786,8 @@
                                     <select type="" id="consul_quantity" class="form-control"
                                         onchange="getConsulatationAmount();">
                                         <option value="">Select</option>
-                                        <?php 
-                                        for($i=1; $i<=10; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>  
-                                    </select>
+                                        <?php for ($i = 1; $i <= 10; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">

@@ -77,7 +77,7 @@ class ParentController extends Controller
             $user = User::create([
                 'name' => $request->get('parent1_first_name'),
                 'email' => $request->get('parent1_email'),
-                'password' => Hash::make($request->get('parent1_cell_phone')),
+                'password' => Hash::make('westriveracademy'),
                 'email_verified_at' => date("Y-m-d H:i:s"),
             ]);
 

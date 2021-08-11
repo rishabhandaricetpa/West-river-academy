@@ -40,18 +40,18 @@
                                         id="edit_rep_city" value="{{ $rep_group->city }}" disabled required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Name of Rep :</label>
+                                    <label>Name :</label>
                                     <input type="text" class="form-control is-disabled" name="edit_rep_name"
                                         id="edit_rep_name" value="{{ $rep_group->name }}" disabled required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Rep Email :</label>
+                                    <label> Email :</label>
                                     <input type="email" class="form-control is-disabled" name="edit_rep_email"
                                         id="edit_rep_email" value="{{ $rep_group->email }}" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>Rep Phone :</label>
+                                    <label> Phone :</label>
                                     <input type="number" class="form-control is-disabled" name="edit_rep_phone"
                                         id="edit_rep_phone" value="{{ $rep_group->rep_phone }}" disabled>
                                 </div>

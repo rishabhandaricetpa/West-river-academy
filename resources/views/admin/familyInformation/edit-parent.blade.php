@@ -405,21 +405,22 @@
                     </div>
                 </div>
                 <div class="col-md-6 ">
-                    <h3>Reps/Group</h3>
+                    <h3>Reps/Influencers</h3>
                     <div class="overflow-auto max-table">
                         <table class="table table-striped table-styling w-100 table-vertical_scroll">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Rep Name</th>
+                                    <th scope="col"> Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col" class="text-right"><button type="button"
                                             class="btn btn-primary btn-modal ml-auto" data-toggle="modal"
                                             data-target="#RepsModal" data-whatever="@getbootstrap">Add
-                                            new Rep</button>
+                                            new Rep/Influencer</button>
                                     </th>
                                     <th scope="col" class="text-right"><button type="button"
                                             class="btn btn-primary btn-modal ml-auto" data-toggle="modal"
-                                            data-target="#groupModal" data-whatever="@getbootstrap">Choose Rep</button>
+                                            data-target="#groupModal" data-whatever="@getbootstrap">Choose
+                                            Rep/Influencer</button>
                                     </th>
                                 </tr>
                             </thead>
@@ -475,7 +476,7 @@
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Name of
-                                                    Representative/Influncer
+                                                    Representative/Influencer
                                                 </label>
                                                 <input type="text" id="rep_name" class="form-control" required>
                                             </div>
@@ -497,7 +498,7 @@
 
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Rep Email
+                                                <label for="message-text" class="col-form-label">Rep/Influencer Email
                                                 </label>
                                                 <input type="email" id="rep_email" class="form-control">
                                             </div>
@@ -505,7 +506,7 @@
 
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Rep Phone
+                                                <label for="message-text" class="col-form-label">Rep/Influencer Phone
                                                 </label>
                                                 <input type="text" id="rep_phone" class="form-control">
                                             </div>
@@ -525,7 +526,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="groupModalLabel">Choose Reps/Group</h5>
+                                <h5 class="modal-title" id="groupModalLabel">Choose Rep/Influencer</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -537,6 +538,7 @@
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Type:</label>
                                                 <select class="form-control" type="text" id='choosed_rep_id'>
+                                                    <option disable>Select One</option>
                                                     @foreach ($all_rep_groups as $all_rep_group)
                                                         <option value="{{ $all_rep_group->id }}">
                                                             {{ $all_rep_group->name }}
@@ -1292,7 +1294,7 @@
                                                         Transfer</a></td>
 
                                             @elseif($data->related_to === 'custom_record_received')
-                                                <td><a href="{{ route('admin.custom.payments', $data->linked_to) }}">Custom
+                                                <td><a href="{{ route('admin.edit.custompayment', $data->linked_to) }}">Custom
                                                         Payment</a></td>
                                             @elseif($data->related_to === 'transcript_edit_record_received')
                                                 <td><a href="">Transcript Edit Request</a></td>
@@ -1304,10 +1306,10 @@
                                                         class="transform-none">Notarization
                                                         or Apostille</a></td>
                                             @elseif($data->related_to === 'custom_letter_record_received')
-                                                <td><a href="{{ route('admin.each.customletters', $data->linked_to) }}">Custom
+                                                <td><a href="{{ route('admin.edit.customletter', $data->linked_to) }}">Custom
                                                         Letter</a></td>
                                             @elseif($data->related_to === 'orderconsultation_record_received')
-                                                <td><a href="{{ route('admin.each.conultation', $data->linked_to) }}">Personal
+                                                <td><a href="{{ route('admin.edit.conultation', $data->linked_to) }}">Personal
                                                         Consultation</a></td>
                                             @endif
 
