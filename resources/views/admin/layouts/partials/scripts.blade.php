@@ -603,7 +603,10 @@
             success: function(response) {
                 event.preventDefault();
                 console.log(response);
+
                 var html = '';
+                var no_notification = no_notification + `<p> No Notification</p>`;
+
                 const s = new Date();
                 const startDate = s.getDate();
                 response.forEach((record) => {
@@ -617,12 +620,14 @@
 
                             </li>`
                     }
-                    diffInMilliSeconds = Math.abs(startDate - new Date(record.created_at)
-                        .getDate());
-
 
                 })
-                $('#notifiy-list').html(html);
+                if (response.length == 0) {
+                    $('#notifiy-list').html(no_notification);
+                } else {
+                    $('#notifiy-list').html(html);
+                }
+
 
             },
             error: function(response) {
