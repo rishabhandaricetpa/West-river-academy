@@ -224,7 +224,8 @@ label.h3 {
   label {
     font-size: 18px;
   }
-}   
+}
+
 select.dropdown-icon {
   background-color: $primary;
   border-radius: 10px;
@@ -232,25 +233,26 @@ select.dropdown-icon {
   font: inherit;
   padding: .3rem 2rem .3rem .5rem;
   /* reset */
-  margin: 0;      
+  margin: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+
 select.dropdown-icon {
   background-image:
-  linear-gradient(45deg, transparent 50%, $black 50%),
-  linear-gradient(135deg, $black 50%, transparent 50%);
-background-position:
-  calc(100% - 20px) calc(1rem - 2px),
-  calc(100% - 15px) calc(1rem - 2px);
-background-size:
-  5px 5px,
-  5px 5px,
-  1.5rem 1.5rem;
-background-repeat: no-repeat;
+    linear-gradient(45deg, transparent 50%, $black 50%),
+    linear-gradient(135deg, $black 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1rem - 2px),
+    calc(100% - 15px) calc(1rem - 2px);
+  background-size:
+    5px 5px,
+    5px 5px,
+    1.5rem 1.5rem;
+  background-repeat: no-repeat;
 }
 
 input[type="checkbox"],
@@ -358,7 +360,7 @@ input[type="radio"]:checked:before {
 //////family details form
 form.is-readonly .btn-save {
   display: none;
-}   
+}
 
 form.is-readonly input[disabled],
 form.is-readonly textarea[disabled] {
@@ -373,39 +375,135 @@ form.is-editing .btn-edit {
   display: none;
 }
 
-.family-details{
-  .nav{
-   justify-content: space-around;
-   .nav-link{
-    border-bottom: 2px solid transparent;
-    transition: .2s all;
-  }
-   .nav-link:hover{
-     border-bottom: 2px solid #ff9900;
-   }
+.family-details {
+  .nav {
+    justify-content: space-around;
+
+    .nav-link {
+      border-bottom: 2px solid transparent;
+      transition: .2s all;
+    }
+
+    .nav-link:hover {
+      border-bottom: 2px solid #ff9900;
+    }
   }
 }
-  .parents-details,
-  .students-details,
-  .order-details,
-  .rep-details {
-    .form-group { 
-      display: flex;
-      align-items: center;
-      margin-bottom: 5px;   
 
-      label {
-        max-width: 120px;
-        margin-bottom: 0;
-      }
+.parents-details,
+.students-details,
+.order-details,
+.rep-details {
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+
+    label {
+      max-width: 120px;
+      margin-bottom: 0;
     }
-  }     
+  }
+}
+
 .btn-modal {
   background-color: #fc0;
-  padding:5px;
+  padding: 5px;
 }
 
 
+.search-form {
+  *:focus{  
+    border:none;   
+    box-shadow: 0!important;
+  }
+  .dropdown.dropdown-lg .dropdown-menu {
+    padding: 15px 10px;
+  }
 
+  .form-group {
+    display: flex;
+    align-items: flex-end;
+  }
 
+  .search-icon,
+  .input-group-btn {
+    content: '';
+    top: 50%;
+    z-index: 9;
+    transform: translateY(-50%);
+  }
 
+  .search-icon {
+    left: 5px;
+    background-color: transparent;
+
+    .fa-search {
+      color: $secondary-color;
+    }
+
+  }
+
+  .input-group-btn {
+    right: 0;
+    color: $secondary-color;
+
+  }
+
+  label {
+    width: 290px;
+    margin-bottom: 0;
+  }
+
+  .form-group input {
+    border: 0;
+    border-radius: 0 !important;
+    border-bottom: 1px solid grey;
+  }
+
+  .btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .btn-group .form-horizontal .btn[type="submit"] {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  .dropdown-toggle{
+    padding-top:10px;  
+    padding-bottom: 0;
+  
+  }
+  .dropdown-toggle::after {
+    border-top: 0.5em solid $secondary-color !important;
+    border-right: 0.5em solid transparent;
+    border-left: 0.5em solid transparent;
+  }
+
+  @media screen and (min-width: 768px) {
+    #adv-search {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    .dropdown.dropdown-lg {
+      position: static !important;
+    }
+
+    .dropdown.dropdown-lg .dropdown-menu {
+      min-width: 300px;
+      max-width: 500px;
+    }
+  }
+}

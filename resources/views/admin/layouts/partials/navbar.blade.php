@@ -1,8 +1,8 @@
 <!-- Navbar -->
 
 <nav id="admin-header"
-    class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue p-0 d-flex justify-content-between main-nav_header align-items-center">
-    <!-- Left navbar links -->
+    class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue p-0 d-lg-flex justify-content-between main-nav_header align-items-center">
+    <!-- Left navbar links -->  
 
     <ul class="d-flex overflow-scroll">
         <ul class="navbar-nav">
@@ -26,7 +26,65 @@
         <li class="menu-item"><a href="#">Groups</a></li>
     </ul>
     <ul class="d-flex">
-        <li><img src="/images/search.png" alt="login"></li>
+        <li class="mr-3">
+          <div class="input-group search-form position-relative" id="adv-search">
+            <button type="button" class="btn search-icon p-0 bg-white position-absolute">
+              <i class="fas fa-search"></i>
+            </button>
+            <input type="text" class="form-control pl-4" placeholder="Search" />
+            <div class="input-group-btn position-absolute">
+                <div class="btn-group" role="group">
+                    <div class="dropdown dropdown-lg"> 
+                        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <form class="form-horizontal" role="form">
+                              <div class="form-group">
+                                <label for="filter">First Name</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Last Name</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Enrollment start date</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Email</label>
+                                <input class="form-control" type="email" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Status</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Country</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Student Birth Date</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Student Grade</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Referred By</label>
+                                <input class="form-control" type="text" />
+                              </div>
+                              <div class="form-group text-right">   
+                                <button class="btn" type="submit"> Clear Filters</button>
+                                <button class="btn btn-primary" type="submit"> Search</button>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
         <li>
           <div id="notification-container"  class="admin-notification-container">
             <div class="notification-wrap position-relative">
