@@ -1274,55 +1274,57 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($detail_order_lists as $data)
-                                        <tr>
-                                            <td>{{ formatDate($data->created_at) }}</td>
-                                            @if ($data->related_to === 'student_record_received')
-                                                <td><a
-                                                        href=" {{ route('admin.edit.payment.status', $data->student->id) }}">New
-                                                        Student Enrolled</a></td>
-                                            @elseif($data->related_to === 'graduation_record_received')
-                                                <td><a
-                                                        href="{{ route('admin.view.graduation') }}/{{ $data->linked_to }}/edit">Graduation
-                                                        Application</a></td>
-                                            @elseif($data->related_to === 'transcript_ordered')
-                                                <td><a href="{{ route('admin.transpayment.edit', $data->linked_to) }}">Transcript
-                                                        Ordered</a></td>
-                                            @elseif($data->related_to === 'record_transfer' )
-                                                <td><a
-                                                        href="{{ route('admin.student.schoolRecord', [$data->student_profile_id, $data['recordTransfer']['id']]) }}">Record
-                                                        Transfer</a></td>
-
-                                            @elseif($data->related_to === 'custom_record_received')
-                                                <td><a href="{{ route('admin.edit.custompayment', $data->linked_to) }}">Custom
-                                                        Payment</a></td>
-                                            @elseif($data->related_to === 'transcript_edit_record_received')
-                                                <td><a href="">Transcript Edit Request</a></td>
-                                            @elseif($data->related_to === 'postage_record_received')
-                                                <td><a href="{{ route('admin.each.postage', $data->linked_to) }}">Postage
-                                                        Request</a></td>
-                                            @elseif($data->related_to === 'appostile_record_received')
-                                                <td><a href="{{ route('admin.each.notarization', $data->linked_to) }}"
-                                                        class="transform-none">Notarization
-                                                        or Apostille</a></td>
-                                            @elseif($data->related_to === 'custom_letter_record_received')
-                                                <td><a href="{{ route('admin.edit.customletter', $data->linked_to) }}">Custom
-                                                        Letter</a></td>
-                                            @elseif($data->related_to === 'orderconsultation_record_received')
-                                                <td><a href="{{ route('admin.edit.conultation', $data->linked_to) }}">Personal
-                                                        Consultation</a></td>
-                                            @endif
-
-                                            <td>${{ $data->amount }}</td>
-                                            <td></td>
-                                        </tr>
-                                    @endforeach
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>3</td>
+                                        <td><button type="button" class="btn btn-primary btn-modal ml-3"
+                                            data-toggle="modal" data-target="#order-details_details"
+                                            data-whatever="@getbootstrap">manisha</button>  
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </section>
+            <div class="modal fade bd-example-modal-lg" id="order-details_details" tabindex="-1" role="dialog"
+                aria-labelledby="order-details_details-Label" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="order-details_details-Label">Order Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="overflow-auto max-table">
+                              <table class="table-styling w-100 table-vertical_scroll">
+                                <thead>
+                                  <tr><td>Payment Method</td>
+                                  <td>Amount</td>
+                                </tr></thead>
+                                <tbody>
+                                  <tr>
+                                    <td>payment method 1 </td>
+                                    <td>$<span>90</span></td>
+                                  </tr>
+                                </tbody>
+                                <tfoot class="bg-light">
+                                  <tr>
+                                    <td>Total</td>
+                                    <td>$<span>90</span></td>
+                                  </tr>
+                                </tfoot>
+                              </table>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="text-right pb-4">
                 <a href="#admin-header" class="btn btn-primary">Back to Top</a>
             </div>

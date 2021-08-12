@@ -75,7 +75,7 @@
                                 <label for="contain">Referred By</label>
                                 <input class="form-control" type="text" />
                               </div>
-                              <div class="form-group text-right">   
+                              <div class="form-group pt-3">   
                                 <button class="btn" type="submit"> Clear Filters</button>
                                 <button class="btn btn-primary" type="submit"> Search</button>
                               </div>
