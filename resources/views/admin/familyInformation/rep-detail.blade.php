@@ -122,10 +122,10 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
-                            Report From <input type="date" name="from" class="form-control">
+                            Report From <input type="date" id="report_from" name="report_from" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            Report To <input type="date" name="to" class="form-control">
+                            Report To <input type="date" id="report_to" name="report_to" class="form-control">
                         </div>
                         <input type="hidden" value="{{ $rep_id }}" name="rep_id">
                     </div>

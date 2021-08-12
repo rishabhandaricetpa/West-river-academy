@@ -1889,6 +1889,21 @@
             document.getElementById("end_date_of_enrollment").value = "";
         }
     });
+    // for report validating start and end date 
+    $("#report_to").change(function() {
+        var startDate = document.getElementById("report_from").value;
+        var endDate = document.getElementById("report_to").value;
+
+        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(
+                endDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("report_to").value = "";
+        }
+        if ((Date.parse(startDate) == Date.parse(endDate))) {
+            alert("End date and Start date cann't be same");
+            document.getElementById("report_to").value = "";
+        }
+    });
     $('#add_new_rep').on('submit', function(event) {
         event.preventDefault();
         var rep_type = $('#rep_type').val();
