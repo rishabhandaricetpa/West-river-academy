@@ -138,17 +138,53 @@
           @endforeach
         </tbody>
       </table>
+      <div class="modal fade bd-example-modal-lg" id="Payment-details-Modal" tabindex="-1" role="dialog"
+                aria-labelledby="Payment-details-ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="Payment-details-Label">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        <div class="modal-body">
+                          <div class="overflow-auto max-table">
+                            <table class="table-styling w-100 table-vertical_scroll">
+                              <thead>
+                                <td>Payment Method</td>
+                                <td>Amount</td>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>payment method 1 </td>
+                                  <td>$<span>90</span></td>
+                                </tr>
+                              </tbody>
+                              <tfoot class="bg-light">
+                                <tr>
+                                  <td>Total</td>
+                                  <td>$<span>90</span></td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div class="modal fade bd-example-modal-lg mt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
+      {{-- <div class="modal fade bd-example-modal-lg mt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
         aria-labelledby="Payment-details-ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="Payment-details-Label">Add Payment Details</h5>
+              <h5 class="modal-title" id="Payment-details-Label">New message</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                  <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+          </div>
+           
             <div class="modal-body">
               <div class="overflow-auto max-table">
                 <table class="table-styling w-100 table-vertical_scroll">
@@ -175,7 +211,7 @@
           </div>
           </form>
         </div>
-      </div>
+      </div> --}}
       <div>
       </div>
     </div>
