@@ -18,7 +18,8 @@
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center">
                                     <h2 class="pr-3"><a
-                                            href="{{ route('admin.parent.edit', $parent_id) }}">{{ $student->fullname }}</a>
+                                            href="{{ route('admin.parent.edit', $parent_id) }}">{{ $parent->p1_first_name }}
+                                            {{ $parent->p1_last_name }}</a>
                                     </h2>
                                     <div class="form-group mb-0">
                                         <select required class="dropdown-icon" id="student_status">

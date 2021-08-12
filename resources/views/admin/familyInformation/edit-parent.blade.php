@@ -580,7 +580,6 @@
                                         <th scope="col">Student Name</th>
                                         <th scope="col">Gender</th>
                                         <th scope="col">Date of Birth</th>
-                                        <th scope="col">Enrolled</th>
                                         <th scope="col">Email</th>
                                         <th>Delete</th>
                                         <th scope="col" class="text-right"><button type="button"
@@ -594,20 +593,18 @@
                                 <tbody>
                                     @foreach ($allstudent as $student)
                                         <tr>
-                                            @if ($rep_group)
-                                                <td><a
-                                                        href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
-                                                </td>
-                                            @else
-                                                <td></td>
-                                            @endif
-                                            @if ($rep_group)
-                                                <td><a class="transform-none" href="mailto:${{ $rep_group->email }}">
-                                                        {{ $rep_group->email }}</a></td>
-                                            @else
-                                                <td></td>
-                                            @endif
+                                            <td><a
+                                                    href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a></br>
+                                            </td>
+                                            <td>{{ $student->gender }}</td>
+                                            <td>{{ $student->d_o_b->format('M j, Y') }}</td>
                                             <td></td>
+
+                                            <td>{{ $student->email }}</td>
+                                            <td><a href="{{ route('admin.delete.student', $student->id) }}"
+                                                    onclick="return confirm('Are you sure you want to delete this student?');"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            </td>
                                             <td></td>
                                         </tr>
                                     @endforeach
