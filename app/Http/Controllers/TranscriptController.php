@@ -520,11 +520,10 @@ class TranscriptController extends Controller
             $transcriptData->status = 'completed';
             Dashboard::create([
                 'parent_profile_id' =>  ParentProfile::getParentId(),
+                'amount' => $transcript_payment->amount,
                 'student_profile_id' => $student_id,
                 'linked_to' => $transcript_payment->id,
-                'is_archieved' => 0,
                 'related_to' => 'transcript_ordered',
-                'notes' =>  $transcriptData['student']['fullname'],
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
         }

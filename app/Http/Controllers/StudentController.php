@@ -266,15 +266,14 @@ class StudentController extends Controller
                     $confirmlink->save();
                 }
             }
-            Dashboard::create([
-                'parent_profile_id' =>  $parentProfileData->id,
-                'student_profile_id' => $student->id,
-                'linked_to' => $student->Name,
-                'is_archieved' => 0,
-                'related_to' => 'student_record_received',
-                'notes' =>  $student->first_name . $student->last_name,
-                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
-            ]);
+            // Dashboard::create([
+            //     'parent_profile_id' =>  $parentProfileData->id,
+            //     'amount' => $fee,
+            //     'student_profile_id' => $student->id,
+            //     'linked_to' => $student->Name,
+            //     'related_to' => 'student_record_received',
+            //     'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            // ]);
             DB::commit();
 
             if ($data->expectsJson()) {

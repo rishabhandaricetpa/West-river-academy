@@ -140,6 +140,7 @@
           @endforeach
         </tbody>
       </table>
+  
 
       <div class="modal fade bd-example-modal-lg mt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
         aria-labelledby="Payment-details-ModalLabel" aria-hidden="true">
@@ -150,7 +151,8 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">Close</span>
               </button>
-            </div>
+          </div>
+           
             <div class="modal-body">
               <div class="overflow-auto max-table">
                 <table class="table-styling w-100 table-vertical_scroll">

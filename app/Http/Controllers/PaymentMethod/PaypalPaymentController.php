@@ -143,6 +143,7 @@ class PaypalPaymentController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
 
         $coupon_code = session('applied_coupon', null);
+        // dd('coupon', $coupon_code);
         $coupon_amount = session('applied_coupon_amount', 0);
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
         $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
@@ -157,6 +158,7 @@ class PaypalPaymentController extends Controller
         $paypal->amount = $enroll_fees->amount;
         $paypal->status = 'succeeded';
         $paypal->coupon_code = $coupon_code;
+        // dd('coupon code', $paypal->coupon_code);
         $paypal->coupon_amount = $coupon_amount;
         $paypal->item_type = $item_type;
         $paypal->student_profile_id = $student_id;

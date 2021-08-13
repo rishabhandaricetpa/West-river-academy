@@ -63,8 +63,9 @@
                                     <div class="form-group">
                                         <label for="p1_first_name">First Name :</label>
                                         <input type="text" class="form-control is-disabled" name="p1_first_name"
-                                            id="p1_first_name" placeholder="" value="{{ $parent->p1_first_name }} {{ $parent->p1_last_name }}"
-                                            disabled required>
+                                            id="p1_first_name" placeholder=""
+                                            value="{{ $parent->p1_first_name }} {{ $parent->p1_last_name }}" disabled
+                                            required>
                                     </div>
                                     <input type="hidden" value="{{ $parent->id }}" id="parent_address_id">
                                     <input type="hidden" value="{{ $address->id }}" id="address_id">
@@ -109,7 +110,6 @@
                                             placeholder="" name="country" value="{{ $parent->country }}" disabled
                                             required>
                                     </div>
-                               
                                 </div>
 
                                 {{-- shipping details 2 --}}
@@ -195,7 +195,7 @@
                 </div>
                 <div class="d-flex align-items-center form-group">
                     <label for="message-text" class="col-form-label col-form-label_highlights">Total</label>
-                    <input type="text" id="" value={{$amount}} class="form-control">
+                    <input type="text" id="" value={{ $amount }} class="form-control">
 
                 </div>
             </div>

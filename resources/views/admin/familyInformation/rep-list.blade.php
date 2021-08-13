@@ -6,7 +6,7 @@
 
         <div class="rep-list bg-white py-3 px-2 overflow-auto">
             <button type="button" class="btn btn-primary btn-modal ml-3" data-toggle="modal"
-                data-target="#addrep-list-Modal" data-whatever="@getbootstrap"><span>Add Rep</span><img
+                data-target="#addrep-list-Modal" data-whatever="@getbootstrap"><span>Add Rep/Influencer</span><img
                     src="/images.add.png" alt="">
             </button>
             <div class="modal fade bd-example-modal-lg mt-5" id="addrep-list-Modal" tabindex="-1" role="dialog"
@@ -14,7 +14,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addrep-list-Label">Add Repo List</h5>
+                            <h5 class="modal-title" id="addrep-list-Label">Add Rep/Influencer List</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -85,17 +85,19 @@
             <table class="datatable-pagination table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Name of Rep </th>
+                        <th>Name of Rep/Influencer </th>
+                        <th>Type</th>
                         <th>Country</th>
                         <th>City/Area</th>
-                        <th>Rep E-mail</th>
-                        <th>Rep Phone</th>
+                        <th>E-mail</th>
+                        <th>Phone</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($all_reps as $rep)
                         <tr>
                             <td><a href="{{ route('admin.rep.details', $rep->id) }}"> {{ $rep->name }} </a></td>
+                            <td>{{ $rep->type }}</td>
                             <td>{{ $rep->country }}</td>
                             <td>{{ $rep->city }}</td>
                             <td class="center">{{ $rep->email }}</td>

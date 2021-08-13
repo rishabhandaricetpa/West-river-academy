@@ -405,21 +405,22 @@
                     </div>
                 </div>
                 <div class="col-md-6 ">
-                    <h3>Reps/Group</h3>
+                    <h3>Reps/Influencers</h3>
                     <div class="overflow-auto max-table">
                         <table class="table table-striped table-styling w-100 table-vertical_scroll">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Rep Name</th>
+                                    <th scope="col"> Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col" class="text-right"><button type="button"
                                             class="btn btn-primary btn-modal ml-auto" data-toggle="modal"
                                             data-target="#RepsModal" data-whatever="@getbootstrap">Add
-                                            new Rep</button>
+                                            new Rep/Influencer</button>
                                     </th>
                                     <th scope="col" class="text-right"><button type="button"
                                             class="btn btn-primary btn-modal ml-auto" data-toggle="modal"
-                                            data-target="#groupModal" data-whatever="@getbootstrap">Choose Rep</button>
+                                            data-target="#groupModal" data-whatever="@getbootstrap">Choose
+                                            Rep/Influencer</button>
                                     </th>
                                 </tr>
                             </thead>
@@ -475,7 +476,7 @@
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Name of
-                                                    Representative/Influncer
+                                                    Representative/Influencer
                                                 </label>
                                                 <input type="text" id="rep_name" class="form-control" required>
                                             </div>
@@ -497,7 +498,7 @@
 
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Rep Email
+                                                <label for="message-text" class="col-form-label">Rep/Influencer Email
                                                 </label>
                                                 <input type="email" id="rep_email" class="form-control">
                                             </div>
@@ -505,7 +506,7 @@
 
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Rep Phone
+                                                <label for="message-text" class="col-form-label">Rep/Influencer Phone
                                                 </label>
                                                 <input type="text" id="rep_phone" class="form-control">
                                             </div>
@@ -525,7 +526,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="groupModalLabel">Choose Reps/Group</h5>
+                                <h5 class="modal-title" id="groupModalLabel">Choose Rep/Influencer</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -537,6 +538,7 @@
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Type:</label>
                                                 <select class="form-control" type="text" id='choosed_rep_id'>
+                                                    <option disable>Select One</option>
                                                     @foreach ($all_rep_groups as $all_rep_group)
                                                         <option value="{{ $all_rep_group->id }}">
                                                             {{ $all_rep_group->name }}
@@ -578,7 +580,6 @@
                                         <th scope="col">Student Name</th>
                                         <th scope="col">Gender</th>
                                         <th scope="col">Date of Birth</th>
-                                        <th scope="col">Enrolled</th>
                                         <th scope="col">Email</th>
                                         <th>Delete</th>
                                         <th scope="col" class="text-right"><button type="button"
@@ -592,20 +593,18 @@
                                 <tbody>
                                     @foreach ($allstudent as $student)
                                         <tr>
-                                            @if ($rep_group)
-                                                <td><a
-                                                        href="{{ route('admin.rep.details', [$rep_group->id, $parent->id]) }}">{{ $rep_group->name }}</a>
-                                                </td>
-                                            @else
-                                                <td></td>
-                                            @endif
-                                            @if ($rep_group)
-                                                <td><a class="transform-none" href="mailto:${{ $rep_group->email }}">
-                                                        {{ $rep_group->email }}</a></td>
-                                            @else
-                                                <td></td>
-                                            @endif
+                                            <td><a
+                                                    href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a></br>
+                                            </td>
+                                            <td>{{ $student->gender }}</td>
+                                            <td>{{ $student->d_o_b->format('M j, Y') }}</td>
                                             <td></td>
+
+                                            <td>{{ $student->email }}</td>
+                                            <td><a href="{{ route('admin.delete.student', $student->id) }}"
+                                                    onclick="return confirm('Are you sure you want to delete this student?');"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            </td>
                                             <td></td>
                                         </tr>
                                     @endforeach
@@ -1263,8 +1262,7 @@
                                     <tr>
                                         <th scope="col">Date</th>
                                         <th scope="col">Orders</th>
-
-
+                                        <th scope="col">Amount</th>
                                         <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                                 data-toggle="modal" data-target="#documentsModal"
                                                 data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
@@ -1272,55 +1270,59 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($detail_order_lists as $data)
+                                    @foreach ($detail_order_lists as $detail_order_list)
                                         <tr>
-                                            <td>{{ formatDate($data->created_at) }}</td>
-                                            @if ($data->related_to === 'student_record_received')
-                                                <td><a
-                                                        href=" {{ route('admin.edit.payment.status', $data->student->id) }}">New
-                                                        Student Enrolled</a></td>
-                                            @elseif($data->related_to === 'graduation_record_received')
-                                                <td><a
-                                                        href="{{ route('admin.view.graduation') }}/{{ $data->linked_to }}/edit">Graduation
-                                                        Application</a></td>
-                                            @elseif($data->related_to === 'transcript_ordered')
-                                                <td><a href="{{ route('admin.transpayment.edit', $data->linked_to) }}">Transcript
-                                                        Ordered</a></td>
-                                            @elseif($data->related_to === 'record_transfer' )
-                                                <td><a
-                                                        href="{{ route('admin.student.schoolRecord', [$data->student_profile_id, $data['recordTransfer']['id']]) }}">Record
-                                                        Transfer</a></td>
-
-                                            @elseif($data->related_to === 'custom_record_received')
-                                                <td><a href="{{ route('admin.custom.payments', $data->linked_to) }}">Custom
-                                                        Payment</a></td>
-                                            @elseif($data->related_to === 'transcript_edit_record_received')
-                                                <td><a href="">Transcript Edit Request</a></td>
-                                            @elseif($data->related_to === 'postage_record_received')
-                                                <td><a href="{{ route('admin.each.postage', $data->linked_to) }}">Postage
-                                                        Request</a></td>
-                                            @elseif($data->related_to === 'appostile_record_received')
-                                                <td><a href="{{ route('admin.each.notarization', $data->linked_to) }}"
-                                                        class="transform-none">Notarization
-                                                        or Apostille</a></td>
-                                            @elseif($data->related_to === 'custom_letter_record_received')
-                                                <td><a href="{{ route('admin.each.customletters', $data->linked_to) }}">Custom
-                                                        Letter</a></td>
-                                            @elseif($data->related_to === 'orderconsultation_record_received')
-                                                <td><a href="{{ route('admin.each.conultation', $data->linked_to) }}">Personal
-                                                        Consultation</a></td>
-                                            @endif
+                                            <td>{{ $detail_order_list->created_at }}</td>
+                                            <td>{{ $detail_order_list->item_type }}</td>
+                                            <td>{{ $detail_order_list->amount }}</td>
+                                            <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"
+                                                    data-toggle="modal" data-target="#order-details_details"
+                                                    data-whatever="@getbootstrap"
+                                                    data-id={{ $detail_order_list->transcation_id }}
+                                                    onclick="detailOrders(event.target)">View Order</a></td>
 
 
-                                            <td></td>
                                         </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </section>
+            <div class="modal fade bd-example-modal-lg" id="order-details_details" tabindex="-1" role="dialog"
+                aria-labelledby="order-details_details-Label" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="order-details_details-Label">Order Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="overflow-auto max-table">
+                                <table class="table-styling w-100 table-vertical_scroll">
+                                    <thead>
+                                        <tr>
+                                            <td>Student Name</td>
+                                            <td>Related To</td>
+                                            <td>Amount</td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="paymeny_history_wrapper_admin">
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-right pb-4">
                 <a href="#admin-header" class="btn btn-primary">Back to Top</a>
             </div>

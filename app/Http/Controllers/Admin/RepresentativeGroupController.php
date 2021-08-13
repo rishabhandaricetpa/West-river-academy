@@ -119,9 +119,10 @@ class RepresentativeGroupController extends Controller
         try {
 
 
-            $from = $request->from;
-            $to = $request->to;
+            $from = $request->report_from;
+            $to = $request->report_to;
             if ($from &&  $to) {
+
                 $rep_families =   ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->whereBetween('created_at', [$from, $to])->get();
             } else {
                 $rep_families =     ParentProfile::whereIn('representative_group_id', [$request->rep_id])->where('rep_status', 'active')->get();

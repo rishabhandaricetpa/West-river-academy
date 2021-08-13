@@ -581,7 +581,70 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     });
+    document.getElementById("button-notification").addEventListener("click", function() {
 
+        if ($("#notification-items").hasClass("d-block"))
+            $("#notification-items").removeClass("d-block");
+        else
+            $('#notification-items').addClass('d-block');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.recordtransfer.alert') }}",
+            type: "GET",
+
+            data: {
+
+
+
+            },
+            success: function(response) {
+                event.preventDefault();
+                console.log(response);
+
+                var html = '';
+                var no_notification = no_notification + `<p> No Notification</p>`;
+
+                const s = new Date();
+                const startDate = s.getDate();
+                response.forEach((record) => {
+                    if (Math.abs(startDate - new Date(record.created_at)
+                            .getDate()) > 7) {
+                        html = html + ` <li class="border-bottom mb-3 pb-3">
+                               
+                          <span class=" text-black"> Resend Record Transfer Request To School : ${record.school_name} </span><br>
+
+                                <a href="/admin/student/record/${record.student_profile_id}/${record.id}" class="btn btn-primary">Go To Record</a>
+
+                            </li>`
+                    }
+
+                })
+                if (response.length == 0) {
+                    $('#notifiy-list').html(no_notification);
+                } else {
+                    $('#notifiy-list').html(html);
+                }
+
+
+            },
+            error: function(response) {
+
+            }
+        });
+
+    })
+    document.body.addEventListener("click", function(e) {
+
+        var notification = document.getElementById("notification-container");
+        if (!notification.contains(e.target)) {
+
+            $("#notification-items").removeClass("d-block");
+        }
+
+    })
     // dashboard admin upload doc for student
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
@@ -1829,6 +1892,64 @@
             document.getElementById("end_date_of_enrollment").value = "";
         }
     });
+    // for report validating start and end date 
+    $("#report_to").change(function() {
+        var startDate = document.getElementById("report_from").value;
+        var endDate = document.getElementById("report_to").value;
+
+        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(
+                endDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("report_to").value = "";
+        }
+        if ((Date.parse(startDate) == Date.parse(endDate))) {
+            alert("End date and Start date cann't be same");
+            document.getElementById("report_to").value = "";
+        }
+    });
+
+    function detailOrders(event) {
+        $("#paymeny_history_wrapper_admin").html("")
+        var trans_id = $(event).data("id");
+        console.log(trans_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.orderdetails') }}",
+            type: "POST",
+
+            data: {
+                transaction_id: trans_id
+            },
+            success: function(response) {
+                console.log(response);
+                // location.reload();
+                var html = '';
+                if (orders.length) {
+                    console.log(response.orders);
+                    let html = '';
+                    response.orders.forEach(element => {
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td> ${element.related_to} </td>
+                        <td> ${element.amount} </td>
+                       </tr>`
+                    });
+                    $("#paymeny_history_wrapper_admin").html(html)
+                }
+            },
+            error: function(response) {
+
+
+            }
+        });
+
+    }
+
+
+
+
     $('#add_new_rep').on('submit', function(event) {
         event.preventDefault();
         var rep_type = $('#rep_type').val();
@@ -2118,9 +2239,9 @@
         } else {
             $("#payment-div").hide();
             $("#transction-div").hide();
-
         }
     })
+
 
     function calculateType() {
         var start_date = $('#order-start_date').val();
@@ -2146,21 +2267,9 @@
             }
         });
     }
-  
-    document.getElementById("button-notification").addEventListener("click", function() {
-        $('#notification-items').addClass('d-block');
-    })
-    // document.body.addEventListener("click", function(e) {
-    //     alert (e.classListjjjj);
-    //     var notification = $('#notification-items');
-        
-    //     if (!notification.is(e.target) && notification.has(e.target).length === 0){
-       
-    //         $('#notification-items').removeClass('d-block');
-    //     }
-    // }) 
-   
-   
+
+
+
 
 
 
