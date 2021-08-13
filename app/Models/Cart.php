@@ -625,17 +625,19 @@ class Cart extends Model
 
 
                     $transcripts = Transcript::whereId($cart->item_id)->get();
-                    foreach ($transcripts as $transcript) {
-                        // $current_count = $transcript->count_for_transcript;
-                        $transcript->status = $status;
-                        // $transcript->count_for_transcript = $current_count + 1;
-                        $transcript->save();
-                        // $clearpendingtranscrit = Transcript::where('status', 'pending')->delete();
 
+                    foreach ($transcript_payment as $ts_payment) {
+                        $ts_payment->payment_mode = $type;
+                        if ($payment_id != null) {
+                            $ts_payment->transcation_id = $payment_id;
+                            $ts_payment->status = $status;
+                        }
+                        $ts_payment->save();
                         Dashboard::create([
                             'parent_profile_id' => ParentProfile::getParentId(),
-                            'amount' => $transcript_payment->amount,
+                            'amount' => $ts_payment->amount,
                             'linked_to' => $ts_payment->id,
+                            'transaction_id' => $ts_payment->transcation_id,
                             'related_to' => 'transcript_ordered',
                             'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                         ]);
