@@ -20,7 +20,7 @@
                 <div class="modal-body">
                     <p>Thank you. We will review your transcript and give you our feedback. Then you will be able to approve
                         or edit your transcript. After you approve it, it will be available for you to download.</p>
-                    <p>Any changes requested after your approval will incur a {{ FeesInfo::getFeeAmount('additional_transcript')}} change fee.</p>
+                    <p>Any changes requested after your approval will incur a ${{$additional_fee}} change fee.</p>
                     <div class="text-right mt-3"><button type="button" class="btn btn-primary"
                             data-dismiss="modal">Close</button>
                     </div>

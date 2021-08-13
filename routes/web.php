@@ -150,6 +150,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('MyAccounts/resetpassword');
         })->name('reset.password');
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
+        Route::post('viewall-orders', 'StudentController@getAllOrders')->name('viewfull.orders');
 
         Route::get('/viewConfirmation/{enrollment_payment_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
         Route::get('/viewdownload/{enrollment_payment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');

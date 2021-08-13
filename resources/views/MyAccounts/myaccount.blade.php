@@ -5,6 +5,7 @@
 
 <main class="position-relative container form-content mt-4">
   <div class="form-wrap border bg-light py-5 px-25">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <form class="row">
       <div class="col-md-6">
@@ -107,17 +108,17 @@
         <thead>
           <tr>
             <th scope="col">Date</th>
-            <th scope="col">Items in order</th>
             <th scope="col">Status</th>
+            {{-- <th scope="col">Coupon Amount</th> --}}
             <th scope="col">Amount Total</th>
             <th scope="col">Payment Method</th>
+            <th scope="col">View Order</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($payment_history as $payment)
           <tr>
             <td>{{ formatDate($payment->created_at)}}</td>
-            <td>{{getOrders($payment->transcation_id)}}
               @if($payment->status=='pending')
             <td>Pending</td>
             @elseif($payment->status=='succeeded')
@@ -127,61 +128,28 @@
             @else
             <td>{{$payment->status}}</td>
             @endif
+            {{-- @if($payment->coupon_amount==0)
+            <td>-</td>
+            @else
+            <td>${{ $payment->coupon_amount}}</td>
+            @endif --}}
             <td>${{ $payment->amount }}</td>
-            <td><button type="button" class="btn btn-primary btn-modal ml-3" data-toggle="modal"
-                data-target="#Payment-details-Modal" data-whatever="@getbootstrap"><span>Add Rep</span><img
-                  src="/images.add.png" alt="">
-                {{ $payment->payment_mode}}</button>
-              </a>
-            </td>
+            <td>{{ $payment->payment_mode}}</td>
+            <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3 passID" data-toggle="modal"  data-target="#Payment-details-Modal" data-id="{{ $payment->transcation_id }}" onclick="viewOrders(event.target)" data-whatever="@getbootstrap">View Order</a></td>
           </tr>
           @endforeach
         </tbody>
       </table>
-      <div class="modal fade bd-example-modal-lg" id="Payment-details-Modal" tabindex="-1" role="dialog"
-                aria-labelledby="Payment-details-ModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="Payment-details-Label">New message</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                        <div class="modal-body">
-                          <div class="overflow-auto max-table">
-                            <table class="table-styling w-100 table-vertical_scroll">
-                              <thead>
-                                <td>Payment Method</td>
-                                <td>Amount</td>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>payment method 1 </td>
-                                  <td>$<span>90</span></td>
-                                </tr>
-                              </tbody>
-                              <tfoot class="bg-light">
-                                <tr>
-                                  <td>Total</td>
-                                  <td>$<span>90</span></td>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  
 
-      {{-- <div class="modal fade bd-example-modal-lg mt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
+      <div class="modal fade bd-example-modal-lg mt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
         aria-labelledby="Payment-details-ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="Payment-details-Label">New message</h5>
+              <h5 class="modal-title" id="Payment-details-Label">View Order Detail</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">Close</span>
               </button>
           </div>
            
@@ -189,19 +157,14 @@
               <div class="overflow-auto max-table">
                 <table class="table-styling w-100 table-vertical_scroll">
                   <thead>
-                    <td>Payment Method</td>
-                    <td>Amount</td>
+                    <td>Student Name</td>
+                    <td>Item Type</td>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>payment method 1 </td>
-                      <td>$<span>90</span></td>
-                    </tr>
+                  <tbody id="paymeny_history_wrapper">
                   </tbody>
                   <tfoot class="bg-light">
                     <tr>
-                      <td>Total</td>
-                      <td>$<span>90</span></td>
+                      
                     </tr>
                   </tfoot>
                 </table>
@@ -211,7 +174,7 @@
           </div>
           </form>
         </div>
-      </div> --}}
+      </div>
       <div>
       </div>
     </div>

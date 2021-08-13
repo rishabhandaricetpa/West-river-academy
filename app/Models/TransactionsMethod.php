@@ -26,10 +26,11 @@ class TransactionsMethod extends Model
     public static function storeTransactionData($parent_profile_id, $amount, $coupon_code, $coupon_amount, $type, $cartItems)
     {
         $items = collect($cartItems)->pluck('item_type')->toArray();
+
         $item_type = implode(",", $items);
         //pluck student id for the payment history tab added later
         $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
-        $student_id = implode(",", (array_unique($student_data)));
+        $student_id = implode(",", ($student_data));
         $id = Auth::user()->id;
         $parentProfileData = User::find($id)->parentProfile()->first();
         $paymentinfo = new self;
@@ -48,3 +49,8 @@ class TransactionsMethod extends Model
         Cart::emptyCartAfterPayment($type, 'pending', $payment_id);
     }
 }
+
+
+/*
+wrapper-
+*/
