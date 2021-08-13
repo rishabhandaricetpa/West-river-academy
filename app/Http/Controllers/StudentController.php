@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Dashboard;
 use App\Models\Notification as Notification;
 use App\Models\OrderPersonalConsultation;
+use App\Models\TransactionsMethod;
 use App\Models\UploadDocuments;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -546,5 +547,47 @@ class StudentController extends Controller
                 return response()->json(['status' => 'error', 'message' => 'Failed to remove enroll period']);
             }
         }
+    }
+
+    private function trimArrayValues($arr)
+    {
+        $data = [];
+        foreach ($arr as $val) {
+            $val = trim($val);
+            $val = str_replace(" ", "", $val);
+            if (!empty($val)) {
+                array_push($data, $val);
+            }
+        }
+        return $data;
+    }
+
+    public function getAllOrders(Request $request)
+    {
+        $trans_id = $request->get('trans_id');
+        $trans_data = TransactionsMethod::where('transcation_id', $trans_id)->first();
+        $orders = explode(',', getOrders($trans_id));
+
+        $student_ids = explode(',', $trans_data->student_profile_id);
+        $orders = $this->trimArrayValues($orders);
+        $student_ids = $this->trimArrayValues($student_ids);
+
+        $students = StudentProfile::whereIn('id', $student_ids)
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item['id'] => $item['fullname']];
+            })->toArray();
+
+        $data = [];
+        for ($i = 0; $i < count($student_ids); $i++) {
+            array_push($data, [
+                "student_name" => $students[$student_ids[$i]],
+                "item_type" => $orders[$i]
+            ]);
+        }
+
+        return response()->json([
+            "data" => $data
+        ]);
     }
 }

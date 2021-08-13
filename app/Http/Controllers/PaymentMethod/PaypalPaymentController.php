@@ -149,7 +149,7 @@ class PaypalPaymentController extends Controller
         $items = collect($cartItems)->pluck('item_type')->toArray();
         $item_type = implode(",", $items);
         $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
-        $student_id = implode(",", (array_unique($student_data)));
+        $student_id = implode(",", ($student_data));
         $paypal = new TransactionsMethod();
         $paypal->transcation_id = $payment_id;
         $paypal->payment_mode = 'PayPal';

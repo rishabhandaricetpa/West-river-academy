@@ -73,7 +73,7 @@ class StripeController extends Controller
                 $items = collect($cartItems)->pluck('item_type')->toArray();
                 $item_type = implode(",", $items);
                 $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
-                $student_id = implode(",", (array_unique($student_data)));
+                $student_id = implode(",", ($student_data));
                 $paymentinfo = $parentProfileData->TransactionsMethod()->create([
                     'parent_profile_id' => $parentProfileData,
                     'transcation_id' => $charges->id,

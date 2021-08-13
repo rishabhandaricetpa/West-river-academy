@@ -144,8 +144,7 @@ class ParentController extends Controller
         $studentData = $parent->studentProfile()->get();
 
         $studentId = collect($studentData)->pluck('id');
-        $payment_history = TransactionsMethod::where('parent_profile_id', $parent->id)->get();
-
+        $payment_history = TransactionsMethod::where('parent_profile_id', $parent->id)->orderBy('created_at', 'DESC')->get();
         return view('MyAccounts/myaccount', compact('parent', 'user_id', 'payment_history'));
     }
 

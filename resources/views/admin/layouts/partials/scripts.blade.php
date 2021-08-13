@@ -1367,6 +1367,7 @@
             }
         });
     });
+    
     // edit Dashboard Record For Super Admin
     function editDashboard(event) {
         var id = $(event).data("id");
@@ -1389,6 +1390,8 @@
             }
         });
     }
+
+     
     // assign Record of Dashboard For Super Admin
     $("#assign-form").on("submit", function(event) {
         console.log('created');

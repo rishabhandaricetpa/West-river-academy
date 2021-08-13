@@ -84,4 +84,37 @@
 
     });
 
+    // view order deatils
+      
+    function viewOrders(event) {
+        $("#paymeny_history_wrapper").html("")
+        var trans_id = $(event).data("id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('viewfull.orders') }}",
+            type: "POST",
+
+            data: {
+                trans_id,
+            },
+            success: function(response) {
+                if (response.data.length) {
+                   let html = '';
+                   response.data.forEach(element => {
+                       html += `<tr>
+                        <td> ${element.student_name} </td>
+                        <td> ${element.item_type} </td>
+                       </tr>`
+                   });
+                   $("#paymeny_history_wrapper").html(html)
+                }
+                },
+            error: function(response) {
+
+            }
+        });
+    }
+
 </script>
