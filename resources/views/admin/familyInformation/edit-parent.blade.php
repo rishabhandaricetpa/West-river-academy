@@ -1274,7 +1274,7 @@
                                         <tr>
                                             <td>{{ $detail_order_list->created_at }}</td>
                                             <td>{{ $detail_order_list->item_type }}</td>
-                                            <td>{{ $detail_order_list->amount }}</td>
+                                            <td>${{ $detail_order_list->amount }}</td>
                                             <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"
                                                     data-toggle="modal" data-target="#order-details_details"
                                                     data-whatever="@getbootstrap"
@@ -1306,7 +1306,7 @@
                                 <table class="table-styling w-100 table-vertical_scroll">
                                     <thead>
                                         <tr>
-                                            <td>Student Name</td>
+                                            <td>Order For</td>
                                             <td>Related To</td>
                                             <td>Amount</td>
 

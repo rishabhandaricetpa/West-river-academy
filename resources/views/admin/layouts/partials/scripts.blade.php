@@ -1930,7 +1930,7 @@
                         html += `<tr>
                         <td>${element.linked_to}</td>
                         <td> ${element.related_to} </td>
-                        <td> ${element.amount} </td>
+                        <td> $${element.amount} </td>
                        </tr>`
                     });
                     $("#paymeny_history_wrapper_admin").html(html)
