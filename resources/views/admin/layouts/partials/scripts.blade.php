@@ -1904,6 +1904,49 @@
             document.getElementById("report_to").value = "";
         }
     });
+
+    function detailOrders(event) {
+        $("#paymeny_history_wrapper_admin").html("")
+        var trans_id = $(event).data("id");
+        console.log(trans_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.orderdetails') }}",
+            type: "POST",
+
+            data: {
+                transaction_id: trans_id
+            },
+            success: function(response) {
+                console.log(response);
+                // location.reload();
+                var html = '';
+                if (orders.length) {
+                    console.log(response.orders);
+                    let html = '';
+                    response.orders.forEach(element => {
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td> ${element.related_to} </td>
+                        <td> ${element.amount} </td>
+                       </tr>`
+                    });
+                    $("#paymeny_history_wrapper_admin").html(html)
+                }
+            },
+            error: function(response) {
+
+
+            }
+        });
+
+    }
+
+
+
+
     $('#add_new_rep').on('submit', function(event) {
         event.preventDefault();
         var rep_type = $('#rep_type').val();

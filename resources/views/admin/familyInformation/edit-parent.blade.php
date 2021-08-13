@@ -1271,15 +1271,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>3</td>
-                                        <td><button type="button" class="btn btn-primary btn-modal ml-3"
-                                            data-toggle="modal" data-target="#order-details_details"
-                                            data-whatever="@getbootstrap">manisha</button>  
-                                        </td>
-                                    </tr>
+                                    @foreach ($detail_order_lists as $detail_order_list)
+                                        <tr>
+                                            <td>{{ $detail_order_list->created_at }}</td>
+                                            <td>{{ $detail_order_list->item_type }}</td>
+                                            <td>{{ $detail_order_list->amount }}</td>
+                                            <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"
+                                                    data-toggle="modal" data-target="#order-details_details"
+                                                    data-whatever="@getbootstrap"
+                                                    data-id={{ $detail_order_list->transcation_id }}
+                                                    onclick="detailOrders(event.target)">View Order</a></td>
+
+
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -1298,30 +1304,26 @@
                         </div>
                         <div class="modal-body">
                             <div class="overflow-auto max-table">
-                              <table class="table-styling w-100 table-vertical_scroll">
-                                <thead>
-                                  <tr><td>Payment Method</td>
-                                  <td>Amount</td>
-                                </tr></thead>
-                                <tbody>
-                                  <tr>
-                                    <td>payment method 1 </td>
-                                    <td>$<span>90</span></td>
-                                  </tr>
-                                </tbody>
-                                <tfoot class="bg-light">
-                                  <tr>
-                                    <td>Total</td>
-                                    <td>$<span>90</span></td>
-                                  </tr>
-                                </tfoot>
-                              </table>
+                                <table class="table-styling w-100 table-vertical_scroll">
+                                    <thead>
+                                        <tr>
+                                            <td>Student Name</td>
+                                            <td>Related To</td>
+                                            <td>Amount</td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="paymeny_history_wrapper_admin">
+
+                                    </tbody>
+
+                                </table>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-right pb-4">
                 <a href="#admin-header" class="btn btn-primary">Back to Top</a>
             </div>
