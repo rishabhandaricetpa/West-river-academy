@@ -100,17 +100,20 @@
                 trans_id,
             },
             success: function(response) {
+                // location.reload();
+                var html = '';
                 if (response.data.length) {
-                   let html = '';
-                   response.data.forEach(element => {
-                       html += `<tr>
-                        <td> ${element.student_name} </td>
-                        <td> ${element.item_type} </td>
+                    let html = '';
+                    response.data.forEach(element => {
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td> ${element.related_to}</td>
+                        <td> ${element.amount} </td>
                        </tr>`
-                   });
-                   $("#paymeny_history_wrapper").html(html)
+                    });
+                    $("#paymeny_history_wrapper").html(html)
                 }
-                },
+            },
             error: function(response) {
 
             }

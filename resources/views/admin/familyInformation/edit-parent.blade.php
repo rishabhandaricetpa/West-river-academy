@@ -1280,8 +1280,6 @@
                                                     data-whatever="@getbootstrap"
                                                     data-id={{ $detail_order_list->transcation_id }}
                                                     onclick="detailOrders(event.target)">View Order</a></td>
-
-
                                         </tr>
                                     @endforeach
 
@@ -1306,14 +1304,18 @@
                                 <table class="table-styling w-100 table-vertical_scroll">
                                     <thead>
                                         <tr>
-                                            <td>Student Name</td>
-                                            <td>Related To</td>
+                                            <td>Name</td>
+                                            <td>Item Type</td>
                                             <td>Amount</td>
 
                                         </tr>
                                     </thead>
                                     <tbody id="paymeny_history_wrapper_admin">
-
+                                        <tr>
+                                            <td id="student_name"></td>
+                                            <td id="items"></td>
+                                            <td id="amount"></td>
+                                        </tr>
                                     </tbody>
 
                                 </table>

@@ -158,7 +158,6 @@ class ParentController extends Controller
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
         $countries = Country::all();
         $studentData = $parent->studentProfile()->get();
-
         $studentId = collect($studentData)->pluck('id');
         $transcations =   Cart::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();

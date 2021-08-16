@@ -53,8 +53,8 @@ class RecordTransferController extends Controller
                 'parent_profile_id' => $parent_id,
                 'student_profile_id' => $student_id,
                 'linked_to' => $recordTransfer->id,
+                'item_type_id' => $recordTransfer->id,
                 'related_to' => 'record_transfer',
-                'linked_to' => 'Record Transfer Request',
                 'record_transfer_id' => $recordTransfer->id,
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);

@@ -564,29 +564,33 @@ class StudentController extends Controller
     public function getAllOrders(Request $request)
     {
         $trans_id = $request->get('trans_id');
-        $trans_data = TransactionsMethod::where('transcation_id', $trans_id)->first();
-        $orders = explode(',', getOrders($trans_id));
+        // $trans_data = TransactionsMethod::where('transcation_id', $trans_id)->first();
+        // $orders = explode(',', getOrders($trans_id));
 
-        $student_ids = explode(',', $trans_data->student_profile_id);
-        $orders = $this->trimArrayValues($orders);
-        $student_ids = $this->trimArrayValues($student_ids);
+        // $student_ids = explode(',', $trans_data->student_profile_id);
+        // $orders = $this->trimArrayValues($orders);
+        // $student_ids = $this->trimArrayValues($student_ids);
 
-        $students = StudentProfile::whereIn('id', $student_ids)
-            ->get()
-            ->mapWithKeys(function ($item) {
-                return [$item['id'] => $item['fullname']];
-            })->toArray();
+        // $students = StudentProfile::whereIn('id', $student_ids)
+        //     ->get()
+        //     ->mapWithKeys(function ($item) {
+        //         return [$item['id'] => $item['fullname']];
+        //     })->toArray();
 
-        $data = [];
-        for ($i = 0; $i < count($student_ids); $i++) {
-            array_push($data, [
-                "student_name" => $students[$student_ids[$i]],
-                "item_type" => $orders[$i]
-            ]);
-        }
+        // $data = [];
+        // for ($i = 0; $i < count($student_ids); $i++) {
+        //     array_push($data, [
+        //         "student_name" => $students[$student_ids[$i]],
+        //         "item_type" => $orders[$i]
+        //     ]);
+        // }
 
-        return response()->json([
-            "data" => $data
-        ]);
+        // return response()->json([
+        //     "data" => $data
+        // ]);
+
+
+        $orderDetails = Dashboard::where('transaction_id', $trans_id)->get();
+        return response()->json(['data' => $orderDetails]);
     }
 }

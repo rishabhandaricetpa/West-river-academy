@@ -497,8 +497,8 @@ class TranscriptController extends Controller
         $data = TranscriptPdf::where('transcript_id', $transcrip_id)->first();
         $pdflink = $data->pdf_link;
         $students = StudentProfile::whereId($student_id)->first();
-       $additional_fee= FeesInfo::getFeeAmount('additional_transcript');
-        return view('transcript/download-transcript', compact('students', 'transcrip_id', 'student_id', 'pdflink', 'data','additional_fee'));
+        $additional_fee = FeesInfo::getFeeAmount('additional_transcript');
+        return view('transcript/download-transcript', compact('students', 'transcrip_id', 'student_id', 'pdflink', 'data', 'additional_fee'));
     }
 
     /**
@@ -523,6 +523,7 @@ class TranscriptController extends Controller
                 'amount' => $transcript_payment->amount,
                 'student_profile_id' => $student_id,
                 'linked_to' => $transcript_payment->id,
+                'item_type_id' => $transcript_payment->id,
                 'related_to' => 'transcript_ordered',
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
