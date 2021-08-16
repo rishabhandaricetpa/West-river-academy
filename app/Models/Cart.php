@@ -593,11 +593,7 @@ class Cart extends Model
                         $confirmlink->status = $status;
                     }
                     $confirmlink->save();
-                    // Dashboard::create([
-                    //     'linked_to' => 'New Student Record Received',
-                    //     'notes' => 'New Student Record Received for parent  ' . $parentName->p1_first_name,
-                    //     'created_date' => \Carbon\Carbon::now()->format('M d Y'),
-                    // ]);
+
                     Dashboard::create([
                         'parent_profile_id' =>  $parent_profile_id,
                         'amount' => $enrollemtpayment->amount,
@@ -613,6 +609,8 @@ class Cart extends Model
 
                 case 'graduation':
                     $graduation_payment = GraduationPayment::where('graduation_id', $cart->item_id)->first();
+                    $graduate = Graduation::where('id', $graduation_payment->graduation_id)->first();
+                    $student = StudentProfile::where('id', $graduate->student_profile_id)->first();
                     if ($graduation_payment) {
                         $graduation_payment->payment_mode = $type;
                         if ($payment_id != null) {
@@ -623,11 +621,20 @@ class Cart extends Model
                         $graduation = Graduation::whereId($cart->item_id)->first();
                         $graduation->status = 'paid';
                         $graduation->save();
+                        Dashboard::create([
+                            'parent_profile_id' => ParentProfile::getParentId(),
+                            'amount' => $graduation_payment->amount,
+                            'linked_to' =>  $student->first_name,
+                            'transaction_id' => $graduation_payment->transcation_id,
+                            'related_to' => 'Graduation Order',
+                            'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                        ]);
                     }
                     break;
                 case 'transcript':
                     $transcript_payment = TranscriptPayment::where('transcript_id', $cart->item_id)->get();
-
+                    $transcript = Transcript::where('id', $cart->item_id)->first();
+                    $student = StudentProfile::where('id', $transcript->student_profile_id)->first();
                     foreach ($transcript_payment as $ts_payment) {
                         $ts_payment->payment_mode = $type;
                         if ($payment_id != null) {
@@ -638,7 +645,7 @@ class Cart extends Model
                         Dashboard::create([
                             'parent_profile_id' => ParentProfile::getParentId(),
                             'amount' => $ts_payment->amount,
-                            'linked_to' => $ts_payment->id,
+                            'linked_to' =>  $student->first_name,
                             'item_type_id' => $ts_payment->id,
                             'transaction_id' => $ts_payment->transcation_id,
                             'related_to' => 'transcript_ordered',
@@ -657,7 +664,6 @@ class Cart extends Model
 
                 case 'custom':
                     $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
-                    //  dd($custom_payment);
                     if ($custom_payment) {
                         $custom_payment->payment_mode = $type;
                         if ($payment_id != null) {
@@ -668,10 +674,11 @@ class Cart extends Model
                         }
                         $custom_payment->save();
                     }
+
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $custom_payment->amount,
-                        'linked_to' => $custom_payment->id,
+                        'linked_to' => $parentName->p1_first_name,
                         'related_to' => 'custom_record_received',
                         'item_type_id' => $custom_payment->id,
                         'transaction_id' => $custom_payment->transcation_id,
@@ -681,6 +688,8 @@ class Cart extends Model
 
                 case 'transcript_edit':
                     $transcript_payment = TranscriptPayment::where('transcript_id', $cart->item_id)->first();
+                    $transcript = Transcript::where('id', $cart->item_id)->first();
+                    $student = StudentProfile::where('id', $transcript->student_profile_id)->first();
                     if ($transcript_payment) {
                         $transcript_payment->payment_mode = $type;
                         if ($payment_id != null) {
@@ -697,9 +706,10 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $transcript_payment->amount,
-                        'linked_to' =>  $cart->item_id,
+                        'linked_to' =>  $student->first_name,
                         'item_type_id' => $transcript_payment->id,
                         'related_to' => 'transcript_edit_record_received',
+                        'transaction_id' => $transcript_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
 
@@ -716,12 +726,14 @@ class Cart extends Model
                         }
                         $postage_payment->save();
                     }
+
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $postage_payment->amount,
-                        'linked_to' =>  $cart->item_id,
+                        'linked_to' => $parentName->p1_first_name,
                         'related_to' => 'postage_record_received',
                         'item_type_id' => $postage_payment->id,
+                        'transaction_id' => $postage_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
                     break;
@@ -743,9 +755,10 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $notarization_payment->amount,
-                        'linked_to' =>  $cart->item_id,
+                        'linked_to' =>  $parentName->p1_first_name,
                         'related_to' => 'appostile_record_received',
                         'item_type_id' => $notarization_payment->id,
+                        'transaction_id' => $notarization_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
 
@@ -765,15 +778,22 @@ class Cart extends Model
                     $apostille = Apostille::whereId($apostille_payment->apostille_id)->first();
                     $apostille->status = $status;
                     $apostille->save();
+                    // Dashboard::create([
+                    //     'parent_profile_id' => ParentProfile::getParentId(),
+                    //     'amount' => $apostille_payment->amount,
+                    //     'linked_to' =>  $cart->item_id,
+                    //     'related_to' => 'appostile_record_received',
+                    //     'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                    // ]);
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $apostille_payment->amount,
-                        'linked_to' =>  $cart->item_id,
+                        'linked_to' =>  $parentName->p1_first_name,
                         'related_to' => 'appostile_record_received',
                         'item_type_id' => $apostille_payment->id,
+                        'transaction_id' => $apostille_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
-
                     break;
                 case 'custom_letter':
                     $customletter_payment = CustomLetterPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
@@ -790,8 +810,8 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $customletter_payment->amount,
-                        'linked_to' =>  $customletter_payment->id,
-                        'related_to' => 'custom_letter_record_received',
+                        'linked_to' =>  $parentName->p1_first_name,
+                        'related_to' => 'Custom Letter',
                         'transaction_id' => $customletter_payment->transcation_id,
                         'item_type_id' => $customletter_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -813,7 +833,7 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $consultation_payment->amount,
                         'linked_to' => $consultation_payment->id,
-                        'related_to' => 'orderconsultation_record_received',
+                        'related_to' => 'orderconsultation',
                         'item_type_id' => $consultation_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);

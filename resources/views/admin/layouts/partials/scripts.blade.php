@@ -1955,7 +1955,7 @@
                        if(element.related_to == "custom_letter_record_received"){
                         url='/admin/edit-customletter/'+ element.item_type_id
                        }
-                       if(element.related_to == "orderconsultation_record_received"){
+                       if(element.related_to == "orderconsultation"){
                         url='/admin/edit-conultation/'+ element.item_type_id
                        }
                        
