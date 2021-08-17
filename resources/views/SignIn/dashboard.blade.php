@@ -243,16 +243,17 @@
                         <tbody>
                             @foreach ($confirmLetter as $student)
                                 <tr>
+                                    
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->grade_level }}</td>
-                                    @if (getPaymentstatus($student->enrollment_payment_id) === 'paid')
+                                    @if (getPaymentstatus($student->enrollmentPeriod->id) === 'paid')
                                         <td>Paid</td>
                                     @else
                                         <td>Pending</td>
                                     @endif
-                                    @if (getPaymentstatus($student->enrollment_payment_id) === 'paid')
-                                        <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
+                                    @if (getPaymentstatus($student->enrollmentPeriod->id) === 'paid')
+                                        <td><a href="{{ route('view.confirm', [$student->enrollmentPeriod->enrollment_payment_id, $student->enrollmentPeriod->grade_level]) }}"
                                                 class="d-flex align-items-center"><i
                                                     class="fas fa-file-pdf mr-2"></i>Download</a></td>
                                     @else

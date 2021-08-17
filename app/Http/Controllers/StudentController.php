@@ -114,9 +114,11 @@ class StudentController extends Controller
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
+
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
-            ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
-            ->with('enrollmentPeriods', 'confirmletter')->get();
+            ->with('enrollmentPeriod', 'confirmletter')->get();
+          
+    //    dd($confirmLetter);
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
