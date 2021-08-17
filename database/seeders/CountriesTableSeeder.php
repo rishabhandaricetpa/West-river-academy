@@ -243,6 +243,7 @@ class CountriesTableSeeder extends Seeder
             ['United Kingdom', 'UK', Carbon::create($year, '08', '01')->format('Y/m/d'), Carbon::create($nextyear, '07', '31')->format('Y/m/d'), 85],
             ['Tanzania', 'TZ', Carbon::create($year, '04', '01')->format('Y/m/d'), Carbon::create($nextyear, '03', '31')->format('Y/m/d'), 85],
             ['United States', 'US', Carbon::create($year, '08', '01')->format('Y/m/d'), Carbon::create($nextyear, '07', '31')->format('Y/m/d'), 0],
+            ['US', 'US', Carbon::create($year, '08', '01')->format('Y/m/d'), Carbon::create($nextyear, '07', '31')->format('Y/m/d'), 0],
             ['U.S. Virgin Islands', 'VI', Carbon::create($year, '08', '01')->format('Y/m/d'), Carbon::create($nextyear, '07', '31')->format('Y/m/d'), 85],
             ['Uruguay', 'UY', Carbon::create($year, '01', '01')->format('Y/m/d'), Carbon::create($year, '12', '31')->format('Y/m/d'), 85],
             ['Uzbekistan', 'UZ', Carbon::create($year, '08', '01')->format('Y/m/d'), Carbon::create($nextyear, '07', '31')->format('Y/m/d'), 85],

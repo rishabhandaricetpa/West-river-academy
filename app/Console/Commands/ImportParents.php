@@ -57,32 +57,34 @@ class ImportParents extends Command
                 }
                 $p1_email = Str::of($cells[13]);
                 $user = User::where('email', $p1_email)->first();
-                if (!$user->exists()) {
-                    User::create(
-                        [
-                            'name' => $cells[14],
-                            'email' => $cells[13],
-                            'legacy_name' => $cells[11],
-                            'password' => Hash::make('12345678'),
-                        ]
-                    );
-                } else {
-                    ParentProfile::create([
-                        'user_id' => (isset($user)) ? $user->id : null,
-                        'p1_first_name' => $cells[14],
-                        'p1_last_name' => $cells[15],
-                        'p1_email' => $cells[13],
-                        'p1_cell_phone' => $cells[4],
-                        'p1_home_phone' =>  $cells[4],
-                        'street_address' => $cells[8],
-                        'legacy' => $cells[11],
-                        'city' => $cells[5],
-                        'state' =>  $cells[7],
-                        'zip_code' =>  $cells[9],
-                        'country' => $cells[6],
-                        'reference' =>  $cells[18],
-                        'immunized' =>  $cells[10]
-                    ]);
+                if ($p1_email != '' && !is_null($user)) {
+                    if (!$user->exists()) {
+                        User::create(
+                            [
+                                'name' => $cells[14],
+                                'email' => $cells[13],
+                                'legacy_name' => $cells[11],
+                                'password' => Hash::make('12345678'),
+                            ]
+                        );
+                    } else {
+                        ParentProfile::create([
+                            'user_id' => $user ? $user->id : null,
+                            'p1_first_name' => $cells[14],
+                            'p1_last_name' => $cells[15],
+                            'p1_email' => $cells[13],
+                            'p1_cell_phone' => $cells[4],
+                            'p1_home_phone' =>  $cells[4],
+                            'street_address' => $cells[8],
+                            'legacy' => $cells[11],
+                            'city' => $cells[5],
+                            'state' =>  $cells[7],
+                            'zip_code' =>  $cells[9],
+                            'country' => $cells[6],
+                            'reference' =>  $cells[18],
+                            'immunized' =>  $cells[10]
+                        ]);
+                    }
                 }
             }
         }
