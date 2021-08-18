@@ -452,6 +452,7 @@ class TranscriptController extends Controller
                 'status' => 'pending',
             ]);
         } else {
+            $enroll_student = StudentProfile::find($id);
             $type = $request->get('type');
             $transcriptData = Transcript::where('id', $request->get('transcript_id'))->first();
             $enrollment_ids =   getEnrollmetForStudents($id);

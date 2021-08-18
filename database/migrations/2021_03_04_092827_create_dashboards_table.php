@@ -19,6 +19,10 @@ class CreateDashboardsTable extends Migration
             $table->string('updated_date')->nullable();
             $table->string('linked_to')->nullable();
             $table->string('amount')->nullable();
+            $table->string('related_to')->nullable();
+            $table->foreignId('student_profile_id')->nullable()->constrained()->references('id')->on('student_profiles')->onDelete('cascade');
+            $table->string('status')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->timestamps();
         });
     }
