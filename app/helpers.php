@@ -546,7 +546,11 @@ function getstatus($enrollment_period_id)
 function getPaymentstatus($enrollment_payment_id)
 {
     $enrollment_payments = EnrollmentPayment::whereId($enrollment_payment_id)->first();
-    return $enrollment_payments->status;
+    $status = $enrollment_payments->status;
+    if ($status == 'paid')
+        return "Paid";
+    else
+        return "Pending";
 }
 
 //Get the student data
