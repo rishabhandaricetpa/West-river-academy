@@ -600,7 +600,8 @@ class Cart extends Model
                         'student_profile_id' => $enrollment_period->student_profile_id,
                         'transaction_id' => $enrollemtpayment->transcation_id,
                         'linked_to' => $student->first_name,
-                        'related_to' => 'Student Enrolled',
+                        'item_type_id' => $student->id,
+                        'related_to' => 'student_enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
 
@@ -645,6 +646,7 @@ class Cart extends Model
                             'parent_profile_id' => ParentProfile::getParentId(),
                             'amount' => $ts_payment->amount,
                             'linked_to' =>  $student->first_name,
+                            'item_type_id' => $ts_payment->id,
                             'transaction_id' => $ts_payment->transcation_id,
                             'related_to' => 'transcript_ordered',
                             'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -677,7 +679,8 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $custom_payment->amount,
                         'linked_to' => $parentName->p1_first_name,
-                        'related_to' => 'Custom Payment',
+                        'related_to' => 'custom_record_received',
+                        'item_type_id' => $custom_payment->id,
                         'transaction_id' => $custom_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -704,7 +707,8 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $transcript_payment->amount,
                         'linked_to' =>  $student->first_name,
-                        'related_to' => 'Transcript Edit',
+                        'item_type_id' => $transcript_payment->id,
+                        'related_to' => 'transcript_edit_record_received',
                         'transaction_id' => $transcript_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -727,7 +731,8 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $postage_payment->amount,
                         'linked_to' => $parentName->p1_first_name,
-                        'related_to' => 'Postage',
+                        'related_to' => 'postage_record_received',
+                        'item_type_id' => $postage_payment->id,
                         'transaction_id' => $postage_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -751,7 +756,8 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $notarization_payment->amount,
                         'linked_to' =>  $parentName->p1_first_name,
-                        'related_to' => 'Notarization ',
+                        'related_to' => 'appostile_record_received',
+                        'item_type_id' => $notarization_payment->id,
                         'transaction_id' => $notarization_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -783,7 +789,8 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $apostille_payment->amount,
                         'linked_to' =>  $parentName->p1_first_name,
-                        'related_to' => 'Apostile',
+                        'related_to' => 'appostile_record_received',
+                        'item_type_id' => $apostille_payment->id,
                         'transaction_id' => $apostille_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -806,6 +813,7 @@ class Cart extends Model
                         'linked_to' =>  $parentName->p1_first_name,
                         'related_to' => 'Custom Letter',
                         'transaction_id' => $customletter_payment->transcation_id,
+                        'item_type_id' => $customletter_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
                     break;
@@ -826,6 +834,7 @@ class Cart extends Model
                         'amount' => $consultation_payment->amount,
                         'linked_to' => $consultation_payment->id,
                         'related_to' => 'orderconsultation',
+                        'item_type_id' => $consultation_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
                     break;

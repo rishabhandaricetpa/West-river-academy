@@ -157,8 +157,9 @@
               <div class="overflow-auto max-table">
                 <table class="table-styling w-100 table-vertical_scroll">
                   <thead>
-                    <td>Student Name</td>
+                    <td>Name</td>
                     <td>Item Type</td>
+                    <td>Amount</td>
                   </thead>
                   <tbody id="paymeny_history_wrapper">
                   </tbody>

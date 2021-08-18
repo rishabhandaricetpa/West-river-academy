@@ -1909,6 +1909,7 @@
     });
 
     function detailOrders(event) {
+        console.log('hi');
         $("#paymeny_history_wrapper_admin").html("")
         var trans_id = $(event).data("id");
         console.log(trans_id);
@@ -1924,16 +1925,44 @@
             },
             success: function(response) {
                 console.log(response);
-                // location.reload();
                 var html = '';
                 if (orders.length) {
                     console.log(response.orders);
                     let html = '';
                     response.orders.forEach(element => {
+                       let url="";
+                       if(element.related_to == "transcript_ordered"){
+                           url='/admin/transcript-edit/payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "graduation_record_received"){
+                        url='/admin/transcript-edit/payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "student_enrolled"){
+                        url='/admin/edit-payment-status/'+ element.item_type_id
+                       }                       
+                       if(element.related_to == "custom_record_received"){
+                        url='/admin/custom-payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "transcript_edit_record_received"){
+                        url='/admin/transcript-edit/payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "postage_record_received"){
+                        url='/admin/edit-postage/'+ element.item_type_id
+                       }
+                       if(element.related_to == "appostile_record_received"){
+                        url='/admin/edit-notarization/'+ element.item_type_id
+                       }
+                       if(element.related_to == "custom_letter_record_received"){
+                        url='/admin/edit-customletter/'+ element.item_type_id
+                       }
+                       if(element.related_to == "orderconsultation"){
+                        url='/admin/edit-conultation/'+ element.item_type_id
+                       }
+                       
                         html += `<tr>
                         <td>${element.linked_to}</td>
-                        <td> ${element.related_to} </td>
-                        <td> $${element.amount} </td>
+                        <td><a href="${url}">${element.related_to}</a></td>
+                       <td> ${element.amount} </td>
                        </tr>`
                     });
                     $("#paymeny_history_wrapper_admin").html(html)
