@@ -48,9 +48,7 @@
                 </ul>
                 <div class="row parents-details_name px-3">
                     <div class="col-12 d-flex align-items-center">
-                        <h2 class="pr-3 mb-0">{{ $parent->p1_first_name }} {{ $parent->p1_middle_name }}
-                            {{ $parent->p1_last_name }} & {{ $parent->p2_first_name }} {{ $parent->p2_middle_name }}
-                            {{ $parent->p2_last_name }}
+                        <h2 class="pr-3 mb-0">{{getlegacyname($parent->id)}}
                         </h2>
                         <div class="form-group mb-0">
                             <select required class="dropdown-icon" id="parent_status">
@@ -1255,13 +1253,13 @@
             <section class="documents  pt-10r" id="documents">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="pr-3"> Orders Paid</h2>
+                        <h2 class="pr-3"> Orders</h2>
                         <div class="overflow-auto max-table">
                             <table class="table table-striped table-styling w-100 table-vertical_scroll">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Orders</th>
+                                        <th scope="col">Item Type</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                                 data-toggle="modal" data-target="#documentsModal"
@@ -1272,7 +1270,7 @@
                                 <tbody>
                                     @foreach ($detail_order_lists as $detail_order_list)
                                         <tr>
-                                            <td>{{ $detail_order_list->created_at }}</td>
+                                            <td>{{ formatDate($detail_order_list->created_at) }}</td>
                                             <td>{{ $detail_order_list->item_type }}</td>
                                             <td>${{ $detail_order_list->amount }}</td>
                                             <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"

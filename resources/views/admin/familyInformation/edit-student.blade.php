@@ -50,7 +50,7 @@
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Middle Name :</label>
                                                 <input type="text" class="form-control is-disabled" id="middle_name"
-                                                    placeholder="Name" value="{{ $student->middle_name }}" disabled>
+                                                    placeholder="" value="{{ $student->middle_name }}" disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Last Name :</label>
@@ -670,6 +670,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @if($transcripts)
                                                     @foreach ($transcripts as $transcript)
                                                         <tr>
                                                             <td>{{ $transcript->period }}</td>
@@ -683,6 +684,7 @@
 
                                                         </tr>
                                                     @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>

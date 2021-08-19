@@ -10,7 +10,6 @@
                             <th scope="col">Order</th>
                             <th scope="col">Status</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Details</th>
                             <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                     data-toggle="modal" data-target="#orderModal" data-whatever="@getbootstrap"><img
                                         src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
@@ -25,9 +24,9 @@
                                 <td>{{ getOrderAmount($transcation->item_type, $transcation->item_id) }}</td>
                                 <?php $values = getOrders($transcation->transcation_id); ?>
                                 <td>{{ $values }}</td>
-                                <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
+                                {{-- <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
                                             class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -618,7 +617,7 @@
                                     <select type="" id="apostille_quantity" class="form-control"
                                         onchange="getApostilleAmount(); getTotal();">
                                         <option value="">Select</option>
-                                        <?php for ($i = 1; $i <= 4; $i++) { echo '<option value="' . $i
+                                        <?php for ($i = 1; $i <= 10; $i++) { echo '<option value="' . $i
                                             . '">' . $i . '</option>' ; } ?> </select>
                                             <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
 

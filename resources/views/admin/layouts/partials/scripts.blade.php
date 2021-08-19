@@ -1931,31 +1931,31 @@
                     let html = '';
                     response.orders.forEach(element => {
                        let url="";
-                       if(element.related_to == "transcript_ordered"){
+                       if(element.related_to == "Transcript Ordered"){
                            url='/admin/transcript-edit/payments/'+ element.item_type_id
                        }
-                       if(element.related_to == "graduation_record_received"){
+                       if(element.related_to == "Graduation Ordered"){
                         url='/admin/transcript-edit/payments/'+ element.item_type_id
                        }
-                       if(element.related_to == "student_enrolled"){
+                       if(element.related_to == "Student Enrolled"){
                         url='/admin/edit-payment-status/'+ element.item_type_id
                        }                       
-                       if(element.related_to == "custom_record_received"){
+                       if(element.related_to == "Custom Payment Ordered"){
                         url='/admin/custom-payments/'+ element.item_type_id
                        }
-                       if(element.related_to == "transcript_edit_record_received"){
+                       if(element.related_to == "Transcript Edit Ordered"){
                         url='/admin/transcript-edit/payments/'+ element.item_type_id
                        }
-                       if(element.related_to == "postage_record_received"){
+                       if(element.related_to == "Postage Ordered"){
                         url='/admin/edit-postage/'+ element.item_type_id
                        }
-                       if(element.related_to == "appostile_record_received"){
+                       if(element.related_to == "Notarization/Appostile Ordered"){
                         url='/admin/edit-notarization/'+ element.item_type_id
                        }
-                       if(element.related_to == "custom_letter_record_received"){
+                       if(element.related_to == "Custom Letter"){
                         url='/admin/edit-customletter/'+ element.item_type_id
                        }
-                       if(element.related_to == "orderconsultation"){
+                       if(element.related_to == "Personal Consulatation Ordered"){
                         url='/admin/edit-conultation/'+ element.item_type_id
                        }
                        

@@ -601,7 +601,7 @@ class Cart extends Model
                         'transaction_id' => $enrollemtpayment->transcation_id,
                         'linked_to' => $student->first_name,
                         'item_type_id' => $student->id,
-                        'related_to' => 'student_enrolled',
+                        'related_to' => 'Student Enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
 
@@ -648,7 +648,7 @@ class Cart extends Model
                             'linked_to' =>  $student->first_name,
                             'item_type_id' => $ts_payment->id,
                             'transaction_id' => $ts_payment->transcation_id,
-                            'related_to' => 'transcript_ordered',
+                            'related_to' => 'Transcript Ordered',
                             'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                         ]);
                     }
@@ -679,7 +679,7 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $custom_payment->amount,
                         'linked_to' => $parentName->p1_first_name,
-                        'related_to' => 'custom_record_received',
+                        'related_to' => 'Custom Payment Ordered',
                         'item_type_id' => $custom_payment->id,
                         'transaction_id' => $custom_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -708,7 +708,7 @@ class Cart extends Model
                         'amount' => $transcript_payment->amount,
                         'linked_to' =>  $student->first_name,
                         'item_type_id' => $transcript_payment->id,
-                        'related_to' => 'transcript_edit_record_received',
+                        'related_to' => 'Transcript Edit Ordered',
                         'transaction_id' => $transcript_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -731,7 +731,7 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $postage_payment->amount,
                         'linked_to' => $parentName->p1_first_name,
-                        'related_to' => 'postage_record_received',
+                        'related_to' => 'Postage Ordered',
                         'item_type_id' => $postage_payment->id,
                         'transaction_id' => $postage_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -756,7 +756,7 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $notarization_payment->amount,
                         'linked_to' =>  $parentName->p1_first_name,
-                        'related_to' => 'appostile_record_received',
+                        'related_to' => 'Notarization/Appostile Ordered',
                         'item_type_id' => $notarization_payment->id,
                         'transaction_id' => $notarization_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -789,7 +789,7 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $apostille_payment->amount,
                         'linked_to' =>  $parentName->p1_first_name,
-                        'related_to' => 'appostile_record_received',
+                        'related_to' => 'Notarization/Appostile Ordered',
                         'item_type_id' => $apostille_payment->id,
                         'transaction_id' => $apostille_payment->transcation_id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -833,7 +833,7 @@ class Cart extends Model
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $consultation_payment->amount,
                         'linked_to' => $consultation_payment->id,
-                        'related_to' => 'orderconsultation',
+                        'related_to' => 'Personal Consulatation Ordered',
                         'item_type_id' => $consultation_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
