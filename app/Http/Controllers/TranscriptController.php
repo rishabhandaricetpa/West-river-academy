@@ -525,7 +525,7 @@ class TranscriptController extends Controller
                 'student_profile_id' => $student_id,
                 'linked_to' => $transcript_payment->id,
                 'item_type_id' => $transcript_payment->id,
-                'related_to' => 'transcript_ordered',
+                'related_to' => 'Transcript Ordered',
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
         }
