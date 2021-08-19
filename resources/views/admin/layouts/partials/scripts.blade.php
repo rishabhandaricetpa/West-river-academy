@@ -2085,9 +2085,13 @@
                     '</select> results'
             }
         })
+
     });
 
-
+/////siderbar
+var url = window.location;
+$('nav .nav-item a').removeClass('active'); 
+$('nav .nav-item a[href="'+ url +'"]').addClass('active'); 
 
     //// table enable 
 

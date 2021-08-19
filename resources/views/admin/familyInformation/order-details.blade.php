@@ -25,7 +25,7 @@
                                 <td>{{ getOrderAmount($transcation->item_type, $transcation->item_id) }}</td>
                                 <?php $values = getOrders($transcation->transcation_id); ?>
                                 <td>{{ $values }}</td>
-                                <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
+                                <td class="text-right"><a class="mr-2" href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
                                             class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
                                 </td>
                             </tr>
