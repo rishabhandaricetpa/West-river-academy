@@ -25,7 +25,7 @@
                                 <?php $values = getOrders($transcation->transcation_id); ?>
                                 <td>{{ $values }}</td>
                                 {{-- <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
-                                            class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
+                                             class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
                                 </td> --}}
                             </tr>
                         @endforeach

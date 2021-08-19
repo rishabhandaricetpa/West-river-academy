@@ -73,9 +73,6 @@
 
         @if ($transcriptWizStatus->transcript_wiz === 'Yes' && $transcriptWizStatus->status === 'pending')
             <div class=" pt-2">
-                <p>If you are finished with this transcript and would like to see what it looks like, you can click the
-                    "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click
-                    the "Submit Transcript" button.</p>
                 <div class="d-sm-flex align-items-center">
                     <a href="{{ route('dashboard') }}" class="btn btn-primary ml-sm-2" role="button">Back to
                         Dashboard</a>

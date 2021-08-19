@@ -339,8 +339,8 @@
                                             id="p2_home_phone" placeholder="" value="{{ $parent->p2_home_phone }}"
                                             disabled>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <h3 class="mt-3 mb-2">Address </h3>
+                                    <div class="d-flex align-items-center">
+                                        <h3 class="mt-3 pr-5 mb-2">Address </h3>
                                         <div class="text-right d-flex align-items-center">
                                             <input class="mt-3 mb-3" type="checkbox" id="check" name="check" value=""
                                                 disabled>
@@ -599,11 +599,10 @@
                                             <td></td>
 
                                             <td>{{ $student->email }}</td>
-                                            <td><a href="{{ route('admin.delete.student', $student->id) }}"
+                                            <td class="text-right"><a class="mr-2" href="{{ route('admin.delete.student', $student->id) }}"
                                                     onclick="return confirm('Are you sure you want to delete this student?');"><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </td>
-                                            <td></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -844,7 +843,7 @@
                                                     href="{{ route('admin.genrate.adminConfirmition', [$payment->student_profile_id, $payment->grade_level, 'unsigned']) }}"><img
                                                         src="/images/document (1).png" alt=""></a>
                                             </td>
-                                            <td></td>
+                                            <td></td></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -1273,7 +1272,7 @@
                                             <td>{{ formatDate($detail_order_list->created_at) }}</td>
                                             <td>{{ $detail_order_list->item_type }}</td>
                                             <td>${{ $detail_order_list->amount }}</td>
-                                            <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"
+                                            <td class="text-right"><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"
                                                     data-toggle="modal" data-target="#order-details_details"
                                                     data-whatever="@getbootstrap"
                                                     data-id={{ $detail_order_list->transcation_id }}

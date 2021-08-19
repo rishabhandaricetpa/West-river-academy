@@ -23,6 +23,7 @@ class CreateGraduationsTable extends Migration
             $table->string('grade_10_info');
             $table->string('grade_11_info');
             $table->enum('status', ['pending', 'approved', 'paid', 'completed']);
+            $table->string('order_id')->nullable();
             $table->timestamps();
         });
     }

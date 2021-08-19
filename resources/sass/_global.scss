@@ -354,6 +354,9 @@ sup {
 
   thead {
     background-color: #ccc;
+    th{
+      min-width:170px;
+    }
   }
 
   td,
@@ -364,6 +367,7 @@ sup {
     font-size: 1rem;
     vertical-align: middle;
     text-transform: capitalize;
+  
   }
 
   tbody {

@@ -115,9 +115,12 @@ class StudentController extends Controller
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
 
-        $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
-            ->with('enrollmentPeriod', 'confirmletter')->get();
-          
+        // $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
+        //     ->with('enrollmentPeriod', 'confirmletter')->get();
+          $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
+            ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+            ->with('enrollmentPeriods', 'confirmletter')->get();
+           
     //    dd($confirmLetter);
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
@@ -475,8 +478,8 @@ class StudentController extends Controller
     }
 
     public function paypalorderReview($parent_id)
-    {
-        $address = User::find($parent_id)->parentProfile()->first();
+    {//dd($parent_id);
+        $address = ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
         if ($final_amount === false) {
@@ -488,7 +491,8 @@ class StudentController extends Controller
 
     public function stripeorderReview($parent_id)
     {
-        $address = User::find($parent_id)->parentProfile()->first();
+      //  $address = User::find($parent_id)->parentProfile()->first();
+       $address= ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
         if ($final_amount === false) {
