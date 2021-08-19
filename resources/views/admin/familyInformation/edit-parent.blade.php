@@ -1,11 +1,11 @@
 @extends('admin.app')
 
 @section('content')
-<section class="content container-fluid  my-3">
+<section class="content container-fluid  mt-3 pb-3">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- first card parent details -->
 
-  <div class="card mt-3 family-details">
+  <div class="card mt-3 family-details pb-3 mb-0">
     <div class="sticky mb-2 pb-1">
       {{-- @include('admin.familyInformation.parent_header') --}}
 
@@ -32,31 +32,45 @@
           <a class="nav-link" href="#documents" aria-controls="documents" aria-selected="true">Documents</a>
         </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.parent.delete', $parent->id) }}"
-                            onclick="return confirm('Are you sure you want to delete this family?');"
-                            aria-controls="documents" aria-selected="true">Delete</a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="add-menu-item nav-link" data-toggle="modal"
-                            data-target="#parentDetailsModal" data-whatever="@getbootstrap">
-                            <img src="/images/add-1.png" alt="">
-                        </a></li>
-                    <li><a class="back-button" onclick="goBack()"> <img src="/images/back-button.png" alt=""></a></li>
-                </ul>
-                <div class="row parents-details_name px-3">
-                    <div class="col-12 d-flex align-items-center">
-                        <h2 class="pr-3 mb-0">{{getlegacyname($parent->id)}}
-                        </h2>
-                        <div class="form-group mb-0">
-                            <select required class="dropdown-icon" id="parent_status">
-                                <option @if ($parent->status === 0) selected @endif value="0">Active</option>
-                                <option @if ($parent->status === 1) selected @endif value="1">Inactive</option>
-                            </select>
-                            <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
-                        </div>
-                    </div>
-                    <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }} </div>
-                </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.parent.delete', $parent->id) }}"
+            onclick="return confirm('Are you sure you want to delete this family?');" aria-controls="documents"
+            aria-selected="true">Delete</a>
+        </li>
+        <li class="nav-item"><a href="#" class="add-menu-item nav-link" data-toggle="modal"
+            data-target="#parentDetailsModal" data-whatever="@getbootstrap">
+            <img src="/images/add-1.png" alt="">
+          </a></li>
+        <li><a class="back-button" onclick="goBack()"> <img src="/images/back-button.png" alt=""></a></li>
+      </ul>
+      <div class="parents-details_name px-3">
+        <div class="row">
+          <div class="col-12 d-flex align-items-center">
+            <h2 class="pr-3 mb-0">{{getlegacyname($parent->id)}}
+            </h2>
+            <div class="form-group mb-0">
+              <select required class="dropdown-icon" id="parent_status">
+                <option @if ($parent->status === 0) selected @endif value="0">Active</option>
+                <option @if ($parent->status === 1) selected @endif value="1">Inactive</option>
+              </select>
+              <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
+            </div>
+          </div>
+          <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg pt-4" id="parentDetailsModal" tabindex="-1" role="dialog"
+      aria-labelledby="parentDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <form id="add-new-parent">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="studentDetailsModalLabel">Add New Parent</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             <div class="modal-body">
               <div class="row">
@@ -209,6 +223,7 @@
           <div class="row">
             {{-- parent detil-1 --}}
             <div class="col-md-12">
+                <h2>Student Name</h2>
               <form class="is-readonly row" id="sampleForm">
                 @csrf
                 <div class="col-md-6">
@@ -357,8 +372,9 @@
                     class="btn btn-default btn-primary form-enable  btn-save js-save mr-2">Save</button>
                   <button type="button" class="btn btn-default btn-primary  btn-save js-cancel">Cancel</button>
                 </div>
+
+              </form>
             </div>
-            </form>
           </div>
         </div>
       </section>
@@ -450,15 +466,12 @@
                         <input type="text" id="rep_country" class="form-control">
                       </div>
                     </div>
-
                     <div class="col-md-6 col-12">
                       <div class="form-group">
                         <label for="message-text" class="col-form-label">City Area:</label>
                         <input type="text" id="rep_city" class="form-control">
                       </div>
                     </div>
-
-
                     <div class="col-lg-6 col-12">
                       <div class="form-group">
                         <label for="message-text" class="col-form-label">Rep/Influencer Email
@@ -466,7 +479,6 @@
                         <input type="email" id="rep_email" class="form-control">
                       </div>
                     </div>
-
                     <div class="col-lg-6 col-12">
                       <div class="form-group">
                         <label for="message-text" class="col-form-label">Rep/Influencer Phone
@@ -513,7 +525,6 @@
                         <input type="hidden" value="{{ $parent->id }}" id='parent_Id' name="parent_id">
                       </div>
                     </div>
-
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -525,7 +536,7 @@
           </div>
         </div>
       </div>
-      </form>
+
 
 
 
@@ -736,12 +747,14 @@
                   <textarea class="form-control" id="message_text" required
                     onKeyPress="if(this.value.length==2000) return false;" maxlength="2000"></textarea>
                 </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+
+              </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-            </form>
 
           </div>
         </div>
@@ -1036,8 +1049,9 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <form id="add-record-request">
+
+            <form id="add-record-request">
+              <div class="modal-body">
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="recipient-name" class="col-form-label">For Student</label>
@@ -1090,16 +1104,17 @@
                     <input type="text" id="record_country" class="form-control" required>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-              </form>
-            </div>
-
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
           </div>
+
         </div>
       </div>
+
       {{-- Documents --}}
       <section class="documents  pt-10r" id="documents">
         <div class="row">
@@ -1160,7 +1175,9 @@
             <form id="add-documents" enctype="multipart/form-data">
               <div class="modal-body">
                 <div class="row">
-<<<<<<< HEAD
+                  <div class="col-12">
+                    <h2 class="pr-3"> Orders</h2>
+                  </div>
                   <div class="form-group col-md-6">
                     <label for="recipient-name" class="col-form-label">For Student</label>
                     <select id="student_idd" class="form-control">
@@ -1170,38 +1187,9 @@
                       @endforeach
                     </select>
                     <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
-=======
-                    <div class="col-12">
-                        <h2 class="pr-3"> Orders</h2>
-                        <div class="overflow-auto max-table">
-                            <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Item Type</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
-                                                data-toggle="modal" data-target="#documentsModal"
-                                                data-whatever="@getbootstrap"><img src="/images/add.png" alt=""><img
-                                                    src="/images.add.png" alt=""></button></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($detail_order_lists as $detail_order_list)
-                                        <tr>
-                                            <td>{{ formatDate($detail_order_list->created_at) }}</td>
-                                            <td>{{ $detail_order_list->item_type }}</td>
-                                            <td>${{ $detail_order_list->amount }}</td>
-                                            <td class="text-right"><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3"
-                                                    data-toggle="modal" data-target="#order-details_details"
-                                                    data-whatever="@getbootstrap"
-                                                    data-id={{ $detail_order_list->transcation_id }}
-                                                    onclick="detailOrders(event.target)">View Order</a></td>
-                                        </tr>
-                                    @endforeach
->>>>>>> 9d27c5f9d50173538019e08a180efe191f4a268e
 
                   </div>
+
                   <div class="form-group col-md-6 d-flex">
                     <input type="checkbox" id="is_upload" value="1" class="form-control choose-btn mt-2 mr-2">
                     <label for="message-text" class="col-form-label">
@@ -1300,6 +1288,8 @@
           </div>
         </div>
       </div>
+
+
 
       <div class="text-right pb-4">
         <a href="#admin-header" class="btn btn-primary">Back to Top</a>
