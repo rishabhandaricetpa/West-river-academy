@@ -12,7 +12,8 @@
                     </tr>
         </tbody>
     </table>
-    <div class="row confirmation-letter__options">
+    <div class="row pt-3">
+    <div class="col-12 confirmation-letter__options">
     <h3 class="mb-3">You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter.</h3>
                                <div  v-if="countryname ==='Hungary'" class="form-group d-sm-flex mb-2">
                         <label class="container">Birth City
@@ -23,7 +24,7 @@
                             >
                             <span class="isDobCity"></span>
                         </label>
-                        <label class="container">Mother's Maiden Name
+                        <label class=" pl-0 container">Mother's Maiden Name
                             <input
                             type="checkbox"
                             name="IsMotherName"
@@ -31,14 +32,14 @@
                             <span class="IsMotherName"></span>
                         </label>
                         </div>
-                        <label class="container">Student ID
+                        <label class="pl-0 container">Student ID
                             <input 
                             type="checkbox" 
                             name="isStudentId" 
                             v-model="form.isStudentId">
                             <span class="isStudentId"></span>
                         </label>
-                        <label class="container">Grade
+                        <label class="pl-0 container">Grade
                             <input 
                             type="checkbox" 
                             name="isGrade" 
@@ -55,6 +56,7 @@
                             class="btn btn-primary addenrollment mb-4 mb-sm-0">Back</a> -->
                     <button type="submit" class="btn btn-primary mb-4 mb-sm-0 ml-2">Continue</button>
                     </div>
+                    </div> 
     </form>
 </template>
 

@@ -10,7 +10,7 @@
 <body>
 
     <div style="text-align:center;width:300px;margin:0 auto;">
-        <img src="{{ asset('images/letterhead.png') }}" style="width:100%;object-fit:contain;" alt="logo-img">
+        <img src="{{ asset('"../public/images/letterhead.png') }}" style="width:100%;object-fit:contain;" alt="logo-img">
     </div>
 
     <div style="max-width: 1000px; margin: 0 auto;">
@@ -47,7 +47,7 @@
                 <tr>
                     @if($type=='signed')
                     <td>
-                        <img src="../public/images/signature.png" alt="signature">
+                        <img style="width:200px;" src="../public/images/signature.png" alt="signature">
                         <p>Stacey Nishikawa</p>
                         <p>Administrative Director</p>
                     </td>

@@ -223,7 +223,6 @@
           <div class="row">
             {{-- parent detil-1 --}}
             <div class="col-md-12">
-                <h2>Student Name</h2>
               <form class="is-readonly row" id="sampleForm">
                 @csrf
                 <div class="col-md-6">
