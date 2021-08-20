@@ -84,7 +84,7 @@
     <table>
         <tbody>
             <tr style="width:100%;">
-                <td style="width:70%;max-width:700px;">
+                <td width="70%">
                     <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
                         <thead>
                             <tr>

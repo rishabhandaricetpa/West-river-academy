@@ -109,9 +109,9 @@
                        </tr>
                    </tbody>
                </table>
-               <table width="100%" style="padding-top:30px;vertical-align:top;">
+               <table style="padding-top:30px;vertical-align:top; width:100%;">
                    <tr>
-                       <td width="35%" style="vertical-align:top;">
+                       <td style="vertical-align:top;width:30%;">
                            <table width="100%" style="border:1px solid #000;">
                                <tr>
                                    <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total credits earned
@@ -130,7 +130,7 @@
                            </table>
                            <p style="font-size:13px;">West River Academy is accredited by the National Association for the Legal Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>
                        </td>
-                       <td width="45%" style="vertical-align:top;padding:0 4px 4px 4px; border:1px solid #000;">
+                       <td  style="width:36.6%;vertical-align:top;padding:0 4px 4px 4px; border:1px solid #000;">
                            <p style="text-align:center;font-weight:600;margin-bottom:0;"><span style="border-bottom:1px solid #000;margin-bottom:0;margin-top:-20px;font-size:13px;">Grading System</span>
                            </p>
                            <table>
@@ -139,7 +139,7 @@
                                        <th style="font-size:13px;text-decoration:underline;text-align:left;">Grade</th>
                                        <th style="font-size:13px;text-decoration:underline;text-align:left;">percent</th>
                                        <th style="font-size:13px;text-decoration:underline;text-align:left;">Points</th>
-                                       <th style="font-size:13px;text-decoration:underline;text-align:left;">AP Points</th>
+                                       <th style="font-size:13px;text-decoration:underline;text-align:left;white-space:nowrap;">AP Points</th>
                                    </tr>
                                </thead>
                                <tr>
@@ -180,21 +180,21 @@
                                </tr>
                            </table>
                        </td>
-                       <td width="40%" style="vertical-align:top;">
-                           <table>
+                       <td style="width:33.3%;vertical-align:top;">
+                           <table style="width:100%;">
                                <tbody>
-                                   <tr>
-                                       <td width="60%" style="text-align:center;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span>
+                                   <tr>   
+                                       <td width="60%" style="text-align:center;width:60%;"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official signature</span>
                                        </td>
-                                       <td width="40%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
+                                       <td style= "width:40%"><span style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
                                        </td>
                                    </tr>
                                </tbody>
                            </table>
-                           <table width="100%">
+                           <table style="width:100%;">
                                <tr style="width:100%;">
                                    <td style="text-align:center;width:100%;" colspan="2">
-                                       <div style="margin:0 auto;"><img src="{{asset('images/Stamp.png')}}" style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp"></div>
+                                       <div style="margin:0 auto;"><img src="images/Stamp.png" style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp"></div>
                                    </td>
                                </tr>
                            </table>
