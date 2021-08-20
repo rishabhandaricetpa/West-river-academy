@@ -10,7 +10,7 @@
 <body>
 
     <div style="text-align:center;width:300px;margin:0 auto;">
-        <img src="{{ asset('"../public/images/letterhead.png') }}" style="width:100%;object-fit:contain;" alt="logo-img">
+        <img src="images/letterhead.png" style="width:100%;object-fit:contain;" alt="logo-img">
     </div>
 
     <div style="max-width: 1000px; margin: 0 auto;">

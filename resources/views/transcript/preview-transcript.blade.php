@@ -42,7 +42,7 @@
                                                     official transcript</td>
                                                 <td width="50%" valign="middle" style="text-align:center;">
                                                     <img src="/images/letterhead.png" alt="logo"
-                                                        style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
+                                                        style="filter: brightness(0.5);width: 300px;margin: 0 auto;object-fit:contain;display:block;">
                                                 </td>
                                             </tr>
                                         </tbody>
