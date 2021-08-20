@@ -43,7 +43,6 @@ class CartController extends Controller
     public function index()
     {
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id);
-
         return view('cart', compact('enroll_fees'));
     }
 

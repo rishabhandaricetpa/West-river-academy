@@ -70,7 +70,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
-        Route::get('/cart', 'CartController@index');
+    Route::get('/cart', 'CartController@index');
 
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
