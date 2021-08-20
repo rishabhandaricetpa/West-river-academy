@@ -81,7 +81,8 @@ class GraduationController extends Controller
                 'amount' => $fee,
                 'student_profile_id' => $request->student_id,
                 'linked_to' => $graduation->id,
-                'related_to' => 'graduation_record_received',
+                'item_type_id' => $graduation->id,
+                'related_to' => 'Graduation Ordered',
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();

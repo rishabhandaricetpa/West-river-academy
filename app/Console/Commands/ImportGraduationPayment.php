@@ -2,30 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use App\Models\GraduationPayment;
 use Illuminate\Console\Command;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-use Hash;
-use Carbon\Carbon;
 
-
-class ImportUsers extends Command
+class ImportGraduationPayment extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:users';
+    protected $signature = 'import:graduationpayment';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import All Users';
+    protected $description = 'graduation payment';
 
     /**
      * Create a new command instance.
@@ -45,7 +40,7 @@ class ImportUsers extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/parents.csv');
+        $filePath = base_path('csv/payments.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -53,26 +48,17 @@ class ImportUsers extends Command
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
                 $cells = $cells->getCells();
-                $date  = Carbon::now();
-
                 if ($rowIndex === 1) {
                     continue;
                 }
-                if ($cells[13] != '' && $cells[13] != 'x' && $cells[13] != 'xx' && $cells[13] != 'xxx') {
+                GraduationPayment::where('order_id',$cells[19])->update([
+                    'transcation_id'=>$cells[15],
+                    'payment_mode'=>$cells[17]
 
-                    User::create(
-                        [
-                            'name' => $cells[14] = '' ? "Test Name" :  $cells[14],
-                            'email' => $cells[13],
-                            'legacy_name' => $cells[11],
-                            'password' => Hash::make('12345678'),
-                            'email_verified_at' => $date
-                        ]
-                    );
-                }
+                ]);
+
             }
         }
-
         $reader->close();
         $this->line('import successfully');
     }

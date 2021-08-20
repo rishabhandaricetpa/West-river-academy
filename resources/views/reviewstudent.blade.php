@@ -71,8 +71,8 @@
                   @if ($fee->type == 'annual') Annual @else Second Semester Only @endif
                   <span class="small"> ({{ Carbon\Carbon::parse($fee->start_date_of_enrollment)->format('M j, Y') }} - {{ Carbon\Carbon::parse($fee->end_date_of_enrollment)->format('M j, Y') }} ) </span>
                 </td>
-                <td class="text-center">${{ $fee->amount }}</td>
-                <td style="min-width: 2rem; text-align:center"> <input v-on:click="changeAmount($event, '{{ $fee->amount }}')" type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
+                <td>${{ $fee->amount }}</td>
+                <td style="min-width: 2rem;"> <input v-on:click="changeAmount($event, '{{ $fee->amount }}')" type="checkbox" name="eps[]" checked value="{{ $fee->id }}"> </td>
                 @php
                 $total_amount += $fee->amount;
                 @endphp

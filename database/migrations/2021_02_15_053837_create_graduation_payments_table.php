@@ -20,6 +20,7 @@ class CreateGraduationPaymentsTable extends Migration
             $table->string('amount');
             $table->string('transcation_id')->nullable();
             $table->string('payment_mode')->nullable();
+            $table->string('order_id')->nullable();
             $table->timestamps();
         });
     }

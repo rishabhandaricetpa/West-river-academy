@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Coupon;
 use App\Models\CustomLetterPayment;
 use App\Models\CustomPayment;
+use App\Models\Dashboard;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\Graduation;
@@ -144,8 +145,8 @@ class ParentController extends Controller
         $studentData = $parent->studentProfile()->get();
 
         $studentId = collect($studentData)->pluck('id');
-        $payment_history = TransactionsMethod::where('parent_profile_id', $parent->id)->get();
-
+        $payment_history = TransactionsMethod::where('parent_profile_id', $parent->id)->orderBy('created_at', 'DESC')->get();
+        // $dashboard=Dashboard::where()
         return view('MyAccounts/myaccount', compact('parent', 'user_id', 'payment_history'));
     }
 

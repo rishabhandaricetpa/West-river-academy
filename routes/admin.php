@@ -275,6 +275,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
+    Route::post('get/order/details', 'ParentController@getDetailedOrders')->name('get.orderdetails');
 });
 
 

@@ -61,7 +61,6 @@ class ImportEnrollmentPeriod extends Command
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
                 $student_present = StudentProfile::where('legacy_name', $legacy_name)->first();
-
                 if ($student_present) {
                     EnrollmentPeriods::create([
                         'student_profile_id' => (isset($student_present)) ? $student_present->id : 0,

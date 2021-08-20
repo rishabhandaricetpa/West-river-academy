@@ -10,7 +10,7 @@ class GraduationPayment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'graduation_id', 'amount', 'transcation_id', 'payment_mode',
+        'graduation_id', 'amount', 'transcation_id', 'payment_mode','order_id'
     ];
 
     public function graduation()

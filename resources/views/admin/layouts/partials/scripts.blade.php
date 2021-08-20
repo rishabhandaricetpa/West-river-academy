@@ -1430,6 +1430,7 @@
             }
         });
     });
+    
     // edit Dashboard Record For Super Admin
     function editDashboard(event) {
         var id = $(event).data("id");
@@ -1452,6 +1453,8 @@
             }
         });
     }
+
+     
     // assign Record of Dashboard For Super Admin
     $("#assign-form").on("submit", function(event) {
         console.log('created');
@@ -1904,6 +1907,78 @@
             document.getElementById("report_to").value = "";
         }
     });
+
+    function detailOrders(event) {
+        console.log('hi');
+        $("#paymeny_history_wrapper_admin").html("")
+        var trans_id = $(event).data("id");
+        console.log(trans_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.orderdetails') }}",
+            type: "POST",
+
+            data: {
+                transaction_id: trans_id
+            },
+            success: function(response) {
+                console.log(response);
+                var html = '';
+                if (orders.length) {
+                    console.log(response.orders);
+                    let html = '';
+                    response.orders.forEach(element => {
+                       let url="";
+                       if(element.related_to == "Transcript Ordered"){
+                           url='/admin/transcript-edit/payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Graduation Ordered"){
+                        url='/admin/transcript-edit/payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Student Enrolled"){
+                        url='/admin/edit-payment-status/'+ element.item_type_id
+                       }                       
+                       if(element.related_to == "Custom Payment Ordered"){
+                        url='/admin/custom-payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Transcript Edit Ordered"){
+                        url='/admin/transcript-edit/payments/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Postage Ordered"){
+                        url='/admin/edit-postage/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Notarization/Appostile Ordered"){
+                        url='/admin/edit-notarization/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Custom Letter"){
+                        url='/admin/edit-customletter/'+ element.item_type_id
+                       }
+                       if(element.related_to == "Personal Consulatation Ordered"){
+                        url='/admin/edit-conultation/'+ element.item_type_id
+                       }
+                       
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td><a href="${url}">${element.related_to}</a></td>
+                       <td> ${element.amount} </td>
+                       </tr>`
+                    });
+                    $("#paymeny_history_wrapper_admin").html(html)
+                }
+            },
+            error: function(response) {
+
+
+            }
+        });
+
+    }
+
+
+
+
     $('#add_new_rep').on('submit', function(event) {
         event.preventDefault();
         var rep_type = $('#rep_type').val();
@@ -2010,9 +2085,13 @@
                     '</select> results'
             }
         })
+
     });
 
-
+/////siderbar
+var url = window.location;
+$('nav .nav-item a').removeClass('active'); 
+$('nav .nav-item a[href="'+ url +'"]').addClass('active'); 
 
     //// table enable 
 

@@ -2102,6 +2102,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ConfirmationInfo",
@@ -40545,227 +40547,230 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row confirmation-letter__options" }, [
-        _c("h3", { staticClass: "mb-3" }, [
-          _vm._v(
-            "You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter."
-          )
-        ]),
-        _vm._v(" "),
-        _vm.countryname === "Hungary"
-          ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-              _c("label", { staticClass: "container" }, [
-                _vm._v("Birth City\n                         "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.isDobCity,
-                      expression: "form.isDobCity"
-                    }
-                  ],
-                  attrs: { type: "checkbox", name: "isDobCity" },
-                  domProps: {
-                    checked: Array.isArray(_vm.form.isDobCity)
-                      ? _vm._i(_vm.form.isDobCity, null) > -1
-                      : _vm.form.isDobCity
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.form.isDobCity,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.form, "isDobCity", $$a.concat([$$v]))
+      _c("div", { staticClass: "row pt-3" }, [
+        _c("div", { staticClass: "col-12 confirmation-letter__options" }, [
+          _c("h3", { staticClass: "mb-3" }, [
+            _vm._v(
+              "You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter."
+            )
+          ]),
+          _vm._v(" "),
+          _vm.countryname === "Hungary"
+            ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+                _c("label", { staticClass: "container" }, [
+                  _vm._v("Birth City\n                         "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.isDobCity,
+                        expression: "form.isDobCity"
+                      }
+                    ],
+                    attrs: { type: "checkbox", name: "isDobCity" },
+                    domProps: {
+                      checked: Array.isArray(_vm.form.isDobCity)
+                        ? _vm._i(_vm.form.isDobCity, null) > -1
+                        : _vm.form.isDobCity
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.form.isDobCity,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.form, "isDobCity", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.form,
+                                "isDobCity",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.form,
-                              "isDobCity",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.form, "isDobCity", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.form, "isDobCity", $$c)
                       }
                     }
-                  }
-                }),
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "isDobCity" })
+                ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "isDobCity" })
-              ]),
-              _vm._v(" "),
-              _c("label", { staticClass: "container" }, [
-                _vm._v("Mother's Maiden Name\n                         "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.IsMotherName,
-                      expression: "form.IsMotherName"
-                    }
-                  ],
-                  attrs: { type: "checkbox", name: "IsMotherName" },
-                  domProps: {
-                    checked: Array.isArray(_vm.form.IsMotherName)
-                      ? _vm._i(_vm.form.IsMotherName, null) > -1
-                      : _vm.form.IsMotherName
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.form.IsMotherName,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(
-                              _vm.form,
-                              "IsMotherName",
-                              $$a.concat([$$v])
-                            )
+                _c("label", { staticClass: " pl-0 container" }, [
+                  _vm._v("Mother's Maiden Name\n                         "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.IsMotherName,
+                        expression: "form.IsMotherName"
+                      }
+                    ],
+                    attrs: { type: "checkbox", name: "IsMotherName" },
+                    domProps: {
+                      checked: Array.isArray(_vm.form.IsMotherName)
+                        ? _vm._i(_vm.form.IsMotherName, null) > -1
+                        : _vm.form.IsMotherName
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.form.IsMotherName,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.form,
+                                "IsMotherName",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.form,
+                                "IsMotherName",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.form,
-                              "IsMotherName",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.form, "IsMotherName", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.form, "IsMotherName", $$c)
                       }
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "IsMotherName" })
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "IsMotherName" })
+                ])
               ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("label", { staticClass: "container" }, [
-          _vm._v("Student ID\n                         "),
+            : _vm._e(),
+          _vm._v(" "),
+          _c("label", { staticClass: "pl-0 container" }, [
+            _vm._v("Student ID\n                         "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.isStudentId,
+                  expression: "form.isStudentId"
+                }
+              ],
+              attrs: { type: "checkbox", name: "isStudentId" },
+              domProps: {
+                checked: Array.isArray(_vm.form.isStudentId)
+                  ? _vm._i(_vm.form.isStudentId, null) > -1
+                  : _vm.form.isStudentId
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.form.isStudentId,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.form, "isStudentId", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.form,
+                          "isStudentId",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.form, "isStudentId", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "isStudentId" })
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "pl-0 container" }, [
+            _vm._v("Grade\n                         "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.isGrade,
+                  expression: "form.isGrade"
+                }
+              ],
+              attrs: { type: "checkbox", name: "isGrade" },
+              domProps: {
+                checked: Array.isArray(_vm.form.isGrade)
+                  ? _vm._i(_vm.form.isGrade, null) > -1
+                  : _vm.form.isGrade
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.form.isGrade,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.form, "isGrade", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.form,
+                          "isGrade",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.form, "isGrade", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "isGrade" })
+          ]),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.form.isStudentId,
-                expression: "form.isStudentId"
+                value: _vm.form.enrolment_id,
+                expression: "form.enrolment_id"
               }
             ],
-            attrs: { type: "checkbox", name: "isStudentId" },
-            domProps: {
-              checked: Array.isArray(_vm.form.isStudentId)
-                ? _vm._i(_vm.form.isStudentId, null) > -1
-                : _vm.form.isStudentId
-            },
+            attrs: { type: "hidden", name: "enrolment_id" },
+            domProps: { value: _vm.form.enrolment_id },
             on: {
-              change: function($event) {
-                var $$a = _vm.form.isStudentId,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 &&
-                      _vm.$set(_vm.form, "isStudentId", $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      _vm.$set(
-                        _vm.form,
-                        "isStudentId",
-                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                      )
-                  }
-                } else {
-                  _vm.$set(_vm.form, "isStudentId", $$c)
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
+                _vm.$set(_vm.form, "enrolment_id", $event.target.value)
               }
             }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "isStudentId" })
+          })
         ]),
         _vm._v(" "),
-        _c("label", { staticClass: "container" }, [
-          _vm._v("Grade\n                         "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.isGrade,
-                expression: "form.isGrade"
-              }
-            ],
-            attrs: { type: "checkbox", name: "isGrade" },
-            domProps: {
-              checked: Array.isArray(_vm.form.isGrade)
-                ? _vm._i(_vm.form.isGrade, null) > -1
-                : _vm.form.isGrade
-            },
-            on: {
-              change: function($event) {
-                var $$a = _vm.form.isGrade,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 && _vm.$set(_vm.form, "isGrade", $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      _vm.$set(
-                        _vm.form,
-                        "isGrade",
-                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                      )
-                  }
-                } else {
-                  _vm.$set(_vm.form, "isGrade", $$c)
-                }
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "isGrade" })
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.form.enrolment_id,
-              expression: "form.enrolment_id"
-            }
-          ],
-          attrs: { type: "hidden", name: "enrolment_id" },
-          domProps: { value: _vm.form.enrolment_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.form, "enrolment_id", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
+        _vm._m(0)
+      ])
     ]
   )
 }

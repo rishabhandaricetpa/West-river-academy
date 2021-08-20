@@ -61,7 +61,7 @@ class ImportStudents extends Command
 
                 if ($user_email) {
                     StudentProfile::create([
-                        'parent_profile_id' => (isset($user_email)) ? $user_email->id : 0,
+                        'parent_profile_id' => $user_email ? $user_email->id : 0,
                         'first_name' => $cells[12],
                         'last_name' => $cells[13],
                         'gender' => $cells[5],
@@ -74,7 +74,7 @@ class ImportStudents extends Command
                     ]);
                 } elseif ($legacy_name) {
                     StudentProfile::create([
-                        'parent_profile_id' => (isset($legacy_name)) ? $legacy_name->id : 0,
+                        'parent_profile_id' => $legacy_name ? $legacy_name->id : 0,
                         'first_name' => $cells[12],
                         'last_name' => $cells[13],
                         'gender' => $cells[5],

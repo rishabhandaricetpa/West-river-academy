@@ -156,10 +156,8 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::where('id', $id)->first();
         $allstudent = StudentProfile::where('parent_profile_id', $id)->get();
-        // $student_ids = StudentProfile::where('parent_profile_id', $id)->select('id')->get()->toArray();
         $countries = Country::all();
         $studentData = $parent->studentProfile()->get();
-
         $studentId = collect($studentData)->pluck('id');
         $transcations =   Cart::where('parent_profile_id', $id)->get();
         $getNotes = Notes::where('parent_profile_id', $id)->get();
@@ -189,7 +187,8 @@ class ParentController extends Controller
 
 
         $all_rep_groups = RepresentativeGroup::all();
-        $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
+        // $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
+        $detail_order_lists = TransactionsMethod::where('parent_profile_id', $id)->get();
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups', 'detail_order_lists'));
     }
 
@@ -763,5 +762,11 @@ class ParentController extends Controller
                 }
             }
         }
+    }
+    public function getDetailedOrders(Request $request)
+    {
+        $orderDetails = Dashboard::where('transaction_id', $request->transaction_id)->get();
+
+        return response()->json(['orders' => $orderDetails]);
     }
 }

@@ -3093,7 +3093,7 @@
                     var hostElementClassNames = [
                         _classNameHostElement,
                         _classNameHostElementForeign,
-                        _classNameHostTextareaElement,
+                        _classNameHostElement,
                         _classNameHostResizeDisabled,
                         _classNameHostRTL,
                         _classNameHostScrollbarHorizontalHidden,

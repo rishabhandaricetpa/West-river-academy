@@ -22,33 +22,33 @@
             <table style="border:1px solid black;margin-bottom:20px;" cellspacing="0" width="100%">
                 <thead style="border-bottom: 1px solid grey">
                     <tr>
-                        <th style="text-align: left">Date </th>
-                        <th style="text-align: left">Family Name</th>
-                        <th style="text-align: left">Amount Earned</th>
+                        <th style="text-align: left;padding:5px;">Date </th>
+                        <th style="text-align: left;padding:5px;">Family Name</th>
+                        <th style="text-align: left;padding:5px;">Amount Earned</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($rep_families as $rep_familie)
                         <tr>
-                            <td>{{ formatDate($rep_familie->created_at) }}</td>
-                            <td>{{ $rep_familie->p1_first_name }}</td>
-                            <td>{{ $rep_familie->amount }}</td>
+                            <td style="padding:5px;">{{ formatDate($rep_familie->created_at) }}</td>
+                            <td style="padding:5px;">{{ $rep_familie->p1_first_name }}</td>
+                            <td style="padding:5px;">{{ $rep_familie->amount }}</td>
                         </tr>
                     @endforeach
 
                 </tbody>
                 <tfoot style="background-color:grey;">
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td style="padding:5px;"></td>
+                        <td style="padding:5px;"></td>
 
                         @if ($totalFamilyAmount > 0)
-                            <td class="text-right">Total: ${{ $totalFamilyAmount }}</td>
+                            <td style="padding:5px;" class="text-right">Total: ${{ $totalFamilyAmount }}</td>
                         @elseif ($totalFamilyAmount == 0)
-                            <td class="text-right">Total: $0</td>
+                            <td style="padding:5px;" class="text-right">Total: $0</td>
                         @else
-                            <td class="text-right">Total: {{ '-$' . abs($totalFamilyAmount) }} </td>
+                            <td style="padding:5px;" class="text-right">Total: {{ '-$' . abs($totalFamilyAmount) }} </td>
                         @endif
                     </tr>
 
@@ -60,33 +60,33 @@
                 width="100%">
                 <thead style="border-bottom: 1px solid grey">
                     <tr>
-                        <th style="text-align: left">Notes</th>
-                        <th style="text-align: left"></th>
-                        <th style="text-align: left">Amount Paid</th>
+                        <th style="text-align: left;padding:5px;">Notes</th>
+                        <th style="text-align: left;padding:5px;"></th>
+                        <th style="text-align: left;padding:5px;">Amount Paid</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($repGroupAmountDetails as $repGroupAmountDetail)
                         <tr>
-                            <td>{{ $repGroupAmountDetail->notes }}</td>
-                            <td></td>
-                            <td>{{ $repGroupAmountDetail->amount }}</td>
+                            <td style="padding:5px;">{{ $repGroupAmountDetail->notes }}</td>
+                            <td style="padding:5px;"></td>
+                            <td style="padding:5px;">{{ $repGroupAmountDetail->amount }}</td>
 
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot style="background:grey;padding:5px;">
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td style="padding:5px;"></td>
+                        <td style="padding:5px;"></td>
                         @if ($amountPaid > 0)
-                            <td class="text-right">Total: ${{ $amountPaid }}</td>
+                            <td class="text-right" style="padding:5px;">Total: ${{ $amountPaid }}</td>
                         @elseif($amountPaid ==0)
-                            <td class="text-right">Total: $0</td>
+                            <td class="text-right" style="padding:5px;">Total: $0</td>
                         @else
 
-                            <td class="text-right">Total: {{ '-$' . abs($amountPaid) }} </td>
+                            <td class="text-right" style="padding:5px;">Total: {{ '-$' . abs($amountPaid) }} </td>
                         @endif
 
 
@@ -99,10 +99,10 @@
             <table cellspacing="0" width="100%">
                 <tbody>
                     <tr>
-                        <td>
+                        <td style="padding:5px;">
                             <p style="font-size: 20px;color:#004C99">Balance of Amount Earned minus Amount Paid:</p>
                         </td>
-                        <td>
+                        <td style="padding:5px;">
                             @if ($calculatedAmount > 0)
                                 <p style="font-size: 20px;color:#004C99">${{ $calculatedAmount }}</p>
                             @elseif ($calculatedAmount == 0)
