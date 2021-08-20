@@ -5,7 +5,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         <div class="rep-list bg-white py-3 px-2 overflow-auto">
-            <button type="button" class="btn btn-primary btn-modal ml-3" data-toggle="modal"
+            <button type="button" class="btn btn-primary btn-modal mb-3" data-toggle="modal"
                 data-target="#addrep-list-Modal" data-whatever="@getbootstrap"><span>Add Rep/Influencer</span><img
                     src="/images.add.png" alt="">
             </button>

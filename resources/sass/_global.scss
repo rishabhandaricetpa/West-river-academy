@@ -354,7 +354,13 @@ sup {
 
   thead {
     background-color: #ccc;
+   
   }
+  thead.min-width{   
+    th{   
+      min-width:150px;   
+    }
+  }   
 
   td,
   th {
@@ -364,6 +370,7 @@ sup {
     font-size: 1rem;
     vertical-align: middle;
     text-transform: capitalize;
+  
   }
 
   tbody {

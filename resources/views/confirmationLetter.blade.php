@@ -47,7 +47,7 @@
                 <tr>
                     @if($type=='signed')
                     <td>
-                        <img src="../public/images/signature.png" alt="signature">
+                        <img style="width:200px;" src="../public/images/signature.png" alt="signature">
                         <p>Stacey Nishikawa</p>
                         <p>Administrative Director</p>
                     </td>

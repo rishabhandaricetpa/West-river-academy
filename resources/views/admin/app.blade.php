@@ -7,8 +7,8 @@
   @include('admin.layouts.partials.navbar')
   <!-- * =============== /Navbar =============== * -->
     <!-- * =============== Sidebar =============== * -->
-    <aside class="main-sidebar">
-  @include('admin.layouts.partials.sidebar')
+    <aside class="main-sidebar pt-1">
+    @include('admin.layouts.partials.sidebar')
   </aside>
 
   <!-- * =============== /Sidebar =============== * -->

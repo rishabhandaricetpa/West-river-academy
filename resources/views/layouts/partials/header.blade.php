@@ -23,7 +23,7 @@
 <!-- * =============== Header =============== * -->
 <header class="site-header">
     <nav class="navbar navbar-expand-lg navbar-dark px-0">
-        <a class="navbar-brand" href="{{ route('dashboard') }}"><img src="/images/wra_logo.svg" alt="wra_logo"></a>
+        <a class="navbar-brand" href="{{ route('dashboard') }}"><img class="p-1" src="/images/wra_logo.svg" alt="wra_logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-header"
             aria-controls="main-header" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
