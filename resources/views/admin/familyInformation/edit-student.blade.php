@@ -299,7 +299,7 @@
             <div class="col-12">
               <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                  <thead class="thead-light">
+                  <thead class="thead-light min-width">
                     <tr>
                       <th scope="col">Date</th>
                       <th scope="col">Notes</th>
@@ -361,7 +361,7 @@
             <div class="col-12">
               <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                  <thead class="thead-light">
+                  <thead class="thead-light min-width">
                     <tr>
                       <th scope="col">Date</th>
                       <th scope="col">Student Name</th>
@@ -607,7 +607,7 @@
             <div class="col-12">
               <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                  <thead class="thead-light">
+                  <thead class="thead-light min-width">
                     <tr>
                       <th scope="col">Transcript</th>
                       <th scope="col">Status</th>
@@ -744,7 +744,7 @@
             <div class="col-12">
               <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                  <thead class="thead-light">
+                  <thead class="thead-light min-width">
                     <tr>
                       <th scope="col">Student Name</th>
                       <th scope="col">School Name</th>
@@ -874,7 +874,7 @@
             <div class="col-12">
               <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                  <thead class="thead-light">
+                  <thead class="thead-light min-width">
                     <tr>
                       <th scope="col">Date</th>
                       <th scope="col">Student Name</th>
