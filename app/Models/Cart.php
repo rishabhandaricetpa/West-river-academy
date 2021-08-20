@@ -600,7 +600,7 @@ class Cart extends Model
                         'student_profile_id' => $enrollment_period->student_profile_id,
                         'transaction_id' => $enrollemtpayment->transcation_id,
                         'linked_to' => $student->first_name,
-                        'item_type_id' => $student->id,
+                        'item_type_id' => $enrollment_period->id,
                         'related_to' => 'Student Enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);

@@ -481,7 +481,7 @@ class StudentController extends Controller
     }
 
     public function paypalorderReview($parent_id)
-    { 
+    {
         $address = ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
@@ -573,13 +573,21 @@ class StudentController extends Controller
     public function getAllOrders(Request $request)
     {
         $trans_id = $request->get('trans_id');
-        $enrollmentdata = [];
-        $orderDetails = Dashboard::where('transaction_id', $trans_id)->where('related_to', '!=', 'student_enrolled')->get();
-        $enrollment = Dashboard::where('transaction_id', $trans_id)->where('related_to', 'student_enrolled')->get();
+
+        $orderDetails = Dashboard::where('transaction_id', $trans_id)->where('related_to', '!=', 'Student Enrolled')->get();
+        $enrollment = Dashboard::where('transaction_id', $trans_id)->where('related_to', 'Student Enrolled')->get();
+        $arr = [];
         foreach ($enrollment as $orderDetail) {
-           $id = $orderDetail->item_type_id;
-           
+            $ep = EnrollmentPeriods::findOrFail($orderDetail->item_type_id);
+            $arr[] = [
+                'related_to' => $orderDetail->related_to,
+                'linked_to' => $orderDetail->linked_to,
+                'start_date_of_enrollment' => formatDate($ep->start_date_of_enrollment),
+                'end_date_of_enrollment' => formatDate($ep->end_date_of_enrollment),
+                'amount' => $orderDetail->amount
+            ];
         }
-        return response()->json(['data' => $orderDetails, 'enrollmentdata' => $enrollment]);
+
+        return response()->json(['data' => $orderDetails, 'enrollmentdata' => $arr]);
     }
 }

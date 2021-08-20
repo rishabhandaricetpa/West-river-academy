@@ -108,11 +108,25 @@
                         html += `<tr>
                         <td>${element.linked_to}</td>
                         <td> ${element.related_to}</td>
-                        <td> ${element.amount} </td>
+                        <td>$${element.amount} </td>
                        </tr>`
                     });
 
                     $("#paymeny_history_wrapper").html(html)
+                }
+                if (response.enrollmentdata.length) {
+                    let html = '';
+
+                    response.enrollmentdata.forEach(element => {
+
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td> ${element.related_to} (${element.start_date_of_enrollment} - ${element.end_date_of_enrollment} )</td>
+                        <td> $${element.amount} </td>
+                       </tr>`
+                    });
+
+                    $("#paymeny_history_wrapper").append(html)
                 }
             },
             error: function(response) {
