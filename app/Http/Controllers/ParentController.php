@@ -48,7 +48,7 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::where('id', ParentProfile::getParentId())->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-
+        // dd($enroll_fees);
         if (is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0) {
             $notification = [
                 'message' => 'Cart is Empty! Please add atleast one item.',
