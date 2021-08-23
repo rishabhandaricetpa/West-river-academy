@@ -169,6 +169,7 @@ class ParentController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
             }
         } catch (\Exception $e) {
+            dd($e);
             report($e);
             DB::rollBack();
             report($e);

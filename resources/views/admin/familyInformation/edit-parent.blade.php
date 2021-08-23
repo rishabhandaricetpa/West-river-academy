@@ -169,7 +169,7 @@
                                     <div class="col-lg-4 col-12">
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Street Address:</label>
-                                            <input type="text" id="parent1_street_address" class="form-control">
+                                            <input type="text" id="parent1_street_address" class="form-control" required>
                                         </div>
                                     </div>
 
@@ -182,7 +182,7 @@
                                     <div class="col-lg-4 col-12">
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">State:</label>
-                                            <input type="text" id="parent1_state" class="form-control">
+                                            <input type="text" id="parent1_state" class="form-control" required>
                                         </div>
                                     </div>
 
