@@ -117,11 +117,11 @@ class StudentController extends Controller
 
         // $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
         //     ->with('enrollmentPeriod', 'confirmletter')->get();
-          $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
+        $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods', 'confirmletter')->get();
-           
-    //    dd($confirmLetter);
+
+        //    dd($confirmLetter);
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
@@ -301,8 +301,11 @@ class StudentController extends Controller
     {
         $user_id = Auth::user()->id;
         $parent_id =  ParentProfile::getParentId();
+
         $students = StudentProfile::where('parent_profile_id', $parent_id)->get();
-        $fees = ParentProfile::getParentPendingFees($user_id);
+
+        $fees = ParentProfile::getParentPendingFees($parent_id);
+
         return view('reviewstudent', compact('students', 'fees'));
     }
 
@@ -478,7 +481,7 @@ class StudentController extends Controller
     }
 
     public function paypalorderReview($parent_id)
-    {//dd($parent_id);
+    {
         $address = ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
@@ -491,8 +494,8 @@ class StudentController extends Controller
 
     public function stripeorderReview($parent_id)
     {
-      //  $address = User::find($parent_id)->parentProfile()->first();
-       $address= ParentProfile::find($parent_id)->first();
+        //  $address = User::find($parent_id)->parentProfile()->first();
+        $address = ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
         if ($final_amount === false) {
@@ -570,33 +573,21 @@ class StudentController extends Controller
     public function getAllOrders(Request $request)
     {
         $trans_id = $request->get('trans_id');
-        // $trans_data = TransactionsMethod::where('transcation_id', $trans_id)->first();
-        // $orders = explode(',', getOrders($trans_id));
 
-        // $student_ids = explode(',', $trans_data->student_profile_id);
-        // $orders = $this->trimArrayValues($orders);
-        // $student_ids = $this->trimArrayValues($student_ids);
+        $orderDetails = Dashboard::where('transaction_id', $trans_id)->where('related_to', '!=', 'Student Enrolled')->get();
+        $enrollment = Dashboard::where('transaction_id', $trans_id)->where('related_to', 'Student Enrolled')->get();
+        $arr = [];
+        foreach ($enrollment as $orderDetail) {
+            $ep = EnrollmentPeriods::findOrFail($orderDetail->item_type_id);
+            $arr[] = [
+                'related_to' => $orderDetail->related_to,
+                'linked_to' => $orderDetail->linked_to,
+                'start_date_of_enrollment' => formatDate($ep->start_date_of_enrollment),
+                'end_date_of_enrollment' => formatDate($ep->end_date_of_enrollment),
+                'amount' => $orderDetail->amount
+            ];
+        }
 
-        // $students = StudentProfile::whereIn('id', $student_ids)
-        //     ->get()
-        //     ->mapWithKeys(function ($item) {
-        //         return [$item['id'] => $item['fullname']];
-        //     })->toArray();
-
-        // $data = [];
-        // for ($i = 0; $i < count($student_ids); $i++) {
-        //     array_push($data, [
-        //         "student_name" => $students[$student_ids[$i]],
-        //         "item_type" => $orders[$i]
-        //     ]);
-        // }
-
-        // return response()->json([
-        //     "data" => $data
-        // ]);
-
-
-        $orderDetails = Dashboard::where('transaction_id', $trans_id)->get();
-        return response()->json(['data' => $orderDetails]);
+        return response()->json(['data' => $orderDetails, 'enrollmentdata' => $arr]);
     }
 }

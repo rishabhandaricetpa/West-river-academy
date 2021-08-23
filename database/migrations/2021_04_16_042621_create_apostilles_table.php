@@ -32,7 +32,6 @@ class CreateApostillesTable extends Migration
             $table->string('confirmation_doc')->nullable();
             $table->string('custom_doc')->nullable();
             $table->dropColumn('number_of_documents');
-            $table->
             $table->timestamps();
         });
     }

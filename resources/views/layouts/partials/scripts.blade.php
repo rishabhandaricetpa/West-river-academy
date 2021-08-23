@@ -8,25 +8,25 @@
 <script src="{{ URL::asset('/js/custom.js') }}" crossorigin="anonymous"></script>
 
 <script>
-    @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch (type) {
+    @if (Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch (type) {
         case 'info':
-            toastr.info("{{ Session::get('message') }}");
-            break;
-
+        toastr.info("{{ Session::get('message') }}");
+        break;
+    
         case 'warning':
-            toastr.warning("{{ Session::get('message') }}");
-            break;
-
+        toastr.warning("{{ Session::get('message') }}");
+        break;
+    
         case 'success':
-            toastr.success("{{ Session::get('message') }}");
-            break;
-
+        toastr.success("{{ Session::get('message') }}");
+        break;
+    
         case 'error':
-            toastr.error("{{ Session::get('message') }}");
-            break;
-    }
+        toastr.error("{{ Session::get('message') }}");
+        break;
+        }
     @endif
 
 </script>
@@ -35,14 +35,13 @@
     $(function() {
         var $form = $(".validation");
         $('form.validation').bind('submit', function(e) {
-            var $form = $(".validation")
-                , inputVal = ['input[type=email]', 'input[type=password]'
-                    , 'input[type=text]', 'input[type=file]'
-                    , 'textarea'
-                ].join(', ')
-                , $inputs = $form.find('.required').find(inputVal)
-                , $errorStatus = $form.find('div.error')
-                , valid = true;
+            var $form = $(".validation"),
+                inputVal = ['input[type=email]', 'input[type=password]', 'input[type=text]',
+                    'input[type=file]', 'textarea'
+                ].join(', '),
+                $inputs = $form.find('.required').find(inputVal),
+                $errorStatus = $form.find('div.error'),
+                valid = true;
             $errorStatus.addClass('hide');
 
             $('.has-error').removeClass('has-error');
@@ -59,10 +58,10 @@
                 e.preventDefault();
                 Stripe.setPublishableKey($form.data('stripe-publishable-key'));
                 Stripe.createToken({
-                    number: $('.card-num').val()
-                    , cvc: $('.card-cvc').val()
-                    , exp_month: $('.card-expiry-month').val()
-                    , exp_year: $('.card-expiry-year').val()
+                    number: $('.card-num').val(),
+                    cvc: $('.card-cvc').val(),
+                    exp_month: $('.card-expiry-month').val(),
+                    exp_year: $('.card-expiry-year').val()
                 }, stripeHandleResponse);
             }
 
@@ -85,7 +84,7 @@
     });
 
     // view order deatils
-      
+
     function viewOrders(event) {
         $("#paymeny_history_wrapper").html("")
         var trans_id = $(event).data("id");
@@ -100,18 +99,34 @@
                 trans_id,
             },
             success: function(response) {
-                // location.reload();
+                console.log(response);
                 var html = '';
                 if (response.data.length) {
                     let html = '';
                     response.data.forEach(element => {
+
                         html += `<tr>
                         <td>${element.linked_to}</td>
                         <td> ${element.related_to}</td>
-                        <td> ${element.amount} </td>
+                        <td>$${element.amount} </td>
                        </tr>`
                     });
+
                     $("#paymeny_history_wrapper").html(html)
+                }
+                if (response.enrollmentdata.length) {
+                    let html = '';
+
+                    response.enrollmentdata.forEach(element => {
+
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td> ${element.related_to} (${element.start_date_of_enrollment} - ${element.end_date_of_enrollment} )</td>
+                        <td> $${element.amount} </td>
+                       </tr>`
+                    });
+
+                    $("#paymeny_history_wrapper").append(html)
                 }
             },
             error: function(response) {

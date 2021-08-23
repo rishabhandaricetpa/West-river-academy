@@ -128,11 +128,7 @@
             @else
             <td>{{$payment->status}}</td>
             @endif
-            {{-- @if($payment->coupon_amount==0)
-            <td>-</td>
-            @else
-            <td>${{ $payment->coupon_amount}}</td>
-            @endif --}}
+           
             <td>${{ $payment->amount }}</td>
             <td>{{ $payment->payment_mode}}</td>
             <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3 passID" data-toggle="modal"  data-target="#Payment-details-Modal" data-id="{{ $payment->transcation_id }}" onclick="viewOrders(event.target)" data-whatever="@getbootstrap">View Order</a></td>

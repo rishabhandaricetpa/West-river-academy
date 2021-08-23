@@ -354,10 +354,13 @@ sup {
 
   thead {
     background-color: #ccc;
-    th{
-      min-width:170px;
-    }
+   
   }
+  thead.min-width{   
+    th{   
+      min-width:150px;   
+    }
+  }   
 
   td,
   th {

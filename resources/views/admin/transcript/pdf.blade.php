@@ -20,30 +20,30 @@
 </head>
 
 <body>
-    <table>
+    <table style="width:100%;">
         <tbody>
-            <tr width="100%">
+            <tr style="width:100%;">
                 <td style="width:100%;color:#EC1D1D;font-weight:400;font-size:20px;margin:0 auto;">After this transcript
                     is approved by you, any further changes will incure a $25 fee.</td>
             </tr>
         </tbody>
     </table>
-    <table style="margin-bottom:20px;">
+    <table style="margin-bottom:20px;width:100%;">
         <tbody>
             <tr style="width:100%;">
                 <td valign="middle"
-                    style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px">official
+                    style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;">official
                     transcript</td>
                 <td valign="middle" style="text-align:center;width:50%;height:100px;">
                     <img src="../public/images/letterhead.png" alt="logo"
                         style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
                     <!-- <p style="margin:0;font-size:14px;">Califorinia Colorado USA</p>
-          <p style="margin:0;font-size:14px;">949.492.5240 info@westriveracademy.com</p> -->
+          <p style="margin:0;font-size:14px;">949.492.1540 info@westriveracademy.com</p> -->
                 </td>
             </tr>
         </tbody>
     </table>
-    <table>
+    <table style="width:100%;">
         <tbody>
             <tr style="width:100%;">
                 <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
@@ -57,7 +57,7 @@
             </tr>
         </tbody>
     </table>
-    <table>
+    <table style="width:100%;">
         <tbody>
             <tr style="width:100%;">
                 <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
@@ -72,7 +72,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="margin-bottom:20px;">
+    <table style="margin-bottom:20px;width:100%;">
         <tbody>
             <tr style="width:100%;">
                 <td style="text-transform:uppercase;font-size:14px;width:10%;"></td>
@@ -84,19 +84,19 @@
             </tr>
         </tbody>
     </table>
-    <table>
+    <table style="width:100%;">
         <tbody>
-            <tr style="width:100%;">
-                <td width="70%">
+            <tr style="width:100%;vertical-align:top;">   
+                <td style="width:80%;">
                     <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
                         <thead>
                             <tr>
                                 <th
-                                    style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;width:70%;padding:3px;">
+                                    style="border-bottom:1px solid #000;font-size: 11px;font-weight:700;padding:3px 5px;">
                                     Course name</th>
                                 @foreach ($grades as $grade)
                                     <th
-                                        style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;width:15%;padding:3px 20px;white-spane:initial;word-break:break-all;">
+                                        style="border-bottom:1px solid #000;border-left:1px solid #000;font-size: 11px;font-weight:700;padding:3px 5px;white-spane:initial;word-break:break-all;">
                                         Grade {{ $grade->grade }}</th>
                                 @endforeach
                             </tr>
@@ -116,34 +116,34 @@
                         </tbody>
                     </table>
                 </td>
-                <td width="30%" style="text-align:right;">
-                    <table width="100%">
+                <td style="text-align:right;width:20%;">
+                    <table style="width:100%;">
                         <tbody>
                             <tr style="width:100%;">
                                 <td
-                                    style="white-space: pre;font-weight:600;text-transform:uppercase;padding-left:52px;">
+                                    style="white-space:nowrap;font-weight:600;text-transform:uppercase;padding-left:15px;">
                                     <span
                                         style="border-bottom:1px solid #000;display:inline-block;font-size:11px;">GRADING
                                         SYSTEM</span>
                                 </td>
                             </tr>
                             <tr style="width:100%;">
-                                <td style="white-space: pre;padding-left:52px;font-size:11px;">A = 90-100%</td>
+                                <td style="white-space: pre;padding-left:15px;font-size:11px;">A = 90-100%</td>
                             </tr>
                             <tr style="width:100%;">
-                                <td style="white-space: pre;padding-left:52px;font-size:11px;">B = 80-89%</td>
+                                <td style="white-space: pre;padding-left:15px;font-size:11px;">B = 80-89%</td>
                             </tr>
                             <tr style="width:100%;">
-                                <td style="white-space: pre;padding-left:52px;font-size:11px;">C = 70-79%</td>
+                                <td style="white-space: pre;padding-left:15px;font-size:11px;">C = 70-79%</td>
                             </tr>
                             <tr style="width:100%;">
-                                <td style="white-space: pre;padding-left:52px;font-size:11px;">D = 60-69%</td>
+                                <td style="white-space: pre;padding-left:15px;font-size:11px;">D = 60-69%</td>
                             </tr>
                             <tr style="width:100%;">
-                                <td style="white-space: pre;padding-left:52px;font-size:11px;">F = 0-59%</td>
+                                <td style="white-space: pre;padding-left:15px;font-size:11px;">F = 0-59%</td>
                             </tr>
                             <tr style="width:100%;">
-                                <td style="white-space: pre;padding-left:52px;font-size:11px;">P = PASS</td>
+                                <td style="white-space: pre;padding-left:15px;font-size:11px;">P = PASS</td>
                             </tr>
                         </tbody>
                     </table>
@@ -151,9 +151,9 @@
             </tr>
         </tbody>
     </table>
-    <table style="margin:10px 0 20px;">
+    <table style="margin:10px 0 20px;width:100%;">
         <tbody>
-            <tr width="100%">
+            <tr style="width:100%;">
                 <td style="padding-top:20px;width:100%;font-size:12px;">This Student has met West River
                     Academy's
                     requirements for Grades <span style="font-weight:700;">{{ getPromotedGrades($grades) }}</span>
@@ -162,7 +162,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="margin-top:3%">
+    <table style="margin-top:3%;width:100%;">
         <tbody>
             <tr>
                 <td width="50%" style="text-align:center;padding-right:30px;"><span
@@ -176,7 +176,7 @@
             </tr>
         </tbody>
     </table>
-    <table>
+    <table style="width:100%;">
         <tbody>
             <tr>
                 <td>
