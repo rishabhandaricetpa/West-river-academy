@@ -57,7 +57,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="contain">Status</label>
-                                <select class="form-controll" name="status">
+                                <select class="form-control" name="status">
                                     <option value="0">Active</option>
                                     <option value="1">In Active</option>
                                 </select>
@@ -65,7 +65,8 @@
                               <div class="form-group">
                                 <label for="contain">Country</label>
                                 <select class="form-control" id="fill-countries" name="country" value="{{ Request::get('country') ?? ''}}">
-                                  <option></option>
+                                  <option>India</option>
+                                  <option>US</option>
                                 </select>
                                 <div id="suggesstion-box"></div>
                               </div>
@@ -84,7 +85,7 @@
                                 <input class="form-control" type="text" name="refered_by" value="{{ Request::get('refered_by') ?? ''}}"/>
                               </div>
                               <div class="form-group pt-3">   
-                                <a href="{{ route('admin.view.parent') }} " class="btn" > Clear Filters</a>
+                                <a href="{{ route('admin.view.parent') }} " class="btn btn-light mr-2" > Clear Filters</a>
                                 <button class="btn btn-primary" type="submit"> Search</button>
                               </div>
                             </form>
