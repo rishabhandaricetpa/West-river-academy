@@ -1,4 +1,5 @@
 @stack('select2_script')
+@php $input = Request::all();@endphp
 <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -37,11 +38,23 @@
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-
+        
         //parent datatable
         $("#family-table").DataTable({
-            "ajax": "{{ route('admin.datatable.parent') }}",
+            "ajax": {
+                "url": "{{ route('admin.datatable.parent') }}",
+                "data": function ( d ) {
+                    d.first_name    = "{{$input['first_name'] ?? ''}}";
+                    d.last_name     = "{{$input['last_name'] ?? ''}}";
+                    d.refered_by    = "{{$input['refered_by'] ?? ''}}";
+                    d.enroll_date   = "{{$input['enroll_date'] ?? ''}}";
+                    d.email         = "{{$input['email'] ?? ''}}";
+                    d.status        = "{{$input['status'] ?? ''}}";
+                    d.country       = "{{$input['country'] ?? ''}}";
+                    d.grade         = "{{$input['grade'] ?? ''}}";
+                    d.dob           = "{{$input['dob'] ?? ''}}";
+                }
+            },
             "processing": true,
             "searching": true,
             "serverSide": true,
@@ -581,7 +594,7 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     });
-    document.getElementById("button-notification").addEventListener("click", function() {
+    document.getElementById("button-notification")?.addEventListener("click", function() {
 
         if ($("#notification-items").hasClass("d-block"))
             $("#notification-items").removeClass("d-block");
@@ -2095,7 +2108,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
 
     //// table enable 
 
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("sampleForm");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -2104,7 +2117,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
             elements[i].disabled = true;
         }
     })
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("studentForm1");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -2113,7 +2126,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
             elements[i].disabled = true;
         }
     })
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("orderForm1");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -2122,7 +2135,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
             elements[i].disabled = true;
         }
     })
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("sampleForm");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -2236,7 +2249,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
         });
     });
     // for graduation hide and show payment mode inaccordance to status
-    document.getElementById("status-graduation").addEventListener("change", function() {
+    document.getElementById("status-graduation")?.addEventListener("change", function() {
 
 
         var value = this.value;
@@ -2262,7 +2275,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
         $("#custom_letter_amount").val(quantity * 35);
     }
 
-    document.getElementById("custom_letter_status").addEventListener("change", function() {
+    document.getElementById("custom_letter_status")?.addEventListener("change", function() {
 
         var value = this.value;
         console.log(value);
@@ -2307,7 +2320,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
 
 
 
-    document.getElementById("order_detail_val").addEventListener("change", function() {
+    document.getElementById("order_detail_val")?.addEventListener("change", function() {
         var elem = this;
         var value = this.value;
         $("#order-detail_transcript").hide();
@@ -2390,7 +2403,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
 
     document.querySelectorAll(".paymentDisplay").
     forEach((element) => {
-        element.addEventListener("change", function() {
+        element?.addEventListener("change", function() {
             var value = this.value;
             if (value == "paid") {
                 $(".transction-div").show();
@@ -2413,7 +2426,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
         }
     });
 
-    document.getElementById("postage_country").addEventListener("change", function() {
+    document.getElementById("postage_country")?.addEventListener("change", function() {
 
         var value = this.value;
         if (value == "India") {
@@ -2670,6 +2683,40 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
 
 
     }
+    $('#search-country').editableSelect({
+        // enable filter
+        filter:true,
+    });
+
+    // $('#search-countries').select2({
+    // // ajax: {
+    // //     url: 'search/family-filter',
+    // //     dataType: 'json'
+    // //     // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    // // }
+    // });
+
+
+    $(document).ready(function(){
+        $.ajax({
+        type: "get",
+        url: "search/family-filter",
+        data:'type=country&keyword='+$(this).val()+'&_token='+$('input[name="_token"]').attr('value'),
+        beforeSend: function(){
+            $("#search-country").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;");
+        },
+        success: function(data){
+            $("#fill-countries").append(data);
+            $("#search-box").css("background","#FFF");
+            $('#fill-countries').select2({placeholder: "Select Country"});
+        }
+        });
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
+        $('#student_grade').select2({});
+    });
 
 </script>
 
