@@ -27,78 +27,68 @@
 
     <ul class="d-flex">
         <li class="mr-3">
-            <div class="input-group search-form position-relative" id="adv-search">
-                <button type="button" class="btn search-icon p-0 bg-white position-absolute">
-                    <i class="fas fa-search"></i>
-                </button>
-                <input type="text" class="form-control pl-4" placeholder="Search" />
-                <div class="input-group-btn position-absolute">
-                    @csrf
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown"
-                                aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form" autocomplete="off"
-                                    action="{{ route('admin.view.parent') }}">
-                                    <div class="form-group">
-                                        <label for="filter">First Name</label>
-                                        <input class="form-control" type="text" name="first_name"
-                                            value="{{ Request::get('first_name') ?? '' }}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Last Name</label>
-                                        <input class="form-control" type="text" name="last_name"
-                                            value="{{ Request::get('last_name') ?? '' }}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Enrollment start date</label>
-                                        <input class="form-control datepicker" type="text" id="enroll_date"
-                                            name="enroll_date" value="{{ Request::get('enroll_date') ?? '' }}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Email</label>
-                                        <input class="form-control" type="email" name="email"
-                                            value="{{ Request::get('email') ?? '' }}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Status</label>
-                                        <select class="form-controll" name="status">
-                                            <option value="0">Active</option>
-                                            <option value="1">In Active</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Country</label>
-                                        <select class="form-control" id="fill-countries" name="country"
-                                            value="{{ Request::get('country') ?? '' }}">
-                                            <option></option>
-                                        </select>
-                                        <div id="suggesstion-box"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Student Birth Date</label>
-                                        <input class="form-control datepicker" type="text" name="dob"
-                                            value="{{ Request::get('dob') ?? '' }}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Student Grade</label>
-                                        <select name="grade" class="form-control" id="student_grade">
-                                            <option value=''> Select One</option>
-                                            @php studentGradeDropdown(Request::get('grade')) @endphp
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Referred By</label>
-                                        <input class="form-control" type="text" name="refered_by"
-                                            value="{{ Request::get('refered_by') ?? '' }}" />
-                                    </div>
-                                    <div class="form-group pt-3">
-                                        <a href="{{ route('admin.view.parent') }} " class="btn"> Clear Filters</a>
-                                        <button class="btn btn-primary" type="submit"> Search</button>
-                                    </div>
-                                </form>
-                            </div>
+          <div class="input-group search-form position-relative" id="adv-search">
+            <button type="button" class="btn search-icon p-0 bg-white position-absolute">
+              <i class="fas fa-search"></i>
+            </button>
+            <input type="text" class="form-control pl-4" placeholder="Search" />
+            <div class="input-group-btn position-absolute">
+                @csrf
+                <div class="btn-group" role="group">
+                    <div class="dropdown dropdown-lg"> 
+                        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <form class="form-horizontal" role="form" autocomplete="off"   action="{{ route('admin.view.parent') }}">
+                              <div class="form-group">
+                                <label for="filter">First Name</label>
+                                <input class="form-control" type="text" name="first_name" value="{{ Request::get('first_name') ?? ''}}"/>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Last Name</label>
+                                <input class="form-control" type="text" name="last_name" value="{{ Request::get('last_name') ?? ''}}"/>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Enrollment start date</label>
+                                <input class="form-control datepicker" type="text" id="enroll_date" name="enroll_date" value="{{ Request::get('enroll_date') ?? ''}}"/>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Email</label>
+                                <input class="form-control" type="email" name="email" value="{{ Request::get('email') ?? ''}}"/>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Status</label>
+                                <select class="form-control" name="status">
+                                    <option value="0">Active</option>
+                                    <option value="1">In Active</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Country</label>
+                                <select class="form-control" id="fill-countries" name="country" value="{{ Request::get('country') ?? ''}}">
+                                  <option>India</option>
+                                  <option>US</option>
+                                </select>
+                                <div id="suggesstion-box"></div>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Student Birth Date</label>
+                                <input class="form-control datepicker" type="text" name="dob"  value="{{ Request::get('dob') ?? ''}}"/>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Student Grade</label>
+                                <select name="grade" class="form-control" id="student_grade">
+                                  @php studentGradeDropdown(Request::get('grade')) @endphp
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="contain">Referred By</label>
+                                <input class="form-control" type="text" name="refered_by" value="{{ Request::get('refered_by') ?? ''}}"/>
+                              </div>
+                              <div class="form-group pt-3">   
+                                <a href="{{ route('admin.view.parent') }} " class="btn btn-light mr-2" > Clear Filters</a>
+                                <button class="btn btn-primary" type="submit"> Search</button>
+                              </div>
+                            </form>
                         </div>
 
                     </div>
