@@ -433,6 +433,9 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_CustomLetter':
+
+                    CustomLetterPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
+
                     $custom_payment = new CustomLetterPayment();
                     $custom_payment->parent_profile_id = $request->get('parent_id');
                     $custom_payment->amount = $request->get('custom_letter_amount');
@@ -455,16 +458,18 @@ class ParentController extends Controller
                         $transction->save();
                     }
                     if ($request->get('custom_letter_status') == 'pending') {
-                        Cart::create([
-                            'item_type' => 'custom_letter',
-                            'item_id' => $request->get('parent_id'),
-                            'parent_profile_id' => $request->get('parent_id'),
-                        ]);
+                        if (!Cart::where('item_type', 'custom_letter')->exists()) {
+                            Cart::create([
+                                'item_type' => 'custom_letter',
+                                'item_id' => $request->get('parent_id'),
+                                'parent_profile_id' => $request->get('parent_id'),
+                            ]);
+                        }
                     }
                     break;
 
                 case 'order-detail_OrderPostage':
-                    $clearpendingPayments = OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
+                    OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
                     $charge = Country::where('country', $request->get('postage_country'))->select('postage_charges')->first();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
@@ -581,7 +586,7 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_CustomPayment':
-
+                    CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
                     $custom_payment = new CustomPayment();
                     $custom_payment->parent_profile_id = $request->get('parent_id');
                     $custom_payment->amount = $request->get('custom_amount');
@@ -603,11 +608,13 @@ class ParentController extends Controller
                         $transction->save();
                     }
                     if ($request->get('custom_status') == 'pending') {
-                        Cart::create([
-                            'item_type' => 'custom',
-                            'item_id' => $request->get('parent_id'),
-                            'parent_profile_id' => $request->get('parent_id'),
-                        ]);
+                        if (!Cart::where('item_type', 'custom')->exists()) {
+                            Cart::create([
+                                'item_type' => 'custom',
+                                'item_id' => $request->get('parent_id'),
+                                'parent_profile_id' => $request->get('parent_id'),
+                            ]);
+                        }
                     }
 
                     break;

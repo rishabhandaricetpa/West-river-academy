@@ -15,7 +15,7 @@
                                         src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>             
                         @foreach ($transcations as $transcation)
                             <tr>
                                 <td>{{ $transcation->created_at->format('M j,Y') }}</td>
