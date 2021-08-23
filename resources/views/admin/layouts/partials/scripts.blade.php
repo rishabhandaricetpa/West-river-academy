@@ -39,6 +39,27 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         
+        
+        $.ajax({
+            type: "get",
+            url: "search/family-filter",
+            data:'type=country&keyword='+$(this).val()+'&_token='+$('input[name="_token"]').attr('value'),
+            beforeSend: function(){
+                $("#search-country").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;");
+            },
+            success: function(data){
+                $("#fill-countries").append(data);
+                $("#search-box").css("background","#FFF");
+                $('#fill-countries').select2({placeholder: "Select Country"});
+            }
+        });
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
+        $('#student_grade').select2({});
+    
+
         //parent datatable
         $("#family-table").DataTable({
             "ajax": {
@@ -2697,26 +2718,7 @@ $('nav .nav-item a[href="'+ url +'"]').addClass('active');
     // });
 
 
-    $(document).ready(function(){
-        $.ajax({
-        type: "get",
-        url: "search/family-filter",
-        data:'type=country&keyword='+$(this).val()+'&_token='+$('input[name="_token"]').attr('value'),
-        beforeSend: function(){
-            $("#search-country").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;");
-        },
-        success: function(data){
-            $("#fill-countries").append(data);
-            $("#search-box").css("background","#FFF");
-            $('#fill-countries').select2({placeholder: "Select Country"});
-        }
-        });
-        $(".datepicker").datepicker({
-            dateFormat: "yy-mm-dd"
-        });
-
-        $('#student_grade').select2({});
-    });
+    
 
 </script>
 
