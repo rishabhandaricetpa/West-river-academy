@@ -588,3 +588,25 @@ function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
     }
     return $repAmount + $valueAmount;
 }
+
+
+function studentGradeDropdown($grade)
+{
+    try {
+        $gradeArray = [];
+
+        $studentGrade = config('constants.STUDENT_GRADE');
+        if($studentGrade):
+
+            foreach ($studentGrade as $key => $value) {
+
+                $selected = ($grade == $value) ? 'selected' : '';
+                array_push($gradeArray, "<option '".$selected."' value=".$value.">".$value."</option>");
+            }
+
+        endif;
+        echo implode(' ', $gradeArray);
+    } catch (\Throwable $th) {
+        return false;
+    }
+}

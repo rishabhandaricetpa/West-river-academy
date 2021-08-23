@@ -422,12 +422,20 @@ class TranscriptController extends Controller
             $years = collect($enrollment_periods)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
+            if ($maxYear == $minYear) {
+                $maxYear = $maxYear + 1;
+            }
+
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         } else {
             $enrollment_periods = TranscriptK8::where('transcript_id', $transcript_id)->get();
             $years = collect($enrollment_periods)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
+            if ($maxYear == $minYear) {
+                $maxYear = $maxYear + 1;
+            }
+
             $transcript_id = Transcript::select()->where('student_profile_id', $student_id)->whereStatus('completed')->where('status', 'paid')->first();
             return view('transcript/preview-transcript', compact('student', 'transcriptData', 'grades', 'groupCourses', 'transcript_id', 'address', 'year', 'minYear', 'maxYear'));
         }
