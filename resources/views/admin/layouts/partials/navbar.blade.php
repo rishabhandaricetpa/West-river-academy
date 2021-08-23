@@ -39,7 +39,7 @@
                             <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown"
                                 aria-expanded="false"><span class="caret"></span></button>
                             <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form" autocomplete="off"
+                                <form id="navbar_search-form" class="form-horizontal" role="form" autocomplete="off"
                                     action="{{ route('admin.view.parent') }}">
                                     <div class="form-group">
                                         <label for="filter">First Name</label>
@@ -94,7 +94,7 @@
                                             value="{{ Request::get('refered_by') ?? '' }}" />
                                     </div>
                                     <div class="form-group pt-3">
-                                        <a href="{{ route('admin.view.parent') }} " class="btn btn-light mr-2"> Clear
+                                        <a id="btn-reset" href="{{ route('admin.view.parent') }} " class="btn btn-light mr-2"> Clear
                                             Filters</a>
                                         <button class="btn btn-primary" type="submit"> Search</button>
                                     </div>
