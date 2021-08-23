@@ -149,7 +149,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom':
-                    $clearpendingPayments = CustomPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $customPaymentsData = CustomPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $request->get('amount'),
@@ -187,7 +187,7 @@ class CartController extends Controller
                     break;
 
                 case 'postage':
-                    $clearpendingPayments = OrderPostage::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = $request->get('postage_charges') + $request->get('usa_shiiping');
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -290,7 +290,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom_letter':
-                    $clearpendingPayments = CustomLetterPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = CustomLetterPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = FeesInfo::getFeeAmount('custom_letter') * $request->get('quantity');
                     $customletterPaymentsData = CustomLetterPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -310,7 +310,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'order_consultation':
-                    $clearpendingPayments = OrderPersonalConsultation::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = $request->get('amount_due');
                     $orderConsultancyData = OrderPersonalConsultation::create([
                         'parent_profile_id' => ParentProfile::getParentId(),

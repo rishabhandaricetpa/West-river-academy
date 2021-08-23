@@ -464,6 +464,7 @@ class ParentController extends Controller
                     break;
 
                 case 'order-detail_OrderPostage':
+                    $clearpendingPayments = OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
                     $charge = Country::where('country', $request->get('postage_country'))->select('postage_charges')->first();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
@@ -611,6 +612,7 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_OrderConsultaion':
+                    $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
                         $transction = new TransactionsMethod();

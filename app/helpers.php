@@ -436,25 +436,25 @@ function getOrderAmount($item_type, $item_code)
         $amount = TranscriptPayment::where('transcript_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "postage") {
-        $amount = OrderPostage::where('parent_profile_id', $item_code)->first();
+        $amount = OrderPostage::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "notarization") {
-        $amount = NotarizationPayment::where('notarization_id', $item_code)->first();
+        $amount = NotarizationPayment::whereNull('transcation_id')->where('notarization_id', $item_code)->first();
         if ($amount)
             return $amount->amount;
         else
             return false;
     } elseif ($item_type == "apostille") {
-        $amount = NotarizationPayment::where('apostille_id', $item_code)->first();
+        $amount = NotarizationPayment::whereNull('transcation_id')->where('apostille_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "custom_letter") {
-        $amount = CustomLetterPayment::where('parent_profile_id', $item_code)->first();
+        $amount = CustomLetterPayment::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "order_consultation") {
-        $amount = OrderPersonalConsultation::where('parent_profile_id', $item_code)->first();
+        $amount = OrderPersonalConsultation::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "custom") {
-        $amount = CustomPayment::where('parent_profile_id', $item_code)->first();
+        $amount = CustomPayment::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         if ($amount)
             return ($amount->amount);
         else

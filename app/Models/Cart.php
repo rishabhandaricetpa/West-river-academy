@@ -380,7 +380,7 @@ class Cart extends Model
     {
         return self::where('cart.parent_profile_id', $parent_profile_id)
             ->where('cart.item_type', 'postage')
-            ->leftJoin('order_postages', 'cart.item_id', 'order_postages.parent_profile_id')->where('order_postages.status', 'pending')
+            ->leftJoin('order_postages', 'cart.item_id', 'order_postages.parent_profile_id')->whereNull('transcation_id')->where('order_postages.status', 'pending')
             ->leftJoin('parent_profiles', 'order_postages.parent_profile_id', 'parent_profiles.id');
     }
     private static function getNotarizationQuery($parent_profile_id)
