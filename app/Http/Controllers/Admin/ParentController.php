@@ -69,43 +69,43 @@ class ParentController extends Controller
     {
         $input                  = $request->all();
         $parentProfile          = ParentProfile::select('parent_profiles.*')
-                                  ->leftJoin('student_profiles AS sp', 'sp.parent_profile_id', 'parent_profiles.id')
-                                  ->leftJoin('enrollment_periods AS ep', 'ep.student_profile_id', 'sp.id')
-                                  ->with(['studentProfile', 'address']);
-        if( $input['first_name'] )
-            $parentProfile->where(function($query) use($input){
+            ->leftJoin('student_profiles AS sp', 'sp.parent_profile_id', 'parent_profiles.id')
+            ->leftJoin('enrollment_periods AS ep', 'ep.student_profile_id', 'sp.id')
+            ->with(['studentProfile', 'address']);
+        if ($input['first_name'])
+            $parentProfile->where(function ($query) use ($input) {
                 $query->where('sp.first_name', $input['first_name']);
                 $query->orWhere('parent_profiles.p1_first_name', $input['first_name']);
             });
 
-        if( $input['last_name'] )
-            $parentProfile->where(function($query) use($input){
+        if ($input['last_name'])
+            $parentProfile->where(function ($query) use ($input) {
                 $query->where('sp.last_name', $input['last_name']);
                 $query->orWhere('parent_profiles.p1_last_name', $input['last_name']);
             });
 
-        if( $input['email'] )
-            $parentProfile->where(function($query) use($input){
+        if ($input['email'])
+            $parentProfile->where(function ($query) use ($input) {
                 $query->where('sp.email', $input['email']);
                 $query->orWhere('parent_profiles.p1_email', $input['email']);
             });
 
-        if( $input['dob'] )
+        if ($input['dob'])
             $parentProfile->where('sp.d_o_b', $input['dob']);
 
-        if( $input['status'] )
+        if ($input['status'])
             $parentProfile->where('parent_profiles.status', $input['status']);
 
-        if( $input['country'] )
+        if ($input['country'])
             $parentProfile->where('country', $input['country']);
 
-        if( $input['refered_by'] )
+        if ($input['refered_by'])
             $parentProfile->whereRaw('LOWER(reference)', strtolower($input['refered_by']));
 
-        if( $input['enroll_date'] )
+        if ($input['enroll_date'])
             $parentProfile->where('start_date_of_enrollment', $input['enroll_date']);
 
-        if( $input['grade'] )
+        if ($input['grade'])
             $parentProfile->where('grade_level', $input['grade']);
 
         return $parentProfile->latest()->get();
@@ -235,7 +235,7 @@ class ParentController extends Controller
 
         $all_rep_groups = RepresentativeGroup::all();
         // $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
-        $detail_order_lists = TransactionsMethod::where('parent_profile_id', $id)->get();
+        $detail_order_lists = TransactionsMethod::where('parent_profile_id', $id)->orderBy('id', 'desc')->get();
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups', 'detail_order_lists'));
     }
 
@@ -831,7 +831,7 @@ class ParentController extends Controller
      * 
      * @param {Request} $request
      * @return
-    */
+     */
     public function getSearchFilterData(Request $request)
     {
         $input      = $request->all();
@@ -839,17 +839,17 @@ class ParentController extends Controller
 
         switch ($input['type']) {
             case 'country':
-                
+
                 $country  = Country::orderBy('country')->get();
-                if($country):
+                if ($country) :
                     foreach ($country as $key => $value) {
-                        $option  = '<option value="'.$value->country.'">'.$value->country.'</option>';
+                        $option  = '<option value="' . $value->country . '">' . $value->country . '</option>';
                         array_push($countries, $option);
                     }
                     return $countries;
                 endif;
                 break;
-            
+
             default:
                 # code...
                 break;

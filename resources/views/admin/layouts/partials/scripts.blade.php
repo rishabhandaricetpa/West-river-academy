@@ -38,19 +38,31 @@
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        
-        
+
+
         $.ajax({
             type: "get",
+            "serverSide": true,
+            "processing": true,
+            "searching": true,
+            "serverSide": true,
+
+            "autoWidth": false,
+            "dom": "Bfrtip",
             url: "search/family-filter",
-            data:'type=country&keyword='+$(this).val()+'&_token='+$('input[name="_token"]').attr('value'),
-            beforeSend: function(){
-                $("#search-country").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;");
+            data: 'type=country&keyword=' + $(this).val() + '&_token=' + $('input[name="_token"]').attr(
+                'value'),
+            beforeSend: function() {
+                $("#search-country").css("background",
+                    "#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;"
+                );
             },
-            success: function(data){
+            success: function(data) {
                 $("#fill-countries").append(data);
-                $("#search-box").css("background","#FFF");
-                $('#fill-countries').select2({placeholder: "Select Country"});
+                $("#search-box").css("background", "#FFF");
+                $('#fill-countries').select2({
+                    placeholder: "Select Country"
+                });
             }
         });
         $(".datepicker").datepicker({
@@ -58,22 +70,22 @@
         });
 
         $('#student_grade').select2({});
-    
+
 
         //parent datatable
         $("#family-table").DataTable({
             "ajax": {
                 "url": "{{ route('admin.datatable.parent') }}",
-                "data": function ( d ) {
-                    d.first_name    = "{{$input['first_name'] ?? ''}}";
-                    d.last_name     = "{{$input['last_name'] ?? ''}}";
-                    d.refered_by    = "{{$input['refered_by'] ?? ''}}";
-                    d.enroll_date   = "{{$input['enroll_date'] ?? ''}}";
-                    d.email         = "{{$input['email'] ?? ''}}";
-                    d.status        = "{{$input['status'] ?? ''}}";
-                    d.country       = "{{$input['country'] ?? ''}}";
-                    d.grade         = "{{$input['grade'] ?? ''}}";
-                    d.dob           = "{{$input['dob'] ?? ''}}";
+                "data": function(d) {
+                    d.first_name = "{{ $input['first_name'] ?? '' }}";
+                    d.last_name = "{{ $input['last_name'] ?? '' }}";
+                    d.refered_by = "{{ $input['refered_by'] ?? '' }}";
+                    d.enroll_date = "{{ $input['enroll_date'] ?? '' }}";
+                    d.email = "{{ $input['email'] ?? '' }}";
+                    d.status = "{{ $input['status'] ?? '' }}";
+                    d.country = "{{ $input['country'] ?? '' }}";
+                    d.grade = "{{ $input['grade'] ?? '' }}";
+                    d.dob = "{{ $input['dob'] ?? '' }}";
                 }
             },
             "processing": true,
@@ -1300,7 +1312,7 @@
                     apostille_country_gard
                 },
                 success: function(response) {
-                      location.reload();
+                    location.reload();
                 },
                 error: function(response) {
 
@@ -2704,7 +2716,7 @@
     }
     $('#search-country').editableSelect({
         // enable filter
-        filter:true,
+        filter: true,
     });
 
     // $('#search-countries').select2({
@@ -2714,9 +2726,6 @@
     // //     // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
     // // }
     // });
-
-
-    
 
 </script>
 

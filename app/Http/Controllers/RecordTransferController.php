@@ -55,7 +55,7 @@ class RecordTransferController extends Controller
                 'linked_to' => $recordTransfer->id,
                 'item_type_id' => $recordTransfer->id,
                 'related_to' => 'record_transfer',
-                'record_transfer_id' => $recordTransfer->id,
+
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();
@@ -66,6 +66,7 @@ class RecordTransferController extends Controller
 
             return view('recordTransfer.thankyou', compact('parent_id'));
         } catch (\Exception $e) {
+
             DB::rollback();
             $notification = [
                 'message' => 'Failed to update Record!',
