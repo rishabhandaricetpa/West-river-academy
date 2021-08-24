@@ -64,9 +64,56 @@ class ParentController extends Controller
         $allstudent = StudentProfile::where('parent_profile_id', $parent_id)->get();
         return view('admin.familyInformation.view-student-parent', compact('parent', 'allstudent'));
     }
-    public function dataTable()
+
+    public function _filter($request)
     {
-        return datatables(ParentProfile::with(['studentProfile', 'address'])->latest()->get())->toJson();
+        $input                  = $request->all();
+        $parentProfile          = ParentProfile::select('parent_profiles.*')
+            ->leftJoin('student_profiles AS sp', 'sp.parent_profile_id', 'parent_profiles.id')
+            ->leftJoin('enrollment_periods AS ep', 'ep.student_profile_id', 'sp.id')
+            ->with(['studentProfile', 'address']);
+        if ($input['first_name'])
+            $parentProfile->where(function ($query) use ($input) {
+                $query->where('sp.first_name', $input['first_name']);
+                $query->orWhere('parent_profiles.p1_first_name', $input['first_name']);
+            });
+
+        if ($input['last_name'])
+            $parentProfile->where(function ($query) use ($input) {
+                $query->where('sp.last_name', $input['last_name']);
+                $query->orWhere('parent_profiles.p1_last_name', $input['last_name']);
+            });
+
+        if ($input['email'])
+            $parentProfile->where(function ($query) use ($input) {
+                $query->where('sp.email', $input['email']);
+                $query->orWhere('parent_profiles.p1_email', $input['email']);
+            });
+
+        if ($input['dob'])
+            $parentProfile->where('sp.d_o_b', $input['dob']);
+
+        if ($input['status'])
+            $parentProfile->where('parent_profiles.status', $input['status']);
+
+        if ($input['country'])
+            $parentProfile->where('country', $input['country']);
+
+        if ($input['refered_by'])
+            $parentProfile->whereRaw('LOWER(reference)', strtolower($input['refered_by']));
+
+        if ($input['enroll_date'])
+            $parentProfile->where('start_date_of_enrollment', $input['enroll_date']);
+
+        if ($input['grade'])
+            $parentProfile->where('grade_level', $input['grade']);
+
+        return $parentProfile->latest()->get();
+    }
+    public function dataTable(Request $request)
+    {
+        $query  = $request->query() ? self::_filter($request) : ParentProfile::with(['studentProfile', 'address'])->latest()->get();
+        return datatables($query)->toJson();
     }
 
 
@@ -122,6 +169,7 @@ class ParentController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
             }
         } catch (\Exception $e) {
+            dd($e);
             report($e);
             DB::rollBack();
             report($e);
@@ -188,7 +236,7 @@ class ParentController extends Controller
 
         $all_rep_groups = RepresentativeGroup::all();
         // $detail_order_lists = Dashboard::where('parent_profile_id',  $parent->id)->get();
-        $detail_order_lists = TransactionsMethod::where('parent_profile_id', $id)->get();
+        $detail_order_lists = TransactionsMethod::where('parent_profile_id', $id)->orderBy('id', 'desc')->get();
         return view('admin.familyInformation.edit-parent', compact('parent', 'allstudent', 'transcations', 'recordTransfer', 'payment_info', 'documents', 'getNotes', 'payment_nonpaid', 'countries', 'rep_group', 'all_rep_groups', 'detail_order_lists'));
     }
 
@@ -433,6 +481,9 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_CustomLetter':
+
+                    CustomLetterPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
+
                     $custom_payment = new CustomLetterPayment();
                     $custom_payment->parent_profile_id = $request->get('parent_id');
                     $custom_payment->amount = $request->get('custom_letter_amount');
@@ -455,16 +506,18 @@ class ParentController extends Controller
                         $transction->save();
                     }
                     if ($request->get('custom_letter_status') == 'pending') {
-                        Cart::create([
-                            'item_type' => 'custom_letter',
-                            'item_id' => $request->get('parent_id'),
-                            'parent_profile_id' => $request->get('parent_id'),
-                        ]);
+                        if (!Cart::where('item_type', 'custom_letter')->exists()) {
+                            Cart::create([
+                                'item_type' => 'custom_letter',
+                                'item_id' => $request->get('parent_id'),
+                                'parent_profile_id' => $request->get('parent_id'),
+                            ]);
+                        }
                     }
                     break;
 
                 case 'order-detail_OrderPostage':
-                    $clearpendingPayments = OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
+                    OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
                     $charge = Country::where('country', $request->get('postage_country'))->select('postage_charges')->first();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
@@ -619,7 +672,7 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_CustomPayment':
-
+                    CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
                     $custom_payment = new CustomPayment();
                     $custom_payment->parent_profile_id = $request->get('parent_id');
                     $custom_payment->amount = $request->get('custom_amount');
@@ -641,11 +694,13 @@ class ParentController extends Controller
                         $transction->save();
                     }
                     if ($request->get('custom_status') == 'pending') {
-                        Cart::create([
-                            'item_type' => 'custom',
-                            'item_id' => $request->get('parent_id'),
-                            'parent_profile_id' => $request->get('parent_id'),
-                        ]);
+                        if (!Cart::where('item_type', 'custom')->exists()) {
+                            Cart::create([
+                                'item_type' => 'custom',
+                                'item_id' => $request->get('parent_id'),
+                                'parent_profile_id' => $request->get('parent_id'),
+                            ]);
+                        }
                     }
 
                     break;
@@ -813,5 +868,35 @@ class ParentController extends Controller
         $orderDetails = Dashboard::where('transaction_id', $request->transaction_id)->get();
 
         return response()->json(['orders' => $orderDetails]);
+    }
+
+    /**
+     * Get search filter data
+     * 
+     * @param {Request} $request
+     * @return
+     */
+    public function getSearchFilterData(Request $request)
+    {
+        $input      = $request->all();
+        $countries  = [];
+
+        switch ($input['type']) {
+            case 'country':
+
+                $country  = Country::orderBy('country')->get();
+                if ($country) :
+                    foreach ($country as $key => $value) {
+                        $option  = '<option value="' . $value->country . '">' . $value->country . '</option>';
+                        array_push($countries, $option);
+                    }
+                    return $countries;
+                endif;
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 }

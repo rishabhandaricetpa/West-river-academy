@@ -289,7 +289,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom_letter':
-                    $clearpendingPayments = CustomLetterPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    CustomLetterPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = FeesInfo::getFeeAmount('custom_letter') * $request->get('quantity');
                     $customletterPaymentsData = CustomLetterPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),

@@ -292,3 +292,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], funct
     Route::get('repdelete/{id}', 'RepresentativeGroupController@deleteRep')->name('delete.rep');
     Route::get('change/status/{parent_id}', 'RepresentativeGroupController@changeStatusRep')->name('rep.status');
 });
+
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'search'], function () {
+    Route::get('family-filter', 'ParentController@getSearchFilterData')->name('family.filter');
+});

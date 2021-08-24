@@ -26,6 +26,7 @@ class Cart extends Model
     {
         try {
             if ($total) {
+                // GO AFTER CART i.e in address
                 $enroll_total = Self::getEnrollQuery($parent_profile_id)->select(DB::raw('sum(enrollment_payments.amount) as amount'))->first();
                 $graduation_total = Self::getGraduationQuery($parent_profile_id)->select(DB::raw('sum(graduation_payments.amount) as amount'))->first();
                 $transcript_total = Self::getTranscriptQuery($parent_profile_id)->select(DB::raw('sum(transcript_payments.amount) as amount'))->first();
@@ -42,6 +43,7 @@ class Cart extends Model
                 $total_amount->amount = $enroll_total->amount + $graduation_total->amount + $transcript_total->amount + $custom_total->amount + $transcript_edit_total->amount + $postage_total->amount + $notarization_total->amount + $custom_letter_total->amount + $consultation_total->amount + $apostille_total->amount;
                 return $total_amount;
             } else {
+                // in cart
                 $enroll_data = Self::getEnrollData($parent_profile_id);
                 $graduation_data = Self::getGraduationData($parent_profile_id);
                 $transcript_data = Self::getTranscriptData($parent_profile_id);
@@ -363,7 +365,7 @@ class Cart extends Model
     {
         return self::where('cart.parent_profile_id', $parent_profile_id)
             ->where('cart.item_type', 'custom')
-            ->leftJoin('custom_payments', 'cart.item_id', 'custom_payments.parent_profile_id')->where('custom_payments.status', 'pending')
+            ->leftJoin('custom_payments', 'cart.item_id', 'custom_payments.parent_profile_id')->whereNull('transcation_id')->where('custom_payments.status', 'pending')
             ->leftJoin('parent_profiles', 'custom_payments.parent_profile_id', 'parent_profiles.id');
     }
 
@@ -403,7 +405,7 @@ class Cart extends Model
     {
         return self::where('cart.parent_profile_id', $parent_profile_id)
             ->where('cart.item_type', 'custom_letter')
-            ->leftJoin('custom_letter_payments', 'cart.item_id', 'custom_letter_payments.parent_profile_id')->where('custom_letter_payments.status', 'pending')
+            ->leftJoin('custom_letter_payments', 'cart.item_id', 'custom_letter_payments.parent_profile_id')->whereNull('transcation_id')->where('custom_letter_payments.status', 'pending')
             ->leftJoin('parent_profiles', 'custom_letter_payments.parent_profile_id', 'parent_profiles.id');
     }
     private static function getConsultationQuery($parent_profile_id)
@@ -656,9 +658,21 @@ class Cart extends Model
 
                     $transcripts = Transcript::whereId($cart->item_id)->get();
 
-                    foreach ($transcripts as $transcript) {
-                        $transcript->status = $status;
-                        $transcript->save();
+                    foreach ($transcript_payment as $ts_payment) {
+                        $ts_payment->payment_mode = $type;
+                        if ($payment_id != null) {
+                            $ts_payment->transcation_id = $payment_id;
+                            $ts_payment->status = $status;
+                        }
+                        $ts_payment->save();
+                        Dashboard::create([
+                            'parent_profile_id' => ParentProfile::getParentId(),
+                            'amount' => $ts_payment->amount,
+                            'linked_to' => $ts_payment->id,
+                            'transaction_id' => $ts_payment->transcation_id,
+                            'related_to' => 'transcript_ordered',
+                            'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                        ]);
                     }
                     break;
 
