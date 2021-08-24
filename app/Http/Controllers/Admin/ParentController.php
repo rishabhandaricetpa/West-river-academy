@@ -499,6 +499,17 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_Notarization':
+
+                    $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
+                        ->where('pay_for', 'notarization')->where('status', 'pending')
+                        ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
+                    if ($clearpendingPayments) {
+                        $deletedata = Notarization::where('id', $clearpendingPayments->notarization_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
+                        $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
+                            ->where('pay_for', 'notarization')->where('status', 'pending')
+                            ->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
+                    }
+
                     $total_notar = $request->get('notar_amount') + $request->get('shipping_amount');
                     $notarization_type = "notarization";
                     $status = ($request->get('noatrization_status') == 'pending') ? 'pending' : 'paid';
@@ -530,14 +541,37 @@ class ParentController extends Controller
                     $notarization_payment->save();
 
                     if ($status == 'pending') {
-                        Cart::create([
-                            'item_type' => 'notarization',
-                            'item_id' => $notarization->id,
-                            'parent_profile_id' => $request->get('parent_profile_id'),
-                        ]);
+                        Cart::updateOrCreate(
+                            [
+                                'parent_profile_id' => $request->get('parent_profile_id'),
+                                'item_type' => 'notarization',
+                            ],
+                            [
+                                'item_type' => 'notarization',
+                                'item_id' => $notarization->id,
+                                'parent_profile_id' => $request->get('parent_profile_id'),
+                            ]
+                        );
                     }
                     break;
                 case 'order-detail_ApostilePackage':
+
+                    $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
+                        ->where('pay_for', 'apostille')->where('status', 'pending')
+                        ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
+                    if ($clearpendingPayments) {
+                        $deletedata = Apostille::where('id', $clearpendingPayments->apostille_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
+                        $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
+                            ->where('pay_for', 'apostille')->where('status', 'pending')
+                            ->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
+                    }
+
+
+
+
+
+                    // $clearpendingPayments->delete();
+
                     $apotille_type = "apostille";
                     $status = ($request->get('apostille_status') == 'pending') ? 'pending' : 'paid';
                     $amount_total = $request->get('apostille_amount') + $request->get('ship_amount');
@@ -570,13 +604,17 @@ class ParentController extends Controller
                     $notarization_payment->save();
 
                     if ($status == 'pending') {
-                        if (!Cart::where('item_type', 'apostille')->exists()) {
-                            Cart::create([
+                        Cart::updateOrCreate(
+                            [
+                                'parent_profile_id' => $request->get('parent_profile_id'),
+                                'item_type' => 'apostille',
+                            ],
+                            [
                                 'item_type' => 'apostille',
                                 'item_id' => $apostille->id,
                                 'parent_profile_id' => $request->get('parent_profile_id'),
-                            ]);
-                        }
+                            ]
+                        );
                     }
 
                     break;
@@ -612,7 +650,8 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_OrderConsultaion':
-                    $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+
+                    $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('p1_profile_id'))->delete();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
                     if ($status == 'paid') {
                         $transction = new TransactionsMethod();
@@ -656,10 +695,14 @@ class ParentController extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
+            dd($e);
             report($e);
             DB::rollBack();
-
-            return redirect()->back();
+            $notification = [
+                'message' => 'Something went wrong!',
+                'alert-type' => 'error',
+            ];
+            return redirect()->back()->with($notification);
         }
     }
 

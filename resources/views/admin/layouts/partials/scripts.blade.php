@@ -1160,7 +1160,7 @@
 
                 },
                 success: function(response) {
-                    location.reload();
+
                 },
                 error: function(response) {
 
