@@ -58,8 +58,7 @@
                               <div class="form-group">
                                 <label for="contain">Status</label>
                                 <select class="form-controll" name="status">
-                                    <option value="0">Active</option>
-                                    <option value="1">In Active</option>
+                                    @php statusDropdown(Request::get('status')) @endphp
                                 </select>
                               </div>
                               <div class="form-group">
@@ -76,6 +75,7 @@
                               <div class="form-group">
                                 <label for="contain">Student Grade</label>
                                 <select name="grade" class="form-control" id="student_grade">
+                                  <option value="">Select Grade</option>
                                   @php studentGradeDropdown(Request::get('grade')) @endphp
                                 </select>
                               </div>
