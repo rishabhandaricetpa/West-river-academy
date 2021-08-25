@@ -42,7 +42,7 @@
         
         $.ajax({
             type: "get",
-            url: "{{ route('family.filter')}}",
+            url: "{{ route('admin.family.filter')}}",
             data:'type=country&keyword='+$(this).val()+'&_token='+$('input[name="_token"]').attr('value'),
             beforeSend: function(){
                 $("#search-country").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;");

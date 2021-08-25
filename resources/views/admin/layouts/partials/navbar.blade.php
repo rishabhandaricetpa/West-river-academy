@@ -38,7 +38,7 @@
                     <div class="dropdown dropdown-lg"> 
                         <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         <div class="dropdown-menu dropdown-menu-right" role="menu">
-                            <form class="form-horizontal" role="form" autocomplete="off">
+                            <form class="form-horizontal" role="form" autocomplete="off" action="{{ route('admin.view.parent') }}">
                               <div class="form-group">
                                 <label for="filter">First Name</label>
                                 <input class="form-control" type="text" name="first_name" value="{{ Request::get('first_name') ?? ''}}"/>
