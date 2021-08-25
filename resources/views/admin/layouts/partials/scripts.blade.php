@@ -46,18 +46,12 @@
             "processing": true,
             "searching": true,
             "serverSide": true,
-
-            "autoWidth": false,
-            "dom": "Bfrtip",
-            url: "search/family-filter",
-            data: 'type=country&keyword=' + $(this).val() + '&_token=' + $('input[name="_token"]').attr(
-                'value'),
-            beforeSend: function() {
-                $("#search-country").css("background",
-                    "#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;"
-                );
+            url: "{{ route('admin.family.filter')}}",
+            data:'type=country&keyword='+$(this).val()+'&_token='+$('input[name="_token"]').attr('value'),
+            beforeSend: function(){
+                $("#search-country").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;");
             },
-            success: function(data) {
+            success: function(data){
                 $("#fill-countries").append(data);
                 $("#search-box").css("background", "#FFF");
                 $('#fill-countries').select2({
