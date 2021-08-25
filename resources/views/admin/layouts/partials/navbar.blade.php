@@ -48,7 +48,7 @@
                                 <input class="form-control" type="text" name="last_name" value="{{ Request::get('last_name') ?? ''}}"/>
                               </div>
                               <div class="form-group">
-                                <label for="contain">Enrollment start date</label>
+                                <label for="contain">Enrollment Start Date</label>
                                 <input class="form-control datepicker" type="text" id="enroll_date" name="enroll_date" value="{{ Request::get('enroll_date') ?? ''}}"/>
                               </div>
                               <div class="form-group">

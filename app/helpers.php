@@ -626,7 +626,7 @@ function statusDropdown($status)
 {
     try {
 
-        echo '<option value="">Select Status</option><option value="0" '.($status == 0 ? "selected" : '').'>Active</option><option value="1" '.($status == 1 ? "selected" : '').'>In Active</option>';
+        echo '<option value="">Select Status</option><option value="0" '.($status == 0 ? "selected" : '').'>Active</option><option value="1" '.($status == 1 ? "selected" : '').'>Inactive</option>';
     } catch (\Throwable $th) {
         return false;
     }
