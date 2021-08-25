@@ -1206,7 +1206,7 @@
 
                 },
                 success: function(response) {
-                    location.reload();
+
                 },
                 error: function(response) {
 
@@ -2020,7 +2020,9 @@
 
     }
 
-
+    $("#btn-reset").click(function() {
+        document.getElementById("navbar_search-form").reset();
+     });
 
 
     $('#add_new_rep').on('submit', function(event) {
@@ -2131,6 +2133,7 @@
         })
 
     });
+
 
     /////siderbar
     var url = window.location;
