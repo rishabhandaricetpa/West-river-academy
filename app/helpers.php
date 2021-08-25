@@ -589,7 +589,12 @@ function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
     return $repAmount + $valueAmount;
 }
 
-
+/**
+ * student grade dropdown
+ * 
+ * @param {int} $grade
+ * @return {string}
+*/
 function studentGradeDropdown($grade)
 {
     try {
@@ -606,6 +611,22 @@ function studentGradeDropdown($grade)
 
         endif;
         echo implode(' ', $gradeArray);
+    } catch (\Throwable $th) {
+        return false;
+    }
+}
+
+/**
+ * status dropdown
+ * 
+ * @param {int} $status
+ * @return {string}
+*/
+function statusDropdown($status)
+{
+    try {
+
+        echo '<option value="">Select Status</option><option value="0" '.($status == 0 ? "selected" : '').'>Active</option><option value="1" '.($status == 1 ? "selected" : '').'>In Active</option>';
     } catch (\Throwable $th) {
         return false;
     }
