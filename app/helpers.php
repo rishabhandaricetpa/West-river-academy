@@ -606,7 +606,7 @@ function studentGradeDropdown($grade)
             foreach ($studentGrade as $key => $value) {
 
                 $selected = ($grade == $value) ? 'selected' : '';
-                array_push($gradeArray, "<option '".$selected."' value=".$value.">".$value."</option>");
+                array_push($gradeArray, "<option ".$selected." value='".$value."'>".$value."</option>");
             }
 
         endif;
