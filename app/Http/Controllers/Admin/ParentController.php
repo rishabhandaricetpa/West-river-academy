@@ -91,7 +91,7 @@ class ParentController extends Controller
             });
 
         if( $input['dob'] )
-            $parentProfile->where('sp.d_o_b', $input['dob']);
+            $parentProfile->whereRaw('DATE(sp.d_o_b) = "'.$input['dob'].'"');
 
         if( $input['status'] )
             $parentProfile->where('parent_profiles.status', $input['status']);
@@ -100,15 +100,15 @@ class ParentController extends Controller
             $parentProfile->where('country', $input['country']);
 
         if( $input['refered_by'] )
-            $parentProfile->whereRaw('LOWER(reference)', strtolower($input['refered_by']));
+            $parentProfile->whereRaw('LOWER(reference) = "'.strtolower($input['refered_by'].'"'));
 
         if( $input['enroll_date'] )
-            $parentProfile->where('start_date_of_enrollment', $input['enroll_date']);
+            $parentProfile->whereRaw('DATE(start_date_of_enrollment) = "'.\Carbon\Carbon::parse($input['enroll_date'])->format('Y-m-d').'"');
 
         if( $input['grade'] )
             $parentProfile->where('grade_level', $input['grade']);
 
-        return $parentProfile->latest()->get();
+        return $parentProfile->groupBy('parent_profiles.id')->latest()->get();
     }
     public function dataTable(Request $request)
     {
