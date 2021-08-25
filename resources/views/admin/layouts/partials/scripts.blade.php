@@ -42,14 +42,7 @@
 
         $.ajax({
             type: "get",
-            "serverSide": true,
-            "processing": true,
-            "searching": true,
-            "serverSide": true,
-
-            "autoWidth": false,
-            "dom": "Bfrtip",
-            url: "search/family-filter",
+            url: "{{ route('admin.family.filter') }}",
             data: 'type=country&keyword=' + $(this).val() + '&_token=' + $('input[name="_token"]').attr(
                 'value'),
             beforeSend: function() {
@@ -2022,7 +2015,7 @@
 
     $("#btn-reset").click(function() {
         document.getElementById("navbar_search-form").reset();
-     });
+    });
 
 
     $('#add_new_rep').on('submit', function(event) {
