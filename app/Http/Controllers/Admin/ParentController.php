@@ -93,7 +93,7 @@ class ParentController extends Controller
         if ($input['dob'])
             $parentProfile->whereRaw('DATE(sp.d_o_b) = "' . $input['dob'] . '"');
 
-        if ($input['status'])
+        if ($input['status'] != '')
             $parentProfile->where('parent_profiles.status', $input['status']);
 
         if ($input['country'])
