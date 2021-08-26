@@ -91,7 +91,7 @@ class ParentController extends Controller
             });
 
         if ($input['dob'])
-            $parentProfile->whereRaw('DATE(sp.d_o_b) = "' . $input['dob'] . '"');
+            $parentProfile->whereRaw('DATE(sp.d_o_b) = "' . \Carbon\Carbon::parse($input['dob'])->format('Y-m-d') . '"');
 
         if ($input['status'] != '')
             $parentProfile->where('parent_profiles.status', $input['status']);
@@ -887,7 +887,10 @@ class ParentController extends Controller
                 $country  = Country::orderBy('country')->get();
                 if ($country) :
                     foreach ($country as $key => $value) {
-                        $option  = '<option value="' . $value->country . '">' . $value->country . '</option>';
+
+                        $selected  = ( $input['keyword'] && $input['keyword'] == $value->country ) ? 'selected' : '';
+
+                        $option  = '<option '.$selected.' value="' . $value->country . '">' . $value->country . '</option>';
                         array_push($countries, $option);
                     }
                     return $countries;

@@ -49,7 +49,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="contain">Enrollment Start Date</label>
-                                <input class="form-control datepicker" type="text" id="enroll_date" name="enroll_date" value="{{ Request::get('enroll_date') ?? ''}}"/>
+                                <input class="form-control" type="date" id="enroll_date" name="enroll_date" value="{{ Request::get('enroll_date') ?? ''}}"/>
                               </div>
                               <div class="form-group">
                                 <label for="contain">Email</label>
@@ -63,14 +63,14 @@
                               </div>
                               <div class="form-group">
                                 <label for="contain">Country</label>
-                                <select class="form-control" id="fill-countries" name="country" value="{{ Request::get('country') ?? ''}}">
+                                  <select class="form-control" id="fill-countries" name="country" value="{{ Request::get('country') ?? ''}}">
                                   <option></option>
                                 </select>
                                 <div id="suggesstion-box"></div>
                               </div>
                               <div class="form-group">
                                 <label for="contain">Student Birth Date</label>
-                                <input class="form-control datepicker" type="text" name="dob"  value="{{ Request::get('dob') ?? ''}}"/>
+                                <input class="form-control" type="date" name="dob"  value="{{ Request::get('dob') ?? ''}}"/>
                               </div>
                               <div class="form-group">
                                 <label for="contain">Student Grade</label>
