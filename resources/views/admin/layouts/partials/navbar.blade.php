@@ -84,7 +84,7 @@
                                 <input class="form-control" type="text" name="refered_by" value="{{ Request::get('refered_by') ?? ''}}"/>
                               </div>
                               <div class="form-group pt-3">   
-                                <a href="{{ route('admin.view.parent') }} " class="btn" > Clear Filters</a>
+                                <a href="{{ route('admin.view.parent') }} " class="btn btn-dark mr-1" > Clear Filters</a>
                                 <button class="btn btn-primary" type="submit"> Search</button>
                               </div>
                             </form>
