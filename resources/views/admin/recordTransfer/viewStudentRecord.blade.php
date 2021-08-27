@@ -126,10 +126,10 @@
                         <div class="col-md-6 mt-4">
                             <a href="#" onclick="updateRecord()" class="btn btn-primary">Update</a>
                             <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                class="btn btn-primary">Download & Preview Records</a>
+                                class="btn btn-primary">Download & Preview Request</a>
                             <button type="submit"
                                 onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
-                                class="btn btn-primary">Send Records To School</button>
+                                class="btn btn-primary">Send Record Request To School</button>
                             <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
                                 class=" btn btn-primary">Re-send Request</a>
 

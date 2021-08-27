@@ -148,7 +148,7 @@ class TranscriptController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function createTranscript(Request $request, $transcript_id, $id)
+    public function createTranscript($transcript_id, $id)
     {
         $enroll_student = StudentProfile::find($id);
         $enrollment_ids =   getEnrollmetForStudents($id);

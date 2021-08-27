@@ -1276,7 +1276,7 @@
                 <section class="documents  pt-10r" id="documents">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="pr-3"> Orders Paid</h2>
+                            <h2 class="pr-3"> Payment History</h2>
                             <div class="overflow-auto max-table">
                                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                                     <thead class="thead-light">

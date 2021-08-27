@@ -70,7 +70,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
-    Route::get('/cart', 'CartController@index');
+        Route::get('/cart', 'CartController@index');
 
         Route::get('edit/address/{id}', 'ParentController@address')->name('edit.address');
         Route::post('/cart-billing', 'ParentController@saveaddress')->name('billing.address');
@@ -284,7 +284,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         //Record Transfer
         Route::get('transfer/record', 'RecordTransferController@getStudents')->name('transferSchoolRecord');
         // Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
-        Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
         Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
         Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
         Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');

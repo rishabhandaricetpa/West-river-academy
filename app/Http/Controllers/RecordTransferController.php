@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dashboard;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
+use App\Models\StudentProfile;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -28,7 +29,15 @@ class RecordTransferController extends Controller
     }
     public function sendRecordRequest($student_id, $parent_id)
     {
-        return view('recordTransfer.previous-school', compact('student_id', 'parent_id'));
+        $enrollment_ids =   getEnrollmetForStudents($student_id);
+        $enroll_student = StudentProfile::find($student_id);
+        $payment_info = getPaymentInformation($enrollment_ids);
+
+        if (count($payment_info) == 0) {
+            return view('transcript.dashboard-notify-record', compact('enroll_student'));
+        } else {
+            return view('recordTransfer.previous-school', compact('student_id', 'parent_id'));
+        }
     }
 
     public function storeRecordRequest(Request $request, $student_id, $parent_id)
