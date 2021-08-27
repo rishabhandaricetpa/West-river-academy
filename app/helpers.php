@@ -575,7 +575,14 @@ function getcartval()
     $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
     return $count;
 }
-
+function getStudentGrade($transcript_grade)
+{
+    $grades = [];
+    foreach ($transcript_grade as $grade) {
+        array_push($grades, $grade->grade);
+    }
+    return implode(',', array_unique($grades));
+}
 function formatDate($date)
 {
     return \Carbon\Carbon::parse($date)->format('M j , Y');
@@ -594,19 +601,19 @@ function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
  * 
  * @param {int} $grade
  * @return {string}
-*/
+ */
 function studentGradeDropdown($grade)
 {
     try {
         $gradeArray = [];
 
         $studentGrade = config('constants.STUDENT_GRADE');
-        if($studentGrade):
+        if ($studentGrade) :
 
             foreach ($studentGrade as $key => $value) {
 
                 $selected = ($grade == $value) ? 'selected' : '';
-                array_push($gradeArray, "<option ".$selected." value='".$value."'>".$value."</option>");
+                array_push($gradeArray, "<option " . $selected . " value='" . $value . "'>" . $value . "</option>");
             }
 
         endif;
@@ -621,12 +628,12 @@ function studentGradeDropdown($grade)
  * 
  * @param {int} $status
  * @return {string}
-*/
+ */
 function statusDropdown($status)
 {
     try {
 
-        echo '<option value="">Select Status</option><option value="0" '.($status == 0 ? "selected" : '').'>Active</option><option value="1" '.($status == 1 ? "selected" : '').'>Inactive</option>';
+        echo '<option value="">Select Status</option><option value="0" ' . ($status == 0 ? "selected" : '') . '>Active</option><option value="1" ' . ($status == 1 ? "selected" : '') . '>Inactive</option>';
     } catch (\Throwable $th) {
         return false;
     }

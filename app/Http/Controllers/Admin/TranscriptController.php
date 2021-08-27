@@ -26,9 +26,15 @@ class TranscriptController extends Controller
 {
     public function index()
     {
-        $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
-        $type = "k-8";
-        return view('admin.transcript.view-student', compact('students', 'type'));
+        // $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
+        // $type = "k-8";
+        $transcript_data = TranscriptK8::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
+        // $transcript_k8 =  TranscriptK8::orderBy('id', 'DESC')->get()->groupBy(function ($data) {
+        //     return $data->transcript_id;
+        // });
+
+
+        return view('admin.transcript.view-student', compact('transcript_data'));
     }
     //fetch all the transcript data with completed and approved and paid status
     public function edit($id)
