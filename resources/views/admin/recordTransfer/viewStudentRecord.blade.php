@@ -123,18 +123,18 @@
                     <!-- /.card-body -->
 
                     <div class="row">
-                        <div class="col-md-6 mt-4">
-                            <a href="#" onclick="updateRecord()" class="btn btn-primary">Update</a>
+                        <div class="col-12 mt-4">
+                            <a href="#" onclick="updateRecord()" class="btn btn-primary my-1">Update</a>
                             <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                class="btn btn-primary">Download & Preview Request</a>
+                                class="btn btn-primary my-1">Download & Preview Request</a>
                             <button type="submit"
                                 onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
-                                class="btn btn-primary">Send Record Request To School</button>
+                                class="btn btn-primary my-1">Send Record Request To School</button>
                             <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                class=" btn btn-primary">Re-send Request</a>
+                                class=" btn btn-primary my-1">Re-send Request</a>
 
 
-                            <a onclick="goBack()" class=" btn btn-primary">Back</a>
+                            <a onclick="goBack()" class=" btn btn-primary my-1">Back</a>
                         </div>
 
                         <div class="col-md-6 mt-4">
