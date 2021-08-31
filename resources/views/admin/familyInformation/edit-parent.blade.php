@@ -584,7 +584,7 @@
                                             <th scope="col">Gender</th>
                                             <th scope="col">Date of Birth</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Delete</th>
                                             <th scope="col" class="text-right"><button type="button"
                                                     class="btn btn-modal ml-auto" data-toggle="modal"
                                                     data-target="#studentDetailsModal" data-whatever="@getbootstrap"><img
@@ -599,19 +599,18 @@
                                         @foreach ($allstudent as $student)
                                             <tr>
                                                 <td><a
-                                                        href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a></br>
+                                                        href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a>
                                                 </td>
                                                 <td>{{ $student->gender }}</td>
                                                 <td>{{ $student->d_o_b->format('M j, Y') }}</td>
-                                                <td></td>
 
                                                 <td><a href="mailto:{{ $student->email }}"
                                                         target="_blank">{{ $student->email }}</a></td>
-                                                <td class="text-right"><a
-                                                        href="{{ route('admin.delete.student', $student->id) }}"
+                                                <td><a href="{{ route('admin.delete.student', $student->id) }}"
                                                         onclick="return confirm('Are you sure you want to delete this student?');"><i
                                                             class="fas fa-trash-alt"></i></a>
                                                 </td>
+                                                <td class="text-right"></td>
 
                                             </tr>
                                         @endforeach

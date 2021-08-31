@@ -90,7 +90,7 @@
                     </div>
                 </div>
             @else
-                <div class="pt-2">
+                <div class="pt-2 seperator">
                     <p>If you are finished with this transcript and would like to see what it looks like, you can click
                         the
                         "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed
@@ -105,10 +105,10 @@
 
             @endif
 
-            You can use the button below to add classes from other schools, colleges, and universities. Course selection,
+        <p class="pt-5">    You can use the button below to add classes from other schools, colleges, and universities. Course selection,
             credits, and grades must match exactly the transcript we have on file from the other school. Heading on
-            transcript will indicate the name of the school.
-            <a href="{{ route('transcript.create', [$transcript_id, $student->id]) }}">Add Another Grade</a>
+            transcript will indicate the name of the school.</p>
+            <a class="btn btn-primary" href="{{ route('transcript.create', [$transcript_id, $student->id]) }}">Add Another Grade</a>
         </div>
     </main>
 
