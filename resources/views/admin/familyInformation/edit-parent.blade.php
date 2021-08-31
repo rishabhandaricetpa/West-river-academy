@@ -1287,11 +1287,7 @@
                                             <th scope="col">Date</th>
                                             <th scope="col">Orders</th>
                                             <th scope="col">Amount</th>
-                                            <th scope="col" class="text-right"> <button type="button"
-                                                    class="btn btn-modal ml-3" data-toggle="modal"
-                                                    data-target="#documentsModal" data-whatever="@getbootstrap"><img
-                                                        src="/images/add.png" alt=""><img src="/images.add.png"
-                                                        alt=""></button></th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
