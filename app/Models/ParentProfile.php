@@ -20,12 +20,15 @@ class ParentProfile extends Model
 
     ];
     protected $table = 'parent_profiles';
-
+    public $append = ['full_name'];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    public function getFullNameAttribute(){
+        return $this->p1_first_name. ' '. $this->p1_last_name;
+    }
     public function studentProfile()
     {
         return $this->hasMany('App\Models\StudentProfile', 'parent_profile_id', 'id');

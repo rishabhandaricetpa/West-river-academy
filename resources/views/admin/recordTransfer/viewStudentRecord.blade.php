@@ -10,7 +10,8 @@
             <div class="form-wrap border py-5 px-25 position-relative">
                 <form class="row align-items-center" method="post"
                     action="{{ route('admin.recordReceived', $studentRecord->id) }}" enctype="multipart/form-data">
-
+                    <a href="{{ route('admin.parent.edit', $studentRecord->parent_profile_id) }}"
+                        class="btn btn-primary  ">View Parent</a>
                     <div class="col-12 text-sm-right">
                         @if ($studentRecord->request_status !== 'Record Received')
                             <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Records Received</button>
@@ -51,6 +52,7 @@
                     </h3>
 
                 @endif
+
                 <form method="post" action="{{ route('admin.sendRecordToSchool', $studentRecord->student_profile_id) }}">
                     @csrf
                     <div class="card-body p-0 row">

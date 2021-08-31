@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.parent.delete', $parent->id) }}"
                             onclick="return confirm('Are you sure you want to delete this family?');"
-                            aria-controls="documents" aria-selected="true">Delete</a>
+                            aria-controls="documents" aria-selected="true"><i class="fas fa-trash-alt"></i></a>
                     </li>
                     <li class="nav-item"><a href="#" class="add-menu-item nav-link" data-toggle="modal"
                             data-target="#parentDetailsModal" data-whatever="@getbootstrap">
@@ -584,13 +584,14 @@
                                             <th scope="col">Gender</th>
                                             <th scope="col">Date of Birth</th>
                                             <th scope="col">Email</th>
-                                            <th>Delete</th>
+                                            <th scope="col"></th>
                                             <th scope="col" class="text-right"><button type="button"
                                                     class="btn btn-modal ml-auto" data-toggle="modal"
                                                     data-target="#studentDetailsModal" data-whatever="@getbootstrap"><img
                                                         src="/images/add.png" alt=""><img src="/images.add.png"
                                                         alt=""></button>
                                             </th>
+
                                         </tr>
                                     </thead>
 
@@ -604,12 +605,14 @@
                                                 <td>{{ $student->d_o_b->format('M j, Y') }}</td>
                                                 <td></td>
 
-                                                <td>{{ $student->email }}</td>
-                                                <td class="text-right"><a class="mr-2"
+                                                <td><a href="mailto:{{ $student->email }}"
+                                                        target="_blank">{{ $student->email }}</a></td>
+                                                <td class="text-right"><a
                                                         href="{{ route('admin.delete.student', $student->id) }}"
                                                         onclick="return confirm('Are you sure you want to delete this student?');"><i
                                                             class="fas fa-trash-alt"></i></a>
                                                 </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -47,7 +47,8 @@
             "searching": true,
             "serverSide": true,
             url: "{{ route('admin.family.filter') }}",
-            data: 'type=country&keyword={{ Request::get("country")}}&_token=' + $('input[name="_token"]').attr(
+            data: 'type=country&keyword={{ Request::get('country') }}&_token=' + $(
+                'input[name="_token"]').attr(
                 'value'),
             beforeSend: function() {
                 $("#search-country").css("background",
@@ -86,7 +87,7 @@
                 }
             },
             "processing": true,
-            "searching": true,
+            "searching": false,
             "serverSide": true,
             "ordering": false,
             "pagination": true,
