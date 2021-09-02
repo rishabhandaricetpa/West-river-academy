@@ -76,6 +76,7 @@
         >Add an Another Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
+      <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
 </template>
@@ -110,18 +111,25 @@ export default {
       removingPeriod: false
     };
   },
-  props: ["anotherstudies", "transcript_id", "student_id", "courses_id","trans_id"],
+  props: [
+    "anotherstudies",
+    "transcript_id",
+    "student_id",
+    "courses_id",
+    "trans_id"
+  ],
   methods: {
     addCourses() {
       axios
         .post(route("another.store"), this.form)
         .then(response => {
-          window.location = "/choose-another/" +  this.student_id +
-            "/" +
-            this.trans_id;
+          window.location =
+            "/choose-another/" + this.student_id + "/" + this.trans_id;
         })
         .catch(error => {
-          alert("Please choose a course or click the X button on the top right of the screen to continue .");
+          alert(
+            "Please choose a course or click the X button on the top right of the screen to continue ."
+          );
         });
     },
     addNewSocialScienceCourse() {
@@ -136,6 +144,10 @@ export default {
     },
     removeForeignCourse(index) {
       this.form.anotherCourse.splice(index, 1);
+    },
+    skipCourse() {
+      window.location =
+     "/choose-another/" + this.student_id + "/" + this.trans_id;
     }
   }
 };

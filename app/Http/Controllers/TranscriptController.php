@@ -136,8 +136,9 @@ class TranscriptController extends Controller
         } else {
             $transcriptPayments = DB::table('transcripts')->where('student_profile_id', $student_id)
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
-                ->where('transcript_payments.status', 'paid')
+                ->whereIn('transcript_payments.status', ['approved', 'paid', 'completed', 'canEdit'])
                 ->get();
+      
             return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         }
         // }
@@ -404,7 +405,7 @@ class TranscriptController extends Controller
      */
 
     public function previewTranscript($student_id, $transcript_id)
-    {
+    { 
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);

@@ -75,6 +75,14 @@
                 </div>
             @endforeach
         </div>
+        <div class="form-wrap border bg-light py-5 px-25">
+            <p> You can use the button below to add classes from other schools, colleges, and universities. Course
+                selection,
+                credits, and grades must match exactly the transcript we have on file from the other school. Heading on
+                transcript will indicate the name of the school.</p>
+            <a class="btn btn-primary" href="{{ route('transcript.create', [$trans_id, $student->id]) }}"> Add another
+                grade </a>
+        </div>
 
         @if ($transcriptWizStatus->transcript_wiz === 'Yes' && $transcriptWizStatus->status === 'pending')
             <div class="form-wrap border bg-light py-5 px-25">

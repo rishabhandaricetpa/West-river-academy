@@ -76,6 +76,7 @@
         >Add another Foreign Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
+      <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
 </template>
@@ -120,7 +121,9 @@ export default {
             "/another/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose a course or click the X button on the top right of the screen to continue .");
+          alert(
+            "Please choose a course or click the X button on the top right of the screen to continue ."
+          );
         });
     },
     addNewForeignCourse() {
@@ -135,6 +138,10 @@ export default {
     },
     removeForeignCourse(index) {
       this.form.foreignCourse.splice(index, 1);
+    },
+    skipCourse() {
+      window.location =
+        "/another/" + this.student_id + "/" + this.transcript_id;
     }
   }
 };
