@@ -130,7 +130,7 @@
                                 <option value="Karen">Karen</option>
                                 <option value="Peggy">Peggy</option>
                                 <option value="Paula">Paula</option>
-                                <option value="Raelyn">Raelyn</option>
+                                <option value="Rachel">Rachel</option>
                                 <option value="Stacey">Stacey</option>
                                 <option value="Ray">Ray</option>
                                 <option value="Paige">Paige</option>

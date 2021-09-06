@@ -11,7 +11,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Name</label>
                     <div>
-                        {{ $studentInfo->first_name }}
+                        {{ $studentInfo->fullname }}
                     </div>
                 </div>
                 <div class="form-group d-sm-flex mb-2">
