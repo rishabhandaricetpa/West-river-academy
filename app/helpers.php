@@ -595,6 +595,11 @@ function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
     }
     return $repAmount + $valueAmount;
 }
+function getTranscriptStatus($transcript_id)
+{
+    $transcript =  Transcript::findOrFail($transcript_id);
+    return $transcript->status == 'completed' ? 'Completed : Waiting for approval' : $transcript->status;
+}
 
 /**
  * student grade dropdown
