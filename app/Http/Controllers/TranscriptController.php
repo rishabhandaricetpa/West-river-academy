@@ -167,15 +167,19 @@ class TranscriptController extends Controller
             if ($transcriptPayment) {
                 if ($transcriptPayment->period == 'K-8') {
                     $is_transcript = TranscriptK8::where('transcript_id', $transcript_id)->first();
-                    $transcript = TranscriptK8::create(
-                        [
-                            'student_profile_id' => $id,
-                            'country' => $is_transcript->country,
-                            'transcript_id' => $transcript_id,
-                        ]
-                    );
-                    $transcriptData = $transcriptPayment->transcript_id;
-                    return view('transcript.grade', compact('student', 'transcript'));
+                    if ($is_transcript) {
+                        $transcript = TranscriptK8::create(
+                            [
+                                'student_profile_id' => $id,
+                                'country' => $is_transcript->country,
+                                'transcript_id' => $transcript_id,
+                            ]
+                        );
+                        $transcriptData = $transcriptPayment->transcript_id;
+                        return view('transcript.grade', compact('student', 'transcript'));
+                    }
+
+
                     // return view('transcript.dashboard-transcript', compact('enroll_student', 'transcriptPayment', 'transcriptData'));
                 } elseif ($transcriptPayment->period == '9-12') {
                     $is_transcript = Transcript9_12::where('transcript_id', $transcript_id)->first();
