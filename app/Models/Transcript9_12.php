@@ -33,4 +33,8 @@ class Transcript9_12 extends Model
     {
         return $this->hasMany(AdvancePlacement::class);
     }
+    public function student()
+    {
+        return $this->belongsTo('App\Models\StudentProfile', 'student_profile_id', 'id');
+    }
 }
