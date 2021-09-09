@@ -6,8 +6,12 @@
       :key="physicalEducation.id"
     >
       <div class="position-relative">
-        <span class="remove" @click="removeEnglishCourse(index)"
+        <span
+          v-if="index > 0"
+          class="remove"
+          @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
+          <p>Delete Course</p>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
@@ -76,7 +80,9 @@
         >Add another Physical Education Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
-      <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
+      <a class="btn btn-primary float-right" @click="skipCourse()"
+        >Skip Course</a
+      >
     </div>
   </form>
 </template>
