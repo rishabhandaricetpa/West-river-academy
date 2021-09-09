@@ -77,6 +77,7 @@
         >Add another Science Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
+      <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
 </template>
@@ -121,7 +122,9 @@ export default {
             "/physical-education/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose a course or click the X button on the top right of the screen to continue .");
+          alert(
+            "Please choose a course or click the X button on the top right of the screen to continue ."
+          );
         });
     },
     addNewSocialScienceCourse() {
@@ -137,6 +140,10 @@ export default {
     removeEnglishCourse(index) {
       console.log(index);
       this.form.sciencecourse.splice(index, 1);
+    },
+    skipCourse() {
+      window.location =
+        "/physical-education/" + this.student_id + "/" + this.transcript_id;
     }
   }
 };

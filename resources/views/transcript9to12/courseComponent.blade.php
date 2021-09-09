@@ -1,6 +1,6 @@
 <table style="width:100%;border-collapse:collapse;">
     <thead style="background-color:#cccccc70">
-        <tr style="line-height:1;">
+        <tr style="line-height:1;" valign="top">
             <th style="text-transform:uppercase;font-size:13px;padding:4px 7px;line-height:1;text-align:left;">course
                 name
             </th>

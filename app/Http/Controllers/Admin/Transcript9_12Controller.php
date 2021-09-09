@@ -29,7 +29,9 @@ class Transcript9_12Controller extends Controller
     {
         $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "9-12";
-        return view('admin.transcript.view-student', compact('students', 'type'));
+        $transcript_data = Transcript9_12::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
+
+        return view('admin.transcript.view-student', compact('transcript_data', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])

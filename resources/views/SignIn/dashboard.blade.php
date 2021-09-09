@@ -99,9 +99,15 @@
         </div>
         <!-- -->
         @if ($amount > 0)
-            <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <h2 class="mb-3">Pay Now : <i class="fas fa-dollar-sign "></i> {{ $amount }}</h2>
-                <a href="{{ route('add.cart') }}" class="btn btn-primary">Go To Cart</a>
+            <div class="form-wrap border bg-light py-5 px-25 mb-4 row">
+                <div class="col-md-6 text-center">
+                    <h2 class="mb-3">Amount Due</h2>
+                    <h3 class="font-large"> <i class="fas fa-dollar-sign "></i> {{ $amount }}</h3>
+                </div>
+                <div class="col-md-6 text-center">
+                    <h2>Make a Payment</h2>
+                    <a href="{{ route('add.cart') }}" class="btn btn-primary">Go To Cart</a>
+                </div>
             </div>
         @endif
         @if (count($transcript) > 0)
@@ -243,23 +249,23 @@
                         <tbody>
                             @foreach ($confirmLetter as $student)
                                 <tr>
-                                    
+
                                     <td>{{ $student->fullname }}</td>
                                     <td>{{ $student->student_Id }}</td>
                                     <td>{{ $student->grade_level }}</td>
-                                        @if(getPaymentstatus($student->enrollment_payment_id) ==='paid')
-                                    <td>Paid</td>
+                                    @if (getPaymentstatus($student->enrollment_payment_id) === 'paid')
+                                        <td>Paid</td>
                                     @else
-                                    <td>Not Paid for Enrollment</td>
+                                        <td>Not Paid for Enrollment</td>
                                     @endif
-                                    @if(getPaymentstatus($student->enrollment_payment_id) ==='paid')
-                                    <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
-                                            class="d-flex align-items-center"><i
-                                                class="fas fa-file-pdf mr-2"></i>Download</a></td>
+                                    @if (getPaymentstatus($student->enrollment_payment_id) === 'paid')
+                                        <td><a href="{{ route('view.confirm', [$student->enrollment_payment_id, $student->grade_level]) }}"
+                                                class="d-flex align-items-center"><i
+                                                    class="fas fa-file-pdf mr-2"></i>Download</a></td>
                                     @else
-                                    <td>-</td>
+                                        <td>-</td>
                                     @endif
-                                  
+
                                 </tr>
                             @endforeach
                         </tbody>

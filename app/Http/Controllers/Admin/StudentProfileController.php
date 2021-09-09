@@ -458,7 +458,8 @@ class StudentProfileController extends Controller
     }
     public function updateStudentProfile(Request $request)
     {
-        StudentProfile::where('id', $request->student_id)->update(
+
+        StudentProfile::where('id', $request->students_id)->update(
             [
                 'first_name' => $request->first_name,
                 'middle_name' => $request->middle_name,
@@ -473,6 +474,11 @@ class StudentProfileController extends Controller
                 'student_situation' => $request->student_situation
             ]
         );
+        $notification = [
+            'message' => 'Student Record Updated Successfuly!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
     }
     public function updateAllEnrollment($student_id)
     {

@@ -136,8 +136,9 @@ class TranscriptController extends Controller
         } else {
             $transcriptPayments = DB::table('transcripts')->where('student_profile_id', $student_id)
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
-                ->where('transcript_payments.status', 'paid')
+                ->whereIn('transcript_payments.status', ['approved', 'paid', 'completed', 'canEdit'])
                 ->get();
+      
             return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         }
         // }
@@ -148,7 +149,7 @@ class TranscriptController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function createTranscript(Request $request, $transcript_id, $id)
+    public function createTranscript($transcript_id, $id)
     {
         $enroll_student = StudentProfile::find($id);
         $enrollment_ids =   getEnrollmetForStudents($id);
@@ -166,15 +167,19 @@ class TranscriptController extends Controller
             if ($transcriptPayment) {
                 if ($transcriptPayment->period == 'K-8') {
                     $is_transcript = TranscriptK8::where('transcript_id', $transcript_id)->first();
-                    $transcript = TranscriptK8::create(
-                        [
-                            'student_profile_id' => $id,
-                            'country' => $is_transcript->country,
-                            'transcript_id' => $transcript_id,
-                        ]
-                    );
-                    $transcriptData = $transcriptPayment->transcript_id;
-                    return view('transcript.grade', compact('student', 'transcript'));
+                    if ($is_transcript) {
+                        $transcript = TranscriptK8::create(
+                            [
+                                'student_profile_id' => $id,
+                                'country' => $is_transcript->country,
+                                'transcript_id' => $transcript_id,
+                            ]
+                        );
+                        $transcriptData = $transcriptPayment->transcript_id;
+                        return view('transcript.grade', compact('student', 'transcript'));
+                    }
+
+
                     // return view('transcript.dashboard-transcript', compact('enroll_student', 'transcriptPayment', 'transcriptData'));
                 } elseif ($transcriptPayment->period == '9-12') {
                     $is_transcript = Transcript9_12::where('transcript_id', $transcript_id)->first();
@@ -404,7 +409,7 @@ class TranscriptController extends Controller
      */
 
     public function previewTranscript($student_id, $transcript_id)
-    {
+    { 
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);

@@ -38,7 +38,9 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Status</th>
+                                        <th>View Parent</th>
                                         <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,7 +48,8 @@
                                         <tr>
                                             <td>{{ $record['student']['fullname'] }}</td>
                                             <td>{{ $record->school_name }}</td>
-                                            <td><a class="transform-none" href="mailto:${{ $record->email }}"> {{ $record->email }}</a></td>
+                                            <td><a class="transform-none" href="mailto:${{ $record->email }}">
+                                                    {{ $record->email }}</a></td>
                                             <td>{{ $record->phone_number }}</td>
                                             @if (empty($record->request_status))
                                                 <td>In Review </br>
@@ -57,12 +60,15 @@
                                                 Resend Requested:{{ $record->resendCount }}
                                             @endif
                                             </td>
-
+                                            <td><a
+                                                    href="{{ route('admin.parent.edit', $record->parent_profile_id) }}">{{ $record['parent']['fullname'] }}</a>
+                                            </td>
                                             <td>
                                                 <a
                                                     href="{{ route('admin.student.schoolRecord', [$record->student_profile_id, $record->id]) }}">
                                                     <i class=" fas fa-arrow-alt-circle-right"></i></a>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>

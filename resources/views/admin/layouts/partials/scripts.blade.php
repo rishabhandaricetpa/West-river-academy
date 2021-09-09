@@ -47,7 +47,8 @@
             "searching": true,
             "serverSide": true,
             url: "{{ route('admin.family.filter') }}",
-            data: 'type=country&keyword={{ Request::get("country")}}&_token=' + $('input[name="_token"]').attr(
+            data: 'type=country&keyword={{ Request::get('country') }}&_token=' + $(
+                'input[name="_token"]').attr(
                 'value'),
             beforeSend: function() {
                 $("#search-country").css("background",
@@ -86,7 +87,7 @@
                 }
             },
             "processing": true,
-            "searching": true,
+            "searching": false,
             "serverSide": true,
             "ordering": false,
             "pagination": true,
@@ -907,6 +908,7 @@
     $("#studentForm1").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
+        var students_id = $('#students_id').val();
         var first_name = $('#first_name').val();
         var middle_name = $('#middle_name').val();
         var last_name = $('#last_name').val();
@@ -928,6 +930,7 @@
 
             data: {
                 parent_id: parent_id,
+                students_id: students_id,
                 first_name: first_name,
                 middle_name: middle_name,
                 last_name: last_name,

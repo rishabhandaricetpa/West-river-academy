@@ -145,6 +145,7 @@
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
       </button>
+         <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
   </div>
@@ -313,6 +314,14 @@ export default {
             this.student_id +
             "/" +
             this.trans_id +
+            "/" +
+            this.transcript_id;
+    },
+    skipCourse() {
+    
+   window.location =
+          "/anotherCourse-transcript/" +
+            this.student_id +
             "/" +
             this.transcript_id;
     }

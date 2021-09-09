@@ -39,13 +39,14 @@
                         <div>
                             <input type="text" name="graduation_date"
                                 value="{{ Carbon\Carbon::parse($dateofGraduation->date_of_graduation)->format('M j, Y') }}"
-                                class="form-control-sm datepicker" id="getgraduationDate"></input>
+                                class="form-control-sm datepicker" id="getgraduationDate">
+                                <button type="submit" href="" class="btn btn-primary">Update</button>
                         </div>
-                        <button type="submit" href="" class="btn btn-primary">Update</button>
+                        
                     </div>
                 </form>
                 <a type="button" href="{{ route('admin.genrate.transcript9_12', [$student->id, $transcript_id]) }}"
-                    class="btn btn-primary mr-1 mt-3">Generate Unsigned Transcript</a>
+                    class="btn btn-primary mr-1 mt-3">Generate Unsigned Transcript </a>
                 <a type="button" href="{{ route('admin.signed.transcript9_12', [$student->id, $transcript_id]) }}"
                     class="btn btn-primary mr-1 mt-3">Generate Signed Transcript</a>
                 <a type="button" href="{{ route('admin.file.upload', [$student->id, $transcript_id]) }}"

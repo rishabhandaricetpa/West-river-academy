@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.parent.delete', $parent->id) }}"
                             onclick="return confirm('Are you sure you want to delete this family?');"
-                            aria-controls="documents" aria-selected="true">Delete</a>
+                            aria-controls="documents" aria-selected="true"><i class="fas fa-trash-alt"></i></a>
                     </li>
                     <li class="nav-item"><a href="#" class="add-menu-item nav-link" data-toggle="modal"
                             data-target="#parentDetailsModal" data-whatever="@getbootstrap">
@@ -435,7 +435,7 @@
                                             <td><a
                                                     href="{{ route('admin.rep.details', $rep_group->id) }}">{{ $rep_group->name }}</a>
                                             </td>
-                                            <td>{{ $rep_group->email }}</td>
+                                            <td class="transform-none">{{ $rep_group->email }}</td>
                                             <td><a href="{{ route('admin.rep.status', $parent->id) }}"
                                                     onclick="return confirm('Are you sure you want to deattach this representative from this family?')">X</a>
                                             </td>
@@ -472,7 +472,7 @@
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">Type:</label>
                                                     <select class="form-control" type="text" id='rep_type'>
-                                                        <option value="Respresentative">Respresentative</option>
+                                                        <option value="Respresentative">Representative</option>
                                                         <option value="Influencer">Influencer</option>
                                                     </select>
                                                 </div>
@@ -584,13 +584,14 @@
                                             <th scope="col">Gender</th>
                                             <th scope="col">Date of Birth</th>
                                             <th scope="col">Email</th>
-                                            <th>Delete</th>
+                                            <th scope="col">Delete</th>
                                             <th scope="col" class="text-right"><button type="button"
                                                     class="btn btn-modal ml-auto" data-toggle="modal"
                                                     data-target="#studentDetailsModal" data-whatever="@getbootstrap"><img
                                                         src="/images/add.png" alt=""><img src="/images.add.png"
                                                         alt=""></button>
                                             </th>
+
                                         </tr>
                                     </thead>
 
@@ -598,18 +599,19 @@
                                         @foreach ($allstudent as $student)
                                             <tr>
                                                 <td><a
-                                                        href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a></br>
+                                                        href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a>
                                                 </td>
                                                 <td>{{ $student->gender }}</td>
                                                 <td>{{ $student->d_o_b->format('M j, Y') }}</td>
-                                                <td></td>
 
-                                                <td>{{ $student->email }}</td>
-                                                <td class="text-right"><a class="mr-2"
-                                                        href="{{ route('admin.delete.student', $student->id) }}"
+                                                <td><a class="transform-none" href="mailto:{{ $student->email }}"
+                                                        target="_blank">{{ $student->email }}</a></td>
+                                                <td><a href="{{ route('admin.delete.student', $student->id) }}"
                                                         onclick="return confirm('Are you sure you want to delete this student?');"><i
                                                             class="fas fa-trash-alt"></i></a>
                                                 </td>
+                                                <td class="text-right"></td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -708,7 +710,14 @@
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Is this student immunized?
                                                 </label>
-                                                <input type="text" id="immunized_status" class="form-control">
+                                                <select class="form-control" name="immunized_status" id="immunized_status">
+                                                    <option>Yes, records will come with school records.</option>
+                                                    <option>Yes, I will provide records.</option>
+                                                    <option>Yes, I plan to get immunizations soon.</option>
+                                                    <option>No, for personal reasons.</option>
+                                                    <option>No, for medical reasons.</option>
+                                                    <option>No, for religious reasons.</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -1276,7 +1285,7 @@
                 <section class="documents  pt-10r" id="documents">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="pr-3"> Orders Paid</h2>
+                            <h2 class="pr-3"> Payment History</h2>
                             <div class="overflow-auto max-table">
                                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                                     <thead class="thead-light">
@@ -1284,11 +1293,7 @@
                                             <th scope="col">Date</th>
                                             <th scope="col">Orders</th>
                                             <th scope="col">Amount</th>
-                                            <th scope="col" class="text-right"> <button type="button"
-                                                    class="btn btn-modal ml-3" data-toggle="modal"
-                                                    data-target="#documentsModal" data-whatever="@getbootstrap"><img
-                                                        src="/images/add.png" alt=""><img src="/images.add.png"
-                                                        alt=""></button></th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>

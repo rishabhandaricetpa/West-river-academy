@@ -33,7 +33,7 @@
             <tr style="width:100%;">
                 <td valign="middle"
                     style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;">official
-                    transcript</td>
+                    transcript dee</td>
                 <td valign="middle" style="text-align:center;width:50%;height:100px;">
                     <img src="../public/images/letterhead.png" alt="logo"
                         style="filter: brightness(0.5);max-width: 300px;height:90px;margin: 0 auto;object-fit:contain;display:block;">
@@ -46,7 +46,7 @@
     <table style="width:100%;">
         <tbody>
             <tr style="width:100%;">
-                <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student</td>
+                <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">student RISHA</td>
                 <td
                     style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
                     {{ $student->fullname }}</td>
@@ -86,7 +86,7 @@
     </table>
     <table style="width:100%;">
         <tbody>
-            <tr style="width:100%;vertical-align:top;">   
+            <tr style="width:100%;vertical-align:top;">
                 <td style="width:80%;">
                     <table style="width:100%;border:2px solid #000;border-collapse:collapse;text-transform:uppercase;">
                         <thead>

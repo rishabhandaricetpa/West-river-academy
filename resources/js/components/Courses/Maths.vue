@@ -76,6 +76,7 @@
         >Add another Mathematics Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
+      <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
 </template>
@@ -120,7 +121,9 @@ export default {
             "/science/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose a course or click the X button on the top right of the screen to continue .");
+          alert(
+            "Please choose a course or click the X button on the top right of the screen to continue ."
+          );
         });
     },
     addNewMathsCourse() {
@@ -137,6 +140,10 @@ export default {
     removeEnglishCourse(index) {
       console.log(index);
       this.form.mathscourse.splice(index, 1);
+    },
+    skipCourse() {
+      window.location =
+        "/science/" + this.student_id + "/" + this.transcript_id;
     }
   }
 };

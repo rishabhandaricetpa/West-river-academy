@@ -10,7 +10,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu">
-            {{-- <li class="nav-item">
+                {{-- <li class="nav-item">
                 <a href="{{ route('admin.dashboard.notification') }}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
@@ -18,7 +18,7 @@
                     </p>
                 </a>
             </li> --}}
-            @can('isAdmin')
+                @can('isAdmin')
                 <li class="nav-item">
                     <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -57,7 +57,7 @@
                         <a href="{{ route('admin.payments') }}" class="nav-link">
                             <i class="fas fa-eye"></i>
                             <p>
-                                View Payments
+                                Enrollment Payments
                             </p>
                         </a>
                     </li>

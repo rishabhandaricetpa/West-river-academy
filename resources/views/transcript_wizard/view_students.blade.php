@@ -27,11 +27,13 @@
                                 @if (getTranscriptdeatils($enroll_student->id) === 'true')
                                     <td><a href="{{ route('transcriptwizard.details', $enroll_student->id) }}"
                                             class="btn btn-primary">View Saved Transcript</a></td>
-                                    {{-- <td><a href="{{route('transcript.viewall',$enroll_student->id)}}" class="btn btn-primary">View Recent Purchase</a></td> --}}
+                                    {{-- <td><a href="{{ route('transcript.viewall', $enroll_student->id) }}"
+                                            class="btn btn-primary">View Recent Purchase</a></td> --}}
                                 @else
                                     <td><a href="{{ route('transcriptwizard.details', $enroll_student->id) }}"
                                             class="btn btn-primary disabled">View Saved Transcript</a></td>
-                                    {{-- <td><a href="{{route('transcript.viewall',$enroll_student->id)}}" class="btn btn-primary disabled">View Recent Purchase</a></td> --}}
+                                    {{-- <td><a href="{{ route('transcript.viewall', $enroll_student->id) }}"
+                                            class="btn btn-primary disabled">View Recent Purchase</a></td> --}}
                                 @endif
                             </tr>
                         @endforeach

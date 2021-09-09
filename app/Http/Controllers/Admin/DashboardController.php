@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $admin_data = DB::table('admins')->where('id', $adminid)->first();
         if ($admin_data->name == AdminType::SuperAdmin) {
             //$dashboardData = Dashboard::select()->with('student', 'recordTransfer')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
-            $dashboardData = TransactionsMethod::select()->where('is_archieved', null)->orderBy('id', 'DESC')->get();
+            $dashboardData = TransactionsMethod::select()->with('parentProfile')->where('is_archieved', null)->orderBy('id', 'DESC')->get();
             $isAdmin = true;
             return view('admin.dashboard-admin', compact('dashboardData', 'isAdmin'));
             // return admin dashboard screen

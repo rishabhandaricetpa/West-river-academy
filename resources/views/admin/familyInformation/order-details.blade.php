@@ -1,7 +1,7 @@
 <section class="orders-detail  pt-10r" id="orders">
     <div class="row">
         <div class="col-12">
-            <h2 class="pr-3">Create Orders</h2>
+            <h2 class="pr-3">Current Orders</h2>
             <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                     <thead class="thead-light">
@@ -15,7 +15,7 @@
                                         src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
                         </tr>
                     </thead>
-                    <tbody>             
+                    <tbody>
                         @foreach ($transcations as $transcation)
                             <tr>
                                 <td>{{ $transcation->created_at->format('M j,Y') }}</td>
