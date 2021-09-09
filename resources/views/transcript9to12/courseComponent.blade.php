@@ -10,6 +10,7 @@
         </tr>
     </thead>
     <tbody>
+
         <!-- for annual courses -->
         @foreach ($yearGroup as $year => $courses)
             <tr style="line-height:1;">
@@ -18,11 +19,9 @@
                     <span style="text-decoration:underline;">
 
                         @if (strtotime($year))
-                            Academic Year {{ $year }} - {{ $year + 1 }}
-                        @elseif($year == 'Courses In Progres')
+                            Academic Year {{ $year }}
+                        @elseif(!empty($year))
                             {{ $year }}
-                        @else
-                            Courses Completed at {{ $year }}
                         @endif
                     </span>
 

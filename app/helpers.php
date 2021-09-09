@@ -180,7 +180,7 @@ function fetchTranscript9_12Details($transcriptData)
                         'score' => '-',
                         'name' => $course->subject->subject_name,
                         'credit' => $course->credit->credit,
-                        'groupBy' => 'Courses In Progres',
+                        'groupBy' => 'Courses In Progress',
                         'grade' => $transcript_courses->grade,
                         'type' => 'courseInProgress'
                     ]
