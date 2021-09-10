@@ -435,7 +435,7 @@
                                             <td><a
                                                     href="{{ route('admin.rep.details', $rep_group->id) }}">{{ $rep_group->name }}</a>
                                             </td>
-                                            <td>{{ $rep_group->email }}</td>
+                                            <td class="transform-none">{{ $rep_group->email }}</td>
                                             <td><a href="{{ route('admin.rep.status', $parent->id) }}"
                                                     onclick="return confirm('Are you sure you want to deattach this representative from this family?')">X</a>
                                             </td>
@@ -472,7 +472,7 @@
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">Type:</label>
                                                     <select class="form-control" type="text" id='rep_type'>
-                                                        <option value="Respresentative">Respresentative</option>
+                                                        <option value="Respresentative">Representative</option>
                                                         <option value="Influencer">Influencer</option>
                                                     </select>
                                                 </div>
@@ -604,7 +604,7 @@
                                                 <td>{{ $student->gender }}</td>
                                                 <td>{{ $student->d_o_b->format('M j, Y') }}</td>
 
-                                                <td><a href="mailto:{{ $student->email }}"
+                                                <td><a class="transform-none" href="mailto:{{ $student->email }}"
                                                         target="_blank">{{ $student->email }}</a></td>
                                                 <td><a href="{{ route('admin.delete.student', $student->id) }}"
                                                         onclick="return confirm('Are you sure you want to delete this student?');"><i
@@ -710,7 +710,14 @@
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Is this student immunized?
                                                 </label>
-                                                <input type="text" id="immunized_status" class="form-control">
+                                                <select class="form-control" name="immunized_status" id="immunized_status">
+                                                    <option>Yes, records will come with school records.</option>
+                                                    <option>Yes, I will provide records.</option>
+                                                    <option>Yes, I plan to get immunizations soon.</option>
+                                                    <option>No, for personal reasons.</option>
+                                                    <option>No, for medical reasons.</option>
+                                                    <option>No, for religious reasons.</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

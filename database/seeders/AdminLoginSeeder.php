@@ -68,7 +68,7 @@ class AdminLoginSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name' => 'Raelyn',
+                'name' => 'Rachel',
                 'email' => 'Rachel@westriveracademy.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => date('Y-m-d H:i:s'),
@@ -88,6 +88,7 @@ class AdminLoginSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+
 
         ]);
     }

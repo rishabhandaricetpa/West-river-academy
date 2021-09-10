@@ -90,7 +90,7 @@
                         <th>Country</th>
                         <th>City/Area</th>
                         <th>E-mail</th>
-                        <th>Phone</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +100,7 @@
                             <td>{{ $rep->type }}</td>
                             <td>{{ $rep->country }}</td>
                             <td>{{ $rep->city }}</td>
-                            <td class="center">{{ $rep->email }}</td>
+                            <td class="center transform-none">{{ $rep->email }}</td>
                             <td><a class="nav-link" href="{{ route('admin.delete.rep', $rep->id) }}"
                                     onclick="return confirm('Are you sure you want to delete this representative?');"
                                     aria-controls="documents" aria-selected="true"><i class="fas fa-trash-alt"></i></a></td>

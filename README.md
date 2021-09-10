@@ -51,3 +51,21 @@ php artisan optimize
 
 -   E-mail service
 -   [Sentry](https://docs.sentry.io/platforms/php/laravel/) error reporting service (optional)
+
+- Sequence to execute db commands
+
+### user, parent and student import CSV import
+-   php artisan import:users
+-   php artisan import:parents
+-   php artisan import:students
+
+### Enrollment import
+-   php artisan import:enrollments
+-   php artisan import:enrollmentpayment
+-   php artisan import:enrollmentpaymentsmethods
+
+### Transcript Import k8
+-   php artisan import:transcript9_12
+
+### Transcript Import 9-12 import
+-   php artisan import:transcript9_12
