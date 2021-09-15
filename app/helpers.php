@@ -403,7 +403,7 @@ function getEnrollmetForStudents($student_id)
 function getPaymentInformation($enrollment_ids)
 {
     $payment_info = DB::table('enrollment_periods')
-        ->whereIn('enrollment_payment_id', $enrollment_ids)
+        //  ->whereIn('enrollment_payment_id', $enrollment_ids)
         ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
         ->where('enrollment_payments.status', 'paid')
         ->get();
@@ -556,6 +556,7 @@ function getlegacyname($parent_id)
 //Get Enrollment Payments status for blade file
 function getPaymentstatus($enrollment_payment_id)
 {
+
     $enrollment_payments = EnrollmentPayment::whereId($enrollment_payment_id)->first();
     return $enrollment_payments->status;
 }

@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use DB;
 
 class ImportEnrollmentPeriod extends Command
 {
@@ -47,7 +48,7 @@ class ImportEnrollmentPeriod extends Command
         $filePath = base_path('csv/enrollments_periods.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
-
+        $notFound = [];
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
@@ -55,24 +56,44 @@ class ImportEnrollmentPeriod extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $legacy_name = Str::of($cells[12]);
                 $selectedStartDate = \Carbon\Carbon::parse($cells[36]);
+                $student_name = $cells[34];
+                $legacy_name = $cells[12];
+                // dd($student_name);
+                $studentArray   = explode(' ', $student_name);
+
                 $selectedEndDate = \Carbon\Carbon::parse($cells[37]);
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
-                $student_present = StudentProfile::where('legacy_name', $legacy_name)->first();
-                if ($student_present) {
+
+                $student = \App\Models\StudentProfile::where(DB::raw("CONCAT(lower(first_name),' ',lower(last_name))"), strtolower($student_name))
+                    ->orWhere(function ($query) use ($studentArray, $student_name, $legacy_name) {
+                        $query->where(DB::raw('lower(first_name)'), strtolower($studentArray[0]));
+                        $query->where(DB::raw('legacy_name', $legacy_name));
+                        if (isset($studentArray[1]))
+                            $query->orWhere(DB::raw('lower(last_name)'), strtolower($studentArray[1]));
+                        if (isset($studentArray[2]))
+                            $query->orWhere(DB::raw('lower(last_name)'), strtolower($studentArray[2]));
+                        if (isset($studentArray[3]))
+                            $query->orWhere(DB::raw('lower(last_name)'), strtolower($studentArray[3]));
+                    });
+
+                $student    = $student->first();
+                if ($student) {
                     EnrollmentPeriods::create([
-                        'student_profile_id' => (isset($student_present)) ? $student_present->id : 0,
+                        'student_profile_id' => (isset($student)) ? $student->id : 0,
                         'start_date_of_enrollment' => $cells[36],
                         'end_date_of_enrollment' => $cells[37],
                         'grade_level' => $cells[38],
                         'order_id' => $cells[13],
                         'type' => $type,
                     ]);
+                } else {
+                    array_push($notFound, ['email' =>  $cells[12]]);
                 }
             }
         }
+
         $reader->close();
         $this->line('import successfully');
     }

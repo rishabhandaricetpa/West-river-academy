@@ -121,7 +121,7 @@ class StudentController extends Controller
             ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods', 'confirmletter')->get();
 
-        //    dd($confirmLetter);
+        //  dd($confirmLetter);
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
