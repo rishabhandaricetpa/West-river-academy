@@ -182,7 +182,7 @@
                 </table>
             </td>
             <td style="text-align:center;width:40%;" colspan="2" valign="middle">
-                <span style="margin:0 auto;"><img src="../public/images/stamp.png"
+                <span style="margin:0 auto;"><img src="{{ asset('images/Stamp.png') }}"
                         style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp"></span>
             </td>
         </tr>
