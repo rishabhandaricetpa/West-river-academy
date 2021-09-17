@@ -2395,6 +2395,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2552,6 +2553,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2625,6 +2627,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
 //
 //
 //
@@ -40929,22 +40932,22 @@ var render = function() {
           { key: anotherCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
               index > 0
                 ? _c(
                     "span",
                     {
-                      staticClass: "remove",
+                      staticClass: "remove place-top",
                       on: {
                         click: function($event) {
                           return _vm.removeForeignCourse(index)
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-times" }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Delete Course")])
-                    ]
+                    [_c("i", { staticClass: "fas fa-times" })]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -41200,22 +41203,22 @@ var render = function() {
           { key: englishCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
               index > 0
                 ? _c(
                     "span",
                     {
-                      staticClass: "remove",
+                      staticClass: "remove place-top",
                       on: {
                         click: function($event) {
                           return _vm.removeEnglishCourse(index)
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-times" }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Delete Course")])
-                    ]
+                    [_c("i", { staticClass: "fas fa-times" })]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -41471,22 +41474,22 @@ var render = function() {
           { key: foreignCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
               index > 0
                 ? _c(
                     "span",
                     {
-                      staticClass: "remove",
+                      staticClass: "remove place-top ",
                       on: {
                         click: function($event) {
                           return _vm.removeForeignCourse(index)
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-times" }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Delete Course")])
-                    ]
+                    [_c("i", { staticClass: "fas fa-times" })]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -41742,22 +41745,22 @@ var render = function() {
           { key: healthCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
               index > 0
                 ? _c(
                     "span",
                     {
-                      staticClass: "remove",
+                      staticClass: "remove place-top",
                       on: {
                         click: function($event) {
                           return _vm.removeHealthCourse(index)
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-times" }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Delete Course")])
-                    ]
+                    [_c("i", { staticClass: "fas fa-times" })]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -42010,22 +42013,22 @@ var render = function() {
       _vm._l(_vm.form.mathscourse, function(maths, index) {
         return _c("div", { key: maths.id, staticClass: "seperator mt-4" }, [
           _c("div", { staticClass: "position-relative" }, [
+            _c("p", { staticClass: "delete-course" }, [
+              _vm._v("Delete Course ")
+            ]),
+            _vm._v(" "),
             index > 0
               ? _c(
                   "span",
                   {
-                    staticClass: "remove",
+                    staticClass: "remove place-top",
                     on: {
                       click: function($event) {
                         return _vm.removeEnglishCourse(index)
                       }
                     }
                   },
-                  [
-                    _c("i", { staticClass: "fas fa-times" }),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Delete Course")])
-                  ]
+                  [_c("i", { staticClass: "fas fa-times " })]
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -42269,22 +42272,22 @@ var render = function() {
           { key: physicalEducation.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
               index > 0
                 ? _c(
                     "span",
                     {
-                      staticClass: "remove",
+                      staticClass: "remove place-top",
                       on: {
                         click: function($event) {
                           return _vm.removeEnglishCourse(index)
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-times" }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Delete Course")])
-                    ]
+                    [_c("i", { staticClass: "fas fa-times" })]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -42541,22 +42544,22 @@ var render = function() {
       _vm._l(_vm.form.sciencecourse, function(science, index) {
         return _c("div", { key: science.id, staticClass: "seperator mt-4" }, [
           _c("div", { staticClass: "position-relative" }, [
+            _c("p", { staticClass: "delete-course" }, [
+              _vm._v("Delete Course ")
+            ]),
+            _vm._v(" "),
             index > 0
               ? _c(
                   "span",
                   {
-                    staticClass: "remove",
+                    staticClass: "remove place-top",
                     on: {
                       click: function($event) {
                         return _vm.removeEnglishCourse(index)
                       }
                     }
                   },
-                  [
-                    _c("i", { staticClass: "fas fa-times" }),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Delete Course")])
-                  ]
+                  [_c("i", { staticClass: "fas fa-times" })]
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -42803,22 +42806,22 @@ var render = function() {
           { key: socialStudiesCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
               index > 0
                 ? _c(
                     "span",
                     {
-                      staticClass: "remove",
+                      staticClass: "remove place-top",
                       on: {
                         click: function($event) {
                           return _vm.removeEnglishCourse(index)
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-times" }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Delete Course")])
-                    ]
+                    [_c("i", { staticClass: "fas fa-times" })]
                   )
                 : _vm._e(),
               _vm._v(" "),

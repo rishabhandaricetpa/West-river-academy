@@ -6,12 +6,12 @@
       :key="physicalEducation.id"
     >
       <div class="position-relative">
+        <p class="delete-course">Delete Course </p>
         <span
           v-if="index > 0"
-          class="remove"
+          class="remove place-top"
           @click="removeEnglishCourse(index)"
           ><i class="fas fa-times"></i>
-          <p>Delete Course</p>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
