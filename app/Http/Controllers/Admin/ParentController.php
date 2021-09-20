@@ -460,6 +460,8 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('total_val');
                         $transction->status = $request->get('status');
+                        $transction->item_type = 'transcript';
+                        $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
                     }
 
@@ -492,6 +494,18 @@ class ParentController extends Controller
                                     'parent_profile_id' => $request->get('parent_id'),
                                 ]);
                             }
+                        }
+                        $student = StudentProfile::where('id', $request->get('student_id_val'))->first();
+                        if ($request->get('status') == 'paid') {
+                            $dashboard = new Dashboard();
+                            $dashboard->linked_to = $student->first_name;
+                            $dashboard->amount =  $request->get('amount');
+                            $dashboard->related_to = 'Transcript Ordered';
+                            $dashboard->student_profile_id  = $request->get('student_id_val');
+                            $dashboard->transaction_id = $transction->transcation_id;
+                            $dashboard->parent_profile_id = $request->get('parent_id');
+                            $dashboard->item_type_id = $transcript->id;
+                            $dashboard->save();
                         }
                     }
 

@@ -1980,7 +1980,7 @@
                             url = '/admin/transcript-edit/payments/' + element.item_type_id
                         }
                         if (element.related_to == "Graduation Ordered") {
-                            url = '/admin/transcript-edit/payments/' + element.item_type_id
+                            url = '/admin/graduations/' + element.item_type_id + '/edit'
                         }
                         if (element.related_to == "Student Enrolled") {
                             url = '/admin/edit-payment-status/' + element.item_type_id

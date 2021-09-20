@@ -11,6 +11,7 @@ use App\Models\Graduation;
 use App\Models\GraduationDetail;
 use App\Models\GraduationPayment;
 use App\Models\RecordTransfer;
+use App\Models\StudentProfile;
 use App\Models\UploadDocuments;
 use App\Models\TransactionsMethod;
 use Illuminate\Http\Request;
@@ -194,7 +195,8 @@ class DashboardController extends Controller
             }
 
             if (
-                !empty($request->get('custom_payment_mode'))
+                $request->input('status') == 'paid'
+
             ) {
                 $transction = new TransactionsMethod();
                 $transction->transcation_id   = $request->get('grad_transction_id') ? $request->get('grad_transction_id')  : substr(uniqid(), 0, 12);
@@ -202,7 +204,21 @@ class DashboardController extends Controller
                 $transction->parent_profile_id = $request->get('parent_id');
                 $transction->amount = 395;
                 $transction->status = 'succeeded';
+                $transction->item_type = 'graduation';
+                $transction->student_profile_id = $request->get('student_id');
                 $transction->save();
+
+                //adding graduation in dashboard
+                $student = StudentProfile::where('id', $request->get('student_id'))->first();
+                $dashboard = new Dashboard();
+                $dashboard->amount = 395;
+                $dashboard->linked_to = $student->first_name;
+                $dashboard->related_to = 'Graduation Ordered';
+                $dashboard->student_profile_id = $request->get('student_id');
+                $dashboard->transaction_id =      $transction->transcation_id;
+                $dashboard->parent_profile_id = $request->get('parent_id');
+                $dashboard->item_type_id = $graduation->id;
+                $dashboard->save();
             }
 
 
