@@ -229,7 +229,7 @@
                        </tr>
                        <tr>
                            <td style="text-align:center;width:100%;" colspan="2" valign="middle">
-                               <span style="margin:10px auto 0;"><img src="../public/images/stamp.png"
+                               <span style="margin:10px auto 0;"><img src="../public/images/Stamp.png"
                                        style="width: 100px;height:100px;object-fit:contain;display:block;"
                                        alt="Stamp"></span>
                            </td>
