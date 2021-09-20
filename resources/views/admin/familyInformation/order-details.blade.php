@@ -220,6 +220,7 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_letter_status" class="form-control paymentDisplay">
+                                        <option value="">Select One</option>
                                         <option value="pending">Pending</option>
                                         <option value="paid">Paid</option>
                                     </select>

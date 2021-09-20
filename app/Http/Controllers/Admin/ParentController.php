@@ -386,12 +386,15 @@ class ParentController extends Controller
                 case 'order-detail_enrollment':
                     if ($request->get('status') == 'paid') {
                         $transction = new TransactionsMethod();
-                        $transction->transcation_id   = $request->get('enrollment_transction_id');
-                        $transction->payment_mode = $request->get('enrollment_pay_mode');
+                        $transction->transcation_id   = $request->get('enrollment_transction_id') ? $request->get('enrollment_transction_id')  : substr(uniqid(), 0, 12);;
+                        $transction->payment_mode = $request->get('enrollment_pay_mode') ? $request->get('enrollment_pay_mode') : '';
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('amount');
                         $transction->status = $request->get('status');
+                        $transction->item_type = 'enrollment_period';
+                        $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
+                        $student = StudentProfile::where('id', $request->get('student_id'))->first();
                     }
 
                     $enrollment_period = new EnrollmentPeriods();
@@ -410,6 +413,19 @@ class ParentController extends Controller
                         $cart->parent_profile_id = $request->get('parent_id');
                         $cart->save();
                     }
+                    if ($request->get('status') == 'paid') {
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $student->first_name;
+                        $dashboard->amount =  $request->get('amount');
+                        $dashboard->related_to = 'Student Enrolled';
+                        $dashboard->student_profile_id  = $request->get('student_id');
+                        $dashboard->transaction_id =  $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $enrollment_period->id;
+                        $dashboard->save();
+                    }
+
+
                     $enroll_payment = new EnrollmentPayment();
                     $enroll_payment->enrollment_period_id  = $enrollment_period->id;
                     $enroll_payment->amount = $request->get('amount');
@@ -888,9 +904,9 @@ class ParentController extends Controller
                 if ($country) :
                     foreach ($country as $key => $value) {
 
-                        $selected  = ( $input['keyword'] && $input['keyword'] == $value->country ) ? 'selected' : '';
+                        $selected  = ($input['keyword'] && $input['keyword'] == $value->country) ? 'selected' : '';
 
-                        $option  = '<option '.$selected.' value="' . $value->country . '">' . $value->country . '</option>';
+                        $option  = '<option ' . $selected . ' value="' . $value->country . '">' . $value->country . '</option>';
                         array_push($countries, $option);
                     }
                     return $countries;
