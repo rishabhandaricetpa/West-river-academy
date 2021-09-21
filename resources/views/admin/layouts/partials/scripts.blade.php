@@ -1219,8 +1219,8 @@
             var order_detail_val = $('#order_detail_val').val();
             var custom_amount = $('#custom_amount').val();
             var custom_paying_for = $('#custom_paying_for').val();
-            var custom_transcation = $('#custom_transcation').val();
-            var custom_payment_mode = $('#custom_payment_mode').val();
+            var custom_transcation = $('#custom_transcation1').val();
+            var custom_payment_mode = $('#custom_payment_mode1').val();
             var custom_status = $('#custom1').val();
             var parent_id = $('#parent_id').val();
             $.ajax({
@@ -1980,7 +1980,7 @@
                             url = '/admin/transcript-edit/payments/' + element.item_type_id
                         }
                         if (element.related_to == "Graduation Ordered") {
-                            url = '/admin/transcript-edit/payments/' + element.item_type_id
+                            url = '/admin/graduations/' + element.item_type_id + '/edit'
                         }
                         if (element.related_to == "Student Enrolled") {
                             url = '/admin/edit-payment-status/' + element.item_type_id

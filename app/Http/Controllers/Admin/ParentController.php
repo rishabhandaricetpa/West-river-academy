@@ -460,6 +460,8 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('total_val');
                         $transction->status = $request->get('status');
+                        $transction->item_type = 'transcript';
+                        $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
                     }
 
@@ -492,6 +494,18 @@ class ParentController extends Controller
                                     'parent_profile_id' => $request->get('parent_id'),
                                 ]);
                             }
+                        }
+                        $student = StudentProfile::where('id', $request->get('student_id_val'))->first();
+                        if ($request->get('status') == 'paid') {
+                            $dashboard = new Dashboard();
+                            $dashboard->linked_to = $student->first_name;
+                            $dashboard->amount =  $request->get('amount');
+                            $dashboard->related_to = 'Transcript Ordered';
+                            $dashboard->student_profile_id  = $request->get('student_id_val');
+                            $dashboard->transaction_id = $transction->transcation_id;
+                            $dashboard->parent_profile_id = $request->get('parent_id');
+                            $dashboard->item_type_id = $transcript->id;
+                            $dashboard->save();
                         }
                     }
 
@@ -688,6 +702,7 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_CustomPayment':
+
                     CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
                     $custom_payment = new CustomPayment();
                     $custom_payment->parent_profile_id = $request->get('parent_id');
@@ -698,8 +713,9 @@ class ParentController extends Controller
                     $custom_payment->payment_mode = $request->get('custom_payment_mode');
                     $custom_payment->status = $request->get('custom_status');
                     $custom_payment->save();
+                    $parent = ParentProfile::where('id', $request->get('parent_id'))->first();
                     if (
-                        !empty($request->get('custom_payment_mode'))
+                        $request->get('custom_status') == 'paid'
                     ) {
                         $transction = new TransactionsMethod();
                         $transction->transcation_id   = $request->get('custom_transcation') ? $request->get('custom_transcation')  : substr(uniqid(), 0, 12);
@@ -707,7 +723,18 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('custom_amount');
                         $transction->status = $request->get('custom_status');
+                        $transction->item_type = 'Custom Payment';
                         $transction->save();
+
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('custom_amount');
+                        $dashboard->related_to = 'Custom Payment Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $custom_payment->id;
+                        $dashboard->save();
                     }
                     if ($request->get('custom_status') == 'pending') {
                         if (!Cart::where('item_type', 'custom')->exists()) {
