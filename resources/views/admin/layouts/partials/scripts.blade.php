@@ -2141,6 +2141,9 @@
     $('nav .nav-item a').removeClass('active');
     $('nav .nav-item a[href="' + url + '"]').addClass('active');
 
+    $('.list-unstyled li a').removeClass('active'); 
+    $('.list-unstyled li a[href="' + url + '"]').addClass('active');
+
     //// table enable 
 
     document.querySelector(".js-cancel")?.addEventListener("click", () => {

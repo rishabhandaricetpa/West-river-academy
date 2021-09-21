@@ -59,12 +59,12 @@
                                 <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
                             </div>
                         </div>
-                        <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }}
+                        <div class="col-12">Date Created:  {{ $parent->created_at->format('M j, Y') }}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade bd-example-modal-lg pt-4" id="parentDetailsModal" tabindex="-1" role="dialog"
+            <div class="modal fade bd-example-modal-lg pt-5 " id="parentDetailsModal" tabindex="-1" role="dialog"
                 aria-labelledby="parentDetailsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <form id="add-new-parent">
@@ -455,7 +455,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="modal fade bd-example-modal-lg" id="RepsModal" tabindex="-1" role="dialog"
+                    <div class="modal fade bd-example-modal-lg pt-5 " id="RepsModal" tabindex="-1" role="dialog"
                         aria-labelledby="RepsModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -524,7 +524,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade bd-example-modal-lg" id="groupModal" tabindex="-1" role="dialog"
+                    <div class="modal fade bd-example-modal-lg pt-5 " id="groupModal" tabindex="-1" role="dialog"
                         aria-labelledby="groupModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -620,7 +620,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="studentDetailsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 "  id="studentDetailsModal" tabindex="-1" role="dialog"
                     aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -761,7 +761,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="notesModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="notesModal" tabindex="-1" role="dialog"
                     aria-labelledby="#notesModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -873,7 +873,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="enrollmentsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="enrollmentsModal" tabindex="-1" role="dialog"
                     aria-labelledby="enrollmentsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1094,7 +1094,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="recordsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="recordsModal" tabindex="-1" role="dialog"
                     aria-labelledby="recordsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1223,7 +1223,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="documentsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="documentsModal" tabindex="-1" role="dialog"
                     aria-labelledby="documentsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1317,7 +1317,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="order-details_details" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="order-details_details" tabindex="-1" role="dialog"
                     aria-labelledby="order-details_details-Label" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">

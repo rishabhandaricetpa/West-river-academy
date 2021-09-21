@@ -133,7 +133,7 @@
       </form>
     </div>
     {{-- add payment for rep --}}
-    <div class="modal fade bd-example-modal-lg" id="testing1" tabindex="-1" role="dialog" aria-labelledby="#testing1"
+    <div class="modal fade bd-example-modal-lg pt-5 " id="testing1" tabindex="-1" role="dialog" aria-labelledby="#testing1"
       aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content mt-5">
@@ -232,7 +232,7 @@
           </div>
         </section>
         {{-- rerepdetail-family_addModal --}}
-        <div class="modal fade bd-example-modal-lg" id="rerepdetail-family_addModal" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg pt-5 " id="rerepdetail-family_addModal" tabindex="-1" role="dialog"
           aria-labelledby="#rerepdetail-family_addModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content mt-5">
@@ -292,7 +292,7 @@
             </div>
           </div>
         </section>
-        <div class="modal fade bd-example-modal-lg" id="repdetail-notes_addModal" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg pt-5 " id="repdetail-notes_addModal" tabindex="-1" role="dialog"
           aria-labelledby="repdetail-notes_addModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content mt-5">
@@ -358,7 +358,7 @@
           </div>
       </div>
   </section>
-  <div class="modal fade bd-example-modal-lg" id="repdetail-docModal" tabindex="-1" role="dialog"
+  <div class="modal fade bd-example-modal-lg pt-5 " id="repdetail-docModal" tabindex="-1" role="dialog"
     aria-labelledby="repdetail-docModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content mt-5">
