@@ -1,7 +1,7 @@
 <section class="orders-detail  pt-10r" id="orders">
     <div class="row">
         <div class="col-12">
-            <h2 class="pr-3">Orders</h2>
+            <h2 class="pr-3">Current Orders</h2>
             <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                     <thead class="thead-light">
@@ -10,7 +10,6 @@
                             <th scope="col">Order</th>
                             <th scope="col">Status</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Details</th>
                             <th scope="col" class="text-right"> <button type="button" class="btn btn-modal ml-3"
                                     data-toggle="modal" data-target="#orderModal" data-whatever="@getbootstrap"><img
                                         src="/images/add.png" alt=""><img src="/images.add.png" alt=""></button></th>
@@ -25,9 +24,9 @@
                                 <td>{{ getOrderAmount($transcation->item_type, $transcation->item_id) }}</td>
                                 <?php $values = getOrders($transcation->transcation_id); ?>
                                 <td>{{ $values }}</td>
-                                <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
-                                            class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
-                                </td>
+                                {{-- <td><a href=" {{ route('admin.orders.details', $transcation->parent_profile_id) }}"><i
+                                             class=" fas fa-edit" onclick="return myFunction();"></i></a></br>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -197,12 +196,8 @@
                                         <option value="Preschool Age 3">Preschool Age 3 </option>
                                         <option value="Preschool Age 4">Preschool Age 4</option>
                                         <option value="Kindergarten">Kindergarten</option>
-                                        <?php 
-                                        for($i=1; $i<=12; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>  
-                                    </select>
+                                        <?php for ($i = 1; $i <= 12; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
                                 </div>
                             </div>
 
@@ -543,12 +538,8 @@
                                     <select type="" id="notarization_quantity" class="form-control"
                                         onchange="getNoatrizationAmount(); getTotal();">
                                         <option value="">Select</option>
-                                        <?php 
-                                        for($i=1; $i<=10; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>                                      
-                                    </select>
+                                        <?php for ($i = 1; $i <= 10; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -626,13 +617,9 @@
                                     <select type="" id="apostille_quantity" class="form-control"
                                         onchange="getApostilleAmount(); getTotal();">
                                         <option value="">Select</option>
-                                        <?php 
-                                        for($i=1; $i<=4; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>  
-                                    </select>
-                                    <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
+                                        <?php for ($i = 1; $i <= 10; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
+                                            <input type="hidden" value="{{ $parent->id }}" id='parent_profile_id'>
 
                                 </div>
                             </div>
@@ -798,18 +785,14 @@
                                     <select type="" id="consul_quantity" class="form-control"
                                         onchange="getConsulatationAmount();">
                                         <option value="">Select</option>
-                                        <?php 
-                                        for($i=1; $i<=4; $i++){
-                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                        }   
-                                        ?>  
-                                    </select>
+                                        <?php for ($i = 1; $i <= 10; $i++) { echo '<option value="' . $i
+                                            . '">' . $i . '</option>' ; } ?> </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Amount</label>
-                                    <input type="text" id="consul_amount" class="form-control" disabled>
+                                    <input type="text" id="consul_amount" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">

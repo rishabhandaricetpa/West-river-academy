@@ -78,6 +78,9 @@ class StudentProfile extends Model
     {
         return $this->hasOne('App\Models\Dashboard', 'student_profile_id', 'student_profile_id');
     }
+    public function enrollmentPeriod(){
+         return $this->hasOne('App\Models\EnrollmentPeriods', 'student_profile_id', 'id');
+    }
 
     public function graduationAddress()
     {

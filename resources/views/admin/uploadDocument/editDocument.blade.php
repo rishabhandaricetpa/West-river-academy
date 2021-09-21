@@ -31,7 +31,9 @@
                         @endif
 
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary">Upload</button>
+                            <button type="submit"
+                                onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
+                                class="btn btn-primary">Upload</button>
                             <a onclick="goBack()" class="btn btn-primary">Back</a>
                         </div>
 

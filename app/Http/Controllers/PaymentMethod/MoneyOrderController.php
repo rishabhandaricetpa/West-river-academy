@@ -46,8 +46,8 @@ class MoneyOrderController extends Controller
 
         $type = 'Check or Money Order';
         //store transactions
-
-        $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);
+        $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
+        $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type, $cartItems);
 
         //update cart status active
 

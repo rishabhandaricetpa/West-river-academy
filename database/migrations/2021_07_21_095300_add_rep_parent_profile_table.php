@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusToDashboardsTable extends Migration
+class AddRepParentProfileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddStatusToDashboardsTable extends Migration
      */
     public function up()
     {
-        Schema::table('dashboards', function (Blueprint $table) {
-            $table->string('status')->nullable();
+        Schema::table('parent_profiles', function (Blueprint $table) {
+            $table->string('amount')->nullable();
+            $table->enum('rep_status', ['active', 'inactive'])->nullable();
         });
     }
 
@@ -25,7 +26,7 @@ class AddStatusToDashboardsTable extends Migration
      */
     public function down()
     {
-        Schema::table('dashboards', function (Blueprint $table) {
+        Schema::table('parent_profiles', function (Blueprint $table) {
             //
         });
     }

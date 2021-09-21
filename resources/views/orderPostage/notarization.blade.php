@@ -9,69 +9,80 @@
         <input type="hidden" name="type" value="notarization" class="form-control col-3">
         <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <h2 class="mb-3">Order Notarization</h2>
-
-           
             <form class="mb-0" method="post" action="{{route('add.cart')}}">
-
                     <p>
                         <span class="font-weight-bold">Notarizations:</span>
                         $20 per document. Shipping First class in the USA is free. Expedited shipping may be ordered separately. Express Mail shipping outside the USA is added at checkout. Allow 3 days for processing plus shipping time.
                     </p>
-                    <div class="form-group d-md-flex mb-2">
-                        <div class="col-md-6 d-sm-flex px-0 mb-4">
-                            <p class="font-weight-bold">Quantity</p>
-                            <div class="row ml-3 mx-0">
-                                <select class="form-control col-3" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')" required>
-                                    <option value="">Select Quantity</option>
-                                    <?php 
-                                    for($i=1; $i<=10; $i++){
-                                        echo'<option value="'.$i.'">'.$i.'</option>'; 
-                                    }   
-                                    ?>    
-                                </select>
-                                <span class="col-3 text-center">=</span>
-                                <i class="fas fa-dollar-sign additional-sign"></i>
-                                <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due" readonly>
+                    
+                        <div class="col-md-9 px-0 mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p class="font-weight-bold">Transcript(s) Quantity</p>
+                                </div>
+                                <div class="col-md-8 d-flex">
+                                    <select class="form-control col-3" name="transcript_quan" onchange="getNotarizationAmount(event,'{{$notarization_fee}}')">
+                                        <option value="">Select Quantity</option>
+                                        <?php 
+                                        for($i=1; $i<=10; $i++){
+                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                        }   
+                                        ?>    
+                                    </select>
+                                    <span class="col-3 text-center">=</span>
+                                    <i class="fas fa-dollar-sign additional-sign"></i>
+                                    <input type="text" id="notarization_due" class="form-control col-3" name="notarization_due" readonly>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <div class="form-group mb-2 row">
-                    <p class="font-weight-bold mb-1 col-sm-12">What is to be notarized?</p>
-                    <div class="form-group col-sm-3 mb-3">
-                        <label for="" class="w-auto">Transcript(s)</label>
-                        <div class="w-100">
-                            <select name="transcript_doc[]" multiple="multiple" class="multiple-select form-control">
-                                @foreach ($transcript as $transcripts)
-                                <option value="{{ $transcripts->pdf_link }}">{{ $transcripts->pdf_link }}</option>
-                                @endforeach
-                            </select>
-
+                   
+              
+                        <div class="col-md-9 px-0 mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p class="font-weight-bold">Confirmation of Enrollment Letter(s) Quantity</p>
+                                </div>
+                                <div class="col-md-8 d-flex">
+                                    <select class="form-control col-3"  name="confirm_quan" onchange="getNotarizationAmountForConfirm(event,'{{$notarization_fee}}')">
+                                        <option value="">Select Quantity</option>
+                                        <?php 
+                                        for($i=1; $i<=10; $i++){
+                                            echo'<option value="'.$i.'">'.$i.'</option>'; 
+                                        }   
+                                        ?>    
+                                    </select>
+                                    <span class="col-3 text-center">=</span>
+                                    <i class="fas fa-dollar-sign additional-sign"></i>
+                                    <input type="text" id="notarization_due1" class="form-control col-3" name="notarization_due1" readonly>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-3 mb-3">
-                        <label for="" class="w-auto">Confirmation(s) of Enrollment Letter</label>
-                        <div class="w-100">
-                            <select name="confirmation_doc" multiple="multiple" class="multiple-select form-control">
-                                @foreach ($confirmationLetter as $enrollment)
-                                <option value="{{ $enrollment->pdf_link }}">{{ $enrollment->pdf_link }}</option>
-                                @endforeach
-                            </select>
+                 
+                   
+                        <div class="col-9 px-0 mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p class="font-weight-bold">Custom Letter(s) Quantity</p>
+                                </div>
+                                <div class="col-md-8 d-flex">
+<select class="form-control col-3" name="custom_quan" onchange="getNotarizationAmountForCustom(event,'{{$notarization_fee}}')">
+    <option value="">Select Quantity</option>
+    <?php 
+    for($i=1; $i<=10; $i++){
+        echo'<option value="'.$i.'">'.$i.'</option>'; 
+    }   
+    ?>    
+</select>
+<span class="col-3 text-center">=</span>
+<i class="fas fa-dollar-sign additional-sign"></i>
+<input type="text" id="notarization_due2" class="form-control col-3" name="notarization_due2" readonly>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-3 mb-3">
-                        <label for="" class="w-auto">Custom Letter(s)</label>
-                        <div class="w-100">
-                            <select name="custom_doc" multiple="multiple" class="multiple-select form-control">
-                                @foreach ($custom_letter as $letter)
-                                <option value="{{ $letter->pdf_link }}">{{ $letter->pdf_link }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                   
                 <div class="form-group mb-2">
                     <p class="font-weight-bold mb-1">Please enter the student name(s) and year(s) for the document(s) you wish to have notarized and any other comments.</p>
-                    <textarea name="" id="" cols="40" rows="10" class="form-control" name="message" maxlength="2000" onKeyPress="if(this.value.length==2000) return false;"></textarea>
+                    <textarea cols="40" rows="10" class="form-control" name="message" maxlength="2000" onKeyPress="if(this.value.length==2000) return false;" required></textarea>
                 </div>
 
                 <div class="form-group mb-2">
@@ -160,12 +171,23 @@
         document.getElementById("notarization_due").value = amount
 
     }
-
-    function getApostilleAmount(e, fees) {
+    function getNotarizationAmountForConfirm(e, fees) {
         var amount = fees * e.target.value;
-        document.getElementById("apostille_due").value = amount
+        document.getElementById("notarization_due1").value = amount
 
     }
+    function getNotarizationAmountForCustom(e, fees) {
+        var amount = fees * e.target.value;
+        document.getElementById("notarization_due2").value = amount
+
+    }
+
+    // function getApostilleAmount(e, fees) {
+    //     var amount = fees * e.target.value;
+    //     document.getElementById("apostille_due").value = amount
+
+    // }
+    
 
     function getPostageCharges(e) {
         var country_name = e.target.value;

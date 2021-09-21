@@ -26,19 +26,20 @@ class TranscriptController extends Controller
 {
     public function index()
     {
-        $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
+        // $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "k-8";
-        return view('admin.transcript.view-student', compact('students', 'type'));
+        $transcript_data = TranscriptK8::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
+      
+
+        return view('admin.transcript.view-student', compact('transcript_data', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
-    //whereIn('status', ['paid', 'approved', 'completed'])
     public function edit($id)
     {
         $type = "k-8";
         $transcript = Transcript::whereIn('status', ['paid', 'approved', 'completed'])->with('transcriptk8')
             ->Join('k8transcript', 'k8transcript.transcript_id', 'transcripts.id')->where('k8transcript.student_profile_id', $id)
             ->get()->unique('transcript_id');
-        // dd($transcript);
         $transcriptData = TranscriptK8::where('student_profile_id', $id)
             ->with(['TranscriptCourse', 'TranscriptCourse.subjects', 'TranscriptCourse.course'])
             ->get();
@@ -224,13 +225,6 @@ class TranscriptController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    //delete subject from transcript
-
-    public function deleteSubGrades($subject_id, $transcript_id)
-    {
-        // dd($transcript_id);
-    }
-
     /* *
      *view all the payments of the transcript methods
      *
@@ -239,7 +233,7 @@ class TranscriptController extends Controller
      */
     public function viewAllPayments()
     {
-        $getAlltranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->get();
+        $getAlltranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->orderBy('id', 'desc')->get();
         return view('admin.transcript.transcript_payments', compact('getAlltranscriptPayments'));
     }
     public function editAllPayments($transpay_id)

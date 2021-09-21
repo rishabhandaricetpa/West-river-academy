@@ -77,7 +77,6 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
         try {
             $country = Country::find($id);
             $country->country = $request->get('country');
@@ -91,6 +90,7 @@ class CountryController extends Controller
 
             return redirect('admin/countryenrollments')->with($notification);
         } catch (\Exception $e) {
+            report($e);
             DB::rollBack();
             if ($request->expectsJson()) {
                 return response()->json(['status' => 'error', 'message' => 'Failed to update Country Data']);

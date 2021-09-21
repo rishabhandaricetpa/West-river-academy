@@ -22,6 +22,8 @@ class CreateTransactionMethodsTable extends Migration
             $table->timestamps();
             $table->string('amount');
             $table->string('status')->nullable();
+            $table->string('item_type')->nullable();
+            $table->string('student_profile_id')->nullable();
         });
     }
 

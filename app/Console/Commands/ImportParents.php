@@ -44,10 +44,11 @@ class ImportParents extends Command
     public function handle()
     {
         $this->line('starting import');
+        $_this = $this;
         $filePath = base_path('csv/parents.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
-
+        $duplicateCheckArray = [];
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
@@ -55,10 +56,17 @@ class ImportParents extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $p1_email = Str::of($cells[13]);
+                $p1_email = Str::of($cells[3]);
+
+                if (!isset($duplicateCheckArray[$p1_email])) $duplicateCheckArray[$p1_email] = 0;
+                $duplicateCheckArray[$p1_email] = ($duplicateCheckArray[$p1_email] + 1);
+
+                $this->line($p1_email);
+                // if ($p1_email != '' && 1==2) {
+
                 $user = User::where('email', $p1_email)->first();
-                if (!$user->exists()) {
-                    User::create(
+                if (!$user) {
+                    $user = User::create(
                         [
                             'name' => $cells[14],
                             'email' => $cells[13],
@@ -66,9 +74,12 @@ class ImportParents extends Command
                             'password' => Hash::make('12345678'),
                         ]
                     );
-                } else {
+                }
+                $parent = ParentProfile::where('p1_email', $p1_email)->first();
+
+                if (!$parent)
                     ParentProfile::create([
-                        'user_id' => (isset($user)) ? $user->id : null,
+                        'user_id' => $user ? $user->id : null,
                         'p1_first_name' => $cells[14],
                         'p1_last_name' => $cells[15],
                         'p1_email' => $cells[13],
@@ -83,10 +94,8 @@ class ImportParents extends Command
                         'reference' =>  $cells[18],
                         'immunized' =>  $cells[10]
                     ]);
-                }
             }
         }
-
         $reader->close();
         $this->line('import successfully');
     }

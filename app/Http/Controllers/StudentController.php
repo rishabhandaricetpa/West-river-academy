@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Dashboard;
 use App\Models\Notification as Notification;
 use App\Models\OrderPersonalConsultation;
+use App\Models\TransactionsMethod;
 use App\Models\UploadDocuments;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -113,9 +114,14 @@ class StudentController extends Controller
             ->whereIn('status', ['approved', 'paid', 'completed', 'canEdit'])
             ->with('student')->get();
         $record_transfer = ParentProfile::find($parentId)->schoolRecord()->get();
+
+        // $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
+        //     ->with('enrollmentPeriod', 'confirmletter')->get();
         $confirmLetter = StudentProfile::where('student_profiles.parent_profile_id', $parentId)
             ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
             ->with('enrollmentPeriods', 'confirmletter')->get();
+
+        //  dd($confirmLetter);
         $personal_consultation = OrderPersonalConsultation::where('status', 'paid')->where('parent_profile_id', $parentId)->with('parent')->get();
 
         $uploadedDocuments = UploadDocuments::select()
@@ -170,23 +176,26 @@ class StudentController extends Controller
     public function saveConfirmationInformation(Request $request, $student_id, $grade_id)
     {
         $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $request->input('enrolment_id'))->first();
+
         if ($request->input('isDobCity')) {
-            $confirmation_data->isDobCity = $request->input('isDobCity');
+            $confirmation_data->isDobCity = 1;
         } else {
             $confirmation_data->isDobCity = 0;
         }
         if ($request->input('IsMotherName')) {
-            $confirmation_data->IsMotherName = $request->input('IsMotherName');
+            $confirmation_data->IsMotherName = 1;
         } else {
             $confirmation_data->IsMotherName = 0;
         }
         if ($request->input('isGrade')) {
-            $confirmation_data->isGrade = $request->input('isGrade');
+
+            $confirmation_data->isGrade = 1;
         } else {
             $confirmation_data->isGrade = 0;
         }
         if ($request->input('isStudentId')) {
-            $confirmation_data->isStudentId = $request->input('isStudentId');
+
+            $confirmation_data->isStudentId = 1;
         } else {
             $confirmation_data->isStudentId = 0;
         }
@@ -265,21 +274,21 @@ class StudentController extends Controller
                     $confirmlink->save();
                 }
             }
-            Dashboard::create([
-                'student_profile_id' => $student->id,
-                'linked_to' => $student->Name,
-                'is_archieved' => 0,
-                'related_to' => 'student_record_received',
-                'notes' =>  $student->first_name . $student->last_name,
-                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
-            ]);
+            // Dashboard::create([
+            //     'parent_profile_id' =>  $parentProfileData->id,
+            //     'amount' => $fee,
+            //     'student_profile_id' => $student->id,
+            //     'linked_to' => $student->Name,
+            //     'related_to' => 'student_record_received',
+            //     'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+            // ]);
             DB::commit();
 
             if ($data->expectsJson()) {
                 return response()->json(['status' => 'success', 'message' => 'Student added successfully', 'data' => $student]);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
 
             if ($data->expectsJson()) {
@@ -295,8 +304,11 @@ class StudentController extends Controller
     {
         $user_id = Auth::user()->id;
         $parent_id =  ParentProfile::getParentId();
+
         $students = StudentProfile::where('parent_profile_id', $parent_id)->get();
-        $fees = ParentProfile::getParentPendingFees($user_id);
+
+        $fees = ParentProfile::getParentPendingFees($parent_id);
+
         return view('reviewstudent', compact('students', 'fees'));
     }
 
@@ -473,7 +485,7 @@ class StudentController extends Controller
 
     public function paypalorderReview($parent_id)
     {
-        $address = User::find($parent_id)->parentProfile()->first();
+        $address = ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
         if ($final_amount === false) {
@@ -485,7 +497,8 @@ class StudentController extends Controller
 
     public function stripeorderReview($parent_id)
     {
-        $address = User::find($parent_id)->parentProfile()->first();
+        //  $address = User::find($parent_id)->parentProfile()->first();
+        $address = ParentProfile::find($parent_id)->first();
         $final_amount = $this->getFinalAmount();
 
         if ($final_amount === false) {
@@ -545,5 +558,39 @@ class StudentController extends Controller
                 return response()->json(['status' => 'error', 'message' => 'Failed to remove enroll period']);
             }
         }
+    }
+
+    private function trimArrayValues($arr)
+    {
+        $data = [];
+        foreach ($arr as $val) {
+            $val = trim($val);
+            $val = str_replace(" ", "", $val);
+            if (!empty($val)) {
+                array_push($data, $val);
+            }
+        }
+        return $data;
+    }
+
+    public function getAllOrders(Request $request)
+    {
+        $trans_id = $request->get('trans_id');
+
+        $orderDetails = Dashboard::where('transaction_id', $trans_id)->where('related_to', '!=', 'Student Enrolled')->get();
+        $enrollment = Dashboard::where('transaction_id', $trans_id)->where('related_to', 'Student Enrolled')->get();
+        $arr = [];
+        foreach ($enrollment as $orderDetail) {
+            $ep = EnrollmentPeriods::findOrFail($orderDetail->item_type_id);
+            $arr[] = [
+                'related_to' => $orderDetail->related_to,
+                'linked_to' => $orderDetail->linked_to,
+                'start_date_of_enrollment' => formatDate($ep->start_date_of_enrollment),
+                'end_date_of_enrollment' => formatDate($ep->end_date_of_enrollment),
+                'amount' => $orderDetail->amount
+            ];
+        }
+
+        return response()->json(['data' => $orderDetails, 'enrollmentdata' => $arr]);
     }
 }

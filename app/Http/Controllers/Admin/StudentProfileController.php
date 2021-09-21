@@ -191,7 +191,7 @@ class StudentProfileController extends Controller
             return  redirect()->back()->with($notification);
             // return view('admin.edit-student',$student->id)->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             $notification = [
                 'message' => 'Failed to update Record!',
                 'alert-type' => 'error',
@@ -297,13 +297,14 @@ class StudentProfileController extends Controller
                 'enrollment' => $enrollment_periods,
                 'title' => 'Confirmation of Enrollment',
                 'date' => date('M j, Y'),
+                'type' => $type,
             ];
 
             $pdf = PDF::loadView('confirmationLetter', $data);
             Storage::put(ConfirmationLetter::UPLOAD_DIR_ADMIN . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             $notification = [
                 'message' => 'Failed!',
                 'alert-type' => 'error',
@@ -369,7 +370,13 @@ class StudentProfileController extends Controller
         $notes->parent_profile_id = $request->get('parent_id');
         $notes->student_profile_id = $request->get('student_name_for_notes');
         $notes->notes = $request->get('message_text');
-
+        $notes->save();
+    }
+    public function createRepNotes(Request $request)
+    {
+        $notes = new Notes;
+        $notes->representative_group_id = $request->get('rep_group_id');
+        $notes->notes = $request->get('rep_message_val');
         $notes->save();
     }
 
@@ -451,7 +458,8 @@ class StudentProfileController extends Controller
     }
     public function updateStudentProfile(Request $request)
     {
-        StudentProfile::where('id', $request->student_id)->update(
+
+        StudentProfile::where('id', $request->students_id)->update(
             [
                 'first_name' => $request->first_name,
                 'middle_name' => $request->middle_name,
@@ -466,5 +474,17 @@ class StudentProfileController extends Controller
                 'student_situation' => $request->student_situation
             ]
         );
+        $notification = [
+            'message' => 'Student Record Updated Successfuly!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
+    }
+    public function updateAllEnrollment($student_id)
+    {
+        $enrollment_period = EnrollmentPeriods::whereIn('student_profile_id', [$student_id])->get();
+        $enrollment_payment_id = collect($enrollment_period)->pluck('enrollment_payment_id');
+        EnrollmentPayment::whereIn('id', $enrollment_payment_id)->update(['status' => 'paid']);
+        return redirect()->back();
     }
 }

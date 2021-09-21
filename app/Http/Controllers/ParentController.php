@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Coupon;
 use App\Models\CustomLetterPayment;
 use App\Models\CustomPayment;
+use App\Models\Dashboard;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\Graduation;
@@ -18,6 +19,7 @@ use App\Models\Notification;
 use App\Models\OrderPersonalConsultation;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
+use App\Models\TransactionsMethod;
 use App\Models\Transcript;
 use App\Models\UploadDocuments;
 use App\Models\User;
@@ -46,7 +48,6 @@ class ParentController extends Controller
     {
         $parent = ParentProfile::where('id', ParentProfile::getParentId())->first();
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
-
         if (is_null($enroll_fees->amount) || empty($enroll_fees->amount) || $enroll_fees->amount == 0) {
             $notification = [
                 'message' => 'Cart is Empty! Please add atleast one item.',
@@ -143,38 +144,9 @@ class ParentController extends Controller
         $studentData = $parent->studentProfile()->get();
 
         $studentId = collect($studentData)->pluck('id');
-        $transcript_payments = Transcript::with('student', 'transcriptPayment')->whereIn('student_profile_id', $studentId)->whereIn('status', ['paid', 'completed', 'approved', 'canEdit'])->get();
-
-        /** Receiving payment history data for custom payment*/
-        $customPayments = CustomPayment::with('ParentProfile')->where('parent_profile_id', $user_id)->where('status', 'paid')->get();
-
-        /** Receiving payment history data for enrollments*/
-
-        $enrollmentPayments = DB::table('enrollment_periods')->whereIn('student_profile_id', $studentId)
-            ->join('enrollment_payments', 'enrollment_payments.id', 'enrollment_periods.enrollment_payment_id')
-            ->join('student_profiles', 'student_profiles.id', 'enrollment_periods.student_profile_id')
-            ->whereIn('enrollment_payments.status', ['active', 'paid'])
-            ->get();
-        /** Receiving payment history data for graduation*/
-
-        $graduationPayments = Graduation::join('graduation_payments', 'graduation_payments.graduation_id', 'graduations.id')
-            ->whereIn('graduations.student_profile_id', $studentId)
-            ->whereIn('graduations.status', ['paid', 'approved', 'completed'])
-            ->join('student_profiles', 'student_profiles.id', 'graduations.student_profile_id')
-            ->get();
-
-        /** Receiving payment history data for notirization*/
-        $notirizationPayments = NotarizationPayment::with('notarization', 'ParentProfile')->where('parent_profile_id', $user_id)->get();
-
-        /** Receiving payment history data for order personal consultation*/
-
-        $orderConsulationPayments = OrderPersonalConsultation::with('parent')->where('parent_profile_id', $user_id)->get();
-
-        $customLetter = CustomLetterPayment::with('ParentProfile')
-            ->where('parent_profile_id', $user_id)
-            ->where('status', 'paid')
-            ->get();
-        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'transcript_payments', 'customPayments', 'enrollmentPayments', 'graduationPayments', 'notirizationPayments', 'orderConsulationPayments', 'customLetter'));
+        $payment_history = TransactionsMethod::where('parent_profile_id', $parent->id)->orderBy('created_at', 'DESC')->get();
+        // $dashboard=Dashboard::where()
+        return view('MyAccounts/myaccount', compact('parent', 'user_id', 'payment_history'));
     }
 
     public function editmysettings($user_id)

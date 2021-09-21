@@ -18,7 +18,7 @@ class RecordTransferController extends Controller
 {
     public function index()
     {
-        $schoolRecords = RecordTransfer::select()->orderBy('id', 'DESC')->get();
+        $schoolRecords = RecordTransfer::select()->with('parent')->orderBy('id', 'DESC')->get();
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }
     public function studentRecords($record_id)
@@ -111,14 +111,14 @@ class RecordTransferController extends Controller
 
         $data['email'] = $record->email;
         $data['title'] = 'Request for Student Records';
-        $data['name'] = $studentData->first_name;
+        $data['name'] = $studentData->first_name . ' ' . $studentData->last_name;
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $data['grade'] = $record->last_grade;
         $pdf = PDF::loadView('schoolResendRecord', $data);
         Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
             $message->to($data['email'], $data['email'])
-                ->subject($data['title'])
+                ->subject('Gentle Reminder' . ' : ' . $data['title'])
                 ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
         });
         $record->save();
@@ -135,7 +135,7 @@ class RecordTransferController extends Controller
         $studentData = StudentProfile::where('id', $record->student_profile_id)->first();
         $data['email'] = $record->email;
         $data['title'] = 'West River Academy';
-        $data['name'] = $studentData->first_name;
+        $data['name'] = $studentData->first_name . ' ' . $studentData->last_name;
         $data['date'] = \Carbon\Carbon::now()->format('M d Y');
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $data['grade'] = $record->last_grade;

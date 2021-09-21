@@ -43,7 +43,7 @@ class ImportPaymentForEnrollments extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/enrollmentpayment.csv');
+        $filePath = base_path('csv/payment.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -55,6 +55,7 @@ class ImportPaymentForEnrollments extends Command
                     continue;
                 }
                 $order_id = Str::of($cells[19]);
+                $legacy_name = Str::of($cells[12]);
                 $payment_order_id = EnrollmentPayment::where('order_id', $order_id)->first();
                 if ($payment_order_id) {
                     $updatePayments = EnrollmentPayment::where('order_id', $order_id)->update(

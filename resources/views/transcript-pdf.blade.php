@@ -21,7 +21,7 @@
     <div style="max-width:1000px;margin:0 auto;padding:0 15px;">
         <div style="display:flex;flex-wrap:wrap;align-items: center;">
             <h1 style="width:50%;text-transform:uppercase;font-family:'Judson',serif;font-weight: 300;margin:0;">
-                official transcript</h1>
+                cript</h1>
             <div style="width:50%;display:flex;">
                 <div style="margin-left:auto;text-align:center;">
                     <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo"

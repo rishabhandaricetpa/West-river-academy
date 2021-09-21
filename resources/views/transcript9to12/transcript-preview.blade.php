@@ -14,7 +14,7 @@
     </main>
     <div class="modal fade" id="previewTranscriptModal" tabindex="-1" role="dialog"
         aria-labelledby="previewTranscriptModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     @php
@@ -132,9 +132,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table width="100%" style="padding-top:30px;vertical-align:top;" class="mt-5">
+                    <table style="padding-top:30px;vertical-align:top;width:100%;" class="mt-5">
                         <tr>
-                            <td width="35%" style="vertical-align:top;padding:0 30px;padding-left:0;">
+                            <td  style="width:33.3%;vertical-align:top;padding:0 5px;padding-left:0;">
                                 <table width="100%" style="border:1px solid #000;">
                                     <tr>
                                         <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;"
@@ -166,7 +166,7 @@
                                     Point, CA
                                     92629-2173</p>
                             </td>
-                            <td width="45%" style="vertical-align:top;padding:0 30px;">
+                            <td style="width:33.3%;vertical-align:top;padding:0 5px;">
 
                                 <table style="border:1px solid #000;" width="100%">
                                     <thead>
@@ -190,54 +190,54 @@
                                                 Points</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:13px;padding:4px;text-align:center">A</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">90-100</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">4.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">5.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">A</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">90-100</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">4.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">5.00</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:13px;padding:4px;text-align:center">B</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">80-89</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">3.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">4.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">B</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">80-89</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">3.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">4.00</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:13px;padding:4px;text-align:center">C</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">70-79</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">2.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">3.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">C</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">70-79</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">2.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">3.00</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:13px;padding:4px;text-align:center">D</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">60-69</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">1.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">2.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">D</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">60-69</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">1.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">2.00</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:13px;padding:4px;text-align:center">F</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">0-59</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">F</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0-59</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-size:13px;padding:4px;text-align:center">P</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">60-100</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
-                                            <td style="font-size:13px;padding:4px;text-align:center">0.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">P</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">60-100</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
                                         </tr>
                                     </tbody>
 
                                 </table>
                             </td>
-                            <td width="40%" style="vertical-align:top;">
+                            <td  style="vertical-align:top;width:33.3%;">
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td width=" 60%" style="text-align:center;"><span
+                                            <td style="text-align:center;width:60%;"><span
                                                     style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
                                                     signature</span>
                                             </td>
-                                            <td width="40%"><span
+                                            <td style="width:40%;"><span
                                                     style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
                                             </td>
                                         </tr>
@@ -247,7 +247,7 @@
                                     <tr style="width:100%;">
                                         <td style="text-align:center;width:100%;" colspan="2">
                                             <div style="margin:0 auto;"><img src="{{ asset('images/Stamp.png') }}"
-                                                    style="width: 120px;height:120px;object-fit:contain;display:block;"
+                                                    style="margin:0 auto;width: 100px;height:100px;object-fit:contain;display:block;"
                                                     alt="Stamp"></div>
                                         </td>
                                     </tr>

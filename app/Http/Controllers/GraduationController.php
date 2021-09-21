@@ -77,11 +77,12 @@ class GraduationController extends Controller
             GraduationDetail::updateOrInsert(['graduation_id' => $graduation->id], []);
             $studentName = StudentProfile::whereId($inputs['student_id'])->first();
             Dashboard::create([
+                'parent_profile_id' => ParentProfile::getParentId(),
+                'amount' => $fee,
                 'student_profile_id' => $request->student_id,
                 'linked_to' => $graduation->id,
-                'related_to' => 'graduation_record_received',
-                'is_archieved' => 0,
-                'notes' =>  $studentName->fullname,
+                'item_type_id' => $graduation->id,
+                'related_to' => 'Graduation Ordered',
                 'created_date' => \Carbon\Carbon::now()->format('M d Y'),
             ]);
             DB::commit();
@@ -90,7 +91,7 @@ class GraduationController extends Controller
                 return response()->json(['status' => 'success', 'message' => 'Record added successfully']);
             }
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollBack();
 
             if ($request->expectsJson()) {
@@ -175,7 +176,6 @@ class GraduationController extends Controller
                 'alert-type' => 'success',
             ]);
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
 
             return redirect()->back()->with([
@@ -192,7 +192,6 @@ class GraduationController extends Controller
 
     public function dataTable()
     {
-        // dd(Graduation::with(['details', 'student', 'parent'])->latest()->get()->toArray());
         return datatables(Graduation::with(['details', 'student', 'parent'])->latest()->get())->toJson();
     }
 

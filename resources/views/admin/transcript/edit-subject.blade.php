@@ -25,7 +25,7 @@
 
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary">Update</button>
-                            <a onclick="goBack()" class="btn btn-primary">Back</a>
+                            <a href="{{ route('admin.edit.course', $name->courses_id) }}" class="btn btn-primary">Back</a>
                         </div>
                 </form>
             </div>

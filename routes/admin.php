@@ -218,7 +218,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // archieved tasks
     Route::get('archieved/tasks', 'DashboardController@ArchievedTasks')->name('archieved.tasks');
     Route::get('dashboard/notification', 'DashboardController@index')->name('dashboard.notification');
-
+    Route::get('dashboard/alert', 'DashboardController@alertRecordTransfer')->name('recordtransfer.alert');
     //transcript 9-12th backend
     Route::get('generate-transcript9_12/{id}/{transcript_id}', 'Transcript9_12Controller@genrateTranscript')->name('genrate.transcript9_12');
     Route::post('viewfull-transcript9_12/{student_id}/{transcript_id}', 'Transcript9_12Controller@updateDateofGraduation')->name('viewfull9_12');
@@ -259,11 +259,13 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('store-document-dashboard', 'DashboardController@uploadDocument')->name('dashboard.documents');
     Route::post('store-record-dashboard', 'DashboardController@uploadRecordTransfer')->name('dashboard.recordtrasnfer');
     Route::post('store-student', 'StudentProfileController@updateNewStudents')->name('create.students');
+    Route::get('update-all-enrollment/{student_id}', 'StudentProfileController@updateAllEnrollment')->name('update.allenrollment');
     Route::post('create-student', 'StudentProfileController@createNewStudents')->name('create.newstudent');
     Route::post('update-student-profile', 'StudentProfileController@updateStudentProfile')->name('update.student.profile');
 
     // create order from parent admin side
     Route::post('store-notes', 'StudentProfileController@createNotes')->name('create.notes');
+    Route::post('store-rep-notes', 'StudentProfileController@createRepNotes')->name('create.rep.notes');
     Route::post('store-enrollment', 'StudentProfileController@createEnrollment')->name('create.enrollments');
     Route::post('store-orders', 'ParentController@createOrders')->name('create.orders');
     Route::post('create-parent', 'ParentController@createParent')->name('create.parent');
@@ -273,10 +275,24 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('get-transcript', 'ParentController@getTranscriptval')->name('get.transcriptcharges');
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
-    Route::get('rep-list/', function () {
-        return view('admin/familyInformation/rep-list');
-    });
-    Route::get('rep-detail/', function () {
-        return view('admin/familyInformation/rep-detail');
-    });
+    Route::post('get/order/details', 'ParentController@getDetailedOrders')->name('get.orderdetails');
+});
+
+
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], function () {
+    Route::post('groups', 'RepresentativeGroupController@create')->name('add.representative');
+    Route::post('report', 'RepresentativeGroupController@repReport')->name('generaterep.report');
+    Route::post('amount', 'RepresentativeGroupController@createRepAmount')->name('amount.representative');
+    Route::post('documents', 'RepresentativeGroupController@uploadDocuments')->name('rep.documents');
+    Route::post('get-rep-groups', 'RepresentativeGroupController@getRepGroup')->name('get.representative');
+    Route::get('details/{rep_id}', 'RepresentativeGroupController@repDetails')->name('rep.details');
+    Route::get('delete/{repamount_id}', 'RepresentativeGroupController@delete')->name('delete.amount');
+    Route::get('view-representatives', 'RepresentativeGroupController@index')->name('replist');
+    Route::post('edit', 'RepresentativeGroupController@update')->name('update.representative');
+    Route::get('repdelete/{id}', 'RepresentativeGroupController@deleteRep')->name('delete.rep');
+    Route::get('change/status/{parent_id}', 'RepresentativeGroupController@changeStatusRep')->name('rep.status');
+});
+
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'search'], function () {
+    Route::get('family-filter', 'ParentController@getSearchFilterData')->name('family.filter');
 });

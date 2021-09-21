@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsCompletedToUsersTable extends Migration
+class AddRepIdToParentProfileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddIsCompletedToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('dashboards', function (Blueprint $table) {
-            $table->boolean('is_completed')->nullable();
+        Schema::table('parent_profiles', function (Blueprint $table) {
+
+            $table->foreignId('representative_group_id')->nullable()->constrained()->references('id')->on('representative_groups')->onDelete('set null');
         });
     }
 
@@ -25,7 +26,7 @@ class AddIsCompletedToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('dashboards', function (Blueprint $table) {
+        Schema::table('parent_profiles', function (Blueprint $table) {
             //
         });
     }

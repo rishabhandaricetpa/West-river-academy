@@ -15,10 +15,16 @@
           <div class="col-sm-6 d-flex align-items-center">
             <div class="text-center">
               <p class="mb-0">Amount Due:</p>
-              <span class="total-amount">${{ $transcript_fee }}</span>
+              <span class="total-amount">${{ $count }}</span>
             </div>
           </div>
-          <input type="hidden" name="transcript_id" value="{{$transcript_id}}">
+          @if($trans_wiz=='Yes')
+            <input type="hidden" name="transcript_ids" value="{{$transcript_ids}}">
+          @else
+            @foreach ($transcript_ids as $transcript_id)
+            <input type="hidden" name="transcript_ids[]" value="{{$transcript_id}}">
+            @endforeach
+           @endif
           <input type="hidden" name="type" value="transcript">
           <input type="hidden" name="student_id" value="{{ $student->id }}">
           <div class="col-sm-6 d-flex justify-content-center align-items-center">

@@ -1,4 +1,5 @@
 @stack('select2_script')
+@php $input = Request::all();@endphp
 <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -39,12 +40,54 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
+        $.ajax({
+            type: "get",
+            "serverSide": true,
+            "processing": true,
+            "searching": true,
+            "serverSide": true,
+            url: "{{ route('admin.family.filter') }}",
+            data: 'type=country&keyword={{ Request::get('country') }}&_token=' + $(
+                'input[name="_token"]').attr(
+                'value'),
+            beforeSend: function() {
+                $("#search-country").css("background",
+                    "#FFF url(images/LoaderIcon.gif) no-repeat 165px; background-position: right;"
+                );
+            },
+            success: function(data) {
+                $("#fill-countries").append(data);
+                $("#search-box").css("background", "#FFF");
+                $('#fill-countries').select2({
+                    placeholder: "Select Country"
+                });
+            }
+        });
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
+        $('#student_grade').select2({});
+
+
         //parent datatable
         $("#family-table").DataTable({
-            "ajax": "{{ route('admin.datatable.parent') }}"
-
-                ,
+            "ajax": {
+                "url": "{{ route('admin.datatable.parent') }}",
+                "data": function(d) {
+                    d.first_name = "{{ $input['first_name'] ?? '' }}";
+                    d.last_name = "{{ $input['last_name'] ?? '' }}";
+                    d.refered_by = "{{ $input['refered_by'] ?? '' }}";
+                    d.enroll_date = "{{ $input['enroll_date'] ?? '' }}";
+                    d.email = "{{ $input['email'] ?? '' }}";
+                    d.status = "{{ $input['status'] ?? '' }}";
+                    d.country = "{{ $input['country'] ?? '' }}";
+                    d.grade = "{{ $input['grade'] ?? '' }}";
+                    d.dob = "{{ $input['dob'] ?? '' }}";
+                }
+            },
             "processing": true,
+            "searching": false,
             "serverSide": true,
             "ordering": false,
             "pagination": true,
@@ -56,7 +99,7 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
                     "data": function(row, type, val, meta) {
-                        return `<a href="edit/${row.id}">${row.p1_first_name}</a>`
+                        return `<a href="edit/${row.id}">${row.p1_first_name + ' '+ row.p1_last_name}</a>`
                     },
                 },
                 {
@@ -308,34 +351,34 @@
             "ordering": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             "columns": [{
-                "data": "id",
-                "render": function(data, type, row, meta) {
-                    return meta.row + 1;
-                    e
-                }
-            }, {
-                "data": "student.fullname"
-            }, {
-                "data": function(row, type, val, meta) {
-                    return row.student.email
-                },
-                defaultContent: '',
-                "render": function(data) {
-                    if (data === null) {
-                        return `<label> </label>`;
-                    } else {
-                        return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
+                    "data": "id",
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1;
+                        e
                     }
-                }
-            }, {
-                "data": "student.birthdate",
-                "render": function(data) {
-                    return (moment(data).format("LL"));
-                }
-            }, {
-                "data": "grade_9_info",
-                "render": function(data, type, row, meta) {
-                    return `
+                }, {
+                    "data": "student.fullname"
+                }, {
+                    "data": function(row, type, val, meta) {
+                        return row.student.email
+                    },
+                    defaultContent: '',
+                    "render": function(data) {
+                        if (data === null) {
+                            return `<label> </label>`;
+                        } else {
+                            return `<a  class="transform-none" href="mailto:${data}">${data}</a>`;
+                        }
+                    }
+                }, {
+                    "data": "student.birthdate",
+                    "render": function(data) {
+                        return (moment(data).format("LL"));
+                    }
+                }, {
+                    "data": "grade_9_info",
+                    "render": function(data, type, row, meta) {
+                        return `
                           <ul>
                             <li>
                                 Grade 9 : ${ row.grade_9_info }
@@ -348,30 +391,31 @@
                             </li>
                           </ul>
                         `;
+                    }
+                },
+                {
+                    "data": "details.project"
+                }, {
+                    "data": "apostille_country"
+                }, {
+                    "data": "status",
+                    "render": function(status) {
+                        if (status === 'pending')
+                            return `<td> Pending</td>`;
+                        if (status === 'approved')
+                            return `<td> Approved </td>`;
+                        if (status === 'paid')
+                            return `<td> Paid </td>`;
+                        if (status === 'completed')
+                            return `<td> Completed </td>`;
+                    }
+                }, {
+                    "data": "id",
+                    "render": function(id) {
+                        return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
+                    }
                 }
-            },
-            {
-                "data": "details.project"
-            }, {
-                "data": "apostille_country"
-            }, {
-                "data": "status",
-                "render": function(status) {
-                    if (status === 'pending')
-                        return `<td> Pending</td>`;
-                    if (status === 'approved')
-                        return `<td> Approved </td>`;
-                    if (status === 'paid')
-                        return `<td> Paid </td>`;
-                    if (status === 'completed')
-                        return `<td> Completed </td>`;
-                }
-            }, {
-                "data": "id",
-                "render": function(id) {
-                    return `<a href="{{ route('admin.view.graduation') }}/${id}/edit">Edit</a>`;
-                }
-            }]
+            ]
         });
 
         //custom payments datatable
@@ -581,7 +625,70 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     });
+    document.getElementById("button-notification")?.addEventListener("click", function() {
 
+        if ($("#notification-items").hasClass("d-block"))
+            $("#notification-items").removeClass("d-block");
+        else
+            $('#notification-items').addClass('d-block');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.recordtransfer.alert') }}",
+            type: "GET",
+
+            data: {
+
+
+
+            },
+            success: function(response) {
+                event.preventDefault();
+                console.log(response);
+
+                var html = '';
+                var no_notification = no_notification + `<p> No Notification</p>`;
+
+                const s = new Date();
+                const startDate = s.getDate();
+                response.forEach((record) => {
+                    if (Math.abs(startDate - new Date(record.created_at)
+                            .getDate()) > 7) {
+                        html = html + ` <li class="border-bottom mb-3 pb-3">
+                               
+                          <span class=" text-black"> Resend Record Transfer Request To School : ${record.school_name} </span><br>
+
+                                <a href="/admin/student/record/${record.student_profile_id}/${record.id}" class="btn btn-primary">Go To Record</a>
+
+                            </li>`
+                    }
+
+                })
+                if (response.length == 0) {
+                    $('#notifiy-list').html(no_notification);
+                } else {
+                    $('#notifiy-list').html(html);
+                }
+
+
+            },
+            error: function(response) {
+
+            }
+        });
+
+    })
+    document.body.addEventListener("click", function(e) {
+
+        var notification = document.getElementById("notification-container");
+        if (!notification.contains(e.target)) {
+
+            $("#notification-items").removeClass("d-block");
+        }
+
+    })
     // dashboard admin upload doc for student
     $("#add-documents").on("submit", function(event) {
         event.preventDefault();
@@ -801,6 +908,7 @@
     $("#studentForm1").on("submit", function(event) {
         event.preventDefault();
         var parent_id = $('#parent_id').val();
+        var students_id = $('#students_id').val();
         var first_name = $('#first_name').val();
         var middle_name = $('#middle_name').val();
         var last_name = $('#last_name').val();
@@ -822,6 +930,7 @@
 
             data: {
                 parent_id: parent_id,
+                students_id: students_id,
                 first_name: first_name,
                 middle_name: middle_name,
                 last_name: last_name,
@@ -1098,6 +1207,7 @@
                 },
                 success: function(response) {
                     location.reload();
+
                 },
                 error: function(response) {
 
@@ -1309,6 +1419,33 @@
         });
     });
 
+    //add-rep-notes
+    $("#add-rep-notes").on("submit", function(event) {
+        event.preventDefault();
+        var rep_message_val = $('#rep_message_val').val();
+        var rep_group_id = $('#rep_group_id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.create.rep.notes') }}",
+            type: "POST",
+
+            data: {
+                rep_message_val: rep_message_val,
+                rep_group_id: rep_group_id,
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(response) {
+
+            }
+        });
+    });
+
+
     //Add student enrollment
     $("#add-new-enrollments").on("submit", function(event) {
         event.preventDefault();
@@ -1362,6 +1499,7 @@
             }
         });
     }
+
     // assign Record of Dashboard For Super Admin
     $("#assign-form").on("submit", function(event) {
         console.log('created');
@@ -1634,7 +1772,7 @@
                 apostille_country_gard
             },
             success: function(response) {
-                // location.reload();
+                location.reload();
             },
             error: function(response) {
 
@@ -1674,6 +1812,87 @@
 
         });
     });
+    //representative groups
+    $('#choose-rep').on('submit', function(event) {
+        event.preventDefault();
+        var choosed_rep_id = $('#choosed_rep_id').val();
+        var parent_Id = $('#parent_Id').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.representative') }}",
+            type: "POST",
+
+            data: {
+                choosed_rep_id,
+                parent_Id
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
+    // add amount to rep
+    $('#add-rep-amount').on('submit', function(event) {
+        event.preventDefault();
+        var rep_id = $('#rep_id').val();
+        var rep_amount = $('#rep_amount').val();
+        var rep_message_text = $('#rep_message_text').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.amount.representative') }}",
+            type: "POST",
+
+            data: {
+                rep_id,
+                rep_amount,
+                rep_message_text
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
+    $('#add-rep-doc').on('submit', function(event) {
+        event.preventDefault();
+        var rep_id = $('#rep_id').val();
+        var rep_doc_note = $('#rep_doc_note').val();
+
+
+        data = new FormData();
+        data.append('file', $('#file')[0].files[0]);
+        data.append('rep_id', rep_id);
+        data.append('rep_doc_note', rep_doc_note);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.rep.documents') }}",
+            processData: false,
+            contentType: false,
+            type: "POST",
+            data: data,
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+
+    });
+
 
     // check the archieve status
     function archieve() {
@@ -1718,6 +1937,175 @@
             document.getElementById("end_date_of_enrollment").value = "";
         }
     });
+    // for report validating start and end date 
+    $("#report_to").change(function() {
+        var startDate = document.getElementById("report_from").value;
+        var endDate = document.getElementById("report_to").value;
+
+        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(
+                endDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("report_to").value = "";
+        }
+        if ((Date.parse(startDate) == Date.parse(endDate))) {
+            alert("End date and Start date cann't be same");
+            document.getElementById("report_to").value = "";
+        }
+    });
+
+    function detailOrders(event) {
+        console.log('hi');
+        $("#paymeny_history_wrapper_admin").html("")
+        var trans_id = $(event).data("id");
+        console.log(trans_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.get.orderdetails') }}",
+            type: "POST",
+
+            data: {
+                transaction_id: trans_id
+            },
+            success: function(response) {
+                console.log(response);
+                var html = '';
+                if (orders.length) {
+                    console.log(response.orders);
+                    let html = '';
+                    response.orders.forEach(element => {
+                        let url = "";
+                        if (element.related_to == "Transcript Ordered") {
+                            url = '/admin/transcript-edit/payments/' + element.item_type_id
+                        }
+                        if (element.related_to == "Graduation Ordered") {
+                            url = '/admin/transcript-edit/payments/' + element.item_type_id
+                        }
+                        if (element.related_to == "Student Enrolled") {
+                            url = '/admin/edit-payment-status/' + element.item_type_id
+                        }
+                        if (element.related_to == "Custom Payment Ordered") {
+                            url = '/admin/custom-payments/' + element.item_type_id
+                        }
+                        if (element.related_to == "Transcript Edit Ordered") {
+                            url = '/admin/transcript-edit/payments/' + element.item_type_id
+                        }
+                        if (element.related_to == "Postage Ordered") {
+                            url = '/admin/edit-postage/' + element.item_type_id
+                        }
+                        if (element.related_to == "Notarization/Appostile Ordered") {
+                            url = '/admin/edit-notarization/' + element.item_type_id
+                        }
+                        if (element.related_to == "Custom Letter") {
+                            url = '/admin/edit-customletter/' + element.item_type_id
+                        }
+                        if (element.related_to == "Personal Consulatation Ordered") {
+                            url = '/admin/edit-conultation/' + element.item_type_id
+                        }
+
+                        html += `<tr>
+                        <td>${element.linked_to}</td>
+                        <td><a href="${url}">${element.related_to}</a></td>
+                       <td> ${element.amount} </td>
+                       </tr>`
+                    });
+                    $("#paymeny_history_wrapper_admin").html(html)
+                }
+            },
+            error: function(response) {
+
+
+            }
+        });
+
+    }
+
+    $("#btn-reset").click(function() {
+        document.getElementById("navbar_search-form").reset();
+    });
+
+
+    $('#add_new_rep').on('submit', function(event) {
+        event.preventDefault();
+        var rep_type = $('#rep_type').val();
+        var parent_Id = $('#parent_Id').val();
+        var rep_country = $('#rep_country').val();
+        var rep_city = $('#rep_city').val();
+        var rep_name = $('#rep_name').val();
+        var rep_email = $('#rep_email').val();
+        var rep_phone = $('#rep_phone').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.add.representative') }}",
+            type: "POST",
+
+            data: {
+                rep_type,
+                parent_Id,
+                rep_country,
+                rep_city,
+                rep_name,
+                rep_email,
+                rep_phone
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
+
+
+    //edit rep details
+
+
+    $('#repForm').on('submit', function(event) {
+        event.preventDefault();
+        var edit_rep_id = $('#edit_rep_id').val();
+        var edit_rep_type = $('#edit_rep_type').val();
+        var edit_parent_id = $('#edit_parent_id').val();
+        var edit_rep_country = $('#edit_rep_country').val();
+        var edit_rep_city = $('#edit_rep_city').val();
+        var edit_rep_name = $('#edit_rep_name').val();
+        var edit_rep_email = $('#edit_rep_email').val();
+        var edit_rep_phone = $('#edit_rep_phone').val();
+        var terms_of_org = $('#terms_of_org').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.update.representative') }}",
+            type: "POST",
+
+            data: {
+                edit_rep_id,
+                edit_rep_type,
+                edit_parent_id,
+                edit_rep_country,
+                edit_rep_city,
+                edit_rep_name,
+                edit_rep_email,
+                edit_rep_phone,
+                terms_of_org,
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(response) {
+
+
+            }
+        });
+    });
+
+
 
     /////pagination
     $(document).ready(function() {
@@ -1744,13 +2132,18 @@
                     '</select> results'
             }
         })
+
     });
 
 
+    /////siderbar
+    var url = window.location;
+    $('nav .nav-item a').removeClass('active');
+    $('nav .nav-item a[href="' + url + '"]').addClass('active');
 
     //// table enable 
 
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("sampleForm");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -1759,7 +2152,7 @@
             elements[i].disabled = true;
         }
     })
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("studentForm1");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -1768,7 +2161,7 @@
             elements[i].disabled = true;
         }
     })
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("orderForm1");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -1777,7 +2170,7 @@
             elements[i].disabled = true;
         }
     })
-    document.querySelector(".js-cancel").addEventListener("click", () => {
+    document.querySelector(".js-cancel")?.addEventListener("click", () => {
         var form = document.getElementById("sampleForm");
         form.classList.add("is-readonly");
         form.classList.remove("is-editing");
@@ -1891,7 +2284,7 @@
         });
     });
     // for graduation hide and show payment mode inaccordance to status
-    document.getElementById("status-graduation").addEventListener("change", function() {
+    document.getElementById("status-graduation")?.addEventListener("change", function() {
 
 
         var value = this.value;
@@ -1917,7 +2310,7 @@
         $("#custom_letter_amount").val(quantity * 35);
     }
 
-    document.getElementById("custom_letter_status").addEventListener("change", function() {
+    document.getElementById("custom_letter_status")?.addEventListener("change", function() {
 
         var value = this.value;
         console.log(value);
@@ -1927,9 +2320,9 @@
         } else {
             $("#payment-div").hide();
             $("#transction-div").hide();
-
         }
     })
+
 
     function calculateType() {
         var start_date = $('#order-start_date').val();
@@ -1957,7 +2350,12 @@
     }
 
 
-    document.getElementById("order_detail_val").addEventListener("change", function() {
+
+
+
+
+
+    document.getElementById("order_detail_val")?.addEventListener("change", function() {
         var elem = this;
         var value = this.value;
         $("#order-detail_transcript").hide();
@@ -2040,7 +2438,7 @@
 
     document.querySelectorAll(".paymentDisplay").
     forEach((element) => {
-        element.addEventListener("change", function() {
+        element?.addEventListener("change", function() {
             var value = this.value;
             if (value == "paid") {
                 $(".transction-div").show();
@@ -2063,7 +2461,7 @@
         }
     });
 
-    document.getElementById("postage_country").addEventListener("change", function() {
+    document.getElementById("postage_country")?.addEventListener("change", function() {
 
         var value = this.value;
         if (value == "India") {
@@ -2181,6 +2579,54 @@
         });
     }
 
+    function updateRecord() {
+        var record_id = $('#record_id').val();
+        var record_student_id = $('#record_student_id').val();
+        var parent_id = $('#record_parentid').val();
+        var record_student_name = $('#record_student_name').val();
+        var school_name = $('#record_school_name').val();
+        var record_school_email = $('#record_school_email').val();
+        var school_fax_number = $('#school_fax_number').val();
+        var phone_number = $('#school_phone_number').val();
+        var street_address = $('#school_street_address').val();
+        var city = $('#school_city').val();
+        var state = $('#school_state').val();
+        var zip_code = $('#school_zip_code').val();
+        var country = $('#school_country').val();
+        var last_grade = $('#last_grade_in').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('admin.update.record') }}",
+            type: "POST",
+
+            data: {
+                parent_id,
+                record_id,
+                record_student_id,
+                record_student_name,
+                school_name,
+                record_school_email,
+                school_fax_number,
+                phone_number,
+                street_address,
+                city,
+                state,
+                zip_code,
+                country,
+                last_grade
+            },
+            success: function(response) {
+
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
     function getCountryValnotar() {
         var countryname = $('#shipping_country').val();
         $.ajax({
@@ -2226,6 +2672,8 @@
         });
     }
 
+
+
     function getApostilleAmount() {
         var quantity = $('#apostille_quantity').val();
         var amount = 75;
@@ -2242,6 +2690,20 @@
 
     }
 
+    function getConsulatationAmount() {
+        console.log('hi')
+        var hours = $('#consul_quantity').val();
+        var total = hours * 80;
+        $("#consul_amount").val(total);
+    }
+
+    function getTotalTranscript() {
+        var amount = $('#amount').val();
+        var quantity = $('#quantity').val();
+        var total = amount * quantity;
+        $("#total_val").val(total);
+    }
+
     function getTotal() {
         var type = $('#order_detail_val').val();
         if (type == 'order-detail_OrderPostage') {
@@ -2252,67 +2714,22 @@
         }
 
 
-        function getTotalTranscript() {
-            var amount = $('#amount').val();
-            var quantity = $('#quantity').val();
-            var total = amount * quantity;
-            $("#total_val").val(total);
-        }
 
-        function getConsulatationAmount() {
-            var hours = $('#consul_quantity').val();
-            var total = hours * 80;
-            $("#consul_amount").val(total);
-        }
 
-        function updateRecord() {
-            var record_id = $('#record_id').val();
-            var record_student_id = $('#record_student_id').val();
-            var parent_id = $('#record_parentid').val();
-            var record_student_name = $('#record_student_name').val();
-            var school_name = $('#record_school_name').val();
-            var record_school_email = $('#record_school_email').val();
-            var school_fax_number = $('#school_fax_number').val();
-            var phone_number = $('#school_phone_number').val();
-            var street_address = $('#school_street_address').val();
-            var city = $('#school_city').val();
-            var state = $('#school_state').val();
-            var zip_code = $('#school_zip_code').val();
-            var country = $('#school_country').val();
-            var last_grade = $('#last_grade_in').val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ route('admin.update.record') }}",
-                type: "POST",
 
-                data: {
-                    parent_id,
-                    record_id,
-                    record_student_id,
-                    record_student_name,
-                    school_name,
-                    record_school_email,
-                    school_fax_number,
-                    phone_number,
-                    street_address,
-                    city,
-                    state,
-                    zip_code,
-                    country,
-                    last_grade
-                },
-                success: function(response) {
-
-                    location.reload();
-                },
-                error: function(response) {
-
-                }
-            });
-        }
     }
+    $('#search-country').editableSelect({
+        // enable filter
+        filter: true,
+    });
+
+    // $('#search-countries').select2({
+    // // ajax: {
+    // //     url: 'search/family-filter',
+    // //     dataType: 'json'
+    // //     // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    // // }
+    // });
 
 </script>
 

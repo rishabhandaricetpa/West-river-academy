@@ -91,6 +91,11 @@
   height: 32px;
   margin-left: 5px;
 }
+.admin-notification-container{
+  .notification-wrap {               
+    margin-right: 20px !important;
+  }
+}
 
 .notification {
   background-color: $white;
@@ -208,8 +213,7 @@
   }
 
 ////// parent-sudent nav header
-.student-detail_documents,
-.main-nav_header {
+.student-detail_documents {
   overflow-x: scroll;
 }
 .student-detail_documents {
@@ -229,6 +233,7 @@
       a {
         padding: 10px 20px;
         color: white;
+        font-size: .9rem;
         transition: .3s all;
         text-transform: uppercase;
       }
@@ -243,12 +248,14 @@
 
       img {
         margin-right: 0 !important;
+       
       }
     }
 
     li {
       img {
         margin-right: 20px;
+        width: 30px;   
       }
     }
   }
@@ -261,4 +268,7 @@
   &:hover {
     border: 2px solid #ff9900;
   }
+}
+#admin-header{   
+  flex-wrap: wrap!important;
 }

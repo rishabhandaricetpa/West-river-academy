@@ -2102,6 +2102,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ConfirmationInfo",
@@ -2147,6 +2149,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
 //
 //
 //
@@ -2278,6 +2282,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeForeignCourse: function removeForeignCourse(index) {
       this.form.anotherCourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/choose-another/" + this.student_id + "/" + this.trans_id;
     }
   }
 });
@@ -2299,6 +2306,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2430,6 +2445,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeEnglishCourse: function removeEnglishCourse(index) {
       this.form.englishCourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/social-studies/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -2451,6 +2469,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
 //
 //
 //
@@ -2582,6 +2603,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeForeignCourse: function removeForeignCourse(index) {
       this.form.foreignCourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/another/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -2603,6 +2627,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
 //
 //
 //
@@ -2734,6 +2761,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeHealthCourse: function removeHealthCourse(index) {
       this.form.healthCourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/foreign/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -2757,6 +2787,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -2888,6 +2920,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     removeEnglishCourse: function removeEnglishCourse(index) {
       console.log(index);
       this.form.mathscourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/science/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -2903,6 +2938,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3027,6 +3069,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeEnglishCourse: function removeEnglishCourse(index) {
       this.form.physicalEducation.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/health/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -3048,6 +3093,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
 //
 //
 //
@@ -3181,6 +3228,9 @@ __webpack_require__.r(__webpack_exports__);
     removeEnglishCourse: function removeEnglishCourse(index) {
       console.log(index);
       this.form.sciencecourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/physical-education/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -3196,6 +3246,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3322,6 +3379,9 @@ __webpack_require__.r(__webpack_exports__);
     removeEnglishCourse: function removeEnglishCourse(index) {
       console.log(index);
       this.form.socialStudiesCourse.splice(index, 1);
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/mathematics/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -9415,6 +9475,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ElectiveCourse",
   data: function data() {
@@ -9557,6 +9620,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
     }
   }
 });
@@ -9572,6 +9638,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -9850,6 +9919,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/mathematics-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -9865,6 +9937,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -10164,6 +10239,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/anotherCourse-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -10179,6 +10257,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -10477,6 +10557,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/foreignCourse-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -10492,6 +10575,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -10805,6 +10891,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/science-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -10820,6 +10909,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -11119,6 +11210,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/socialStudies/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -11134,6 +11228,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -11433,6 +11529,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/healthCourse-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -11448,6 +11547,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -11746,6 +11847,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextCourse: function nextCourse() {
       window.location = "/another-grade-transcript/" + this.student_id + "/" + this.trans_id + "/" + this.transcript_id;
+    },
+    skipCourse: function skipCourse() {
+      window.location = "/physicalEducation-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   }
 });
@@ -40545,227 +40649,230 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row confirmation-letter__options" }, [
-        _c("h3", { staticClass: "mb-3" }, [
-          _vm._v(
-            "You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter."
-          )
-        ]),
-        _vm._v(" "),
-        _vm.countryname === "Hungary"
-          ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-              _c("label", { staticClass: "container" }, [
-                _vm._v("Birth City\n                         "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.isDobCity,
-                      expression: "form.isDobCity"
-                    }
-                  ],
-                  attrs: { type: "checkbox", name: "isDobCity" },
-                  domProps: {
-                    checked: Array.isArray(_vm.form.isDobCity)
-                      ? _vm._i(_vm.form.isDobCity, null) > -1
-                      : _vm.form.isDobCity
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.form.isDobCity,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.form, "isDobCity", $$a.concat([$$v]))
+      _c("div", { staticClass: "row pt-3" }, [
+        _c("div", { staticClass: "col-12 confirmation-letter__options" }, [
+          _c("h3", { staticClass: "mb-3" }, [
+            _vm._v(
+              "You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter."
+            )
+          ]),
+          _vm._v(" "),
+          _vm.countryname === "Hungary"
+            ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+                _c("label", { staticClass: "container" }, [
+                  _vm._v("Birth City\n                         "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.isDobCity,
+                        expression: "form.isDobCity"
+                      }
+                    ],
+                    attrs: { type: "checkbox", name: "isDobCity" },
+                    domProps: {
+                      checked: Array.isArray(_vm.form.isDobCity)
+                        ? _vm._i(_vm.form.isDobCity, null) > -1
+                        : _vm.form.isDobCity
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.form.isDobCity,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.form, "isDobCity", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.form,
+                                "isDobCity",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.form,
-                              "isDobCity",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.form, "isDobCity", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.form, "isDobCity", $$c)
                       }
                     }
-                  }
-                }),
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "isDobCity" })
+                ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "isDobCity" })
-              ]),
-              _vm._v(" "),
-              _c("label", { staticClass: "container" }, [
-                _vm._v("Mother's Maiden Name\n                         "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.IsMotherName,
-                      expression: "form.IsMotherName"
-                    }
-                  ],
-                  attrs: { type: "checkbox", name: "IsMotherName" },
-                  domProps: {
-                    checked: Array.isArray(_vm.form.IsMotherName)
-                      ? _vm._i(_vm.form.IsMotherName, null) > -1
-                      : _vm.form.IsMotherName
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.form.IsMotherName,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(
-                              _vm.form,
-                              "IsMotherName",
-                              $$a.concat([$$v])
-                            )
+                _c("label", { staticClass: " pl-0 container" }, [
+                  _vm._v("Mother's Maiden Name\n                         "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.IsMotherName,
+                        expression: "form.IsMotherName"
+                      }
+                    ],
+                    attrs: { type: "checkbox", name: "IsMotherName" },
+                    domProps: {
+                      checked: Array.isArray(_vm.form.IsMotherName)
+                        ? _vm._i(_vm.form.IsMotherName, null) > -1
+                        : _vm.form.IsMotherName
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.form.IsMotherName,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.form,
+                                "IsMotherName",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.form,
+                                "IsMotherName",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
                         } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.form,
-                              "IsMotherName",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                          _vm.$set(_vm.form, "IsMotherName", $$c)
                         }
-                      } else {
-                        _vm.$set(_vm.form, "IsMotherName", $$c)
                       }
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "IsMotherName" })
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "IsMotherName" })
+                ])
               ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("label", { staticClass: "container" }, [
-          _vm._v("Student ID\n                         "),
+            : _vm._e(),
+          _vm._v(" "),
+          _c("label", { staticClass: "pl-0 container" }, [
+            _vm._v("Student ID\n                         "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.isStudentId,
+                  expression: "form.isStudentId"
+                }
+              ],
+              attrs: { type: "checkbox", name: "isStudentId" },
+              domProps: {
+                checked: Array.isArray(_vm.form.isStudentId)
+                  ? _vm._i(_vm.form.isStudentId, null) > -1
+                  : _vm.form.isStudentId
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.form.isStudentId,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.form, "isStudentId", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.form,
+                          "isStudentId",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.form, "isStudentId", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "isStudentId" })
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "pl-0 container" }, [
+            _vm._v("Grade\n                         "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.isGrade,
+                  expression: "form.isGrade"
+                }
+              ],
+              attrs: { type: "checkbox", name: "isGrade" },
+              domProps: {
+                checked: Array.isArray(_vm.form.isGrade)
+                  ? _vm._i(_vm.form.isGrade, null) > -1
+                  : _vm.form.isGrade
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.form.isGrade,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.form, "isGrade", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.form,
+                          "isGrade",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.form, "isGrade", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "isGrade" })
+          ]),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.form.isStudentId,
-                expression: "form.isStudentId"
+                value: _vm.form.enrolment_id,
+                expression: "form.enrolment_id"
               }
             ],
-            attrs: { type: "checkbox", name: "isStudentId" },
-            domProps: {
-              checked: Array.isArray(_vm.form.isStudentId)
-                ? _vm._i(_vm.form.isStudentId, null) > -1
-                : _vm.form.isStudentId
-            },
+            attrs: { type: "hidden", name: "enrolment_id" },
+            domProps: { value: _vm.form.enrolment_id },
             on: {
-              change: function($event) {
-                var $$a = _vm.form.isStudentId,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 &&
-                      _vm.$set(_vm.form, "isStudentId", $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      _vm.$set(
-                        _vm.form,
-                        "isStudentId",
-                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                      )
-                  }
-                } else {
-                  _vm.$set(_vm.form, "isStudentId", $$c)
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
+                _vm.$set(_vm.form, "enrolment_id", $event.target.value)
               }
             }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "isStudentId" })
+          })
         ]),
         _vm._v(" "),
-        _c("label", { staticClass: "container" }, [
-          _vm._v("Grade\n                         "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.isGrade,
-                expression: "form.isGrade"
-              }
-            ],
-            attrs: { type: "checkbox", name: "isGrade" },
-            domProps: {
-              checked: Array.isArray(_vm.form.isGrade)
-                ? _vm._i(_vm.form.isGrade, null) > -1
-                : _vm.form.isGrade
-            },
-            on: {
-              change: function($event) {
-                var $$a = _vm.form.isGrade,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 && _vm.$set(_vm.form, "isGrade", $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      _vm.$set(
-                        _vm.form,
-                        "isGrade",
-                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                      )
-                  }
-                } else {
-                  _vm.$set(_vm.form, "isGrade", $$c)
-                }
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "isGrade" })
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.form.enrolment_id,
-              expression: "form.enrolment_id"
-            }
-          ],
-          attrs: { type: "hidden", name: "enrolment_id" },
-          domProps: { value: _vm.form.enrolment_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.form, "enrolment_id", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
+        _vm._m(0)
+      ])
     ]
   )
 }
@@ -40825,18 +40932,24 @@ var render = function() {
           { key: anotherCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeForeignCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeForeignCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
@@ -41030,6 +41143,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -41077,18 +41203,24 @@ var render = function() {
           { key: englishCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeEnglishCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeEnglishCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
@@ -41282,6 +41414,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -41329,18 +41474,24 @@ var render = function() {
           { key: foreignCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeForeignCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top ",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeForeignCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
@@ -41534,6 +41685,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -41581,18 +41745,24 @@ var render = function() {
           { key: healthCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeHealthCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeHealthCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
@@ -41786,6 +41956,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -41830,18 +42013,24 @@ var render = function() {
       _vm._l(_vm.form.mathscourse, function(maths, index) {
         return _c("div", { key: maths.id, staticClass: "seperator mt-4" }, [
           _c("div", { staticClass: "position-relative" }, [
-            _c(
-              "span",
-              {
-                staticClass: "remove",
-                on: {
-                  click: function($event) {
-                    return _vm.removeEnglishCourse(index)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fas fa-times" })]
-            ),
+            _c("p", { staticClass: "delete-course" }, [
+              _vm._v("Delete Course ")
+            ]),
+            _vm._v(" "),
+            index > 0
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "remove place-top",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeEnglishCourse(index)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-times " })]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
               _c("div", { staticClass: "col-sm-6" }, [
@@ -42023,6 +42212,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -42070,18 +42272,24 @@ var render = function() {
           { key: physicalEducation.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeEnglishCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeEnglishCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
@@ -42279,6 +42487,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -42323,18 +42544,24 @@ var render = function() {
       _vm._l(_vm.form.sciencecourse, function(science, index) {
         return _c("div", { key: science.id, staticClass: "seperator mt-4" }, [
           _c("div", { staticClass: "position-relative" }, [
-            _c(
-              "span",
-              {
-                staticClass: "remove",
-                on: {
-                  click: function($event) {
-                    return _vm.removeEnglishCourse(index)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fas fa-times" })]
-            ),
+            _c("p", { staticClass: "delete-course" }, [
+              _vm._v("Delete Course ")
+            ]),
+            _vm._v(" "),
+            index > 0
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "remove place-top",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeEnglishCourse(index)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-times" })]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
               _c("div", { staticClass: "col-sm-6" }, [
@@ -42516,6 +42743,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -42566,18 +42806,24 @@ var render = function() {
           { key: socialStudiesCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeEnglishCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeEnglishCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group d-sm-flex mt-2r row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
@@ -42774,6 +43020,19 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("Continue")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -51793,26 +52052,26 @@ var render = function() {
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _vm.errors.length
-              ? _c("p", [
-                  _c(
-                    "ul",
-                    _vm._l(_vm.errors, function(error) {
-                      return _c(
-                        "li",
-                        { key: error.id, staticStyle: { color: "red" } },
-                        [_vm._v("  " + _vm._s(error) + " ")]
-                      )
-                    }),
-                    0
-                  )
-                ])
-              : _vm._e()
+            ])
           ]
         )
       }),
+      _vm._v(" "),
+      _vm.errors.length
+        ? _c("p", [
+            _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c(
+                  "li",
+                  { key: error.id, staticStyle: { color: "red" } },
+                  [_vm._v("  " + _vm._s(error) + " ")]
+                )
+              }),
+              0
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "mt-2r" }, [
         _c(
@@ -51915,18 +52174,20 @@ var render = function() {
                 { key: anotherCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove  place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c("span", {
+                          staticClass: "remove  place-top",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeCourse(index)
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                        })
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -52338,6 +52599,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n        Continue\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],
@@ -52416,18 +52690,24 @@ var render = function() {
           { key: englishCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "remove place-top",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeCourse(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-times" })]
-              ),
+              _c("p", { staticClass: "delete-course" }, [
+                _vm._v("Delete Course ")
+              ]),
+              _vm._v(" "),
+              index > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "remove place-top",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeCourse(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7 px-0" }, [
                 _c(
@@ -52781,6 +53061,19 @@ var render = function() {
             attrs: { type: "submit" }
           },
           [_vm._v("\n      Continue\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary float-right",
+            on: {
+              click: function($event) {
+                return _vm.skipCourse()
+              }
+            }
+          },
+          [_vm._v("Skip Course")]
         )
       ])
     ],
@@ -52852,18 +53145,24 @@ var render = function() {
                 { key: foreignCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "remove place-top",
+                            on: {
+                              click: function($event) {
+                                return _vm.removeCourse(index)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-times" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -53265,6 +53564,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n      Continue\n    ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],
@@ -53345,18 +53657,24 @@ var render = function() {
                 { key: healthCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove  place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "remove  place-top",
+                            on: {
+                              click: function($event) {
+                                return _vm.removeCourse(index)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-times" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -53758,6 +54076,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n        Continue\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],
@@ -53841,18 +54172,24 @@ var render = function() {
                 { key: socialsciencecourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "remove place-top",
+                            on: {
+                              click: function($event) {
+                                return _vm.removeCourse(index)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-times" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -54278,6 +54615,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n        Continue\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],
@@ -54358,18 +54708,24 @@ var render = function() {
                 { key: mathscourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "remove place-top",
+                            on: {
+                              click: function($event) {
+                                return _vm.removeCourse(index)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-times" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -54771,6 +55127,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n        Continue\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],
@@ -54857,18 +55226,24 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "remove place-top",
+                            on: {
+                              click: function($event) {
+                                return _vm.removeCourse(index)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-times" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -55310,6 +55685,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n        Continue\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],
@@ -55390,18 +55778,20 @@ var render = function() {
                 { key: scienceCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "remove place-top",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCourse(index)
+                    _c("p", { staticClass: "delete-course" }, [
+                      _vm._v("Delete Course ")
+                    ]),
+                    _vm._v(" "),
+                    index > 0
+                      ? _c("span", {
+                          staticClass: "remove place-top",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeCourse(index)
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-times" })]
-                    ),
+                        })
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-7 px-0" }, [
                       _c(
@@ -55803,6 +56193,19 @@ var render = function() {
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n        Continue\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.skipCourse()
+                    }
+                  }
+                },
+                [_vm._v("Skip Course")]
               )
             ])
           ],

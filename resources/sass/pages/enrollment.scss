@@ -1,5 +1,5 @@
 .main-sidebar {
-  width: 180px;
+  width: 200px;//180px;
   height: 100vh;
   overflow-x: visible !important;
   overflow-y: auto;
@@ -37,7 +37,7 @@
 }
 
 .main-content {
-  width: calc(100% - 180px);
+  width: calc(100% - 200px);
 
   .form-content {
     max-width: 97%;

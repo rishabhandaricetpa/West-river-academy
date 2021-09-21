@@ -11,9 +11,11 @@
       :key="socialsciencecourse.id"
     >
       <div class="position-relative">
-        <span class="remove place-top" @click="removeCourse(index)"
+      <p v-if="index>0" class="delete-course">Delete Course </p>
+        <span v-if="index>0" class="remove place-top" @click="removeCourse(index)"
           ><i class="fas fa-times"></i>
-        </span>
+          
+        </span>  
         <div class="col-sm-7 px-0">
 
           <div class="form-group d-sm-flex  align-items-center">
@@ -148,6 +150,7 @@
       <button type="submit" class="btn btn-primary ml-4 float-right">
         Continue
       </button>
+         <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
   </div>
@@ -324,6 +327,11 @@ export default {
             this.trans_id +
             "/" +
             this.transcript_id;
+    },
+    skipCourse() {
+    
+   window.location =
+        "/science-transcript/" + this.student_id + "/" + this.transcript_id;
     }
   },
  

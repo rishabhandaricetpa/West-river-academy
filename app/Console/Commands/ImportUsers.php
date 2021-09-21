@@ -58,16 +58,18 @@ class ImportUsers extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
+                if ($cells[13] != '' && $cells[13] != 'x' && $cells[13] != 'xx' && $cells[13] != 'xxx') {
 
-                User::create(
-                    [
-                        'name' => $cells[14] = null ? "Test Name" :  $cells[14],
-                        'email' => $cells[13],
-                        'legacy_name' => $cells[11],
-                        'password' => Hash::make('12345678'),
-                        'email_verified_at'=>$date
-                    ]
-                );
+                    User::create(
+                        [
+                            'name' => $cells[14] = '' ? "Test Name" :  $cells[14],
+                            'email' => $cells[13],
+                            'legacy_name' => $cells[11],
+                            'password' => Hash::make('12345678'),
+                            'email_verified_at' => $date
+                        ]
+                    );
+                }
             }
         }
 

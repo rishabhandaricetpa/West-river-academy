@@ -10,7 +10,8 @@
             <div class="form-wrap border py-5 px-25 position-relative">
                 <form class="row align-items-center" method="post"
                     action="{{ route('admin.recordReceived', $studentRecord->id) }}" enctype="multipart/form-data">
-
+                    <a href="{{ route('admin.parent.edit', $studentRecord->parent_profile_id) }}"
+                        class="btn btn-primary  ">View Parent</a>
                     <div class="col-12 text-sm-right">
                         @if ($studentRecord->request_status !== 'Record Received')
                             <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Records Received</button>
@@ -51,6 +52,7 @@
                     </h3>
 
                 @endif
+
                 <form method="post" action="{{ route('admin.sendRecordToSchool', $studentRecord->student_profile_id) }}">
                     @csrf
                     <div class="card-body p-0 row">
@@ -59,7 +61,7 @@
                         <div class="form-group col-sm-6">
                             <label>Student Name <sup>*</sup></label>
                             <input class="form-control" id="name" value="{{ $studentRecord['student']['fullname'] }}"
-                                name="name" id="record_student_name" required>
+                                name="name" id="record_student_name" required readonly>
                         </div>
                         @if ($studentEnrollmentYear)
                             @foreach ($studentEnrollmentYear as $year)
@@ -123,18 +125,18 @@
                     <!-- /.card-body -->
 
                     <div class="row">
-                        <div class="col-md-6 mt-4">
-                            <a class="btn btn-primary" onclick="updateRecord()">Update</a>
+                        <div class="col-12 mt-4">
+                            <a href="#" onclick="updateRecord()" class="btn btn-primary my-1">Update</a>
                             <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                class="btn btn-primary">Download & Preview Records</a>
+                                class="btn btn-primary my-1">Download & Preview Request</a>
                             <button type="submit"
                                 onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
-                                class="btn btn-primary">Send Records To School</button>
+                                class="btn btn-primary my-1">Send Record Request To School</button>
                             <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                                class=" btn btn-primary">Re-send Request</a>
+                                class=" btn btn-primary my-1">Re-send Request</a>
 
 
-                            <a onclick="goBack()" class=" btn btn-primary">Back</a>
+                            <a onclick="goBack()" class=" btn btn-primary my-1">Back</a>
                         </div>
 
                         <div class="col-md-6 mt-4">

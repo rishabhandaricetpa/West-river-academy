@@ -11,6 +11,7 @@ use App\Models\GraduationPayment;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\TranscriptK8;
+use App\Models\Transcript;
 use App\Models\TranscriptPayment;
 use App\Models\User;
 use App\Models\OrderPostage;
@@ -22,6 +23,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Apostille;
+use App\Models\EnrollmentPeriods;
 
 class CartController extends Controller
 {
@@ -41,13 +43,11 @@ class CartController extends Controller
     public function index()
     {
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id);
-
         return view('cart', compact('enroll_fees'));
     }
 
     public function store(Request $request)
     {
-        // dd($request);
         try {
             DB::beginTransaction();
             $data = $request->all();
@@ -63,11 +63,13 @@ class CartController extends Controller
 
                     for ($i = 0; $i < count($data['eps']); $i++) {
                         $item_id = $data['eps'][$i];
+                        $student_data = EnrollmentPeriods::whereId($item_id)->first();
                         if (!Cart::where('item_id', $item_id)->where('item_type', 'enrollment_period')->exists()) {
                             Cart::create([
                                 'item_type' => 'enrollment_period',
                                 'item_id' => $item_id,
                                 'parent_profile_id' => $this->parent_profile_id,
+                                'student_profile_id' => $student_data->student_profile_id,
                             ]);
                         }
                     }
@@ -80,7 +82,6 @@ class CartController extends Controller
                         ->where('parent_profile_id', $parent_profile_id)
                         ->with('graduation')
                         ->first();
-
                     if ($student) {
                         GraduationMailingAddress::create([
                             'graduation_id' => $student->graduation->id,
@@ -107,6 +108,7 @@ class CartController extends Controller
                                 'item_type' => 'graduation',
                                 'item_id' => $student->graduation->id,
                                 'parent_profile_id' => $parent_profile_id,
+                                'student_profile_id' => $student->id,
                             ]);
                         }
                     } else {
@@ -117,22 +119,36 @@ class CartController extends Controller
                     }
                     break;
                 case 'transcript':
-                    $parent_profile_id = ParentProfile::getParentId();
-                    $student = StudentProfile::whereId($data['student_id'])
-                        ->where('parent_profile_id', $parent_profile_id)
-                        ->with('transcript')
-                        ->first();
-                    $amount = FeesInfo::getFeeAmount('transcript');
-                    if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
-                        Cart::create([
-                            'item_type' => 'transcript',
-                            'item_id' => $request->get('transcript_id'),
-                            'parent_profile_id' => $parent_profile_id,
-                        ]);
+                    //change in transcript for purchasing multiple transcript together
+                    $transcript_id = $request->get('transcript_ids');
+                    $isstring = is_string($transcript_id);
+                    if ($isstring) {
+                        $transcript_ids[] = $request->get('transcript_ids');
+                    } else {
+                        $transcript_ids = $request->get('transcript_ids');
+                    }
+                    foreach ($transcript_ids as $trans_id) {
+                        $transcript_id = $trans_id;
+                        $student_id = Transcript::whereId($transcript_id)->first();
+
+                        $parent_profile_id = ParentProfile::getParentId();
+                        $student = StudentProfile::whereId($student_id->student_profile_id)
+                            ->where('parent_profile_id', $parent_profile_id)
+                            ->with('transcript')
+                            ->first();
+                        $amount = FeesInfo::getFeeAmount('transcript');
+                        if (!Cart::where('item_id', $request->get('transcript_id'))->where('item_type', 'transcript')->exists()) {
+                            Cart::create([
+                                'item_type' => 'transcript',
+                                'item_id' => $transcript_id,
+                                'parent_profile_id' => $parent_profile_id,
+                                'student_profile_id' => $student->id,
+                            ]);
+                        }
                     }
                     break;
                 case 'custom':
-                    $clearpendingPayments = CustomPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $customPaymentsData = CustomPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $request->get('amount'),
@@ -164,12 +180,13 @@ class CartController extends Controller
                             'item_type' => 'transcript_edit',
                             'item_id' => $request->get('transcript_id'),
                             'parent_profile_id' => $parent_profile_id,
+                            'student_profile_id' => $student->id,
                         ]);
                     }
                     break;
 
                 case 'postage':
-                    $clearpendingPayments = OrderPostage::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = $request->get('postage_charges') + $request->get('usa_shiiping');
                     $orderPostageData = OrderPostage::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -207,12 +224,12 @@ class CartController extends Controller
                         'zip_code' => $request['zip_code'],
                         'country' => $request['country_name'],
                         'apostille_country' =>  $request['apostille_country'],
-                        'transcript_doc' => $transcript_doc_total,
-                        'confirmation_doc' => $confirmation_doc_total,
-                        'custom_doc' => $custom_doc_total,
+                        'transcript_doc' => $request->get('transcript_quan'),
+                        'confirmation_doc' => $request->get('confirm_quan'),
+                        'custom_doc' => $request->get('custom_quan'),
                         'status' => 'pending',
                     ]);
-                    $amount = $request->get('notarization_due') + $request->get('postage_charges');
+                    $amount = $request->get('notarization_due') + $request->get('notarization_due1') + $request->get('notarization_due2') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'notarization_id' => $notarizationDetails->id,
@@ -230,8 +247,8 @@ class CartController extends Controller
                     }
                     break;
                 case 'apostille':
+
                     // $clearpendingPayments = Apostille::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->get();
-                    //   dd($clearpendingPayments);
                     $parent_profile_id = ParentProfile::getParentId();
                     $transcript_doc_total = json_encode($request->get('transcript_doc'));
                     $confirmation_doc_total = json_encode($request->get('confirmation_doc'));
@@ -248,13 +265,13 @@ class CartController extends Controller
                         'zip_code' => $request['zip_code'],
                         'country' => $request['country_name'],
                         'apostille_country' =>  $request['apostille_country'],
-                        'transcript_doc' => $transcript_doc_total,
-                        'confirmation_doc' => $confirmation_doc_total,
-                        'custom_doc' => $custom_doc_total,
+                        'transcript_doc' => $request->get('transcript_quan'),
+                        'confirmation_doc' => $request->get('confirm_quan'),
+                        'custom_doc' => $request->get('custom_quan'),
                         'status' => 'pending',
                     ]);
 
-                    $amount = $request->get('apostille_due') + $request->get('postage_charges');
+                    $amount = $request->get('apostille_due') + $request->get('apostille_due1') + $request->get('apostille_due2') + $request->get('postage_charges');
                     $notarizationData = NotarizationPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'apostille_id' => $apostilleDetails->id,
@@ -272,7 +289,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'custom_letter':
-                    $clearpendingPayments = CustomLetterPayment::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    CustomLetterPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = FeesInfo::getFeeAmount('custom_letter') * $request->get('quantity');
                     $customletterPaymentsData = CustomLetterPayment::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -292,7 +309,7 @@ class CartController extends Controller
                     }
                     break;
                 case 'order_consultation':
-                    $clearpendingPayments = OrderPersonalConsultation::where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
+                    $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', ParentProfile::getParentId())->delete();
                     $amount = $request->get('amount_due');
                     $orderConsultancyData = OrderPersonalConsultation::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
@@ -320,13 +337,11 @@ class CartController extends Controller
             DB::commit();
             return redirect('/cart');
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
 
             return redirect()->back();
         }
     }
-
     public function delete($id)
     {
         if (Cart::where('id', $id)->delete()) {

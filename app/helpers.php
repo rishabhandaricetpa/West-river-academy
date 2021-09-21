@@ -25,6 +25,9 @@ use App\Models\TransactionsMethod;
 use App\Models\Transcript;
 use App\Models\TranscriptPayment;
 use App\Models\UploadDocuments;
+use Illuminate\Support\Carbon;
+
+use function Clue\StreamFilter\fun;
 
 /**
  * Compare given route with current route and return output if they match.
@@ -177,7 +180,7 @@ function fetchTranscript9_12Details($transcriptData)
                         'score' => '-',
                         'name' => $course->subject->subject_name,
                         'credit' => $course->credit->credit,
-                        'groupBy' => 'Courses In Progres',
+                        'groupBy' => 'Courses In Progress',
                         'grade' => $transcript_courses->grade,
                         'type' => 'courseInProgress'
                     ]
@@ -400,7 +403,7 @@ function getEnrollmetForStudents($student_id)
 function getPaymentInformation($enrollment_ids)
 {
     $payment_info = DB::table('enrollment_periods')
-        ->whereIn('enrollment_payment_id', $enrollment_ids)
+        //  ->whereIn('enrollment_payment_id', $enrollment_ids)
         ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
         ->where('enrollment_payments.status', 'paid')
         ->get();
@@ -413,8 +416,8 @@ function getendallenrollmentes($student_id)
 {
     $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
     foreach ($enrollment_periods as $enrollment_period) {
-        $strtdate = 'Start Date: ' . Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M j, Y');
-        $enddate = 'End Date: ' . Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M j, Y');
+        $strtdate = 'Start Date: ' . \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M j, Y');
+        $enddate = 'End Date: ' . \Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M j, Y');
     }
     return $strtdate . '    ' . $enddate;
 }
@@ -433,25 +436,25 @@ function getOrderAmount($item_type, $item_code)
         $amount = TranscriptPayment::where('transcript_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "postage") {
-        $amount = OrderPostage::where('parent_profile_id', $item_code)->first();
+        $amount = OrderPostage::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "notarization") {
-        $amount = NotarizationPayment::where('notarization_id', $item_code)->first();
+        $amount = NotarizationPayment::whereNull('transcation_id')->where('notarization_id', $item_code)->first();
         if ($amount)
             return $amount->amount;
         else
             return false;
     } elseif ($item_type == "apostille") {
-        $amount = NotarizationPayment::where('apostille_id', $item_code)->first();
+        $amount = NotarizationPayment::whereNull('transcation_id')->where('apostille_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "custom_letter") {
-        $amount = CustomLetterPayment::where('parent_profile_id', $item_code)->first();
+        $amount = CustomLetterPayment::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "order_consultation") {
-        $amount = OrderPersonalConsultation::where('parent_profile_id', $item_code)->first();
+        $amount = OrderPersonalConsultation::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         return $amount->amount;
     } elseif ($item_type == "custom") {
-        $amount = CustomPayment::where('parent_profile_id', $item_code)->first();
+        $amount = CustomPayment::whereNull('transcation_id')->where('parent_profile_id', $item_code)->first();
         if ($amount)
             return ($amount->amount);
         else
@@ -499,6 +502,13 @@ function getOrders($transction_id)
     foreach ($transcript_payment as &$transcript_payments) {
         $transcript_payments = '$' . $transcript_payments;
     }
+    //order_postages
+
+    $postage = OrderPostage::whereIn('transcation_id', [$transction_id])->get();
+    $postage_payments = collect($postage)->pluck('amount')->toArray();
+    foreach ($postage_payments as &$postage_payment) {
+        $postage_payment = '$' . $postage_payment;
+    }
     // checking for order personal consultation
     $order = OrderPersonalConsultation::whereIn('transcation_id', [$transction_id])->get();
     $order_payment = collect($order)->pluck('amount')->toArray();
@@ -506,15 +516,15 @@ function getOrders($transction_id)
         $order_payments = '$' . $order_payments;
     }
 
-    $enrollment = count($enrollment_amount) > 0 ? 'Enrollment Payment :' . implode(", ", $enrollment_amount) : '';
-    $cl = count($custom_letter) > 0 ? 'Custom Letter : ' . implode(", ", $custom_letter_amt) : '';
-    $cp = count($custom_payment) > 0 ? 'Custom Payment : ' . implode(", ", $cp) : '';
-    $graduate = count($graduation_amount) > 0 ? 'Graduation Payment : ' . implode(',', $graduation_amount) : '';
-    $notarize = count($notarization_payment) > 0 ? 'Notarization Payment :' . implode(',', $notarization_payment) : '';
-    $transcript = count($transcript_payment) > 0 ? 'Transcript Payment :' . implode(',', $transcript_payment) : '';
-    $orderconsultation = count($order_payment) > 0 ? 'Personal Consultation:' . implode(',', $order_payment) : '';
-
-    return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation;
+    $enrollment = count($enrollment_amount) > 0 ? 'Enrollment Payment: ' . implode(", ", $enrollment_amount) : '';
+    $cl = count($custom_letter) > 0 ? 'Custom Letter: ' . implode(", ", $custom_letter_amt) : '';
+    $cp = count($custom_payment) > 0 ? 'Custom Payment: ' . implode(", ", $cp) : '';
+    $graduate = count($graduation_amount) > 0 ? 'Graduation Payment: ' . implode(',', $graduation_amount) : '';
+    $notarize = count($notarization_payment) > 0 ? 'Notarization Payment: ' . implode(',', $notarization_payment) : '';
+    $transcript = count($transcript_payment) > 0 ? 'Transcript Payment: ' . implode(',', $transcript_payment) : '';
+    $orderconsultation = count($order_payment) > 0 ? 'Personal Consultation: ' . implode(',', $order_payment) : '';
+    $orderpostage = count($postage_payments) > 0 ? 'Postage: ' . implode(',', $postage_payments) : '';
+    return $enrollment . ' ' . $cl . ' ' . $cp . ' ' . $graduate . ' ' . $notarize . ' ' . $transcript . ' ' . $orderconsultation . '  ' . $orderpostage;
 }
 
 
@@ -532,9 +542,21 @@ function getstatus($enrollment_period_id)
     }
 }
 
+//get family name 
+
+function getlegacyname($parent_id)
+{
+    $parent_date = ParentProfile::whereId($parent_id)->first();
+    if ($parent_date->p2_first_name) {
+        return  $parent_date->p1_first_name . $parent_date->p1_middle_name . $parent_date->p1_last_name . '&' . $parent_date->p2_first_name . $parent_date->p2_middle_name . $parent_date->p2_last_name;
+    } else {
+        return  $parent_date->p1_first_name . $parent_date->p1_middle_name . $parent_date->p1_last_name;
+    }
+}
 //Get Enrollment Payments status for blade file
 function getPaymentstatus($enrollment_payment_id)
 {
+
     $enrollment_payments = EnrollmentPayment::whereId($enrollment_payment_id)->first();
     return $enrollment_payments->status;
 }
@@ -553,4 +575,72 @@ function getcartval()
     $parent_profile_id = ParentProfile::getParentId();
     $count = Cart::where('parent_profile_id', $parent_profile_id)->count();
     return $count;
+}
+function getStudentGrade($transcript_grade)
+{
+    $grades = [];
+    foreach ($transcript_grade as $grade) {
+        array_push($grades, $grade->grade);
+    }
+    return implode(',', array_unique($grades));
+}
+function formatDate($date)
+{
+    return \Carbon\Carbon::parse($date)->format('M j , Y');
+}
+function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
+{
+    $valueAmount = 0;
+    foreach ($repGroupAmountDetails as $repGroupAmountDetail) {
+        $valueAmount = $valueAmount + $repGroupAmountDetail->amount;
+    }
+    return $repAmount + $valueAmount;
+}
+function getTranscriptStatus($transcript_id)
+{
+    $transcript =  Transcript::findOrFail($transcript_id);
+    return $transcript->status == 'completed' ? 'Completed : Waiting for approval' : $transcript->status;
+}
+
+/**
+ * student grade dropdown
+ * 
+ * @param {int} $grade
+ * @return {string}
+ */
+function studentGradeDropdown($grade)
+{
+    try {
+        $gradeArray = [];
+
+        $studentGrade = config('constants.STUDENT_GRADE');
+        if ($studentGrade) :
+
+            foreach ($studentGrade as $key => $value) {
+
+                $selected = ($grade == $value) ? 'selected' : '';
+                array_push($gradeArray, "<option " . $selected . " value='" . $value . "'>" . $value . "</option>");
+            }
+
+        endif;
+        echo implode(' ', $gradeArray);
+    } catch (\Throwable $th) {
+        return false;
+    }
+}
+
+/**
+ * status dropdown
+ * 
+ * @param {int} $status
+ * @return {string}
+ */
+function statusDropdown($status)
+{
+    try {
+
+        echo '<option value="">Select Status</option><option value="0" ' . ($status == 0 ? "selected" : '') . '>Active</option><option value="1" ' . ($status == 1 ? "selected" : '') . '>Inactive</option>';
+    } catch (\Throwable $th) {
+        return false;
+    }
 }

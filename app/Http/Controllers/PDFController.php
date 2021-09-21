@@ -39,6 +39,7 @@ class PDFController extends Controller
                     'title' => 'Confirmation of Enrollment',
                     'date' => date('M j, Y'),
                     'confirmData' => $confirmation_data,
+                    'type' => 'signed'
                 ];
                 $pdf = PDF::loadView('confirmationLetter', $data);
                 Storage::put(ConfirmationLetter::UPLOAD_DIR_STUDENT . '/' . $pdfname . '.' . Str::random(10), $pdf->output());
@@ -59,6 +60,7 @@ class PDFController extends Controller
                 return redirect()->back()->with($notification);
             }
         } catch (\Exception $e) {
+            report($e);
             $notification = [
                 'message' => 'Failed!',
                 'alert-type' => 'error',

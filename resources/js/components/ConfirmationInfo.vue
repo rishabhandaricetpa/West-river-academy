@@ -1,61 +1,80 @@
 <template>
-   <form method="POST" class="mb-0" @submit.prevent="addItems()">
+  <form method="POST" class="mb-0" @submit.prevent="addItems()">
     <table>
-        <tbody>
-                <tr>
-                    <td>Student</td>
-                    <td>{{this.student.fullname}}</td>
-                </tr>                           
-                <tr>
-                    <td>Date of Birth</td>
-                    <td>{{this.student.birthdate | moment("MMMM D, YYYY")}}</td>
-                    </tr>
-        </tbody>
+      <tbody>
+        <tr>
+          <td>Student</td>
+          <td>{{ this.student.fullname }}</td>
+        
+        </tr>
+        <tr>
+          <td>Date of Birth</td>
+          <td>{{ this.student.birthdate | moment("MMMM D, YYYY") }}</td>
+        </tr>
+      </tbody>
     </table>
-    <div class="row confirmation-letter__options">
-    <h3 class="mb-3">You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter.</h3>
-                               <div  v-if="countryname ==='Hungary'" class="form-group d-sm-flex mb-2">
-                        <label class="container">Birth City
-                            <input 
-                            type="checkbox" 
-                            name="isDobCity" 
-                             v-model="form.isDobCity"
-                            >
-                            <span class="isDobCity"></span>
-                        </label>
-                        <label class="container">Mother's Maiden Name
-                            <input
-                            type="checkbox"
-                            name="IsMotherName"
-                             v-model="form.IsMotherName">
-                            <span class="IsMotherName"></span>
-                        </label>
-                        </div>
-                        <label class="container">Student ID
-                            <input 
-                            type="checkbox" 
-                            name="isStudentId" 
-                            v-model="form.isStudentId">
-                            <span class="isStudentId"></span>
-                        </label>
-                        <label class="container">Grade
-                            <input 
-                            type="checkbox" 
-                            name="isGrade" 
-                            v-model="form.isGrade">
-                            <span class="isGrade"></span>
-                        </label>
-                        <input type="hidden" name="enrolment_id" v-model="form.enrolment_id">
-                    </div>
-                    <!-- <p>If the checkbox is disabled or field data is not showing up for the field you want to include, click
+    <div class="row pt-3">
+      <div class="col-12 confirmation-letter__options">
+        <h3 class="mb-3">
+        Add any of the following fields by checking the box(es) below.
+         Be sure you have provided this information if you wish to select it.
+        </h3>
+        <div class="form-group d-sm-flex mb-2">
+          <label class=" pl-0 container">
+            <input
+              type="checkbox"
+              name="IsMotherName"
+              v-model="form.IsMotherName"
+              v-on:click='checkMotherName()'
+            />
+            Mother's Maiden Name
+            <span class="IsMotherName"></span>
+          </label>
+        </div>
+        <label class="pl-0 container">
+             <input 
+             type="checkbox" 
+            name="isDobCity" 
+            class='line-through'
+            v-model="form.isDobCity"
+             v-on:change='checkisDobCity()'
+            > <span >Birth City</span>
+            <span ></span>
+        </label>
+        <label class="pl-0 container">
+          <input
+            type="checkbox"
+            name="isStudentId"
+            v-model="form.isStudentId"
+             v-on:change='checkisNationalId()'
+          />
+         National ID
+          <span class="isStudentId"></span>
+        </label>
+       
+        <input type="hidden" name="enrolment_id" v-model="form.enrolment_id" />
+      </div>
+        <p v-if="errors.length" >
+       <ul>
+       <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
+      </ul>
+    </p> 
+      <!-- <p>If the checkbox is disabled or field data is not showing up for the field you want to include, click
                         <a href="{{route('edit.student',$student->id)}}">here</a> to add it to the student record.
                     </p> -->
-                    <div class="mt-2r">
-                        <!-- <a href="{{route('dashboard')}}"
+      <div class="mt-2r">
+        <!-- <a href="{{route('dashboard')}}"
                             class="btn btn-primary addenrollment mb-4 mb-sm-0">Back</a> -->
-                    <button type="submit" class="btn btn-primary mb-4 mb-sm-0 ml-2">Continue</button>
-                    </div>
-    </form>
+        <a v-on:click="editInfo()" class="btn btn-primary mb-4 mb-sm-0 ml-2">
+         Add Above information
+        </a>
+        <button type="submit" class="btn btn-primary mb-4 mb-sm-0 ml-2">
+          Continue
+        </button>
+       
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -65,31 +84,65 @@ export default {
   data() {
     return {
       form: {
-        isDobCity: this.confirmationdata.isDobCity,
-        isStudentId: this.confirmationdata.isStudentId,
-        isGrade:this.confirmationdata.isGrade,
-        IsMotherName:this.confirmationdata.IsMotherName,
-        enrolment_id:this.enrollments.id
+        isDobCity: '',
+        isStudentId: '',  
+        IsMotherName: '',
+        enrolment_id: this.enrollments.id,
+        mother_name: this.student.mothers_name,
+        dobCity :this.student.birth_city,
+        nationalId:this.student.student_Id,
+     
       },
+      errors: []
     };
   },
-  props: ["student","gradeid","confirmationdata","student_id","enrollments","countryData"],
+
+  props: [
+    "student",
+    "gradeid",
+    "confirmationdata",
+    "student_id",
+    "enrollments",
+    "countryData"
+  ],
   methods: {
-    addItems() {
-      axios
-        .post(route("save.confirmationData",[this.student_id,this.gradeid]), this.form)
-       .then(response => {
-            window.location =
-              "/viewdownload/" +
-              this.enrollments.id +
-              "/" +
-              this.gradeid;
-          })
-        .catch((error) => console.log(error));
-    },
-   
-    
-  },
  
+    checkMotherName(){
+    if (this.form.mother_name == null || this.form.mother_name == '' ) {
+        alert('This is information was not provided . Click Add button to add it');
+        this.form.IsMotherName = false;
+      }
+    },
+    checkisDobCity(){
+        if (this.form.dobCity == null || this.form.dobCity == '' ) {
+        alert('This is information was not provided . Click Add button to add it');
+
+        this.form.isDobCity = false;
+      }
+    },  checkisNationalId(){
+        if (this.form.nationalId == null || this.form.nationalId == '' ) {
+        alert('This is information was not provided . Click Add button to add it');
+        this.form.isStudentId = false;
+      }
+    },
+    editInfo(){
+     window.location ='/edit/'+this.student_id;
+    },
+
+  
+    addItems() {
+      
+      axios
+        .post(
+          route("save.confirmationData", [this.student_id, this.gradeid]),
+          this.form
+        )
+        .then(response => {
+          window.location =
+            "/viewdownload/" + this.enrollments.id + "/" + this.gradeid;
+        })
+        .catch(error => console.log(error));}
+    
+  }
 };
 </script>

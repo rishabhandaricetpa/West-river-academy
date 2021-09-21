@@ -7,9 +7,9 @@
             <h1>Custom Letter Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3>Payment Status of Parent : {{ $customLetter->ParentProfile->p1_first_name }}
-                    <h3>
-
+                        <h3 class="pr-3"> Payment Status of Parent :<a
+                            href="{{ route('admin.parent.edit', $customLetter->parent_profile_id) }}">{{ $customLetter->ParentProfile->p1_first_name}}</a>
+                        </h3>
                         <form method="post" class="row"
                             action="{{ route('admin.update.customletter', $customLetter->id) }}">
 

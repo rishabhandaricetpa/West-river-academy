@@ -21,6 +21,7 @@ class ActiveUser
     public function handle(Request $request, Closure $next)
     {
         $id = Auth::user()->id;
+
         $parentProfileData = User::find($id)->parentProfile()->first();
         if ($parentProfileData->status == 1) {
             $user = Auth::user();

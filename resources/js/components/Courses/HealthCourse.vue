@@ -6,8 +6,10 @@
       :key="healthCourse.id"
     >
       <div class="position-relative">
-        <span class="remove" @click="removeHealthCourse(index)"
+        <p  v-if="index>0" class="delete-course">Delete Course </p>
+        <span v-if="index>0" class="remove place-top" @click="removeHealthCourse(index)"
           ><i class="fas fa-times"></i>
+          
         </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">
@@ -76,6 +78,7 @@
         >Add another Health Course</a
       >
       <button type="submit" class="btn btn-primary">Continue</button>
+      <a class="btn btn-primary float-right" @click="skipCourse()">Skip Course</a>
     </div>
   </form>
 </template>
@@ -120,7 +123,9 @@ export default {
             "/foreign/" + this.student_id + "/" + this.transcript_id;
         })
         .catch(error => {
-          alert("Please choose a course or click the X button on the top right of the screen to continue .");
+          alert(
+            "Please choose a course or click the X button on the top right of the screen to continue ."
+          );
         });
     },
     addNewSocialScienceCourse() {
@@ -135,6 +140,10 @@ export default {
     },
     removeHealthCourse(index) {
       this.form.healthCourse.splice(index, 1);
+    },
+    skipCourse() {
+      window.location =
+        "/foreign/" + this.student_id + "/" + this.transcript_id;
     }
   }
 };

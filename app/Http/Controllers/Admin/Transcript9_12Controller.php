@@ -29,7 +29,9 @@ class Transcript9_12Controller extends Controller
     {
         $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "9-12";
-        return view('admin.transcript.view-student', compact('students', 'type'));
+        $transcript_data = Transcript9_12::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
+
+        return view('admin.transcript.view-student', compact('transcript_data', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
     //whereIn('status', ['paid', 'approved', 'completed'])
@@ -68,7 +70,6 @@ class Transcript9_12Controller extends Controller
         $subjectDeatils = TranscriptCourse9_12::where('transcript9_12_id', $schoolDetails->id)
             ->where('subject_id', $subject_id)
             ->first();
-
         $subjects = Subject::whereId($subject_id)->first();
         return view('admin.transcript.edit_subject_grade9_12', compact('subjects', 'subjectDeatils', 'subject_id', 'transcript_id', 'grade_value'));
     }
@@ -109,12 +110,18 @@ class Transcript9_12Controller extends Controller
             $years = collect($enrollment_periods)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
+            if ($maxYear == $minYear) {
+                $maxYear = $maxYear + 1;
+            }
         } else {
 
             $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
             $years = collect($enrollment_years)->pluck('enrollment_year');
             $maxYear = $years->max();
             $minYear = $years->min();
+            if ($maxYear == $minYear) {
+                $maxYear = $maxYear + 1;
+            }
 
             $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
         }
@@ -161,13 +168,18 @@ class Transcript9_12Controller extends Controller
                 $years = collect($enrollment_periods)->pluck('enrollment_year');
                 $maxYear = $years->max();
                 $minYear = $years->min();
+                if ($maxYear == $minYear) {
+                    $maxYear = $maxYear + 1;
+                }
             } else {
 
                 $enrollment_years = Transcript9_12::where('transcript_id', $transcript_id)->get();
                 $years = collect($enrollment_years)->pluck('enrollment_year');
                 $maxYear = $years->max();
                 $minYear = $years->min();
-
+                if ($maxYear == $minYear) {
+                    $maxYear = $maxYear + 1;
+                }
                 $transcript_id = Transcript::select()->where('student_profile_id', $student->id)->whereStatus('completed')->orWhere('status', 'paid')->first();
             }
             $pdfname = $student->fullname . '_' . $student->d_o_b->format('M_d_Y') . '_' . $transcript_id . '_' . 'Signed_transcript_letter';
@@ -197,7 +209,7 @@ class Transcript9_12Controller extends Controller
                 $storetranscript->save();
             }
 
-            //MOVE CODE FROM HERE TO UPLOAD SIGNED CODE CHANGE THE STATUS TO UPLOAD IN UPLOAD SIGNED
+            //generate the signed transcript and update the column to paid to approved
             $updateTranscriptStatus = Transcript::whereId($transcript_id)
                 ->where('status', 'completed')->first();
             if ($updateTranscriptStatus != null) {
@@ -211,7 +223,6 @@ class Transcript9_12Controller extends Controller
                 $paymentsTranscriptStatus->save();
             }
             DB::commit();
-
             return $pdf->download($pdfname . '.pdf');
         } catch (\Exception $e) {
             DB::rollback();
@@ -219,7 +230,6 @@ class Transcript9_12Controller extends Controller
                 'message' => 'Data Missmatch',
                 'alert-type' => 'error',
             ];
-
             return redirect()->back()->with($notification);
         }
     }
@@ -238,7 +248,7 @@ class Transcript9_12Controller extends Controller
             ];
             return redirect()->back()->with($notification);
         } catch (\Exception $e) {
-            dd($e);
+            report($e);
             DB::rollback();
             $notification = [
                 'message' => 'Data Missmatch',

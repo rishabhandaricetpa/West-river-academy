@@ -150,6 +150,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             return view('MyAccounts/resetpassword');
         })->name('reset.password');
         Route::post('reset/{id}', 'ParentController@updatePassword')->name('account-pass.update');
+        Route::post('viewall-orders', 'StudentController@getAllOrders')->name('viewfull.orders');
 
         Route::get('/viewConfirmation/{enrollment_payment_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
         Route::get('/viewdownload/{enrollment_payment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
@@ -170,7 +171,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // Graduation Process ends
 
-        Route::get('student-transcript/{student_id}', 'TranscriptController@purchaseNew')->name('transcript.studentInfo');
+        Route::post('student-transcript', 'TranscriptController@purchaseNew')->name('transcript.studentInfo');
         Route::get('create-transcript/{transcript_id}/{student_id}', 'TranscriptController@createTranscript')->name('transcript.create');
         Route::get('viewall-transcript/{student_id}', 'TranscriptController@getAllTranscript')->name('transcript.viewall');
 
@@ -283,22 +284,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         //Record Transfer
         Route::get('transfer/record', 'RecordTransferController@getStudents')->name('transferSchoolRecord');
         // Route::get('record/transfer/{parent_id}', 'RecordTransferController@index')->name('record.transfer');
-        Route::get('record/request/{student_id}/{parent_id}', 'RecordTransferController@sendRecordRequest')->name('record.send');
         Route::post('record/save/{student_id}/{parent_id}', 'RecordTransferController@storeRecordRequest')->name('record.store');
         Route::get('record/edit/{id}', 'RecordTransferController@editRecordRequest')->name('edit.record');
         Route::post('record/edit/update/{id}', 'RecordTransferController@updateStoreRecordRequest')->name('edit.record.store');
         Route::get('notarization', 'NotarizationController@index')->name('notarization');
         Route::post('notarization/save', 'NotarizationController@store')->name('notarization.save');
-
-
-
-
-        Route::get('select/country/{student_id}/{transcript_id}', 'TranscriptController\Transcript9to12@selectCountry')->name('selecting.country');
-        Route::post('select/grade/{student_id}', 'TranscriptController\Transcript9to12@selectGrade')->name('select.grade');
-        Route::post('select/enrollmentyear/{student_id}', 'TranscriptController\Transcript9to12@enrollSchool')->name('enrollSchool');
-        Route::post('choose/apcourse/{student_id}', 'TranscriptController\Transcript9to12@enrollYear')->name('select.apCourse');
-        Route::post('apCourses/{student_id}', 'TranscriptController\Transcript9to12@apCourses')->name('apCourse');
-        // Route::get('preview-transcript9_12/{student_id}/{trans_id}', 'TranscriptController\Transcript9to12@previewTranscript')->name('preview.transcript9_12');
 
         //archieve records
         // Route::post('archieve/record', 'Admin\DashboardController@archieveRecord');
@@ -365,7 +355,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         //operation - delete and edit in transript 9-12
         Route::get('delete/school-transcript/{transcript_id}', 'TranscriptController\Transcript9to12@deleteSchool')->name('delete.transcript.school');
-        //Route::get('course-details/{transcript_id}/{student_id}', 'TranscriptController\Transcript9to12@displayAllCourse')->name('displayCourseDetails');
 
         //show specific course details
 

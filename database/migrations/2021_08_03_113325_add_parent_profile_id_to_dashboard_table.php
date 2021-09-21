@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRelatedToColumnOnDashboardsTable extends Migration
+class AddParentProfileIdToDashboardTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class AddRelatedToColumnOnDashboardsTable extends Migration
     public function up()
     {
         Schema::table('dashboards', function (Blueprint $table) {
-            $table->string('related_to')->nullable();
-            // $table->unsignedBigInteger('student_profile_id');
-            $table->foreignId('student_profile_id')->nullable()->constrained()->references('id')->on('student_profiles')->onDelete('cascade');
+            $table->foreignId('parent_profile_id')->nullable()->constrained()->references('id')->on('parent_profiles')->onDelete('cascade');
         });
     }
 
@@ -27,7 +25,7 @@ class AddRelatedToColumnOnDashboardsTable extends Migration
      */
     public function down()
     {
-        Schema::table('column_on_dashboards', function (Blueprint $table) {
+        Schema::table('dashboard', function (Blueprint $table) {
             //
         });
     }

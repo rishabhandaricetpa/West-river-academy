@@ -42,8 +42,9 @@ class BankTranferController extends Controller
         $amount = $enroll_fees->amount;
         $final_amount = $coupon_amount > $amount ? 1 : $amount - $coupon_amount;
         $type = 'Bank Transfer';
+        $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
         //store transactions
-        $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type);
+        $saveTransaction = TransactionsMethod::storeTransactionData($this->parent_profile_id, $amount, $coupon_code, $coupon_amount, $type, $cartItems);
         //update cart status active
 
         Mail::to($email)->send(new BankTranferEmail($user, $amount));

@@ -22,7 +22,7 @@
                             <button type="submit" class="btn btn-primary" data-toggle="modal"
                                 data-target="#addsubjectsModal">Add New course to {{ $coursename->course_name }}</button>
                             <a href="{{ route('admin.other.subjects', $id) }}" class="btn btn-primary">View Subject area list</a>
-                            <a onclick="goBack()" class="btn btn-primary">Back</a>
+                            <a href=" {{ route('admin.manage.course') }}" class="btn btn-primary">Back</a>
                             <table id="addressData" class="table table-bordered table-striped data-table">
                       <thead>
                       <tr>
