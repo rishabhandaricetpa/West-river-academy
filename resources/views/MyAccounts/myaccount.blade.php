@@ -31,15 +31,16 @@
 
       <div class="col-md-6">
         <h2 class="mb-3">Password</h2>
-        <form>
+        
           <div class="form-group ">
             <label for="">Password</label>
             <div>********</div>
           </div>
           <a href="{{ route('reset.password', $user_id) }}" class="btn btn-primary">Change Your
             Password?</a>
-
+          
       </div>
+    </form>
   </div>
 
   <div class="form-wrap row border bg-light py-5 px-25 mt-2r ">
@@ -95,6 +96,7 @@
           <div>{{ $parent->p2_home_phone }}</div>
         </div>
         <a href="{{ url('/editaccount', $user_id) }}" class="btn btn-primary">Edit Your Login</a>
+      </form>
     </div>
   </div>
 
@@ -119,7 +121,7 @@
           @foreach ($payment_history as $payment)
           <tr>
             <td>{{ formatDate($payment->created_at)}}</td>
-              @if($payment->status=='pending')
+            @if($payment->status=='pending')
             <td>Pending</td>
             @elseif($payment->status=='succeeded')
             <td>Paid</td>
@@ -128,27 +130,27 @@
             @else
             <td>{{$payment->status}}</td>
             @endif
-           
+
             <td>${{ $payment->amount }}</td>
             <td>{{ $payment->payment_mode}}</td>
-            <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3 passID" data-toggle="modal"  data-target="#Payment-details-Modal" data-id="{{ $payment->transcation_id }}" onclick="viewOrders(event.target)" data-whatever="@getbootstrap">View Order</a></td>
+            <td><a href="javascript:void(0)" class="btn btn-primary btn-modal ml-3 passID" data-toggle="modal"
+                data-target="#Payment-details-Modal" data-id="{{ $payment->transcation_id }}"
+                onclick="viewOrders(event.target)" data-whatever="@getbootstrap">View Order</a></td>
           </tr>
           @endforeach
         </tbody>
       </table>
-  
-
-      <div class="modal fade bd-example-modal-lg mt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
+    </div>
+    <div class="modal fade bd-example-modal-lg pt-5" id="Payment-details-Modal" tabindex="-1" role="dialog"
         aria-labelledby="Payment-details-ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="Payment-details-Label">View Order Detail</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">Close</span>
+                <span aria-hidden="true">&times;</span>
               </button>
-          </div>
-           
+            </div>
             <div class="modal-body">
               <div class="overflow-auto max-table">
                 <table class="table-styling w-100 table-vertical_scroll">
@@ -161,20 +163,15 @@
                   </tbody>
                   <tfoot class="bg-light">
                     <tr>
-                      
+
                     </tr>
                   </tfoot>
                 </table>
               </div>
             </div>
-
           </div>
-          </form>
         </div>
       </div>
-      <div>
-      </div>
-    </div>
   </div>
   @endif
 

@@ -3,7 +3,7 @@
 
 
    {{-- add new parent --}}
-   <div class="modal fade bd-example-modal-lg" id="parentDetailsModal" tabindex="-1" role="dialog"
+   <div class="modal fade bd-example-modal-lg pt-5 " id="parentDetailsModal" tabindex="-1" role="dialog"
    aria-labelledby="parentDetailsModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg" role="document">
      <form id="add-new-parent">

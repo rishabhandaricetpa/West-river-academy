@@ -176,26 +176,23 @@ class StudentController extends Controller
     public function saveConfirmationInformation(Request $request, $student_id, $grade_id)
     {
         $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $request->input('enrolment_id'))->first();
-
         if ($request->input('isDobCity')) {
-            $confirmation_data->isDobCity = 1;
+            $confirmation_data->isDobCity = $request->input('isDobCity');
         } else {
             $confirmation_data->isDobCity = 0;
         }
         if ($request->input('IsMotherName')) {
-            $confirmation_data->IsMotherName = 1;
+            $confirmation_data->IsMotherName = $request->input('IsMotherName');
         } else {
             $confirmation_data->IsMotherName = 0;
         }
         if ($request->input('isGrade')) {
-
-            $confirmation_data->isGrade = 1;
+            $confirmation_data->isGrade = $request->input('isGrade');
         } else {
             $confirmation_data->isGrade = 0;
         }
         if ($request->input('isStudentId')) {
-
-            $confirmation_data->isStudentId = 1;
+            $confirmation_data->isStudentId = $request->input('isStudentId');
         } else {
             $confirmation_data->isStudentId = 0;
         }

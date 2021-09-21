@@ -35,7 +35,7 @@
         </div>
     </div>
 </section>
-<div class="modal fade bd-example-modal-lg" id="orderModal" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg pt-5 " id="orderModal" tabindex="-1" role="dialog"
     aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
