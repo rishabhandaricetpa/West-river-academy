@@ -520,13 +520,16 @@ class ParentController extends Controller
                     $custom_payment->amount = $request->get('custom_letter_amount');
                     $custom_payment->paying_for = $request->get('custom_letter_paying');
                     $custom_payment->type_of_payment = 'Custom Letter';
-                    $custom_payment->transcation_id = $request->get('custom_letter_transction');
+                    if ($request->get('custom_letter_status') == 'paid') {
+                        $custom_payment->transcation_id = $request->get('custom_letter_transction') ?  $request->get('custom_letter_transction') : substr(uniqid(), 0, 12);
+                    }
+
                     $custom_payment->payment_mode = $request->get('custom_letter_payment_mode');
                     $custom_payment->status = $request->get('custom_letter_status');
                     $custom_payment->save();
                     $parent = ParentProfile::where('id', $request->get('parent_id'))->first();
                     if (
-                        !empty($request->get('custom_letter_payment_mode'))
+                        $request->get('custom_letter_status') == 'paid'
                     ) {
 
                         $transction = new TransactionsMethod();
@@ -535,13 +538,14 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('custom_letter_amount');
                         $transction->status = $request->get('custom_letter_status');
+                        $transction->item_type = 'Custom Letter';
                         $transction->save();
 
 
                         $dashboard = new Dashboard();
                         $dashboard->linked_to = $parent->p1_first_name;
-                        $dashboard->amount =  $request->get('custom_amount');
-                        $dashboard->related_to = 'Custom Payment Ordered';
+                        $dashboard->amount =  $request->get('custom_letter_amount');
+                        $dashboard->related_to = 'Custom Letter';
 
                         $dashboard->transaction_id = $transction->transcation_id;
                         $dashboard->parent_profile_id = $request->get('parent_id');
@@ -614,7 +618,7 @@ class ParentController extends Controller
                         ->where('pay_for', 'notarization')->where('status', 'pending')
                         ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
 
-                    if ($clearpendingPayments && $request->get('noatrization_status') == 'pending') {                       
+                    if ($clearpendingPayments && $request->get('noatrization_status') == 'pending') {
                         Notarization::where('id', $clearpendingPayments->notarization_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
                         NotarizationPayment::whereNull('transcation_id')
                             ->where('pay_for', 'notarization')->where('status', 'pending')
