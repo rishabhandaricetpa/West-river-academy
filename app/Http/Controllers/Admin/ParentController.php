@@ -208,6 +208,7 @@ class ParentController extends Controller
         $studentData = $parent->studentProfile()->get();
         $studentId = collect($studentData)->pluck('id');
         $transcations =   Cart::where('parent_profile_id', $id)->get();
+
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
@@ -523,6 +524,7 @@ class ParentController extends Controller
                     $custom_payment->payment_mode = $request->get('custom_letter_payment_mode');
                     $custom_payment->status = $request->get('custom_letter_status');
                     $custom_payment->save();
+                    $parent = ParentProfile::where('id', $request->get('parent_id'))->first();
                     if (
                         !empty($request->get('custom_letter_payment_mode'))
                     ) {
@@ -534,6 +536,17 @@ class ParentController extends Controller
                         $transction->amount = $request->get('custom_letter_amount');
                         $transction->status = $request->get('custom_letter_status');
                         $transction->save();
+
+
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('custom_amount');
+                        $dashboard->related_to = 'Custom Payment Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $custom_payment->id;
+                        $dashboard->save();
                     }
                     if ($request->get('custom_letter_status') == 'pending') {
                         if (!Cart::where('item_type', 'custom_letter')->exists()) {
@@ -547,17 +560,20 @@ class ParentController extends Controller
                     break;
 
                 case 'order-detail_OrderPostage':
+                    // CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
                     OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
                     $charge = Country::where('country', $request->get('postage_country'))->select('postage_charges')->first();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
+                    $parent = ParentProfile::where('id', $request->get('parent_value'))->first();
                     if ($status == 'paid') {
 
                         $transction = new TransactionsMethod();
-                        $transction->transcation_id   = $request->get('postage_transaction_id');
-                        $transction->payment_mode = $request->get('postage_payment_mode');
+                        $transction->transcation_id   = $request->get('postage_transaction_id') ? $request->get('postage_transaction_id') : substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('postage_payment_mode') ? $request->get('postage_payment_mode') : '';
                         $transction->parent_profile_id = $request->get('parent_value');
                         $transction->amount =  $request->get('postage_total');
                         $transction->status = $status;
+                        $transction->item_type = 'Postage Payment';
                         $transction->save();
                     }
                     $postage_type = "postage";
@@ -578,6 +594,17 @@ class ParentController extends Controller
                                 'parent_profile_id' => $request->get('parent_value'),
                             ]);
                         }
+                    }
+                    if ($request->get('paymentDetails') == 'paid') {
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('postage_payment_mode');
+                        $dashboard->related_to = 'Postage Ordered';
+
+                        $dashboard->transaction_id =  $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $postage->id;
+                        $dashboard->save();
                     }
 
                     break;
@@ -719,7 +746,7 @@ class ParentController extends Controller
                     ) {
                         $transction = new TransactionsMethod();
                         $transction->transcation_id   = $request->get('custom_transcation') ? $request->get('custom_transcation')  : substr(uniqid(), 0, 12);
-                        $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : 'pending';
+                        $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : ' ';
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('custom_amount');
                         $transction->status = $request->get('custom_status');
