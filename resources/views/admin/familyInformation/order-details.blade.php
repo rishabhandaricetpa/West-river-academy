@@ -432,7 +432,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div" id="payment-div-custom">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="custom_payment_mode"
+                                    <select type="" id="custom_payment_mode1"
                                         class="form-control custom_letter_payment_mode">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>

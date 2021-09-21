@@ -1219,8 +1219,8 @@
             var order_detail_val = $('#order_detail_val').val();
             var custom_amount = $('#custom_amount').val();
             var custom_paying_for = $('#custom_paying_for').val();
-            var custom_transcation = $('#custom_transcation').val();
-            var custom_payment_mode = $('#custom_payment_mode').val();
+            var custom_transcation = $('#custom_transcation1').val();
+            var custom_payment_mode = $('#custom_payment_mode1').val();
             var custom_status = $('#custom1').val();
             var parent_id = $('#parent_id').val();
             $.ajax({
