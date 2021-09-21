@@ -613,9 +613,10 @@ class ParentController extends Controller
                     $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
                         ->where('pay_for', 'notarization')->where('status', 'pending')
                         ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
-                    if ($clearpendingPayments) {
-                        $deletedata = Notarization::where('id', $clearpendingPayments->notarization_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
-                        $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
+
+                    if ($clearpendingPayments && $request->get('noatrization_status') == 'pending') {                       
+                        Notarization::where('id', $clearpendingPayments->notarization_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
+                        NotarizationPayment::whereNull('transcation_id')
                             ->where('pay_for', 'notarization')->where('status', 'pending')
                             ->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
                     }
@@ -623,13 +624,14 @@ class ParentController extends Controller
                     $total_notar = $request->get('notar_amount') + $request->get('shipping_amount');
                     $notarization_type = "notarization";
                     $status = ($request->get('noatrization_status') == 'pending') ? 'pending' : 'paid';
-                    if ($status == 'paid') {
+                    if ($request->get('noatrization_status') == 'paid') {
                         $transction = new TransactionsMethod();
-                        $transction->transcation_id   =   $request->get('notar_transaction_id');
-                        $transction->payment_mode = $request->get('notar_payment_mode');
+                        $transction->transcation_id   =   $request->get('notar_transaction_id') ? $request->get('notar_transaction_id') : substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('notar_payment_mode') ? $request->get('notar_payment_mode') : "";
                         $transction->parent_profile_id = $request->get('parent_profile_id');
                         $transction->amount = $total_notar;
                         $transction->status = $request->get('noatrization_status');
+                        $transction->item_type = 'Notarization Payment';
                         $transction->save();
                     }
 
@@ -640,7 +642,7 @@ class ParentController extends Controller
                     $notarization->country = $request->get('shipping_country');
                     $notarization->status = $request->get('noatrization_status');
                     $notarization->save();
-
+                    $parent = ParentProfile::where('id', $request->get('parent_profile_id'))->first();
 
                     $notarization_payment = new NotarizationPayment();
                     $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
@@ -648,8 +650,22 @@ class ParentController extends Controller
                     $notarization_payment->amount = $total_notar;
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "notarization";
-                    $notarization_payment->save();
+                    if ($request->get('noatrization_status') == 'paid') {
+                        $notarization_payment->transcation_id = $request->get('notar_transaction_id')  ? $request->get('notar_transaction_id') : substr(uniqid(), 0, 12);
+                    }
 
+                    $notarization_payment->save();
+                    if ($request->get('noatrization_status') == 'paid') {
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $total_notar;
+                        $dashboard->related_to = 'Notarization/Appostile Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $notarization_payment->id;
+                        $dashboard->save();
+                    }
                     if ($status == 'pending') {
                         Cart::updateOrCreate(
                             [

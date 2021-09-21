@@ -15,9 +15,11 @@ class CreateNotarizationPaymentsTable extends Migration
     {
         Schema::create('notarization_payments', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('notarization_id');
-            $table->foreignId('notarization_id')->nullable()->constrained()->references('id')->on('notarizations');
-            $table->foreignId('parent_profile_id')->nullable()->constrained()->references('id')->on('parent_profiles')->onDelete('cascade');
+            $table->unsignedBigInteger('notarization_id');
+            $table->foreign('notarization_id')->references('id')->on('notarizations')->onDelete('cascade');;
+            //  $table->foreignId('parent_profile_id')->nullable()->constrained()->references('id')->on('parent_profiles')->onDelete('cascade');
+            $table->unsignedBigInteger('parent_profile_id');
+            $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('pay_for');
             $table->string('amount');
             $table->enum('status', ['pending', 'paid', 'approved', 'completed', 'active']);
