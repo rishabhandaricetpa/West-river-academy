@@ -392,7 +392,7 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('amount');
                         $transction->status = $request->get('status');
-                        $transction->item_type = 'enrollment_period';
+                        $transction->item_type = 'enrollment';
                         $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
                         $student = StudentProfile::where('id', $request->get('student_id'))->first();
@@ -798,15 +798,7 @@ class ParentController extends Controller
 
                     $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('p1_profile_id'))->delete();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
-                    if ($status == 'paid') {
-                        $transction = new TransactionsMethod();
-                        $transction->transcation_id   = $request->get('consul_transaction_id');
-                        $transction->payment_mode =  $request->get('consul_payment_mode');
-                        $transction->parent_profile_id = $request->get('p1_profile_id');
-                        $transction->amount = $request->get('consul_amount');
-                        $transction->status = $status;
-                        $transction->save();
-                    }
+
                     $consultation_type = "order_consultation";
                     $consultation = new OrderPersonalConsultation();
                     $consultation->parent_profile_id   = $request->get('p1_profile_id');
@@ -819,6 +811,28 @@ class ParentController extends Controller
                     $consultation->payment_mode = $request->get('consul_payment_mode');
                     $consultation->status = $status;
                     $consultation->save();
+
+                    $parent = ParentProfile::where('id', $request->get('p1_profile_id'))->first();
+                    if ($status == 'paid') {
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   = $request->get('consul_transaction_id') ? $request->get('consul_transaction_id')  : substr(uniqid(), 0, 12);
+                        $transction->payment_mode =  $request->get('consul_payment_mode') ?  $request->get('consul_payment_mode') : 'By Admin';
+                        $transction->parent_profile_id = $request->get('p1_profile_id');
+                        $transction->amount = $request->get('consul_amount');
+                        $transction->status = $status;
+                        $transction->item_type = 'Personal Consulatation Ordered';
+                        $transction->save();
+
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('consul_amount');
+                        $dashboard->related_to = 'Personal Consulatation Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('p1_profile_id');
+                        $dashboard->item_type_id = $consultation->id;
+                        $dashboard->save();
+                    }
 
                     if ($status) {
                         if (!Cart::where('item_type', $consultation_type)->exists()) {
