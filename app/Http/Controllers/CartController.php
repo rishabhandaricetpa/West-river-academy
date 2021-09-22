@@ -337,6 +337,7 @@ class CartController extends Controller
             DB::commit();
             return redirect('/cart');
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
 
             return redirect()->back();
