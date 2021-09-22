@@ -602,7 +602,7 @@ class ParentController extends Controller
                     if ($request->get('paymentDetails') == 'paid') {
                         $dashboard = new Dashboard();
                         $dashboard->linked_to = $parent->p1_first_name;
-                        $dashboard->amount =  $request->get('postage_payment_mode');
+                        $dashboard->amount =  $request->get('postage_total');
                         $dashboard->related_to = 'Postage Ordered';
 
                         $dashboard->transaction_id =  $transction->transcation_id;
