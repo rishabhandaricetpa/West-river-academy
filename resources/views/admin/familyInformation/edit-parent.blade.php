@@ -59,7 +59,7 @@
                                 <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
                             </div>
                         </div>
-                        <div class="col-12">Date Created:  {{ $parent->created_at->format('M j, Y') }}
+                        <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }}
                         </div>
                     </div>
                 </div>
@@ -567,7 +567,77 @@
                     </div>
                 </div>
 
+                {{-- Orders Paid --}}
+                <section class="documents  pt-10r" id="documents">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="pr-3"> Payment History</h2>
+                            <div class="overflow-auto max-table">
+                                <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Orders</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($detail_order_lists as $detail_order_list)
+                                            <tr>
+                                                <td>{{ formatDate($detail_order_list->created_at) }}</td>
+                                                <td>{{ $detail_order_list->item_type }}</td>
+                                                <td>${{ $detail_order_list->amount }}</td>
+                                                <td class="text-right"><a href="javascript:void(0)"
+                                                        class="btn btn-primary btn-modal ml-3" data-toggle="modal"
+                                                        data-target="#order-details_details" data-whatever="@getbootstrap"
+                                                        data-id={{ $detail_order_list->transcation_id }}
+                                                        onclick="detailOrders(event.target)">View
+                                                        Order</a></td>
+                                            </tr>
+                                        @endforeach
 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="modal fade bd-example-modal-lg pt-5 " id="order-details_details" tabindex="-1" role="dialog"
+                    aria-labelledby="order-details_details-Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="order-details_details-Label">Order Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Item Type</td>
+                                                <td>Amount</td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="paymeny_history_wrapper_admin">
+                                            <tr>
+                                                <td id="student_name"></td>
+                                                <td id="items"></td>
+                                                <td id="amount"></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
@@ -620,7 +690,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg pt-5 "  id="studentDetailsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="studentDetailsModal" tabindex="-1" role="dialog"
                     aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1281,77 +1351,7 @@
                 </div>
 
 
-                {{-- Orders Paid --}}
-                <section class="documents  pt-10r" id="documents">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="pr-3"> Payment History</h2>
-                            <div class="overflow-auto max-table">
-                                <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Orders</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($detail_order_lists as $detail_order_list)
-                                            <tr>
-                                                <td>{{ formatDate($detail_order_list->created_at) }}</td>
-                                                <td>{{ $detail_order_list->item_type }}</td>
-                                                <td>${{ $detail_order_list->amount }}</td>
-                                                <td class="text-right"><a href="javascript:void(0)"
-                                                        class="btn btn-primary btn-modal ml-3" data-toggle="modal"
-                                                        data-target="#order-details_details" data-whatever="@getbootstrap"
-                                                        data-id={{ $detail_order_list->transcation_id }}
-                                                        onclick="detailOrders(event.target)">View
-                                                        Order</a></td>
-                                            </tr>
-                                        @endforeach
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="modal fade bd-example-modal-lg pt-5 " id="order-details_details" tabindex="-1" role="dialog"
-                    aria-labelledby="order-details_details-Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="order-details_details-Label">Order Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="overflow-auto max-table">
-                                    <table class="table-styling w-100 table-vertical_scroll">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Item Type</td>
-                                                <td>Amount</td>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody id="paymeny_history_wrapper_admin">
-                                            <tr>
-                                                <td id="student_name"></td>
-                                                <td id="items"></td>
-                                                <td id="amount"></td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
 
