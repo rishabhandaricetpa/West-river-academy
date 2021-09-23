@@ -35,7 +35,7 @@
         </div>
     </div>
 </section>
-<div class="modal fade bd-example-modal-lg" id="orderModal" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg pt-5 " id="orderModal" tabindex="-1" role="dialog"
     aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -220,6 +220,7 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_letter_status" class="form-control paymentDisplay">
+                                        <option value="">Select One</option>
                                         <option value="pending">Pending</option>
                                         <option value="paid">Paid</option>
                                     </select>
@@ -431,7 +432,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div" id="payment-div-custom">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="custom_payment_mode"
+                                    <select type="" id="custom_payment_mode1"
                                         class="form-control custom_letter_payment_mode">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>

@@ -41,10 +41,10 @@
                     <h2 class="mb-2">{{ $school->school_name }}</h2>
                     @if (count($k8details) > 1)
                         <a href="{{ route('delete.school', $school->id) }}" class="btn btn-primary float-right"
-                            type="submit" value="Delete School Record">Delete School Record</a>
+                            type="submit" value="Delete School Record">Delete this Year</a>
                     @endif
                     <p class="mb-0"><span class="font-weight-bold mr-2">Academic School
-                            Year(s):</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }}</p>
+                            Year:</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }}</p>
                     <p> <span class="font-weight-bold mr-2"> Grade:</span> {{ $school->grade }}</p>
 
                     <div class="overflow-auto">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="buttongroup">
                         <a href="{{ route('displayAllCourse', [$school->id, $school->student_profile_id]) }}"
-                            class="btn btn-primary mt-4">Select Courses and Grade</a>
+                            class="btn btn-primary mt-4">Add Courses</a>
                     </div>
                 </div>
             @endforeach

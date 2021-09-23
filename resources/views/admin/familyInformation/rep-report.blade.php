@@ -44,11 +44,11 @@
                         <td style="padding:5px;"></td>
 
                         @if ($totalFamilyAmount > 0)
-                            <td style="padding:5px;" class="text-right">Total: ${{ $totalFamilyAmount }}</td>
+                            <td style="padding:5px;" class="text-right no-wrap">Total: ${{ $totalFamilyAmount }}</td>
                         @elseif ($totalFamilyAmount == 0)
-                            <td style="padding:5px;" class="text-right">Total: $0</td>
+                            <td style="padding:5px;" class="text-right no-wrap">Total: $0</td>
                         @else
-                            <td style="padding:5px;" class="text-right">Total: {{ '-$' . abs($totalFamilyAmount) }} </td>
+                            <td style="padding:5px;" class="text-right no-wrap">Total: {{ '-$' . abs($totalFamilyAmount) }} </td>
                         @endif
                     </tr>
 
@@ -81,12 +81,12 @@
                         <td style="padding:5px;"></td>
                         <td style="padding:5px;"></td>
                         @if ($amountPaid > 0)
-                            <td class="text-right" style="padding:5px;">Total: ${{ $amountPaid }}</td>
+                            <td class="text-right no-wrap" style="padding:5px;">Total: ${{ $amountPaid }}</td>
                         @elseif($amountPaid ==0)
-                            <td class="text-right" style="padding:5px;">Total: $0</td>
+                            <td class="text-right no-wrap" style="padding:5px;">Total: $0</td>
                         @else
 
-                            <td class="text-right" style="padding:5px;">Total: {{ '-$' . abs($amountPaid) }} </td>
+                            <td class="text-right no-wrap" style="padding:5px;">Total: {{ '-$' . abs($amountPaid) }} </td>
                         @endif
 
 

@@ -128,7 +128,7 @@ class Cart extends Model
         $data = [];
 
         foreach ($enroll_data as $key => $value) {
-            $type = $value['type'] == 'annual' ? 'Annual' : 'Second Semester Only';
+            $type = $value['type'] == 'annual' ? 'Annual Enrollment' : 'Second Semester Only';
             $arr = [
                 'id' => $value['id'],
                 'type' => $type,

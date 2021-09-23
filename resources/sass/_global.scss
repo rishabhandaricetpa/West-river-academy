@@ -11,14 +11,10 @@ h3,
 .h3 {
   color: #235;
 }
-.display-none {
-  display: none;
+.display-none{
+  display:none;
 }
 /* custom classes */
-
-.line-through input:checked + span {
-  text-decoration: line-through;
-}
 
 .lato-italic {
   p {
@@ -33,6 +29,7 @@ h3,
     }
   }
 }
+
 
 .img-absolute {
   position: absolute;
@@ -183,8 +180,8 @@ button {
 .pt-10r {
   padding-top: 10rem !important;
 }
-.pb-5r {
-  padding-bottom: 5rem !important;
+.pb-5r{
+  padding-bottom: 5rem!important;
 }
 
 .px-25 {
@@ -195,13 +192,13 @@ button {
 .max-width__275 {
   max-width: 275px;
 }
-.font-size-large {
-  font-size: 20px !important;
-  color: $text-color !important;
-  font-weight: 700 !important;
+.font-size-large{
+  font-size: 20px !important;;
+  color: $text-color!important;
+  font-weight: 700!important;
 }
-.required {
-  color: rgb(193, 10, 10);
+.required{
+  color:rgb(193, 10, 10);
 }
 
 .h-120 {
@@ -211,9 +208,9 @@ button {
 /* popup css */
 
 .modal-open .main-sidebar .main-sidebar::before,
-.modal-open .main-header::before {
-  content: "";
-  position: absolute;
+.modal-open .main-header::before{
+  content: '';
+  position: absolute;  
   top: 0;
   bottom: 0;
   width: 100vw;
@@ -224,6 +221,15 @@ button {
 
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
+  .close{
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    background-color: transparent;
+    border: 0;
+  }
 }
 
 .modal-backdrop {
@@ -248,7 +254,7 @@ button {
     color: $black;
   }
 }
-.font-medium {
+.font-medium{
   font-size: 1.2rem;
   font-family: $lato-font !important;
 }
@@ -279,7 +285,7 @@ tfoot {
   page-break-inside: avoid !important;
 }
 
-////tabs
+////tabs 
 .tabbable-responsive {
   display: block;
   min-width: 100%;
@@ -311,7 +317,7 @@ tfoot {
 .position-relative {
   position: relative;
 }
-.position-absolute {
+.position-absolute{
   position: absolute;
 }
 
@@ -327,11 +333,12 @@ sup {
 
 .table-vertical_scroll {
   thead {
-    position: sticky;
-    top: -1px;
+    position: sticky;     
+    top:-1px;
     z-index: 5;
   }
 }
+
 
 .table-styling,
 .data-table {
@@ -356,12 +363,13 @@ sup {
 
   thead {
     background-color: #ccc;
+   
   }
-  thead.min-width {
-    th {
-      min-width: 150px;
+  thead.min-width{   
+    th{   
+      min-width:150px;   
     }
-  }
+  }   
 
   td,
   th {
@@ -371,6 +379,7 @@ sup {
     font-size: 1rem;
     vertical-align: middle;
     text-transform: capitalize;
+  
   }
 
   tbody {
@@ -401,7 +410,7 @@ a.btn {
 }
 
 .datepicker-full {
-  > p {
+  >p {
     width: 100%;
   }
 }
@@ -410,7 +419,7 @@ a.btn {
 .min-w-100 {
   min-width: 100% !important;
 }
-.border-bottom-2 {
+.border-bottom-2{
   border-bottom: 2px solid $gray-800;
 }
 
@@ -459,7 +468,7 @@ sub {
   text-transform: none !important;
 }
 
-///pdf
+///pdf 
 .hg-pdf table tr {
   page-break-inside: avoid;
 }
@@ -506,13 +515,13 @@ footer {
   }
 
   /* On mouse-over, add a grey background color */
-  &:hover input ~ .checkmark {
+  &:hover input~.checkmark {
     background-color: #ccc;
   }
 
   /* When the checkbox is checked, add a blue background */
-  input:checked ~ .checkmark {
-    background-color: #004c99;
+  input:checked~.checkmark {
+    background-color: #004C99;
   }
 
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -522,8 +531,9 @@ footer {
     display: none;
   }
 
+
   /* Show the checkmark when checked */
-  input:checked ~ .checkmark:after {
+  input:checked~.checkmark:after {
     display: block;
   }
 
@@ -544,25 +554,32 @@ footer {
 //  stikcy nav bar
 .sticky {
   position: sticky;
-  top: 0;
-  background: white;
-  z-index: 9;
+  top:0;
+  background:white;
+  z-index: 9;   
   box-shadow: 0px 4px 10px rgb(246, 246, 246);
+  
 }
-.cart-item-no {
+.cart-item-no{
   position: relative;
-  .item-no {
+  .item-no{
     position: absolute;
-    top: 5px;
-    left: 55px;
+    top:5px;
+    left:55px;     
     font-size: 15px;
-    width: 22px;
-    height: 22px;
+    width:22px;
+    height:22px;
     border-radius: 50%;
     background-color: rgb(191, 37, 37);
   }
 }
-.font-large {
+.font-large{
   font-size: 45px;
-  font-weight: 500;
+  font-weight: 500; 
+}
+.no-wrap{
+  white-space: nowrap!important;
+}
+.overflow-auto{
+overflow: auto!important;
 }

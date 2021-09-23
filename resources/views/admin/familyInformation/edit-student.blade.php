@@ -23,7 +23,7 @@
             <input type="hidden" value="{{ $student->id }}" id='id' name="id">
           </div>
         </div>
-        <div class="col-12"> Date Created:{{ $student->created_at->format('M j, Y') }}
+        <div class="col-12"> Date Created: {{ $student->created_at->format('M j, Y') }}
         </div>
       </div>
     </div>
@@ -167,7 +167,7 @@
       </div>
     </section>
 
-    <div class="modal fade bd-example-modal-lg" id="studentsDetailsModal" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg pt-5 " id="studentsDetailsModal" tabindex="-1" role="dialog"
       aria-labelledby="studentGraduationModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -323,7 +323,7 @@
           </div>
         </section>
         {{-- Student-activityModal --}}
-        <div class="modal fade bd-example-modal-lg" id="Student-activityModal" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg pt-5 " id="Student-activityModal" tabindex="-1" role="dialog"
           aria-labelledby="#Student-activityModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -409,7 +409,7 @@
             </div>
           </div>
         </section>
-        <div class="modal fade bd-example-modal-lg" id="enrollmentsModal" tabindex="-1" role="dialog"
+        <div class=" pt-" id="enrollmentsModal" tabindex="-1" role="dialog"
           aria-labelledby="enrollmentsModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -639,7 +639,7 @@
             </div>
           </div>
         </section>
-        <div class="modal fade bd-example-modal-lg" id="transcriptModal" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg pt-5 " id="transcriptModal" tabindex="-1" role="dialog"
           aria-labelledby="transcriptModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -791,7 +791,7 @@
             </div>
           </div>
         </section>
-        <div class="modal fade bd-example-modal-lg" id="recordsModal" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg pt-5 " id="recordsModal" tabindex="-1" role="dialog"
           aria-labelledby="recordsModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -909,7 +909,7 @@
             </div>
           </div>
         </section>
-        <div class="modal fade bd-example-modal-lg" id="documentsModal" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg pt-5 " id="documentsModal" tabindex="-1" role="dialog"
           aria-labelledby="documentsModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

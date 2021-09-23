@@ -208,6 +208,7 @@ class ParentController extends Controller
         $studentData = $parent->studentProfile()->get();
         $studentId = collect($studentData)->pluck('id');
         $transcations =   Cart::where('parent_profile_id', $id)->get();
+
         $getNotes = Notes::where('parent_profile_id', $id)->get();
         $recordTransfer = RecordTransfer::where('parent_profile_id', $id)->get();
         //$enrollment_periods = StudentProfile::find($id)->enrollmentPeriods()->get();
@@ -386,12 +387,15 @@ class ParentController extends Controller
                 case 'order-detail_enrollment':
                     if ($request->get('status') == 'paid') {
                         $transction = new TransactionsMethod();
-                        $transction->transcation_id   = $request->get('enrollment_transction_id');
-                        $transction->payment_mode = $request->get('enrollment_pay_mode');
+                        $transction->transcation_id   = $request->get('enrollment_transction_id') ? $request->get('enrollment_transction_id')  : substr(uniqid(), 0, 12);;
+                        $transction->payment_mode = $request->get('enrollment_pay_mode') ? $request->get('enrollment_pay_mode') : '';
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('amount');
                         $transction->status = $request->get('status');
+                        $transction->item_type = 'enrollment_period';
+                        $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
+                        $student = StudentProfile::where('id', $request->get('student_id'))->first();
                     }
 
                     $enrollment_period = new EnrollmentPeriods();
@@ -410,6 +414,19 @@ class ParentController extends Controller
                         $cart->parent_profile_id = $request->get('parent_id');
                         $cart->save();
                     }
+                    if ($request->get('status') == 'paid') {
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $student->first_name;
+                        $dashboard->amount =  $request->get('amount');
+                        $dashboard->related_to = 'Student Enrolled';
+                        $dashboard->student_profile_id  = $request->get('student_id');
+                        $dashboard->transaction_id =  $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $enrollment_period->id;
+                        $dashboard->save();
+                    }
+
+
                     $enroll_payment = new EnrollmentPayment();
                     $enroll_payment->enrollment_period_id  = $enrollment_period->id;
                     $enroll_payment->amount = $request->get('amount');
@@ -444,6 +461,8 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('total_val');
                         $transction->status = $request->get('status');
+                        $transction->item_type = 'transcript';
+                        $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
                     }
 
@@ -477,6 +496,18 @@ class ParentController extends Controller
                                 ]);
                             }
                         }
+                        $student = StudentProfile::where('id', $request->get('student_id_val'))->first();
+                        if ($request->get('status') == 'paid') {
+                            $dashboard = new Dashboard();
+                            $dashboard->linked_to = $student->first_name;
+                            $dashboard->amount =  $request->get('amount');
+                            $dashboard->related_to = 'Transcript Ordered';
+                            $dashboard->student_profile_id  = $request->get('student_id_val');
+                            $dashboard->transaction_id = $transction->transcation_id;
+                            $dashboard->parent_profile_id = $request->get('parent_id');
+                            $dashboard->item_type_id = $transcript->id;
+                            $dashboard->save();
+                        }
                     }
 
                     break;
@@ -489,12 +520,16 @@ class ParentController extends Controller
                     $custom_payment->amount = $request->get('custom_letter_amount');
                     $custom_payment->paying_for = $request->get('custom_letter_paying');
                     $custom_payment->type_of_payment = 'Custom Letter';
-                    $custom_payment->transcation_id = $request->get('custom_letter_transction');
+                    if ($request->get('custom_letter_status') == 'paid') {
+                        $custom_payment->transcation_id = $request->get('custom_letter_transction') ?  $request->get('custom_letter_transction') : substr(uniqid(), 0, 12);
+                    }
+
                     $custom_payment->payment_mode = $request->get('custom_letter_payment_mode');
                     $custom_payment->status = $request->get('custom_letter_status');
                     $custom_payment->save();
+                    $parent = ParentProfile::where('id', $request->get('parent_id'))->first();
                     if (
-                        !empty($request->get('custom_letter_payment_mode'))
+                        $request->get('custom_letter_status') == 'paid'
                     ) {
 
                         $transction = new TransactionsMethod();
@@ -503,7 +538,19 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('custom_letter_amount');
                         $transction->status = $request->get('custom_letter_status');
+                        $transction->item_type = 'Custom Letter';
                         $transction->save();
+
+
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('custom_letter_amount');
+                        $dashboard->related_to = 'Custom Letter';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $custom_payment->id;
+                        $dashboard->save();
                     }
                     if ($request->get('custom_letter_status') == 'pending') {
                         if (!Cart::where('item_type', 'custom_letter')->exists()) {
@@ -517,17 +564,20 @@ class ParentController extends Controller
                     break;
 
                 case 'order-detail_OrderPostage':
+                    // CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
                     OrderPostage::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_value'))->delete();
                     $charge = Country::where('country', $request->get('postage_country'))->select('postage_charges')->first();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
+                    $parent = ParentProfile::where('id', $request->get('parent_value'))->first();
                     if ($status == 'paid') {
 
                         $transction = new TransactionsMethod();
-                        $transction->transcation_id   = $request->get('postage_transaction_id');
-                        $transction->payment_mode = $request->get('postage_payment_mode');
+                        $transction->transcation_id   = $request->get('postage_transaction_id') ? $request->get('postage_transaction_id') : substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('postage_payment_mode') ? $request->get('postage_payment_mode') : '';
                         $transction->parent_profile_id = $request->get('parent_value');
                         $transction->amount =  $request->get('postage_total');
                         $transction->status = $status;
+                        $transction->item_type = 'Postage Payment';
                         $transction->save();
                     }
                     $postage_type = "postage";
@@ -549,6 +599,17 @@ class ParentController extends Controller
                             ]);
                         }
                     }
+                    if ($request->get('paymentDetails') == 'paid') {
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('postage_total');
+                        $dashboard->related_to = 'Postage Ordered';
+
+                        $dashboard->transaction_id =  $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $postage->id;
+                        $dashboard->save();
+                    }
 
                     break;
                 case 'order-detail_Notarization':
@@ -556,9 +617,10 @@ class ParentController extends Controller
                     $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
                         ->where('pay_for', 'notarization')->where('status', 'pending')
                         ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
-                    if ($clearpendingPayments) {
-                        $deletedata = Notarization::where('id', $clearpendingPayments->notarization_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
-                        $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
+
+                    if ($clearpendingPayments && $request->get('noatrization_status') == 'pending') {
+                        Notarization::where('id', $clearpendingPayments->notarization_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
+                        NotarizationPayment::whereNull('transcation_id')
                             ->where('pay_for', 'notarization')->where('status', 'pending')
                             ->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
                     }
@@ -566,13 +628,14 @@ class ParentController extends Controller
                     $total_notar = $request->get('notar_amount') + $request->get('shipping_amount');
                     $notarization_type = "notarization";
                     $status = ($request->get('noatrization_status') == 'pending') ? 'pending' : 'paid';
-                    if ($status == 'paid') {
+                    if ($request->get('noatrization_status') == 'paid') {
                         $transction = new TransactionsMethod();
-                        $transction->transcation_id   =   $request->get('notar_transaction_id');
-                        $transction->payment_mode = $request->get('notar_payment_mode');
+                        $transction->transcation_id   =   $request->get('notar_transaction_id') ? $request->get('notar_transaction_id') : substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('notar_payment_mode') ? $request->get('notar_payment_mode') : "";
                         $transction->parent_profile_id = $request->get('parent_profile_id');
                         $transction->amount = $total_notar;
                         $transction->status = $request->get('noatrization_status');
+                        $transction->item_type = 'Notarization Payment';
                         $transction->save();
                     }
 
@@ -583,7 +646,7 @@ class ParentController extends Controller
                     $notarization->country = $request->get('shipping_country');
                     $notarization->status = $request->get('noatrization_status');
                     $notarization->save();
-
+                    $parent = ParentProfile::where('id', $request->get('parent_profile_id'))->first();
 
                     $notarization_payment = new NotarizationPayment();
                     $notarization_payment->parent_profile_id   = $request->get('parent_profile_id');
@@ -591,8 +654,22 @@ class ParentController extends Controller
                     $notarization_payment->amount = $total_notar;
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "notarization";
-                    $notarization_payment->save();
+                    if ($request->get('noatrization_status') == 'paid') {
+                        $notarization_payment->transcation_id = $request->get('notar_transaction_id')  ? $request->get('notar_transaction_id') : substr(uniqid(), 0, 12);
+                    }
 
+                    $notarization_payment->save();
+                    if ($request->get('noatrization_status') == 'paid') {
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $total_notar;
+                        $dashboard->related_to = 'Notarization/Appostile Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $notarization_payment->id;
+                        $dashboard->save();
+                    }
                     if ($status == 'pending') {
                         Cart::updateOrCreate(
                             [
@@ -612,7 +689,7 @@ class ParentController extends Controller
                     $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
                         ->where('pay_for', 'apostille')->where('status', 'pending')
                         ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
-                    if ($clearpendingPayments) {
+                    if ($clearpendingPayments && $request->get('apostille_status') == 'pending') {
                         $deletedata = Apostille::where('id', $clearpendingPayments->apostille_id)->where('status', 'pending')->where('parent_profile_id', $request->get('parent_profile_id'))->delete();
                         $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
                             ->where('pay_for', 'apostille')->where('status', 'pending')
@@ -629,15 +706,7 @@ class ParentController extends Controller
                     $status = ($request->get('apostille_status') == 'pending') ? 'pending' : 'paid';
                     $amount_total = $request->get('apostille_amount') + $request->get('ship_amount');
 
-                    if ($status == 'paid') {
-                        $transction = new TransactionsMethod();
-                        $transction->transcation_id   =   $request->get('apostille_transaction_id');
-                        $transction->payment_mode = $request->get('apostille_payment_mode');
-                        $transction->parent_profile_id = $request->get('parent_profile_id');
-                        $transction->amount = $amount_total;
-                        $transction->status = $status;
-                        $transction->save();
-                    }
+
 
                     $apostille = new Apostille();
                     $apostille->parent_profile_id   = $request->get('parent_profile_id');
@@ -655,7 +724,29 @@ class ParentController extends Controller
                     $notarization_payment->status = $status;
                     $notarization_payment->pay_for = "apostille";
                     $notarization_payment->save();
+                    $parent = ParentProfile::where('id', $request->get('parent_profile_id'))->first();
+                    if ($status == 'paid') {
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   =   $request->get('apostille_transaction_id') ? $request->get('apostille_transaction_id')  : substr(uniqid(), 0, 12);
+                        $transction->payment_mode = $request->get('apostille_payment_mode') ? $request->get('apostille_payment_mode') : 'By Admin';
+                        $transction->parent_profile_id = $request->get('parent_profile_id');
+                        $transction->amount = $amount_total;
+                        $transction->status = $status;
+                        $transction->item_type = 'Apostile';
+                        $transction->save();
 
+                        if ($request->get('apostille_status') == 'paid') {
+                            $dashboard = new Dashboard();
+                            $dashboard->linked_to = $parent->p1_first_name;
+                            $dashboard->amount =  $request->get('apostille_amount');
+                            $dashboard->related_to = 'Notarization/Appostile Ordered';
+
+                            $dashboard->transaction_id = $transction->transcation_id;
+                            $dashboard->parent_profile_id = $request->get('parent_profile_id');
+                            $dashboard->item_type_id = $notarization_payment->id;
+                            $dashboard->save();
+                        }
+                    }
                     if ($status == 'pending') {
                         Cart::updateOrCreate(
                             [
@@ -672,6 +763,7 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_CustomPayment':
+
                     CustomPayment::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('parent_id'))->delete();
                     $custom_payment = new CustomPayment();
                     $custom_payment->parent_profile_id = $request->get('parent_id');
@@ -682,16 +774,28 @@ class ParentController extends Controller
                     $custom_payment->payment_mode = $request->get('custom_payment_mode');
                     $custom_payment->status = $request->get('custom_status');
                     $custom_payment->save();
+                    $parent = ParentProfile::where('id', $request->get('parent_id'))->first();
                     if (
-                        !empty($request->get('custom_payment_mode'))
+                        $request->get('custom_status') == 'paid'
                     ) {
                         $transction = new TransactionsMethod();
                         $transction->transcation_id   = $request->get('custom_transcation') ? $request->get('custom_transcation')  : substr(uniqid(), 0, 12);
-                        $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : 'pending';
+                        $transction->payment_mode = $request->get('custom_payment_mode') ? $request->get('custom_payment_mode')  : ' ';
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('custom_amount');
                         $transction->status = $request->get('custom_status');
+                        $transction->item_type = 'Custom Payment';
                         $transction->save();
+
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('custom_amount');
+                        $dashboard->related_to = 'Custom Payment Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('parent_id');
+                        $dashboard->item_type_id = $custom_payment->id;
+                        $dashboard->save();
                     }
                     if ($request->get('custom_status') == 'pending') {
                         if (!Cart::where('item_type', 'custom')->exists()) {
@@ -708,15 +812,7 @@ class ParentController extends Controller
 
                     $clearpendingPayments = OrderPersonalConsultation::whereNull('transcation_id')->where('status', 'pending')->where('parent_profile_id', $request->get('p1_profile_id'))->delete();
                     $status = ($request->get('paymentDetails') == 'pending') ? 'pending' : 'paid';
-                    if ($status == 'paid') {
-                        $transction = new TransactionsMethod();
-                        $transction->transcation_id   = $request->get('consul_transaction_id');
-                        $transction->payment_mode =  $request->get('consul_payment_mode');
-                        $transction->parent_profile_id = $request->get('p1_profile_id');
-                        $transction->amount = $request->get('consul_amount');
-                        $transction->status = $status;
-                        $transction->save();
-                    }
+
                     $consultation_type = "order_consultation";
                     $consultation = new OrderPersonalConsultation();
                     $consultation->parent_profile_id   = $request->get('p1_profile_id');
@@ -729,6 +825,28 @@ class ParentController extends Controller
                     $consultation->payment_mode = $request->get('consul_payment_mode');
                     $consultation->status = $status;
                     $consultation->save();
+
+                    $parent = ParentProfile::where('id', $request->get('p1_profile_id'))->first();
+                    if ($status == 'paid') {
+                        $transction = new TransactionsMethod();
+                        $transction->transcation_id   = $request->get('consul_transaction_id') ? $request->get('consul_transaction_id')  : substr(uniqid(), 0, 12);
+                        $transction->payment_mode =  $request->get('consul_payment_mode') ?  $request->get('consul_payment_mode') : 'By Admin';
+                        $transction->parent_profile_id = $request->get('p1_profile_id');
+                        $transction->amount = $request->get('consul_amount');
+                        $transction->status = $status;
+                        $transction->item_type = 'Personal Consulatation Ordered';
+                        $transction->save();
+
+                        $dashboard = new Dashboard();
+                        $dashboard->linked_to = $parent->p1_first_name;
+                        $dashboard->amount =  $request->get('consul_amount');
+                        $dashboard->related_to = 'Personal Consulatation Ordered';
+
+                        $dashboard->transaction_id = $transction->transcation_id;
+                        $dashboard->parent_profile_id = $request->get('p1_profile_id');
+                        $dashboard->item_type_id = $consultation->id;
+                        $dashboard->save();
+                    }
 
                     if ($status) {
                         if (!Cart::where('item_type', $consultation_type)->exists()) {
@@ -888,9 +1006,9 @@ class ParentController extends Controller
                 if ($country) :
                     foreach ($country as $key => $value) {
 
-                        $selected  = ( $input['keyword'] && $input['keyword'] == $value->country ) ? 'selected' : '';
+                        $selected  = ($input['keyword'] && $input['keyword'] == $value->country) ? 'selected' : '';
 
-                        $option  = '<option '.$selected.' value="' . $value->country . '">' . $value->country . '</option>';
+                        $option  = '<option ' . $selected . ' value="' . $value->country . '">' . $value->country . '</option>';
                         array_push($countries, $option);
                     }
                     return $countries;
