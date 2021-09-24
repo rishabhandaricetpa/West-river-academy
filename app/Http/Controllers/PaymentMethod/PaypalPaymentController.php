@@ -148,7 +148,7 @@ class PaypalPaymentController extends Controller
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
         $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
         $items = collect($cartItems)->pluck('item_type')->toArray();
-        $item_type = implode(",", $items);
+        $item_type = implode(", ", $items);
         $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
         $student_id = implode(",", ($student_data));
         $paypal = new TransactionsMethod();
@@ -160,7 +160,7 @@ class PaypalPaymentController extends Controller
         $paypal->coupon_code = $coupon_code;
         // dd('coupon code', $paypal->coupon_code);
         $paypal->coupon_amount = $coupon_amount;
-        $paypal->item_type = $item_type;
+        $paypal->item_type = str_replace("enrollment_period", "Enrollment", $item_type);
         $paypal->student_profile_id = $student_id;
         $paypal->save();
 

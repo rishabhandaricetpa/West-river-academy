@@ -392,7 +392,7 @@ class ParentController extends Controller
                         $transction->parent_profile_id = $request->get('parent_id');
                         $transction->amount = $request->get('amount');
                         $transction->status = $request->get('status');
-                        $transction->item_type = 'enrollment_period';
+                        $transction->item_type = 'Enrollment';
                         $transction->student_profile_id = $request->get('student_id');
                         $transction->save();
                         $student = StudentProfile::where('id', $request->get('student_id'))->first();

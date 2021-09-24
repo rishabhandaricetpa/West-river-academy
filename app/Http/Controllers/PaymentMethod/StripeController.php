@@ -71,7 +71,7 @@ class StripeController extends Controller
                 $parentProfileData = User::find($userId)->parentProfile()->first();
                 $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
                 $items = collect($cartItems)->pluck('item_type')->toArray();
-                $item_type = implode(",", $items);
+                $item_type = implode(", ", $items);
                 $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
                 $student_id = implode(",", ($student_data));
                 $paymentinfo = $parentProfileData->TransactionsMethod()->create([
@@ -82,7 +82,7 @@ class StripeController extends Controller
                     'status' => $charges->status,
                     'coupon_code' => $coupon_code,
                     'coupon_amount' => $coupon_amount,
-                    'item_type' => $item_type,
+                    'item_type' =>  str_replace("enrollment_period", "Enrollment", $item_type),
                     'student_profile_id' => $student_id,
                 ]);
 
