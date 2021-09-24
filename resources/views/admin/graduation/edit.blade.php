@@ -8,11 +8,11 @@
       enctype="multipart/form-data">
       @csrf
       @method('put')
-      Student Name : <a href="{{ route('admin.edit-student',$graduation->student_profile_id)}}"class="form-group col-sm-6">
-         {{ $graduation->student->fullname }} edit-student
+      Student Name: <a href="{{ route('admin.edit-student',$graduation->student_profile_id)}}"class="form-group col-sm-6">
+         {{ $graduation->student->fullname }} 
       </a>
       <div class="form-group col-sm-6">
-        Student Email : <a class="transform-none" href="mailto:{{ $graduation->student->email }}">
+        Student Email: <a class="transform-none" href="mailto:{{ $graduation->student->email }}">
           {{ $graduation->student->email }}</a>
       </div>
 
@@ -21,21 +21,21 @@
       </div>
 
       <div class="form-group col-sm-6">
-        Parent Email : <a class="transform-none"
+        Parent Email: <a class="transform-none"
           href="mailto:{{{ $graduation->parent->p1_email }}}">{{{ $graduation->parent->p1_email }}}</a>
       </div>
 
       <div class="form-group col-sm-6">
         Grade Details :
         <ul>
-          <li>Grade 9 : {{ $graduation->grade_9_info }}</li>
-          <li>Grade 10 : {{ $graduation->grade_10_info }}</li>
-          <li>Grade 11 : {{ $graduation->grade_11_info }}</li>
+          <li>Grade 9: {{ $graduation->grade_9_info }}</li>
+          <li>Grade 10: {{ $graduation->grade_10_info }}</li>
+          <li>Grade 11: {{ $graduation->grade_11_info }}</li>
         </ul>
       </div>
 
       <div class="form-group col-sm-6">
-        Country : {{ $graduation->parent->country }}
+        Country: {{ $graduation->parent->country }}
       </div>
 
       <div class="form-group col-sm-6">

@@ -229,9 +229,9 @@
                                 <form class="is-readonly row" id="sampleForm">
                                     @csrf
                                     <div class="col-md-6">
-                                        <h3 class="mt-3">Parent-details-1</h3>
+                                        <h3 class="mt-3">Parent 1 Details</h3>
                                         <div class="form-group">
-                                            <label for="p1_first_name">First Name :</label>
+                                            <label for="p1_first_name">First Name: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_first_name"
                                                 id="p1_first_name" placeholder="" value="{{ $parent->p1_first_name }}"
                                                 disabled required>
@@ -239,38 +239,38 @@
                                         <div class="form-group">
                                             <input type='hidden' id="parent_id" name="parent_id"
                                                 value="{{ $parent->id }}">
-                                            <label for="p1_middle_name">Middle Name :</label>
+                                            <label for="p1_middle_name">Middle Name: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_middle_name"
                                                 id="p1_middle_name" placeholder="" value="{{ $parent->p1_middle_name }}"
                                                 disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_last_name">Last Name :</label>
+                                            <label for="p1_last_name">Last Name: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_last_name"
                                                 id="p1_last_name" placeholder="" value="{{ $parent->p1_last_name }}"
                                                 disabled required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_email">Email :</label>
+                                            <label for="p1_email">Email: </label>
                                             <input type="email" class="form-control is-disabled" name="p1_email"
                                                 id="p1_email" placeholder="" value="{{ $parent->p1_email }}" disabled
                                                 required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_cell_phone">Phone :</label>
+                                            <label for="p1_cell_phone">Cell Phone: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_cell_phone"
                                                 id="p1_cell_phone" placeholder="" value="{{ $parent->p1_cell_phone }}"
                                                 disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_home_phone"> Home Phone :</label>
+                                            <label for="p1_home_phone"> Home Phone: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_home_phone"
                                                 id="p1_home_phone" placeholder="" value="{{ $parent->p1_home_phone }}"
                                                 disabled>
                                         </div>
                                         <h3 class="mt-3">Address</h3>
                                         <div class="form-group">
-                                            <label for="street_address">Street :</label>
+                                            <label for="street_address">Street: </label>
                                             <input type="text" class="form-control is-disabled" id="street_address"
                                                 placeholder="" name="street_address"
                                                 value="{{ $parent->street_address }}" disabled required>
@@ -278,13 +278,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">City :</label>
+                                                    <label for="exampleInputEmail1">City: </label>
                                                     <input type="text" class="form-control is-disabled" id="city"
                                                         placeholder="" name="city" value="{{ $parent->city }}" disabled
                                                         required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">State :</label>
+                                                    <label for="exampleInputEmail1">State: </label>
                                                     <input type="text" class="form-control is-disabled" id="state"
                                                         placeholder="" name="state" value="{{ $parent->state }}" disabled
                                                         required>
@@ -292,13 +292,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Country :</label>
+                                                    <label for="exampleInputEmail1">Country: </label>
                                                     <input type="text" class="form-control is-disabled" id="country"
                                                         placeholder="" name="country" value="{{ $parent->country }}"
                                                         disabled required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Zip Code :</label>
+                                                    <label for="exampleInputEmail1">Zip Code: </label>
                                                     <input type="text" class="form-control is-disabled" id="zip_code"
                                                         placeholder="" name="state" value="{{ $parent->zip_code }}"
                                                         disabled required>
@@ -309,21 +309,21 @@
 
                                     {{-- parents details 2 --}}
                                     <div class="col-md-6">
-                                        <h3 class="mt-3">Parent-details-2</h3>
+                                        <h3 class="mt-3">Parent 2 Details</h3>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">First Name :</label>
+                                            <label for="exampleInputPassword1">First Name: </label>
                                             <input type="text" class="form-control is-disabled" id="p2_first_name"
                                                 placeholder="" value="{{ $parent->p2_first_name }}" name="p2_first_name"
                                                 disabled>
                                         </div>
                                         <div class=" form-group">
-                                            <label for="exampleInputPassword1">Middle Name :</label>
+                                            <label for="exampleInputPassword1">Middle Name: </label>
                                             <input type="text" class="form-control is-disabled" id="p2_middle_name"
                                                 placeholder="" name="p2_middle_name"
                                                 value="{{ $parent->p2_middle_name }}" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Last Name :</label>
+                                            <label for="exampleInputPassword1">Last Name: </label>
                                             <input type="text" class="form-control is-disabled" id="p2_last_name"
                                                 placeholder="" name="p2_last_name" value="{{ $parent->p2_last_name }}"
                                                 disabled>
@@ -334,19 +334,19 @@
                                                 placeholder="" name="p2_email" value="{{ $parent->p2_email }}" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Phone :</label>
+                                            <label for="exampleInputEmail1">Cell Phone: </label>
                                             <input type="email" class="form-control is-disabled" name="p2_cell_phone"
                                                 id="p2_cell_phone" placeholder="" value="{{ $parent->p2_cell_phone }}"
                                                 disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Home Phone :</label>
+                                            <label for="exampleInputEmail1">Home Phone: </label>
                                             <input type="email" class="form-control is-disabled" name="p2_home_phone"
                                                 id="p2_home_phone" placeholder="" value="{{ $parent->p2_home_phone }}"
                                                 disabled>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <h3 class="mt-3 pr-5 mb-2">Address </h3>
+                                            <h3 class="mt-3 pr-5 mb-2">Address: </h3>
                                             <div class="text-right d-flex align-items-center">
                                                 <input class="mt-3 mb-3" type="checkbox" id="check" name="check" value=""
                                                     disabled>
@@ -354,7 +354,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Street :</label>
+                                            <label for="exampleInputEmail1">Street: </label>
                                             <input type="text" class="form-control is-disabled" placeholder=""
                                                 id="p2_street_address" value="{{ $parent->p2_street_address }}"
                                                 name="street2" disabled>
@@ -362,24 +362,24 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">City :</label>
+                                                    <label for="exampleInputEmail1">City: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_city }}" id="p2_city" disabled>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">State :</label>
+                                                    <label for="exampleInputEmail1">State: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_state }}" id="p2_state" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Country :</label>
+                                                    <label for="exampleInputEmail1">Country: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_country }}" id="p2_country" disabled>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Zip code :</label>
+                                                    <label for="exampleInputEmail1">Zip code: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_zip_code }}" id="p2_zip_code" disabled>
                                                 </div>

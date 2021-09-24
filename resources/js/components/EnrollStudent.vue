@@ -424,7 +424,7 @@ export default {
       const year = oldDate.getFullYear();
       const oDate = oldDate.getDate();
       const month = oldDate.getMonth();
-      return new Date(year + 1, month, oDate); 
+      return new Date(year + 1, month, oDate +1); 
     },
      calcMinDate(date){
       const oldDate = new Date(date);

@@ -78,7 +78,7 @@ class PaymentController extends Controller
 
                 Notification::create([
                     'parent_profile_id' => $request->parent_id,
-                    'content' => 'Your payment has been received for student ' . $request->student_name . ' by payment mode '
+                    'content' => 'Your payment for Enrollment of ' . $request->student_name . ' has been received by '
                         . $enrollment_payment->payment_mode,
                     'type' => 'offline_paid',
                     'read' => 'false'

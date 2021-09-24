@@ -141,7 +141,7 @@ class StudentController extends Controller
             ],
             [
                 'parent_profile_id' => $parentId,
-                'content' => 'Pay Amount' . ' : ' . $amount,
+                'content' => 'Pay Amount' . ': $' . $amount,
                 'type' => 'PayAmount',
                 'read' => 'false',
             ]

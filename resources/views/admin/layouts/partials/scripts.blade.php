@@ -380,13 +380,13 @@
                     "render": function(data, type, row, meta) {
                         return `
                           <ul>
-                            <li>
+                            <li  class="transform-none" >
                                 Grade 9 : ${ row.grade_9_info }
                             </li>
-                            <li>
+                            <li class="transform-none">
                                 Grade 10 : ${ row.grade_10_info }
                             </li>
-                            <li>
+                            <li class="transform-none">
                                 Grade 11 : ${ row.grade_11_info }
                             </li>
                           </ul>

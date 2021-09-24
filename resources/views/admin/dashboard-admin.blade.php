@@ -42,9 +42,9 @@
 
                                     <th>Date Created</th>
                                     <th>Family Name</th>
-                                    <th>Orders</th>
+                                    <th>Order</th>
                                     <th>Amount</th>
-                                    <th>Notes</th>
+                                    <th>Note</th>
                                     <th>Assigned To:</th>
 
                                     <th>Action</th>
