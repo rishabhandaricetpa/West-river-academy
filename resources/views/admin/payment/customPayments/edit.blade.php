@@ -7,7 +7,7 @@
             <h1>Custom Payment Details</h1>
             <div class="form-wrap border py-5 px-25 position-relative">
                 <!-- form start -->
-                <h3 class="pr-3"> Payment Status of Parent :<a
+                <h3 class="pr-3"> Payment Status of Parent: <a
                         href="{{ route('admin.parent.edit', $customPaymentsData->parent_profile_id) }}">{{ $customPaymentsData->ParentProfile->p1_first_name }}</a>
                 </h3>
                 <form method="post" class="row"

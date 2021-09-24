@@ -5,7 +5,7 @@
         <main class="position-relative container form-content mt-4">
             <h1 class="text-center text-white text-uppercase">transcript wizard</h1>
             <div class="form-wrap border bg-light py-5 px-25 dashboard-info">
-                <h3> Select a Foreign course:</h3>
+                <h3> Select a Foreign Language course:</h3>
                 <foreign-transcript-course :required_credit='@json($selectedCreditRequired)'
                 :trans_id='@json($trans_id)'
                     :total_credits='@json($total_credits)' :all_credits='@json($all_credits)'
