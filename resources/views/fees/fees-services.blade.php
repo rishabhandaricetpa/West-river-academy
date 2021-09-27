@@ -17,11 +17,11 @@
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Fee for the first student in the family</p>
             <span>Annual</span>
-            <span class="text-secondary">${{ getFeeDetails('first_student_annual') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('first_student_annual') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Second Semester Only</p>
-            <span class="text-secondary">${{ getFeeDetails('first_student_half') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('first_student_half') }}</span>
           </div>
         </div>
       </div>
@@ -38,11 +38,11 @@
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Fee for each additional student in the same family</p>
             <span>Annual</span>
-            <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('additional_student_annual') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Second Semester Only</p>
-            <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('additional_student_annual') }}</span>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Per student fee covers Graduation Project and high school transcript</p>
-            <span class="text-secondary">${{ getFeeDetails('graduation') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('graduation') }}</span>
           </div>
         </div>
       </div>
@@ -74,15 +74,15 @@
         <div class="col-sm-9">
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Notarization per document fee</p>
-            <span class="text-secondary">${{ getFeeDetails('notarization_doc_fee') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('notarization_doc_fee') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Apostille per document fee</p>
-            <span class="text-secondary">${{ getFeeDetails('apostille_doc_fee') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('apostille_doc_fee') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">Apostille Package includes 2 documents plus Express Mail </p>
-            <span class="text-secondary">${{ getFeeDetails('apostille') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('apostille') }}</span>
           </div>
         </div>
       </div>
@@ -98,11 +98,11 @@
         <div class="col-sm-9 d-sm-flex">
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">For an initial transcript for a student</p>
-            <span class="text-secondary">${{ getFeeDetails('transcript') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('transcript') }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <p class="max-width__275">For a subsequest transcript if an initial one has been issued</p>
-            <span class="text-secondary">${{ getFeeDetails('transcript_edit') }}</span>
+            <span class="text-secondary lato">$ {{ getFeeDetails('transcript_edit') }}</span>
           </div>
         </div>
       </div>
@@ -125,26 +125,26 @@
             <table width="100%">
               <tr>
                 <th>Express Mail Tier 1 (for most countries)</th>
-                <td class="text-secondary text-right">${{ getFeeDetails('express_international') }}</td>
+                <td class="text-secondary text-right lato">$ {{ getFeeDetails('express_international') }}</td>
               </tr>
               <tr>
                 <th>Express Mail Tier 2 (for Hungary, Philippines, Romania, South Africa, Spain)</th>
-                <td class="text-secondary text-right">${{ getFeeDetails('global_guaranteed_international') }}</td>
+                <td class="text-secondary text-right lato">$ {{ getFeeDetails('global_guaranteed_international') }}</td>
               </tr>
               <tr>
                 <th>Express Mail Tier 3 (for Argentina and Brazil)</th>
-                <td class="text-secondary text-right">${{ getFeeDetails('priority_international') }}</td>
+                <td class="text-secondary text-right lato">$ {{ getFeeDetails('priority_international') }}</td>
               </tr>
             </table>
             <h3 style="text-transform: uppercase;">USA :</h3>
             <table width="100%">
               <tr>
                 <th>Priority</th>
-                <td class="text-secondary text-right">${{ getFeeDetails('priority_usa') }}</td>
+                <td class="text-secondary text-right lato">$ {{ getFeeDetails('priority_usa') }}</td>
               </tr>
               <tr>
                 <th>Express</th>
-                <td class="text-secondary text-right">${{ getFeeDetails('express_usa') }}</td>
+                <td class="text-secondary text-right lato">$ {{ getFeeDetails('express_usa') }}</td>
               </tr>
             </table>
           </div>
