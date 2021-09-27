@@ -6,7 +6,7 @@
       :key="anotherCourse.id"
     >
       <div class="position-relative">
-        <p class="delete-course">Delete Course </p>
+        <p v-if="index>0" class="delete-course">Delete Course </p>
         <span v-if="index>0" class="remove place-top" @click="removeForeignCourse(index)"
           ><i class="fas fa-times"></i>
         </span>

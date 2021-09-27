@@ -177,22 +177,22 @@ class StudentController extends Controller
     {
         $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $request->input('enrolment_id'))->first();
         if ($request->input('isDobCity')) {
-            $confirmation_data->isDobCity = $request->input('isDobCity');
+            $confirmation_data->isDobCity = 1;
         } else {
             $confirmation_data->isDobCity = 0;
         }
         if ($request->input('IsMotherName')) {
-            $confirmation_data->IsMotherName = $request->input('IsMotherName');
+            $confirmation_data->IsMotherName = 1;
         } else {
             $confirmation_data->IsMotherName = 0;
         }
         if ($request->input('isGrade')) {
-            $confirmation_data->isGrade = $request->input('isGrade');
+            $confirmation_data->isGrade = 1;
         } else {
             $confirmation_data->isGrade = 0;
         }
         if ($request->input('isStudentId')) {
-            $confirmation_data->isStudentId = $request->input('isStudentId');
+            $confirmation_data->isStudentId = 1;
         } else {
             $confirmation_data->isStudentId = 0;
         }

@@ -135,7 +135,7 @@
        </div>
     </div>
 
-       <div v-if="countryname==='Hungary'" class="form-group d-sm-flex mb-2">
+       <div class="form-group d-sm-flex mb-2">
         <label for="">Mother's Name</label>
         <div class="row">
           <div class="col-md-5 col-lg-3">
@@ -157,7 +157,7 @@
           </div>
         </div>
       </div>
-       <div v-if="countryname==='Hungary'" class="form-group d-sm-flex mb-2">
+       <div  class="form-group d-sm-flex mb-2">
         <label for="">Birth City</label>
         <div class="row">
           <div class="col-md-5 col-lg-3">

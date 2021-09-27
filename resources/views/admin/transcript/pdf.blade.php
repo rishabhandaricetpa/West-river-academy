@@ -171,7 +171,7 @@
                 <td width="15%"><span
                         style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
                 </td>
-                <td width="35%" style="text-align:right;"> <img src="../public/images/Stamp.png"
+                <td width="35%" style="text-align:right;"> <img src="{{ asset('images/Stamp.png') }}"
                         style="width:150px;heigth:150px;object-fit:contain;" alt="logo"></td>
             </tr>
         </tbody>

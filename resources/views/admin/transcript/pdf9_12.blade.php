@@ -223,7 +223,7 @@
                    <table style="width:100%;">
                        <tr style="width:100%;">
                            <td style="text-align:center;width:100%;" colspan="2">
-                               <div style="margin:0 auto;"><img src="../public/images/Stamp.png"
+                               <div style="margin:0 auto;"><img src="{{ asset('images/Stamp.png') }}"
                                        style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp">
                                </div>
                            </td>
