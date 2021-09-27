@@ -28,7 +28,7 @@
              
               v-on:click='checkMotherName()'
             />
-        <span :style="[this.form.IsMotherName ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">   Mother's Maiden Name </span>
+        <span :style="[this.form.mother_name == ''|| this.form.mother_name == null ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">   Mother's Maiden Name </span>
             <span class="IsMotherName"></span>
           </label>
         </div>
@@ -39,8 +39,9 @@
             class='line-through'
             v-model="form.isDobCity"
              v-on:change='checkisDobCity()'
-            > <span >Birth City</span>
-            <span ></span>
+            > 
+         <span :style="[ (this.form.dobCity == null || this.form.dobCity == '') ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">  Birth City </span>
+
         </label>
         <label class="pl-0 container">
           <input
@@ -49,7 +50,7 @@
             v-model="form.isStudentId"
              v-on:change='checkisNationalId()'
           />
-         National ID
+       <span :style="[ (this.form.nationalId == '' || this.form.nationalId == '') ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">  National ID </span>
           <span class="isStudentId"></span>
         </label>
        
@@ -113,19 +114,19 @@ export default {
     checkMotherName(){
     if (this.form.mother_name == null || this.form.mother_name == '' ) {
         alert('This is information was not provided . Click Add button to add it');
-        this.form.IsMotherName = false;
+       
       }
     },
     checkisDobCity(){
         if (this.form.dobCity == null || this.form.dobCity == '' ) {
         alert('This is information was not provided . Click Add button to add it');
 
-        this.form.isDobCity = false;
+      
       }
     },  checkisNationalId(){
         if (this.form.nationalId == null || this.form.nationalId == '' ) {
         alert('This is information was not provided . Click Add button to add it');
-        this.form.isStudentId = false;
+     
       }
     },
     editInfo(){
@@ -134,7 +135,8 @@ export default {
 
   
     addItems() {
-      
+       
+     
       axios
         .post(
           route("save.confirmationData", [this.student_id, this.gradeid]),
@@ -144,7 +146,9 @@ export default {
           window.location =
             "/viewdownload/" + this.enrollments.id + "/" + this.gradeid;
         })
-        .catch(error => console.log(error));}
+        .catch(error => console.log(error));
+        }
+      
     
   }
 };
