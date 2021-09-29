@@ -40,7 +40,7 @@ class RepresentativeGroupController extends Controller
                 $parent = ParentProfile::where('id', $request->parent_Id)->first();
 
                 $parent->representative_group_id = $rep->id;
-                $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+                $parent->amount = $rep->type == 'Representative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
                 $parent->rep_status = 'active';
                 $parent->save();
             }
@@ -70,7 +70,7 @@ class RepresentativeGroupController extends Controller
 
         $parent = ParentProfile::where('id', $request->parent_Id)->first();
         $parent->representative_group_id = $rep->id;
-        $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+        $parent->amount = $rep->type == 'Representative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
         $parent->rep_status = 'active';
         $parent->save();
 
