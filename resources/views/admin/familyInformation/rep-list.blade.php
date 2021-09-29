@@ -26,7 +26,7 @@
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Type:</label>
                                             <select class="form-control" type="text" id='rep_type'>
-                                                <option value="Respresentative">Representative</option>
+                                                <option value="Representative">Representative</option>
                                                 <option value="Influencer">Influencer</option>
                                             </select>
                                         </div>

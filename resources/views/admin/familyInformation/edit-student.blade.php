@@ -409,7 +409,7 @@
             </div>
           </div>
         </section>
-        <div class=" pt-" id="enrollmentsModal" tabindex="-1" role="dialog"
+        <div class="modal pt-5" id="enrollmentsModal" tabindex="-1" role="dialog"
           aria-labelledby="enrollmentsModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
