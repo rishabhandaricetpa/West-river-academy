@@ -42,7 +42,7 @@ class TransactionsMethod extends Model
             'status' => 'pending',
             'coupon_code' => $coupon_code,
             'coupon_amount' => $coupon_amount,
-            'item_type' =>  $item_type,
+            'item_type' =>   str_replace("enrollment_period", "Enrollment", $item_type),
             'student_profile_id' => $student_id,
         ]);
         $payment_id = $paymentinfo->transcation_id;
