@@ -2,30 +2,28 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ParentProfile;
+use App\Models\RepresentativeAmount;
 use App\Models\RepresentativeGroup;
+use Illuminate\Console\Command;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use DB;
 use Illuminate\Support\Str;
 
-
-use Illuminate\Console\Command;
-
-class UpdateParentRepresentative extends Command
+class ImportRepresentativeAmount extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:parentrep';
+    protected $signature = 'import:repamount';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update parent with rep id';
+    protected $description = 'table representative_amount';
 
     /**
      * Create a new command instance.
@@ -48,7 +46,7 @@ class UpdateParentRepresentative extends Command
         $filePath = base_path('csv/generated.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
-        // $arr['correct'] = [];
+
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
@@ -56,29 +54,22 @@ class UpdateParentRepresentative extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
+                $rep_name = Str::of($cells[8]);
 
+                $rep_email = Str::of($cells[7]);
 
-                $legacy_name = Str::of($cells[20]);
-
-                $parent =  ParentProfile::where('legacy', $legacy_name)->first();
-                $rep_name =   Str::of($cells[8]);
-                if ($parent) {
-                    $representative = RepresentativeGroup::where('name', $rep_name)->first();
-                }
-
-                if ($parent  && $representative) {
-                    $parent->update([
-                        'representative_group_id' => $representative->id,
-                        'rep_status' => 'active',
-                        'amount' => $cells[25]
-                    ]);
-                    $representative->update([
-                        'parent_profile_id' => $parent->id
+                $representative =  RepresentativeGroup::where('email', $rep_email)
+                    ->first();
+                if ($representative) {
+                    RepresentativeAmount::create([
+                        'representative_group_id' =>  $representative->id,
+                        'amount' => $cells[25] == '' ||   $cells[25] == null ?  0 : $cells[25],
+                        'notes' => $cells[5],
                     ]);
                 }
             }
         }
-        // print_r($arr);
+
         $reader->close();
         $this->line('import successfully');
     }

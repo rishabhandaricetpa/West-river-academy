@@ -92,7 +92,8 @@ class ImportParents extends Command
                         'zip_code' =>  $cells[9],
                         'country' => $cells[6],
                         'reference' =>  $cells[18],
-                        'immunized' =>  $cells[10]
+                        'immunized' =>  $cells[10],
+                        //todo : update created at with family created at from sheet  'created_at'=> 
                     ]);
             }
         }
