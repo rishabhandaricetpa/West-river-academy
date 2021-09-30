@@ -29,8 +29,6 @@ class TranscriptController extends Controller
         // $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "k-8";
         $transcript_data = TranscriptK8::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
-      
-
         return view('admin.transcript.view-student', compact('transcript_data', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
@@ -255,6 +253,13 @@ class TranscriptController extends Controller
             $transpayPayments->status = $request->input('paymentStatus');
             $transpayPayments->payment_mode = $request->input('payment_mode');
             $transpayPayments->save();
+
+            //update transcript
+
+            $transcript = Transcript::where('id', $transpay_id)->first();
+            $transcript->update([
+                'status' => $request->input('paymentStatus')
+            ]);
             DB::commit();
 
             $notification = [
