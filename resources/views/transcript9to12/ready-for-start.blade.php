@@ -4,15 +4,37 @@
 
 <main class="position-relative container form-content mt-4">
   <h1 class="text-center text-white text-uppercase">Transcript Wizard</h1>
-
+  
   <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info d-flex justify-content-center flex-wrap">
     <p class="w-100">You are ready to select the courses, credits and grades to put on the transcript for <a href="{{ route('reviewstudent') }}">{{$enroll_student->first_name}}</a>. Be sure you have watched the tutorial and read the recommended course distribution before starting. </p>
     <div class="mt-auto col-xl-9 d-xl-flex justify-content-between">
-      <a href="{{route('video.tutorials')}}" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">View Transcript Tutorial</a>
+      <a href="{{route('video.tutorials')}}" class="btn btn-primary font-weight-bold mb-4 mb-xl-0" type="button" data-toggle="modal" data-target=".view-tutorial">View Transcript Tutorial</a>
       <a href="{{route('selecting.country',[$id,$transcript_id] )}}" class="btn btn-primary font-weight-bold mb-4 mb-xl-0">Start to create transcript</a>
       <a href="#recommendedCourse" class="btn btn-primary font-weight-bold mb-4 mb-xl-0" data-toggle="modal">View recommended course distribution</a>
+      <div class="modal fade view-tutorial" tabindex="-1" role="dialog" aria-labelledby="view-tutorial" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Transcript Tutorial</h4>
+        <button id="modal-button-close"  type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-2">
+        <div class="embed-responsive embed-responsive-16by9">
+          <video id="transcriptTutorial" loop="" controls playsinline="" class="embed-responsive-item">
+              <source src="/images/FinalTranscriptTutorial.mp4" type="video/mp4">
+          </video>
+      </div>
+      </div>
+     
     </div>
   </div>
+</div>
+    </div>
+  </div>
+
+
 </main>
 <!-- Choose more grade -->
 <div class="modal fade" id="recommendedCourse" tabindex="-1" aria-labelledby="recommendedCourseLabel" aria-hidden="true">
