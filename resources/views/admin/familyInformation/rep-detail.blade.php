@@ -224,6 +224,8 @@
                                                 Due:
                                                 @if ($calculatedAmount > 0)
                                                     <span>${{ $calculatedAmount }}</span>
+                                                @elseif($calculatedAmount == 0)
+                                                    <span>${{ $calculatedAmount }}</span>
                                                 @else
                                                     <span>{{ '-$' . abs($calculatedAmount) }}</span>
                                                 @endif

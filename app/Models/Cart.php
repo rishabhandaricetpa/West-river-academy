@@ -601,7 +601,7 @@ class Cart extends Model
                         'amount' => $enrollemtpayment->amount,
                         'student_profile_id' => $enrollment_period->student_profile_id,
                         'transaction_id' => $enrollemtpayment->transcation_id,
-                        'linked_to' => $student->first_name,
+                        'linked_to' => $student->first_name . ' ' . $student->last_name,
                         'item_type_id' => $enrollment_period->id,
                         'related_to' => 'Student Enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -626,7 +626,7 @@ class Cart extends Model
                         Dashboard::create([
                             'parent_profile_id' => ParentProfile::getParentId(),
                             'amount' => $graduation_payment->amount,
-                            'linked_to' =>  $student->first_name,
+                            'linked_to' =>  $student->first_name . ' ' . $student->last_name,
                             'transaction_id' => $graduation_payment->transcation_id,
                             'related_to' => 'Graduation Order',
                             'created_date' => \Carbon\Carbon::now()->format('M d Y'),
@@ -647,7 +647,7 @@ class Cart extends Model
                         Dashboard::create([
                             'parent_profile_id' => ParentProfile::getParentId(),
                             'amount' => $ts_payment->amount,
-                            'linked_to' =>  $student->first_name,
+                            'linked_to' =>  $student->first_name . ' ' . $student->last_name,
                             'item_type_id' => $ts_payment->id,
                             'transaction_id' => $ts_payment->transcation_id,
                             'related_to' => 'Transcript Ordered',
@@ -680,7 +680,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $custom_payment->amount,
-                        'linked_to' => $parentName->p1_first_name,
+                        'linked_to' => $parentName->p1_first_name . ' ' . $parentName->p1_last_name,
                         'related_to' => 'Custom Payment Ordered',
                         'item_type_id' => $custom_payment->id,
                         'transaction_id' => $custom_payment->transcation_id,
@@ -708,7 +708,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $transcript_payment->amount,
-                        'linked_to' =>  $student->first_name,
+                        'linked_to' =>  $student->first_name . ' ' . $student->last_name,
                         'item_type_id' => $transcript_payment->id,
                         'related_to' => 'Transcript Edit Ordered',
                         'transaction_id' => $transcript_payment->transcation_id,
@@ -732,7 +732,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $postage_payment->amount,
-                        'linked_to' => $parentName->p1_first_name,
+                        'linked_to' => $parentName->p1_first_name . ' ' . $parentName->p1_last_name,
                         'related_to' => 'Postage Ordered',
                         'item_type_id' => $postage_payment->id,
                         'transaction_id' => $postage_payment->transcation_id,
@@ -757,7 +757,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $notarization_payment->amount,
-                        'linked_to' =>  $parentName->p1_first_name,
+                        'linked_to' =>  $parentName->p1_first_name . ' ' . $parentName->p1_last_name,
                         'related_to' => 'Notarization/Appostile Ordered',
                         'item_type_id' => $notarization_payment->id,
                         'transaction_id' => $notarization_payment->transcation_id,
@@ -790,7 +790,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $apostille_payment->amount,
-                        'linked_to' =>  $parentName->p1_first_name,
+                        'linked_to' =>  $parentName->p1_first_name . ' ' . $parentName->p1_last_name,
                         'related_to' => 'Notarization/Appostile Ordered',
                         'item_type_id' => $apostille_payment->id,
                         'transaction_id' => $apostille_payment->transcation_id,
@@ -812,7 +812,7 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $customletter_payment->amount,
-                        'linked_to' =>  $parentName->p1_first_name,
+                        'linked_to' =>  $parentName->p1_first_name . ' ' . $parentName->p1_last_name,
                         'related_to' => 'Custom Letter',
                         'transaction_id' => $customletter_payment->transcation_id,
                         'item_type_id' => $customletter_payment->id,

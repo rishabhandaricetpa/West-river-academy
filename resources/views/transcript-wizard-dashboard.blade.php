@@ -40,8 +40,9 @@
                 <div class="seperator mb-4">
                     <h2 class="mb-2">{{ $school->school_name }}</h2>
                     @if (count($k8details) > 1)
-                        <a href="{{ route('delete.school', $school->id) }}" class="btn btn-primary float-right"
-                            type="submit" value="Delete School Record">Delete this Year</a>
+                        <a href="{{ route('delete.school', $school->id) }}"
+                            class="btn btn-primary float-right transform-none" type="submit"
+                            value="Delete School Record">Delete this Year</a>
                     @endif
                     <p class="mb-0"><span class="font-weight-bold mr-2">Academic School
                             Year:</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }}</p>

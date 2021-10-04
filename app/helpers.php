@@ -548,9 +548,9 @@ function getlegacyname($parent_id)
 {
     $parent_date = ParentProfile::whereId($parent_id)->first();
     if ($parent_date->p2_first_name) {
-        return  $parent_date->p1_first_name . $parent_date->p1_middle_name . $parent_date->p1_last_name . '&' . $parent_date->p2_first_name . $parent_date->p2_middle_name . $parent_date->p2_last_name;
+        return  $parent_date->p1_first_name . ' ' . $parent_date->p1_middle_name .  ' ' . $parent_date->p1_last_name . ' & ' . $parent_date->p2_first_name . ' ' . $parent_date->p2_middle_name . ' ' . $parent_date->p2_last_name;
     } else {
-        return  $parent_date->p1_first_name . $parent_date->p1_middle_name . ' ' . $parent_date->p1_last_name;
+        return  $parent_date->p1_first_name . ' ' . $parent_date->p1_middle_name . ' ' . $parent_date->p1_last_name;
     }
 }
 //Get Enrollment Payments status for blade file
@@ -586,7 +586,7 @@ function getStudentGrade($transcript_grade)
 }
 function formatDate($date)
 {
-    return \Carbon\Carbon::parse($date)->format('M j , Y');
+    return \Carbon\Carbon::parse($date)->format('M j, Y');
 }
 function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
 {

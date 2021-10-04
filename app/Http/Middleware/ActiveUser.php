@@ -27,7 +27,7 @@ class ActiveUser
             $user = Auth::user();
             auth()->logout();
             $notification = [
-                'message' => 'Your account is not in active status!Please contact your admin',
+                'message' => 'Your account is not in active status! Please contact your admin',
                 'alert-type' => 'error',
             ];
 

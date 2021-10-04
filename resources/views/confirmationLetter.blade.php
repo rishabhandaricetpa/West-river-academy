@@ -14,7 +14,7 @@
     </div>
 
     <div style="max-width: 1000px; margin: 0 auto;">
-        <h1 style="font-size:23px;text-align:center;margin:70px 0 60px;">Confirmation of Enrollment ss</h1>
+        <h1 style="font-size:23px;text-align:center;margin:70px 0 60px;">Confirmation of Enrollment</h1>
         <p style="font-size: 17px;">Date:
             {{ Carbon\Carbon::parse($enrollment->start_date_of_enrollment)->format('F j, Y') }}</p>
         <p style="margin-top:25px;font-size: 17px;">This confirms the enrollment of the following student in West River
