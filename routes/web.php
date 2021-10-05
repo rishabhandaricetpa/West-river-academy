@@ -69,6 +69,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
+
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
 
@@ -439,5 +440,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('social/media', function () {
             return view('social-media');
         });
+        Route::get('refund', function () {
+            return view('refund');
+        });
+        // Route::get(‘refund’,function(){
+        //     return view(‘refund’);
+        // });
     });
+
 });
