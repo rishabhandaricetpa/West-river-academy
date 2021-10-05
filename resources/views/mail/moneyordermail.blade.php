@@ -9,7 +9,7 @@
 
 <body>
     <h3 style="font-family:'Catamaran', sans-serif; color:black;">West River Academy - Check Or Money Order Instructions</h3> 
-    <h3 style="font-family:'Catamaran', sans-serif; color:black;">Hi {{$user->name}},</h3>
+    <p style="font-family:'Catamaran', sans-serif; color:black;">Hi {{$user->name}},</p>
     <p style="font-family:'Catamaran', sans-serif; color:black;margin-bottom: 0!important;">Thank you for your order. To pay by check or money order, please:</br>  </p>
         <p style="font-family:'Catamaran', sans-serif; color:black;margin-bottom: 0!important;"> 1. Make your check or money order payment  to West River Academy.</br></p>
         <p style="font-family:'Catamaran', sans-serif; color:black;margin-bottom: 0!important;"></p>
@@ -26,8 +26,8 @@
 
     <p style="font-family:'Catamaran', sans-serif; color:black;">We will notify you by the email and in your account notifications when payment has been received.</p>
 
-    <address style="font-family:'Catamaran', sans-serif; color:black;">
-        <h3 style="font-family:'Catamaran', sans-serif; color:black; margin-bottom:none !important;"> Thank you,</h3> 
+    <address style="font-family:'Catamaran', sans-serif; color:black;font-style: normal;">
+        <p style="font-family:'Catamaran', sans-serif; color:black; margin-bottom:none !important;"> Thank you,</p> 
         <a href="contact@westriveracademy.com">The West River Academy Team</a><br>
     </address>
 </body>
