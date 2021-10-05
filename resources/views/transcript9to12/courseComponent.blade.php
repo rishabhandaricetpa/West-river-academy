@@ -21,7 +21,7 @@
                         @if (strtotime($year))
                             Academic Year {{ $year }}
                         @elseif(!empty($year))
-                            Course Completed at {{ $year }}
+                            {{ $year }}
                         @endif
                     </span>
 

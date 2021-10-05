@@ -2104,22 +2104,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ConfirmationInfo",
   data: function data() {
     return {
       form: {
-        isDobCity: this.confirmationdata.isDobCity,
-        isStudentId: this.confirmationdata.isStudentId,
-        isGrade: this.confirmationdata.isGrade,
-        IsMotherName: this.confirmationdata.IsMotherName,
-        enrolment_id: this.enrollments.id
-      }
+        isDobCity: '',
+        isStudentId: '',
+        IsMotherName: '',
+        enrolment_id: this.enrollments.id,
+        mother_name: this.student.mothers_name,
+        dobCity: this.student.birth_city,
+        nationalId: this.student.student_Id
+      },
+      errors: []
     };
   },
   props: ["student", "gradeid", "confirmationdata", "student_id", "enrollments", "countryData"],
   methods: {
+    checkMotherName: function checkMotherName() {
+      if (this.form.mother_name == null || this.form.mother_name == '') {
+        alert('This is information was not provided . Click Add button to add it');
+      }
+    },
+    checkisDobCity: function checkisDobCity() {
+      if (this.form.dobCity == null || this.form.dobCity == '') {
+        alert('This is information was not provided . Click Add button to add it');
+      }
+    },
+    checkisNationalId: function checkisNationalId() {
+      if (this.form.nationalId == null || this.form.nationalId == '') {
+        alert('This is information was not provided . Click Add button to add it');
+      }
+    },
+    editInfo: function editInfo() {
+      window.location = '/edit/' + this.student_id;
+    },
     addItems: function addItems() {
       var _this = this;
 
@@ -8339,7 +8379,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var year = oldDate.getFullYear();
       var oDate = oldDate.getDate();
       var month = oldDate.getMonth();
-      return new Date(year + 1, month, oDate);
+      return new Date(year + 1, month, oDate + 1);
     },
     calcMinDate: function calcMinDate(date) {
       var oldDate = new Date(date);
@@ -40653,112 +40693,134 @@ var render = function() {
         _c("div", { staticClass: "col-12 confirmation-letter__options" }, [
           _c("h3", { staticClass: "mb-3" }, [
             _vm._v(
-              "You may choose to include or exclude any of the following fields. Check the ones you want on the Confirmation Letter."
+              "\n      Add any of the following fields by checking the box(es) below.\n       Be sure you have provided this information if you wish to select it.\n      "
             )
           ]),
           _vm._v(" "),
-          _vm.countryname === "Hungary"
-            ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-                _c("label", { staticClass: "container" }, [
-                  _vm._v("Birth City\n                         "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.isDobCity,
-                        expression: "form.isDobCity"
+          _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+            _c("label", { staticClass: " pl-0 container" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.IsMotherName,
+                    expression: "form.IsMotherName"
+                  }
+                ],
+                attrs: { type: "checkbox", name: "IsMotherName" },
+                domProps: {
+                  checked: Array.isArray(_vm.form.IsMotherName)
+                    ? _vm._i(_vm.form.IsMotherName, null) > -1
+                    : _vm.form.IsMotherName
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.checkMotherName()
+                  },
+                  change: function($event) {
+                    var $$a = _vm.form.IsMotherName,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "IsMotherName", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "IsMotherName",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
                       }
-                    ],
-                    attrs: { type: "checkbox", name: "isDobCity" },
-                    domProps: {
-                      checked: Array.isArray(_vm.form.isDobCity)
-                        ? _vm._i(_vm.form.isDobCity, null) > -1
-                        : _vm.form.isDobCity
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.form.isDobCity,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(_vm.form, "isDobCity", $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.form,
-                                "isDobCity",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
-                          }
-                        } else {
-                          _vm.$set(_vm.form, "isDobCity", $$c)
-                        }
-                      }
+                    } else {
+                      _vm.$set(_vm.form, "IsMotherName", $$c)
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "isDobCity" })
-                ]),
-                _vm._v(" "),
-                _c("label", { staticClass: " pl-0 container" }, [
-                  _vm._v("Mother's Maiden Name\n                         "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.IsMotherName,
-                        expression: "form.IsMotherName"
-                      }
-                    ],
-                    attrs: { type: "checkbox", name: "IsMotherName" },
-                    domProps: {
-                      checked: Array.isArray(_vm.form.IsMotherName)
-                        ? _vm._i(_vm.form.IsMotherName, null) > -1
-                        : _vm.form.IsMotherName
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.form.IsMotherName,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(
-                                _vm.form,
-                                "IsMotherName",
-                                $$a.concat([$$v])
-                              )
-                          } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.form,
-                                "IsMotherName",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
-                          }
-                        } else {
-                          _vm.$set(_vm.form, "IsMotherName", $$c)
-                        }
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "IsMotherName" })
-                ])
-              ])
-            : _vm._e(),
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  style: [
+                    this.form.mother_name == "" || this.form.mother_name == null
+                      ? { textDecoration: "line-through" }
+                      : { textDecoration: "none" }
+                  ]
+                },
+                [_vm._v("   Mother's Maiden Name ")]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "IsMotherName" })
+            ])
+          ]),
           _vm._v(" "),
           _c("label", { staticClass: "pl-0 container" }, [
-            _vm._v("Student ID\n                         "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.isDobCity,
+                  expression: "form.isDobCity"
+                }
+              ],
+              staticClass: "line-through",
+              attrs: { type: "checkbox", name: "isDobCity" },
+              domProps: {
+                checked: Array.isArray(_vm.form.isDobCity)
+                  ? _vm._i(_vm.form.isDobCity, null) > -1
+                  : _vm.form.isDobCity
+              },
+              on: {
+                change: [
+                  function($event) {
+                    var $$a = _vm.form.isDobCity,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "isDobCity", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "isDobCity",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "isDobCity", $$c)
+                    }
+                  },
+                  function($event) {
+                    return _vm.checkisDobCity()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                style: [
+                  this.form.dobCity == null || this.form.dobCity == ""
+                    ? { textDecoration: "line-through" }
+                    : { textDecoration: "none" }
+                ]
+              },
+              [_vm._v("  Birth City ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "pl-0 container" }, [
             _c("input", {
               directives: [
                 {
@@ -40775,78 +40837,49 @@ var render = function() {
                   : _vm.form.isStudentId
               },
               on: {
-                change: function($event) {
-                  var $$a = _vm.form.isStudentId,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = null,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 &&
-                        _vm.$set(_vm.form, "isStudentId", $$a.concat([$$v]))
+                change: [
+                  function($event) {
+                    var $$a = _vm.form.isStudentId,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "isStudentId", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "isStudentId",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
                     } else {
-                      $$i > -1 &&
-                        _vm.$set(
-                          _vm.form,
-                          "isStudentId",
-                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                        )
+                      _vm.$set(_vm.form, "isStudentId", $$c)
                     }
-                  } else {
-                    _vm.$set(_vm.form, "isStudentId", $$c)
+                  },
+                  function($event) {
+                    return _vm.checkisNationalId()
                   }
-                }
+                ]
               }
             }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                style: [
+                  this.form.nationalId == "" || this.form.nationalId == ""
+                    ? { textDecoration: "line-through" }
+                    : { textDecoration: "none" }
+                ]
+              },
+              [_vm._v("  National ID ")]
+            ),
             _vm._v(" "),
             _c("span", { staticClass: "isStudentId" })
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "pl-0 container" }, [
-            _vm._v("Grade\n                         "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.isGrade,
-                  expression: "form.isGrade"
-                }
-              ],
-              attrs: { type: "checkbox", name: "isGrade" },
-              domProps: {
-                checked: Array.isArray(_vm.form.isGrade)
-                  ? _vm._i(_vm.form.isGrade, null) > -1
-                  : _vm.form.isGrade
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.form.isGrade,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = null,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 &&
-                        _vm.$set(_vm.form, "isGrade", $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        _vm.$set(
-                          _vm.form,
-                          "isGrade",
-                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                        )
-                    }
-                  } else {
-                    _vm.$set(_vm.form, "isGrade", $$c)
-                  }
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "isGrade" })
           ]),
           _vm._v(" "),
           _c("input", {
@@ -40871,28 +40904,50 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _vm.errors.length
+          ? _c("p", [
+              _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c(
+                    "li",
+                    { key: error.id, staticStyle: { color: "red" } },
+                    [_vm._v("  " + _vm._s(error) + " ")]
+                  )
+                }),
+                0
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-2r" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary mb-4 mb-sm-0 ml-2",
+              on: {
+                click: function($event) {
+                  return _vm.editInfo()
+                }
+              }
+            },
+            [_vm._v("\n       Add Above information\n      ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary mb-4 mb-sm-0 ml-2",
+              attrs: { type: "submit" }
+            },
+            [_vm._v("\n        Continue\n      ")]
+          )
+        ])
       ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-2r" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary mb-4 mb-sm-0 ml-2",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Continue")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40932,9 +40987,11 @@ var render = function() {
           { key: anotherCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -41203,9 +41260,11 @@ var render = function() {
           { key: englishCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -41474,9 +41533,11 @@ var render = function() {
           { key: foreignCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -41745,9 +41806,11 @@ var render = function() {
           { key: healthCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -42013,9 +42076,11 @@ var render = function() {
       _vm._l(_vm.form.mathscourse, function(maths, index) {
         return _c("div", { key: maths.id, staticClass: "seperator mt-4" }, [
           _c("div", { staticClass: "position-relative" }, [
-            _c("p", { staticClass: "delete-course" }, [
-              _vm._v("Delete Course ")
-            ]),
+            index > 0
+              ? _c("p", { staticClass: "delete-course" }, [
+                  _vm._v("Delete Course ")
+                ])
+              : _vm._e(),
             _vm._v(" "),
             index > 0
               ? _c(
@@ -42272,9 +42337,11 @@ var render = function() {
           { key: physicalEducation.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -42544,9 +42611,11 @@ var render = function() {
       _vm._l(_vm.form.sciencecourse, function(science, index) {
         return _c("div", { key: science.id, staticClass: "seperator mt-4" }, [
           _c("div", { staticClass: "position-relative" }, [
-            _c("p", { staticClass: "delete-course" }, [
-              _vm._v("Delete Course ")
-            ]),
+            index > 0
+              ? _c("p", { staticClass: "delete-course" }, [
+                  _vm._v("Delete Course ")
+                ])
+              : _vm._e(),
             _vm._v(" "),
             index > 0
               ? _c(
@@ -42806,9 +42875,11 @@ var render = function() {
           { key: socialStudiesCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -45266,87 +45337,83 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.countryname === "Hungary"
-        ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("Mother's Name")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-5 col-lg-3" }, [
-                _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.mothers_name,
-                        expression: "form.mothers_name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "mothers_name",
-                      name: "mothers_name",
-                      "aria-describedby": "emailHelp"
-                    },
-                    domProps: { value: _vm.form.mothers_name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "mothers_name", $event.target.value)
-                      }
+      _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Mother's Name")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-5 col-lg-3" }, [
+            _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.mothers_name,
+                    expression: "form.mothers_name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "mothers_name",
+                  name: "mothers_name",
+                  "aria-describedby": "emailHelp"
+                },
+                domProps: { value: _vm.form.mothers_name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(5)
+                    _vm.$set(_vm.form, "mothers_name", $event.target.value)
+                  }
+                }
+              })
             ])
-          ])
-        : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _vm._m(5)
+        ])
+      ]),
       _vm._v(" "),
-      _vm.countryname === "Hungary"
-        ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-            _c("label", { attrs: { for: "" } }, [_vm._v("Birth City")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-5 col-lg-3" }, [
-                _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.birth_city,
-                        expression: "form.birth_city"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "birth_city",
-                      name: "birth_city",
-                      "aria-describedby": "emailHelp"
-                    },
-                    domProps: { value: _vm.form.birth_city },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "birth_city", $event.target.value)
-                      }
+      _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("Birth City")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-5 col-lg-3" }, [
+            _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.birth_city,
+                    expression: "form.birth_city"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "birth_city",
+                  name: "birth_city",
+                  "aria-describedby": "emailHelp"
+                },
+                domProps: { value: _vm.form.birth_city },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(6)
+                    _vm.$set(_vm.form, "birth_city", $event.target.value)
+                  }
+                }
+              })
             ])
-          ])
-        : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _vm._m(6)
+        ])
+      ]),
       _vm._v(" "),
       _vm._l(_vm.form.periods, function(period, index) {
         return _c("div", { key: period.id, staticClass: "seperator mt-4" }, [
@@ -50063,103 +50130,83 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm.countryname === "Hungary"
-            ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Mother's Name")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-5 col-lg-3" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group w-100 datepicker-full" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.mothersName,
-                              expression: "form.mothersName"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "mothers_name",
-                            name: "mothers_name",
-                            "aria-describedby": "emailHelp"
-                          },
-                          domProps: { value: _vm.form.mothersName },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "mothersName",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(5)
+          _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Mother's Name")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-5 col-lg-3" }, [
+                _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.mothersName,
+                        expression: "form.mothersName"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "mothers_name",
+                      name: "mothers_name",
+                      "aria-describedby": "emailHelp"
+                    },
+                    domProps: { value: _vm.form.mothersName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "mothersName", $event.target.value)
+                      }
+                    }
+                  })
                 ])
-              ])
-            : _vm._e(),
+              ]),
+              _vm._v(" "),
+              _vm._m(5)
+            ])
+          ]),
           _vm._v(" "),
-          _vm.countryname === "Hungary"
-            ? _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Birth City")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-5 col-lg-3" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group w-100 datepicker-full" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.birthCity,
-                              expression: "form.birthCity"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "birth_city",
-                            name: "birth_city",
-                            "aria-describedby": "emailHelp"
-                          },
-                          domProps: { value: _vm.form.birthCity },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "birthCity",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(6)
+          _c("div", { staticClass: "form-group d-sm-flex mb-2" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Birth City")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-5 col-lg-3" }, [
+                _c("div", { staticClass: "form-group w-100 datepicker-full" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.birthCity,
+                        expression: "form.birthCity"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "birth_city",
+                      name: "birth_city",
+                      "aria-describedby": "emailHelp"
+                    },
+                    domProps: { value: _vm.form.birthCity },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "birthCity", $event.target.value)
+                      }
+                    }
+                  })
                 ])
-              ])
-            : _vm._e(),
+              ]),
+              _vm._v(" "),
+              _vm._m(6)
+            ])
+          ]),
           _vm._v(" "),
           _vm._l(_vm.form.enrollPeriods, function(enrollPeriod, index) {
             return _c(
@@ -52174,9 +52221,11 @@ var render = function() {
                 { key: anotherCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c("span", {
@@ -52690,9 +52739,11 @@ var render = function() {
           { key: englishCourse.id, staticClass: "seperator mt-4" },
           [
             _c("div", { staticClass: "position-relative" }, [
-              _c("p", { staticClass: "delete-course" }, [
-                _vm._v("Delete Course ")
-              ]),
+              index > 0
+                ? _c("p", { staticClass: "delete-course" }, [
+                    _vm._v("Delete Course ")
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               index > 0
                 ? _c(
@@ -53145,9 +53196,11 @@ var render = function() {
                 { key: foreignCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c(
@@ -53657,9 +53710,11 @@ var render = function() {
                 { key: healthCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c(
@@ -54172,9 +54227,11 @@ var render = function() {
                 { key: socialsciencecourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c(
@@ -54708,9 +54765,11 @@ var render = function() {
                 { key: mathscourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c(
@@ -55117,7 +55176,7 @@ var render = function() {
                   staticClass: "btn btn-primary",
                   on: { click: _vm.addCourse }
                 },
-                [_vm._v("Add another Mathematics/Language Arts Course")]
+                [_vm._v("Add another Mathematics Course")]
               ),
               _vm._v(" "),
               _c(
@@ -55226,9 +55285,11 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c(
@@ -55778,9 +55839,11 @@ var render = function() {
                 { key: scienceCourse.id, staticClass: "seperator mt-4" },
                 [
                   _c("div", { staticClass: "position-relative" }, [
-                    _c("p", { staticClass: "delete-course" }, [
-                      _vm._v("Delete Course ")
-                    ]),
+                    index > 0
+                      ? _c("p", { staticClass: "delete-course" }, [
+                          _vm._v("Delete Course ")
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     index > 0
                       ? _c("span", {
@@ -80661,6 +80724,9 @@ $(document).ready(function () {
     if (!$(event.target).closest(".notification-wrap").length) {
       $(".notification").removeClass("d-block");
     }
+  });
+  $('.view-tutorial').on('hide.bs.modal', function (e) {
+    $('video').trigger('pause');
   }); // country transcript
 
   $("#transcript-country").click(function () {
