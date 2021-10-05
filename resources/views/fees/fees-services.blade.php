@@ -19,7 +19,7 @@
               <p class="max-width__275">Fee for the first student in the family</p>
             </div>
             <div class="col-4">
-              <p class="max-width__275">Annual</p>
+              <p class="max-width__275">Annual Enrollment</p>
               <p class="max-width__275">Second Semester Only</p>
             </div>
             <div class="col-3 text-right">
@@ -44,7 +44,7 @@
               <p class="max-width__275">Fee for each additional student in the same family</p>
             </div>
             <div class="col-4">
-              <p class="max-width__275">Annual</p>
+              <p class="max-width__275">Annual Enrollment</p>
               <p class="max-width__275">Second Semester Only</p>
             </div>
             <div class="col-3 text-right">
