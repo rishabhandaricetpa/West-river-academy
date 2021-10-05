@@ -37,7 +37,7 @@
                 </table>
             </div>
             @foreach ($transcriptDatas as $school)
-                <div class="seperator mb-4">
+                <div class="mb-4">
                     <h2 class="mb-2">{{ $school->school_name }}</h2>
                     @if (count($k8details) > 1)
                         <a href="{{ route('delete.school', $school->id) }}"
@@ -86,7 +86,7 @@
         </div>
 
         @if ($transcriptWizStatus->transcript_wiz === 'Yes' && $transcriptWizStatus->status === 'pending')
-            <div class="form-wrap border bg-light py-5 px-25">
+            <div class="form-wrap border bg-light py-5 px-25 mt-4">
                 <div class="d-sm-flex align-items-center">
                     <a href="{{ route('dashboard') }}" class="btn btn-primary " role="button">Back to Dashboard</a>
                     <form method="post" action="{{ route('transcript.purchase', $student->id) }}"

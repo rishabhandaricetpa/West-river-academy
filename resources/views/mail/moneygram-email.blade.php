@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    
     <h3 style="font-family:'Catamaran', sans-serif; color:black;">MoneyGram Payment</h3>
 
     <p style="font-family:'Catamaran', sans-serif; color:black;">Hi {{ $user->name }},</p>
@@ -21,8 +22,9 @@
     <p style="font-family:'Catamaran', sans-serif; color:black;">We will notify you by the email and in your account
         notifications when payment has been received.</p>
 
-    <address style="font-family:'Catamaran', sans-serif; color:black;font-style: normal;">
+    
         <p style="font-family:'Catamaran', sans-serif; color:black;"> Thank you,</p>
+    <address style="font-family:'Catamaran', sans-serif; color:black;">
         <a href="contact@westriveracademy.com">The West River Academy Team</a><br>
     </address>
 </body>
