@@ -12285,6 +12285,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -57347,7 +57391,111 @@ var staticRenderFns = [
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body" })
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "div",
+                { staticClass: "position-relative refund-page bg-white" },
+                [
+                  _c("div", { staticClass: "bg-white position-relative" }, [
+                    _c("div", { staticClass: "container" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("p", [
+                            _vm._v("WEST RIVER ACADEMY (the “Company”) has a "),
+                            _c("strong", [_vm._v("NO REFUND")]),
+                            _vm._v(
+                              " policy for its services, products and\n            enrollment."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v("Please note that all transactions are "),
+                            _c("strong", [_vm._v("final")]),
+                            _vm._v(" and fees are "),
+                            _c("strong", [_vm._v("non-refundable")]),
+                            _vm._v(
+                              "\n            unless prior agreement has been made with West River Academy."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "If you have any questions or concerns, please contact West River Academy at\n            "
+                            ),
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "mailto:Contact@westriveracademy.com"
+                                }
+                              },
+                              [_vm._v("Contact@westriveracademy.com")]
+                            ),
+                            _vm._v(" "),
+                            _c("strong", [_vm._v("PRIOR")]),
+                            _vm._v(" to making any payments.")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _c("strong", [
+                              _vm._v("Your Acceptance of These Terms:")
+                            ]),
+                            _vm._v(
+                              " By enrolling in West River Academy, you accept the\n            policies\n            and restrictions set forth in this Refund Policy. If you do not agree to this policy, please do not make\n            payments or enroll. This Refund Policy may be revised from time to time by updating this posting. You are\n            bound\n            by any such revisions and should therefore periodically visit this page to review the then current Refund\n            Policy\n            to which you are bound."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _c("em", [_c("strong", [_vm._v("En Español:")])])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "WEST RIVER ACADEMY (la “Compañía”) tiene una política de NO REEMBOLSO para sus servicios, productos e\n            inscripción."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Tenga en cuenta que todas las transacciones son finales y los honorarios no son reembolsables acuerdo a\n            menos\n            que antes se ha hecho con West River Academy."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Si tiene alguna pregunta o inquietud, comuníquese con West River Academy en\n            "
+                            ),
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "mailto:Contact@westriveracademy.com"
+                                }
+                              },
+                              [_vm._v("Contact@westriveracademy.com")]
+                            ),
+                            _vm._v(
+                              "\n            ANTES de realizar cualquier pago.\n          "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _c("strong", [
+                              _vm._v("Su aceptación de estos términos:")
+                            ]),
+                            _vm._v(
+                              " Al inscribirse en West River Academy, acepta las\n            políticas y\n            restricciones establecidas en esta Política de reembolso. Si no está de acuerdo con esta política, no se\n            inscriba. Esta Política de reembolso puede ser revisada de vez en cuando actualizando esta publicación.\n            Usted\n            está sujeto a dichas revisiones y, por lo tanto, debe visitar periódicamente esta página para revisar la\n            Política de reembolso vigente en ese momento a la que está obligado."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Last Updated: September 29, 2021")])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
           ])
         ])
       ]
