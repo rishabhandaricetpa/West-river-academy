@@ -35,6 +35,8 @@ class RepresentativeGroupController extends Controller
                 'city' => $request->rep_city,
                 'name' => $request->rep_name,
                 'email' => $request->rep_email,
+                'rep_phone' => $request->rep_phone,
+                'terms_of_agreement' => $request->terms_of_agreement
             ]);
             if ($request->parent_Id) {
                 $parent = ParentProfile::where('id', $request->parent_Id)->first();

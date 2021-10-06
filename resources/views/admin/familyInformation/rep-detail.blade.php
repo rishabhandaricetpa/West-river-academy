@@ -58,8 +58,8 @@
 
                                 <div class="form-group">
                                     <label>Terms of Agreement :</label>
-                                    <textarea class="form-control is-disabled" name="terms_of_org" id="terms_of_org"
-                                        disabled>{{ $rep_group->terms_of_agreement }}</textarea>
+                                    <textarea class="form-control is-disabled" name="terms_of_org"
+                                        id="terms_of_org">{{ $rep_group->terms_of_agreement }}</textarea>
                                 </div>
                                 <div class="pt-3 d-md-flex">
                                     <button type="button"
