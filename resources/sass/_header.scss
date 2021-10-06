@@ -3,6 +3,9 @@
   max-width: 90%;
   margin: 0 auto;
   padding-top: 30px;
+  .navbar{
+    z-index:10;  
+  }
 
   .navbar-toggler[aria-expanded="true"] {
     .icon-bar:nth-child(2) {

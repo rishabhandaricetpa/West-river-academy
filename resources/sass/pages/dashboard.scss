@@ -16,11 +16,15 @@
 }
 
 .dashboard-info {
-  h3,p ,input,label {
+
+  h3,
+  p,
+  input,
+  label {
     font-weight: 500;
     // font-size: 1.2rem;
   }
- 
+
 
   a:not(.btn) {
     text-decoration: underline;
@@ -102,16 +106,17 @@
       flex: 1;
       padding: 2.3rem;
     }
-}
-.table-styling .fas {
-  width: 30px;
-  height: 30px;
-  background-color: $primary;
-  line-height: 30px;
-  font-size: 18px;
-  border-radius: 4px;
-  margin-top: 5px;
-  cursor: pointer;
+  }
+
+  .table-styling .fas {
+    width: 30px;
+    height: 30px;
+    background-color: $primary;
+    line-height: 30px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-top: 5px;
+    cursor: pointer;
   }
 
   .col-sm-3 {
@@ -144,11 +149,58 @@
   font-size: 2.5rem;
 }
 
-.social-community{
-  .media{
-    img{
+.social-community {
+  .media {
+    img {
       width: 10rem;
       height: 10rem;
     }
   }
+}
+
+.refund-page {
+  top: -120px; 
+  z-index: 0;
+  width: 100%; 
+  height: 100%; 
+  .refund-page_banner{
+    height:80vh;
+    &::before{
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-color: #004C99;
+      opacity: 0.5; 
+    }
+    img {
+      width: 100%;
+      height:100%;
+      object-fit: cover;
+      background-repeat: no-repeat;
+      
+    }
+  
+    .banner-heading {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color:$white;
+      text-transform: uppercase;
+      z-index: 2;
+      font-size: 50px;  
+      white-space: nowrap;  
+      @media screen and (min-width:1280px){
+        font-size: 100px; 
+      }
+    }
+  }
+  p{
+    font-size: 18px;
+    color:$text-color;
+  }  
+
 }
