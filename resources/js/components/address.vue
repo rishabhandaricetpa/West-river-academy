@@ -246,13 +246,31 @@
       <table class="w-100 table-styling">
         <tfoot>
           <tr>
-            <td class="mb-3">Order total</td>
-            <h2 class="mb-3">${{ amount }}</h2>
+            <td class="mb-3 pl-0">Order total</td>
+            <td><h2 class="mb-3">${{ amount }}</h2></td>
           </tr>
         </tfoot>
       </table>
       </div>
+      <p class="font-md">All transactions are final and fees are non-refundable without prior written agreement. Click
+       <a href="#" type="button" data-toggle="modal" data-target=".bd-example-modal-lg"><strong>here</strong></a> for full Refund Policy (https::www.westriveracademy.com/refund-policy)</p>
     </div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Refund Policy</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+
+    </div>
+  </div>
+</div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
       <h2>Select your method of payment...</h2>
       <h3 class="py-2">Pay with</h3>

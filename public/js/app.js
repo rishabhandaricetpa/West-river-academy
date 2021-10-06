@@ -12267,6 +12267,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -56603,7 +56621,7 @@ var render = function() {
               _vm._l(_vm.countries, function(val, i) {
                 return _c("option", { key: i }, [
                   _vm._v(
-                    "\n            " + _vm._s(val.country) + "\n          "
+                    "\n              " + _vm._s(val.country) + "\n            "
                   )
                 ])
               }),
@@ -56661,7 +56679,7 @@ var render = function() {
                 ]
               }
             }),
-            _vm._v("\n        Same as Billing Address")
+            _vm._v("\n          Same as Billing Address")
           ])
         ]),
         _vm._v(" "),
@@ -56919,7 +56937,7 @@ var render = function() {
               _vm._l(_vm.countries, function(val, i) {
                 return _c("option", { key: i }, [
                   _vm._v(
-                    "\n            " + _vm._s(val.country) + "\n          "
+                    "\n              " + _vm._s(val.country) + "\n            "
                   )
                 ])
               }),
@@ -57004,7 +57022,7 @@ var render = function() {
               attrs: { type: "button" },
               on: { click: _vm.applyCoupon }
             },
-            [_vm._v("\n        Apply Coupon\n      ")]
+            [_vm._v("\n          Apply Coupon\n        ")]
           ),
           _vm._v(" "),
           _c(
@@ -57014,7 +57032,7 @@ var render = function() {
               attrs: { type: "button" },
               on: { click: _vm.removeCoupon }
             },
-            [_vm._v("\n        Remove Coupon\n      ")]
+            [_vm._v("\n          Remove Coupon\n        ")]
           )
         ])
       ]),
@@ -57026,16 +57044,22 @@ var render = function() {
           _c("table", { staticClass: "w-100 table-styling" }, [
             _c("tfoot", [
               _c("tr", [
-                _c("td", { staticClass: "mb-3" }, [_vm._v("Order total")]),
+                _c("td", { staticClass: "mb-3 pl-0" }, [_vm._v("Order total")]),
                 _vm._v(" "),
-                _c("h2", { staticClass: "mb-3" }, [
-                  _vm._v("$" + _vm._s(_vm.amount))
+                _c("td", [
+                  _c("h2", { staticClass: "mb-3" }, [
+                    _vm._v("$" + _vm._s(_vm.amount))
+                  ])
                 ])
               ])
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
       ]),
+      _vm._v(" "),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
@@ -57088,7 +57112,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(0)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -57126,7 +57150,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -57164,7 +57188,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(4)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -57202,7 +57226,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(5)
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "py-3 pl-3" }, [
@@ -57240,18 +57264,95 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(6)
               ])
             ]
           )
         ]
       ),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(7)
     ]
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "font-md" }, [
+      _vm._v(
+        "All transactions are final and fees are non-refundable without prior written agreement. Click\n       "
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "#",
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": ".bd-example-modal-lg"
+          }
+        },
+        [_c("strong", [_vm._v("here")])]
+      ),
+      _vm._v(
+        " for full Refund Policy (https::www.westriveracademy.com/refund-policy)"
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade bd-example-modal-lg",
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myLargeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h2",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalLabel" }
+                },
+                [_vm._v("Refund Policy")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" })
+          ])
+        ])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -57273,7 +57374,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n            You will be redirected to the PayPal website to complete your\n            payment.\n          "
+          "\n              You will be redirected to the PayPal website to complete your\n              payment.\n            "
         )
       ])
     ])
@@ -57287,7 +57388,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n            Release of enrollment confirmation may be delayed until payment\n            clears.\n          "
+          "\n              Release of enrollment confirmation may be delayed until payment\n              clears.\n            "
         )
       ])
     ])
@@ -57301,7 +57402,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n            Release of enrollment confirmation may be delayed until payment\n            clears.\n          "
+          "\n              Release of enrollment confirmation may be delayed until payment\n              clears.\n            "
         )
       ])
     ])
@@ -57315,7 +57416,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n            Release of enrollment confirmation may be delayed until payment\n            clears.\n          "
+          "\n              Release of enrollment confirmation may be delayed until payment\n              clears.\n            "
         )
       ])
     ])
