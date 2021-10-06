@@ -14,14 +14,18 @@
           </div>
         </div>
         <div class="col-sm-9 d-sm-flex">
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="max-width__275">Fee for the first student in the family</p>
-            <span>Annual</span>
-            <span class="text-secondary">${{ getFeeDetails('first_student_annual') }}</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="max-width__275">Second Semester Only</p>
-            <span class="text-secondary">${{ getFeeDetails('first_student_half') }}</span>
+          <div class="row">
+            <div class="col-5">
+              <p class="max-width__275">Fee for the first student in the family</p>
+            </div>
+            <div class="col-4">
+              <p class="max-width__275">Annual Enrollment</p>
+              <p class="max-width__275">Second Semester Only</p>
+            </div>
+            <div class="col-3 text-right">
+              <p class="text-secondary lato "><strong>${{ getFeeDetails('first_student_annual') }}</strong> </p>
+              <p class="text-secondary lato "><strong>${{ getFeeDetails('first_student_half') }}</strong></p>
+            </div>
           </div>
         </div>
       </div>
@@ -35,14 +39,18 @@
           </div>
         </div>
         <div class="col-sm-9 d-sm-flex">
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="max-width__275">Fee for each additional student in the same family</p>
-            <span>Annual</span>
-            <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="max-width__275">Second Semester Only</p>
-            <span class="text-secondary">${{ getFeeDetails('additional_student_annual') }}</span>
+          <div class="row">
+            <div class="col-5">
+              <p class="max-width__275">Fee for each additional student in the same family</p>
+            </div>
+            <div class="col-4">
+              <p class="max-width__275">Annual Enrollment</p>
+              <p class="max-width__275">Second Semester Only</p>
+            </div>
+            <div class="col-3 text-right">
+              <p class="text-secondary lato "><strong>${{ getFeeDetails('additional_student_annual') }}</strong> </p>
+              <p class="text-secondary lato "><strong>${{ getFeeDetails('additional_student_annual') }}</strong></p>
+            </div>
           </div>
         </div>
       </div>

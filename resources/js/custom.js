@@ -40,6 +40,10 @@ $(document).on("click", function (event) {
   }
 });
 
+
+    $('.view-tutorial').on('hide.bs.modal', function(e) {  
+        $('video').trigger('pause');
+    })
 // country transcript
 
 $("#transcript-country").click(function () {

@@ -75,7 +75,7 @@
                 </div>
             @endforeach
         </div>
-        <div class="form-wrap border bg-light py-5 px-25">
+        <div class="form-wrap border bg-light py-5 px-25 mb-4">
             <p> You can use the button below to add classes from other schools, colleges, and universities. Course
                 selection,
                 credits, and grades must match exactly the transcript we have on file from the other school. Heading on
@@ -85,7 +85,7 @@
         </div>
 
         @if ($transcriptWizStatus->transcript_wiz === 'Yes' && $transcriptWizStatus->status === 'pending')
-            <div class="form-wrap border bg-light py-5 px-25">
+            <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <div class="d-sm-flex align-items-center">
                     <a href="{{ route('dashboard') }}" class="btn btn-primary " role="button">Back to Dashboard</a>
                     <form method="post" action="{{ route('transcript.purchase', $student->id) }}"
@@ -101,7 +101,7 @@
                 </div>
             </div>
         @else
-            <div class="form-wrap border bg-light py-5 px-25">
+            <div class="form-wrap border bg-light py-5 px-25 mb-4">
                 <p>If you are finished with this transcript and would like to see what it looks like, you can click the
                     "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed click
                     the "Submit Transcript" button.</p>
