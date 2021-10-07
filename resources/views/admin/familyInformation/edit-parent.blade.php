@@ -1138,7 +1138,7 @@
                                             <tr>
                                                 <td>{{ $records['student']['fullname'] }}</td>
                                                 <td>{{ $records->school_name }}</td>
-                                                <td><a class="transform-none" href="mailto:${{ $records->email }}">
+                                                <td><a class="text-lowercase" href="mailto:${{ $records->email }}">
                                                         {{ $records->email }}</a></td>
                                                 <td>{{ $records->phone_number }}</td>
                                                 @if (empty($records->request_status))

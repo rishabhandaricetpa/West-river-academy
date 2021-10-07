@@ -48,7 +48,7 @@
                                         <tr>
                                             <td>{{ $record['student']['fullname'] }}</td>
                                             <td>{{ $record->school_name }}</td>
-                                            <td><a class="transform-none" href="mailto:${{ $record->email }}">
+                                            <td><a class="text-lowercase" href="mailto:${{ $record->email }}">
                                                     {{ $record->email }}</a></td>
                                             <td>{{ $record->phone_number }}</td>
                                             @if (empty($record->request_status))

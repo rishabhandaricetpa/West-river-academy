@@ -1453,7 +1453,7 @@
         var student_name = $('#student_name_enroll').val();
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
-        var grade_level = $("input[type='radio']:checked").val();
+        var grade_level = $("input[name='grade_level']:checked").val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
