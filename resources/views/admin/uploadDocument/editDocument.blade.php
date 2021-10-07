@@ -14,7 +14,7 @@
                         <div class="form-group col-sm-6">
                             <label>Upload Single/Multiple Documents<sup>*</sup></label>
                             <label class="font-weight-bold text-secondary">For Student
-                                {{ $parentStudentData->first_name }}</label>
+                                {{ $parentStudentData->full_name }}</label>
                             <input multiple="multiple" type="file" name="file[]" class="form-control choose-btn" multiple>
                         </div>
                         <input type="hidden" name="student_id" value="{{ $parentStudentData->id }}">

@@ -674,7 +674,7 @@
                                                 <td>{{ $student->gender }}</td>
                                                 <td>{{ $student->d_o_b->format('M j, Y') }}</td>
 
-                                                <td><a class="transform-none" href="mailto:{{ $student->email }}"
+                                                <td><a class="text-lowercase" href="mailto:{{ $student->email }}"
                                                         target="_blank">{{ $student->email }}</a></td>
                                                 <td><a href="{{ route('admin.delete.student', $student->id) }}"
                                                         onclick="return confirm('Are you sure you want to delete this student?');"><i
@@ -850,7 +850,7 @@
                                             @foreach ($allstudent as $student)
 
                                                 <option value="{{ $student->id }}" id="student_name_for_notes">
-                                                    {{ $student->first_name }}
+                                                    {{ $student->full_name }}
                                                 </option>
 
                                             @endforeach

@@ -58,8 +58,8 @@
 
                                 <div class="form-group">
                                     <label>Terms of Agreement :</label>
-                                    <textarea class="form-control is-disabled" name="terms_of_org" id="terms_of_org"
-                                        disabled>{{ $rep_group->terms_of_agreement }}</textarea>
+                                    <textarea class="form-control is-disabled" name="terms_of_org"
+                                        id="terms_of_org">{{ $rep_group->terms_of_agreement }}</textarea>
                                 </div>
                                 <div class="pt-3 d-md-flex">
                                     <button type="button"
@@ -206,7 +206,7 @@
                                                 @foreach ($family_groups as $rep_family)
                                                     <td>{{ formatDate($rep_family->created_at) }}</td>
                                                     <td><a
-                                                            href="{{ route('admin.parent.edit', $rep_family->id) }}">{{ $rep_family->p1_first_name }}</a>
+                                                            href="{{ route('admin.parent.edit', $rep_family->id) }}">{{ $rep_family->p1_first_name . ' ' . $rep_family->p1_last_name }}</a>
                                                     </td>
                                                     <td>${{ $rep_family->amount }}</td>
                                                     <td></td>

@@ -1453,6 +1453,7 @@
         var student_name = $('#student_name_enroll').val();
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
+        var amount_status = $('#amount_status').val();
         var grade_level = $("input[name='grade_level']:checked").val();
         $.ajax({
             headers: {
@@ -1467,6 +1468,7 @@
                 start_date: start_date,
                 end_date: end_date,
                 grade_level: grade_level,
+                amount_status:amount_status
             },
             success: function(response) {
                 location.reload();
@@ -1809,6 +1811,13 @@
                 transcript_pay_mode: transcript_pay_mode,
                 transcript_transaction_id: transcript_transaction_id,
             },
+            success: function(response) {
+                //location.reload();
+            },
+            error: function(response) {
+
+
+            }
 
         });
     });

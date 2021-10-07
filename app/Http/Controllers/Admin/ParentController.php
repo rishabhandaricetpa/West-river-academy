@@ -945,12 +945,14 @@ class ParentController extends Controller
             $transction->payment_mode = $request->get('transcript_pay_mode') ? $request->get('transcript_pay_mode')  : '';
             $transction->parent_profile_id = $request->get('parent_id');
             $transction->amount = $request->get('total_val');
+            $transction->item_type = 'Transcript ';
+            $transction->student_profile_id = $request->get('student_id_val');
             $transction->status = $request->get('status');
             $transction->save();
         }
 
         //create the entry to transcript table according to the quantity 
-
+        $student = StudentProfile::where('id', $request->get('student_id_val'))->first();
         for ($x = 1; $x <= $request->get('quantity'); $x++) {
 
             $transcript_type = "transcript";
@@ -965,7 +967,7 @@ class ParentController extends Controller
             $transcript_payment->transcript_id   =  $transcript->id;
             $transcript_payment->amount = $request->get('amount');
             $transcript_payment->status = $request->get('status');
-            $transcript_payment->transcation_id =  $request->get('status') == 'paid' ? $transction->id  : '';
+            $transcript_payment->transcation_id =  $request->get('status') == 'paid' ? $request->get('transcript_transaction_id')  : '';
             $transcript_payment->payment_mode = $request->get('transcript_pay_mode');
             $transcript_payment->save();
 
@@ -978,6 +980,18 @@ class ParentController extends Controller
                         'parent_profile_id' => $request->get('parent_id'),
                     ]);
                 }
+            }
+            if ($request->get('status') == 'paid') {
+                $dashboard = new Dashboard();
+                $dashboard->linked_to = $student->first_name;
+                $dashboard->amount =  $request->get('amount');
+                $dashboard->related_to = 'Transcript Ordered';
+                $dashboard->student_profile_id  =  $request->get('student_id_val');
+                $dashboard->transaction_id
+                    = $transction->transcation_id;
+                $dashboard->parent_profile_id = $request->get('parent_id');
+                $dashboard->item_type_id = $transcript->id;
+                $dashboard->save();
             }
         }
     }

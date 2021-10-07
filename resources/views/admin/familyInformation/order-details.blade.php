@@ -176,7 +176,7 @@
                                 <label for="recipient-name" class="col-form-label">For Student</label>
                                 <select id="order-student-name" class="form-control">
                                     @foreach ($allstudent as $student)
-                                        <option value="{{ $student->id }}">{{ $student->first_name }}
+                                        <option value="{{ $student->id }}">{{ $student->fullname }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -261,7 +261,7 @@
                                             <select id="student_ids" class="form-control grad-student">
                                                 @foreach ($allstudent as $student)
                                                     <option value="{{ $student->id }}">
-                                                        {{ $student->first_name }}
+                                                        {{ $student->fullname }}
                                                     </option>
                                                 @endforeach
                                             </select>

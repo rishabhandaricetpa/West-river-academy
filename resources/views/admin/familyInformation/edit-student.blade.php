@@ -529,7 +529,7 @@
                                                                     name="grade_level" id="grade_level[]" value="3"
                                                                     required>
                                                                 <label class="form-check-label pl-1 pl-sm-0">
-                                                                    2
+                                                                    3
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">

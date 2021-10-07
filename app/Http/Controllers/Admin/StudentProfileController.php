@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ConfirmationLetter;
+use App\Models\Dashboard;
 use App\Models\EnrollmentPayment;
 use App\Models\FeesInfo;
 use App\Models\EnrollmentPeriods;
@@ -417,8 +418,10 @@ class StudentProfileController extends Controller
             $transction->transcation_id   = substr(uniqid(), 0, 12);
             $transction->payment_mode = "admin created";
             $transction->parent_profile_id = $request->get('parent_id');
-            $transction->amount = $fee;
+            $transction->amount = $request->get('amount_status');
             $transction->status = 'paid';
+            $transction->item_type = 'Enrollment';
+            $transction->student_profile_id = $request->get('student_id');
             $transction->save();
 
             $enroll_payment = new EnrollmentPayment();
@@ -426,8 +429,22 @@ class StudentProfileController extends Controller
             $enroll_payment->payment_mode = "admin created";
             $enroll_payment->transcation_id = $transction->transcation_id;
             $enroll_payment->status = 'paid';
-            $enroll_payment->amount = $fee;
+            $enroll_payment->amount =  $request->get('amount_status');
             $enroll_payment->save();
+
+            if ($enroll_payment->status == 'paid') {
+                if ($request->get('status') == 'paid') {
+                    $dashboard = new Dashboard();
+                    $dashboard->linked_to =  $student_id->first_name;
+                    $dashboard->amount = $request->get('amount_status');;
+                    $dashboard->related_to = 'Student Enrolled';
+                    $dashboard->student_profile_id  =  $student_id;
+                    $dashboard->transaction_id = $transction->transcation_id;
+                    $dashboard->parent_profile_id = $request->get('parent_id');
+                    $dashboard->item_type_id = $enroll->id;
+                    $dashboard->save();
+                }
+            }
 
             $enroll->enrollment_payment_id = $enroll_payment->id;
             $enroll->save();
