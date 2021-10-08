@@ -81,3 +81,15 @@ php artisan optimize
 -   php artisan import:repname
 -   php artisan import:representative
 -   php artisan import:parentrep
+-   php artisan import:repamount
+
+
+## For Custom Payments
+
+- php artisan import:custompayment
+- php artisan import:updatecustom
+
+## For Custom Letter
+
+- php artisan import:customletter
+- php artisan import:updatecustompletterayment
