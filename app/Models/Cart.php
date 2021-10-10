@@ -834,8 +834,9 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $consultation_payment->amount,
-                        'linked_to' => $consultation_payment->id,
+                        'linked_to' =>   $parentName->p1_first_name,
                         'related_to' => 'Personal Consulatation Ordered',
+                        'transaction_id' => $consultation_payment->transcation_id,
                         'item_type_id' => $consultation_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
