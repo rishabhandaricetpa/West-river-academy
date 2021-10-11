@@ -57,7 +57,8 @@ class ImportGraduation extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $parent = ParentProfile::where('p1_email', $cells[11])->orWhere(DB::raw('lower(legacy)'), trim(strtolower($cells[12])))->first();
+                $parent = ParentProfile::where('p1_email', $cells[11])
+                ->orWhere(DB::raw('lower(legacy)'), trim(strtolower($cells[12])))->first();
                 if ($parent) {
                     $student = StudentProfile::where('parent_profile_id', $parent->id)->first();
                 }

@@ -100,3 +100,7 @@ php artisan optimize
 ## For Personal Consultation
 - php artisan import:personalconsultation
 - php artisan import:updatepaymentconsultation
+
+## For Graduation
+- php artisan import:graduation
+- php artisan import:graduationpayment
