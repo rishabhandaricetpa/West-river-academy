@@ -17,7 +17,7 @@ class ImportApostile extends Command
      *
      * @var string
      */
-    protected $signature = 'import:apostile';
+    protected $signature = 'import:apostilenotarization';
 
     /**
      * The console command description.
@@ -44,7 +44,7 @@ class ImportApostile extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/apostile.csv');
+        $filePath = base_path('csv/orders.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -56,31 +56,48 @@ class ImportApostile extends Command
                     continue;
                 }
                 $parent_email = $cells[11];
-                $parent = ParentProfile::where('p1_email',$parent_email)->first();
-                if($parent){
-                 $apostile=   Apostille::create([
-                        'parent_profile_id'=>$parent->id,
-                        'postage_option'=> 'Apostille',
-                        'apostille_country'=>$cells[16],
-                        'first_name'=>$cells[17],
-                        'last_name'=>$cells[18],
-                        'street'=>$cells[20],
-                        'city'=>$cells[15],
-                        'country'=>$cells[16],
-                        'zip_code'=>$cells[21]
+                $parent = ParentProfile::where('p1_email', $parent_email)->first();
+                if ($parent && ($cells[32] == 'Apostille Package'  || $cells[32] == 'Apostille')) {
+                    $apostile =   Apostille::create([
+                        'parent_profile_id' => $parent->id,
+                        'postage_option' => 'Apostille',
+                        'apostille_country' => $cells[16],
+                        'first_name' => $cells[17],
+                        'last_name' => $cells[18],
+                        'street' => $cells[20],
+                        'city' => $cells[15],
+                        'country' => $cells[16],
+                        'zip_code' => $cells[21]
                     ]);
                     NotarizationPayment::create([
-                        "apostille_id"=> $apostile->id,
-                        'parent_profile_id'=>$parent->id,
-                        'pay_for'=>'apostile',
-                        'amount'=>$cells[33],
-                        'status'=>$cells[22],
-                        'order_id'=>$cells[13]
+                        "apostille_id" => $apostile->id,
+                        'parent_profile_id' => $parent->id,
+                        'pay_for' => 'apostile',
+                        'amount' => $cells[33],
+                        'status' => $cells[22] == 'PAID' ? 'paid' : 'pending',
+                        'order_id' => $cells[13]
+                    ]);
+                } else if ($parent && $cells[32] == 'Notarization') {
+                    $notarization = Notarization::create([
+                        'parent_profile_id' => $parent->id,
+                        'postage_option' => 'Notarization',
+                        'first_name' => $cells[17],
+                        'last_name' => $cells[18],
+                        'street' => $cells[20],
+                        'city' => $cells[15],
+                        'country' => $cells[16],
+                        'zip_code' => $cells[21]
                     ]);
 
+                    NotarizationPayment::create([
+                        "notarization_id" => $notarization->id,
+                        'parent_profile_id' => $parent->id,
+                        'pay_for' => 'notarization',
+                        'amount' => $cells[33],
+                        'status' => $cells[22] == 'PAID' ? 'paid' : 'pending',
+                        'order_id' => $cells[13]
+                    ]);
                 }
-              
-               
             }
         }
         $reader->close();

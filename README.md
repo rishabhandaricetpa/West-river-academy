@@ -104,3 +104,7 @@ php artisan optimize
 ## For Graduation
 - php artisan import:graduation
 - php artisan import:graduationpayment
+
+## For Apostile/Notarization
+- php artisan import:apostilenotarization
+- php artisan import:notarizationpayment
