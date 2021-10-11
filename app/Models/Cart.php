@@ -602,7 +602,7 @@ class Cart extends Model
                         'student_profile_id' => $enrollment_period->student_profile_id,
                         'transaction_id' => $enrollemtpayment->transcation_id,
                         'linked_to' => $student->first_name,
-                        'item_type_id' => $enrollment_period->id,
+                        'item_type_id' => $enrollemtpayment->id,
                         'related_to' => 'Student Enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -627,8 +627,9 @@ class Cart extends Model
                             'parent_profile_id' => ParentProfile::getParentId(),
                             'amount' => $graduation_payment->amount,
                             'linked_to' =>  $student->first_name,
+                            'item_type_id' => $graduation_payment->id,
                             'transaction_id' => $graduation_payment->transcation_id,
-                            'related_to' => 'Graduation Order',
+                            'related_to' => 'Graduation Ordered',
                             'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                         ]);
                     }
