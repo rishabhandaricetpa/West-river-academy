@@ -93,3 +93,10 @@ php artisan optimize
 
 - php artisan import:customletter
 - php artisan import:updatecustompletterayment
+
+## For Coupon
+- php artisan import:coupon
+
+## For Personal Consultation
+- php artisan import:personalconsultation
+- php artisan import:updatepaymentconsultation
