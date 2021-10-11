@@ -11,6 +11,7 @@ use App\Models\Dashboard;
 use App\Models\EnrollmentPeriods;
 use App\Models\StudentProfile;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Illuminate\Support\Carbon;
 
 class ImportPaymentForEnrollments extends Command
 {
@@ -86,13 +87,13 @@ class ImportPaymentForEnrollments extends Command
                         ]);
 
                         Dashboard::create([
-                            'created_date' => $cells[9],
+                            'created_date' => $cells[10] ? Carbon::parse($cells[10]) : Carbon::now(),
                             'linked_to' => $student->first_name,
                             'amount' => $payment_order_id->amount,
                             'related_to' => 'Student Enrolled',
                             'transaction_id' =>  $t->transcation_id,
                             'parent_profile_id' =>  $student->parent_profile_id,
-                            'item_type_id' => $ep->id
+                            'item_type_id' => $payment_order_id->id
                         ]);
                     }
                 } else {

@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use App\Models\ParentProfile;
 use App\Models\TransactionsMethod;
+use Illuminate\Support\Carbon;
 
 class updatecustompayment extends Command
 {
@@ -73,7 +74,7 @@ class updatecustompayment extends Command
                     ]);
 
                     Dashboard::create([
-                        'created_date' => $cells[9],
+                        'created_date' => $cells[10] ? Carbon::parse($cells[10]) : Carbon::now(),
                         'linked_to' => $parent->p1_first_name,
                         'amount' => $custom->amount,
                         'related_to' => 'Custom Letter',
