@@ -57,42 +57,42 @@ $duplicateCheckArray = [];
                     continue;
                 }
                 $p1_email = Str::of($cells[13]);
-                if( !isset($duplicateCheckArray[$p1_email]) ) $duplicateCheckArray[$p1_email] = 0;
-                $duplicateCheckArray[$p1_email] = ($duplicateCheckArray[$p1_email] + 1);
+                // if( !isset($duplicateCheckArray[$p1_email]) ) $duplicateCheckArray[$p1_email] = 0;
+                // $duplicateCheckArray[$p1_email] = ($duplicateCheckArray[$p1_email] + 1);
 
                 $_this->line($p1_email);
-                // if ($p1_email != '' && 1==2) {
+                if ($p1_email != '') {
 
-                //     $user = User::where('email', $p1_email)->first();
-                //     if (!$user) {
-                //         $user = User::create(
-                //             [
-                //                 'name' => $cells[14],
-                //                 'email' => $cells[13],
-                //                 'legacy_name' => $cells[11],
-                //                 'password' => Hash::make('12345678'),
-                //             ]
-                //         );
-                //     } 
-                //     $parent = ParentProfile::where('p1_email', $p1_email)->first();
-                //     if( !$parent )
-                //         ParentProfile::create([
-                //             'user_id' => $user ? $user->id : null,
-                //             'p1_first_name' => $cells[14],
-                //             'p1_last_name' => $cells[15],
-                //             'p1_email' => $cells[13],
-                //             'p1_cell_phone' => $cells[4],
-                //             'p1_home_phone' =>  $cells[4],
-                //             'street_address' => $cells[8],
-                //             'legacy' => $cells[11],
-                //             'city' => $cells[5],
-                //             'state' =>  $cells[7],
-                //             'zip_code' =>  $cells[9],
-                //             'country' => $cells[6],
-                //             'reference' =>  $cells[18],
-                //             'immunized' =>  $cells[10]
-                //         ]);
-                // }
+                    $user = User::where('email', $p1_email)->first();
+                    if (!$user) { echo '<pre>'; print_r($user);
+                        $user = User::create(
+                            [
+                                'name' => $cells[14],
+                                'email' => $cells[13],
+                                'legacy_name' => $cells[11],
+                                'password' => Hash::make('12345678'),
+                            ]
+                        );
+                    } 
+                    $parent = ParentProfile::where('p1_email', strtolower($p1_email))->first();
+                    if( !$parent )
+                        ParentProfile::create([
+                            'user_id' => $user ? $user->id : null,
+                            'p1_first_name' => $cells[14],
+                            'p1_last_name' => $cells[15],
+                            'p1_email' => strtolower($cells[13]),
+                            'p1_cell_phone' => $cells[4],
+                            'p1_home_phone' =>  $cells[4],
+                            'street_address' => $cells[8],
+                            'legacy' => $cells[11],
+                            'city' => $cells[5],
+                            'state' =>  $cells[7],
+                            'zip_code' =>  $cells[9],
+                            'country' => $cells[6],
+                            'reference' =>  $cells[18],
+                            'immunized' =>  $cells[10]
+                        ]);
+                }
                
             }
         }
