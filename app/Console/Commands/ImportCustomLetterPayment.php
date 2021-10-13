@@ -2,30 +2,26 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use App\Models\CustomLetterPayment;
 use Illuminate\Console\Command;
+use App\Models\ParentProfile;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-use Hash;
-use Carbon\Carbon;
 
-
-class ImportUsers extends Command
+class ImportCustomLetterPayment extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:users';
+    protected $signature = 'import:customletter';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import All Users';
+    protected $description = 'Import Custom letter table';
 
     /**
      * Create a new command instance.
@@ -45,7 +41,7 @@ class ImportUsers extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/family.csv');
+        $filePath = base_path('csv/custom_letter.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -53,26 +49,25 @@ class ImportUsers extends Command
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
                 $cells = $cells->getCells();
-                $date  = Carbon::now();
-
                 if ($rowIndex === 1) {
                     continue;
                 }
-                if ($cells[13] != '' && $cells[13] != 'x' && $cells[13] != 'xx' && $cells[13] != 'xxx') {
-
-                    User::create(
-                        [
-                            'name' => $cells[14] == '' ? "Test Name" :  $cells[14],
-                            'email' => $cells[13],
-                            'legacy_name' => $cells[11],
-                            'password' => Hash::make('12345678'),
-                            'email_verified_at' => $date
-                        ]
-                    );
+                $parent_email = $cells[11];
+                $legacy_name = $cells[12];
+                // todo add order_id column in custom payment
+                $parent = ParentProfile::where('p1_email', $parent_email)->where('legacy', $legacy_name)->first();
+                if ($parent) {
+                    CustomLetterPayment::create([
+                        'parent_profile_id' => $parent->id,
+                        'amount' => $cells[23],
+                        'paying_for' => $cells[32],
+                        'type_of_payment' => 'Custom Letter',
+                        "status" => $cells[22] == 'PAID' ? 'paid' : 'pending',
+                        'order_id' => $cells[13]
+                    ]);
                 }
             }
         }
-
         $reader->close();
         $this->line('import successfully');
     }

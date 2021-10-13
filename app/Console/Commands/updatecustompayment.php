@@ -2,29 +2,29 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CustomLetterPayment;
 use App\Models\Dashboard;
-use App\Models\NotarizationPayment;
-use App\Models\ParentProfile;
-use App\Models\TransactionsMethod;
 use Illuminate\Console\Command;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use App\Models\ParentProfile;
+use App\Models\TransactionsMethod;
 use Illuminate\Support\Carbon;
 
-class ImportNotarizationPayment extends Command
+class updatecustompayment extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:notarizationpayment';
+    protected $signature = 'import:updatecustompletterayment';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import notarization payment details in notrization_payment table';
+    protected $description = 'Update transction id and payment mode in custom letter';
 
     /**
      * Create a new command instance.
@@ -44,7 +44,7 @@ class ImportNotarizationPayment extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/payments.csv');
+        $filePath = base_path('csv/payment.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -55,31 +55,32 @@ class ImportNotarizationPayment extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $notarization = NotarizationPayment::where('order_id', $cells[19])->first();
-                NotarizationPayment::where('order_id', $cells[19])->update([
-                    'transcation_id' => $cells[15],
-                    'payment_mode' => $cells[17]
-                ]);
-                if ($notarization) {
-                    $parent = ParentProfile::where('id', $notarization->parent_profile_id)->first();
-                    $t =  TransactionsMethod::create([
+                // todo add order_id column in custom payment
+                $custom = CustomLetterPayment::where('order_id', $cells[19])->first();
+                if ($custom) {
+                    $parent = ParentProfile::where('id', $custom->parent_profile_id)->first();
+                    $custom->update([
+                        'transcation_id' => $cells[15],
+                        'payment_mode' => $cells[17]
+                    ]);
+
+                    $t =   TransactionsMethod::create([
                         'transcation_id' => $cells[15],
                         'payment_mode' => $cells[17],
-                        'order_id' => $cells[19],
-                        'parent_profile_id' => $notarization->parent_profile_id,
-                        'amount' => $cells[20],
-                        'status' => $cells[16] == 'APPLIED' ? 'paid' : 'pending',
-                        'item_type' => 'Notarization/Appostile Ordered',
+                        'parent_profile_id' => $custom->parent_profile_id,
+                        'amount' => $custom->amount,
+                        'status' => $custom->status,
+                        'item_type' => 'custom_letter',
                     ]);
 
                     Dashboard::create([
                         'created_date' => $cells[10] ? Carbon::parse($cells[10]) : Carbon::now(),
                         'linked_to' => $parent->p1_first_name,
-                        'amount' =>  $cells[20],
-                        'related_to' => 'Notarization/Appostile Ordered',
+                        'amount' => $custom->amount,
+                        'related_to' => 'Custom Letter',
                         'transaction_id' =>  $t->transcation_id,
-                        'parent_profile_id' => $parent->parent_profile_id,
-                        'item_type_id' => $notarization->id
+                        'parent_profile_id' => $custom->parent_profile_id,
+                        'item_type_id' => $custom->id
                     ]);
                 }
             }

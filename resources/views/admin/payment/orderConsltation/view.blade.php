@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid position-relative">
-            <h1 class="text-center">Order Consltation List</h1>
+            <h1 class="text-center">Order Consultation List</h1>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->

@@ -601,8 +601,8 @@ class Cart extends Model
                         'amount' => $enrollemtpayment->amount,
                         'student_profile_id' => $enrollment_period->student_profile_id,
                         'transaction_id' => $enrollemtpayment->transcation_id,
-                        'linked_to' => $student->first_name . ' ' . $student->last_name,
-                        'item_type_id' => $enrollment_period->id,
+                        'linked_to' => $student->first_name,
+                        'item_type_id' => $enrollemtpayment->id,
                         'related_to' => 'Student Enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
@@ -626,9 +626,10 @@ class Cart extends Model
                         Dashboard::create([
                             'parent_profile_id' => ParentProfile::getParentId(),
                             'amount' => $graduation_payment->amount,
-                            'linked_to' =>  $student->first_name . ' ' . $student->last_name,
+                            'linked_to' =>  $student->first_name,
+                            'item_type_id' => $graduation_payment->id,
                             'transaction_id' => $graduation_payment->transcation_id,
-                            'related_to' => 'Graduation Order',
+                            'related_to' => 'Graduation Ordered',
                             'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                         ]);
                     }
@@ -665,7 +666,7 @@ class Cart extends Model
                     break;
 
                 case 'custom':
-                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
+                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->whereNull('transcation_id')->first();
                     if ($custom_payment) {
                         $custom_payment->payment_mode = $type;
                         if ($payment_id != null) {
@@ -834,8 +835,9 @@ class Cart extends Model
                     Dashboard::create([
                         'parent_profile_id' => ParentProfile::getParentId(),
                         'amount' => $consultation_payment->amount,
-                        'linked_to' => $consultation_payment->id,
+                        'linked_to' =>   $parentName->p1_first_name,
                         'related_to' => 'Personal Consulatation Ordered',
+                        'transaction_id' => $consultation_payment->transcation_id,
                         'item_type_id' => $consultation_payment->id,
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);

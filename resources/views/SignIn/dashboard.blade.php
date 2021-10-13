@@ -239,7 +239,7 @@
                     <table class="table-styling w-100 table-vertical_scroll">
                         <thead>
                             <tr>
-                                <th>Student First Name</th>
+                                <th>Student Name</th>
                                 <th>National Id</th>
                                 <th>Grade</th>
                                 <th>Status</th>

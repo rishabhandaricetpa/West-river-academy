@@ -81,3 +81,30 @@ php artisan optimize
 -   php artisan import:repname
 -   php artisan import:representative
 -   php artisan import:parentrep
+-   php artisan import:repamount
+
+
+## For Custom Payments
+
+- php artisan import:custompayment
+- php artisan import:updatecustom
+
+## For Custom Letter
+
+- php artisan import:customletter
+- php artisan import:updatecustompletterayment
+
+## For Coupon
+- php artisan import:coupon
+
+## For Personal Consultation
+- php artisan import:personalconsultation
+- php artisan import:updatepaymentconsultation
+
+## For Graduation
+- php artisan import:graduation
+- php artisan import:graduationpayment
+
+## For Apostile/Notarization
+- php artisan import:apostilenotarization
+- php artisan import:notarizationpayment
