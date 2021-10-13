@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use DB;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 
 class ImportRecordRequest extends Command
 {
@@ -83,6 +84,7 @@ class ImportRecordRequest extends Command
                 if ($student) {
                     $parent  = \App\Models\ParentProfile::whereId($student->parent_profile_id)->first();
                     if ($parent) {
+
                         RecordTransfer::create(
                             [
                                 'student_profile_id' => (isset($student)) ? $student->id : 0,
@@ -97,9 +99,11 @@ class ImportRecordRequest extends Command
                                 'zip_code' => $cells[16],
                                 'legacy_name' => $cells[28],
                                 'country' => $cells[11],
-                                'firstRequestDate' => $cells[19],
-                                'secondRequestDate' => $cells[17],
-                                'thirdRequest' => $cells[20],
+                                'status' => $cells[1] == '1' ? 'Record Received' : 'In Review',
+                                'request_status' => $cells[1] == '1' ? 'Record Received' : 'Pending',
+                                'firstRequestDate' => Carbon::parse($cells[19]),
+                                'secondRequestDate' => Carbon::parse($cells[17]),
+                                'thirdRequest' => Carbon::parse($cells[20]),
                             ]
                         );
                     } else {

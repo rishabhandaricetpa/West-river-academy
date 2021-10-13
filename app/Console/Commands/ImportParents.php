@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Hash;
+use Illuminate\Support\Carbon;
 
 class ImportParents extends Command
 {
@@ -45,7 +46,7 @@ class ImportParents extends Command
     {
         $this->line('starting import');
         $_this = $this;
-        $filePath = base_path('csv/parents.csv');
+        $filePath = base_path('csv/family.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
         $duplicateCheckArray = [];
@@ -56,48 +57,52 @@ class ImportParents extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $p1_email = Str::of($cells[3]);
+                $p1_email = Str::of($cells[13]);
 
-                if (!isset($duplicateCheckArray[$p1_email])) $duplicateCheckArray[$p1_email] = 0;
-                $duplicateCheckArray[$p1_email] = ($duplicateCheckArray[$p1_email] + 1);
+                // if (!isset($duplicateCheckArray[$p1_email])) $duplicateCheckArray[$p1_email] = 0;
+                // $duplicateCheckArray[$p1_email] = ($duplicateCheckArray[$p1_email] + 1);
 
                 $this->line($p1_email);
-                // if ($p1_email != '' && 1==2) {
+                if ($p1_email != '') {
 
-                $user = User::where('email', $p1_email)->first();
-                if (!$user) {
-                    $user = User::create(
-                        [
-                            'name' => $cells[14],
-                            'email' => $cells[13],
-                            'legacy_name' => $cells[11],
-                            'password' => Hash::make('12345678'),
-                        ]
-                    );
+                    $user = User::where('email', $p1_email)->first();
+                    echo '<pre>';
+                    print_r($user);
+                    if (!$user) {
+                        $user = User::create(
+                            [
+                                'name' => $cells[14],
+                                'email' => $cells[13],
+                                'legacy_name' => $cells[11],
+                                'password' => Hash::make('12345678'),
+                                'email_verified_at' => Carbon::now()
+                            ]
+                        );
+                    }
+                    $parent = ParentProfile::where('p1_email', $p1_email)->first();
+
+                    if (!$parent)
+                        ParentProfile::create([
+                            'user_id' => $user ? $user->id : null,
+                            'p1_first_name' => $cells[14],
+                            'p1_last_name' => $cells[15],
+                            'p1_email' => $cells[13],
+                            'p1_cell_phone' => $cells[4],
+                            'p1_home_phone' =>  $cells[4],
+                            'street_address' => $cells[8],
+                            'legacy' => $cells[11],
+                            'city' => $cells[5],
+                            'state' =>  $cells[7],
+                            'zip_code' =>  $cells[9],
+                            'country' => $cells[6],
+                            'reference' =>  $cells[18],
+                            'immunized' =>  $cells[10],
+                            //todo : update created at with family created at from sheet  'created_at'=> 
+                        ]);
                 }
-                $parent = ParentProfile::where('p1_email', $p1_email)->first();
-
-                if (!$parent)
-                    ParentProfile::create([
-                        'user_id' => $user ? $user->id : null,
-                        'p1_first_name' => $cells[14],
-                        'p1_last_name' => $cells[15],
-                        'p1_email' => $cells[13],
-                        'p1_cell_phone' => $cells[4],
-                        'p1_home_phone' =>  $cells[4],
-                        'street_address' => $cells[8],
-                        'legacy' => $cells[11],
-                        'city' => $cells[5],
-                        'state' =>  $cells[7],
-                        'zip_code' =>  $cells[9],
-                        'country' => $cells[6],
-                        'reference' =>  $cells[18],
-                        'immunized' =>  $cells[10],
-                        //todo : update created at with family created at from sheet  'created_at'=> 
-                    ]);
             }
+            $reader->close();
+            $this->line('import successfully');
         }
-        $reader->close();
-        $this->line('import successfully');
     }
 }

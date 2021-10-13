@@ -666,7 +666,7 @@ class Cart extends Model
                     break;
 
                 case 'custom':
-                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->first();
+                    $custom_payment = CustomPayment::where('parent_profile_id', $cart->item_id)->where('status', 'pending')->whereNull('transcation_id')->first();
                     if ($custom_payment) {
                         $custom_payment->payment_mode = $type;
                         if ($payment_id != null) {

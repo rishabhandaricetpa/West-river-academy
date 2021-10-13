@@ -19,6 +19,8 @@ class MoneyOrder extends Mailable
      *
      * @return void
      */
+    protected $user;
+    protected $amount;
     public function __construct($user, $amount)
     {
         $this->user = $user;

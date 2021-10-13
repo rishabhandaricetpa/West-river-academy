@@ -52,8 +52,8 @@ class MoneyOrderController extends Controller
         //update cart status active
 
 
-        // Mail::to($email)->send(new MoneyOrder($user, $amount));
-        dispatch(new \App\Jobs\QueueJob($user, $amount));
+         Mail::to($email)->send(new MoneyOrder($user, $amount));
+       // dispatch(new \App\Jobs\QueueJob($user, $amount));
 
         return view('mail.moneyorder-review', compact('email'));
     }

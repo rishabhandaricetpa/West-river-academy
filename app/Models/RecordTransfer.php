@@ -9,7 +9,7 @@ class RecordTransfer extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'school_name', 'email', 'fax_number', 'phone_number', 'street_address',
+        'school_name', 'email', 'fax_number', 'phone_number', 'street_address', 'request_status',
         'city', 'state', 'zip_code', 'country', 'status', 'student_profile_id', 'parent_profile_id', 'medium_of_transfer', 'last_grade'
     ];
 

@@ -36,7 +36,7 @@
                                         <th>Student Name</th>
                                         <th>School Name</th>
                                         <th>Email</th>
-                                        <th>Phone Number</th>
+
                                         <th>Status</th>
                                         <th>View Parent</th>
                                         <th>Action</th>
@@ -50,8 +50,8 @@
                                             <td>{{ $record->school_name }}</td>
                                             <td><a class="transform-none" href="mailto:${{ $record->email }}">
                                                     {{ $record->email }}</a></td>
-                                            <td>{{ $record->phone_number }}</td>
-                                            @if (empty($record->request_status))
+
+                                            @if (empty($record->request_status) || $record->request_status == 'Pending')
                                                 <td>In Review </br>
                                                 @elseif($record->request_status=='Record Received')
                                                 <td>Records Received </br>
