@@ -53,7 +53,7 @@
                 <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">date of birth</td>
                 <td
                     style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                    {{ $student->d_o_b->format(' M d Y') }}</td>
+                    {{ formatDate($student->d_o_b) }}</td>
             </tr>
         </tbody>
     </table>

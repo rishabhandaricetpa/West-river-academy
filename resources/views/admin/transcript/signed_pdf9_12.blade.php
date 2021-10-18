@@ -72,7 +72,7 @@
                    <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
                    <td
                        style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                       {{ $student->d_o_b->format('M j, Y') }}</td>
+                       {{ formatDate($student->d_o_b) }}</td>
                </tr>
            </tbody>
        </table>
@@ -149,7 +149,7 @@
                                Graduation
                            </th>
                            <td style="padding:3px 5px;font-size:13px;line-height:1;">
-                               {{ Carbon\Carbon::parse($dateofGraduation->date_of_graduation)->format('d/m/Y') }}
+                               {{ formatDate($dateofGraduation->date_of_graduation) }}
                            </td>
                        </tr>
                    </table>

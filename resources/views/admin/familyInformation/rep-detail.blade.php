@@ -288,7 +288,7 @@
                                         <tbody>
                                             @foreach ($getNotes as $getNote)
                                                 <tr>
-                                                    <td>{{ $getNote->created_at->format('M j, Y') }}</td>
+                                                    <td>{{ formatDate($getNote->created_at) }}</td>
                                                     <td>{{ $getNote->notes }}</td>
                                                     <td></td>
                                                 </tr>

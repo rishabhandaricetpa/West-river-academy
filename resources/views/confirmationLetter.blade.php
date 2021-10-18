@@ -16,7 +16,7 @@
     <div style="max-width: 1000px; margin: 0 auto;">
         <h1 style="font-size:23px;text-align:center;margin:70px 0 60px;">Confirmation of Enrollment</h1>
         <p style="font-size: 17px;">Date:
-            {{ Carbon\Carbon::parse($enrollment->start_date_of_enrollment)->format('F j, Y') }}</p>
+            {{ formatDate($enrollment->start_date_of_enrollment) }}</p>
         <p style="margin-top:25px;font-size: 17px;">This confirms the enrollment of the following student in West River
             Academy.</p>
         <div class="info-detail" style="margin-top:25px;">
@@ -44,8 +44,8 @@
             </p>
 
             <p style="margin-top:25px;font-size: 17px;">Enrollment Period:
-                {{ Carbon\Carbon::parse($enrollment->start_date_of_enrollment)->format('F j, Y') }} -
-                {{ Carbon\Carbon::parse($enrollment->end_date_of_enrollment)->format('F j, Y') }}</p>
+                {{ formatDate($enrollment->start_date_of_enrollment) }} -
+                {{ formatDate($enrollment->end_date_of_enrollment) }}</p>
         </div>
         <table style="padding-top:30px;width:100%;">
             <tbody>

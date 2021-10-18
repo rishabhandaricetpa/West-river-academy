@@ -33,9 +33,9 @@
                                     @foreach ($payment_info as $payment)
                                         <tr>
 
-                                            <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
+                                            <td>{{ formatDate($payment->start_date_of_enrollment) }}
                                             </td>
-                                            <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
+                                            <td>{{ formatDate($payment->end_date_of_enrollment) }}
                                             </td>
                                             <td>{{ $payment->grade_level }}</td>
                                             <td>{{ $payment->amount }}</td>

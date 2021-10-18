@@ -59,7 +59,7 @@
                                 <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
                             </div>
                         </div>
-                        <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }}
+                        <div class="col-12">Date Created: {{ formatDate($parent->created_at) }}
                         </div>
                     </div>
                 </div>
@@ -672,7 +672,7 @@
                                                         href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a>
                                                 </td>
                                                 <td>{{ $student->gender }}</td>
-                                                <td>{{ $student->d_o_b->format('M j, Y') }}</td>
+                                                <td>{{ formatDate($student->d_o_b) }}</td>
 
                                                 <td><a class="text-lowercase" href="mailto:{{ $student->email }}"
                                                         target="_blank">{{ $student->email }}</a></td>
@@ -820,7 +820,7 @@
                                     <tbody>
                                         @foreach ($getNotes as $getNote)
                                             <tr>
-                                                <td>{{ $getNote->created_at->format('M j, Y') }}</td>
+                                                <td>{{ formatDate($getNote->created_at) }}</td>
                                                 <td>{{ $getNote->notes }}</td>
                                                 <td></td>
                                             </tr>
@@ -909,12 +909,12 @@
                                         {{-- {{dd($payment_info)}} --}}
                                         @foreach ($payment_info as $payment)
                                             <tr>
-                                                <td>{{ Carbon\Carbon::parse($payment->created_at)->format('M j, Y') }}
+                                                <td>{{ formatDate($payment->created_at) }}
                                                 </td>
                                                 <td>{{ getStudentData($payment->student_profile_id) }}</td>
-                                                <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
+                                                <td>{{ formatDate($payment->start_date_of_enrollment) }}
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
+                                                <td>{{ formatDate($payment->end_date_of_enrollment) }}
                                                 </td>
                                                 <td>{{ $payment->grade_level }}</td>
                                                 @if ($payment->status === 'paid')
@@ -1268,7 +1268,7 @@
                                     <tbody>
                                         @foreach ($documents as $document)
                                             <tr>
-                                                <td>{{ $document->created_at->format('M j,Y') }}</td>
+                                                <td>{{ formatDate($document->created_at) }}</td>
                                                 <td>{{ $document['student']['fullname'] }}</td>
                                                 <td>{{ $document->original_filename }}</td>
                                                 <td>{{ $document->document_type }}</td>

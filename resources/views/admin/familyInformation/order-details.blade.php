@@ -1,7 +1,7 @@
 <section class="orders-detail  pt-10r" id="orders">
     <div class="row">
         <div class="col-12">
-            <h2 class="pr-3">Current Orders</h2>
+            <h2 class="pr-3">Create Orders</h2>
             <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                     <thead class="thead-light">
@@ -18,7 +18,7 @@
                     <tbody>
                         @foreach ($transcations as $transcation)
                             <tr>
-                                <td>{{ $transcation->created_at->format('M j,Y') }}</td>
+                                <td>{{ formatDate($transcation->created_at) }}</td>
                                 <td>{{ $transcation->item_type }}</td>
                                 <td>Pending</td>
                                 <td>{{ getOrderAmount($transcation->item_type, $transcation->item_id) }}</td>

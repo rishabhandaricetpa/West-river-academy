@@ -20,7 +20,7 @@
                     <div class="form-group d-sm-flex mb-2">
                         <label for="">Date of Birth</label>
                         <div class="float-left">
-                            {{ $student->d_o_b->format('M j, Y') }}
+                            {{ formatDate($student->d_o_b) }}
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">

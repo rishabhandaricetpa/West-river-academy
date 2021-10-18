@@ -50,7 +50,7 @@
             v-model="form.isStudentId"
              v-on:change='checkisNationalId()'
           />
-       <span :style="[ (this.form.nationalId == '' || this.form.nationalId == '') ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">  National ID </span>
+       <span :style="[ (this.form.nationalId == null || this.form.nationalId == '') ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">  National ID </span>
           <span class="isStudentId"></span>
         </label>
        

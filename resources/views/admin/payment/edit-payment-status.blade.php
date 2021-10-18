@@ -18,13 +18,13 @@
         <div class="form-group col-sm-6">
           <label>Start Date of Enrollment <sup>*</sup></label>
           <input name="start_date_of_enrollment" id="start_date_of_enrollment" class="form-control datepicker"
-            value="{{ Carbon\Carbon::parse($enrollment_periods->start_date_of_enrollment)->format('M j, Y') }}"
+            value="{{ formatDate($enrollment_periods->start_date_of_enrollment) }}"
             required>
         </div>
         <div class="form-group col-sm-6">
           <label>End Date of Enrollment <sup>*</sup></label>
           <input name="end_date_of_enrollment" id="end_date_of_enrollment" class="form-control datepicker"
-            value="{{ Carbon\Carbon::parse($enrollment_periods->end_date_of_enrollment)->format('M j, Y') }}" required>
+            value="{{ formatDate($enrollment_periods->end_date_of_enrollment) }}" required>
         </div>
         <div class="form-group col-sm-6">
             <label>Grade Level <sup>*</sup></label>

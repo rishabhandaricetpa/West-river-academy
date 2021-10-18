@@ -26,7 +26,7 @@ class PDFController extends Controller
         try {
             $parent_id = ParentProfile::getParentId();
             $studentProfileData = StudentProfile::whereId($student_id)->first();
-            $pdfname = $studentProfileData->fullname . '_' . $student_id . '_'  . $studentProfileData->d_o_b->format('M_d_Y') . '_' . 'Confirmation_letter';
+            $pdfname = $studentProfileData->fullname . '_' . $student_id . '_'  . $studentProfileData->d_o_b->format('F_d_Y') . '_' . 'Confirmation_letter';
             $enrollment_periods = StudentProfile::where('student_profiles.parent_profile_id', $parent_id)
                 ->where('enrollment_periods.grade_level', $grade_id)
                 ->join('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')->where('enrollment_periods.student_profile_id', $student_id)

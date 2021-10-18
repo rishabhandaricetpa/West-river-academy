@@ -24,7 +24,7 @@
                             <input type="hidden" value="{{ $student->id }}" id='id' name="id">
                         </div>
                     </div>
-                    <div class="col-12"> Date Created: {{ $student->created_at->format('M j, Y') }}
+                    <div class="col-12"> Date Created: {{ formatDate($student->created_at) }}
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputDOB">Date Of Birth :</label>
                                         <input type="text" class="form-control is-disabled" id="d_o_b"
-                                            placeholder="MM/DD/YYYY" value="{{ $student->d_o_b->format('F j, Y') }}"
+                                            placeholder="MM/DD/YYYY" value="{{ formatDate($student->d_o_b) }}"
                                             disabled>
                                     </div>
                                     <div class="form-group lato-italic info-detail d-flex py-1">
@@ -325,7 +325,7 @@
                                         <tbody>
                                             @foreach ($notes as $note)
                                                 <tr>
-                                                    <td>{{ $note->created_at->format('M j, Y') }}</td>
+                                                    <td>{{ formatDate($note->created_at)}}</td>
                                                     <td>{{ $note->notes }}</td>
                                                     <td></td>
                                                 </tr>
@@ -401,12 +401,12 @@
                                         <tbody>
                                             @foreach ($payment_info as $payment)
                                                 <tr>
-                                                    <td>{{ Carbon\Carbon::parse($payment->created_at)->format('M j, Y') }}
+                                                    <td>{{ formatDate($payment->created_at) }}
                                                     </td>
                                                     <td>{{ getStudentData($payment->student_profile_id) }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
+                                                    <td>{{ formatDate($payment->start_date_of_enrollment) }}
                                                     </td>
-                                                    <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
+                                                    <td>{{ formatDate($payment->end_date_of_enrollment)}}
                                                     </td>
                                                     <td>{{ $payment->grade_level }}</td>
                                                     @if ($payment->status === 'paid')
@@ -937,7 +937,7 @@
                                         <tbody>
                                             @foreach ($documents as $document)
                                                 <tr>
-                                                    <td>{{ $document->created_at->format('M j,Y') }}</td>
+                                                    <td>{{ formatDate($document->created_at) }}</td>
                                                     <td>{{ $document['student']['fullname'] }}</td>
                                                     <td>{{ $document->original_filename }}</td>
                                                     <td>{{ $document->document_type }}</td>

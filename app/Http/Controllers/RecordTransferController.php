@@ -65,7 +65,7 @@ class RecordTransferController extends Controller
                 'item_type_id' => $recordTransfer->id,
                 'related_to' => 'record_transfer',
 
-                'created_date' => \Carbon\Carbon::now()->format('M d Y'),
+                'created_date' => \Carbon\Carbon::now()->format('F d Y'),
             ]);
             DB::commit();
             $notification = [
