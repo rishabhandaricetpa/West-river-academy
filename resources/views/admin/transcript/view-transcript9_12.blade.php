@@ -8,7 +8,10 @@
                 <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
             </div>
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <h2 class="mb-3">{{ $student->fullname }}</h2>
+                <h2 class="mb-3"><a
+                        href="{{ route('admin.parent.edit', $student->parentProfile->id) }}">{{ $student->fullname }}
+                    </a>
+                </h2>
                 <form method="POST" action="{{ route('admin.viewfull9_12', [$student->id, $transcript_id]) }}"
                     class="mb-0">
                     @csrf
@@ -40,9 +43,9 @@
                             <input type="text" name="graduation_date"
                                 value="{{ formatDate($dateofGraduation->date_of_graduation) }}"
                                 class="form-control-sm datepicker" id="getgraduationDate">
-                                <button type="submit" href="" class="btn btn-primary">Update</button>
+                            <button type="submit" href="" class="btn btn-primary">Update</button>
                         </div>
-                        
+
                     </div>
                 </form>
                 <a type="button" href="{{ route('admin.genrate.transcript9_12', [$student->id, $transcript_id]) }}"
@@ -57,7 +60,7 @@
                 <div class="form-wrap border bg-light py-5 px-25 mb-4">
                     <h2 class="mb-3">{{ $school->school_name }}</h2>
                     <p>
-                        Academic School Year(s):{{ $school->enrollment_year }}<br>
+                        Academic Year(s):{{ $school->enrollment_year }}<br>
                         Grade: {{ $school->grade }}<br>
                     </p>
                     <table id="addressData" class="table table-bordered table-striped data-table mt-3">

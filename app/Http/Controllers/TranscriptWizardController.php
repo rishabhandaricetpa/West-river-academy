@@ -55,9 +55,16 @@ class TranscriptWizardController extends Controller
 
     public function createTranscript(Request $request, $id)
     {
+
         try {
             DB::beginTransaction();
             $enroll_student = StudentProfile::find($id);
+
+            $enroll_student->update([
+                'first_name' => $request->get('first_name'),
+                'middle_name' => $request->get('middle_name'),
+                'last_name' => $request->get('last_name')
+            ]);
             $type = $request->get('grade');
             $transcriptData = Transcript::create([
                 'parent_profile_id' => ParentProfile::getParentId(),

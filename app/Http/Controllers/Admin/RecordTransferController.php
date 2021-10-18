@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotifyToParentRecordReceived;
 use App\Mail\SchoolRecordTransfer;
+use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
 use App\Models\UploadDocuments;
@@ -148,6 +150,11 @@ class RecordTransferController extends Controller
         $record->request_status = 'Record Received';
         $record->medium_of_transfer = $request->mediumOfDelivery;
         $record->save();
+        $parent = ParentProfile::where('id',  $record->parent_profile_id)->first();
+        //send mail to parent
+        Mail::to($parent->p1_email)->send(new  NotifyToParentRecordReceived($record,$parent));
+
+
         // upload document 
         $cover = $request->file('file');
         if ($request->file('file')) {
