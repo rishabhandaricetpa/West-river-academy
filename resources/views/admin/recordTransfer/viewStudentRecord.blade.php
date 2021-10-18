@@ -24,7 +24,7 @@
                     @if ($studentRecord->request_status !== 'Record Received')
                         <div class="col-sm-6">
                             <label>Method of Delivery </label>
-                            <select class="form-control" name="mediumOfDelivery">
+                            <select class="form-control" name="mediumOfDelivery" required>
                                 <option value="">Select If Received</option>
                                 <option value="Digital">Digital</option>
                                 <option value="Physical">Physical</option>

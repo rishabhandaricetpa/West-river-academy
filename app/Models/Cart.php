@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\EnrollmentConfirmation;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\FeesInfo;
@@ -11,6 +12,7 @@ use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 class Cart extends Model
 {
@@ -606,7 +608,9 @@ class Cart extends Model
                         'related_to' => 'Student Enrolled',
                         'created_date' => \Carbon\Carbon::now()->format('M d Y'),
                     ]);
-
+                    if ($status != 'pending') {
+                        Mail::to($parentName->p1_email)->send(new EnrollmentConfirmation($enrollment_period));
+                    }
                     break;
 
                 case 'graduation':
