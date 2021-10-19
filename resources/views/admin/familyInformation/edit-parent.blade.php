@@ -567,8 +567,8 @@
                     </div>
                 </div>
 
-                {{-- Orders Paid --}}
-                <section class="documents  pt-10r" id="documents">
+                {{-- Payment History --}}
+                <section class="history  pt-10r" id="history">
                     <div class="row">
                         <div class="col-12">
                             <h2 class="pr-3"> Payment History</h2>
