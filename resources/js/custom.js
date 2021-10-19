@@ -35,8 +35,9 @@ $(".notify-btn").click(function () {
 /* Show transcript popup by default */
 $('#transcript-notification').modal('show');
 $(document).on("click", function (event) {
-  if (!$(event.target).closest(".notification-wrap").length) {
+  if (!$(event.target).closest(".notification-wrap").length || ($(event.target).closest(".notification-wrap").length==0)) {
     $(".notification").removeClass("d-block");
+    $(".notification").addClass("d-none");
   }
 });
 
