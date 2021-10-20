@@ -61,20 +61,22 @@ class RecordTransferController extends Controller
     }
     public function sendRecordToSchool(Request $request, $student_id)
     {
+        //  dd($request->get('bcc'));
         $record = RecordTransfer::find($request->record_id);
         $studentData = StudentProfile::find($student_id);
-        $data['email'] = $request->get('email');
+        $data['email'] = $request->get('school_email');
         $data['title'] = 'West River Academy';
-        $data['name'] = $request->input('name');
-        $data['date'] = \Carbon\Carbon::now()->format('M d Y');
-
-
-        $data['grade'] = $request->input('last_grade');
-        $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
+        $data['name'] = $request->input('student_name');
+        $data['date'] = \Carbon\Carbon::now()->format('F d Y');
+        $data['bcc'] = $request->get('bcc');
+        $data['grade'] = $request->input('last_grade_in');
+        $data['dob'] = formatDate($studentData->d_o_b);
+        $data['content'] = $request->get('email-content');
         $pdf = PDF::loadView('schoolRecordRequest', $data);
         Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
             $message->to($data['email'], $data['email'])
                 ->subject($data['title'])
+                ->bcc($data['bcc'])
                 ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
         });
         $record->save();
@@ -142,7 +144,7 @@ class RecordTransferController extends Controller
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $data['grade'] = $record->last_grade;
         $pdf = PDF::loadView('schoolResendRecord', $data);
-        return $pdf->download();
+        return $pdf->stream();
     }
     public function receivedRecord(Request $request, $record_id)
     {
@@ -152,7 +154,7 @@ class RecordTransferController extends Controller
         $record->save();
         $parent = ParentProfile::where('id',  $record->parent_profile_id)->first();
         //send mail to parent
-        Mail::to($parent->p1_email)->send(new  NotifyToParentRecordReceived($record,$parent));
+        Mail::to($parent->p1_email)->send(new  NotifyToParentRecordReceived($record, $parent));
 
 
         // upload document 

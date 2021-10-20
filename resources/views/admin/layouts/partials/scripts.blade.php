@@ -27,6 +27,7 @@
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
 <script>
     $(function() {
@@ -1468,7 +1469,7 @@
                 start_date: start_date,
                 end_date: end_date,
                 grade_level: grade_level,
-                amount_status:amount_status
+                amount_status: amount_status
             },
             success: function(response) {
                 location.reload();
