@@ -148,6 +148,7 @@ class PaypalPaymentController extends Controller
         $enroll_fees = Cart::getCartAmount($this->parent_profile_id, true);
         $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
         $items = collect($cartItems)->pluck('item_type')->toArray();
+        $transcript_exists = in_array('transcript', $items) ? true : false;
         $item_type = implode(", ", $items);
         $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
         $student_id = implode(",", ($student_data));
@@ -171,8 +172,11 @@ class PaypalPaymentController extends Controller
                 'message' => 'Payment has been successfully processed! Add more services',
                 'alert-type' => 'success',
             ];
-
-            return Redirect::route('thankyou.paypal')->with($notification);
+            if ($transcript_exists) {
+                return Redirect::route('transcript.payment.info')->with($notification);
+            } else {
+                return Redirect::route('thankyou.paypal')->with($notification);
+            }
         }
 
         \Session::put('error', 'Payment failed !!');

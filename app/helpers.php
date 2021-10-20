@@ -103,12 +103,24 @@ function getPromotedGrades($grades, $last_value = true)
             return $grade;
         });
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
-        $length = count($sortedOrder);
-        if ($last_value && $length > 1) {
-            $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
-        }
 
-        return implode(", ", $sortedOrder);
+        $length = count($sortedOrder);
+
+        // if ($last_value && $length > 1) {
+        //     $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
+        // }
+
+
+
+        $sortedOrder[] = implode(' and ', array_splice($sortedOrder, -2));
+        return implode(', ', $sortedOrder);
+        // if ($length >= 3) {
+        //     $sortedOrders = array_filter($sortedOrder);
+
+        //     return implode(",", $sortedOrders);
+        // } else {
+        //     return implode(" ", $sortedOrder);
+        // }
     } catch (\Throwable $th) {
         return false;
     }
