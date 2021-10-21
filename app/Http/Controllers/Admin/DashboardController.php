@@ -235,4 +235,8 @@ class DashboardController extends Controller
             ->orWhere('request_status', null)->get()->toArray();
         return response()->json($records);
     }
+    public function getAllEmails()
+    {
+        return view('admin.EditableEmail.all-email');
+    }
 }

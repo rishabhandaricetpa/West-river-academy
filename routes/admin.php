@@ -276,6 +276,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
     Route::post('get/order/details', 'ParentController@getDetailedOrders')->name('get.orderdetails');
+    Route::get('get/emails', 'DashboardController@getAllEmails')->name('get.emails');
+    Route::get('/edit/emails', 'DashboardController@editEmail')->name('edit.emails');
+    Route::get('edit-email', function () {
+        return view('admin.EditableEmail.edit-email');
+    });
 });
 
 

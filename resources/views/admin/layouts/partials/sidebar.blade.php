@@ -208,6 +208,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.get.emails') }}" class="nav-link d-flex">
+                    <i class="nav-icon fas fa-exchange-alt"></i>
+                    <p class="pl-2">
+                        Emails Edit
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('admin.logout') }}" class="nav-link">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>
