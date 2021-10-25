@@ -35,8 +35,8 @@
                   @foreach($countrydata as $countryenrollment)
                   <tr>
                       <td>{{$countryenrollment->country}}</td>
-                      <td>{{Carbon\Carbon::parse($countryenrollment->start_date)->format('M d')}}</td>
-                      <td>{{Carbon\Carbon::parse($countryenrollment->end_date)->format('M d')}}</td>
+                      <td>{{Carbon\Carbon::parse($countryenrollment->start_date)->format('F d')}}</td>
+                      <td>{{Carbon\Carbon::parse($countryenrollment->end_date)->format('F d')}}</td>
                       <td><a href="{{ url('admin/edit-country',$countryenrollment->id)}}"> <i class="fas fa-edit"></i></a>
                   </tr>
                   @endforeach

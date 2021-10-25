@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Hash;
+use Illuminate\Support\Carbon;
 
 class ImportParents extends Command
 {
@@ -48,7 +49,7 @@ class ImportParents extends Command
         $filePath = base_path('csv/family.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
-$duplicateCheckArray = [];
+        $duplicateCheckArray = [];
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as
                 $rowIndex => $cells) {
@@ -71,16 +72,18 @@ $duplicateCheckArray = [];
                                 'email' => $cells[13],
                                 'legacy_name' => $cells[11],
                                 'password' => Hash::make('12345678'),
+                                'email_verified_at' => Carbon::now()
                             ]
                         );
-                    } 
-                    $parent = ParentProfile::where('p1_email', strtolower($p1_email))->first();
-                    if( !$parent )
+                    }
+                    $parent = ParentProfile::where('p1_email', $p1_email)->first();
+
+                    if (!$parent)
                         ParentProfile::create([
                             'user_id' => $user ? $user->id : null,
                             'p1_first_name' => $cells[14],
                             'p1_last_name' => $cells[15],
-                            'p1_email' => strtolower($cells[13]),
+                            'p1_email' => $cells[13],
                             'p1_cell_phone' => $cells[4],
                             'p1_home_phone' =>  $cells[4],
                             'street_address' => $cells[8],
@@ -90,14 +93,13 @@ $duplicateCheckArray = [];
                             'zip_code' =>  $cells[9],
                             'country' => $cells[6],
                             'reference' =>  $cells[18],
-                            'immunized' =>  $cells[10]
+                            'immunized' =>  $cells[10],
+                            //todo : update created at with family created at from sheet  'created_at'=> 
                         ]);
                 }
-               
             }
+            $reader->close();
+            $this->line('import successfully');
         }
-        echo '<pre>'; print_r($duplicateCheckArray);
-        $reader->close();
-        $this->line('import successfully');
     }
 }

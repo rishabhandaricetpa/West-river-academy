@@ -6,8 +6,9 @@
       :key="maths.id"
     >
       <div class="position-relative">
-        <span class="remove" @click="removeEnglishCourse(index)"
-          ><i class="fas fa-times"></i>
+        <p v-if="index>0" class="delete-course">Delete Course </p>
+        <span v-if="index>0" class="remove place-top" @click="removeEnglishCourse(index)"
+          ><i class="fas fa-times "></i>
         </span>
         <div class="form-group d-sm-flex mt-2r row">
           <div class="col-sm-6">

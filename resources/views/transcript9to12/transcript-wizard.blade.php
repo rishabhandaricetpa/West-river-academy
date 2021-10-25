@@ -17,7 +17,7 @@
                 <div class="form-group d-sm-flex mb-2">
                     <label for="">Date of Birth</label>
                     <div>
-                        {{ $student->d_o_b->format('F j, Y') }}
+                        {{ formatDate($student->d_o_b) }}
                     </div>
                 </div>
             </form>
@@ -26,14 +26,14 @@
 
                 @foreach ($transcriptDatas as $school)
 
-                    <div class="seperator mb-4">
+                    <div class=" mb-4">
                         <h2 class="mb-2">{{ $school->school_name }}</h2>
 
                         <a href="{{ route('delete.transcript.school', $school->id) }}" class="btn btn-primary float-right"
-                            type="submit" value="Delete School Record">Delete School Record</a>
+                            type="submit" value="Delete School Record">Delete this Year</a>
 
                         <p class="mb-0"><span class="font-weight-bold mr-2">Academic School
-                                Year(s):</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }} </p>
+                                Year:</span>{{ $school->enrollment_year }} - {{ $school->enrollment_year + 1 }} </p>
                         <p> <span class="font-weight-bold mr-2"> Grade:</span> {{ $school->grade }}</p>
 
                         <div class="overflow-auto">
@@ -65,12 +65,23 @@
                         </div>
                         <div class="buttongroup">
                             <a href="{{ route('showCourseDetails', [$school->id, $school->student_profile_id]) }}"
-                                class="btn btn-primary mt-4">Select Courses and Grade</a>
+                                class="btn btn-primary mt-4">Add Courses</a>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
 
+        <div class="form-wrap border bg-light py-5 px-25 mb-4 school-record">
+            <p> You can use the button below to add classes from other schools, colleges, and universities.
+                Course selection,
+                credits, and grades must match exactly the transcript we have on file from the other school. Heading on
+                transcript will indicate the name of the school.</p>
+            <a class="btn btn-primary" href="{{ route('transcript.create', [$transcript_id, $student->id]) }}">Add
+                Another Grade</a>
+        </div>
+
+        <div class="form-wrap border bg-light py-5 px-25 mb-4 school-record ">
             @if ($transcriptWizStatus->transcript_wiz === 'Yes' && $transcriptWizStatus->status === 'pending')
                 <div class=" pt-2">
                     <div class="d-sm-flex align-items-center">
@@ -90,7 +101,7 @@
                     </div>
                 </div>
             @else
-                <div class="pt-2 seperator">
+                <div class="pt-2">
                     <p>If you are finished with this transcript and would like to see what it looks like, you can click
                         the
                         "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed
@@ -104,11 +115,6 @@
                 </div>
 
             @endif
-
-        <p class="pt-5">    You can use the button below to add classes from other schools, colleges, and universities. Course selection,
-            credits, and grades must match exactly the transcript we have on file from the other school. Heading on
-            transcript will indicate the name of the school.</p>
-            <a class="btn btn-primary" href="{{ route('transcript.create', [$transcript_id, $student->id]) }}">Add Another Grade</a>
         </div>
     </main>
 

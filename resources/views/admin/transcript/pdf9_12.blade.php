@@ -71,7 +71,7 @@
                    <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
                    <td
                        style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                       {{ $student->d_o_b->format('M j, Y') }}</td>
+                       {{ formatDate($student->d_o_b) }}</td>
                </tr>
            </tbody>
        </table>
@@ -223,7 +223,7 @@
                    <table style="width:100%;">
                        <tr style="width:100%;">
                            <td style="text-align:center;width:100%;" colspan="2">
-                               <div style="margin:0 auto;"><img src="images/Stamp.png"
+                               <div style="margin:0 auto;"><img src="{{ asset('images/Stamp.png') }}"
                                        style="width: 120px;height:120px;object-fit:contain;display:block;" alt="Stamp">
                                </div>
                            </td>

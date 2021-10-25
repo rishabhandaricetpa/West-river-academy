@@ -52,20 +52,59 @@ php artisan optimize
 -   E-mail service
 -   [Sentry](https://docs.sentry.io/platforms/php/laravel/) error reporting service (optional)
 
-- Sequence to execute db commands
+-   Sequence to execute db commands
 
 ### user, parent and student import CSV import
+
 -   php artisan import:users
 -   php artisan import:parents
 -   php artisan import:students
 
 ### Enrollment import
+
 -   php artisan import:enrollments
 -   php artisan import:enrollmentpayment
 -   php artisan import:enrollmentpaymentsmethods
 
 ### Transcript Import k8
+
 -   php artisan import:transcript9_12
 
 ### Transcript Import 9-12 import
+
 -   php artisan import:transcript9_12
+
+### Representative Groups
+
+`First generate new csv for filling empty parent representative names`
+
+-   php artisan import:repname
+-   php artisan import:representative
+-   php artisan import:parentrep
+-   php artisan import:repamount
+
+
+## For Custom Payments
+
+- php artisan import:custompayment
+- php artisan import:updatecustom
+
+## For Custom Letter
+
+- php artisan import:customletter
+- php artisan import:updatecustompletterayment
+
+## For Coupon
+- php artisan import:coupon
+
+## For Personal Consultation
+- php artisan import:personalconsultation
+- php artisan import:updatepaymentconsultation
+
+## For Graduation
+- php artisan import:graduation
+- php artisan import:graduationpayment
+
+## For Apostile/Notarization
+- php artisan import:apostilenotarization
+- php artisan import:notarizationpayment

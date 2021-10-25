@@ -59,12 +59,12 @@
                                 <input type="hidden" value="{{ $parent->id }}" id='parent_id' name="parent_id">
                             </div>
                         </div>
-                        <div class="col-12">Date Created: {{ $parent->created_at->format('M j, Y') }}
+                        <div class="col-12">Date Created: {{ formatDate($parent->created_at) }}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade bd-example-modal-lg pt-4" id="parentDetailsModal" tabindex="-1" role="dialog"
+            <div class="modal fade bd-example-modal-lg pt-5 " id="parentDetailsModal" tabindex="-1" role="dialog"
                 aria-labelledby="parentDetailsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <form id="add-new-parent">
@@ -229,9 +229,9 @@
                                 <form class="is-readonly row" id="sampleForm">
                                     @csrf
                                     <div class="col-md-6">
-                                        <h3 class="mt-3">Parent-details-1</h3>
+                                        <h3 class="mt-3">Parent 1 Details</h3>
                                         <div class="form-group">
-                                            <label for="p1_first_name">First Name :</label>
+                                            <label for="p1_first_name">First Name: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_first_name"
                                                 id="p1_first_name" placeholder="" value="{{ $parent->p1_first_name }}"
                                                 disabled required>
@@ -239,38 +239,38 @@
                                         <div class="form-group">
                                             <input type='hidden' id="parent_id" name="parent_id"
                                                 value="{{ $parent->id }}">
-                                            <label for="p1_middle_name">Middle Name :</label>
+                                            <label for="p1_middle_name">Middle Name: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_middle_name"
                                                 id="p1_middle_name" placeholder="" value="{{ $parent->p1_middle_name }}"
                                                 disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_last_name">Last Name :</label>
+                                            <label for="p1_last_name">Last Name: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_last_name"
                                                 id="p1_last_name" placeholder="" value="{{ $parent->p1_last_name }}"
                                                 disabled required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_email">Email :</label>
+                                            <label for="p1_email">Email: </label>
                                             <input type="email" class="form-control is-disabled" name="p1_email"
                                                 id="p1_email" placeholder="" value="{{ $parent->p1_email }}" disabled
                                                 required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_cell_phone">Phone :</label>
+                                            <label for="p1_cell_phone">Cell Phone: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_cell_phone"
                                                 id="p1_cell_phone" placeholder="" value="{{ $parent->p1_cell_phone }}"
                                                 disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="p1_home_phone"> Home Phone :</label>
+                                            <label for="p1_home_phone"> Home Phone: </label>
                                             <input type="text" class="form-control is-disabled" name="p1_home_phone"
                                                 id="p1_home_phone" placeholder="" value="{{ $parent->p1_home_phone }}"
                                                 disabled>
                                         </div>
                                         <h3 class="mt-3">Address</h3>
                                         <div class="form-group">
-                                            <label for="street_address">Street :</label>
+                                            <label for="street_address">Street: </label>
                                             <input type="text" class="form-control is-disabled" id="street_address"
                                                 placeholder="" name="street_address"
                                                 value="{{ $parent->street_address }}" disabled required>
@@ -278,13 +278,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">City :</label>
+                                                    <label for="exampleInputEmail1">City: </label>
                                                     <input type="text" class="form-control is-disabled" id="city"
                                                         placeholder="" name="city" value="{{ $parent->city }}" disabled
                                                         required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">State :</label>
+                                                    <label for="exampleInputEmail1">State: </label>
                                                     <input type="text" class="form-control is-disabled" id="state"
                                                         placeholder="" name="state" value="{{ $parent->state }}" disabled
                                                         required>
@@ -292,13 +292,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Country :</label>
+                                                    <label for="exampleInputEmail1">Country: </label>
                                                     <input type="text" class="form-control is-disabled" id="country"
                                                         placeholder="" name="country" value="{{ $parent->country }}"
                                                         disabled required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Zip Code :</label>
+                                                    <label for="exampleInputEmail1">Zip Code: </label>
                                                     <input type="text" class="form-control is-disabled" id="zip_code"
                                                         placeholder="" name="state" value="{{ $parent->zip_code }}"
                                                         disabled required>
@@ -309,21 +309,21 @@
 
                                     {{-- parents details 2 --}}
                                     <div class="col-md-6">
-                                        <h3 class="mt-3">Parent-details-2</h3>
+                                        <h3 class="mt-3">Parent 2 Details</h3>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">First Name :</label>
+                                            <label for="exampleInputPassword1">First Name: </label>
                                             <input type="text" class="form-control is-disabled" id="p2_first_name"
                                                 placeholder="" value="{{ $parent->p2_first_name }}" name="p2_first_name"
                                                 disabled>
                                         </div>
                                         <div class=" form-group">
-                                            <label for="exampleInputPassword1">Middle Name :</label>
+                                            <label for="exampleInputPassword1">Middle Name: </label>
                                             <input type="text" class="form-control is-disabled" id="p2_middle_name"
                                                 placeholder="" name="p2_middle_name"
                                                 value="{{ $parent->p2_middle_name }}" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Last Name :</label>
+                                            <label for="exampleInputPassword1">Last Name: </label>
                                             <input type="text" class="form-control is-disabled" id="p2_last_name"
                                                 placeholder="" name="p2_last_name" value="{{ $parent->p2_last_name }}"
                                                 disabled>
@@ -334,19 +334,19 @@
                                                 placeholder="" name="p2_email" value="{{ $parent->p2_email }}" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Phone :</label>
+                                            <label for="exampleInputEmail1">Cell Phone: </label>
                                             <input type="email" class="form-control is-disabled" name="p2_cell_phone"
                                                 id="p2_cell_phone" placeholder="" value="{{ $parent->p2_cell_phone }}"
                                                 disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Home Phone :</label>
+                                            <label for="exampleInputEmail1">Home Phone: </label>
                                             <input type="email" class="form-control is-disabled" name="p2_home_phone"
                                                 id="p2_home_phone" placeholder="" value="{{ $parent->p2_home_phone }}"
                                                 disabled>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <h3 class="mt-3 pr-5 mb-2">Address </h3>
+                                            <h3 class="mt-3 pr-5 mb-2">Address: </h3>
                                             <div class="text-right d-flex align-items-center">
                                                 <input class="mt-3 mb-3" type="checkbox" id="check" name="check" value=""
                                                     disabled>
@@ -354,7 +354,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Street :</label>
+                                            <label for="exampleInputEmail1">Street: </label>
                                             <input type="text" class="form-control is-disabled" placeholder=""
                                                 id="p2_street_address" value="{{ $parent->p2_street_address }}"
                                                 name="street2" disabled>
@@ -362,24 +362,24 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">City :</label>
+                                                    <label for="exampleInputEmail1">City: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_city }}" id="p2_city" disabled>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">State :</label>
+                                                    <label for="exampleInputEmail1">State: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_state }}" id="p2_state" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Country :</label>
+                                                    <label for="exampleInputEmail1">Country: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_country }}" id="p2_country" disabled>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Zip code :</label>
+                                                    <label for="exampleInputEmail1">Zip code: </label>
                                                     <input type="text" class="form-control is-disabled" placeholder=""
                                                         value="{{ $parent->p2_zip_code }}" id="p2_zip_code" disabled>
                                                 </div>
@@ -455,7 +455,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="modal fade bd-example-modal-lg" id="RepsModal" tabindex="-1" role="dialog"
+                    <div class="modal fade bd-example-modal-lg pt-5 " id="RepsModal" tabindex="-1" role="dialog"
                         aria-labelledby="RepsModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -472,7 +472,7 @@
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">Type:</label>
                                                     <select class="form-control" type="text" id='rep_type'>
-                                                        <option value="Respresentative">Representative</option>
+                                                        <option value="Representative">Representative</option>
                                                         <option value="Influencer">Influencer</option>
                                                     </select>
                                                 </div>
@@ -524,7 +524,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade bd-example-modal-lg" id="groupModal" tabindex="-1" role="dialog"
+                    <div class="modal fade bd-example-modal-lg pt-5 " id="groupModal" tabindex="-1" role="dialog"
                         aria-labelledby="groupModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -567,7 +567,77 @@
                     </div>
                 </div>
 
+                {{-- Payment History --}}
+                <section class="history  pt-10r" id="history">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="pr-3"> Payment History</h2>
+                            <div class="overflow-auto max-table">
+                                <table class="table table-striped table-styling w-100 table-vertical_scroll">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Orders</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($detail_order_lists as $detail_order_list)
+                                            <tr>
+                                                <td>{{ formatDate($detail_order_list->created_at) }}</td>
+                                                <td>{{ $detail_order_list->item_type }}</td>
+                                                <td>${{ $detail_order_list->amount }}</td>
+                                                <td class="text-right"><a href="javascript:void(0)"
+                                                        class="btn btn-primary btn-modal ml-3" data-toggle="modal"
+                                                        data-target="#order-details_details" data-whatever="@getbootstrap"
+                                                        data-id={{ $detail_order_list->transcation_id }}
+                                                        onclick="detailOrders(event.target)">View
+                                                        Order</a></td>
+                                            </tr>
+                                        @endforeach
 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="modal fade bd-example-modal-lg pt-5 " id="order-details_details" tabindex="-1" role="dialog"
+                    aria-labelledby="order-details_details-Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="order-details_details-Label">Order Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="overflow-auto max-table">
+                                    <table class="table-styling w-100 table-vertical_scroll">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Item Type</td>
+                                                <td>Amount</td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="paymeny_history_wrapper_admin">
+                                            <tr>
+                                                <td id="student_name"></td>
+                                                <td id="items"></td>
+                                                <td id="amount"></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
@@ -602,9 +672,9 @@
                                                         href=" {{ route('admin.edit-student', $student->id) }}">{{ $student->fullname }}</a>
                                                 </td>
                                                 <td>{{ $student->gender }}</td>
-                                                <td>{{ $student->d_o_b->format('M j, Y') }}</td>
+                                                <td>{{ formatDate($student->d_o_b) }}</td>
 
-                                                <td><a class="transform-none" href="mailto:{{ $student->email }}"
+                                                <td><a class="text-lowercase" href="mailto:{{ $student->email }}"
                                                         target="_blank">{{ $student->email }}</a></td>
                                                 <td><a href="{{ route('admin.delete.student', $student->id) }}"
                                                         onclick="return confirm('Are you sure you want to delete this student?');"><i
@@ -620,7 +690,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="studentDetailsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="studentDetailsModal" tabindex="-1" role="dialog"
                     aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -750,7 +820,7 @@
                                     <tbody>
                                         @foreach ($getNotes as $getNote)
                                             <tr>
-                                                <td>{{ $getNote->created_at->format('M j, Y') }}</td>
+                                                <td>{{ formatDate($getNote->created_at) }}</td>
                                                 <td>{{ $getNote->notes }}</td>
                                                 <td></td>
                                             </tr>
@@ -761,7 +831,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="notesModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="notesModal" tabindex="-1" role="dialog"
                     aria-labelledby="#notesModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -780,7 +850,7 @@
                                             @foreach ($allstudent as $student)
 
                                                 <option value="{{ $student->id }}" id="student_name_for_notes">
-                                                    {{ $student->first_name }}
+                                                    {{ $student->full_name }}
                                                 </option>
 
                                             @endforeach
@@ -839,12 +909,12 @@
                                         {{-- {{dd($payment_info)}} --}}
                                         @foreach ($payment_info as $payment)
                                             <tr>
-                                                <td>{{ Carbon\Carbon::parse($payment->created_at)->format('M j, Y') }}
+                                                <td>{{ formatDate($payment->created_at) }}
                                                 </td>
                                                 <td>{{ getStudentData($payment->student_profile_id) }}</td>
-                                                <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
+                                                <td>{{ formatDate($payment->start_date_of_enrollment) }}
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
+                                                <td>{{ formatDate($payment->end_date_of_enrollment) }}
                                                 </td>
                                                 <td>{{ $payment->grade_level }}</td>
                                                 @if ($payment->status === 'paid')
@@ -873,7 +943,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="enrollmentsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="enrollmentsModal" tabindex="-1" role="dialog"
                     aria-labelledby="enrollmentsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1068,7 +1138,7 @@
                                             <tr>
                                                 <td>{{ $records['student']['fullname'] }}</td>
                                                 <td>{{ $records->school_name }}</td>
-                                                <td><a class="transform-none" href="mailto:${{ $records->email }}">
+                                                <td><a class="text-lowercase" href="mailto:${{ $records->email }}">
                                                         {{ $records->email }}</a></td>
                                                 <td>{{ $records->phone_number }}</td>
                                                 @if (empty($records->request_status))
@@ -1094,7 +1164,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="recordsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="recordsModal" tabindex="-1" role="dialog"
                     aria-labelledby="recordsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1198,7 +1268,7 @@
                                     <tbody>
                                         @foreach ($documents as $document)
                                             <tr>
-                                                <td>{{ $document->created_at->format('M j,Y') }}</td>
+                                                <td>{{ formatDate($document->created_at) }}</td>
                                                 <td>{{ $document['student']['fullname'] }}</td>
                                                 <td>{{ $document->original_filename }}</td>
                                                 <td>{{ $document->document_type }}</td>
@@ -1223,7 +1293,7 @@
                         </div>
                     </div>
                 </section>
-                <div class="modal fade bd-example-modal-lg" id="documentsModal" tabindex="-1" role="dialog"
+                <div class="modal fade bd-example-modal-lg pt-5 " id="documentsModal" tabindex="-1" role="dialog"
                     aria-labelledby="documentsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -1281,77 +1351,7 @@
                 </div>
 
 
-                {{-- Orders Paid --}}
-                <section class="documents  pt-10r" id="documents">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="pr-3"> Payment History</h2>
-                            <div class="overflow-auto max-table">
-                                <table class="table table-striped table-styling w-100 table-vertical_scroll">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Orders</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($detail_order_lists as $detail_order_list)
-                                            <tr>
-                                                <td>{{ formatDate($detail_order_list->created_at) }}</td>
-                                                <td>{{ $detail_order_list->item_type }}</td>
-                                                <td>${{ $detail_order_list->amount }}</td>
-                                                <td class="text-right"><a href="javascript:void(0)"
-                                                        class="btn btn-primary btn-modal ml-3" data-toggle="modal"
-                                                        data-target="#order-details_details" data-whatever="@getbootstrap"
-                                                        data-id={{ $detail_order_list->transcation_id }}
-                                                        onclick="detailOrders(event.target)">View
-                                                        Order</a></td>
-                                            </tr>
-                                        @endforeach
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="modal fade bd-example-modal-lg" id="order-details_details" tabindex="-1" role="dialog"
-                    aria-labelledby="order-details_details-Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="order-details_details-Label">Order Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="overflow-auto max-table">
-                                    <table class="table-styling w-100 table-vertical_scroll">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Item Type</td>
-                                                <td>Amount</td>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody id="paymeny_history_wrapper_admin">
-                                            <tr>
-                                                <td id="student_name"></td>
-                                                <td id="items"></td>
-                                                <td id="amount"></td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
 

@@ -1,9 +1,9 @@
 <!-- Navbar -->
 <nav id="admin-header"
-    class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue p-0 d-lg-flex justify-content-between main-nav_header align-items-center">
+    class="collapse-nav main-header navbar navbar-expand navbar-white navbar-light ml-auto border-0 bg-blue px-0 py-1 d-lg-flex justify-content-between main-nav_header align-items-center">
     <!-- Left navbar links -->
 
-    <ul class="d-flex overflow-scroll align-items-center">
+    <ul class="d-flex overflow-auto align-items-center">
         <ul class="navbar-nav">
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link"></a>
@@ -25,7 +25,7 @@
         <li class="menu-item"><a href="#">Groups</a></li>
     </ul>
 
-    <ul class="d-flex">
+    <ul class="d-flex ml-sm-auto">
         <li class="mr-3">
           <div class="input-group search-form position-relative" id="adv-search">
             <button type="button" class="btn search-icon p-0 bg-white position-absolute">

@@ -27,6 +27,7 @@ class CreateOrderPersonalConsultationsTable extends Migration
             $table->string('transcation_id')->nullable();
             $table->string('payment_mode')->nullable();
             $table->string('status');
+            $table->string('order_id')->nullable();
             $table->timestamps();
         });
     }

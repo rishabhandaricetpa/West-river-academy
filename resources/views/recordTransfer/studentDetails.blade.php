@@ -24,7 +24,7 @@
                                 <td><a
                                     href="{{ route('record.send', [$student->id, $parentId]) }}">{{ $student->fullname }}</a>
                                 </td>
-                                <td>{{ Carbon\Carbon::parse($student->birthdate)->format('M j, Y') }}</td>
+                                <td>{{ formatDate($student->birthdate) }}</td>
                                 <td>{{ $student->student_Id }}</td>
                                 <td class="transform-none">{{ $student->email }}</td>
                             </tr>

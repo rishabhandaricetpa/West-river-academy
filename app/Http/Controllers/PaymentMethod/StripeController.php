@@ -71,7 +71,9 @@ class StripeController extends Controller
                 $parentProfileData = User::find($userId)->parentProfile()->first();
                 $cartItems = Cart::where('parent_profile_id', $this->parent_profile_id)->get();
                 $items = collect($cartItems)->pluck('item_type')->toArray();
-                $item_type = implode(",", $items);
+
+                $transcript_exists = in_array('transcript', $items) ? true : false;
+                $item_type = implode(", ", $items);
                 $student_data = collect($cartItems)->pluck('student_profile_id')->toArray();
                 $student_id = implode(",", ($student_data));
                 $paymentinfo = $parentProfileData->TransactionsMethod()->create([
@@ -82,7 +84,7 @@ class StripeController extends Controller
                     'status' => $charges->status,
                     'coupon_code' => $coupon_code,
                     'coupon_amount' => $coupon_amount,
-                    'item_type' => $item_type,
+                    'item_type' =>  str_replace("enrollment_period", "Enrollment", $item_type),
                     'student_profile_id' => $student_id,
                 ]);
 
@@ -96,7 +98,7 @@ class StripeController extends Controller
                         'alert-type' => 'error',
                     ];
 
-                    return Redirect::route('payment.info')->with($notification);
+                    return view('Billing.invalid');
                 }
 
                 $paymentinfo->save();
@@ -105,8 +107,11 @@ class StripeController extends Controller
                     'message' => 'Payment has been successfully processed!',
                     'alert-type' => 'success',
                 ];
-
-                return Redirect::route('payment.info')->with($notification);
+                if ($transcript_exists) {
+                    return Redirect::route('transcript.payment.info')->with($notification);
+                } else {
+                    return Redirect::route('payment.info')->with($notification);
+                }
             } catch (\Stripe\Exception\CardException $e) {
                 echo 'Status is:' . $e->getHttpStatus() . '\n';
                 echo 'Type is:' . $e->getError()->type . '\n';

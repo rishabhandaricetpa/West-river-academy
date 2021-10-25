@@ -44,7 +44,7 @@ class ImportEnrollmentPayments extends Command
     public function handle()
     {
         $this->line('starting import');
-        $filePath = base_path('csv/enrollments_periods.csv');
+        $filePath = base_path('csv/payment.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($filePath);
         $reader->open($filePath);
 
@@ -55,7 +55,7 @@ class ImportEnrollmentPayments extends Command
                 if ($rowIndex === 1) {
                     continue;
                 }
-                $order_id = Str::of($cells[13]);
+                $order_id = Str::of($cells[19]);
 
 
                 $enrollment_payment = EnrollmentPeriods::where('order_id', $order_id)->first();
@@ -63,9 +63,9 @@ class ImportEnrollmentPayments extends Command
                 if ($enrollment_payment) {
                     EnrollmentPayment::create([
                         'enrollment_period_id' => (isset($enrollment_payment)) ? $enrollment_payment->id : 0,
-                        'amount' => $cells[24],
-                        'order_id' => $cells[13],
-                        'status' => $cells[22],
+                        'amount' => $cells[2],
+                        'order_id' => $cells[19],
+                        'status' => $cells[16] == 'APPLIED' ? 'paid' : 'pending',
                     ]);
                 }
             }

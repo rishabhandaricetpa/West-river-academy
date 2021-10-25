@@ -10,7 +10,7 @@ class RepresentativeGroup extends Model
     use HasFactory;
     protected $table = 'representative_groups';
     public $append = ['full_name'];
-    protected $fillable = ['parent_profile_id', 'type', 'country', 'city', 'name', 'email'];
+    protected $fillable = ['parent_profile_id', 'type', 'country', 'city', 'name', 'email', 'terms_of_agreement', 'rep_skype', 'rep_phone'];
 
 
     public function families()

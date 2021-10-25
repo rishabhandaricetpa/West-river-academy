@@ -35,12 +35,14 @@ class RepresentativeGroupController extends Controller
                 'city' => $request->rep_city,
                 'name' => $request->rep_name,
                 'email' => $request->rep_email,
+                'rep_phone' => $request->rep_phone,
+                'terms_of_agreement' => $request->terms_of_agreement
             ]);
             if ($request->parent_Id) {
                 $parent = ParentProfile::where('id', $request->parent_Id)->first();
 
                 $parent->representative_group_id = $rep->id;
-                $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+                $parent->amount = $rep->type == 'Representative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
                 $parent->rep_status = 'active';
                 $parent->save();
             }
@@ -70,7 +72,7 @@ class RepresentativeGroupController extends Controller
 
         $parent = ParentProfile::where('id', $request->parent_Id)->first();
         $parent->representative_group_id = $rep->id;
-        $parent->amount = $rep->type == 'Respresentative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
+        $parent->amount = $rep->type == 'Representative' ? FeeStructureType::RepGroupAmount : FeeStructureType::InfluncerAmount;
         $parent->rep_status = 'active';
         $parent->save();
 

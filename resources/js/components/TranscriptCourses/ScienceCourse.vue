@@ -11,8 +11,9 @@
       :key="scienceCourse.id"
     >
       <div class="position-relative">
-        <span class="remove place-top" @click="removeCourse(index)"
-          ><i class="fas fa-times"></i>
+      <p  v-if="index>0" class="delete-course">Delete Course </p>
+        <span v-if="index>0" class="remove place-top" @click="removeCourse(index)"
+          >  
         </span>
         <div class="col-sm-7 px-0">
           <div class="form-group d-sm-flex  align-items-center">

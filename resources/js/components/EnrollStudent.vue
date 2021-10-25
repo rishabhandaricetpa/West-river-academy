@@ -136,7 +136,7 @@
           </div>
         </div>
       </div>
-       <div v-if="countryname==='Hungary'" class="form-group d-sm-flex mb-2">
+       <div class="form-group d-sm-flex mb-2">
         <label for="">Mother's Name</label>
         <div class="row">
           <div class="col-md-5 col-lg-3">
@@ -158,7 +158,7 @@
           </div>
         </div>
       </div>
-       <div  v-if="countryname ==='Hungary'" class="form-group d-sm-flex mb-2">
+       <div class="form-group d-sm-flex mb-2">
         <label for="">Birth City</label>
         <div class="row">
           <div class="col-md-5 col-lg-3">
@@ -424,7 +424,7 @@ export default {
       const year = oldDate.getFullYear();
       const oDate = oldDate.getDate();
       const month = oldDate.getMonth();
-      return new Date(year + 1, month, oDate); 
+      return new Date(year + 1, month, oDate +1); 
     },
      calcMinDate(date){
       const oldDate = new Date(date);

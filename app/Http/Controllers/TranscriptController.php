@@ -14,6 +14,8 @@ use App\Models\TranscriptK8;
 use App\Models\Transcript9_12;
 use App\Models\TranscriptPayment;
 use App\Models\TranscriptPdf;
+use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +28,9 @@ class TranscriptController extends Controller
      */
     public function index($id)
     {
-        $enroll_students = ParentProfile::find($id)->studentProfile()->get();
+        $parent_id = User::find(auth()->user()->id)->parentProfile()->first();
+
+        $enroll_students = ParentProfile::find($parent_id->id)->studentProfile()->get();
         return view('transcript.graduation-app', compact('enroll_students'));
     }
 
@@ -73,6 +77,7 @@ class TranscriptController extends Controller
      */
     public function purchaseNew(Request $request)
     {
+
         $trans_wiz = "No";
         try {
             $count = 0;
@@ -81,6 +86,7 @@ class TranscriptController extends Controller
             $val = $user_input['transcript_val'];
             foreach ($val as $id) {
                 $enroll_student = StudentProfile::find($id);
+
                 $enrollment_ids =   getEnrollmetForStudents($id);
                 DB::beginTransaction();
                 $transcriptData = Transcript::create([
@@ -138,7 +144,7 @@ class TranscriptController extends Controller
                 ->join('transcript_payments', 'transcript_payments.transcript_id', 'transcripts.id')
                 ->whereIn('transcript_payments.status', ['approved', 'paid', 'completed', 'canEdit'])
                 ->get();
-      
+
             return view('transcript.student-transcripts', compact('enroll_student', 'transcriptPayments'));
         }
         // }
@@ -409,7 +415,7 @@ class TranscriptController extends Controller
      */
 
     public function previewTranscript($student_id, $transcript_id)
-    { 
+    {
         $parentId = ParentProfile::getParentId();
         $address = ParentProfile::where('id', $parentId)->first();
         $student = StudentProfile::find($student_id);

@@ -109,7 +109,7 @@
                 @foreach ($journals as $journal)
                     <div class="journal py-2">
                         <h3><a href="#">Volume {{ $volume = $volume + 1 }} : {{ $journal->heading }}
-                                :{{ $journal->created_at->format('M j, Y') }}
+                                :{{ formatDate($journal->created_at) }}
                             </a></h3>
                         <p>{{ $journal->content }}</p>
                     </div>
@@ -127,8 +127,7 @@
                     @foreach ($podcasts as $podcast)
                         <div class="episodes col-md-6 pb-3">
                             <h3 class="pt-3"> Episode{{ $episode = $episode + 1 }} : {{ $podcast->heading }}</h3>
-                            <p><span
-                                    class="pl-sm-5 pl-3 date">{{ $podcast->created_at->format('M j, Y') }}</span></p>
+                            <p><span class="pl-sm-5 pl-3 date">{{ formatDate($podcast->created_at) }}</span></p>
                             <p>{{ $podcast->content }}</p>
                             <audio controls="controls" src="{{ $podcast->podcast_url }}">
                                 Your browser does not support the HTML5 audio element.

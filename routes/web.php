@@ -36,6 +36,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('email/resend', 'Auth\VerificationController@showResendForm')->name('verification.request');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
+
+    Route::get('refund-policy', function () {
+        return view('refund');
+    });
     Route::group(['middleware' => ['auth', 'active_user']], function () {
         // Route::get('/welcome-video', function () {
         //     return view('welcome-video');
@@ -69,6 +73,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         Route::post('/cart', 'CartController@store')->name('add.cart');
+
         Route::delete('/cart/{id}', 'CartController@delete')->name('delete.cart');
         Route::get('/cart', 'CartController@index');
 
@@ -118,7 +123,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('paymentinfo', function () {
             return view('Billing/paymentsuccess');
         })->name('payment.info');
-
+        Route::get('transcript-paymentinfo', function () {
+            return view('Billing/transcript-payment');
+        })->name('transcript.payment.info');
         //Money-order
         Route::get('/money-order', 'PaymentMethod\MoneyOrderController@index')->name('money.order');
         Route::get('/money-order/{id}', 'StudentController@moneyorderReview');

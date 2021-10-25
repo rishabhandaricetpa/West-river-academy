@@ -73,7 +73,7 @@
                                 </td>
                                 <td
                                     style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                                    {{ $student->d_o_b->format('M j, Y') }}</td>
+                                    {{ formatDate($student->d_o_b) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -134,7 +134,7 @@
                     </table>
                     <table style="padding-top:30px;vertical-align:top;width:100%;" class="mt-5">
                         <tr>
-                            <td  style="width:33.3%;vertical-align:top;padding:0 5px;padding-left:0;">
+                            <td style="width:33.3%;vertical-align:top;padding:0 5px;padding-left:0;">
                                 <table width="100%" style="border:1px solid #000;">
                                     <tr>
                                         <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;"
@@ -229,7 +229,7 @@
 
                                 </table>
                             </td>
-                            <td  style="vertical-align:top;width:33.3%;">
+                            <td style="vertical-align:top;width:33.3%;">
                                 <table>
                                     <tbody>
                                         <tr>

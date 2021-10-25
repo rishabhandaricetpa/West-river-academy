@@ -80,7 +80,7 @@ class ImportStudents extends Command
                             'cell_phone' => $cells[16],
                             'student_Id' => $cells[9],
                             'legacy_name' => $cells[11],
-                            'student_situation' =>  $cells[9],
+                            'student_situation' =>  $cells[30],
                         ]);
                     } elseif ($legacy_name) {
                         StudentProfile::create([
@@ -93,7 +93,7 @@ class ImportStudents extends Command
                             'cell_phone' => $cells[16],
                             'student_Id' => $cells[9],
                             'legacy_name' => $cells[11],
-                            'student_situation' =>  $cells[9],
+                            'student_situation' =>  $cells[30],
                         ]);
                     }
                     else{

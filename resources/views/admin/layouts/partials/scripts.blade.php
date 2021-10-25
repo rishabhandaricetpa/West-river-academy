@@ -380,13 +380,13 @@
                     "render": function(data, type, row, meta) {
                         return `
                           <ul>
-                            <li>
+                            <li  class="transform-none" >
                                 Grade 9 : ${ row.grade_9_info }
                             </li>
-                            <li>
+                            <li class="transform-none">
                                 Grade 10 : ${ row.grade_10_info }
                             </li>
-                            <li>
+                            <li class="transform-none">
                                 Grade 11 : ${ row.grade_11_info }
                             </li>
                           </ul>
@@ -1219,8 +1219,8 @@
             var order_detail_val = $('#order_detail_val').val();
             var custom_amount = $('#custom_amount').val();
             var custom_paying_for = $('#custom_paying_for').val();
-            var custom_transcation = $('#custom_transcation').val();
-            var custom_payment_mode = $('#custom_payment_mode').val();
+            var custom_transcation = $('#custom_transcation1').val();
+            var custom_payment_mode = $('#custom_payment_mode1').val();
             var custom_status = $('#custom1').val();
             var parent_id = $('#parent_id').val();
             $.ajax({
@@ -1453,7 +1453,8 @@
         var student_name = $('#student_name_enroll').val();
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
-        var grade_level = $("input[type='radio']:checked").val();
+        var amount_status = $('#amount_status').val();
+        var grade_level = $("input[name='grade_level']:checked").val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1467,6 +1468,7 @@
                 start_date: start_date,
                 end_date: end_date,
                 grade_level: grade_level,
+                amount_status:amount_status
             },
             success: function(response) {
                 location.reload();
@@ -1809,6 +1811,13 @@
                 transcript_pay_mode: transcript_pay_mode,
                 transcript_transaction_id: transcript_transaction_id,
             },
+            success: function(response) {
+                //location.reload();
+            },
+            error: function(response) {
+
+
+            }
 
         });
     });
@@ -1980,7 +1989,7 @@
                             url = '/admin/transcript-edit/payments/' + element.item_type_id
                         }
                         if (element.related_to == "Graduation Ordered") {
-                            url = '/admin/transcript-edit/payments/' + element.item_type_id
+                            url = '/admin/graduations/' + element.item_type_id + '/edit'
                         }
                         if (element.related_to == "Student Enrolled") {
                             url = '/admin/edit-payment-status/' + element.item_type_id
@@ -2140,6 +2149,9 @@
     var url = window.location;
     $('nav .nav-item a').removeClass('active');
     $('nav .nav-item a[href="' + url + '"]').addClass('active');
+
+    $('.list-unstyled li a').removeClass('active');
+    $('.list-unstyled li a[href="' + url + '"]').addClass('active');
 
     //// table enable 
 

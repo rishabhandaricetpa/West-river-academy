@@ -220,7 +220,7 @@
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2>Coupon</h2>
-            <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
+      <div class="form-group d-sm-flex mb-2 col-md-6 px-0">
         <label for="">Enter Code</label>
         <div>
           <input
@@ -235,7 +235,11 @@
         <button type="button" class="btn btn-primary" @click="applyCoupon">
           Apply Coupon
         </button>
-         <button type="button" class="btn btn-primary ml-3" @click="removeCoupon">
+        <button
+          type="button"
+          class="btn btn-primary ml-3"
+          @click="removeCoupon"
+        >
           Remove Coupon
         </button>
       </div>
@@ -243,14 +247,127 @@
     <div class="form-wrap border bg-light py-5 px-25 mt-2r">
       <h2 class="mb-3">Payment Total</h2>
       <div class="overflow-auto">
-      <table class="w-100 table-styling">
-        <tfoot>
-          <tr>
-            <td class="mb-3">Order total</td>
-            <h2 class="mb-3">${{ amount }}</h2>
-          </tr>
-        </tfoot>
-      </table>
+        <table class="w-100 table-styling">
+          <tfoot>
+            <tr>
+              <td class="mb-3 pl-0">Order total</td>
+              <td>
+                <h2 class="mb-3">${{ amount }}</h2>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="font-md">
+        All transactions are final and fees are non-refundable without prior
+        written agreement. Click
+        <a
+          href="#"
+          type="button"
+          data-toggle="modal"
+          data-target=".bd-example-modal-lg"
+          ><strong>here</strong></a
+        >
+        for full Refund Policy
+        <a href="https://staging.westriveracademy.com/refund-policy"
+          >(https://staging.westriveracademy.com/refund-policy)</a
+        >
+      </p>
+    </div>
+
+    <div
+      class="modal fade bd-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">Refund Policy</h2>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class=" refund-page">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <p>
+                      WEST RIVER ACADEMY (the “Company”) has a
+                      <strong>NO REFUND</strong> policy for its services,
+                      products and enrollment.
+                    </p>
+                    <p>
+                      Please note that all transactions are
+                      <strong>final</strong> and fees are
+                      <strong>non-refundable</strong> unless prior agreement has
+                      been made with West River Academy.
+                    </p>
+                    <p>
+                      If you have any questions or concerns, please contact West
+                      River Academy at
+                      <a href="mailto:Contact@westriveracademy.com"
+                        >Contact@westriveracademy.com</a
+                      >
+                      <strong>PRIOR</strong> to making any payments.
+                    </p>
+                    <p>
+                      <strong>Your Acceptance of These Terms:</strong> By
+                      enrolling in West River Academy, you accept the policies
+                      and restrictions set forth in this Refund Policy. If you
+                      do not agree to this policy, please do not make payments
+                      or enroll. This Refund Policy may be revised from time to
+                      time by updating this posting. You are bound by any such
+                      revisions and should therefore periodically visit this
+                      page to review the then current Refund Policy to which you
+                      are bound.
+                    </p>
+                    <p>
+                      <em><strong>En Español:</strong></em>
+                    </p>
+                    <p>
+                      WEST RIVER ACADEMY (la “Compañía”) tiene una política de
+                      NO REEMBOLSO para sus servicios, productos e inscripción.
+                    </p>
+                    <p>
+                      Tenga en cuenta que todas las transacciones son finales y
+                      los honorarios no son reembolsables acuerdo a menos que
+                      antes se ha hecho con West River Academy.
+                    </p>
+                    <p>
+                      Si tiene alguna pregunta o inquietud, comuníquese con West
+                      River Academy en
+                      <a href="mailto:Contact@westriveracademy.com"
+                        >Contact@westriveracademy.com</a
+                      >
+                      ANTES de realizar cualquier pago.
+                    </p>
+                    <p>
+                      <strong>Su aceptación de estos términos:</strong> Al
+                      inscribirse en West River Academy, acepta las políticas y
+                      restricciones establecidas en esta Política de reembolso.
+                      Si no está de acuerdo con esta política, no se inscriba.
+                      Esta Política de reembolso puede ser revisada de vez en
+                      cuando actualizando esta publicación. Usted está sujeto a
+                      dichas revisiones y, por lo tanto, debe visitar
+                      periódicamente esta página para revisar la Política de
+                      reembolso vigente en ese momento a la que está obligado.
+                    </p>
+                    <p>Last Updated: September 29, 2021</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-wrap border bg-light py-5 px-25 mt-2r payment-method">
@@ -362,7 +479,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   name: "Address",
   components: {
-    "v-select": vSelect,
+    "v-select": vSelect
   },
   data() {
     return {
@@ -372,7 +489,7 @@ export default {
         sSame: false,
         email: this.parents.p1_email,
         paymentMethod: {
-          payment_type: null,
+          payment_type: null
         },
         billing_address: {
           first_name: this.parents.p1_first_name,
@@ -381,7 +498,7 @@ export default {
           city: this.parents.city,
           state: this.parents.state,
           zip_code: this.parents.zip_code,
-          country: this.parents.country,
+          country: this.parents.country
         },
         shipping_address: {
           first_name: null,
@@ -390,9 +507,9 @@ export default {
           city: null,
           state: null,
           zip_code: null,
-          country: null,
-        },
-      },
+          country: null
+        }
+      }
     };
   },
   props: ["parents", "countries", "total", "coupons", "selectedcoupon"],
@@ -411,57 +528,57 @@ export default {
     addPayments() {
       axios
         .post(route("billing.address"), this.form)
-        .then((response) => {
+        .then(response => {
           window.location = response.data
             ? response.data + "/" + this.parents.id
             : alert(response.message);
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
     applyCoupon() {
-      if(this.couponSelected === null){
+      if (this.couponSelected === null) {
         return false;
       }
       axios
         .get(route("coupon.apply", this.couponSelected))
-        .then((response) => {
-          if(response.data.status == 'success'){
-            if(response.data.amount > this.total.amount){
+        .then(response => {
+          if (response.data.status == "success") {
+            if (response.data.amount > this.total.amount) {
               this.amount = 1;
-            }else{
+            } else {
               this.amount = this.total.amount - response.data.amount;
             }
-          }else{
+          } else {
             this.couponSelected = null;
             this.amount = this.total.amount;
           }
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
-     removeCoupon() {
-      if(this.couponSelected === null){
+    removeCoupon() {
+      if (this.couponSelected === null) {
         return false;
       }
       axios
         .get(route("coupon.remove", this.couponSelected))
-        .then((response) => {
-          if(response.data.status == 'success'){
-            if(response.data.amount > this.total.amount){
+        .then(response => {
+          if (response.data.status == "success") {
+            if (response.data.amount > this.total.amount) {
               this.amount = 1;
-            }else{
+            } else {
               this.amount = this.total.amount - response.data.amount;
             }
-          }else{
+          } else {
             this.couponSelected = null;
             this.amount = this.total.amount;
           }
         })
-        .catch((error) => console.log(error));
-    },
+        .catch(error => console.log(error));
+    }
   },
-  mounted(){
-    this.couponSelected !== null ? this.applyCoupon() : '';
-    this.couponSelected !== null ? this.removeCoupon() : '';
+  mounted() {
+    this.couponSelected !== null ? this.applyCoupon() : "";
+    this.couponSelected !== null ? this.removeCoupon() : "";
   }
 };
 </script>

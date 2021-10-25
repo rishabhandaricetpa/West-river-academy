@@ -21,12 +21,13 @@ class ActiveUser
     public function handle(Request $request, Closure $next)
     {
         $id = Auth::user()->id;
+
         $parentProfileData = User::find($id)->parentProfile()->first();
         if ($parentProfileData->status == 1) {
             $user = Auth::user();
             auth()->logout();
             $notification = [
-                'message' => 'Your account is not in active status!Please contact your admin',
+                'message' => 'Your account is not in active status! Please contact your admin',
                 'alert-type' => 'error',
             ];
 

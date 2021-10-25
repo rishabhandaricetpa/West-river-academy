@@ -10,7 +10,7 @@
                     <!-- /.card-header -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="pr-3"> Payment Status of Parent :<a
+                            <h3 class="pr-3"> Payment Status of Parent: <a
                                     href="{{ route('admin.parent.edit', $student->parent_profile_id) }}">View Parent</a>
                             </h3>
                             <a onclick="goBack()" class="btn btn-primary float-right">Back</a>
@@ -33,9 +33,9 @@
                                     @foreach ($payment_info as $payment)
                                         <tr>
 
-                                            <td>{{ Carbon\Carbon::parse($payment->start_date_of_enrollment)->format('M j, Y') }}
+                                            <td>{{ formatDate($payment->start_date_of_enrollment) }}
                                             </td>
-                                            <td>{{ Carbon\Carbon::parse($payment->end_date_of_enrollment)->format('M j, Y') }}
+                                            <td>{{ formatDate($payment->end_date_of_enrollment) }}
                                             </td>
                                             <td>{{ $payment->grade_level }}</td>
                                             <td>{{ $payment->amount }}</td>

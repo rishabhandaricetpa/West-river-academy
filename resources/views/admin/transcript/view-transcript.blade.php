@@ -8,19 +8,22 @@
                 <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
             </div>
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <h2 class="mb-3">{{ $student->fullname }}</h2>
+                <a href="{{ route('admin.parent.edit', $student->ParentProfile->id) }}">
+                    <h2 class="mb-3">{{ $student->fullname }}</h2>
+                </a>
                 <form method="POST" action="" class="mb-0">
 
                     <div class="form-group d-sm-flex mb-2">
                         <label for="">Name</label>
                         <div class="float-left">
+
                             {{ $student->fullname }}
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">
                         <label for="">Date of Birth</label>
                         <div class="float-left">
-                            {{ $student->d_o_b->format('M j, Y') }}
+                            {{ formatDate($student->d_o_b) }}
                         </div>
                     </div>
                     <div class="form-group d-sm-flex mb-2">

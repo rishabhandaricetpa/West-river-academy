@@ -26,8 +26,9 @@ class ParentProfile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getFullNameAttribute(){
-        return $this->p1_first_name. ' '. $this->p1_last_name;
+    public function getFullNameAttribute()
+    {
+        return $this->p1_first_name . ' ' . $this->p1_last_name;
     }
     public function studentProfile()
     {
@@ -131,6 +132,6 @@ class ParentProfile extends Model
     }
     public function representative()
     {
-        return $this->belongsTo(RepresentativeGroup::class);
+        return $this->belongsTo(RepresentativeGroup::class, 'parent_profile_id', 'id');
     }
 }

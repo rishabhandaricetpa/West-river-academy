@@ -9,7 +9,7 @@
                 data-target="#addrep-list-Modal" data-whatever="@getbootstrap"><span>Add Rep/Influencer</span><img
                     src="/images.add.png" alt="">
             </button>
-            <div class="modal fade bd-example-modal-lg mt-5" id="addrep-list-Modal" tabindex="-1" role="dialog"
+            <div class="modal fade bd-example-modal-lg pt-5" id="addrep-list-Modal" tabindex="-1" role="dialog"
                 aria-labelledby="addrep-list-ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -26,7 +26,7 @@
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Type:</label>
                                             <select class="form-control" type="text" id='rep_type'>
-                                                <option value="Respresentative">Respresentative</option>
+                                                <option value="Representative">Representative</option>
                                                 <option value="Influencer">Influencer</option>
                                             </select>
                                         </div>

@@ -103,12 +103,24 @@ function getPromotedGrades($grades, $last_value = true)
             return $grade;
         });
         $sortedOrder = $grades->sortBy("order")->pluck("grade")->unique()->toArray();
-        $length = count($sortedOrder);
-        if ($last_value && $length > 1) {
-            $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
-        }
 
-        return implode(", ", $sortedOrder);
+        $length = count($sortedOrder);
+
+        // if ($last_value && $length > 1) {
+        //     $sortedOrder[$length - 1] =  " and " . $sortedOrder[$length - 1];
+        // }
+
+
+
+        $sortedOrder[] = implode(' and ', array_splice($sortedOrder, -2));
+        return implode(', ', $sortedOrder);
+        // if ($length >= 3) {
+        //     $sortedOrders = array_filter($sortedOrder);
+
+        //     return implode(",", $sortedOrders);
+        // } else {
+        //     return implode(" ", $sortedOrder);
+        // }
     } catch (\Throwable $th) {
         return false;
     }
@@ -180,7 +192,7 @@ function fetchTranscript9_12Details($transcriptData)
                         'score' => '-',
                         'name' => $course->subject->subject_name,
                         'credit' => $course->credit->credit,
-                        'groupBy' => 'Courses In Progres',
+                        'groupBy' => 'Courses In Progress',
                         'grade' => $transcript_courses->grade,
                         'type' => 'courseInProgress'
                     ]
@@ -403,7 +415,7 @@ function getEnrollmetForStudents($student_id)
 function getPaymentInformation($enrollment_ids)
 {
     $payment_info = DB::table('enrollment_periods')
-        ->whereIn('enrollment_payment_id', $enrollment_ids)
+        //  ->whereIn('enrollment_payment_id', $enrollment_ids)
         ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
         ->where('enrollment_payments.status', 'paid')
         ->get();
@@ -416,8 +428,8 @@ function getendallenrollmentes($student_id)
 {
     $enrollment_periods = StudentProfile::find($student_id)->enrollmentPeriods()->get();
     foreach ($enrollment_periods as $enrollment_period) {
-        $strtdate = 'Start Date: ' . \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('M j, Y');
-        $enddate = 'End Date: ' . \Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('M j, Y');
+        $strtdate = 'Start Date: ' . \Carbon\Carbon::parse($enrollment_period->start_date_of_enrollment)->format('F j, Y');
+        $enddate = 'End Date: ' . \Carbon\Carbon::parse($enrollment_period->end_date_of_enrollment)->format('F j, Y');
     }
     return $strtdate . '    ' . $enddate;
 }
@@ -548,14 +560,15 @@ function getlegacyname($parent_id)
 {
     $parent_date = ParentProfile::whereId($parent_id)->first();
     if ($parent_date->p2_first_name) {
-        return  $parent_date->p1_first_name . $parent_date->p1_middle_name . $parent_date->p1_last_name . '&' . $parent_date->p2_first_name . $parent_date->p2_middle_name . $parent_date->p2_last_name;
+        return  $parent_date->p1_first_name . ' ' . $parent_date->p1_middle_name .  ' ' . $parent_date->p1_last_name . ' & ' . $parent_date->p2_first_name . ' ' . $parent_date->p2_middle_name . ' ' . $parent_date->p2_last_name;
     } else {
-        return  $parent_date->p1_first_name . $parent_date->p1_middle_name . $parent_date->p1_last_name;
+        return  $parent_date->p1_first_name . ' ' . $parent_date->p1_middle_name . ' ' . $parent_date->p1_last_name;
     }
 }
 //Get Enrollment Payments status for blade file
 function getPaymentstatus($enrollment_payment_id)
 {
+
     $enrollment_payments = EnrollmentPayment::whereId($enrollment_payment_id)->first();
     return $enrollment_payments->status;
 }
@@ -585,7 +598,7 @@ function getStudentGrade($transcript_grade)
 }
 function formatDate($date)
 {
-    return \Carbon\Carbon::parse($date)->format('M j , Y');
+    return \Carbon\Carbon::parse($date)->format('F j, Y');
 }
 function getRepresentativeAmount($repGroupAmountDetails,  $repAmount)
 {

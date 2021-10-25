@@ -22,6 +22,7 @@ class CreateCustomLetterPaymentsTable extends Migration
             $table->string('type_of_payment');
             $table->string('transcation_id')->nullable();
             $table->string('payment_mode')->nullable();
+            $table->string('order_id')->nullable();
             $table->string('status');
             $table->timestamps();
         });

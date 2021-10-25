@@ -1,7 +1,7 @@
 <section class="orders-detail  pt-10r" id="orders">
     <div class="row">
         <div class="col-12">
-            <h2 class="pr-3">Current Orders</h2>
+            <h2 class="pr-3">Create Orders</h2>
             <div class="overflow-auto max-table">
                 <table class="table table-striped table-styling w-100 table-vertical_scroll">
                     <thead class="thead-light">
@@ -18,7 +18,7 @@
                     <tbody>
                         @foreach ($transcations as $transcation)
                             <tr>
-                                <td>{{ $transcation->created_at->format('M j,Y') }}</td>
+                                <td>{{ formatDate($transcation->created_at) }}</td>
                                 <td>{{ $transcation->item_type }}</td>
                                 <td>Pending</td>
                                 <td>{{ getOrderAmount($transcation->item_type, $transcation->item_id) }}</td>
@@ -35,7 +35,7 @@
         </div>
     </div>
 </section>
-<div class="modal fade bd-example-modal-lg" id="orderModal" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg pt-5 " id="orderModal" tabindex="-1" role="dialog"
     aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -176,7 +176,7 @@
                                 <label for="recipient-name" class="col-form-label">For Student</label>
                                 <select id="order-student-name" class="form-control">
                                     @foreach ($allstudent as $student)
-                                        <option value="{{ $student->id }}">{{ $student->first_name }}
+                                        <option value="{{ $student->id }}">{{ $student->fullname }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -220,6 +220,7 @@
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Status</label>
                                     <select type="" id="custom_letter_status" class="form-control paymentDisplay">
+                                        <option value="">Select One</option>
                                         <option value="pending">Pending</option>
                                         <option value="paid">Paid</option>
                                     </select>
@@ -260,7 +261,7 @@
                                             <select id="student_ids" class="form-control grad-student">
                                                 @foreach ($allstudent as $student)
                                                     <option value="{{ $student->id }}">
-                                                        {{ $student->first_name }}
+                                                        {{ $student->fullname }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -431,7 +432,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group payment-div" id="payment-div-custom">
                                     <label for="message-text" class="col-form-label">Payment Mode</label>
-                                    <select type="" id="custom_payment_mode"
+                                    <select type="" id="custom_payment_mode1"
                                         class="form-control custom_letter_payment_mode">
                                         <option value="">Select One </option>
                                         <option value="Credit Card">Credit Card</option>

@@ -314,8 +314,9 @@ class CustomController extends Controller
     public function editCustomPayment($id)
     {
         $customPaymentsData = CustomPayment::whereId($id)->with('ParentProfile')->first();
-        $transactionData = TransactionsMethod::where('transcation_id', $customPaymentsData->transcation_id)->first();
-        return view('admin.payment.customPayments.edit', compact('customPaymentsData', 'transactionData'));
+
+        // $transactionData = TransactionsMethod::where('transcation_id', $customPaymentsData->transcation_id)->first();
+        return view('admin.payment.customPayments.edit', compact('customPaymentsData'));
     }
 
     //update data from Admin users input in Custom payment table

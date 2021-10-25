@@ -52,7 +52,7 @@
                         <tbody>
                             <tr>
                                 <td colspan="3">
-                                    <table  style="width:100%;">
+                                    <table style="width:100%;">
                                         <tbody>
                                             <tr>
                                                 <td
@@ -84,7 +84,7 @@
                                     </table>
                                 </td>
                                 <td colspan="3">
-                                    <table  style="width:100%;">
+                                    <table style="width:100%;">
                                         <tbody>
                                             <tr>
                                                 <td
@@ -92,7 +92,7 @@
                                                     date of birth</td>
                                                 <td
                                                     style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;line-height:1;">
-                                                    {{ $student->d_o_b->format(' M j, Y') }}</td>
+                                                    {{ formatDate($student->d_o_b) }}</td>
                                             </tr>
                                             <tr>
                                                 <td valign="top"
@@ -121,7 +121,7 @@
                     </table>
 
 
-                    <table  style="width:100%;">
+                    <table style="width:100%;">
                         <tbody>
                             <tr style="width:100%;vertical-align:top;">
                                 <td width="80%">
@@ -156,37 +156,50 @@
                                     </table>
                                 </td>
                                 <td width="20%" style="text-align:right;">
-                                    <table  style="width:100%;">
+                                    <table style="width:100%;">
                                         <tbody>
                                             <tr style="width:100%;">
                                                 <td
                                                     style="white-space:nowrap;font-weight:600;text-transform:uppercase;padding-left:5px;">
                                                     <span
                                                         style="border-bottom:1px solid #000;display:inline-block;font-size:11px;text-align:left;">GRADING
-                                                        SYSTEM</span></td>
-                                            </tr>
-                                            <tr style="width:100%;">
-                                                <td style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;padding-top:10px;">A = 90-100%
+                                                        SYSTEM</span>
                                                 </td>
                                             </tr>
                                             <tr style="width:100%;">
-                                                <td style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">B = 80-89%
+                                                <td
+                                                    style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;padding-top:10px;">
+                                                    A = 90-100%
                                                 </td>
                                             </tr>
                                             <tr style="width:100%;">
-                                                <td style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">C = 70-79%
+                                                <td
+                                                    style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">
+                                                    B = 80-89%
                                                 </td>
                                             </tr>
                                             <tr style="width:100%;">
-                                                <td style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">D = 60-69%
+                                                <td
+                                                    style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">
+                                                    C = 70-79%
                                                 </td>
                                             </tr>
                                             <tr style="width:100%;">
-                                                <td style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">F = 0-59%
+                                                <td
+                                                    style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">
+                                                    D = 60-69%
                                                 </td>
                                             </tr>
                                             <tr style="width:100%;">
-                                                <td style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">P = P</td>
+                                                <td
+                                                    style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">
+                                                    F = 0-59%
+                                                </td>
+                                            </tr>
+                                            <tr style="width:100%;">
+                                                <td
+                                                    style="white-space: pre;padding-left:5px;font-size:11px;line-height:12px;">
+                                                    P = P</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -206,7 +219,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table  style="width:100%;">
+                    <table style="width:100%;">
                         <tbody>
                             <tr>
                                 <td valign="bottom" style="text-align:center;width:40%;padding:10px 20px;"><span
@@ -220,7 +233,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table  style="width:100%;">
+                    <table style="width:100%;">
                         <tbody>
                             <tr>
                                 <td>
@@ -234,7 +247,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="my-5"  style="width:100%;">
+                    <table class="my-5" style="width:100%;">
                         <tbody>
                             <tr>
                                 <td width="50%" style="text-align:center;position: relative;"> <a

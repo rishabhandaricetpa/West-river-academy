@@ -44,7 +44,7 @@
 }
 
 .collapse-nav {
-  width: calc(100% - 200px);
+  width: calc(100% - 250px);
 }
 
 .admin-wrapper {
@@ -101,7 +101,7 @@
     @extend .bg-light;
   }
   &.content-wrapper {
-    width: calc(100% - 200px);
+    width: calc(100% - 250px);
     @extend .ml-auto;
   }
   h1,

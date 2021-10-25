@@ -56,14 +56,14 @@
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>Date: {{ $date }} </td>
+                    <td>Date: {{ formatDate($date) }} </td>
                 </tr>
             </tbody>
         </table>
         <table class="mb-20">
             <tbody>
                 <tr style="width:100%">
-                    <td>To: {{ $email }}</td>
+                    <td class="text-transform:lowercase;">To: {{ $email }}</td>
                 </tr>
             </tbody>
         </table>

@@ -40,7 +40,7 @@
                                 <tbody>
                                     @foreach ($transcations as $transcation)
                                         <tr>
-                                            <td>{{ $transcation->created_at->format('M j,Y') }}</td>
+                                            <td>{{ formatDate($transcation->created_at) }}</td>
                                             <td>{{ $transcation->transcation_id }}</td>
                                             <td>{{ $transcation->payment_mode }}</td>
                                             <td>{{ $transcation->amount }}</td>

@@ -267,8 +267,9 @@ class ParentController extends Controller
 
     public function editmyaddress($user_id)
     {
-        $parent =  ParentProfile::where('user_id', $user_id)->first();
-        return view('Myaccounts.editAddress', compact('parent'));
+        $parent_id = ParentProfile::getParentId();
+        $parent =  ParentProfile::where('user_id', $parent_id)->first();
+        return view('editAddress', compact('parent'));
     }
     public function updateAddress(Request $request, $parent_id)
     {

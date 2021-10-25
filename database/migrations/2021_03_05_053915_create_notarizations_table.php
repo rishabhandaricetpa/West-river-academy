@@ -17,6 +17,7 @@ class CreateNotarizationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
+            //  $table->foreignId('parent_profile_id')->nullable()->constrained()->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('number_of_documents');
             $table->string('additional_message')->nullable();
             $table->string('postage_option');
