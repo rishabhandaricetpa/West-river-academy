@@ -13,6 +13,8 @@
             <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'moneygram') }}">MoneyGram
             </a>
             <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'graduation') }}">Graduation</a>
+            <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'moneyorder') }}">Check Or Money
+                Order</a>
         </div>
     </section>
 

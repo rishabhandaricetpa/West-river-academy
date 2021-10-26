@@ -23,7 +23,9 @@
                     @elseif($type == 'graduation')
                         <textarea class="form-control" id='message-text' name='email_body'
                             id="message-text"> <?php include base_path('/resources/views/mail/graduation-approved.blade.php'); ?></textarea>
-
+                    @elseif($type == 'moneyorder')
+                        <textarea class="form-control" id='message-text' name='email_body'
+                            id="message-text"> <?php include base_path('/resources/views/mail/moneyordermail.blade.php'); ?></textarea>
                     @endif
                 </div>
 

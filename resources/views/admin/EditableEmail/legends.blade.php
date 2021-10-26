@@ -35,7 +35,11 @@
               <td class="p-1">$total_fees</td>
               <td class="p-1"> Total Fees</td>
           </tr>
-
+      @elseif($type=='moneyorder')
+          <tr>
+              <td class="p-1">$user_name</td>
+              <td class="p-1"> User Name</td>
+          </tr>
           @endif
           </tr>
       </tbody>

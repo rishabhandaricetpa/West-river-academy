@@ -20,6 +20,9 @@ class MailController extends Controller
             case 'graduation':
                 $type = 'graduation';
                 return view('admin.EditableEmail.edit-email', compact('type'));
+            case 'moneyorder':
+                $type = 'moneyorder';
+                return view('admin.EditableEmail.edit-email', compact('type'));
         }
     }
     public function getAllEmails()
@@ -28,22 +31,22 @@ class MailController extends Controller
     }
     public function savemail(Request $request, $type)
     {
+        $data['content'] = $request->get('email_body');
         if ($type == 'enrollment') {
-            $data['content'] = $request->get('email_body');
             $filePath = base_path('resources/views/mail/enrollment-confirmation.blade.php');
-
             echo file_put_contents($filePath, $data);
             return redirect()->back();
         } elseif ($type == 'graduation') {
-            $data['content'] = $request->get('email_body');
-            $filePath = base_path('resources/views/mail/graduation-approved.blade.php');
 
+            $filePath = base_path('resources/views/mail/graduation-approved.blade.php');
             echo file_put_contents($filePath, $data);
             return redirect()->back();
         } elseif ($type == 'moneygram') {
-            $data['content'] = $request->get('email_body');
             $filePath = base_path('resources/views/mail/moneygram-email.blade.php');
-
+            echo file_put_contents($filePath, $data);
+            return redirect()->back();
+        } elseif ($type == 'moneyorder') {
+            $filePath = base_path('resources/views/mail/moneyordermail.blade.php');
             echo file_put_contents($filePath, $data);
             return redirect()->back();
         }
