@@ -232,11 +232,19 @@ class DashboardController extends Controller
     {
 
         $records = RecordTransfer::where('request_status', 'pending')
-            ->orWhere('request_status', null)->get()->toArray();
+            ->orWhere('request_status', null)
+            ->join('student_profiles', 'student_profiles.id', 'record_transfers.student_profile_id')
+            ->select(
+                'student_profiles.first_name',
+                'student_profiles.last_name',
+                'record_transfers.school_name',
+                'student_profiles.id as studentid',
+                'record_transfers.firstRequestDate',
+                'record_transfers.resendCount',
+                'record_transfers.id'
+            )
+            ->get()->toArray();
+
         return response()->json($records);
-    }
-    public function getAllEmails()
-    {
-        return view('admin.EditableEmail.all-email');
     }
 }

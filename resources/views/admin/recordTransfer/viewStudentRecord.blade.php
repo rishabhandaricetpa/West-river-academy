@@ -170,7 +170,7 @@
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">bcc:</label>
                                             <select class="from-control select2" id="recipient-name" name='bcc[]'
-                                                multiple="multiple">
+                                                multiple="multiple" required>
                                                 <option value="rebecca.risha@ithands.com">rebecca</option>
                                                 <option value="r.gausai@gmail.com">richard</option>
                                             </select>
@@ -178,7 +178,7 @@
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Message:</label>
                                             <textarea class="form-control email-body" id="message-text"
-                                                name="email-content">{{ $studentRecord['student']['fullname'] }} is currently enrolled in West River Academy . A record request form is attached.Please forward all record to :West River Academy  5475 S. Shawnee Way  Aurora,CO 80015  Fax : (949)315-4317   Email : registrar@westriveracademy.com      Thank you.</textarea>
+                                                name="email-content">@include('admin.recordTransfer.sample-record',['student_name'=>$studentRecord['student']['fullname']]) </textarea>
                                             <a href="{{ route('admin.download.record', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
                                                 target="_blank">Attachment: Record Request</a>
                                         </div>

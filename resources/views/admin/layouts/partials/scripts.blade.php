@@ -647,7 +647,6 @@
             },
             success: function(response) {
                 event.preventDefault();
-                console.log(response);
 
                 var html = '';
                 var no_notification = no_notification + `<p> No Notification</p>`;
@@ -655,13 +654,15 @@
                 const s = new Date();
                 const startDate = s.getDate();
                 response.forEach((record) => {
-                    if (Math.abs(startDate - new Date(record.created_at)
-                            .getDate()) > 7) {
+                    console.log(record);
+                    if (Math.abs(startDate - new Date(record.firstRequestDate)
+                            .getDate()) > 7 && record.resendCount == 1) {
+
                         html = html + ` <li class="border-bottom mb-3 pb-3">
                                
-                          <span class=" text-black"> Resend Record Transfer Request To School : ${record.school_name} </span><br>
+                          <span class=" text-black"> Resend Record Transfer Request For Student: ${record.first_name} &nbsp;   ${record.last_name}  </span><br>
 
-                                <a href="/admin/student/record/${record.student_profile_id}/${record.id}" class="btn btn-primary">Go To Record</a>
+                                <a href="/admin/student/record/${record.studentid}/${record.id}" class="btn btn-primary">Go To Record</a>
 
                             </li>`
                     }
