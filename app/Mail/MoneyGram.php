@@ -33,11 +33,11 @@ class MoneyGram extends Mailable
     public function build()
     {
         $id = $this->user->id;
-        $user = User::find($id);
-        $address = User::find($id)->parentProfile()->first();
+        $user = User::find($id)->parentProfile()->first();
+        $user_name = $user->full_name;
         $date = \Carbon\Carbon::now()->format('M d Y');
         $amount = $this->amount;
 
-        return  $this->markdown('mail.moneygram-email', compact('user', 'address', 'date', 'amount'))->subject('MoneyGram Payment');
+        return  $this->markdown('mail.moneygram-email', compact('user_name', 'date', 'amount'))->subject('MoneyGram Payment');
     }
 }

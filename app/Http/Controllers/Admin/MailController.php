@@ -14,8 +14,8 @@ class MailController extends Controller
             case 'enrollment':
                 $type = 'enrollment';
                 return view('admin.EditableEmail.edit-email', compact('type'));
-            case 'record_transfer':
-                $type = 'record_transfer';
+            case 'moneygram':
+                $type = 'moneygram';
                 return view('admin.EditableEmail.edit-email', compact('type'));
             case 'graduation':
                 $type = 'graduation';
@@ -37,6 +37,12 @@ class MailController extends Controller
         } elseif ($type == 'graduation') {
             $data['content'] = $request->get('email_body');
             $filePath = base_path('resources/views/mail/graduation-approved.blade.php');
+
+            echo file_put_contents($filePath, $data);
+            return redirect()->back();
+        } elseif ($type == 'moneygram') {
+            $data['content'] = $request->get('email_body');
+            $filePath = base_path('resources/views/mail/moneygram-email.blade.php');
 
             echo file_put_contents($filePath, $data);
             return redirect()->back();

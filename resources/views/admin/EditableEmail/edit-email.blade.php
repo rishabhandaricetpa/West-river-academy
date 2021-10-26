@@ -17,12 +17,13 @@
                     @if ($type == 'enrollment')
                         <textarea class="form-control" id='message-text' name='email_body'
                             id="message-text"> <?php include base_path('/resources/views/mail/enrollment-confirmation.blade.php'); ?></textarea>
-                    @elseif($type == 'record_transfer')
+                    @elseif($type == 'moneygram')
                         <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/enrollment-confirmation.blade.php'); ?></textarea>
+                            id="message-text"> <?php include base_path('/resources/views/mail/moneygram-email.blade.php'); ?></textarea>
                     @elseif($type == 'graduation')
                         <textarea class="form-control" id='message-text' name='email_body'
                             id="message-text"> <?php include base_path('/resources/views/mail/graduation-approved.blade.php'); ?></textarea>
+
                     @endif
                 </div>
 

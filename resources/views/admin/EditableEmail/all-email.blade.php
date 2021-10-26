@@ -10,8 +10,8 @@
             <h2 class="py-4">Mails </h2>
             <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'enrollment') }}">Student
                 Enrollement Mail</a>
-            <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'record_transfer') }}">Records
-                Transfer</a>
+            <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'moneygram') }}">MoneyGram
+            </a>
             <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'graduation') }}">Graduation</a>
         </div>
     </section>

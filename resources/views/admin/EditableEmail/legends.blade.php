@@ -21,18 +21,21 @@
               <td class="p-1"> $enrollment_end_date </td>
               <td class="p-1"> Enrollment End Date</td>
           </tr>
-      @elseif($type=='record_transfer')
-          <td class="p-1"> answer 122 </td>
-          <td class="p-1"> answer 211</td>
+      @elseif($type=='moneygram')
+          <tr>
+              <td class="p-1"> $user_name</td>
+              <td class="p-1"> User Name</td>
+          </tr>
+          <tr>
+              <td class="p-1"> $amount</td>
+              <td class="p-1"> Amount</td>
+          </tr>
       @elseif($type=='graduation')
           <tr>
-              <td class="p-1">$data->total_fee</td>
+              <td class="p-1">$total_fees</td>
               <td class="p-1"> Total Fees</td>
           </tr>
-          <tr>
-              <td class="p-1">$data->message</td>
-              <td class="p-1"> Final transcript (Optional) </td>
-          </tr>
+
           @endif
           </tr>
       </tbody>
