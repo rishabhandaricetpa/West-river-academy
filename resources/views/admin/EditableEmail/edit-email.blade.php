@@ -1,29 +1,42 @@
 @extends('admin.app')
 
 @section('content')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <section class="content container-fluid  mt-3 pb-3">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <!-- first card parent details -->
 
-<section class="content container-fluid  mt-3 pb-3">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <!-- first card parent details -->
+        <div class="card mt-3 px-4 py-5">
+            <form method='post' action='{{ route('admin.savemail', $type) }}'>
+                @csrf
 
-    <div class="card mt-3 px-4 py-5">
-        <form>
-            <div class="form-group">
-              <label for="Tittle" class="col-form-label">Tittle:</label>
-              <input type="text" class="form-control" id="Tittle">
-            </div>
-            <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                <input type="text" class="form-control" id="recipient-name">
-              </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
-            </div>
-            <button class="btn btn-primary">Submit</button>
-          </form>
-    </div>
-</section>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Email Body:</label>
+                    @if ($type == 'enrollment')
+                        <textarea class="form-control" id='message-text' name='email_body'
+                            id="message-text"> <?php include base_path('/resources/views/mail/enrollment-confirmation.blade.php'); ?></textarea>
+                    @elseif($type == 'record_transfer')
+                        <textarea class="form-control" id='message-text' name='email_body'
+                            id="message-text"> <?php include base_path('/resources/views/mail/enrollment-confirmation.blade.php'); ?></textarea>
+                    @elseif($type == 'graduation')
+                        <textarea class="form-control" id='message-text' name='email_body'
+                            id="message-text"> <?php include base_path('/resources/views/mail/graduation-approved.blade.php'); ?></textarea>
+                    @endif
+                </div>
 
+
+                <button class="btn btn-primary">Save</button>
+            </form>
+            @include('admin.EditableEmail.legends')
+        </div>
+    </section>
+    <script>
+        $(document).ready(function() {
+            $("#message-text").wysihtml5();
+        });
+
+    </script>
 
 @endsection

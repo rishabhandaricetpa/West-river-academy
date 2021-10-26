@@ -276,11 +276,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
     Route::post('get/order/details', 'ParentController@getDetailedOrders')->name('get.orderdetails');
-    Route::get('get/emails', 'DashboardController@getAllEmails')->name('get.emails');
-    Route::get('/edit/emails', 'DashboardController@editEmail')->name('edit.emails');
-    Route::get('edit-email', function () {
-        return view('admin.EditableEmail.edit-email');
-    });
+
+
 });
 
 
@@ -300,4 +297,10 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], funct
 
 Route::group(['middleware' => 'auth:admin', 'prefix' => 'search'], function () {
     Route::get('family-filter', 'ParentController@getSearchFilterData')->name('family.filter');
+});
+
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'mails'], function () {
+    Route::get('edit/{type}', 'MailController@getEmail')->name('studentEnrollment.mail');
+    Route::get('get', 'MailController@getAllEmails')->name('get.emails');
+    Route::post('save/{type}', 'MailController@savemail')->name('savemail');
 });
