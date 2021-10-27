@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Config;
 use Illuminate\Http\Request;
 
 class MailController extends Controller
@@ -54,8 +55,7 @@ class MailController extends Controller
                 }
             }
 
-
-            $existing_legends = ['$student_name', '$enrollment_start_date', '$enrollment_end_date'];
+            $existing_legends = Config::get('constants.enrollment_variables');
             if ($legends == $existing_legends) {
 
                 $filePath = base_path('resources/views/mail/enrollment-confirmation.blade.php');
@@ -73,7 +73,6 @@ class MailController extends Controller
                 return redirect()->back()->with($notification);
             }
         } elseif ($type == 'graduation') {
-
             $filePath = base_path('resources/views/mail/graduation-approved.blade.php');
             echo file_put_contents($filePath, $data);
             return redirect()->back();
