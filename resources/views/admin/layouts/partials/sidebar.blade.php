@@ -211,7 +211,7 @@
                 <a href="{{ route('admin.get.emails') }}" class="nav-link d-flex">
                     <i class="nav-icon fas fa-exchange-alt"></i>
                     <p class="pl-2">
-                        Emails Edit
+                        Emails
                     </p>
                 </a>
             </li>

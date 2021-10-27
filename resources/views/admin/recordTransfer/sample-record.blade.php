@@ -1,7 +1,7 @@
 <p>Hello,</p>
-<p>{{ $student_name }} is currently enrolled in West River Academy . A record request form is attached. Please
+<p>{{ $student_name }} is currently enrolled in West River Academy . A records request form is attached. Please
     forward all
-    record to:</p>
+    records to:</p>
 West River Academy <br>
 5475 S. Shawnee Way<br>
 Aurora,CO 80015<br>

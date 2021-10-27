@@ -40,6 +40,16 @@
               <td class="p-1">$user_name</td>
               <td class="p-1"> User Name</td>
           </tr>
+
+      @elseif($type=='banktransfer')
+          <tr>
+              <td class="p-1"> $user_name</td>
+              <td class="p-1"> User Name</td>
+          </tr>
+          <tr>
+              <td class="p-1"> $amount</td>
+              <td class="p-1"> Amount</td>
+          </tr>
           @endif
           </tr>
       </tbody>

@@ -132,8 +132,8 @@
                         {{-- <button type="submit"
                                 onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();"
                                 class="btn btn-primary my-1">Send Record Request To School</button> --}}
-                        <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
-                            class=" btn btn-primary my-1">Re-send Request</a>
+                        {{-- <a href="{{ route('admin.resend.request', [$studentRecord->id, $studentRecord->student_profile_id]) }}"
+                            class=" btn btn-primary my-1">Re-send Request</a> --}}
                         <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target=".bd-example-modal-lg">Send Mail</button>
 

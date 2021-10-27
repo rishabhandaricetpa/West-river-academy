@@ -12,9 +12,16 @@
                 Enrollement Mail</a>
             <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'moneygram') }}">MoneyGram
             </a>
-            <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'graduation') }}">Graduation</a>
+            <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'graduation') }}">Graduation
+                Approved</a>
             <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'moneyorder') }}">Check Or Money
                 Order</a>
+            <a class="email-card m-1 p-3" href="{{ route('admin.studentEnrollment.mail', 'banktransfer') }}">Bank Transfer
+            </a>
+            <a class="email-card m-1 p-3"
+                href="{{ route('admin.studentEnrollment.mail', 'transcript_approved') }}">Transcript
+                Approved
+            </a>
         </div>
     </section>
 
