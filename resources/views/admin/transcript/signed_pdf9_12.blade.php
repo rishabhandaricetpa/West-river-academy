@@ -216,7 +216,7 @@
                    <table style="width:100%;">
                        <tr>
                            <td style="text-align:center;width:60%" valign="bottom">
-                               <span><img src="../public/images/signature.png" style="width:150px;height:50px;"
+                               <span><img src="../public/images/DanielleSignature.jpg" style="width:150px;height:50px;"
                                        alt=""></span></br>
                                <span
                                    style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
