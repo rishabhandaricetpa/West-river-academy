@@ -20,6 +20,7 @@ class RecordTransfers extends Migration
             $table->unsignedBigInteger('parent_profile_id');
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')->onDelete('cascade');
             $table->string('school_name')->nullable();
+            $table->boolean('is_archieved')->nullable();
             $table->string('email');
             $table->string('fax_number')->nullable();
             $table->string('phone_number')->nullable();

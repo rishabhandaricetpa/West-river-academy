@@ -18,16 +18,16 @@
                     </p>
                 </a>
             </li> --}}
-                @can('isAdmin')
-                <li class="nav-item">
-                    <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Archived Tasks
-                        </p>
-                    </a>
-                </li>
-            @endcan
+
+            <li class="nav-item">
+                <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Archived Tasks
+                    </p>
+                </a>
+            </li>
+
             {{-- <li class="nav-item">
                 <a href="{{ url('admin/view') }}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
@@ -183,13 +183,53 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('admin.record.request') }}" class="nav-link">
                     <i class="nav-icon fas fa-exchange-alt"></i>
                     <p>
                         Record Transfers
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.view.transcript') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>
+                                Archived Records
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+            </li> --}}
+            <li class="nav-item">
+                <a href="#" class="nav-link ">
+                    <i class="nav-icon fas fa-scroll"></i>
+                    <p>
+                        Record Transfers
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.record.request') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>
+                                Lists
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.archieved.requests') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>
+                                Archieved Tasks
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.upload.documents') }}" class="nav-link">
