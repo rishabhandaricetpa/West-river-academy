@@ -5,6 +5,7 @@
     <!-- Content Wrapper. Contains page content -->
 
     <!-- Content Header (Page header) -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <div class="content-header">
         <div class="container-fluid position-relative">
             <h1>Student Details</h1>
@@ -22,17 +23,24 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+
                 <div class="col-12">
                     <!-- /.card-header -->
                     <div class="card">
                         <div class="card-header">
+                            <button class="btn btn-primary mr-auto" type="submit"
+                                onclick="sendRecordArchieve()">Archive</button>
+
                             <h3 class="card-title"></h3>
                         </div>
+
                         <!-- /.card-header -->
                         <div class="card-body">
+
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
+                                        <td>Select</td>
                                         <th>Student Name</th>
                                         <th>School Name</th>
                                         <th>Email</th>
@@ -46,6 +54,9 @@
                                 <tbody>
                                     @foreach ($schoolRecords as $record)
                                         <tr>
+                                            <td> <input type="checkbox" value="{{ $record->id }}"
+                                                    name="is_record_archived" onclick="archieveRecord(this.value)">
+                                            </td>
                                             <td>{{ $record['student']['fullname'] }}</td>
                                             <td>{{ $record->school_name }}</td>
                                             <td><a class="text-lowercase" href="mailto:${{ $record->email }}">

@@ -1936,6 +1936,42 @@
             }
         });
     }
+    /** archieve record transfer starts **/
+
+    function archieveRecord() {
+        var checkedRecordTasksId = [];
+        $("input:checkbox[name=is_record_archived]:checked").each(function() {
+            checkedRecordTasksId.push($(this).val());
+        });
+        console.log(checkedRecordTasksId);
+        return checkedRecordTasksId;
+
+    }
+
+    function sendRecordArchieve() {
+
+        var archieve_ids = archieveRecord();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/archieve/recordtransfer') }}",
+            type: "POST",
+            data: {
+                id: archieve_ids,
+            },
+            success: function(response) {
+                location.reload()
+                console.log(response);
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
+    /** archieve record transfer ends **/
 
     // for validating start and end date 
     $("#end_date_of_enrollment").change(function() {

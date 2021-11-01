@@ -211,6 +211,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     Route::post('update/record', 'RecordTransferController@updateRecord')->name('update.record');
+    Route::get('record/archieved', 'RecordTransferController@archievedList')->name('archieved.requests');
     //dashboard notification
     Route::get('generate-pdf/{student_id}/{grade_id}/{type}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
@@ -244,6 +245,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/record/status', 'DashboardController@updateRecordStatus')->name('update.assigneeStatus');
 
     Route::post('archieve/record', 'DashboardController@archieveRecord');
+    Route::post('archieve/recordtransfer', 'RecordTransferController@archieveRecord');
 
     // view all orders 
     Route::get('transaction/{transcation_id}', 'StudentProfileController@orders')->name('transaction.orders');
@@ -276,8 +278,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('calculate-type', 'ParentController@calculateType')->name('calculate.annualtype');
     Route::post('edit-address', 'ParentController@editAddress')->name('edit.order.address');
     Route::post('get/order/details', 'ParentController@getDetailedOrders')->name('get.orderdetails');
-
-
 });
 
 

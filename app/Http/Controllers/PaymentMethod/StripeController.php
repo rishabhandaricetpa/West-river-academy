@@ -90,7 +90,7 @@ class StripeController extends Controller
 
                 Coupon::removeAppliedCoupon();
 
-                if ($charges->status == 'succeeded') {
+                if ($charges->status == 'succeeded' && $charges->paid == 'true') {
                     Cart::emptyCartAfterPayment('Credit Card', 'paid', $charges->id);
                 } else {
                     $notification = [

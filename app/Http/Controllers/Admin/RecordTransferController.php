@@ -20,7 +20,7 @@ class RecordTransferController extends Controller
 {
     public function index()
     {
-        $schoolRecords = RecordTransfer::select()->with('parent')->orderBy('id', 'DESC')->get();
+        $schoolRecords = RecordTransfer::select()->where('is_archieved', null)->with('parent')->orderBy('id', 'DESC')->get();
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }
     public function studentRecords($record_id)
@@ -179,5 +179,15 @@ class RecordTransferController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->back()->with($notification);
+    }
+    public function archieveRecord(Request $request)
+    {
+        $dashboard = RecordTransfer::whereIn('id', $request->id)->update(array('is_archieved' => 1));
+        return response()->json(['code' => 200, 'message' => 'Task status updated successfully', 'data' => $dashboard], 200);
+    }
+    public  function archievedList()
+    {
+        $record_archieved = RecordTransfer::where('is_archieved', 1)->get();
+        return view('admin.recordTransfer.archieved', compact('record_archieved'));
     }
 }
