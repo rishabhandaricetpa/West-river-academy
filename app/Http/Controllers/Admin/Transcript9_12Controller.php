@@ -29,7 +29,10 @@ class Transcript9_12Controller extends Controller
     {
         $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "9-12";
-        $transcript_data = Transcript9_12::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
+        $transcript_data = Transcript9_12::select()->with('student')
+            ->where('is_archieved', null)
+            ->orderBy('id', 'DESC')
+            ->get()->groupBy('transcript_id');
 
         return view('admin.transcript.view-student', compact('transcript_data', 'type'));
     }
@@ -257,5 +260,15 @@ class Transcript9_12Controller extends Controller
 
             return redirect()->back()->with($notification);
         }
+    }
+    public function showArchieve()
+    {
+        $type = "9-12";
+        $transcript_data = Transcript9_12::select()->with('student')
+            ->where('is_archieved', 1)
+            ->orderBy('id', 'DESC')
+            ->get()->groupBy('transcript_id');
+
+        return view('admin.transcript.archieved', compact('transcript_data', 'type'));
     }
 }

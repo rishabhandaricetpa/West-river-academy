@@ -1972,6 +1972,40 @@
     }
 
     /** archieve record transfer ends **/
+    /** archieve transcript starts **/
+    function archieveTranscriptRecord() {
+        var checkedRecordTranscriptId = [];
+        $("input:checkbox[name=is_transcript_archived]:checked").each(function() {
+            checkedRecordTranscriptId.push($(this).val());
+        });
+        console.log(checkedRecordTranscriptId);
+        return checkedRecordTranscriptId;
+
+    }
+
+    function sendTranscriptArchieve() {
+
+        var archieve_ids = archieveTranscriptRecord();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/archieve/transcript') }}",
+            type: "POST",
+            data: {
+                id: archieve_ids,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
+    /** archieve transcript ends **/
 
     // for validating start and end date 
     $("#end_date_of_enrollment").change(function() {

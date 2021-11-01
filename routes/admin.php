@@ -304,3 +304,8 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'mails'], function () {
     Route::get('get', 'MailController@getAllEmails')->name('get.emails');
     Route::post('save/{type}', 'MailController@savemail')->name('savemail');
 });
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'archieve'], function () {
+    Route::post('transcript', 'TranscriptController@archieve');
+    Route::get('k8display', 'TranscriptController@showArchieve');
+    Route::get('9_12display', 'Transcript9_12Controller@showArchieve');
+});

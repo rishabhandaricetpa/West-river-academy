@@ -10,14 +10,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu">
-                {{-- <li class="nav-item">
-                <a href="{{ route('admin.dashboard.notification') }}" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
-                    <p>
-                        Dashboard
-                    </p>
-                </a>
-            </li> --}}
+
 
             <li class="nav-item">
                 <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
@@ -28,22 +21,7 @@
                 </a>
             </li>
 
-            {{-- <li class="nav-item">
-                <a href="{{ url('admin/view') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>
-                        View Parents
-                    </p>
-                </a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a href="{{ url('admin/view-student') }}" class="nav-link">
-                    <i class="fas fa-user-friends nav-icon"></i>
-                    <p>
-                        Students
-                    </p>
-                </a>
-            </li> --}}
+
             <li class="nav-item menu">
                 <a href="" class="nav-link ">
                     <i class="nav-icon fas fa-wallet"></i>
@@ -148,6 +126,18 @@
                             <p>Manage Courses</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/archieve/k8display') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>Archived k-8</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/archieve/9_12display') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>Archived 9-12</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -183,25 +173,6 @@
                     </p>
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a href="{{ route('admin.record.request') }}" class="nav-link">
-                    <i class="nav-icon fas fa-exchange-alt"></i>
-                    <p>
-                        Record Transfers
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ route('admin.view.transcript') }}" class="nav-link">
-                            <i class="fas fa-eye"></i>
-                            <p>
-                                Archived Records
-                            </p>
-                        </a>
-                    </li>
-
-                </ul>
-            </li> --}}
             <li class="nav-item">
                 <a href="#" class="nav-link ">
                     <i class="nav-icon fas fa-scroll"></i>
