@@ -26,6 +26,9 @@
                     @elseif($type == 'moneyorder')
                         <textarea class="form-control" id='message-text' name='email_body'
                             id="message-text"> <?php include base_path('/resources/views/mail/moneyordermail.blade.php'); ?></textarea>
+                    @elseif($type == 'banktransfer')
+                        <textarea class="form-control" id='message-text' name='email_body'
+                            id="message-text"> <?php include base_path('/resources/views/mail/bankinfo.blade.php'); ?></textarea>
                     @elseif($type == 'transcript_approved')
                         <textarea class="form-control" id='message-text' name='email_body'
                             id="message-text"> <?php include base_path('/resources/views/mail/transcriptMail.blade.php'); ?></textarea>
@@ -36,6 +39,8 @@
                 <button class="btn btn-primary">Save</button>
             </form>
             @include('admin.EditableEmail.legends')
+            <p style='color:red'> Note : Any edits in variables or replacement of them is prohibited.
+            <p>
         </div>
     </section>
     <script>

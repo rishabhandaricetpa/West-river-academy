@@ -195,7 +195,7 @@
                         <a href="{{ route('admin.archieved.requests') }}" class="nav-link">
                             <i class="fas fa-eye"></i>
                             <p>
-                                Archieved Tasks
+                                Archieved
                             </p>
                         </a>
                     </li>

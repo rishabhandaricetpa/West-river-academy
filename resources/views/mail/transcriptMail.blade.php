@@ -1,5 +1,5 @@
 <h2>Hi, </h2>
-<h3>Transcript Received</h3>
+<p><b></b><b>Transcript Received</b><b></b></p>
 
 <p>We have recived an transcript will review the same and then you can
     download the Signed Transcript</p>

@@ -28,5 +28,9 @@ return [
   'CSV_DOMAIN' => 'westriveracademy.com',
   //legends in enrollment-confirmation
 
-  'enrollment_variables' => ['$student_name', '$enrollment_start_date', '$enrollment_end_date']
+  'enrollment_variables' => ['$student_name', '$enrollment_start_date', '$enrollment_end_date'],
+  'moneygram' => ['$user_name', '${{', '$amount'],
+  'graduation' => ['${{', '$total_fees'],
+  'moneyorder' => ['$user_name'],
+  'banktransfer' => ['$user_name', '${{', '$amount']
 ];
