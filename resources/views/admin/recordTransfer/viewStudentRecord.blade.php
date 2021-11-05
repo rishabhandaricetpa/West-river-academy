@@ -54,7 +54,6 @@
                 @endif
 
                 <form>
-
                     <div class="card-body p-0 row">
                         <input type="hidden" value="{{ $studentRecord->id }}" name="record_id" id="record_id">
                         <input type="hidden" value="{{ $studentRecord->status }}" name="status">
@@ -169,10 +168,15 @@
 
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">bcc:</label>
-                                            <select class="from-control select2" id="recipient-name" name='bcc[]'
-                                                multiple="multiple" required>
-                                                <option value="rebecca.risha@ithands.com">rebecca</option>
-                                                <option value="r.gausai@gmail.com">richard</option>
+                                            <select class="from-control select2" id="recipient-name" type='email'
+                                                name='bcc[]' multiple="multiple" required>
+                                                <option value="{{ $studentRecord->email }}">Student Email:
+                                                    {{ $studentRecord->email }}
+                                                </option>
+                                                <option value=" {{ $studentRecord['parent']['p1_email'] }}">
+                                                    Parent Email: {{ $studentRecord['parent']['p1_email'] }}</option>
+                                                <option value="{{ $studentRecord->fax_number }}">Fax Number:
+                                                    {{ $studentRecord->fax_number }}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

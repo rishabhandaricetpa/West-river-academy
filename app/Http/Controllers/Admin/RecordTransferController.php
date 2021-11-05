@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use App\Mail\NotifyToParentRecordReceived;
-use App\Mail\SchoolRecordTransfer;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
@@ -15,6 +15,7 @@ use Mail;
 use PDF;
 use Storage;
 use Str;
+use Validator;
 
 class RecordTransferController extends Controller
 {
@@ -61,7 +62,12 @@ class RecordTransferController extends Controller
     }
     public function sendRecordToSchool(Request $request, $student_id)
     {
-        //  dd($request->get('bcc'));
+        // $j = implode(',', $request->get('bcc'));
+
+        // $validated = $request->validate([
+        //     'j' => 'required|email|max:255'
+
+        // ]);
         $record = RecordTransfer::find($request->record_id);
         $studentData = StudentProfile::find($student_id);
         $data['email'] = $request->get('school_email');
@@ -73,19 +79,40 @@ class RecordTransferController extends Controller
         $data['dob'] = formatDate($studentData->d_o_b);
         $data['content'] = $request->get('email-content');
         $pdf = PDF::loadView('schoolRecordRequest', $data);
-        Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
-            $message->to($data['email'], $data['email'])
-                ->subject($data['title'])
-                ->bcc($data['bcc'])
-                ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
-        });
-        $record->save();
-        $notification = [
-            'message' => 'Record Request Sent Successfully To School',
-            'alert-type' => 'success',
-        ];
 
-        return redirect()->back()->with($notification);
+        // if (filter_var($data['bcc'], FILTER_VALIDATE_EMAIL)) {
+
+        $invalid = [];
+        foreach ($request->get('bcc') as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalid[] =  $email;
+            }
+        }
+
+        if (count($invalid) > 0) {
+            $notification = [
+                'message' => 'Mail not sent .Invalid Email Id is provided',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
+        } else {
+
+            Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
+                $message->to($data['email'], $data['email'])
+                    ->subject($data['title'])
+                    ->bcc($data['bcc'])
+                    ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
+            });
+            $notification = [
+                'message' => 'Record Request Sent Successfully To School',
+                'alert-type' => 'success',
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+
+        $record->save();
     }
 
     public function resendRecordToSchool($record_id, $student_id)
