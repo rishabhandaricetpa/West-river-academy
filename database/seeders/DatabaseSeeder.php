@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        Schema::disableForeignKeyConstraints();
-        foreach ($this->toTruncate as $table) {
-            DB::table($table)->truncate();
-        }
-        Schema::enableForeignKeyConstraints();
-        // \App\Models\User::factory(10)->create();
+        // Schema::disableForeignKeyConstraints();
+        // foreach ($this->toTruncate as $table) {
+        //     DB::table($table)->truncate();
+        // }
+        // Schema::enableForeignKeyConstraints();
+
         $this->call(CountriesTableSeeder::class);
         $this->call(FeesInfoSeeder::class);
         $this->call(BankTransferTableSeeder::class);
