@@ -591,3 +591,20 @@ footer {
 .overflow-auto{
 overflow: auto!important;
 }
+.diagonal{border:1px solid gray;
+  height:100px;
+  width:100px;
+  position:relative;
+  border:0px;
+}
+
+.diagonal:after{
+  content:"";
+  position:absolute;
+  border-top:1px solid #ccc;
+  width:104%;
+  left:100%;
+  transform: rotate(164deg);
+  transform-origin: 0% 0%;
+  top:0px;
+}
