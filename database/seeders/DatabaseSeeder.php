@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        foreach ($this->toTruncate as $table) {
-            DB::table($table)->truncate();
-        }
+        // foreach ($this->toTruncate as $table) {
+        //     DB::table($table)->truncate();
+        // }
         // \App\Models\User::factory(10)->create();
         $this->call(CountriesTableSeeder::class);
         $this->call(FeesInfoSeeder::class);
