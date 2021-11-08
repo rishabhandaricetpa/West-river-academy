@@ -1,0 +1,54 @@
+.wysihtml5-toolbar{
+
+  .btn{
+      @extend .btn-primary;
+  }
+  a[data-wysihtml5-command="insertImage"]{
+    @extend .d-none;
+    }
+}
+
+.wysihtml5-sandbox{
+    height: 400px !important;
+}
+
+.glyphicon{
+    &:before{
+font-family: 'Font Awesome 5 Free';
+font-weight: 900;
+-webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-size: inherit;
+    position: static;
+    }
+    &.glyphicon-list:before {
+        content: "\F03A";
+    }
+    &.glyphicon-th-list:before {
+        content: "\F00B";
+    }
+    &.glyphicon-indent-right:before {
+        content: "\F03C";
+    }
+    &.glyphicon-indent-left:before {
+        content: "\F03B";
+    }
+    &.glyphicon-share:before {
+        content: "\F14D";
+    }
+    &.glyphicon-picture:before{
+            content: "\F03E";
+    }
+    &.glyphicon-quote:before {
+        content: "\F10D";
+    }
+    &.glyphicon-quote:after{
+      @extend .d-none;
+    }
+}
+
+

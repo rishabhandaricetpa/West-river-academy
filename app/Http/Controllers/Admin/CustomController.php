@@ -292,6 +292,16 @@ class CustomController extends Controller
         $order_conultation->en_call_type = $request->get('en_call_type');
         $order_conultation->consulting_about = $request->get('consulting_about');
         $order_conultation->save();
+        if ($request->get('paymentStatus') == 'paid') {
+            TransactionsMethod::where('transcation_id', $order_conultation->transcation_id)->update([
+                'status' => 'succeeded'
+            ]);
+        } else {
+            TransactionsMethod::where('transcation_id', $order_conultation->transcation_id)->update([
+                'status' => 'pending'
+            ]);
+        }
+
         $notification = [
             'message' => 'Record updated successfully!',
             'alert-type' => 'success',
@@ -329,6 +339,16 @@ class CustomController extends Controller
         $customPayments->status = $request->get('paymentStatus');
         $customPayments->paying_for = $request->get('paying_for');
         $customPayments->save();
+        if ($request->get('paymentStatus') == 'paid') {
+            TransactionsMethod::where('transcation_id', $customPayments->transcation_id)->update([
+                'status' => 'succeeded'
+            ]);
+        } else {
+            TransactionsMethod::where('transcation_id', $customPayments->transcation_id)->update([
+                'status' => 'pending'
+            ]);
+        }
+
         $notification = [
             'message' => 'Record updated successfully!',
             'alert-type' => 'success',
@@ -336,5 +356,37 @@ class CustomController extends Controller
         return redirect()->back()->with($notification);
 
         return view('payments/custom-payment');
+    }
+    public function updateAllPaymentToPaid($type, $parent_id)
+    {
+        switch ($type) {
+            case 'custom_payment':
+                CustomPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                $notification = [
+                    'message' => 'All Payments Updated Successfully ',
+                    'alert-type' => 'success',
+                ];
+
+                return redirect()->back()->with($notification);
+            case 'personal_consultation':
+                OrderPersonalConsultation::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                $notification = [
+                    'message' => 'All Payments Updated Successfully ',
+                    'alert-type' => 'success',
+                ];
+
+                return redirect()->back()->with($notification);
+            case 'custom_letter':
+                CustomLetterPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                $notification = [
+                    'message' => 'All Payments Updated Successfully ',
+                    'alert-type' => 'success',
+                ];
+
+                return redirect()->back()->with($notification);
+        }
     }
 }

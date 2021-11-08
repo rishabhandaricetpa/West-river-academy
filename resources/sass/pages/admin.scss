@@ -211,3 +211,12 @@
 div.dataTables_wrapper div.dataTables_filter label{
   @extend .text-right;
 }
+
+.email-card{
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 500;
+  background-color: rgb(234, 234, 234) !important;
+  text-decoration: none !important;
+
+}

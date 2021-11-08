@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<h2>Hi, </h2>
+<p><b></b><b>Transcript Received</b><b></b></p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<p>We have recived an transcript will review the same and then you can
+    download the Signed Transcript</p>
 
-<body>
-    <h2 style="font-family:'Catamaran', sans-serif;">Hi, </h2>
-    <h3 style="font-family:'Catamaran', sans-serif;">Transcript Received </h3>
+Your Address
 
-    <p style="font-family:'Catamaran', sans-serif;">We have recived an transcript will review the same and then you can download the Signed Transcript</p>
-
-    Your Address
-    <address style="font-family:'Catamaran', sans-serif;">
-        Written by <a href="mailto:contact@westriveracademy.com">West River Academy</a>.<br>
-        Visit us at: https://www.westriveracademy.com/
-    </address>
-</body>
-
-</html>
+    Written by <a target="_blank" rel="nofollow">West River Academy</a>.<br>
+    Visit us at: <a target="_blank" rel="nofollow" href="https://www.westriveracademy.com/">https://www.westriveracademy.com/</a>

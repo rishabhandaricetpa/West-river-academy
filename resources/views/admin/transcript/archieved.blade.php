@@ -20,8 +20,6 @@
                     <!-- /.card-header -->
                     <div class="card">
                         <div class="card-header">
-                            <button class="btn btn-primary mr-auto" type="submit"
-                                onclick="sendTranscriptArchieve()">Archive</button>
                             <h3 class="card-title"></h3>
                         </div>
                         <!-- /.card-header -->
@@ -30,7 +28,7 @@
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
-                                        <th> Select </th>
+
                                         <th>Student Name</th>
                                         <th>Status</th>
                                         <th>Grade</th>
@@ -42,10 +40,7 @@
 
                                     @foreach ($transcript_data as $transcripts)
                                         <tr>
-                                            <td> <input type="checkbox" value="{{ $transcripts[0]['transcript_id'] }}"
-                                                    name="is_transcript_archived"
-                                                    onclick="archieveTranscriptRecord(this.value)">
-                                            </td>
+
                                             <td>{{ getStudentData($transcripts[0]['student_profile_id']) }}</td>
                                             {{-- <td><a class="transform-none" href="mailto:${{ $student->email }}">
                       {{ $student->transcript_id }}</a></td> --}}

@@ -88,7 +88,7 @@
                     <td>Student Name: {{ $name }}</td>
                 </tr>
                 <tr style="width:100%">
-                    <td>Date of Birth: {{ $dob }} </td>
+                    <td>Date of Birth: {{ formatDate($dob) }} </td>
                 </tr>
                 <tr style="width:100%">
                     <td>Grade Level: {{ $grade }}

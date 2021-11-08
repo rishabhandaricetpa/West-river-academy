@@ -21,6 +21,7 @@ class CreateK8transcriptTable extends Migration
             $table->string('enrollment_year')->nullable();
             $table->string('grade')->nullable();
             $table->string('school_name')->nullable();
+            $table->boolean('is_archieved')->nullable();
             $table->timestamps();
         });
     }

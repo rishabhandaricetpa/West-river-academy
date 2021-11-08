@@ -656,3 +656,21 @@ function statusDropdown($status)
         return false;
     }
 }
+function checkLegends($data)
+{
+    $legends = array();
+
+    $pattern = '/{{/';
+    $replacement = '$0 ';
+    $replace =   preg_replace($pattern, $replacement, $data);
+    $email_contents = explode(' ', $replace);
+
+    foreach ($email_contents as $email_content) {
+
+        if (strlen($email_content) > 0  && $email_content[0] === '$') {
+            $legends[] = $email_content;
+        }
+    }
+
+    return ['consts' => $legends, 'replace' => $replace];
+}

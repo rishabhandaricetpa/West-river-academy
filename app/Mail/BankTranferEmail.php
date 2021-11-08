@@ -32,12 +32,11 @@ class BankTranferEmail extends Mailable
      */
     public function build()
     {
-        $date = \Carbon\Carbon::now()->format('M d Y');
-        $id = $this->user->id;
-        $user = User::find($id);
-        $address = User::find($id)->parentProfile()->first();
+
+        $user = User::find($this->user->id)->parentProfile()->first();
+        $user_name = $user->full_name;
         $amount = $this->amount;
 
-        return  $this->markdown('mail.bankinfo', compact('user', 'date', 'address', 'amount'))->subject('Bank Transfer Instructions');
+        return  $this->markdown('mail.bankinfo', compact('user_name', 'amount'))->subject('Bank Transfer Instructions');
     }
 }

@@ -568,6 +568,17 @@
                 </div>
 
                 {{-- Payment History --}}
+                <a class='btn btn-primary'
+                    href="{{ route('admin.paid.allcustompayment', ['custom_payment', $parent->id]) }}">Update
+                    All
+                    Custom Payment Paid</a>
+                <a class='btn btn-primary'
+                    href="{{ route('admin.paid.allcustompayment', ['personal_consultation', $parent->id]) }}">Update
+                    All
+                    Personal Consultation Payment Paid</a>
+                <a class='btn btn-primary'
+                    href="{{ route('admin.paid.allcustompayment', ['custom_letter', $parent->id]) }}">Update
+                    All Custom Letter Paid</a>
                 <section class="history  pt-10r" id="history">
                     <div class="row">
                         <div class="col-12">

@@ -166,7 +166,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('custom-payments/{id}', 'CustomController@editCustomPayment')->name('edit.custompayment');
     Route::post('update/custom-payments/{id}', 'CustomController@updateCustomPayments')->name('update.custompayment');
     Route::get('view-custompayment/{id}', 'CustomController@getAllParentsPayment')->name('each.payments');
-
+    Route::get('update-payment/{type}/{parent_id}', 'CustomController@updateAllPaymentToPaid')->name('paid.allcustompayment');
     //order Postage
     Route::get('order-postage', 'CustomController@viewPostage')->name('order.postage');
     Route::get('postagepayment', 'CustomController@orderPostageDataTable')->name('datatable.postage');
@@ -211,6 +211,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('resend/request/{record_id}/{student_id}', 'RecordTransferController@resendRecordToSchool')->name('resend.request');
     Route::get('download/record/{record_id}/{student_id}', 'RecordTransferController@downloadRecord')->name('download.record');
     Route::post('update/record', 'RecordTransferController@updateRecord')->name('update.record');
+    Route::get('record/archieved', 'RecordTransferController@archievedList')->name('archieved.requests');
     //dashboard notification
     Route::get('generate-pdf/{student_id}/{grade_id}/{type}', 'StudentProfileController@generateConfirmation')->name('genrate.adminConfirmition');
 
@@ -244,6 +245,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::post('update/record/status', 'DashboardController@updateRecordStatus')->name('update.assigneeStatus');
 
     Route::post('archieve/record', 'DashboardController@archieveRecord');
+    Route::post('archieve/recordtransfer', 'RecordTransferController@archieveRecord');
 
     // view all orders 
     Route::get('transaction/{transcation_id}', 'StudentProfileController@orders')->name('transaction.orders');
@@ -295,4 +297,15 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'representative'], funct
 
 Route::group(['middleware' => 'auth:admin', 'prefix' => 'search'], function () {
     Route::get('family-filter', 'ParentController@getSearchFilterData')->name('family.filter');
+});
+
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'mails'], function () {
+    Route::get('edit/{type}', 'MailController@getEmail')->name('studentEnrollment.mail');
+    Route::get('get', 'MailController@getAllEmails')->name('get.emails');
+    Route::post('save/{type}', 'MailController@savemail')->name('savemail');
+});
+Route::group(['middleware' => 'auth:admin', 'prefix' => 'archieve'], function () {
+    Route::post('transcript', 'TranscriptController@archieve');
+    Route::get('k8display', 'TranscriptController@showArchieve');
+    Route::get('9_12display', 'Transcript9_12Controller@showArchieve');
 });

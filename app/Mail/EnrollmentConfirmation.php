@@ -34,6 +34,7 @@ class EnrollmentConfirmation extends Mailable
         $enrollment_start_date = formatDate($this->enrollment_period->start_date_of_enrollment);
         $enrollment_end_date = formatDate($this->enrollment_period->end_date_of_enrollment);
         $student = StudentProfile::where('id', $student_id)->first();
-        return  $this->markdown('mail.enrollment-confirmation', compact('student', 'enrollment_start_date', 'enrollment_end_date'))->subject('Successfully Enrolled');
+        $student_name = $student->first_name;
+        return  $this->markdown('mail.enrollment-confirmation', compact('student_name', 'enrollment_start_date', 'enrollment_end_date'))->subject('Successfully Enrolled');
     }
 }

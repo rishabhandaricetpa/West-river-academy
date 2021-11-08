@@ -10,7 +10,7 @@ class TranscriptK8 extends Model
     use HasFactory;
     protected $table = 'k8transcript';
     protected $fillable = [
-        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name', 'transcript_id',
+        'student_profile_id', 'country', 'enrollment_year', 'grade', 'school_name', 'transcript_id', 'is_archieved'
     ];
 
     public function transcripts()

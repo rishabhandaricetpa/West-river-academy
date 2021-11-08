@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use App\Mail\NotifyToParentRecordReceived;
-use App\Mail\SchoolRecordTransfer;
 use App\Models\ParentProfile;
 use App\Models\RecordTransfer;
 use App\Models\StudentProfile;
@@ -15,12 +15,13 @@ use Mail;
 use PDF;
 use Storage;
 use Str;
+use Validator;
 
 class RecordTransferController extends Controller
 {
     public function index()
     {
-        $schoolRecords = RecordTransfer::select()->with('parent')->orderBy('id', 'DESC')->get();
+        $schoolRecords = RecordTransfer::select()->where('is_archieved', null)->with('parent')->orderBy('id', 'DESC')->get();
         return view('admin.recordTransfer.adminRecord', compact('schoolRecords'));
     }
     public function studentRecords($record_id)
@@ -61,29 +62,57 @@ class RecordTransferController extends Controller
     }
     public function sendRecordToSchool(Request $request, $student_id)
     {
+        // $j = implode(',', $request->get('bcc'));
+
+        // $validated = $request->validate([
+        //     'j' => 'required|email|max:255'
+
+        // ]);
         $record = RecordTransfer::find($request->record_id);
         $studentData = StudentProfile::find($student_id);
-        $data['email'] = $request->get('email');
+        $data['email'] = $request->get('school_email');
         $data['title'] = 'West River Academy';
-        $data['name'] = $request->input('name');
-        $data['date'] = \Carbon\Carbon::now()->format('M d Y');
-
-
-        $data['grade'] = $request->input('last_grade');
-        $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
+        $data['name'] = $request->input('student_name');
+        $data['date'] = \Carbon\Carbon::now()->format('F d Y');
+        $data['bcc'] = $request->get('bcc');
+        $data['grade'] = $request->input('last_grade_in');
+        $data['dob'] = formatDate($studentData->d_o_b);
+        $data['content'] = $request->get('email-content');
         $pdf = PDF::loadView('schoolRecordRequest', $data);
-        Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
-            $message->to($data['email'], $data['email'])
-                ->subject($data['title'])
-                ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
-        });
-        $record->save();
-        $notification = [
-            'message' => 'Record Request Sent Successfully To School',
-            'alert-type' => 'success',
-        ];
 
-        return redirect()->back()->with($notification);
+        // if (filter_var($data['bcc'], FILTER_VALIDATE_EMAIL)) {
+
+        $invalid = [];
+        foreach ($request->get('bcc') as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalid[] =  $email;
+            }
+        }
+
+        if (count($invalid) > 0) {
+            $notification = [
+                'message' => 'Mail not sent .Invalid Email Id is provided',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->back()->with($notification);
+        } else {
+
+            Mail::send('admin.recordTransfer.sendSchoolRecord', ['data' => $data], function ($message) use ($data, $pdf) {
+                $message->to($data['email'], $data['email'])
+                    ->subject($data['title'])
+                    ->bcc($data['bcc'])
+                    ->attachData($pdf->output(), 'RecordTransferRequest.pdf');
+            });
+            $notification = [
+                'message' => 'Record Request Sent Successfully To School',
+                'alert-type' => 'success',
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+
+        $record->save();
     }
 
     public function resendRecordToSchool($record_id, $student_id)
@@ -142,7 +171,7 @@ class RecordTransferController extends Controller
         $data['dob'] = \Carbon\Carbon::parse($studentData->d_o_b)->format('M d Y');
         $data['grade'] = $record->last_grade;
         $pdf = PDF::loadView('schoolResendRecord', $data);
-        return $pdf->download();
+        return $pdf->stream();
     }
     public function receivedRecord(Request $request, $record_id)
     {
@@ -152,7 +181,7 @@ class RecordTransferController extends Controller
         $record->save();
         $parent = ParentProfile::where('id',  $record->parent_profile_id)->first();
         //send mail to parent
-        Mail::to($parent->p1_email)->send(new  NotifyToParentRecordReceived($record,$parent));
+        Mail::to($parent->p1_email)->send(new  NotifyToParentRecordReceived($record, $parent));
 
 
         // upload document 
@@ -177,5 +206,15 @@ class RecordTransferController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->back()->with($notification);
+    }
+    public function archieveRecord(Request $request)
+    {
+        $dashboard = RecordTransfer::whereIn('id', $request->id)->update(array('is_archieved' => 1));
+        return response()->json(['code' => 200, 'message' => 'Task status updated successfully', 'data' => $dashboard], 200);
+    }
+    public  function archievedList()
+    {
+        $record_archieved = RecordTransfer::where('is_archieved', 1)->get();
+        return view('admin.recordTransfer.archieved', compact('record_archieved'));
     }
 }

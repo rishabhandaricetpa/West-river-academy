@@ -167,7 +167,7 @@
                     <tbody>
                         <tr>
                             <td style="text-align:center;width:40%" valign="bottom">
-                                <span><img src="../public/images/signature.png" style="width:200px;height:80px;"
+                                <span><img src="../public/images/DanielleSignature.jpg" style="width:200px;height:80px;"
                                         alt=""></span></br>
                                 <span
                                     style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official

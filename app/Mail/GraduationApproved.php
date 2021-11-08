@@ -30,6 +30,8 @@ class GraduationApproved extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.graduation-approved')->subject('West River Academy Graduation');
+        $total_fees = $this->data->total_fee;
+        // return $this->view('mail.graduation-approved')->subject('West River Academy Graduation');
+        return  $this->markdown('mail.graduation-approved', compact('total_fees'))->subject('MoneyGram Payment');
     }
 }
