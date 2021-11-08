@@ -10,40 +10,18 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu">
-                {{-- <li class="nav-item">
-                <a href="{{ route('admin.dashboard.notification') }}" class="nav-link">
+
+
+            <li class="nav-item">
+                <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>
-                        Dashboard
+                        Archived Tasks
                     </p>
                 </a>
-            </li> --}}
-                @can('isAdmin')
-                <li class="nav-item">
-                    <a href="{{ route('admin.archieved.tasks') }}" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Archived Tasks
-                        </p>
-                    </a>
-                </li>
-            @endcan
-            {{-- <li class="nav-item">
-                <a href="{{ url('admin/view') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>
-                        View Parents
-                    </p>
-                </a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a href="{{ url('admin/view-student') }}" class="nav-link">
-                    <i class="fas fa-user-friends nav-icon"></i>
-                    <p>
-                        Students
-                    </p>
-                </a>
-            </li> --}}
+            </li>
+
+
             <li class="nav-item menu">
                 <a href="" class="nav-link ">
                     <i class="nav-icon fas fa-wallet"></i>
@@ -148,6 +126,18 @@
                             <p>Manage Courses</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/archieve/k8display') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>Archived k-8</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/archieve/9_12display') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>Archived 9-12</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -184,12 +174,33 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.record.request') }}" class="nav-link">
-                    <i class="nav-icon fas fa-exchange-alt"></i>
+                <a href="#" class="nav-link ">
+                    <i class="nav-icon fas fa-scroll"></i>
                     <p>
                         Record Transfers
+                        <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.record.request') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>
+                                Lists
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.archieved.requests') }}" class="nav-link">
+                            <i class="fas fa-eye"></i>
+                            <p>
+                                Archieved
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.upload.documents') }}" class="nav-link">
@@ -204,6 +215,14 @@
                     <i class="nav-icon fas fa-exchange-alt"></i>
                     <p class="pl-2">
                         Upload Podcast, audios and videos
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.get.emails') }}" class="nav-link d-flex">
+                    <i class="nav-icon fas fa-exchange-alt"></i>
+                    <p class="pl-2">
+                        Emails
                     </p>
                 </a>
             </li>

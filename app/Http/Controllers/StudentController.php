@@ -75,7 +75,6 @@ class StudentController extends Controller
 
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
-
                 $year_end_date = Carbon::create($countryData->end_date)->format('m/d');
                 $country_end_date = '12/31';
                 if ($year_end_date == $country_end_date) {

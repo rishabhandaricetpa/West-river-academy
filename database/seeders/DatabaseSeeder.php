@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,11 +21,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        // Schema::disableForeignKeyConstraints();
+        // foreach ($this->toTruncate as $table) {
+        //     DB::table($table)->truncate();
+        // }
+        // Schema::enableForeignKeyConstraints();
 
-        foreach ($this->toTruncate as $table) {
-            DB::table($table)->truncate();
-        }
-        // \App\Models\User::factory(10)->create();
         $this->call(CountriesTableSeeder::class);
         $this->call(FeesInfoSeeder::class);
         $this->call(BankTransferTableSeeder::class);

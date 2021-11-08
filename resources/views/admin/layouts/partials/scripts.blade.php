@@ -27,6 +27,7 @@
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
 <script>
     $(function() {
@@ -646,7 +647,6 @@
             },
             success: function(response) {
                 event.preventDefault();
-                console.log(response);
 
                 var html = '';
                 var no_notification = no_notification + `<p> No Notification</p>`;
@@ -654,13 +654,15 @@
                 const s = new Date();
                 const startDate = s.getDate();
                 response.forEach((record) => {
-                    if (Math.abs(startDate - new Date(record.created_at)
-                            .getDate()) > 7) {
+                    console.log(record);
+                    if (Math.abs(startDate - new Date(record.firstRequestDate)
+                            .getDate()) > 7 && record.resendCount == 1) {
+
                         html = html + ` <li class="border-bottom mb-3 pb-3">
                                
-                          <span class=" text-black"> Resend Record Transfer Request To School : ${record.school_name} </span><br>
+                          <span class=" text-black"> Resend Record Transfer Request For Student: ${record.first_name} &nbsp;   ${record.last_name}  </span><br>
 
-                                <a href="/admin/student/record/${record.student_profile_id}/${record.id}" class="btn btn-primary">Go To Record</a>
+                                <a href="/admin/student/record/${record.studentid}/${record.id}" class="btn btn-primary">Go To Record</a>
 
                             </li>`
                     }
@@ -1468,7 +1470,7 @@
                 start_date: start_date,
                 end_date: end_date,
                 grade_level: grade_level,
-                amount_status:amount_status
+                amount_status: amount_status
             },
             success: function(response) {
                 location.reload();
@@ -1934,6 +1936,76 @@
             }
         });
     }
+    /** archieve record transfer starts **/
+
+    function archieveRecord() {
+        var checkedRecordTasksId = [];
+        $("input:checkbox[name=is_record_archived]:checked").each(function() {
+            checkedRecordTasksId.push($(this).val());
+        });
+        console.log(checkedRecordTasksId);
+        return checkedRecordTasksId;
+
+    }
+
+    function sendRecordArchieve() {
+
+        var archieve_ids = archieveRecord();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/archieve/recordtransfer') }}",
+            type: "POST",
+            data: {
+                id: archieve_ids,
+            },
+            success: function(response) {
+                location.reload()
+                console.log(response);
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
+    /** archieve record transfer ends **/
+    /** archieve transcript starts **/
+    function archieveTranscriptRecord() {
+        var checkedRecordTranscriptId = [];
+        $("input:checkbox[name=is_transcript_archived]:checked").each(function() {
+            checkedRecordTranscriptId.push($(this).val());
+        });
+        console.log(checkedRecordTranscriptId);
+        return checkedRecordTranscriptId;
+
+    }
+
+    function sendTranscriptArchieve() {
+
+        var archieve_ids = archieveTranscriptRecord();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('admin/archieve/transcript') }}",
+            type: "POST",
+            data: {
+                id: archieve_ids,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(response) {
+
+            }
+        });
+    }
+
+    /** archieve transcript ends **/
 
     // for validating start and end date 
     $("#end_date_of_enrollment").change(function() {

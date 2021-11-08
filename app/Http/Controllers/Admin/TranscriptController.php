@@ -26,9 +26,12 @@ class TranscriptController extends Controller
 {
     public function index()
     {
-        // $students = StudentProfile::select()->orderBy('id', 'DESC')->get();
         $type = "k-8";
-        $transcript_data = TranscriptK8::select()->orderBy('id', 'DESC')->with('student')->get()->groupBy('transcript_id');
+        $transcript_data = TranscriptK8::select()->with('student')
+            ->where('is_archieved', null)
+            ->orderBy('id', 'DESC')
+            ->get()->groupBy('transcript_id');
+
         return view('admin.transcript.view-student', compact('transcript_data', 'type'));
     }
     //fetch all the transcript data with completed and approved and paid status
@@ -298,5 +301,23 @@ class TranscriptController extends Controller
             ];
             return redirect()->back()->with($notification);
         }
+    }
+    public function archieve(Request $request)
+    {
+        $transcript =   TranscriptK8::whereIn('transcript_id', [$request->get('id')])->get();
+        TranscriptK8::whereIn('transcript_id', $request->get('id'))->update(['is_archieved' => 1]);
+        if (count($transcript) == 0) {
+
+            Transcript9_12::whereIn('transcript_id', $request->get('id'))->update(array('is_archieved' => 1));
+        }
+    }
+    public function showArchieve()
+    {
+        $transcript_data = TranscriptK8::select()->with('student')
+            ->where('is_archieved', 1)
+            ->orderBy('id', 'DESC')
+            ->get()->groupBy('transcript_id');
+        $type = 'k-8';
+        return view('admin.transcript.archieved', compact('transcript_data', 'type'));
     }
 }

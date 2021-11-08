@@ -28,9 +28,9 @@
                     <div class="col-12">
                         <!-- /.card-header -->
 
-                        @if ($isAdmin)
-                            <button class="btn btn-primary mr-auto" type="submit" onclick="sendArchieve()">Archive</button>
-                        @endif
+
+                        <button class="btn btn-primary mr-auto" type="submit" onclick="sendArchieve()">Archive</button>
+
 
 
                         <!-- /.card-header -->

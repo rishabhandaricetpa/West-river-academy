@@ -83,7 +83,7 @@ class GraduationController extends Controller
                 'linked_to' => $graduation->id,
                 'item_type_id' => $graduation->id,
                 'related_to' => 'Graduation Ordered',
-                'created_date' => \Carbon\Carbon::now()->format('F d Y'),
+                'created_date' => \Carbon\Carbon::now()->format('m d Y'),
             ]);
             DB::commit();
 
@@ -147,7 +147,7 @@ class GraduationController extends Controller
                     'transcript' => $inputs['transcript'],
                     'situation' => $inputs['situation'],
                     'record_received' => $inputs['record_received'],
-                    'grad_date' =>  formatDate($inputs['grad_date']),
+                    'grad_date' =>  \Carbon\Carbon::parse($inputs['grad_date'])->format('Y/m/d'),
                     'notes' => $inputs['notes'],
                 ]
 
@@ -177,7 +177,6 @@ class GraduationController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-
             return redirect()->back()->with([
                 'message' => 'Failed to update details!',
                 'alert-type' => 'error',

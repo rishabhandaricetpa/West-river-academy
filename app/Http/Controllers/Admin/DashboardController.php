@@ -33,13 +33,12 @@ class DashboardController extends Controller
         if ($admin_data->name == AdminType::SuperAdmin) {
             //$dashboardData = Dashboard::select()->with('student', 'recordTransfer')->where('is_archieved', 0)->orderBy('id', 'DESC')->get();
             $dashboardData = TransactionsMethod::select()->with('parentProfile')->where('is_archieved', null)->orderBy('id', 'DESC')->get();
-            $isAdmin = true;
-            return view('admin.dashboard-admin', compact('dashboardData', 'isAdmin'));
-            // return admin dashboard screen
+
+            return view('admin.dashboard-admin', compact('dashboardData'));
         } else {
-            $isAdmin = false;
-            $dashboardData = TransactionsMethod::select()->with('student')->where('assigned_to', $admin_data->name)->orderBy('id', 'DESC')->get();
-            return view('admin.dashboard-sub-admin', compact('dashboardData', 'isAdmin'));
+
+            $dashboardData = TransactionsMethod::select()->with('student')->where('is_archieved', null)->where('assigned_to', $admin_data->name)->orderBy('id', 'DESC')->get();
+            return view('admin.dashboard-sub-admin', compact('dashboardData'));
         }
     }
     /** Update the dashboard of sub admin which is provided by super admin stacey */
@@ -79,12 +78,8 @@ class DashboardController extends Controller
     }
     public function ArchievedTasks()
     {
-        $adminid = Auth::guard('admin')->user()->id;
-        $admin_data = DB::table('admins')->where('id', $adminid)->first();
-        if ($admin_data->name == AdminType::SuperAdmin) {
-            $dashboardData = TransactionsMethod::select()->with('student')->where('is_archieved', 1)->orderBy('id', 'DESC')->get();
-            return view('admin.archieved', compact('dashboardData'));
-        }
+        $dashboardData = TransactionsMethod::select()->with('student')->where('is_archieved', 1)->orderBy('id', 'DESC')->get();
+        return view('admin.archieved', compact('dashboardData'));
     }
     public function uploadDocument(Request $request)
     {
@@ -232,7 +227,19 @@ class DashboardController extends Controller
     {
 
         $records = RecordTransfer::where('request_status', 'pending')
-            ->orWhere('request_status', null)->get()->toArray();
+            ->orWhere('request_status', null)
+            ->join('student_profiles', 'student_profiles.id', 'record_transfers.student_profile_id')
+            ->select(
+                'student_profiles.first_name',
+                'student_profiles.last_name',
+                'record_transfers.school_name',
+                'student_profiles.id as studentid',
+                'record_transfers.firstRequestDate',
+                'record_transfers.resendCount',
+                'record_transfers.id'
+            )
+            ->get()->toArray();
+
         return response()->json($records);
     }
 }

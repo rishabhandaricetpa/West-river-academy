@@ -23,6 +23,7 @@ class Transcript912 extends Migration
             $table->string('grade')->nullable();
             $table->string('school_name')->nullable();
             $table->unsignedBigInteger('transcript_id');
+            $table->boolean('is_archieved')->nullable();
             $table->foreign('transcript_id')->references('id')->on('transcripts')->nullable()->onDelete('cascade');
             $table->timestamps();
         });
