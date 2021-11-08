@@ -8,7 +8,12 @@
                 <h1 class="text-center text-white text-uppercase">Transcript Information</h1>
             </div>
             <div class="form-wrap border bg-light py-5 px-25 mb-4">
-                <h2 class="mb-3">{{ $student->fullname }}</h2>
+                <h2 class="mb-3">{{ $student->fullname }}
+                    <a class='btn btn-primary ml-5'
+                        href="{{ route('admin.parent.edit', $student->parentProfile->id) }}">View
+                        Parent
+                    </a>
+                </h2>
                 <form method="POST" action="" class="mb-0">
 
                     <div class="form-group d-sm-flex mb-2">

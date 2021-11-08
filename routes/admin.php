@@ -166,7 +166,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('custom-payments/{id}', 'CustomController@editCustomPayment')->name('edit.custompayment');
     Route::post('update/custom-payments/{id}', 'CustomController@updateCustomPayments')->name('update.custompayment');
     Route::get('view-custompayment/{id}', 'CustomController@getAllParentsPayment')->name('each.payments');
-
+    Route::get('update-payment/{type}/{parent_id}', 'CustomController@updateAllPaymentToPaid')->name('paid.allcustompayment');
     //order Postage
     Route::get('order-postage', 'CustomController@viewPostage')->name('order.postage');
     Route::get('postagepayment', 'CustomController@orderPostageDataTable')->name('datatable.postage');
