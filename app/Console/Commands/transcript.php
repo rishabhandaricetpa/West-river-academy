@@ -97,8 +97,7 @@ class transcript extends Command
                             $array  = [
                                 'parent_profile_id' => $parent->id,
                                 'student_profile_id' => $student->id,
-                                'parent' => $parent->p1_first_name.' '.$parent->p1_last_name,
-                                'student' => $student->first_name.' '.$student->last_name,
+                                'legacy_name' => $legacy_name,
                                 'status' => 'pending',
                             ];
                             array_push($dataArray['correctRecords'], $array);

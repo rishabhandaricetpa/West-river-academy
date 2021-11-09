@@ -58,17 +58,14 @@ class ImportParents extends Command
                     continue;
                 }
                 $p1_email = Str::of($cells[13]);
-
-                // if (!isset($duplicateCheckArray[$p1_email])) $duplicateCheckArray[$p1_email] = 0;
+                // if( !isset($duplicateCheckArray[$p1_email]) ) $duplicateCheckArray[$p1_email] = 0;
                 // $duplicateCheckArray[$p1_email] = ($duplicateCheckArray[$p1_email] + 1);
 
-                $this->line($p1_email);
+                $_this->line($p1_email);
                 if ($p1_email != '') {
 
                     $user = User::where('email', $p1_email)->first();
-                    echo '<pre>';
-                    print_r($user);
-                    if (!$user) {
+                    if (!$user) { echo '<pre>'; print_r($user);
                         $user = User::create(
                             [
                                 'name' => $cells[14],

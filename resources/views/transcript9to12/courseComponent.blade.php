@@ -10,7 +10,6 @@
         </tr>
     </thead>
     <tbody>
-
         <!-- for annual courses -->
         @foreach ($yearGroup as $year => $courses)
             <tr style="line-height:1;">
@@ -28,7 +27,12 @@
                 </td>
             </tr>
 
-            @foreach ($courses as $course)
+            @if( $year == 0)
+                <tr style="line-height:1;">
+                    <td colspan="4" class='diagonal'></td>
+                </tr>
+            @else           
+                @foreach ($courses as $course)
                 @if ($course->id === -1)
                     <tr style="line-height:1;">
                         <td colspan="4">&ensp;</td>
@@ -75,7 +79,7 @@
                     @endif
                 @endif
             @endforeach
-
+            @endif
         @endforeach
 
 
