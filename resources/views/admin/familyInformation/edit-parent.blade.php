@@ -568,17 +568,22 @@
                 </div>
 
                 {{-- Payment History --}}
+                <p>Update All Payment to Paid of following category  : </p>
                 <a class='btn btn-primary'
-                    href="{{ route('admin.paid.allcustompayment', ['custom_payment', $parent->id]) }}">Update
-                    All
-                    Custom Payment Paid</a>
+                    href="{{ route('admin.paid.allcustompayment', ['custom_payment', $parent->id]) }}">
+
+                    Custom Payment </a>
                 <a class='btn btn-primary'
-                    href="{{ route('admin.paid.allcustompayment', ['personal_consultation', $parent->id]) }}">Update
-                    All
-                    Personal Consultation Payment Paid</a>
+                    href="{{ route('admin.paid.allcustompayment', ['personal_consultation', $parent->id]) }}">
+
+                    Personal Consultation Payment </a>
                 <a class='btn btn-primary'
-                    href="{{ route('admin.paid.allcustompayment', ['custom_letter', $parent->id]) }}">Update
-                    All Custom Letter Paid</a>
+                    href="{{ route('admin.paid.allcustompayment', ['custom_letter', $parent->id]) }}">
+                    Custom Letter </a>
+                <a class='btn btn-primary' href="{{ route('admin.paid.allcustompayment', ['postage', $parent->id]) }}">
+                    Order Postage </a>
+                <a class='btn btn-primary' href="{{ route('admin.paid.allcustompayment', ['notarization', $parent->id]) }}">
+                    Notarization </a>
                 <section class="history  pt-10r" id="history">
                     <div class="row">
                         <div class="col-12">

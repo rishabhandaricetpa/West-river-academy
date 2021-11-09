@@ -656,9 +656,9 @@ function statusDropdown($status)
         return false;
     }
 }
-function checkLegends($data)
+function getLegends($data)
 {
-    $legends = array();
+    $legends = array(); 
 
     $pattern = '/{{/';
     $replacement = '$0 ';

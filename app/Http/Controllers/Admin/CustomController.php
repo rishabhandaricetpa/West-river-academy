@@ -137,6 +137,16 @@ class CustomController extends Controller
         $orderPostage->amount = $request->get('amount');
         $orderPostage->status = $request->get('paymentStatus');
         $orderPostage->save();
+
+        if ($request->get('paymentStatus') == 'paid') {
+            TransactionsMethod::where('transcation_id', $orderPostage->transcation_id)->update([
+                'status' => 'succeeded'
+            ]);
+        } else {
+            TransactionsMethod::where('transcation_id', $orderPostage->transcation_id)->update([
+                'status' => 'pending'
+            ]);
+        }
         $notification = [
             'message' => 'Record updated successfully!',
             'alert-type' => 'success',
@@ -180,6 +190,15 @@ class CustomController extends Controller
                 $notarization->amount = $request->get('amount');
                 $notarization->status = $request->get('paymentStatus');
                 $notarization->save();
+                if ($request->get('paymentStatus') == 'paid') {
+                    TransactionsMethod::where('transcation_id', $notarization->transcation_id)->update([
+                        'status' => 'succeeded'
+                    ]);
+                } else {
+                    TransactionsMethod::where('transcation_id', $notarization->transcation_id)->update([
+                        'status' => 'pending'
+                    ]);
+                }
                 $notification = [
                     'message' => 'Record updated successfully!',
                     'alert-type' => 'success',
@@ -364,7 +383,7 @@ class CustomController extends Controller
                 CustomPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
                 $notification = [
-                    'message' => 'All Payments Updated Successfully ',
+                    'message' => 'All Payments for Custom Payment Updated Successfully ',
                     'alert-type' => 'success',
                 ];
 
@@ -373,7 +392,7 @@ class CustomController extends Controller
                 OrderPersonalConsultation::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
                 $notification = [
-                    'message' => 'All Payments Updated Successfully ',
+                    'message' => 'All Payments for Personal Consultation Updated Successfully ',
                     'alert-type' => 'success',
                 ];
 
@@ -382,7 +401,27 @@ class CustomController extends Controller
                 CustomLetterPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
                 $notification = [
-                    'message' => 'All Payments Updated Successfully ',
+                    'message' => 'All Payments for Custom Letter Updated Successfully ',
+                    'alert-type' => 'success',
+                ];
+
+                return redirect()->back()->with($notification);
+            case 'postage':
+                OrderPostage::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                $notification = [
+                    'message' => 'All Payments for Postage Updated Successfully ',
+                    'alert-type' => 'success',
+                ];
+
+                return redirect()->back()->with($notification);
+            case 'notarization':
+                NotarizationPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+
+
+                $notification = [
+                    'message' => 'All Payments for Notarization Updated Successfully ',
                     'alert-type' => 'success',
                 ];
 
