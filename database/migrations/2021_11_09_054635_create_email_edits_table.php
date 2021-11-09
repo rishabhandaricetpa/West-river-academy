@@ -15,7 +15,7 @@ class CreateEmailEditsTable extends Migration
     {
         Schema::create('email_edits', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
+            $table->text('content');
             $table->string('type');
             $table->timestamps();
         });

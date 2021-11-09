@@ -3,8 +3,10 @@
 namespace App\Mail;
 
 use App\Models\Cart;
+use App\Models\EmailEdits;
 use App\Models\User;
 use Auth;
+use DbView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -32,12 +34,16 @@ class MoneyGram extends Mailable
      */
     public function build()
     {
-        $id = $this->user->id;
-        $user = User::find($id)->parentProfile()->first();
+        $user = User::find($this->user->id)->parentProfile()->first();
         $user_name = $user->full_name;
         $date = \Carbon\Carbon::now()->format('M d Y');
         $amount = $this->amount;
-
-        return  $this->markdown('mail.moneygram-email', compact('user_name', 'date', 'amount'))->subject('MoneyGram Payment');
+        $template = EmailEdits::where('type', 'moneygram')->first();
+        $email_data =  DbView::make($template)->field('content')->with([
+            'user_name' => $user_name,
+            'date' => $date,
+            'amount' => $amount,
+        ])->render();
+        return  $this->markdown('mail.email-notification', compact('email_data'))->subject('MoneyGram Payment');
     }
 }

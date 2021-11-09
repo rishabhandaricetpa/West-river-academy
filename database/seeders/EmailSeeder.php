@@ -15,7 +15,6 @@ class EmailSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('email_edits')->delete();
         $data = [
             ['type' => 'enrollment', 'content' => '<p>Hi,</p>
 

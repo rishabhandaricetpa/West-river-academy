@@ -38,11 +38,11 @@ class EnrollmentConfirmation extends Mailable
         $student = StudentProfile::where('id', $student_id)->first();
         $student_name = $student->first_name;
         $template = EmailEdits::where('type', 'enrollment')->first();
-        $r =  DbView::make($template)->field('content')->with([
+        $email_data =  DbView::make($template)->field('content')->with([
             'student_name' => $student_name,
             'enrollment_start_date' => $enrollment_start_date,
             'enrollment_end_date' => $enrollment_end_date
         ])->render();
-        return  $this->markdown('mail.enrollment-confirmation', compact('r'))->subject('Successfully Enrolled');
+        return  $this->markdown('mail.email-notification', compact('email_data'))->subject('Successfully Enrolled');
     }
 }

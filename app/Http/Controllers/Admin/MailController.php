@@ -14,8 +14,8 @@ class MailController extends Controller
     public function getEmail($type)
     {
         $template = EmailEdits::where('type', $type)->first();
-        $r =  $template->content;
-        return view('admin.EditableEmail.edit-email', compact('type', 'r'));
+        $email_data =  $template->content;
+        return view('admin.EditableEmail.edit-email', compact('type', 'email_data'));
     }
     public function getAllEmails()
     {

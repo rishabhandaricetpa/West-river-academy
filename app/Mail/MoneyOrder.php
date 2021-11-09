@@ -3,8 +3,10 @@
 namespace App\Mail;
 
 use App\Models\Cart;
+use App\Models\EmailEdits;
 use App\Models\User;
 use Auth;
+use DbView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -39,7 +41,11 @@ class MoneyOrder extends Mailable
         $user = User::find($this->user->id)->parentProfile()->first();
         $user_name = $user->full_name;
         $amount = $this->amount;
-
-        return $this->markdown('mail.moneyordermail', compact('user_name', 'amount'))->subject('Check and Money Order Details');
+        $template = EmailEdits::where('type', 'moneyorder')->first();
+        $email_data =  DbView::make($template)->field('content')->with([
+            'user_name' => $user_name,
+            'amount' => $amount,
+        ])->render();
+        return $this->markdown('mail.email-notification', compact('email_data'))->subject('Check and Money Order Details');
     }
 }
