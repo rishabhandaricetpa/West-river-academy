@@ -29,7 +29,7 @@ class MailController extends Controller
         $legends = getLegends($request->get('email_body'));
         if ($legends['consts'] == $existing_legends) {
             EmailEdits::where('type', $type)->update([
-                'content' => $request->get('email_body'),
+                'content' => $legends['replace'],
                 'type' => $type
             ]);
             // echo $content;
