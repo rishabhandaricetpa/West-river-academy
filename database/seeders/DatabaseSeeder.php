@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         //     DB::table($table)->truncate();
         // }
         // Schema::enableForeignKeyConstraints();
-
+        $this->call(EmailSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(FeesInfoSeeder::class);
         $this->call(BankTransferTableSeeder::class);
