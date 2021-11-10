@@ -242,6 +242,16 @@ class TranscriptController extends Controller
 
         $geteachtranscriptPayments = TranscriptPayment::with('transcript', 'transcript.student')->whereId($transpay_id)->first();
         $transactionData = TransactionsMethod::where('transcation_id', $geteachtranscriptPayments->transcation_id)->first();
+        if ($geteachtranscriptPayments->status == 'paid') {
+            TransactionsMethod::where('transcation_id', $geteachtranscriptPayments->transcation_id)->update([
+                'status' => 'succeeded'
+            ]);
+        } else {
+            TransactionsMethod::where('transcation_id', $geteachtranscriptPayments->transcation_id)->update([
+                'status' => 'pending'
+            ]);
+        }
+
         return view('admin.transcript.edit-transcript_payments', compact('geteachtranscriptPayments', 'transactionData'));
     }
 

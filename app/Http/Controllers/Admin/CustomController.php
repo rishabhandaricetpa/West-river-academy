@@ -10,7 +10,9 @@ use App\Models\NotarizationPayment;
 use App\Models\Notarization;
 use App\Models\OrderPersonalConsultation;
 use App\Models\CustomLetterPayment;
+use App\Models\Graduation;
 use App\Models\TransactionsMethod;
+use App\Models\Transcript;
 use DB;
 use Illuminate\Http\Request;
 
@@ -39,78 +41,6 @@ class CustomController extends Controller
         return view('admin.payment.customPayments.view-each', compact('customPaymentsData'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(cr $cr)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //     $countrydata = Country::find($id);
-        //     return view('admin.edit-country', compact('countrydata'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-    }
-
-    /*
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy(cr $cr)
-    // {
-    //     //
-    // }
-
-
-
-    /**
-     * Order Postage Custom payments Code  to view all the postage made by users
-     *
-     */
     public function viewPostage()
     {
         return view('admin.payment.orderPostagePayment.postage-payments');
@@ -381,7 +311,7 @@ class CustomController extends Controller
         switch ($type) {
             case 'custom_payment':
                 CustomPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
-                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'custom')->update(['status' => 'succeeded']);
                 $notification = [
                     'message' => 'All Payments for Custom Payment Updated Successfully ',
                     'alert-type' => 'success',
@@ -390,7 +320,7 @@ class CustomController extends Controller
                 return redirect()->back()->with($notification);
             case 'personal_consultation':
                 OrderPersonalConsultation::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
-                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'order_consultation')->update(['status' => 'succeeded']);
                 $notification = [
                     'message' => 'All Payments for Personal Consultation Updated Successfully ',
                     'alert-type' => 'success',
@@ -399,7 +329,7 @@ class CustomController extends Controller
                 return redirect()->back()->with($notification);
             case 'custom_letter':
                 CustomLetterPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
-                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'custom_letter')->update(['status' => 'succeeded']);
                 $notification = [
                     'message' => 'All Payments for Custom Letter Updated Successfully ',
                     'alert-type' => 'success',
@@ -408,7 +338,7 @@ class CustomController extends Controller
                 return redirect()->back()->with($notification);
             case 'postage':
                 OrderPostage::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
-                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'postage')->update(['status' => 'succeeded']);
                 $notification = [
                     'message' => 'All Payments for Postage Updated Successfully ',
                     'alert-type' => 'success',
@@ -417,11 +347,22 @@ class CustomController extends Controller
                 return redirect()->back()->with($notification);
             case 'notarization':
                 NotarizationPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
-                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'succeeded']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'notarization')->update(['status' => 'succeeded']);
 
 
                 $notification = [
                     'message' => 'All Payments for Notarization Updated Successfully ',
+                    'alert-type' => 'success',
+                ];
+
+                return redirect()->back()->with($notification);
+
+            case 'transcript':
+
+                Transcript::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
+                TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'transcript')->update(['status' => 'succeeded']);
+                $notification = [
+                    'message' => 'All Payments for Transcript Updated Successfully ',
                     'alert-type' => 'success',
                 ];
 
