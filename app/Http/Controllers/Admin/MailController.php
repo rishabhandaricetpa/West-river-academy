@@ -27,23 +27,23 @@ class MailController extends Controller
         $existing_legends = Config::get("constants." . $type . "_variables");
 
         $legends = getLegends($request->get('email_body'));
-        if ($legends['consts'] == $existing_legends) {
-            EmailEdits::where('type', $type)->update([
-                'content' => $legends['replace'],
-                'type' => $type
-            ]);
-            // echo $content;
-            $notification = [
-                'message' => 'Email Edited Successfully',
-                'alert-type' => 'success',
-            ];
-            return back()->with($notification);
-        } else {
-            $notification = [
-                'message' => 'Email not Edited ',
-                'alert-type' => 'error',
-            ];
-            return back()->with($notification);
-        }
+        // if ($legends['consts'] == $existing_legends) {
+        EmailEdits::where('type', $type)->update([
+            'content' => $legends['replace'],
+            'type' => $type
+        ]);
+        // echo $content;
+        $notification = [
+            'message' => 'Email Edited Successfully',
+            'alert-type' => 'success',
+        ];
+        return back()->with($notification);
+        // } else {
+        //     $notification = [
+        //         'message' => 'Email not Edited ',
+        //         'alert-type' => 'error',
+        //     ];
+        //     return back()->with($notification);
+        // }
     }
 }

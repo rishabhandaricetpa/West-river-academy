@@ -9,6 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Services\WireViewEngine;
 
 class EnrollmentConfirmation extends Mailable
 {
@@ -38,7 +39,7 @@ class EnrollmentConfirmation extends Mailable
         $student = StudentProfile::where('id', $student_id)->first();
         $student_name = $student->first_name;
         $template = EmailEdits::where('type', 'enrollment')->first();
-        $email_data =  DbView::make($template)->field('content')->with([
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
             'student_name' => $student_name,
             'enrollment_start_date' => $enrollment_start_date,
             'enrollment_end_date' => $enrollment_end_date

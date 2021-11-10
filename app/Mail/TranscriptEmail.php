@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Models\EmailEdits;
 use App\Models\User;
+use App\Services\WireViewEngine;
 use DbView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,7 +38,7 @@ class TranscriptEmail extends Mailable
         $id = $this->user->id;
         $user = User::find($id);
         $template = EmailEdits::where('type', 'transcript_approved')->first();
-        $email_data =  DbView::make($template)->field('content')->with([
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
             'date' => $date,
         ])->render();
         return $this->markdown('mail.email-notification', compact('date'))->subject('Transcript Received');

@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\Cart;
 use App\Models\EmailEdits;
 use App\Models\User;
+use App\Services\WireViewEngine;
 use Auth;
 use DbView;
 use Illuminate\Bus\Queueable;
@@ -42,7 +43,7 @@ class MoneyOrder extends Mailable
         $user_name = $user->full_name;
         $amount = $this->amount;
         $template = EmailEdits::where('type', 'moneyorder')->first();
-        $email_data =  DbView::make($template)->field('content')->with([
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
             'user_name' => $user_name,
             'amount' => $amount,
         ])->render();

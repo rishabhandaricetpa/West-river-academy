@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\Cart;
 use App\Models\EmailEdits;
 use App\Models\User;
+use App\Services\WireViewEngine;
 use Auth;
 use DbView;
 use Illuminate\Bus\Queueable;
@@ -39,7 +40,7 @@ class MoneyGram extends Mailable
         $date = \Carbon\Carbon::now()->format('M d Y');
         $amount = $this->amount;
         $template = EmailEdits::where('type', 'moneygram')->first();
-        $email_data =  DbView::make($template)->field('content')->with([
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
             'user_name' => $user_name,
             'date' => $date,
             'amount' => $amount,
