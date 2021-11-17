@@ -308,6 +308,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment"
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import DatePicker from './DatePicker.vue';
@@ -487,14 +488,15 @@ export default {
           "Grade is a required Field! Please select a Grade and then continue."
         );
       }
-      // if (!this.vallidateEndDate()) {
-      //   this.errors.push(
-      //     "End date of Enrollment is a required!Please select a End Date and then continue."
-      //   );
-      // }
+      if (!this.vallidateEndDate()) {
+       
+        this.errors.push(
+          "End date of Enrollment can not be smaller then Start Date of Enrollment"
+        );
+      }
       if (
         this.form.dob &&
-        this.vallidateGrades()
+        this.vallidateGrades() && this.vallidateEndDate()
       ) {
         axios.post(route("enroll.student"), this.form).then((response) => {
           const resp = response.data;
@@ -505,25 +507,33 @@ export default {
       }
     },
     vallidateGrades() {
+
+      
       for (let i = 0; i < this.form.enrollPeriods.length; i++) {
         const enrollPeriod = this.form.enrollPeriods[i];
         if (!enrollPeriod.grade) {
+         
           return false;
           break;
         }
       }
       return true;
     },
-    // vallidateEndDate() {
-    //   for (let i = 0; i < this.form.enrollPeriods.length; i++) {
-    //     const enrollPeriod = this.form.enrollPeriods[i];
-    //     if (!enrollPeriod.selectedEndDate) {
-    //       return false;
-    //       break;
-    //     }
-    //   }
-    //   return true;
-    // },
+    vallidateEndDate() {
+     
+      let isValid = true;
+      this.form.enrollPeriods.forEach((enrollPeriod) => {
+       
+        const selectedStartDate = moment(enrollPeriod.selectedStartDate);
+        const selectedEndDate = moment(enrollPeriod.selectedEndDate);
+        if ( selectedEndDate.isBefore(selectedStartDate)) {
+          isValid = false;
+         
+        }
+      });
+
+      return isValid;
+    },
     clickDatepicker() {
       document.getElementById("dob").click();
     },

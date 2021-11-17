@@ -1456,7 +1456,7 @@
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
         var amount_status = $('#amount_status').val();
-        var grade_level = $("input[name='grade_level']:checked").val();
+        var grade_level = $("input[id='grade_level']:checked").val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
