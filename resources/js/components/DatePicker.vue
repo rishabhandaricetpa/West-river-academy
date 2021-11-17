@@ -153,7 +153,7 @@ export default {
           ? this.selectedMonth + 1
           : `0${this.selectedMonth + 1}`;
 
-      return `${day}.${month}.${this.selectedYear}`;
+      return `${month}.${day}.${this.selectedYear}`;
     },
 
     // The alternative names of months

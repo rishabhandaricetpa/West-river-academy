@@ -223,8 +223,8 @@ class StudentController extends Controller
                 'status' => 0,
             ]);
             foreach ($data->get('enrollPeriods', []) as $period) {
-                $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
-                $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
+                $selectedStartDate =  \Carbon\Carbon::createFromFormat("m.d.Y", $period['selectedStartDate']);
+                $selectedEndDate  = \Carbon\Carbon::createFromFormat("m.d.Y", $period['selectedEndDate']);
                 $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
                 $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $id)
@@ -270,14 +270,7 @@ class StudentController extends Controller
                     $confirmlink->save();
                 }
             }
-            // Dashboard::create([
-            //     'parent_profile_id' =>  $parentProfileData->id,
-            //     'amount' => $fee,
-            //     'student_profile_id' => $student->id,
-            //     'linked_to' => $student->Name,
-            //     'related_to' => 'student_record_received',
-            //     'created_date' => \Carbon\Carbon::now()->format('M d Y'),
-            // ]);
+            
             DB::commit();
 
             if ($data->expectsJson()) {
