@@ -35,6 +35,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                @click='setOtherValue(index)'
                 v-model="healthCourse.other_subject"
                 aria-describedby=""
               />
@@ -122,13 +123,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3  class="mt-3">
+             <h3 class="mt-3" v-if='(final_credits[healthCourse.component_index ] - healthCourse.selectedCredit)>=0'>
                 You have
              {{ final_credits[healthCourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
               </h3>
+               <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
           </div>
         </div>
@@ -140,7 +142,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add Another Health Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
@@ -210,16 +212,23 @@ export default {
         healthCourse.component_index = index;
       });
     },
+     setOtherValue(index){
+     this.form.healthCourse[index].subject_name ="";
+    },
     reCalculateAll() {
       this.form.healthCourse.forEach((healthCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(healthCourse)
       })
-      this.finalValue();
+       const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     }, 
      finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit); 
+      return finalValue;
     },
     addCourse() {
     const healthCourse=  {
@@ -233,7 +242,7 @@ export default {
         total_credits: this.final_credits[this.form.healthCourse.length - 1],
         component_index: this.form.healthCourse.length
       };
-        this.final_credits.push(this.calculateRemainingCredit(healthCourse))
+      this.final_credits.push(this.calculateRemainingCredit(healthCourse))
       this.form.healthCourse.push(healthCourse);
       this.finalValue();
     },
@@ -245,8 +254,7 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-
-      if (!this.validateSubject() && !this.validateOtherSubject()) {
+      if (!this.validateSubject() && !this.validateOtherSubject() ) {
         this.errors.push(
           "Course name is required Field! Please select a Course name"
         );
@@ -254,9 +262,9 @@ export default {
       if (!this.validateCredit()) {
         this.errors.push("Credit is required Field! Please select a credit ");
       }
-  if(!this.validateFinalCredit()){
+    if(!this.validateFinalCredit()){
          this.errors.push(
-          "Credits cann't be negative"
+         "No Credits remaining"
         );
       }
       if(this.validateFinalCredit()){

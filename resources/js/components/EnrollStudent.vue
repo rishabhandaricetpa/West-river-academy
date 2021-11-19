@@ -194,7 +194,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-               <date-picker   :default="startDate" v-model="enrollPeriod.selectedStartDate"/>
+               <date-picker  :default="startDate" v-model="enrollPeriod.selectedStartDate"/>
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-                 <date-picker v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
+                 <date-picker  :config="enrollPeriod.configenddate" v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
               </p>
      
             </div>
@@ -358,19 +358,19 @@ export default {
               altInput: true,
               allowInput: true,
             },
-            // configenddate: {
-            //   altFormat: "F j, Y",
-            //   altInputClass: "form-control",
-            //   altInput: true,
-            //   allowInput: true,
-            //   minDate:this.calcMinDate(this.startdate),
-            //   disable: [
-            //     {
-            //       from: this.calcEndDate(this.startdate),
-            //       to: this.calcToData(this.startdate),
-            //     },
-            //   ],
-            // },
+            configenddate: {
+              altFormat: "F j, Y",
+              altInputClass: "form-control",
+              altInput: true,
+              allowInput: true,
+              minDate:this.calcMinDate(this.startdate),
+              disable: [
+                {
+                  from: this.calcEndDate(this.startdate),
+                  to: this.calcToData(this.startdate),
+                },
+              ],
+            },
           },
         ],
       },
@@ -452,23 +452,23 @@ export default {
         selectedStartDate: this.startdate,
         selectedEndDate: this.enddate,
         grade: "",
-        // configstartdate: {
-        //   altFormat: "F j, Y",
-        //   altInput: true,
-        //   allowInput: true,
-        // },
-        // configenddate: {
-        //   altFormat: "F j, Y",
-        //   altInput: true,
-        //   allowInput: true,
-        //   minDate:this.calcMinDate(this.startdate),
-        //   disable: [
-        //     {
-        //       from: this.calcEndDate(this.startdate),
-        //       to: this.calcToData(this.startdate),
-        //     },
-        //   ],
-        // },
+        configstartdate: {
+          altFormat: "F j, Y",
+          altInput: true,
+          allowInput: true,
+        },
+        configenddate: {
+          altFormat: "F j, Y",
+          altInput: true,
+          allowInput: true,
+          minDate:this.calcMinDate(this.startdate),
+          disable: [
+            {
+              from: this.calcEndDate(this.startdate),
+              to: this.calcToData(this.startdate),
+            },
+          ],
+        },
       });
     },
     removePeriod(index){
