@@ -30,7 +30,9 @@
                     <div class="modal-body">
                         <p>AP means Advanced Placement. To put AP in front of a course name, you must have taken and passed
                             with a grade of A, B or C an actual AP course listed on this website:
-                            https://apstudents.collegeboard.org/course-index-page</p>
+                            <a href='https://apstudents.collegeboard.org/course-index-page'>
+                                https://apstudents.collegeboard.org/course-index-page</a>
+                        </p>
                         <p>Enter the exact name of the course and the grade you received. You will need to show us proof of
                             taking and passing the course.</p>
                         <div class="text-right mt-3"><button type="button" class="btn btn-primary"

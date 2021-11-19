@@ -5,7 +5,7 @@
         <h1 class="text-center text-white text-uppercase">preview transcript</h1>
 
         <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
-            <p>I'm finished with this transcript. I want to see what it looks like</p>
+            <p>I'm finished with this transcript. I want to see what it looks like. Submit once done.</p>
             <a href="{{ url('/transcript-pdf') }}" class="btn btn-primary mt-4 font-weight-bold" data-toggle="modal"
                 data-target="#previewTranscriptModal">View Transcript</a>
             <a href="{{ route('submit.transcript', [$student->id, $transcript_id]) }}"
@@ -44,32 +44,32 @@
                                 $rightGroup->last()->push((object) ['id' => -1]);
                             }
                         }
-
+                        
                         $courseGroups = $courses->sortBy('groupBy');
-
+                        
                         $groupList = [];
                         foreach ($courseGroups->toArray() as $key => $groupItem) {
                             $groupList[$groupItem->groupBy][] = $groupItem;
                         }
-
-                        $countGroupItems  = count($groupList);
-                        if( $countGroupItems > 2  && $countGroupItems % 2  != 0)
+                        
+                        $countGroupItems = count($groupList);
+                        if ($countGroupItems > 2 && $countGroupItems % 2 != 0) {
                             $groupList[0] = [];
-
-                        if( count($groupList) )
-                        {
+                        }
+                        
+                        if (count($groupList)) {
                             $leftGroupItem = [];
                             $rightGroupItem = [];
-                            $countGroupItems  = round(count($groupList)/2);
-                            $item  = 1;
-
+                            $countGroupItems = round(count($groupList) / 2);
+                            $item = 1;
+                        
                             foreach ($groupList as $key => $value) {
-                                
-                                if( $item <= $countGroupItems ) 
-                                    $leftGroupItem[$key]    = $value;
-                                else
-                                    $rightGroupItem[$key]   = $value;
-
+                                if ($item <= $countGroupItems) {
+                                    $leftGroupItem[$key] = $value;
+                                } else {
+                                    $rightGroupItem[$key] = $value;
+                                }
+                        
                                 $item++;
                             }
                         }
@@ -146,11 +146,11 @@
                                     <tr>
                                         <td style="width:@php echo $tableWidth;?>" valign="top">
                                             @include('transcript9to12.courseComponent',[
-                                                'yearGroup'=> $leftGroupItem,
+                                            'yearGroup'=> $leftGroupItem,
 
                                             ])
                                         </td>
-                                        @if( count($rightGroupItem))
+                                        @if (count($rightGroupItem))
                                             <td style="width:50%;" valign="top">
                                                 @include('transcript9to12.courseComponent',[
                                                 'yearGroup'=> $rightGroupItem,

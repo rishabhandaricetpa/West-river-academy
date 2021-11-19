@@ -14,6 +14,7 @@ use App\Models\TranscriptCourse9_12;
 use App\Models\FeesInfo;
 use App\Models\TranscriptPayment;
 use App\Models\ParentProfile;
+use Config;
 use DB;
 use Illuminate\Http\Request;
 
@@ -109,10 +110,7 @@ class Transcript9to12 extends Controller
                 }
                 $result = array_unique($items);
             } else {
-                $result = [
-                    date("Y"), date("Y") + 1, date("Y") + 2, date("Y") + 3, date("Y") + 4, date("Y") + 5,
-                    date("Y") + 6, date("Y") + 7, date("Y") + 8, date("Y") + 9,
-                ];
+                $result = config('constants.ENROLLMENT_YEAR_RANGE');
             }
             DB::commit();
 

@@ -102,15 +102,17 @@
                 </div>
             @else
                 <div class="pt-2">
-                    <p>If you are finished with this transcript and would like to see what it looks like, you can click
+                    {{-- <p>If you are finished with this transcript and would like to see what it looks like, you can click
                         the
                         "Preview Transcript" button to download a preview. If you would like to submit it to be reviewed
                         click
-                        the "Submit Transcript" button.</p>
+                        the "Submit Transcript" button.</p> --}}
+                    <p>Continue if you are finished with this transcript and would like to see what it looks like, then hit
+                        "Preview Transcript" button to download a preview . </p>
                     <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3" role="button">Back to Dashboard</a>
                     @if (count($details9_12) > 0)
                         <a href="{{ route('preview.transcript9_12', [$student->id, $transcript_id]) }}"
-                            class="btn btn-primary mt-3 ml-2" role="button">Submit Transcript</a>
+                            class="btn btn-primary mt-3 ml-2" role="button">Continue </a>
                     @endif
                 </div>
 

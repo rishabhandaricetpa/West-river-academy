@@ -38,12 +38,6 @@ class MailController extends Controller
             'alert-type' => 'success',
         ];
         return back()->with($notification);
-        // } else {
-        //     $notification = [
-        //         'message' => 'Email not Edited ',
-        //         'alert-type' => 'error',
-        //     ];
-        //     return back()->with($notification);
-        // }
+       
     }
 }

@@ -32,5 +32,8 @@ return [
   'moneygram_variables' => ['$user_name', '${{', '$amount'],
   'graduation_variables' => ['${{', '$total_fees'],
   'moneyorder_variables' => ['$user_name'],
-  'banktransfer_variables' => ['$user_name', '${{', '$amount']
+  'banktransfer_variables' => ['$user_name', '${{', '$amount'],
+
+    /** When other school is selected while trancript creation */
+  'ENROLLMENT_YEAR_RANGE' => range(2013, 2028)
 ];
