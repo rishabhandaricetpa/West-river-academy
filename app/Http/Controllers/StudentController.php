@@ -166,7 +166,9 @@ class StudentController extends Controller
 
     public function confirmationpage($enrollment_payment_id, $grade_id)
     {
+
         $enrollments = EnrollmentPeriods::where('enrollment_payment_id', $enrollment_payment_id)->where('grade_level', $grade_id)->first();
+
         $student_id = $enrollments->student_profile_id;
         $student = StudentProfile::whereId($student_id)->first();
         $id = Auth::user()->id;
@@ -178,12 +180,13 @@ class StudentController extends Controller
         // return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
     }
 
-    public function viewDownload($enrollment_payment_id, $grade_id)
+    public function viewDownload($enrollment_id, $grade_id)
     {
-        $enrollments = EnrollmentPeriods::where('enrollment_payment_id', $enrollment_payment_id)->where('grade_level', $grade_id)->first();
+        $enrollments = EnrollmentPeriods::where('id', $enrollment_id)->where('grade_level', $grade_id)->first();
+
         $student_id = $enrollments->student_profile_id;
         $student = StudentProfile::whereId($student_id)->first();
-        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $enrollment_payment_id)->first();
+        $confirmation_data = ConfirmationLetter::where('student_profile_id', $student_id)->where('enrollment_period_id', $enrollment_id)->first();
         return view('viewConfirmation', compact('student', 'student_id', 'grade_id'));
     }
     public function saveConfirmationInformation(Request $request, $student_id, $grade_id)
@@ -199,7 +202,7 @@ class StudentController extends Controller
         } else {
             $confirmation_data->IsMotherName = 0;
         }
-        if ($request->input('isGrade')) {
+        if ($request->input('isgradeId')) {
             $confirmation_data->isGrade = 1;
         } else {
             $confirmation_data->isGrade = 0;

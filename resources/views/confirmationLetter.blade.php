@@ -40,9 +40,11 @@
                     {{ $student->birth_city }}</p>
             @endif
 
-            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Grade: {{ $enrollment->grade_level }}
-            </p>
+            @if ($confirmData->isGrade == 1)
 
+                <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Grade: {{ $enrollment->grade_level }}
+                </p>
+            @endif
             <p style="margin-top:25px;font-size: 17px;">Enrollment Period:
                 {{ formatDate($enrollment->start_date_of_enrollment) }} -
                 {{ formatDate($enrollment->end_date_of_enrollment) }}</p>

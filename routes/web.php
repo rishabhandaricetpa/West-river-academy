@@ -160,7 +160,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('viewall-orders', 'StudentController@getAllOrders')->name('viewfull.orders');
 
         Route::get('/viewConfirmation/{enrollment_payment_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
-        Route::get('/viewdownload/{enrollment_payment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
+        Route::get('/viewdownload/{enrollment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
 
         Route::post('/saveConfirmationData/{student_id}/{grade_id}', 'StudentController@saveConfirmationInformation')->name('save.confirmationData');
 
