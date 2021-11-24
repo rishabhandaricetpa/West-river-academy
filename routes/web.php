@@ -55,7 +55,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/reviewstudents', 'StudentController@reviewStudent')->name('reviewstudent');
         Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
         Route::post('delete/{id}', 'StudentController@deleteEnroll')->name('delete.enroll');
-
+        Route::get( 'deletestudent/{id}','StudentController@destroy')->name('delete.student');
         // dashboard screen and verify email message
         Route::get('/verify-email/{email}', function () {
             return view('SignIn/verify-email');

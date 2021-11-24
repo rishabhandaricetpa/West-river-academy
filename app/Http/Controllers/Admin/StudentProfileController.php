@@ -210,24 +210,13 @@ class StudentProfileController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            DB::beginTransaction();
-            $notification = [
-                'message' => 'Student Record is Deleted Successfully!',
-                'alert-type' => 'Success',
-            ];
-            StudentProfile::where('id', $id)->delete();
-            DB::commit();
 
-            return redirect()->back()->with($notification);
-        } catch (\Exception $e) {
-            $notification = [
-                'message' => 'Delete Parent Record for deleting last student !',
-                'alert-type' => 'error',
-            ];
-
-            return redirect()->back()->with($notification);
-        }
+        StudentProfile::where('id', $id)->delete();
+        $notification = [
+            'message' => 'Student Record is Deleted Successfully!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
     }
 
     //genrate confirmation

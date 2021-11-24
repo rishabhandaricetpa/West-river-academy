@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-
 class StudentController extends Controller
 {
     private $parent_profile_id;
@@ -101,7 +100,22 @@ class StudentController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
         }
     }
+    /** Delete Student */
+    public function destroy($id)
+    {
+        $student = DB::table('student_profiles')->where('student_profiles.id', $id)
+            ->leftJoin('enrollment_periods', 'enrollment_periods.student_profile_id', 'student_profiles.id')
+            ->leftJoin('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
+            ->select('enrollment_payments.status', 'student_profiles.id')
+            ->first();
 
+        if ($student->status == 'pending') {
+            StudentProfile::where('id', $student->id)->delete();
+            return redirect()->back()->with('message', 'Student deleted Successfully');
+        } else {
+            return redirect()->back()->with('error', "Student is enrolled , can't be deleted");
+        }
+    }
     public function showstudents()
     {
         $parentId = ParentProfile::getParentId();
@@ -270,7 +284,7 @@ class StudentController extends Controller
                     $confirmlink->save();
                 }
             }
-            
+
             DB::commit();
 
             if ($data->expectsJson()) {
