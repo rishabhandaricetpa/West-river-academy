@@ -82,8 +82,8 @@
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
       <div class="position-relative mb-0 col-md-3 col-xl-2 px-0">
-        <flat-pickr id="dob" name="dob"  v-model="form.dob" required>
-        </flat-pickr>
+        <date-picker id="dob" name="dob"  v-model="form.dob" required>
+        </date-picker>
          <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
       </div>
      
@@ -194,7 +194,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-               <date-picker  :default="startDate" v-model="enrollPeriod.selectedStartDate"/>
+               <date-picker  :disbaled-months='disablestartdate' :default="startDate" v-model="enrollPeriod.selectedStartDate" />
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-                 <date-picker  :config="enrollPeriod.configenddate" v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
+                 <date-picker :disbaled-months='disableenddate'  v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
               </p>
      
             </div>
@@ -321,6 +321,7 @@ export default {
   data() {
  
        return {
+        minStartDate: this.calcEndDate(this.startdate),
      startDate:this.startdate,
      endDate:this.enddate,
       grades: [
@@ -400,6 +401,14 @@ export default {
     },
     countryname:{
       required:true,
+    },
+    disableenddate:{
+    required:true,
+     type:Array
+    },
+    disablestartdate:{
+      required:true,
+     type:Array
     }
   },
   methods: {

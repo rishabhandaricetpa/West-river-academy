@@ -7,7 +7,6 @@ use App\Models\Country;
 use App\Models\EnrollmentPayment;
 use App\Models\EnrollmentPeriods;
 use App\Models\FeesInfo;
-use App\Models\FeeStructure;
 use App\Models\ParentProfile;
 use App\Models\StudentProfile;
 use App\Models\Transcript;
@@ -16,9 +15,8 @@ use App\Models\User;
 use App\Models\Dashboard;
 use App\Models\Notification as Notification;
 use App\Models\OrderPersonalConsultation;
-use App\Models\TransactionsMethod;
 use App\Models\UploadDocuments;
-use App\Providers\RouteServiceProvider;
+use App\Services\CountriesEnrollmentDate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +68,7 @@ class StudentController extends Controller
                 $newYear = $year + 1;
                 $year = Carbon::create($year)->format('Y');
                 $month_start_date = Carbon::create($countryData->start_date)->format('m/d');
+
                 $start_date = $year . '/' . $month_start_date;
 
                 $sem = Carbon::parse($start_date);
@@ -83,11 +82,14 @@ class StudentController extends Controller
                     $month_end_date = Carbon::create($countryData->end_date)->format('m/d');
                     $end_date = $newYear . '/' . $month_end_date;
                 }
+                $dates = (new CountriesEnrollmentDate($month_start_date, $year_end_date))->getEnrollmentDates();
+                $disable_start_date = $dates['start_date'];
+                $disable_end_date = $dates['end_date'];
                 DB::commit();
                 if ($request->expectsJson()) {
                     return response()->json($start_date);
                 }
-                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount', 'country_name'));
+                return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'disable_start_date', 'disable_end_date', 'semestermonth', 'studentCount', 'country_name'));
             } else {
                 $start_date = Carbon::now()->format('Y/m/d');
                 $end_date = Carbon::now()->addYears(1)->format('Y/m/d');
@@ -96,6 +98,7 @@ class StudentController extends Controller
                 return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount', 'country_name'));
             }
         } catch (\Exception $e) {
+            report($e);
             DB::rollBack();
             return response()->json(['status' => 'error', 'message' => 'Enrollment Start Date and End Date Missing for your Country Please contact your Admin']);
         }
@@ -229,7 +232,7 @@ class StudentController extends Controller
                 'middle_name' => $data['middle_name'],
                 'last_name' => $data['last_name'],
                 'gender' => $data['gender'],
-                'd_o_b' => \Carbon\Carbon::parse($data['dob'])->format('Y/m/d'),
+                'd_o_b' =>   \Carbon\Carbon::createFromFormat("m.d.Y", $data['dob']),
                 'email' => $data['email'],
                 'cell_phone' => $data['cell_phone'],
                 'student_Id' => $data['studentID'],
@@ -329,7 +332,7 @@ class StudentController extends Controller
             $student->last_name = $request->input('last_name');
             $student->email = $request->input('email');
             $student->gender = $request->input('gender');
-            $student->d_o_b = \Carbon\Carbon::parse($request->input('dob'))->format('Y/m/d');
+            $student->d_o_b = \Carbon\Carbon::createFromFormat("m.d.Y", $request->input('dob'));
             $student->cell_phone = $request->input('cell_phone');
             $student->student_Id = $request->input('student_Id');
             $student->immunized_status = $request->input('immunized_status');
@@ -367,8 +370,8 @@ class StudentController extends Controller
     public function updateEnrollPeriod($period, $student, $enrollPeriod)
     {
         $parent_profile = ParentProfile::getParentId();
-        $selectedStartDate = \Carbon\Carbon::parse($period['selectedStartDate']);
-        $selectedEndDate = \Carbon\Carbon::parse($period['selectedEndDate']);
+        $selectedStartDate =  \Carbon\Carbon::createFromFormat("m.d.Y", $period['selectedStartDate']);;
+        $selectedEndDate =  \Carbon\Carbon::createFromFormat("m.d.Y", $period['selectedEndDate']);
         $type = $selectedStartDate->diffInMonths($selectedEndDate) > 7 ? 'annual' : 'half';
 
         $student_enrolled = StudentProfile::where('student_profiles.parent_profile_id', $student->parent_profile_id)

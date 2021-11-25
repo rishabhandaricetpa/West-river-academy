@@ -80,8 +80,8 @@
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
       <div class="position-relative mb-0  col-md-3 col-xl-2 px-0">
-        <flat-pickr required id="dob" name="dob" :config="config" v-model="form.dob">
-        </flat-pickr>
+        <date-picker required id="dob" name="dob" :default="form.dob" v-model="form.dob">
+        </date-picker>
         <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
       </div>
       
@@ -382,19 +382,7 @@ export default {
           altInput: true,
           allowInput: true,
         },
-        // configenddate: {
-        //   altFormat: "F j, Y",
-        //   altInputClass: "form-control",
-        //   altInput: true,
-        //   allowInput: true,
-        //   minDate:this.calcMinDate(this.startdate),
-        //   disable: [
-        //     {
-        //       from: this.calcEndDate(item.start_date_of_enrollment),
-        //       to: this.calcToData(item.start_date_of_enrollment),
-        //     },
-        //   ],
-        // },
+       
       });
     });
   },

@@ -11,6 +11,7 @@
           v-for="(month, index) in months"
           :value="index"
           :key="month.month"
+          :disabled="monthIsDisabled(index)"
         >
           {{ month.month }}
         </option>
@@ -107,6 +108,13 @@ export default {
       type: String,
       required: false,
       default: "date-dropdown-container"
+    },
+    disbaledMonths: {
+      type: Array,
+      required: false,
+      default: () => {
+        return [];
+      }
     }
   },
 
@@ -140,7 +148,6 @@ export default {
     // The maximum date the will allow user to select.
     maxDate() {
       if (this.max) return new Date(this.max);
-
       return;
     },
 
@@ -197,8 +204,7 @@ export default {
       let through = this.max ? this.maxDate.getFullYear() + 1 - firstYear : 101;
       let years = [];
 
-      for (let i = firstYear, len = firstYear + through; i < len; i++)
-        years.push(i);
+      for (let i = 2013, len = firstYear + through; i < len; i++) years.push(i);
 
       return years.map(year => {
         return { year, selected: year === this.selectedYear };
@@ -221,7 +227,9 @@ export default {
         return { day, selected: days === this.selectedDay };
       });
     },
-
+    monthIsDisabled(index) {
+      return this.disbaledMonths.includes(index);
+    },
     updateDays() {
       this.days = this.getDays();
     },
