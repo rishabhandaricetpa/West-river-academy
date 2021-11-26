@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\CustomPayment;
 use App\Models\OrderPostage;
 use App\Models\ParentProfile;
@@ -312,6 +313,7 @@ class CustomController extends Controller
             case 'custom_payment':
                 CustomPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'custom')->update(['status' => 'succeeded']);
+                Cart::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'custom')->delete();
                 $notification = [
                     'message' => 'All Payments for Custom Payment Updated Successfully ',
                     'alert-type' => 'success',
@@ -321,6 +323,7 @@ class CustomController extends Controller
             case 'personal_consultation':
                 OrderPersonalConsultation::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'order_consultation')->update(['status' => 'succeeded']);
+                Cart::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'order_consultation')->delete();
                 $notification = [
                     'message' => 'All Payments for Personal Consultation Updated Successfully ',
                     'alert-type' => 'success',
@@ -330,6 +333,7 @@ class CustomController extends Controller
             case 'custom_letter':
                 CustomLetterPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'custom_letter')->update(['status' => 'succeeded']);
+                Cart::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'custom_letter')->delete();
                 $notification = [
                     'message' => 'All Payments for Custom Letter Updated Successfully ',
                     'alert-type' => 'success',
@@ -339,6 +343,7 @@ class CustomController extends Controller
             case 'postage':
                 OrderPostage::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'postage')->update(['status' => 'succeeded']);
+                Cart::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'postage')->delete();
                 $notification = [
                     'message' => 'All Payments for Postage Updated Successfully ',
                     'alert-type' => 'success',
@@ -348,7 +353,7 @@ class CustomController extends Controller
             case 'notarization':
                 NotarizationPayment::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'notarization')->update(['status' => 'succeeded']);
-
+                Cart::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'notarization')->delete();
 
                 $notification = [
                     'message' => 'All Payments for Notarization Updated Successfully ',
@@ -361,6 +366,7 @@ class CustomController extends Controller
 
                 Transcript::whereIn('parent_profile_id', [$parent_id])->update(['status' => 'paid']);
                 TransactionsMethod::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'transcript')->update(['status' => 'succeeded']);
+                Cart::whereIn('parent_profile_id', [$parent_id])->where('item_type', 'transcript')->delete();
                 $notification = [
                     'message' => 'All Payments for Transcript Updated Successfully ',
                     'alert-type' => 'success',
