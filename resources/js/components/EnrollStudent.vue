@@ -82,7 +82,7 @@
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
       <div class="position-relative mb-0 col-md-4  px-0 date-field-style">
-        <date-picker id="dob" name="dob"  v-model="form.dob" required>
+        <date-picker id="dob" name="dob" v-bind:endPastYear='1980' v-model="form.dob" required>
         </date-picker>
       </div>
      
@@ -193,7 +193,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-               <date-picker  v-bind:disbaled-months='disablestartdate' :default="startDate" v-model="enrollPeriod.selectedStartDate" />
+               <date-picker endPastYear='2000' v-bind:disbaled-months='disablestartdate' :default="startDate" v-model="enrollPeriod.selectedStartDate" />
               </p>
             </div>
           </div>
@@ -214,7 +214,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-                 <date-picker v-bind:disbaled-months='disableenddate'  v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
+                 <date-picker endPastYear='2000' v-bind:disbaled-months='disableenddate'  v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
               </p>
      
             </div>

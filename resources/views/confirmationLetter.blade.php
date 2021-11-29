@@ -21,24 +21,25 @@
             Academy.</p>
         <div class="info-detail" style="margin-top:25px;">
 
-            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Name: {{ $student->first_name }}
+            <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Student: {{ $student->first_name }}
                 {{ $student->last_name }}
             </p>
             <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Date of Birth:
                 {{ Carbon\Carbon::parse($student->d_o_b)->format('F j, Y') }}</p>
+            @if ($confirmData->isDobCity == 1 && !empty($student->birth_city))
+                <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Birth City:
+                    {{ $student->birth_city }}</p>
+            @endif
             @if ($confirmData->isStudentId && !empty($student->student_Id))
                 <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">National ID:
                     {{ $student->student_Id }}</p>
 
             @endif
             @if ($confirmData->IsMotherName == 1 && !empty($student->mothers_name))
-                <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Mothers' Name:
+                <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Name of Mother:
                     {{ $student->mothers_name }}</p>
             @endif
-            @if ($confirmData->isDobCity == 1 && !empty($student->birth_city))
-                <p style="margin-top:0;margin-bottom:5px;font-size: 17px;">Birth City:
-                    {{ $student->birth_city }}</p>
-            @endif
+
 
             @if ($confirmData->isGrade == 1)
 
@@ -56,7 +57,7 @@
                         <td style="width:50%;padding-top:100px;">
                             <img style="width:200px;" src="../public/images/signature.png" alt="signature">
                             <p style="margin-bottom:0;">Stacey Nishikawa</p>
-                            <p  style="margin-top:6px;font-style:italic">Administrative Director</p>
+                            <p style="margin-top:6px;font-style:italic">Administrative Director</p>
                         </td>
                         <td style="width:50%"><img src="../public/images/Stamp.png"
                                 style="width:150px;height:150px;object-fit:contain;" alt="Stamp"></td>

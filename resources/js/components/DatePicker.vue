@@ -115,6 +115,10 @@ export default {
       default: () => {
         return [];
       }
+    },
+    endPastYear:{
+      type:String,
+      required:true
     }
   },
 
@@ -204,7 +208,7 @@ export default {
       let through = this.max ? this.maxDate.getFullYear() + 1 - firstYear : 101;
       let years = [];
 
-      for (let i = 2013, len = firstYear + through; i < len; i++) years.push(i);
+      for (let i = this.endPastYear, len = firstYear + through; i < len; i++) years.push(i);
 
       return years.map(year => {
         return { year, selected: year === this.selectedYear };
