@@ -20,26 +20,19 @@
 
         </div>
         <table id="student-table" class="table table-bordered table-striped data-table"">
-                <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>DOB</th>
-                  <th>Gender</th>
-                  <th>Country</th>
-                  <th>Email</th>
-                  <th>Action</th>
-                  <th>Payment</th>
-                  <th>Transcript</th>
-                  <th>Graduation</th>
-                  <th>Record Transfer</th>
-                  <th>View Uploaded Document</th>
-                   <th>Upload Documents</th>
-                </tr>
-                </thead>
-                <tbody>
-               
-              </tbody>
-          </table>
-          </div>
-        <!-- /.content -->
+                    <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>DOB</th>
+                      <th>Gender</th>
+                      <th>Country</th>
+                      <th>Email</th>
+                      <th>Action</th>   
+                    </tr>
+                    </thead>
+                    <tbody>              
+                  </tbody>
+              </table>
+              </div>
+            <!-- /.content -->
     @endsection

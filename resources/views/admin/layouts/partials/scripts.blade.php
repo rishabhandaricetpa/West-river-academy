@@ -238,67 +238,7 @@
                     "render": function(id) {
                         return `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
                     }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="edit-payment/${id}">View Payments</a>`;
-                    }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="edit-transcript/${id}">Transcripts</a>`;
-                    }
-                }, {
-
-                    "data": function(row, type, val, meta) {
-                        return row.graduation?.id
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="graduations/${data}/edit">Graduation</a>`;
-                        }
-                    }
-                }, {
-
-                    "data": function(row, type, val, meta) {
-                        return row.record_transfers?.id
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="student/record/transfer/${data}">Record Transfer</a>`;
-                        }
-                    }
-                },
-                {
-                    "data": "id",
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="view-documents/${data}">View</a>`;
-                        }
-                    }
-                },
-                {
-                    "data": "id",
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="edit-upload/${data}">Upload</a>`;
-                        }
-                    }
-                },
+                }
             ]
         });
 
