@@ -81,10 +81,9 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <div class="position-relative mb-0 col-md-3 col-xl-2 px-0">
+      <div class="position-relative mb-0 col-md-4  px-0 date-field-style">
         <date-picker id="dob" name="dob"  v-model="form.dob" required>
         </date-picker>
-         <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
       </div>
      
     </div>
@@ -194,7 +193,7 @@
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-               <date-picker  :disbaled-months='disablestartdate' :default="startDate" v-model="enrollPeriod.selectedStartDate" />
+               <date-picker  v-bind:disbaled-months='disablestartdate' :default="startDate" v-model="enrollPeriod.selectedStartDate" />
               </p>
             </div>
           </div>
@@ -209,14 +208,13 @@
           </div>
         </div>
       </div>
-
       <div class="form-group d-sm-flex mb-2 mt-2r">
         <label for="">Select your END date of enrollment<sup>*</sup></label>
         <div class="row">
           <div class="col-md-4">
             <div class="form-group w-100 datepicker-full date-field-style">
               <p>
-                 <date-picker :disbaled-months='disableenddate'  v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
+                 <date-picker v-bind:disbaled-months='disableenddate'  v-bind:default="endDate" v-model='enrollPeriod.selectedEndDate'/>
               </p>
      
             </div>
@@ -308,7 +306,6 @@
 
 <script>
 import axios from "axios";
-import moment from "moment"
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import DatePicker from './DatePicker.vue';
@@ -320,8 +317,7 @@ export default {
   },
   data() {
  
-       return {
-        minStartDate: this.calcEndDate(this.startdate),
+       return {     
      startDate:this.startdate,
      endDate:this.enddate,
       grades: [
@@ -354,24 +350,6 @@ export default {
             selectedStartDate: '',
             selectedEndDate:'',
             grade: "",
-            configstartdate: {
-              altFormat: "F j, Y",
-              altInput: true,
-              allowInput: true,
-            },
-            configenddate: {
-              altFormat: "F j, Y",
-              altInputClass: "form-control",
-              altInput: true,
-              allowInput: true,
-              minDate:this.calcMinDate(this.startdate),
-              disable: [
-                {
-                  from: this.calcEndDate(this.startdate),
-                  to: this.calcToData(this.startdate),
-                },
-              ],
-            },
           },
         ],
       },
@@ -412,72 +390,18 @@ export default {
     }
   },
   methods: {
-    
-    calcEndDate(date) {
-      const oldDate = new Date(date);
-      const year = oldDate.getFullYear();
-      const oDate = oldDate.getDate();
-      const month = oldDate.getMonth();
-      return new Date(year + 1, month, oDate +1); 
-    },
-     calcMinDate(date){
-      const oldDate = new Date(date);
-      const year = oldDate.getFullYear();
-      const oDate = oldDate.getDate();
-      const month = oldDate.getMonth();
-      return new Date(year, month, oDate + 1); 
-    },
-    calcToData(date) {
-      const oldDate = new Date(date);
-      const oDate = oldDate.getDate();
-      const year = oldDate.getFullYear();
-      const month = oldDate.getMonth();
-      return new Date(year + 900, month, oDate + 1);
-    },
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
-    updateEndDate(index) {
-      this.form.enrollPeriods[
-        index
-      ].configenddate.disable[0].from = this.calcEndDate(
-        this.form.enrollPeriods[index].selectedStartDate
-      );
-      this.form.enrollPeriods[
-        index
-      ].configenddate.disable[0].to = this.calcToData(
-        this.form.enrollPeriods[index].selectedStartDate
-      );
-      this.form.enrollPeriods[
-        index
-      ].configenddate.minDate = this.calcMinDate(
-        this.form.enrollPeriods[index].selectedStartDate
-      );
-      this.form.enrollPeriods[index].selectedEndDate = ""; // reset the end date value
-    },
+ 
     addNewEnrollPeriod() {
       this.form.enrollPeriods.push({
         selectedStartDate: this.startdate,
         selectedEndDate: this.enddate,
         grade: "",
-        configstartdate: {
-          altFormat: "F j, Y",
-          altInput: true,
-          allowInput: true,
-        },
-        configenddate: {
-          altFormat: "F j, Y",
-          altInput: true,
-          allowInput: true,
-          minDate:this.calcMinDate(this.startdate),
-          disable: [
-            {
-              from: this.calcEndDate(this.startdate),
-              to: this.calcToData(this.startdate),
-            },
-          ],
-        },
+      
+     
       });
     },
     removePeriod(index){
@@ -533,9 +457,10 @@ export default {
       let isValid = true;
       this.form.enrollPeriods.forEach((enrollPeriod) => {
        
-        const selectedStartDate = moment(enrollPeriod.selectedStartDate);
-        const selectedEndDate = moment(enrollPeriod.selectedEndDate);
-        if ( selectedEndDate.isBefore(selectedStartDate)) {
+        const selectedStartDate = new Date(enrollPeriod.selectedStartDate);
+        const selectedEndDate = new Date(enrollPeriod.selectedEndDate);
+  
+        if ( selectedEndDate <= selectedStartDate) {
           isValid = false;
          
         }

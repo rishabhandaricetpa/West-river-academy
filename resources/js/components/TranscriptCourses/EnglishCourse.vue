@@ -213,7 +213,12 @@ export default {
         englishCourse.component_index = index;
       });
     },
-
+  validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+    },
     reCalculateAll() {
       this.form.englishCourses.forEach((englishCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(englishCourse)
@@ -264,7 +269,14 @@ export default {
         this.errors.push(
           "Credit is required Field! Please select a credit "
         );
-      }      axios
+      }  
+       if(!this.validateFinalCredit()){
+         this.errors.push(
+          "No Credits remaining"
+        );
+      }
+       if(this.validateFinalCredit()){
+      axios
         .post(route("english-transcript.store"), this.form)
         .then(response => {
           window.location =
@@ -276,6 +288,7 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
+        }
 
     },
     validateSubject() {

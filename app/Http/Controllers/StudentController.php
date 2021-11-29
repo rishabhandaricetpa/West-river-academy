@@ -86,15 +86,15 @@ class StudentController extends Controller
                 $disable_start_date = $dates['start_date'];
                 $disable_end_date = $dates['end_date'];
                 DB::commit();
-                if ($request->expectsJson()) {
-                    return response()->json($start_date);
-                }
                 return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'disable_start_date', 'disable_end_date', 'semestermonth', 'studentCount', 'country_name'));
             } else {
                 $start_date = Carbon::now()->format('Y/m/d');
                 $end_date = Carbon::now()->addYears(1)->format('Y/m/d');
                 $sem = Carbon::parse($start_date);
                 $semestermonth = $sem->addMonths(5);
+                $dates = (new CountriesEnrollmentDate($start_date, $end_date))->getEnrollmentDates();
+                $disable_start_date = $dates['start_date'];
+                $disable_end_date = $dates['end_date'];
                 return view('enrollment.enrollstudent', compact('start_date', 'end_date', 'semestermonth', 'studentCount', 'country_name'));
             }
         } catch (\Exception $e) {

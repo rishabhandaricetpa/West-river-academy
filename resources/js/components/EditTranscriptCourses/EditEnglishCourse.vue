@@ -19,7 +19,8 @@
               class="form-control text-uppercase"
               v-model="englishCourse.subject_name"
             >
-              <option v-for="Course in englishcourse" :key="Course">
+           <option disabled value="">Please select one</option>
+              <option v-for="Course in englishcourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -32,6 +33,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                @click='setOtherValue(index)'
                 v-model="englishCourse.other_subject"
                 aria-describedby=""
               />
@@ -116,26 +118,28 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 v-if="isCredit">
+              <h3  v-if='(final_credits[englishCourse.component_index ] - englishCourse.selectedCredit)>=0'>
                 You have
                 {{ final_credits[englishCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
               </h3>
+                <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
 
           </div>
         </div>
       </div>
     </div>
+
        <p v-if="errors.length" >
        <ul>
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
       </ul>
     </p>
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0'  class="btn btn-primary" @click="addCourse"
         >Add another English/Language Arts Course</a
       >
         <a class="btn btn-primary" @click="showAllCourses"
@@ -190,6 +194,7 @@ export default {
           total_credits: this.outofcredit.total_credit,
           component_index: index
         };
+        
       });
 
       this.form.englishCourses = courses;
@@ -212,7 +217,9 @@ export default {
       return this.final_credits[englishCourse.component_index] - englishCourse.selectedCredit;
 
     },
-
+    setOtherValue(index){
+     this.form.englishCourses[index].subject_name ="";
+    },
     reIndex(){
       this.form.englishCourses.forEach((englishCourse, index) => {
         englishCourse.component_index = index;
@@ -223,13 +230,15 @@ export default {
       this.form.englishCourses.forEach((englishCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(englishCourse)
       })
-      this.finalValue();
+       const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
-      console.log('finalValue ', this.final_remaining_credit);
-
+      return finalValue;
     },
     addCourse() {
       const englishCourse = {
@@ -253,6 +262,12 @@ export default {
       this.reIndex();
       this.reCalculateAll();
     },
+       validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+    },
     submitCourse() {
       this.errors = [];
       if (!this.vallidateGrades()) {
@@ -265,15 +280,21 @@ export default {
           "Course name is a required Field! Please select a Grade and then continue."
         );
       }
+  
       if (!this.validateCredit()) {
         this.errors.push(
           "Credit is a required Field! Please select a Grade and then continue."
         );
       }
+         if(!this.validateFinalCredit()){
+         this.errors.push(
+          "No Credits remaining"
+        );
+      }
       if (
         this.vallidateGrades() &&
         this.validateSubject() &&
-        this.validateCredit()
+        this.validateCredit() && this.validateFinalCredit()
       ) {
         axios
           .post(route("editEnglishTranscriptCourse.store"), this.form)

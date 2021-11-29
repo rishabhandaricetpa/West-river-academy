@@ -2012,10 +2012,21 @@
         var startDate = document.getElementById("start_date_of_enrollment").value;
         var endDate = document.getElementById("end_date_of_enrollment").value;
 
-        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(
+        if ((Date.parse(startDate) >= Date.parse(endDate)) || (Date.parse(startDate) == Date.parse(
                 endDate))) {
             alert("End date should be greater than Start date");
             document.getElementById("end_date_of_enrollment").value = "";
+        }
+    });
+    $("#end_date").change(function() {
+        console.log('end date');
+        var startDate = document.getElementById("start_date").value;
+        var endDate = document.getElementById("end_date").value;
+
+        if ((Date.parse(startDate) >= Date.parse(endDate)) || (Date.parse(startDate) == Date.parse(
+                endDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("end_date").value = "";
         }
     });
     // for report validating start and end date 

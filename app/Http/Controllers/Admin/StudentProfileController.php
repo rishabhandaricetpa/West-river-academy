@@ -438,15 +438,9 @@ class StudentProfileController extends Controller
             $enroll->enrollment_payment_id = $enroll_payment->id;
             $enroll->save();
             DB::commit();
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
-            }
         } catch (\Exception $e) {
+            report($e);
             DB::rollBack();
-            dd($e);
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'error', 'message' => 'Failed to update Record']);
-            }
         }
     }
 
