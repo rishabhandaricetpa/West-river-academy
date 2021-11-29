@@ -10,11 +10,11 @@
 <body>
 
     <div style="text-align:center;width:300px;margin:0 auto;">
-        <img src="{{ asset('images/letterhead.png') }}" style="width:100%;object-fit:contain;" alt="logo-img">
+        <img src="../public/images/letterhead.png" style="width:100%;object-fit:contain;" alt="logo-img">
     </div>
 
     <div style="max-width: 1000px; margin: 0 auto;">
-        <h1 style="font-size:23px;text-align:center;margin:70px 0 60px;">Confirmation of Enrollment</h1>
+        <h1 style="font-size:23px;text-align:center;margin:70px 0 30px;">Confirmation of Enrollment</h1>
         <p style="font-size: 17px;">Date:
             {{ formatDate($enrollment->start_date_of_enrollment) }}</p>
         <p style="margin-top:25px;font-size: 17px;">This confirms the enrollment of the following student in West River
@@ -49,16 +49,16 @@
                 {{ formatDate($enrollment->start_date_of_enrollment) }} -
                 {{ formatDate($enrollment->end_date_of_enrollment) }}</p>
         </div>
-        <table style="padding-top:30px;width:100%;">
+        <table style="padding-top:20px;width:100%;">
             <tbody>
                 <tr>
                     @if ($type == 'signed')
-                        <td>
+                        <td style="width:50%;padding-top:100px;">
                             <img style="width:200px;" src="../public/images/signature.png" alt="signature">
-                            <p>Stacey Nishikawa</p>
-                            <p>Administrative Director</p>
+                            <p style="margin-bottom:0;">Stacey Nishikawa</p>
+                            <p  style="margin-top:6px;font-style:italic">Administrative Director</p>
                         </td>
-                        <td style="text-align: right"><img src="../public/images/Stamp.png"
+                        <td style="width:50%"><img src="../public/images/Stamp.png"
                                 style="width:150px;height:150px;object-fit:contain;" alt="Stamp"></td>
                     @endif
                 </tr>

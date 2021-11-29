@@ -19,7 +19,7 @@
         Add any of the following fields by checking the box(es) below.
          Be sure you have provided this information if you wish to select it.
         </h3>
-        <div class="form-group d-sm-flex mb-2">
+        <div class="form-group mb-2">
              <label class="pl-0 container">
              <input 
              type="checkbox" 
@@ -41,7 +41,7 @@
         <span :style="[this.form.mother_name == ''|| this.form.mother_name == null ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">   Mother's Maiden Name </span>
             <span class="IsMotherName"></span>
           </label>
-        </div>
+     
         <label class="pl-0 container">
              <input 
              type="checkbox" 
@@ -66,7 +66,7 @@
        
         <input type="hidden" name="enrolment_id" v-model="form.enrolment_id" />
       </div>
-      
+         </div>
         <p v-if="errors.length" >
        <ul>
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
