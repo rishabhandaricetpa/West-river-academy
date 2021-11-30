@@ -28,7 +28,7 @@
         <tbody>
             <tr style="width:100%;">
                 <td valign="middle"
-                    style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;">
+                    style="text-transform:uppercase;font-weight: 300;font-size:25px;width:50%;height:100px;font-family:'Judson', serif;">
                     official transcript</td>
                 <td valign="middle" style="text-align:center;width:50%;height:100px;">
                     <img src="../public/images/letterhead.png" alt="logo"
