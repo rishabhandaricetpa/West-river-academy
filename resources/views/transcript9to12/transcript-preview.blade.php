@@ -84,60 +84,65 @@
                                 <td width="50%" style="text-align:center;">
                                     <img src="https://www.westriveracademy.com/cwp/img/wra_logo.svg" alt="logo"
                                         style="filter: brightness(0.5);max-width: 300px;margin: 0 auto;object-fit:contain;display:block;">
-                                    <p style="margin:0;font-size:13px;">Califorinia Colorado USA</p>
-                                    <p style="margin:0;font-size:13px;">949.492.5240 info@westriveracademy.com</p>
+                                    <p style="margin:0;font-size:13px;font-weight:700;">California  •  Colorado  •  USA</p>
+                                    <p style="margin:0;font-size:13px;font-weight:700;"> 949.456.8753  •  info@westriveracademy.com</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <table width="100%">
+                    <table width="100%" style="margin-bottom:17px;">
+                      <tr>
+                      <td style="width:35%;">
+                      <table width="100%">
                         <tbody>
                             <tr style="width:100%;">
                                 <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Name</td>
                                 <td
-                                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                                    style="font-weight:900;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
                                     {{ $student->fullname }}
                                 </td>
-                                <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth
-                                </td>
-                                <td
-                                    style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                                    {{ formatDate($student->d_o_b) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table width="100%">
-                        <tbody>
-                            <tr style="width:100%;">
+                                </tr>
+                                <tr>
                                 <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
                                 <td
-                                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                                    style="font-weight:900;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
                                     {{ $address->street_address }} {{ $address->city }}, {{ $address->zip_code }},
                                     {{ $address->country }}</td>
+                               </tr>
+                          
+                        </tbody>
+                    </table>
+                      </td>
+                      <td style="width:55%;">
+                      <table width="100%" style="max-width: 300px;">
+                        <tbody>
+                            <tr style="width:100%;">
+                            <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth
+                                </td>
+                                <td
+                                    style="font-weight:900;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
+                                    {{ formatDate($student->d_o_b) }}</td>
+                            </tr>
+                            <tr style="width:100%;">
                                 <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years
                                 </td>
                                 <td
-                                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
+                                    style="font-weight:900;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
                                     {{ $minYear }} - {{ $maxYear }}
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table width="100%" style="margin-bottom:20px;">
-                        <tbody>
                             <tr style="width:100%;">
-                                <td style="text-transform:uppercase;font-size:13px;width:10%;"></td>
-                                <td
-                                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:13px;width:50%;">
-                                </td>
                                 <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level
                                 </td>
                                 <td
-                                    style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
+                                    style="font-weight:900;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
                                     {{ getPromotedGrades($grades_data) }}
                                 </td>
                             </tr>
                         </tbody>
+                    </table>
+                      </td>
+                      </tr>
                     </table>
                     <table width="100%" style="border-collapse:collapse;">
                         <tbody>
@@ -163,10 +168,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table style="padding-top:30px;vertical-align:top;width:100%;" class="mt-5">
+                    <table style="margin-top:20px;vertical-align:top;width:100%;">
                         <tr>
                             <td style="width:33.3%;vertical-align:top;padding:0 5px;padding-left:0;">
-                                <table width="100%" style="border:1px solid #000;">
+                                <table width="100%" style="border-collapse:collapse" border="1">
                                     <tr>
                                         <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;"
                                             width="80%">Total
@@ -197,13 +202,13 @@
                                     Point, CA
                                     92629-2173</p>
                             </td>
-                            <td style="width:33.3%;vertical-align:top;padding:0 5px;">
+                            <td style="width:30.3%;vertical-align:top;padding:0 5px;">
 
                                 <table style="border:1px solid #000;" width="100%">
                                     <thead>
                                         <tr>
                                             <th colspan="4"
-                                                style="width:100%;text-align:center;font-weight:600;margin-bottom:0;">
+                                                style="width:100%;text-align:center;font-weight:600;margin-bottom:0;line-height:1.2">
                                                 Grading
                                                 System </th>
                                         </tr>
@@ -211,46 +216,46 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;">Grade
+                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">Grade
                                             </td>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;">Percent
+                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">Percent
                                             </td>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;">Points
+                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">Points
                                             </td>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;">AP
+                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">AP
                                                 Points</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="line-height:1;">
                                             <td style="font-size:13px;padding:2px;text-align:center">A</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">90-100</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">4.00</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">5.00</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="line-height:1;">
                                             <td style="font-size:13px;padding:2px;text-align:center">B</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">80-89</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">3.00</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">4.00</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="line-height:1;">
                                             <td style="font-size:13px;padding:2px;text-align:center">C</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">70-79</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">2.00</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">3.00</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="line-height:1;">
                                             <td style="font-size:13px;padding:2px;text-align:center">D</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">60-69</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">1.00</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">2.00</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="line-height:1;">
                                             <td style="font-size:13px;padding:2px;text-align:center">F</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">0-59</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
                                         </tr>
-                                        <tr>
+                                        <tr style="line-height:1;">
                                             <td style="font-size:13px;padding:2px;text-align:center">P</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">60-100</td>
                                             <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
@@ -260,7 +265,7 @@
 
                                 </table>
                             </td>
-                            <td style="vertical-align:top;width:33.3%;">
+                            <td style="vertical-align:top;width:36.3%;">
                                 <table>
                                     <tbody>
                                         <tr>
