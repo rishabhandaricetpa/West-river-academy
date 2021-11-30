@@ -205,6 +205,7 @@ export default {
       this.final_credits.push(this.calculateRemainingCredit(this.form.englishCourses[0]));
       this.finalValue();
     },
+    
     showCredit(e) {
       this.isCredit = false;
       this.form.remainingCredit =
@@ -270,14 +271,10 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
+      
+       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
-          "Grade is a required Field! Please select a Grade and then continue."
-        );
-      }
-      if (!this.validateSubject()) {
-        this.errors.push(
-          "Course name is a required Field! Please select a Grade and then continue."
+          "Course name is required Field! Please select a Course name"
         );
       }
   
@@ -292,9 +289,7 @@ export default {
         );
       }
       if (
-        this.vallidateGrades() &&
-        this.validateSubject() &&
-        this.validateCredit() && this.validateFinalCredit()
+      this.validateFinalCredit()
       ) {
         axios
           .post(route("editEnglishTranscriptCourse.store"), this.form)
@@ -310,19 +305,20 @@ export default {
           });
       }
     },
-    vallidateGrades() {
+   
+    validateSubject() {
       for (let i = 0; i < this.form.englishCourses.length; i++) {
-        const englishCourse = this.form.englishCourses[i];
-        if (!englishCourse.grade) {
+        const enrollmentSubject = this.form.englishCourses[i];
+        if (!enrollmentSubject.subject_name) {
           return false;
         }
       }
       return true;
     },
-    validateSubject() {
+       validateOtherSubject() {
       for (let i = 0; i < this.form.englishCourses.length; i++) {
-        const enrollmentSubject = this.form.englishCourses[i];
-        if (!enrollmentSubject.subject_name) {
+        const enrollmentOtherSubject = this.form.englishCourses[i];
+        if (!enrollmentOtherSubject.other_subject) {
           return false;
         }
       }

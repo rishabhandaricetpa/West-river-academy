@@ -79,10 +79,9 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <div class="position-relative mb-0  col-md-3 col-xl-2 px-0">
-        <date-picker required id="dob" name="dob" :default="form.dob" v-model="form.dob">
+      <div class="position-relative mb-0 col-md-4  px-0 date-field-style">
+        <date-picker endPastYear='1980' required id="dob" name="dob" :default="form.dob" v-model="form.dob">
         </date-picker>
-        <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
       </div>
       
     </div>
@@ -189,7 +188,7 @@
               <div class="form-group w-100 datepicker-full date-field-style">
                 <p>
               
-                <date-picker  v-model="period.selectedStartDate" :default="period.selectedStartDate" />
+                <date-picker endPastYear='2000'  v-model="period.selectedStartDate" :default="period.selectedStartDate" />
                 </p>
               </div>
             </div>
@@ -210,7 +209,7 @@
               <div class="form-group w-100 datepicker-full date-field-style">
                 <p>
                
-                <date-picker  v-model="period.selectedEndDate" :default="period.selectedEndDate" />
+                <date-picker endPastYear='2000' v-model="period.selectedEndDate" :default="period.selectedEndDate" />
                 </p>
               </div>
             </div>

@@ -20,6 +20,7 @@
               class="form-control text-uppercase"
               v-model="mathsCourse.subject_name"
             >
+             <option disabled value="">Please select one</option>
               <option v-for="Course in mathscourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
@@ -33,6 +34,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                 @click='setOtherValue(index)'
                 v-model="mathsCourse.other_subject"
                 aria-describedby=""
               />
@@ -117,13 +119,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 >
+            <h3  v-if='(final_credits[mathsCourse.component_index ] - mathsCourse.selectedCredit)>=0'>
                 You have
                {{ final_credits[mathsCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
               </h3>
+               <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
             
           </div>
@@ -136,7 +139,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add another Mathematics Course</a
       >
        <a
@@ -205,6 +208,9 @@ export default {
       this.form.mathsCourse = courses;
        this.reCalculateAll();
     },
+     setOtherValue(index){
+     this.form.mathsCourse[index].subject_name ="";
+    },
       mounted() {
       this.form.mathsCourse[0].selectedCredit = this.required_credit.credit;
       this.final_credits.push(this.calculateRemainingCredit(this.form.mathsCourse[0]));
@@ -226,13 +232,16 @@ export default {
       this.form.mathsCourse.forEach((mathsCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(mathsCourse)
       })
-      this.finalValue();
+      const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit);
-
+      return finalValue;
     },
     addCourse() {
       const mathsCourse = {
@@ -258,14 +267,10 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
+   
+         if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
-          "Grade is a required Field! Please select a Grade and then continue."
-        );
-      }
-      if (!this.validateSubject()) {
-        this.errors.push(
-          "Course name is a required Field! Please select a Grade and then continue."
+          "Course name is required Field! Please select a Course name"
         );
       }
       if (!this.validateCredit()) {
@@ -278,11 +283,9 @@ export default {
           "Credits cann't be negative"
         );
       }
-     
+   
       if (
-        this.vallidateGrades() &&
-        this.validateSubject() &&
-        this.validateCredit() && this.validateFinalCredit()
+        this.validateFinalCredit()
       ) {
         axios
           .post(route("editMathematicsTranscriptCourse.store"), this.form)
@@ -298,18 +301,19 @@ export default {
           });
       }
     },
-    vallidateGrades() {
-      for (let i = 0; i < this.form.mathsCourse.length; i++) {
-        const mathsCourse = this.form.mathsCourse[i];
-        if (!mathsCourse.grade) {
-          return false;
-        }
-      }
-      return true;
-    },
+ 
     validateFinalCredit(){
        if(this.form.final_remaining_credit <0){
        return false;
+      }
+      return true;
+    },
+      validateOtherSubject() {
+      for (let i = 0; i < this.form.mathsCourse.length; i++) {
+        const enrollmentOtherSubject = this.form.mathsCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
+        }
       }
       return true;
     },

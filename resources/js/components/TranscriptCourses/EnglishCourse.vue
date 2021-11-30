@@ -223,7 +223,7 @@ export default {
       this.form.englishCourses.forEach((englishCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(englishCourse)
       })
-        const getFinalCredit= this.finalValue();
+     const getFinalCredit= this.finalValue();
      if(getFinalCredit <0){
         alert('Credits are overs , either select smaller value or delete the course');
      }

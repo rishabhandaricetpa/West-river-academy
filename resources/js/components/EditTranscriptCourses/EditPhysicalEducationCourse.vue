@@ -21,6 +21,7 @@
               class="form-control text-uppercase"
               v-model="physicalCourse.subject_name"
             >
+             <option disabled value="">Please select one</option>
               <option v-for="Course in physicalcourses" :key="Course">
                 {{ Course.subject_name }}</option
               >
@@ -34,6 +35,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                 @click='setOtherValue(index)'
                 v-model="physicalCourse.other_subject"
                 aria-describedby=""
               />
@@ -118,13 +120,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 >
+              <h3  v-if='(final_credits[physicalCourse.component_index ] - physicalCourse.selectedCredit)>=0'>
                 You have
              {{ final_credits[physicalCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
               </h3>
+             <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
             
           </div>
@@ -137,7 +140,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a class="btn btn-primary" @click="addCourse" v-if='this.form.final_remaining_credit >0'
         >Add another Physical Education Course</a
       >
         <a
@@ -211,6 +214,9 @@ export default {
       this.final_credits.push(this.calculateRemainingCredit(this.form.physicalCourse[0]));
       this.finalValue();
     },
+    setOtherValue(index){
+     this.form.physicalCourse[index].subject_name ="";
+    },
     
       calculateRemainingCredit(physicalCourse) {
       this.finalValue();
@@ -227,13 +233,16 @@ export default {
       this.form.physicalCourse.forEach((physicalCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(physicalCourse)
       })
-      this.finalValue();
+      const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit);
-
+      return finalValue;
     },
     addCourse() {
       const physicalCourse={
@@ -259,14 +268,10 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
+   
+    if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
-          "Grade is a required Field! Please select a Grade and then continue."
-        );
-      }
-      if (!this.validateSubject()) {
-        this.errors.push(
-          "Course name is a required Field! Please select a Grade and then continue."
+          "Course name is required Field! Please select a Course name"
         );
       }
       if (!this.validateCredit()) {
@@ -280,9 +285,7 @@ export default {
         );
       }
       if (
-        this.vallidateGrades() &&
-        this.validateSubject() &&
-        this.validateCredit()  && this.validateFinalCredit()
+       this.validateFinalCredit()
       ) {
         axios
           .post(route("editPhysicalEducationTranscriptCourse.store"), this.form)
@@ -298,15 +301,7 @@ export default {
           });
       }
     },
-    vallidateGrades() {
-      for (let i = 0; i < this.form.physicalCourse.length; i++) {
-        const physicalCourse = this.form.physicalCourse[i];
-        if (!physicalCourse.grade) {
-          return false;
-        }
-      }
-      return true;
-    },
+  
     validateSubject() {
       for (let i = 0; i < this.form.physicalCourse.length; i++) {
         const enrollmentSubject = this.form.physicalCourse[i];
@@ -322,6 +317,15 @@ export default {
       }
       return true;
       
+    },
+    validateOtherSubject() {
+      for (let i = 0; i < this.form.physicalCourse.length; i++) {
+        const enrollmentOtherSubject = this.form.physicalCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
+          return false;
+        }
+      }
+      return true;
     },
     validateCredit() {
       for (let i = 0; i < this.form.physicalCourse.length; i++) {

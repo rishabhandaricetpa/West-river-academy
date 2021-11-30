@@ -287,6 +287,7 @@ class Transcript9to12 extends Controller
             if ($minYear == $maxYear) {
                 $maxYear = $maxYear + 1;
             }
+
             return view('transcript9to12.transcript-preview', compact('student', 'grades_data', 'transcript_id', 'address', 'minYear', 'maxYear', 'courses', 'totalSelectedGrades'));
         } else {
 
