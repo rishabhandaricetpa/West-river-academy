@@ -171,7 +171,7 @@
                     <table style="margin-top:20px;vertical-align:top;width:100%;">
                         <tr>
                             <td style="width:33.3%;vertical-align:top;padding:0 5px;padding-left:0;">
-                                <table width="100%" style="border:1px solid #000;">
+                                <table width="100%" style="border-collapse:collapse" border="1">
                                     <tr>
                                         <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;"
                                             width="80%">Total
