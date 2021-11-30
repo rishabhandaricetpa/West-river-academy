@@ -227,11 +227,11 @@
                    <table style="width:100%;">
                        <tbody>
                            <tr>
-                               <td width="60%" style="text-align:center;width:60%;"><span
+                               <td width="80%" style="text-align:center;width:60%;"><span
                                        style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
                                        signature</span>
                                </td>
-                               <td style="width:40%"><span
+                               <td style="width:20%"><span
                                        style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
                                </td>
                            </tr>
