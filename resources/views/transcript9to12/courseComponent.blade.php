@@ -66,7 +66,7 @@
                             @endif
                         </tr>
 
-                    @elseif($course->type =='college')
+                    @elseif($course->type ==='college')
                         <tr style="line-height:1;">
                             <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">
                                 {{ $course->groupBy }}</td>

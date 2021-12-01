@@ -93,7 +93,7 @@ class ImportEnrollmentPeriod extends Command
                 }
             }
         }
-
+// todo :: add confirmation document i.e insert data in confirmation_letter table
         $reader->close();
         $this->line('import successfully');
     }
