@@ -36,6 +36,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                @click='setOtherValue(index)'
                 v-model="foreignCourse.other_subject"
                 aria-describedby=""
               />
@@ -123,13 +124,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 class="mt-3">
+            <h3 class="mt-3" v-if='(final_credits[foreignCourse.component_index ] - foreignCourse.selectedCredit)>=0'>
                 You have
               {{ final_credits[foreignCourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
               </h3>
+          <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
           </div>
         </div>
@@ -141,7 +143,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add Another Foreign Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
@@ -215,13 +217,20 @@ export default {
       this.form.foreignCourse.forEach((foreignCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(foreignCourse)
       })
-      this.finalValue();
+         const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
+
+    },
+      setOtherValue(index){
+     this.form.foreignCourse[index].subject_name ="";
     },
       finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit);
-      
+      return finalValue;
     },
     addCourse() {
    const  foreignCourse= {
@@ -259,7 +268,7 @@ export default {
       }
        if(!this.validateFinalCredit()){
          this.errors.push(
-          "Credits cann't be negative"
+         "No Credits remaining"
         );
       }
     if(this.validateFinalCredit()){

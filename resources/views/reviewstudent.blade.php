@@ -10,7 +10,11 @@
                     <div class="d-flex align-items-center pt-4">
                         <h3> Student {{ ++$key }} Profile </h3>
                         <a href="{{ route('edit.student', $student->id) }}" class="btn btn-primary ml-auto">Edit Student
-                            {{ $key }} </a>
+                            {{ $key }} </a><br />
+
+                        <a href="{{ route('delete.student', $student->id) }}" class="btn btn-primary ml-2"
+                            onclick="return confirm('Are you sure you want to delete this student?');">Delete Student
+                            {{ $key }}</a>
                     </div>
                     <div class="seperator">
                         <div class="form-group d-sm-flex mb-2">

@@ -20,7 +20,8 @@
               class="form-control text-uppercase"
               v-model="scienceCourse.subject_name"
             >
-              <option v-for="Course in sciencecourse" :key="Course">
+            <option disabled value="">Please select one</option>
+              <option v-for="Course in sciencecourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
             </select>
@@ -33,6 +34,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                 @click='setOtherValue(index)'
                 v-model="scienceCourse.other_subject"
                 aria-describedby=""
               />
@@ -117,13 +119,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3>
+              <h3  v-if='(final_credits[scienceCourse.component_index ] - scienceCourse.selectedCredit)>=0'>
                 You have
                      {{ final_credits[scienceCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
               </h3>
+             <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
             
           </div>
@@ -136,7 +139,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add another History/Social Science Course</a
       >
          <a
@@ -209,7 +212,9 @@ export default {
       this.final_credits.push(this.calculateRemainingCredit(this.form.scienceCourse[0]));
       this.finalValue();
     },
-    
+       setOtherValue(index){
+     this.form.scienceCourse[index].subject_name ="";
+    },
       calculateRemainingCredit(scienceCourse) {
       this.finalValue();
       return this.final_credits[scienceCourse.component_index] - scienceCourse.selectedCredit;
@@ -225,13 +230,17 @@ export default {
       this.form.scienceCourse.forEach((scienceCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(scienceCourse)
       })
+      const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
       this.finalValue();
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit);
-
+      return finalValue;
     },
   
     addCourse() {
@@ -258,14 +267,10 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
+    
+       if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
-          "Grade is a required Field! Please select a Grade and then continue."
-        );
-      }
-      if (!this.validateSubject()) {
-        this.errors.push(
-          "Course name is a required Field! Please select a Grade and then continue."
+          "Course name is required Field! Please select a Course name"
         );
       }
       if (!this.validateCredit()) {
@@ -279,9 +284,7 @@ export default {
         );
       }
       if (
-        this.vallidateGrades() &&
-        this.validateSubject() &&
-        this.validateCredit()  && this.validateFinalCredit()
+        this.validateFinalCredit()
       ) {
         axios
           .post(route("editSocialScienceTranscriptCourse.store"), this.form)
@@ -297,19 +300,20 @@ export default {
           });
       }
     },
-    vallidateGrades() {
+   
+    validateSubject() {
       for (let i = 0; i < this.form.scienceCourse.length; i++) {
-        const scienceCourse = this.form.scienceCourse[i];
-        if (!scienceCourse.grade) {
+        const enrollmentSubject = this.form.scienceCourse[i];
+        if (!enrollmentSubject.subject_name) {
           return false;
         }
       }
       return true;
     },
-    validateSubject() {
+      validateOtherSubject() {
       for (let i = 0; i < this.form.scienceCourse.length; i++) {
-        const enrollmentSubject = this.form.scienceCourse[i];
-        if (!enrollmentSubject.subject_name) {
+        const enrollmentOtherSubject = this.form.scienceCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
           return false;
         }
       }

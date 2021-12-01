@@ -7,7 +7,7 @@
 
         <div class="form-wrap border bg-light py-2r px-25 text-center dashboard-info">
             <p>Thank you!</p>
-            <p>Your transaction was successful. Please start creating the transcript from dashboard.</p>
+            <p>Your transaction was successful. Please create/review the transcript from dashboard.</p>
             <a href="{{ url('dashboard') }}" class="btn btn-primary mt-4 font-weight-bold">Go to Dashboard</a>
 
         </div>

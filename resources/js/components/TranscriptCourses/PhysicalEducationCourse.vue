@@ -35,6 +35,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                  @click='setOtherValue(index)'
                 v-model="physicalEducationCourse.other_subject"
                 aria-describedby=""
               />
@@ -122,13 +123,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 class="mt-3">
+              <h3 class="mt-3" v-if='(final_credits[physicalEducationCourse.component_index ] - physicalEducationCourse.selectedCredit)>=0'>
                 You have
                {{ final_credits[physicalEducationCourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
               </h3>
+                <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
           </div>
         </div>
@@ -140,7 +142,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add Another Physical Education Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
@@ -205,6 +207,9 @@ export default {
        this.finalValue();
       return this.final_credits[physicalEducationCourse.component_index] - physicalEducationCourse.selectedCredit;     
     },
+     setOtherValue(index){
+     this.form.physicalEducationCourse[index].subject_name ="";
+    },
        reIndex(){
       this.form.physicalEducationCourse.forEach((physicalEducationCourse, index) => {
         physicalEducationCourse.component_index = index;
@@ -214,12 +219,16 @@ export default {
       this.form.physicalEducationCourse.forEach((physicalEducationCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(physicalEducationCourse)
       })
-      this.finalValue();
+       const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     }, 
      finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit); 
+     return finalValue;
     },
     addCourse() {
     const  physicalEducationCourse= {
@@ -255,7 +264,7 @@ export default {
       }
        if(!this.validateFinalCredit()){
          this.errors.push(
-          "Credits cann't be negative"
+           "No Credits remaining"
         );
       }
       if(this.validateFinalCredit()){

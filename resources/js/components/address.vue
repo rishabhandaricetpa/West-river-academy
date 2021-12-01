@@ -266,12 +266,8 @@
           type="button"
           data-toggle="modal"
           data-target=".bd-example-modal-lg"
-          ><strong>here</strong></a
-        >
-        for full Refund Policy
-        <a href="https://staging.westriveracademy.com/refund-policy"
-          >(https://staging.westriveracademy.com/refund-policy)</a
-        >
+          ><strong>here</strong></a>
+        for full Refund Policy.
       </p>
     </div>
 

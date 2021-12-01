@@ -39,6 +39,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                      @click='setOtherValue(index)'
                 v-model="anotherCourse.other_subject"
                 aria-describedby=""
               />
@@ -126,13 +127,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3  class="mt-3">
+             <h3 class="mt-3" v-if='(final_credits[anotherCourse.component_index ] - anotherCourse.selectedCredit)>=0'>
                 You have
               {{ final_credits[anotherCourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
               </h3>
+               <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
           </div>
         </div>
@@ -144,7 +146,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a class="btn btn-primary" v-if='this.form.final_remaining_credit >0' @click="addCourse"
         >Add Another Elective Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
@@ -217,13 +219,21 @@ export default {
       this.form.anotherCourse.forEach((anotherCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(anotherCourse)
       })
-      this.finalValue();
+      
+     const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     }, 
+     setOtherValue(index){
+     this.form.anotherCourse[index].subject_name ="";
+    },
+    
       finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit); 
-    },
+      return finalValue;    },
     addCourse() {
      const anotherCourse= {
         course_id: this.courses_id,
@@ -240,6 +250,7 @@ export default {
       this.form.anotherCourse.push(anotherCourse);
       this.finalValue();
     },
+    
     removeCourse(index) {
       this.form.anotherCourse.splice(index, 1);
        this.final_credits.splice(this.final_credits.length - 1, 1);

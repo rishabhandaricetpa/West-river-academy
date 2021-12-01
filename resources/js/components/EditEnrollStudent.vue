@@ -79,10 +79,9 @@
       </div>
     <div class="form-group d-sm-flex mb-2 position-relative">
       <label for="">Date of Birth<sup>*</sup></label>
-      <div class="position-relative mb-0  col-md-3 col-xl-2 px-0">
-        <flat-pickr required id="dob" name="dob" :config="config" v-model="form.dob">
-        </flat-pickr>
-        <i class="fas fa-calendar-alt" @click="clickDatepicker" aria-hidden="true"></i>
+      <div class="position-relative mb-0 col-md-4  px-0 date-field-style">
+        <date-picker endPastYear='1980' required id="dob" name="dob" :default="form.dob" v-model="form.dob">
+        </date-picker>
       </div>
       
     </div>
@@ -185,28 +184,20 @@
         <div class="form-group d-sm-flex mb-2 mt-2r">
           <label for="">Select your START date of enrollment</label>
           <div class="row">
-            <div class="col-md-4 col-lg-2">
-              <div class="form-group w-100 datepicker-full">
+            <div class="col-md-4">
+              <div class="form-group w-100 datepicker-full date-field-style">
                 <p>
-                <flat-pickr
-                  id="startdate"
-                  name="startdate"
-                  v-model="period.selectedStartDate"
-                  :config="period.configstartdate"
-                  :value="period.selectedStartDate"
-                  required
-                  @input="updateEndDate(index)"
-                >
-                </flat-pickr>
+              
+                <date-picker endPastYear='2000'  v-model="period.selectedStartDate" :default="period.selectedStartDate" />
                 </p>
               </div>
             </div>
-            <div class="info-detail col-md-8 col-lg-6 lato-italic">
+            <div class="info-detail col-md-8 col-lg-5 lato-italic">
               <p>
               You can enter a different date AFTER the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will START on the date you see in the box. 
               </p>
             </div>
-             <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
+             <div class="col-lg-3 links-list pl-md-0 mt-3 mt-sm-0">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
           </div>
@@ -214,28 +205,20 @@
         <div class="form-group d-sm-flex mb-2 mt-2r">
           <label for="">Select your END date of enrollment</label>
           <div class="row">
-            <div class="col-md-4 col-lg-2">
-              <div class="form-group w-100 datepicker-full">
+            <div class="col-md-4">
+              <div class="form-group w-100 datepicker-full date-field-style">
                 <p>
-                <flat-pickr
-                  id="enddate"
-                  name="enddate"
-                  v-model="period.selectedEndDate"
-                  required
-                  :config="period.configenddate"
-                  :value="period.selectedEndDate"
-                  :open-date="period.selectedStartDate" 
-                >
-                </flat-pickr>
+               
+                <date-picker endPastYear='2000' v-model="period.selectedEndDate" :default="period.selectedEndDate" />
                 </p>
               </div>
             </div>
-            <div class="info-detail col-md-8 col-lg-6 lato-italic">
+            <div class="info-detail col-md-8 col-lg-5 lato-italic">
               <p>
                You can enter a different date BEFORE the one entered. The date you enter will appear on your confirmation of enrollment letter, but your official enrollment will END on the date you see in the box. 
               </p>
             </div>
-             <div class="col-lg-4 links-list pl-0 mt-3 mt-sm-0">
+             <div class="col-lg-3 links-list pl-md-0 mt-3 mt-sm-0">
            <a href="#chooseDates" data-toggle="modal">help me choose a date</a>
           </div>
           </div>
@@ -338,13 +321,16 @@
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import axios from "axios";
+import DatePicker from './DatePicker.vue';
 export default {
   name: "EditEnrollStudent",
   components: {
     flatPickr,
+    DatePicker
   },
   data() {
-    return {
+ 
+       return {
       grades: [
         [
           "Ungraded",
@@ -386,8 +372,8 @@ export default {
     this.periods.forEach((item) => {
       this.form.periods.push({
         id: item.id,
-        selectedStartDate: new Date(item.start_date_of_enrollment),
-        selectedEndDate: new Date(item.end_date_of_enrollment),
+        selectedStartDate: item.start_date_of_enrollment,
+        selectedEndDate: item.end_date_of_enrollment,
         grade: item.grade_level,
         status: item.status,
         configstartdate: {
@@ -395,38 +381,21 @@ export default {
           altInput: true,
           allowInput: true,
         },
-        configenddate: {
-          altFormat: "F j, Y",
-          altInputClass: "form-control",
-          altInput: true,
-          allowInput: true,
-          minDate:this.calcMinDate(this.startdate),
-          disable: [
-            {
-              from: this.calcEndDate(item.start_date_of_enrollment),
-              to: this.calcToData(item.start_date_of_enrollment),
-            },
-          ],
-        },
+       
       });
     });
   },
   methods: {
     EditStudent() {
       this.errors = [];
-      // if (!this.validEmail(this.form.email)) {
-      //   return this.errors.push("Valid email required.");
-      // }
+    
       if (!this.vallidateGrades()) {
         this.errors.push(
           "Grade is a required Field! Please select a Grade and then continue."
         );
       }
-      if (!this.vallidateEndDate()) {
-        this.errors.push(
-          "End date of Enrollment is a required! Please select a End Date and then continue."
-        );
-      } else {
+    
+     else {
         axios
           .post(route("update.student", this.students), this.form)
           .then((response) => {
@@ -480,9 +449,9 @@ export default {
     addNewEnrollPeriod() {
       this.form.periods.push({
         id: null,
-        selectedStartDate: new Date(this.semesters.start_date),
+        selectedStartDate: this.semesters.start_date,
         status: "pending",
-        selectedEndDate: new Date(this.semesters.end_date),
+        selectedEndDate: this.semesters.end_date,
         grade: "",
         configstartdate: {
           altFormat: "F j, Y",
@@ -536,16 +505,16 @@ export default {
       }
       return true;
     },
-    vallidateEndDate() {
-      for (let i = 0; i < this.form.periods.length; i++) {
-        const periods = this.form.periods[i];
-        if (!periods.selectedEndDate) {
-          return false;
-          break;
-        }
-      }
-      return true;
-    },
+    // vallidateEndDate() {
+    //   for (let i = 0; i < this.form.periods.length; i++) {
+    //     const periods = this.form.periods[i];
+    //     if (!periods.selectedEndDate) {
+    //       return false;
+    //       break;
+    //     }
+    //   }
+    //   return true;
+    // },
     clickDatepicker() {
       document.getElementById("dob").click();
       document.getElementById("dob").focus();
@@ -557,7 +526,7 @@ export default {
       required: true,
     },
   date_of_birth:{
-    type:Object,
+    type:String,
     required:true
   },
     periods: {

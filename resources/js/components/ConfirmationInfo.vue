@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td>Date of Birth</td>
-          <td>{{ this.student.birthdate | moment("MMMM D, YYYY") }}</td>
+          <td>{{ student.birthdate | moment("MMMM D, YYYY") }}</td>
         </tr>
       </tbody>
     </table>
@@ -19,19 +19,29 @@
         Add any of the following fields by checking the box(es) below.
          Be sure you have provided this information if you wish to select it.
         </h3>
-        <div class="form-group d-sm-flex mb-2">
+        <div class="form-group mb-2">
+             <label class="pl-0 container">
+             <input 
+             type="checkbox" 
+            name="isDobCity" 
+            class='line-through'
+            v-model="form.isgradeId"
+             v-on:change='checkisDobCity()'
+            > 
+         <span :style="[ ( gradeid == null || gradeid == '') ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">  Grade Level</span>
+
+        </label>
           <label class=" pl-0 container">
             <input
               type="checkbox"
               name="IsMotherName"
               v-model="form.IsMotherName"
-             
               v-on:click='checkMotherName()'
             />
         <span :style="[this.form.mother_name == ''|| this.form.mother_name == null ? {textDecoration: 'line-through'} : {textDecoration: 'none'}]">   Mother's Maiden Name </span>
             <span class="IsMotherName"></span>
           </label>
-        </div>
+     
         <label class="pl-0 container">
              <input 
              type="checkbox" 
@@ -56,6 +66,7 @@
        
         <input type="hidden" name="enrolment_id" v-model="form.enrolment_id" />
       </div>
+         </div>
         <p v-if="errors.length" >
        <ul>
        <li style="color:red" v-for="error in errors" :key="error.id">  {{error}} </li>
@@ -89,11 +100,12 @@ export default {
         isDobCity: '',
         isStudentId: '',  
         IsMotherName: '',
+        isgradeId:'',
         enrolment_id: this.enrollments.id,
         mother_name: this.student.mothers_name,
         dobCity :this.student.birth_city,
         nationalId:this.student.student_Id,
-     
+        
       },
      
       

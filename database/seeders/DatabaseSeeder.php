@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         //     DB::table($table)->truncate();
         // }
         // Schema::enableForeignKeyConstraints();
-
+        $this->call(EmailSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(FeesInfoSeeder::class);
         $this->call(BankTransferTableSeeder::class);
@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SubjectTableSeeder::class);
         $this->call(AdminLoginSeeder::class);
         $this->call(CreditTableSeeder::class);
+        $this->call(UserSeeder::class);
         Model::reguard();
     }
 }

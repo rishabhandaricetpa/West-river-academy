@@ -613,7 +613,6 @@ class ParentController extends Controller
 
                     break;
                 case 'order-detail_Notarization':
-
                     $clearpendingPayments = NotarizationPayment::whereNull('transcation_id')
                         ->where('pay_for', 'notarization')->where('status', 'pending')
                         ->where('parent_profile_id', $request->get('parent_profile_id'))->first();
@@ -656,6 +655,7 @@ class ParentController extends Controller
                     $notarization_payment->pay_for = "notarization";
                     if ($request->get('noatrization_status') == 'paid') {
                         $notarization_payment->transcation_id = $request->get('notar_transaction_id')  ? $request->get('notar_transaction_id') : substr(uniqid(), 0, 12);
+                        $notarization_payment->payment_mode = $request->get('notar_payment_mode');
                     }
 
                     $notarization_payment->save();

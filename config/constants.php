@@ -29,8 +29,11 @@ return [
   //legends in enrollment-confirmation
 
   'enrollment_variables' => ['$student_name', '$enrollment_start_date', '$enrollment_end_date'],
-  'moneygram' => ['$user_name', '${{', '$amount'],
-  'graduation' => ['${{', '$total_fees'],
-  'moneyorder' => ['$user_name'],
-  'banktransfer' => ['$user_name', '${{', '$amount']
+  'moneygram_variables' => ['$user_name', '${{', '$amount'],
+  'graduation_variables' => ['${{', '$total_fees'],
+  'moneyorder_variables' => ['$user_name'],
+  'banktransfer_variables' => ['$user_name', '${{', '$amount'],
+
+    /** When other school is selected while trancript creation */
+  'ENROLLMENT_YEAR_RANGE' => range(2013, 2028)
 ];

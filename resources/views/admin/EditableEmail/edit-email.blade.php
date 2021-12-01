@@ -14,25 +14,9 @@
 
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">Email Body:</label>
-                    @if ($type == 'enrollment')
-                        <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/enrollment-confirmation.blade.php'); ?></textarea>
-                    @elseif($type == 'moneygram')
-                        <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/moneygram-email.blade.php'); ?></textarea>
-                    @elseif($type == 'graduation')
-                        <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/graduation-approved.blade.php'); ?></textarea>
-                    @elseif($type == 'moneyorder')
-                        <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/moneyordermail.blade.php'); ?></textarea>
-                    @elseif($type == 'banktransfer')
-                        <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/bankinfo.blade.php'); ?></textarea>
-                    @elseif($type == 'transcript_approved')
-                        <textarea class="form-control" id='message-text' name='email_body'
-                            id="message-text"> <?php include base_path('/resources/views/mail/transcriptMail.blade.php'); ?></textarea>
-                    @endif
+
+                    <textarea class="form-control" id='message-text' name='email_body'
+                        id="message-text"> {{ $email_data }}</textarea>
                 </div>
 
 

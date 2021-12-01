@@ -2,7 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\EmailEdits;
 use App\Models\User;
+use App\Services\WireViewEngine;
+use DbView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -34,7 +37,10 @@ class TranscriptEmail extends Mailable
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         $id = $this->user->id;
         $user = User::find($id);
-
-        return $this->markdown('mail.transcriptMail', compact('date'))->subject('Transcript K-8');
+        $template = EmailEdits::where('type', 'transcript_approved')->first();
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
+            'date' => $date,
+        ])->render();
+        return $this->markdown('mail.email-notification', compact('date'))->subject('Transcript Received');
     }
 }

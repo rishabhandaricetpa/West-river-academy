@@ -60,49 +60,55 @@
                </tr>
            </tbody>
        </table>
+       <table width="100%" style="margin-bottom:17px;">
+       <td width="40%">
        <table>
            <tbody>
                <tr style="width:100%;">
                    <td style="text-transform:uppercase;width:10%;font-size:11px;line-height:1;">Student</td>
                    <td
-                       style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
+                       style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;padding-left:30px;">
                        {{ $student->fullname }}
                    </td>
-                   <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
+                   </tr>
+                   <tr>
+                   <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
                    <td
-                       style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
-                       {{ formatDate($student->d_o_b) }}</td>
+                       style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;padding-left:30px;">
+                       {{ $address->street_address }} {{ $address->city }}, {{ $address->zip_code }},
+                       {{ $address->country }}</td>
+                    </tr>
                </tr>
            </tbody>
        </table>
+       </td>
+       <td width="60%" style="max-width:300px;">
        <table>
            <tbody>
                <tr style="width:100%;">
-                   <td style="text-transform:uppercase;font-size:11px;width:10%;line-height:1;">address</td>
+               <td style="text-transform:uppercase;width:20%;font-size:11px;line-height:1;">Date Of Birth</td>
                    <td
-                       style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:50%;line-height:1;">
-                       {{ $address->street_address }} {{ $address->city }}, {{ $address->zip_code }},
-                       {{ $address->country }}</td>
+                       style="font-weight:700;text-transform:uppercase;text-align:left;width:20%;font-size:11px;line-height:1;">
+                       {{ formatDate($student->d_o_b) }}</td>
+                  
+                  </tr>
+                  <tr>
                    <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">academic years</td>
                    <td
                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
                        {{ $minYear }} - {{ $maxYear }}
                    </td>
-               </tr>
-           </tbody>
-       </table>
-       <table style="margin-bottom:20px;">
-           <tbody>
-               <tr style="width:100%;">
-                   <td style="text-transform:uppercase;font-size:13px;width:10%;"></td>
-                   <td style="font-weight:700;text-transform:uppercase;text-align:left;font-size:13px;width:50%;"></td>
+                   </tr>
+                   <tr>
                    <td style="text-transform:uppercase;font-size:11px;width:20%;line-height:1;">grade level</td>
                    <td
                        style="font-weight:700;text-transform:uppercase;text-align:left;font-size:11px;width:20%;line-height:1;">
                        {{ getPromotedGrades($grades_data) }}
                    </td>
-               </tr>
+                   </tr>
            </tbody>
+       </table>
+       </td>
        </table>
        <table width="100%" style="border-collapse:collapse;">
            <tbody>
@@ -126,10 +132,10 @@
                </tr>
            </tbody>
        </table>
-       <table style="padding-top:30px;vertical-align:top; width:100%;">
+       <table style="padding-top:20px;vertical-align:top; width:100%;">
            <tr>
-               <td style="vertical-align:top;width:30%;">
-                   <table width="100%" style="border:1px solid #000;">
+               <td style="vertical-align:top;width:35%;">
+                   <table width="100%" style="border-collapse:collapse;" border="1">
                        <tr>
                            <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Total
                                credits earned
@@ -146,75 +152,86 @@
                            <th style="padding:3px 5px;font-size:13px;line-height:1;text-align:left;" width="80%">Date Of
                                Graduation
                            </th>
-                           <td style="padding:3px 5px;font-size:13px;line-height:1;"></td>
+                           <td style="padding:3px 5px;font-size:13px;line-height:1;">
+                               {{ formatDate($dateofGraduation->date_of_graduation) }}
+                           </td>
                        </tr>
                    </table>
                    <p style="font-size:13px;">West River Academy is accredited by the National Association for the Legal
                        Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS
                        Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>
                </td>
-               <td style="width:36.6%;vertical-align:top;padding:0 4px 4px 4px; border:1px solid #000;">
-                   <p style="text-align:center;font-weight:600;margin-bottom:0;"><span
-                           style="border-bottom:1px solid #000;margin-bottom:0;margin-top:-20px;font-size:13px;">Grading
-                           System</span>
-                   </p>
-                   <table>
-                       <thead>
-                           <tr>
-                               <th style="font-size:13px;text-decoration:underline;text-align:left;">Grade</th>
-                               <th style="font-size:13px;text-decoration:underline;text-align:left;">percent</th>
-                               <th style="font-size:13px;text-decoration:underline;text-align:left;">Points</th>
-                               <th style="font-size:13px;text-decoration:underline;text-align:left;white-space:nowrap;">
-                                   AP Points</th>
-                           </tr>
-                       </thead>
-                       <tr>
-                           <td style="font-size:13px;">A</td>
-                           <td style="font-size:13px;">90-100</td>
-                           <td style="font-size:13px;">4.00</td>
-                           <td style="font-size:13px;">5.00</td>
-                       </tr>
-                       <tr>
-                           <td style="font-size:13px;">B</td>
-                           <td style="font-size:13px;">80-89</td>
-                           <td style="font-size:13px;">3.00</td>
-                           <td style="font-size:13px;">4.00</td>
-                       </tr>
-                       <tr>
-                           <td style="font-size:13px;">C</td>
-                           <td style="font-size:13px;">70-79</td>
-                           <td style="font-size:13px;">2.00</td>
-                           <td style="font-size:13px;">3.00</td>
-                       </tr>
-                       <tr>
-                           <td style="font-size:13px;">D</td>
-                           <td style="font-size:13px;">60-69</td>
-                           <td style="font-size:13px;">1.00</td>
-                           <td style="font-size:13px;">2.00</td>
-                       </tr>
-                       <tr>
-                           <td style="font-size:13px;">F</td>
-                           <td style="font-size:13px;">0-59</td>
-                           <td style="font-size:13px;">0.00</td>
-                           <td style="font-size:13px;">0.00</td>
-                       </tr>
-                       <tr>
-                           <td style="font-size:13px;">P</td>
-                           <td style="font-size:13px;">60-100</td>
-                           <td style="font-size:13px;">0.00</td>
-                           <td style="font-size:13px;">0.00</td>
-                       </tr>
-                   </table>
+               <td style="width:35%;vertical-align:top;padding:0 4px 4px 4px;">
+               <table style="border:1px solid #000;" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="4"
+                                                style="width:100%;text-align:center;font-weight:600;margin-bottom:0;line-height:1.2">
+                                                Grading
+                                                System </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">Grade
+                                            </td>
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">Percent
+                                            </td>
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">Points
+                                            </td>
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">AP
+                                                Points</td>
+                                        </tr>
+                                        <tr style="line-height:1;">
+                                            <td style="font-size:13px;padding:2px;text-align:center">A</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">90-100</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">4.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">5.00</td>
+                                        </tr>
+                                        <tr style="line-height:1;">
+                                            <td style="font-size:13px;padding:2px;text-align:center">B</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">80-89</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">3.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">4.00</td>
+                                        </tr>
+                                        <tr style="line-height:1;">
+                                            <td style="font-size:13px;padding:2px;text-align:center">C</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">70-79</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">2.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">3.00</td>
+                                        </tr>
+                                        <tr style="line-height:1;">
+                                            <td style="font-size:13px;padding:2px;text-align:center">D</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">60-69</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">1.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">2.00</td>
+                                        </tr>
+                                        <tr style="line-height:1;">
+                                            <td style="font-size:13px;padding:2px;text-align:center">F</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0-59</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
+                                        </tr>
+                                        <tr style="line-height:1;">
+                                            <td style="font-size:13px;padding:2px;text-align:center">P</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">60-100</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
+                                            <td style="font-size:13px;padding:2px;text-align:center">0.00</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
                </td>
-               <td style="width:33.3%;vertical-align:top;">
+               <td style="width:30%;vertical-align:top;">
                    <table style="width:100%;">
                        <tbody>
                            <tr>
-                               <td width="60%" style="text-align:center;width:60%;"><span
+                               <td width="80%" style="text-align:center;width:60%;"><span
                                        style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;">official
                                        signature</span>
                                </td>
-                               <td style="width:40%"><span
+                               <td style="width:20%"><span
                                        style="border-top: 1px solid #000;display:block;text-transform:uppercase;padding-top:10px;font-size:11px;text-align:center;">date</span>
                                </td>
                            </tr>

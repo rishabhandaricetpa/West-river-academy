@@ -568,17 +568,26 @@
                 </div>
 
                 {{-- Payment History --}}
+                <p>Update All Payment to Paid of following category : </p>
                 <a class='btn btn-primary'
-                    href="{{ route('admin.paid.allcustompayment', ['custom_payment', $parent->id]) }}">Update
-                    All
-                    Custom Payment Paid</a>
+                    href="{{ route('admin.paid.allcustompayment', ['custom_payment', $parent->id]) }}">
+
+                    Custom Payments </a>
                 <a class='btn btn-primary'
-                    href="{{ route('admin.paid.allcustompayment', ['personal_consultation', $parent->id]) }}">Update
-                    All
-                    Personal Consultation Payment Paid</a>
+                    href="{{ route('admin.paid.allcustompayment', ['personal_consultation', $parent->id]) }}">
+
+                    Personal Consultation Payments </a>
                 <a class='btn btn-primary'
-                    href="{{ route('admin.paid.allcustompayment', ['custom_letter', $parent->id]) }}">Update
-                    All Custom Letter Paid</a>
+                    href="{{ route('admin.paid.allcustompayment', ['custom_letter', $parent->id]) }}">
+                    Custom Letters </a>
+                <a class='btn btn-primary' href="{{ route('admin.paid.allcustompayment', ['postage', $parent->id]) }}">
+                    Order Postage </a>
+                <a class='btn btn-primary'
+                    href="{{ route('admin.paid.allcustompayment', ['notarization', $parent->id]) }}">
+                    Notarization </a>
+                <a class='btn btn-primary'
+                    href="{{ route('admin.paid.allcustompayment', ['transcript', $parent->id]) }}">
+                    Transcripts </a>
                 <section class="history  pt-10r" id="history">
                     <div class="row">
                         <div class="col-12">
@@ -994,57 +1003,57 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="form-check" required>
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="Ungraded" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="Ungraded" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 Ungraded
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="Preschool Age 3">
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="Preschool Age 3">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 Preschool Age 3
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="Preschool Age 4">
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="Preschool Age 4">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 Preschool Age 4
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="Kindergarten" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="Kindergarten" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 Kindergarten
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="1" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="1" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 1
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="2" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="2" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 2
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="3" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="3" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 3
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="4" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="4" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 4
                                                             </label>
@@ -1053,57 +1062,57 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" id="grade_level[]"
-                                                                name="grade_level[]" value="5" required>
+                                                            <input class="form-check-input" type="radio" id="grade_level"
+                                                                name="grade_level" value="5" required>
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 5
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="6"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 6
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="7"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 7
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="8"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 8
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="9"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 9
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="10"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 10
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="11"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 11
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="12"
-                                                                name="grade_level[]" id="grade_level[]">
+                                                                name="grade_level" id="grade_level">
                                                             <label class="form-check-label pl-1 pl-sm-0">
                                                                 12
                                                             </label>

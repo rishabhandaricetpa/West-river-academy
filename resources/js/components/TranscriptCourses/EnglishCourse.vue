@@ -36,6 +36,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                @click='setOtherValue(index)'
                 v-model="englishCourse.other_subject"
                 aria-describedby=""
               />
@@ -122,13 +123,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 class="mt-3">
+              <h3 class="mt-3" v-if='(final_credits[englishCourse.component_index ] - englishCourse.selectedCredit)>=0'>
                 You have
                 {{ final_credits[englishCourse.component_index + 1] }}
                 out of
                 {{ total_credits.total_credit }}
                 remaining credits for this year.
               </h3>
+               <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
           </div>
         </div>
@@ -139,8 +141,9 @@
       <li style="color:red" v-for="error in errors" :key="error.id"> {{ error }}</li>
     </ul>
     </p>
+ 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0'  class="btn btn-primary" @click="addCourse"
       >Add another English/Language Arts Course</a
       >
       <button type="submit" class="btn btn-primary ml-4 float-right">
@@ -202,26 +205,36 @@ export default {
       return this.final_credits[englishCourse.component_index] - englishCourse.selectedCredit;
         
     },
-
+    setOtherValue(index){
+     this.form.englishCourses[index].subject_name = "";
+    },
     reIndex(){
       this.form.englishCourses.forEach((englishCourse, index) => {
         englishCourse.component_index = index;
       });
     },
-
+  validateFinalCredit(){
+       if(this.form.final_remaining_credit <0){
+       return false;
+      }
+      return true;
+    },
     reCalculateAll() {
       this.form.englishCourses.forEach((englishCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(englishCourse)
       })
+     const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
       this.finalValue();
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
-      console.log('finalValue ', this.final_remaining_credit);
-      
+      return finalValue;
     },
-
+ 
     addCourse() {
       const englishCourse = {
         course_id: this.courses_id,
@@ -247,8 +260,7 @@ export default {
     submitCourse() {
       this.errors = [];
 
-
-      if (!this.validateSubject() && !this.validateOtherSubject()) {
+   if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
           "Course name is required Field! Please select a Course name"
         );
@@ -257,8 +269,13 @@ export default {
         this.errors.push(
           "Credit is required Field! Please select a credit "
         );
+      }  
+       if(!this.validateFinalCredit()){
+         this.errors.push(
+          "No Credits remaining"
+        );
       }
-
+       if(this.validateFinalCredit()){
       axios
         .post(route("english-transcript.store"), this.form)
         .then(response => {
@@ -271,10 +288,9 @@ export default {
         .catch(error => {
           alert("Please fill in the fields");
         });
-
+        }
 
     },
-
     validateSubject() {
       for (let i = 0; i < this.form.englishCourses.length; i++) {
         const enrollmentSubject = this.form.englishCourses[i];

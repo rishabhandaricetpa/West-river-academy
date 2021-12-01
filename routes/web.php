@@ -55,7 +55,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/reviewstudents', 'StudentController@reviewStudent')->name('reviewstudent');
         Route::get('/edit/{id}', 'StudentController@edit')->name('edit.student');
         Route::post('delete/{id}', 'StudentController@deleteEnroll')->name('delete.enroll');
-
+        Route::get( 'deletestudent/{id}','StudentController@destroy')->name('delete.student');
         // dashboard screen and verify email message
         Route::get('/verify-email/{email}', function () {
             return view('SignIn/verify-email');
@@ -160,7 +160,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('viewall-orders', 'StudentController@getAllOrders')->name('viewfull.orders');
 
         Route::get('/viewConfirmation/{enrollment_payment_id}/{grade_id}', 'StudentController@confirmationpage')->name('view.confirm');
-        Route::get('/viewdownload/{enrollment_payment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
+        Route::get('/viewdownload/{enrollment_id}/{grade_id}', 'StudentController@viewDownload')->name('view.download');
 
         Route::post('/saveConfirmationData/{student_id}/{grade_id}', 'StudentController@saveConfirmationInformation')->name('save.confirmationData');
 

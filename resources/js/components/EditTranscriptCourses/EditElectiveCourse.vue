@@ -20,6 +20,7 @@
               class="form-control text-uppercase"
               v-model="electiveCourse.subject_name"
             >
+             <option disabled value="">Please select one</option>
               <option v-for="Course in electivecourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
@@ -33,6 +34,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                 @click='setOtherValue(index)'
                 v-model="electiveCourse.other_subject"
                 aria-describedby=""
               />
@@ -117,13 +119,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3 >
+              <h3 v-if='(final_credits[electiveCourse.component_index ] - electiveCourse.selectedCredit)>=0'>
                 You have
                 {{ final_credits[electiveCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
-              </h3>
+              </h3> 
+               <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
             
           </div>
@@ -136,7 +139,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add another Elective Course</a
       >
       <a
@@ -211,7 +214,9 @@ export default {
       this.final_credits.push(this.calculateRemainingCredit(this.form.electiveCourse[0]));
       this.finalValue();
     },
-    
+      setOtherValue(index){
+     this.form.electiveCourse[index].subject_name ="";
+    },
       calculateRemainingCredit(electiveCourse) {
       this.finalValue();
       return this.final_credits[electiveCourse.component_index] - electiveCourse.selectedCredit;
@@ -227,13 +232,16 @@ export default {
       this.form.electiveCourse.forEach((electiveCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(electiveCourse)
       })
-      this.finalValue();
+       const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit);
-
+      return finalValue;
     },
     addCourse() {
       const electiveCourse ={
@@ -259,14 +267,10 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
+ 
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
-          "Grade is a required Field! Please select a Grade and then continue."
-        );
-      }
-      if (!this.validateSubject()) {
-        this.errors.push(
-          "Course name is a required Field! Please select a Grade and then continue."
+          "Course name is required Field! Please select a Course name"
         );
       }
       if (!this.validateCredit()) {
@@ -280,9 +284,7 @@ export default {
         );
       }
       if (
-        this.vallidateGrades() &&
-        this.validateSubject() &&
-        this.validateCredit() && this.validateFinalCredit()
+        this.validateFinalCredit()
       ) {
         axios
           .post(route("editElectiveTranscriptCourse.store"), this.form)
@@ -298,10 +300,11 @@ export default {
           });
       }
     },
-    vallidateGrades() {
+  
+     validateOtherSubject() {
       for (let i = 0; i < this.form.electiveCourse.length; i++) {
-        const electiveCourse = this.form.electiveCourse[i];
-        if (!electiveCourse.grade) {
+        const enrollmentOtherSubject = this.form.electiveCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
           return false;
         }
       }

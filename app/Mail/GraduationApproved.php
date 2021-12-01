@@ -2,6 +2,9 @@
 
 namespace App\Mail;
 
+use App\Models\EmailEdits;
+use App\Services\WireViewEngine;
+use DbView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -31,7 +34,10 @@ class GraduationApproved extends Mailable
     public function build()
     {
         $total_fees = $this->data->total_fee;
-        // return $this->view('mail.graduation-approved')->subject('West River Academy Graduation');
-        return  $this->markdown('mail.graduation-approved', compact('total_fees'))->subject('MoneyGram Payment');
+        $template = EmailEdits::where('type', 'graduation')->first();
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
+            'total_fees' => $total_fees,
+        ])->render();
+        return  $this->markdown('mail.email-notification', compact('email_data'))->subject('MoneyGram Payment');
     }
 }

@@ -16,7 +16,7 @@ class CreateGraduationDetailsTable extends Migration
         Schema::create('graduation_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('graduation_id');
-            $table->foreign('graduation_id')->references('id')->on('graduations');
+            $table->foreign('graduation_id')->references('id')->on('graduations')->onDelete('cascade');
             $table->string('project')->nullable();
             $table->string('diploma')->nullable();
             $table->string('transcript')->nullable();

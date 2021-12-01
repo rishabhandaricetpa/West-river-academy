@@ -20,6 +20,7 @@
               class="form-control text-uppercase"
               v-model="foreignCourse.subject_name"
             >
+            <option disabled value="">Please select one</option>
               <option v-for="Course in foreigncourse" :key="Course.id">
                 {{ Course.subject_name }}</option
               >
@@ -33,6 +34,7 @@
                 class="form-control"
                 name=""
                 value="other"
+                @click='setOtherValue(index)'
                 v-model="foreignCourse.other_subject"
                 aria-describedby=""
               />
@@ -117,13 +119,14 @@
                   {{ credit.credit }}
                 </option>
               </select>
-              <h3>
+              <h3 v-if='(final_credits[foreignCourse.component_index ] - foreignCourse.selectedCredit)>=0'>
                 You have
              {{ final_credits[foreignCourse.component_index + 1] }}
                 out of
                 {{ outofcredit.total_credit }}
                 remaining credits for this year.
               </h3>
+               <h3  class="mt-3" v-else>Credits Are Over</h3>
             </div>
             
           </div>
@@ -136,7 +139,7 @@
       </ul>
     </p> 
     <div class="mt-2r">
-      <a class="btn btn-primary" @click="addCourse"
+      <a  v-if='this.form.final_remaining_credit >0' class="btn btn-primary" @click="addCourse"
         >Add another Foreign Language Course</a
       >  
       <a
@@ -210,7 +213,9 @@ export default {
       this.final_credits.push(this.calculateRemainingCredit(this.form.foreignCourse[0]));
       this.finalValue();
     },
-    
+       setOtherValue(index){
+     this.form.foreignCourse[index].subject_name ="";
+    },
       calculateRemainingCredit(foreignCourse) {
       this.finalValue();
       return this.final_credits[foreignCourse.component_index] - foreignCourse.selectedCredit;
@@ -226,13 +231,16 @@ export default {
       this.form.foreignCourse.forEach((foreignCourse, index) => {
         this.final_credits[index + 1] = this.calculateRemainingCredit(foreignCourse)
       })
-      this.finalValue();
+     const getFinalCredit= this.finalValue();
+     if(getFinalCredit <0){
+        alert('Credits are overs , either select smaller value or delete the course');
+     }
     },
     finalValue(){
       const finalValue = this.final_credits[this.final_credits.length - 1];
       this.form.final_remaining_credit = finalValue;
       console.log('finalValue ', this.final_remaining_credit);
-
+      return finalValue;
     },
     addCourse() {
       const foreignCourse ={
@@ -246,7 +254,7 @@ export default {
         total_credits: this.outofcredit.total_credit,
         component_index: this.form.foreignCourse.length
       };
-        this.final_credits.push(this.calculateRemainingCredit(foreignCourse))
+      this.final_credits.push(this.calculateRemainingCredit(foreignCourse))
       this.form.foreignCourse.push(foreignCourse);
       this.finalValue();
     },
@@ -258,14 +266,10 @@ export default {
     },
     submitCourse() {
       this.errors = [];
-      if (!this.vallidateGrades()) {
+    
+      if (!this.validateSubject() && !this.validateOtherSubject()) {
         this.errors.push(
-          "Grade is a required Field! Please select a Grade and then continue."
-        );
-      }
-      if (!this.validateSubject()) {
-        this.errors.push(
-          "Course name is a required Field! Please select a Grade and then continue."
+          "Course name is required Field! Please select a Course name"
         );
       }
       if (!this.validateCredit()) {
@@ -279,9 +283,7 @@ export default {
         );
       }
       if (
-        this.vallidateGrades() &&
-        this.validateSubject() &&
-        this.validateCredit()  &&  this.validateFinalCredit()
+        this.validateFinalCredit()
       ) {
         axios
           .post(route("editForeignTranscriptCourse.store"), this.form)
@@ -297,10 +299,10 @@ export default {
           });
       }
     },
-    vallidateGrades() {
+    validateOtherSubject() {
       for (let i = 0; i < this.form.foreignCourse.length; i++) {
-        const foreignCourse = this.form.foreignCourse[i];
-        if (!foreignCourse.grade) {
+        const enrollmentOtherSubject = this.form.foreignCourse[i];
+        if (!enrollmentOtherSubject.other_subject) {
           return false;
         }
       }

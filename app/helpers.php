@@ -414,8 +414,9 @@ function getEnrollmetForStudents($student_id)
 //Get payment information according to the enrollment ids
 function getPaymentInformation($enrollment_ids)
 {
+
     $payment_info = DB::table('enrollment_periods')
-        //  ->whereIn('enrollment_payment_id', $enrollment_ids)
+        ->whereIn('enrollment_payment_id', $enrollment_ids)
         ->join('enrollment_payments', 'enrollment_payments.enrollment_period_id', 'enrollment_periods.id')
         ->where('enrollment_payments.status', 'paid')
         ->get();
@@ -656,7 +657,7 @@ function statusDropdown($status)
         return false;
     }
 }
-function checkLegends($data)
+function getLegends($data)
 {
     $legends = array();
 

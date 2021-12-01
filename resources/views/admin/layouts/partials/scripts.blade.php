@@ -238,67 +238,7 @@
                     "render": function(id) {
                         return `<a href="delete/${id}"><i class="fas fa-trash-alt"></i></a>`;
                     }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="edit-payment/${id}">View Payments</a>`;
-                    }
-                }, {
-                    "data": "id",
-                    "render": function(id) {
-                        return `<a href="edit-transcript/${id}">Transcripts</a>`;
-                    }
-                }, {
-
-                    "data": function(row, type, val, meta) {
-                        return row.graduation?.id
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="graduations/${data}/edit">Graduation</a>`;
-                        }
-                    }
-                }, {
-
-                    "data": function(row, type, val, meta) {
-                        return row.record_transfers?.id
-                    },
-                    defaultContent: '',
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="student/record/transfer/${data}">Record Transfer</a>`;
-                        }
-                    }
-                },
-                {
-                    "data": "id",
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="view-documents/${data}">View</a>`;
-                        }
-                    }
-                },
-                {
-                    "data": "id",
-                    "render": function(data) {
-
-                        if (data == null) {
-                            return `<label> Not Applied </label>`;
-                        } else {
-                            return `<a href="edit-upload/${data}">Upload</a>`;
-                        }
-                    }
-                },
+                }
             ]
         });
 
@@ -1456,7 +1396,7 @@
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
         var amount_status = $('#amount_status').val();
-        var grade_level = $("input[name='grade_level']:checked").val();
+        var grade_level = $("input[id='grade_level']:checked").val();
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2012,10 +1952,21 @@
         var startDate = document.getElementById("start_date_of_enrollment").value;
         var endDate = document.getElementById("end_date_of_enrollment").value;
 
-        if ((Date.parse(startDate) >= Date.parse(endDate)) && (Date.parse(startDate) !== Date.parse(
+        if ((Date.parse(startDate) >= Date.parse(endDate)) || (Date.parse(startDate) == Date.parse(
                 endDate))) {
             alert("End date should be greater than Start date");
             document.getElementById("end_date_of_enrollment").value = "";
+        }
+    });
+    $("#end_date").change(function() {
+        console.log('end date');
+        var startDate = document.getElementById("start_date").value;
+        var endDate = document.getElementById("end_date").value;
+
+        if ((Date.parse(startDate) >= Date.parse(endDate)) || (Date.parse(startDate) == Date.parse(
+                endDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("end_date").value = "";
         }
     });
     // for report validating start and end date 

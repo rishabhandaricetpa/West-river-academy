@@ -210,24 +210,13 @@ class StudentProfileController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            DB::beginTransaction();
-            $notification = [
-                'message' => 'Student Record is Deleted Successfully!',
-                'alert-type' => 'Success',
-            ];
-            StudentProfile::where('id', $id)->delete();
-            DB::commit();
 
-            return redirect()->back()->with($notification);
-        } catch (\Exception $e) {
-            $notification = [
-                'message' => 'Delete Parent Record for deleting last student !',
-                'alert-type' => 'error',
-            ];
-
-            return redirect()->back()->with($notification);
-        }
+        StudentProfile::where('id', $id)->delete();
+        $notification = [
+            'message' => 'Student Record is Deleted Successfully!',
+            'alert-type' => 'Success',
+        ];
+        return redirect()->back()->with($notification);
     }
 
     //genrate confirmation
@@ -418,7 +407,7 @@ class StudentProfileController extends Controller
             $transction->transcation_id   = substr(uniqid(), 0, 12);
             $transction->payment_mode = "admin created";
             $transction->parent_profile_id = $request->get('parent_id');
-            $transction->amount = $request->get('amount_status');
+            $transction->amount = $fee;
             $transction->status = 'paid';
             $transction->item_type = 'Enrollment';
             $transction->student_profile_id = $request->get('student_id');
@@ -429,14 +418,14 @@ class StudentProfileController extends Controller
             $enroll_payment->payment_mode = "admin created";
             $enroll_payment->transcation_id = $transction->transcation_id;
             $enroll_payment->status = 'paid';
-            $enroll_payment->amount =  $request->get('amount_status');
+            $enroll_payment->amount = $fee;
             $enroll_payment->save();
 
             if ($enroll_payment->status == 'paid') {
                 if ($request->get('status') == 'paid') {
                     $dashboard = new Dashboard();
                     $dashboard->linked_to =  $student_id->first_name;
-                    $dashboard->amount = $request->get('amount_status');;
+                    $dashboard->amount = $fee;
                     $dashboard->related_to = 'Student Enrolled';
                     $dashboard->student_profile_id  =  $student_id;
                     $dashboard->transaction_id = $transction->transcation_id;
@@ -449,15 +438,9 @@ class StudentProfileController extends Controller
             $enroll->enrollment_payment_id = $enroll_payment->id;
             $enroll->save();
             DB::commit();
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'success', 'message' => 'Record updated successfully']);
-            }
         } catch (\Exception $e) {
-            DB::rollBack();
             report($e);
-            if ($request->expectsJson()) {
-                return response()->json(['status' => 'error', 'message' => 'Failed to update Record']);
-            }
+            DB::rollBack();
         }
     }
 

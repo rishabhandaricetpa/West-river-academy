@@ -2,7 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\EmailEdits;
 use App\Models\User;
+use App\Services\WireViewEngine;
+use DbView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -36,7 +39,11 @@ class BankTranferEmail extends Mailable
         $user = User::find($this->user->id)->parentProfile()->first();
         $user_name = $user->full_name;
         $amount = $this->amount;
-
-        return  $this->markdown('mail.bankinfo', compact('user_name', 'amount'))->subject('Bank Transfer Instructions');
+        $template = EmailEdits::where('type', 'banktransfer')->first();
+        $email_data =  (new WireViewEngine($template->content))->setLegends([
+            'user_name' => $user_name,
+            'amount' => $amount,
+        ])->render();
+        return  $this->markdown('mail.email-notification', compact('email_data'))->subject('Bank Transfer Instructions');
     }
 }
