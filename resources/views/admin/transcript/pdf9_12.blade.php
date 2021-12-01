@@ -161,7 +161,7 @@
                        Support of Alternative Schools (NALSAS) and registered in the California School Directory. CDS
                        Code: 30 66464 6134720 County: Orange Address: 33721 Bluewater Ln. Dana Point, CA 92629-2173</p>
                </td>
-               <td style="width:40%;vertical-align:top;padding:0 4px 4px 4px;">
+               <td style="width:35%;vertical-align:top;padding:0 4px 4px 4px;">
                <table style="border:1px solid #000;" width="100%">
                                     <thead>
                                         <tr>
@@ -174,13 +174,13 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">Grade
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">Grade
                                             </td>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">Percent
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">Percent
                                             </td>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">Points
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">Points
                                             </td>
-                                            <td style="font-size:13px;text-decoration:underline;text-align:center;font-weight:700;">AP
+                                            <td style="font-size:11px;text-decoration:underline;text-align:center;font-weight:700;">AP
                                                 Points</td>
                                         </tr>
                                         <tr style="line-height:1;">
@@ -223,7 +223,7 @@
 
                                 </table>
                </td>
-               <td style="width:25%;vertical-align:top;">
+               <td style="width:30%;vertical-align:top;">
                    <table style="width:100%;">
                        <tbody>
                            <tr>
