@@ -23,6 +23,35 @@
                $rightGroup->last()->push((object) ['id' => -1]);
            }
        }
+
+       $courseGroups = $courses->sortBy('groupBy');
+
+        $groupList = [];
+        foreach ($courseGroups->toArray() as $key => $groupItem) {
+            $groupList[$groupItem->groupBy][] = $groupItem;
+        }
+
+        $countGroupItems  = count($groupList);
+        if( $countGroupItems > 2  && $countGroupItems % 2  != 0)
+            $groupList[0] = [];
+
+        if( count($groupList) )
+        {
+            $leftGroupItem = [];
+            $rightGroupItem = [];
+            $countGroupItems  = round(count($groupList)/2);
+            $item  = 1;
+
+            foreach ($groupList as $key => $value) {
+                
+                if( $item <= $countGroupItems ) 
+                    $leftGroupItem[$key]    = $value;
+                else
+                    $rightGroupItem[$key]   = $value;
+
+                $item++;
+            }
+        }
        
    @endphp
    <!DOCTYPE html>
@@ -112,13 +141,13 @@
                        <tr>
                            <td style="width:50%;" valign="top">
                                @include('transcript9to12.courseComponent',[
-                               'yearGroup'=> $leftGroup,
+                               'yearGroup'=> $leftGroupItem,
 
                                ])
                            </td>
                            <td style="width:50%;" valign="top">
                                @include('transcript9to12.courseComponent',[
-                               'yearGroup'=> $rightGroup,
+                               'yearGroup'=> $rightGroupItem,
 
                                ])
                            </td>

@@ -23,15 +23,15 @@
                             {{ $year }}
                         @endif
                     </span>
-
+                    
                 </td>
             </tr>
-
-            @if( $year == 0)
+            
+            @if( $year == "")
                 <tr style="line-height:1;">
                     <td colspan="4" class='diagonal'></td>
                 </tr>
-            @else           
+            @else    
                 @foreach ($courses as $course)
                 @if ($course->id === -1)
                     <tr style="line-height:1;">
@@ -52,7 +52,7 @@
                                     {{ $course->score }}</td>
                             @endif
                         </tr>
-                    @elseif($course->type =='courseInProgress')
+                    @elseif($course->type === 'courseInProgress')
                         <tr style="line-height:1;">
                             <td style="padding:3px 6px;line-height:1;font-size:13px;text-transform:uppercase;">
                                 {{ $course->name }}</td>
